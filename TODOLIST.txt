@@ -1,5 +1,7 @@
 Refactor portfolio in Angular:
 -Prepare hans-ui-design-lib to be a module federation and prepare this portfolio to consume it (separating or integrating the lib build on Vercel)
+-Edit the root components
+-Set the build/deploy on Vercel
 -Refactor the screens and components from the old version of the portfolio
 -Create a backend for it (Node.js + Neon + PostgreSQL DB)
 -Create more components and features in the portfolio
