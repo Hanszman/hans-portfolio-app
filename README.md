@@ -1,59 +1,85 @@
-# HansPortfolioApp
+# Hans Portfolio App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+An **Angular + TypeScript Front-End App** to show all the projects I've already worked.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- ⚛️ **Angular 20.3.6** with **TypeScript 5.9.2**
+- 🎨 **TailwindCSS + SCSS** for styling flexibility
+- ✅ **Karma + Jasmine** for unit and integration testing
+- 📊 **Test Coverage** with HTML reports
+- 🧹 **ESLint + Prettier** for code quality and formatting
+- ♾️ Deployed by **Vercel** at https://hans-portfolio-app.vercel.app/
+- **Node Version to build this project: 22.18.0 and npm 10.9.3**
 
-```bash
-ng serve
-```
+## 🧑‍💻 Development
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Clone the repo and install dependencies:
 
 ```bash
-ng generate --help
+git clone https://github.com/Hanszman/hans-portfolio-app.git
+cd hans-portfolio-app
+npm install
 ```
 
-## Building
-
-To build the project run:
+Start the dev server:
 
 ```bash
-ng build
+npm run dev
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run tests:
 
 ```bash
-ng test
+npm run test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Run tests with coverage:
 
 ```bash
-ng e2e
+npm run test:coverage
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Lint code:
 
-## Additional Resources
+```bash
+npm run lint
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Build the package:
+
+```bash
+npm run build
+```
+
+Start the server:
+
+```bash
+npm run start
+```
+
+## 🛠️ Tech Stack
+
+- **Angular 20.3.6**
+- **TypeScript 5.9.2**
+- **TailwindCSS**
+- **SCSS**
+- **Karma**
+- **Jasmine**
+- **React Testing Library**
+- **JSDOM**
+- **ESLint (flat config)**
+- **Prettier**
+
+## 📜 History of commands used to build this project:
+
+```bash
+npx @angular/cli@latest new hans-portfolio-app --style=scss --routing --standalone --strict
+
+npm install -D tailwindcss@3.4.14 postcss autoprefixer
+
+ng add @angular-eslint/schematics
+
+npm install -D prettier eslint-config-prettier eslint-plugin-prettier
+
+```

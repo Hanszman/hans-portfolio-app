@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@angular-eslint/recommended", "plugin:prettier/recommended"],
+      "rules": {
+        "prettier/prettier": ["error"]
+      }
+    }
+  ]
+}
