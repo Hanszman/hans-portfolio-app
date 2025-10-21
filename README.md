@@ -82,4 +82,5 @@ ng add @angular-eslint/schematics
 
 npm install -D prettier eslint-config-prettier eslint-plugin-prettier
 
+npm i -D @angular-architects/module-federation
 ```
