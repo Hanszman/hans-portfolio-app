@@ -1,5 +1,5 @@
 <div>
-  HELLO THERE!! CLICK HERE:
-  <hans-button label="Clique"></hans-button>
+  <h1>Hello, {{ title() }}</h1>
 </div>
+<app-react-host [props]="{ label: 'Clique' }"></app-react-host>
 <router-outlet />
