@@ -1,5 +1,13 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { ModuleFederationLoaderService } from '../../services/module-federation-loader.service';
+interface MountResult {
+  unmount?: () => void;
+}
+
+interface RemoteModule {
+  mount?: (el: HTMLElement, props?: Record<string, unknown>) => MountResult;
+  default?: RemoteModule;
+}
 
 @Component({
   selector: 'app-react-host',
@@ -7,35 +15,34 @@ import { ModuleFederationLoaderService } from '../../services/module-federation-
 })
 export class ReactHostComponent implements OnInit, OnDestroy {
   @ViewChild('container', { static: true }) containerRef!: ElementRef<HTMLDivElement>;
-  @Input() props: any;
+  @Input() props?: Record<string, unknown>;
+  @Input() remoteModulePath = './Widget'; // default; pode passar './Button' etc.
+  private readonly loader = inject(ModuleFederationLoaderService);
   private unmountFn?: () => void;
 
-  constructor(private moduleFederationLoader: ModuleFederationLoaderService) {}
-
-  async ngOnInit() {
-    // ajustar a URL para o remoteEntry webpack que você publicou
+  async ngOnInit(): Promise<void> {
     const remoteUrl = 'https://hans-ui-design-lib-cdn.vercel.app/remoteEntry.js';
     const scope = 'hans_ui_design_lib';
-    const module = './Widget'; // conforme exposto no webpack.mf.config.js
+    const module = this.remoteModulePath;
 
     try {
-      const Module: any = await this.moduleFederationLoader.loadRemote(remoteUrl, scope, module);
-      // Module pode exportar mount (como fizemos)
-      if (Module && Module.mount) {
-        const result = Module.mount(this.containerRef.nativeElement, this.props);
-        this.unmountFn = result?.unmount;
-      } else if (Module && Module.default && Module.default.mount) {
-        const result = Module.default.mount(this.containerRef.nativeElement, this.props);
-        this.unmountFn = result?.unmount;
-      } else {
-        console.error('Module loaded but mount not found', Module);
+      const loaded = (await this.loader.loadRemote(remoteUrl, scope, module)) as RemoteModule;
+
+      const moduleToUse = loaded?.mount ? loaded : loaded?.default ? loaded.default : undefined;
+
+      if (!moduleToUse?.mount) {
+        console.error('mount não encontrado no módulo remoto', loaded);
+        return;
       }
+
+      const result = moduleToUse.mount(this.containerRef.nativeElement, this.props);
+      this.unmountFn = result?.unmount;
     } catch (err) {
-      console.error('Erro ao carregar remoto', err);
+      console.error('Erro ao carregar remoto:', err);
     }
   }
 
-  ngOnDestroy() {
-    if (this.unmountFn) this.unmountFn();
+  ngOnDestroy(): void {
+    this.unmountFn?.();
   }
 }
