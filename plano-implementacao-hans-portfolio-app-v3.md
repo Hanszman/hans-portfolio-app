@@ -40,7 +40,7 @@ O remake deve sair do modelo antigo de “lista extensa de tecnologias e cards�
 - **Projetos apresentados como cases**;
 - **Experiências narradas como carreira e impacto**;
 - **Tela própria de dashboard analítico**;
-- **Admin real com persistência e manutenção futura**.
+- **Admin real com persistência e manutenção**.
 
 ---
 
@@ -48,7 +48,7 @@ O remake deve sair do modelo antigo de “lista extensa de tecnologias e cards�
 
 ### Design lib
 
-- A `hans-ui-design-lib` já deve ser tratada neste plano como **pronta para consumo**, incluindo os componentes de **Accordion** e **Carousel**.
+- A `hans-ui-design-lib` já deve ser tratada neste plano como **pronta para consumo**, incluindo todos os componentes presentes nela que forem necessários.
 - Portanto, **não haverá novas tarefas de desenvolvimento dentro da lib** neste plano.
 - O foco será apenas em:
   - inicialização correta via CDN/web components no Angular;
@@ -60,11 +60,11 @@ O remake deve sair do modelo antigo de “lista extensa de tecnologias e cards�
 - O repositório **`hans-portfolio-api` já existe** e deve ser o ponto de partida oficial da etapa 1.
 - Ele foi criado em **.NET 10** e já contém a estrutura inicial padrão do template de Web API.
 - Como parte das primeiras tasks, deve-se:
-  - remover qualquer rota/controller/exemplo padrão herdado do template (ex.: `WeatherForecast` ou equivalente);
-  - configurar Swagger/OpenAPI de forma definitiva;
-  - estruturar a base do projeto para a API real do portfólio;
-  - criar README completo da API;
-  - registrar no README o histórico de comandos e pacotes usados durante a evolução do projeto.
+  - Remover qualquer rota/controller/exemplo padrão herdado do template (ex.: `WeatherForecast` ou equivalente);
+  - Configurar Swagger/OpenAPI de forma definitiva;
+  - Estruturar a base do projeto para a API real do portfólio;
+  - Criar README completo da API;
+  - Registrar no README o histórico de comandos e pacotes usados durante a evolução do projeto (incluindo comandos do .NET, Entity, Tests e links como o do Swagger). Se basear em documentação semelhante à do `hans-ui-design-lib`.
 
 ## 2) Princípios técnicos obrigatórios
 
@@ -127,7 +127,7 @@ Tanto no front quanto no back:
 - SOLID onde fizer sentido
 - nomes claros
 - responsabilidade bem separada
-- testes unitários nos pontos críticos
+- testes unitários garantindo 100% de cobertura (exceto em arquivos de configuração)
 - lint/build/test verdes
 - documentação clara
 - README completo
@@ -332,18 +332,18 @@ Campos sugeridos:
 
 Como alinhado, cada tecnologia deve suportar **3 eixos independentes**:
 
-1. **Nível**
+1. **Nível** (Apenas um)
    - básico
    - intermediário
    - avançado
 
-2. **Frequência de uso**
+2. **Frequência de uso** (Apenas um)
    - frequente
    - ocasional
    - já-utilizei
    - estudando
 
-3. **Contexto de uso**
+3. **Contexto de uso** (Pode aceitar mais de um ao mesmo tempo)
    - profissional
    - pessoal
    - acadêmico
@@ -1052,7 +1052,8 @@ A lib será usada via **CDN/web components** no Angular, como você já iniciou.
 - Toggle / Switch
 - Accordion
 - Carousel
-- eventualmente Table, se a lib já tiver
+- Table
+  OBS: Sinta-se livre para utilizar todos os components da lib que forem necessários. Não crie componentes no remake se já existir algum com o mesmo papel na lib, reutilize da lib.
 
 ## 11.2. Sobre `Accordion` e `Carousel`
 
