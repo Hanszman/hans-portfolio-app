@@ -1,0 +1,6 @@
+PGHOST='ep-shy-dawn-acds024d-pooler.sa-east-1.aws.neon.tech'
+PGDATABASE='hans-portfolio-db'
+PGUSER='neondb_owner'
+PGPASSWORD='npg_Tc6r5CmoLxYD'
+PGSSLMODE='require'
+PGCHANNELBINDING='require'
