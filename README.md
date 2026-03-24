@@ -10,7 +10,7 @@ An **Angular + TypeScript Front-End App** to show all the projects I've already 
 - 📊 **Test Coverage** with HTML reports
 - 🧹 **ESLint + Prettier** for code quality and formatting
 - ♾️ Deployed by **Vercel** at https://hans-portfolio-app.vercel.app/
-- **Node Version to build this project: 22.18.0 and npm 11.8.0**
+- **Node Version to build this project: 24.14.1 and npm 11.11.0**
 
 ## 🧑‍💻 Development
 
