@@ -2,7 +2,15 @@
 
 > Objetivo: guiar a execucao do remake do portfolio antigo (`victor_hanszman_portfolio-old`) no repositorio novo de front (`hans-portfolio-app`) e no repositorio novo de back (`hans-portfolio-api`), usando **Angular 20.3.6** no front-end, **`hans-ui-design-lib` via CDN/web components** como base visual, e **backend proprio em Node.js 24 + NestJS + Express + TypeScript + Prisma + PostgreSQL/Neon** desde a primeira etapa.
 
-OBS: As informacoes de conexao com o banco de dados continuam no arquivo `db-connection.txt`.
+OBS: As informacoes de conexao com o banco de dados estao abaixo:
+
+PGHOST=ep-shy-dawn-acds024d-pooler.sa-east-1.aws.neon.tech
+PGDATABASE=hans-portfolio-db
+PGUSER=neondb_owner
+PGPASSWORD=npg_Tc6r5CmoLxYD
+PGPORT=5432
+PGSSLMODE=require
+PGCHANNELBINDING=require
 
 > Ordem oficial de implementacao:
 >
