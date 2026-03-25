@@ -199,17 +199,17 @@ Por fim:
 
 O sistema precisa suportar, no minimo:
 
-- projects
-- experiences
-- skills/technologies
-- formations
+- project
+- experience
+- skill/technology
+- formation
 - spoken languages
-- customers
-- jobs
-- links
+- customer
+- job
+- link
 - image assets
-- tags
-- portfolio settings
+- tag
+- portfolio setting
 - highlights (`highlight`) nas entidades relevantes
 
 Tambem precisa refletir de forma estrategica os highlights ja confirmados:
@@ -266,8 +266,8 @@ O modelo conceitual do `v3` continua valido e deve ser mantido, apenas traduzido
 ### Convencoes relevantes
 
 - `highlight` continua como boolean nas entidades relevantes
-- `links` e `images` continuam como entidades proprias
-- `languages`, `customers` e `jobs` continuam incluidos
+- `link` e `image` continuam como entidades proprias
+- `language`, `customer` e `job` continuam incluidos
 - a ideia de `slug`, `sortOrder`, `isPublished`, `createdAt`, `updatedAt` continua valida onde fizer sentido
 
 ---
@@ -343,17 +343,17 @@ hans-portfolio-api/
     modules/
       system/
       auth/
-      projects/
-      experiences/
-      technologies/
-      formations/
-      spoken-languages/
-      customers/
-      jobs/
-      links/
-      image-assets/
-      tags/
-      portfolio-settings/
+      project/
+      experience/
+      technology/
+      formation/
+      spoken-language/
+      customer/
+      job/
+      link/
+      image-asset/
+      tag/
+      portfolio-setting/
       dashboard/
     prisma/
       prisma.module.ts
@@ -392,8 +392,8 @@ hans-portfolio-api/
 - exemplos esperados:
   - `src/modules/system`
   - `src/modules/auth`
-  - `src/modules/projects`
-  - `src/modules/experiences`
+  - `src/modules/project`
+  - `src/modules/experience`
 - dentro de cada feature, a organizacao padrao deve priorizar:
   - `controllers/`
   - `services/`
@@ -415,8 +415,8 @@ hans-portfolio-api/
 - nome do arquivo: `<feature-ou-responsabilidade>.types.ts`
 - exemplos:
   - `database-diagnostics.types.ts`
-  - `projects.types.ts`
-  - `experiences.types.ts`
+  - `project.types.ts`
+  - `experience.types.ts`
 - quando uma mesma feature precisar de varios tipos internos, o preferivel e mantelos agrupados no mesmo `*.types.ts` em vez de pulverizar arquivos pequenos cedo demais
 
 ### Convencao de responsabilidade por controller/service
@@ -435,7 +435,7 @@ hans-portfolio-api/
 - a tendencia e ter **um arquivo e2e por feature/modulo**, por exemplo:
   - `test/system.e2e-spec.ts`
   - `test/auth.e2e-spec.ts`
-  - `test/projects.e2e-spec.ts`
+  - `test/project.e2e-spec.ts`
 - o comando oficial de coverage deve ser `npm run test:coverage`
 - `test:coverage` deve validar o alvo de coverage da etapa e tambem executar a suite e2e
 - arquivos gerados, contratos triviais e `types` internos podem ser excluidos do coverage quando nao fizer sentido medir execucao neles
@@ -469,7 +469,7 @@ hans-portfolio-api/
 - `POST /admin/projects`
 - `PUT /admin/projects/{id}`
 - `DELETE /admin/projects/{id}`
-- CRUD equivalente para experiences, technologies, formations, jobs, customers, spoken-languages, links, image-assets, tags e portfolio-settings
+- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`
 
 ### Observacao sobre rotas no Nest
 
@@ -599,7 +599,7 @@ Popular banco com base nos JSONs do projeto antigo.
 
 - parser/mapper dos JSONs antigos
 - `prisma/seed.ts`
-- carga inicial para projetos, experiencias, technologies e vinculos
+- carga inicial para `project`, `experience`, `technology` e vinculos
 - import de icones e imagens reutilizadas do projeto antigo, quando aplicavel
 
 ### Criterios de aceite
@@ -784,8 +784,8 @@ O Codex deve:
 - Swagger obrigatorio
 - README completo da API obrigatorio
 - `highlight` como boolean nas entidades
-- `links` e `images` como entidades proprias
-- `languages`, `customers` e `jobs` incluidos
+- `link` e `image` como entidades proprias
+- `language`, `customer` e `job` incluidos
 - `React` explicitamente tratado como **core stack**
 - dashboard em tela propria
 - dark mode/light mode reais
