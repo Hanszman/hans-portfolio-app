@@ -310,6 +310,9 @@ Tambem manter:
 - documentacao do schema
 - diagrama ER simplificado no README ou em `/docs`
 - scripts SQL auxiliares para inspecao/troubleshooting quando necessario
+- estrategia explicita para assets estaticos enquanto nao houver object storage:
+  - copiar imagens/icones do legado para `hans-portfolio-app/src/assets/img`
+  - persistir caminhos publicos da forma `/assets/img/...` nas entidades que precisarem de icone
 
 ---
 
@@ -525,10 +528,10 @@ O backend deve continuar tendo um README tao caprichado quanto os outros projeto
 - `npm run build`
 - `npm run test`
 - `npm run test:coverage`
-- `npx prisma migrate dev`
-- `npx prisma migrate deploy`
-- `npx prisma studio`
-- `npm run seed`
+- `npm run prisma:migrate:dev`
+- `npm run prisma:migrate:deploy`
+- `npm run prisma:studio`
+- `npm run prisma:seed`
 - comando de checagem de dependencias desatualizadas adotado no projeto
 
 ---
@@ -599,13 +602,17 @@ Popular banco com base nos JSONs do projeto antigo.
 
 - parser/mapper dos JSONs antigos
 - `prisma/seed.ts`
-- carga inicial para `project`, `experience`, `technology` e vinculos
-- import de icones e imagens reutilizadas do projeto antigo, quando aplicavel
+- carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
+- import de icones e imagens reutilizadas do projeto antigo
+- copia automatica dos assets legados para `hans-portfolio-app/src/assets/img`
+- novos campos opcionais de `icon` nas entidades que precisarem expor um asset principal no frontend
+- documentacao do fluxo de seed/import e da estrategia de assets locais
 
 ### Criterios de aceite
 
 - ambiente local sobe com conteudo real
 - dados do legado sao reproduzidos com consistencia
+- `npm run prisma:seed` aplica migrations pendentes, importa os dados e sincroniza os assets do frontend
 
 ## 9.4. Sprint B4 - Authentication and authorization
 
