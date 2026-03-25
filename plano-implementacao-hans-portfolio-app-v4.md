@@ -386,32 +386,89 @@ hans-portfolio-api/
 
 > A ideia aqui e seguir o jeito do Nest, e nao reproduzir uma arquitetura de camadas tipica do `.NET`.
 
+### Convencoes de organizacao consolidadas para este remake
+
+- cada entidade/feature deve viver em `src/modules/<feature>`
+- exemplos esperados:
+  - `src/modules/system`
+  - `src/modules/auth`
+  - `src/modules/projects`
+  - `src/modules/experiences`
+- dentro de cada feature, a organizacao padrao deve priorizar:
+  - `controllers/`
+  - `services/`
+  - `contracts/`
+  - `types/`
+- `controllers` devem concentrar apenas HTTP e delegar para `services`
+- `services` devem concentrar regra/orquestracao
+- `contracts` devem representar o contrato HTTP publico da API:
+  - DTOs de request
+  - DTOs de response
+- `types` devem representar estruturas internas de implementacao:
+  - rows brutas de query
+  - tipos auxiliares de mapper
+  - shapes internos nao expostos como contrato HTTP
+
+### Convencao oficial para types
+
+- o padrao oficial passa a ser **um arquivo de types por entidade ou responsabilidade**
+- nome do arquivo: `<feature-ou-responsabilidade>.types.ts`
+- exemplos:
+  - `database-diagnostics.types.ts`
+  - `projects.types.ts`
+  - `experiences.types.ts`
+- quando uma mesma feature precisar de varios tipos internos, o preferivel e mantelos agrupados no mesmo `*.types.ts` em vez de pulverizar arquivos pequenos cedo demais
+
+### Convencao de responsabilidade por controller/service
+
+- quando uma responsabilidade for claramente distinta, deve existir seu proprio par de `controller` e `service`
+- exemplos validos no modulo `system`:
+  - `PingController` + `PingService`
+  - `DatabaseDiagnosticsController` + `DatabaseDiagnosticsService`
+  - `HealthController` + `HealthService`
+  - `SystemController` + `SystemService` apenas para agregacao/overview do proprio modulo
+
+### Convencao de testes
+
+- testes unitarios devem ficar proximos do codigo da propria feature
+- testes e2e devem ficar na pasta de topo `test/`
+- a tendencia e ter **um arquivo e2e por feature/modulo**, por exemplo:
+  - `test/system.e2e-spec.ts`
+  - `test/auth.e2e-spec.ts`
+  - `test/projects.e2e-spec.ts`
+- o comando oficial de coverage deve ser `npm run test:coverage`
+- `test:coverage` deve validar o alvo de coverage da etapa e tambem executar a suite e2e
+- arquivos gerados, contratos triviais e `types` internos podem ser excluidos do coverage quando nao fizer sentido medir execucao neles
+
 ## 7.3. Padrao de endpoints
 
 ### Publicos
 
-- `GET /api/projects`
-- `GET /api/projects/{slug}`
-- `GET /api/experiences`
-- `GET /api/skills`
-- `GET /api/formations`
-- `GET /api/languages`
-- `GET /api/dashboard`
-- `GET /api/settings/public`
+- `GET /projects`
+- `GET /projects/{slug}`
+- `GET /experiences`
+- `GET /skills`
+- `GET /formations`
+- `GET /languages`
+- `GET /dashboard`
+- `GET /settings/public`
 
 ### Sistema
 
-- `GET /api/system/ping`
-- `GET /api/system/database`
+- `GET /system`
+- `GET /system/ping`
+- `GET /system/database`
+- `GET /system/health`
+- `GET /`
 - `GET /health`
 
 ### Administrativos
 
-- `POST /api/auth/login`
-- `GET /api/admin/projects`
-- `POST /api/admin/projects`
-- `PUT /api/admin/projects/{id}`
-- `DELETE /api/admin/projects/{id}`
+- `POST /auth/login`
+- `GET /admin/projects`
+- `POST /admin/projects`
+- `PUT /admin/projects/{id}`
+- `DELETE /admin/projects/{id}`
 - CRUD equivalente para experiences, technologies, formations, jobs, customers, spoken-languages, links, image-assets, tags e portfolio-settings
 
 ### Observacao sobre rotas no Nest
@@ -467,7 +524,7 @@ O backend deve continuar tendo um README tao caprichado quanto os outros projeto
 - `npm run start:dev`
 - `npm run build`
 - `npm run test`
-- `npm run test:cov`
+- `npm run test:coverage`
 - `npx prisma migrate dev`
 - `npx prisma migrate deploy`
 - `npx prisma studio`
@@ -493,8 +550,12 @@ Subir a base do backend com arquitetura minima, Swagger e banco conectado.
 - configuracao do `.env` e `.env.example`
 - configuracao do Swagger/OpenAPI
 - health check inicial
-- endpoint `GET /api/system/ping`
-- endpoint `GET /api/system/database`
+- endpoint `GET /system`
+- endpoint `GET /system/ping`
+- endpoint `GET /system/database`
+- endpoint `GET /system/health`
+- alias `GET /`
+- alias `GET /health`
 - README inicial da API em ingles
 - documentacao dos comandos de execucao, testes e Prisma
 - testes e2e para `ping`, `health` e `database`
@@ -748,8 +809,12 @@ Comecar pela **Sprint B1 - Foundation do backend**, ja fazendo:
 - configuracao de Prisma + PostgreSQL
 - Swagger
 - health check
-- `GET /api/system/ping`
-- `GET /api/system/database`
+- `GET /system`
+- `GET /system/ping`
+- `GET /system/database`
+- `GET /system/health`
+- alias `GET /`
+- alias `GET /health`
 - README inicial em ingles
 - testes e2e iniciais
 
