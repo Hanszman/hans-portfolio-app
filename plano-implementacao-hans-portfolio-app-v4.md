@@ -311,8 +311,9 @@ Tambem manter:
 - diagrama ER simplificado no README ou em `/docs`
 - scripts SQL auxiliares para inspecao/troubleshooting quando necessario
 - estrategia explicita para assets estaticos enquanto nao houver object storage:
-  - copiar imagens/icones do legado para `hans-portfolio-app/src/assets/img`
+  - versionar imagens/icones em `hans-portfolio-app/src/assets/img`
   - persistir caminhos publicos da forma `/assets/img/...` nas entidades que precisarem de icone
+  - manter um snapshot versionado dos dados em vez de depender continuamente dos JSONs do legado
 
 ---
 
@@ -531,7 +532,9 @@ O backend deve continuar tendo um README tao caprichado quanto os outros projeto
 - `npm run prisma:migrate:dev`
 - `npm run prisma:migrate:deploy`
 - `npm run prisma:studio`
-- `npm run prisma:seed`
+- `npm run seed`
+- `npm run seed:reset`
+- `npm run seed:snapshot`
 - comando de checagem de dependencias desatualizadas adotado no projeto
 
 ---
@@ -592,27 +595,30 @@ Criar schema Prisma, relacionamentos e primeira migration.
 - relacoes principais criadas
 - nomes de tabelas/colunas padronizados
 
-## 9.3. Sprint B3 - Legacy seed
+## 9.3. Sprint B3 - Seed snapshot
 
 ### Objetivo
 
-Popular banco com base nos JSONs do projeto antigo.
+Popular o banco a partir do legado uma unica vez e consolidar um seed versionado, deterministico e replayable.
 
 ### Entregas
 
-- parser/mapper dos JSONs antigos
-- `prisma/seed.ts`
+- import inicial dos dados do legado
+- consolidacao de um snapshot versionado em `prisma/data/portfolio-seed.snapshot.json`
+- `prisma/seed.ts` independente do projeto antigo
+- `prisma/reset.ts` para limpeza dos dados do portfolio
+- `prisma/export-seed-snapshot.ts` para regenerar o snapshot quando necessario
 - carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
-- import de icones e imagens reutilizadas do projeto antigo
-- copia automatica dos assets legados para `hans-portfolio-app/src/assets/img`
+- versionamento dos assets reutilizados em `hans-portfolio-app/src/assets/img`
 - novos campos opcionais de `icon` nas entidades que precisarem expor um asset principal no frontend
-- documentacao do fluxo de seed/import e da estrategia de assets locais
+- documentacao do fluxo novo de `seed`, `seed:reset` e `seed:snapshot`
 
 ### Criterios de aceite
 
 - ambiente local sobe com conteudo real
-- dados do legado sao reproduzidos com consistencia
-- `npm run prisma:seed` aplica migrations pendentes, importa os dados e sincroniza os assets do frontend
+- os dados do portfolio podem ser apagados e repovoados sem depender do repo antigo
+- `npm run seed` aplica migrations pendentes e reinsere o snapshot versionado
+- `npm run seed:reset` limpa os dados do portfolio
 
 ## 9.4. Sprint B4 - Authentication and authorization
 
