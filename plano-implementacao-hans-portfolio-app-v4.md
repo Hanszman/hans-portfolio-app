@@ -402,8 +402,7 @@ hans-portfolio-api/
 - exemplos esperados:
   - `src/modules/system`
   - `src/modules/auth`
-  - `src/modules/project`
-  - `src/modules/experience`
+  - `src/modules/content`
 - dentro de cada feature, a organizacao padrao deve priorizar:
   - `controllers/`
   - `services/`
@@ -427,6 +426,10 @@ hans-portfolio-api/
   - `database-diagnostics.types.ts`
   - `project.types.ts`
   - `experience.types.ts`
+- no caso do CRUD do portfolio, um modulo guarda-chuva como `src/modules/content` pode agrupar varias entidades pequenas, desde que mantenha:
+  - controllers por entidade
+  - contracts por entidade
+  - services compartilhados apenas quando a responsabilidade generica realmente fizer sentido
 - quando uma mesma feature precisar de varios tipos internos, o preferivel e mantelos agrupados no mesmo `*.types.ts` em vez de pulverizar arquivos pequenos cedo demais
 
 ### Convencao de responsabilidade por controller/service
@@ -457,11 +460,26 @@ hans-portfolio-api/
 - `GET /projects`
 - `GET /projects/{slug}`
 - `GET /experiences`
-- `GET /skills`
+- `GET /experiences/{slug}`
+- `GET /technologies`
+- `GET /technologies/{slug}`
 - `GET /formations`
-- `GET /languages`
+- `GET /formations/{slug}`
+- `GET /spoken-languages`
+- `GET /spoken-languages/{code}`
+- `GET /customers`
+- `GET /customers/{slug}`
+- `GET /jobs`
+- `GET /jobs/{slug}`
+- `GET /links`
+- `GET /links/{id}`
+- `GET /image-assets`
+- `GET /image-assets/{id}`
+- `GET /tags`
+- `GET /tags/{slug}`
+- `GET /portfolio-settings`
+- `GET /portfolio-settings/{key}`
 - `GET /dashboard`
-- `GET /settings/public`
 
 Regra oficial:
 
@@ -482,10 +500,11 @@ Regra oficial:
 - `POST /auth/login`
 - `GET /admin/session`
 - `GET /admin/projects`
+- `GET /admin/projects/{id}`
 - `POST /admin/projects`
 - `PUT /admin/projects/{id}`
 - `DELETE /admin/projects/{id}`
-- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`
+- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`, sempre com `GET /admin/<resource>`, `GET /admin/<resource>/{id}`, `POST`, `PUT` e `DELETE`
 
 Regra oficial:
 
@@ -686,6 +705,8 @@ Criar CRUD completo das entidades relevantes.
 - CRUD de PortfolioSettings
 - DTO validation e responses consistentes
 - separacao explicita entre leitura publica e escrita administrativa protegida
+- rotas publicas de leitura em `/projects`, `/experiences`, `/technologies`, `/formations`, `/spoken-languages`, `/customers`, `/jobs`, `/links`, `/image-assets`, `/tags` e `/portfolio-settings`
+- rotas administrativas protegidas sob `/admin/<resource>` com `GET`, `POST`, `PUT` e `DELETE`
 
 ### Criterios de aceite
 
@@ -694,6 +715,7 @@ Criar CRUD completo das entidades relevantes.
 - responses consistentes
 - mensagens de erro claras
 - somente `Read` permanece publico nas entidades expostas
+- `GET /admin/<resource>` e `GET /admin/<resource>/{id}` tambem exigem autenticacao admin
 
 ## 9.6. Sprint B6 - Dashboard e endpoints agregados
 
