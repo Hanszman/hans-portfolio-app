@@ -503,17 +503,14 @@ Regra oficial:
 
 - `POST /auth/login`
 - `GET /admin/session`
-- `GET /admin/projects`
-- `GET /admin/projects/{id}`
 - `POST /admin/projects`
 - `PUT /admin/projects/{id}`
 - `DELETE /admin/projects/{id}`
-- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`, sempre com `GET /admin/<resource>`, `GET /admin/<resource>/{id}`, `POST`, `PUT` e `DELETE`
+- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`, sempre com `POST`, `PUT` e `DELETE` em `/admin/<resource>`
 
 Regra oficial:
 
 - todo `Create`, `Update` e `Delete` deve ficar protegido por autenticacao e autorizacao de admin
-- mesmo quando existir `GET` administrativo, ele deve ser tratado como parte da area autenticada
 - a area administrativa existe para uso do proprio Victor como unico admin esperado do sistema
 
 ### Observacao sobre rotas no Nest
@@ -710,7 +707,7 @@ Criar CRUD completo das entidades relevantes.
 - DTO validation e responses consistentes
 - separacao explicita entre leitura publica e escrita administrativa protegida
 - rotas publicas de leitura em `/projects`, `/experiences`, `/technologies`, `/formations`, `/spoken-languages`, `/customers`, `/jobs`, `/links`, `/image-assets`, `/tags` e `/portfolio-settings`
-- rotas administrativas protegidas sob `/admin/<resource>` com `GET`, `POST`, `PUT` e `DELETE`
+- rotas administrativas protegidas sob `/admin/<resource>` com `POST`, `PUT` e `DELETE`
 - possibilidade de usar um modulo guarda-chuva `content` com services genericos de leitura/escrita, desde que cada entidade mantenha seus controllers e contracts
 - registry/config central para definir por entidade: delegate Prisma, lookup field, ordenacao, includes e DTOs
 - tabelas de relacionamento modeladas no Prisma e expostas na leitura via includes das entidades principais, mesmo sem CRUD administrativo dedicado nesta sprint
@@ -722,7 +719,7 @@ Criar CRUD completo das entidades relevantes.
 - responses consistentes
 - mensagens de erro claras
 - somente `Read` permanece publico nas entidades expostas
-- `GET /admin/<resource>` e `GET /admin/<resource>/{id}` tambem exigem autenticacao admin
+- apenas `POST`, `PUT` e `DELETE` existem na superficie administrativa das entidades de conteudo
 
 ## 9.6. Sprint B6 - Dashboard e endpoints agregados
 
