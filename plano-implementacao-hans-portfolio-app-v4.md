@@ -430,6 +430,8 @@ hans-portfolio-api/
   - controllers por entidade
   - contracts por entidade
   - services compartilhados apenas quando a responsabilidade generica realmente fizer sentido
+- quando existir uma abstracao generica de CRUD como no modulo `content`, a customizacao por entidade deve ficar concentrada em um registry/config central
+- mesmo com services genericos, os controllers devem continuar separados por entidade para manter a superficie HTTP explicita e facil de navegar
 - quando uma mesma feature precisar de varios tipos internos, o preferivel e mantelos agrupados no mesmo `*.types.ts` em vez de pulverizar arquivos pequenos cedo demais
 
 ### Convencao de responsabilidade por controller/service
@@ -451,6 +453,8 @@ hans-portfolio-api/
   - `test/project.e2e-spec.ts`
 - o comando oficial de coverage deve ser `npm run test:coverage`
 - `test:coverage` deve validar o alvo de coverage da etapa e tambem executar a suite e2e
+- controllers com comportamento real de delegacao tambem devem receber testes unitarios
+- se a instrumentacao do framework gerar ruido artificial de branch coverage nos controllers, eles podem ficar fora do alvo mensuravel, desde que continuem testados
 - arquivos gerados, contratos triviais e `types` internos podem ser excluidos do coverage quando nao fizer sentido medir execucao neles
 
 ## 7.3. Padrao de endpoints
@@ -707,6 +711,9 @@ Criar CRUD completo das entidades relevantes.
 - separacao explicita entre leitura publica e escrita administrativa protegida
 - rotas publicas de leitura em `/projects`, `/experiences`, `/technologies`, `/formations`, `/spoken-languages`, `/customers`, `/jobs`, `/links`, `/image-assets`, `/tags` e `/portfolio-settings`
 - rotas administrativas protegidas sob `/admin/<resource>` com `GET`, `POST`, `PUT` e `DELETE`
+- possibilidade de usar um modulo guarda-chuva `content` com services genericos de leitura/escrita, desde que cada entidade mantenha seus controllers e contracts
+- registry/config central para definir por entidade: delegate Prisma, lookup field, ordenacao, includes e DTOs
+- tabelas de relacionamento modeladas no Prisma e expostas na leitura via includes das entidades principais, mesmo sem CRUD administrativo dedicado nesta sprint
 
 ### Criterios de aceite
 
