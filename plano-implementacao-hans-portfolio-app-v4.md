@@ -532,9 +532,9 @@ O backend deve continuar tendo um README tao caprichado quanto os outros projeto
 - `npm run prisma:migrate:dev`
 - `npm run prisma:migrate:deploy`
 - `npm run prisma:studio`
-- `npm run seed`
-- `npm run seed:reset`
-- `npm run seed:snapshot`
+- `npm run prisma:seed`
+- `npm run prisma:seed:reset`
+- `npm run prisma:seed:snapshot`
 - comando de checagem de dependencias desatualizadas adotado no projeto
 
 ---
@@ -611,14 +611,14 @@ Popular o banco a partir do legado uma unica vez e consolidar um seed versionado
 - carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
 - versionamento dos assets reutilizados em `hans-portfolio-app/src/assets/img`
 - novos campos opcionais de `icon` nas entidades que precisarem expor um asset principal no frontend
-- documentacao do fluxo novo de `seed`, `seed:reset` e `seed:snapshot`
+- documentacao do fluxo novo de `prisma:seed`, `prisma:seed:reset` e `prisma:seed:snapshot`
 
 ### Criterios de aceite
 
 - ambiente local sobe com conteudo real
 - os dados do portfolio podem ser apagados e repovoados sem depender do repo antigo
-- `npm run seed` aplica migrations pendentes e reinsere o snapshot versionado
-- `npm run seed:reset` limpa os dados do portfolio
+- `npm run prisma:seed` aplica migrations pendentes e reinsere o snapshot versionado
+- `npm run prisma:seed:reset` limpa os dados do portfolio
 
 ## 9.4. Sprint B4 - Authentication and authorization
 
