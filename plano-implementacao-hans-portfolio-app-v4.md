@@ -172,6 +172,12 @@ Implementar primeiro:
 - scripts e historico de setup
 - cobertura de testes e pipeline basica de qualidade
 
+Regra oficial de acesso aos CRUDs:
+
+- `Read` sera a unica operacao publica em todas as entidades
+- `Create`, `Update` e `Delete` serao permitidos apenas para o usuario admin autenticado
+- na pratica, apenas Victor podera realizar mutacoes administrativas no sistema
+
 ### Etapa 2 - Frontend completo
 
 Implementar depois:
@@ -457,6 +463,11 @@ hans-portfolio-api/
 - `GET /dashboard`
 - `GET /settings/public`
 
+Regra oficial:
+
+- endpoints de leitura publica nao exigem login
+- a leitura sera a unica parte aberta dos CRUDs
+
 ### Sistema
 
 - `GET /system`
@@ -474,6 +485,12 @@ hans-portfolio-api/
 - `PUT /admin/projects/{id}`
 - `DELETE /admin/projects/{id}`
 - CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`
+
+Regra oficial:
+
+- todo `Create`, `Update` e `Delete` deve ficar protegido por autenticacao e autorizacao de admin
+- mesmo quando existir `GET` administrativo, ele deve ser tratado como parte da area autenticada
+- a area administrativa existe para uso do proprio Victor como unico admin esperado do sistema
 
 ### Observacao sobre rotas no Nest
 
@@ -634,11 +651,13 @@ Criar acesso administrativo seguro.
 - autenticacao JWT
 - autorizacao por role
 - protecao de rotas administrativas com guards
+- formalizacao da regra: somente `Read` publico; `Create`, `Update` e `Delete` exclusivos do admin autenticado
 
 ### Criterios de aceite
 
 - endpoints admin exigem autenticacao
 - endpoints publicos continuam livres
+- operacoes de escrita ficam bloqueadas para usuarios nao autenticados
 
 ## 9.5. Sprint B5 - Administrative CRUDs
 
@@ -660,6 +679,7 @@ Criar CRUD completo das entidades relevantes.
 - CRUD de ImageAssets
 - CRUD de PortfolioSettings
 - DTO validation e responses consistentes
+- separacao explicita entre leitura publica e escrita administrativa protegida
 
 ### Criterios de aceite
 
@@ -667,6 +687,7 @@ Criar CRUD completo das entidades relevantes.
 - requests validadas
 - responses consistentes
 - mensagens de erro claras
+- somente `Read` permanece publico nas entidades expostas
 
 ## 9.6. Sprint B6 - Dashboard e endpoints agregados
 
