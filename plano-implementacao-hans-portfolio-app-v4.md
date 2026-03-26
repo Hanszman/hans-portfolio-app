@@ -480,6 +480,7 @@ Regra oficial:
 ### Administrativos
 
 - `POST /auth/login`
+- `GET /admin/session`
 - `GET /admin/projects`
 - `POST /admin/projects`
 - `PUT /admin/projects/{id}`
@@ -552,6 +553,7 @@ O backend deve continuar tendo um README tao caprichado quanto os outros projeto
 - `npm run prisma:seed`
 - `npm run prisma:seed:reset`
 - `npm run prisma:seed:snapshot`
+- `npm run prisma:admin:bootstrap`
 - comando de checagem de dependencias desatualizadas adotado no projeto
 
 ---
@@ -647,10 +649,12 @@ Criar acesso administrativo seguro.
 
 - login admin
 - criacao do primeiro usuario admin
+- script de bootstrap do primeiro admin
 - hash de senha com `bcrypt`
 - autenticacao JWT
 - autorizacao por role
 - protecao de rotas administrativas com guards
+- endpoint protegido inicial `GET /admin/session`
 - formalizacao da regra: somente `Read` publico; `Create`, `Update` e `Delete` exclusivos do admin autenticado
 
 ### Criterios de aceite
@@ -658,6 +662,8 @@ Criar acesso administrativo seguro.
 - endpoints admin exigem autenticacao
 - endpoints publicos continuam livres
 - operacoes de escrita ficam bloqueadas para usuarios nao autenticados
+- `POST /auth/login` retorna JWT valido para o admin bootstrapado
+- `GET /admin/session` valida a sessao autenticada do admin
 
 ## 9.5. Sprint B5 - Administrative CRUDs
 
