@@ -268,6 +268,10 @@ O modelo conceitual do `v3` continua valido e deve ser mantido, apenas traduzido
 - `Project` <-> `ImageAsset`
 - `Experience` <-> `ImageAsset`
 - `Formation` <-> `ImageAsset`
+- `Technology` <-> `ImageAsset`
+- `SpokenLanguage` <-> `ImageAsset`
+- `Customer` <-> `ImageAsset`
+- `Job` <-> `ImageAsset`
 
 ### Convencoes relevantes
 
@@ -319,6 +323,8 @@ Tambem manter:
 - estrategia explicita para assets estaticos enquanto nao houver object storage:
   - versionar imagens/icones em `hans-portfolio-app/src/assets/img`
   - persistir caminhos publicos da forma `/assets/img/...` nas entidades que precisarem de icone
+  - manter a tabela `image_asset` como catalogo normalizado dos arquivos versionados do frontend, incluindo subpasta e tipo de uso
+  - relacionar imagens nas entidades principais por tabelas de juncao quando a API precisar expor metadata de renderizacao
   - manter um snapshot versionado dos dados em vez de depender continuamente dos JSONs do legado
 
 ---
@@ -650,6 +656,8 @@ Popular o banco a partir do legado uma unica vez e consolidar um seed versionado
 - carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
 - versionamento dos assets reutilizados em `hans-portfolio-app/src/assets/img`
 - novos campos opcionais de `icon` nas entidades que precisarem expor um asset principal no frontend
+- catalogo versionado em `image_asset` com campos de `folder` e `kind`
+- relacoes de imagem preenchidas para `project`, `experience`, `formation`, `technology`, `spoken-language`, `customer` e `job`
 - documentacao do fluxo novo de `prisma:seed`, `prisma:seed:reset` e `prisma:seed:snapshot`
 
 ### Criterios de aceite
