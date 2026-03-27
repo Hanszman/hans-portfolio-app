@@ -659,6 +659,7 @@ Popular o banco a partir do legado uma unica vez e consolidar um seed versionado
 - catalogo versionado em `image_asset` com campos de `folder` e `kind`
 - relacoes de imagem preenchidas para `project`, `experience`, `formation`, `technology`, `spoken-language`, `customer` e `job`
 - documentacao do fluxo novo de `prisma:seed`, `prisma:seed:reset` e `prisma:seed:snapshot`
+- o fluxo de `prisma:seed` deve recriar o admin bootstrapado quando `ADMIN_BOOTSTRAP_*` estiver configurado, para reduzir atrito apos resets completos de schema
 
 ### Criterios de aceite
 
