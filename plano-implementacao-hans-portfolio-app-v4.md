@@ -724,6 +724,7 @@ Criar CRUD completo das entidades relevantes.
 - tabelas de relacionamento modeladas no Prisma e expostas na leitura via includes das entidades principais, mesmo sem CRUD administrativo dedicado nesta sprint
 - todos os `GET` de colecao devem retornar `data + pagination`
 - todos os `GET` de colecao devem aceitar filtros opcionais por propriedades relevantes
+- todos os `GET` de colecao devem aceitar ordenacao opcional por query params, respeitando a whitelist de campos permitidos por entidade
 - `PUT` pode continuar sendo usado como update parcial se a API mantiver DTOs parciais e comportamento nao-destrutivo para campos omitidos
 - `POST` e `PUT` administrativos devem aceitar arrays/estruturas para criar ou substituir relacoes N:N diretamente pelas entidades principais, sem exigir endpoints separados para cada join table
 
@@ -737,6 +738,7 @@ Criar CRUD completo das entidades relevantes.
 - apenas `POST`, `PUT` e `DELETE` existem na superficie administrativa das entidades de conteudo
 - leituras publicas de colecao funcionam com paginacao
 - leituras publicas de colecao funcionam com filtros opcionais por propriedades relevantes
+- leituras publicas de colecao funcionam com ordenacao opcional via query params
 - relacoes principais podem ser manipuladas nos payloads administrativos das entidades donas
 
 ## 9.6. Sprint B6 - Dashboard e endpoints agregados
