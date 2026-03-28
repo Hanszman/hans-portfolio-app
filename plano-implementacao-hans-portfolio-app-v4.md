@@ -490,6 +490,11 @@ hans-portfolio-api/
 - `GET /portfolio-settings`
 - `GET /portfolio-settings/{key}`
 - `GET /dashboard`
+- `GET /dashboard/stack-distribution`
+- `GET /dashboard/project-contexts`
+- `GET /dashboard/technology-usage`
+- `GET /dashboard/professional-timeline`
+- `GET /dashboard/highlights`
 
 Regra oficial:
 
@@ -497,6 +502,7 @@ Regra oficial:
 - a leitura sera a unica parte aberta dos CRUDs
 - todos os `GET` de colecao devem suportar paginacao
 - todos os `GET` de colecao devem suportar filtros opcionais por propriedades relevantes da entidade
+- o modulo `dashboard` deve expor agregados publicos para que o frontend nao precise recomputar distribuicoes e timelines pesadas client-side
 
 ### Sistema
 
@@ -749,15 +755,26 @@ Criar endpoints derivados/analiticos para o dashboard do front.
 
 ### Entregas
 
-- endpoint de distribuicao por stack
-- endpoint de projetos por contexto
-- endpoint de tecnologias por frequencia/contexto/nivel
-- endpoint de timeline profissional
-- endpoint de highlights
+- endpoint agregado `GET /dashboard`
+- endpoint `GET /dashboard/stack-distribution`
+- endpoint `GET /dashboard/project-contexts`
+- endpoint `GET /dashboard/technology-usage`
+- endpoint `GET /dashboard/professional-timeline`
+- endpoint `GET /dashboard/highlights`
+- analytics sempre calculados a partir de dados publicados
+- distribuicao por stack com base em `TagType.STACK`
+- distribuicao de projetos por `context` e `environment`
+- distribuicao de tecnologias por `level`, `frequency`, `contexts` e source (`project`, `experience`, `formation`)
+- timeline profissional derivada de `experience`
+- highlights normalizados entre `project`, `experience`, `technology`, `formation`, `customer`, `job` e `spokenLanguage`
+- testes unitarios do service e controller de dashboard
+- testes e2e cobrindo rotas e documentacao OpenAPI do dashboard
 
 ### Criterios de aceite
 
 - front consegue consumir dados analiticos sem calculo pesado client-side
+- o frontend pode optar por hidratar tudo via `GET /dashboard` ou lazy-load por endpoint segmentado
+- respostas do dashboard filtram conteudo nao publicado antes da agregacao
 
 ## 9.7. Sprint B7 - Tests, docs and finish
 
