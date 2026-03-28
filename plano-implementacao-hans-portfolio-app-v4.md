@@ -797,6 +797,12 @@ Fechar a API redonda.
 - documentacao boa o suficiente para retomar o projeto meses depois sem sofrer
 - cobertura do alvo da etapa em 100%
 
+### Status atual do backend
+
+- o backend do `hans-portfolio-api` ja foi executado e fechado ate esta sprint
+- isso significa que as sprints `B1`, `B2`, `B3`, `B4`, `B5`, `B6` e `B7` ja estao concluidas no estado atual do projeto
+- a partir deste ponto, o proximo fluxo recomendado do remake deixa de ser "continuar o backend" e passa a ser iniciar a etapa do frontend e, depois, a integracao
+
 ---
 
 ## 10) Front-end e integracao
