@@ -473,6 +473,7 @@ hans-portfolio-api/
 - `GET /experiences/{slug}`
 - `GET /technologies`
 - `GET /technologies/{slug}`
+- `GET /technologies/{slug}/experience-metrics`
 - `GET /formations`
 - `GET /formations/{slug}`
 - `GET /spoken-languages`
@@ -733,6 +734,9 @@ Criar CRUD completo das entidades relevantes.
 - todos os `GET` de colecao devem aceitar ordenacao opcional por query params, respeitando a whitelist de campos permitidos por entidade
 - `PUT` pode continuar sendo usado como update parcial se a API mantiver DTOs parciais e comportamento nao-destrutivo para campos omitidos
 - `POST` e `PUT` administrativos devem aceitar arrays/estruturas para criar ou substituir relacoes N:N diretamente pelas entidades principais, sem exigir endpoints separados para cada join table
+- relacoes de tecnologia devem suportar `startedAt` e `endedAt` na propria tabela de join para que o backend responda tempo de experiencia preciso por tecnologia e por contexto
+- leituras de `technology` devem expor `experienceMetrics` com total e quebra por `PROFESSIONAL`, `PERSONAL`, `ACADEMIC` e `STUDY`
+- o calculo do tempo total de tecnologia deve unificar intervalos sobrepostos antes de somar meses, evitando dupla contagem quando contextos diferentes se cruzam no mesmo periodo
 
 ### Criterios de aceite
 
@@ -759,12 +763,14 @@ Criar endpoints derivados/analiticos para o dashboard do front.
 - endpoint `GET /dashboard/stack-distribution`
 - endpoint `GET /dashboard/project-contexts`
 - endpoint `GET /dashboard/technology-usage`
+- endpoint dedicado `GET /technologies/{slug}/experience-metrics` para detalhamento de duracao por tecnologia
 - endpoint `GET /dashboard/professional-timeline`
 - endpoint `GET /dashboard/highlights`
 - analytics sempre calculados a partir de dados publicados
 - distribuicao por stack com base em `TagType.STACK`
 - distribuicao de projetos por `context` e `environment`
 - distribuicao de tecnologias por `level`, `frequency`, `contexts` e source (`project`, `experience`, `formation`)
+- metricas precisas de tempo por tecnologia e por contexto consumiveis pelo frontend para cards, tooltips e comparativos
 - timeline profissional derivada de `experience`
 - highlights normalizados entre `project`, `experience`, `technology`, `formation`, `customer`, `job` e `spokenLanguage`
 - testes unitarios do service e controller de dashboard
@@ -775,6 +781,7 @@ Criar endpoints derivados/analiticos para o dashboard do front.
 - front consegue consumir dados analiticos sem calculo pesado client-side
 - o frontend pode optar por hidratar tudo via `GET /dashboard` ou lazy-load por endpoint segmentado
 - respostas do dashboard filtram conteudo nao publicado antes da agregacao
+- o frontend tambem pode consumir `GET /technologies/{slug}/experience-metrics` quando precisar apenas do resumo temporal de uma tecnologia sem carregar toda a entidade novamente
 
 ## 9.7. Sprint B7 - Tests, docs and finish
 

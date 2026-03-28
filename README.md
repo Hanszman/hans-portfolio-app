@@ -71,6 +71,33 @@ npm run start
 - **ESLint (flat config)**
 - **Prettier**
 
+## API Integration Notes
+
+The backend already exposes public technology duration metrics that this frontend can consume during the integration phase.
+
+Relevant route:
+
+- `GET /technologies/:slug/experience-metrics`
+
+The regular technology reads also embed the same structure:
+
+- `GET /technologies`
+- `GET /technologies/:slug`
+
+Returned contract summary:
+
+- `experienceMetrics.total`
+- `experienceMetrics.byContext.PROFESSIONAL`
+- `experienceMetrics.byContext.PERSONAL`
+- `experienceMetrics.byContext.ACADEMIC`
+- `experienceMetrics.byContext.STUDY`
+
+Recommended frontend usage:
+
+- show `experienceMetrics.total.label` on technology cards
+- show the per-context breakdown in tooltips, drawers, or detail sections
+- treat the total duration as overlap-safe because the backend already merges intersecting periods before calculating the final time span
+
 ## 📜 History of commands used to build this project:
 
 ```bash
