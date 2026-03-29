@@ -77,12 +77,13 @@ The backend already exposes public technology duration metrics that this fronten
 
 Relevant route:
 
-- `GET /technologies/:slug/experience-metrics`
+- `GET /technology-contexts/:slug`
 
 The regular technology reads also embed the same structure:
 
 - `GET /technologies`
 - `GET /technologies/:slug`
+- `GET /technology-contexts`
 
 Returned contract summary:
 
@@ -96,6 +97,7 @@ Recommended frontend usage:
 
 - show `experienceMetrics.total.label` on technology cards
 - show the per-context breakdown in tooltips, drawers, or detail sections
+- use `GET /technology-contexts/:slug` when the admin UI needs the editable raw context rows grouped under one technology
 - treat the total duration as overlap-safe because the backend already merges intersecting periods before calculating the final time span
 
 ## 📜 History of commands used to build this project:

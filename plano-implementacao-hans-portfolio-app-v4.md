@@ -473,7 +473,8 @@ hans-portfolio-api/
 - `GET /experiences/{slug}`
 - `GET /technologies`
 - `GET /technologies/{slug}`
-- `GET /technologies/{slug}/experience-metrics`
+- `GET /technology-contexts`
+- `GET /technology-contexts/{slug}`
 - `GET /formations`
 - `GET /formations/{slug}`
 - `GET /spoken-languages`
@@ -734,7 +735,10 @@ Criar CRUD completo das entidades relevantes.
 - todos os `GET` de colecao devem aceitar ordenacao opcional por query params, respeitando a whitelist de campos permitidos por entidade
 - `PUT` pode continuar sendo usado como update parcial se a API mantiver DTOs parciais e comportamento nao-destrutivo para campos omitidos
 - `POST` e `PUT` administrativos devem aceitar arrays/estruturas para criar ou substituir relacoes N:N diretamente pelas entidades principais, sem exigir endpoints separados para cada join table
-- relacoes de tecnologia devem suportar `startedAt` e `endedAt` na propria tabela de join para que o backend responda tempo de experiencia preciso por tecnologia e por contexto
+- `technology.level` e `technology.frequency` devem representar o estado atual global da tecnologia
+- periodos precisos por contexto devem viver em `technology_context` com relacao `1:N` para cada tecnologia
+- `technology_context` deve suportar multiplos registros por contexto para a mesma tecnologia
+- o calculo total deve somar os periodos por contexto e depois unir interseccoes entre contextos para evitar dupla contagem
 - leituras de `technology` devem expor `experienceMetrics` com total e quebra por `PROFESSIONAL`, `PERSONAL`, `ACADEMIC` e `STUDY`
 - o calculo do tempo total de tecnologia deve unificar intervalos sobrepostos antes de somar meses, evitando dupla contagem quando contextos diferentes se cruzam no mesmo periodo
 
@@ -763,7 +767,10 @@ Criar endpoints derivados/analiticos para o dashboard do front.
 - endpoint `GET /dashboard/stack-distribution`
 - endpoint `GET /dashboard/project-contexts`
 - endpoint `GET /dashboard/technology-usage`
-- endpoint dedicado `GET /technologies/{slug}/experience-metrics` para detalhamento de duracao por tecnologia
+- CRUD dedicado de `technology_context`
+- leitura publica agrupada por tecnologia em `GET /technology-contexts`
+- leitura publica especifica por slug em `GET /technology-contexts/{slug}`
+- mutacoes admin por registro individual em `POST/PUT/DELETE /admin/technology-contexts`
 - endpoint `GET /dashboard/professional-timeline`
 - endpoint `GET /dashboard/highlights`
 - analytics sempre calculados a partir de dados publicados
@@ -781,7 +788,7 @@ Criar endpoints derivados/analiticos para o dashboard do front.
 - front consegue consumir dados analiticos sem calculo pesado client-side
 - o frontend pode optar por hidratar tudo via `GET /dashboard` ou lazy-load por endpoint segmentado
 - respostas do dashboard filtram conteudo nao publicado antes da agregacao
-- o frontend tambem pode consumir `GET /technologies/{slug}/experience-metrics` quando precisar apenas do resumo temporal de uma tecnologia sem carregar toda a entidade novamente
+- o frontend tambem pode consumir `GET /technology-contexts/{slug}` quando precisar do resumo temporal e das linhas cruas de contexto de uma tecnologia
 
 ## 9.7. Sprint B7 - Tests, docs and finish
 
