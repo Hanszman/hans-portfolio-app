@@ -665,9 +665,9 @@ Popular o banco a partir do legado uma unica vez e consolidar um seed versionado
 - `prisma/export-seed-snapshot.ts` para regenerar o snapshot quando necessario
 - carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
 - versionamento dos assets reutilizados em `hans-portfolio-app/src/assets/img`
-- novos campos opcionais de `icon` nas entidades que precisarem expor um asset principal no frontend
 - catalogo versionado em `image_asset` com campos de `folder` e `kind`
 - relacoes de imagem preenchidas para `project`, `experience`, `formation`, `technology`, `spoken-language`, `customer` e `job`
+- links normalizados em `link` e tabelas de juncao, evitando colunas de URL diretamente nas entidades
 - documentacao do fluxo novo de `prisma:seed`, `prisma:seed:reset` e `prisma:seed:snapshot`
 - o fluxo de `prisma:seed` deve recriar o admin bootstrapado quando `ADMIN_BOOTSTRAP_*` estiver configurado, para reduzir atrito apos resets completos de schema
 
@@ -735,6 +735,7 @@ Criar CRUD completo das entidades relevantes.
 - todos os `GET` de colecao devem aceitar ordenacao opcional por query params, respeitando a whitelist de campos permitidos por entidade
 - `PUT` pode continuar sendo usado como update parcial se a API mantiver DTOs parciais e comportamento nao-destrutivo para campos omitidos
 - `POST` e `PUT` administrativos devem aceitar arrays/estruturas para criar ou substituir relacoes N:N diretamente pelas entidades principais, sem exigir endpoints separados para cada join table
+- campos diretos de `icon` e URLs nas entidades principais devem ser evitados; imagens devem vir de `image_asset` e URLs de `link`, sempre via relacoes explicitas
 - `technology.level` e `technology.frequency` devem representar o estado atual global da tecnologia
 - periodos precisos por contexto devem viver em `technology_context` com relacao `1:N` para cada tecnologia
 - `technology_context` deve suportar multiplos registros por contexto para a mesma tecnologia

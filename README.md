@@ -85,6 +85,12 @@ The regular technology reads also embed the same structure:
 - `GET /technologies/:slug`
 - `GET /technology-contexts`
 
+Media and external URLs are now fully normalized on the backend:
+
+- icons, logos, screenshots, and profile images come from `image_asset` relations
+- project and technology URLs come from `link` relations
+- the frontend should not expect direct `icon`, `repositoryUrl`, `deployUrl`, `docsUrl`, `npmUrl`, or `officialUrl` scalar fields from the main content entities anymore
+
 Returned contract summary:
 
 - `experienceMetrics.total`
