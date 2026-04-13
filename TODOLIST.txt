@@ -1,6 +1,8 @@
 Refactor portfolio in Angular:
 -Refactor the screens and components from the old version of the portfolio
 -Create more components and features in the portfolio
+-Create pipeline ci/cd and docker in the project
+-Create skills
 -Checkout the TODO list from the old project:
 
 // TODO: Criar separação entre tempos de experiência
