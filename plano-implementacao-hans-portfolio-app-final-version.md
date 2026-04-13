@@ -1,6 +1,6 @@
 # Plano de Implementacao - hans-portfolio-app + hans-portfolio-api (v5)
 
-> Objetivo: guiar a continuacao oficial do remake do portfolio antigo (`victor_hanszman_portfolio-old`) usando o novo front em `hans-portfolio-app` e a nova API em `hans-portfolio-api`, com Angular moderno no front, `hans-ui-design-lib` como base visual oficial e integracao posterior com a API NestJS ja concluida.
+> Objetivo: guiar a continuacao oficial do remake do portfolio antigo (`victor_hanszman_portfolio-old`) usando o novo front em `hans-portfolio-app` e a nova API em `hans-portfolio-api`, com Angular moderno no front, `hans-ui-design-lib` como base visual oficial e integracao antecipada com a API NestJS ja concluida.
 
 Este documento substitui o `v4` como referencia oficial de execucao.
 
@@ -17,7 +17,7 @@ Este documento substitui o `v4` como referencia oficial de execucao.
 - a etapa de backend ja foi concluida no repositorio `hans-portfolio-api`
 - a API oficial do portfolio agora existe em NestJS + Express + TypeScript + Prisma + PostgreSQL/Neon
 - o proximo foco oficial do remake passa a ser o front no repositorio `hans-portfolio-app`
-- a integracao real com a API continua sendo uma etapa posterior ao fechamento estrutural do front
+- a integracao real com a API deve comecar ja nas primeiras etapas do front, para visualizarmos dados reais desde cedo
 
 ### 1.3. Fontes oficiais de contexto
 
@@ -31,6 +31,8 @@ As referencias mais importantes para as proximas etapas continuam sendo:
 - `hans-portfolio-api/README.md`
 - `victor_hanszman_portfolio-old` como referencia funcional e de conteudo do portfolio anterior
 - `hans-ui-design-lib` como referencia oficial de componentes reutilizaveis e contratos visuais
+- o plano old mantido no repositorio deve permanecer intacto
+- qualquer evolucao de documentacao de execucao do remake deve acontecer somente neste plano versao final
 
 ---
 
@@ -87,6 +89,31 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - `hans-ui-design-lib` e a base visual oficial do projeto
 - o consumo do app continua previsto via CDN/web components
 - componentes ja existentes na lib devem ser reutilizados antes de qualquer implementacao customizada equivalente
+
+### 3.4. Integracao com backend desde o inicio do front
+
+- nao usar mocks como trilha principal do remake
+- priorizar consumo real da API NestJS ja nas primeiras sprints do frontend
+- usar dados reais da API desde o inicio sempre que a feature ja tiver endpoint disponivel
+- so usar dados estaticos temporarios quando houver bloqueio tecnico pontual e explicitamente justificado
+
+### 3.5. Estrategia oficial de ambiente do frontend
+
+- o frontend deve ter logica de `.env` para configurar a base URL da API
+- a base local de desenvolvimento da API deve apontar para `http://localhost:3000`
+- a base produtiva da API deve apontar para `https://hans-portfolio-api.vercel.app`
+- deve existir um `.env.example` no app com valores publicos seguros, usando a URL produtiva como referencia padrao documentada
+- a estrategia de ambiente do app deve ser simples, publica e sem segredos no bundle
+
+Variavel publica alvo sugerida:
+
+- `PORTFOLIO_API_BASE_URL`
+
+Mapa alvo:
+
+- desenvolvimento local: `PORTFOLIO_API_BASE_URL=http://localhost:3000`
+- producao: `PORTFOLIO_API_BASE_URL=https://hans-portfolio-api.vercel.app`
+- `.env.example`: `PORTFOLIO_API_BASE_URL=https://hans-portfolio-api.vercel.app`
 
 ---
 
@@ -261,6 +288,18 @@ Quando fizer sentido, tambem validar:
 - nao aceitar quebra de lint/prettier
 - nao acumular debitos que poderiam ser evitados no momento da entrega
 
+### 6.6. Regra de manutencao do README do app
+
+Ao longo do desenvolvimento, o `README.md` do `hans-portfolio-app` deve ser atualizado apenas nas partes necessarias, preservando o formato que ja foi alinhado no repositorio.
+
+Regras explicitas:
+
+- nao mexer na ordem geral das informacoes do README
+- manter as secoes `Features`, `Development`, `Tech Stack` e `History` na estrutura em que ja estao
+- manter os icones que ja existem nos titulos `##`
+- quando novas secoes forem realmente necessarias, incluir novos icones coerentes nos titulos `##`
+- evitar reestruturacoes amplas do README sem necessidade real
+
 ---
 
 ## 7) Arquitetura alvo do hans-portfolio-app
@@ -415,42 +454,107 @@ Fechar a base do app novo e consolidar as regras do projeto antes do desenvolvim
 - consolidar regras de Angular moderno
 - consolidar politica de testes e coverage
 - consolidar politica de uso da `hans-ui-design-lib`
+- consolidar a regra de manutencao do README do app sem alterar sua ordem estrutural
+- consolidar a regra de manter o plano old intacto e evoluir apenas este plano final
 - confirmar estrutura base do app
 - manter a integracao por CDN/web components preparada
+- consolidar a direcao oficial de integracao antecipada com a API
+- consolidar a estrategia oficial de `.env` do frontend
 
 #### Criterios de aceite
 
 - documentacao coerente com o estado atual do projeto
 - diretrizes tecnicas claras para as proximas sprints
 - nenhum espaco para duvida sobre o uso de Angular moderno, coverage e design lib
+- nenhum espaco para duvida sobre a regra de preservacao do formato do README
+- nenhum espaco para duvida sobre a estrategia de ambiente e integracao antecipada
 
-### F1 - App shell, layout base e infra transversal
+### F1.1 - Estrutura base do app
 
 #### Objetivo
 
-Criar a casca oficial do app e a infraestrutura base de navegacao, tema e organizacao.
+Criar a fundacao estrutural do app novo sem ainda atacar paginas completas.
 
 #### Entregas
 
-- app shell
+- estrutura inicial de `core`, `layout`, `pages`, `shared` e `helpers`
+- definicao da shell principal do app
+- organizacao inicial de rotas
+- base inicial de composicao do layout
+- testes unitarios da casca minima criada
+
+#### Criterios de aceite
+
+- app com estrutura clara para crescimento
+- shell minima funcional
+- coverage total do escopo implementado
+
+### F1.2 - Ambiente e integracao HTTP inicial
+
+#### Objetivo
+
+Conectar o frontend ao backend desde cedo e preparar a base de ambiente do projeto.
+
+#### Entregas
+
+- logica oficial de `.env` do frontend
+- `.env.example` com a URL produtiva da API
+- configuracao de desenvolvimento apontando para `http://localhost:3000`
+- configuracao de producao apontando para `https://hans-portfolio-api.vercel.app`
+- camada inicial de configuracao para `PORTFOLIO_API_BASE_URL`
+- client HTTP base
+- primeiros adapters de leitura publica da API
+- testes unitarios dos adapters e da logica de ambiente
+
+#### Criterios de aceite
+
+- frontend consegue consumir a API real desde o inicio das proximas features
+- ambiente local e produtivo possuem base URL clara e documentada
+- sem depender de mocks como abordagem padrao
+- coverage total do escopo implementado
+
+### F1.3 - Layout principal e navegacao
+
+#### Objetivo
+
+Construir a casca navegavel principal do portfolio.
+
+#### Entregas
+
 - layout principal
 - header
 - footer
 - navegacao principal
 - wrappers de pagina
-- estrutura inicial de `core`, `layout`, `pages`, `shared` e `helpers`
-- base de tema claro/escuro
-- base de traducao
-- contrato de integracao com a `hans-ui-design-lib`
-- testes unitarios cobrindo a casca do app e os componentes criados
+- responsividade inicial da shell
+- testes unitarios dos componentes de layout criados
 
 #### Criterios de aceite
 
 - navegacao principal funcional
 - layout responsivo minimo funcional
+- coverage total do escopo implementado
+
+### F1.4 - Temas, traducao e contrato com a design lib
+
+#### Objetivo
+
+Fechar a infraestrutura transversal que sera usada pelo restante do front.
+
+#### Entregas
+
+- base de tema claro/escuro
+- base de traducao
+- contrato de integracao com a `hans-ui-design-lib`
+- validacao dos componentes da lib que ja entram na shell
+- testes unitarios do escopo implementado
+
+#### Criterios de aceite
+
 - base de temas preparada
 - base de traducao preparada
-- testes com coverage total do escopo implementado
+- contrato com a design lib claro e funcional
+- coverage total do escopo implementado
 
 ### F2 - Home estrategica
 
@@ -466,13 +570,14 @@ Construir uma home forte, moderna e com posicionamento profissional claro.
 - CTA(s) coerentes com portfolio profissional
 - blocos de projetos/experiencias em destaque
 - secoes de prova social/impacto se fizer sentido
+- consumo de dados reais da API nas secoes que ja tiverem endpoint adequado
 - componentes especificos da home com testes unitarios
 
 #### Criterios de aceite
 
 - home comunica senioridade e proposta de valor em poucos segundos
 - responsividade boa
-- sem depender ainda da integracao real com a API
+- integracao real com a API usada sempre que o backend ja suportar a necessidade da secao
 - coverage total do que for implementado
 
 ### F3 - Pagina de experiences
@@ -487,6 +592,7 @@ Transformar experiencias em narrativa de carreira, nao apenas lista de cards.
 - agrupamentos/organizacao clara
 - destaque para impacto, contexto e stack
 - ligacoes com clientes, cargos, projetos e tecnologias
+- consumo real dos endpoints de experiences e relacionamentos disponiveis
 - testes unitarios completos
 
 #### Criterios de aceite
@@ -508,7 +614,7 @@ Apresentar stack e experiencia tecnica com mais clareza do que no portfolio anti
 - filtros realmente uteis
 - agrupamentos e visualizacoes mais claras
 - destaque para experiencia total e por contexto
-- aproveitamento posterior dos dados de `experienceMetrics` da API
+- consumo real dos dados de `experienceMetrics` da API
 - testes unitarios completos
 
 #### Criterios de aceite
@@ -530,6 +636,7 @@ Apresentar projetos como cases, com mais contexto e valor percebido.
 - destaque de contexto, papel, stack e resultados
 - espaco para links, imagens e highlights
 - filtros e ordenacoes coerentes
+- consumo real dos endpoints de projetos e settings relacionados
 - testes unitarios completos
 
 #### Criterios de aceite
@@ -547,9 +654,9 @@ Criar a tela propria de dashboard prevista no plano do remake.
 #### Entregas
 
 - pagina dedicada
-- consumo inicial mockado/adapter-friendly
+- consumo real dos endpoints agregados do dashboard
 - graficos e indicadores coerentes
-- estrutura pronta para usar os endpoints agregados da API
+- estrutura integrada aos endpoints agregados da API
 - componentes de analytics testados
 
 #### Criterios de aceite
@@ -563,7 +670,7 @@ Criar a tela propria de dashboard prevista no plano do remake.
 
 #### Objetivo
 
-Fechar consistencia visual e tecnica do portfolio publico antes da integracao real com o backend.
+Fechar consistencia visual e tecnica do portfolio publico com a integracao real ja em funcionamento.
 
 #### Entregas
 
@@ -573,11 +680,12 @@ Fechar consistencia visual e tecnica do portfolio publico antes da integracao re
 - revisao de acessibilidade
 - revisao de navegacao
 - revisao de consistencia com `hans-ui-design-lib`
+- revisao da consistencia da integracao com a API em todas as paginas publicas
 - testes adicionais necessarios
 
 #### Criterios de aceite
 
-- portfolio publico pronto para ser integrado
+- portfolio publico pronto e integrado com a API
 - linguagem visual consistente
 - coverage total do escopo entregue
 
@@ -605,10 +713,21 @@ Deixar o frontend pronto para, em etapa apropriada, receber a area admin consumi
 
 ## 11) Plano da etapa de integracao
 
-Depois que o frontend estiver estruturalmente pronto:
+A integracao com o backend nao deve ficar isolada apenas no final do projeto. Ela deve comecar nas primeiras etapas do frontend e amadurecer ao longo das entregas.
+
+Fluxo oficial:
+
+- preparar ambiente e client HTTP na `F1.2`
+- consumir dados reais nas paginas publicas desde as primeiras features
+- integrar dashboard com endpoints agregados assim que a pagina existir
+- consolidar estados de loading/erro/empty ao longo do desenvolvimento
+- preparar autenticacao admin no front em momento apropriado
+- depois integrar CRUDs protegidos quando a etapa administrativa chegar
+
+Escopo continuo da integracao:
 
 - conectar o app aos GETs publicos da API
-- substituir mocks/adapters locais por consumo real
+- evitar mocks como trilha principal
 - integrar dashboard com endpoints agregados
 - integrar technologies com `experienceMetrics`
 - integrar projetos, experiencias e settings da API
@@ -621,6 +740,9 @@ Depois que o frontend estiver estruturalmente pronto:
 - manter separacao clara entre adapters de API e componentes de UI
 - nao deixar detalhes HTTP vazarem para componentes visuais
 - manter testes unitarios completos dos adapters, mappers e services
+- manter a configuracao de ambiente do frontend simples e explicita
+- manter a base local apontando para `http://localhost:3000`
+- manter a base produtiva apontando para `https://hans-portfolio-api.vercel.app`
 
 ---
 
@@ -631,11 +753,12 @@ Toda nova task de frontend deve seguir esta ordem minima:
 1. verificar se existe componente equivalente na `hans-ui-design-lib`
 2. definir se o que falta e especifico do portfolio ou reutilizavel
 3. estruturar a implementacao com Angular moderno
-4. implementar junto com teste unitario
-5. garantir coverage total do escopo alterado
-6. rodar lint
-7. rodar build
-8. atualizar documentacao quando necessario
+4. conectar com a API real sempre que a feature ja tiver endpoint disponivel
+5. implementar junto com teste unitario
+6. garantir coverage total do escopo alterado
+7. rodar lint
+8. rodar build
+9. atualizar documentacao quando necessario
 
 ### Regras explicitas de nao-regressao de padrao
 
@@ -665,6 +788,8 @@ O Codex deve:
 - consultar primeiro a `hans-ui-design-lib` antes de criar UI nova
 - avisar antes de qualquer alteracao ou inclusao de componente reutilizavel na design lib
 - manter no app apenas o que for especifico do portfolio
+- preservar o formato do `README.md` do app quando futuras atualizacoes forem necessarias
+- manter o plano old intacto e atualizar apenas este plano final
 - atualizar documentacao quando as decisoes forem evoluindo
 
 ---
@@ -690,6 +815,7 @@ O Codex deve:
 - traducao preparada
 - light/dark mode reais
 - uso consistente da `hans-ui-design-lib`
+- integracao real com a API desde as primeiras etapas relevantes
 - testes unitarios acompanhando todas as entregas
 - coverage total no escopo relevante
 
@@ -708,6 +834,7 @@ O Codex deve:
 
 - backend concluido em NestJS + Prisma + PostgreSQL/Neon
 - frontend passa a ser o foco oficial do remake
+- integracao com a API deve comecar nas primeiras etapas do frontend
 - Angular `20.3.6` com abordagem moderna obrigatoria
 - standalone components apenas
 - `signals`, `computed` e `effect` como base
@@ -718,8 +845,10 @@ O Codex deve:
 - qualquer novo componente reutilizavel da design lib deve ser alinhado antes
 - todo componente, pagina, service ou helper relevante deve nascer com teste unitario
 - meta oficial de coverage total no escopo relevante de cada etapa
+- `README.md` do app deve manter sua ordem estrutural e seus icones atuais
+- o plano old deve permanecer intacto
 - lint, build e testes devem acompanhar todas as entregas
 
 ### Proximo passo oficial recomendado
 
-Comecar a etapa de frontend pelo fechamento da fundacao do app e da arquitetura base, seguindo a sprint `F1 - App shell, layout base e infra transversal`, sem iniciar integracao real com a API antes do front publico estar estruturalmente pronto.
+Comecar a etapa de frontend pela fundacao do app e da integracao antecipada com a API, seguindo `F1.1` e `F1.2` antes de avançar para as primeiras paginas publicas.
