@@ -1,945 +1,725 @@
-# Plano de Implementacao - `hans-portfolio-app` + `hans-portfolio-api` (v4)
+# Plano de Implementacao - hans-portfolio-app + hans-portfolio-api (v5)
 
-> Objetivo: guiar a execucao do remake do portfolio antigo (`victor_hanszman_portfolio-old`) no repositorio novo de front (`hans-portfolio-app`) e no repositorio novo de back (`hans-portfolio-api`), usando **Angular 20.3.6** no front-end, **`hans-ui-design-lib` via CDN/web components** como base visual, e **backend proprio em Node.js 24 + NestJS + Express + TypeScript + Prisma + PostgreSQL/Neon** desde a primeira etapa.
+> Objetivo: guiar a continuacao oficial do remake do portfolio antigo (`victor_hanszman_portfolio-old`) usando o novo front em `hans-portfolio-app` e a nova API em `hans-portfolio-api`, com Angular moderno no front, `hans-ui-design-lib` como base visual oficial e integracao posterior com a API NestJS ja concluida.
 
-OBS: As informacoes de conexao com o banco de dados estao abaixo:
+Este documento substitui o `v4` como referencia oficial de execucao.
 
-PGHOST=ep-shy-dawn-acds024d-pooler.sa-east-1.aws.neon.tech
-PGDATABASE=hans-portfolio-db
-PGUSER=neondb_owner
-PGPASSWORD=npg_Tc6r5CmoLxYD
-PGPORT=5432
-PGSSLMODE=require
-PGCHANNELBINDING=require
+## 1) Estado atual consolidado
 
-> Ordem oficial de implementacao:
->
-> 1. **Backend completo + banco de dados + autenticacao + CRUDs + admin API**
-> 2. **Frontend completo (remake do portfolio atual)**
-> 3. **Integracao frontend <-> backend**
+### 1.1. Ordem oficial do remake
 
-Este plano substitui o `v3` para fins de execucao.
+1. Backend completo
+2. Frontend completo
+3. Integracao frontend <-> backend
 
-O que muda em relacao ao `v3`:
+### 1.2. Situacao atual do projeto
 
-- o backend em `.NET / C# / EF Core` deixa de ser a trilha oficial;
-- o repositorio `hans-portfolio-api` sera **reaproveitado**, mas com a base atual removida;
-- o backend sera recriado do zero com **NestJS + Express + TypeScript + Prisma**;
-- o escopo funcional, a modelagem conceitual e a ordem de execucao continuam essencialmente os mesmos.
+- a etapa de backend ja foi concluida no repositorio `hans-portfolio-api`
+- a API oficial do portfolio agora existe em NestJS + Express + TypeScript + Prisma + PostgreSQL/Neon
+- o proximo foco oficial do remake passa a ser o front no repositorio `hans-portfolio-app`
+- a integracao real com a API continua sendo uma etapa posterior ao fechamento estrutural do front
 
----
+### 1.3. Fontes oficiais de contexto
 
-## 1) Direcao estrategica do remake
+As referencias mais importantes para as proximas etapas continuam sendo:
 
-O novo portfolio precisa comunicar com clareza que Victor e:
-
-- **Engenheiro de Software Full Stack com forte especializacao em Front-End**;
-- com **7+ anos de experiencia** em aplicacoes web corporativas de grande porte;
-- com foco principal em **Angular, TypeScript e React**;
-- com experiencia real em **Design Systems, Micro Front-End, modernizacao de legados, dashboards analiticos, Clean Code, SOLID, TDD e CI/CD**;
-- e com repertorio complementar em **Node, NestJS, Prisma, PostgreSQL, REST APIs, Docker e Azure DevOps**.
-
-O remake deve sair do modelo antigo de "lista extensa de tecnologias e cards" e evoluir para:
-
-- **Home com impacto e posicionamento forte**;
-- **Highlights realmente visiveis**;
-- **Projetos apresentados como cases**;
-- **Experiencias narradas como carreira e impacto**;
-- **Tela propria de dashboard analitico**;
-- **Admin real com persistencia e manutencao**.
+- `hans-portfolio-app/plano-implementacao-hans-portfolio-app-final-version.md`
+- `hans-portfolio-app/Histórico-Implementação.pdf`
+- `hans-portfolio-app/docs/CV - Victor Hanszman (PT-BR).pdf`
+- `hans-portfolio-app/docs/CV - Victor Hanszman (EN).pdf`
+- `hans-portfolio-app/README.md`
+- `hans-portfolio-api/README.md`
+- `victor_hanszman_portfolio-old` como referencia funcional e de conteudo do portfolio anterior
+- `hans-ui-design-lib` como referencia oficial de componentes reutilizaveis e contratos visuais
 
 ---
 
-## 1.1) Ajustes recentes ja consolidados
+## 2) Direcao estrategica do remake
 
-### Design lib
+O novo portfolio precisa comunicar com mais clareza que Victor e:
 
-- A `hans-ui-design-lib` continua sendo tratada neste plano como **pronta para consumo**.
-- Nao ha escopo de novas tasks de desenvolvimento dentro da lib nesta fase.
-- O foco continua sendo:
-  - inicializacao correta via CDN/web components no Angular;
-  - documentacao de quais componentes entram em cada tela;
-  - criacao apenas de componentes especificos do proprio portfolio quando fizer sentido.
+- Engenheiro de Software Full Stack com forte especializacao em Front-End
+- profissional com 7+ anos de experiencia em aplicacoes web corporativas
+- especialista principalmente em Angular, TypeScript e React
+- profissional com experiencia real em Design Systems, Micro Front-End, dashboards, modernizacao de legados, Clean Code, SOLID, TDD e CI/CD
+- profissional com repertorio complementar em Node, NestJS, Prisma, PostgreSQL, REST APIs, Docker e Azure DevOps
 
-### Backend
+O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova versao deve:
 
-- O repositorio **`hans-portfolio-api` continua sendo o ponto de partida oficial da etapa 1**.
-- A base atual em `.NET` deve ser tratada como **descartavel** para o remake.
-- A implementacao deve:
-  - remover os arquivos atuais do backend em `.NET`;
-  - recriar o projeto do zero com **NestJS** usando o adapter padrao **Express**;
-  - configurar Prisma, Swagger, health check, testes e README desde o inicio;
-  - registrar no README o historico de comandos e pacotes usados durante a evolucao do projeto, agora no ecossistema Node/Nest/Prisma.
+- comunicar melhor posicionamento, senioridade e proposta de valor
+- sair do modelo de listagens extensas e pouco hierarquizadas
+- tratar projetos como cases
+- tratar experiencias como narrativa de carreira e impacto
+- aproveitar melhor analytics e visualizacao de dados
+- ter base preparada para manutencao real por meio da API nova
 
 ---
 
-## 2) Principios tecnicos obrigatorios
+## 3) Decisoes tecnicas firmadas
 
-### 2.1. Front-end - Angular 20.3.6 modernizado
+### 3.1. Frontend
 
-O front permanece com a mesma direcao oficial do `v3`:
+- Angular `20.3.6`
+- TypeScript `5.9.x`
+- standalone components apenas
+- sem Angular modules de feature
+- signals como mecanismo principal de estado local
+- `computed()` e `effect()` como ferramentas de derivacao e reacao
+- RxJS apenas quando for realmente necessario
+- sintaxe nova de template com `@if`, `@for`, `@switch` e `@defer` quando fizer sentido
+- `input()`, `output()` e `inject()` no lugar da sintaxe antiga sempre que aplicavel
+- roteamento standalone com lazy loading por pagina/feature
+- preferencia por zoneless, mantendo a base atual do app
+- SCSS + TailwindCSS como base de estilo
 
-- Standalone Components;
-- Signals, `computed`, `effect` e `linkedSignal` quando fizer sentido;
-- nova sintaxe de template com `@if`, `@for`, `@switch` e `@defer`;
-- `input()` e `output()` modernos;
-- `inject()` quando melhorar a leitura;
-- roteamento standalone com lazy loading por pagina/feature;
-- services e facades enxutos;
-- estado local por feature;
-- RxJS apenas onde realmente fizer sentido.
+### 3.2. Backend
 
-O front continua **sem mudanca estrutural relevante** neste `v4`, exceto pelas futuras integracoes que agora apontam para uma API em NestJS.
-
-### 2.2. Backend - NestJS didatico, moderno e corporativo
-
-O backend deve ser construído de forma **didatica e profissional**, mas sem burocracia desnecessaria.
-
-#### Direcao recomendada
-
-- **Node.js 24 Active LTS**
-- **NestJS** com o adapter padrao **Express**
-- **TypeScript**
-- **Prisma ORM**
-- **PostgreSQL (Neon DB)** como banco principal
-- **Swagger / OpenAPI** desde o inicio
-- **Autenticacao e autorizacao** para a area administrativa
-- **Migrations versionadas** com Prisma
-- **Seed inicial** baseado nos JSONs do portfolio antigo
-- **Estrutura simples e legivel**, alinhada aos padroes do Nest
-- **README didatico** explicando comandos, estrutura, scripts, execucao, testes, coverage, build e atualizacao de dependencias
-
-#### Ferramentas e pacotes de referencia
-
-- `@nestjs/config`
-- `@nestjs/swagger`
-- `@nestjs/terminus`
-- `@nestjs/jwt`
-- `@nestjs/passport`
-- `passport-jwt`
-- `bcrypt`
-- `prisma`
-- `@prisma/client`
-- `jest`
-- `supertest`
-
-### 2.3. Qualidade e consistencia
-
-Tanto no front quanto no back:
-
-- Clean Code
-- DRY
-- SRP
-- SOLID onde fizer sentido
-- nomes claros
-- responsabilidade bem separada
-- testes com objetivo de **100% de coverage** no alvo mensuravel de cada etapa
-- exclusao explicita de coverage apenas para arquivos gerados ou boilerplate sem valor real de teste
-- lint/build/test verdes
-- documentacao clara
-- README completo
-
-#### Regra oficial de testes deste remake
-
-- testar todo arquivo que tenha comportamento relevante;
-- exigir `100%` de coverage para o alvo mensuravel definido em cada step;
-- excluir explicitamente do coverage apenas o que for gerado ou de baixo valor;
-- exemplos tipicos de exclusao aceitavel:
-  - Prisma Client gerado;
-  - artefatos de migration;
-  - bootstrap/config puramente declarativo;
-  - DTOs ou contratos triviais sem comportamento, quando nao fizer sentido testar diretamente.
-
----
-
-## 3) Ordem de execucao oficial
-
-### Etapa 1 - Backend completo
-
-Implementar primeiro:
-
-- API NestJS/TypeScript no repositorio `hans-portfolio-api`
-- limpeza da base atual em `.NET`
-- banco PostgreSQL no Neon
-- modelagem de entidades e relacionamentos no Prisma
-- migrations
-- seed inicial
-- autenticacao/login admin
-- autorizacao
-- CRUDs completos
-- documentacao Swagger/OpenAPI
-- README da API
-- scripts e historico de setup
-- cobertura de testes e pipeline basica de qualidade
-
-Regra oficial de acesso aos CRUDs:
-
-- `Read` sera a unica operacao publica em todas as entidades
-- `Create`, `Update` e `Delete` serao permitidos apenas para o usuario admin autenticado
-- na pratica, apenas Victor podera realizar mutacoes administrativas no sistema
-
-### Etapa 2 - Frontend completo
-
-Implementar depois:
-
-- remake completo do portfolio em Angular 20.3.6
-- usando temporariamente mocks/contratos tipados compativeis com a API
-- integracao visual com a `hans-ui-design-lib`
-- dark mode/light mode
-- traducao
-- novas paginas e layout
-
-### Etapa 3 - Integracao
-
-Por fim:
-
-- conectar frontend ao backend NestJS
-- substituir fontes locais/mockadas pela API
-- validar autenticacao do admin
-- validar fluxos de upload, linkagem, listagem e edicao
-- ajustes finais de UX, loading, erro e cache
-
----
-
-## 4) Dados e conteudo que o sistema precisa suportar
-
-O sistema precisa suportar, no minimo:
-
-- project
-- experience
-- skill/technology
-- formation
-- spoken languages
-- customer
-- job
-- link
-- image assets
-- tag
-- portfolio setting
-- highlights (`highlight`) nas entidades relevantes
-
-Tambem precisa refletir de forma estrategica os highlights ja confirmados:
-
-- Angular e TypeScript como stack principal do remake do portfolio
-- React como **core stack do Victor enquanto repertorio tecnico e projetos pessoais**
-- Design System proprio
-- Micro Front-End
-- modernizacao de legado Angular/Razor/C#
-- dashboards analiticos
-- validacoes complexas e i18n
-- CI/CD, Docker e Azure DevOps
-- experiencia com clientes enterprise
-- projetos pessoais relevantes e futuros highlights
-
----
-
-## 5) Modelagem conceitual alvo do backend
-
-O modelo conceitual do `v3` continua valido e deve ser mantido, apenas traduzido para Prisma/Nest.
-
-### Entidades principais
-
-- `User`
-- `Project`
-- `Experience`
-- `Technology`
-- `Formation`
-- `SpokenLanguage`
-- `Customer`
-- `Job`
-- `Link`
-- `ImageAsset`
-- `Tag`
-- `PortfolioSetting`
-
-### Relacionamentos esperados
-
-- `Project` <-> `Technology`
-- `Experience` <-> `Technology`
-- `Formation` <-> `Technology`
-- `Project` <-> `Experience`
-- `Experience` <-> `Customer`
-- `Experience` <-> `Job`
-- `Project` <-> `Tag`
-- `Technology` <-> `Tag`
-- `Project` <-> `Link`
-- `Experience` <-> `Link`
-- `Formation` <-> `Link`
-- `Project` <-> `ImageAsset`
-- `Experience` <-> `ImageAsset`
-- `Formation` <-> `ImageAsset`
-- `Technology` <-> `ImageAsset`
-- `SpokenLanguage` <-> `ImageAsset`
-- `Customer` <-> `ImageAsset`
-- `Job` <-> `ImageAsset`
-
-### Convencoes relevantes
-
-- `highlight` continua como boolean nas entidades relevantes
-- `link` e `image` continuam como entidades proprias
-- `language`, `customer` e `job` continuam incluidos
-- a ideia de `slug`, `sortOrder`, `isPublished`, `createdAt`, `updatedAt` continua valida onde fizer sentido
-
----
-
-## 6) Banco de dados
-
-## 6.1. Banco escolhido
-
-- **PostgreSQL**
-- provider hospedado inicialmente no **Neon DB**
-
-## 6.2. ORM escolhido
-
-- **Prisma ORM**
-
-### Motivos
-
-- forte adocao atual no ecossistema TypeScript
-- recipe oficial no NestJS
-- excelente DX com client tipado
-- migrations e seed bem resolvidos
-- boa aderencia ao objetivo de portfolio moderno em Node/Nest
-- mais alinhado com vagas atuais de backend TypeScript do que Sequelize para este contexto
-
-## 6.3. Estrategia de migrations e seed
-
-Criar:
-
-- `prisma/schema.prisma`
-- migrations versionadas
-- `prisma/seed.ts`
-- scripts de ambiente para:
-  - aplicar migrations
-  - popular seed
-  - resetar base local
-  - abrir Prisma Studio
-
-Tambem manter:
-
-- documentacao do schema
-- diagrama ER simplificado no README ou em `/docs`
-- scripts SQL auxiliares para inspecao/troubleshooting quando necessario
-- estrategia explicita para assets estaticos enquanto nao houver object storage:
-  - versionar imagens/icones em `hans-portfolio-app/src/assets/img`
-  - persistir caminhos publicos da forma `/assets/img/...` nas entidades que precisarem de icone
-  - manter a tabela `image_asset` como catalogo normalizado dos arquivos versionados do frontend, incluindo subpasta e tipo de uso
-  - relacionar imagens nas entidades principais por tabelas de juncao quando a API precisar expor metadata de renderizacao
-  - manter um snapshot versionado dos dados em vez de depender continuamente dos JSONs do legado
-
----
-
-## 7) Arquitetura sugerida do backend
-
-## 7.1. Stack base
-
-- Node.js 24 Active LTS
-- NestJS
-- Express adapter padrao
+- backend oficial em `hans-portfolio-api`
+- NestJS com adapter padrao Express
 - Prisma ORM
-- PostgreSQL provider
+- PostgreSQL/Neon
 - Swagger/OpenAPI
-- autenticacao com JWT para admin
-- politicas de autorizacao por role
+- autenticacao admin
+- CRUDs administrativos e leituras publicas ja disponiveis
 
-## 7.2. Estrutura de pastas sugerida
+### 3.3. Design system
 
-```txt
-hans-portfolio-api/
-  src/
-    main.ts
-    app.module.ts
-    common/
-      decorators/
-      filters/
-      guards/
-      interceptors/
-      pipes/
-    config/
-    modules/
-      system/
-      auth/
-      project/
-      experience/
-      technology/
-      formation/
-      spoken-language/
-      customer/
-      job/
-      link/
-      image-asset/
-      tag/
-      portfolio-setting/
-      dashboard/
-    prisma/
-      prisma.module.ts
-      prisma.service.ts
-
-  prisma/
-    schema.prisma
-    migrations/
-    seed.ts
-
-  test/
-    e2e/
-
-  docs/
-    api/
-    database/
-
-  scripts/
-    db/
-    setup/
-```
-
-### Explicacao simples da arquitetura
-
-- **controllers** -> onde ficam as rotas HTTP
-- **services** -> regras de aplicacao e orquestracao
-- **DTOs** -> requests/responses/validacoes
-- **Prisma module/service** -> acesso ao banco
-- **guards/strategies** -> autenticacao e autorizacao
-
-> A ideia aqui e seguir o jeito do Nest, e nao reproduzir uma arquitetura de camadas tipica do `.NET`.
-
-### Convencoes de organizacao consolidadas para este remake
-
-- cada entidade/feature deve viver em `src/modules/<feature>`
-- exemplos esperados:
-  - `src/modules/system`
-  - `src/modules/auth`
-  - `src/modules/content`
-- dentro de cada feature, a organizacao padrao deve priorizar:
-  - `controllers/`
-  - `services/`
-  - `contracts/`
-  - `types/`
-- `controllers` devem concentrar apenas HTTP e delegar para `services`
-- `services` devem concentrar regra/orquestracao
-- `contracts` devem representar o contrato HTTP publico da API:
-  - DTOs de request
-  - DTOs de response
-- `types` devem representar estruturas internas de implementacao:
-  - rows brutas de query
-  - tipos auxiliares de mapper
-  - shapes internos nao expostos como contrato HTTP
-
-### Convencao oficial para types
-
-- o padrao oficial passa a ser **um arquivo de types por entidade ou responsabilidade**
-- nome do arquivo: `<feature-ou-responsabilidade>.types.ts`
-- exemplos:
-  - `database-diagnostics.types.ts`
-  - `project.types.ts`
-  - `experience.types.ts`
-- no caso do CRUD do portfolio, um modulo guarda-chuva como `src/modules/content` pode agrupar varias entidades pequenas, desde que mantenha:
-  - controllers por entidade
-  - contracts por entidade
-  - services compartilhados apenas quando a responsabilidade generica realmente fizer sentido
-- quando existir uma abstracao generica de CRUD como no modulo `content`, a customizacao por entidade deve ficar concentrada em um registry/config central
-- mesmo com services genericos, os controllers devem continuar separados por entidade para manter a superficie HTTP explicita e facil de navegar
-- quando uma mesma feature precisar de varios tipos internos, o preferivel e mantelos agrupados no mesmo `*.types.ts` em vez de pulverizar arquivos pequenos cedo demais
-
-### Convencao de responsabilidade por controller/service
-
-- quando uma responsabilidade for claramente distinta, deve existir seu proprio par de `controller` e `service`
-- exemplos validos no modulo `system`:
-  - `PingController` + `PingService`
-  - `DatabaseDiagnosticsController` + `DatabaseDiagnosticsService`
-  - `HealthController` + `HealthService`
-  - `SystemController` + `SystemService` apenas para agregacao/overview do proprio modulo
-
-### Convencao de testes
-
-- testes unitarios devem ficar proximos do codigo da propria feature
-- testes e2e devem ficar na pasta de topo `test/`
-- a tendencia e ter **um arquivo e2e por feature/modulo**, por exemplo:
-  - `test/system.e2e-spec.ts`
-  - `test/auth.e2e-spec.ts`
-  - `test/project.e2e-spec.ts`
-- o comando oficial de coverage deve ser `npm run test:coverage`
-- `test:coverage` deve validar o alvo de coverage da etapa e tambem executar a suite e2e
-- controllers com comportamento real de delegacao tambem devem receber testes unitarios
-- se a instrumentacao do framework gerar ruido artificial de branch coverage nos controllers, eles podem ficar fora do alvo mensuravel, desde que continuem testados
-- arquivos gerados, contratos triviais e `types` internos podem ser excluidos do coverage quando nao fizer sentido medir execucao neles
-
-## 7.3. Padrao de endpoints
-
-### Publicos
-
-- `GET /projects`
-- `GET /projects/{slug}`
-- `GET /experiences`
-- `GET /experiences/{slug}`
-- `GET /technologies`
-- `GET /technologies/{slug}`
-- `GET /technology-contexts`
-- `GET /technology-contexts/{slug}`
-- `GET /formations`
-- `GET /formations/{slug}`
-- `GET /spoken-languages`
-- `GET /spoken-languages/{code}`
-- `GET /customers`
-- `GET /customers/{slug}`
-- `GET /jobs`
-- `GET /jobs/{slug}`
-- `GET /links`
-- `GET /links/{id}`
-- `GET /image-assets`
-- `GET /image-assets/{id}`
-- `GET /tags`
-- `GET /tags/{slug}`
-- `GET /portfolio-settings`
-- `GET /portfolio-settings/{key}`
-- `GET /dashboard`
-- `GET /dashboard/stack-distribution`
-- `GET /dashboard/project-contexts`
-- `GET /dashboard/technology-usage`
-- `GET /dashboard/professional-timeline`
-- `GET /dashboard/highlights`
-
-Regra oficial:
-
-- endpoints de leitura publica nao exigem login
-- a leitura sera a unica parte aberta dos CRUDs
-- todos os `GET` de colecao devem suportar paginacao
-- todos os `GET` de colecao devem suportar filtros opcionais por propriedades relevantes da entidade
-- o modulo `dashboard` deve expor agregados publicos para que o frontend nao precise recomputar distribuicoes e timelines pesadas client-side
-
-### Sistema
-
-- `GET /system`
-- `GET /system/ping`
-- `GET /system/database`
-- `GET /system/health`
-- `GET /`
-- `GET /health`
-
-### Administrativos
-
-- `POST /auth/login`
-- `GET /admin/session`
-- `POST /admin/projects`
-- `PUT /admin/projects/{id}`
-- `DELETE /admin/projects/{id}`
-- CRUD equivalente para `experience`, `technology`, `formation`, `job`, `customer`, `spoken-language`, `link`, `image-asset`, `tag` e `portfolio-setting`, sempre com `POST`, `PUT` e `DELETE` em `/admin/<resource>`
-
-Regra oficial:
-
-- todo `Create`, `Update` e `Delete` deve ficar protegido por autenticacao e autorizacao de admin
-- a area administrativa existe para uso do proprio Victor como unico admin esperado do sistema
-
-### Observacao sobre rotas no Nest
-
-- as rotas serao definidas por **controllers + modules**;
-- o adapter HTTP padrao sera o **Express**;
-- nao sera feito swap para Fastify neste projeto;
-- devemos preservar, sempre que possivel, a mesma superficie HTTP ja pensada no `v3` para evitar churn futuro no frontend.
-
-## 7.4. Documentacao da API
-
-Obrigatorio incluir:
-
-- Swagger/OpenAPI funcionando
-- descricao dos endpoints
-- exemplos de request/response
-- status codes
-- autenticacao descrita
-- colecao de teste opcional em Insomnia/Postman
+- `hans-ui-design-lib` e a base visual oficial do projeto
+- o consumo do app continua previsto via CDN/web components
+- componentes ja existentes na lib devem ser reutilizados antes de qualquer implementacao customizada equivalente
 
 ---
 
-## 8) README do backend
+## 4) Principios obrigatorios do frontend
 
-O backend deve continuar tendo um README tao caprichado quanto os outros projetos novos, mas agora 100% alinhado ao ecossistema Node/Nest/Prisma.
+### 4.1. Angular moderno como regra, nao como preferencia
 
-## 8.1. O README precisa conter
+Durante todo o desenvolvimento do novo `hans-portfolio-app`, devemos seguir estas regras sem excecao, salvo justificativa tecnica muito clara:
 
-- visao geral do projeto
-- stack usada
-- arquitetura de pastas explicada
-- pre-requisitos
-- como clonar
-- como configurar `.env` / `.env.example`
-- como rodar localmente
-- como rodar migrations
-- como popular a base
-- como acessar Swagger
-- como acessar health
-- como validar conexao com banco
-- como rodar testes
-- como gerar coverage
-- como fazer build
-- como atualizar dependencias
-- lista de comandos importantes
-- historico dos comandos/scripts usados para criacao do projeto
-- duvidas comuns de setup
-- explicacao simples de Nest modules/controllers/services/Prisma para iniciantes
+- usar `standalone: true` implicitamente em toda a estrutura moderna do Angular
+- nao criar `NgModule` para paginas, componentes, services ou features
+- usar `signals`, `computed` e `effect` como abordagem padrao de estado e reatividade
+- usar RxJS somente quando o problema realmente exigir stream assicrona, composicao de eventos ou interoperabilidade com APIs baseadas em Observable
+- usar `@if` e `@for` no HTML
+- nao usar `*ngIf` nem `*ngFor`
+- usar `input()` e `output()` nas APIs publicas dos componentes
+- usar `inject()` ao inves de construtores antigos quando isso deixar o codigo mais claro
+- priorizar templates, APIs e patterns da versao atual do Angular
+- evitar sintaxe antiga apenas por costume
 
-### Comandos minimos que devem aparecer documentados
+### 4.2. Filosofia de estado no front
 
-- `npm install`
-- `npm run start:dev`
-- `npm run build`
+- estado local de pagina/feature deve nascer simples
+- cada tela deve concentrar seu proprio estado o maximo possivel
+- shared state global so deve existir quando houver necessidade real
+- preferir derivar view-models com `computed()` em vez de espalhar transformacoes ad hoc no template
+- efeitos devem ser usados com criterio, apenas para sincronizacao e side effects reais
+
+### 4.3. Convencoes de template
+
+- templates devem ser legiveis e modernos
+- loops e condicionais devem usar a nova sintaxe do Angular
+- evitar logica pesada no HTML
+- preferir view-models/computed no `.ts` para simplificar o template
+- usar `@defer` quando houver ganho real de performance ou UX
+
+### 4.4. Convencoes de injecao e API dos componentes
+
+- preferir `inject()` para dependencias
+- preferir `input()` e `output()` para entrada e saida de componentes
+- evitar decorators antigos quando a API moderna equivalente existir e estiver adequada
+- manter componentes com interfaces pequenas e previsiveis
+
+---
+
+## 5) Politica oficial de reutilizacao da hans-ui-design-lib
+
+### 5.1. Regra principal
+
+Sempre que o portfolio precisar de um componente ja existente na `hans-ui-design-lib`, o componente da lib deve ser usado.
+
+Exemplos tipicos:
+
+- button
+- input
+- dropdown
+- select-option
+- toggle
+- date-picker
+- avatar
+- card
+- carousel
+- tag
+- chart
+- accordion
+- icon
+- loading
+- kanban
+- popup
+- toast
+- modal
+- table
+- tabs
+
+### 5.2. Regra de decisao antes de criar UI nova
+
+Antes de criar qualquer novo componente visual no `hans-portfolio-app`, devemos validar:
+
+1. ja existe componente equivalente na `hans-ui-design-lib`?
+2. o componente da lib atende integralmente?
+3. o que falta e especifico do portfolio ou reutilizavel em outros projetos?
+
+### 5.3. Regra para componentes reutilizaveis
+
+Se um novo componente for claramente reutilizavel em outros projetos ou cenarios, ele nao deve ser criado diretamente no `hans-portfolio-app` sem alinhamento previo.
+
+Nesses casos:
+
+- parar antes da implementacao
+- avisar o Victor
+- alinhar se o componente deve nascer na `hans-ui-design-lib`
+- so depois decidir a estrategia final
+
+### 5.4. Regra para componentes especificos do portfolio
+
+Se o componente for claramente especifico do portfolio e nao fizer sentido como asset generico de design system, ele pode ser criado no `hans-portfolio-app`.
+
+Exemplos provaveis:
+
+- hero sections especificas
+- blocos de storytelling de carreira
+- composicoes de case study
+- layouts especificos de timeline do portfolio
+- secoes de highlights muito ligadas ao contexto do Victor
+
+---
+
+## 6) Regra oficial de testes, coverage e qualidade
+
+### 6.1. Regra obrigatoria por implementacao
+
+Sempre que formos implementar qualquer item do front, devemos criar o teste unitario correspondente no mesmo momento.
+
+Isso vale para:
+
+- componente
+- pagina
+- service
+- facade
+- helper
+- mapper
+- guard
+- resolver
+- model/view-model com comportamento relevante
+
+### 6.2. Meta oficial de coverage
+
+A meta oficial do remake continua sendo cobertura total do sistema, com foco em:
+
+- `100%` de coverage em todos os arquivos com comportamento relevante
+- `100%` de lines
+- `100%` de branches sempre que aplicavel e mensuravel
+- `100%` de functions sempre que aplicavel e mensuravel
+
+Arquivos que podem ficar fora do alvo apenas com justificativa clara:
+
+- configuracoes puramente declarativas
+- bootstrap extremamente trivial
+- arquivos gerados
+- wrappers sem comportamento relevante
+- codigo de framework onde medir coverage nao gera sinal de qualidade real
+
+### 6.3. Regra operacional por etapa
+
+Em toda etapa de implementacao do frontend, devemos garantir:
+
+- testes unitarios criados junto com o codigo
+- coverage validado junto da implementacao
+- lint verde
+- prettier/formatacao correta
+- build verde
+
+### 6.4. Comandos de qualidade que devem ser rodados ao longo do desenvolvimento
+
+No `hans-portfolio-app`, a rotina minima por etapa deve incluir, conforme o escopo alterado:
+
 - `npm run test`
 - `npm run test:coverage`
-- `npm run prisma:migrate:dev`
-- `npm run prisma:migrate:deploy`
-- `npm run prisma:studio`
-- `npm run prisma:seed`
-- `npm run prisma:seed:reset`
-- `npm run prisma:seed:snapshot`
-- `npm run prisma:admin:bootstrap`
-- comando de checagem de dependencias desatualizadas adotado no projeto
+- `npm run lint`
+- `npm run build`
+
+Quando fizer sentido, tambem validar:
+
+- `npm run start`
+- `npm run dev`
+
+### 6.5. Filosofia de qualidade
+
+- nao empurrar testes para depois
+- nao deixar coverage para o fim
+- nao aceitar codigo "provisorio" sem cobertura
+- nao aceitar quebra de lint/prettier
+- nao acumular debitos que poderiam ser evitados no momento da entrega
 
 ---
 
-## 9) Etapa 1 - Plano detalhado do backend
+## 7) Arquitetura alvo do hans-portfolio-app
 
-## 9.1. Sprint B1 - Foundation
+### 7.1. Direcao estrutural
 
-### Objetivo
+O frontend novo deve seguir uma organizacao moderna, legivel e simples de navegar.
 
-Subir a base do backend com arquitetura minima, Swagger e banco conectado.
+Direcao oficial:
 
-### Entregas
+- `core/` para infraestrutura transversal
+- `layout/` para casca visual e estrutura base
+- `pages/` para paginas principais
+- `features/` quando um dominio crescer o suficiente para merecer agrupamento proprio
+- `shared/` apenas para itens realmente compartilhados
+- `helpers/` no lugar de `utils/`
 
-- limpeza da base atual do `hans-portfolio-api`
-- inicializacao do projeto NestJS do zero
-- configuracao do Express adapter padrao
-- configuracao do PostgreSQL (Neon/local) via Prisma
-- configuracao do `.env` e `.env.example`
-- configuracao do Swagger/OpenAPI
-- health check inicial
-- endpoint `GET /system`
-- endpoint `GET /system/ping`
-- endpoint `GET /system/database`
-- endpoint `GET /system/health`
-- alias `GET /`
-- alias `GET /health`
-- README inicial da API em ingles
-- documentacao dos comandos de execucao, testes e Prisma
-- testes e2e para `ping`, `health` e `database`
+### 7.2. Responsabilidades sugeridas
 
-### Criterios de aceite
+`core/`
 
-- API sobe localmente
-- Swagger abre
-- conexao com banco configurada
-- `ping`, `health` e `database diagnostics` funcionam
-- projeto roda sem warnings criticos
+- api clients
+- configuracoes globais
+- translation
+- tokens de app
+- adapters de consumo da API
+- helpers compartilhados
+- services transversais
 
-## 9.2. Sprint B2 - Modeling and migrations
+`layout/`
 
-### Objetivo
+- shell principal
+- header
+- footer
+- navegacao principal
+- wrappers de pagina
+- layout de secoes
 
-Criar schema Prisma, relacionamentos e primeira migration.
+`pages/`
 
-### Entregas
+- home
+- experiences
+- technologies ou skills
+- projects
+- dashboard
+- possiveis paginas complementares do remake
 
-- modelos principais no `schema.prisma`
-- enums
-- relacoes N:N necessarias
-- migration inicial
-- aplicacao da migration no `hans-portfolio-db`
-- documentacao simplificada do schema
+`shared/`
 
-### Criterios de aceite
+- componentes realmente compartilhados entre varias features do portfolio
+- directives ou pipes que facam sentido no app inteiro
 
-- banco sobe com schema completo inicial
-- relacoes principais criadas
-- nomes de tabelas/colunas padronizados
+### 7.3. Convencoes de codigo
 
-## 9.3. Sprint B3 - Seed snapshot
-
-### Objetivo
-
-Popular o banco a partir do legado uma unica vez e consolidar um seed versionado, deterministico e replayable.
-
-### Entregas
-
-- import inicial dos dados do legado
-- consolidacao de um snapshot versionado em `prisma/data/portfolio-seed.snapshot.json`
-- `prisma/seed.ts` independente do projeto antigo
-- `prisma/reset.ts` para limpeza dos dados do portfolio
-- `prisma/export-seed-snapshot.ts` para regenerar o snapshot quando necessario
-- carga inicial para `project`, `experience`, `technology`, `formation`, `spoken-language`, `customer`, `job`, `portfolio-setting` e vinculos
-- versionamento dos assets reutilizados em `hans-portfolio-app/src/assets/img`
-- catalogo versionado em `image_asset` com campos de `folder` e `kind`
-- relacoes de imagem preenchidas para `project`, `experience`, `formation`, `technology`, `spoken-language`, `customer` e `job`
-- links normalizados em `link` e tabelas de juncao, evitando colunas de URL diretamente nas entidades
-- documentacao do fluxo novo de `prisma:seed`, `prisma:seed:reset` e `prisma:seed:snapshot`
-- o fluxo de `prisma:seed` deve recriar o admin bootstrapado quando `ADMIN_BOOTSTRAP_*` estiver configurado, para reduzir atrito apos resets completos de schema
-
-### Criterios de aceite
-
-- ambiente local sobe com conteudo real
-- os dados do portfolio podem ser apagados e repovoados sem depender do repo antigo
-- `npm run prisma:seed` aplica migrations pendentes e reinsere o snapshot versionado
-- `npm run prisma:seed:reset` limpa os dados do portfolio
-
-## 9.4. Sprint B4 - Authentication and authorization
-
-### Objetivo
-
-Criar acesso administrativo seguro.
-
-### Entregas
-
-- login admin
-- criacao do primeiro usuario admin
-- script de bootstrap do primeiro admin
-- hash de senha com `bcrypt`
-- autenticacao JWT
-- autorizacao por role
-- protecao de rotas administrativas com guards
-- endpoint protegido inicial `GET /admin/session`
-- formalizacao da regra: somente `Read` publico; `Create`, `Update` e `Delete` exclusivos do admin autenticado
-
-### Criterios de aceite
-
-- endpoints admin exigem autenticacao
-- endpoints publicos continuam livres
-- operacoes de escrita ficam bloqueadas para usuarios nao autenticados
-- `POST /auth/login` retorna JWT valido para o admin bootstrapado
-- `GET /admin/session` valida a sessao autenticada do admin
-
-## 9.5. Sprint B5 - Administrative CRUDs
-
-### Objetivo
-
-Criar CRUD completo das entidades relevantes.
-
-### Entregas
-
-- CRUD de Projects
-- CRUD de Experiences
-- CRUD de Technologies
-- CRUD de Formations
-- CRUD de SpokenLanguages
-- CRUD de Customers
-- CRUD de Jobs
-- CRUD de Tags
-- CRUD de Links
-- CRUD de ImageAssets
-- CRUD de PortfolioSettings
-- DTO validation e responses consistentes
-- separacao explicita entre leitura publica e escrita administrativa protegida
-- rotas publicas de leitura em `/projects`, `/experiences`, `/technologies`, `/formations`, `/spoken-languages`, `/customers`, `/jobs`, `/links`, `/image-assets`, `/tags` e `/portfolio-settings`
-- rotas administrativas protegidas sob `/admin/<resource>` com `POST`, `PUT` e `DELETE`
-- possibilidade de usar um modulo guarda-chuva `content` com services genericos de leitura/escrita, desde que cada entidade mantenha seus controllers e contracts
-- registry/config central para definir por entidade: delegate Prisma, lookup field, ordenacao, includes e DTOs
-- tabelas de relacionamento modeladas no Prisma e expostas na leitura via includes das entidades principais, mesmo sem CRUD administrativo dedicado nesta sprint
-- todos os `GET` de colecao devem retornar `data + pagination`
-- todos os `GET` de colecao devem aceitar filtros opcionais por propriedades relevantes
-- todos os `GET` de colecao devem aceitar ordenacao opcional por query params, respeitando a whitelist de campos permitidos por entidade
-- `PUT` pode continuar sendo usado como update parcial se a API mantiver DTOs parciais e comportamento nao-destrutivo para campos omitidos
-- `POST` e `PUT` administrativos devem aceitar arrays/estruturas para criar ou substituir relacoes N:N diretamente pelas entidades principais, sem exigir endpoints separados para cada join table
-- campos diretos de `icon` e URLs nas entidades principais devem ser evitados; imagens devem vir de `image_asset` e URLs de `link`, sempre via relacoes explicitas
-- `technology.level` e `technology.frequency` devem representar o estado atual global da tecnologia
-- periodos precisos por contexto devem viver em `technology_context` com relacao `1:N` para cada tecnologia
-- `technology_context` deve suportar multiplos registros por contexto para a mesma tecnologia
-- o calculo total deve somar os periodos por contexto e depois unir interseccoes entre contextos para evitar dupla contagem
-- leituras de `technology` devem expor `experienceMetrics` com total e quebra por `PROFESSIONAL`, `PERSONAL`, `ACADEMIC` e `STUDY`
-- o calculo do tempo total de tecnologia deve unificar intervalos sobrepostos antes de somar meses, evitando dupla contagem quando contextos diferentes se cruzam no mesmo periodo
-
-### Criterios de aceite
-
-- todos os CRUDs principais funcionam via Swagger
-- requests validadas
-- responses consistentes
-- mensagens de erro claras
-- somente `Read` permanece publico nas entidades expostas
-- apenas `POST`, `PUT` e `DELETE` existem na superficie administrativa das entidades de conteudo
-- leituras publicas de colecao funcionam com paginacao
-- leituras publicas de colecao funcionam com filtros opcionais por propriedades relevantes
-- leituras publicas de colecao funcionam com ordenacao opcional via query params
-- relacoes principais podem ser manipuladas nos payloads administrativos das entidades donas
-
-## 9.6. Sprint B6 - Dashboard e endpoints agregados
-
-### Objetivo
-
-Criar endpoints derivados/analiticos para o dashboard do front.
-
-### Entregas
-
-- endpoint agregado `GET /dashboard`
-- endpoint `GET /dashboard/stack-distribution`
-- endpoint `GET /dashboard/project-contexts`
-- endpoint `GET /dashboard/technology-usage`
-- CRUD dedicado de `technology_context`
-- leitura publica agrupada por tecnologia em `GET /technology-contexts`
-- leitura publica especifica por slug em `GET /technology-contexts/{slug}`
-- mutacoes admin por registro individual em `POST/PUT/DELETE /admin/technology-contexts`
-- endpoint `GET /dashboard/professional-timeline`
-- endpoint `GET /dashboard/highlights`
-- analytics sempre calculados a partir de dados publicados
-- distribuicao por stack com base em `TagType.STACK`
-- distribuicao de projetos por `context` e `environment`
-- distribuicao de tecnologias por `level`, `frequency`, `contexts` e source (`project`, `experience`, `formation`)
-- metricas precisas de tempo por tecnologia e por contexto consumiveis pelo frontend para cards, tooltips e comparativos
-- timeline profissional derivada de `experience`
-- highlights normalizados entre `project`, `experience`, `technology`, `formation`, `customer`, `job` e `spokenLanguage`
-- testes unitarios do service e controller de dashboard
-- testes e2e cobrindo rotas e documentacao OpenAPI do dashboard
-
-### Criterios de aceite
-
-- front consegue consumir dados analiticos sem calculo pesado client-side
-- o frontend pode optar por hidratar tudo via `GET /dashboard` ou lazy-load por endpoint segmentado
-- respostas do dashboard filtram conteudo nao publicado antes da agregacao
-- o frontend tambem pode consumir `GET /technology-contexts/{slug}` quando precisar do resumo temporal e das linhas cruas de contexto de uma tecnologia
-
-## 9.7. Sprint B7 - Tests, docs and finish
-
-### Objetivo
-
-Fechar a API redonda.
-
-### Entregas
-
-- testes unitarios criticos
-- testes e2e basicos
-- Swagger refinado
-- README final
-- scripts de setup e banco
-- revisao de nomenclatura e estrutura
-- exclusoes de coverage apenas onde forem justificadas
-
-### Criterios de aceite
-
-- documentacao boa o suficiente para retomar o projeto meses depois sem sofrer
-- cobertura do alvo da etapa em 100%
-
-### Status atual do backend
-
-- o backend do `hans-portfolio-api` ja foi executado e fechado ate esta sprint
-- isso significa que as sprints `B1`, `B2`, `B3`, `B4`, `B5`, `B6` e `B7` ja estao concluidas no estado atual do projeto
-- a partir deste ponto, o proximo fluxo recomendado do remake deixa de ser "continuar o backend" e passa a ser iniciar a etapa do frontend e, depois, a integracao
+- nomes claros
+- responsabilidade bem separada
+- pouca magia
+- pouca indirecao desnecessaria
+- preferencia por composicao simples
+- evitar abstracao cedo demais
+- manter leitura facil mesmo meses depois
 
 ---
 
-## 10) Front-end e integracao
+## 8) Escopo funcional alvo do frontend
 
-As secoes de frontend e integracao do `v3` continuam validas como direcao principal deste remake.
+### 8.1. Base de referencia do portfolio antigo
 
-Neste `v4`, elas devem ser entendidas com os seguintes ajustes:
+O `victor_hanszman_portfolio-old` serve como referencia de escopo e conteudo para:
 
-- toda referencia a "API .NET" passa a significar **API NestJS**
-- toda referencia a "contracts compativeis com a API" passa a significar **contracts compativeis com a superficie HTTP do backend Nest**
-- o frontend continua vindo **depois** do backend
-- a integracao continua vindo **depois** do frontend
+- home
+- experiences
+- skills
+- projects
+- navegacao basica
+- dados historicos e filtros
 
-As decisoes de front que permanecem firmadas:
+### 8.2. O que o remake precisa preservar
 
-- Angular **20.3.6** com abordagem moderna
-- estrutura `core`, `layout` e `pages`
-- `translation` dentro de `core`
-- `shared` dentro de `core`
-- `helpers` no lugar de `utils`
-- dashboard em tela propria
+- conteudo principal do portfolio antigo
+- experiencias profissionais
+- projetos
+- tecnologias/habilidades
+- narrativa de carreira
+- versoes em mais de um idioma
+- recursos visuais e assets ja existentes quando fizer sentido
+
+### 8.3. O que o remake precisa melhorar
+
+- hierarquia visual
+- posicionamento profissional
+- storytelling
+- responsividade
+- performance
+- acessibilidade
+- clareza dos filtros e agrupamentos
+- capacidade de consumo da API nova
+- preparo para manutencao futura
+
+### 8.4. Escopo expandido esperado
+
+O front novo nao deve ficar restrito ao portfolio antigo. O plano oficial considera tambem:
+
+- home mais forte e mais estrategica
+- dashboard analitico em pagina propria
 - dark mode/light mode reais
+- traducao estruturada
+- componentes e secoes orientados a cases
+- preparacao para area administrativa visual em etapa posterior
 
 ---
 
-## 11) Criterios gerais para o Codex
+## 9) Conteudo e narrativa que o front deve evidenciar
+
+O front deve deixar muito explicito:
+
+- especializacao forte em front-end moderno
+- dominio de Angular, TypeScript e React
+- experiencia corporativa real
+- Design Systems e componentizacao
+- modernizacao de legados
+- dashboards analiticos
+- integracao com backend proprio moderno
+- TDD e foco em qualidade
+- CI/CD, Docker e Azure DevOps
+- repertorio full stack sem perder o protagonismo do front
+
+Esses pontos devem aparecer distribuidos entre:
+
+- hero
+- highlights
+- resumo profissional
+- experiencias
+- projetos
+- dashboard
+- secoes de stack/competencias
+
+---
+
+## 10) Plano detalhado da etapa de frontend
+
+### F0 - Foundation e documentacao
+
+#### Objetivo
+
+Fechar a base do app novo e consolidar as regras do projeto antes do desenvolvimento funcional.
+
+#### Entregas
+
+- revisar README do app
+- revisar este plano oficial
+- consolidar regras de Angular moderno
+- consolidar politica de testes e coverage
+- consolidar politica de uso da `hans-ui-design-lib`
+- confirmar estrutura base do app
+- manter a integracao por CDN/web components preparada
+
+#### Criterios de aceite
+
+- documentacao coerente com o estado atual do projeto
+- diretrizes tecnicas claras para as proximas sprints
+- nenhum espaco para duvida sobre o uso de Angular moderno, coverage e design lib
+
+### F1 - App shell, layout base e infra transversal
+
+#### Objetivo
+
+Criar a casca oficial do app e a infraestrutura base de navegacao, tema e organizacao.
+
+#### Entregas
+
+- app shell
+- layout principal
+- header
+- footer
+- navegacao principal
+- wrappers de pagina
+- estrutura inicial de `core`, `layout`, `pages`, `shared` e `helpers`
+- base de tema claro/escuro
+- base de traducao
+- contrato de integracao com a `hans-ui-design-lib`
+- testes unitarios cobrindo a casca do app e os componentes criados
+
+#### Criterios de aceite
+
+- navegacao principal funcional
+- layout responsivo minimo funcional
+- base de temas preparada
+- base de traducao preparada
+- testes com coverage total do escopo implementado
+
+### F2 - Home estrategica
+
+#### Objetivo
+
+Construir uma home forte, moderna e com posicionamento profissional claro.
+
+#### Entregas
+
+- hero principal
+- resumo profissional
+- highlights de senioridade e stack
+- CTA(s) coerentes com portfolio profissional
+- blocos de projetos/experiencias em destaque
+- secoes de prova social/impacto se fizer sentido
+- componentes especificos da home com testes unitarios
+
+#### Criterios de aceite
+
+- home comunica senioridade e proposta de valor em poucos segundos
+- responsividade boa
+- sem depender ainda da integracao real com a API
+- coverage total do que for implementado
+
+### F3 - Pagina de experiences
+
+#### Objetivo
+
+Transformar experiencias em narrativa de carreira, nao apenas lista de cards.
+
+#### Entregas
+
+- timeline ou composicao equivalente
+- agrupamentos/organizacao clara
+- destaque para impacto, contexto e stack
+- ligacoes com clientes, cargos, projetos e tecnologias
+- testes unitarios completos
+
+#### Criterios de aceite
+
+- leitura facil
+- boa hierarquia visual
+- narrativa profissional clara
+- coverage total do escopo entregue
+
+### F4 - Pagina de technologies/skills
+
+#### Objetivo
+
+Apresentar stack e experiencia tecnica com mais clareza do que no portfolio antigo.
+
+#### Entregas
+
+- listagem moderna de tecnologias
+- filtros realmente uteis
+- agrupamentos e visualizacoes mais claras
+- destaque para experiencia total e por contexto
+- aproveitamento posterior dos dados de `experienceMetrics` da API
+- testes unitarios completos
+
+#### Criterios de aceite
+
+- pagina mais clara do que a versao antiga
+- filtros previsiveis
+- boa leitura em desktop e mobile
+- coverage total do escopo entregue
+
+### F5 - Pagina de projects
+
+#### Objetivo
+
+Apresentar projetos como cases, com mais contexto e valor percebido.
+
+#### Entregas
+
+- cards ou composicoes de case study
+- destaque de contexto, papel, stack e resultados
+- espaco para links, imagens e highlights
+- filtros e ordenacoes coerentes
+- testes unitarios completos
+
+#### Criterios de aceite
+
+- pagina comunica melhor os projetos do que o portfolio antigo
+- visual consistente com a home e experiences
+- coverage total do escopo entregue
+
+### F6 - Dashboard analitico
+
+#### Objetivo
+
+Criar a tela propria de dashboard prevista no plano do remake.
+
+#### Entregas
+
+- pagina dedicada
+- consumo inicial mockado/adapter-friendly
+- graficos e indicadores coerentes
+- estrutura pronta para usar os endpoints agregados da API
+- componentes de analytics testados
+
+#### Criterios de aceite
+
+- dashboard agrega valor real
+- nao parece decorativo
+- leitura clara dos dados
+- coverage total do escopo entregue
+
+### F7 - Integracao visual final do portfolio publico
+
+#### Objetivo
+
+Fechar consistencia visual e tecnica do portfolio publico antes da integracao real com o backend.
+
+#### Entregas
+
+- refinamento de UX
+- ajustes de responsividade
+- estados de loading, empty e erro
+- revisao de acessibilidade
+- revisao de navegacao
+- revisao de consistencia com `hans-ui-design-lib`
+- testes adicionais necessarios
+
+#### Criterios de aceite
+
+- portfolio publico pronto para ser integrado
+- linguagem visual consistente
+- coverage total do escopo entregue
+
+### F8 - Preparacao da area administrativa visual
+
+#### Objetivo
+
+Deixar o frontend pronto para, em etapa apropriada, receber a area admin consumindo os endpoints protegidos da API.
+
+#### Entregas
+
+- definicao da estrutura de rotas/admin
+- contratos de autenticacao
+- base para formularios administrativos
+- avaliacao de quais componentes da `hans-ui-design-lib` servem para o admin
+- alinhamento de gaps reutilizaveis antes de qualquer mudanca na lib
+
+#### Criterios de aceite
+
+- direcao da area admin documentada
+- sem implementacao prematura desnecessaria
+- sem criar componente reutilizavel novo na lib sem alinhamento previo
+
+---
+
+## 11) Plano da etapa de integracao
+
+Depois que o frontend estiver estruturalmente pronto:
+
+- conectar o app aos GETs publicos da API
+- substituir mocks/adapters locais por consumo real
+- integrar dashboard com endpoints agregados
+- integrar technologies com `experienceMetrics`
+- integrar projetos, experiencias e settings da API
+- preparar autenticacao admin no front
+- depois integrar CRUDs protegidos quando a etapa administrativa chegar
+
+### Regras da integracao
+
+- preservar contratos tipados
+- manter separacao clara entre adapters de API e componentes de UI
+- nao deixar detalhes HTTP vazarem para componentes visuais
+- manter testes unitarios completos dos adapters, mappers e services
+
+---
+
+## 12) Regras operacionais para cada nova task do front
+
+Toda nova task de frontend deve seguir esta ordem minima:
+
+1. verificar se existe componente equivalente na `hans-ui-design-lib`
+2. definir se o que falta e especifico do portfolio ou reutilizavel
+3. estruturar a implementacao com Angular moderno
+4. implementar junto com teste unitario
+5. garantir coverage total do escopo alterado
+6. rodar lint
+7. rodar build
+8. atualizar documentacao quando necessario
+
+### Regras explicitas de nao-regressao de padrao
+
+- nao usar `ngIf`/`ngFor`
+- nao voltar para `@Input()`/`@Output()` antigos por habito
+- nao criar modules
+- nao transformar RxJS em abordagem padrao do app
+- nao criar componente customizado se a `hans-ui-design-lib` ja resolver
+- nao criar componente reutilizavel novo na lib sem alinhamento previo com Victor
+
+---
+
+## 13) Criterios gerais para o Codex
 
 O Codex deve:
 
-- respeitar a ordem oficial: **backend -> frontend -> integracao**
-- modernizar o front com **Angular 20.3.6 e seus padroes atuais**
-- manter o codigo simples de entender
-- evitar abstracao excessiva cedo demais
-- priorizar nomenclatura clara e estrutura legivel
-- reaproveitar o legado apenas onde faz sentido
-- usar a `hans-ui-design-lib` como base visual, sem forcar tudo para dentro dela
-- separar o que e componente de lib do que e especifico do portfolio
-- estruturar o backend como vitrine real de **Node.js + NestJS + Prisma corporativos**
-- testar tudo o que tiver comportamento relevante
-- exigir 100% de coverage no alvo mensuravel de cada etapa
+- respeitar a ordem oficial: backend concluido -> frontend -> integracao
+- tratar o frontend como foco atual do projeto
+- usar Angular moderno de forma consistente
+- usar `signals`, `computed` e `effect` como base
+- usar RxJS so quando realmente necessario
+- usar `@if` e `@for`
+- usar `input()`, `output()` e `inject()` quando aplicavel
+- criar teste unitario junto de cada implementacao
+- perseguir `100%` de coverage no escopo mensuravel de cada etapa
+- rodar `test`, `test:coverage`, `lint` e `build` ao longo das etapas de implementacao
+- consultar primeiro a `hans-ui-design-lib` antes de criar UI nova
+- avisar antes de qualquer alteracao ou inclusao de componente reutilizavel na design lib
+- manter no app apenas o que for especifico do portfolio
+- atualizar documentacao quando as decisoes forem evoluindo
 
 ---
 
-## 12) Entregaveis finais esperados
+## 14) Entregaveis finais esperados
 
 ### Backend
 
 - API NestJS/TypeScript documentada
-- banco PostgreSQL modelado
-- Prisma com migrations
-- seed inicial real
 - auth admin
 - CRUDs completos
-- Swagger
-- README completo
+- dashboard endpoints
+- seed real
+- Swagger e README completos
 
 ### Frontend
 
-- portfolio remake completo em Angular 20.3.6
-- layout moderno
-- temas claro/escuro
-- traducao multilingue preparada
-- dashboard analitico proprio
-- admin visual
-- consumo da design lib via CDN
+- remake completo do portfolio em Angular moderno
+- app shell bem estruturado
+- home forte
+- experiences, technologies e projects refeitas
+- dashboard proprio
+- traducao preparada
+- light/dark mode reais
+- uso consistente da `hans-ui-design-lib`
+- testes unitarios acompanhando todas as entregas
+- coverage total no escopo relevante
 
 ### Integracao
 
-- frontend publico consumindo GETs publicos
-- frontend admin consumindo CRUDs protegidos
-- fluxo de manutencao real do portfolio sem depender de JSON hardcoded
+- portfolio publico consumindo a API
+- dashboard consumindo endpoints agregados
+- area administrativa preparada para consumo dos endpoints protegidos
+- manutencao futura do portfolio sem depender de JSON hardcoded do legado
 
 ---
 
-## 13) Resumo executivo
-
-### Ordem oficial
-
-1. Backend completo
-2. Frontend completo
-3. Integracao
+## 15) Resumo executivo
 
 ### Decisoes firmadas
 
-- Angular **20.3.6** com abordagem moderna
-- Front com `core`, `layout` e `pages`
-- Backend em **NestJS + Express + TypeScript + Prisma + PostgreSQL/Neon**
-- Swagger obrigatorio
-- README completo da API obrigatorio
-- `highlight` como boolean nas entidades
-- `link` e `image` como entidades proprias
-- `language`, `customer` e `job` incluidos
-- `React` explicitamente tratado como **core stack**
-- dashboard em tela propria
-- dark mode/light mode reais
-- reuse do `hans-portfolio-api` com reimplementacao total do backend
+- backend concluido em NestJS + Prisma + PostgreSQL/Neon
+- frontend passa a ser o foco oficial do remake
+- Angular `20.3.6` com abordagem moderna obrigatoria
+- standalone components apenas
+- `signals`, `computed` e `effect` como base
+- RxJS apenas quando extremamente necessario
+- `@if` e `@for` no HTML
+- `input()`, `output()` e `inject()` como padrao moderno
+- `hans-ui-design-lib` como base visual obrigatoria quando houver componente equivalente
+- qualquer novo componente reutilizavel da design lib deve ser alinhado antes
+- todo componente, pagina, service ou helper relevante deve nascer com teste unitario
+- meta oficial de coverage total no escopo relevante de cada etapa
+- lint, build e testes devem acompanhar todas as entregas
 
-### Referencias que fundamentam a troca de stack
+### Proximo passo oficial recomendado
 
-- Node 24 Active LTS: `https://nodejs.org/en/about/releases/`
-- Nest usa Express por padrao: `https://docs.nestjs.com/`
-- Nest possui recipe oficial para Prisma: `https://docs.nestjs.com/recipes/prisma`
-- Prisma como sinal forte de adocao: `https://www.npmjs.com/package/prisma`
-
----
-
-## 14) Proximo passo recomendado para execucao pelo Codex
-
-Comecar pela **Sprint B1 - Foundation do backend**, ja fazendo:
-
-- limpeza do `hans-portfolio-api`
-- inicializacao do NestJS do zero
-- configuracao de Prisma + PostgreSQL
-- Swagger
-- health check
-- `GET /system`
-- `GET /system/ping`
-- `GET /system/database`
-- `GET /system/health`
-- alias `GET /`
-- alias `GET /health`
-- README inicial em ingles
-- testes e2e iniciais
-
-Depois seguir linearmente B2 -> B7, so entao iniciar a etapa do frontend.
+Comecar a etapa de frontend pelo fechamento da fundacao do app e da arquitetura base, seguindo a sprint `F1 - App shell, layout base e infra transversal`, sem iniciar integracao real com a API antes do front publico estar estruturalmente pronto.
