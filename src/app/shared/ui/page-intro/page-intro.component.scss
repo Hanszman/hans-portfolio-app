@@ -1,0 +1,31 @@
+.page-intro {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(124, 45, 18, 0.12);
+  border-radius: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 1.25rem 3rem rgba(124, 45, 18, 0.08);
+}
+
+.page-intro__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ea580c;
+}
+
+.page-intro__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.page-intro__description {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(67, 20, 7, 0.82);
+}

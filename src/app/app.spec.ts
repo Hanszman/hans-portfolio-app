@@ -1,12 +1,13 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { PORTFOLIO_THEME } from './core/config/portfolio-theme';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
@@ -16,10 +17,21 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', () => {
+  it('should apply the portfolio theme when the app initializes', () => {
+    const setTheme = jasmine.createSpy('setTheme');
+    (
+      window as Window & {
+        HansUI?: {
+          setTheme?: (theme: typeof PORTFOLIO_THEME) => void;
+        };
+      }
+    ).HansUI = {
+      setTheme,
+    };
+
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, hans-portfolio-app');
+
+    expect(setTheme).toHaveBeenCalledOnceWith(PORTFOLIO_THEME);
   });
 });

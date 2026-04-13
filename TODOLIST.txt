@@ -30,7 +30,7 @@ Refactor portfolio in Angular:
 // TODO: Talvez fazer página sobre meus gostos e vida pessoal
 
 
-Prompt Inicial:
+[PROMPT INICIAL]:
 
 Olá Codex, bom dia! Tudo bem?
 Vamos continuar o plano de implementação do remake do meu portfolio! Vc pode pegar contexto principalmente nos arquivos:
@@ -54,3 +54,8 @@ Ao longo do processo de desenvolvimento do Front novo, sempre que formos impleme
 Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe claro na documentação também que SEMPRE temos que usá-la se for necessário qualquer componente no projeto que já exista nela... por exemplo, se no remake do portfolio precisarmos de um button, confira na lib pois la ja tem um button, então use ele. Se precisar fazer qualquer alteração ou inclusão de componente novo (somente reutilizavel em outros projetos/cenários) me avise antes por favor. Mas lembrando que nem todo componente vai ser reutilizavel em varios projetos/contextos, alguns muito provavelmente vão servir apenas para o portfolio mesmo, ai nesse caso, crie esses componentes apenas no hans-portfolio-app.
 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
+
+[ATUAL]:
+-Entender arquivos novos, estrutura e rotas
+-Correção de erros do tsconfig app e spec
+-Partir pra próxima etapa de implementação
