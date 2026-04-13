@@ -28,3 +28,29 @@ Refactor portfolio in Angular:
 // TODO: Talvez melhorar agrupamento da formatList caso o usuário queira mudar agrupamentos de type ou stack ou os dois juntos por exemplo
 // TODO: Talvez inserir no json de skills os padrões de projeto como POO e MVC por exemplo
 // TODO: Talvez fazer página sobre meus gostos e vida pessoal
+
+
+Prompt Inicial:
+
+Olá Codex, bom dia! Tudo bem?
+Vamos continuar o plano de implementação do remake do meu portfolio! Vc pode pegar contexto principalmente nos arquivos:
+hans-portfolio-app:
+-plano-implementacao-hans-portfolio-app-final-version.md
+-Histórico-Implementação.pdf
+-CV - Victor Hanszman (EN).pdf
+-CV - Victor Hanszman (PT-BR).pdf
+-README.md
+hans-portfolio-api:
+-README.md
+Mas pode ficar a vontade para pegar contexto de todos os arquivos desses 4 repos: hans-portfolio-app, hans-portfolio-api, victor_hanszman_portfolio-old e hans-ui-design-lib
+
+Já desenvolvemos a api, agora vamos refazer o front do victor_hanszman_portfolio no hans-portfolio-app...
+O plano-implementacao-hans-portfolio-app-final-version.md é a versão final atual de todas as modificações que fizemos ao longo da conversa com o GPT no histórico e também ao longo do desenvolvimento da api... pode atualizar esse arquivo com o que for necessário para essas próximas etapas.
+
+Quero deixar claro que vamos usar o Angular com suas ferramentas mais recentes, usando: signals, effects, computed (usando rxjs somente quando extremamente necessário), standalone components (não usar modules), usando a nova sintaxe do angular (usando @if e @for no html, ou seja, não usar ng-if nem ng-for) (usando também input(), output() e inject() ao invés da sintaxe antiga)... atualize a documentação com essas informações se ainda não tiver atualizado.
+
+Ao longo do processo de desenvolvimento do Front novo, sempre que formos implementar algum componente, pagina, service, etc, vamos criar também já diretamente seu test unitário e vamos garantir 100% de coverage nele... a ideia é cobrir o sistema todo com 100% de coverage em todos os arquivos e todas as linhas... ignorando do coverage claro aqueles aqueles arquivos de configuração que não precisam ser testados... sempre garantir que o código vai passar no lint/prettier também... ou seja, então em todas as etapas, vamos rodar os scripts de test, test:coverage, lint, build, etc.
+
+Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe claro na documentação também que SEMPRE temos que usá-la se for necessário qualquer componente no projeto que já exista nela... por exemplo, se no remake do portfolio precisarmos de um button, confira na lib pois la ja tem um button, então use ele. Se precisar fazer qualquer alteração ou inclusão de componente novo (somente reutilizavel em outros projetos/cenários) me avise antes por favor. Mas lembrando que nem todo componente vai ser reutilizavel em varios projetos/contextos, alguns muito provavelmente vão servir apenas para o portfolio mesmo, ai nesse caso, crie esses componentes apenas no hans-portfolio-app.
+
+Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
