@@ -157,6 +157,150 @@ Durante todo o desenvolvimento do novo `hans-portfolio-app`, devemos seguir esta
 - evitar decorators antigos quando a API moderna equivalente existir e estiver adequada
 - manter componentes com interfaces pequenas e previsiveis
 
+### 4.5. Estrategia oficial de gerenciamento de estado do frontend
+
+O gerenciamento de estado do `hans-portfolio-app` deve seguir uma estrategia progressiva e leve, alinhada ao Angular moderno.
+
+Principio central:
+
+- usar a menor solucao que resolva bem o problema
+- comecar local
+- promover para feature quando necessario
+- promover para global apenas quando houver necessidade real de compartilhamento transversal
+
+#### Estado local de componente - padrao oficial
+
+Para estado local de componente, a abordagem padrao deve ser:
+
+- `signal()` para estado mutavel local
+- `computed()` para derivacoes
+- `effect()` para side effects controlados
+- `input()` e `output()` para comunicacao entre componentes
+
+Casos tipicos de estado local:
+
+- expandido/colapsado
+- tabs ativas
+- modal aberto/fechado
+- loading visual local
+- filtros temporarios de UI ainda nao compartilhados
+- estado de hover, selecao e interacao
+- view-model derivada de props e estado local
+
+#### Estado de pagina/feature - padrao oficial
+
+Quando o estado precisar ser compartilhado entre varios componentes da mesma rota/feature, a abordagem oficial deve ser:
+
+- service de feature com signals
+- API publica enxuta
+- estado privado mutavel
+- sinais derivados expostos como leitura
+- metodos explicitos para mutacoes
+
+Casos tipicos:
+
+- filtros de pagina
+- paginacao
+- ordenacao
+- estado de carregamento e erro da feature
+- selecao de item ativo
+- cache leve da feature enquanto a rota estiver viva
+- view-model consolidada para a pagina
+
+#### Estado global de aplicacao - quando realmente usar
+
+Estado global deve existir apenas para informacoes transversais e recorrentes entre varias telas.
+
+Casos provaveis de estado global neste projeto:
+
+- tema claro/escuro
+- idioma/locale atual
+- sessao admin autenticada
+- configuracoes globais do portfolio carregadas uma vez e reutilizadas
+- notificacoes/toasts globais
+- estado global de layout realmente compartilhado
+
+#### Solucao oficial recomendada por nivel
+
+Para este remake, a estrategia recomendada e:
+
+- componente: `signals` diretamente no componente
+- pagina/feature: services de feature baseados em `signals`
+- global: services singleton baseados em `signals`
+
+#### Posicao oficial sobre NgRx
+
+O projeto nao deve nascer obrigatoriamente com `@ngrx/store` classico como base de toda a aplicacao.
+
+Motivos:
+
+- o escopo atual do portfolio nao exige, de partida, a complexidade de um store global classico
+- a direcao do projeto ja esta orientada a Angular moderno e signal-first
+- boa parte dos cenarios de estado aqui pode ser resolvida com signals + services de forma mais simples e legivel
+
+Se o estado global crescer a ponto de exigir uma solucao mais estruturada, a preferencia futura deve ser:
+
+- avaliar primeiro `NgRx Signal Store`
+- considerar `@ngrx/store` classico apenas se o projeto realmente passar a exigir event sourcing mais formal, tooling global pesado ou padroes de escala que nao se justifiquem agora
+
+#### Posicao oficial sobre RxJS e BehaviorSubject
+
+RxJS continua permitido, mas nao como container padrao de estado da aplicacao.
+
+Uso aceitavel de RxJS:
+
+- interoperabilidade com `HttpClient`
+- router events
+- formulos reativos quando o fluxo pedir
+- debounce/throttle
+- combinacao/cancelamento de streams
+- polling
+- websockets
+- cenarios realmente stream-oriented
+
+`BehaviorSubject` nao deve ser a escolha padrao para stores novos do app.
+
+So deve entrar quando houver motivo claro de interoperabilidade com APIs baseadas em Observable ou quando o custo de adaptacao para signals nao compensar.
+
+#### Posicao oficial sobre carregamento de dados remotos
+
+Para leitura de dados da API:
+
+- preferir `HttpClient` + services/adapters + signals
+- manter o contrato HTTP fora dos componentes visuais
+- expor para as paginas sinais de `data`, `loading`, `error` e derivados relevantes
+
+Observacao importante:
+
+- o Angular possui `httpResource`, mas a documentacao oficial o marca como experimental
+- portanto, ele pode ser avaliado pontualmente em fluxos de leitura reativa simples, mas nao deve virar o padrao principal do projeto neste momento
+
+#### Posicao oficial sobre persistencia no browser
+
+Uso recomendado:
+
+- `localStorage` para preferencias publicas duraveis, como tema e idioma
+- `sessionStorage` para estado temporario de sessao quando realmente fizer sentido
+- evitar guardar dados sensiveis de forma persistente sem necessidade real
+
+Casos provaveis de persistencia:
+
+- tema selecionado
+- idioma selecionado
+- preferencias leves de visualizacao
+
+#### Regra pratica de escalonamento de estado
+
+Ao implementar qualquer fluxo, usar esta ordem de decisao:
+
+1. isso pode ficar so no componente com `signals`?
+2. isso precisa ser compartilhado apenas dentro da pagina/feature?
+3. isso realmente precisa ser global?
+4. isso precisa persistir no browser?
+5. isso realmente exige RxJS/`BehaviorSubject` ou um store mais sofisticado?
+
+Se a resposta parar cedo, nao escalar a solucao sem necessidade.
+
 ---
 
 ## 5) Politica oficial de reutilizacao da hans-ui-design-lib
@@ -324,6 +468,7 @@ Direcao oficial:
 - api clients
 - configuracoes globais
 - translation
+- stores globais baseados em signals quando realmente necessarios
 - tokens de app
 - adapters de consumo da API
 - helpers compartilhados
@@ -352,7 +497,43 @@ Direcao oficial:
 - componentes realmente compartilhados entre varias features do portfolio
 - directives ou pipes que facam sentido no app inteiro
 
-### 7.3. Convencoes de codigo
+### 7.3. Distribuicao sugerida de stores
+
+Exemplos de onde cada tipo de estado deve morar:
+
+`component`
+
+- filtros visuais simples
+- abas locais
+- modais locais
+- hover/selecoes locais
+
+`pages/<feature>`
+
+- filtros de listagem
+- ordenacao
+- paginacao
+- item selecionado
+- leitura de endpoints daquela feature
+
+`core`
+
+- tema
+- idioma
+- sessao admin
+- configuracoes globais carregadas da API
+- notificacoes globais
+
+### 7.4. Convencoes para stores e services de estado
+
+- cada store/service deve ter responsabilidade clara
+- evitar stores gigantes
+- expor sinais readonly sempre que possivel
+- centralizar mutacoes em metodos nomeados
+- nao deixar componentes visuais conhecerem detalhes de HTTP
+- nao misturar persistencia, transporte HTTP e regra de view no mesmo arquivo
+
+### 7.5. Convencoes de codigo
 
 - nomes claros
 - responsabilidade bem separada
@@ -788,6 +969,8 @@ O Codex deve:
 - consultar primeiro a `hans-ui-design-lib` antes de criar UI nova
 - avisar antes de qualquer alteracao ou inclusao de componente reutilizavel na design lib
 - manter no app apenas o que for especifico do portfolio
+- aplicar a estrategia oficial de estado: `signals` primeiro, feature services depois, global apenas quando necessario
+- evitar `BehaviorSubject` e store global classico como padrao inicial
 - preservar o formato do `README.md` do app quando futuras atualizacoes forem necessarias
 - manter o plano old intacto e atualizar apenas este plano final
 - atualizar documentacao quando as decisoes forem evoluindo
@@ -838,6 +1021,7 @@ O Codex deve:
 - Angular `20.3.6` com abordagem moderna obrigatoria
 - standalone components apenas
 - `signals`, `computed` e `effect` como base
+- estrategia de estado progressiva: local com signals, feature com services signal-based, global apenas quando necessario
 - RxJS apenas quando extremamente necessario
 - `@if` e `@for` no HTML
 - `input()`, `output()` e `inject()` como padrao moderno
