@@ -1,15 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { catchError, map, of, startWith } from 'rxjs';
 import { SystemApiService } from '../../core/api/system-api.service';
-
-interface AppShellApiStatusViewModel {
-  readonly state: 'loading' | 'connected' | 'error';
-  readonly title: string;
-  readonly description: string;
-  readonly baseUrl: string;
-}
+import { AppShellApiStatusViewModel } from './app-shell.types';
 
 @Component({
   selector: 'app-shell',
@@ -20,6 +15,7 @@ interface AppShellApiStatusViewModel {
 })
 export class AppShellComponent {
   private readonly systemApiService = inject(SystemApiService);
+  private readonly currentOrigin = globalThis.location.origin;
 
   protected readonly apiStatus = toSignal(
     this.systemApiService.getHealth().pipe(
@@ -37,12 +33,17 @@ export class AppShellComponent {
         description: 'Checking the backend availability for the current environment.',
         baseUrl: this.systemApiService.apiBaseUrl,
       } satisfies AppShellApiStatusViewModel),
-      catchError(() =>
+      catchError((error: unknown) =>
         of<AppShellApiStatusViewModel>({
           state: 'error',
-          title: 'API unavailable',
+          title:
+            error instanceof HttpErrorResponse && error.status === 0
+              ? 'API request blocked'
+              : 'API request failed',
           description:
-            'The initial backend health check could not be completed from the current environment.',
+            error instanceof HttpErrorResponse && error.status === 0
+              ? `The browser could not complete the initial backend request from ${this.currentOrigin}. The API may be online, but the access can still be blocked by CORS or network policy.`
+              : 'The initial backend health check could not be completed for the current environment.',
           baseUrl: this.systemApiService.apiBaseUrl,
         }),
       ),

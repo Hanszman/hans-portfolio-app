@@ -545,11 +545,14 @@ Exemplos de onde cada tipo de estado deve morar:
 - evitar abstracao cedo demais
 - manter leitura facil mesmo meses depois
 - helpers especificos de uma feature devem ficar proximos da propria feature
+- tipos, interfaces, models e contratos semelhantes devem ficar em arquivos `*.types.ts`, proximos da feature ou dominio dono
+- evitar declarar interfaces e types inline no componente quando eles fizerem parte real da estrutura do codigo
 - classes CSS devem usar apenas `-` como separador
 - evitar `_` em nomes de classes CSS
 - preferir SCSS com `@apply` e classes utilitarias do Tailwind, seguindo o mesmo padrao adotado na `hans-ui-design-lib`
 - usar CSS puro apenas quando a regra realmente nao puder ser expressa de forma clara com utilitarios
 - nao sobrescrever base global de tipografia/reset no `styles.scss` quando a `hans-ui-design-lib` ja fornecer essa fundacao
+- configuracoes publicas de integracao com a API devem ficar centralizadas em um unico arquivo claro por dominio, evitando espalhar tokens/helpers sem necessidade real
 
 ---
 
@@ -692,8 +695,10 @@ Conectar o frontend ao backend desde cedo e preparar a base de ambiente do proje
 - configuracao de desenvolvimento apontando para `http://localhost:3000`
 - configuracao de producao apontando para `https://hans-portfolio-api.vercel.app`
 - camada inicial de configuracao para `PORTFOLIO_API_BASE_URL`
+- configuracao centralizada da API em um unico arquivo de dominio no front
 - client HTTP base
 - primeiros adapters de leitura publica da API
+- validacao de acesso real do browser ao backend, incluindo CORS quando necessario
 - testes unitarios dos adapters e da logica de ambiente
 
 #### Criterios de aceite

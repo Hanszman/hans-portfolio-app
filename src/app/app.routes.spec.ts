@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { apiConfig } from './core/api/api.config';
 import { SystemApiService } from './core/api/system-api.service';
 import { routes } from './app.routes';
 
@@ -15,7 +16,7 @@ describe('app routes', () => {
         {
           provide: SystemApiService,
           useValue: {
-            apiBaseUrl: 'http://localhost:3000',
+            apiBaseUrl: apiConfig.baseUrl,
             getHealth: () =>
               of({
                 status: 'healthy',

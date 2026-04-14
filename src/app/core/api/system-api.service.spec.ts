@@ -5,7 +5,7 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { API_BASE_URL } from '../config/api-base-url.token';
+import { apiConfig } from './api.config';
 import { SystemApiService } from './system-api.service';
 
 describe('SystemApiService', () => {
@@ -16,10 +16,6 @@ describe('SystemApiService', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         SystemApiService,
-        {
-          provide: API_BASE_URL,
-          useValue: 'http://localhost:3000',
-        },
       ],
     });
   });
@@ -27,7 +23,7 @@ describe('SystemApiService', () => {
   it('should expose the configured API base URL', () => {
     const service = TestBed.inject(SystemApiService);
 
-    expect(service.apiBaseUrl).toBe('http://localhost:3000');
+    expect(service.apiBaseUrl).toBe(apiConfig.baseUrl);
   });
 
   it('should request the system overview using the configured API base URL', () => {
@@ -36,7 +32,7 @@ describe('SystemApiService', () => {
 
     service.getSystemOverview().subscribe();
 
-    const request = httpTestingController.expectOne('http://localhost:3000/system');
+    const request = httpTestingController.expectOne(`${apiConfig.baseUrl}/system`);
     expect(request.request.method).toBe('GET');
 
     request.flush({
@@ -55,7 +51,7 @@ describe('SystemApiService', () => {
 
     service.getHealth().subscribe();
 
-    const request = httpTestingController.expectOne('http://localhost:3000/health');
+    const request = httpTestingController.expectOne(`${apiConfig.baseUrl}/health`);
     expect(request.request.method).toBe('GET');
 
     request.flush({
