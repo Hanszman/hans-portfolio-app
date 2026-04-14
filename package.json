@@ -2,15 +2,14 @@
   "name": "hans-portfolio-app",
   "version": "0.0.0",
   "scripts": {
-    "env:sync": "node scripts/sync-env.mjs",
     "ng": "ng",
-    "dev": "npm run env:sync && ng serve",
-    "start": "npm run env:sync && ng serve",
-    "build": "npm run env:sync && ng build",
-    "watch": "npm run env:sync && ng build --watch --configuration development",
-    "lint": "npm run env:sync && ng lint",
-    "test": "npm run env:sync && ng test",
-    "test:coverage": "npm run env:sync && ng test --code-coverage"
+    "dev": "ng serve",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint",
+    "test": "ng test",
+    "test:coverage": "ng test --code-coverage"
   },
   "prettier": {
     "printWidth": 100,

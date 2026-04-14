@@ -1,6 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { environment } from '../../../environments/environment.generated';
+import { environment } from '../../../environments/environment';
 import { apiConfig, buildApiUrl } from './api.config';
 
 describe('apiConfig', () => {
@@ -9,7 +9,7 @@ describe('apiConfig', () => {
       providers: [provideZonelessChangeDetection()],
     });
 
-    expect(apiConfig.baseUrl).toBe(environment.PORTFOLIO_API_BASE_URL.replace(/\/+$/, ''));
+    expect(apiConfig.baseUrl).toBe(environment.apiBaseUrl.replace(/\/+$/, ''));
   });
 
   it('should build API URLs for paths with or without a leading slash', () => {

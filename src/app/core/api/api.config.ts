@@ -1,9 +1,9 @@
-import { environment } from '../../../environments/environment.generated';
+import { environment } from '../../../environments/environment';
 
 const normalizeApiBaseUrl = (apiBaseUrl: string): string => apiBaseUrl.replace(/\/+$/, '');
 
 export const apiConfig = {
-  baseUrl: normalizeApiBaseUrl(environment.PORTFOLIO_API_BASE_URL),
+  baseUrl: normalizeApiBaseUrl(environment.apiBaseUrl),
 } as const;
 
 export const buildApiUrl = (path: string): string => {

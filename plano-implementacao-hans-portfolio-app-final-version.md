@@ -101,21 +101,30 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 
 ### 3.5. Estrategia oficial de ambiente do frontend
 
-- o frontend deve ter logica de `.env` para configurar a base URL da API
-- a base local de desenvolvimento da API deve apontar para `http://localhost:3000`
+- o frontend deve usar a estrategia padrao do Angular com `src/environments/environment.ts`
+- a configuracao de producao deve usar `src/environments/environment.production.ts`
+- a base local do app deve apontar para `http://localhost:4200`
+- a base local da API deve apontar para `http://localhost:3000`
+- a base produtiva do app deve apontar para `https://hans-portfolio-app.vercel.app`
 - a base produtiva da API deve apontar para `https://hans-portfolio-api.vercel.app`
-- deve existir um `.env.example` no app com valores publicos seguros, usando a URL produtiva como referencia padrao documentada
-- a estrategia de ambiente do app deve ser simples, publica e sem segredos no bundle
-
-Variavel publica alvo sugerida:
-
-- `PORTFOLIO_API_BASE_URL`
+- a estrategia de ambiente do app deve continuar simples, publica e sem segredos no bundle
 
 Mapa alvo:
 
-- desenvolvimento local: `PORTFOLIO_API_BASE_URL=http://localhost:3000`
-- producao: `PORTFOLIO_API_BASE_URL=https://hans-portfolio-api.vercel.app`
-- `.env.example`: `PORTFOLIO_API_BASE_URL=https://hans-portfolio-api.vercel.app`
+- desenvolvimento local:
+  `appBaseUrl=http://localhost:4200`
+  `apiBaseUrl=http://localhost:3000`
+- producao:
+  `appBaseUrl=https://hans-portfolio-app.vercel.app`
+  `apiBaseUrl=https://hans-portfolio-api.vercel.app`
+
+### 3.6. Estrategia oficial de ambiente do backend para URLs publicas e CORS
+
+- o backend deve manter `PORTFOLIO_APP_BASE_URL` e `PORTFOLIO_API_BASE_URL` no ambiente
+- em ambiente local, essas variaveis devem apontar para `http://localhost:4200` e `http://localhost:3000`
+- em producao, essas variaveis devem apontar para `https://hans-portfolio-app.vercel.app` e `https://hans-portfolio-api.vercel.app`
+- a lista de origins liberadas para CORS deve ser derivada de uma configuracao central do backend, e nao hardcoded diretamente no `main.ts`
+- `CORS_ALLOWED_ORIGINS` pode existir apenas como complemento opcional para previews, staging ou acessos extras
 
 ---
 
@@ -651,7 +660,8 @@ Fechar a base do app novo e consolidar as regras do projeto antes do desenvolvim
 - confirmar estrutura base do app
 - manter a integracao por CDN/web components preparada
 - consolidar a direcao oficial de integracao antecipada com a API
-- consolidar a estrategia oficial de `.env` do frontend
+- consolidar a estrategia oficial de `environment.ts` e `environment.production.ts` do frontend
+- consolidar a estrategia oficial de URLs publicas e CORS derivada de env no backend
 
 #### Criterios de aceite
 
@@ -690,12 +700,13 @@ Conectar o frontend ao backend desde cedo e preparar a base de ambiente do proje
 
 #### Entregas
 
-- logica oficial de `.env` do frontend
-- `.env.example` com a URL produtiva da API
-- configuracao de desenvolvimento apontando para `http://localhost:3000`
-- configuracao de producao apontando para `https://hans-portfolio-api.vercel.app`
-- camada inicial de configuracao para `PORTFOLIO_API_BASE_URL`
+- `environment.ts` com configuracao local do app e da API
+- `environment.production.ts` com configuracao produtiva do app e da API
+- configuracao de desenvolvimento apontando para `http://localhost:4200` e `http://localhost:3000`
+- configuracao de producao apontando para `https://hans-portfolio-app.vercel.app` e `https://hans-portfolio-api.vercel.app`
+- camada inicial de configuracao centralizada da API no front
 - configuracao centralizada da API em um unico arquivo de dominio no front
+- configuracao centralizada de URLs publicas e CORS no backend via env
 - client HTTP base
 - primeiros adapters de leitura publica da API
 - validacao de acesso real do browser ao backend, incluindo CORS quando necessario
