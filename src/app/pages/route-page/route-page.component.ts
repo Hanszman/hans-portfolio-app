@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { readFoundationRouteData } from '../../helpers/route-data.helper';
 import { PageIntroComponent } from '../../shared/ui/page-intro/page-intro.component';
+import { readRoutePageData } from './helpers/route-page-data.helper';
 
 @Component({
   selector: 'app-route-page',
@@ -13,7 +13,5 @@ import { PageIntroComponent } from '../../shared/ui/page-intro/page-intro.compon
 export class RoutePageComponent {
   private readonly route = inject(ActivatedRoute);
 
-  protected readonly content = computed(() =>
-    readFoundationRouteData(this.route.snapshot.data),
-  );
+  protected readonly content = computed(() => readRoutePageData(this.route.snapshot.data));
 }

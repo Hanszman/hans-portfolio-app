@@ -1,4 +1,5 @@
 import { Data } from '@angular/router';
+
 export interface RoutePageContent {
   readonly sectionLabel: string;
   readonly title: string;
@@ -15,7 +16,7 @@ const DEFAULT_ROUTE_PAGE_CONTENT: RoutePageContent = {
 const isNonEmptyString = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0;
 
-export const readFoundationRouteData = (data: Data): RoutePageContent => ({
+export const readRoutePageData = (data: Data): RoutePageContent => ({
   sectionLabel: isNonEmptyString(data['sectionLabel'])
     ? data['sectionLabel']
     : DEFAULT_ROUTE_PAGE_CONTENT.sectionLabel,

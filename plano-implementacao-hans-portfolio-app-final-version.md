@@ -71,9 +71,8 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - sintaxe nova de template com `@if`, `@for`, `@switch` e `@defer` quando fizer sentido
 - `input()`, `output()` e `inject()` no lugar da sintaxe antiga sempre que aplicavel
 - roteamento standalone com lazy loading por pagina/feature
-- arquivos de roteamento devem ficar agrupados em uma pasta dedicada como `routing/`
-- o arquivo raiz `app.routes.ts` pode existir apenas como entrypoint fino do Angular quando isso facilitar a integracao com o bootstrap
-- evitar prefixo `app-` em arquivos internos de roteamento quando ele nao agregar clareza
+- `app.routes.ts` deve concentrar a configuracao de rotas do app
+- evitar espalhar a definicao principal de rotas em varios arquivos sem ganho real de clareza
 - preferencia por zoneless, mantendo a base atual do app
 - SCSS + TailwindCSS como base de estilo
 
@@ -545,6 +544,7 @@ Exemplos de onde cada tipo de estado deve morar:
 - preferencia por composicao simples
 - evitar abstracao cedo demais
 - manter leitura facil mesmo meses depois
+- helpers especificos de uma feature devem ficar proximos da propria feature
 - classes CSS devem usar apenas `-` como separador
 - evitar `_` em nomes de classes CSS
 - preferir SCSS com `@apply` e classes utilitarias do Tailwind, seguindo o mesmo padrao adotado na `hans-ui-design-lib`

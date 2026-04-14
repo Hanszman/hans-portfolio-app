@@ -1,9 +1,9 @@
-import { readFoundationRouteData } from './route-data.helper';
+import { readRoutePageData } from './route-page-data.helper';
 
-describe('readFoundationRouteData', () => {
+describe('readRoutePageData', () => {
   it('should return the route data when it is valid', () => {
     expect(
-      readFoundationRouteData({
+      readRoutePageData({
         sectionLabel: 'Page',
         title: 'Projects',
         description: 'Projects route ready.',
@@ -17,7 +17,7 @@ describe('readFoundationRouteData', () => {
 
   it('should fall back to the home foundation copy when the route data is invalid', () => {
     expect(
-      readFoundationRouteData({
+      readRoutePageData({
         sectionLabel: '',
         title: null,
         description: 42,
