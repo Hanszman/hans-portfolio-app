@@ -1,4 +1,20 @@
 <main class="app-shell" data-testid="app-shell">
+  <section
+    [class.app-shell-api-status]="apiStatusClasses()['app-shell-api-status']"
+    [class.app-shell-api-status-loading]="apiStatusClasses()['app-shell-api-status-loading']"
+    [class.app-shell-api-status-connected]="apiStatusClasses()['app-shell-api-status-connected']"
+    [class.app-shell-api-status-error]="apiStatusClasses()['app-shell-api-status-error']"
+    data-testid="app-shell-api-status"
+  >
+    <div class="app-shell-api-status-copy">
+      <span class="app-shell-api-status-eyebrow">API</span>
+      <strong class="app-shell-api-status-title">{{ apiStatus().title }}</strong>
+      <p class="app-shell-api-status-description">{{ apiStatus().description }}</p>
+    </div>
+
+    <code class="app-shell-api-status-base-url">{{ apiStatus().baseUrl }}</code>
+  </section>
+
   <div class="app-shell-content">
     <router-outlet />
   </div>

@@ -5,3 +5,39 @@
 .app-shell-content {
   @apply mx-auto w-full max-w-6xl;
 }
+
+.app-shell-api-status {
+  @apply mx-auto mb-6 flex w-full max-w-6xl flex-col gap-4 rounded-3xl border bg-white/85 p-5 shadow-lg backdrop-blur md:flex-row md:items-center md:justify-between;
+}
+
+.app-shell-api-status-loading {
+  @apply border-amber-500/20 shadow-amber-950/10;
+}
+
+.app-shell-api-status-connected {
+  @apply border-emerald-500/20 shadow-emerald-950/10;
+}
+
+.app-shell-api-status-error {
+  @apply border-rose-500/20 shadow-rose-950/10;
+}
+
+.app-shell-api-status-copy {
+  @apply grid gap-1;
+}
+
+.app-shell-api-status-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.08em] text-orange-600;
+}
+
+.app-shell-api-status-title {
+  @apply text-sm font-semibold text-orange-950;
+}
+
+.app-shell-api-status-description {
+  @apply m-0 text-sm leading-6 text-orange-950/70;
+}
+
+.app-shell-api-status-base-url {
+  @apply rounded-full border border-orange-950/10 bg-orange-50/90 px-3 py-2 text-xs text-orange-900;
+}

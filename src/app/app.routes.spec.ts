@@ -2,12 +2,31 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { SystemApiService } from './core/api/system-api.service';
 import { routes } from './app.routes';
 
 describe('app routes', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideZonelessChangeDetection(), provideRouter(routes)],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter(routes),
+        {
+          provide: SystemApiService,
+          useValue: {
+            apiBaseUrl: 'http://localhost:3000',
+            getHealth: () =>
+              of({
+                status: 'healthy',
+                checks: {
+                  database: 'up',
+                },
+                checkedAtUtc: '2026-04-14T13:00:00.000Z',
+              }),
+          },
+        },
+      ],
     }).compileComponents();
   });
 
