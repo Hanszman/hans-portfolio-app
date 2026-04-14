@@ -1,31 +1,15 @@
 .page-intro {
-  display: grid;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(124, 45, 18, 0.12);
-  border-radius: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 1.25rem 3rem rgba(124, 45, 18, 0.08);
+  @apply grid gap-3 rounded-3xl border border-orange-950/10 bg-white/90 p-6 shadow-2xl shadow-orange-950/10;
 }
 
-.page-intro__eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ea580c;
+.page-intro-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.08em] text-orange-600;
 }
 
-.page-intro__title {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.05;
+.page-intro-title {
+  @apply m-0 text-4xl font-semibold leading-none md:text-5xl;
 }
 
-.page-intro__description {
-  margin: 0;
-  max-width: 44rem;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: rgba(67, 20, 7, 0.82);
+.page-intro-description {
+  @apply m-0 max-w-3xl text-base leading-7 text-orange-950/80;
 }

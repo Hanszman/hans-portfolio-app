@@ -1,27 +1,15 @@
 .route-page {
-  display: grid;
-  gap: 1.5rem;
+  @apply grid gap-6;
 }
 
-.route-page__status {
-  padding: 1.25rem;
-  border: 1px solid rgba(124, 45, 18, 0.12);
-  border-radius: 1.25rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 1rem 2.5rem rgba(124, 45, 18, 0.08);
+.route-page-status {
+  @apply rounded-2xl border border-orange-950/10 bg-white/80 p-5 shadow-xl shadow-orange-950/10;
 }
 
-.route-page__status-label {
-  display: inline-flex;
-  margin-bottom: 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #9a3412;
+.route-page-status-label {
+  @apply mb-3 inline-flex text-xs font-bold uppercase tracking-[0.08em] text-orange-800;
 }
 
-.route-page__status p {
-  margin: 0;
-  line-height: 1.6;
+.route-page-status p {
+  @apply m-0 leading-7 text-orange-950/80;
 }
