@@ -1,17 +1,8 @@
 import { Data } from '@angular/router';
-
-export interface RoutePageContent {
-  readonly sectionLabel: string;
-  readonly title: string;
-  readonly description: string;
-}
-
-const DEFAULT_ROUTE_PAGE_CONTENT: RoutePageContent = {
-  sectionLabel: 'Foundation',
-  title: 'Home foundation',
-  description:
-    'The home route is wired and ready for the upcoming hero, highlights, and API-driven portfolio summary.',
-};
+import {
+  DEFAULT_ROUTE_PAGE_CONTENT,
+  RoutePageContent,
+} from '../route-page.types';
 
 const isNonEmptyString = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0;
@@ -26,4 +17,19 @@ export const readRoutePageData = (data: Data): RoutePageContent => ({
   description: isNonEmptyString(data['description'])
     ? data['description']
     : DEFAULT_ROUTE_PAGE_CONTENT.description,
+  summaryLabel: isNonEmptyString(data['summaryLabel'])
+    ? data['summaryLabel']
+    : DEFAULT_ROUTE_PAGE_CONTENT.summaryLabel,
+  summaryTitle: isNonEmptyString(data['summaryTitle'])
+    ? data['summaryTitle']
+    : DEFAULT_ROUTE_PAGE_CONTENT.summaryTitle,
+  summaryDescription: isNonEmptyString(data['summaryDescription'])
+    ? data['summaryDescription']
+    : DEFAULT_ROUTE_PAGE_CONTENT.summaryDescription,
+  statusLabel: isNonEmptyString(data['statusLabel'])
+    ? data['statusLabel']
+    : DEFAULT_ROUTE_PAGE_CONTENT.statusLabel,
+  statusDescription: isNonEmptyString(data['statusDescription'])
+    ? data['statusDescription']
+    : DEFAULT_ROUTE_PAGE_CONTENT.statusDescription,
 });

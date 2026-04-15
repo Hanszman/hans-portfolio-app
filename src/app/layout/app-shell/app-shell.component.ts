@@ -1,19 +1,23 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { catchError, map, of, startWith } from 'rxjs';
 import { SystemApiService } from '../../core/api/system-api.service';
+import { PortfolioFooterComponent } from '../footer/portfolio-footer.component';
+import { PortfolioHeaderComponent } from '../header/portfolio-header.component';
+import { readPortfolioNavigationItems } from '../navigation/helpers/portfolio-navigation.helper';
 import { AppShellApiStatusViewModel } from './app-shell.types';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PortfolioHeaderComponent, PortfolioFooterComponent],
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppShellComponent {
+  private readonly router = inject(Router);
   private readonly systemApiService = inject(SystemApiService);
   private readonly currentOrigin = globalThis.location.origin;
 
@@ -56,6 +60,10 @@ export class AppShellComponent {
         baseUrl: this.systemApiService.apiBaseUrl,
       } satisfies AppShellApiStatusViewModel,
     },
+  );
+
+  protected readonly navigationItems = computed(() =>
+    readPortfolioNavigationItems(this.router.config),
   );
 
   protected readonly apiStatusClasses = computed(() => ({

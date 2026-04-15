@@ -1,0 +1,19 @@
+.portfolio-page-wrapper {
+  @apply grid gap-6;
+}
+
+.portfolio-page-wrapper-hero {
+  @apply grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] xl:items-start;
+}
+
+.portfolio-page-wrapper-main {
+  @apply min-w-0;
+}
+
+.portfolio-page-wrapper-sidebar {
+  @apply min-w-0;
+}
+
+.portfolio-page-wrapper-content {
+  @apply grid gap-6;
+}

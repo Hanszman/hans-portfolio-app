@@ -1,4 +1,6 @@
 <main class="app-shell" data-testid="app-shell">
+  <app-portfolio-header [navigationItems]="navigationItems()" />
+
   <section
     [class.app-shell-api-status]="apiStatusClasses()['app-shell-api-status']"
     [class.app-shell-api-status-loading]="apiStatusClasses()['app-shell-api-status-loading']"
@@ -15,7 +17,11 @@
     <code class="app-shell-api-status-base-url">{{ apiStatus().baseUrl }}</code>
   </section>
 
-  <div class="app-shell-content">
-    <router-outlet />
-  </div>
+  <section class="app-shell-stage">
+    <div class="app-shell-content">
+      <router-outlet />
+    </div>
+  </section>
+
+  <app-portfolio-footer [navigationItems]="navigationItems()" />
 </main>

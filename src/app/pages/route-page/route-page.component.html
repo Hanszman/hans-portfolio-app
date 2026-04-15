@@ -1,15 +1,30 @@
-<section class="route-page">
-  <app-page-intro
-    [sectionLabel]="content().sectionLabel"
-    [title]="content().title"
-    [description]="content().description"
-  />
-
-  <div class="route-page-status">
-    <span class="route-page-status-label">Status</span>
-    <p>
-      This route is part of the F1.1 foundation and is ready to receive the next
-      implementation steps.
-    </p>
+<app-portfolio-page-wrapper>
+  <div page-main>
+    <app-page-intro
+      [sectionLabel]="content().sectionLabel"
+      [title]="content().title"
+      [description]="content().description"
+    />
   </div>
-</section>
+
+  <section class="route-page-summary" page-sidebar>
+    <span class="route-page-summary-label">{{ content().summaryLabel }}</span>
+    <h2 class="route-page-summary-title">{{ content().summaryTitle }}</h2>
+    <p class="route-page-summary-description">{{ content().summaryDescription }}</p>
+  </section>
+
+  <div class="route-page-content" page-content>
+    <div class="route-page-status">
+      <span class="route-page-status-label">{{ content().statusLabel }}</span>
+      <p>{{ content().statusDescription }}</p>
+    </div>
+
+    <div class="route-page-status">
+      <span class="route-page-status-label">Layout layer</span>
+      <p>
+        The route now renders inside portfolio-specific wrappers so the next page
+        implementations can focus on real content instead of rebuilding the shell.
+      </p>
+    </div>
+  </div>
+</app-portfolio-page-wrapper>

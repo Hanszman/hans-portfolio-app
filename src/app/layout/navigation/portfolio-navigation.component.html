@@ -1,0 +1,16 @@
+<nav
+  class="portfolio-navigation"
+  aria-label="Primary portfolio navigation"
+  data-testid="portfolio-navigation"
+>
+  @for (item of items(); track item.path) {
+    <a
+      class="portfolio-navigation-link"
+      [routerLink]="item.path"
+      routerLinkActive="portfolio-navigation-link-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ item.label }}
+    </a>
+  }
+</nav>

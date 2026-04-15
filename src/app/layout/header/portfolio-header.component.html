@@ -1,0 +1,55 @@
+<header class="portfolio-header" data-testid="portfolio-header">
+  <div class="portfolio-header-surface">
+    <div class="portfolio-header-top">
+      <a class="portfolio-header-brand" routerLink="/home">
+        <span class="portfolio-header-brand-mark">VH</span>
+        <span class="portfolio-header-brand-copy">
+          <strong>Victor Hanszman</strong>
+          <span>Full Stack Engineer | Front-End specialist</span>
+        </span>
+      </a>
+
+      <div class="portfolio-header-tags" aria-label="Foundation status">
+        <hans-tag label="Angular 20" tagColor="warning" tagSize="md"></hans-tag>
+        <hans-tag label="Signals first" tagColor="info" tagSize="md"></hans-tag>
+        <hans-tag label="API live" tagColor="success" tagSize="md"></hans-tag>
+      </div>
+    </div>
+
+    <div class="portfolio-header-hero">
+      <div class="portfolio-header-copy">
+        <span class="portfolio-header-eyebrow">Portfolio remake foundation</span>
+        <h1 class="portfolio-header-title">
+          A shell specific to the portfolio, already connected to real backend data.
+        </h1>
+        <p class="portfolio-header-description">
+          This first layout layer establishes the portfolio structure, keeps the app
+          aligned with the design library, and prepares the next visual iterations on
+          top of a responsive Angular shell.
+        </p>
+      </div>
+
+      <div class="portfolio-header-highlights">
+        <article class="portfolio-header-highlight-card">
+          <span class="portfolio-header-highlight-label">Layout</span>
+          <strong>Header, footer, nav and page wrappers</strong>
+          <p>Portfolio-specific composition organized inside the app layout layer.</p>
+        </article>
+
+        <article class="portfolio-header-highlight-card">
+          <span class="portfolio-header-highlight-label">Integration</span>
+          <strong>Real API from the start</strong>
+          <p>The shell stays wired to the backend so every next page can evolve on real data.</p>
+        </article>
+
+        <article class="portfolio-header-highlight-card">
+          <span class="portfolio-header-highlight-label">Direction</span>
+          <strong>Design-lib first, portfolio-specific structure second</strong>
+          <p>Reusable lib components stay as the base while unique portfolio layout lives here.</p>
+        </article>
+      </div>
+    </div>
+
+    <app-portfolio-navigation [items]="navigationItems()" />
+  </div>
+</header>

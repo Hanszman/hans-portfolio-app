@@ -6,6 +6,10 @@
   @apply mx-auto w-full max-w-6xl;
 }
 
+.app-shell-stage {
+  @apply py-2;
+}
+
 .app-shell-api-status {
   @apply mx-auto mb-6 flex w-full max-w-6xl flex-col gap-4 rounded-3xl border bg-white/85 p-5 shadow-lg backdrop-blur md:flex-row md:items-center md:justify-between;
 }

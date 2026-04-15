@@ -73,6 +73,7 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - roteamento standalone com lazy loading por pagina/feature
 - `app.routes.ts` deve concentrar a configuracao de rotas do app
 - evitar espalhar a definicao principal de rotas em varios arquivos sem ganho real de clareza
+- dados de navegacao das rotas principais devem nascer em `app.routes.ts`, e a shell deve derivar o menu a partir dali sempre que isso evitar duplicacao manual
 - preferencia por zoneless, mantendo a base atual do app
 - SCSS + TailwindCSS como base de estilo
 
@@ -493,6 +494,7 @@ Direcao oficial:
 - navegacao principal
 - wrappers de pagina
 - layout de secoes
+- componentes de layout especificos do portfolio, mesmo quando baseados visualmente na `hans-ui-design-lib`
 
 `pages/`
 
@@ -731,7 +733,9 @@ Construir a casca navegavel principal do portfolio.
 - header
 - footer
 - navegacao principal
+- navegacao derivada da configuracao de rotas em `app.routes.ts`, evitando cadastro paralelo manual
 - wrappers de pagina
+- uso seletivo de web components da `hans-ui-design-lib` como base visual da shell
 - responsividade inicial da shell
 - testes unitarios dos componentes de layout criados
 

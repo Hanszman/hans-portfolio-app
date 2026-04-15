@@ -1,11 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { apiConfig } from '../../core/api/api.config';
 import { SystemApiService } from '../../core/api/system-api.service';
 import { AppShellComponent } from './app-shell.component';
+
+@Component({
+  template: '',
+})
+class TestRouteComponent {}
 
 describe('AppShellComponent', () => {
   const createSystemApiServiceMock = (mode: 'success' | 'blocked' | 'generic-error') => ({
@@ -37,7 +42,27 @@ describe('AppShellComponent', () => {
       imports: [AppShellComponent],
       providers: [
         provideZonelessChangeDetection(),
-        provideRouter([]),
+        provideRouter([
+          {
+            path: '',
+            children: [
+              {
+                path: 'home',
+                component: TestRouteComponent,
+                data: {
+                  navigationLabel: 'Home',
+                },
+              },
+              {
+                path: 'projects',
+                component: TestRouteComponent,
+                data: {
+                  navigationLabel: 'Projects',
+                },
+              },
+            ],
+          },
+        ]),
         {
           provide: SystemApiService,
           useValue: createSystemApiServiceMock(mode),
@@ -57,6 +82,8 @@ describe('AppShellComponent', () => {
     expect(compiled.textContent).toContain('API connected');
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
     expect(compiled.textContent).toContain(apiConfig.baseUrl);
+    expect(compiled.textContent).toContain('Victor Hanszman');
+    expect(compiled.textContent).toContain('Projects');
   });
 
   it('should render the error API status when the health check fails', async () => {

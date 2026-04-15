@@ -1,0 +1,11 @@
+.portfolio-navigation {
+  @apply flex flex-wrap gap-3;
+}
+
+.portfolio-navigation-link {
+  @apply inline-flex min-h-11 items-center justify-center rounded-full border border-orange-950/10 bg-white/70 px-4 py-2 text-sm font-semibold text-orange-950/70 transition duration-200 hover:border-orange-500/30 hover:bg-orange-100 hover:text-orange-950;
+}
+
+.portfolio-navigation-link-active {
+  @apply border-orange-500/30 bg-orange-500 text-white shadow-lg shadow-orange-950/15;
+}
