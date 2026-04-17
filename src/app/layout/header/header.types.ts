@@ -12,7 +12,3 @@ export type HeaderThemeChangeEvent = CustomEvent<boolean>;
 export interface HansToggleElement extends HTMLElement {
   checked?: boolean;
 }
-
-export interface HansDropdownElement extends HTMLElement {
-  options?: readonly HeaderLanguageDropdownOption[];
-}

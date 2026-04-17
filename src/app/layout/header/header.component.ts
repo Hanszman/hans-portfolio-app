@@ -17,7 +17,6 @@ import { NavigationComponent } from '../navigation/navigation.component';
 import { NavigationItem } from '../navigation/navigation.types';
 import { SurfaceComponent } from '../surface/surface.component';
 import {
-  HansDropdownElement,
   HansToggleElement,
   HeaderLanguageSelectEvent,
   HeaderThemeChangeEvent,
@@ -34,8 +33,6 @@ import {
 export class HeaderComponent {
   readonly navigationItems = input.required<readonly NavigationItem[]>();
   private readonly themeToggle = viewChild<ElementRef<HansToggleElement>>('themeToggle');
-  private readonly languageDropdown =
-    viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   protected readonly translation = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
   protected readonly languageOptions = computed(() =>
@@ -55,14 +52,6 @@ export class HeaderComponent {
       }
     });
 
-    effect(() => {
-      const languageDropdown = this.languageDropdown()?.nativeElement;
-      const languageOptions = this.languageOptions();
-
-      if (languageDropdown) {
-        languageDropdown.options = languageOptions;
-      }
-    });
   }
 
   protected setThemeMode(event: Event): void {

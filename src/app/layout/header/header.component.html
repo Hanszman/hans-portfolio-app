@@ -57,6 +57,7 @@
             <hans-dropdown
               #languageDropdown
               [noOptionsText]="'header.controls.noLanguages' | translate"
+              [options]="languageOptions()"
               [triggerLabel]="'header.controls.language' | translate"
               triggerColor="primary"
               triggerShape="rounded"
