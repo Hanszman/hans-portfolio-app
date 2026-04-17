@@ -1,27 +1,25 @@
 import { Routes } from '@angular/router';
 import { ShellComponent } from './layout/shell/shell.component';
 
-const loadHomePage = () =>
-  import('./pages/home/home-page.component').then((module) => module.HomePageComponent);
+const loadHome = () =>
+  import('./pages/home/home.component').then((module) => module.HomeComponent);
 
-const loadExperiencesPage = () =>
-  import('./pages/experiences/experiences-page.component').then(
-    (module) => module.ExperiencesPageComponent,
+const loadExperiences = () =>
+  import('./pages/experiences/experiences.component').then(
+    (module) => module.ExperiencesComponent,
   );
 
-const loadSkillsPage = () =>
-  import('./pages/skills/skills-page.component').then(
-    (module) => module.SkillsPageComponent,
+const loadSkills = () =>
+  import('./pages/skills/skills.component').then((module) => module.SkillsComponent);
+
+const loadProjects = () =>
+  import('./pages/projects/projects.component').then(
+    (module) => module.ProjectsComponent,
   );
 
-const loadProjectsPage = () =>
-  import('./pages/projects/projects-page.component').then(
-    (module) => module.ProjectsPageComponent,
-  );
-
-const loadDashboardPage = () =>
-  import('./pages/dashboard/dashboard-page.component').then(
-    (module) => module.DashboardPageComponent,
+const loadDashboard = () =>
+  import('./pages/dashboard/dashboard.component').then(
+    (module) => module.DashboardComponent,
   );
 
 export const routes: Routes = [
@@ -36,23 +34,23 @@ export const routes: Routes = [
       },
       {
         path: 'home',
-        loadComponent: loadHomePage,
+        loadComponent: loadHome,
       },
       {
         path: 'experiences',
-        loadComponent: loadExperiencesPage,
+        loadComponent: loadExperiences,
       },
       {
         path: 'skills',
-        loadComponent: loadSkillsPage,
+        loadComponent: loadSkills,
       },
       {
         path: 'projects',
-        loadComponent: loadProjectsPage,
+        loadComponent: loadProjects,
       },
       {
         path: 'dashboard',
-        loadComponent: loadDashboardPage,
+        loadComponent: loadDashboard,
       },
       {
         path: '**',

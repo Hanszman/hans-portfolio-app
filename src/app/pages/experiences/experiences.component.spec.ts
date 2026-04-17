@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ExperiencesPageComponent } from './experiences-page.component';
+import { ExperiencesComponent } from './experiences.component';
 
-describe('ExperiencesPageComponent', () => {
+describe('ExperiencesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExperiencesPageComponent],
+      imports: [ExperiencesComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the experiences foundation content', () => {
-    const fixture = TestBed.createComponent(ExperiencesPageComponent);
+    const fixture = TestBed.createComponent(ExperiencesComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

@@ -4,13 +4,13 @@ import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.com
 import { SurfaceComponent } from '../../layout/surface/surface.component';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-home',
   imports: [
     PageIntroComponent,
     PageWrapperComponent,
     SurfaceComponent,
   ],
-  templateUrl: './home-page.component.html',
+  templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {}
+export class HomeComponent {}

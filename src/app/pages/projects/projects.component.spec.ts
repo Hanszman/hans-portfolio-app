@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ProjectsPageComponent } from './projects-page.component';
+import { ProjectsComponent } from './projects.component';
 
-describe('ProjectsPageComponent', () => {
+describe('ProjectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProjectsPageComponent],
+      imports: [ProjectsComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the projects foundation content', () => {
-    const fixture = TestBed.createComponent(ProjectsPageComponent);
+    const fixture = TestBed.createComponent(ProjectsComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

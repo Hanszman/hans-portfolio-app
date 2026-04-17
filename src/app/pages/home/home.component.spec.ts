@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { HomePageComponent } from './home-page.component';
+import { HomeComponent } from './home.component';
 
-describe('HomePageComponent', () => {
+describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomePageComponent],
+      imports: [HomeComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the home foundation content', () => {
-    const fixture = TestBed.createComponent(HomePageComponent);
+    const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

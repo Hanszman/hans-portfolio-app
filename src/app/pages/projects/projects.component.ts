@@ -4,13 +4,13 @@ import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.com
 import { SurfaceComponent } from '../../layout/surface/surface.component';
 
 @Component({
-  selector: 'app-experiences-page',
+  selector: 'app-projects',
   imports: [
     PageIntroComponent,
     PageWrapperComponent,
     SurfaceComponent,
   ],
-  templateUrl: './experiences-page.component.html',
+  templateUrl: './projects.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExperiencesPageComponent {}
+export class ProjectsComponent {}

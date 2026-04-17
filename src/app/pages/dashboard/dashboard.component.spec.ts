@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { DashboardPageComponent } from './dashboard-page.component';
+import { DashboardComponent } from './dashboard.component';
 
-describe('DashboardPageComponent', () => {
+describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardPageComponent],
+      imports: [DashboardComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the dashboard foundation content', () => {
-    const fixture = TestBed.createComponent(DashboardPageComponent);
+    const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

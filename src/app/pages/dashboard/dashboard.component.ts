@@ -4,13 +4,13 @@ import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.com
 import { SurfaceComponent } from '../../layout/surface/surface.component';
 
 @Component({
-  selector: 'app-dashboard-page',
+  selector: 'app-dashboard',
   imports: [
     PageIntroComponent,
     PageWrapperComponent,
     SurfaceComponent,
   ],
-  templateUrl: './dashboard-page.component.html',
+  templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardPageComponent {}
+export class DashboardComponent {}

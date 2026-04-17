@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { SkillsPageComponent } from './skills-page.component';
+import { SkillsComponent } from './skills.component';
 
-describe('SkillsPageComponent', () => {
+describe('SkillsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SkillsPageComponent],
+      imports: [SkillsComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the skills foundation content', () => {
-    const fixture = TestBed.createComponent(SkillsPageComponent);
+    const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
