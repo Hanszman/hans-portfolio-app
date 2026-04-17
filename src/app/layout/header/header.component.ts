@@ -1,6 +1,7 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   computed,
   ElementRef,
@@ -17,7 +18,9 @@ import { NavigationComponent } from '../navigation/navigation.component';
 import { NavigationItem } from '../navigation/navigation.types';
 import { SurfaceComponent } from '../surface/surface.component';
 import {
+  HansDropdownElement,
   HansToggleElement,
+  HeaderLanguageDropdownOption,
   HeaderLanguageSelectEvent,
   HeaderThemeChangeEvent,
 } from './header.types';
@@ -33,12 +36,15 @@ import {
 export class HeaderComponent {
   readonly navigationItems = input.required<readonly NavigationItem[]>();
   private readonly themeToggle = viewChild<ElementRef<HansToggleElement>>('themeToggle');
+  private readonly languageDropdown =
+    viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly translation = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
   protected readonly languageOptions = computed(() =>
     this.translation.languageOptions().map((option) => ({
       ...option,
-      action: () => this.translation.setLocale(option.value),
+      action: () => this.setLanguage(option),
     })),
   );
 
@@ -52,6 +58,29 @@ export class HeaderComponent {
       }
     });
 
+    effect((onCleanup) => {
+      const languageDropdown = this.languageDropdown()?.nativeElement;
+      const languageOptions = this.languageOptions();
+
+      /* istanbul ignore next -- viewChild is only absent during Angular's pre-render effect pass. */
+      if (!languageDropdown) return;
+
+      let isCleanedUp = false;
+      const applyLanguageOptions = (): void => {
+        if (!isCleanedUp) {
+          languageDropdown.options = languageOptions;
+        }
+      };
+      if (customElements.get('hans-dropdown')) {
+        applyLanguageOptions();
+      } else {
+        void customElements.whenDefined('hans-dropdown').then(applyLanguageOptions);
+      }
+
+      onCleanup(() => {
+        isCleanedUp = true;
+      });
+    });
   }
 
   protected setThemeMode(event: Event): void {
@@ -63,6 +92,11 @@ export class HeaderComponent {
   protected selectLanguage(event: Event): void {
     const { detail: option } = event as HeaderLanguageSelectEvent;
 
+    this.setLanguage(option);
+  }
+
+  private setLanguage(option: HeaderLanguageDropdownOption): void {
     this.translation.setLocale(option.value);
+    this.changeDetectorRef.markForCheck();
   }
 }

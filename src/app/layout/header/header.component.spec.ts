@@ -12,6 +12,17 @@ import { HeaderComponent } from './header.component';
 class TestRouteComponent {}
 
 describe('HeaderComponent', () => {
+  beforeAll(() => {
+    if (!customElements.get('hans-dropdown')) {
+      customElements.define(
+        'hans-dropdown',
+        class extends HTMLElement {
+          options?: readonly unknown[];
+        },
+      );
+    }
+  });
+
   beforeEach(async () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
     localStorage.removeItem(APP_THEME_STORAGE_KEY);
