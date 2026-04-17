@@ -785,13 +785,15 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - paletas completas do app em `core/theme/theme.config.ts`, sempre com os 23 tokens esperados pela `hans-ui-design-lib`
 - arquivos de tema separados em `core/theme/themes/light.theme.ts` e `core/theme/themes/dark.theme.ts`
 - objeto agregador `APP_THEMES`, evitando prefixos desnecessarios como `PORTFOLIO_THEMES`
-- base de traducao usando `@ngx-translate/core`, providers standalone, `TranslatePipe`, locale `en`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
+- base de traducao usando `@ngx-translate/core`, providers standalone, `TranslatePipe`, locale `en-us`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
 - arquivos de traducao separados por idioma em `core/translation/translations`
-- objeto agregador `APP_TRANSLATIONS` compondo os arquivos de `en` e `pt-BR`
+- objeto agregador `APP_TRANSLATIONS` compondo os arquivos de `en-us` e `pt-BR`
 - contrato de integracao com a `hans-ui-design-lib` centralizado em `DesignLibService`
 - aplicacao dinamica de tema via API global do CDN (`window.HansUI.setTheme`) em vez de chamadas diretas espalhadas pelo app
 - o app nao deve manter lista tipada/catologo proprio dos componentes disponiveis na `hans-ui-design-lib`
 - validacao dos web components da lib que ja entram na shell, incluindo `hans-button`, `hans-tag`, `hans-toggle` e `hans-dropdown`
+- ao consumir a lib via CDN/web components, o app deve usar apenas propriedades, atributos, acoes e eventos realmente expostos pelo contrato publico dos custom elements
+- callbacks internos dos componentes React da lib, como `onChange` ou `onSelect`, nao devem ser assumidos automaticamente no Angular enquanto nao estiverem expostos como props/eventos dos web components
 - controle de tema no header usando `hans-toggle`
 - controle de idioma no header usando `hans-dropdown`, para suportar crescimento futuro para mais idiomas sem trocar o padrao de UI
 - textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI

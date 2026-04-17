@@ -76,25 +76,23 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const toggle = compiled.querySelector('hans-toggle') as HTMLElement & {
-      onChange: (checked: boolean) => void;
-    };
+    const toggle = compiled.querySelector('hans-toggle') as HTMLElement;
     const dropdown = compiled.querySelector('hans-dropdown') as HTMLElement & {
-      onSelect: (option: { label: string; value: 'pt-BR' }) => void;
-      options: readonly { label: string; value: string }[];
+      options: readonly {
+        action: () => void;
+        label: string;
+        value: string;
+      }[];
     };
 
-    toggle.onChange(true);
-    dropdown.onSelect({
-      label: 'Portuguese',
-      value: 'pt-BR',
-    });
+    toggle.click();
+    dropdown.options[1].action();
     fixture.detectChanges();
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
     expect(document.documentElement.lang).toBe('pt-BR');
     expect(dropdown.options.map((option) => option.value)).toEqual([
-      'en',
+      'en-us',
       'pt-BR',
     ]);
   });

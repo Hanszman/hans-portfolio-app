@@ -1,4 +1,4 @@
-export type AppLocale = 'en' | 'pt-BR';
+export type AppLocale = 'en-us' | 'pt-BR';
 
 export type AppTranslationParams = Record<string, string>;
 

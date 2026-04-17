@@ -30,25 +30,38 @@
           </div>
 
           <div class="header-controls">
-            <hans-toggle
-              #themeToggle
-              [checked]="theme.mode() === 'dark'"
-              [label]="'header.controls.theme' | translate"
-              [leftLabel]="'header.controls.lightTheme' | translate"
-              [rightLabel]="'header.controls.darkTheme' | translate"
-              toggleColor="primary"
-              toggleSize="small"
-            ></hans-toggle>
+            <div class="header-theme-control">
+              <span class="header-control-label">
+                {{ 'header.controls.theme' | translate }}
+              </span>
+              <div class="header-theme-row">
+                <span class="header-theme-value">
+                  {{
+                    (theme.mode() === 'dark'
+                      ? 'header.controls.darkTheme'
+                      : 'header.controls.lightTheme'
+                    ) | translate
+                  }}
+                </span>
+                <hans-toggle
+                  #themeToggle
+                  [attr.aria-label]="'header.controls.theme' | translate"
+                  [checked]="theme.mode() === 'dark'"
+                  (click)="toggleTheme()"
+                  toggleColor="primary"
+                  toggleSize="small"
+                ></hans-toggle>
+              </div>
+            </div>
 
             <hans-dropdown
               #languageDropdown
               [noOptionsText]="'header.controls.noLanguages' | translate"
-              [options]="languageOptions()"
               [triggerLabel]="'header.controls.language' | translate"
-              triggerColor="secondary"
+              triggerColor="primary"
               triggerShape="rounded"
               triggerSize="small"
-              triggerVariant="outline"
+              triggerVariant="default"
             ></hans-dropdown>
           </div>
         </div>

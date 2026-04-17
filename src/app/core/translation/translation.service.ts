@@ -29,7 +29,7 @@ export class TranslationService {
       id: locale,
       value: locale,
       label: this.instant(
-        locale === 'en'
+        locale === 'en-us'
           ? 'header.controls.english'
           : 'header.controls.portuguese',
       ),
@@ -67,6 +67,6 @@ export class TranslationService {
   }
 
   private isAppLocale(locale: string | null): locale is AppLocale {
-    return locale === 'en' || locale === 'pt-BR';
+    return locale === 'en-us' || locale === 'pt-BR';
   }
 }

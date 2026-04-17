@@ -56,4 +56,6 @@ Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
 [ATUAL]:
+-Arquivo pt-br de tradução ta sem acentuação correta do português
+-Componentes da lib via cdn continuam com comportamento errado ao interagirmos
 -Partir pra próxima etapa de implementação

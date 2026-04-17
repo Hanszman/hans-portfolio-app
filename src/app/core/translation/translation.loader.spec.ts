@@ -37,7 +37,7 @@ describe('AppTranslationLoader', () => {
   it('should provide nested translations through the ngx loader contract', async () => {
     const loader = new AppTranslationLoader();
     const translations = (await firstValueFrom(
-      loader.getTranslation('en'),
+      loader.getTranslation('en-us'),
     )) as {
       shell: {
         api: {

@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  computed,
   effect,
   inject,
   input,
@@ -12,18 +13,14 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
-import { AppLanguageOption } from '../../core/translation/translation.types';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { NavigationItem } from '../navigation/navigation.types';
 import { SurfaceComponent } from '../surface/surface.component';
-
-interface HansToggleElement extends HTMLElement {
-  onChange?: (checked: boolean) => void;
-}
-
-interface HansDropdownElement extends HTMLElement {
-  onSelect?: (option: AppLanguageOption) => void;
-}
+import {
+  HansDropdownElement,
+  HansToggleElement,
+  HeaderLanguageDropdownOption,
+} from './header.types';
 
 @Component({
   selector: 'app-header',
@@ -42,31 +39,36 @@ export class HeaderComponent {
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   protected readonly i18n = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
-  protected readonly languageOptions = this.i18n.languageOptions;
+  protected readonly languageOptions = computed<
+    readonly HeaderLanguageDropdownOption[]
+  >(() =>
+    this.i18n.languageOptions().map((option) => ({
+      ...option,
+      action: () => this.i18n.setLocale(option.value),
+    })),
+  );
 
   constructor() {
     effect(() => {
       const themeToggle = this.themeToggle()?.nativeElement;
+      const checked = this.theme.mode() === 'dark';
 
       if (themeToggle) {
-        themeToggle.onChange = this.handleThemeChange;
+        themeToggle.checked = checked;
       }
     });
 
     effect(() => {
       const languageDropdown = this.languageDropdown()?.nativeElement;
+      const languageOptions = this.languageOptions();
 
       if (languageDropdown) {
-        languageDropdown.onSelect = this.selectLanguage;
+        languageDropdown.options = languageOptions;
       }
     });
   }
 
-  protected readonly handleThemeChange = (): void => {
+  protected toggleTheme(): void {
     this.theme.toggleMode();
-  };
-
-  protected readonly selectLanguage = (option: AppLanguageOption): void => {
-    this.i18n.setLocale(option.value);
-  };
+  }
 }

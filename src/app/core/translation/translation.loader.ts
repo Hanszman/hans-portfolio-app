@@ -65,4 +65,4 @@ const setNestedTranslationValue = (
 };
 
 const isAppLocale = (lang: string): lang is AppLocale =>
-  lang === 'en' || lang === 'pt-BR';
+  lang === 'en-us' || lang === 'pt-BR';

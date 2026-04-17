@@ -22,9 +22,9 @@ describe('TranslationService', () => {
   it('should start with the default English locale', () => {
     const service = TestBed.inject(TranslationService);
 
-    expect(service.locale()).toBe('en');
-    expect(document.documentElement.lang).toBe('en');
-    expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('en');
+    expect(service.locale()).toBe('en-us');
+    expect(document.documentElement.lang).toBe('en-us');
+    expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('en-us');
     expect(service.instant('header.controls.english')).toBe('English');
   });
 
@@ -42,7 +42,7 @@ describe('TranslationService', () => {
 
     const service = TestBed.inject(TranslationService);
 
-    expect(service.locale()).toBe('en');
+    expect(service.locale()).toBe('en-us');
   });
 
   it('should set locales and interpolate translation params', () => {
@@ -51,9 +51,11 @@ describe('TranslationService', () => {
     service.setLocale('pt-BR');
 
     expect(service.locale()).toBe('pt-BR');
-    expect(service.instant('shell.api.connected.description', {
-      checkedAtUtc: '2026-04-14T13:00:00.000Z',
-    })).toContain('2026-04-14T13:00:00.000Z');
+    expect(
+      service.instant('shell.api.connected.description', {
+        checkedAtUtc: '2026-04-14T13:00:00.000Z',
+      }),
+    ).toContain('2026-04-14T13:00:00.000Z');
     expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('pt-BR');
   });
 
@@ -62,8 +64,8 @@ describe('TranslationService', () => {
 
     expect(service.languageOptions()).toEqual([
       {
-        id: 'en',
-        value: 'en',
+        id: 'en-us',
+        value: 'en-us',
         label: 'English',
       },
       {
@@ -77,8 +79,8 @@ describe('TranslationService', () => {
 
     expect(service.languageOptions()).toEqual([
       {
-        id: 'en',
-        value: 'en',
+        id: 'en-us',
+        value: 'en-us',
         label: 'Ingles',
       },
       {
