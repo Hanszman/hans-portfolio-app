@@ -1,6 +1,8 @@
 import type { AppLanguageOption } from '../../core/translation/translation.types';
 
-export type HeaderLanguageDropdownOption = AppLanguageOption;
+export type HeaderLanguageDropdownOption = AppLanguageOption & {
+  readonly action?: (option: HeaderLanguageDropdownOption) => void;
+};
 
 export type HeaderLanguageSelectEvent =
   CustomEvent<HeaderLanguageDropdownOption>;

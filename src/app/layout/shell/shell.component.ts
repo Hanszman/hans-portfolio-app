@@ -30,9 +30,9 @@ import { ShellApiStatusViewModel } from './shell.types';
 export class ShellComponent {
   private readonly router = inject(Router);
   private readonly systemApiService = inject(SystemApiService);
-  private readonly i18n = inject(TranslationService);
+  private readonly translation = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
-  protected readonly activeLocale = this.i18n.locale;
+  protected readonly activeLocale = this.translation.locale;
   private readonly currentOrigin = globalThis.location.origin;
   private readonly loadingApiStatus: ShellApiStatusViewModel = {
     state: 'loading',

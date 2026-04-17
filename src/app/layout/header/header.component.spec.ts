@@ -81,13 +81,12 @@ describe('HeaderComponent', () => {
       options: readonly {
         label: string;
         value: 'en-us' | 'pt-BR';
+        action?: () => void;
       }[];
     };
 
     toggle.dispatchEvent(new CustomEvent('change', { detail: true }));
-    dropdown.dispatchEvent(
-      new CustomEvent('select', { detail: dropdown.options[1] }),
-    );
+    dropdown.options[1].action?.();
     fixture.detectChanges();
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
@@ -98,9 +97,13 @@ describe('HeaderComponent', () => {
       'pt-BR',
     ]);
 
+    dropdown.dispatchEvent(
+      new CustomEvent('select', { detail: dropdown.options[0] }),
+    );
     toggle.dispatchEvent(new CustomEvent('change', { detail: false }));
     fixture.detectChanges();
 
+    expect(document.documentElement.lang).toBe('en-us');
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('light');
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeFalse();
   });

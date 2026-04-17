@@ -2,6 +2,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   effect,
   inject,
@@ -32,14 +33,17 @@ import {
 })
 export class HeaderComponent {
   readonly navigationItems = input.required<readonly NavigationItem[]>();
-
-  private readonly themeToggle =
-    viewChild<ElementRef<HansToggleElement>>('themeToggle');
+  private readonly themeToggle = viewChild<ElementRef<HansToggleElement>>('themeToggle');
   private readonly languageDropdown =
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
-  protected readonly i18n = inject(TranslationService);
+  protected readonly translation = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
-  protected readonly languageOptions = this.i18n.languageOptions;
+  protected readonly languageOptions = computed(() =>
+    this.translation.languageOptions().map((option) => ({
+      ...option,
+      action: () => this.translation.setLocale(option.value),
+    })),
+  );
 
   constructor() {
     effect(() => {
@@ -70,6 +74,6 @@ export class HeaderComponent {
   protected selectLanguage(event: Event): void {
     const { detail: option } = event as HeaderLanguageSelectEvent;
 
-    this.i18n.setLocale(option.value);
+    this.translation.setLocale(option.value);
   }
 }
