@@ -1,0 +1,25 @@
+<main class="shell" data-testid="shell">
+  <app-header [navigationItems]="navigationItems()" />
+
+  <div class="shell-api-status-wrapper">
+    <app-surface [tone]="apiStatusTone()" spacing="compact">
+      <section class="shell-api-status" data-testid="shell-api-status">
+        <div class="shell-api-status-copy">
+          <span class="shell-api-status-eyebrow">API</span>
+          <strong class="shell-api-status-title">{{ apiStatus().title }}</strong>
+          <p class="shell-api-status-description">{{ apiStatus().description }}</p>
+        </div>
+
+        <code class="shell-api-status-base-url">{{ apiStatus().baseUrl }}</code>
+      </section>
+    </app-surface>
+  </div>
+
+  <section class="shell-stage">
+    <div class="shell-content">
+      <router-outlet />
+    </div>
+  </section>
+
+  <app-footer [navigationItems]="navigationItems()" />
+</main>

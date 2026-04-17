@@ -1,0 +1,33 @@
+.footer {
+  @apply mx-auto w-full max-w-6xl;
+}
+
+.footer-content {
+  @apply grid gap-6;
+}
+
+.footer-copy {
+  @apply grid gap-3;
+}
+
+.footer-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.1em];
+  color: var(--primary-default-color);
+}
+
+.footer-title {
+  @apply text-lg font-semibold;
+}
+
+.footer-description {
+  @apply m-0 max-w-3xl text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.footer-links {
+  @apply flex flex-wrap gap-3;
+}
+
+.footer-tags {
+  @apply flex flex-wrap gap-3;
+}

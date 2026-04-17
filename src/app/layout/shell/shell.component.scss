@@ -1,0 +1,44 @@
+.shell {
+  @apply min-h-screen px-4 pb-12 pt-8;
+}
+
+.shell-content {
+  @apply mx-auto w-full max-w-6xl;
+}
+
+.shell-stage {
+  @apply py-2;
+}
+
+.shell-api-status-wrapper {
+  @apply mx-auto mb-6 w-full max-w-6xl;
+}
+
+.shell-api-status {
+  @apply flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between;
+}
+
+.shell-api-status-copy {
+  @apply grid gap-1;
+}
+
+.shell-api-status-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.08em];
+  color: var(--primary-default-color);
+}
+
+.shell-api-status-title {
+  @apply text-sm font-semibold;
+}
+
+.shell-api-status-description {
+  @apply m-0 text-sm leading-6;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.shell-api-status-base-url {
+  @apply rounded-full border px-3 py-2 text-xs;
+  background-color: color-mix(in srgb, var(--background-color) 82%, white);
+  border-color: color-mix(in srgb, var(--base-neutral-color) 40%, transparent);
+  color: var(--base-strong-color);
+}

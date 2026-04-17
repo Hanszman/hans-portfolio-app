@@ -1,0 +1,19 @@
+.page-wrapper {
+  @apply grid gap-6;
+}
+
+.page-wrapper-hero {
+  @apply grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] xl:items-start;
+}
+
+.page-wrapper-main {
+  @apply min-w-0;
+}
+
+.page-wrapper-sidebar {
+  @apply min-w-0;
+}
+
+.page-wrapper-content {
+  @apply grid gap-6;
+}

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AppShellComponent } from './layout/app-shell/app-shell.component';
+import { ShellComponent } from './layout/shell/shell.component';
 
 const loadHomePage = () =>
   import('./pages/home/home-page.component').then((module) => module.HomePageComponent);
@@ -27,7 +27,7 @@ const loadDashboardPage = () =>
 export const routes: Routes = [
   {
     path: '',
-    component: AppShellComponent,
+    component: ShellComponent,
     children: [
       {
         path: '',

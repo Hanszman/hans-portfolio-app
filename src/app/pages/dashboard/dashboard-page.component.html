@@ -1,13 +1,13 @@
-<app-portfolio-page-wrapper>
+<app-page-wrapper>
   <div page-main>
-    <app-portfolio-page-intro
+    <app-page-intro
       sectionLabel="Foundation"
       title="Dashboard foundation"
       description="The dashboard route is prepared for the analytics page and its backend aggregate endpoints."
     />
   </div>
 
-  <app-portfolio-surface
+  <app-surface
     page-sidebar
     tone="danger"
     label="Analytics"
@@ -15,7 +15,7 @@
     description="The dashboard will surface aggregate signals from the portfolio API, including content health and summary metrics."
   />
 
-  <app-portfolio-surface
+  <app-surface
     page-content
     tone="success"
     label="Status"
@@ -23,11 +23,11 @@
     description="The dashboard route is ready to receive analytics widgets, health snapshots, and aggregate backend endpoints."
   />
 
-  <app-portfolio-surface
+  <app-surface
     page-content
     tone="base"
     label="Next content"
     surfaceTitle="Charts and portfolio health"
     description="This page will later define chart colors from the same theme tokens used by the portfolio and the design library."
   />
-</app-portfolio-page-wrapper>
+</app-page-wrapper>

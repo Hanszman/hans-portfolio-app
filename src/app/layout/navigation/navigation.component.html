@@ -1,0 +1,20 @@
+<nav
+  class="navigation"
+  aria-label="Primary portfolio navigation"
+  data-testid="navigation"
+>
+  @for (item of items(); track item.path) {
+    <hans-button
+      #activeRoute="routerLinkActive"
+      class="navigation-button"
+      [routerLink]="item.path"
+      routerLinkActive="navigation-button-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [attr.label]="item.label"
+      [attr.buttonVariant]="activeRoute.isActive ? 'default' : 'outline'"
+      buttonColor="primary"
+      buttonShape="rounded"
+      buttonSize="medium"
+    ></hans-button>
+  }
+</nav>

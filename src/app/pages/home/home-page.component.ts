@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PortfolioPageIntroComponent } from '../../layout/page-intro/portfolio-page-intro.component';
-import { PortfolioPageWrapperComponent } from '../../layout/page-wrapper/portfolio-page-wrapper.component';
-import { PortfolioSurfaceComponent } from '../../layout/surface/portfolio-surface.component';
+import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
+import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { SurfaceComponent } from '../../layout/surface/surface.component';
 
 @Component({
   selector: 'app-home-page',
   imports: [
-    PortfolioPageIntroComponent,
-    PortfolioPageWrapperComponent,
-    PortfolioSurfaceComponent,
+    PageIntroComponent,
+    PageWrapperComponent,
+    SurfaceComponent,
   ],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

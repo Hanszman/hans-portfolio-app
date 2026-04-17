@@ -1,0 +1,15 @@
+<section class="page-wrapper" data-testid="page-wrapper">
+  <div class="page-wrapper-hero">
+    <div class="page-wrapper-main">
+      <ng-content select="[page-main]" />
+    </div>
+
+    <aside class="page-wrapper-sidebar">
+      <ng-content select="[page-sidebar]" />
+    </aside>
+  </div>
+
+  <div class="page-wrapper-content">
+    <ng-content select="[page-content]" />
+  </div>
+</section>

@@ -1,0 +1,61 @@
+.header {
+  @apply mx-auto w-full max-w-6xl;
+}
+
+.header-content {
+  @apply grid gap-8;
+}
+
+.header-top {
+  @apply flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between;
+}
+
+.header-brand {
+  @apply inline-flex items-center gap-4 no-underline;
+  color: var(--text-color);
+}
+
+.header-brand-mark {
+  @apply inline-flex h-14 w-14 items-center justify-center rounded-2xl text-lg font-bold shadow-lg;
+  background-color: var(--primary-default-color);
+  color: var(--background-color);
+}
+
+.header-brand-copy {
+  @apply grid gap-1;
+}
+
+.header-brand-copy span {
+  @apply text-sm;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.header-tags {
+  @apply flex flex-wrap gap-3;
+}
+
+.header-hero {
+  @apply grid gap-6 lg:grid-cols-[3fr_2fr] lg:items-start;
+}
+
+.header-copy {
+  @apply grid gap-4;
+}
+
+.header-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.12em];
+  color: var(--primary-default-color);
+}
+
+.header-title {
+  @apply m-0 max-w-3xl text-4xl font-semibold leading-tight md:text-5xl;
+}
+
+.header-description {
+  @apply m-0 max-w-2xl text-base leading-7;
+  color: color-mix(in srgb, var(--text-color) 75%, transparent);
+}
+
+.header-highlights {
+  @apply grid gap-4;
+}
