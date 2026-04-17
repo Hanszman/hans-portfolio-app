@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      sectionLabel="Foundation"
-      title="Dashboard foundation"
-      description="The dashboard route is prepared for the analytics page and its backend aggregate endpoints."
+      [sectionLabel]="i18n.t('pages.dashboard.sectionLabel')"
+      [title]="i18n.t('pages.dashboard.title')"
+      [description]="i18n.t('pages.dashboard.description')"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="danger"
-    label="Analytics"
-    surfaceTitle="Operational metrics and aggregate portfolio data"
-    description="The dashboard will surface aggregate signals from the portfolio API, including content health and summary metrics."
+    [label]="i18n.t('pages.dashboard.roadmap.label')"
+    [surfaceTitle]="i18n.t('pages.dashboard.roadmap.title')"
+    [description]="i18n.t('pages.dashboard.roadmap.description')"
   />
 
   <app-surface
     page-content
     tone="success"
-    label="Status"
-    surfaceTitle="Dashboard shell ready"
-    description="The dashboard route is ready to receive analytics widgets, health snapshots, and aggregate backend endpoints."
+    [label]="i18n.t('pages.dashboard.status.label')"
+    [surfaceTitle]="i18n.t('pages.dashboard.status.title')"
+    [description]="i18n.t('pages.dashboard.status.description')"
   />
 
   <app-surface
     page-content
     tone="base"
-    label="Next content"
-    surfaceTitle="Charts and portfolio health"
-    description="This page will later define chart colors from the same theme tokens used by the portfolio and the design library."
+    [label]="i18n.t('pages.dashboard.layout.label')"
+    [surfaceTitle]="i18n.t('pages.dashboard.layout.title')"
+    [description]="i18n.t('pages.dashboard.layout.description')"
   />
 </app-page-wrapper>

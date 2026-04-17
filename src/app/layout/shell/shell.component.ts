@@ -4,6 +4,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
 import { catchError, map, of, startWith } from 'rxjs';
 import { SystemApiService } from '../../core/api/system-api.service';
+import { ThemeService } from '../../core/theme/theme.service';
+import { TranslationService } from '../../core/translation/translation.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { readNavigationItems } from '../navigation/helpers/navigation.helper';
@@ -26,6 +28,8 @@ import { ShellApiStatusViewModel } from './shell.types';
 export class ShellComponent {
   private readonly router = inject(Router);
   private readonly systemApiService = inject(SystemApiService);
+  protected readonly i18n = inject(TranslationService);
+  protected readonly theme = inject(ThemeService);
   private readonly currentOrigin = globalThis.location.origin;
 
   protected readonly apiStatus = toSignal(
@@ -33,15 +37,17 @@ export class ShellComponent {
       map(
         (health): ShellApiStatusViewModel => ({
           state: 'connected',
-          title: 'API connected',
-          description: `Health check passed at ${health.checkedAtUtc}.`,
+          title: this.i18n.t('shell.api.connected.title'),
+          description: this.i18n.t('shell.api.connected.description', {
+            checkedAtUtc: health.checkedAtUtc,
+          }),
           baseUrl: this.systemApiService.apiBaseUrl,
         }),
       ),
       startWith({
         state: 'loading',
-        title: 'Connecting to API',
-        description: 'Checking the backend availability for the current environment.',
+        title: this.i18n.t('shell.api.loading.title'),
+        description: this.i18n.t('shell.api.loading.description'),
         baseUrl: this.systemApiService.apiBaseUrl,
       } satisfies ShellApiStatusViewModel),
       catchError((error: unknown) =>
@@ -49,12 +55,14 @@ export class ShellComponent {
           state: 'error',
           title:
             error instanceof HttpErrorResponse && error.status === 0
-              ? 'API request blocked'
-              : 'API request failed',
+              ? this.i18n.t('shell.api.blocked.title')
+              : this.i18n.t('shell.api.error.title'),
           description:
             error instanceof HttpErrorResponse && error.status === 0
-              ? `The browser could not complete the initial backend request from ${this.currentOrigin}. The API may be online, but the access can still be blocked by CORS or network policy.`
-              : 'The initial backend health check could not be completed for the current environment.',
+              ? this.i18n.t('shell.api.blocked.description', {
+                  origin: this.currentOrigin,
+                })
+              : this.i18n.t('shell.api.error.description'),
           baseUrl: this.systemApiService.apiBaseUrl,
         }),
       ),
@@ -62,8 +70,8 @@ export class ShellComponent {
     {
       initialValue: {
         state: 'loading',
-        title: 'Connecting to API',
-        description: 'Checking the backend availability for the current environment.',
+        title: this.i18n.t('shell.api.loading.title'),
+        description: this.i18n.t('shell.api.loading.description'),
         baseUrl: this.systemApiService.apiBaseUrl,
       } satisfies ShellApiStatusViewModel,
     },

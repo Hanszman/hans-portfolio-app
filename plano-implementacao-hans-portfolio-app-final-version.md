@@ -771,17 +771,23 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 
 #### Entregas
 
-- base de tema claro/escuro
-- base de traducao
-- contrato de integracao com a `hans-ui-design-lib`
-- validacao dos componentes da lib que ja entram na shell
+- base de tema claro/escuro usando `ThemeService`, `signal`, `computed`, persistencia em `localStorage` e aplicacao no `document`
+- paletas completas do portfolio em `core/theme/portfolio-theme.ts`, sempre com os 23 tokens esperados pela `hans-ui-design-lib`
+- base de traducao usando `TranslationService`, locale `en`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
+- contrato de integracao com a `hans-ui-design-lib` centralizado em `DesignLibService`
+- aplicacao dinamica de tema via API global do CDN (`window.HansUI.setTheme`) em vez de chamadas diretas espalhadas pelo app
+- validacao dos web components da lib que ja entram na shell, inicialmente `hans-button` e `hans-tag`
+- controles iniciais de tema e idioma no header usando `hans-button`
+- textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI
 - testes unitarios do escopo implementado
 
 #### Criterios de aceite
 
-- base de temas preparada
-- base de traducao preparada
-- contrato com a design lib claro e funcional
+- base de temas preparada e consumida pela shell
+- base de traducao preparada e consumida pela shell/pages iniciais
+- contrato com a design lib claro, funcional e isolado em service proprio
+- nenhum componente reutilizavel da lib deve ser recriado no app sem antes investigar a `hans-ui-design-lib`
+- novos controles visuais devem continuar usando componentes da lib quando ja existirem, como `hans-button` e `hans-tag`
 - coverage total do escopo implementado
 
 ### F2 - Home estrategica

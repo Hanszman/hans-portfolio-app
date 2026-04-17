@@ -5,7 +5,7 @@
     <app-surface [tone]="apiStatusTone()" spacing="compact">
       <section class="shell-api-status" data-testid="shell-api-status">
         <div class="shell-api-status-copy">
-          <span class="shell-api-status-eyebrow">API</span>
+          <span class="shell-api-status-eyebrow">{{ i18n.t('shell.api.eyebrow') }}</span>
           <strong class="shell-api-status-title">{{ apiStatus().title }}</strong>
           <p class="shell-api-status-description">{{ apiStatus().description }}</p>
         </div>

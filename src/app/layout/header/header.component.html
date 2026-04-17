@@ -6,27 +6,71 @@
           <span class="header-brand-mark">VH</span>
           <span class="header-brand-copy">
             <strong>Victor Hanszman</strong>
-            <span>Full Stack Engineer | Front-End specialist</span>
+            <span>{{ i18n.t('header.brand.role') }}</span>
           </span>
         </a>
 
-        <div class="header-tags" aria-label="Foundation status">
-          <hans-tag label="Angular 20" tagColor="warning" tagSize="md"></hans-tag>
-          <hans-tag label="Signals first" tagColor="info" tagSize="md"></hans-tag>
-          <hans-tag label="API live" tagColor="success" tagSize="md"></hans-tag>
+        <div class="header-actions">
+          <div class="header-tags" [attr.aria-label]="i18n.t('header.statusLabel')">
+            <hans-tag
+              [attr.label]="i18n.t('header.tags.angular')"
+              tagColor="warning"
+              tagSize="md"
+            ></hans-tag>
+            <hans-tag
+              [attr.label]="i18n.t('header.tags.signals')"
+              tagColor="info"
+              tagSize="md"
+            ></hans-tag>
+            <hans-tag
+              [attr.label]="i18n.t('header.tags.api')"
+              tagColor="success"
+              tagSize="md"
+            ></hans-tag>
+          </div>
+
+          <div class="header-controls">
+            <hans-button
+              [attr.label]="
+                i18n.t(
+                  theme.mode() === 'light'
+                    ? 'header.controls.darkTheme'
+                    : 'header.controls.lightTheme'
+                )
+              "
+              buttonColor="base"
+              buttonShape="rounded"
+              buttonSize="small"
+              buttonVariant="outline"
+              (click)="theme.toggleMode()"
+            ></hans-button>
+
+            <hans-button
+              [attr.label]="
+                i18n.t(
+                  i18n.locale() === 'en'
+                    ? 'header.controls.portuguese'
+                    : 'header.controls.english'
+                )
+              "
+              buttonColor="secondary"
+              buttonShape="rounded"
+              buttonSize="small"
+              buttonVariant="outline"
+              (click)="i18n.toggleLocale()"
+            ></hans-button>
+          </div>
         </div>
       </div>
 
       <div class="header-hero">
         <div class="header-copy">
-          <span class="header-eyebrow">Portfolio remake foundation</span>
+          <span class="header-eyebrow">{{ i18n.t('header.eyebrow') }}</span>
           <h1 class="header-title">
-            A shell specific to the portfolio, already connected to real backend data.
+            {{ i18n.t('header.title') }}
           </h1>
           <p class="header-description">
-            This first layout layer establishes the portfolio structure, keeps the app
-            aligned with the design library, and prepares the next visual iterations on
-            top of a responsive Angular shell.
+            {{ i18n.t('header.description') }}
           </p>
         </div>
 
@@ -34,25 +78,25 @@
           <app-surface
             tone="primary"
             spacing="compact"
-            label="Layout"
-            surfaceTitle="Header, footer, nav and page wrappers"
-            description="Portfolio-specific composition organized inside the app layout layer."
+            [label]="i18n.t('header.highlight.layout.label')"
+            [surfaceTitle]="i18n.t('header.highlight.layout.title')"
+            [description]="i18n.t('header.highlight.layout.description')"
           />
 
           <app-surface
             tone="success"
             spacing="compact"
-            label="Integration"
-            surfaceTitle="Real API from the start"
-            description="The shell stays wired to the backend so every next page can evolve on real data."
+            [label]="i18n.t('header.highlight.integration.label')"
+            [surfaceTitle]="i18n.t('header.highlight.integration.title')"
+            [description]="i18n.t('header.highlight.integration.description')"
           />
 
           <app-surface
             tone="info"
             spacing="compact"
-            label="Direction"
-            surfaceTitle="Design-lib first, portfolio-specific structure second"
-            description="Reusable lib components stay as the base while unique portfolio layout lives here."
+            [label]="i18n.t('header.highlight.direction.label')"
+            [surfaceTitle]="i18n.t('header.highlight.direction.title')"
+            [description]="i18n.t('header.highlight.direction.description')"
           />
         </div>
       </div>

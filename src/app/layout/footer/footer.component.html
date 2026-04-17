@@ -1,33 +1,44 @@
 <footer class="footer" data-testid="footer">
   <app-surface>
     <div class="footer-content">
-    <div class="footer-copy">
-      <span class="footer-eyebrow">Portfolio shell</span>
-      <strong class="footer-title">Layout foundation ready for the next page builds</strong>
-      <p class="footer-description">
-        The portfolio-specific shell now separates layout from pages, keeps navigation
-        centralized from the route config, and stays aligned with the design library.
-      </p>
-    </div>
+      <div class="footer-copy">
+        <span class="footer-eyebrow">{{ i18n.t('footer.eyebrow') }}</span>
+        <strong class="footer-title">{{ i18n.t('footer.title') }}</strong>
+        <p class="footer-description">
+          {{ i18n.t('footer.description') }}
+        </p>
+      </div>
 
-    <nav class="footer-links" aria-label="Footer navigation">
-      @for (item of navigationItems(); track item.path) {
-        <hans-button
-          [routerLink]="item.path"
-          [attr.label]="item.label"
-          buttonColor="base"
-          buttonShape="rounded"
-          buttonSize="small"
-          buttonVariant="outline"
-        ></hans-button>
-      }
-    </nav>
+      <nav class="footer-links" [attr.aria-label]="i18n.t('footer.navigationLabel')">
+        @for (item of navigationItems(); track item.path) {
+          <hans-button
+            [routerLink]="item.path"
+            [attr.label]="item.label"
+            buttonColor="base"
+            buttonShape="rounded"
+            buttonSize="small"
+            buttonVariant="outline"
+          ></hans-button>
+        }
+      </nav>
 
-    <div class="footer-tags" aria-label="Implementation principles">
-      <hans-tag label="Standalone only" tagColor="warning" tagSize="sm"></hans-tag>
-      <hans-tag label="Tailwind @apply" tagColor="info" tagSize="sm"></hans-tag>
-      <hans-tag label="100% coverage" tagColor="success" tagSize="sm"></hans-tag>
-    </div>
+      <div class="footer-tags" [attr.aria-label]="i18n.t('footer.principlesLabel')">
+        <hans-tag
+          [attr.label]="i18n.t('footer.tags.standalone')"
+          tagColor="warning"
+          tagSize="sm"
+        ></hans-tag>
+        <hans-tag
+          [attr.label]="i18n.t('footer.tags.tailwind')"
+          tagColor="info"
+          tagSize="sm"
+        ></hans-tag>
+        <hans-tag
+          [attr.label]="i18n.t('footer.tags.coverage')"
+          tagColor="success"
+          tagSize="sm"
+        ></hans-tag>
+      </div>
     </div>
   </app-surface>
 </footer>

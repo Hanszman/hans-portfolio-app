@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      sectionLabel="Foundation"
-      title="Home foundation"
-      description="The home route is wired and ready for the upcoming hero, highlights, and API-driven portfolio summary."
+      [sectionLabel]="i18n.t('pages.home.sectionLabel')"
+      [title]="i18n.t('pages.home.title')"
+      [description]="i18n.t('pages.home.description')"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="primary"
-    label="Roadmap"
-    surfaceTitle="Hero, highlights and API-driven overview"
-    description="The home page will introduce Victor, reinforce positioning, and surface the first backend-driven summary cards."
+    [label]="i18n.t('pages.home.roadmap.label')"
+    [surfaceTitle]="i18n.t('pages.home.roadmap.title')"
+    [description]="i18n.t('pages.home.roadmap.description')"
   />
 
   <app-surface
     page-content
     tone="success"
-    label="Status"
-    surfaceTitle="Shell ready"
-    description="This route already sits inside the new portfolio shell and is ready for the upcoming hero, highlights, and API-driven summary implementation."
+    [label]="i18n.t('pages.home.status.label')"
+    [surfaceTitle]="i18n.t('pages.home.status.title')"
+    [description]="i18n.t('pages.home.status.description')"
   />
 
   <app-surface
     page-content
     tone="base"
-    label="Layout layer"
-    surfaceTitle="Page-specific component"
-    description="The content now lives in the Home page component instead of being passed as static route data."
+    [label]="i18n.t('pages.home.layout.label')"
+    [surfaceTitle]="i18n.t('pages.home.layout.title')"
+    [description]="i18n.t('pages.home.layout.description')"
   />
 </app-page-wrapper>

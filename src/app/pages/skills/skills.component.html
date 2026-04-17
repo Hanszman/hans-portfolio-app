@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      sectionLabel="Foundation"
-      title="Skills foundation"
-      description="The skills route is prepared for the upcoming technology catalog, filters, and experience metrics integration."
+      [sectionLabel]="i18n.t('pages.skills.sectionLabel')"
+      [title]="i18n.t('pages.skills.title')"
+      [description]="i18n.t('pages.skills.description')"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="info"
-    label="Catalog"
-    surfaceTitle="Technology clusters and real experience metrics"
-    description="The skills page will organize front-end depth, full-stack breadth, and API-backed metrics in a curated catalog."
+    [label]="i18n.t('pages.skills.roadmap.label')"
+    [surfaceTitle]="i18n.t('pages.skills.roadmap.title')"
+    [description]="i18n.t('pages.skills.roadmap.description')"
   />
 
   <app-surface
     page-content
     tone="success"
-    label="Status"
-    surfaceTitle="Filtering space ready"
-    description="The skills route is ready to receive grouped technologies, filters, and experience evidence from the backend."
+    [label]="i18n.t('pages.skills.status.label')"
+    [surfaceTitle]="i18n.t('pages.skills.status.title')"
+    [description]="i18n.t('pages.skills.status.description')"
   />
 
   <app-surface
     page-content
     tone="base"
-    label="Next content"
-    surfaceTitle="Concepts, patterns and architectures"
-    description="This page can also absorb the old TODOs about design patterns, paradigms, architecture concepts, and grouped skills."
+    [label]="i18n.t('pages.skills.layout.label')"
+    [surfaceTitle]="i18n.t('pages.skills.layout.title')"
+    [description]="i18n.t('pages.skills.layout.description')"
   />
 </app-page-wrapper>

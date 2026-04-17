@@ -30,7 +30,12 @@
   color: color-mix(in srgb, var(--text-color) 70%, transparent);
 }
 
-.header-tags {
+.header-actions {
+  @apply flex flex-col gap-3 lg:items-end;
+}
+
+.header-tags,
+.header-controls {
   @apply flex flex-wrap gap-3;
 }
 

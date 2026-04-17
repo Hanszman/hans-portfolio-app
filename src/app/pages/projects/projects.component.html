@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      sectionLabel="Foundation"
-      title="Projects foundation"
-      description="The projects route is prepared for the future case-study layout, linked assets, and portfolio highlights."
+      [sectionLabel]="i18n.t('pages.projects.sectionLabel')"
+      [title]="i18n.t('pages.projects.title')"
+      [description]="i18n.t('pages.projects.description')"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="warning"
-    label="Case studies"
-    surfaceTitle="Featured work, outcomes and linked assets"
-    description="This page will evolve into a curated case-study space with stronger storytelling, screenshots, and structured project metadata."
+    [label]="i18n.t('pages.projects.roadmap.label')"
+    [surfaceTitle]="i18n.t('pages.projects.roadmap.title')"
+    [description]="i18n.t('pages.projects.roadmap.description')"
   />
 
   <app-surface
     page-content
     tone="success"
-    label="Status"
-    surfaceTitle="Case-study shell ready"
-    description="The projects route is ready to receive featured cases, richer storytelling, and linked assets from the new content model."
+    [label]="i18n.t('pages.projects.status.label')"
+    [surfaceTitle]="i18n.t('pages.projects.status.title')"
+    [description]="i18n.t('pages.projects.status.description')"
   />
 
   <app-surface
     page-content
     tone="base"
-    label="Next content"
-    surfaceTitle="Screenshots, links and deploy references"
-    description="This page is the natural home for print screens, Git links, production links, and project reference modals from the old TODO list."
+    [label]="i18n.t('pages.projects.layout.label')"
+    [surfaceTitle]="i18n.t('pages.projects.layout.title')"
+    [description]="i18n.t('pages.projects.layout.description')"
   />
 </app-page-wrapper>

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TranslationService } from '../../core/translation/translation.service';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
 import { SurfaceComponent } from '../../layout/surface/surface.component';
@@ -13,4 +14,6 @@ import { SurfaceComponent } from '../../layout/surface/surface.component';
   templateUrl: './skills.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkillsComponent {}
+export class SkillsComponent {
+  protected readonly i18n = inject(TranslationService);
+}

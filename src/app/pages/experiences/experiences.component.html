@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      sectionLabel="Foundation"
-      title="Experiences foundation"
-      description="The experiences route is prepared to receive the career timeline, impact storytelling, and real backend data."
+      [sectionLabel]="i18n.t('pages.experiences.sectionLabel')"
+      [title]="i18n.t('pages.experiences.title')"
+      [description]="i18n.t('pages.experiences.description')"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="secondary"
-    label="Career arc"
-    surfaceTitle="Impact timeline and leadership narrative"
-    description="This page will connect professional milestones, measurable outcomes, and storytelling blocks powered by the API."
+    [label]="i18n.t('pages.experiences.roadmap.label')"
+    [surfaceTitle]="i18n.t('pages.experiences.roadmap.title')"
+    [description]="i18n.t('pages.experiences.roadmap.description')"
   />
 
   <app-surface
     page-content
     tone="success"
-    label="Status"
-    surfaceTitle="Timeline ready"
-    description="The experiences area is ready to receive the first timeline sections, leadership highlights, and backend-driven metrics."
+    [label]="i18n.t('pages.experiences.status.label')"
+    [surfaceTitle]="i18n.t('pages.experiences.status.title')"
+    [description]="i18n.t('pages.experiences.status.description')"
   />
 
   <app-surface
     page-content
     tone="base"
-    label="Next content"
-    surfaceTitle="Career storytelling"
-    description="The final page will focus on impact, context, stack, and responsibilities instead of a flat job list."
+    [label]="i18n.t('pages.experiences.layout.label')"
+    [surfaceTitle]="i18n.t('pages.experiences.layout.title')"
+    [description]="i18n.t('pages.experiences.layout.description')"
   />
 </app-page-wrapper>

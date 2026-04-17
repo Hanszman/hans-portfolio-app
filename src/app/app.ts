@@ -1,21 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PORTFOLIO_THEME } from './core/config/portfolio-theme';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App implements OnInit {
-  ngOnInit(): void {
-    (
-      window as Window & {
-        HansUI?: {
-          setTheme?: (theme: typeof PORTFOLIO_THEME) => void;
-        };
-      }
-    ).HansUI?.setTheme?.(PORTFOLIO_THEME);
-  }
-}
+export class App {}
