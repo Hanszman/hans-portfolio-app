@@ -47,7 +47,7 @@
                   #themeToggle
                   [attr.aria-label]="'header.controls.theme' | translate"
                   [checked]="theme.mode() === 'dark'"
-                  (click)="toggleTheme()"
+                  (change)="setThemeMode($event)"
                   toggleColor="primary"
                   toggleSize="small"
                 ></hans-toggle>
@@ -62,6 +62,7 @@
               triggerShape="rounded"
               triggerSize="small"
               triggerVariant="default"
+              (select)="selectLanguage($event)"
             ></hans-dropdown>
           </div>
         </div>

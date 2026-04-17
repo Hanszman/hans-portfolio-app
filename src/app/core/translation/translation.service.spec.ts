@@ -34,7 +34,7 @@ describe('TranslationService', () => {
     const service = TestBed.inject(TranslationService);
 
     expect(service.locale()).toBe('pt-BR');
-    expect(service.instant('header.controls.english')).toBe('Ingles');
+    expect(service.instant('header.controls.english')).toBe('Inglês');
   });
 
   it('should ignore invalid persisted locales', () => {
@@ -81,12 +81,12 @@ describe('TranslationService', () => {
       {
         id: 'en-us',
         value: 'en-us',
-        label: 'Ingles',
+        label: 'Inglês',
       },
       {
         id: 'pt-BR',
         value: 'pt-BR',
-        label: 'Portugues',
+        label: 'Português',
       },
     ]);
   });

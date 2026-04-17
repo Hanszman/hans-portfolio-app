@@ -794,6 +794,8 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - validacao dos web components da lib que ja entram na shell, incluindo `hans-button`, `hans-tag`, `hans-toggle` e `hans-dropdown`
 - ao consumir a lib via CDN/web components, o app deve usar apenas propriedades, atributos, acoes e eventos realmente expostos pelo contrato publico dos custom elements
 - callbacks internos dos componentes React da lib, como `onChange` ou `onSelect`, nao devem ser assumidos automaticamente no Angular enquanto nao estiverem expostos como props/eventos dos web components
+- a `hans-ui-design-lib` deve exportar props tipadas para web components, evitando que booleanos e objetos/arrays sejam convertidos indevidamente para string pelo wrapper React -> Web Component
+- desenvolvimento local do app deve poder consumir o build CDN local da lib via `index.local.html`, enquanto producao permanece apontando para o CDN publico
 - controle de tema no header usando `hans-toggle`
 - controle de idioma no header usando `hans-dropdown`, para suportar crescimento futuro para mais idiomas sem trocar o padrao de UI
 - textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI

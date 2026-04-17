@@ -1,8 +1,11 @@
-import { AppLanguageOption } from '../../core/translation/translation.types';
+import type { AppLanguageOption } from '../../core/translation/translation.types';
 
-export interface HeaderLanguageDropdownOption extends AppLanguageOption {
-  action: (option: HeaderLanguageDropdownOption) => void;
-}
+export type HeaderLanguageDropdownOption = AppLanguageOption;
+
+export type HeaderLanguageSelectEvent =
+  CustomEvent<HeaderLanguageDropdownOption>;
+
+export type HeaderThemeChangeEvent = CustomEvent<boolean>;
 
 export interface HansToggleElement extends HTMLElement {
   checked?: boolean;

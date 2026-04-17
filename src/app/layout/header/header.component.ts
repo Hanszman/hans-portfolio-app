@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  computed,
   effect,
   inject,
   input,
@@ -19,7 +18,8 @@ import { SurfaceComponent } from '../surface/surface.component';
 import {
   HansDropdownElement,
   HansToggleElement,
-  HeaderLanguageDropdownOption,
+  HeaderLanguageSelectEvent,
+  HeaderThemeChangeEvent,
 } from './header.types';
 
 @Component({
@@ -39,14 +39,7 @@ export class HeaderComponent {
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   protected readonly i18n = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
-  protected readonly languageOptions = computed<
-    readonly HeaderLanguageDropdownOption[]
-  >(() =>
-    this.i18n.languageOptions().map((option) => ({
-      ...option,
-      action: () => this.i18n.setLocale(option.value),
-    })),
-  );
+  protected readonly languageOptions = this.i18n.languageOptions;
 
   constructor() {
     effect(() => {
@@ -68,7 +61,15 @@ export class HeaderComponent {
     });
   }
 
-  protected toggleTheme(): void {
-    this.theme.toggleMode();
+  protected setThemeMode(event: Event): void {
+    const { detail: checked } = event as HeaderThemeChangeEvent;
+
+    this.theme.setMode(checked ? 'dark' : 'light');
+  }
+
+  protected selectLanguage(event: Event): void {
+    const { detail: option } = event as HeaderLanguageSelectEvent;
+
+    this.i18n.setLocale(option.value);
   }
 }

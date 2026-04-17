@@ -79,21 +79,29 @@ describe('HeaderComponent', () => {
     const toggle = compiled.querySelector('hans-toggle') as HTMLElement;
     const dropdown = compiled.querySelector('hans-dropdown') as HTMLElement & {
       options: readonly {
-        action: () => void;
         label: string;
-        value: string;
+        value: 'en-us' | 'pt-BR';
       }[];
     };
 
-    toggle.click();
-    dropdown.options[1].action();
+    toggle.dispatchEvent(new CustomEvent('change', { detail: true }));
+    dropdown.dispatchEvent(
+      new CustomEvent('select', { detail: dropdown.options[1] }),
+    );
     fixture.detectChanges();
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
     expect(document.documentElement.lang).toBe('pt-BR');
+    expect((toggle as HTMLElement & { checked: boolean }).checked).toBeTrue();
     expect(dropdown.options.map((option) => option.value)).toEqual([
       'en-us',
       'pt-BR',
     ]);
+
+    toggle.dispatchEvent(new CustomEvent('change', { detail: false }));
+    fixture.detectChanges();
+
+    expect(document.documentElement.getAttribute('data-app-theme')).toBe('light');
+    expect((toggle as HTMLElement & { checked: boolean }).checked).toBeFalse();
   });
 });
