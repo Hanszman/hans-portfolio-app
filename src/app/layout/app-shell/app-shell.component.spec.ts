@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { NEVER, of, throwError } from 'rxjs';
 import { apiConfig } from '../../core/api/api.config';
 import { SystemApiService } from '../../core/api/system-api.service';
 import { AppShellComponent } from './app-shell.component';
@@ -13,7 +13,9 @@ import { AppShellComponent } from './app-shell.component';
 class TestRouteComponent {}
 
 describe('AppShellComponent', () => {
-  const createSystemApiServiceMock = (mode: 'success' | 'blocked' | 'generic-error') => ({
+  const createSystemApiServiceMock = (
+    mode: 'success' | 'blocked' | 'generic-error' | 'loading',
+  ) => ({
     apiBaseUrl: apiConfig.baseUrl,
     getHealth: () =>
       mode === 'success'
@@ -30,13 +32,15 @@ describe('AppShellComponent', () => {
                 new HttpErrorResponse({
                   status: 0,
                   statusText: 'Unknown Error',
-                }),
+              }),
             )
-          : throwError(() => new Error('health failed')),
+          : mode === 'loading'
+            ? NEVER
+            : throwError(() => new Error('health failed')),
   });
 
   const configureTestingModule = async (
-    mode: 'success' | 'blocked' | 'generic-error',
+    mode: 'success' | 'blocked' | 'generic-error' | 'loading',
   ) => {
     await TestBed.configureTestingModule({
       imports: [AppShellComponent],
@@ -49,16 +53,10 @@ describe('AppShellComponent', () => {
               {
                 path: 'home',
                 component: TestRouteComponent,
-                data: {
-                  navigationLabel: 'Home',
-                },
               },
               {
                 path: 'projects',
                 component: TestRouteComponent,
-                data: {
-                  navigationLabel: 'Projects',
-                },
               },
             ],
           },
@@ -83,7 +81,19 @@ describe('AppShellComponent', () => {
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
     expect(compiled.textContent).toContain(apiConfig.baseUrl);
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('Projects');
+    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
+  });
+
+  it('should render the loading API status while the health check is pending', async () => {
+    await configureTestingModule('loading');
+
+    const fixture = TestBed.createComponent(AppShellComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain('Connecting to API');
+    expect(compiled.querySelector('.portfolio-surface-warning')).toBeTruthy();
   });
 
   it('should render the error API status when the health check fails', async () => {

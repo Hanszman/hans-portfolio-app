@@ -1,5 +1,7 @@
 import { readPortfolioNavigationItems } from './portfolio-navigation.helper';
 
+class TestRouteComponent {}
+
 describe('readPortfolioNavigationItems', () => {
   it('should extract navigation items from nested app routes', () => {
     expect(
@@ -9,15 +11,15 @@ describe('readPortfolioNavigationItems', () => {
           children: [
             {
               path: 'home',
-              data: {
-                navigationLabel: 'Home',
-              },
+              component: TestRouteComponent,
             },
             {
               path: 'projects',
-              data: {
-                navigationLabel: 'Projects',
-              },
+              component: TestRouteComponent,
+            },
+            {
+              path: 'case-studies',
+              component: TestRouteComponent,
             },
           ],
         },
@@ -31,10 +33,14 @@ describe('readPortfolioNavigationItems', () => {
         path: '/projects',
         label: 'Projects',
       },
+      {
+        path: '/case-studies',
+        label: 'Case Studies',
+      },
     ]);
   });
 
-  it('should ignore redirects, wildcard routes, routes without labels, and keep valid nested children', () => {
+  it('should ignore redirects, wildcard routes, and dynamic detail routes while keeping nested static children', () => {
     expect(
       readPortfolioNavigationItems([
         {
@@ -49,17 +55,12 @@ describe('readPortfolioNavigationItems', () => {
               children: [
                 {
                   path: 'insights',
-                  data: {
-                    navigationLabel: 'Insights',
-                  },
+                  component: TestRouteComponent,
                 },
               ],
             },
             {
-              path: 'skills',
-              data: {
-                navigationLabel: '',
-              },
+              path: ':projectId',
             },
             {
               path: '**',

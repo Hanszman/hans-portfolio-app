@@ -47,8 +47,8 @@ describe('PortfolioFooterComponent', () => {
     expect(compiled.textContent).toContain(
       'Layout foundation ready for the next page builds',
     );
-    expect(compiled.textContent).toContain('Home');
-    expect(compiled.textContent).toContain('Dashboard');
+    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
+    expect(compiled.querySelector('hans-button[label="Dashboard"]')).toBeTruthy();
     expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
   });
 });

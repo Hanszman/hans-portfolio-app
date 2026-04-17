@@ -49,7 +49,7 @@ describe('PortfolioHeaderComponent', () => {
       'A shell specific to the portfolio, already connected to real backend data.',
     );
     expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
-    expect(compiled.textContent).toContain('Home');
-    expect(compiled.textContent).toContain('Projects');
+    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
+    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
   });
 });

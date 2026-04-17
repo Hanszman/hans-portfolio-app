@@ -1,5 +1,6 @@
 <header class="portfolio-header" data-testid="portfolio-header">
-  <div class="portfolio-header-surface">
+  <app-portfolio-surface>
+    <div class="portfolio-header-content">
     <div class="portfolio-header-top">
       <a class="portfolio-header-brand" routerLink="/home">
         <span class="portfolio-header-brand-mark">VH</span>
@@ -30,26 +31,33 @@
       </div>
 
       <div class="portfolio-header-highlights">
-        <article class="portfolio-header-highlight-card">
-          <span class="portfolio-header-highlight-label">Layout</span>
-          <strong>Header, footer, nav and page wrappers</strong>
-          <p>Portfolio-specific composition organized inside the app layout layer.</p>
-        </article>
+        <app-portfolio-surface
+          tone="primary"
+          spacing="compact"
+          label="Layout"
+          surfaceTitle="Header, footer, nav and page wrappers"
+          description="Portfolio-specific composition organized inside the app layout layer."
+        />
 
-        <article class="portfolio-header-highlight-card">
-          <span class="portfolio-header-highlight-label">Integration</span>
-          <strong>Real API from the start</strong>
-          <p>The shell stays wired to the backend so every next page can evolve on real data.</p>
-        </article>
+        <app-portfolio-surface
+          tone="success"
+          spacing="compact"
+          label="Integration"
+          surfaceTitle="Real API from the start"
+          description="The shell stays wired to the backend so every next page can evolve on real data."
+        />
 
-        <article class="portfolio-header-highlight-card">
-          <span class="portfolio-header-highlight-label">Direction</span>
-          <strong>Design-lib first, portfolio-specific structure second</strong>
-          <p>Reusable lib components stay as the base while unique portfolio layout lives here.</p>
-        </article>
+        <app-portfolio-surface
+          tone="info"
+          spacing="compact"
+          label="Direction"
+          surfaceTitle="Design-lib first, portfolio-specific structure second"
+          description="Reusable lib components stay as the base while unique portfolio layout lives here."
+        />
       </div>
     </div>
 
     <app-portfolio-navigation [items]="navigationItems()" />
-  </div>
+    </div>
+  </app-portfolio-surface>
 </header>

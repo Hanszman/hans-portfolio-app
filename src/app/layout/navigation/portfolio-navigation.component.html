@@ -4,13 +4,17 @@
   data-testid="portfolio-navigation"
 >
   @for (item of items(); track item.path) {
-    <a
-      class="portfolio-navigation-link"
+    <hans-button
+      #activeRoute="routerLinkActive"
+      class="portfolio-navigation-button"
       [routerLink]="item.path"
-      routerLinkActive="portfolio-navigation-link-active"
+      routerLinkActive="portfolio-navigation-button-active"
       [routerLinkActiveOptions]="{ exact: true }"
-    >
-      {{ item.label }}
-    </a>
+      [attr.label]="item.label"
+      [attr.buttonVariant]="activeRoute.isActive ? 'default' : 'outline'"
+      buttonColor="primary"
+      buttonShape="rounded"
+      buttonSize="medium"
+    ></hans-button>
   }
 </nav>

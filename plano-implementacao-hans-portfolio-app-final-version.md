@@ -73,7 +73,10 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - roteamento standalone com lazy loading por pagina/feature
 - `app.routes.ts` deve concentrar a configuracao de rotas do app
 - evitar espalhar a definicao principal de rotas em varios arquivos sem ganho real de clareza
-- dados de navegacao das rotas principais devem nascer em `app.routes.ts`, e a shell deve derivar o menu a partir dali sempre que isso evitar duplicacao manual
+- evitar passar textos estaticos de pagina em `route.data`
+- `route.data` deve ser reservado para informacoes realmente relacionadas a roteamento, ids, slugs, flags ou dados dinamicos necessarios para resolver uma tela
+- textos estaticos de apresentacao devem pertencer ao componente da pagina correspondente enquanto nao vierem da API
+- a navegacao principal deve ser derivada da configuracao real de rotas quando possivel, sem exigir cadastro paralelo manual de labels estaticos
 - preferencia por zoneless, mantendo a base atual do app
 - SCSS + TailwindCSS como base de estilo
 
@@ -352,6 +355,13 @@ Antes de criar qualquer novo componente visual no `hans-portfolio-app`, devemos 
 2. o componente da lib atende integralmente?
 3. o que falta e especifico do portfolio ou reutilizavel em outros projetos?
 
+Regra operacional:
+
+- investigar a `hans-ui-design-lib` antes de criar qualquer UI nova
+- se existir componente equivalente e ele atender ao caso, usar a lib
+- se existir componente parecido mas que nao atenda ao caso especifico, documentar mentalmente o motivo e criar apenas a composicao especifica do portfolio no app
+- se o gap parecer reutilizavel para outros projetos, parar e alinhar antes de alterar a lib
+
 ### 5.3. Regra para componentes reutilizaveis
 
 Se um novo componente for claramente reutilizavel em outros projetos ou cenarios, ele nao deve ser criado diretamente no `hans-portfolio-app` sem alinhamento previo.
@@ -374,6 +384,7 @@ Exemplos provaveis:
 - composicoes de case study
 - layouts especificos de timeline do portfolio
 - secoes de highlights muito ligadas ao contexto do Victor
+- surfaces/wrappers de layout quando o componente da lib existente nao representar bem uma area estrutural generica do portfolio
 
 ---
 
@@ -421,6 +432,7 @@ Em toda etapa de implementacao do frontend, devemos garantir:
 - lint verde
 - prettier/formatacao correta
 - build verde
+- responsividade minima preservada como requisito de todo componente visual novo
 
 ### 6.4. Comandos de qualidade que devem ser rodados ao longo do desenvolvimento
 
@@ -470,7 +482,7 @@ Direcao oficial:
 - `layout/` para casca visual e estrutura base
 - `pages/` para paginas principais
 - `features/` quando um dominio crescer o suficiente para merecer agrupamento proprio
-- `shared/` apenas para itens realmente compartilhados
+- `shared/` apenas se surgir um item realmente generico e transversal que nao seja melhor classificado como layout, pagina, feature ou core
 - `helpers/` no lugar de `utils/`
 
 ### 7.2. Responsabilidades sugeridas
@@ -495,6 +507,7 @@ Direcao oficial:
 - wrappers de pagina
 - layout de secoes
 - componentes de layout especificos do portfolio, mesmo quando baseados visualmente na `hans-ui-design-lib`
+- surfaces reutilizaveis do proprio portfolio quando forem parte da composicao visual/estrutural das paginas
 
 `pages/`
 
@@ -504,10 +517,13 @@ Direcao oficial:
 - projects
 - dashboard
 - possiveis paginas complementares do remake
+- cada rota publica deve ter seu proprio componente de pagina quando a tela tiver responsabilidade visual/conteudo proprio
+- evitar componentes genericos de pagina baseados apenas em trocar textos por `route.data`
 
 `shared/`
 
-- componentes realmente compartilhados entre varias features do portfolio
+- deve nascer vazio ou nem existir ate haver necessidade real
+- componentes realmente compartilhados entre varias features do portfolio, quando nao forem layout e nao pertencerem a um dominio especifico
 - directives ou pipes que facam sentido no app inteiro
 
 ### 7.3. Distribuicao sugerida de stores
@@ -733,9 +749,11 @@ Construir a casca navegavel principal do portfolio.
 - header
 - footer
 - navegacao principal
-- navegacao derivada da configuracao de rotas em `app.routes.ts`, evitando cadastro paralelo manual
+- navegacao derivada da configuracao real de rotas, sem textos estaticos em `route.data`
 - wrappers de pagina
 - uso seletivo de web components da `hans-ui-design-lib` como base visual da shell
+- uso de `hans-button` da `hans-ui-design-lib` para controles visuais de navegacao
+- surfaces reutilizaveis do portfolio para evitar duplicacao de boxes/cards estruturais
 - responsividade inicial da shell
 - testes unitarios dos componentes de layout criados
 

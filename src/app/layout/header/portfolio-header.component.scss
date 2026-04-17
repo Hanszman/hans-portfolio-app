@@ -2,8 +2,8 @@
   @apply mx-auto w-full max-w-6xl;
 }
 
-.portfolio-header-surface {
-  @apply grid gap-8 rounded-[2rem] border border-orange-950/10 bg-white/75 px-6 py-6 shadow-2xl shadow-orange-950/10 backdrop-blur md:px-8 md:py-8;
+.portfolio-header-content {
+  @apply grid gap-8;
 }
 
 .portfolio-header-top {
@@ -11,11 +11,14 @@
 }
 
 .portfolio-header-brand {
-  @apply inline-flex items-center gap-4 text-orange-950 no-underline;
+  @apply inline-flex items-center gap-4 no-underline;
+  color: var(--text-color);
 }
 
 .portfolio-header-brand-mark {
-  @apply inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500 text-lg font-bold text-white shadow-lg;
+  @apply inline-flex h-14 w-14 items-center justify-center rounded-2xl text-lg font-bold shadow-lg;
+  background-color: var(--primary-default-color);
+  color: var(--background-color);
 }
 
 .portfolio-header-brand-copy {
@@ -23,7 +26,8 @@
 }
 
 .portfolio-header-brand-copy span {
-  @apply text-sm text-orange-950/70;
+  @apply text-sm;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
 }
 
 .portfolio-header-tags {
@@ -39,7 +43,8 @@
 }
 
 .portfolio-header-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.12em] text-orange-600;
+  @apply text-xs font-bold uppercase tracking-[0.12em];
+  color: var(--primary-default-color);
 }
 
 .portfolio-header-title {
@@ -47,25 +52,10 @@
 }
 
 .portfolio-header-description {
-  @apply m-0 max-w-2xl text-base leading-7 text-orange-950/75;
+  @apply m-0 max-w-2xl text-base leading-7;
+  color: color-mix(in srgb, var(--text-color) 75%, transparent);
 }
 
 .portfolio-header-highlights {
   @apply grid gap-4;
-}
-
-.portfolio-header-highlight-card {
-  @apply grid gap-2 rounded-3xl border border-orange-950/10 bg-orange-50/70 p-5 shadow-lg;
-}
-
-.portfolio-header-highlight-label {
-  @apply text-xs font-bold uppercase tracking-[0.08em] text-orange-700;
-}
-
-.portfolio-header-highlight-card strong {
-  @apply text-base font-semibold text-orange-950;
-}
-
-.portfolio-header-highlight-card p {
-  @apply m-0 text-sm leading-6 text-orange-950/70;
 }

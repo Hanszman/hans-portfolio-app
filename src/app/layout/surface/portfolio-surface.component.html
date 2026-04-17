@@ -1,0 +1,19 @@
+<section [class]="surfaceClassName()" data-testid="portfolio-surface">
+  @if (hasHeader()) {
+    <header class="portfolio-surface-header">
+      @if (label()) {
+        <span class="portfolio-surface-label">{{ label() }}</span>
+      }
+
+      @if (surfaceTitle()) {
+        <strong class="portfolio-surface-title">{{ surfaceTitle() }}</strong>
+      }
+
+      @if (description()) {
+        <p class="portfolio-surface-description">{{ description() }}</p>
+      }
+    </header>
+  }
+
+  <ng-content />
+</section>

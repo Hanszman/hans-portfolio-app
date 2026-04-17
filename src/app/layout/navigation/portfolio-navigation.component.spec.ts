@@ -43,11 +43,11 @@ describe('PortfolioNavigationComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const links = compiled.querySelectorAll('a');
+    const buttons = compiled.querySelectorAll('hans-button');
 
-    expect(links).toHaveSize(2);
-    expect(compiled.textContent).toContain('Home');
-    expect(compiled.textContent).toContain('Projects');
+    expect(buttons).toHaveSize(2);
+    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
+    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
   });
 
   it('should apply the active class to the current route link', async () => {
@@ -69,10 +69,10 @@ describe('PortfolioNavigationComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const activeLink = (fixture.nativeElement as HTMLElement).querySelector(
-      '.portfolio-navigation-link-active',
+    const activeButton = (fixture.nativeElement as HTMLElement).querySelector(
+      '.portfolio-navigation-button-active',
     );
 
-    expect(activeLink?.textContent).toContain('Projects');
+    expect(activeButton?.getAttribute('label')).toBe('Projects');
   });
 });

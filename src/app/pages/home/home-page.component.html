@@ -1,0 +1,33 @@
+<app-portfolio-page-wrapper>
+  <div page-main>
+    <app-portfolio-page-intro
+      sectionLabel="Foundation"
+      title="Home foundation"
+      description="The home route is wired and ready for the upcoming hero, highlights, and API-driven portfolio summary."
+    />
+  </div>
+
+  <app-portfolio-surface
+    page-sidebar
+    tone="primary"
+    label="Roadmap"
+    surfaceTitle="Hero, highlights and API-driven overview"
+    description="The home page will introduce Victor, reinforce positioning, and surface the first backend-driven summary cards."
+  />
+
+  <app-portfolio-surface
+    page-content
+    tone="success"
+    label="Status"
+    surfaceTitle="Shell ready"
+    description="This route already sits inside the new portfolio shell and is ready for the upcoming hero, highlights, and API-driven summary implementation."
+  />
+
+  <app-portfolio-surface
+    page-content
+    tone="base"
+    label="Layout layer"
+    surfaceTitle="Page-specific component"
+    description="The content now lives in the Home page component instead of being passed as static route data."
+  />
+</app-portfolio-page-wrapper>

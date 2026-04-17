@@ -1,5 +1,6 @@
 <footer class="portfolio-footer" data-testid="portfolio-footer">
-  <div class="portfolio-footer-surface">
+  <app-portfolio-surface>
+    <div class="portfolio-footer-content">
     <div class="portfolio-footer-copy">
       <span class="portfolio-footer-eyebrow">Portfolio shell</span>
       <strong class="portfolio-footer-title">Layout foundation ready for the next page builds</strong>
@@ -11,9 +12,14 @@
 
     <nav class="portfolio-footer-links" aria-label="Footer navigation">
       @for (item of navigationItems(); track item.path) {
-        <a class="portfolio-footer-link" [routerLink]="item.path">
-          {{ item.label }}
-        </a>
+        <hans-button
+          [routerLink]="item.path"
+          [attr.label]="item.label"
+          buttonColor="base"
+          buttonShape="rounded"
+          buttonSize="small"
+          buttonVariant="outline"
+        ></hans-button>
       }
     </nav>
 
@@ -22,5 +28,6 @@
       <hans-tag label="Tailwind @apply" tagColor="info" tagSize="sm"></hans-tag>
       <hans-tag label="100% coverage" tagColor="success" tagSize="sm"></hans-tag>
     </div>
-  </div>
+    </div>
+  </app-portfolio-surface>
 </footer>

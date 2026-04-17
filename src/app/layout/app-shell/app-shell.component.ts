@@ -7,11 +7,18 @@ import { SystemApiService } from '../../core/api/system-api.service';
 import { PortfolioFooterComponent } from '../footer/portfolio-footer.component';
 import { PortfolioHeaderComponent } from '../header/portfolio-header.component';
 import { readPortfolioNavigationItems } from '../navigation/helpers/portfolio-navigation.helper';
+import { PortfolioSurfaceComponent } from '../surface/portfolio-surface.component';
+import { PortfolioSurfaceTone } from '../surface/portfolio-surface.types';
 import { AppShellApiStatusViewModel } from './app-shell.types';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, PortfolioHeaderComponent, PortfolioFooterComponent],
+  imports: [
+    RouterOutlet,
+    PortfolioHeaderComponent,
+    PortfolioFooterComponent,
+    PortfolioSurfaceComponent,
+  ],
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,10 +73,13 @@ export class AppShellComponent {
     readPortfolioNavigationItems(this.router.config),
   );
 
-  protected readonly apiStatusClasses = computed(() => ({
-    'app-shell-api-status': true,
-    'app-shell-api-status-loading': this.apiStatus().state === 'loading',
-    'app-shell-api-status-connected': this.apiStatus().state === 'connected',
-    'app-shell-api-status-error': this.apiStatus().state === 'error',
-  }));
+  protected readonly apiStatusTone = computed<PortfolioSurfaceTone>(() => {
+    const statusState = this.apiStatus().state;
+
+    if (statusState === 'connected') {
+      return 'success';
+    }
+
+    return statusState === 'error' ? 'danger' : 'warning';
+  });
 }

@@ -2,8 +2,8 @@
   @apply mx-auto w-full max-w-6xl;
 }
 
-.portfolio-footer-surface {
-  @apply grid gap-6 rounded-[2rem] border border-orange-950/10 bg-white/70 px-6 py-6 shadow-xl shadow-orange-950/10 backdrop-blur md:px-8 md:py-8;
+.portfolio-footer-content {
+  @apply grid gap-6;
 }
 
 .portfolio-footer-copy {
@@ -11,23 +11,21 @@
 }
 
 .portfolio-footer-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.1em] text-orange-600;
+  @apply text-xs font-bold uppercase tracking-[0.1em];
+  color: var(--primary-default-color);
 }
 
 .portfolio-footer-title {
-  @apply text-lg font-semibold text-orange-950;
+  @apply text-lg font-semibold;
 }
 
 .portfolio-footer-description {
-  @apply m-0 max-w-3xl text-sm leading-7 text-orange-950/70;
+  @apply m-0 max-w-3xl text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
 }
 
 .portfolio-footer-links {
   @apply flex flex-wrap gap-3;
-}
-
-.portfolio-footer-link {
-  @apply inline-flex min-h-11 items-center rounded-full border border-orange-950/10 bg-orange-50/80 px-4 py-2 text-sm font-semibold text-orange-950/75 no-underline transition duration-200 hover:border-orange-500/30 hover:bg-orange-100 hover:text-orange-950;
 }
 
 .portfolio-footer-tags {

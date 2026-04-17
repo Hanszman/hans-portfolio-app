@@ -10,20 +10,12 @@
   @apply py-2;
 }
 
+.app-shell-api-status-wrapper {
+  @apply mx-auto mb-6 w-full max-w-6xl;
+}
+
 .app-shell-api-status {
-  @apply mx-auto mb-6 flex w-full max-w-6xl flex-col gap-4 rounded-3xl border bg-white/85 p-5 shadow-lg backdrop-blur md:flex-row md:items-center md:justify-between;
-}
-
-.app-shell-api-status-loading {
-  @apply border-amber-500/20 shadow-amber-950/10;
-}
-
-.app-shell-api-status-connected {
-  @apply border-emerald-500/20 shadow-emerald-950/10;
-}
-
-.app-shell-api-status-error {
-  @apply border-rose-500/20 shadow-rose-950/10;
+  @apply flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between;
 }
 
 .app-shell-api-status-copy {
@@ -31,17 +23,22 @@
 }
 
 .app-shell-api-status-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.08em] text-orange-600;
+  @apply text-xs font-bold uppercase tracking-[0.08em];
+  color: var(--primary-default-color);
 }
 
 .app-shell-api-status-title {
-  @apply text-sm font-semibold text-orange-950;
+  @apply text-sm font-semibold;
 }
 
 .app-shell-api-status-description {
-  @apply m-0 text-sm leading-6 text-orange-950/70;
+  @apply m-0 text-sm leading-6;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
 }
 
 .app-shell-api-status-base-url {
-  @apply rounded-full border border-orange-950/10 bg-orange-50/90 px-3 py-2 text-xs text-orange-900;
+  @apply rounded-full border px-3 py-2 text-xs;
+  background-color: color-mix(in srgb, var(--background-color) 82%, white);
+  border-color: color-mix(in srgb, var(--base-neutral-color) 40%, transparent);
+  color: var(--base-strong-color);
 }

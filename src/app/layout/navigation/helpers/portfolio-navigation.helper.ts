@@ -9,11 +9,19 @@ const joinRouteSegments = (
   routePath: string,
 ): string => [...parentSegments, routePath].filter(isNonEmptyString).join('/');
 
-const readNavigationLabel = (route: Route): string | null => {
-  const label = route.data?.['navigationLabel'];
+const formatNavigationLabel = (routePath: string): string =>
+  routePath
+    .split('-')
+    .filter(isNonEmptyString)
+    .map((segment) => `${segment[0].toUpperCase()}${segment.slice(1)}`)
+    .join(' ');
 
-  return isNonEmptyString(label) ? label : null;
-};
+const isNavigableRoute = (route: Route, routePath: string): boolean =>
+  isNonEmptyString(routePath) &&
+  !route.redirectTo &&
+  routePath !== '**' &&
+  !routePath.includes(':') &&
+  Boolean(route.component || route.loadComponent);
 
 export const readPortfolioNavigationItems = (
   routes: Routes,
@@ -28,20 +36,14 @@ export const readPortfolioNavigationItems = (
       ? readPortfolioNavigationItems(route.children, nextSegments)
       : [];
 
-    if (!isNonEmptyString(routePath) || route.redirectTo || routePath === '**') {
-      return childItems;
-    }
-
-    const navigationLabel = readNavigationLabel(route);
-
-    if (!navigationLabel) {
+    if (!isNavigableRoute(route, routePath)) {
       return childItems;
     }
 
     return [
       {
         path: `/${joinRouteSegments(parentSegments, routePath)}`,
-        label: navigationLabel,
+        label: formatNavigationLabel(routePath),
       },
       ...childItems,
     ];

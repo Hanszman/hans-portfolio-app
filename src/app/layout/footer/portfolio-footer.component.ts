@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PortfolioNavigationItem } from '../navigation/portfolio-navigation.types';
+import { PortfolioSurfaceComponent } from '../surface/portfolio-surface.component';
 
 @Component({
   selector: 'app-portfolio-footer',
-  imports: [RouterLink],
+  imports: [RouterLink, PortfolioSurfaceComponent],
   templateUrl: './portfolio-footer.component.html',
   styleUrl: './portfolio-footer.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
