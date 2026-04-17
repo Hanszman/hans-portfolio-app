@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      [sectionLabel]="i18n.t('pages.dashboard.sectionLabel')"
-      [title]="i18n.t('pages.dashboard.title')"
-      [description]="i18n.t('pages.dashboard.description')"
+      [sectionLabel]="'pages.dashboard.sectionLabel' | translate"
+      [title]="'pages.dashboard.title' | translate"
+      [description]="'pages.dashboard.description' | translate"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="danger"
-    [label]="i18n.t('pages.dashboard.roadmap.label')"
-    [surfaceTitle]="i18n.t('pages.dashboard.roadmap.title')"
-    [description]="i18n.t('pages.dashboard.roadmap.description')"
+    [label]="'pages.dashboard.roadmap.label' | translate"
+    [surfaceTitle]="'pages.dashboard.roadmap.title' | translate"
+    [description]="'pages.dashboard.roadmap.description' | translate"
   />
 
   <app-surface
     page-content
     tone="success"
-    [label]="i18n.t('pages.dashboard.status.label')"
-    [surfaceTitle]="i18n.t('pages.dashboard.status.title')"
-    [description]="i18n.t('pages.dashboard.status.description')"
+    [label]="'pages.dashboard.status.label' | translate"
+    [surfaceTitle]="'pages.dashboard.status.title' | translate"
+    [description]="'pages.dashboard.status.description' | translate"
   />
 
   <app-surface
     page-content
     tone="base"
-    [label]="i18n.t('pages.dashboard.layout.label')"
-    [surfaceTitle]="i18n.t('pages.dashboard.layout.title')"
-    [description]="i18n.t('pages.dashboard.layout.description')"
+    [label]="'pages.dashboard.layout.label' | translate"
+    [surfaceTitle]="'pages.dashboard.layout.title' | translate"
+    [description]="'pages.dashboard.layout.description' | translate"
   />
 </app-page-wrapper>

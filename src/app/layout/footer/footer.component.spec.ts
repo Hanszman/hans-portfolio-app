@@ -1,6 +1,7 @@
 import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { FooterComponent } from './footer.component';
 
 @Component({
@@ -14,6 +15,7 @@ describe('FooterComponent', () => {
       imports: [FooterComponent],
       providers: [
         provideZonelessChangeDetection(),
+        provideAppTranslations(),
         provideRouter([
           {
             path: 'home',

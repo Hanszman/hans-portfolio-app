@@ -2,14 +2,14 @@
   <app-surface>
     <div class="footer-content">
       <div class="footer-copy">
-        <span class="footer-eyebrow">{{ i18n.t('footer.eyebrow') }}</span>
-        <strong class="footer-title">{{ i18n.t('footer.title') }}</strong>
+        <span class="footer-eyebrow">{{ 'footer.eyebrow' | translate }}</span>
+        <strong class="footer-title">{{ 'footer.title' | translate }}</strong>
         <p class="footer-description">
-          {{ i18n.t('footer.description') }}
+          {{ 'footer.description' | translate }}
         </p>
       </div>
 
-      <nav class="footer-links" [attr.aria-label]="i18n.t('footer.navigationLabel')">
+      <nav class="footer-links" [attr.aria-label]="'footer.navigationLabel' | translate">
         @for (item of navigationItems(); track item.path) {
           <hans-button
             [routerLink]="item.path"
@@ -22,19 +22,19 @@
         }
       </nav>
 
-      <div class="footer-tags" [attr.aria-label]="i18n.t('footer.principlesLabel')">
+      <div class="footer-tags" [attr.aria-label]="'footer.principlesLabel' | translate">
         <hans-tag
-          [attr.label]="i18n.t('footer.tags.standalone')"
+          [attr.label]="'footer.tags.standalone' | translate"
           tagColor="warning"
           tagSize="sm"
         ></hans-tag>
         <hans-tag
-          [attr.label]="i18n.t('footer.tags.tailwind')"
+          [attr.label]="'footer.tags.tailwind' | translate"
           tagColor="info"
           tagSize="sm"
         ></hans-tag>
         <hans-tag
-          [attr.label]="i18n.t('footer.tags.coverage')"
+          [attr.label]="'footer.tags.coverage' | translate"
           tagColor="success"
           tagSize="sm"
         ></hans-tag>

@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      [sectionLabel]="i18n.t('pages.experiences.sectionLabel')"
-      [title]="i18n.t('pages.experiences.title')"
-      [description]="i18n.t('pages.experiences.description')"
+      [sectionLabel]="'pages.experiences.sectionLabel' | translate"
+      [title]="'pages.experiences.title' | translate"
+      [description]="'pages.experiences.description' | translate"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="secondary"
-    [label]="i18n.t('pages.experiences.roadmap.label')"
-    [surfaceTitle]="i18n.t('pages.experiences.roadmap.title')"
-    [description]="i18n.t('pages.experiences.roadmap.description')"
+    [label]="'pages.experiences.roadmap.label' | translate"
+    [surfaceTitle]="'pages.experiences.roadmap.title' | translate"
+    [description]="'pages.experiences.roadmap.description' | translate"
   />
 
   <app-surface
     page-content
     tone="success"
-    [label]="i18n.t('pages.experiences.status.label')"
-    [surfaceTitle]="i18n.t('pages.experiences.status.title')"
-    [description]="i18n.t('pages.experiences.status.description')"
+    [label]="'pages.experiences.status.label' | translate"
+    [surfaceTitle]="'pages.experiences.status.title' | translate"
+    [description]="'pages.experiences.status.description' | translate"
   />
 
   <app-surface
     page-content
     tone="base"
-    [label]="i18n.t('pages.experiences.layout.label')"
-    [surfaceTitle]="i18n.t('pages.experiences.layout.title')"
-    [description]="i18n.t('pages.experiences.layout.description')"
+    [label]="'pages.experiences.layout.label' | translate"
+    [surfaceTitle]="'pages.experiences.layout.title' | translate"
+    [description]="'pages.experiences.layout.description' | translate"
   />
 </app-page-wrapper>

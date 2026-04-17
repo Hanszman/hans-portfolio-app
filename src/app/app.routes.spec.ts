@@ -5,6 +5,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { apiConfig } from './core/api/api.config';
 import { SystemApiService } from './core/api/system-api.service';
+import { provideAppTranslations } from './core/translation/translation.providers';
 import { routes } from './app.routes';
 
 describe('app routes', () => {
@@ -12,6 +13,7 @@ describe('app routes', () => {
     await TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
+        provideAppTranslations(),
         provideRouter(routes),
         {
           provide: SystemApiService,

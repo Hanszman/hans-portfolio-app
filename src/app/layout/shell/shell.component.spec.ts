@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { NEVER, of, throwError } from 'rxjs';
 import { apiConfig } from '../../core/api/api.config';
 import { SystemApiService } from '../../core/api/system-api.service';
+import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { ShellComponent } from './shell.component';
 
 @Component({
@@ -46,6 +47,7 @@ describe('ShellComponent', () => {
       imports: [ShellComponent],
       providers: [
         provideZonelessChangeDetection(),
+        provideAppTranslations(),
         provideRouter([
           {
             path: '',

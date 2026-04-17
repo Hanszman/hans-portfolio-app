@@ -1,6 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { PORTFOLIO_THEMES } from '../theme/portfolio-theme';
+import { APP_THEMES } from '../theme/theme.config';
 import { DesignLibService } from './design-lib.service';
 import { HansWindow } from './design-lib.types';
 
@@ -22,29 +22,32 @@ describe('DesignLibService', () => {
 
     const service = TestBed.inject(DesignLibService);
 
-    expect(service.applyTheme(PORTFOLIO_THEMES.light)).toBeTrue();
-    expect(setTheme).toHaveBeenCalledOnceWith(PORTFOLIO_THEMES.light);
+    expect(service.applyTheme(APP_THEMES.light)).toBeTrue();
+    expect(setTheme).toHaveBeenCalledOnceWith(APP_THEMES.light);
   });
 
   it('should report that theme application is pending when the CDN API is unavailable', () => {
     const service = TestBed.inject(DesignLibService);
 
-    expect(service.applyTheme(PORTFOLIO_THEMES.light)).toBeFalse();
+    expect(service.applyTheme(APP_THEMES.light)).toBeFalse();
   });
 
-  it('should read the required design-lib component contract', () => {
-    if (!customElements.get('hans-button')) {
-      customElements.define('hans-button', class extends HTMLElement {});
-    }
+  it('should expose the design-lib theme API contract status', () => {
+    const service = TestBed.inject(DesignLibService);
+
+    expect(service.readContractStatus()).toEqual({
+      themeApiAvailable: false,
+    });
+  });
+
+  it('should report the theme API as available when the CDN exposes it', () => {
+    hansWindow.HansUI = {
+      setTheme: () => undefined,
+    };
 
     const service = TestBed.inject(DesignLibService);
     const status = service.readContractStatus();
 
-    expect(status.themeApiAvailable).toBeFalse();
-    expect(status.components).toContain({
-      tag: 'hans-button',
-      isRegistered: true,
-    });
-    expect(status.missingComponents).toContain('hans-tag');
+    expect(status.themeApiAvailable).toBeTrue();
   });
 });

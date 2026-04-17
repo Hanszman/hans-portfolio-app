@@ -1,12 +1,13 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardComponent],
-      providers: [provideZonelessChangeDetection()],
+      providers: [provideZonelessChangeDetection(), provideAppTranslations()],
     }).compileComponents();
   });
 

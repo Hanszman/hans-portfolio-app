@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TranslationService } from '../../core/translation/translation.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
 import { SurfaceComponent } from '../../layout/surface/surface.component';
@@ -10,10 +10,9 @@ import { SurfaceComponent } from '../../layout/surface/surface.component';
     PageIntroComponent,
     PageWrapperComponent,
     SurfaceComponent,
+    TranslatePipe,
   ],
   templateUrl: './projects.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectsComponent {
-  protected readonly i18n = inject(TranslationService);
-}
+export class ProjectsComponent {}

@@ -1,6 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { APP_LOCALE_STORAGE_KEY } from './translation.config';
+import { provideAppTranslations } from './translation.providers';
 import { TranslationService } from './translation.service';
 import { AppTranslationKey } from './translation.types';
 
@@ -9,7 +10,7 @@ describe('TranslationService', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
     document.documentElement.lang = '';
     TestBed.configureTestingModule({
-      providers: [provideZonelessChangeDetection()],
+      providers: [provideZonelessChangeDetection(), provideAppTranslations()],
     });
   });
 
@@ -22,9 +23,9 @@ describe('TranslationService', () => {
     const service = TestBed.inject(TranslationService);
 
     expect(service.locale()).toBe('en');
-    expect(service.nextLocale()).toBe('pt-BR');
     expect(document.documentElement.lang).toBe('en');
     expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('en');
+    expect(service.instant('header.controls.english')).toBe('English');
   });
 
   it('should restore a persisted Portuguese locale', () => {
@@ -33,8 +34,7 @@ describe('TranslationService', () => {
     const service = TestBed.inject(TranslationService);
 
     expect(service.locale()).toBe('pt-BR');
-    expect(service.nextLocale()).toBe('en');
-    expect(service.t('header.controls.english')).toBe('Ingles');
+    expect(service.instant('header.controls.english')).toBe('Ingles');
   });
 
   it('should ignore invalid persisted locales', () => {
@@ -45,22 +45,54 @@ describe('TranslationService', () => {
     expect(service.locale()).toBe('en');
   });
 
-  it('should toggle locales and interpolate translation params', () => {
+  it('should set locales and interpolate translation params', () => {
     const service = TestBed.inject(TranslationService);
 
-    service.toggleLocale();
+    service.setLocale('pt-BR');
 
     expect(service.locale()).toBe('pt-BR');
-    expect(service.t('shell.api.connected.description', {
+    expect(service.instant('shell.api.connected.description', {
       checkedAtUtc: '2026-04-14T13:00:00.000Z',
     })).toContain('2026-04-14T13:00:00.000Z');
     expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('pt-BR');
+  });
+
+  it('should expose language options translated in the active locale', () => {
+    const service = TestBed.inject(TranslationService);
+
+    expect(service.languageOptions()).toEqual([
+      {
+        id: 'en',
+        value: 'en',
+        label: 'English',
+      },
+      {
+        id: 'pt-BR',
+        value: 'pt-BR',
+        label: 'Portuguese',
+      },
+    ]);
+
+    service.setLocale('pt-BR');
+
+    expect(service.languageOptions()).toEqual([
+      {
+        id: 'en',
+        value: 'en',
+        label: 'Ingles',
+      },
+      {
+        id: 'pt-BR',
+        value: 'pt-BR',
+        label: 'Portugues',
+      },
+    ]);
   });
 
   it('should fall back to the key when a translation is missing from every locale', () => {
     const service = TestBed.inject(TranslationService);
     const missingKey = 'missing.translation' as AppTranslationKey;
 
-    expect(service.t(missingKey)).toBe(missingKey);
+    expect(service.instant(missingKey)).toBe(missingKey);
   });
 });

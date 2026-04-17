@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { catchError, map, of, startWith } from 'rxjs';
 import { SystemApiService } from '../../core/api/system-api.service';
 import { ThemeService } from '../../core/theme/theme.service';
@@ -17,6 +18,7 @@ import { ShellApiStatusViewModel } from './shell.types';
   selector: 'app-shell',
   imports: [
     RouterOutlet,
+    TranslatePipe,
     HeaderComponent,
     FooterComponent,
     SurfaceComponent,
@@ -28,52 +30,54 @@ import { ShellApiStatusViewModel } from './shell.types';
 export class ShellComponent {
   private readonly router = inject(Router);
   private readonly systemApiService = inject(SystemApiService);
-  protected readonly i18n = inject(TranslationService);
+  private readonly i18n = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
+  protected readonly activeLocale = this.i18n.locale;
   private readonly currentOrigin = globalThis.location.origin;
+  private readonly loadingApiStatus: ShellApiStatusViewModel = {
+    state: 'loading',
+    titleKey: 'shell.api.loading.title',
+    descriptionKey: 'shell.api.loading.description',
+    baseUrl: this.systemApiService.apiBaseUrl,
+  };
 
   protected readonly apiStatus = toSignal(
     this.systemApiService.getHealth().pipe(
       map(
         (health): ShellApiStatusViewModel => ({
           state: 'connected',
-          title: this.i18n.t('shell.api.connected.title'),
-          description: this.i18n.t('shell.api.connected.description', {
+          titleKey: 'shell.api.connected.title',
+          descriptionKey: 'shell.api.connected.description',
+          descriptionParams: {
             checkedAtUtc: health.checkedAtUtc,
-          }),
+          },
           baseUrl: this.systemApiService.apiBaseUrl,
         }),
       ),
-      startWith({
-        state: 'loading',
-        title: this.i18n.t('shell.api.loading.title'),
-        description: this.i18n.t('shell.api.loading.description'),
-        baseUrl: this.systemApiService.apiBaseUrl,
-      } satisfies ShellApiStatusViewModel),
+      startWith(this.loadingApiStatus),
       catchError((error: unknown) =>
         of<ShellApiStatusViewModel>({
           state: 'error',
-          title:
+          titleKey:
             error instanceof HttpErrorResponse && error.status === 0
-              ? this.i18n.t('shell.api.blocked.title')
-              : this.i18n.t('shell.api.error.title'),
-          description:
+              ? 'shell.api.blocked.title'
+              : 'shell.api.error.title',
+          descriptionKey:
             error instanceof HttpErrorResponse && error.status === 0
-              ? this.i18n.t('shell.api.blocked.description', {
+              ? 'shell.api.blocked.description'
+              : 'shell.api.error.description',
+          descriptionParams:
+            error instanceof HttpErrorResponse && error.status === 0
+              ? {
                   origin: this.currentOrigin,
-                })
-              : this.i18n.t('shell.api.error.description'),
+                }
+              : undefined,
           baseUrl: this.systemApiService.apiBaseUrl,
         }),
       ),
     ),
     {
-      initialValue: {
-        state: 'loading',
-        title: this.i18n.t('shell.api.loading.title'),
-        description: this.i18n.t('shell.api.loading.description'),
-        baseUrl: this.systemApiService.apiBaseUrl,
-      } satisfies ShellApiStatusViewModel,
+      initialValue: this.loadingApiStatus,
     },
   );
 

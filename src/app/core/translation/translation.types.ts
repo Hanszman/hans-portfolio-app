@@ -16,8 +16,11 @@ export type AppTranslationKey =
   | 'header.tags.angular'
   | 'header.tags.signals'
   | 'header.tags.api'
+  | 'header.controls.theme'
   | 'header.controls.darkTheme'
   | 'header.controls.lightTheme'
+  | 'header.controls.language'
+  | 'header.controls.noLanguages'
   | 'header.controls.portuguese'
   | 'header.controls.english'
   | 'header.statusLabel'
@@ -102,7 +105,15 @@ export type AppTranslationKey =
   | 'pages.dashboard.layout.title'
   | 'pages.dashboard.layout.description';
 
+export type AppTranslationLanguage = Record<AppTranslationKey, string>;
+
 export type AppTranslationCatalog = Record<
   AppLocale,
-  Record<AppTranslationKey, string>
+  AppTranslationLanguage
 >;
+
+export interface AppLanguageOption {
+  id: AppLocale;
+  label: string;
+  value: AppLocale;
+}

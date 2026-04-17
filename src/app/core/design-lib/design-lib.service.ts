@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DESIGN_LIB_REQUIRED_COMPONENTS } from './design-lib.config';
 import {
-  DesignLibComponentTag,
   DesignLibContractStatus,
   HansThemeCombination,
   HansWindow,
@@ -11,8 +9,6 @@ import {
   providedIn: 'root',
 })
 export class DesignLibService {
-  readonly requiredComponents = DESIGN_LIB_REQUIRED_COMPONENTS;
-
   applyTheme(theme: HansThemeCombination): boolean {
     const setTheme = this.readHansUiApi()?.setTheme;
 
@@ -24,22 +20,9 @@ export class DesignLibService {
     return true;
   }
 
-  isComponentRegistered(tag: DesignLibComponentTag): boolean {
-    return Boolean(customElements.get(tag));
-  }
-
   readContractStatus(): DesignLibContractStatus {
-    const components = this.requiredComponents.map((tag) => ({
-      tag,
-      isRegistered: this.isComponentRegistered(tag),
-    }));
-
     return {
       themeApiAvailable: Boolean(this.readHansUiApi()?.setTheme),
-      components,
-      missingComponents: components
-        .filter((component) => !component.isRegistered)
-        .map((component) => component.tag),
     };
   }
 

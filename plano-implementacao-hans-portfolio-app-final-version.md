@@ -95,6 +95,9 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - `hans-ui-design-lib` e a base visual oficial do projeto
 - o consumo do app continua previsto via CDN/web components
 - componentes ja existentes na lib devem ser reutilizados antes de qualquer implementacao customizada equivalente
+- o app nao deve manter um catalogo tipado proprio listando quais componentes existem na lib
+- a responsabilidade de registrar e expor os componentes (`hans-button`, `hans-dropdown`, `hans-toggle`, `hans-tag`, etc.) pertence a propria `hans-ui-design-lib`
+- no portfolio, o contrato com a lib deve ficar limitado aos pontos de integracao realmente necessarios, como aplicacao dinamica de tema via `window.HansUI.setTheme`
 
 ### 3.4. Integracao com backend desde o inicio do front
 
@@ -358,9 +361,11 @@ Antes de criar qualquer novo componente visual no `hans-portfolio-app`, devemos 
 Regra operacional:
 
 - investigar a `hans-ui-design-lib` antes de criar qualquer UI nova
+- investigar tambem a lib antes de criar controles simples dentro de componentes existentes, como botoes, toggles, dropdowns, inputs, tags e cards
 - se existir componente equivalente e ele atender ao caso, usar a lib
 - se existir componente parecido mas que nao atenda ao caso especifico, documentar mentalmente o motivo e criar apenas a composicao especifica do portfolio no app
 - se o gap parecer reutilizavel para outros projetos, parar e alinhar antes de alterar a lib
+- nao duplicar no portfolio um componente generico que a lib ja entrega, mesmo quando o uso parecer pequeno ou localizado
 
 ### 5.3. Regra para componentes reutilizaveis
 
@@ -492,6 +497,7 @@ Direcao oficial:
 - api clients
 - configuracoes globais
 - translation
+- theme
 - stores globais baseados em signals quando realmente necessarios
 - tokens de app
 - adapters de consumo da API
@@ -574,6 +580,10 @@ Exemplos de onde cada tipo de estado deve morar:
 - helpers especificos de uma feature devem ficar proximos da propria feature
 - tipos, interfaces, models e contratos semelhantes devem ficar em arquivos `*.types.ts`, proximos da feature ou dominio dono
 - evitar declarar interfaces e types inline no componente quando eles fizerem parte real da estrutura do codigo
+- configuracoes globais de tema devem ficar em `core/theme/theme.config.ts`
+- temas concretos devem ficar separados por arquivo em `core/theme/themes`, por exemplo `light.theme.ts` e `dark.theme.ts`
+- traducoes devem ficar separadas por idioma em `core/translation/translations`
+- a configuracao agregadora de traducoes deve apenas compor os arquivos de idioma em `APP_TRANSLATIONS`
 - classes CSS devem usar apenas `-` como separador
 - evitar `_` em nomes de classes CSS
 - preferir SCSS com `@apply` e classes utilitarias do Tailwind, seguindo o mesmo padrao adotado na `hans-ui-design-lib`
@@ -772,12 +782,18 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 #### Entregas
 
 - base de tema claro/escuro usando `ThemeService`, `signal`, `computed`, persistencia em `localStorage` e aplicacao no `document`
-- paletas completas do portfolio em `core/theme/portfolio-theme.ts`, sempre com os 23 tokens esperados pela `hans-ui-design-lib`
-- base de traducao usando `TranslationService`, locale `en`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
+- paletas completas do app em `core/theme/theme.config.ts`, sempre com os 23 tokens esperados pela `hans-ui-design-lib`
+- arquivos de tema separados em `core/theme/themes/light.theme.ts` e `core/theme/themes/dark.theme.ts`
+- objeto agregador `APP_THEMES`, evitando prefixos desnecessarios como `PORTFOLIO_THEMES`
+- base de traducao usando `@ngx-translate/core`, providers standalone, `TranslatePipe`, locale `en`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
+- arquivos de traducao separados por idioma em `core/translation/translations`
+- objeto agregador `APP_TRANSLATIONS` compondo os arquivos de `en` e `pt-BR`
 - contrato de integracao com a `hans-ui-design-lib` centralizado em `DesignLibService`
 - aplicacao dinamica de tema via API global do CDN (`window.HansUI.setTheme`) em vez de chamadas diretas espalhadas pelo app
-- validacao dos web components da lib que ja entram na shell, inicialmente `hans-button` e `hans-tag`
-- controles iniciais de tema e idioma no header usando `hans-button`
+- o app nao deve manter lista tipada/catologo proprio dos componentes disponiveis na `hans-ui-design-lib`
+- validacao dos web components da lib que ja entram na shell, incluindo `hans-button`, `hans-tag`, `hans-toggle` e `hans-dropdown`
+- controle de tema no header usando `hans-toggle`
+- controle de idioma no header usando `hans-dropdown`, para suportar crescimento futuro para mais idiomas sem trocar o padrao de UI
 - textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI
 - testes unitarios do escopo implementado
 
@@ -787,7 +803,8 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - base de traducao preparada e consumida pela shell/pages iniciais
 - contrato com a design lib claro, funcional e isolado em service proprio
 - nenhum componente reutilizavel da lib deve ser recriado no app sem antes investigar a `hans-ui-design-lib`
-- novos controles visuais devem continuar usando componentes da lib quando ja existirem, como `hans-button` e `hans-tag`
+- novos controles visuais devem continuar usando componentes da lib quando ja existirem, como `hans-button`, `hans-tag`, `hans-toggle` e `hans-dropdown`
+- templates devem preferir `TranslatePipe` para copy traduzida, deixando services de traducao para estado/acoes em TypeScript
 - coverage total do escopo implementado
 
 ### F2 - Home estrategica

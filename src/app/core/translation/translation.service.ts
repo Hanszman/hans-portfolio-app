@@ -1,11 +1,13 @@
 import { DOCUMENT } from '@angular/common';
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
+  APP_LOCALES,
   APP_LOCALE_STORAGE_KEY,
-  APP_TRANSLATIONS,
   DEFAULT_APP_LOCALE,
 } from './translation.config';
 import {
+  AppLanguageOption,
   AppLocale,
   AppTranslationKey,
   AppTranslationParams,
@@ -16,14 +18,27 @@ import {
 })
 export class TranslationService {
   private readonly document = inject(DOCUMENT);
+  private readonly translateService = inject(TranslateService);
   private readonly localeSignal = signal<AppLocale>(this.readStoredLocale());
 
   readonly locale = this.localeSignal.asReadonly();
-  readonly nextLocale = computed<AppLocale>(() =>
-    this.locale() === 'en' ? 'pt-BR' : 'en',
-  );
+  readonly languageOptions = computed<readonly AppLanguageOption[]>(() => {
+    this.locale();
+
+    return APP_LOCALES.map((locale) => ({
+      id: locale,
+      value: locale,
+      label: this.instant(
+        locale === 'en'
+          ? 'header.controls.english'
+          : 'header.controls.portuguese',
+      ),
+    }));
+  });
 
   constructor() {
+    this.translateService.addLangs(APP_LOCALES);
+    this.translateService.setFallbackLang(DEFAULT_APP_LOCALE);
     this.applyLocale(this.locale());
   }
 
@@ -32,26 +47,17 @@ export class TranslationService {
     this.applyLocale(locale);
   }
 
-  toggleLocale(): void {
-    this.setLocale(this.nextLocale());
-  }
-
-  t(key: AppTranslationKey, params: AppTranslationParams = {}): string {
-    const translation =
-      APP_TRANSLATIONS[this.locale()][key] ??
-      APP_TRANSLATIONS[DEFAULT_APP_LOCALE][key] ??
-      key;
-
-    return Object.entries(params).reduce<string>(
-      (text, [paramKey, paramValue]) =>
-        text.replaceAll(`{${paramKey}}`, paramValue),
-      translation,
-    );
+  instant(
+    key: AppTranslationKey,
+    params: AppTranslationParams = {},
+  ): string {
+    return this.translateService.instant(key, params) as string;
   }
 
   private applyLocale(locale: AppLocale): void {
     this.document.documentElement.lang = locale;
     localStorage.setItem(APP_LOCALE_STORAGE_KEY, locale);
+    this.translateService.use(locale).subscribe();
   }
 
   private readStoredLocale(): AppLocale {

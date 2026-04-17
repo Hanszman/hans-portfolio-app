@@ -29,15 +29,6 @@ export interface HansWindow extends Window {
   HansUI?: HansThemeApi;
 }
 
-export type DesignLibComponentTag = 'hans-button' | 'hans-tag';
-
-export interface DesignLibComponentStatus {
-  tag: DesignLibComponentTag;
-  isRegistered: boolean;
-}
-
 export interface DesignLibContractStatus {
   themeApiAvailable: boolean;
-  components: readonly DesignLibComponentStatus[];
-  missingComponents: readonly DesignLibComponentTag[];
 }

@@ -1,33 +1,33 @@
 <app-page-wrapper>
   <div page-main>
     <app-page-intro
-      [sectionLabel]="i18n.t('pages.skills.sectionLabel')"
-      [title]="i18n.t('pages.skills.title')"
-      [description]="i18n.t('pages.skills.description')"
+      [sectionLabel]="'pages.skills.sectionLabel' | translate"
+      [title]="'pages.skills.title' | translate"
+      [description]="'pages.skills.description' | translate"
     />
   </div>
 
   <app-surface
     page-sidebar
     tone="info"
-    [label]="i18n.t('pages.skills.roadmap.label')"
-    [surfaceTitle]="i18n.t('pages.skills.roadmap.title')"
-    [description]="i18n.t('pages.skills.roadmap.description')"
+    [label]="'pages.skills.roadmap.label' | translate"
+    [surfaceTitle]="'pages.skills.roadmap.title' | translate"
+    [description]="'pages.skills.roadmap.description' | translate"
   />
 
   <app-surface
     page-content
     tone="success"
-    [label]="i18n.t('pages.skills.status.label')"
-    [surfaceTitle]="i18n.t('pages.skills.status.title')"
-    [description]="i18n.t('pages.skills.status.description')"
+    [label]="'pages.skills.status.label' | translate"
+    [surfaceTitle]="'pages.skills.status.title' | translate"
+    [description]="'pages.skills.status.description' | translate"
   />
 
   <app-surface
     page-content
     tone="base"
-    [label]="i18n.t('pages.skills.layout.label')"
-    [surfaceTitle]="i18n.t('pages.skills.layout.title')"
-    [description]="i18n.t('pages.skills.layout.description')"
+    [label]="'pages.skills.layout.label' | translate"
+    [surfaceTitle]="'pages.skills.layout.title' | translate"
+    [description]="'pages.skills.layout.description' | translate"
   />
 </app-page-wrapper>

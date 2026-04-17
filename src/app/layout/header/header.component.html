@@ -6,71 +6,62 @@
           <span class="header-brand-mark">VH</span>
           <span class="header-brand-copy">
             <strong>Victor Hanszman</strong>
-            <span>{{ i18n.t('header.brand.role') }}</span>
+            <span>{{ 'header.brand.role' | translate }}</span>
           </span>
         </a>
 
         <div class="header-actions">
-          <div class="header-tags" [attr.aria-label]="i18n.t('header.statusLabel')">
+          <div class="header-tags" [attr.aria-label]="'header.statusLabel' | translate">
             <hans-tag
-              [attr.label]="i18n.t('header.tags.angular')"
+              [attr.label]="'header.tags.angular' | translate"
               tagColor="warning"
               tagSize="md"
             ></hans-tag>
             <hans-tag
-              [attr.label]="i18n.t('header.tags.signals')"
+              [attr.label]="'header.tags.signals' | translate"
               tagColor="info"
               tagSize="md"
             ></hans-tag>
             <hans-tag
-              [attr.label]="i18n.t('header.tags.api')"
+              [attr.label]="'header.tags.api' | translate"
               tagColor="success"
               tagSize="md"
             ></hans-tag>
           </div>
 
           <div class="header-controls">
-            <hans-button
-              [attr.label]="
-                i18n.t(
-                  theme.mode() === 'light'
-                    ? 'header.controls.darkTheme'
-                    : 'header.controls.lightTheme'
-                )
-              "
-              buttonColor="base"
-              buttonShape="rounded"
-              buttonSize="small"
-              buttonVariant="outline"
-              (click)="theme.toggleMode()"
-            ></hans-button>
+            <hans-toggle
+              #themeToggle
+              [checked]="theme.mode() === 'dark'"
+              [label]="'header.controls.theme' | translate"
+              [leftLabel]="'header.controls.lightTheme' | translate"
+              [rightLabel]="'header.controls.darkTheme' | translate"
+              toggleColor="primary"
+              toggleSize="small"
+            ></hans-toggle>
 
-            <hans-button
-              [attr.label]="
-                i18n.t(
-                  i18n.locale() === 'en'
-                    ? 'header.controls.portuguese'
-                    : 'header.controls.english'
-                )
-              "
-              buttonColor="secondary"
-              buttonShape="rounded"
-              buttonSize="small"
-              buttonVariant="outline"
-              (click)="i18n.toggleLocale()"
-            ></hans-button>
+            <hans-dropdown
+              #languageDropdown
+              [noOptionsText]="'header.controls.noLanguages' | translate"
+              [options]="languageOptions()"
+              [triggerLabel]="'header.controls.language' | translate"
+              triggerColor="secondary"
+              triggerShape="rounded"
+              triggerSize="small"
+              triggerVariant="outline"
+            ></hans-dropdown>
           </div>
         </div>
       </div>
 
       <div class="header-hero">
         <div class="header-copy">
-          <span class="header-eyebrow">{{ i18n.t('header.eyebrow') }}</span>
+          <span class="header-eyebrow">{{ 'header.eyebrow' | translate }}</span>
           <h1 class="header-title">
-            {{ i18n.t('header.title') }}
+            {{ 'header.title' | translate }}
           </h1>
           <p class="header-description">
-            {{ i18n.t('header.description') }}
+            {{ 'header.description' | translate }}
           </p>
         </div>
 
@@ -78,25 +69,25 @@
           <app-surface
             tone="primary"
             spacing="compact"
-            [label]="i18n.t('header.highlight.layout.label')"
-            [surfaceTitle]="i18n.t('header.highlight.layout.title')"
-            [description]="i18n.t('header.highlight.layout.description')"
+            [label]="'header.highlight.layout.label' | translate"
+            [surfaceTitle]="'header.highlight.layout.title' | translate"
+            [description]="'header.highlight.layout.description' | translate"
           />
 
           <app-surface
             tone="success"
             spacing="compact"
-            [label]="i18n.t('header.highlight.integration.label')"
-            [surfaceTitle]="i18n.t('header.highlight.integration.title')"
-            [description]="i18n.t('header.highlight.integration.description')"
+            [label]="'header.highlight.integration.label' | translate"
+            [surfaceTitle]="'header.highlight.integration.title' | translate"
+            [description]="'header.highlight.integration.description' | translate"
           />
 
           <app-surface
             tone="info"
             spacing="compact"
-            [label]="i18n.t('header.highlight.direction.label')"
-            [surfaceTitle]="i18n.t('header.highlight.direction.title')"
-            [description]="i18n.t('header.highlight.direction.description')"
+            [label]="'header.highlight.direction.label' | translate"
+            [surfaceTitle]="'header.highlight.direction.title' | translate"
+            [description]="'header.highlight.direction.description' | translate"
           />
         </div>
       </div>

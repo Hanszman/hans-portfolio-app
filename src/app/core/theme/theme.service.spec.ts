@@ -2,9 +2,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DesignLibService } from '../design-lib/design-lib.service';
 import {
-  PORTFOLIO_THEMES,
-  PORTFOLIO_THEME_STORAGE_KEY,
-} from './portfolio-theme';
+  APP_THEMES,
+  APP_THEME_STORAGE_KEY,
+} from './theme.config';
 import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {
@@ -29,15 +29,15 @@ describe('ThemeService', () => {
   };
 
   beforeEach(() => {
-    localStorage.removeItem(PORTFOLIO_THEME_STORAGE_KEY);
-    document.documentElement.removeAttribute('data-portfolio-theme');
-    document.body.removeAttribute('data-portfolio-theme');
+    localStorage.removeItem(APP_THEME_STORAGE_KEY);
+    document.documentElement.removeAttribute('data-app-theme');
+    document.body.removeAttribute('data-app-theme');
   });
 
   afterEach(() => {
-    localStorage.removeItem(PORTFOLIO_THEME_STORAGE_KEY);
-    document.documentElement.removeAttribute('data-portfolio-theme');
-    document.body.removeAttribute('data-portfolio-theme');
+    localStorage.removeItem(APP_THEME_STORAGE_KEY);
+    document.documentElement.removeAttribute('data-app-theme');
+    document.body.removeAttribute('data-app-theme');
   });
 
   it('should start with the light theme when no persisted preference exists', () => {
@@ -46,32 +46,32 @@ describe('ThemeService', () => {
     const service = TestBed.inject(ThemeService);
 
     expect(service.mode()).toBe('light');
-    expect(service.theme()).toBe(PORTFOLIO_THEMES.light);
-    expect(document.documentElement.getAttribute('data-portfolio-theme')).toBe(
+    expect(service.theme()).toBe(APP_THEMES.light);
+    expect(document.documentElement.getAttribute('data-app-theme')).toBe(
       'light',
     );
-    expect(localStorage.getItem(PORTFOLIO_THEME_STORAGE_KEY)).toBe('light');
+    expect(localStorage.getItem(APP_THEME_STORAGE_KEY)).toBe('light');
     expect(designLibService.applyTheme).toHaveBeenCalledOnceWith(
-      PORTFOLIO_THEMES.light,
+      APP_THEMES.light,
     );
   });
 
   it('should restore a persisted dark theme preference', () => {
-    localStorage.setItem(PORTFOLIO_THEME_STORAGE_KEY, 'dark');
+    localStorage.setItem(APP_THEME_STORAGE_KEY, 'dark');
     const designLibService = configureTestingModule();
 
     const service = TestBed.inject(ThemeService);
 
     expect(service.mode()).toBe('dark');
     expect(service.nextMode()).toBe('light');
-    expect(document.body.getAttribute('data-portfolio-theme')).toBe('dark');
+    expect(document.body.getAttribute('data-app-theme')).toBe('dark');
     expect(designLibService.applyTheme).toHaveBeenCalledOnceWith(
-      PORTFOLIO_THEMES.dark,
+      APP_THEMES.dark,
     );
   });
 
   it('should ignore invalid persisted theme preferences', () => {
-    localStorage.setItem(PORTFOLIO_THEME_STORAGE_KEY, 'neon');
+    localStorage.setItem(APP_THEME_STORAGE_KEY, 'neon');
     configureTestingModule();
 
     const service = TestBed.inject(ThemeService);
@@ -87,12 +87,12 @@ describe('ThemeService', () => {
     service.toggleMode();
 
     expect(service.mode()).toBe('light');
-    expect(localStorage.getItem(PORTFOLIO_THEME_STORAGE_KEY)).toBe('light');
+    expect(localStorage.getItem(APP_THEME_STORAGE_KEY)).toBe('light');
     expect(designLibService.applyTheme).toHaveBeenCalledWith(
-      PORTFOLIO_THEMES.dark,
+      APP_THEMES.dark,
     );
     expect(designLibService.applyTheme).toHaveBeenCalledWith(
-      PORTFOLIO_THEMES.light,
+      APP_THEMES.light,
     );
   });
 });

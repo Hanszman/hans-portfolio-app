@@ -1,6 +1,12 @@
+import {
+  AppTranslationKey,
+  AppTranslationParams,
+} from '../../core/translation/translation.types';
+
 export interface ShellApiStatusViewModel {
   readonly state: 'loading' | 'connected' | 'error';
-  readonly title: string;
-  readonly description: string;
+  readonly titleKey: AppTranslationKey;
+  readonly descriptionKey: AppTranslationKey;
+  readonly descriptionParams?: AppTranslationParams;
   readonly baseUrl: string;
 }
