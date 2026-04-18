@@ -57,3 +57,4 @@ Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfol
 
 [ATUAL]:
 -Partir pra próxima etapa de implementação
+-Alterar tema/design do portfolio, etc
