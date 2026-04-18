@@ -77,6 +77,7 @@ describe('HeaderComponent', () => {
     expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
     expect(compiled.querySelector('hans-toggle')).toBeTruthy();
     expect(compiled.querySelector('hans-dropdown')).toBeTruthy();
+    expect(compiled.textContent).toContain('Dark mode');
     expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
     expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
   });
@@ -102,6 +103,7 @@ describe('HeaderComponent', () => {
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
     expect(document.documentElement.lang).toBe('pt-BR');
+    expect(compiled.textContent).toContain('Modo escuro');
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeTrue();
     expect(dropdown.options.map((option) => option.value)).toEqual([
       'en-us',

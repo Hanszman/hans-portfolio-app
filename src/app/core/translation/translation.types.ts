@@ -17,6 +17,7 @@ export type AppTranslationKey =
   | 'header.tags.signals'
   | 'header.tags.api'
   | 'header.controls.theme'
+  | 'header.controls.darkMode'
   | 'header.controls.darkTheme'
   | 'header.controls.lightTheme'
   | 'header.controls.language'

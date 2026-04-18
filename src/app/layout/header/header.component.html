@@ -36,12 +36,7 @@
               </span>
               <div class="header-theme-row">
                 <span class="header-theme-value">
-                  {{
-                    (theme.mode() === 'dark'
-                      ? 'header.controls.darkTheme'
-                      : 'header.controls.lightTheme'
-                    ) | translate
-                  }}
+                  {{ 'header.controls.darkMode' | translate }}
                 </span>
                 <hans-toggle
                   #themeToggle

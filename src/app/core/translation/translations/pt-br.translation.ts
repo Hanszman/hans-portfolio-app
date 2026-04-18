@@ -19,6 +19,7 @@ export const PT_BR_TRANSLATIONS = {
   'header.tags.signals': 'Signals first',
   'header.tags.api': 'API ativa',
   'header.controls.theme': 'Tema',
+  'header.controls.darkMode': 'Modo escuro',
   'header.controls.darkTheme': 'Tema escuro',
   'header.controls.lightTheme': 'Tema claro',
   'header.controls.language': 'Idioma',

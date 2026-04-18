@@ -19,6 +19,7 @@ export const EN_TRANSLATIONS = {
   'header.tags.signals': 'Signals first',
   'header.tags.api': 'API live',
   'header.controls.theme': 'Theme',
+  'header.controls.darkMode': 'Dark mode',
   'header.controls.darkTheme': 'Dark theme',
   'header.controls.lightTheme': 'Light theme',
   'header.controls.language': 'Language',
