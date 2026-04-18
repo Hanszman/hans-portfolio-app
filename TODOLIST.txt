@@ -56,5 +56,8 @@ Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
 [ATUAL]:
+-Muitos "localhost:3000" espalhados pelo código que deveriam estar usando a variável do env
+-Teste de app.routes.spec.ts está testando muito dashboards e dados e não deveria
+-Entender direito quais endpoints e informações o codex consumiu para construir a home
 -Partir pra próxima etapa de implementação
 -Alterar tema/design do portfolio, etc

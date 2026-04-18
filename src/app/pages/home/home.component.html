@@ -1,33 +1,204 @@
 <app-page-wrapper>
-  <div page-main>
-    <app-page-intro
-      [sectionLabel]="'pages.home.sectionLabel' | translate"
-      [title]="'pages.home.title' | translate"
-      [description]="'pages.home.description' | translate"
-    />
+  <div page-main class="home-hero">
+    <span class="home-eyebrow">{{ 'pages.home.hero.eyebrow' | translate }}</span>
+
+    <h2 class="home-title">{{ 'pages.home.hero.title' | translate }}</h2>
+
+    <p class="home-description">
+      {{ 'pages.home.hero.description' | translate }}
+    </p>
+
+    <div class="home-actions" aria-label="Home actions">
+      <hans-button
+        routerLink="/projects"
+        [attr.label]="'pages.home.cta.projects' | translate"
+        buttonColor="primary"
+        buttonShape="rounded"
+        buttonSize="large"
+      ></hans-button>
+
+      <hans-button
+        routerLink="/dashboard"
+        [attr.label]="'pages.home.cta.dashboard' | translate"
+        buttonColor="secondary"
+        buttonShape="rounded"
+        buttonSize="large"
+        buttonVariant="outline"
+      ></hans-button>
+    </div>
+
+    <dl class="home-metrics" aria-label="Portfolio summary metrics">
+      @for (metric of heroMetrics(); track metric.labelKey) {
+        <div class="home-metric">
+          <dt>{{ metric.labelKey | translate }}</dt>
+          <dd>{{ metric.value }}</dd>
+          <span>{{ metric.descriptionKey | translate }}</span>
+        </div>
+      }
+    </dl>
   </div>
 
   <app-surface
     page-sidebar
     tone="primary"
-    [label]="'pages.home.roadmap.label' | translate"
-    [surfaceTitle]="'pages.home.roadmap.title' | translate"
-    [description]="'pages.home.roadmap.description' | translate"
-  />
+    [label]="'pages.home.api.label' | translate"
+    [surfaceTitle]="'pages.home.api.title' | translate"
+    [description]="'pages.home.api.description' | translate"
+  >
+    @if (isLoading()) {
+      <p class="home-state">{{ 'pages.home.api.loading' | translate }}</p>
+    } @else if (hasError()) {
+      <p class="home-state">{{ 'pages.home.api.error' | translate }}</p>
+    } @else {
+      <dl class="home-api-metrics">
+        <div>
+          <dt>{{ 'pages.home.api.featuredProjects' | translate }}</dt>
+          <dd>{{ apiSnapshotMetrics().featuredProjects }}</dd>
+        </div>
 
-  <app-surface
-    page-content
-    tone="success"
-    [label]="'pages.home.status.label' | translate"
-    [surfaceTitle]="'pages.home.status.title' | translate"
-    [description]="'pages.home.status.description' | translate"
-  />
+        <div>
+          <dt>{{ 'pages.home.api.highlightedProjects' | translate }}</dt>
+          <dd>{{ apiSnapshotMetrics().highlightedProjects }}</dd>
+        </div>
 
-  <app-surface
-    page-content
-    tone="base"
-    [label]="'pages.home.layout.label' | translate"
-    [surfaceTitle]="'pages.home.layout.title' | translate"
-    [description]="'pages.home.layout.description' | translate"
-  />
+        <div>
+          <dt>{{ 'pages.home.api.usageLinks' | translate }}</dt>
+          <dd>{{ apiSnapshotMetrics().usageLinks }}</dd>
+        </div>
+      </dl>
+    }
+  </app-surface>
+
+  <section page-content class="home-section">
+    <app-page-intro
+      [sectionLabel]="'pages.home.pillars.label' | translate"
+      [title]="'pages.home.pillars.title' | translate"
+      [description]="'pages.home.pillars.description' | translate"
+    />
+
+    <div class="home-pillar-grid">
+      @for (pillar of seniorityPillars; track pillar.titleKey) {
+        <app-surface
+          [tone]="pillar.tone"
+          spacing="compact"
+          [label]="pillar.labelKey | translate"
+          [surfaceTitle]="pillar.titleKey | translate"
+          [description]="pillar.descriptionKey | translate"
+        >
+          <div class="home-tags">
+            @for (tag of pillar.tags; track tag) {
+              <hans-tag
+                [attr.label]="tag | translate"
+                tagColor="primary"
+                tagSize="sm"
+              ></hans-tag>
+            }
+          </div>
+        </app-surface>
+      }
+    </div>
+  </section>
+
+  <section page-content class="home-section home-data-section">
+    <app-surface
+      tone="success"
+      [label]="'pages.home.highlights.label' | translate"
+      [surfaceTitle]="'pages.home.highlights.title' | translate"
+      [description]="'pages.home.highlights.description' | translate"
+    >
+      @if (selectedHighlights().length > 0) {
+        <div class="home-highlight-grid">
+          @for (highlight of selectedHighlights(); track highlight.entity + highlight.slug) {
+            <article class="home-highlight">
+              <span>{{ highlight.entity }}</span>
+              <strong>{{ highlight.title }}</strong>
+              @if (highlight.subtitle) {
+                <p>{{ highlight.subtitle }}</p>
+              }
+              @if (highlight.featured) {
+                <hans-tag
+                  [attr.label]="'pages.home.highlights.featured' | translate"
+                  tagColor="success"
+                  tagSize="sm"
+                ></hans-tag>
+              }
+            </article>
+          }
+        </div>
+      } @else {
+        <p class="home-state">{{ 'pages.home.highlights.empty' | translate }}</p>
+      }
+    </app-surface>
+
+    <app-surface
+      tone="info"
+      [label]="'pages.home.stack.label' | translate"
+      [surfaceTitle]="'pages.home.stack.title' | translate"
+      [description]="'pages.home.stack.description' | translate"
+    >
+      <div class="home-stack-list">
+        @for (stack of stackHighlights(); track stack.slug) {
+          <article class="home-stack-item">
+            <strong>{{ stack.name }}</strong>
+            <span>
+              {{ stack.projectCount }}
+              {{ 'pages.home.stack.projects' | translate }}
+            </span>
+            <span>
+              {{ stack.technologyCount }}
+              {{ 'pages.home.stack.technologies' | translate }}
+            </span>
+          </article>
+        } @empty {
+          <p class="home-state">{{ 'pages.home.stack.empty' | translate }}</p>
+        }
+      </div>
+    </app-surface>
+  </section>
+
+  <section page-content class="home-section home-career-section">
+    <app-surface
+      tone="warning"
+      [label]="'pages.home.career.label' | translate"
+      [surfaceTitle]="'pages.home.career.title' | translate"
+      [description]="'pages.home.career.description' | translate"
+    >
+      @if (careerFocus(); as career) {
+        <div class="home-career-focus">
+          <span>{{ career.companyName }}</span>
+          <strong>{{ career.title }}</strong>
+          <div class="home-tags">
+            @for (technology of career.technologies; track technology) {
+              <hans-tag
+                [attr.label]="technology"
+                tagColor="warning"
+                tagSize="sm"
+              ></hans-tag>
+            }
+          </div>
+        </div>
+      } @else {
+        <p class="home-state">{{ 'pages.home.career.empty' | translate }}</p>
+      }
+    </app-surface>
+
+    <app-surface
+      tone="base"
+      [label]="'pages.home.topTechnologies.label' | translate"
+      [surfaceTitle]="'pages.home.topTechnologies.title' | translate"
+      [description]="'pages.home.topTechnologies.description' | translate"
+    >
+      <div class="home-tags home-tags-large">
+        @for (technology of topTechnologies(); track technology) {
+          <hans-tag
+            [attr.label]="technology"
+            tagColor="secondary"
+            tagSize="md"
+          ></hans-tag>
+        } @empty {
+          <p class="home-state">{{ 'pages.home.topTechnologies.empty' | translate }}</p>
+        }
+      </div>
+    </app-surface>
+  </section>
 </app-page-wrapper>

@@ -71,6 +71,7 @@ export class HeaderComponent {
           languageDropdown.options = languageOptions;
         }
       };
+      /* istanbul ignore else -- custom elements cannot be unregistered in the browser test runtime. */
       if (customElements.get('hans-dropdown')) {
         applyLanguageOptions();
       } else {

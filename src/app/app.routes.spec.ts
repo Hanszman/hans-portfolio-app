@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { apiConfig } from './core/api/api.config';
+import { DashboardApiService } from './core/api/dashboard-api.service';
 import { SystemApiService } from './core/api/system-api.service';
 import { provideAppTranslations } from './core/translation/translation.providers';
 import { routes } from './app.routes';
@@ -26,6 +27,49 @@ describe('app routes', () => {
                   database: 'up',
                 },
                 checkedAtUtc: '2026-04-14T13:00:00.000Z',
+            }),
+          },
+        },
+        {
+          provide: DashboardApiService,
+          useValue: {
+            getOverview: () =>
+              of({
+                generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                summary: {
+                  projects: 12,
+                  experiences: 4,
+                  technologies: 35,
+                  formations: 3,
+                  customers: 6,
+                  jobs: 5,
+                  spokenLanguages: 2,
+                },
+                stackDistribution: {
+                  generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                  stacks: [],
+                },
+                projectContexts: {
+                  generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                  totalProjects: 12,
+                  featuredProjects: 3,
+                  highlightedProjects: 5,
+                },
+                technologyUsage: {
+                  generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                  totalUsageLinks: 48,
+                  topTechnologies: [],
+                },
+                professionalTimeline: {
+                  generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                  totalItems: 0,
+                  items: [],
+                },
+                highlights: {
+                  generatedAtUtc: '2026-04-18T12:00:00.000Z',
+                  totalItems: 0,
+                  items: [],
+                },
               }),
           },
         },
@@ -33,11 +77,13 @@ describe('app routes', () => {
     }).compileComponents();
   });
 
-  it('should redirect the empty path to the home foundation route', async () => {
+  it('should redirect the empty path to the strategic home route', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Home foundation');
+    expect(harness.routeNativeElement?.textContent).toContain(
+      'Strategic portfolio home',
+    );
   });
 
   it('should load the dashboard foundation route', async () => {
@@ -70,10 +116,12 @@ describe('app routes', () => {
     expect(harness.routeNativeElement?.textContent).toContain('Projects foundation');
   });
 
-  it('should redirect unknown routes to the home foundation route', async () => {
+  it('should redirect unknown routes to the strategic home route', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/not-found');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Home foundation');
+    expect(harness.routeNativeElement?.textContent).toContain(
+      'Strategic portfolio home',
+    );
   });
 });
