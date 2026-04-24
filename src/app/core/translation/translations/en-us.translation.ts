@@ -143,22 +143,44 @@ export const EN_TRANSLATIONS = {
   'pages.home.layout.title': 'Page-specific component',
   'pages.home.layout.description':
     'The content now lives in the Home page component instead of being passed as static route data.',
-  'pages.experiences.sectionLabel': 'Foundation',
-  'pages.experiences.title': 'Experiences foundation',
+  'pages.experiences.sectionLabel': 'Career',
+  'pages.experiences.title': 'Experience narrative',
   'pages.experiences.description':
-    'The experiences route is ready for the timeline, impact narrative, and API-driven career data.',
-  'pages.experiences.roadmap.label': 'Roadmap',
-  'pages.experiences.roadmap.title': 'Impact timeline and leadership narrative',
-  'pages.experiences.roadmap.description':
-    'This page will organize career history by context, impact, stack, and relationships from the backend.',
-  'pages.experiences.status.label': 'Status',
-  'pages.experiences.status.title': 'Career storytelling',
-  'pages.experiences.status.description':
-    'The structure is ready for richer sections that make the career path easier to scan and understand.',
-  'pages.experiences.layout.label': 'Layout layer',
-  'pages.experiences.layout.title': 'Page-specific component',
-  'pages.experiences.layout.description':
-    'This page owns its own static foundation content instead of receiving it from route data.',
+    'Career chapters now read the public experiences endpoint and turn relationships into a scannable professional timeline.',
+  'pages.experiences.snapshot.label': 'Career snapshot',
+  'pages.experiences.snapshot.title': 'Trajectory coverage from the live API',
+  'pages.experiences.snapshot.description':
+    'Counts, current role signal, and relationship breadth are derived from the published experiences collection.',
+  'pages.experiences.snapshot.loading':
+    'Loading live experience relationships...',
+  'pages.experiences.snapshot.error':
+    'The experiences endpoint is unavailable right now.',
+  'pages.experiences.snapshot.metrics.currentRole': 'Current role',
+  'pages.experiences.snapshot.metrics.experiences': 'Chapters',
+  'pages.experiences.snapshot.metrics.projects': 'Projects',
+  'pages.experiences.snapshot.metrics.technologies': 'Technologies',
+  'pages.experiences.snapshot.metrics.customers': 'Customers',
+  'pages.experiences.snapshot.metrics.highlights': 'Highlights',
+  'pages.experiences.timeline.label': 'Career narrative',
+  'pages.experiences.timeline.title':
+    'Timeline, context, and impact in the same reading flow',
+  'pages.experiences.timeline.description':
+    'Each chapter connects company, role, customers, projects, and stack signals so the professional story reads as a system instead of a flat list.',
+  'pages.experiences.timeline.loading':
+    'Loading live experience relationships...',
+  'pages.experiences.timeline.error':
+    'The experiences endpoint is unavailable right now.',
+  'pages.experiences.timeline.empty':
+    'No published experience chapters were returned yet.',
+  'pages.experiences.timeline.current': 'Current',
+  'pages.experiences.timeline.highlight': 'Highlight',
+  'pages.experiences.timeline.roles': 'Roles',
+  'pages.experiences.timeline.customers': 'Customers',
+  'pages.experiences.timeline.emptyCustomers': 'No linked customers yet.',
+  'pages.experiences.timeline.technologyStack': 'Technology stack',
+  'pages.experiences.timeline.relatedProjects': 'Related projects',
+  'pages.experiences.timeline.emptyProjects':
+    'No related projects were returned for this chapter.',
   'pages.skills.sectionLabel': 'Foundation',
   'pages.skills.title': 'Skills foundation',
   'pages.skills.description':

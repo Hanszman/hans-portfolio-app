@@ -1,0 +1,241 @@
+:host {
+  display: block;
+}
+
+.experiences-state {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--text-color) 74%, transparent);
+}
+
+.experiences-summary-grid,
+.experiences-timeline,
+.experience-entry-meta,
+.experience-projects,
+.experience-project-grid {
+  display: grid;
+}
+
+.experiences-summary-grid,
+.experience-project-grid {
+  gap: 1rem;
+}
+
+.experiences-timeline,
+.experience-projects {
+  gap: 1.5rem;
+}
+
+.experiences-summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.experiences-summary-item,
+.experience-entry-card,
+.experience-project-card {
+  border: 1px solid color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  border-radius: 1.5rem;
+  background-color: color-mix(in srgb, var(--background-color) 90%, white);
+}
+
+.experiences-summary-item {
+  padding: 1rem;
+  border-color: color-mix(in srgb, var(--secondary-default-color) 20%, transparent);
+}
+
+.experiences-summary-item span,
+.experience-meta-block > span,
+.experience-projects > span,
+.experience-entry-heading span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.experiences-summary-item span {
+  color: var(--secondary-default-color);
+}
+
+.experiences-summary-item strong,
+.experience-project-top strong {
+  display: block;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.experiences-summary-item strong {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.experiences-summary-item small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}
+
+.experience-entry {
+  display: grid;
+  gap: 1rem;
+}
+
+.experience-entry-rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-left: 1rem;
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
+.experience-entry-rail-line {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  background-color: color-mix(in srgb, var(--success-default-color) 35%, transparent);
+}
+
+.experience-entry-date,
+.experience-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+}
+
+.experience-entry-date {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: color-mix(in srgb, var(--success-neutral-color) 45%, white);
+  color: var(--success-strong-color);
+}
+
+.experience-entry-card {
+  gap: 1.25rem;
+  padding: 1.25rem;
+  display: grid;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
+}
+
+.experience-entry-head,
+.experience-project-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.experience-entry-icon {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--warning-default-color) 24%, transparent);
+  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, white);
+}
+
+.experience-entry-copy {
+  flex: 1;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.experience-entry-heading span,
+.experience-meta-block > span,
+.experience-projects > span {
+  color: color-mix(in srgb, var(--text-color) 66%, transparent);
+}
+
+.experience-entry-heading strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.experience-entry-flags,
+.experience-chip-list,
+.experience-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.experience-entry-summary,
+.experience-entry-description,
+.experience-project-card p {
+  margin: 0;
+}
+
+.experience-entry-summary {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.experience-entry-description,
+.experience-project-card p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
+.experience-entry-meta {
+  gap: 1rem;
+}
+
+.experience-meta-block {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.experience-chip {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, white);
+  font-size: 0.9rem;
+}
+
+.experience-chip-muted {
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.experience-project-card {
+  padding: 1rem;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--primary-neutral-color) 18%, white);
+}
+
+@media (min-width: 768px) {
+  .experience-entry-head {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .experience-entry-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .experience-entry {
+    grid-template-columns: 11rem minmax(0, 1fr);
+  }
+
+  .experience-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .experience-project-top {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}

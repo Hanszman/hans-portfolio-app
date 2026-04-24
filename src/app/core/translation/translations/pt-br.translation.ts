@@ -143,23 +143,45 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.layout.title': 'Componente específico da página',
   'pages.home.layout.description':
     'O conteúdo agora vive no componente Home em vez de ser passado como route data estática.',
-  'pages.experiences.sectionLabel': 'Fundação',
-  'pages.experiences.title': 'Fundação de experiences',
+  'pages.experiences.sectionLabel': 'Carreira',
+  'pages.experiences.title': 'Narrativa de carreira',
   'pages.experiences.description':
-    'A rota experiences está pronta para timeline, narrativa de impacto e dados de carreira via API.',
-  'pages.experiences.roadmap.label': 'Roadmap',
-  'pages.experiences.roadmap.title':
-    'Timeline de impacto e narrativa de liderança',
-  'pages.experiences.roadmap.description':
-    'Esta página vai organizar a carreira por contexto, impacto, stack e relacionamentos vindos do backend.',
-  'pages.experiences.status.label': 'Status',
-  'pages.experiences.status.title': 'Storytelling de carreira',
-  'pages.experiences.status.description':
-    'A estrutura está pronta para seções mais ricas que tornam a trajetória mais fácil de escanear e entender.',
-  'pages.experiences.layout.label': 'Camada de layout',
-  'pages.experiences.layout.title': 'Componente específico da página',
-  'pages.experiences.layout.description':
-    'Esta página agora possui seu próprio conteúdo estático de fundação, sem receber isso por route data.',
+    'Os capitulos de carreira agora leem o endpoint publico de experiences e transformam relacionamentos em uma timeline profissional facil de escanear.',
+  'pages.experiences.snapshot.label': 'Panorama',
+  'pages.experiences.snapshot.title': 'Cobertura da trajetoria vinda da API real',
+  'pages.experiences.snapshot.description':
+    'Contagens, sinal do papel atual e amplitude de relacionamentos saem diretamente da colecao publicada de experiences.',
+  'pages.experiences.snapshot.loading':
+    'Carregando relacionamentos reais de experiences...',
+  'pages.experiences.snapshot.error':
+    'O endpoint de experiences esta indisponivel agora.',
+  'pages.experiences.snapshot.metrics.currentRole': 'Papel atual',
+  'pages.experiences.snapshot.metrics.experiences': 'Capitulos',
+  'pages.experiences.snapshot.metrics.projects': 'Projetos',
+  'pages.experiences.snapshot.metrics.technologies': 'Tecnologias',
+  'pages.experiences.snapshot.metrics.customers': 'Clientes',
+  'pages.experiences.snapshot.metrics.highlights': 'Destaques',
+  'pages.experiences.timeline.label': 'Narrativa de carreira',
+  'pages.experiences.timeline.title':
+    'Timeline, contexto e impacto no mesmo fluxo de leitura',
+  'pages.experiences.timeline.description':
+    'Cada capitulo conecta empresa, papel, clientes, projetos e stack para que a historia profissional seja lida como sistema e nao como lista solta.',
+  'pages.experiences.timeline.loading':
+    'Carregando relacionamentos reais de experiences...',
+  'pages.experiences.timeline.error':
+    'O endpoint de experiences esta indisponivel agora.',
+  'pages.experiences.timeline.empty':
+    'Nenhum capitulo publicado de experiencia foi retornado ainda.',
+  'pages.experiences.timeline.current': 'Atual',
+  'pages.experiences.timeline.highlight': 'Destaque',
+  'pages.experiences.timeline.roles': 'Papeis',
+  'pages.experiences.timeline.customers': 'Clientes',
+  'pages.experiences.timeline.emptyCustomers':
+    'Nenhum cliente vinculado ainda.',
+  'pages.experiences.timeline.technologyStack': 'Stack de tecnologia',
+  'pages.experiences.timeline.relatedProjects': 'Projetos relacionados',
+  'pages.experiences.timeline.emptyProjects':
+    'Nenhum projeto relacionado foi retornado para este capitulo.',
   'pages.skills.sectionLabel': 'Fundação',
   'pages.skills.title': 'Fundação de skills',
   'pages.skills.description':

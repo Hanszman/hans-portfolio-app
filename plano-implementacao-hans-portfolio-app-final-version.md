@@ -867,6 +867,14 @@ Transformar experiencias em narrativa de carreira, nao apenas lista de cards.
 - narrativa profissional clara
 - coverage total do escopo entregue
 
+#### Status de execucao atual
+
+- F3 concluida no `hans-portfolio-app`
+- pagina `experiences` agora consome `GET /experiences` com relacionamentos reais
+- a leitura foi organizada como timeline narrativa com foco em empresa, papel, clientes, projetos e stack
+- reutilizacao da `hans-ui-design-lib` aplicada com `hans-avatar`, `hans-tag` e `hans-icon`
+- proxima etapa oficial: `F4 - Pagina de technologies/skills`
+
 ### F4 - Pagina de technologies/skills
 
 #### Objetivo
