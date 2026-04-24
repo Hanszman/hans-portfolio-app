@@ -1,3 +1,8 @@
+export interface DashboardDistributionEntryResponse {
+  key: string;
+  count: number;
+}
+
 export interface DashboardSummaryCountersResponse {
   projects: number;
   experiences: number;
@@ -26,6 +31,8 @@ export interface DashboardProjectContextsResponse {
   totalProjects: number;
   featuredProjects: number;
   highlightedProjects: number;
+  contexts: DashboardDistributionEntryResponse[];
+  environments: DashboardDistributionEntryResponse[];
 }
 
 export interface DashboardTopTechnologyEntryResponse {
@@ -38,6 +45,10 @@ export interface DashboardTopTechnologyEntryResponse {
 export interface DashboardTechnologyUsageResponse {
   generatedAtUtc: string;
   totalUsageLinks: number;
+  levels: DashboardDistributionEntryResponse[];
+  frequencies: DashboardDistributionEntryResponse[];
+  contexts: DashboardDistributionEntryResponse[];
+  sources: DashboardDistributionEntryResponse[];
   topTechnologies: DashboardTopTechnologyEntryResponse[];
 }
 

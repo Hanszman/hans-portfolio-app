@@ -1,6 +1,6 @@
-export type SurfaceSpacing = 'compact' | 'comfortable';
+export type ContainerSpacing = 'compact' | 'comfortable';
 
-export type SurfaceTone =
+export type ContainerTone =
   | 'base'
   | 'primary'
   | 'secondary'

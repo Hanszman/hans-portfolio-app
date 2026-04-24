@@ -389,7 +389,7 @@ Exemplos provaveis:
 - composicoes de case study
 - layouts especificos de timeline do portfolio
 - secoes de highlights muito ligadas ao contexto do Victor
-- surfaces/wrappers de layout quando o componente da lib existente nao representar bem uma area estrutural generica do portfolio
+- containers/wrappers de layout quando o componente da lib existente nao representar bem uma area estrutural generica do portfolio
 
 ---
 
@@ -513,7 +513,7 @@ Direcao oficial:
 - wrappers de pagina
 - layout de secoes
 - componentes de layout especificos do portfolio, mesmo quando baseados visualmente na `hans-ui-design-lib`
-- surfaces reutilizaveis do proprio portfolio quando forem parte da composicao visual/estrutural das paginas
+- containers reutilizaveis do proprio portfolio quando forem parte da composicao visual/estrutural das paginas
 
 `pages/`
 
@@ -763,7 +763,7 @@ Construir a casca navegavel principal do portfolio.
 - wrappers de pagina
 - uso seletivo de web components da `hans-ui-design-lib` como base visual da shell
 - uso de `hans-button` da `hans-ui-design-lib` para controles visuais de navegacao
-- surfaces reutilizaveis do portfolio para evitar duplicacao de boxes/cards estruturais
+- containers reutilizaveis do portfolio para evitar duplicacao de boxes/cards estruturais
 - responsividade inicial da shell
 - testes unitarios dos componentes de layout criados
 
@@ -824,6 +824,8 @@ Construir uma home forte, moderna e com posicionamento profissional claro.
 - highlights de senioridade e stack
 - CTA(s) coerentes com portfolio profissional
 - blocos de projetos/experiencias em destaque
+- uso de avatar/icon da `hans-ui-design-lib` quando fizer sentido para enriquecer leitura visual
+- aproveitamento de imagens reais vindas da API sempre que endpoints agregados ja entregarem `imagePath` ou `icon`
 - secoes de prova social/impacto se fizer sentido
 - consumo de dados reais da API nas secoes que ja tiverem endpoint adequado
 - componentes especificos da home com testes unitarios
@@ -834,6 +836,14 @@ Construir uma home forte, moderna e com posicionamento profissional claro.
 - responsividade boa
 - integracao real com a API usada sempre que o backend ja suportar a necessidade da secao
 - coverage total do que for implementado
+
+### Observacao de organizacao tecnica da API do front
+
+- manter `src/app/core/api/api.config.ts` na raiz da camada de API
+- organizar endpoints por dominio dentro de pastas como `core/api/dashboard/` e `core/api/system/`
+- cada dominio deve concentrar `service.ts`, `types.ts` e `service.spec.ts`
+- factories/mocks compartilhados para specs devem ficar em `core/api/testing/`
+- evitar sufixo `Api` nos nomes dos services quando a propria localizacao em `core/api/` ja deixar o contexto obvio
 
 ### F3 - Pagina de experiences
 

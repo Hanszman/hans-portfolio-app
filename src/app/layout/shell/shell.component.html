@@ -2,7 +2,7 @@
   <app-header [navigationItems]="navigationItems()" />
 
   <div class="shell-api-status-wrapper">
-    <app-surface [tone]="apiStatusTone()" spacing="compact">
+    <app-container [tone]="apiStatusTone()" spacing="compact">
       <section class="shell-api-status" data-testid="shell-api-status">
         <div class="shell-api-status-copy">
           <span class="shell-api-status-eyebrow">
@@ -21,7 +21,7 @@
 
         <code class="shell-api-status-base-url">{{ apiStatus().baseUrl }}</code>
       </section>
-    </app-surface>
+    </app-container>
   </div>
 
   <section class="shell-stage">

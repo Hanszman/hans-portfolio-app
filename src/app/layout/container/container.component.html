@@ -1,0 +1,19 @@
+<section [class]="containerClassName()" data-testid="container">
+  @if (hasHeader()) {
+    <header class="container-header">
+      @if (label()) {
+        <span class="container-label">{{ label() }}</span>
+      }
+
+      @if (containerTitle()) {
+        <strong class="container-title">{{ containerTitle() }}</strong>
+      }
+
+      @if (description()) {
+        <p class="container-description">{{ description() }}</p>
+      }
+    </header>
+  }
+
+  <ng-content />
+</section>

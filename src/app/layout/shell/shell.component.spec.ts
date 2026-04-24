@@ -1,10 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { NEVER, of, throwError } from 'rxjs';
 import { apiConfig } from '../../core/api/api.config';
-import { SystemApiService } from '../../core/api/system-api.service';
+import { createSystemServiceMock } from '../../core/api/testing/system.testing';
+import { SystemService } from '../../core/api/system/service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { ShellComponent } from './shell.component';
 
@@ -14,32 +13,6 @@ import { ShellComponent } from './shell.component';
 class TestRouteComponent {}
 
 describe('ShellComponent', () => {
-  const createSystemApiServiceMock = (
-    mode: 'success' | 'blocked' | 'generic-error' | 'loading',
-  ) => ({
-    apiBaseUrl: apiConfig.baseUrl,
-    getHealth: () =>
-      mode === 'success'
-        ? of({
-            status: 'healthy' as const,
-            checks: {
-              database: 'up' as const,
-            },
-            checkedAtUtc: '2026-04-14T13:00:00.000Z',
-          })
-        : mode === 'blocked'
-          ? throwError(
-              () =>
-                new HttpErrorResponse({
-                  status: 0,
-                  statusText: 'Unknown Error',
-              }),
-            )
-          : mode === 'loading'
-            ? NEVER
-            : throwError(() => new Error('health failed')),
-  });
-
   const configureTestingModule = async (
     mode: 'success' | 'blocked' | 'generic-error' | 'loading',
   ) => {
@@ -64,8 +37,8 @@ describe('ShellComponent', () => {
           },
         ]),
         {
-          provide: SystemApiService,
-          useValue: createSystemApiServiceMock(mode),
+          provide: SystemService,
+          useValue: createSystemServiceMock(mode),
         },
       ],
     }).compileComponents();
@@ -95,7 +68,7 @@ describe('ShellComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.textContent).toContain('Connecting to API');
-    expect(compiled.querySelector('.surface-warning')).toBeTruthy();
+    expect(compiled.querySelector('.container-warning')).toBeTruthy();
   });
 
   it('should render the error API status when the health check fails', async () => {

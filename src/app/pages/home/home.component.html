@@ -1,48 +1,135 @@
 <app-page-wrapper>
   <div page-main class="home-hero">
-    <span class="home-eyebrow">{{ 'pages.home.hero.eyebrow' | translate }}</span>
+    <div class="home-hero-grid">
+      <section class="home-hero-copy">
+        <span class="home-eyebrow">{{ 'pages.home.hero.eyebrow' | translate }}</span>
 
-    <h2 class="home-title">{{ 'pages.home.hero.title' | translate }}</h2>
+        <h2 class="home-title">{{ 'pages.home.hero.title' | translate }}</h2>
 
-    <p class="home-description">
-      {{ 'pages.home.hero.description' | translate }}
-    </p>
+        <p class="home-description">
+          {{ 'pages.home.hero.description' | translate }}
+        </p>
 
-    <div class="home-actions" aria-label="Home actions">
-      <hans-button
-        routerLink="/projects"
-        [attr.label]="'pages.home.cta.projects' | translate"
-        buttonColor="primary"
-        buttonShape="rounded"
-        buttonSize="large"
-      ></hans-button>
+        <div class="home-actions" aria-label="Home actions">
+          <hans-button
+            routerLink="/projects"
+            [attr.label]="'pages.home.cta.projects' | translate"
+            buttonColor="primary"
+            buttonShape="rounded"
+            buttonSize="large"
+          ></hans-button>
 
-      <hans-button
-        routerLink="/dashboard"
-        [attr.label]="'pages.home.cta.dashboard' | translate"
-        buttonColor="secondary"
-        buttonShape="rounded"
-        buttonSize="large"
-        buttonVariant="outline"
-      ></hans-button>
-    </div>
-
-    <dl class="home-metrics" aria-label="Portfolio summary metrics">
-      @for (metric of heroMetrics(); track metric.labelKey) {
-        <div class="home-metric">
-          <dt>{{ metric.labelKey | translate }}</dt>
-          <dd>{{ metric.value }}</dd>
-          <span>{{ metric.descriptionKey | translate }}</span>
+          <hans-button
+            routerLink="/dashboard"
+            [attr.label]="'pages.home.cta.dashboard' | translate"
+            buttonColor="secondary"
+            buttonShape="rounded"
+            buttonSize="large"
+            buttonVariant="outline"
+          ></hans-button>
         </div>
-      }
-    </dl>
+
+        <dl class="home-metrics" aria-label="Portfolio summary metrics">
+          @for (metric of heroMetrics(); track metric.labelKey) {
+            <div class="home-metric">
+              <div class="home-metric-icon">
+                <hans-icon [name]="metric.iconName" iconSize="medium"></hans-icon>
+              </div>
+              <dt>{{ metric.labelKey | translate }}</dt>
+              <dd>{{ metric.value }}</dd>
+              <span>{{ metric.descriptionKey | translate }}</span>
+            </div>
+          }
+        </dl>
+      </section>
+
+      <section class="home-identity-panel">
+        <div class="home-identity-top">
+          <hans-avatar
+            [src]="profileImageSrc"
+            alt="Victor Hanszman"
+            avatarSize="large"
+          ></hans-avatar>
+
+          <div class="home-identity-copy">
+            <span class="home-identity-name">Victor Hanszman</span>
+            <strong>{{ 'header.brand.role' | translate }}</strong>
+            <p>{{ 'pages.home.hero.description' | translate }}</p>
+          </div>
+        </div>
+
+        @if (careerFocus(); as career) {
+          <div class="home-current-focus">
+            <div class="home-current-focus-head">
+              @if (career.imageUrl) {
+                <hans-avatar
+                  [src]="career.imageUrl"
+                  [alt]="career.companyName"
+                  avatarSize="medium"
+                ></hans-avatar>
+              } @else {
+                <div class="home-current-focus-icon">
+                  <hans-icon name="LuBriefcaseBusiness" iconSize="medium"></hans-icon>
+                </div>
+              }
+
+              <div class="home-current-focus-copy">
+                <span>{{ 'pages.home.career.label' | translate }}</span>
+                <strong>{{ career.companyName }}</strong>
+                <p>{{ career.title }}</p>
+              </div>
+            </div>
+
+            <div class="home-tags">
+              @for (technology of career.technologies; track technology) {
+                <hans-tag
+                  [attr.label]="technology"
+                  tagColor="info"
+                  tagSize="sm"
+                ></hans-tag>
+              }
+            </div>
+
+            @if (career.customers.length > 0 || career.projects.length > 0) {
+              <div class="home-focus-links">
+                @for (customer of career.customers; track customer) {
+                  <span class="home-focus-pill">
+                    <hans-icon name="LuHandshake" iconSize="small"></hans-icon>
+                    {{ customer }}
+                  </span>
+                }
+
+                @for (project of career.projects; track project) {
+                  <span class="home-focus-pill">
+                    <hans-icon name="LuFolderKanban" iconSize="small"></hans-icon>
+                    {{ project }}
+                  </span>
+                }
+              </div>
+            }
+          </div>
+        }
+
+        @if (showcaseVisuals().length > 0) {
+          <div class="home-visual-strip">
+            @for (visual of showcaseVisuals(); track visual.id) {
+              <hans-avatar
+                [src]="visual.src"
+                [alt]="visual.alt"
+                avatarSize="small"
+              ></hans-avatar>
+            }
+          </div>
+        }
+      </section>
+    </div>
   </div>
 
-  <app-surface
+  <app-container
     page-sidebar
     tone="primary"
     [label]="'pages.home.api.label' | translate"
-    [surfaceTitle]="'pages.home.api.title' | translate"
+    [containerTitle]="'pages.home.api.title' | translate"
     [description]="'pages.home.api.description' | translate"
   >
     @if (isLoading()) {
@@ -51,23 +138,18 @@
       <p class="home-state">{{ 'pages.home.api.error' | translate }}</p>
     } @else {
       <dl class="home-api-metrics">
-        <div>
-          <dt>{{ 'pages.home.api.featuredProjects' | translate }}</dt>
-          <dd>{{ apiSnapshotMetrics().featuredProjects }}</dd>
-        </div>
-
-        <div>
-          <dt>{{ 'pages.home.api.highlightedProjects' | translate }}</dt>
-          <dd>{{ apiSnapshotMetrics().highlightedProjects }}</dd>
-        </div>
-
-        <div>
-          <dt>{{ 'pages.home.api.usageLinks' | translate }}</dt>
-          <dd>{{ apiSnapshotMetrics().usageLinks }}</dd>
-        </div>
+        @for (metric of apiSnapshotMetrics(); track metric.labelKey) {
+          <div>
+            <span class="home-api-icon">
+              <hans-icon [name]="metric.iconName" iconSize="medium"></hans-icon>
+            </span>
+            <dt>{{ metric.labelKey | translate }}</dt>
+            <dd>{{ metric.value }}</dd>
+          </div>
+        }
       </dl>
     }
-  </app-surface>
+  </app-container>
 
   <section page-content class="home-section">
     <app-page-intro
@@ -78,13 +160,17 @@
 
     <div class="home-pillar-grid">
       @for (pillar of seniorityPillars; track pillar.titleKey) {
-        <app-surface
+        <app-container
           [tone]="pillar.tone"
           spacing="compact"
           [label]="pillar.labelKey | translate"
-          [surfaceTitle]="pillar.titleKey | translate"
+          [containerTitle]="pillar.titleKey | translate"
           [description]="pillar.descriptionKey | translate"
         >
+          <div class="home-panel-icon">
+            <hans-icon [name]="pillar.iconName" iconSize="medium"></hans-icon>
+          </div>
+
           <div class="home-tags">
             @for (tag of pillar.tags; track tag) {
               <hans-tag
@@ -94,27 +180,42 @@
               ></hans-tag>
             }
           </div>
-        </app-surface>
+        </app-container>
       }
     </div>
   </section>
 
   <section page-content class="home-section home-data-section">
-    <app-surface
+    <app-container
       tone="success"
       [label]="'pages.home.highlights.label' | translate"
-      [surfaceTitle]="'pages.home.highlights.title' | translate"
+      [containerTitle]="'pages.home.highlights.title' | translate"
       [description]="'pages.home.highlights.description' | translate"
     >
       @if (selectedHighlights().length > 0) {
         <div class="home-highlight-grid">
           @for (highlight of selectedHighlights(); track highlight.entity + highlight.slug) {
             <article class="home-highlight">
-              <span>{{ highlight.entity }}</span>
-              <strong>{{ highlight.title }}</strong>
-              @if (highlight.subtitle) {
-                <p>{{ highlight.subtitle }}</p>
-              }
+              <div class="home-highlight-visual">
+                @if (highlight.visualUrl) {
+                  <hans-avatar
+                    [src]="highlight.visualUrl"
+                    [alt]="highlight.title"
+                    avatarSize="medium"
+                  ></hans-avatar>
+                } @else {
+                  <hans-icon [name]="highlight.iconName" iconSize="medium"></hans-icon>
+                }
+              </div>
+
+              <div class="home-highlight-copy">
+                <span>{{ highlight.entity }}</span>
+                <strong>{{ highlight.title }}</strong>
+                @if (highlight.subtitle) {
+                  <p>{{ highlight.subtitle }}</p>
+                }
+              </div>
+
               @if (highlight.featured) {
                 <hans-tag
                   [attr.label]="'pages.home.highlights.featured' | translate"
@@ -128,23 +229,28 @@
       } @else {
         <p class="home-state">{{ 'pages.home.highlights.empty' | translate }}</p>
       }
-    </app-surface>
+    </app-container>
 
-    <app-surface
+    <app-container
       tone="info"
       [label]="'pages.home.stack.label' | translate"
-      [surfaceTitle]="'pages.home.stack.title' | translate"
+      [containerTitle]="'pages.home.stack.title' | translate"
       [description]="'pages.home.stack.description' | translate"
     >
       <div class="home-stack-list">
         @for (stack of stackHighlights(); track stack.slug) {
           <article class="home-stack-item">
-            <strong>{{ stack.name }}</strong>
-            <span>
-              {{ stack.projectCount }}
-              {{ 'pages.home.stack.projects' | translate }}
-            </span>
-            <span>
+            <div class="home-stack-icon">
+              <hans-icon [name]="stack.iconName" iconSize="medium"></hans-icon>
+            </div>
+            <div class="home-stack-copy">
+              <strong>{{ stack.name }}</strong>
+              <span>
+                {{ stack.projectCount }}
+                {{ 'pages.home.stack.projects' | translate }}
+              </span>
+            </div>
+            <span class="home-stack-count">
               {{ stack.technologyCount }}
               {{ 'pages.home.stack.technologies' | translate }}
             </span>
@@ -153,20 +259,37 @@
           <p class="home-state">{{ 'pages.home.stack.empty' | translate }}</p>
         }
       </div>
-    </app-surface>
+    </app-container>
   </section>
 
   <section page-content class="home-section home-career-section">
-    <app-surface
+    <app-container
       tone="warning"
       [label]="'pages.home.career.label' | translate"
-      [surfaceTitle]="'pages.home.career.title' | translate"
+      [containerTitle]="'pages.home.career.title' | translate"
       [description]="'pages.home.career.description' | translate"
     >
       @if (careerFocus(); as career) {
         <div class="home-career-focus">
-          <span>{{ career.companyName }}</span>
-          <strong>{{ career.title }}</strong>
+          <div class="home-career-head">
+            @if (career.imageUrl) {
+              <hans-avatar
+                [src]="career.imageUrl"
+                [alt]="career.companyName"
+                avatarSize="medium"
+              ></hans-avatar>
+            } @else {
+              <div class="home-career-icon">
+                <hans-icon name="LuBuilding2" iconSize="medium"></hans-icon>
+              </div>
+            }
+
+            <div>
+              <span>{{ career.companyName }}</span>
+              <strong>{{ career.title }}</strong>
+            </div>
+          </div>
+
           <div class="home-tags">
             @for (technology of career.technologies; track technology) {
               <hans-tag
@@ -176,29 +299,52 @@
               ></hans-tag>
             }
           </div>
+
+          <div class="home-focus-links">
+            @for (customer of career.customers; track customer) {
+              <span class="home-focus-pill">
+                <hans-icon name="LuHandshake" iconSize="small"></hans-icon>
+                {{ customer }}
+              </span>
+            }
+
+            @for (project of career.projects; track project) {
+              <span class="home-focus-pill">
+                <hans-icon name="LuFolderKanban" iconSize="small"></hans-icon>
+                {{ project }}
+              </span>
+            }
+          </div>
         </div>
       } @else {
         <p class="home-state">{{ 'pages.home.career.empty' | translate }}</p>
       }
-    </app-surface>
+    </app-container>
 
-    <app-surface
+    <app-container
       tone="base"
       [label]="'pages.home.topTechnologies.label' | translate"
-      [surfaceTitle]="'pages.home.topTechnologies.title' | translate"
+      [containerTitle]="'pages.home.topTechnologies.title' | translate"
       [description]="'pages.home.topTechnologies.description' | translate"
     >
-      <div class="home-tags home-tags-large">
-        @for (technology of topTechnologies(); track technology) {
-          <hans-tag
-            [attr.label]="technology"
-            tagColor="secondary"
-            tagSize="md"
-          ></hans-tag>
+      <div class="home-technology-list">
+        @for (technology of topTechnologies(); track technology.slug) {
+          <article class="home-technology-item">
+            <div class="home-technology-icon">
+              <hans-icon
+                [name]="technology.iconName"
+                iconSize="medium"
+              ></hans-icon>
+            </div>
+            <div class="home-technology-copy">
+              <strong>{{ technology.name }}</strong>
+              <span>{{ technology.usageCount }}</span>
+            </div>
+          </article>
         } @empty {
           <p class="home-state">{{ 'pages.home.topTechnologies.empty' | translate }}</p>
         }
       </div>
-    </app-surface>
+    </app-container>
   </section>
 </app-page-wrapper>

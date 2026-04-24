@@ -3,7 +3,15 @@
 }
 
 .home-hero {
-  @apply grid gap-6 py-4 md:py-8;
+  @apply py-3;
+}
+
+.home-hero-grid {
+  @apply grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] xl:items-start;
+}
+
+.home-hero-copy {
+  @apply grid gap-6;
 }
 
 .home-eyebrow {
@@ -12,7 +20,7 @@
 }
 
 .home-title {
-  @apply m-0 max-w-4xl text-4xl font-semibold leading-tight md:text-6xl;
+  @apply m-0 max-w-4xl text-4xl font-semibold leading-[0.95] md:text-6xl;
   color: var(--text-color);
 }
 
@@ -30,13 +38,34 @@
 }
 
 .home-metric {
-  @apply grid gap-1 rounded-2xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 86%, white);
-  border-color: color-mix(in srgb, var(--base-neutral-color) 38%, transparent);
+  @apply grid gap-2 rounded-[1.75rem] border p-4;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--background-color) 88%, white) 0%,
+      color-mix(in srgb, var(--primary-neutral-color) 16%, transparent) 100%
+    );
+  border-color: color-mix(in srgb, var(--base-neutral-color) 32%, transparent);
+}
+
+.home-metric-icon,
+.home-api-icon,
+.home-panel-icon,
+.home-stack-icon,
+.home-technology-icon,
+.home-current-focus-icon,
+.home-career-icon {
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl border;
+  background-color: color-mix(in srgb, var(--primary-neutral-color) 24%, transparent);
+  border-color: color-mix(in srgb, var(--primary-default-color) 24%, transparent);
+  color: var(--primary-default-color);
 }
 
 .home-metric dt,
-.home-api-metrics dt {
+.home-api-metrics dt,
+.home-highlight span,
+.home-career-head span,
+.home-current-focus-copy span {
   @apply text-xs font-bold uppercase tracking-[0.1em];
   color: var(--primary-default-color);
 }
@@ -52,13 +81,95 @@
   color: color-mix(in srgb, var(--text-color) 68%, transparent);
 }
 
+.home-identity-panel {
+  @apply grid gap-5 rounded-[2rem] border p-6 md:p-7;
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--primary-default-color) 14%, transparent) 0%,
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background-color) 94%, white) 0%,
+      color-mix(in srgb, var(--secondary-neutral-color) 18%, transparent) 100%
+    );
+  border-color: color-mix(in srgb, var(--primary-default-color) 20%, transparent);
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--primary-default-color) 12%, transparent);
+}
+
+.home-identity-top {
+  @apply grid gap-4 md:grid-cols-[auto_minmax(0,1fr)] md:items-center;
+}
+
+.home-identity-copy {
+  @apply grid gap-2;
+}
+
+.home-identity-name {
+  @apply text-sm font-bold uppercase tracking-[0.12em];
+  color: var(--primary-default-color);
+}
+
+.home-identity-copy strong {
+  @apply text-2xl font-semibold leading-tight;
+  color: var(--text-color);
+}
+
+.home-identity-copy p {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.home-current-focus,
+.home-career-focus,
+.home-highlight,
+.home-stack-item,
+.home-technology-item {
+  @apply grid gap-4 rounded-[1.75rem] border p-4;
+  background-color: color-mix(in srgb, var(--background-color) 74%, transparent);
+  border-color: color-mix(in srgb, var(--base-neutral-color) 28%, transparent);
+}
+
+.home-current-focus-head,
+.home-career-head,
+.home-highlight {
+  @apply items-start;
+}
+
+.home-current-focus-head,
+.home-career-head {
+  @apply grid gap-3 md:grid-cols-[auto_minmax(0,1fr)];
+}
+
+.home-current-focus-copy strong,
+.home-career-head strong,
+.home-highlight-copy strong,
+.home-stack-copy strong,
+.home-technology-copy strong {
+  @apply text-xl font-semibold leading-snug;
+  color: var(--text-color);
+}
+
+.home-current-focus-copy p,
+.home-highlight-copy p {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.home-visual-strip {
+  @apply flex flex-wrap items-center gap-3 border-t pt-4;
+  border-color: color-mix(in srgb, var(--base-neutral-color) 22%, transparent);
+}
+
 .home-api-metrics {
   @apply grid gap-3;
 }
 
 .home-api-metrics div {
-  @apply flex items-center justify-between gap-4 rounded-2xl border px-4 py-3;
+  @apply grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-[1.5rem] border px-4 py-3;
   border-color: color-mix(in srgb, var(--primary-default-color) 22%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
 }
 
 .home-section {
@@ -81,46 +192,59 @@
   @apply flex flex-wrap gap-2;
 }
 
-.home-tags-large {
-  @apply gap-3;
-}
-
-.home-highlight,
-.home-stack-item,
-.home-career-focus {
-  @apply grid gap-3 rounded-2xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 72%, transparent);
-  border-color: color-mix(in srgb, var(--base-neutral-color) 34%, transparent);
-}
-
-.home-highlight span,
-.home-career-focus span {
-  @apply text-xs font-bold uppercase tracking-[0.1em];
-  color: var(--primary-default-color);
-}
-
-.home-highlight strong,
-.home-stack-item strong,
-.home-career-focus strong {
-  @apply text-xl font-semibold leading-snug;
-}
-
-.home-highlight p {
-  @apply m-0 text-sm leading-7;
-  color: color-mix(in srgb, var(--text-color) 70%, transparent);
-}
-
+.home-highlight-grid,
+.home-technology-list,
 .home-stack-list {
   @apply grid gap-3;
 }
 
-.home-stack-item {
-  @apply grid-cols-[minmax(0,1fr)_auto_auto] items-center;
+.home-highlight {
+  @apply grid-cols-[auto_minmax(0,1fr)] items-start;
 }
 
-.home-stack-item span {
+.home-highlight-copy {
+  @apply grid gap-2;
+}
+
+.home-highlight-visual {
+  @apply flex h-14 w-14 items-center justify-center rounded-2xl border;
+  background-color: color-mix(in srgb, var(--success-neutral-color) 24%, transparent);
+  border-color: color-mix(in srgb, var(--success-default-color) 20%, transparent);
+  color: var(--success-default-color);
+}
+
+.home-stack-item {
+  @apply grid-cols-[auto_minmax(0,1fr)_auto] items-center;
+}
+
+.home-stack-copy {
+  @apply grid gap-1;
+}
+
+.home-stack-copy span,
+.home-stack-count,
+.home-technology-copy span {
   @apply text-sm;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.home-technology-item {
+  @apply grid-cols-[auto_minmax(0,1fr)] items-center;
+}
+
+.home-technology-copy {
+  @apply flex items-center justify-between gap-3;
+}
+
+.home-focus-links {
+  @apply flex flex-wrap gap-2;
+}
+
+.home-focus-pill {
+  @apply inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium;
+  background-color: color-mix(in srgb, var(--background-color) 76%, transparent);
+  border-color: color-mix(in srgb, var(--base-neutral-color) 28%, transparent);
+  color: color-mix(in srgb, var(--text-color) 82%, transparent);
 }
 
 .home-state {
@@ -128,8 +252,23 @@
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
 }
 
+@media (max-width: 1024px) {
+  .home-stack-item,
+  .home-technology-item {
+    @apply grid-cols-1;
+  }
+
+  .home-technology-copy {
+    @apply items-start;
+  }
+}
+
 @media (max-width: 768px) {
-  .home-stack-item {
+  .home-title {
+    @apply text-4xl;
+  }
+
+  .home-highlight {
     @apply grid-cols-1;
   }
 }

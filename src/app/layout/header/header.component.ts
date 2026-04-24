@@ -16,7 +16,7 @@ import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { NavigationItem } from '../navigation/navigation.types';
-import { SurfaceComponent } from '../surface/surface.component';
+import { ContainerComponent } from '../container/container.component';
 import {
   HansDropdownElement,
   HansToggleElement,
@@ -27,7 +27,7 @@ import {
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, TranslatePipe, NavigationComponent, SurfaceComponent],
+  imports: [RouterLink, TranslatePipe, NavigationComponent, ContainerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

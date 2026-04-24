@@ -4,14 +4,14 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { catchError, map, of, startWith } from 'rxjs';
-import { SystemApiService } from '../../core/api/system-api.service';
+import { SystemService } from '../../core/api/system/service';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { readNavigationItems } from '../navigation/helpers/navigation.helper';
-import { SurfaceComponent } from '../surface/surface.component';
-import { SurfaceTone } from '../surface/surface.types';
+import { ContainerComponent } from '../container/container.component';
+import { ContainerTone } from '../container/container.types';
 import { ShellApiStatusViewModel } from './shell.types';
 
 @Component({
@@ -21,7 +21,7 @@ import { ShellApiStatusViewModel } from './shell.types';
     TranslatePipe,
     HeaderComponent,
     FooterComponent,
-    SurfaceComponent,
+    ContainerComponent,
   ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
@@ -29,7 +29,7 @@ import { ShellApiStatusViewModel } from './shell.types';
 })
 export class ShellComponent {
   private readonly router = inject(Router);
-  private readonly systemApiService = inject(SystemApiService);
+  private readonly systemService = inject(SystemService);
   private readonly translation = inject(TranslationService);
   protected readonly theme = inject(ThemeService);
   protected readonly activeLocale = this.translation.locale;
@@ -38,11 +38,11 @@ export class ShellComponent {
     state: 'loading',
     titleKey: 'shell.api.loading.title',
     descriptionKey: 'shell.api.loading.description',
-    baseUrl: this.systemApiService.apiBaseUrl,
+    baseUrl: this.systemService.apiBaseUrl,
   };
 
   protected readonly apiStatus = toSignal(
-    this.systemApiService.getHealth().pipe(
+    this.systemService.getHealth().pipe(
       map(
         (health): ShellApiStatusViewModel => ({
           state: 'connected',
@@ -51,7 +51,7 @@ export class ShellComponent {
           descriptionParams: {
             checkedAtUtc: health.checkedAtUtc,
           },
-          baseUrl: this.systemApiService.apiBaseUrl,
+          baseUrl: this.systemService.apiBaseUrl,
         }),
       ),
       startWith(this.loadingApiStatus),
@@ -72,7 +72,7 @@ export class ShellComponent {
                   origin: this.currentOrigin,
                 }
               : undefined,
-          baseUrl: this.systemApiService.apiBaseUrl,
+          baseUrl: this.systemService.apiBaseUrl,
         }),
       ),
     ),
@@ -85,7 +85,7 @@ export class ShellComponent {
     readNavigationItems(this.router.config),
   );
 
-  protected readonly apiStatusTone = computed<SurfaceTone>(() => {
+  protected readonly apiStatusTone = computed<ContainerTone>(() => {
     const statusState = this.apiStatus().state;
 
     if (statusState === 'connected') {

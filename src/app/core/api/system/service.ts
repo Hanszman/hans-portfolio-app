@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { apiConfig, buildApiUrl } from './api.config';
-import { HealthResponse, SystemOverviewResponse } from './system-api.types';
+import { apiConfig, buildApiUrl } from '../api.config';
+import { HealthResponse, SystemOverviewResponse } from './types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SystemApiService {
+export class SystemService {
   private readonly httpClient = inject(HttpClient);
 
   get apiBaseUrl(): string {

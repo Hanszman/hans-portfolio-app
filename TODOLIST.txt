@@ -56,8 +56,11 @@ Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
 [ATUAL]:
--Muitos "localhost:3000" espalhados pelo código que deveriam estar usando a variável do env
--Teste de app.routes.spec.ts está testando muito dashboards e dados e não deveria
--Entender direito quais endpoints e informações o codex consumiu para construir a home
+-Arquivos service, spec e types do dashboard e system perderam seu nome no arquivo
+-Alguns ícones carregaram e outros ficaram com loading infinito
+-Não vi minha foto de profile
+-Avatares não carregaram, acho que é pq vc criou a url dos assets errado... os links estão salvos no banco mas não completos pq o caminho real é essa pasta de assets do front
+-Mudar "testing" para mocks na pasta e no nome dos arquivos
+-Home component ts tem varias consts que acho que poderiam estar no types dele
 -Partir pra próxima etapa de implementação
 -Alterar tema/design do portfolio, etc

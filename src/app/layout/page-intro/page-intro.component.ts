@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { SurfaceComponent } from '../surface/surface.component';
+import { ContainerComponent } from '../container/container.component';
 
 @Component({
   selector: 'app-page-intro',
-  imports: [SurfaceComponent],
+  imports: [ContainerComponent],
   templateUrl: './page-intro.component.html',
   styleUrl: './page-intro.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

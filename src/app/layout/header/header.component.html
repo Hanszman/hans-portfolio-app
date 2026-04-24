@@ -1,5 +1,5 @@
 <header class="header" data-testid="header">
-  <app-surface>
+  <app-container>
     <div class="header-content">
       <div class="header-top">
         <a class="header-brand" routerLink="/home">
@@ -76,27 +76,27 @@
         </div>
 
         <div class="header-highlights">
-          <app-surface
+          <app-container
             tone="primary"
             spacing="compact"
             [label]="'header.highlight.layout.label' | translate"
-            [surfaceTitle]="'header.highlight.layout.title' | translate"
+            [containerTitle]="'header.highlight.layout.title' | translate"
             [description]="'header.highlight.layout.description' | translate"
           />
 
-          <app-surface
+          <app-container
             tone="success"
             spacing="compact"
             [label]="'header.highlight.integration.label' | translate"
-            [surfaceTitle]="'header.highlight.integration.title' | translate"
+            [containerTitle]="'header.highlight.integration.title' | translate"
             [description]="'header.highlight.integration.description' | translate"
           />
 
-          <app-surface
+          <app-container
             tone="info"
             spacing="compact"
             [label]="'header.highlight.direction.label' | translate"
-            [surfaceTitle]="'header.highlight.direction.title' | translate"
+            [containerTitle]="'header.highlight.direction.title' | translate"
             [description]="'header.highlight.direction.description' | translate"
           />
         </div>
@@ -104,5 +104,5 @@
 
       <app-navigation [items]="navigationItems()" />
     </div>
-  </app-surface>
+  </app-container>
 </header>
