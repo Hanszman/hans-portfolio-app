@@ -57,4 +57,6 @@ Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfol
 
 [ATUAL]:
 -Partir pra próxima etapa de implementação
--Alterar tema/design do portfolio, etc
+-Alterar tema/infos/design do portfolio, etc
+
+Continue o plano-implementacao-hans-portfolio-app-final-version.md da etapa em que paramos. Como vc pode ver ja fizemos ate a etapa F2 e a proxima é a F3. Lembre-se de usar nossa lib de hans design sempre que precisar de algum componente que ela já tenha. Lembre-se de sempre que necessário atualizar as documentações E lembre-se de sempre (no final de toda etapa/implementação que vc fizer) rodar os scripts de lint, build, test, etc para verificar se tudo passou corretamente.
