@@ -17,7 +17,7 @@ import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.com
 import {
   buildExperiencePortfolioSummary,
   mapExperienceToTimelineItem,
-} from './experiences.helper';
+} from './helpers/experiences.helper';
 
 @Component({
   selector: 'app-experiences',

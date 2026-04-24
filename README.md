@@ -97,6 +97,9 @@ This project must follow the current Angular direction consistently:
 - do not fall back to older Angular APIs out of habit
 - prefer signals-based state over RxJS-based local state
 - keep templates simple and move view-model logic to TypeScript when useful
+- feature-specific helpers must live inside a local `helpers/` folder near the component, page, or domain they support
+- component/page constants, types, and interfaces must live in that feature's own `*.types.ts` file
+- helpers should keep only helper functions and should not become a mixed file for contracts/constants
 
 ### Testing and quality
 

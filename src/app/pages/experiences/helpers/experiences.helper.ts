@@ -1,86 +1,18 @@
-import { buildAssetUrl } from '../../core/api/api.config';
+import { buildAssetUrl } from '../../../core/api/api.config';
 import {
   ExperienceCollectionItemResponse,
   ExperienceProjectResponse,
-} from '../../core/api/experiences/experiences.types';
-import { AppLocale } from '../../core/translation/translation.types';
-
-export interface ExperienceProjectViewModel {
-  slug: string;
-  title: string;
-  summary: string;
-  statusLabel: string;
-  environmentLabel: string;
-}
-
-export interface ExperienceTimelineItemViewModel {
-  id: string;
-  companyName: string;
-  title: string;
-  summary: string;
-  description: string;
-  dateRangeLabel: string;
-  isCurrent: boolean;
-  isHighlight: boolean;
-  imageUrl: string;
-  jobs: string[];
-  customers: string[];
-  projects: ExperienceProjectViewModel[];
-  technologies: string[];
-  extraTechnologyCount: number;
-}
-
-export interface ExperiencePortfolioSummaryViewModel {
-  currentRoleTitle: string;
-  currentCompanyName: string;
-  experienceCount: string;
-  projectCount: string;
-  technologyCount: string;
-  customerCount: string;
-  highlightCount: string;
-}
-
-const PROJECT_STATUS_LABELS: Record<string, Record<AppLocale, string>> = {
-  COMPLETED: {
-    'en-us': 'Completed',
-    'pt-BR': 'Concluido',
-  },
-  IN_PROGRESS: {
-    'en-us': 'In progress',
-    'pt-BR': 'Em andamento',
-  },
-};
-
-const PROJECT_ENVIRONMENT_LABELS: Record<string, Record<AppLocale, string>> = {
-  FRONTEND: {
-    'en-us': 'Front-end',
-    'pt-BR': 'Front-end',
-  },
-  BACKEND: {
-    'en-us': 'Back-end',
-    'pt-BR': 'Back-end',
-  },
-  FULLSTACK: {
-    'en-us': 'Full stack',
-    'pt-BR': 'Full stack',
-  },
-};
-
-const PRESENT_LABELS: Record<AppLocale, string> = {
-  'en-us': 'Present',
-  'pt-BR': 'Atual',
-};
-
-const MONTH_FORMATTERS: Record<AppLocale, Intl.DateTimeFormat> = {
-  'en-us': new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    year: 'numeric',
-  }),
-  'pt-BR': new Intl.DateTimeFormat('pt-BR', {
-    month: 'short',
-    year: 'numeric',
-  }),
-};
+} from '../../../core/api/experiences/experiences.types';
+import { AppLocale } from '../../../core/translation/translation.types';
+import {
+  EXPERIENCE_MONTH_FORMATTERS,
+  EXPERIENCE_PRESENT_LABELS,
+  EXPERIENCE_PROJECT_ENVIRONMENT_LABELS,
+  EXPERIENCE_PROJECT_STATUS_LABELS,
+  ExperiencePortfolioSummaryViewModel,
+  ExperienceProjectViewModel,
+  ExperienceTimelineItemViewModel,
+} from '../experiences.types';
 
 const dedupe = (values: string[]): string[] => [...new Set(values)];
 
@@ -92,18 +24,20 @@ const normalizeLabel = (value: string): string =>
     .join(' ');
 
 const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
-  MONTH_FORMATTERS[locale].format(new Date(dateIso));
+  EXPERIENCE_MONTH_FORMATTERS[locale].format(new Date(dateIso));
 
 const resolveProjectStatusLabel = (
   status: string,
   locale: AppLocale,
-): string => PROJECT_STATUS_LABELS[status]?.[locale] ?? normalizeLabel(status);
+): string =>
+  EXPERIENCE_PROJECT_STATUS_LABELS[status]?.[locale] ?? normalizeLabel(status);
 
 const resolveProjectEnvironmentLabel = (
   environment: string,
   locale: AppLocale,
 ): string =>
-  PROJECT_ENVIRONMENT_LABELS[environment]?.[locale] ?? normalizeLabel(environment);
+  EXPERIENCE_PROJECT_ENVIRONMENT_LABELS[environment]?.[locale] ??
+  normalizeLabel(environment);
 
 const mapProject = (
   project: ExperienceProjectResponse,
@@ -127,7 +61,7 @@ export const formatExperienceDateRange = (
   const startLabel = formatMonthYear(startDate, locale);
   const endLabel = endDate
     ? formatMonthYear(endDate, locale)
-    : PRESENT_LABELS[locale];
+    : EXPERIENCE_PRESENT_LABELS[locale];
 
   return `${startLabel} - ${endLabel}`;
 };
@@ -209,6 +143,8 @@ export const buildExperiencePortfolioSummary = (
     projectCount: String(uniqueProjectSlugs.size),
     technologyCount: String(uniqueTechnologySlugs.size),
     customerCount: String(uniqueCustomerSlugs.size),
-    highlightCount: String(experiences.filter((experience) => experience.highlight).length),
+    highlightCount: String(
+      experiences.filter((experience) => experience.highlight).length,
+    ),
   };
 };

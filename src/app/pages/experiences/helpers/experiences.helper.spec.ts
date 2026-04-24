@@ -1,4 +1,4 @@
-import { createExperiencesCollectionResponse } from '../../core/api/mocks/experiences.mocks';
+import { createExperiencesCollectionResponse } from '../../../core/api/mocks/experiences.mocks';
 import {
   buildExperiencePortfolioSummary,
   formatExperienceDateRange,
