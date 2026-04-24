@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
-import { DashboardService } from '../dashboard/service';
-import { DashboardOverviewResponse } from '../dashboard/types';
+import { DashboardService } from '../dashboard/dashboard.service';
+import { DashboardOverviewResponse } from '../dashboard/dashboard.types';
 
 export const createDashboardOverviewResponse = (
   overrides: Partial<DashboardOverviewResponse> = {},
@@ -115,27 +115,27 @@ export const createDashboardOverviewResponse = (
         usageCount: 9,
       },
       {
-        slug: 'rxjs',
-        name: 'RxJS',
-        category: 'LIBRARY',
+        slug: 'css',
+        name: 'CSS',
+        category: 'LANGUAGE',
         usageCount: 7,
       },
       {
-        slug: 'nestjs',
-        name: 'NestJS',
-        category: 'FRAMEWORK',
+        slug: 'html',
+        name: 'HTML',
+        category: 'LANGUAGE',
         usageCount: 6,
       },
       {
-        slug: 'prisma',
-        name: 'Prisma',
-        category: 'ORM',
+        slug: 'javascript',
+        name: 'JavaScript',
+        category: 'LANGUAGE',
         usageCount: 5,
       },
       {
-        slug: 'postgresql',
-        name: 'PostgreSQL',
-        category: 'DATABASE',
+        slug: 'json',
+        name: 'JSON',
+        category: 'LANGUAGE',
         usageCount: 4,
       },
     ],
@@ -145,19 +145,19 @@ export const createDashboardOverviewResponse = (
     totalItems: 1,
     items: [
       {
-        slug: 'pagbank',
-        companyName: 'PagBank',
-        titlePt: 'Engenheiro de Software',
-        titleEn: 'Software Engineer',
-        startDate: '2023-01-01',
+        slug: 'stefanini-group',
+        companyName: 'Stefanini Group',
+        titlePt: 'Especialista Front-End',
+        titleEn: 'Front-End Specialist',
+        startDate: '2021-09-01',
         endDate: null,
         isCurrent: true,
         highlight: true,
-        jobs: ['Frontend Engineer'],
-        customers: ['PagBank', 'Stone'],
-        projects: ['portfolio-remake', 'admin-dashboard'],
-        technologies: ['Angular', 'TypeScript', 'Design Systems', 'NestJS'],
-        imagePath: '/assets/img/experiences/pagbank.png',
+        jobs: ['Front-End Specialist'],
+        customers: ['Ford', 'Ale'],
+        projects: ['stefanini-ford', 'stefanini-ale'],
+        technologies: ['Angular', 'JSON', 'Bootstrap', 'GitHub'],
+        imagePath: '/assets/img/experiences/stefanini.jpg',
       },
     ],
   },
@@ -167,13 +167,13 @@ export const createDashboardOverviewResponse = (
     items: [
       {
         entity: 'project',
-        slug: 'portfolio-remake',
-        titlePt: 'Remake do Portfólio',
-        titleEn: 'Portfolio Remake',
-        subtitlePt: 'Projeto full stack conectado a API real.',
-        subtitleEn: 'Full stack project connected to a real API.',
-        icon: '/assets/img/logo/angular.svg',
-        imagePath: '/assets/img/projects/portfolio-remake.png',
+        slug: 'github-consumer',
+        titlePt: 'GitHub Consumer',
+        titleEn: 'GitHub Consumer',
+        subtitlePt: 'Projeto full stack conectado a APIs reais.',
+        subtitleEn: 'Full stack project connected to real APIs.',
+        icon: '/assets/img/logo/vh_logo_blue.png',
+        imagePath: '/assets/img/projects/github-consumer.png',
         featured: true,
       },
       {
@@ -183,7 +183,7 @@ export const createDashboardOverviewResponse = (
         titleEn: 'TypeScript',
         subtitlePt: 'Baseando componentes, contratos e integrações.',
         subtitleEn: 'Powering components, contracts, and integrations.',
-        icon: '/assets/img/skills/typescript.svg',
+        icon: '/assets/img/skills/typescript.png',
         featured: false,
       },
     ],

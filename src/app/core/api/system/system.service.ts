@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiConfig, buildApiUrl } from '../api.config';
-import { HealthResponse, SystemOverviewResponse } from './types';
+import { HealthResponse, SystemOverviewResponse } from './system.types';
 
 @Injectable({
   providedIn: 'root',

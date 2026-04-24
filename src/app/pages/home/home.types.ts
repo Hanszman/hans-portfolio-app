@@ -1,6 +1,48 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { ContainerTone } from '../../layout/container/container.types';
 
+export const HOME_PROFILE_IMAGE_SRC = '/assets/img/profile/vh_profile.jpeg';
+
+const HOME_ENTITY_ICON_NAMES: Record<string, string> = {
+  project: 'LuFolderKanban',
+  experience: 'LuBriefcaseBusiness',
+  technology: 'LuCpu',
+  customer: 'LuHandshake',
+  formation: 'LuGraduationCap',
+  language: 'LuLanguages',
+};
+
+const HOME_STACK_ICON_NAMES: Record<string, string> = {
+  'front-end': 'LuMonitorSmartphone',
+  frontend: 'LuMonitorSmartphone',
+  'back-end': 'LuServer',
+  backend: 'LuServer',
+  fullstack: 'LuLayers3',
+  devops: 'LuCloud',
+  mobile: 'LuSmartphone',
+};
+
+const HOME_TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
+  FRAMEWORK: 'LuBlocks',
+  LANGUAGE: 'LuCpu',
+  LIBRARY: 'LuPackage',
+  DATABASE: 'LuDatabase',
+  ORM: 'LuDatabase',
+  DEVOPS: 'LuCloud',
+};
+
+const HOME_TECHNOLOGY_VISUALS: Record<string, string> = {
+  angular: '/assets/img/skills/angular.png',
+  css: '/assets/img/skills/css.png',
+  html: '/assets/img/skills/html.png',
+  javascript: '/assets/img/skills/javascript.png',
+  json: '/assets/img/skills/json.png',
+  git: '/assets/img/skills/git.png',
+  typescript: '/assets/img/skills/typescript.png',
+  visualstudiocode: '/assets/img/skills/visualstudiocode.png',
+  'visual-studio-code': '/assets/img/skills/visualstudiocode.png',
+};
+
 export interface HomeMetricViewModel {
   value: string;
   labelKey: AppTranslationKey;
@@ -49,6 +91,7 @@ export interface HomeTechnologyViewModel {
   name: string;
   usageCount: number;
   iconName: string;
+  visualUrl: string;
 }
 
 export interface HomeVisualViewModel {
@@ -101,3 +144,15 @@ export const HOME_SENIORITY_PILLARS = [
     ],
   },
 ] as const satisfies readonly HomeSeniorityPillar[];
+
+export const resolveHomeEntityIconName = (entity: string): string =>
+  HOME_ENTITY_ICON_NAMES[entity] ?? 'LuSparkles';
+
+export const resolveHomeStackIconName = (slug: string): string =>
+  HOME_STACK_ICON_NAMES[slug.toLowerCase()] ?? 'LuLayers3';
+
+export const resolveHomeTechnologyIconName = (category: string): string =>
+  HOME_TECHNOLOGY_CATEGORY_ICON_NAMES[category] ?? 'LuCpu';
+
+export const resolveHomeTechnologyVisualUrl = (slug: string): string =>
+  HOME_TECHNOLOGY_VISUALS[slug.toLowerCase()] ?? '';

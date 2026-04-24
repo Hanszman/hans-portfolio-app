@@ -9,8 +9,8 @@ import { apiConfig, buildApiUrl } from '../api.config';
 import {
   createHealthResponse,
   createSystemOverviewResponse,
-} from '../testing/system.testing';
-import { SystemService } from './service';
+} from '../mocks/system.mocks';
+import { SystemService } from './system.service';
 
 describe('SystemService', () => {
   beforeEach(() => {

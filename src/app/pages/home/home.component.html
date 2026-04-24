@@ -331,10 +331,18 @@
         @for (technology of topTechnologies(); track technology.slug) {
           <article class="home-technology-item">
             <div class="home-technology-icon">
-              <hans-icon
-                [name]="technology.iconName"
-                iconSize="medium"
-              ></hans-icon>
+              @if (technology.visualUrl) {
+                <hans-avatar
+                  [src]="technology.visualUrl"
+                  [alt]="technology.name"
+                  avatarSize="small"
+                ></hans-avatar>
+              } @else {
+                <hans-icon
+                  [name]="technology.iconName"
+                  iconSize="medium"
+                ></hans-icon>
+              }
             </div>
             <div class="home-technology-copy">
               <strong>{{ technology.name }}</strong>

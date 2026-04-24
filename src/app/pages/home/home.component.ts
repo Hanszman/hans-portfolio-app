@@ -9,9 +9,9 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { buildApiAssetUrl } from '../../core/api/api.config';
-import { DashboardService } from '../../core/api/dashboard/service';
-import { DashboardOverviewResponse } from '../../core/api/dashboard/types';
+import { buildAssetUrl } from '../../core/api/api.config';
+import { DashboardService } from '../../core/api/dashboard/dashboard.service';
+import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
@@ -24,37 +24,13 @@ import {
   HomeStackViewModel,
   HomeTechnologyViewModel,
   HomeVisualViewModel,
+  HOME_PROFILE_IMAGE_SRC,
   HOME_SENIORITY_PILLARS,
+  resolveHomeEntityIconName,
+  resolveHomeStackIconName,
+  resolveHomeTechnologyIconName,
+  resolveHomeTechnologyVisualUrl,
 } from './home.types';
-
-const PROFILE_IMAGE_SRC = 'assets/img/profile/vh_profile.jpeg';
-const ENTITY_ICON_NAMES: Record<string, string> = {
-  project: 'LuFolderKanban',
-  experience: 'LuBriefcaseBusiness',
-  technology: 'LuCpu',
-  customer: 'LuHandshake',
-  formation: 'LuGraduationCap',
-  language: 'LuLanguages',
-};
-
-const STACK_ICON_NAMES: Record<string, string> = {
-  'front-end': 'LuMonitorSmartphone',
-  frontend: 'LuMonitorSmartphone',
-  'back-end': 'LuServer',
-  backend: 'LuServer',
-  fullstack: 'LuLayers3',
-  devops: 'LuCloud',
-  mobile: 'LuSmartphone',
-};
-
-const TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
-  FRAMEWORK: 'LuBlocks',
-  LANGUAGE: 'LuCode2',
-  LIBRARY: 'LuPackage',
-  DATABASE: 'LuDatabase',
-  ORM: 'LuDatabase',
-  DEVOPS: 'LuCloud',
-};
 
 @Component({
   selector: 'app-home',
@@ -78,7 +54,7 @@ export class HomeComponent {
   );
 
   protected readonly seniorityPillars = HOME_SENIORITY_PILLARS;
-  protected readonly profileImageSrc = PROFILE_IMAGE_SRC;
+  protected readonly profileImageSrc = buildAssetUrl(HOME_PROFILE_IMAGE_SRC);
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly dashboard = this.dashboardSignal.asReadonly();
@@ -126,7 +102,7 @@ export class HomeComponent {
         name: locale === 'pt-BR' ? stack.namePt : stack.nameEn,
         projectCount: stack.projectCount,
         technologyCount: stack.technologyCount,
-        iconName: this.resolveStackIconName(stack.slug),
+        iconName: resolveHomeStackIconName(stack.slug),
       }));
     },
   );
@@ -137,28 +113,32 @@ export class HomeComponent {
     const locale = this.translationService.locale();
     const highlights = this.dashboard()?.highlights.items ?? [];
 
-      return highlights.slice(0, 3).map((highlight) => ({
-        entity: highlight.entity,
-        slug: highlight.slug,
-        title: locale === 'pt-BR' ? highlight.titlePt : highlight.titleEn,
-        subtitle:
-          (locale === 'pt-BR' ? highlight.subtitlePt : highlight.subtitleEn) ??
-          '',
-        featured: highlight.featured === true,
-        visualUrl: buildApiAssetUrl(highlight.imagePath ?? highlight.icon),
-        iconName: this.resolveEntityIconName(highlight.entity),
-      }));
+    return highlights.slice(0, 3).map((highlight) => ({
+      entity: highlight.entity,
+      slug: highlight.slug,
+      title: locale === 'pt-BR' ? highlight.titlePt : highlight.titleEn,
+      subtitle:
+        (locale === 'pt-BR' ? highlight.subtitlePt : highlight.subtitleEn) ??
+        '',
+      featured: highlight.featured === true,
+      visualUrl: buildAssetUrl(highlight.imagePath ?? highlight.icon),
+      iconName: resolveHomeEntityIconName(highlight.entity),
+    }));
   });
 
-  protected readonly topTechnologies = computed<readonly HomeTechnologyViewModel[]>(() =>
-    (this.dashboard()?.technologyUsage.topTechnologies ?? [])
-      .slice(0, 6)
-      .map((technology) => ({
-        slug: technology.slug,
-        name: technology.name,
-        usageCount: technology.usageCount,
-        iconName: this.resolveTechnologyIconName(technology.category),
-      })),
+  protected readonly topTechnologies = computed<readonly HomeTechnologyViewModel[]>(
+    () =>
+      (this.dashboard()?.technologyUsage.topTechnologies ?? [])
+        .slice(0, 6)
+        .map((technology) => ({
+          slug: technology.slug,
+          name: technology.name,
+          usageCount: technology.usageCount,
+          iconName: resolveHomeTechnologyIconName(technology.category),
+          visualUrl: buildAssetUrl(
+            resolveHomeTechnologyVisualUrl(technology.slug),
+          ),
+        })),
   );
 
   protected readonly careerFocus = computed<HomeCareerFocusViewModel | null>(
@@ -180,7 +160,7 @@ export class HomeComponent {
         technologies: focus.technologies.slice(0, 4),
         customers: focus.customers.slice(0, 3),
         projects: focus.projects.slice(0, 3),
-        imageUrl: buildApiAssetUrl(focus.imagePath),
+        imageUrl: buildAssetUrl(focus.imagePath),
       };
     },
   );
@@ -262,17 +242,5 @@ export class HomeComponent {
 
   private formatCount(value: number | undefined, fallback: string): string {
     return typeof value === 'number' ? String(value) : fallback;
-  }
-
-  private resolveEntityIconName(entity: string): string {
-    return ENTITY_ICON_NAMES[entity] ?? 'LuSparkles';
-  }
-
-  private resolveStackIconName(slug: string): string {
-    return STACK_ICON_NAMES[slug.toLowerCase()] ?? 'LuLayers3';
-  }
-
-  private resolveTechnologyIconName(category: string): string {
-    return TECHNOLOGY_CATEGORY_ICON_NAMES[category] ?? 'LuCpu';
   }
 }

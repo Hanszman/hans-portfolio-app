@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { NEVER, Observable, of, throwError } from 'rxjs';
 import { apiConfig } from '../api.config';
-import { SystemService } from '../system/service';
-import { HealthResponse, SystemOverviewResponse } from '../system/types';
+import { SystemService } from '../system/system.service';
+import { HealthResponse, SystemOverviewResponse } from '../system/system.types';
 
 export const createHealthResponse = (
   overrides: Partial<HealthResponse> = {},

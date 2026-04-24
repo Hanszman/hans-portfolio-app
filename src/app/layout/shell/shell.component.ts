@@ -4,14 +4,14 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { catchError, map, of, startWith } from 'rxjs';
-import { SystemService } from '../../core/api/system/service';
+import { SystemService } from '../../core/api/system/system.service';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { readNavigationItems } from '../navigation/helpers/navigation.helper';
-import { ContainerComponent } from '../container/container.component';
 import { ContainerTone } from '../container/container.types';
+import { ContainerComponent } from '../container/container.component';
 import { ShellApiStatusViewModel } from './shell.types';
 
 @Component({

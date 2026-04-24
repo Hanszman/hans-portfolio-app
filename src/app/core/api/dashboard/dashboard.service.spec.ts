@@ -6,8 +6,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { createDashboardOverviewResponse } from '../testing/dashboard.testing';
-import { DashboardService } from './service';
+import { createDashboardOverviewResponse } from '../mocks/dashboard.mocks';
+import { DashboardService } from './dashboard.service';
 
 describe('DashboardService', () => {
   beforeEach(() => {

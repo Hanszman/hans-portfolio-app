@@ -7,7 +7,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { buildApiUrl } from '../../core/api/api.config';
-import { createDashboardOverviewResponse } from '../../core/api/testing/dashboard.testing';
+import { createDashboardOverviewResponse } from '../../core/api/mocks/dashboard.mocks';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
@@ -59,9 +59,9 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Real data from the first screen');
-    expect(compiled.textContent).toContain('Portfolio Remake');
-    expect(compiled.textContent).toContain('PagBank');
-    expect(compiled.textContent).toContain('Software Engineer');
+    expect(compiled.textContent).toContain('GitHub Consumer');
+    expect(compiled.textContent).toContain('Stefanini Group');
+    expect(compiled.textContent).toContain('Front-End Specialist');
     expect(compiled.querySelectorAll('hans-avatar').length).toBeGreaterThan(2);
     expect(compiled.querySelectorAll('hans-icon').length).toBeGreaterThan(6);
   });
@@ -80,7 +80,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Home');
-    expect(compiled.textContent).toContain('Engenheiro de Software');
+    expect(compiled.textContent).toContain('Especialista Front-End');
     expect(compiled.querySelector('hans-button[label="Ver projetos"]')).toBeTruthy();
   });
 

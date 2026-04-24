@@ -2,8 +2,8 @@ import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { apiConfig } from '../../core/api/api.config';
-import { createSystemServiceMock } from '../../core/api/testing/system.testing';
-import { SystemService } from '../../core/api/system/service';
+import { createSystemServiceMock } from '../../core/api/mocks/system.mocks';
+import { SystemService } from '../../core/api/system/system.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { ShellComponent } from './shell.component';
 

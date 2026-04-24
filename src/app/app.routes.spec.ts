@@ -2,10 +2,10 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { DashboardService } from './core/api/dashboard/service';
-import { SystemService } from './core/api/system/service';
-import { createDashboardServiceMock } from './core/api/testing/dashboard.testing';
-import { createSystemServiceMock } from './core/api/testing/system.testing';
+import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
+import { createSystemServiceMock } from './core/api/mocks/system.mocks';
+import { DashboardService } from './core/api/dashboard/dashboard.service';
+import { SystemService } from './core/api/system/system.service';
 import { provideAppTranslations } from './core/translation/translation.providers';
 import { routes } from './app.routes';
 

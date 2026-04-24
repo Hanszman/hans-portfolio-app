@@ -1,10 +1,14 @@
 import { environment } from '../../../environments/environment';
 
-const normalizeApiBaseUrl = (apiBaseUrl: string): string => apiBaseUrl.replace(/\/+$/, '');
+const normalizeBaseUrl = (baseUrl: string): string => baseUrl.replace(/\/+$/, '');
 const ABSOLUTE_URL_PATTERN = /^https?:\/\//i;
 
+export const appConfig = {
+  baseUrl: normalizeBaseUrl(environment.appBaseUrl),
+} as const;
+
 export const apiConfig = {
-  baseUrl: normalizeApiBaseUrl(environment.apiBaseUrl),
+  baseUrl: normalizeBaseUrl(environment.apiBaseUrl),
 } as const;
 
 export const buildApiUrl = (path: string): string => {
@@ -13,9 +17,7 @@ export const buildApiUrl = (path: string): string => {
   return `${apiConfig.baseUrl}${normalizedPath}`;
 };
 
-export const buildApiAssetUrl = (
-  assetPath: string | null | undefined,
-): string => {
+export const buildAssetUrl = (assetPath: string | null | undefined): string => {
   if (!assetPath) {
     return '';
   }
@@ -24,7 +26,10 @@ export const buildApiAssetUrl = (
     return assetPath;
   }
 
-  const normalizedPath = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
+  const normalizedPath = assetPath.replace(/^\/+/, '');
+  const assetsPath = normalizedPath.startsWith('assets/')
+    ? normalizedPath
+    : `assets/${normalizedPath}`;
 
-  return `${apiConfig.baseUrl}${normalizedPath}`;
+  return `${appConfig.baseUrl}/${assetsPath}`;
 };

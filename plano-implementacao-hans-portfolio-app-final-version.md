@@ -842,7 +842,7 @@ Construir uma home forte, moderna e com posicionamento profissional claro.
 - manter `src/app/core/api/api.config.ts` na raiz da camada de API
 - organizar endpoints por dominio dentro de pastas como `core/api/dashboard/` e `core/api/system/`
 - cada dominio deve concentrar `service.ts`, `types.ts` e `service.spec.ts`
-- factories/mocks compartilhados para specs devem ficar em `core/api/testing/`
+- factories/mocks compartilhados para specs devem ficar em `core/api/mocks/`
 - evitar sufixo `Api` nos nomes dos services quando a propria localizacao em `core/api/` ja deixar o contexto obvio
 
 ### F3 - Pagina de experiences
