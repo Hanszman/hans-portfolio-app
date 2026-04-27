@@ -1,7 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '../../../environments/environment';
-import { apiConfig, appConfig, buildAssetUrl, buildApiUrl } from './api.config';
+import {
+  apiConfig,
+  appConfig,
+  buildAssetUrl,
+  buildApiUrl,
+  buildRelativeAssetPath,
+  buildRelativeImageAssetPath,
+  buildRelativeSkillImageAssetPath,
+  IMAGE_ASSETS_ROOT_PATH,
+  SKILLS_IMAGE_ASSETS_ROOT_PATH,
+} from './api.config';
 
 describe('apiConfig', () => {
   it('should expose the normalized API base URL from the environment', () => {
@@ -35,5 +45,18 @@ describe('apiConfig', () => {
       'https://cdn.test/avatar.png',
     );
     expect(buildAssetUrl(null)).toBe('');
+  });
+
+  it('should expose reusable relative asset path helpers', () => {
+    expect(buildRelativeAssetPath('assets', 'img', 'logo/angular.svg')).toBe(
+      '/assets/img/logo/angular.svg',
+    );
+    expect(buildRelativeAssetPath('', '/')).toBe('');
+    expect(buildRelativeImageAssetPath('logo/angular.svg')).toBe(
+      `/${IMAGE_ASSETS_ROOT_PATH}/logo/angular.svg`,
+    );
+    expect(buildRelativeSkillImageAssetPath('angular.png')).toBe(
+      `/${SKILLS_IMAGE_ASSETS_ROOT_PATH}/angular.png`,
+    );
   });
 });

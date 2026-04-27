@@ -1,4 +1,4 @@
-import { AppLocale, AppTranslationKey } from '../../core/translation/translation.types';
+import { AppTranslationKey } from '../../core/translation/translation.types';
 
 export interface ExperienceProjectViewModel {
   slug: string;
@@ -50,18 +50,3 @@ export const EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS: Record<
 };
 
 export const EXPERIENCE_PRESENT_LABEL_KEY = 'taxonomy.experiences.present';
-
-export const EXPERIENCE_MONTH_FORMATTERS: Record<AppLocale, Intl.DateTimeFormat> = {
-  'en-us': new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    year: 'numeric',
-  }),
-  'pt-BR': new Intl.DateTimeFormat('pt-BR', {
-    month: 'short',
-    year: 'numeric',
-  }),
-  'es-es': new Intl.DateTimeFormat('es-ES', {
-    month: 'short',
-    year: 'numeric',
-  }),
-};

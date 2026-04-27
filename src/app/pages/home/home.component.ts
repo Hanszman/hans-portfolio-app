@@ -102,7 +102,14 @@ export class HomeComponent {
 
       return stacks.slice(0, 3).map((stack) => ({
         slug: stack.slug,
-        name: this.resolveApiText(locale, stack.namePt, stack.nameEn),
+        name: resolveLocalizedText(
+          locale,
+          {
+            'pt-BR': stack.namePt,
+            'en-us': stack.nameEn,
+          },
+          stack.nameEn,
+        ),
         projectCount: stack.projectCount,
         technologyCount: stack.technologyCount,
         iconName: resolveHomeStackIconName(stack.slug),
@@ -119,10 +126,20 @@ export class HomeComponent {
     return highlights.slice(0, 3).map((highlight) => ({
       entity: highlight.entity,
       slug: highlight.slug,
-      title: this.resolveApiText(locale, highlight.titlePt, highlight.titleEn),
-      subtitle: this.resolveApiText(
+      title: resolveLocalizedText(
         locale,
-        highlight.subtitlePt ?? '',
+        {
+          'pt-BR': highlight.titlePt,
+          'en-us': highlight.titleEn,
+        },
+        highlight.titleEn,
+      ),
+      subtitle: resolveLocalizedText(
+        locale,
+        {
+          'pt-BR': highlight.subtitlePt ?? '',
+          'en-us': highlight.subtitleEn ?? '',
+        },
         highlight.subtitleEn ?? '',
       ),
       featured: highlight.featured === true,
@@ -161,7 +178,14 @@ export class HomeComponent {
 
       return {
         companyName: focus.companyName,
-        title: this.resolveApiText(locale, focus.titlePt, focus.titleEn),
+        title: resolveLocalizedText(
+          locale,
+          {
+            'pt-BR': focus.titlePt,
+            'en-us': focus.titleEn,
+          },
+          focus.titleEn,
+        ),
         technologies: focus.technologies.slice(0, 4),
         customers: focus.customers.slice(0, 3),
         projects: focus.projects.slice(0, 3),
@@ -247,20 +271,5 @@ export class HomeComponent {
 
   private formatCount(value: number | undefined, fallback: string): string {
     return typeof value === 'number' ? String(value) : fallback;
-  }
-
-  private resolveApiText(
-    locale: ReturnType<TranslationService['locale']>,
-    portuguese: string,
-    english: string,
-  ): string {
-    return resolveLocalizedText(
-      locale,
-      {
-        'pt-BR': portuguese,
-        'en-us': english,
-      },
-      english,
-    );
   }
 }

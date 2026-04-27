@@ -1,4 +1,7 @@
-import { buildAssetUrl } from '../../../core/api/api.config';
+import {
+  buildAssetUrl,
+  buildRelativeSkillImageAssetPath,
+} from '../../../core/api/api.config';
 import {
   TechnologiesCollectionResponse,
   TechnologyCollectionItemResponse,
@@ -19,7 +22,7 @@ import {
   SKILL_GROUP_ICON_NAMES,
   SKILL_GROUP_TONES,
   SKILL_LEVEL_LABEL_KEYS,
-  SKILL_VISUALS,
+  SKILL_VISUAL_FILE_NAMES,
   SkillCardViewModel,
   SkillContextMetricViewModel,
   SkillsGroupViewModel,
@@ -58,7 +61,15 @@ const resolveCatalogLabel = (
 export const resolveSkillVisualUrl = (
   slug: string,
   fallbackPath?: string,
-): string => buildAssetUrl(fallbackPath ?? SKILL_VISUALS[slug.toLowerCase()] ?? '');
+): string =>
+  buildAssetUrl(
+    fallbackPath ??
+      (SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()]
+        ? buildRelativeSkillImageAssetPath(
+            `${SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()]}.png`,
+          )
+        : ''),
+  );
 
 export const mapTechnologyToSkillCard = (
   technology: TechnologyCollectionItemResponse,

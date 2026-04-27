@@ -9,7 +9,6 @@ import {
 } from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
 import {
-  EXPERIENCE_MONTH_FORMATTERS,
   EXPERIENCE_PRESENT_LABEL_KEY,
   EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS,
   EXPERIENCE_PROJECT_STATUS_LABEL_KEYS,
@@ -28,7 +27,10 @@ const normalizeLabel = (value: string): string =>
     .join(' ');
 
 const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
-  EXPERIENCE_MONTH_FORMATTERS[locale].format(new Date(dateIso));
+  new Intl.DateTimeFormat(locale, {
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date(dateIso));
 
 const resolveProjectStatusLabel = (
   status: string,
@@ -46,30 +48,25 @@ const resolveProjectEnvironmentLabel = (
     ? translateStaticKey(locale, EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS[environment])
     : normalizeLabel(environment);
 
-const resolveApiText = (
-  locale: AppLocale,
-  portuguese: string,
-  english: string,
-): string =>
-  resolveLocalizedText(
-    locale,
-    {
-      'en-us': english,
-      'pt-BR': portuguese,
-      'es-es': english,
-    },
-    english,
-  );
-
 const mapProject = (
   project: ExperienceProjectResponse,
   locale: AppLocale,
 ): ExperienceProjectViewModel => ({
   slug: project.slug,
-  title: resolveApiText(locale, project.titlePt, project.titleEn),
-  summary: resolveApiText(
+  title: resolveLocalizedText(
     locale,
-    project.shortDescriptionPt,
+    {
+      'pt-BR': project.titlePt,
+      'en-us': project.titleEn,
+    },
+    project.titleEn,
+  ),
+  summary: resolveLocalizedText(
+    locale,
+    {
+      'pt-BR': project.shortDescriptionPt,
+      'en-us': project.shortDescriptionEn,
+    },
     project.shortDescriptionEn,
   ),
   statusLabel: resolveProjectStatusLabel(project.status, locale),
@@ -104,11 +101,28 @@ export const mapExperienceToTimelineItem = (
   return {
     id: experience.id,
     companyName: experience.companyName,
-    title: resolveApiText(locale, experience.titlePt, experience.titleEn),
-    summary: resolveApiText(locale, experience.summaryPt, experience.summaryEn),
-    description: resolveApiText(
+    title: resolveLocalizedText(
       locale,
-      experience.descriptionPt,
+      {
+        'pt-BR': experience.titlePt,
+        'en-us': experience.titleEn,
+      },
+      experience.titleEn,
+    ),
+    summary: resolveLocalizedText(
+      locale,
+      {
+        'pt-BR': experience.summaryPt,
+        'en-us': experience.summaryEn,
+      },
+      experience.summaryEn,
+    ),
+    description: resolveLocalizedText(
+      locale,
+      {
+        'pt-BR': experience.descriptionPt,
+        'en-us': experience.descriptionEn,
+      },
       experience.descriptionEn,
     ),
     dateRangeLabel: formatExperienceDateRange(
@@ -121,7 +135,14 @@ export const mapExperienceToTimelineItem = (
     imageUrl: buildAssetUrl(primaryImage?.imageAsset.filePath),
     jobs: dedupe(
       experience.jobs.map(({ job }) =>
-        resolveApiText(locale, job.namePt, job.nameEn),
+        resolveLocalizedText(
+          locale,
+          {
+            'pt-BR': job.namePt,
+            'en-us': job.nameEn,
+          },
+          job.nameEn,
+        ),
       ),
     ),
     customers: dedupe(experience.customers.map(({ customer }) => customer.name)),
@@ -160,7 +181,14 @@ export const buildExperiencePortfolioSummary = (
 
   return {
     currentRoleTitle: currentExperience
-      ? resolveApiText(locale, currentExperience.titlePt, currentExperience.titleEn)
+      ? resolveLocalizedText(
+          locale,
+          {
+            'pt-BR': currentExperience.titlePt,
+            'en-us': currentExperience.titleEn,
+          },
+          currentExperience.titleEn,
+        )
       : '',
     currentCompanyName: currentExperience?.companyName ?? '',
     experienceCount: String(experiences.length),

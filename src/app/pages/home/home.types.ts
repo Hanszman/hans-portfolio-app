@@ -1,7 +1,13 @@
+import {
+  buildRelativeImageAssetPath,
+  buildRelativeSkillImageAssetPath,
+} from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { ContainerTone } from '../../layout/container/container.types';
 
-export const HOME_PROFILE_IMAGE_SRC = '/assets/img/profile/vh_profile.jpeg';
+export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath(
+  'profile/vh_profile.jpeg',
+);
 
 const HOME_ENTITY_ICON_NAMES: Record<string, string> = {
   project: 'LuFolderKanban',
@@ -31,16 +37,16 @@ const HOME_TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
   DEVOPS: 'LuCloud',
 };
 
-const HOME_TECHNOLOGY_VISUALS: Record<string, string> = {
-  angular: '/assets/img/skills/angular.png',
-  css: '/assets/img/skills/css.png',
-  html: '/assets/img/skills/html.png',
-  javascript: '/assets/img/skills/javascript.png',
-  json: '/assets/img/skills/json.png',
-  git: '/assets/img/skills/git.png',
-  typescript: '/assets/img/skills/typescript.png',
-  visualstudiocode: '/assets/img/skills/visualstudiocode.png',
-  'visual-studio-code': '/assets/img/skills/visualstudiocode.png',
+const HOME_TECHNOLOGY_VISUAL_FILE_NAMES: Record<string, string> = {
+  angular: 'angular',
+  css: 'css',
+  html: 'html',
+  javascript: 'javascript',
+  json: 'json',
+  git: 'git',
+  typescript: 'typescript',
+  visualstudiocode: 'visualstudiocode',
+  'visual-studio-code': 'visualstudiocode',
 };
 
 export interface HomeMetricViewModel {
@@ -155,4 +161,8 @@ export const resolveHomeTechnologyIconName = (category: string): string =>
   HOME_TECHNOLOGY_CATEGORY_ICON_NAMES[category] ?? 'LuCpu';
 
 export const resolveHomeTechnologyVisualUrl = (slug: string): string =>
-  HOME_TECHNOLOGY_VISUALS[slug.toLowerCase()] ?? '';
+  HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]
+    ? buildRelativeSkillImageAssetPath(
+        `${HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]}.png`,
+      )
+    : '';
