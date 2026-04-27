@@ -309,20 +309,94 @@ export const EN_TRANSLATIONS = {
   'taxonomy.projects.fallback.noCompanies': 'No linked companies yet.',
   'taxonomy.projects.fallback.untitledLink': 'Untitled link',
   'pages.dashboard.sectionLabel': 'Foundation',
-  'pages.dashboard.title': 'Dashboard foundation',
+  'pages.dashboard.title': 'Portfolio analytics dashboard',
   'pages.dashboard.description':
-    'The dashboard route is ready for aggregate metrics, charts, and API-driven portfolio insights.',
-  'pages.dashboard.roadmap.label': 'Roadmap',
-  'pages.dashboard.roadmap.title':
-    'Operational metrics and aggregate portfolio data',
-  'pages.dashboard.roadmap.description':
-    'This page will evolve into the visual summary layer for totals, relationships, and health indicators.',
-  'pages.dashboard.status.label': 'Status',
-  'pages.dashboard.status.title': 'Charts and portfolio health',
-  'pages.dashboard.status.description':
-    'The dashboard foundation is isolated as its own page so charts and metrics can grow cleanly.',
-  'pages.dashboard.layout.label': 'Layout layer',
-  'pages.dashboard.layout.title': 'Page-specific component',
-  'pages.dashboard.layout.description':
-    'Dashboard-specific content is now owned by the Dashboard page instead of route metadata.',
+    'Aggregate signals across projects, stack, and career now live in their own route, fed by the public dashboard endpoints.',
+  'pages.dashboard.snapshot.label': 'Snapshot',
+  'pages.dashboard.snapshot.title': 'Published footprint in one glance',
+  'pages.dashboard.snapshot.description':
+    'The sidebar concentrates the live headline counters that summarize the current public dataset.',
+  'pages.dashboard.snapshot.loading': 'Loading dashboard aggregates...',
+  'pages.dashboard.snapshot.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.snapshot.metrics.projects': 'Projects',
+  'pages.dashboard.snapshot.metrics.experiences': 'Experiences',
+  'pages.dashboard.snapshot.metrics.technologies': 'Technologies',
+  'pages.dashboard.snapshot.metrics.formations': 'Formations / languages',
+  'pages.dashboard.snapshot.metrics.customers': 'Customers',
+  'pages.dashboard.snapshot.metrics.jobs': 'Roles',
+  'pages.dashboard.snapshot.metrics.languages': 'Languages',
+  'pages.dashboard.stacks.label': 'Stack distribution',
+  'pages.dashboard.stacks.title':
+    'Where the portfolio carries the most technical weight',
+  'pages.dashboard.stacks.description':
+    'Each stack area combines linked projects and mapped technologies so the strongest zones are obvious at a glance.',
+  'pages.dashboard.stacks.loading': 'Loading stack distribution...',
+  'pages.dashboard.stacks.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.stacks.empty': 'No stack distribution was returned yet.',
+  'pages.dashboard.stacks.projects': 'projects',
+  'pages.dashboard.stacks.technologies': 'technologies',
+  'pages.dashboard.distribution.label': 'Project footprint',
+  'pages.dashboard.distribution.title':
+    'Delivery context, environment spread, and highlight density',
+  'pages.dashboard.distribution.description':
+    'This block keeps the project catalog readable by separating featured volume from context and environment patterns.',
+  'pages.dashboard.distribution.loading':
+    'Loading project distribution aggregates...',
+  'pages.dashboard.distribution.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.distribution.empty':
+    'No project distribution data was returned yet.',
+  'pages.dashboard.distribution.featured': 'Featured',
+  'pages.dashboard.distribution.highlighted': 'Highlighted',
+  'pages.dashboard.distribution.total': 'Total projects',
+  'pages.dashboard.distribution.contexts': 'Contexts',
+  'pages.dashboard.distribution.environments': 'Environments',
+  'pages.dashboard.technology.label': 'Technology usage',
+  'pages.dashboard.technology.title': 'Technology usage signals',
+  'pages.dashboard.technology.description':
+    'Top technologies and their frequency, context, and source patterns come straight from the aggregate API relations.',
+  'pages.dashboard.technology.loading':
+    'Loading technology usage aggregates...',
+  'pages.dashboard.technology.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.technology.empty':
+    'No technology usage aggregates were returned yet.',
+  'pages.dashboard.technology.levels': 'Levels',
+  'pages.dashboard.technology.frequencies': 'Frequencies',
+  'pages.dashboard.technology.contexts': 'Contexts',
+  'pages.dashboard.technology.sources': 'Sources',
+  'pages.dashboard.technology.links': 'linked signals',
+  'pages.dashboard.timeline.label': 'Career',
+  'pages.dashboard.timeline.title': 'Career focus timeline',
+  'pages.dashboard.timeline.description':
+    'The public professional timeline becomes an analytical layer that shows active chapters, highlight density, and project/customer spread.',
+  'pages.dashboard.timeline.loading':
+    'Loading professional timeline aggregates...',
+  'pages.dashboard.timeline.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.timeline.empty':
+    'No professional timeline items were returned yet.',
+  'pages.dashboard.timeline.current': 'Current',
+  'pages.dashboard.timeline.highlight': 'Highlight',
+  'pages.dashboard.timeline.customers': 'Customers',
+  'pages.dashboard.timeline.emptyCustomers': 'No linked customers yet.',
+  'pages.dashboard.timeline.projects': 'Projects',
+  'pages.dashboard.timeline.emptyProjects': 'No linked projects yet.',
+  'pages.dashboard.timeline.technologies': 'Technologies',
+  'pages.dashboard.highlights.label': 'Highlights',
+  'pages.dashboard.highlights.title': 'Portfolio highlights',
+  'pages.dashboard.highlights.description':
+    'Featured entities from the backend stay visible here as proof points across projects, experience, and technology.',
+  'pages.dashboard.highlights.loading':
+    'Loading highlighted portfolio entities...',
+  'pages.dashboard.highlights.error':
+    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.highlights.empty':
+    'No highlighted portfolio items were returned yet.',
+  'pages.dashboard.highlights.featured': 'Featured',
+  'taxonomy.dashboard.source.experience': 'Experience',
+  'taxonomy.dashboard.source.project': 'Project',
+  'taxonomy.dashboard.source.formation': 'Formation',
 } as const satisfies AppTranslationLanguage;

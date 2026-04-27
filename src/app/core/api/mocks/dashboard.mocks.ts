@@ -193,6 +193,23 @@ export const createDashboardOverviewResponse = (
 
 export const createDashboardServiceMock = (
   responseOverrides: Partial<DashboardOverviewResponse> = {},
-): Pick<DashboardService, 'getOverview'> => ({
-  getOverview: () => of(createDashboardOverviewResponse(responseOverrides)),
-});
+): Pick<
+  DashboardService,
+  | 'getOverview'
+  | 'getStackDistribution'
+  | 'getProjectContexts'
+  | 'getTechnologyUsage'
+  | 'getProfessionalTimeline'
+  | 'getHighlights'
+> => {
+  const overview = createDashboardOverviewResponse(responseOverrides);
+
+  return {
+    getOverview: () => of(overview),
+    getStackDistribution: () => of(overview.stackDistribution),
+    getProjectContexts: () => of(overview.projectContexts),
+    getTechnologyUsage: () => of(overview.technologyUsage),
+    getProfessionalTimeline: () => of(overview.professionalTimeline),
+    getHighlights: () => of(overview.highlights),
+  };
+};

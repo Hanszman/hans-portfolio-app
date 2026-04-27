@@ -209,12 +209,12 @@ At the moment, this repository already has the first public pages evolving on re
 - the skills route now consumes the public `GET /technologies` collection with real `experienceMetrics`
 - the projects route now consumes the public `GET /projects` collection with linked technologies, links, screenshots, and related experiences
 - home consumes the public dashboard aggregate endpoints
+- dashboard now consumes `GET /dashboard` plus the specialized aggregate endpoints for stack distribution, project contexts, technology usage, professional timeline, and highlights
 - experiences consumes the public `GET /experiences` collection with related projects, customers, jobs, technologies, and image assets
-- projects and dashboard routes still remain in their foundation stage
 - the design library CDN is already wired
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 
-The next official frontend step after the current implementation is `F6`, focused on the dashboard page.
+The next official frontend step after the current implementation is `F7`, focused on the final visual integration pass of the public portfolio.
 
 ## 📜 History of commands used to build this project:
 

@@ -1,5 +1,7 @@
 [TODO ATUAL]:
+-Interface dentro de dashboard component
 -Partir pra próxima etapa de implementação
+-Utilizar loadings e outros components da lib, além de melhorar os tratamentos de erros
 -Alterar tema/infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
 
 [PROXIMOS TODO's]:

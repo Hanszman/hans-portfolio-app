@@ -957,6 +957,14 @@ Criar a tela propria de dashboard prevista no plano do remake.
 - leitura clara dos dados
 - coverage total do escopo entregue
 
+#### Status de execucao atual
+
+- F6 concluida no `hans-portfolio-app`
+- pagina `dashboard` agora consome `GET /dashboard` e os endpoints agregados especializados de stack, contextos de projeto, uso de tecnologia, timeline profissional e highlights
+- a leitura foi organizada em blocos analiticos com snapshot lateral, distribuicao de stack, footprint de projetos, sinais de uso de tecnologia, timeline profissional e destaques do portfolio
+- a pagina reaproveita a `hans-ui-design-lib` com `hans-icon` e `hans-tag`
+- proxima etapa oficial: `F7 - Integracao visual final do portfolio publico`
+
 ### F7 - Integracao visual final do portfolio publico
 
 #### Objetivo

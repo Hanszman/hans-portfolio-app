@@ -325,20 +325,97 @@ export const ES_ES_TRANSLATIONS = {
     'Todavia no hay empresas vinculadas.',
   'taxonomy.projects.fallback.untitledLink': 'Link sin titulo',
   'pages.dashboard.sectionLabel': 'Fundacion',
-  'pages.dashboard.title': 'Fundacion del dashboard',
+  'pages.dashboard.title': 'Dashboard analitico',
   'pages.dashboard.description':
-    'La ruta dashboard esta lista para metricas agregadas, graficos e insights del portfolio via API.',
-  'pages.dashboard.roadmap.label': 'Roadmap',
-  'pages.dashboard.roadmap.title':
-    'Metricas operativas y datos agregados del portfolio',
-  'pages.dashboard.roadmap.description':
-    'Esta pagina evolucionara hacia la capa visual de resumen de totales, relaciones e indicadores de salud.',
-  'pages.dashboard.status.label': 'Estado',
-  'pages.dashboard.status.title': 'Graficos y salud del portfolio',
-  'pages.dashboard.status.description':
-    'La fundacion del dashboard esta aislada en su propia page para que graficos y metricas crezcan con claridad.',
-  'pages.dashboard.layout.label': 'Capa de layout',
-  'pages.dashboard.layout.title': 'Componente especifico de la pagina',
-  'pages.dashboard.layout.description':
-    'El contenido especifico del Dashboard ahora pertenece a la propia page en lugar de metadata de rutas.',
+    'Senales agregadas entre proyectos, stack y carrera ahora viven en una ruta propia, alimentada por los endpoints publicos de dashboard.',
+  'pages.dashboard.snapshot.label': 'Snapshot',
+  'pages.dashboard.snapshot.title': 'Huella publicada en una sola lectura',
+  'pages.dashboard.snapshot.description':
+    'La sidebar concentra los contadores principales de la API para resumir rapidamente el dataset publico actual.',
+  'pages.dashboard.snapshot.loading': 'Cargando agregados del dashboard...',
+  'pages.dashboard.snapshot.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.snapshot.metrics.projects': 'Proyectos',
+  'pages.dashboard.snapshot.metrics.experiences': 'Experiencias',
+  'pages.dashboard.snapshot.metrics.technologies': 'Tecnologias',
+  'pages.dashboard.snapshot.metrics.formations': 'Formaciones / idiomas',
+  'pages.dashboard.snapshot.metrics.customers': 'Clientes',
+  'pages.dashboard.snapshot.metrics.jobs': 'Cargos',
+  'pages.dashboard.snapshot.metrics.languages': 'Idiomas',
+  'pages.dashboard.stacks.label': 'Distribucion de stack',
+  'pages.dashboard.stacks.title':
+    'Donde el portfolio carga hoy mas peso tecnico',
+  'pages.dashboard.stacks.description':
+    'Cada area combina proyectos relacionados y tecnologias mapeadas para dejar claras las zonas mas fuertes al instante.',
+  'pages.dashboard.stacks.loading': 'Cargando distribucion de stack...',
+  'pages.dashboard.stacks.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.stacks.empty':
+    'Todavia no se devolvio ninguna distribucion de stack.',
+  'pages.dashboard.stacks.projects': 'proyectos',
+  'pages.dashboard.stacks.technologies': 'tecnologias',
+  'pages.dashboard.distribution.label': 'Huella de proyectos',
+  'pages.dashboard.distribution.title':
+    'Contexto de entrega, ambientes y densidad de destaque',
+  'pages.dashboard.distribution.description':
+    'Este bloque separa volumen destacado, contexto y ambiente para que el catalogo de proyectos sea mas legible.',
+  'pages.dashboard.distribution.loading':
+    'Cargando agregados de distribucion de proyectos...',
+  'pages.dashboard.distribution.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.distribution.empty':
+    'Todavia no se devolvio ningun dato de distribucion de proyectos.',
+  'pages.dashboard.distribution.featured': 'Destacados',
+  'pages.dashboard.distribution.highlighted': 'Highlights',
+  'pages.dashboard.distribution.total': 'Total de proyectos',
+  'pages.dashboard.distribution.contexts': 'Contextos',
+  'pages.dashboard.distribution.environments': 'Ambientes',
+  'pages.dashboard.technology.label': 'Uso de tecnologia',
+  'pages.dashboard.technology.title': 'Senales de uso de stack',
+  'pages.dashboard.technology.description':
+    'Las tecnologias lideres y sus patrones de frecuencia, contexto y origen salen directo de las relaciones agregadas de la API.',
+  'pages.dashboard.technology.loading':
+    'Cargando agregados de uso de tecnologia...',
+  'pages.dashboard.technology.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.technology.empty':
+    'Todavia no se devolvio ningun agregado de uso de tecnologia.',
+  'pages.dashboard.technology.levels': 'Niveles',
+  'pages.dashboard.technology.frequencies': 'Frecuencias',
+  'pages.dashboard.technology.contexts': 'Contextos',
+  'pages.dashboard.technology.sources': 'Origenes',
+  'pages.dashboard.technology.links': 'senales vinculadas',
+  'pages.dashboard.timeline.label': 'Carrera',
+  'pages.dashboard.timeline.title': 'Timeline de foco profesional',
+  'pages.dashboard.timeline.description':
+    'La timeline publica se vuelve una capa analitica para mostrar capitulos activos, densidad de highlight y distribucion entre proyectos y clientes.',
+  'pages.dashboard.timeline.loading':
+    'Cargando agregados de la timeline profesional...',
+  'pages.dashboard.timeline.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.timeline.empty':
+    'Todavia no se devolvio ningun item de la timeline profesional.',
+  'pages.dashboard.timeline.current': 'Actual',
+  'pages.dashboard.timeline.highlight': 'Highlight',
+  'pages.dashboard.timeline.customers': 'Clientes',
+  'pages.dashboard.timeline.emptyCustomers':
+    'Todavia no hay clientes vinculados.',
+  'pages.dashboard.timeline.projects': 'Proyectos',
+  'pages.dashboard.timeline.emptyProjects':
+    'Todavia no hay proyectos vinculados.',
+  'pages.dashboard.timeline.technologies': 'Tecnologias',
+  'pages.dashboard.highlights.label': 'Highlights',
+  'pages.dashboard.highlights.title': 'Destacados del portfolio',
+  'pages.dashboard.highlights.description':
+    'Las entidades marcadas en el backend siguen visibles aqui como prueba de repertorio entre proyectos, experiencia y tecnologia.',
+  'pages.dashboard.highlights.loading':
+    'Cargando entidades destacadas del portfolio...',
+  'pages.dashboard.highlights.error':
+    'Los endpoints agregados del dashboard no estan disponibles ahora.',
+  'pages.dashboard.highlights.empty':
+    'Todavia no se devolvio ningun item destacado del portfolio.',
+  'pages.dashboard.highlights.featured': 'Destacado',
+  'taxonomy.dashboard.source.experience': 'Experiencia',
+  'taxonomy.dashboard.source.project': 'Proyecto',
+  'taxonomy.dashboard.source.formation': 'Formacion',
 } as const satisfies AppTranslationLanguage;

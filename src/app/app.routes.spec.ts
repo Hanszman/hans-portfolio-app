@@ -60,7 +60,7 @@ describe('app routes', () => {
     await harness.navigateByUrl('/dashboard');
 
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Dashboard foundation',
+      'Portfolio analytics dashboard',
     );
   });
 

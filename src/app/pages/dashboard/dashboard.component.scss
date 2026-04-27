@@ -1,0 +1,209 @@
+.dashboard-hero,
+.dashboard-section {
+  @apply contents;
+}
+
+.dashboard-state {
+  @apply text-sm leading-6 text-[var(--text-color)];
+}
+
+.dashboard-summary-grid {
+  @apply grid gap-3 sm:grid-cols-2;
+}
+
+.dashboard-summary-card {
+  @apply flex min-h-28 flex-col justify-between rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--warning-default-color) 30%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--warning-neutral-color) 35%,
+    transparent
+  );
+}
+
+.dashboard-summary-icon {
+  @apply flex size-10 items-center justify-center rounded-2xl text-[var(--warning-strong-color)];
+  background-color: color-mix(
+    in srgb,
+    var(--warning-default-color) 15%,
+    transparent
+  );
+}
+
+.dashboard-summary-card strong {
+  @apply text-2xl font-semibold text-[var(--text-color)];
+}
+
+.dashboard-summary-card span {
+  @apply text-sm leading-5;
+  color: color-mix(in srgb, var(--text-color) 75%, transparent);
+}
+
+.dashboard-stack-list,
+.dashboard-timeline-list,
+.dashboard-highlight-grid,
+.dashboard-tech-leaders,
+.dashboard-tech-breakdowns {
+  @apply grid gap-4;
+}
+
+.dashboard-stack-row,
+.dashboard-timeline-card,
+.dashboard-highlight-card {
+  @apply rounded-[2rem] border p-4 shadow-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 20%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
+}
+
+.dashboard-stack-row {
+  @apply grid items-center gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_3rem];
+}
+
+.dashboard-stack-copy {
+  @apply flex items-center gap-3;
+}
+
+.dashboard-stack-copy strong,
+.dashboard-highlight-copy strong,
+.dashboard-timeline-head strong,
+.dashboard-tech-card strong,
+.dashboard-kpi strong {
+  @apply text-[var(--text-color)];
+}
+
+.dashboard-stack-copy small,
+.dashboard-highlight-copy p,
+.dashboard-timeline-head p,
+.dashboard-kpi span,
+.dashboard-breakdown span,
+.dashboard-tech-card span {
+  @apply text-sm leading-5;
+  color: color-mix(in srgb, var(--text-color) 75%, transparent);
+}
+
+.dashboard-stack-icon,
+.dashboard-tech-icon {
+  @apply flex items-center justify-center rounded-2xl text-[var(--primary-strong-color)];
+  background-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 12%,
+    transparent
+  );
+}
+
+.dashboard-stack-icon {
+  @apply size-10;
+}
+
+.dashboard-tech-icon {
+  @apply size-14;
+}
+
+.dashboard-bar-shell {
+  @apply h-3 rounded-full;
+  background-color: color-mix(in srgb, var(--base-default-color) 12%, transparent);
+}
+
+.dashboard-bar-fill {
+  @apply block h-full rounded-full bg-[var(--primary-default-color)];
+}
+
+.dashboard-bar-value {
+  @apply text-right text-sm font-semibold text-[var(--text-color)];
+}
+
+.dashboard-kpis {
+  @apply mb-5 grid gap-3 sm:grid-cols-3;
+}
+
+.dashboard-kpi,
+.dashboard-chip,
+.dashboard-tech-card {
+  @apply rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 20%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 75%, transparent);
+}
+
+.dashboard-dual-grid,
+.dashboard-tech-grid {
+  @apply grid gap-4 lg:grid-cols-2;
+}
+
+.dashboard-breakdown {
+  @apply grid gap-3;
+}
+
+.dashboard-chip-list {
+  @apply flex flex-wrap gap-3;
+}
+
+.dashboard-chip {
+  @apply flex items-center gap-2 py-3;
+}
+
+.dashboard-chip strong {
+  @apply text-base font-semibold text-[var(--text-color)];
+}
+
+.dashboard-chip span {
+  @apply text-sm;
+  color: color-mix(in srgb, var(--text-color) 75%, transparent);
+}
+
+.dashboard-tech-leaders {
+  @apply sm:grid-cols-2;
+}
+
+.dashboard-tech-card {
+  @apply flex items-center gap-4;
+}
+
+.dashboard-tech-card img,
+.dashboard-highlight-visual img {
+  @apply size-14 rounded-2xl object-cover;
+}
+
+.dashboard-timeline-head,
+.dashboard-highlight-head {
+  @apply flex flex-wrap items-start justify-between gap-3;
+}
+
+.dashboard-timeline-head > div:first-child span,
+.dashboard-highlight-copy > span {
+  @apply text-xs font-semibold uppercase tracking-[0.14em];
+  color: color-mix(in srgb, var(--text-color) 55%, transparent);
+}
+
+.dashboard-timeline-flags {
+  @apply flex flex-wrap gap-2;
+}
+
+.dashboard-highlight-grid {
+  @apply md:grid-cols-2;
+}
+
+.dashboard-highlight-card {
+  @apply flex gap-4;
+}
+
+.dashboard-highlight-visual {
+  @apply flex shrink-0 items-start;
+}
+
+.dashboard-highlight-copy {
+  @apply grid gap-2;
+}
+
+@media (max-width: 767px) {
+  .dashboard-stack-row {
+    @apply grid-cols-1;
+  }
+
+  .dashboard-bar-value {
+    @apply text-left;
+  }
+
+  .dashboard-highlight-card {
+    @apply flex-col;
+  }
+}
