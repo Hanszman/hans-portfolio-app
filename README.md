@@ -214,7 +214,7 @@ At the moment, this repository already has the first public pages evolving on re
 - the design library CDN is already wired
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 
-The next official frontend step after the current implementation is `F5`, focused on the projects page.
+The next official frontend step after the current implementation is `F6`, focused on the dashboard page.
 
 ## 📜 History of commands used to build this project:
 

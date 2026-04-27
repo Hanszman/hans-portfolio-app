@@ -1,10 +1,14 @@
-Refactor portfolio in Angular:
--Refactor the screens and components from the old version of the portfolio
--Create more components and features in the portfolio
--Create pipeline ci/cd and docker in the project
--Create skills
--Checkout the TODO list from the old project:
+[TODO ATUAL]:
+-Partir pra próxima etapa de implementação
+-Alterar tema/infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
 
+[PROXIMOS TODO's]:
+-Refatorar e readaptar telas e componentes da versão antiga do portfolio
+-Refactor the screens and components from the old version of the portfolio
+-Criar mais features e componentes
+-Criar pipeline ci/cd e configurar docker no projeto
+-Criar skills
+-Verificar lista de TODO's antigos:
 // TODO: Criar separação entre tempos de experiência
 // TODO: Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures
 // TODO: Melhorar a apresentação dos cards no css de cada página (tirar espaços brancos, centralizar, dividir informações em boxes, colocar tamanho padronizado, centralizar filtros)
@@ -31,7 +35,6 @@ Refactor portfolio in Angular:
 
 
 [PROMPT INICIAL]:
-
 Olá Codex, bom dia! Tudo bem?
 Vamos continuar o plano de implementação do remake do meu portfolio! Vc pode pegar contexto principalmente nos arquivos:
 hans-portfolio-app:
@@ -55,8 +58,5 @@ Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe 
 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
-[ATUAL]:
--Partir pra próxima etapa de implementação
--Alterar tema/infos/design do portfolio, etc
-
+[PROMPT CONTINUAÇÃO]:
 Continue o plano-implementacao-hans-portfolio-app-final-version.md da etapa em que paramos. Como vc pode ver ja fizemos ate a etapa F2 e a proxima é a F3. Lembre-se de usar nossa lib de hans design sempre que precisar de algum componente que ela já tenha. Lembre-se de sempre que necessário atualizar as documentações E lembre-se de sempre (no final de toda etapa/implementação que vc fizer) rodar os scripts de lint, build, test, etc para verificar se tudo passou corretamente.
