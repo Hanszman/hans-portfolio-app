@@ -38,15 +38,15 @@ const HOME_TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
 };
 
 const HOME_TECHNOLOGY_VISUAL_FILE_NAMES: Record<string, string> = {
-  angular: 'angular',
-  css: 'css',
-  html: 'html',
-  javascript: 'javascript',
-  json: 'json',
-  git: 'git',
-  typescript: 'typescript',
-  visualstudiocode: 'visualstudiocode',
-  'visual-studio-code': 'visualstudiocode',
+  angular: 'angular.png',
+  css: 'css.png',
+  html: 'html.png',
+  javascript: 'javascript.png',
+  json: 'json.png',
+  git: 'git.png',
+  typescript: 'typescript.png',
+  visualstudiocode: 'visualstudiocode.png',
+  'visual-studio-code': 'visualstudiocode.png',
 };
 
 export interface HomeMetricViewModel {
@@ -162,7 +162,5 @@ export const resolveHomeTechnologyIconName = (category: string): string =>
 
 export const resolveHomeTechnologyVisualUrl = (slug: string): string =>
   HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]
-    ? buildRelativeSkillImageAssetPath(
-        `${HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]}.png`,
-      )
+    ? buildRelativeSkillImageAssetPath(HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()])
     : '';

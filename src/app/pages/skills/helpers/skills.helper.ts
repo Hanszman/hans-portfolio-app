@@ -65,9 +65,7 @@ export const resolveSkillVisualUrl = (
   buildAssetUrl(
     fallbackPath ??
       (SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()]
-        ? buildRelativeSkillImageAssetPath(
-            `${SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()]}.png`,
-          )
+        ? buildRelativeSkillImageAssetPath(SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()])
         : ''),
   );
 
