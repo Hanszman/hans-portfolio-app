@@ -7,6 +7,7 @@ An **Angular + TypeScript Front-End App** to show all the projects I've already 
 - ⚙️ **Angular 20.3.6** with **TypeScript 5.9.2**
 - 🏠 Strategic home already hydrated by the public dashboard endpoint
 - 💼 Experiences page already rendered as a live career timeline from `GET /experiences`
+- 🧠 Skills page now grouped by real `GET /technologies` experience metrics
 - 🎨 **TailwindCSS + SCSS** for styling flexibility
 - ✅ **Karma + Jasmine** for unit and integration testing
 - 📊 **Test Coverage** with HTML reports
@@ -201,13 +202,14 @@ The backend also normalizes media and URLs through relations, so the frontend sh
 At the moment, this repository already has the first public pages evolving on real backend data:
 
 - the app shell, strategic home, and experiences timeline are implemented
+- the skills route now consumes the public `GET /technologies` collection with real `experienceMetrics`
 - home consumes the public dashboard aggregate endpoints
 - experiences consumes the public `GET /experiences` collection with related projects, customers, jobs, technologies, and image assets
-- skills, projects, and dashboard routes still remain in their foundation stage
+- projects and dashboard routes still remain in their foundation stage
 - the design library CDN is already wired
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 
-The next official frontend step after the current implementation is `F4`, focused on the technologies/skills page.
+The next official frontend step after the current implementation is `F5`, focused on the projects page.
 
 ## 📜 History of commands used to build this project:
 

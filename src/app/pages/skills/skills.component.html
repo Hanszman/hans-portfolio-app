@@ -1,5 +1,5 @@
 <app-page-wrapper>
-  <div page-main>
+  <div page-main class="skills-hero">
     <app-page-intro
       [sectionLabel]="'pages.skills.sectionLabel' | translate"
       [title]="'pages.skills.title' | translate"
@@ -9,25 +9,176 @@
 
   <app-container
     page-sidebar
-    tone="info"
-    [label]="'pages.skills.roadmap.label' | translate"
-    [containerTitle]="'pages.skills.roadmap.title' | translate"
-    [description]="'pages.skills.roadmap.description' | translate"
-  />
+    tone="secondary"
+    [label]="'pages.skills.snapshot.label' | translate"
+    [containerTitle]="'pages.skills.snapshot.title' | translate"
+    [description]="'pages.skills.snapshot.description' | translate"
+  >
+    @if (isLoading()) {
+      <p class="skills-state">{{ 'pages.skills.snapshot.loading' | translate }}</p>
+    } @else if (hasError()) {
+      <p class="skills-state">{{ 'pages.skills.snapshot.error' | translate }}</p>
+    } @else {
+      <dl class="skills-summary-grid">
+        @for (metric of summaryMetrics(); track metric.label) {
+          <div class="skills-summary-item">
+            <span>{{ metric.label }}</span>
+            <strong>{{ metric.value }}</strong>
+            @if (metric.supportingText) {
+              <small>{{ metric.supportingText }}</small>
+            }
+          </div>
+        }
+      </dl>
+    }
+  </app-container>
 
-  <app-container
-    page-content
-    tone="success"
-    [label]="'pages.skills.status.label' | translate"
-    [containerTitle]="'pages.skills.status.title' | translate"
-    [description]="'pages.skills.status.description' | translate"
-  />
+  <section page-content class="skills-section">
+    <app-container
+      tone="info"
+      [label]="'pages.skills.filters.label' | translate"
+      [containerTitle]="'pages.skills.filters.title' | translate"
+      [description]="'pages.skills.filters.description' | translate"
+    >
+      <div class="skills-filters">
+        <hans-dropdown
+          #categoryDropdown
+          [options]="categoryOptions()"
+          [triggerLabel]="'pages.skills.filters.category' | translate"
+          triggerColor="primary"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectCategory($event)"
+        ></hans-dropdown>
 
-  <app-container
-    page-content
-    tone="base"
-    [label]="'pages.skills.layout.label' | translate"
-    [containerTitle]="'pages.skills.layout.title' | translate"
-    [description]="'pages.skills.layout.description' | translate"
-  />
+        <hans-dropdown
+          #levelDropdown
+          [options]="levelOptions()"
+          [triggerLabel]="'pages.skills.filters.level' | translate"
+          triggerColor="secondary"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectLevel($event)"
+        ></hans-dropdown>
+
+        <hans-dropdown
+          #contextDropdown
+          [options]="contextOptions()"
+          [triggerLabel]="'pages.skills.filters.context' | translate"
+          triggerColor="success"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectContext($event)"
+        ></hans-dropdown>
+      </div>
+
+      <div class="skills-filter-summary">
+        <span>{{ 'pages.skills.filters.total' | translate }}</span>
+        <strong>{{ filteredCountLabel() }}</strong>
+      </div>
+    </app-container>
+
+    <app-container
+      tone="success"
+      [label]="'pages.skills.catalog.label' | translate"
+      [containerTitle]="'pages.skills.catalog.title' | translate"
+      [description]="'pages.skills.catalog.description' | translate"
+    >
+      @if (isLoading()) {
+        <p class="skills-state">{{ 'pages.skills.catalog.loading' | translate }}</p>
+      } @else if (hasError()) {
+        <p class="skills-state">{{ 'pages.skills.catalog.error' | translate }}</p>
+      } @else if (groupedTechnologies().length === 0) {
+        <p class="skills-state">{{ 'pages.skills.catalog.empty' | translate }}</p>
+      } @else {
+        <div class="skills-group-list">
+          @for (group of groupedTechnologies(); track group.id) {
+            <section class="skills-group">
+              <div class="skills-group-header">
+                <div class="skills-group-copy">
+                  <span>{{ group.description }}</span>
+                  <strong>{{ group.title }}</strong>
+                </div>
+
+                <div class="skills-group-icon">
+                  <hans-icon [name]="group.iconName" iconSize="medium"></hans-icon>
+                </div>
+              </div>
+
+              <div class="skills-card-grid">
+                @for (item of group.items; track item.id) {
+                  <article class="skills-card">
+                    <div class="skills-card-head">
+                      <div class="skills-card-visual">
+                        @if (item.visualUrl) {
+                          <hans-avatar
+                            [src]="item.visualUrl"
+                            [alt]="item.name"
+                            avatarSize="medium"
+                          ></hans-avatar>
+                        } @else {
+                          <hans-icon [name]="item.iconName" iconSize="medium"></hans-icon>
+                        }
+                      </div>
+
+                      <div class="skills-card-copy">
+                        <span>{{ item.categoryLabel }}</span>
+                        <strong>{{ item.name }}</strong>
+                      </div>
+
+                      @if (item.isHighlight) {
+                        <hans-tag
+                          [attr.label]="'pages.skills.card.highlight' | translate"
+                          tagColor="warning"
+                          tagSize="sm"
+                        ></hans-tag>
+                      }
+                    </div>
+
+                    <div class="skills-card-tags">
+                      <hans-tag
+                        [attr.label]="item.levelLabel"
+                        tagColor="primary"
+                        tagSize="sm"
+                      ></hans-tag>
+                      <hans-tag
+                        [attr.label]="item.frequencyLabel"
+                        tagColor="secondary"
+                        tagSize="sm"
+                      ></hans-tag>
+                    </div>
+
+                    <div class="skills-card-metric">
+                      <span>{{ 'pages.skills.card.totalExperience' | translate }}</span>
+                      <strong>{{ item.totalExperienceLabel }}</strong>
+                    </div>
+
+                    <section class="skills-card-contexts">
+                      <span>{{ 'pages.skills.card.contexts' | translate }}</span>
+                      <div class="skills-context-list">
+                        @for (context of item.contexts; track context.key) {
+                          <div class="skills-context-item">
+                            <strong>{{ context.label }}</strong>
+                            <span>{{ context.value }}</span>
+                          </div>
+                        } @empty {
+                          <div class="skills-context-item">
+                            <strong>{{ 'pages.skills.card.contexts' | translate }}</strong>
+                            <span>0</span>
+                          </div>
+                        }
+                      </div>
+                    </section>
+                  </article>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      }
+    </app-container>
+  </section>
 </app-page-wrapper>

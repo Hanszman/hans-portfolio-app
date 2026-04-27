@@ -1,0 +1,190 @@
+:host {
+  display: block;
+}
+
+.skills-state,
+.skills-filter-summary span,
+.skills-group-copy span,
+.skills-card-copy span,
+.skills-card-metric span,
+.skills-card-contexts > span {
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.skills-summary-grid,
+.skills-filters,
+.skills-group-list,
+.skills-card-grid,
+.skills-context-list {
+  display: grid;
+}
+
+.skills-summary-grid,
+.skills-card-grid {
+  gap: 1rem;
+}
+
+.skills-group-list {
+  gap: 1.5rem;
+}
+
+.skills-summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.skills-summary-item,
+.skills-group,
+.skills-card,
+.skills-context-item {
+  border: 1px solid color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  border-radius: 1.5rem;
+  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+}
+
+.skills-summary-item,
+.skills-card,
+.skills-group {
+  padding: 1rem;
+}
+
+.skills-summary-item span,
+.skills-group-copy span,
+.skills-card-copy span,
+.skills-card-metric span,
+.skills-card-contexts > span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skills-summary-item strong,
+.skills-group-copy strong,
+.skills-card-copy strong,
+.skills-card-metric strong,
+.skills-context-item strong {
+  display: block;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.skills-summary-item strong {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.skills-summary-item small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.skills-section,
+.skills-filters {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.skills-filter-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.skills-filter-summary strong {
+  font-size: 1.5rem;
+}
+
+.skills-group {
+  display: grid;
+  gap: 1rem;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
+}
+
+.skills-group-header,
+.skills-card-head {
+  display: flex;
+  gap: 1rem;
+}
+
+.skills-group-header {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skills-group-copy strong {
+  margin-top: 0.25rem;
+  font-size: 1.5rem;
+}
+
+.skills-group-icon,
+.skills-card-visual {
+  display: grid;
+  place-items: center;
+  min-width: 4rem;
+  height: 4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--success-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
+}
+
+.skills-card {
+  display: grid;
+  gap: 1rem;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+}
+
+.skills-card-head {
+  align-items: center;
+}
+
+.skills-card-copy {
+  flex: 1;
+}
+
+.skills-card-copy strong {
+  margin-top: 0.2rem;
+  font-size: 1.25rem;
+}
+
+.skills-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skills-card-contexts {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.skills-context-list {
+  gap: 0.75rem;
+}
+
+.skills-context-item {
+  padding: 0.85rem;
+}
+
+.skills-context-item span {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .skills-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skills-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-context-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

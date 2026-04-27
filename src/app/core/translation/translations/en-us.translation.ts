@@ -181,23 +181,37 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.timeline.relatedProjects': 'Related projects',
   'pages.experiences.timeline.emptyProjects':
     'No related projects were returned for this chapter.',
-  'pages.skills.sectionLabel': 'Foundation',
-  'pages.skills.title': 'Skills foundation',
+  'pages.skills.sectionLabel': 'Technology',
+  'pages.skills.title': 'Technology depth',
   'pages.skills.description':
-    'The skills route is ready for grouped technologies, concepts, patterns, and experience metrics.',
-  'pages.skills.roadmap.label': 'Roadmap',
-  'pages.skills.roadmap.title':
-    'Technology clusters and real experience metrics',
-  'pages.skills.roadmap.description':
-    'This page will consume backend skill data and organize it into useful filters, groups, and summaries.',
-  'pages.skills.status.label': 'Status',
-  'pages.skills.status.title': 'Concepts, patterns and architectures',
-  'pages.skills.status.description':
-    'The remake will include broader technical knowledge, not only specific technologies.',
-  'pages.skills.layout.label': 'Layout layer',
-  'pages.skills.layout.title': 'Page-specific component',
-  'pages.skills.layout.description':
-    'Skills-specific composition can now evolve independently from the other routes.',
+    'The skills page now turns live `experienceMetrics` into a clearer technology catalog, with useful filters and context-based reading.',
+  'pages.skills.snapshot.label': 'Portfolio snapshot',
+  'pages.skills.snapshot.title': 'Technology clarity from live API metrics',
+  'pages.skills.snapshot.description':
+    'The sidebar summarizes category breadth, highlight density, and the strongest duration signal already published by the backend.',
+  'pages.skills.snapshot.loading': 'Loading technology experience metrics...',
+  'pages.skills.snapshot.error':
+    'The technologies endpoint is unavailable right now.',
+  'pages.skills.filters.label': 'Catalog filters',
+  'pages.skills.filters.title': 'Slice the stack by category, level, and context',
+  'pages.skills.filters.description':
+    'Filters stay lightweight in the UI while the real technology durations still come from the backend contracts.',
+  'pages.skills.filters.category': 'Category',
+  'pages.skills.filters.level': 'Level',
+  'pages.skills.filters.context': 'Context',
+  'pages.skills.filters.total': 'Filtered technologies',
+  'pages.skills.catalog.label': 'Technology groups',
+  'pages.skills.catalog.title': 'Grouped reading for the current filter set',
+  'pages.skills.catalog.description':
+    'Each technology card highlights total experience plus the contexts where that stack has already been used.',
+  'pages.skills.catalog.loading': 'Building technology groups...',
+  'pages.skills.catalog.error':
+    'The technologies endpoint is unavailable right now.',
+  'pages.skills.catalog.empty':
+    'No published technologies matched the current filters.',
+  'pages.skills.card.highlight': 'Highlight',
+  'pages.skills.card.totalExperience': 'Total experience',
+  'pages.skills.card.contexts': 'Context coverage',
   'pages.projects.sectionLabel': 'Foundation',
   'pages.projects.title': 'Projects foundation',
   'pages.projects.description':

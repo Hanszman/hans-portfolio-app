@@ -5,9 +5,11 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
 import { createSystemServiceMock } from './core/api/mocks/system.mocks';
+import { createTechnologiesServiceMock } from './core/api/mocks/technologies.mocks';
 import { DashboardService } from './core/api/dashboard/dashboard.service';
 import { ExperiencesService } from './core/api/experiences/experiences.service';
 import { SystemService } from './core/api/system/system.service';
+import { TechnologiesService } from './core/api/technologies/technologies.service';
 import { provideAppTranslations } from './core/translation/translation.providers';
 import { routes } from './app.routes';
 
@@ -29,6 +31,10 @@ describe('app routes', () => {
         {
           provide: ExperiencesService,
           useValue: createExperiencesServiceMock(),
+        },
+        {
+          provide: TechnologiesService,
+          useValue: createTechnologiesServiceMock(),
         },
       ],
     }).compileComponents();
@@ -61,11 +67,11 @@ describe('app routes', () => {
     );
   });
 
-  it('should load the skills foundation route', async () => {
+  it('should load the skills technology route', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/skills');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Skills foundation');
+    expect(harness.routeNativeElement?.textContent).toContain('Technology depth');
   });
 
   it('should load the projects foundation route', async () => {
