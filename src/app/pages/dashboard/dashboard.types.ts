@@ -1,5 +1,22 @@
+import {
+  DashboardHighlightsResponse,
+  DashboardOverviewResponse,
+  DashboardProfessionalTimelineResponse,
+  DashboardProjectContextsResponse,
+  DashboardStackDistributionResponse,
+  DashboardTechnologyUsageResponse,
+} from '../../core/api/dashboard/dashboard.types';
 import { buildRelativeSkillImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
+
+export interface DashboardPageData {
+  overview: DashboardOverviewResponse;
+  stackDistribution: DashboardStackDistributionResponse;
+  projectContexts: DashboardProjectContextsResponse;
+  technologyUsage: DashboardTechnologyUsageResponse;
+  professionalTimeline: DashboardProfessionalTimelineResponse;
+  highlights: DashboardHighlightsResponse;
+}
 
 export interface DashboardSummaryCardViewModel {
   label: string;

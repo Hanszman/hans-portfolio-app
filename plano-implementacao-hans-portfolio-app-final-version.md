@@ -583,9 +583,10 @@ Exemplos de onde cada tipo de estado deve morar:
 - manter leitura facil mesmo meses depois
 - helpers especificos de uma feature devem ficar proximos da propria feature
 - helpers especificos de componente/pagina devem ficar dentro de uma pasta local `helpers/`, seguindo o mesmo padrao adotado na `hans-ui-design-lib`
-- tipos, interfaces, models e contratos semelhantes devem ficar em arquivos `*.types.ts`, proximos da feature ou dominio dono
+- tipos, interfaces, type aliases, view-models, payloads agregados locais e contratos semelhantes devem ficar em arquivos `*.types.ts`, proximos da feature ou dominio dono
 - consts de apoio do componente/pagina tambem devem ficar no `*.types.ts` da propria feature quando fizerem parte do contrato e da modelagem daquela view
-- evitar declarar interfaces e types inline no componente quando eles fizerem parte real da estrutura do codigo
+- evitar declarar interfaces e types inline no componente; se a estrutura participa do modelo real da feature, ela deve ir para o `*.types.ts`
+- o mesmo vale para arquivos `helper`: nao acumular interfaces, types nem contratos locais ali; helpers devem consumir a tipagem definida no `*.types.ts`
 - arquivos `helper` devem conter apenas funcoes auxiliares, sem acumular types, interfaces ou consts da feature
 - configuracoes globais de tema devem ficar em `core/theme/theme.config.ts`
 - temas concretos devem ficar separados por arquivo em `core/theme/themes`, por exemplo `light.theme.ts` e `dark.theme.ts`

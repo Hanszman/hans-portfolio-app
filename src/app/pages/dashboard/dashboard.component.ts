@@ -10,18 +10,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
-import {
-  DashboardHighlightsResponse,
-  DashboardOverviewResponse,
-  DashboardProfessionalTimelineResponse,
-  DashboardProjectContextsResponse,
-  DashboardStackDistributionResponse,
-  DashboardTechnologyUsageResponse,
-} from '../../core/api/dashboard/dashboard.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { DashboardPageData } from './dashboard.types';
 import {
   buildDashboardProjectDistribution,
   buildDashboardSummaryCards,
@@ -31,15 +24,6 @@ import {
   mapDashboardStackRows,
   mapDashboardTimelineCards,
 } from './helpers/dashboard.helper';
-
-interface DashboardPageData {
-  overview: DashboardOverviewResponse;
-  stackDistribution: DashboardStackDistributionResponse;
-  projectContexts: DashboardProjectContextsResponse;
-  technologyUsage: DashboardTechnologyUsageResponse;
-  professionalTimeline: DashboardProfessionalTimelineResponse;
-  highlights: DashboardHighlightsResponse;
-}
 
 @Component({
   selector: 'app-dashboard',

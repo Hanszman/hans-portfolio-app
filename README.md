@@ -99,7 +99,8 @@ This project must follow the current Angular direction consistently:
 - prefer signals-based state over RxJS-based local state
 - keep templates simple and move view-model logic to TypeScript when useful
 - feature-specific helpers must live inside a local `helpers/` folder near the component, page, or domain they support
-- component/page constants, types, and interfaces must live in that feature's own `*.types.ts` file
+- every feature-local typing structure must live in that feature's own `*.types.ts` file, including interfaces, type aliases, view-models, local aggregate contracts, and component/page support constants tied to that model
+- component/page `.ts` and local helper files must not keep inline interfaces or type aliases when those structures belong to the feature's code model; move them to the owning `*.types.ts` file
 - helpers should keep only helper functions and should not become a mixed file for contracts/constants
 - stylesheets must prefer Tailwind utilities through `@apply`; plain CSS/SCSS should only be used when there is no adequate Tailwind utility for that rule
 - when TypeScript needs translated labels, pass translation keys only and resolve them through `TranslationService`; do not keep locale-to-text maps in `types`, helpers, or components
