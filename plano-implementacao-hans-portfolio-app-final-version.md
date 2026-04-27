@@ -928,6 +928,14 @@ Apresentar projetos como cases, com mais contexto e valor percebido.
 - visual consistente com a home e experiences
 - coverage total do escopo entregue
 
+#### Status de execucao atual
+
+- F5 concluida no `hans-portfolio-app`
+- pagina `projects` agora consome `GET /projects` com relacionamentos reais de tecnologias, links, screenshots e experiences
+- a leitura foi organizada como case studies com filtros por contexto, ambiente e status, alem de ordenacoes por destaque, data, stack e assets vinculados
+- a pagina reaproveita a `hans-ui-design-lib` com `hans-dropdown`, `hans-tag` e `hans-icon`
+- proxima etapa oficial: `F6 - Dashboard analitico`
+
 ### F6 - Dashboard analitico
 
 #### Objetivo

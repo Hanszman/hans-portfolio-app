@@ -4,10 +4,12 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
+import { createProjectsServiceMock } from './core/api/mocks/projects.mocks';
 import { createSystemServiceMock } from './core/api/mocks/system.mocks';
 import { createTechnologiesServiceMock } from './core/api/mocks/technologies.mocks';
 import { DashboardService } from './core/api/dashboard/dashboard.service';
 import { ExperiencesService } from './core/api/experiences/experiences.service';
+import { ProjectsService } from './core/api/projects/projects.service';
 import { SystemService } from './core/api/system/system.service';
 import { TechnologiesService } from './core/api/technologies/technologies.service';
 import { provideAppTranslations } from './core/translation/translation.providers';
@@ -35,6 +37,10 @@ describe('app routes', () => {
         {
           provide: TechnologiesService,
           useValue: createTechnologiesServiceMock(),
+        },
+        {
+          provide: ProjectsService,
+          useValue: createProjectsServiceMock(),
         },
       ],
     }).compileComponents();
@@ -74,11 +80,11 @@ describe('app routes', () => {
     expect(harness.routeNativeElement?.textContent).toContain('Technology depth');
   });
 
-  it('should load the projects foundation route', async () => {
+  it('should load the projects case-study route', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/projects');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Projects foundation');
+    expect(harness.routeNativeElement?.textContent).toContain('Project case studies');
   });
 
   it('should redirect unknown routes to the strategic home route', async () => {

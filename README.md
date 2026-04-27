@@ -207,6 +207,7 @@ At the moment, this repository already has the first public pages evolving on re
 
 - the app shell, strategic home, and experiences timeline are implemented
 - the skills route now consumes the public `GET /technologies` collection with real `experienceMetrics`
+- the projects route now consumes the public `GET /projects` collection with linked technologies, links, screenshots, and related experiences
 - home consumes the public dashboard aggregate endpoints
 - experiences consumes the public `GET /experiences` collection with related projects, customers, jobs, technologies, and image assets
 - projects and dashboard routes still remain in their foundation stage

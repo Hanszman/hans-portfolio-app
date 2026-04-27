@@ -1,0 +1,191 @@
+:host {
+  @apply block;
+}
+
+.projects-state,
+.projects-filter-summary span,
+.projects-summary-item small,
+.project-case-heading span,
+.project-case-description,
+.project-link span,
+.project-case-block > span {
+  color: color-mix(in srgb, var(--text-color) 74%, transparent);
+}
+
+.projects-summary-grid,
+.projects-section,
+.projects-filters,
+.projects-case-list,
+.project-case,
+.project-case-copy,
+.project-case-grid,
+.project-case-block,
+.project-link-list {
+  @apply grid;
+}
+
+.projects-summary-grid,
+.project-case-grid,
+.project-link-list {
+  @apply gap-4;
+}
+
+.projects-section,
+.projects-filters,
+.projects-case-list,
+.project-case-copy {
+  @apply gap-6;
+}
+
+.projects-summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.projects-summary-item,
+.project-case,
+.project-link,
+.project-case-chip {
+  @apply rounded-3xl border;
+  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.projects-summary-item,
+.project-case {
+  @apply p-4;
+}
+
+.projects-summary-item span,
+.project-case-heading span,
+.project-case-block > span,
+.project-link span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+}
+
+.projects-summary-item strong,
+.project-case-heading strong,
+.project-case-footer strong,
+.project-link strong {
+  @apply block font-semibold leading-tight;
+}
+
+.projects-summary-item strong {
+  @apply mt-2 text-[1.1rem];
+}
+
+.projects-summary-item small {
+  @apply mt-2 block text-[0.9rem] leading-6;
+}
+
+.projects-filter-summary {
+  @apply mt-4 flex items-baseline gap-3;
+}
+
+.projects-filter-summary strong {
+  @apply text-2xl;
+}
+
+.project-case {
+  @apply gap-5;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
+}
+
+.project-case-visual img,
+.project-case-icon {
+  @apply h-full min-h-[14rem] w-full rounded-[1.75rem];
+}
+
+.project-case-visual img {
+  @apply block object-cover;
+}
+
+.project-case-icon {
+  @apply grid place-items-center border;
+  border-color: color-mix(in srgb, var(--warning-default-color) 22%, transparent);
+  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, white);
+}
+
+.project-case-head {
+  @apply flex flex-col gap-4;
+}
+
+.project-case-heading strong {
+  @apply mt-2 text-[1.7rem];
+}
+
+.project-case-flags,
+.project-case-meta,
+.project-case-tags,
+.project-case-chips {
+  @apply flex flex-wrap gap-2;
+}
+
+.project-case-summary,
+.project-case-description {
+  @apply m-0;
+}
+
+.project-case-summary {
+  @apply text-[1.05rem] font-medium leading-7;
+}
+
+.project-case-description {
+  @apply text-[0.95rem] leading-7;
+}
+
+.project-case-block {
+  @apply gap-3;
+}
+
+.project-case-chip {
+  @apply inline-flex items-center gap-2 px-[0.85rem] py-[0.55rem] text-[0.9rem];
+  background-color: color-mix(in srgb, var(--base-neutral-color) 24%, white);
+}
+
+.project-case-chip-muted {
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.project-link {
+  @apply p-4 no-underline;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--primary-neutral-color) 18%, white);
+}
+
+.project-link strong {
+  @apply text-[1rem];
+  color: var(--text-color);
+}
+
+.project-link span {
+  @apply mt-2;
+}
+
+.project-case-footer {
+  @apply flex items-baseline gap-3;
+}
+
+.project-case-footer span {
+  @apply text-[0.9rem];
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+@media (min-width: 768px) {
+  .projects-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-case-grid {
+    @apply grid-cols-2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-case {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  }
+
+  .project-case-head {
+    @apply flex-row items-start justify-between;
+  }
+}

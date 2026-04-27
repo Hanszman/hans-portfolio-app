@@ -1,5 +1,5 @@
 <app-page-wrapper>
-  <div page-main>
+  <div page-main class="projects-hero">
     <app-page-intro
       [sectionLabel]="'pages.projects.sectionLabel' | translate"
       [title]="'pages.projects.title' | translate"
@@ -9,25 +9,231 @@
 
   <app-container
     page-sidebar
-    tone="warning"
-    [label]="'pages.projects.roadmap.label' | translate"
-    [containerTitle]="'pages.projects.roadmap.title' | translate"
-    [description]="'pages.projects.roadmap.description' | translate"
-  />
+    tone="secondary"
+    [label]="'pages.projects.snapshot.label' | translate"
+    [containerTitle]="'pages.projects.snapshot.title' | translate"
+    [description]="'pages.projects.snapshot.description' | translate"
+  >
+    @if (isLoading()) {
+      <p class="projects-state">{{ 'pages.projects.snapshot.loading' | translate }}</p>
+    } @else if (hasError()) {
+      <p class="projects-state">{{ 'pages.projects.snapshot.error' | translate }}</p>
+    } @else {
+      <dl class="projects-summary-grid">
+        @for (metric of summaryMetrics(); track metric.label) {
+          <div class="projects-summary-item">
+            <span>{{ metric.label }}</span>
+            <strong>{{ metric.value }}</strong>
+            @if (metric.supportingText) {
+              <small>{{ metric.supportingText }}</small>
+            }
+          </div>
+        }
+      </dl>
+    }
+  </app-container>
 
-  <app-container
-    page-content
-    tone="success"
-    [label]="'pages.projects.status.label' | translate"
-    [containerTitle]="'pages.projects.status.title' | translate"
-    [description]="'pages.projects.status.description' | translate"
-  />
+  <section page-content class="projects-section">
+    <app-container
+      tone="info"
+      [label]="'pages.projects.filters.label' | translate"
+      [containerTitle]="'pages.projects.filters.title' | translate"
+      [description]="'pages.projects.filters.description' | translate"
+    >
+      <div class="projects-filters">
+        <hans-dropdown
+          #contextDropdown
+          [options]="contextOptions()"
+          [triggerLabel]="'pages.projects.filters.context' | translate"
+          triggerColor="primary"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectContext($event)"
+        ></hans-dropdown>
 
-  <app-container
-    page-content
-    tone="base"
-    [label]="'pages.projects.layout.label' | translate"
-    [containerTitle]="'pages.projects.layout.title' | translate"
-    [description]="'pages.projects.layout.description' | translate"
-  />
+        <hans-dropdown
+          #environmentDropdown
+          [options]="environmentOptions()"
+          [triggerLabel]="'pages.projects.filters.environment' | translate"
+          triggerColor="secondary"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectEnvironment($event)"
+        ></hans-dropdown>
+
+        <hans-dropdown
+          #statusDropdown
+          [options]="statusOptions()"
+          [triggerLabel]="'pages.projects.filters.status' | translate"
+          triggerColor="success"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectStatus($event)"
+        ></hans-dropdown>
+
+        <hans-dropdown
+          #sortDropdown
+          [options]="sortOptions()"
+          [triggerLabel]="'pages.projects.filters.sort' | translate"
+          triggerColor="warning"
+          triggerShape="rounded"
+          triggerSize="small"
+          triggerVariant="default"
+          (select)="selectSort($event)"
+        ></hans-dropdown>
+      </div>
+
+      <div class="projects-filter-summary">
+        <span>{{ 'pages.projects.filters.total' | translate }}</span>
+        <strong>{{ filteredCountLabel() }}</strong>
+      </div>
+    </app-container>
+
+    <app-container
+      tone="success"
+      [label]="'pages.projects.catalog.label' | translate"
+      [containerTitle]="'pages.projects.catalog.title' | translate"
+      [description]="'pages.projects.catalog.description' | translate"
+    >
+      @if (isLoading()) {
+        <p class="projects-state">{{ 'pages.projects.catalog.loading' | translate }}</p>
+      } @else if (hasError()) {
+        <p class="projects-state">{{ 'pages.projects.catalog.error' | translate }}</p>
+      } @else if (projectCases().length === 0) {
+        <p class="projects-state">{{ 'pages.projects.catalog.empty' | translate }}</p>
+      } @else {
+        <div class="projects-case-list">
+          @for (project of projectCases(); track project.id) {
+            <article class="project-case">
+              <div class="project-case-visual">
+                @if (project.imageUrl) {
+                  <img [src]="project.imageUrl" [alt]="project.imageAlt" />
+                } @else {
+                  <div class="project-case-icon">
+                    <hans-icon name="LuFolderKanban" iconSize="large"></hans-icon>
+                  </div>
+                }
+              </div>
+
+              <div class="project-case-copy">
+                <div class="project-case-head">
+                  <div class="project-case-heading">
+                    <span>{{ project.dateRangeLabel }}</span>
+                    <strong>{{ project.title }}</strong>
+                  </div>
+
+                  <div class="project-case-flags">
+                    @if (project.isFeatured) {
+                      <hans-tag
+                        [attr.label]="'pages.projects.card.featured' | translate"
+                        tagColor="success"
+                        tagSize="sm"
+                      ></hans-tag>
+                    }
+
+                    @if (project.isHighlight) {
+                      <hans-tag
+                        [attr.label]="'pages.projects.card.highlight' | translate"
+                        tagColor="warning"
+                        tagSize="sm"
+                      ></hans-tag>
+                    }
+                  </div>
+                </div>
+
+                <p class="project-case-summary">{{ project.summary }}</p>
+                <p class="project-case-description">{{ project.description }}</p>
+
+                <div class="project-case-meta">
+                  <hans-tag
+                    [attr.label]="project.contextLabel"
+                    tagColor="primary"
+                    tagSize="sm"
+                  ></hans-tag>
+                  <hans-tag
+                    [attr.label]="project.environmentLabel"
+                    tagColor="secondary"
+                    tagSize="sm"
+                  ></hans-tag>
+                  <hans-tag
+                    [attr.label]="project.statusLabel"
+                    tagColor="info"
+                    tagSize="sm"
+                  ></hans-tag>
+                </div>
+
+                <div class="project-case-grid">
+                  <section class="project-case-block">
+                    <span>{{ 'pages.projects.card.technologies' | translate }}</span>
+                    <div class="project-case-tags">
+                      @for (technology of project.technologies; track technology) {
+                        <hans-tag
+                          [attr.label]="technology"
+                          tagColor="base"
+                          tagSize="sm"
+                        ></hans-tag>
+                      }
+
+                      @if (project.extraTechnologyCount > 0) {
+                        <hans-tag
+                          [attr.label]="'+' + project.extraTechnologyCount"
+                          tagColor="warning"
+                          tagSize="sm"
+                        ></hans-tag>
+                      }
+                    </div>
+                  </section>
+
+                  <section class="project-case-block">
+                    <span>{{ 'pages.projects.card.companies' | translate }}</span>
+                    <div class="project-case-chips">
+                      @for (company of project.companyNames; track company) {
+                        <span class="project-case-chip">
+                          <hans-icon name="LuBuilding2" iconSize="small"></hans-icon>
+                          {{ company }}
+                        </span>
+                      } @empty {
+                        <span class="project-case-chip project-case-chip-muted">
+                          {{ 'pages.projects.card.emptyCompanies' | translate }}
+                        </span>
+                      }
+                    </div>
+                  </section>
+                </div>
+
+                <section class="project-case-block">
+                  <span>{{ 'pages.projects.card.links' | translate }}</span>
+                  <div class="project-link-list">
+                    @for (link of project.links; track link.id) {
+                      <a
+                        class="project-link"
+                        [href]="link.url"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <strong>{{ link.label }}</strong>
+                        <span>{{ link.typeLabel }}</span>
+                      </a>
+                    } @empty {
+                      <p class="projects-state">
+                        {{ 'pages.projects.card.emptyLinks' | translate }}
+                      </p>
+                    }
+                  </div>
+                </section>
+
+                <div class="project-case-footer">
+                  <span>{{ 'pages.projects.card.assets' | translate }}</span>
+                  <strong>{{ project.assetCountLabel }}</strong>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </app-container>
+  </section>
 </app-page-wrapper>

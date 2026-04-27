@@ -256,23 +256,65 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.experiences.projectEnvironment.backend': 'Back-end',
   'taxonomy.experiences.projectEnvironment.fullstack': 'Full stack',
   'taxonomy.experiences.present': 'Atual',
-  'pages.projects.sectionLabel': 'Fundacao',
-  'pages.projects.title': 'Fundacao de projects',
+  'pages.projects.sectionLabel': 'Projetos',
+  'pages.projects.title': 'Cases de projeto',
   'pages.projects.description':
-    'A rota projects esta pronta para trabalhos em destaque, screenshots, links e dados de projetos via API.',
-  'pages.projects.roadmap.label': 'Roadmap',
-  'pages.projects.roadmap.title':
-    'Trabalhos em destaque, resultados e assets vinculados',
-  'pages.projects.roadmap.description':
-    'Esta pagina vai conectar projetos a tecnologias, deploys, repositorios e imagens de apoio.',
-  'pages.projects.status.label': 'Status',
-  'pages.projects.status.title': 'Screenshots, links e referencias de deploy',
-  'pages.projects.status.description':
-    'O remake vai tornar cada projeto mais facil de avaliar com assets mais ricos e referencias explicitas.',
-  'pages.projects.layout.label': 'Camada de layout',
-  'pages.projects.layout.title': 'Componente especifico da pagina',
-  'pages.projects.layout.description':
-    'O conteudo especifico de projects agora vive na page Projects e pode evoluir sem acoplamento com route data.',
+    'A rota projects agora le a colecao publica real e apresenta trabalhos em formato de case, com stack, referencias e assets de apoio.',
+  'pages.projects.snapshot.label': 'Panorama dos cases',
+  'pages.projects.snapshot.title': 'Trabalhos publicados com assets reais vinculados',
+  'pages.projects.snapshot.description':
+    'A lateral resume densidade de featured, referencias vinculadas e o sinal de stack mais ampla ja exposto pelo endpoint publico de projetos.',
+  'pages.projects.snapshot.loading': 'Carregando cases reais de projeto...',
+  'pages.projects.snapshot.error':
+    'O endpoint de projects esta indisponivel agora.',
+  'pages.projects.filters.label': 'Filtros dos cases',
+  'pages.projects.filters.title':
+    'Recorte o portfolio por contexto, ambiente, status e ordem de leitura',
+  'pages.projects.filters.description':
+    'A UI continua leve enquanto os relacionamentos de projeto, experiencia, imagem e links chegam direto do backend.',
+  'pages.projects.filters.context': 'Contexto',
+  'pages.projects.filters.environment': 'Ambiente',
+  'pages.projects.filters.status': 'Status',
+  'pages.projects.filters.sort': 'Ordenar por',
+  'pages.projects.filters.total': 'Cases filtrados',
+  'pages.projects.catalog.label': 'Cases',
+  'pages.projects.catalog.title': 'Projetos como cases, nao apenas listagens',
+  'pages.projects.catalog.description':
+    'Cada case conecta periodo, stack, contexto de entrega, empresas, deploys, repositorios e screenshots no mesmo bloco de leitura.',
+  'pages.projects.catalog.loading': 'Montando os case studies de projetos...',
+  'pages.projects.catalog.error':
+    'O endpoint de projects esta indisponivel agora.',
+  'pages.projects.catalog.empty':
+    'Nenhum projeto publicado corresponde aos filtros atuais.',
+  'pages.projects.card.featured': 'Em destaque',
+  'pages.projects.card.highlight': 'Destaque',
+  'pages.projects.card.technologies': 'Tecnologias',
+  'pages.projects.card.companies': 'Empresas',
+  'pages.projects.card.emptyCompanies': 'Nenhuma empresa vinculada ainda.',
+  'pages.projects.card.links': 'Links e referencias',
+  'pages.projects.card.emptyLinks':
+    'Nenhum link publicado foi vinculado a este case ainda.',
+  'pages.projects.card.assets': 'Assets vinculados',
+  'taxonomy.projects.filters.allContexts': 'Todos os contextos',
+  'taxonomy.projects.filters.allEnvironments': 'Todos os ambientes',
+  'taxonomy.projects.filters.allStatuses': 'Todos os status',
+  'taxonomy.projects.sort.featured': 'Em destaque primeiro',
+  'taxonomy.projects.sort.recent': 'Inicio mais recente',
+  'taxonomy.projects.sort.stack': 'Maior stack',
+  'taxonomy.projects.sort.links': 'Mais assets vinculados',
+  'taxonomy.projects.linkType.github': 'GitHub',
+  'taxonomy.projects.linkType.deploy': 'Deploy',
+  'taxonomy.projects.linkType.sourceCode': 'Codigo-fonte',
+  'taxonomy.projects.summary.total': 'Cases publicados',
+  'taxonomy.projects.summary.featured': 'Em destaque',
+  'taxonomy.projects.summary.inProgress': 'Em andamento',
+  'taxonomy.projects.summary.linkedAssets': 'Assets vinculados',
+  'taxonomy.projects.summary.richestStack': 'Stack mais ampla',
+  'taxonomy.projects.fallback.noAssets': 'Nenhum asset visual vinculado ainda.',
+  'taxonomy.projects.fallback.noLinks':
+    'Nenhum link publicado foi vinculado ainda.',
+  'taxonomy.projects.fallback.noCompanies': 'Nenhuma empresa vinculada ainda.',
+  'taxonomy.projects.fallback.untitledLink': 'Link sem titulo',
   'pages.dashboard.sectionLabel': 'Fundacao',
   'pages.dashboard.title': 'Fundacao do dashboard',
   'pages.dashboard.description':
