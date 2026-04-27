@@ -24,8 +24,9 @@ export const PT_BR_TRANSLATIONS = {
   'header.controls.lightTheme': 'Tema claro',
   'header.controls.language': 'Idioma',
   'header.controls.noLanguages': 'Nenhum idioma disponivel',
-  'header.controls.portuguese': 'Português',
-  'header.controls.english': 'Inglês',
+  'header.controls.portuguese': 'Portugues',
+  'header.controls.english': 'Ingles',
+  'header.controls.spanish': 'Espanhol',
   'header.statusLabel': 'Status da fundacao',
   'header.eyebrow': 'Fundacao do remake do portfolio',
   'header.title':

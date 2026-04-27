@@ -79,6 +79,7 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - a navegacao principal deve ser derivada da configuracao real de rotas quando possivel, sem exigir cadastro paralelo manual de labels estaticos
 - preferencia por zoneless, mantendo a base atual do app
 - SCSS + TailwindCSS como base de estilo
+- em arquivos `.scss`/`.css`, usar `@apply` com utilitarios do Tailwind sempre que houver equivalente; CSS/SCSS puro so deve entrar quando a regra nao puder ser representada pela camada utilitaria
 
 ### 3.2. Backend
 
@@ -416,6 +417,7 @@ Isso vale para:
 A meta oficial do remake continua sendo cobertura total do sistema, com foco em:
 
 - `100%` de coverage em todos os arquivos com comportamento relevante
+- `100%` de statements sempre que aplicavel e mensuravel
 - `100%` de lines
 - `100%` de branches sempre que aplicavel e mensuravel
 - `100%` de functions sempre que aplicavel e mensuravel
@@ -788,9 +790,9 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - paletas completas do app em `core/theme/theme.config.ts`, sempre com os 23 tokens esperados pela `hans-ui-design-lib`
 - arquivos de tema separados em `core/theme/themes/light.theme.ts` e `core/theme/themes/dark.theme.ts`
 - objeto agregador `APP_THEMES`, evitando prefixos desnecessarios como `PORTFOLIO_THEMES`
-- base de traducao usando `@ngx-translate/core`, providers standalone, `TranslatePipe`, locale `en-us`/`pt-BR`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
+- base de traducao usando `@ngx-translate/core`, providers standalone, `TranslatePipe`, locale `en-us`/`pt-BR`/`es-es`, fallback seguro, interpolacao de parametros e persistencia em `localStorage`
 - arquivos de traducao separados por idioma em `core/translation/translations`
-- objeto agregador `APP_TRANSLATIONS` compondo os arquivos de `en-us` e `pt-BR`
+- objeto agregador `APP_TRANSLATIONS` compondo os arquivos de `en-us`, `pt-BR` e `es-es`
 - contrato de integracao com a `hans-ui-design-lib` centralizado em `DesignLibService`
 - aplicacao dinamica de tema via API global do CDN (`window.HansUI.setTheme`) em vez de chamadas diretas espalhadas pelo app
 - o app nao deve manter lista tipada/catologo proprio dos componentes disponiveis na `hans-ui-design-lib`
@@ -802,6 +804,8 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - controle de tema no header usando `hans-toggle`
 - controle de idioma no header usando `hans-dropdown`, para suportar crescimento futuro para mais idiomas sem trocar o padrao de UI
 - textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI
+- templates devem preferir `TranslatePipe` para copy traduzida, deixando services de traducao para estado/acoes em TypeScript
+- sempre que um texto precisar ser resolvido no TypeScript, usar helper central da `TranslationService` em vez de `if`, `switch` ou ternario manual por locale
 - testes unitarios do escopo implementado
 
 #### Criterios de aceite

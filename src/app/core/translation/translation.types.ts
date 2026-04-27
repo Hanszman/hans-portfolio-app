@@ -1,4 +1,6 @@
-export type AppLocale = 'en-us' | 'pt-BR';
+export type AppLocale = 'en-us' | 'pt-BR' | 'es-es';
+
+export type AppLocalizedText = Partial<Record<AppLocale, string>>;
 
 export type AppTranslationParams = Record<string, string>;
 
@@ -24,6 +26,7 @@ export type AppTranslationKey =
   | 'header.controls.noLanguages'
   | 'header.controls.portuguese'
   | 'header.controls.english'
+  | 'header.controls.spanish'
   | 'header.statusLabel'
   | 'header.eyebrow'
   | 'header.title'

@@ -29,8 +29,11 @@ import {
 import {
   SKILL_CATEGORY_LABELS,
   SKILL_CONTEXT_LABELS,
+  SKILL_FILTER_ALL_LABELS,
   SKILL_LEVEL_LABELS,
   SkillFilterOption,
+  SkillsDropdownElement,
+  SkillsSelectEvent,
 } from './skills.types';
 
 @Component({
@@ -217,56 +220,57 @@ export class SkillsComponent {
   }
 
   private buildCategoryOptions(values: readonly string[]): readonly SkillFilterOption[] {
-    const locale = this.translationService.locale();
-
     return [
       {
-        label:
-          locale === 'pt-BR' ? 'Todas as categorias' : 'All categories',
+        label: this.translationService.translateContent(
+          SKILL_FILTER_ALL_LABELS.categories,
+        ),
         value: 'ALL',
       },
       ...values.map((value) => ({
-        label: SKILL_CATEGORY_LABELS[value]?.[locale] ?? value,
+        label: this.translationService.translateContent(
+          SKILL_CATEGORY_LABELS[value] ?? { 'en-us': value },
+          value,
+        ),
         value,
       })),
     ];
   }
 
   private buildLevelOptions(values: readonly string[]): readonly SkillFilterOption[] {
-    const locale = this.translationService.locale();
-
     return [
       {
-        label: locale === 'pt-BR' ? 'Todos os niveis' : 'All levels',
+        label: this.translationService.translateContent(
+          SKILL_FILTER_ALL_LABELS.levels,
+        ),
         value: 'ALL',
       },
       ...values.map((value) => ({
-        label: SKILL_LEVEL_LABELS[value]?.[locale] ?? value,
+        label: this.translationService.translateContent(
+          SKILL_LEVEL_LABELS[value] ?? { 'en-us': value },
+          value,
+        ),
         value,
       })),
     ];
   }
 
   private buildContextOptions(): readonly SkillFilterOption[] {
-    const locale = this.translationService.locale();
-
     return [
       {
-        label: locale === 'pt-BR' ? 'Todos os contextos' : 'All contexts',
+        label: this.translationService.translateContent(
+          SKILL_FILTER_ALL_LABELS.contexts,
+        ),
         value: 'ALL',
       },
       ...(['PROFESSIONAL', 'PERSONAL', 'ACADEMIC', 'STUDY'] as const).map(
         (value) => ({
-          label: SKILL_CONTEXT_LABELS[value][locale],
+          label: this.translationService.translateContent(
+            SKILL_CONTEXT_LABELS[value],
+          ),
           value,
         }),
       ),
     ];
   }
 }
-
-interface SkillsDropdownElement extends HTMLElement {
-  options?: readonly SkillFilterOption[];
-}
-
-type SkillsSelectEvent = CustomEvent<SkillFilterOption>;

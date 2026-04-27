@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  @apply block;
 }
 
 .skills-state,
@@ -15,17 +15,20 @@
 .skills-filters,
 .skills-group-list,
 .skills-card-grid,
-.skills-context-list {
-  display: grid;
+.skills-context-list,
+.skills-section {
+  @apply grid;
 }
 
 .skills-summary-grid,
 .skills-card-grid {
-  gap: 1rem;
+  @apply gap-4;
 }
 
-.skills-group-list {
-  gap: 1.5rem;
+.skills-group-list,
+.skills-filters,
+.skills-section {
+  @apply gap-6;
 }
 
 .skills-summary-grid {
@@ -36,15 +39,15 @@
 .skills-group,
 .skills-card,
 .skills-context-item {
-  border: 1px solid color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  border-radius: 1.5rem;
+  @apply rounded-3xl border;
   background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
 }
 
 .skills-summary-item,
 .skills-card,
 .skills-group {
-  padding: 1rem;
+  @apply p-4;
 }
 
 .skills-summary-item span,
@@ -52,11 +55,7 @@
 .skills-card-copy span,
 .skills-card-metric span,
 .skills-card-contexts > span {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
 }
 
 .skills-summary-item strong,
@@ -64,115 +63,85 @@
 .skills-card-copy strong,
 .skills-card-metric strong,
 .skills-context-item strong {
-  display: block;
-  font-weight: 600;
-  line-height: 1.2;
+  @apply block font-semibold leading-tight;
 }
 
 .skills-summary-item strong {
-  margin-top: 0.5rem;
-  font-size: 1.1rem;
+  @apply mt-2 text-[1.1rem];
 }
 
 .skills-summary-item small {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.skills-section,
-.skills-filters {
-  display: grid;
-  gap: 1.5rem;
+  @apply mt-2 block text-[0.9rem] leading-6;
 }
 
 .skills-filter-summary {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  @apply mt-4 flex items-baseline gap-3;
 }
 
 .skills-filter-summary strong {
-  font-size: 1.5rem;
+  @apply text-2xl;
 }
 
 .skills-group {
-  display: grid;
-  gap: 1rem;
+  @apply gap-4;
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
 }
 
 .skills-group-header,
 .skills-card-head {
-  display: flex;
-  gap: 1rem;
+  @apply flex gap-4;
 }
 
 .skills-group-header {
-  align-items: center;
-  justify-content: space-between;
+  @apply items-center justify-between;
 }
 
 .skills-group-copy strong {
-  margin-top: 0.25rem;
-  font-size: 1.5rem;
+  @apply mt-1 text-2xl;
 }
 
 .skills-group-icon,
 .skills-card-visual {
-  display: grid;
-  place-items: center;
-  min-width: 4rem;
-  height: 4rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--success-default-color) 18%, transparent);
+  @apply grid h-16 min-w-16 place-items-center rounded-full border;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
   background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
 }
 
 .skills-card {
-  display: grid;
-  gap: 1rem;
+  @apply gap-4;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
 }
 
 .skills-card-head {
-  align-items: center;
+  @apply items-center;
 }
 
 .skills-card-copy {
-  flex: 1;
+  @apply flex-1;
 }
 
 .skills-card-copy strong {
-  margin-top: 0.2rem;
-  font-size: 1.25rem;
+  @apply mt-1 text-xl;
 }
 
 .skills-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  @apply flex flex-wrap gap-2;
 }
 
 .skills-card-contexts {
-  display: grid;
-  gap: 0.75rem;
+  @apply grid gap-3;
 }
 
 .skills-context-list {
-  gap: 0.75rem;
+  @apply gap-3;
 }
 
 .skills-context-item {
-  padding: 0.85rem;
+  @apply p-3;
 }
 
 .skills-context-item span {
-  display: block;
-  margin-top: 0.35rem;
-  font-size: 0.95rem;
+  @apply mt-1 block text-[0.95rem];
 }
 
 @media (min-width: 768px) {
@@ -180,10 +149,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .skills-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+  .skills-card-grid,
   .skills-context-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

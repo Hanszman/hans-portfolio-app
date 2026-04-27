@@ -4,10 +4,14 @@ import {
   TechnologyCollectionItemResponse,
   TechnologyContextKey,
 } from '../../../core/api/technologies/technologies.types';
+import {
+  resolveLocalizedText,
+} from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
 import {
   SKILL_CATEGORY_LABELS,
   SKILL_CONTEXT_LABELS,
+  SKILL_FALLBACK_LABELS,
   SKILL_FREQUENCY_LABELS,
   SKILL_GROUP_ICON_NAMES,
   SKILL_GROUP_TONES,
@@ -17,6 +21,7 @@ import {
   SkillContextMetricViewModel,
   SkillsGroupViewModel,
   SkillsSummaryMetricViewModel,
+  resolveSkillGroupDescription,
 } from '../skills.types';
 
 const SKILL_CONTEXT_ORDER: readonly TechnologyContextKey[] = [
@@ -33,17 +38,17 @@ const normalizeLabel = (value: string): string =>
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
 
-const resolveLocalizedLabel = (
-  catalog: Record<string, Record<AppLocale, string>>,
-  value: string | null,
+const resolveCatalogLabel = (
   locale: AppLocale,
+  catalog: Record<string, Record<string, string | undefined>>,
+  value: string | null,
   fallback: string,
 ): string => {
   if (!value) {
     return fallback;
   }
 
-  return catalog[value]?.[locale] ?? normalizeLabel(value);
+  return resolveLocalizedText(locale, catalog[value] ?? {}, normalizeLabel(value));
 };
 
 export const resolveSkillVisualUrl = (
@@ -60,10 +65,10 @@ export const mapTechnologyToSkillCard = (
     technology.imageAssets?.[0];
   const contexts: SkillContextMetricViewModel[] = SKILL_CONTEXT_ORDER.map((key) => ({
     key,
-    label: SKILL_CONTEXT_LABELS[key][locale],
+    label: resolveLocalizedText(locale, SKILL_CONTEXT_LABELS[key]),
     value:
       technology.experienceMetrics?.byContext[key].label ??
-      (locale === 'pt-BR' ? '0 meses' : '0 months'),
+      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.zeroMonths),
     totalMonths: technology.experienceMetrics?.byContext[key].totalMonths ?? 0,
   })).filter((context) => context.totalMonths > 0);
 
@@ -71,27 +76,27 @@ export const mapTechnologyToSkillCard = (
     id: technology.id,
     slug: technology.slug,
     name: technology.name,
-    categoryLabel: resolveLocalizedLabel(
+    categoryLabel: resolveCatalogLabel(
+      locale,
       SKILL_CATEGORY_LABELS,
       technology.category,
-      locale,
-      locale === 'pt-BR' ? 'Nao categorizada' : 'Uncategorized',
+      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.uncategorized),
     ),
-    levelLabel: resolveLocalizedLabel(
+    levelLabel: resolveCatalogLabel(
+      locale,
       SKILL_LEVEL_LABELS,
       technology.level,
-      locale,
-      locale === 'pt-BR' ? 'Nivel nao informado' : 'Level not set',
+      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.levelNotSet),
     ),
-    frequencyLabel: resolveLocalizedLabel(
+    frequencyLabel: resolveCatalogLabel(
+      locale,
       SKILL_FREQUENCY_LABELS,
       technology.frequency,
-      locale,
-      locale === 'pt-BR' ? 'Frequencia nao informada' : 'Frequency not set',
+      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.frequencyNotSet),
     ),
     totalExperienceLabel:
       technology.experienceMetrics?.total.label ??
-      (locale === 'pt-BR' ? 'Sem periodo consolidado' : 'No duration available'),
+      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.noDuration),
     isHighlight: technology.highlight,
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
@@ -116,23 +121,23 @@ export const buildSkillsSummaryMetrics = (
 
   return [
     {
-      label: locale === 'pt-BR' ? 'Tecnologias mapeadas' : 'Mapped technologies',
+      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryMapped),
       value: String(technologies.length),
     },
     {
-      label: locale === 'pt-BR' ? 'Destaques' : 'Highlights',
+      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryHighlights),
       value: String(highlightedCount),
     },
     {
-      label: locale === 'pt-BR' ? 'Categorias' : 'Categories',
+      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryCategories),
       value: String(categories.size),
     },
     {
-      label: locale === 'pt-BR' ? 'Stack avancada' : 'Advanced stack',
+      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryAdvanced),
       value: String(advancedCount),
     },
     {
-      label: locale === 'pt-BR' ? 'Maior tempo total' : 'Longest total time',
+      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryLongest),
       value: strongestTechnology?.name ?? '-',
       supportingText: strongestTechnology?.experienceMetrics?.total.label ?? '',
     },
@@ -155,16 +160,13 @@ export const buildSkillsGroups = (
     .sort(([left], [right]) => left.localeCompare(right))
     .map(([category, items]) => ({
       id: category,
-      title: resolveLocalizedLabel(
+      title: resolveCatalogLabel(
+        locale,
         SKILL_CATEGORY_LABELS,
         category,
-        locale,
-        locale === 'pt-BR' ? 'Nao categorizada' : 'Uncategorized',
+        resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.uncategorized),
       ),
-      description:
-        locale === 'pt-BR'
-          ? `${items.length} tecnologias com tempo real consolidado por contexto.`
-          : `${items.length} technologies with real duration coverage by context.`,
+      description: resolveSkillGroupDescription(locale, items.length),
       tone: SKILL_GROUP_TONES[category] ?? 'base',
       iconName: SKILL_GROUP_ICON_NAMES[category] ?? 'LuSparkles',
       items: [...items]

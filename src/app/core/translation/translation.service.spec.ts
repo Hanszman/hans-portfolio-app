@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { APP_LOCALE_STORAGE_KEY } from './translation.config';
 import { provideAppTranslations } from './translation.providers';
-import { TranslationService } from './translation.service';
+import { resolveLocalizedText, TranslationService } from './translation.service';
 import { AppTranslationKey } from './translation.types';
 
 describe('TranslationService', () => {
@@ -34,7 +34,7 @@ describe('TranslationService', () => {
     const service = TestBed.inject(TranslationService);
 
     expect(service.locale()).toBe('pt-BR');
-    expect(service.instant('header.controls.english')).toBe('Inglês');
+    expect(service.instant('header.controls.english')).toBe('Ingles');
   });
 
   it('should ignore invalid persisted locales', () => {
@@ -73,6 +73,11 @@ describe('TranslationService', () => {
         value: 'pt-BR',
         label: 'Portuguese',
       },
+      {
+        id: 'es-es',
+        value: 'es-es',
+        label: 'Spanish',
+      },
     ]);
 
     service.setLocale('pt-BR');
@@ -81,14 +86,53 @@ describe('TranslationService', () => {
       {
         id: 'en-us',
         value: 'en-us',
-        label: 'Inglês',
+        label: 'Ingles',
       },
       {
         id: 'pt-BR',
         value: 'pt-BR',
-        label: 'Português',
+        label: 'Portugues',
+      },
+      {
+        id: 'es-es',
+        value: 'es-es',
+        label: 'Espanhol',
       },
     ]);
+  });
+
+  it('should translate localized TypeScript-side labels through the service helper', () => {
+    const service = TestBed.inject(TranslationService);
+
+    expect(
+      service.translateContent({
+        'en-us': 'All levels',
+        'pt-BR': 'Todos os niveis',
+        'es-es': 'Todos los niveles',
+      }),
+    ).toBe('All levels');
+
+    service.setLocale('es-es');
+
+    expect(
+      service.translateContent({
+        'en-us': 'All levels',
+        'pt-BR': 'Todos os niveis',
+        'es-es': 'Todos los niveles',
+      }),
+    ).toBe('Todos los niveles');
+  });
+
+  it('should resolve localized text from any available locale when the active and default locales are missing', () => {
+    expect(
+      resolveLocalizedText(
+        'es-es',
+        {
+          'pt-BR': 'Somente portugues',
+        },
+        'fallback',
+      ),
+    ).toBe('Somente portugues');
   });
 
   it('should fall back to the key when a translation is missing from every locale', () => {

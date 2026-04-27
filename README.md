@@ -101,6 +101,8 @@ This project must follow the current Angular direction consistently:
 - feature-specific helpers must live inside a local `helpers/` folder near the component, page, or domain they support
 - component/page constants, types, and interfaces must live in that feature's own `*.types.ts` file
 - helpers should keep only helper functions and should not become a mixed file for contracts/constants
+- stylesheets must prefer Tailwind utilities through `@apply`; plain CSS/SCSS should only be used when there is no adequate Tailwind utility for that rule
+- when TypeScript needs translated labels, use the helper from `TranslationService`; do not branch on locale with ad hoc `if`/ternary checks
 
 ### Testing and quality
 
@@ -109,6 +111,7 @@ Every component, page, service, helper, facade, mapper, or any other file with r
 The working goal for this remake is:
 
 - `100%` coverage for relevant files and lines
+- `100%` statements, branches, functions, and lines for each file with relevant behavior
 - explicit exclusions only for configuration, generated files, or trivial framework glue that adds no real value to execution-based coverage
 
 For implementation steps, always validate the repo with the relevant scripts:

@@ -26,6 +26,7 @@ export const EN_TRANSLATIONS = {
   'header.controls.noLanguages': 'No languages available',
   'header.controls.portuguese': 'Portuguese',
   'header.controls.english': 'English',
+  'header.controls.spanish': 'Spanish',
   'header.statusLabel': 'Foundation status',
   'header.eyebrow': 'Portfolio remake foundation',
   'header.title':

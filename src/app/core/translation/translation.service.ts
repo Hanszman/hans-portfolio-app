@@ -8,10 +8,29 @@ import {
 } from './translation.config';
 import {
   AppLanguageOption,
+  AppLocalizedText,
   AppLocale,
   AppTranslationKey,
   AppTranslationParams,
 } from './translation.types';
+
+const LANGUAGE_LABEL_KEYS: Record<AppLocale, AppTranslationKey> = {
+  'en-us': 'header.controls.english',
+  'pt-BR': 'header.controls.portuguese',
+  'es-es': 'header.controls.spanish',
+};
+
+export const resolveLocalizedText = (
+  locale: AppLocale,
+  translations: AppLocalizedText,
+  fallback = '',
+): string =>
+  translations[locale] ??
+  translations[DEFAULT_APP_LOCALE] ??
+  Object.values(translations).find(
+    (translation): translation is string => typeof translation === 'string',
+  ) ??
+  fallback;
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +47,7 @@ export class TranslationService {
     return APP_LOCALES.map((locale) => ({
       id: locale,
       value: locale,
-      label: this.instant(
-        locale === 'en-us'
-          ? 'header.controls.english'
-          : 'header.controls.portuguese',
-      ),
+      label: this.instant(LANGUAGE_LABEL_KEYS[locale]),
     }));
   });
 
@@ -54,6 +69,10 @@ export class TranslationService {
     return this.translateService.instant(key, params) as string;
   }
 
+  translateContent(translations: AppLocalizedText, fallback = ''): string {
+    return resolveLocalizedText(this.locale(), translations, fallback);
+  }
+
   private applyLocale(locale: AppLocale): void {
     this.document.documentElement.lang = locale;
     localStorage.setItem(APP_LOCALE_STORAGE_KEY, locale);
@@ -67,6 +86,6 @@ export class TranslationService {
   }
 
   private isAppLocale(locale: string | null): locale is AppLocale {
-    return locale === 'en-us' || locale === 'pt-BR';
+    return locale === 'en-us' || locale === 'pt-BR' || locale === 'es-es';
   }
 }
