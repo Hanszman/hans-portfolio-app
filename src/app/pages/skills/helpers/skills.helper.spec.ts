@@ -1,6 +1,6 @@
 import { TechnologyCollectionItemResponse } from '../../../core/api/technologies/technologies.types';
 import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/technologies.mocks';
-import { resolveSkillGroupDescription } from '../skills.types';
+import { translateStaticKey } from '../../../core/translation/translation.service';
 import {
   buildSkillsGroups,
   buildSkillsSummaryMetrics,
@@ -548,7 +548,11 @@ describe('skills helper', () => {
   });
 
   it('should fall back to the English group description when a locale key is missing', () => {
-    expect(resolveSkillGroupDescription('fr-fr' as never, 3)).toBe(
+    expect(
+      translateStaticKey('fr-fr' as never, 'taxonomy.skills.group.description', {
+        count: '3',
+      }),
+    ).toBe(
       '3 technologies with real duration coverage by context.',
     );
   });

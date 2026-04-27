@@ -3,12 +3,16 @@ import {
   ExperienceCollectionItemResponse,
   ExperienceProjectResponse,
 } from '../../../core/api/experiences/experiences.types';
+import {
+  resolveLocalizedText,
+  translateStaticKey,
+} from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
 import {
   EXPERIENCE_MONTH_FORMATTERS,
-  EXPERIENCE_PRESENT_LABELS,
-  EXPERIENCE_PROJECT_ENVIRONMENT_LABELS,
-  EXPERIENCE_PROJECT_STATUS_LABELS,
+  EXPERIENCE_PRESENT_LABEL_KEY,
+  EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS,
+  EXPERIENCE_PROJECT_STATUS_LABEL_KEYS,
   ExperiencePortfolioSummaryViewModel,
   ExperienceProjectViewModel,
   ExperienceTimelineItemViewModel,
@@ -30,25 +34,44 @@ const resolveProjectStatusLabel = (
   status: string,
   locale: AppLocale,
 ): string =>
-  EXPERIENCE_PROJECT_STATUS_LABELS[status]?.[locale] ?? normalizeLabel(status);
+  EXPERIENCE_PROJECT_STATUS_LABEL_KEYS[status]
+    ? translateStaticKey(locale, EXPERIENCE_PROJECT_STATUS_LABEL_KEYS[status])
+    : normalizeLabel(status);
 
 const resolveProjectEnvironmentLabel = (
   environment: string,
   locale: AppLocale,
 ): string =>
-  EXPERIENCE_PROJECT_ENVIRONMENT_LABELS[environment]?.[locale] ??
-  normalizeLabel(environment);
+  EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS[environment]
+    ? translateStaticKey(locale, EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS[environment])
+    : normalizeLabel(environment);
+
+const resolveApiText = (
+  locale: AppLocale,
+  portuguese: string,
+  english: string,
+): string =>
+  resolveLocalizedText(
+    locale,
+    {
+      'en-us': english,
+      'pt-BR': portuguese,
+      'es-es': english,
+    },
+    english,
+  );
 
 const mapProject = (
   project: ExperienceProjectResponse,
   locale: AppLocale,
 ): ExperienceProjectViewModel => ({
   slug: project.slug,
-  title: locale === 'pt-BR' ? project.titlePt : project.titleEn,
-  summary:
-    locale === 'pt-BR'
-      ? project.shortDescriptionPt
-      : project.shortDescriptionEn,
+  title: resolveApiText(locale, project.titlePt, project.titleEn),
+  summary: resolveApiText(
+    locale,
+    project.shortDescriptionPt,
+    project.shortDescriptionEn,
+  ),
   statusLabel: resolveProjectStatusLabel(project.status, locale),
   environmentLabel: resolveProjectEnvironmentLabel(project.environment, locale),
 });
@@ -61,7 +84,7 @@ export const formatExperienceDateRange = (
   const startLabel = formatMonthYear(startDate, locale);
   const endLabel = endDate
     ? formatMonthYear(endDate, locale)
-    : EXPERIENCE_PRESENT_LABELS[locale];
+    : translateStaticKey(locale, EXPERIENCE_PRESENT_LABEL_KEY);
 
   return `${startLabel} - ${endLabel}`;
 };
@@ -81,10 +104,13 @@ export const mapExperienceToTimelineItem = (
   return {
     id: experience.id,
     companyName: experience.companyName,
-    title: locale === 'pt-BR' ? experience.titlePt : experience.titleEn,
-    summary: locale === 'pt-BR' ? experience.summaryPt : experience.summaryEn,
-    description:
-      locale === 'pt-BR' ? experience.descriptionPt : experience.descriptionEn,
+    title: resolveApiText(locale, experience.titlePt, experience.titleEn),
+    summary: resolveApiText(locale, experience.summaryPt, experience.summaryEn),
+    description: resolveApiText(
+      locale,
+      experience.descriptionPt,
+      experience.descriptionEn,
+    ),
     dateRangeLabel: formatExperienceDateRange(
       experience.startDate,
       experience.endDate,
@@ -95,7 +121,7 @@ export const mapExperienceToTimelineItem = (
     imageUrl: buildAssetUrl(primaryImage?.imageAsset.filePath),
     jobs: dedupe(
       experience.jobs.map(({ job }) =>
-        locale === 'pt-BR' ? job.namePt : job.nameEn,
+        resolveApiText(locale, job.namePt, job.nameEn),
       ),
     ),
     customers: dedupe(experience.customers.map(({ customer }) => customer.name)),
@@ -134,9 +160,7 @@ export const buildExperiencePortfolioSummary = (
 
   return {
     currentRoleTitle: currentExperience
-      ? locale === 'pt-BR'
-        ? currentExperience.titlePt
-        : currentExperience.titleEn
+      ? resolveApiText(locale, currentExperience.titlePt, currentExperience.titleEn)
       : '',
     currentCompanyName: currentExperience?.companyName ?? '',
     experienceCount: String(experiences.length),

@@ -84,6 +84,24 @@ describe('HomeComponent', () => {
     expect(compiled.querySelector('hans-button[label="Ver projetos"]')).toBeTruthy();
   });
 
+  it('should render shell and home copy in Spanish when the locale changes', () => {
+    TestBed.inject(TranslationService).setLocale('es-es');
+
+    const fixture = TestBed.createComponent(HomeComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
+    request.flush(createDashboardOverviewResponse());
+    fixture.detectChanges();
+
+    expect(compiled.textContent).toContain('Home estrategica del portfolio');
+    expect(compiled.textContent).toContain('Datos reales desde la primera pantalla');
+    expect(compiled.querySelector('hans-button[label="Ver proyectos"]')).toBeTruthy();
+  });
+
   it('should render empty states when dashboard sections return no items', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();

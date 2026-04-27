@@ -27,10 +27,10 @@ import {
   extractSkillFilterValues,
 } from './helpers/skills.helper';
 import {
-  SKILL_CATEGORY_LABELS,
-  SKILL_CONTEXT_LABELS,
-  SKILL_FILTER_ALL_LABELS,
-  SKILL_LEVEL_LABELS,
+  SKILL_CATEGORY_LABEL_KEYS,
+  SKILL_CONTEXT_LABEL_KEYS,
+  SKILL_FILTER_ALL_LABEL_KEYS,
+  SKILL_LEVEL_LABEL_KEYS,
   SkillFilterOption,
   SkillsDropdownElement,
   SkillsSelectEvent,
@@ -222,16 +222,13 @@ export class SkillsComponent {
   private buildCategoryOptions(values: readonly string[]): readonly SkillFilterOption[] {
     return [
       {
-        label: this.translationService.translateContent(
-          SKILL_FILTER_ALL_LABELS.categories,
-        ),
+        label: this.translationService.instant(SKILL_FILTER_ALL_LABEL_KEYS.categories),
         value: 'ALL',
       },
       ...values.map((value) => ({
-        label: this.translationService.translateContent(
-          SKILL_CATEGORY_LABELS[value] ?? { 'en-us': value },
-          value,
-        ),
+        label: SKILL_CATEGORY_LABEL_KEYS[value]
+          ? this.translationService.instant(SKILL_CATEGORY_LABEL_KEYS[value])
+          : value,
         value,
       })),
     ];
@@ -240,16 +237,13 @@ export class SkillsComponent {
   private buildLevelOptions(values: readonly string[]): readonly SkillFilterOption[] {
     return [
       {
-        label: this.translationService.translateContent(
-          SKILL_FILTER_ALL_LABELS.levels,
-        ),
+        label: this.translationService.instant(SKILL_FILTER_ALL_LABEL_KEYS.levels),
         value: 'ALL',
       },
       ...values.map((value) => ({
-        label: this.translationService.translateContent(
-          SKILL_LEVEL_LABELS[value] ?? { 'en-us': value },
-          value,
-        ),
+        label: SKILL_LEVEL_LABEL_KEYS[value]
+          ? this.translationService.instant(SKILL_LEVEL_LABEL_KEYS[value])
+          : value,
         value,
       })),
     ];
@@ -258,16 +252,12 @@ export class SkillsComponent {
   private buildContextOptions(): readonly SkillFilterOption[] {
     return [
       {
-        label: this.translationService.translateContent(
-          SKILL_FILTER_ALL_LABELS.contexts,
-        ),
+        label: this.translationService.instant(SKILL_FILTER_ALL_LABEL_KEYS.contexts),
         value: 'ALL',
       },
       ...(['PROFESSIONAL', 'PERSONAL', 'ACADEMIC', 'STUDY'] as const).map(
         (value) => ({
-          label: this.translationService.translateContent(
-            SKILL_CONTEXT_LABELS[value],
-          ),
+          label: this.translationService.instant(SKILL_CONTEXT_LABEL_KEYS[value]),
           value,
         }),
       ),

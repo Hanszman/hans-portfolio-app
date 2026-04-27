@@ -80,6 +80,8 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - preferencia por zoneless, mantendo a base atual do app
 - SCSS + TailwindCSS como base de estilo
 - em arquivos `.scss`/`.css`, usar `@apply` com utilitarios do Tailwind sempre que houver equivalente; CSS/SCSS puro so deve entrar quando a regra nao puder ser representada pela camada utilitaria
+- quando o TypeScript precisar resolver copy traduzida, o codigo deve trafegar apenas `translation keys`; textos por idioma devem viver exclusivamente nos arquivos de `core/translation/translations`
+- `types`, helpers e componentes nao devem manter mapas locale -> texto para copy estatica da UI; a responsabilidade de resolver a chave para cada idioma pertence a `TranslationService`
 
 ### 3.2. Backend
 
@@ -806,6 +808,7 @@ Fechar a infraestrutura transversal que sera usada pelo restante do front.
 - textos estaticos iniciais da shell/layout/pages passando pela camada de traducao, nao hardcoded direto nos templates quando forem copy de UI
 - templates devem preferir `TranslatePipe` para copy traduzida, deixando services de traducao para estado/acoes em TypeScript
 - sempre que um texto precisar ser resolvido no TypeScript, usar helper central da `TranslationService` em vez de `if`, `switch` ou ternario manual por locale
+- para copy estatica de UI resolvida no TypeScript, trafegar apenas a `translation key`; os valores por idioma devem existir somente nos arquivos de traducao
 - testes unitarios do escopo implementado
 
 #### Criterios de aceite

@@ -1,4 +1,4 @@
-import { AppLocale } from '../../core/translation/translation.types';
+import { AppLocale, AppTranslationKey } from '../../core/translation/translation.types';
 
 export interface ExperienceProjectViewModel {
   slug: string;
@@ -35,48 +35,21 @@ export interface ExperiencePortfolioSummaryViewModel {
   highlightCount: string;
 }
 
-export const EXPERIENCE_PROJECT_STATUS_LABELS: Record<
-  string,
-  Record<AppLocale, string>
-> = {
-  COMPLETED: {
-    'en-us': 'Completed',
-    'pt-BR': 'Concluido',
-    'es-es': 'Completado',
-  },
-  IN_PROGRESS: {
-    'en-us': 'In progress',
-    'pt-BR': 'Em andamento',
-    'es-es': 'En progreso',
-  },
+export const EXPERIENCE_PROJECT_STATUS_LABEL_KEYS: Record<string, AppTranslationKey> = {
+  COMPLETED: 'taxonomy.experiences.projectStatus.completed',
+  IN_PROGRESS: 'taxonomy.experiences.projectStatus.inProgress',
 };
 
-export const EXPERIENCE_PROJECT_ENVIRONMENT_LABELS: Record<
+export const EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS: Record<
   string,
-  Record<AppLocale, string>
+  AppTranslationKey
 > = {
-  FRONTEND: {
-    'en-us': 'Front-end',
-    'pt-BR': 'Front-end',
-    'es-es': 'Front-end',
-  },
-  BACKEND: {
-    'en-us': 'Back-end',
-    'pt-BR': 'Back-end',
-    'es-es': 'Back-end',
-  },
-  FULLSTACK: {
-    'en-us': 'Full stack',
-    'pt-BR': 'Full stack',
-    'es-es': 'Full stack',
-  },
+  FRONTEND: 'taxonomy.experiences.projectEnvironment.frontend',
+  BACKEND: 'taxonomy.experiences.projectEnvironment.backend',
+  FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
 };
 
-export const EXPERIENCE_PRESENT_LABELS: Record<AppLocale, string> = {
-  'en-us': 'Present',
-  'pt-BR': 'Atual',
-  'es-es': 'Actual',
-};
+export const EXPERIENCE_PRESENT_LABEL_KEY = 'taxonomy.experiences.present';
 
 export const EXPERIENCE_MONTH_FORMATTERS: Record<AppLocale, Intl.DateTimeFormat> = {
   'en-us': new Intl.DateTimeFormat('en-US', {

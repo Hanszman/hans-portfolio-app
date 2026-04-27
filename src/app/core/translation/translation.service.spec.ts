@@ -2,7 +2,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { APP_LOCALE_STORAGE_KEY } from './translation.config';
 import { provideAppTranslations } from './translation.providers';
-import { resolveLocalizedText, TranslationService } from './translation.service';
+import {
+  resolveLocalizedText,
+  translateStaticKey,
+  TranslationService,
+} from './translation.service';
 import { AppTranslationKey } from './translation.types';
 
 describe('TranslationService', () => {
@@ -102,15 +106,16 @@ describe('TranslationService', () => {
   });
 
   it('should translate localized TypeScript-side labels through the service helper', () => {
-    const service = TestBed.inject(TranslationService);
+    expect(translateStaticKey('en-us', 'taxonomy.skills.filters.allLevels')).toBe(
+      'All levels',
+    );
+    expect(translateStaticKey('es-es', 'taxonomy.skills.filters.allLevels')).toBe(
+      'Todos los niveles',
+    );
+  });
 
-    expect(
-      service.translateContent({
-        'en-us': 'All levels',
-        'pt-BR': 'Todos os niveis',
-        'es-es': 'Todos los niveles',
-      }),
-    ).toBe('All levels');
+  it('should translate localized API/domain content through translateContent', () => {
+    const service = TestBed.inject(TranslationService);
 
     service.setLocale('es-es');
 
@@ -135,10 +140,15 @@ describe('TranslationService', () => {
     ).toBe('Somente portugues');
   });
 
+  it('should return the empty fallback when localized content has no available values', () => {
+    expect(resolveLocalizedText('es-es', {})).toBe('');
+  });
+
   it('should fall back to the key when a translation is missing from every locale', () => {
     const service = TestBed.inject(TranslationService);
     const missingKey = 'missing.translation' as AppTranslationKey;
 
     expect(service.instant(missingKey)).toBe(missingKey);
+    expect(translateStaticKey('fr-fr' as never, missingKey)).toBe(missingKey);
   });
 });

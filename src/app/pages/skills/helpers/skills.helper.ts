@@ -5,23 +5,25 @@ import {
   TechnologyContextKey,
 } from '../../../core/api/technologies/technologies.types';
 import {
-  resolveLocalizedText,
+  translateStaticKey,
 } from '../../../core/translation/translation.service';
-import { AppLocale } from '../../../core/translation/translation.types';
 import {
-  SKILL_CATEGORY_LABELS,
-  SKILL_CONTEXT_LABELS,
-  SKILL_FALLBACK_LABELS,
-  SKILL_FREQUENCY_LABELS,
+  AppLocale,
+  AppTranslationKey,
+} from '../../../core/translation/translation.types';
+import {
+  SKILL_CATEGORY_LABEL_KEYS,
+  SKILL_CONTEXT_LABEL_KEYS,
+  SKILL_FALLBACK_LABEL_KEYS,
+  SKILL_FREQUENCY_LABEL_KEYS,
   SKILL_GROUP_ICON_NAMES,
   SKILL_GROUP_TONES,
-  SKILL_LEVEL_LABELS,
+  SKILL_LEVEL_LABEL_KEYS,
   SKILL_VISUALS,
   SkillCardViewModel,
   SkillContextMetricViewModel,
   SkillsGroupViewModel,
   SkillsSummaryMetricViewModel,
-  resolveSkillGroupDescription,
 } from '../skills.types';
 
 const SKILL_CONTEXT_ORDER: readonly TechnologyContextKey[] = [
@@ -40,7 +42,7 @@ const normalizeLabel = (value: string): string =>
 
 const resolveCatalogLabel = (
   locale: AppLocale,
-  catalog: Record<string, Record<string, string | undefined>>,
+  catalog: Record<string, AppTranslationKey>,
   value: string | null,
   fallback: string,
 ): string => {
@@ -48,7 +50,9 @@ const resolveCatalogLabel = (
     return fallback;
   }
 
-  return resolveLocalizedText(locale, catalog[value] ?? {}, normalizeLabel(value));
+  const translationKey = catalog[value];
+
+  return translationKey ? translateStaticKey(locale, translationKey) : normalizeLabel(value);
 };
 
 export const resolveSkillVisualUrl = (
@@ -65,10 +69,10 @@ export const mapTechnologyToSkillCard = (
     technology.imageAssets?.[0];
   const contexts: SkillContextMetricViewModel[] = SKILL_CONTEXT_ORDER.map((key) => ({
     key,
-    label: resolveLocalizedText(locale, SKILL_CONTEXT_LABELS[key]),
+    label: translateStaticKey(locale, SKILL_CONTEXT_LABEL_KEYS[key]),
     value:
       technology.experienceMetrics?.byContext[key].label ??
-      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.zeroMonths),
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.zeroMonths),
     totalMonths: technology.experienceMetrics?.byContext[key].totalMonths ?? 0,
   })).filter((context) => context.totalMonths > 0);
 
@@ -78,25 +82,25 @@ export const mapTechnologyToSkillCard = (
     name: technology.name,
     categoryLabel: resolveCatalogLabel(
       locale,
-      SKILL_CATEGORY_LABELS,
+      SKILL_CATEGORY_LABEL_KEYS,
       technology.category,
-      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.uncategorized),
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.uncategorized),
     ),
     levelLabel: resolveCatalogLabel(
       locale,
-      SKILL_LEVEL_LABELS,
+      SKILL_LEVEL_LABEL_KEYS,
       technology.level,
-      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.levelNotSet),
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
     ),
     frequencyLabel: resolveCatalogLabel(
       locale,
-      SKILL_FREQUENCY_LABELS,
+      SKILL_FREQUENCY_LABEL_KEYS,
       technology.frequency,
-      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.frequencyNotSet),
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.frequencyNotSet),
     ),
     totalExperienceLabel:
       technology.experienceMetrics?.total.label ??
-      resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.noDuration),
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
     isHighlight: technology.highlight,
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
@@ -121,23 +125,23 @@ export const buildSkillsSummaryMetrics = (
 
   return [
     {
-      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryMapped),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryMapped),
       value: String(technologies.length),
     },
     {
-      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryHighlights),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryHighlights),
       value: String(highlightedCount),
     },
     {
-      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryCategories),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryCategories),
       value: String(categories.size),
     },
     {
-      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryAdvanced),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryAdvanced),
       value: String(advancedCount),
     },
     {
-      label: resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.summaryLongest),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryLongest),
       value: strongestTechnology?.name ?? '-',
       supportingText: strongestTechnology?.experienceMetrics?.total.label ?? '',
     },
@@ -162,11 +166,17 @@ export const buildSkillsGroups = (
       id: category,
       title: resolveCatalogLabel(
         locale,
-        SKILL_CATEGORY_LABELS,
+        SKILL_CATEGORY_LABEL_KEYS,
         category,
-        resolveLocalizedText(locale, SKILL_FALLBACK_LABELS.uncategorized),
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.uncategorized),
       ),
-      description: resolveSkillGroupDescription(locale, items.length),
+      description: translateStaticKey(
+        locale,
+        SKILL_FALLBACK_LABEL_KEYS.groupDescription,
+        {
+          count: String(items.length),
+        },
+      ),
       tone: SKILL_GROUP_TONES[category] ?? 'base',
       iconName: SKILL_GROUP_ICON_NAMES[category] ?? 'LuSparkles',
       items: [...items]

@@ -12,7 +12,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { buildAssetUrl } from '../../core/api/api.config';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
-import { TranslationService } from '../../core/translation/translation.service';
+import {
+  resolveLocalizedText,
+  TranslationService,
+} from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
@@ -99,7 +102,7 @@ export class HomeComponent {
 
       return stacks.slice(0, 3).map((stack) => ({
         slug: stack.slug,
-        name: locale === 'pt-BR' ? stack.namePt : stack.nameEn,
+        name: this.resolveApiText(locale, stack.namePt, stack.nameEn),
         projectCount: stack.projectCount,
         technologyCount: stack.technologyCount,
         iconName: resolveHomeStackIconName(stack.slug),
@@ -116,10 +119,12 @@ export class HomeComponent {
     return highlights.slice(0, 3).map((highlight) => ({
       entity: highlight.entity,
       slug: highlight.slug,
-      title: locale === 'pt-BR' ? highlight.titlePt : highlight.titleEn,
-      subtitle:
-        (locale === 'pt-BR' ? highlight.subtitlePt : highlight.subtitleEn) ??
-        '',
+      title: this.resolveApiText(locale, highlight.titlePt, highlight.titleEn),
+      subtitle: this.resolveApiText(
+        locale,
+        highlight.subtitlePt ?? '',
+        highlight.subtitleEn ?? '',
+      ),
       featured: highlight.featured === true,
       visualUrl: buildAssetUrl(highlight.imagePath ?? highlight.icon),
       iconName: resolveHomeEntityIconName(highlight.entity),
@@ -156,7 +161,7 @@ export class HomeComponent {
 
       return {
         companyName: focus.companyName,
-        title: locale === 'pt-BR' ? focus.titlePt : focus.titleEn,
+        title: this.resolveApiText(locale, focus.titlePt, focus.titleEn),
         technologies: focus.technologies.slice(0, 4),
         customers: focus.customers.slice(0, 3),
         projects: focus.projects.slice(0, 3),
@@ -242,5 +247,20 @@ export class HomeComponent {
 
   private formatCount(value: number | undefined, fallback: string): string {
     return typeof value === 'number' ? String(value) : fallback;
+  }
+
+  private resolveApiText(
+    locale: ReturnType<TranslationService['locale']>,
+    portuguese: string,
+    english: string,
+  ): string {
+    return resolveLocalizedText(
+      locale,
+      {
+        'pt-BR': portuguese,
+        'en-us': english,
+      },
+      english,
+    );
   }
 }

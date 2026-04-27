@@ -102,7 +102,8 @@ This project must follow the current Angular direction consistently:
 - component/page constants, types, and interfaces must live in that feature's own `*.types.ts` file
 - helpers should keep only helper functions and should not become a mixed file for contracts/constants
 - stylesheets must prefer Tailwind utilities through `@apply`; plain CSS/SCSS should only be used when there is no adequate Tailwind utility for that rule
-- when TypeScript needs translated labels, use the helper from `TranslationService`; do not branch on locale with ad hoc `if`/ternary checks
+- when TypeScript needs translated labels, pass translation keys only and resolve them through `TranslationService`; do not keep locale-to-text maps in `types`, helpers, or components
+- when API/domain content arrives with localized fields, resolve it through the centralized translation helpers instead of ad hoc `if`/ternary checks
 
 ### Testing and quality
 

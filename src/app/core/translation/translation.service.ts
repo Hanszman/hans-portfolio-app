@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
+  APP_TRANSLATIONS,
   APP_LOCALES,
   APP_LOCALE_STORAGE_KEY,
   DEFAULT_APP_LOCALE,
@@ -20,6 +21,18 @@ const LANGUAGE_LABEL_KEYS: Record<AppLocale, AppTranslationKey> = {
   'es-es': 'header.controls.spanish',
 };
 
+const interpolateParams = (
+  template: string,
+  params: AppTranslationParams,
+): string =>
+  Object.entries(params).reduce(
+    (content, [key, value]) =>
+      content
+        .replaceAll(`{{ ${key} }}`, value)
+        .replaceAll(`{{${key}}}`, value),
+    template,
+  );
+
 export const resolveLocalizedText = (
   locale: AppLocale,
   translations: AppLocalizedText,
@@ -31,6 +44,19 @@ export const resolveLocalizedText = (
     (translation): translation is string => typeof translation === 'string',
   ) ??
   fallback;
+
+export const translateStaticKey = (
+  locale: AppLocale,
+  key: AppTranslationKey,
+  params: AppTranslationParams = {},
+): string => {
+  const template =
+    APP_TRANSLATIONS[locale]?.[key] ??
+    APP_TRANSLATIONS[DEFAULT_APP_LOCALE][key] ??
+    key;
+
+  return interpolateParams(template, params);
+};
 
 @Injectable({
   providedIn: 'root',

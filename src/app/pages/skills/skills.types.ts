@@ -1,8 +1,5 @@
 import { TechnologyContextKey } from '../../core/api/technologies/technologies.types';
-import {
-  AppLocalizedText,
-  AppLocale,
-} from '../../core/translation/translation.types';
+import { AppTranslationKey } from '../../core/translation/translation.types';
 import { ContainerTone } from '../../layout/container/container.types';
 
 export interface SkillFilterOption {
@@ -53,173 +50,53 @@ export interface SkillsGroupViewModel {
   items: readonly SkillCardViewModel[];
 }
 
-export const SKILL_FILTER_ALL_LABELS = {
-  categories: {
-    'en-us': 'All categories',
-    'pt-BR': 'Todas as categorias',
-    'es-es': 'Todas las categorias',
-  },
-  levels: {
-    'en-us': 'All levels',
-    'pt-BR': 'Todos os niveis',
-    'es-es': 'Todos los niveles',
-  },
-  contexts: {
-    'en-us': 'All contexts',
-    'pt-BR': 'Todos os contextos',
-    'es-es': 'Todos los contextos',
-  },
-} as const satisfies Record<string, AppLocalizedText>;
+export const SKILL_FILTER_ALL_LABEL_KEYS = {
+  categories: 'taxonomy.skills.filters.allCategories',
+  levels: 'taxonomy.skills.filters.allLevels',
+  contexts: 'taxonomy.skills.filters.allContexts',
+} as const satisfies Record<string, AppTranslationKey>;
 
-export const SKILL_FALLBACK_LABELS = {
-  uncategorized: {
-    'en-us': 'Uncategorized',
-    'pt-BR': 'Nao categorizada',
-    'es-es': 'Sin categoria',
-  },
-  levelNotSet: {
-    'en-us': 'Level not set',
-    'pt-BR': 'Nivel nao informado',
-    'es-es': 'Nivel no informado',
-  },
-  frequencyNotSet: {
-    'en-us': 'Frequency not set',
-    'pt-BR': 'Frequencia nao informada',
-    'es-es': 'Frecuencia no informada',
-  },
-  noDuration: {
-    'en-us': 'No duration available',
-    'pt-BR': 'Sem periodo consolidado',
-    'es-es': 'Sin periodo consolidado',
-  },
-  zeroMonths: {
-    'en-us': '0 months',
-    'pt-BR': '0 meses',
-    'es-es': '0 meses',
-  },
-  summaryMapped: {
-    'en-us': 'Mapped technologies',
-    'pt-BR': 'Tecnologias mapeadas',
-    'es-es': 'Tecnologias mapeadas',
-  },
-  summaryHighlights: {
-    'en-us': 'Highlights',
-    'pt-BR': 'Destaques',
-    'es-es': 'Destacados',
-  },
-  summaryCategories: {
-    'en-us': 'Categories',
-    'pt-BR': 'Categorias',
-    'es-es': 'Categorias',
-  },
-  summaryAdvanced: {
-    'en-us': 'Advanced stack',
-    'pt-BR': 'Stack avancada',
-    'es-es': 'Stack avanzada',
-  },
-  summaryLongest: {
-    'en-us': 'Longest total time',
-    'pt-BR': 'Maior tempo total',
-    'es-es': 'Mayor tiempo total',
-  },
-  groupDescription: {
-    'en-us': '{{count}} technologies with real duration coverage by context.',
-    'pt-BR': '{{count}} tecnologias com tempo real consolidado por contexto.',
-    'es-es': '{{count}} tecnologias con tiempo real consolidado por contexto.',
-  },
-} as const satisfies Record<string, AppLocalizedText>;
+export const SKILL_FALLBACK_LABEL_KEYS = {
+  uncategorized: 'taxonomy.skills.fallback.uncategorized',
+  levelNotSet: 'taxonomy.skills.fallback.levelNotSet',
+  frequencyNotSet: 'taxonomy.skills.fallback.frequencyNotSet',
+  noDuration: 'taxonomy.skills.fallback.noDuration',
+  zeroMonths: 'taxonomy.skills.fallback.zeroMonths',
+  summaryMapped: 'taxonomy.skills.summary.mapped',
+  summaryHighlights: 'taxonomy.skills.summary.highlights',
+  summaryCategories: 'taxonomy.skills.summary.categories',
+  summaryAdvanced: 'taxonomy.skills.summary.advanced',
+  summaryLongest: 'taxonomy.skills.summary.longest',
+  groupDescription: 'taxonomy.skills.group.description',
+} as const satisfies Record<string, AppTranslationKey>;
 
-export const SKILL_CATEGORY_LABELS: Record<string, AppLocalizedText> = {
-  FRAMEWORK: {
-    'en-us': 'Framework',
-    'pt-BR': 'Framework',
-    'es-es': 'Framework',
-  },
-  LANGUAGE: {
-    'en-us': 'Language',
-    'pt-BR': 'Linguagem',
-    'es-es': 'Lenguaje',
-  },
-  LIBRARY: {
-    'en-us': 'Library',
-    'pt-BR': 'Biblioteca',
-    'es-es': 'Biblioteca',
-  },
-  DATABASE: {
-    'en-us': 'Database',
-    'pt-BR': 'Banco de dados',
-    'es-es': 'Base de datos',
-  },
-  DEVOPS: {
-    'en-us': 'DevOps',
-    'pt-BR': 'DevOps',
-    'es-es': 'DevOps',
-  },
-  ORM: {
-    'en-us': 'ORM',
-    'pt-BR': 'ORM',
-    'es-es': 'ORM',
-  },
+export const SKILL_CATEGORY_LABEL_KEYS: Record<string, AppTranslationKey> = {
+  FRAMEWORK: 'taxonomy.skills.category.framework',
+  LANGUAGE: 'taxonomy.skills.category.language',
+  LIBRARY: 'taxonomy.skills.category.library',
+  DATABASE: 'taxonomy.skills.category.database',
+  DEVOPS: 'taxonomy.skills.category.devops',
+  ORM: 'taxonomy.skills.category.orm',
 };
 
-export const SKILL_LEVEL_LABELS: Record<string, AppLocalizedText> = {
-  ADVANCED: {
-    'en-us': 'Advanced',
-    'pt-BR': 'Avancado',
-    'es-es': 'Avanzado',
-  },
-  INTERMEDIATE: {
-    'en-us': 'Intermediate',
-    'pt-BR': 'Intermediario',
-    'es-es': 'Intermedio',
-  },
-  BEGINNER: {
-    'en-us': 'Beginner',
-    'pt-BR': 'Iniciante',
-    'es-es': 'Principiante',
-  },
+export const SKILL_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
+  ADVANCED: 'taxonomy.skills.level.advanced',
+  INTERMEDIATE: 'taxonomy.skills.level.intermediate',
+  BEGINNER: 'taxonomy.skills.level.beginner',
 };
 
-export const SKILL_FREQUENCY_LABELS: Record<string, AppLocalizedText> = {
-  FREQUENT: {
-    'en-us': 'Frequent',
-    'pt-BR': 'Frequente',
-    'es-es': 'Frecuente',
-  },
-  OCCASIONAL: {
-    'en-us': 'Occasional',
-    'pt-BR': 'Ocasional',
-    'es-es': 'Ocasional',
-  },
-  RARE: {
-    'en-us': 'Rare',
-    'pt-BR': 'Rara',
-    'es-es': 'Rara',
-  },
+export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
+  FREQUENT: 'taxonomy.skills.frequency.frequent',
+  OCCASIONAL: 'taxonomy.skills.frequency.occasional',
+  RARE: 'taxonomy.skills.frequency.rare',
 };
 
-export const SKILL_CONTEXT_LABELS: Record<TechnologyContextKey, AppLocalizedText> =
+export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> =
   {
-    PROFESSIONAL: {
-      'en-us': 'Professional',
-      'pt-BR': 'Profissional',
-      'es-es': 'Profesional',
-    },
-    PERSONAL: {
-      'en-us': 'Personal',
-      'pt-BR': 'Pessoal',
-      'es-es': 'Personal',
-    },
-    ACADEMIC: {
-      'en-us': 'Academic',
-      'pt-BR': 'Academico',
-      'es-es': 'Academico',
-    },
-    STUDY: {
-      'en-us': 'Study',
-      'pt-BR': 'Estudo',
-      'es-es': 'Estudio',
-    },
+    PROFESSIONAL: 'taxonomy.skills.context.professional',
+    PERSONAL: 'taxonomy.skills.context.personal',
+    ACADEMIC: 'taxonomy.skills.context.academic',
+    STUDY: 'taxonomy.skills.context.study',
   };
 
 export const SKILL_GROUP_TONES: Record<string, ContainerTone> = {
@@ -263,16 +140,3 @@ export const SKILL_VISUALS: Record<string, string> = {
   swagger: '/assets/img/skills/swagger.png',
   typescript: '/assets/img/skills/typescript.png',
 };
-
-export const resolveSkillGroupDescription = (
-  locale: AppLocale,
-  count: number,
-): string =>
-  SKILL_FALLBACK_LABELS.groupDescription[locale]?.replace(
-    '{{count}}',
-    String(count),
-  ) ??
-  SKILL_FALLBACK_LABELS.groupDescription['en-us']!.replace(
-    '{{count}}',
-    String(count),
-  );
