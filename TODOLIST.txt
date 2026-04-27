@@ -56,9 +56,7 @@ Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe 
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
 [ATUAL]:
--Ainda tem scss despadronizado no código, dê uma olhada no scss do experiences por exemplo, devemos aplicar o @apply com as classes do tailwind nele e em todos os outros scss/css que estiverem fora do padrão no código por favor.
--Sua tratativa para traduzir os arquivos ts ficou melhor mas ainda está ruim, vi que vc colocou as traduções de cada termo no skill.types e experiences.types, mas essas tags de tradução tem que ficar nos arquivos de tradução, não ali nos tipos. Devemos passar pelo ts apenas a tag de tradução e o responsável por saber a tradução da tag em cada idioma tem que ser a lógica no service de translation. Se não, toda vez que tivermos que incluir alguma lingua nova, vamos ter que alterar em todos os types. Refatore isso por favor e atualize a documentação.
--Como vc pode ver no print, ao selecionarmos o idioma Espanhol no dropdown de idioma, as traduções ficam em inglês, tem algum bug ai na tradução pro espanhol, resolva por favor.
+-Analisar e ver o que pode melhorar nos arquivos: experiences.types.ts, experiences.helper.ts, home.component.ts, skills.types.ts
 -Partir pra próxima etapa de implementação
 -Alterar tema/infos/design do portfolio, etc
 
