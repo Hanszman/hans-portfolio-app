@@ -1,0 +1,137 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="project()?.title ?? ''"
+  modalColor="primary"
+  modalSize="large"
+  modalVariant="default"
+  placement="center"
+  closeButtonLabel="Close"
+  [header]="project()?.dateRangeLabel ?? ''"
+  (close)="requestClose()"
+>
+  @if (project(); as currentProject) {
+    <div class="project-detail-modal">
+      <div class="project-detail-modal-copy">
+        <div class="project-detail-modal-meta">
+          <hans-tag
+            [attr.label]="currentProject.contextLabel"
+            tagColor="primary"
+            tagSize="sm"
+          ></hans-tag>
+          <hans-tag
+            [attr.label]="currentProject.environmentLabel"
+            tagColor="secondary"
+            tagSize="sm"
+          ></hans-tag>
+          <hans-tag
+            [attr.label]="currentProject.statusLabel"
+            tagColor="info"
+            tagSize="sm"
+          ></hans-tag>
+        </div>
+
+        <p class="project-detail-modal-summary">{{ currentProject.summary }}</p>
+        <p class="project-detail-modal-description">{{ currentProject.description }}</p>
+      </div>
+
+      <div class="project-detail-modal-grid">
+        <section class="project-detail-modal-section">
+          <span>{{ 'pages.projects.card.technologies' | translate }}</span>
+          <div class="project-detail-modal-tags">
+            @for (technology of currentProject.technologies; track technology) {
+              <hans-tag [attr.label]="technology" tagColor="base" tagSize="sm"></hans-tag>
+            }
+            @if (currentProject.extraTechnologyCount > 0) {
+              <hans-tag
+                [attr.label]="'+' + currentProject.extraTechnologyCount"
+                tagColor="warning"
+                tagSize="sm"
+              ></hans-tag>
+            }
+          </div>
+        </section>
+
+        <section class="project-detail-modal-section">
+          <span>{{ 'pages.projects.detail.relatedExperiences' | translate }}</span>
+          <div class="project-detail-modal-chip-list">
+            @for (experience of currentProject.experienceTitles; track experience) {
+              <span class="project-detail-modal-chip">{{ experience }}</span>
+            } @empty {
+              <span class="project-detail-modal-chip project-detail-modal-chip-muted">
+                {{ 'pages.projects.detail.noExperiences' | translate }}
+              </span>
+            }
+          </div>
+        </section>
+
+        <section class="project-detail-modal-section">
+          <span>{{ 'pages.projects.card.companies' | translate }}</span>
+          <div class="project-detail-modal-chip-list">
+            @for (company of currentProject.companyNames; track company) {
+              <span class="project-detail-modal-chip">{{ company }}</span>
+            } @empty {
+              <span class="project-detail-modal-chip project-detail-modal-chip-muted">
+                {{ 'pages.projects.card.emptyCompanies' | translate }}
+              </span>
+            }
+          </div>
+        </section>
+
+        <section class="project-detail-modal-section">
+          <span>{{ 'pages.projects.detail.tags' | translate }}</span>
+          <div class="project-detail-modal-tags">
+            @for (tag of currentProject.tagLabels; track tag) {
+              <hans-tag [attr.label]="tag" tagColor="success" tagSize="sm"></hans-tag>
+            } @empty {
+              <span class="project-detail-modal-inline-text">
+                {{ 'pages.projects.detail.noTags' | translate }}
+              </span>
+            }
+          </div>
+        </section>
+      </div>
+
+      <section class="project-detail-modal-section">
+        <span>{{ 'pages.projects.detail.analytics' | translate }}</span>
+        <hans-chart
+          [categories]="chartCategories()"
+          chartColor="primary"
+          chartType="bar"
+          [series]="chartSeries()"
+          [title]="'pages.projects.detail.analytics' | translate"
+          [height]="280"
+        ></hans-chart>
+      </section>
+
+      @if (currentProject.galleryItems.length > 0) {
+        <section class="project-detail-modal-section">
+          <span>{{ 'pages.projects.detail.gallery' | translate }}</span>
+          <hans-carousel
+            [items]="currentProject.galleryItems"
+            carouselColor="secondary"
+            carouselSize="medium"
+            carouselVariant="default"
+            [visibleItemsCount]="1"
+          ></hans-carousel>
+        </section>
+      }
+
+      <section class="project-detail-modal-section">
+        <span>{{ 'pages.projects.card.links' | translate }}</span>
+        <div class="project-detail-modal-links">
+          @for (link of currentProject.links; track link.id) {
+            <a [href]="link.url" target="_blank" rel="noreferrer">
+              <strong>{{ link.label }}</strong>
+              <span>{{ link.typeLabel }}</span>
+            </a>
+          } @empty {
+            <p class="project-detail-modal-inline-text">
+              {{ 'pages.projects.card.emptyLinks' | translate }}
+            </p>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</hans-modal>
+

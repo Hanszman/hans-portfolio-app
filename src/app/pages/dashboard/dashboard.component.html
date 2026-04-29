@@ -15,9 +15,15 @@
     [description]="'pages.dashboard.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <p class="dashboard-state">{{ 'pages.dashboard.snapshot.loading' | translate }}</p>
+      <app-portfolio-state
+        mode="loading"
+        [message]="'pages.dashboard.snapshot.loading' | translate"
+      />
     } @else if (hasError()) {
-      <p class="dashboard-state">{{ 'pages.dashboard.snapshot.error' | translate }}</p>
+      <app-portfolio-state
+        mode="error"
+        [message]="'pages.dashboard.snapshot.error' | translate"
+      />
     } @else {
       <dl class="dashboard-summary-grid">
         @for (card of summaryCards(); track card.label) {
@@ -41,11 +47,20 @@
       [description]="'pages.dashboard.stacks.description' | translate"
     >
       @if (isLoading()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.stacks.loading' | translate }}</p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.dashboard.stacks.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.stacks.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.dashboard.stacks.error' | translate"
+        />
       } @else if (stackRows().length === 0) {
-        <p class="dashboard-state">{{ 'pages.dashboard.stacks.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.dashboard.stacks.empty' | translate"
+        />
       } @else {
         <div class="dashboard-stack-list">
           @for (stack of stackRows(); track stack.slug) {
@@ -87,13 +102,20 @@
       [description]="'pages.dashboard.distribution.description' | translate"
     >
       @if (isLoading()) {
-        <p class="dashboard-state">
-          {{ 'pages.dashboard.distribution.loading' | translate }}
-        </p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.dashboard.distribution.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.distribution.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.dashboard.distribution.error' | translate"
+        />
       } @else if (!projectDistribution()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.distribution.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.dashboard.distribution.empty' | translate"
+        />
       } @else {
         <div class="dashboard-kpis">
           <div class="dashboard-kpi">
@@ -120,9 +142,10 @@
                   <span>{{ item.label }}</span>
                 </div>
               } @empty {
-                <p class="dashboard-state">
-                  {{ 'pages.dashboard.distribution.empty' | translate }}
-                </p>
+                <app-portfolio-state
+                  mode="empty"
+                  [message]="'pages.dashboard.distribution.empty' | translate"
+                />
               }
             </div>
           </section>
@@ -136,9 +159,10 @@
                   <span>{{ item.label }}</span>
                 </div>
               } @empty {
-                <p class="dashboard-state">
-                  {{ 'pages.dashboard.distribution.empty' | translate }}
-                </p>
+                <app-portfolio-state
+                  mode="empty"
+                  [message]="'pages.dashboard.distribution.empty' | translate"
+                />
               }
             </div>
           </section>
@@ -153,11 +177,20 @@
       [description]="'pages.dashboard.technology.description' | translate"
     >
       @if (isLoading()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.technology.loading' | translate }}</p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.dashboard.technology.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.technology.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.dashboard.technology.error' | translate"
+        />
       } @else if (technologyLeaders().length === 0 && technologyBreakdowns().length === 0) {
-        <p class="dashboard-state">{{ 'pages.dashboard.technology.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.dashboard.technology.empty' | translate"
+        />
       } @else {
         <div class="dashboard-tech-grid">
           <div class="dashboard-tech-leaders">
@@ -187,9 +220,10 @@
                       <span>{{ item.label }}</span>
                     </div>
                   } @empty {
-                    <p class="dashboard-state">
-                      {{ 'pages.dashboard.technology.empty' | translate }}
-                    </p>
+                    <app-portfolio-state
+                      mode="empty"
+                      [message]="'pages.dashboard.technology.empty' | translate"
+                    />
                   }
                 </div>
               </section>
@@ -206,11 +240,20 @@
       [description]="'pages.dashboard.timeline.description' | translate"
     >
       @if (isLoading()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.timeline.loading' | translate }}</p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.dashboard.timeline.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.timeline.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.dashboard.timeline.error' | translate"
+        />
       } @else if (timelineCards().length === 0) {
-        <p class="dashboard-state">{{ 'pages.dashboard.timeline.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.dashboard.timeline.empty' | translate"
+        />
       } @else {
         <div class="dashboard-timeline-list">
           @for (item of timelineCards(); track item.slug) {
@@ -250,9 +293,10 @@
                         <span>{{ customer }}</span>
                       </div>
                     } @empty {
-                      <p class="dashboard-state">
-                        {{ 'pages.dashboard.timeline.emptyCustomers' | translate }}
-                      </p>
+                      <app-portfolio-state
+                        mode="empty"
+                        [message]="'pages.dashboard.timeline.emptyCustomers' | translate"
+                      />
                     }
                   </div>
                 </section>
@@ -265,9 +309,10 @@
                         <span>{{ project }}</span>
                       </div>
                     } @empty {
-                      <p class="dashboard-state">
-                        {{ 'pages.dashboard.timeline.emptyProjects' | translate }}
-                      </p>
+                      <app-portfolio-state
+                        mode="empty"
+                        [message]="'pages.dashboard.timeline.emptyProjects' | translate"
+                      />
                     }
                   </div>
                 </section>
@@ -296,11 +341,20 @@
       [description]="'pages.dashboard.highlights.description' | translate"
     >
       @if (isLoading()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.highlights.loading' | translate }}</p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.dashboard.highlights.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="dashboard-state">{{ 'pages.dashboard.highlights.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.dashboard.highlights.error' | translate"
+        />
       } @else if (highlightCards().length === 0) {
-        <p class="dashboard-state">{{ 'pages.dashboard.highlights.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.dashboard.highlights.empty' | translate"
+        />
       } @else {
         <div class="dashboard-highlight-grid">
           @for (highlight of highlightCards(); track highlight.slug) {

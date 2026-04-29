@@ -1,7 +1,13 @@
 [TODO ATUAL]:
--Partir pra próxima etapa de implementação
+-Analisar estrutura de estado global
+-Garantir 100% de coverage nos tests
+-Faltou incluir as tags de tradução do espanhol
+-Interfaces, consts e tipos ainda fora dos arquivos de types
+-Ainda estou sentindo os arquivos meio grandes
+-Codex não arrumou praticamente nada do redesign visual ainda, precisamos rever as telas
 -Utilizar loadings e outros components da lib, além de melhorar os tratamentos de erros
 -Alterar tema/infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
+-Partir pra próxima etapa de implementação
 
 [PROXIMOS TODO's]:
 -Refatorar e readaptar telas e componentes da versão antiga do portfolio

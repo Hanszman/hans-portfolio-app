@@ -1,0 +1,23 @@
+:host {
+  @apply block;
+}
+
+.portfolio-state {
+  @apply flex min-h-28 flex-col items-center justify-center gap-4 rounded-[1.5rem] border px-5 py-6 text-center;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 72%, transparent);
+}
+
+.portfolio-state p {
+  @apply m-0 max-w-xl text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 74%, transparent);
+}
+
+.portfolio-state[data-mode='error'] {
+  border-color: color-mix(in srgb, var(--danger-default-color) 20%, transparent);
+}
+
+.portfolio-state[data-mode='empty'] {
+  border-color: color-mix(in srgb, var(--warning-default-color) 20%, transparent);
+}
+

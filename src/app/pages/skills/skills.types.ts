@@ -27,6 +27,13 @@ export interface SkillContextMetricViewModel {
   totalMonths: number;
 }
 
+export interface SkillTimelineEntryViewModel {
+  key: TechnologyContextKey;
+  label: string;
+  startedAt: string;
+  endedAt: string | null;
+}
+
 export interface SkillCardViewModel {
   id: string;
   slug: string;
@@ -39,6 +46,7 @@ export interface SkillCardViewModel {
   iconName: string;
   visualUrl: string;
   contexts: readonly SkillContextMetricViewModel[];
+  timelineEntries: readonly SkillTimelineEntryViewModel[];
 }
 
 export interface SkillsGroupViewModel {

@@ -8,8 +8,17 @@ export interface ExperienceProjectViewModel {
   environmentLabel: string;
 }
 
+export interface ExperienceGalleryItemViewModel {
+  id: string;
+  imageSrc: string;
+  imageAlt: string;
+  title?: string;
+  description?: string;
+}
+
 export interface ExperienceTimelineItemViewModel {
   id: string;
+  slug: string;
   companyName: string;
   title: string;
   summary: string;
@@ -23,6 +32,7 @@ export interface ExperienceTimelineItemViewModel {
   projects: ExperienceProjectViewModel[];
   technologies: string[];
   extraTechnologyCount: number;
+  galleryItems: readonly ExperienceGalleryItemViewModel[];
 }
 
 export interface ExperiencePortfolioSummaryViewModel {

@@ -14,6 +14,9 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
+import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
+import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
 import {
   buildExperiencePortfolioSummary,
   mapExperienceToTimelineItem,
@@ -25,6 +28,9 @@ import {
     PageIntroComponent,
     PageWrapperComponent,
     ContainerComponent,
+    PortfolioStateComponent,
+    ExperienceTimelineCardComponent,
+    ExperienceDetailModalComponent,
     TranslatePipe,
   ],
   templateUrl: './experiences.component.html',
@@ -36,10 +42,14 @@ export class ExperiencesComponent {
   private readonly experiencesService = inject(ExperiencesService);
   private readonly translationService = inject(TranslationService);
   private readonly experiencesSignal = signal<ExperienceCollectionItemResponse[]>([]);
+  private readonly selectedExperienceSignal = signal<ReturnType<typeof mapExperienceToTimelineItem> | null>(
+    null,
+  );
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly experiences = this.experiencesSignal.asReadonly();
+  protected readonly selectedExperience = this.selectedExperienceSignal.asReadonly();
 
   protected readonly experienceSummary = computed(() =>
     buildExperiencePortfolioSummary(
@@ -55,6 +65,10 @@ export class ExperiencesComponent {
         this.translationService.locale(),
       ),
     ),
+  );
+
+  protected readonly isDetailOpen = computed(
+    () => this.selectedExperience() !== null,
   );
 
   constructor() {
@@ -73,5 +87,15 @@ export class ExperiencesComponent {
           this.isLoading.set(false);
         },
       });
+  }
+
+  protected openExperienceDetails(
+    item: ReturnType<typeof mapExperienceToTimelineItem>,
+  ): void {
+    this.selectedExperienceSignal.set(item);
+  }
+
+  protected closeExperienceDetails(): void {
+    this.selectedExperienceSignal.set(null);
   }
 }

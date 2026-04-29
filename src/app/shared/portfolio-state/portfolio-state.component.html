@@ -1,0 +1,13 @@
+<div class="portfolio-state" [attr.data-mode]="mode()">
+  @if (mode() === 'loading') {
+    <hans-loading
+      ariaLabel="Loading content"
+      loadingColor="primary"
+      loadingSize="medium"
+      loadingType="spinner"
+    ></hans-loading>
+  }
+
+  <p>{{ message() }}</p>
+</div>
+

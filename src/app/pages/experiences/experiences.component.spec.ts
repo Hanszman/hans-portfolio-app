@@ -14,7 +14,16 @@ import { ExperiencesComponent } from './experiences.component';
 
 describe('ExperiencesComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-avatar', 'hans-icon', 'hans-tag'];
+    const elementNames = [
+      'hans-avatar',
+      'hans-icon',
+      'hans-tag',
+      'hans-button',
+      'hans-modal',
+      'hans-carousel',
+      'hans-chart',
+      'hans-loading',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -62,11 +71,10 @@ describe('ExperiencesComponent', () => {
 
     expect(compiled.textContent).toContain('Experience narrative');
     expect(compiled.textContent).toContain('Stefanini Group');
-    expect(compiled.textContent).toContain('Customer & Dealer Transformation App');
-    expect(compiled.textContent).toContain('Front-End Specialist');
+    expect(compiled.textContent).toContain('Experience at Stefanini Group');
     expect(compiled.textContent).toContain('Ford');
-    expect(compiled.querySelectorAll('hans-avatar').length).toBeGreaterThan(1);
-    expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(4);
+    expect(compiled.textContent).toContain('2 projects');
+    expect(compiled.querySelectorAll('hans-button').length).toBeGreaterThan(1);
   });
 
   it('should render localized experience labels in Portuguese', () => {

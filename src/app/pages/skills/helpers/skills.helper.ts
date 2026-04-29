@@ -114,6 +114,12 @@ export const mapTechnologyToSkillCard = (
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
     contexts,
+    timelineEntries: (technology.technologyContexts ?? []).map((context) => ({
+      key: context.context,
+      label: translateStaticKey(locale, SKILL_CONTEXT_LABEL_KEYS[context.context]),
+      startedAt: context.startedAt,
+      endedAt: context.endedAt,
+    })),
   };
 };
 

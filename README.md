@@ -86,6 +86,9 @@ npm run build
 - zoneless change detection kept as part of the current app base
 - SCSS + TailwindCSS for styling
 - `hans-ui-design-lib` consumed via CDN/web components
+- public pages should be progressively refactored into smaller page-local or shared components as the portfolio grows
+- page-only components belong inside the owning page folder; cross-page reusable components belong in `src/app/shared/`
+- public entity cards should stay concise in the page flow and expand deeper relationships and analytics inside detail modals when appropriate
 
 ## 📜 Mandatory Project Rules
 
@@ -152,6 +155,14 @@ Common components already available in the library include:
 - table
 - tabs
 
+For the current public-portfolio refinement stage, the default preference is to reach first for library primitives such as:
+
+- `hans-loading` for loading states
+- `hans-modal` for entity details
+- `hans-carousel` for larger image galleries
+- `hans-chart` and `hans-table` for analytics/details
+- `hans-card` for reusable card surfaces when the library contract fits the need
+
 If a missing component would clearly be reusable in other projects, stop and align before adding or changing anything in `hans-ui-design-lib`.
 
 Portfolio-only UI can live in this repository when it is not a good fit for the shared design library.
@@ -216,6 +227,14 @@ At the moment, this repository already has the first public pages evolving on re
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 
 The next official frontend step after the current implementation is `F7`, focused on the final visual integration pass of the public portfolio.
+
+That step includes:
+
+- responsive and UX refinement across all public pages
+- denser and better-balanced information layout inspired by `victor_hanszman_portfolio-old`
+- extraction of oversized page components into smaller page-local/shared components
+- broader use of real API relationships and aggregate data
+- concise cards with richer detail modals backed by the design library
 
 ## 📜 History of commands used to build this project:
 

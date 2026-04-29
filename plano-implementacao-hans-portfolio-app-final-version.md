@@ -974,19 +974,36 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 
 #### Entregas
 
+- refatoracao estrutural obrigatoria das paginas publicas (`home`, `experiences`, `skills`, `projects`, `dashboard`) para reduzir responsabilidade excessiva dos componentes de pagina
+- quebra de composicoes grandes em componentes menores seguindo clean code, SRP e separacao clara entre estado, mapeamento e renderizacao
+- quando o componente novo for usado apenas por uma pagina, ele deve nascer dentro da pasta da propria pagina, com seus arquivos `ts`, `html`, `scss`, `spec`, `types` e `helpers` quando necessario
+- quando o componente novo for reutilizavel entre multiplas paginas publicas e nao existir equivalente na `hans-ui-design-lib`, ele deve nascer em `src/app/shared/` como pasta irma de `layout/` e `pages/`
+- antes de criar qualquer componente visual novo nesta etapa, revalidar se a `hans-ui-design-lib` ja entrega alternativa equivalente
 - refinamento de UX
 - ajustes de responsividade
+- reducao de espacos vazios excessivos e reorganizacao da densidade de informacao para evitar colunas quebradas, sobreposicoes e blocos subaproveitados
+- revisao da distribuicao de conteudo em desktop, tablet e mobile para evitar textos escapando de cards, trilhas verticais desbalanceadas e areas relevantes ficando vazias sem necessidade
 - estados de loading, empty e erro
+- uso preferencial dos componentes da `hans-ui-design-lib` para estados visuais de suporte, especialmente `hans-loading`, `hans-modal`, `hans-carousel`, `hans-chart`, `hans-table`, `hans-card` e `hans-tabs` quando fizer sentido
 - revisao de acessibilidade
 - revisao de navegacao
+- alinhamento visual e organizacional com a referencia funcional do portfolio antigo `victor_hanszman_portfolio-old`, especialmente em menu, header, agrupamento de informacoes, filtros e leitura geral das entidades
 - revisao de consistencia com `hans-ui-design-lib`
 - revisao da consistencia da integracao com a API em todas as paginas publicas
+- ampliacao do consumo dos dados reais da API nas telas publicas, aproveitando melhor relacionamentos, metricas, tabelas, filtros, graficos e sinais de portfolio que ja existem no backend
+- reorganizacao dos cards para exibirem um resumo mais objetivo na listagem principal, com abertura de modal de detalhe ao clique do usuario
+- modais de detalhe para tecnologias, projetos, experiencias e outros itens relevantes, mostrando informacoes expandidas, conexoes com outras entidades, ativos visuais e graficos quando agregarem valor
+- quando houver imagens vinculadas suficientes, uso de `hans-carousel` dentro do detalhe para exibicao ampliada
 - testes adicionais necessarios
 
 #### Criterios de aceite
 
 - portfolio publico pronto e integrado com a API
 - linguagem visual consistente
+- paginas publicas mais modulares e legiveis, sem concentrar mapeamento, filtros, estados e composicao detalhada em um unico componente gigante
+- estrutura de pastas coerente com a regra de `shared/` para reaproveitamento transversal e subpastas locais para componentes especificos de pagina
+- organizacao das informacoes mais proxima do portfolio antigo, mas com linguagem visual nova, responsiva e alinhada a design lib
+- entidades principais com leitura resumida na listagem e aprofundamento em modal de detalhe quando aplicavel
 - coverage total do escopo entregue
 
 ### F8 - Preparacao da area administrativa visual

@@ -27,7 +27,16 @@ const flushProjectsRequest = (
 
 describe('ProjectsComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-icon', 'hans-tag', 'hans-dropdown'];
+    const elementNames = [
+      'hans-icon',
+      'hans-tag',
+      'hans-dropdown',
+      'hans-button',
+      'hans-modal',
+      'hans-carousel',
+      'hans-chart',
+      'hans-loading',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -69,12 +78,20 @@ describe('ProjectsComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Projects as cases, not just entries');
-    expect(compiled.textContent).toContain("Github's API Consumer");
+    expect(compiled.textContent).toContain('Portfolio');
+    expect(compiled.textContent).toContain('Public Diagnostics');
     expect(compiled.textContent).toContain('HardWorker');
-    expect(compiled.textContent).toContain('Front-End Deploy');
     expect(compiled.querySelectorAll('hans-dropdown').length).toBe(4);
     expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(6);
-    expect(compiled.querySelectorAll('.project-link').length).toBeGreaterThan(1);
+    expect(compiled.querySelectorAll('hans-button').length).toBeGreaterThan(1);
+
+    const component = fixture.componentInstance as unknown as {
+      projectCases: () => readonly { title: string }[];
+    };
+
+    expect(component.projectCases().map((project) => project.title)).toContain(
+      "Github's API Consumer",
+    );
   });
 
   it('should render localized labels in Portuguese', () => {
@@ -126,6 +143,7 @@ describe('ProjectsComponent', () => {
       selectEnvironment: (event: Event) => void;
       selectStatus: (event: Event) => void;
       selectSort: (event: Event) => void;
+      projectCases: () => readonly { title: string }[];
     };
 
     component.selectContext(
@@ -195,16 +213,13 @@ describe('ProjectsComponent', () => {
     );
     fixture.detectChanges();
 
-    const firstTitle = compiled.querySelector('.project-case-heading strong');
-
-    expect(firstTitle?.textContent?.trim()).toBe("Github's API Consumer");
+    expect(component.projectCases()[0].title).toBe("Github's API Consumer");
   });
 
   it('should sort project cases by recent start and largest stack', () => {
     const fixture = TestBed.createComponent(ProjectsComponent);
     fixture.detectChanges();
 
-    const compiled = fixture.nativeElement as HTMLElement;
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     flushProjectsRequest(httpTestingController);
@@ -212,6 +227,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectSort: (event: Event) => void;
+      projectCases: () => readonly { title: string }[];
     };
 
     component.selectSort(
@@ -224,9 +240,7 @@ describe('ProjectsComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(
-      compiled.querySelector('.project-case-heading strong')?.textContent?.trim(),
-    ).toBe('Portfolio');
+    expect(component.projectCases()[0].title).toBe('Portfolio');
 
     component.selectSort(
       new CustomEvent('select', {
@@ -238,9 +252,7 @@ describe('ProjectsComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(
-      compiled.querySelector('.project-case-heading strong')?.textContent?.trim(),
-    ).toBe('Portfolio');
+    expect(component.projectCases()[0].title).toBe('Portfolio');
   });
 
   it('should break recent-start sorting ties with sortOrder', () => {
@@ -277,6 +289,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectSort: (event: Event) => void;
+      projectCases: () => readonly { title: string }[];
     };
 
     component.selectSort(
@@ -289,11 +302,7 @@ describe('ProjectsComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement
-        .querySelector('.project-case-heading strong')
-        ?.textContent?.trim(),
-    ).toBe('Recent A');
+    expect(component.projectCases()[0].title).toBe('Recent A');
   });
 
   it('should build dropdown options with localized fallbacks for unknown values', () => {
@@ -428,6 +437,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectSort: (event: Event) => void;
+      projectCases: () => readonly { title: string }[];
     };
 
     component.selectSort(
@@ -440,11 +450,7 @@ describe('ProjectsComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement
-        .querySelector('.project-case-heading strong')
-        ?.textContent?.trim(),
-    ).toBe('Tie A');
+    expect(component.projectCases()[0].title).toBe('Tie A');
   });
 
   it('should safely handle dropdown option binding branches', async () => {

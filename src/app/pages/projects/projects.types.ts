@@ -13,6 +13,14 @@ export interface ProjectLinkViewModel {
   typeLabel: string;
 }
 
+export interface ProjectGalleryItemViewModel {
+  id: string;
+  imageSrc: string;
+  imageAlt: string;
+  title?: string;
+  description?: string;
+}
+
 export interface ProjectCaseViewModel {
   id: string;
   slug: string;
@@ -32,6 +40,9 @@ export interface ProjectCaseViewModel {
   imageUrl: string;
   imageAlt: string;
   assetCountLabel: string;
+  experienceTitles: readonly string[];
+  tagLabels: readonly string[];
+  galleryItems: readonly ProjectGalleryItemViewModel[];
 }
 
 export interface ProjectFilterValues {

@@ -1,0 +1,94 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="item()?.name ?? ''"
+  modalColor="success"
+  modalSize="large"
+  [header]="item()?.categoryLabel ?? ''"
+  (close)="requestClose()"
+>
+  @if (item(); as currentItem) {
+    <div class="skill-detail-modal">
+      <div class="skill-detail-modal-head">
+        <div class="skill-detail-modal-visual">
+          @if (currentItem.visualUrl) {
+            <hans-avatar
+              [src]="currentItem.visualUrl"
+              [alt]="currentItem.name"
+              avatarSize="large"
+            ></hans-avatar>
+          } @else {
+            <hans-icon [name]="currentItem.iconName" iconSize="large"></hans-icon>
+          }
+        </div>
+
+        <div class="skill-detail-modal-copy">
+          <div class="skill-detail-modal-tags">
+            <hans-tag [attr.label]="currentItem.levelLabel" tagColor="primary" tagSize="sm"></hans-tag>
+            <hans-tag
+              [attr.label]="currentItem.frequencyLabel"
+              tagColor="secondary"
+              tagSize="sm"
+            ></hans-tag>
+            @if (currentItem.isHighlight) {
+              <hans-tag
+                [attr.label]="'pages.skills.card.highlight' | translate"
+                tagColor="warning"
+                tagSize="sm"
+              ></hans-tag>
+            }
+          </div>
+
+          <p class="skill-detail-modal-text">
+            {{ 'pages.skills.detail.totalExperience' | translate }}:
+            <strong>{{ currentItem.totalExperienceLabel }}</strong>
+          </p>
+        </div>
+      </div>
+
+      <section class="skill-detail-modal-section">
+        <span>{{ 'pages.skills.card.contexts' | translate }}</span>
+        <hans-chart
+          [categories]="chartCategories()"
+          chartColor="success"
+          chartType="bar"
+          [series]="chartSeries()"
+          [title]="'pages.skills.detail.contextChart' | translate"
+          [height]="260"
+        ></hans-chart>
+      </section>
+
+      <section class="skill-detail-modal-section">
+        <span>{{ 'pages.skills.detail.coverage' | translate }}</span>
+        <div class="skill-detail-modal-context-grid">
+          @for (context of currentItem.contexts; track context.key) {
+            <div class="skill-detail-modal-context-card">
+              <strong>{{ context.label }}</strong>
+              <span>{{ context.value }}</span>
+            </div>
+          } @empty {
+            <p class="skill-detail-modal-text">
+              {{ 'pages.skills.catalog.empty' | translate }}
+            </p>
+          }
+        </div>
+      </section>
+
+      <section class="skill-detail-modal-section">
+        <span>{{ 'pages.skills.detail.timeline' | translate }}</span>
+        <div class="skill-detail-modal-timeline">
+          @for (entry of currentItem.timelineEntries; track entry.key + entry.startedAt) {
+            <div class="skill-detail-modal-timeline-item">
+              <strong>{{ entry.label }}</strong>
+              <span>{{ entry.startedAt | date: 'MMM y' }} - {{ entry.endedAt ? (entry.endedAt | date: 'MMM y') : ('taxonomy.experiences.present' | translate) }}</span>
+            </div>
+          } @empty {
+            <p class="skill-detail-modal-text">
+              {{ 'pages.skills.detail.noTimeline' | translate }}
+            </p>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</hans-modal>
+

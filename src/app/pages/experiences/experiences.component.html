@@ -15,13 +15,15 @@
     [description]="'pages.experiences.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <p class="experiences-state">
-        {{ 'pages.experiences.snapshot.loading' | translate }}
-      </p>
+      <app-portfolio-state
+        mode="loading"
+        [message]="'pages.experiences.snapshot.loading' | translate"
+      />
     } @else if (hasError()) {
-      <p class="experiences-state">
-        {{ 'pages.experiences.snapshot.error' | translate }}
-      </p>
+      <app-portfolio-state
+        mode="error"
+        [message]="'pages.experiences.snapshot.error' | translate"
+      />
     } @else {
       <dl class="experiences-summary-grid">
         <div class="experiences-summary-item">
@@ -66,160 +68,36 @@
       [description]="'pages.experiences.timeline.description' | translate"
     >
       @if (isLoading()) {
-        <p class="experiences-state">
-          {{ 'pages.experiences.timeline.loading' | translate }}
-        </p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.experiences.timeline.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="experiences-state">
-          {{ 'pages.experiences.timeline.error' | translate }}
-        </p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.experiences.timeline.error' | translate"
+        />
       } @else if (timelineItems().length === 0) {
-        <p class="experiences-state">
-          {{ 'pages.experiences.timeline.empty' | translate }}
-        </p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.experiences.timeline.empty' | translate"
+        />
       } @else {
         <div class="experiences-timeline">
           @for (item of timelineItems(); track item.id) {
-            <article class="experience-entry">
-              <div class="experience-entry-rail">
-                <span class="experience-entry-rail-line"></span>
-                <span class="experience-entry-date">{{ item.dateRangeLabel }}</span>
-              </div>
-
-              <div class="experience-entry-card">
-                <div class="experience-entry-head">
-                  @if (item.imageUrl) {
-                    <hans-avatar
-                      [src]="item.imageUrl"
-                      [alt]="item.companyName"
-                      avatarSize="medium"
-                    ></hans-avatar>
-                  } @else {
-                    <div class="experience-entry-icon">
-                      <hans-icon name="LuBriefcaseBusiness" iconSize="medium"></hans-icon>
-                    </div>
-                  }
-
-                  <div class="experience-entry-copy">
-                    <div class="experience-entry-heading">
-                      <span>{{ item.companyName }}</span>
-                      <strong>{{ item.title }}</strong>
-                    </div>
-
-                    <div class="experience-entry-flags">
-                      @if (item.isCurrent) {
-                        <hans-tag
-                          [attr.label]="'pages.experiences.timeline.current' | translate"
-                          tagColor="success"
-                          tagSize="sm"
-                        ></hans-tag>
-                      }
-
-                      @if (item.isHighlight) {
-                        <hans-tag
-                          [attr.label]="'pages.experiences.timeline.highlight' | translate"
-                          tagColor="warning"
-                          tagSize="sm"
-                        ></hans-tag>
-                      }
-                    </div>
-                  </div>
-                </div>
-
-                <p class="experience-entry-summary">{{ item.summary }}</p>
-                <p class="experience-entry-description">{{ item.description }}</p>
-
-                <div class="experience-entry-meta">
-                  <section class="experience-meta-block">
-                    <span>{{ 'pages.experiences.timeline.roles' | translate }}</span>
-                    <div class="experience-chip-list">
-                      @for (job of item.jobs; track job) {
-                        <span class="experience-chip">
-                          <hans-icon name="LuBadgeCheck" iconSize="small"></hans-icon>
-                          {{ job }}
-                        </span>
-                      } @empty {
-                        <span class="experience-chip experience-chip-muted">
-                          {{ item.companyName }}
-                        </span>
-                      }
-                    </div>
-                  </section>
-
-                  <section class="experience-meta-block">
-                    <span>{{ 'pages.experiences.timeline.customers' | translate }}</span>
-                    <div class="experience-chip-list">
-                      @for (customer of item.customers; track customer) {
-                        <span class="experience-chip">
-                          <hans-icon name="LuHandshake" iconSize="small"></hans-icon>
-                          {{ customer }}
-                        </span>
-                      } @empty {
-                        <span class="experience-chip experience-chip-muted">
-                          {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
-                        </span>
-                      }
-                    </div>
-                  </section>
-                </div>
-
-                <section class="experience-meta-block">
-                  <span>{{ 'pages.experiences.timeline.technologyStack' | translate }}</span>
-                  <div class="experience-tag-list">
-                    @for (technology of item.technologies; track technology) {
-                      <hans-tag
-                        [attr.label]="technology"
-                        tagColor="info"
-                        tagSize="sm"
-                      ></hans-tag>
-                    }
-
-                    @if (item.extraTechnologyCount > 0) {
-                      <hans-tag
-                        [attr.label]="'+' + item.extraTechnologyCount"
-                        tagColor="base"
-                        tagSize="sm"
-                      ></hans-tag>
-                    }
-                  </div>
-                </section>
-
-                <section class="experience-projects">
-                  <span>{{ 'pages.experiences.timeline.relatedProjects' | translate }}</span>
-
-                  <div class="experience-project-grid">
-                    @for (project of item.projects; track project.slug) {
-                      <article class="experience-project-card">
-                        <div class="experience-project-top">
-                          <strong>{{ project.title }}</strong>
-                          <div class="experience-tag-list">
-                            <hans-tag
-                              [attr.label]="project.environmentLabel"
-                              tagColor="primary"
-                              tagSize="sm"
-                            ></hans-tag>
-                            <hans-tag
-                              [attr.label]="project.statusLabel"
-                              tagColor="secondary"
-                              tagSize="sm"
-                            ></hans-tag>
-                          </div>
-                        </div>
-
-                        <p>{{ project.summary }}</p>
-                      </article>
-                    } @empty {
-                      <p class="experiences-state">
-                        {{ 'pages.experiences.timeline.emptyProjects' | translate }}
-                      </p>
-                    }
-                  </div>
-                </section>
-              </div>
-            </article>
+            <app-experience-timeline-card
+              [item]="item"
+              (openDetails)="openExperienceDetails($event)"
+            />
           }
         </div>
       }
     </app-container>
   </section>
+
+  <app-experience-detail-modal
+    [isOpen]="isDetailOpen()"
+    [item]="selectedExperience()"
+    (closed)="closeExperienceDetails()"
+  />
 </app-page-wrapper>

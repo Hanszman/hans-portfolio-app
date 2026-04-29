@@ -1,0 +1,70 @@
+:host {
+  @apply block;
+}
+
+.experience-detail-modal,
+.experience-detail-modal-section,
+.experience-detail-modal-grid,
+.experience-detail-modal-projects {
+  @apply grid gap-5;
+}
+
+.experience-detail-modal-head {
+  @apply flex flex-col gap-3 md:flex-row md:items-center md:justify-between;
+}
+
+.experience-detail-modal-head span,
+.experience-detail-modal-section > span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}
+
+.experience-detail-modal-flags,
+.experience-detail-modal-chip-list,
+.experience-detail-modal-tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.experience-detail-modal-summary,
+.experience-detail-modal-description,
+.experience-detail-modal-inline-text,
+.experience-detail-modal-project-card p {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
+}
+
+.experience-detail-modal-summary {
+  @apply text-base font-medium;
+  color: var(--text-color);
+}
+
+.experience-detail-modal-chip,
+.experience-detail-modal-project-card {
+  @apply rounded-[1.5rem] border;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 76%, transparent);
+}
+
+.experience-detail-modal-chip {
+  @apply px-3 py-2 text-sm;
+}
+
+.experience-detail-modal-chip-muted {
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.experience-detail-modal-project-card {
+  @apply p-4;
+}
+
+.experience-detail-modal-project-card strong {
+  @apply block text-base font-semibold;
+  color: var(--text-color);
+}
+
+@media (min-width: 768px) {
+  .experience-detail-modal-grid {
+    @apply grid-cols-2;
+  }
+}
+

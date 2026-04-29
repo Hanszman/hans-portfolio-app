@@ -2,12 +2,8 @@
   @apply block;
 }
 
-.skills-state,
 .skills-filter-summary span,
-.skills-group-copy span,
-.skills-card-copy span,
-.skills-card-metric span,
-.skills-card-contexts > span {
+.skills-group-copy span {
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
 }
 
@@ -15,14 +11,8 @@
 .skills-filters,
 .skills-group-list,
 .skills-card-grid,
-.skills-context-list,
 .skills-section {
   @apply grid;
-}
-
-.skills-summary-grid,
-.skills-card-grid {
-  @apply gap-4;
 }
 
 .skills-group-list,
@@ -31,38 +21,29 @@
   @apply gap-6;
 }
 
+.skills-summary-grid,
+.skills-card-grid {
+  @apply gap-4;
+}
+
 .skills-summary-grid {
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
 
 .skills-summary-item,
-.skills-group,
-.skills-card,
-.skills-context-item {
-  @apply rounded-3xl border;
+.skills-group {
+  @apply rounded-3xl border p-4;
   background-color: color-mix(in srgb, var(--background-color) 92%, white);
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
 }
 
-.skills-summary-item,
-.skills-card,
-.skills-group {
-  @apply p-4;
-}
-
 .skills-summary-item span,
-.skills-group-copy span,
-.skills-card-copy span,
-.skills-card-metric span,
-.skills-card-contexts > span {
+.skills-group-copy span {
   @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
 }
 
 .skills-summary-item strong,
-.skills-group-copy strong,
-.skills-card-copy strong,
-.skills-card-metric strong,
-.skills-context-item strong {
+.skills-group-copy strong {
   @apply block font-semibold leading-tight;
 }
 
@@ -75,7 +56,7 @@
 }
 
 .skills-filter-summary {
-  @apply mt-4 flex items-baseline gap-3;
+  @apply mt-4 flex flex-wrap items-baseline gap-3;
 }
 
 .skills-filter-summary strong {
@@ -87,61 +68,18 @@
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
 }
 
-.skills-group-header,
-.skills-card-head {
-  @apply flex gap-4;
-}
-
 .skills-group-header {
-  @apply items-center justify-between;
+  @apply flex items-center justify-between gap-4;
 }
 
 .skills-group-copy strong {
   @apply mt-1 text-2xl;
 }
 
-.skills-group-icon,
-.skills-card-visual {
+.skills-group-icon {
   @apply grid h-16 min-w-16 place-items-center rounded-full border;
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
   background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
-}
-
-.skills-card {
-  @apply gap-4;
-  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
-}
-
-.skills-card-head {
-  @apply items-center;
-}
-
-.skills-card-copy {
-  @apply flex-1;
-}
-
-.skills-card-copy strong {
-  @apply mt-1 text-xl;
-}
-
-.skills-card-tags {
-  @apply flex flex-wrap gap-2;
-}
-
-.skills-card-contexts {
-  @apply grid gap-3;
-}
-
-.skills-context-list {
-  @apply gap-3;
-}
-
-.skills-context-item {
-  @apply p-3;
-}
-
-.skills-context-item span {
-  @apply mt-1 block text-[0.95rem];
 }
 
 @media (min-width: 768px) {
@@ -149,8 +87,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .skills-card-grid,
-  .skills-context-list {
+  .skills-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

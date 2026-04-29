@@ -97,18 +97,20 @@ export const mapExperienceToTimelineItem = (
   const primaryImage =
     experience.imageAssets.find(({ imageAsset }) => imageAsset.kind === 'ICON') ??
     experience.imageAssets[0];
+  const title = resolveLocalizedText(
+    locale,
+    {
+      'pt-BR': experience.titlePt,
+      'en-us': experience.titleEn,
+    },
+    experience.titleEn,
+  );
 
   return {
     id: experience.id,
+    slug: experience.slug,
     companyName: experience.companyName,
-    title: resolveLocalizedText(
-      locale,
-      {
-        'pt-BR': experience.titlePt,
-        'en-us': experience.titleEn,
-      },
-      experience.titleEn,
-    ),
+    title,
     summary: resolveLocalizedText(
       locale,
       {
@@ -149,6 +151,31 @@ export const mapExperienceToTimelineItem = (
     projects: experience.projects.map(({ project }) => mapProject(project, locale)),
     technologies: leadTechnologies,
     extraTechnologyCount: Math.max(0, technologies.length - leadTechnologies.length),
+    galleryItems: [...experience.imageAssets]
+      .sort((left, right) => left.sortOrder - right.sortOrder)
+      .map(({ imageAsset }) => ({
+        id: imageAsset.id,
+        imageSrc: buildAssetUrl(imageAsset.filePath),
+        imageAlt:
+          resolveLocalizedText(
+            locale,
+            {
+              'pt-BR': imageAsset.altPt ?? undefined,
+              'en-us': imageAsset.altEn ?? undefined,
+            },
+            title,
+          ) || title,
+        title: experience.companyName,
+        description:
+          resolveLocalizedText(
+            locale,
+            {
+              'pt-BR': imageAsset.captionPt ?? undefined,
+              'en-us': imageAsset.captionEn ?? undefined,
+            },
+            '',
+          ) || undefined,
+      })),
   };
 };
 

@@ -15,9 +15,15 @@
     [description]="'pages.skills.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <p class="skills-state">{{ 'pages.skills.snapshot.loading' | translate }}</p>
+      <app-portfolio-state
+        mode="loading"
+        [message]="'pages.skills.snapshot.loading' | translate"
+      />
     } @else if (hasError()) {
-      <p class="skills-state">{{ 'pages.skills.snapshot.error' | translate }}</p>
+      <app-portfolio-state
+        mode="error"
+        [message]="'pages.skills.snapshot.error' | translate"
+      />
     } @else {
       <dl class="skills-summary-grid">
         @for (metric of summaryMetrics(); track metric.label) {
@@ -88,11 +94,20 @@
       [description]="'pages.skills.catalog.description' | translate"
     >
       @if (isLoading()) {
-        <p class="skills-state">{{ 'pages.skills.catalog.loading' | translate }}</p>
+        <app-portfolio-state
+          mode="loading"
+          [message]="'pages.skills.catalog.loading' | translate"
+        />
       } @else if (hasError()) {
-        <p class="skills-state">{{ 'pages.skills.catalog.error' | translate }}</p>
+        <app-portfolio-state
+          mode="error"
+          [message]="'pages.skills.catalog.error' | translate"
+        />
       } @else if (groupedTechnologies().length === 0) {
-        <p class="skills-state">{{ 'pages.skills.catalog.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.skills.catalog.empty' | translate"
+        />
       } @else {
         <div class="skills-group-list">
           @for (group of groupedTechnologies(); track group.id) {
@@ -110,69 +125,10 @@
 
               <div class="skills-card-grid">
                 @for (item of group.items; track item.id) {
-                  <article class="skills-card">
-                    <div class="skills-card-head">
-                      <div class="skills-card-visual">
-                        @if (item.visualUrl) {
-                          <hans-avatar
-                            [src]="item.visualUrl"
-                            [alt]="item.name"
-                            avatarSize="medium"
-                          ></hans-avatar>
-                        } @else {
-                          <hans-icon [name]="item.iconName" iconSize="medium"></hans-icon>
-                        }
-                      </div>
-
-                      <div class="skills-card-copy">
-                        <span>{{ item.categoryLabel }}</span>
-                        <strong>{{ item.name }}</strong>
-                      </div>
-
-                      @if (item.isHighlight) {
-                        <hans-tag
-                          [attr.label]="'pages.skills.card.highlight' | translate"
-                          tagColor="warning"
-                          tagSize="sm"
-                        ></hans-tag>
-                      }
-                    </div>
-
-                    <div class="skills-card-tags">
-                      <hans-tag
-                        [attr.label]="item.levelLabel"
-                        tagColor="primary"
-                        tagSize="sm"
-                      ></hans-tag>
-                      <hans-tag
-                        [attr.label]="item.frequencyLabel"
-                        tagColor="secondary"
-                        tagSize="sm"
-                      ></hans-tag>
-                    </div>
-
-                    <div class="skills-card-metric">
-                      <span>{{ 'pages.skills.card.totalExperience' | translate }}</span>
-                      <strong>{{ item.totalExperienceLabel }}</strong>
-                    </div>
-
-                    <section class="skills-card-contexts">
-                      <span>{{ 'pages.skills.card.contexts' | translate }}</span>
-                      <div class="skills-context-list">
-                        @for (context of item.contexts; track context.key) {
-                          <div class="skills-context-item">
-                            <strong>{{ context.label }}</strong>
-                            <span>{{ context.value }}</span>
-                          </div>
-                        } @empty {
-                          <div class="skills-context-item">
-                            <strong>{{ 'pages.skills.card.contexts' | translate }}</strong>
-                            <span>0</span>
-                          </div>
-                        }
-                      </div>
-                    </section>
-                  </article>
+                  <app-skill-card
+                    [item]="item"
+                    (openDetails)="openSkillDetails($event)"
+                  />
                 }
               </div>
             </section>
@@ -181,4 +137,10 @@
       }
     </app-container>
   </section>
+
+  <app-skill-detail-modal
+    [isOpen]="isDetailOpen()"
+    [item]="selectedSkill()"
+    (closed)="closeSkillDetails()"
+  />
 </app-page-wrapper>

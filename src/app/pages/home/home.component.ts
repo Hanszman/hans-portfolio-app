@@ -19,6 +19,7 @@ import {
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
 import {
   HomeApiSnapshotMetricViewModel,
   HomeCareerFocusViewModel,
@@ -41,6 +42,7 @@ import {
     ContainerComponent,
     PageIntroComponent,
     PageWrapperComponent,
+    PortfolioStateComponent,
     RouterLink,
     TranslatePipe,
   ],

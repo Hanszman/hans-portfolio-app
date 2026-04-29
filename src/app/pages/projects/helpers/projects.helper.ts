@@ -92,6 +92,18 @@ export const mapProjectToCaseCard = (
   const companyNames = dedupe(
     project.experiences.map(({ experience }) => experience.companyName),
   );
+  const experienceTitles = dedupe(
+    project.experiences.map(({ experience }) =>
+      resolveLocalizedText(
+        locale,
+        {
+          'pt-BR': experience.titlePt,
+          'en-us': experience.titleEn,
+        },
+        experience.titleEn,
+      ),
+    ),
+  );
   const localizedTitle = resolveLocalizedText(
     locale,
     {
@@ -146,6 +158,44 @@ export const mapProjectToCaseCard = (
         localizedTitle,
       ) || localizedTitle,
     assetCountLabel: String(project.links.length + project.imageAssets.length),
+    experienceTitles,
+    tagLabels: dedupe(
+      project.tags.map(({ tag }) =>
+        resolveLocalizedText(
+          locale,
+          {
+            'pt-BR': tag.labelPt,
+            'en-us': tag.labelEn,
+          },
+          tag.labelEn,
+        ),
+      ),
+    ),
+    galleryItems: [...project.imageAssets]
+      .sort((left, right) => left.sortOrder - right.sortOrder)
+      .map(({ imageAsset }) => ({
+        id: imageAsset.id,
+        imageSrc: buildAssetUrl(imageAsset.filePath),
+        imageAlt:
+          resolveLocalizedText(
+            locale,
+            {
+              'pt-BR': imageAsset.altPt ?? undefined,
+              'en-us': imageAsset.altEn ?? undefined,
+            },
+            localizedTitle,
+          ) || localizedTitle,
+        title: localizedTitle,
+        description:
+          resolveLocalizedText(
+            locale,
+            {
+              'pt-BR': imageAsset.captionPt ?? undefined,
+              'en-us': imageAsset.captionEn ?? undefined,
+            },
+            '',
+          ) || undefined,
+      })),
   };
 };
 

@@ -1,0 +1,97 @@
+:host {
+  @apply block;
+}
+
+.project-case-card {
+  @apply grid gap-5 rounded-[2rem] border p-4 md:p-5;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background-color) 95%, white) 0%,
+      color-mix(in srgb, var(--success-neutral-color) 18%, transparent) 100%
+    );
+}
+
+.project-case-card-visual img,
+.project-case-card-icon {
+  @apply h-full min-h-[12rem] w-full rounded-[1.5rem];
+}
+
+.project-case-card-visual img {
+  @apply block object-cover;
+}
+
+.project-case-card-icon {
+  @apply grid place-items-center border;
+  border-color: color-mix(in srgb, var(--warning-default-color) 22%, transparent);
+  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, white);
+}
+
+.project-case-card-body,
+.project-case-card-grid,
+.project-case-card-block {
+  @apply grid gap-4;
+}
+
+.project-case-card-head,
+.project-case-card-footer {
+  @apply flex flex-col gap-4;
+}
+
+.project-case-card-heading span,
+.project-case-card-block > span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.project-case-card-heading strong {
+  @apply mt-2 block text-[1.5rem] font-semibold leading-tight;
+  color: var(--text-color);
+}
+
+.project-case-card-summary {
+  @apply m-0 text-[0.98rem] leading-7;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
+}
+
+.project-case-card-flags,
+.project-case-card-meta,
+.project-case-card-tags,
+.project-case-card-chips,
+.project-case-card-stats {
+  @apply flex flex-wrap gap-2;
+}
+
+.project-case-card-chip {
+  @apply inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[0.88rem];
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, white);
+}
+
+.project-case-card-chip-muted {
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.project-case-card-stats span {
+  @apply rounded-full border px-3 py-2 text-xs font-medium;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--primary-neutral-color) 16%, white);
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
+@media (min-width: 1024px) {
+  .project-case-card {
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  }
+
+  .project-case-card-head,
+  .project-case-card-footer {
+    @apply flex-row items-start justify-between;
+  }
+
+  .project-case-card-grid {
+    @apply grid-cols-2;
+  }
+}
+

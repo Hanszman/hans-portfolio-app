@@ -18,6 +18,9 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
+import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
+import { ProjectDetailModalComponent } from './components/project-detail-modal/project-detail-modal.component';
 import {
   buildProjectsSummaryMetrics,
   extractProjectFilterValues,
@@ -41,6 +44,9 @@ import {
     PageIntroComponent,
     PageWrapperComponent,
     ContainerComponent,
+    PortfolioStateComponent,
+    ProjectCaseCardComponent,
+    ProjectDetailModalComponent,
     TranslatePipe,
   ],
   templateUrl: './projects.component.html',
@@ -61,6 +67,9 @@ export class ProjectsComponent {
   private readonly sortDropdown =
     viewChild<ElementRef<ProjectsDropdownElement>>('sortDropdown');
   private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
+  private readonly selectedProjectSignal = signal<ReturnType<typeof mapProjectToCaseCard> | null>(
+    null,
+  );
   private readonly selectedContextSignal = signal('ALL');
   private readonly selectedEnvironmentSignal = signal('ALL');
   private readonly selectedStatusSignal = signal('ALL');
@@ -69,6 +78,7 @@ export class ProjectsComponent {
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly projects = this.projectsSignal.asReadonly();
+  protected readonly selectedProject = this.selectedProjectSignal.asReadonly();
   protected readonly selectedContext = this.selectedContextSignal.asReadonly();
   protected readonly selectedEnvironment =
     this.selectedEnvironmentSignal.asReadonly();
@@ -165,6 +175,8 @@ export class ProjectsComponent {
     String(this.filteredProjects().length),
   );
 
+  protected readonly isDetailOpen = computed(() => this.selectedProject() !== null);
+
   constructor() {
     effect((onCleanup) => {
       this.bindDropdownOptions(
@@ -235,6 +247,14 @@ export class ProjectsComponent {
       (event as ProjectsSelectEvent).detail.value as ProjectSortKey,
     );
     this.changeDetectorRef.markForCheck();
+  }
+
+  protected openProjectDetails(project: ReturnType<typeof mapProjectToCaseCard>): void {
+    this.selectedProjectSignal.set(project);
+  }
+
+  protected closeProjectDetails(): void {
+    this.selectedProjectSignal.set(null);
   }
 
   private bindDropdownOptions(

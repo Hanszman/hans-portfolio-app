@@ -1,0 +1,120 @@
+<article class="project-case-card">
+  <div class="project-case-card-visual">
+    @if (project().imageUrl) {
+      <img [src]="project().imageUrl" [alt]="project().imageAlt" />
+    } @else {
+      <div class="project-case-card-icon">
+        <hans-icon name="LuFolderKanban" iconSize="large"></hans-icon>
+      </div>
+    }
+  </div>
+
+  <div class="project-case-card-body">
+    <div class="project-case-card-head">
+      <div class="project-case-card-heading">
+        <span>{{ project().dateRangeLabel }}</span>
+        <strong>{{ project().title }}</strong>
+      </div>
+
+      <div class="project-case-card-flags">
+        @if (project().isFeatured) {
+          <hans-tag
+            [attr.label]="'pages.projects.card.featured' | translate"
+            tagColor="success"
+            tagSize="sm"
+          ></hans-tag>
+        }
+
+        @if (project().isHighlight) {
+          <hans-tag
+            [attr.label]="'pages.projects.card.highlight' | translate"
+            tagColor="warning"
+            tagSize="sm"
+          ></hans-tag>
+        }
+      </div>
+    </div>
+
+    <p class="project-case-card-summary">{{ project().summary }}</p>
+
+    <div class="project-case-card-meta">
+      <hans-tag
+        [attr.label]="project().contextLabel"
+        tagColor="primary"
+        tagSize="sm"
+      ></hans-tag>
+      <hans-tag
+        [attr.label]="project().environmentLabel"
+        tagColor="secondary"
+        tagSize="sm"
+      ></hans-tag>
+      <hans-tag
+        [attr.label]="project().statusLabel"
+        tagColor="info"
+        tagSize="sm"
+      ></hans-tag>
+    </div>
+
+    <div class="project-case-card-grid">
+      <section class="project-case-card-block">
+        <span>{{ 'pages.projects.card.technologies' | translate }}</span>
+        <div class="project-case-card-tags">
+          @for (technology of project().technologies.slice(0, 4); track technology) {
+            <hans-tag
+              [attr.label]="technology"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
+          }
+
+          @if (project().extraTechnologyCount > 0) {
+            <hans-tag
+              [attr.label]="'+' + project().extraTechnologyCount"
+              tagColor="warning"
+              tagSize="sm"
+            ></hans-tag>
+          }
+        </div>
+      </section>
+
+      <section class="project-case-card-block">
+        <span>{{ 'pages.projects.card.companies' | translate }}</span>
+        <div class="project-case-card-chips">
+          @for (company of project().companyNames.slice(0, 2); track company) {
+            <span class="project-case-card-chip">
+              <hans-icon name="LuBuilding2" iconSize="small"></hans-icon>
+              {{ company }}
+            </span>
+          } @empty {
+            <span class="project-case-card-chip project-case-card-chip-muted">
+              {{ 'pages.projects.card.emptyCompanies' | translate }}
+            </span>
+          }
+        </div>
+      </section>
+    </div>
+
+    <div class="project-case-card-footer">
+      <div class="project-case-card-stats">
+        <span>
+          {{ project().links.length }}
+          {{ 'pages.projects.detail.linksCount' | translate }}
+        </span>
+        <span>
+          {{ project().galleryItems.length }}
+          {{ 'pages.projects.detail.imagesCount' | translate }}
+        </span>
+      </div>
+
+      <hans-button
+        [attr.label]="'common.actions.viewDetails' | translate"
+        buttonColor="primary"
+        buttonShape="rounded"
+        buttonSize="small"
+        buttonVariant="outline"
+        (click)="requestDetails()"
+      ></hans-button>
+    </div>
+  </div>
+</article>
+

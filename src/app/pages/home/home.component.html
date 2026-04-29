@@ -133,9 +133,15 @@
     [description]="'pages.home.api.description' | translate"
   >
     @if (isLoading()) {
-      <p class="home-state">{{ 'pages.home.api.loading' | translate }}</p>
+      <app-portfolio-state
+        mode="loading"
+        [message]="'pages.home.api.loading' | translate"
+      />
     } @else if (hasError()) {
-      <p class="home-state">{{ 'pages.home.api.error' | translate }}</p>
+      <app-portfolio-state
+        mode="error"
+        [message]="'pages.home.api.error' | translate"
+      />
     } @else {
       <dl class="home-api-metrics">
         @for (metric of apiSnapshotMetrics(); track metric.labelKey) {
@@ -227,7 +233,10 @@
           }
         </div>
       } @else {
-        <p class="home-state">{{ 'pages.home.highlights.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.home.highlights.empty' | translate"
+        />
       }
     </app-container>
 
@@ -256,7 +265,10 @@
             </span>
           </article>
         } @empty {
-          <p class="home-state">{{ 'pages.home.stack.empty' | translate }}</p>
+          <app-portfolio-state
+            mode="empty"
+            [message]="'pages.home.stack.empty' | translate"
+          />
         }
       </div>
     </app-container>
@@ -317,7 +329,10 @@
           </div>
         </div>
       } @else {
-        <p class="home-state">{{ 'pages.home.career.empty' | translate }}</p>
+        <app-portfolio-state
+          mode="empty"
+          [message]="'pages.home.career.empty' | translate"
+        />
       }
     </app-container>
 
@@ -350,7 +365,10 @@
             </div>
           </article>
         } @empty {
-          <p class="home-state">{{ 'pages.home.topTechnologies.empty' | translate }}</p>
+          <app-portfolio-state
+            mode="empty"
+            [message]="'pages.home.topTechnologies.empty' | translate"
+          />
         }
       </div>
     </app-container>

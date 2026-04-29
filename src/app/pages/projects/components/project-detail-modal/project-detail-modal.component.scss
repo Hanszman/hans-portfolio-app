@@ -1,0 +1,67 @@
+:host {
+  @apply block;
+}
+
+.project-detail-modal,
+.project-detail-modal-copy,
+.project-detail-modal-grid,
+.project-detail-modal-section,
+.project-detail-modal-links {
+  @apply grid gap-5;
+}
+
+.project-detail-modal-meta,
+.project-detail-modal-tags,
+.project-detail-modal-chip-list {
+  @apply flex flex-wrap gap-2;
+}
+
+.project-detail-modal-summary,
+.project-detail-modal-description,
+.project-detail-modal-inline-text {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
+}
+
+.project-detail-modal-summary {
+  @apply text-base font-medium;
+  color: var(--text-color);
+}
+
+.project-detail-modal-section > span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}
+
+.project-detail-modal-chip {
+  @apply inline-flex items-center rounded-full border px-3 py-2 text-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 18%, white);
+}
+
+.project-detail-modal-chip-muted {
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.project-detail-modal-links a {
+  @apply grid gap-1 rounded-[1.5rem] border p-4 no-underline;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--primary-neutral-color) 14%, white);
+}
+
+.project-detail-modal-links strong {
+  @apply text-base font-semibold;
+  color: var(--text-color);
+}
+
+.project-detail-modal-links span {
+  @apply text-sm;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+@media (min-width: 768px) {
+  .project-detail-modal-grid {
+    @apply grid-cols-2;
+  }
+}
+

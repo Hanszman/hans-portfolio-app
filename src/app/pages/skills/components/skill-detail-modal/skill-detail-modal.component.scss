@@ -1,0 +1,57 @@
+:host {
+  @apply block;
+}
+
+.skill-detail-modal,
+.skill-detail-modal-copy,
+.skill-detail-modal-section,
+.skill-detail-modal-context-grid,
+.skill-detail-modal-timeline {
+  @apply grid gap-5;
+}
+
+.skill-detail-modal-head {
+  @apply grid gap-4 md:grid-cols-[auto_minmax(0,1fr)] md:items-center;
+}
+
+.skill-detail-modal-visual {
+  @apply flex items-center justify-center;
+}
+
+.skill-detail-modal-tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.skill-detail-modal-section > span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.skill-detail-modal-text {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
+}
+
+.skill-detail-modal-context-grid {
+  @apply md:grid-cols-2;
+}
+
+.skill-detail-modal-context-card,
+.skill-detail-modal-timeline-item {
+  @apply rounded-[1.5rem] border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 76%, transparent);
+}
+
+.skill-detail-modal-context-card strong,
+.skill-detail-modal-timeline-item strong {
+  @apply block text-base font-semibold;
+  color: var(--text-color);
+}
+
+.skill-detail-modal-context-card span,
+.skill-detail-modal-timeline-item span {
+  @apply mt-2 block text-sm;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+

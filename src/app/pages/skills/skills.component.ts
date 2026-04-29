@@ -21,6 +21,9 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
 import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
 import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
+import { SkillCardComponent } from './components/skill-card/skill-card.component';
+import { SkillDetailModalComponent } from './components/skill-detail-modal/skill-detail-modal.component';
 import {
   buildSkillsGroups,
   buildSkillsSummaryMetrics,
@@ -42,6 +45,9 @@ import {
     PageIntroComponent,
     PageWrapperComponent,
     ContainerComponent,
+    PortfolioStateComponent,
+    SkillCardComponent,
+    SkillDetailModalComponent,
     TranslatePipe,
   ],
   templateUrl: './skills.component.html',
@@ -62,6 +68,9 @@ export class SkillsComponent {
   private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>(
     [],
   );
+  private readonly selectedSkillSignal = signal<ReturnType<typeof buildSkillsGroups>[number]['items'][number] | null>(
+    null,
+  );
   private readonly selectedCategorySignal = signal('ALL');
   private readonly selectedLevelSignal = signal('ALL');
   private readonly selectedContextSignal = signal<string>('ALL');
@@ -69,6 +78,7 @@ export class SkillsComponent {
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly technologies = this.technologiesSignal.asReadonly();
+  protected readonly selectedSkill = this.selectedSkillSignal.asReadonly();
   protected readonly selectedCategory = this.selectedCategorySignal.asReadonly();
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
   protected readonly selectedContext = this.selectedContextSignal.asReadonly();
@@ -132,6 +142,8 @@ export class SkillsComponent {
     String(this.filteredTechnologies().length),
   );
 
+  protected readonly isDetailOpen = computed(() => this.selectedSkill() !== null);
+
   constructor() {
     effect((onCleanup) => {
       this.bindDropdownOptions(
@@ -190,6 +202,16 @@ export class SkillsComponent {
     const option = (event as SkillsSelectEvent).detail;
     this.selectedContextSignal.set(option.value);
     this.changeDetectorRef.markForCheck();
+  }
+
+  protected openSkillDetails(
+    skill: ReturnType<typeof buildSkillsGroups>[number]['items'][number],
+  ): void {
+    this.selectedSkillSignal.set(skill);
+  }
+
+  protected closeSkillDetails(): void {
+    this.selectedSkillSignal.set(null);
   }
 
   private bindDropdownOptions(

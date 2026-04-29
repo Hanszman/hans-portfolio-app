@@ -2,31 +2,12 @@
   @apply block;
 }
 
-.experiences-state {
-  @apply m-0 text-[0.95rem] leading-7;
-  color: color-mix(in srgb, var(--text-color) 74%, transparent);
-}
-
 .experiences-summary-grid,
-.experiences-timeline,
-.experience-entry-meta,
-.experience-projects,
-.experience-project-grid,
-.experience-entry,
-.experiences-summary-item,
-.experience-entry-card,
-.experience-meta-block {
-  @apply grid;
+.experiences-timeline {
+  @apply grid gap-4;
 }
 
-.experiences-summary-grid,
-.experience-project-grid,
-.experience-entry-meta {
-  @apply gap-4;
-}
-
-.experiences-timeline,
-.experience-projects {
+.experiences-timeline {
   @apply gap-6;
 }
 
@@ -34,161 +15,22 @@
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
 
-.experiences-summary-item,
-.experience-entry-card,
-.experience-project-card {
-  @apply rounded-3xl border;
-  background-color: color-mix(in srgb, var(--background-color) 90%, white);
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-}
-
 .experiences-summary-item {
-  @apply p-4;
+  @apply rounded-3xl border p-4;
+  background-color: color-mix(in srgb, var(--background-color) 90%, white);
   border-color: color-mix(in srgb, var(--secondary-default-color) 20%, transparent);
 }
 
-.experiences-summary-item span,
-.experience-meta-block > span,
-.experience-projects > span,
-.experience-entry-heading span {
-  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
-}
-
 .experiences-summary-item span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
   color: var(--secondary-default-color);
 }
 
-.experiences-summary-item strong,
-.experience-project-top strong {
-  @apply block font-semibold leading-[1.2];
-}
-
 .experiences-summary-item strong {
-  @apply mt-2 text-[1.1rem];
+  @apply mt-2 block text-[1.1rem] font-semibold leading-[1.2];
 }
 
 .experiences-summary-item small {
   @apply mt-2 block text-[0.9rem] leading-[1.6];
   color: color-mix(in srgb, var(--text-color) 68%, transparent);
-}
-
-.experience-entry {
-  @apply gap-4;
-}
-
-.experience-entry-rail {
-  @apply relative flex flex-col gap-3 pl-4;
-  color: color-mix(in srgb, var(--text-color) 76%, transparent);
-}
-
-.experience-entry-rail-line {
-  @apply absolute bottom-0 left-0 top-0 w-px;
-  background-color: color-mix(in srgb, var(--success-default-color) 35%, transparent);
-}
-
-.experience-entry-date,
-.experience-chip {
-  @apply inline-flex items-center gap-2 rounded-full;
-}
-
-.experience-entry-date {
-  @apply px-[0.85rem] py-[0.55rem] text-[0.9rem] font-semibold;
-  background-color: color-mix(in srgb, var(--success-neutral-color) 45%, white);
-  color: var(--success-strong-color);
-}
-
-.experience-entry-card {
-  @apply gap-5 p-5;
-  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-}
-
-.experience-entry-head,
-.experience-project-top {
-  @apply flex flex-col gap-3;
-}
-
-.experience-entry-icon {
-  @apply grid h-16 w-16 place-items-center rounded-full border;
-  border-color: color-mix(in srgb, var(--warning-default-color) 24%, transparent);
-  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, white);
-}
-
-.experience-entry-copy {
-  @apply flex-1 grid gap-3;
-}
-
-.experience-entry-heading span,
-.experience-meta-block > span,
-.experience-projects > span {
-  color: color-mix(in srgb, var(--text-color) 66%, transparent);
-}
-
-.experience-entry-heading strong {
-  @apply mt-[0.2rem] block text-[1.6rem] font-semibold leading-[1.15];
-}
-
-.experience-entry-flags,
-.experience-chip-list,
-.experience-tag-list {
-  @apply flex flex-wrap gap-2;
-}
-
-.experience-entry-summary,
-.experience-entry-description,
-.experience-project-card p {
-  @apply m-0;
-}
-
-.experience-entry-summary {
-  @apply text-[1.05rem] font-medium leading-7;
-}
-
-.experience-entry-description,
-.experience-project-card p {
-  @apply text-[0.95rem] leading-7;
-  color: color-mix(in srgb, var(--text-color) 76%, transparent);
-}
-
-.experience-meta-block {
-  @apply gap-3;
-}
-
-.experience-chip {
-  @apply border px-[0.85rem] py-[0.55rem] text-[0.9rem];
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, white);
-}
-
-.experience-chip-muted {
-  color: color-mix(in srgb, var(--text-color) 62%, transparent);
-}
-
-.experience-project-card {
-  @apply rounded-3xl border p-4;
-  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--primary-neutral-color) 18%, white);
-}
-
-@media (min-width: 768px) {
-  .experience-entry-head {
-    @apply flex-row items-start;
-  }
-
-  .experience-entry-meta {
-    @apply grid-cols-2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .experience-entry {
-    grid-template-columns: 11rem minmax(0, 1fr);
-  }
-
-  .experience-project-grid {
-    @apply grid-cols-2;
-  }
-
-  .experience-project-top {
-    @apply flex-row items-start justify-between;
-  }
 }

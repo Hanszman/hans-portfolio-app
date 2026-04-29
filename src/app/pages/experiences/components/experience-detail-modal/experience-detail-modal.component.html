@@ -1,0 +1,123 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="item()?.title ?? ''"
+  modalColor="success"
+  modalSize="large"
+  [header]="item()?.companyName ?? ''"
+  (close)="requestClose()"
+>
+  @if (item(); as currentItem) {
+    <div class="experience-detail-modal">
+      <div class="experience-detail-modal-head">
+        <span>{{ currentItem.dateRangeLabel }}</span>
+
+        <div class="experience-detail-modal-flags">
+          @if (currentItem.isCurrent) {
+            <hans-tag
+              [attr.label]="'pages.experiences.timeline.current' | translate"
+              tagColor="success"
+              tagSize="sm"
+            ></hans-tag>
+          }
+
+          @if (currentItem.isHighlight) {
+            <hans-tag
+              [attr.label]="'pages.experiences.timeline.highlight' | translate"
+              tagColor="warning"
+              tagSize="sm"
+            ></hans-tag>
+          }
+        </div>
+      </div>
+
+      <p class="experience-detail-modal-summary">{{ currentItem.summary }}</p>
+      <p class="experience-detail-modal-description">{{ currentItem.description }}</p>
+
+      <section class="experience-detail-modal-section">
+        <span>{{ 'pages.experiences.detail.analytics' | translate }}</span>
+        <hans-chart
+          [categories]="chartCategories()"
+          chartColor="success"
+          chartType="bar"
+          [series]="chartSeries()"
+          [title]="'pages.experiences.detail.analytics' | translate"
+          [height]="260"
+        ></hans-chart>
+      </section>
+
+      @if (currentItem.galleryItems.length > 0) {
+        <section class="experience-detail-modal-section">
+          <span>{{ 'pages.experiences.detail.gallery' | translate }}</span>
+          <hans-carousel
+            [items]="currentItem.galleryItems"
+            carouselColor="primary"
+            carouselSize="medium"
+            carouselVariant="default"
+            [visibleItemsCount]="1"
+          ></hans-carousel>
+        </section>
+      }
+
+      <div class="experience-detail-modal-grid">
+        <section class="experience-detail-modal-section">
+          <span>{{ 'pages.experiences.timeline.roles' | translate }}</span>
+          <div class="experience-detail-modal-chip-list">
+            @for (job of currentItem.jobs; track job) {
+              <span class="experience-detail-modal-chip">{{ job }}</span>
+            }
+          </div>
+        </section>
+
+        <section class="experience-detail-modal-section">
+          <span>{{ 'pages.experiences.timeline.customers' | translate }}</span>
+          <div class="experience-detail-modal-chip-list">
+            @for (customer of currentItem.customers; track customer) {
+              <span class="experience-detail-modal-chip">{{ customer }}</span>
+            } @empty {
+              <span class="experience-detail-modal-chip experience-detail-modal-chip-muted">
+                {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
+              </span>
+            }
+          </div>
+        </section>
+
+        <section class="experience-detail-modal-section">
+          <span>{{ 'pages.experiences.timeline.relatedProjects' | translate }}</span>
+          <div class="experience-detail-modal-projects">
+            @for (project of currentItem.projects; track project.slug) {
+              <article class="experience-detail-modal-project-card">
+                <strong>{{ project.title }}</strong>
+                <p>{{ project.summary }}</p>
+                <div class="experience-detail-modal-flags">
+                  <hans-tag [attr.label]="project.environmentLabel" tagColor="primary" tagSize="sm"></hans-tag>
+                  <hans-tag [attr.label]="project.statusLabel" tagColor="secondary" tagSize="sm"></hans-tag>
+                </div>
+              </article>
+            } @empty {
+              <p class="experience-detail-modal-inline-text">
+                {{ 'pages.experiences.timeline.emptyProjects' | translate }}
+              </p>
+            }
+          </div>
+        </section>
+
+        <section class="experience-detail-modal-section">
+          <span>{{ 'pages.experiences.timeline.technologyStack' | translate }}</span>
+          <div class="experience-detail-modal-tags">
+            @for (technology of currentItem.technologies; track technology) {
+              <hans-tag [attr.label]="technology" tagColor="info" tagSize="sm"></hans-tag>
+            }
+            @if (currentItem.extraTechnologyCount > 0) {
+              <hans-tag
+                [attr.label]="'+' + currentItem.extraTechnologyCount"
+                tagColor="base"
+                tagSize="sm"
+              ></hans-tag>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</hans-modal>
+

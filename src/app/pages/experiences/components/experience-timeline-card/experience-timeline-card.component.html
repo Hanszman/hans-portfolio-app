@@ -1,0 +1,96 @@
+<article class="experience-entry">
+  <div class="experience-entry-rail">
+    <span class="experience-entry-rail-line"></span>
+    <span class="experience-entry-date">{{ item().dateRangeLabel }}</span>
+  </div>
+
+  <div class="experience-entry-card">
+    <div class="experience-entry-head">
+      @if (item().imageUrl) {
+        <hans-avatar [src]="item().imageUrl" [alt]="item().companyName" avatarSize="medium"></hans-avatar>
+      } @else {
+        <div class="experience-entry-icon">
+          <hans-icon name="LuBriefcaseBusiness" iconSize="medium"></hans-icon>
+        </div>
+      }
+
+      <div class="experience-entry-copy">
+        <div class="experience-entry-heading">
+          <span>{{ item().companyName }}</span>
+          <strong>{{ item().title }}</strong>
+        </div>
+
+        <div class="experience-entry-flags">
+          @if (item().isCurrent) {
+            <hans-tag
+              [attr.label]="'pages.experiences.timeline.current' | translate"
+              tagColor="success"
+              tagSize="sm"
+            ></hans-tag>
+          }
+
+          @if (item().isHighlight) {
+            <hans-tag
+              [attr.label]="'pages.experiences.timeline.highlight' | translate"
+              tagColor="warning"
+              tagSize="sm"
+            ></hans-tag>
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="experience-entry-summary">{{ item().summary }}</p>
+
+    <div class="experience-entry-grid">
+      <section class="experience-meta-block">
+        <span>{{ 'pages.experiences.timeline.customers' | translate }}</span>
+        <div class="experience-chip-list">
+          @for (customer of item().customers.slice(0, 3); track customer) {
+            <span class="experience-chip">
+              <hans-icon name="LuHandshake" iconSize="small"></hans-icon>
+              {{ customer }}
+            </span>
+          } @empty {
+            <span class="experience-chip experience-chip-muted">
+              {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
+            </span>
+          }
+        </div>
+      </section>
+
+      <section class="experience-meta-block">
+        <span>{{ 'pages.experiences.timeline.technologyStack' | translate }}</span>
+        <div class="experience-tag-list">
+          @for (technology of item().technologies.slice(0, 4); track technology) {
+            <hans-tag [attr.label]="technology" tagColor="info" tagSize="sm"></hans-tag>
+          }
+          @if (item().extraTechnologyCount > 0) {
+            <hans-tag
+              [attr.label]="'+' + item().extraTechnologyCount"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
+          }
+        </div>
+      </section>
+    </div>
+
+    <div class="experience-entry-footer">
+      <span>
+        {{ item().projects.length }}
+        {{ 'pages.experiences.detail.projectsCount' | translate }}
+      </span>
+
+      <hans-button
+        [attr.label]="'common.actions.viewDetails' | translate"
+        buttonColor="primary"
+        buttonShape="rounded"
+        buttonSize="small"
+        buttonVariant="outline"
+        (click)="requestDetails()"
+      ></hans-button>
+    </div>
+  </div>
+</article>
+

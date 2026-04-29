@@ -1,0 +1,66 @@
+:host {
+  @apply block;
+}
+
+.skill-card,
+.skill-card-contexts,
+.skill-card-context-list {
+  @apply grid gap-4;
+}
+
+.skill-card {
+  @apply rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+}
+
+.skill-card-head {
+  @apply flex items-center gap-4;
+}
+
+.skill-card-visual {
+  @apply grid h-16 min-w-16 place-items-center rounded-full border;
+  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
+}
+
+.skill-card-copy {
+  @apply flex-1;
+}
+
+.skill-card-copy span,
+.skill-card-metric span,
+.skill-card-contexts > span {
+  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.skill-card-copy strong,
+.skill-card-metric strong,
+.skill-card-context-item strong {
+  @apply block font-semibold leading-tight;
+}
+
+.skill-card-copy strong {
+  @apply mt-1 text-xl;
+}
+
+.skill-card-tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.skill-card-context-list {
+  @apply gap-3 md:grid-cols-2;
+}
+
+.skill-card-context-item {
+  @apply rounded-3xl border p-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 24%, white);
+}
+
+.skill-card-context-item span {
+  @apply mt-1 block text-[0.95rem];
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
