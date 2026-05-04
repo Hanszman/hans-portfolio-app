@@ -1,7 +1,7 @@
 import { AppLocale, AppTranslationCatalog } from './translation.types';
-import { EN_TRANSLATIONS } from './translations/en-us.translation';
-import { ES_ES_TRANSLATIONS } from './translations/es-es.translation';
-import { PT_BR_TRANSLATIONS } from './translations/pt-br.translation';
+import { EN_TRANSLATIONS } from './languages/en-us.translation';
+import { ES_ES_TRANSLATIONS } from './languages/es-es.translation';
+import { PT_BR_TRANSLATIONS } from './languages/pt-br.translation';
 
 export const DEFAULT_APP_LOCALE: AppLocale = 'en-us';
 

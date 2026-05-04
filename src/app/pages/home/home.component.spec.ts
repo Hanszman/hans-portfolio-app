@@ -97,7 +97,7 @@ describe('HomeComponent', () => {
     request.flush(createDashboardOverviewResponse());
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Home estrategica del portfolio');
+    expect(compiled.textContent).toContain('Home estratégica del portfolio');
     expect(compiled.textContent).toContain('Datos reales desde la primera pantalla');
     expect(compiled.querySelector('hans-button[label="Ver proyectos"]')).toBeTruthy();
   });

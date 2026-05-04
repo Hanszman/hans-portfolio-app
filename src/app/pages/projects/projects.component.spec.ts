@@ -107,7 +107,7 @@ describe('ProjectsComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Cases de projeto');
-    expect(compiled.textContent).toContain('Projetos como cases, nao apenas listagens');
+    expect(compiled.textContent).toContain('Projetos como cases, não apenas listagens');
     expect(compiled.querySelector('hans-tag[label="Em andamento"]')).toBeTruthy();
   });
 

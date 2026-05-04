@@ -53,7 +53,7 @@ describe('skills helper', () => {
     expect(card.categoryLabel).toBe('Custom Stack');
     expect(card.levelLabel).toBe('Nivel no informado');
     expect(card.frequencyLabel).toBe('Frecuencia no informada');
-    expect(card.totalExperienceLabel).toBe('Sin periodo consolidado');
+    expect(card.totalExperienceLabel).toBe('Sin período consolidado');
     expect(card.iconName).toBe('LuSparkles');
     expect(card.visualUrl).toBe('');
     expect(card.contexts).toEqual([]);
@@ -119,7 +119,7 @@ describe('skills helper', () => {
 
     expect(card.levelLabel).toBe('Expert Plus');
     expect(card.frequencyLabel).toBe('Very Frequent');
-    expect(card.totalExperienceLabel).toBe('Sem periodo consolidado');
+    expect(card.totalExperienceLabel).toBe('Sem período consolidado');
     expect(card.contexts).toEqual([
       {
         key: 'PROFESSIONAL',
@@ -140,7 +140,7 @@ describe('skills helper', () => {
       { label: 'Tecnologias mapeadas', value: '4' },
       { label: 'Destaques', value: '2' },
       { label: 'Categorias', value: '4' },
-      { label: 'Stack avancada', value: '2' },
+      { label: 'Stack avançada', value: '2' },
       {
         label: 'Maior tempo total',
         value: 'Angular',

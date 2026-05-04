@@ -88,12 +88,12 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Profundidade tecnica');
+    expect(compiled.textContent).toContain('Profundidade técnica');
     expect(compiled.textContent).toContain(
-      'Tecnologias com metricao real por contexto',
+      'Tecnologias com medição real por contexto',
     );
     expect(compiled.textContent).toContain('Profissional');
-    expect(compiled.querySelector('hans-tag[label="Avancado"]')).toBeTruthy();
+    expect(compiled.querySelector('hans-tag[label="Avançado"]')).toBeTruthy();
   });
 
   it('should render localized labels in Spanish', () => {
@@ -108,8 +108,8 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Profundidad tecnica');
-    expect(compiled.textContent).toContain('Tecnologias con metricas reales por contexto');
+    expect(compiled.textContent).toContain('Profundidad técnica');
+    expect(compiled.textContent).toContain('Tecnologías con métricas reales por contexto');
     expect(compiled.querySelector('hans-tag[label="Avanzado"]')).toBeTruthy();
   });
 

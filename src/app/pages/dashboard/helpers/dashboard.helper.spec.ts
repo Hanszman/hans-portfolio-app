@@ -22,7 +22,7 @@ describe('dashboard helper', () => {
       iconName: 'LuFolderKanban',
     });
     expect(cards[5]).toEqual({
-      label: 'Formacoes / idiomas',
+      label: 'Formações / idiomas',
       value: '3 / 2',
       iconName: 'LuGraduationCap',
     });

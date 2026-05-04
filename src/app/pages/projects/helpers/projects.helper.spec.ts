@@ -214,7 +214,7 @@ describe('projects helper', () => {
       'Nenhum link publicado foi vinculado ainda.',
     );
     expect(resolveProjectEmptyAssetsLabel('es-es')).toBe(
-      'Todavia no se publico ningun asset visual vinculado.',
+      'Todavía no se publicó ningún asset visual vinculado.',
     );
   });
 });

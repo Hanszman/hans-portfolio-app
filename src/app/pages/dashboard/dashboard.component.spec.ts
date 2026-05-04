@@ -136,7 +136,7 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Dashboard analitico');
+    expect(compiled.textContent).toContain('Dashboard analítico');
     expect(compiled.textContent).toContain(
       'Sinais agregados entre projetos, stack e carreira',
     );
@@ -155,9 +155,9 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Dashboard analitico');
+    expect(compiled.textContent).toContain('Dashboard analítico');
     expect(compiled.textContent).toContain(
-      'Senales agregadas entre proyectos, stack y carrera',
+      'Señales agregadas entre proyectos, stack y carrera',
     );
     expect(compiled.querySelector('hans-tag[label="Actual"]')).toBeTruthy();
   });

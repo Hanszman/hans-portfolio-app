@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
-import { EN_TRANSLATIONS } from './translations/en-us.translation';
-import { PT_BR_TRANSLATIONS } from './translations/pt-br.translation';
+import { EN_TRANSLATIONS } from './languages/en-us.translation';
+import { PT_BR_TRANSLATIONS } from './languages/pt-br.translation';
 import {
   AppTranslationLoader,
   readTranslationLanguage,
