@@ -381,4 +381,32 @@ describe('SkillsComponent', () => {
     expect(customElements.whenDefined).toHaveBeenCalledWith('hans-dropdown');
     expect(dropdown.options).toEqual(options);
   });
+
+  it('should open and close the skill detail modal state', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    flushTechnologiesRequest(httpTestingController);
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      groupedTechnologies: () => readonly { items: readonly [{ name: string }] }[];
+      openSkillDetails: (skill: { name: string }) => void;
+      closeSkillDetails: () => void;
+      selectedSkill: () => { name: string } | null;
+      isDetailOpen: () => boolean;
+    };
+
+    const skill = component.groupedTechnologies()[0].items[0];
+    component.openSkillDetails(skill);
+
+    expect(component.selectedSkill()).toEqual(skill);
+    expect(component.isDetailOpen()).toBeTrue();
+
+    component.closeSkillDetails();
+
+    expect(component.selectedSkill()).toBeNull();
+    expect(component.isDetailOpen()).toBeFalse();
+  });
 });

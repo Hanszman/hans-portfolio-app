@@ -5,7 +5,6 @@ import {
 import {
   TechnologiesCollectionResponse,
   TechnologyCollectionItemResponse,
-  TechnologyContextKey,
 } from '../../../core/api/technologies/technologies.types';
 import {
   translateStaticKey,
@@ -16,6 +15,7 @@ import {
 } from '../../../core/translation/translation.types';
 import {
   SKILL_CATEGORY_LABEL_KEYS,
+  SKILL_CONTEXT_ORDER,
   SKILL_CONTEXT_LABEL_KEYS,
   SKILL_FALLBACK_LABEL_KEYS,
   SKILL_FREQUENCY_LABEL_KEYS,
@@ -28,13 +28,6 @@ import {
   SkillsGroupViewModel,
   SkillsSummaryMetricViewModel,
 } from '../skills.types';
-
-const SKILL_CONTEXT_ORDER: readonly TechnologyContextKey[] = [
-  'PROFESSIONAL',
-  'PERSONAL',
-  'ACADEMIC',
-  'STUDY',
-];
 
 const normalizeLabel = (value: string): string =>
   value

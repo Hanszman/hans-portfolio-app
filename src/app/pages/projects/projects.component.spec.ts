@@ -486,4 +486,32 @@ describe('ProjectsComponent', () => {
     expect(customElements.whenDefined).toHaveBeenCalledWith('hans-dropdown');
     expect(dropdown.options).toEqual(options);
   });
+
+  it('should open and close the project detail modal state', () => {
+    const fixture = TestBed.createComponent(ProjectsComponent);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    flushProjectsRequest(httpTestingController);
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      projectCases: () => readonly [{ title: string }];
+      openProjectDetails: (project: { title: string }) => void;
+      closeProjectDetails: () => void;
+      selectedProject: () => { title: string } | null;
+      isDetailOpen: () => boolean;
+    };
+
+    const project = component.projectCases()[0];
+    component.openProjectDetails(project);
+
+    expect(component.selectedProject()).toEqual(project);
+    expect(component.isDetailOpen()).toBeTrue();
+
+    component.closeProjectDetails();
+
+    expect(component.selectedProject()).toBeNull();
+    expect(component.isDetailOpen()).toBeFalse();
+  });
 });

@@ -10,12 +10,7 @@ import {
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../core/translation/translation.service';
-import { SkillCardViewModel } from '../../skills.types';
-
-interface SkillChartSeries {
-  name: string;
-  data: number[];
-}
+import { SkillCardViewModel, SkillChartSeries } from '../../skills.types';
 
 @Component({
   selector: 'app-skill-detail-modal',

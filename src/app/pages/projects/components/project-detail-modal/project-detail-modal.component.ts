@@ -9,12 +9,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../core/translation/translation.service';
-import { ProjectCaseViewModel } from '../../projects.types';
-
-interface ProjectChartSeries {
-  name: string;
-  data: number[];
-}
+import { ProjectCaseViewModel, ProjectChartSeries } from '../../projects.types';
 
 @Component({
   selector: 'app-project-detail-modal',
@@ -63,4 +58,3 @@ export class ProjectDetailModalComponent {
     this.closed.emit();
   }
 }
-

@@ -79,4 +79,11 @@ describe('ProjectDetailModalComponent', () => {
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('returns an empty chart series when no project is selected', () => {
+    fixture.componentRef.setInput('project', null);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance['chartSeries']()).toEqual([]);
+  });
 });

@@ -66,6 +66,35 @@ describe('projects helper', () => {
     expect(card.imageAlt).toBe('Portfolio');
   });
 
+  it('should map localized tag labels when tags are linked to the project', () => {
+    const card = mapProjectToCaseCard(
+      {
+        ...createProjectsCollectionResponse().data[0],
+        tags: [
+          {
+            projectId: 'project-consumer',
+            tagId: 'tag-angular',
+            sortOrder: 1,
+            tag: {
+              id: 'tag-angular',
+              slug: 'angular',
+              labelPt: 'Angular PT',
+              labelEn: 'Angular EN',
+              color: '#dd0031',
+              sortOrder: 1,
+              isPublished: true,
+              createdAt: '2026-01-01T00:00:00.000Z',
+              updatedAt: '2026-01-01T00:00:00.000Z',
+            },
+          },
+        ],
+      },
+      'pt-BR',
+    );
+
+    expect(card.tagLabels).toEqual(['Angular PT']);
+  });
+
   it('should use the untitled-link fallback and sort project images by relation order', () => {
     const card = mapProjectToCaseCard(
       {
@@ -114,6 +143,30 @@ describe('projects helper', () => {
     });
     expect(card.imageUrl).toContain('/assets/img/projects/first-image.png');
     expect(card.imageAlt).toBe("Github's API Consumer");
+  });
+
+  it('should fallback gallery alt text and keep descriptions undefined when captions are not available', () => {
+    const card = mapProjectToCaseCard(
+      {
+        ...createProjectsCollectionResponse().data[0],
+        imageAssets: [
+          {
+            ...createProjectsCollectionResponse().data[0].imageAssets[0],
+            imageAsset: {
+              ...createProjectsCollectionResponse().data[0].imageAssets[0].imageAsset,
+              altPt: '',
+              altEn: '',
+              captionPt: null,
+              captionEn: null,
+            },
+          },
+        ],
+      },
+      'en-us',
+    );
+
+    expect(card.galleryItems[0].imageAlt).toBe("Github's API Consumer");
+    expect(card.galleryItems[0].description).toBeUndefined();
   });
 
   it('should summarize featured density, in-progress work, linked assets, and richest stack', () => {

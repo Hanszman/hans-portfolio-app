@@ -27,6 +27,11 @@ export interface SkillContextMetricViewModel {
   totalMonths: number;
 }
 
+export interface SkillChartSeries {
+  name: string;
+  data: number[];
+}
+
 export interface SkillTimelineEntryViewModel {
   key: TechnologyContextKey;
   label: string;
@@ -124,6 +129,13 @@ export const SKILL_GROUP_ICON_NAMES: Record<string, string> = {
   DEVOPS: 'LuCloud',
   ORM: 'LuDatabase',
 };
+
+export const SKILL_CONTEXT_ORDER: readonly TechnologyContextKey[] = [
+  'PROFESSIONAL',
+  'PERSONAL',
+  'ACADEMIC',
+  'STUDY',
+];
 
 export const SKILL_VISUAL_FILE_NAMES: Record<string, string> = {
   ajax: 'ajax.png',

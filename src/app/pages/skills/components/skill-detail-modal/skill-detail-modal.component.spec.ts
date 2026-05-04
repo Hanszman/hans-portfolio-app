@@ -74,4 +74,17 @@ describe('SkillDetailModalComponent', () => {
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('falls back to empty chart data when no skill is selected', () => {
+    fixture.componentRef.setInput('item', null);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance['chartCategories']()).toEqual([]);
+    expect(fixture.componentInstance['chartSeries']()).toEqual([
+      {
+        name: 'Months',
+        data: [],
+      },
+    ]);
+  });
 });

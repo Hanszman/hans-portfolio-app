@@ -362,8 +362,18 @@ export type AppTranslationCatalog = Record<
   AppTranslationLanguage
 >;
 
+export interface AppNestedTranslation {
+  [key: string]: string | AppNestedTranslation;
+}
+
 export interface AppLanguageOption {
   id: AppLocale;
   label: string;
   value: AppLocale;
 }
+
+export const APP_LANGUAGE_LABEL_KEYS: Record<AppLocale, AppTranslationKey> = {
+  'en-us': 'header.controls.english',
+  'pt-BR': 'header.controls.portuguese',
+  'es-es': 'header.controls.spanish',
+};

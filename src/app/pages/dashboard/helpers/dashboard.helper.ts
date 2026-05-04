@@ -23,6 +23,7 @@ import {
   DASHBOARD_FREQUENCY_LABEL_KEYS,
   DASHBOARD_LEVEL_LABEL_KEYS,
   DASHBOARD_SOURCE_LABEL_KEYS,
+  DASHBOARD_SUMMARY_ICON_NAMES,
   DASHBOARD_SUMMARY_LABEL_KEYS,
   DashboardDistributionRowViewModel,
   DashboardHighlightCardViewModel,
@@ -85,16 +86,6 @@ const formatTimelinePeriod = (
 
   return `${startLabel} - ${endLabel}`;
 };
-
-const DASHBOARD_SUMMARY_ICON_NAMES = {
-  projects: 'LuFolderKanban',
-  experiences: 'LuBriefcaseBusiness',
-  technologies: 'LuCpu',
-  formations: 'LuGraduationCap',
-  customers: 'LuHandshake',
-  jobs: 'LuBadgeCheck',
-  spokenLanguages: 'LuLanguages',
-} as const;
 
 export const buildDashboardSummaryCards = (
   summary: DashboardSummaryCountersResponse,

@@ -7,13 +7,10 @@ import {
 } from './translation.config';
 import {
   AppLocale,
+  AppNestedTranslation,
   AppTranslationKey,
   AppTranslationLanguage,
 } from './translation.types';
-
-interface AppNestedTranslation {
-  [key: string]: string | AppNestedTranslation;
-}
 
 @Injectable()
 export class AppTranslationLoader extends TranslateLoader {

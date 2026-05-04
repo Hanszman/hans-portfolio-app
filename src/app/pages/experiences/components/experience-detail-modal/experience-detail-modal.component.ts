@@ -9,12 +9,10 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../core/translation/translation.service';
-import { ExperienceTimelineItemViewModel } from '../../experiences.types';
-
-interface ExperienceChartSeries {
-  name: string;
-  data: number[];
-}
+import {
+  ExperienceChartSeries,
+  ExperienceTimelineItemViewModel,
+} from '../../experiences.types';
 
 @Component({
   selector: 'app-experience-detail-modal',

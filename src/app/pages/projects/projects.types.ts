@@ -21,6 +21,11 @@ export interface ProjectGalleryItemViewModel {
   description?: string;
 }
 
+export interface ProjectChartSeries {
+  name: string;
+  data: number[];
+}
+
 export interface ProjectCaseViewModel {
   id: string;
   slug: string;

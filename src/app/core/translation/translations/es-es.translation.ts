@@ -3,6 +3,7 @@ import { EN_TRANSLATIONS } from './en-us.translation';
 
 export const ES_ES_TRANSLATIONS = {
   ...EN_TRANSLATIONS,
+  'shell.api.eyebrow': 'API',
   'shell.api.connected.title': 'API conectada',
   'shell.api.connected.description':
     'Health check ejecutado con exito en {{ checkedAtUtc }}.',
@@ -56,6 +57,7 @@ export const ES_ES_TRANSLATIONS = {
   'footer.tags.standalone': 'Solo standalone',
   'footer.tags.tailwind': 'Tailwind @apply',
   'footer.tags.coverage': '100% coverage',
+  'common.actions.viewDetails': 'Ver detalles',
   'pages.home.sectionLabel': 'Fundacion',
   'pages.home.title': 'Fundacion de la home',
   'pages.home.description':
@@ -193,6 +195,14 @@ export const ES_ES_TRANSLATIONS = {
   'pages.experiences.timeline.relatedProjects': 'Proyectos relacionados',
   'pages.experiences.timeline.emptyProjects':
     'No se devolvio ningun proyecto relacionado para este capitulo.',
+  'pages.experiences.detail.projectsCount': 'proyectos',
+  'pages.experiences.detail.analytics': 'Analitica de la experiencia',
+  'pages.experiences.detail.gallery': 'Galeria vinculada',
+  'pages.experiences.detail.chart.jobs': 'Roles',
+  'pages.experiences.detail.chart.customers': 'Clientes',
+  'pages.experiences.detail.chart.projects': 'Proyectos',
+  'pages.experiences.detail.chart.technologies': 'Tecnologias',
+  'pages.experiences.detail.chart.series': 'Conexiones',
   'pages.skills.sectionLabel': 'Tecnologia',
   'pages.skills.title': 'Profundidad tecnica',
   'pages.skills.description':
@@ -226,6 +236,13 @@ export const ES_ES_TRANSLATIONS = {
   'pages.skills.card.highlight': 'Destacado',
   'pages.skills.card.totalExperience': 'Experiencia total',
   'pages.skills.card.contexts': 'Cobertura por contexto',
+  'pages.skills.detail.totalExperience': 'Experiencia consolidada',
+  'pages.skills.detail.contextChart': 'Distribucion por contexto',
+  'pages.skills.detail.chartSeries': 'Meses',
+  'pages.skills.detail.coverage': 'Cobertura detallada',
+  'pages.skills.detail.timeline': 'Timeline de contexto',
+  'pages.skills.detail.noTimeline':
+    'No se devolvio ningun intervalo publicado.',
   'taxonomy.skills.filters.allCategories': 'Todas las categorias',
   'taxonomy.skills.filters.allLevels': 'Todos los niveles',
   'taxonomy.skills.filters.allContexts': 'Todos los contextos',
@@ -302,6 +319,21 @@ export const ES_ES_TRANSLATIONS = {
   'pages.projects.card.emptyLinks':
     'Todavia no se vinculo ningun link publicado a este caso.',
   'pages.projects.card.assets': 'Assets vinculados',
+  'pages.projects.detail.linksCount': 'links',
+  'pages.projects.detail.imagesCount': 'imagenes',
+  'pages.projects.detail.relatedExperiences': 'Experiencias relacionadas',
+  'pages.projects.detail.noExperiences':
+    'Todavia no se publico ninguna experiencia relacionada.',
+  'pages.projects.detail.tags': 'Tags del caso',
+  'pages.projects.detail.noTags':
+    'Todavia no se vinculo ninguna tag publicada.',
+  'pages.projects.detail.analytics': 'Analitica del caso',
+  'pages.projects.detail.gallery': 'Galeria ampliada',
+  'pages.projects.detail.chart.series': 'Densidad',
+  'pages.projects.detail.chart.technologies': 'Tecnologias',
+  'pages.projects.detail.chart.companies': 'Empresas',
+  'pages.projects.detail.chart.links': 'Links',
+  'pages.projects.detail.chart.images': 'Imagenes',
   'taxonomy.projects.filters.allContexts': 'Todos los contextos',
   'taxonomy.projects.filters.allEnvironments': 'Todos los entornos',
   'taxonomy.projects.filters.allStatuses': 'Todos los estados',

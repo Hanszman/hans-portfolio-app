@@ -111,4 +111,84 @@ describe('experiences helper', () => {
     expect(summary.currentCompanyName).toBe('M2M Telemetria');
     expect(summary.highlightCount).toBe('1');
   });
+
+  it('should fallback gallery alt text and omit gallery descriptions when captions are missing', () => {
+    const experience = createExperiencesCollectionResponse({
+      data: [
+        {
+          ...createExperiencesCollectionResponse().data[0],
+          imageAssets: [
+            {
+              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
+              sortOrder: 2,
+              imageAsset: {
+                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
+                  .imageAsset,
+                altPt: null,
+                altEn: null,
+                captionPt: null,
+                captionEn: null,
+              },
+            },
+            {
+              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
+              imageAssetId: 'image-second',
+              sortOrder: 1,
+              imageAsset: {
+                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
+                  .imageAsset,
+                id: 'image-second',
+                filePath: '/assets/img/experiences/secondary.png',
+                altPt: null,
+                altEn: null,
+                captionPt: null,
+                captionEn: null,
+              },
+            },
+          ],
+        },
+      ],
+    }).data[0];
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(timelineItem.galleryItems[0].imageAlt).toBe('Experience at Stefanini Group');
+    expect(timelineItem.galleryItems[0].imageSrc).toContain(
+      '/assets/img/experiences/secondary.png',
+    );
+    expect(timelineItem.galleryItems[0].description).toBeUndefined();
+  });
+
+  it('should fallback to the experience title when gallery alt text is an empty string', () => {
+    const experience = createExperiencesCollectionResponse({
+      data: [
+        {
+          ...createExperiencesCollectionResponse().data[0],
+          imageAssets: [
+            {
+              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
+              imageAsset: {
+                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
+                  .imageAsset,
+                altPt: '',
+                altEn: '',
+              },
+            },
+          ],
+        },
+      ],
+    }).data[0];
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(timelineItem.galleryItems[0].imageAlt).toBe('Experience at Stefanini Group');
+  });
+
+  it('should keep the summary empty when no experience is available', () => {
+    const summary = buildExperiencePortfolioSummary([], 'en-us');
+
+    expect(summary.currentRoleTitle).toBe('');
+    expect(summary.currentCompanyName).toBe('');
+    expect(summary.experienceCount).toBe('0');
+  });
 });

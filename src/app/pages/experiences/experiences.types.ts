@@ -16,6 +16,11 @@ export interface ExperienceGalleryItemViewModel {
   description?: string;
 }
 
+export interface ExperienceChartSeries {
+  name: string;
+  data: number[];
+}
+
 export interface ExperienceTimelineItemViewModel {
   id: string;
   slug: string;

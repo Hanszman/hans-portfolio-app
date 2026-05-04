@@ -8,18 +8,13 @@ import {
   DEFAULT_APP_LOCALE,
 } from './translation.config';
 import {
+  APP_LANGUAGE_LABEL_KEYS,
   AppLanguageOption,
   AppLocalizedText,
   AppLocale,
   AppTranslationKey,
   AppTranslationParams,
 } from './translation.types';
-
-const LANGUAGE_LABEL_KEYS: Record<AppLocale, AppTranslationKey> = {
-  'en-us': 'header.controls.english',
-  'pt-BR': 'header.controls.portuguese',
-  'es-es': 'header.controls.spanish',
-};
 
 const interpolateParams = (
   template: string,
@@ -73,7 +68,7 @@ export class TranslationService {
     return APP_LOCALES.map((locale) => ({
       id: locale,
       value: locale,
-      label: this.instant(LANGUAGE_LABEL_KEYS[locale]),
+      label: this.instant(APP_LANGUAGE_LABEL_KEYS[locale]),
     }));
   });
 

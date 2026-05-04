@@ -93,6 +93,16 @@ export const DASHBOARD_SUMMARY_LABEL_KEYS = {
   spokenLanguages: 'pages.dashboard.snapshot.metrics.languages',
 } as const satisfies Record<string, AppTranslationKey>;
 
+export const DASHBOARD_SUMMARY_ICON_NAMES = {
+  projects: 'LuFolderKanban',
+  experiences: 'LuBriefcaseBusiness',
+  technologies: 'LuCpu',
+  formations: 'LuGraduationCap',
+  customers: 'LuHandshake',
+  jobs: 'LuBadgeCheck',
+  spokenLanguages: 'LuLanguages',
+} as const;
+
 export const DASHBOARD_CONTEXT_LABEL_KEYS: Record<string, AppTranslationKey> = {
   PROFESSIONAL: 'taxonomy.skills.context.professional',
   PERSONAL: 'taxonomy.skills.context.personal',

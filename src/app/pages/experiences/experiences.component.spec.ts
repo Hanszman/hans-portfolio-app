@@ -152,4 +152,35 @@ describe('ExperiencesComponent', () => {
       'The experiences endpoint is unavailable right now.',
     );
   });
+
+  it('should open and close the experience detail modal state', () => {
+    const fixture = TestBed.createComponent(ExperiencesComponent);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
+    );
+    request.flush(createExperiencesCollectionResponse());
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      timelineItems: () => readonly [{ slug: string }];
+      openExperienceDetails: (item: { slug: string }) => void;
+      closeExperienceDetails: () => void;
+      selectedExperience: () => { slug: string } | null;
+      isDetailOpen: () => boolean;
+    };
+
+    const item = component.timelineItems()[0];
+    component.openExperienceDetails(item);
+
+    expect(component.selectedExperience()).toEqual(item);
+    expect(component.isDetailOpen()).toBeTrue();
+
+    component.closeExperienceDetails();
+
+    expect(component.selectedExperience()).toBeNull();
+    expect(component.isDetailOpen()).toBeFalse();
+  });
 });

@@ -71,4 +71,11 @@ describe('ExperienceDetailModalComponent', () => {
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('returns an empty chart series when no experience is selected', () => {
+    fixture.componentRef.setInput('item', null);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance['chartSeries']()).toEqual([]);
+  });
 });
