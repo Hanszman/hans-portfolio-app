@@ -1,5 +1,6 @@
 [TODO ATUAL]:
--Codex não arrumou praticamente nada do redesign visual ainda e ainda estou sentindo os arquivos meio grandes, precisamos rever as telas: Alterar tema/infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
+-Codex não arrumou praticamente nada do redesign visual ainda e ainda estou sentindo os arquivos meio grandes, precisamos rever as telas:
+    Alterar tema/infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
 -Partir pra próxima etapa de implementação
 
 [PROXIMOS TODO's]:
