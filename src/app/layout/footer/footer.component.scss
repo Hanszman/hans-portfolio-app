@@ -1,33 +1,25 @@
 .footer {
-  @apply mx-auto w-full max-w-6xl;
+  @apply mt-12 w-full;
+  background-color: #373b3e;
+}
+
+.footer-shell {
+  @apply mx-auto w-full px-4 py-6;
 }
 
 .footer-content {
-  @apply grid gap-6;
+  @apply mx-auto grid max-w-[120rem] gap-4 text-center;
 }
 
 .footer-copy {
-  @apply grid gap-3;
+  @apply m-0 flex items-center justify-center gap-2 text-base text-white;
 }
 
-.footer-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.1em];
-  color: var(--primary-default-color);
+.footer-copy a {
+  @apply font-bold no-underline transition-colors duration-200;
+  color: #7089fa;
 }
 
-.footer-title {
-  @apply text-lg font-semibold;
-}
-
-.footer-description {
-  @apply m-0 max-w-3xl text-sm leading-7;
-  color: color-mix(in srgb, var(--text-color) 70%, transparent);
-}
-
-.footer-links {
-  @apply flex flex-wrap gap-3;
-}
-
-.footer-tags {
-  @apply flex flex-wrap gap-3;
+.footer-copy a:hover {
+  color: white;
 }

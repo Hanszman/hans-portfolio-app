@@ -50,6 +50,17 @@ describe('NavigationComponent', () => {
     expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
   });
 
+  it('should expose the mobile open state class when requested', () => {
+    const fixture = TestBed.createComponent(NavigationComponent);
+    fixture.componentRef.setInput('items', []);
+    fixture.componentRef.setInput('menuOpen', true);
+    fixture.detectChanges();
+
+    const navigation = (fixture.nativeElement as HTMLElement).querySelector('nav');
+
+    expect(navigation?.classList.contains('navigation-open')).toBeTrue();
+  });
+
   it('should apply the active class to the current route link', async () => {
     const router = TestBed.inject(Router);
     const fixture = TestBed.createComponent(NavigationComponent);

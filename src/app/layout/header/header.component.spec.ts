@@ -1,9 +1,11 @@
 import { Component, provideZonelessChangeDetection } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { APP_THEME_STORAGE_KEY } from '../../core/theme/theme.config';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
+import { NavigationComponent } from '../navigation/navigation.component';
 import { HeaderComponent } from './header.component';
 
 @Component({
@@ -54,7 +56,7 @@ describe('HeaderComponent', () => {
     document.body.removeAttribute('data-app-theme');
   });
 
-  it('should render the brand, shell message, and navigation', () => {
+  it('should render the old-style shell navigation with logo and controls', () => {
     const fixture = TestBed.createComponent(HeaderComponent);
     fixture.componentRef.setInput('navigationItems', [
       {
@@ -69,20 +71,17 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    const brandImage = compiled.querySelector('.header-brand-image') as HTMLImageElement;
 
-    expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain(
-      'A shell specific to the portfolio, already connected to real backend data.',
-    );
-    expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
+    expect(brandImage.getAttribute('src')).toContain('assets/img/logo/vh_logo_blue.png');
     expect(compiled.querySelector('hans-toggle')).toBeTruthy();
     expect(compiled.querySelector('hans-dropdown')).toBeTruthy();
-    expect(compiled.textContent).toContain('Dark mode');
+    expect(compiled.querySelector('.header-menu-button')).toBeTruthy();
     expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
     expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
   });
 
-  it('should expose theme and language handlers for design-lib controls', () => {
+  it('should expose theme, language, and mobile menu handlers for design-lib controls', () => {
     const fixture = TestBed.createComponent(HeaderComponent);
     fixture.componentRef.setInput('navigationItems', []);
     fixture.detectChanges();
@@ -127,5 +126,20 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(document.documentElement.lang).toBe('es-es');
+
+    const menuButton = compiled.querySelector('.header-menu-button') as HTMLElement;
+    menuButton.click();
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.navigation-open')).toBeTruthy();
+
+    const navigation = fixture.debugElement.query(
+      By.directive(NavigationComponent),
+    ).componentInstance as NavigationComponent;
+
+    navigation.itemSelected.emit();
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.navigation-open')).toBeFalsy();
   });
 });

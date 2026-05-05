@@ -30,27 +30,14 @@ describe('FooterComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the footer copy, quick links, and design-lib tags', () => {
+  it('should render the legacy-inspired social footer and copyright', () => {
     const fixture = TestBed.createComponent(FooterComponent);
-    fixture.componentRef.setInput('navigationItems', [
-      {
-        path: '/home',
-        label: 'Home',
-      },
-      {
-        path: '/dashboard',
-        label: 'Dashboard',
-      },
-    ]);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain(
-      'Layout foundation ready for the next page builds',
-    );
-    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
-    expect(compiled.querySelector('hans-button[label="Dashboard"]')).toBeTruthy();
-    expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
+    expect(compiled.querySelectorAll('app-footer-social-links a')).toHaveSize(3);
+    expect(compiled.textContent).toContain('Victor Hanszman');
+    expect(compiled.textContent).toContain(String(new Date().getFullYear()));
   });
 });

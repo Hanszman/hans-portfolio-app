@@ -1,0 +1,12 @@
+.footer-social-links {
+  @apply m-0 flex list-none items-center justify-center gap-6 p-0;
+}
+
+.footer-social-links a {
+  @apply inline-flex items-center justify-center transition-colors duration-200;
+  color: white;
+}
+
+.footer-social-links a:hover {
+  color: #7089fa;
+}

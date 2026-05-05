@@ -1,5 +1,6 @@
 <nav
   class="navigation"
+  [class.navigation-open]="menuOpen()"
   aria-label="Primary portfolio navigation"
   data-testid="navigation"
 >
@@ -11,10 +12,11 @@
       routerLinkActive="navigation-button-active"
       [routerLinkActiveOptions]="{ exact: true }"
       [attr.label]="item.label"
-      [attr.buttonVariant]="activeRoute.isActive ? 'default' : 'outline'"
-      buttonColor="primary"
+      [attr.buttonColor]="activeRoute.isActive ? 'primary' : 'base'"
       buttonShape="rounded"
-      buttonSize="medium"
+      buttonSize="small"
+      buttonVariant="transparent"
+      (click)="itemSelected.emit()"
     ></hans-button>
   }
 </nav>

@@ -1,44 +1,12 @@
 <footer class="footer" data-testid="footer">
-  <app-container>
+  <div class="footer-shell">
     <div class="footer-content">
-      <div class="footer-copy">
-        <span class="footer-eyebrow">{{ 'footer.eyebrow' | translate }}</span>
-        <strong class="footer-title">{{ 'footer.title' | translate }}</strong>
-        <p class="footer-description">
-          {{ 'footer.description' | translate }}
-        </p>
-      </div>
+      <app-footer-social-links />
 
-      <nav class="footer-links" [attr.aria-label]="'footer.navigationLabel' | translate">
-        @for (item of navigationItems(); track item.path) {
-          <hans-button
-            [routerLink]="item.path"
-            [attr.label]="item.label"
-            buttonColor="base"
-            buttonShape="rounded"
-            buttonSize="small"
-            buttonVariant="outline"
-          ></hans-button>
-        }
-      </nav>
-
-      <div class="footer-tags" [attr.aria-label]="'footer.principlesLabel' | translate">
-        <hans-tag
-          [attr.label]="'footer.tags.standalone' | translate"
-          tagColor="warning"
-          tagSize="sm"
-        ></hans-tag>
-        <hans-tag
-          [attr.label]="'footer.tags.tailwind' | translate"
-          tagColor="info"
-          tagSize="sm"
-        ></hans-tag>
-        <hans-tag
-          [attr.label]="'footer.tags.coverage' | translate"
-          tagColor="success"
-          tagSize="sm"
-        ></hans-tag>
-      </div>
+      <p class="footer-copy">
+        <a routerLink="/home">{{ 'footer.copyright.name' | translate }}</a>
+        <span>{{ 'footer.copyright.year' | translate: { year: '' + currentYear() } }}</span>
+      </p>
     </div>
-  </app-container>
+  </div>
 </footer>

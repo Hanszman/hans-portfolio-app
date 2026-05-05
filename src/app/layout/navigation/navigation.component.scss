@@ -1,7 +1,23 @@
 .navigation {
-  @apply flex flex-wrap gap-3;
+  @apply flex flex-wrap items-center justify-center gap-2;
 }
 
 .navigation-button {
   @apply inline-flex;
+}
+
+@media (max-width: 1023px) {
+  .navigation {
+    @apply absolute right-4 top-[calc(100%+0.75rem)] hidden min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
+    background-color: var(--background-color);
+    border-color: color-mix(in srgb, var(--base-strong-color) 28%, transparent);
+  }
+
+  .navigation-open {
+    @apply flex;
+  }
+
+  .navigation-button {
+    @apply w-full;
+  }
 }

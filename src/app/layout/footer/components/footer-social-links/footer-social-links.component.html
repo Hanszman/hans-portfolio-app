@@ -1,0 +1,14 @@
+<ul class="footer-social-links" [attr.aria-label]="'footer.social.navigation' | translate">
+  @for (link of links; track link.href) {
+    <li>
+      <a
+        [href]="link.href"
+        target="_blank"
+        rel="noreferrer"
+        [attr.aria-label]="link.labelKey | translate"
+      >
+        <hans-icon [name]="link.iconName" iconSize="medium"></hans-icon>
+      </a>
+    </li>
+  }
+</ul>

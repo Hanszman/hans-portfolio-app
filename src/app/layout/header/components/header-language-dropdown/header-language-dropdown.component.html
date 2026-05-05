@@ -1,0 +1,13 @@
+<hans-dropdown
+  #languageDropdown
+  class="header-language-dropdown"
+  [noOptionsText]="'header.controls.noLanguages' | translate"
+  [options]="languageOptions()"
+  [triggerLabel]="triggerLabel()"
+  [attr.aria-label]="'header.controls.language' | translate"
+  triggerColor="primary"
+  triggerShape="rounded"
+  triggerSize="small"
+  triggerVariant="default"
+  (select)="selectLanguage($event)"
+></hans-dropdown>
