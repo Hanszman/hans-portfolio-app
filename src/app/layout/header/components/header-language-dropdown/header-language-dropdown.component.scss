@@ -2,6 +2,22 @@
   @apply inline-flex;
 }
 
+.header-language-dropdown-shell {
+  @apply relative inline-flex;
+}
+
+.header-language-dropdown-icon {
+  @apply pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2;
+  color: #ffffff;
+}
+
 .header-language-dropdown {
   @apply inline-flex;
+  --primary-default-color: #7089fa;
+  --white: #ffffff;
+}
+
+.header-language-dropdown:hover {
+  --primary-default-color: #ffffff;
+  --white: #7089fa;
 }

@@ -90,3 +90,13 @@ Beleza, ficou ótimo em termos de código. Mas como vc pode ver nos 3 primeiros 
 -O botão de modo escuro não precisa escrever "Modo escuro", pode ser só um ícone também de dark/light mode, pode usar o component de icon da nossa lib... e deixe o ícone ao lado do toggle button
 -Além disso, no modo escuro, deveriamos deixar o background da pagina com a cor escura, não clara, como é no modo light... resolva isso por favor
 -Esse projeto está sobrescrevendo a font-family e/ou font-size em algum css/scss? se sim, tire esse overwriting por favor, pois devemos garantir que esse novo portfolio use o tipo e o tamanho da font igual ao definido na hans-ui-design-lib, se não estiver usando igual lá ainda automaticamente, faça importar de lá
+...
+Continuar arrumando header/footer e entender os novos problemas que o codex trouxe:
+-Usar SVGs de flags ou o pacote npm de flags?
+-Não entendi essas regras de css no styles.scss
+-O que esse popup-option-item.types.ts ta fazendo nessa pasta? deveria estar ali mesmo?
+-Existem algumas cores de css sendo sobrescritas nos scss ao invés de usarmos as variáveis de cores
+-Ícone de dark/light ficou ruim, tem que ser um só e deve ficar centralizado em relação ao toggle
+-Botões de navegação e dropdown de idioma continuam com layout/cores erradas
+-Ainda existem objetos/types/interfaces como getLanguageFlagAsset que não deveriam estar nos component.ts mas sim nos types
+-Ainda tem margem abaixo do footer

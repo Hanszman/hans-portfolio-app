@@ -102,7 +102,7 @@ describe('HeaderComponent', () => {
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
     expect(document.documentElement.lang).toBe('pt-BR');
-    expect(compiled.textContent).toContain('Modo escuro');
+    expect(compiled.querySelector('.header-theme-icon')).toBeTruthy();
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeTrue();
     expect(dropdown.options.map((option) => option.value)).toEqual([
       'en-us',

@@ -1,13 +1,22 @@
-<hans-dropdown
-  #languageDropdown
-  class="header-language-dropdown"
-  [noOptionsText]="'header.controls.noLanguages' | translate"
-  [options]="languageOptions()"
-  [triggerLabel]="triggerLabel()"
-  [attr.aria-label]="'header.controls.language' | translate"
-  triggerColor="primary"
-  triggerShape="rounded"
-  triggerSize="small"
-  triggerVariant="default"
-  (select)="selectLanguage($event)"
-></hans-dropdown>
+<div class="header-language-dropdown-shell">
+  <hans-icon
+    class="header-language-dropdown-icon"
+    name="FaGlobe"
+    iconSize="small"
+    aria-hidden="true"
+  ></hans-icon>
+
+  <hans-dropdown
+    #languageDropdown
+    class="header-language-dropdown"
+    [noOptionsText]="'header.controls.noLanguages' | translate"
+    [options]="languageOptions()"
+    triggerLabel=""
+    [attr.aria-label]="'header.controls.language' | translate"
+    triggerColor="primary"
+    triggerShape="rounded"
+    triggerSize="small"
+    triggerVariant="default"
+    (select)="selectLanguage($event)"
+  ></hans-dropdown>
+</div>

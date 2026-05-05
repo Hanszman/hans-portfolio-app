@@ -5,23 +5,31 @@
 }
 
 .header-shell {
-  @apply mx-auto w-full px-4;
+  @apply mx-auto w-full;
 }
 
 .header-content {
-  @apply mx-auto flex min-h-[5.5rem] max-w-[120rem] items-center justify-between gap-4;
+  @apply mx-auto flex min-h-[5.5rem] max-w-[120rem] items-center justify-between gap-4 px-4;
 }
 
 .header-brand {
-  @apply inline-flex shrink-0 items-center;
+  @apply relative inline-flex shrink-0 items-center;
 }
 
 .header-brand-image {
-  @apply h-auto w-14 transition-transform duration-200;
+  @apply h-auto w-14 transition-opacity duration-200;
 }
 
-.header-brand:hover .header-brand-image {
-  transform: scale(1.04);
+.header-brand-image-hover {
+  @apply absolute inset-0 opacity-0;
+}
+
+.header-brand:hover .header-brand-image-default {
+  @apply opacity-0;
+}
+
+.header-brand:hover .header-brand-image-hover {
+  @apply opacity-100;
 }
 
 .header-navigation {
@@ -38,9 +46,8 @@
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-.header-control-label {
-  @apply text-sm;
-  color: rgba(255, 255, 255, 0.88);
+.header-theme-icon {
+  color: #ffffff;
 }
 
 .header-menu-button {
@@ -62,15 +69,5 @@
 
   .header-menu-button {
     @apply inline-flex;
-  }
-}
-
-@media (max-width: 640px) {
-  .header-shell {
-    @apply px-3;
-  }
-
-  .header-actions {
-    @apply gap-2;
   }
 }

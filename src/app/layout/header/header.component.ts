@@ -38,11 +38,15 @@ export class HeaderComponent {
   private readonly themeToggle = viewChild<ElementRef<HansToggleElement>>('themeToggle');
   protected readonly theme = inject(ThemeService);
   protected readonly isMobileMenuOpen = signal(false);
+  protected readonly brandLogoBluePath = 'assets/img/logo/vh_logo_blue.png';
+  protected readonly brandLogoWhitePath = 'assets/img/logo/vh_logo_white.png';
+  protected readonly themeIconName = signal<'FaMoon' | 'FaSun'>('FaMoon');
 
   constructor() {
     effect(() => {
       const themeToggle = this.themeToggle()?.nativeElement;
       const checked = this.theme.mode() === 'dark';
+      this.themeIconName.set(checked ? 'FaSun' : 'FaMoon');
 
       if (themeToggle) {
         themeToggle.checked = checked;

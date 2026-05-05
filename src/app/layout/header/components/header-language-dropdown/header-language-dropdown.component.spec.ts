@@ -30,7 +30,7 @@ describe('HeaderLanguageDropdownComponent', () => {
     document.documentElement.lang = '';
   });
 
-  it('should configure language options with flag labels and react to selection', () => {
+  it('should configure language options with flag assets and react to selection', () => {
     const fixture = TestBed.createComponent(HeaderLanguageDropdownComponent);
     fixture.detectChanges();
 
@@ -38,18 +38,22 @@ describe('HeaderLanguageDropdownComponent', () => {
       options: readonly {
         label: string;
         value: 'en-us' | 'pt-BR' | 'es-es';
+        imageSrc: string;
       }[];
     };
 
     expect(dropdown.options.map((option) => option.label)).toEqual([
-      '🇺🇸 English',
-      '🇧🇷 Portuguese',
-      '🇪🇸 Spanish',
+      'English',
+      'Portuguese',
+      'Spanish',
+    ]);
+    expect(dropdown.options.map((option) => option.imageSrc)).toEqual([
+      'assets/flags/4x3/us.svg',
+      'assets/flags/4x3/br.svg',
+      'assets/flags/4x3/es.svg',
     ]);
 
-    dropdown.dispatchEvent(
-      new CustomEvent('select', { detail: dropdown.options[1] }),
-    );
+    dropdown.dispatchEvent(new CustomEvent('select', { detail: dropdown.options[1] }));
     fixture.detectChanges();
 
     expect(document.documentElement.lang).toBe('pt-BR');

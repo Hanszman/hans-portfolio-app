@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { PopupOptionItem } from '../../../../core/design-lib/popup-option-item.types';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import {
   HansDropdownElement,
@@ -17,16 +18,16 @@ import {
   HeaderLanguageSelectEvent,
 } from '../../header.types';
 
-const getLanguageEmoji = (
+const getLanguageFlagAsset = (
   locale: HeaderLanguageDropdownOption['value'],
 ): string => {
   switch (locale) {
     case 'pt-BR':
-      return '🇧🇷';
+      return 'assets/flags/4x3/br.svg';
     case 'es-es':
-      return '🇪🇸';
+      return 'assets/flags/4x3/es.svg';
     default:
-      return '🇺🇸';
+      return 'assets/flags/4x3/us.svg';
   }
 };
 
@@ -43,15 +44,13 @@ export class HeaderLanguageDropdownComponent {
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly translation = inject(TranslationService);
-  protected readonly triggerLabel = computed(
-    () => `${getLanguageEmoji(this.translation.locale())} ${this.translation.instant('header.controls.language')}`,
-  );
-  protected readonly languageOptions = computed<
-    readonly HeaderLanguageDropdownOption[]
-  >(() =>
+  protected readonly languageOptions = computed<readonly PopupOptionItem[]>(() =>
     this.translation.languageOptions().map((option) => ({
-      ...option,
-      label: `${getLanguageEmoji(option.value)} ${option.label}`,
+      id: option.id,
+      label: option.label,
+      value: option.value,
+      imageAlt: option.label,
+      imageSrc: getLanguageFlagAsset(option.value),
       action: () => this.setLanguage(option.value),
     })),
   );

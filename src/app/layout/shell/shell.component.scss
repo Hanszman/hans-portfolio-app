@@ -1,5 +1,5 @@
 .shell {
-  @apply min-h-screen px-4 pb-12 pt-28;
+  @apply min-h-screen pb-12;
 }
 
 .shell-content {
@@ -7,17 +7,11 @@
 }
 
 .shell-stage {
-  @apply py-2;
+  @apply px-4 py-2;
 }
 
 .shell-api-status-wrapper {
-  @apply mx-auto mb-6 w-full max-w-6xl;
-}
-
-@media (max-width: 1023px) {
-  .shell {
-    @apply pt-24;
-  }
+  @apply mx-auto mb-6 mt-1 w-full max-w-6xl px-4;
 }
 
 .shell-api-status {

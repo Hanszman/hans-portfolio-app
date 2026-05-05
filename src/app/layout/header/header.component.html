@@ -3,9 +3,15 @@
     <div class="header-content">
       <a class="header-brand" routerLink="/home" [attr.aria-label]="'header.brand.home' | translate">
         <img
-          class="header-brand-image"
-          src="assets/img/logo/vh_logo_blue.png"
+          class="header-brand-image header-brand-image-default"
+          [src]="brandLogoBluePath"
           alt="Victor Hanszman logo"
+        />
+        <img
+          class="header-brand-image header-brand-image-hover"
+          [src]="brandLogoWhitePath"
+          alt=""
+          aria-hidden="true"
         />
       </a>
 
@@ -18,9 +24,14 @@
 
       <div class="header-actions">
         <div class="header-theme-control">
-          <span class="header-control-label">
-            {{ 'header.controls.darkMode' | translate }}
-          </span>
+          <hans-icon
+            class="header-theme-icon"
+            [name]="themeIconName()"
+            iconSize="small"
+            [attr.aria-label]="theme.mode() === 'dark'
+              ? ('header.controls.lightTheme' | translate)
+              : ('header.controls.darkTheme' | translate)"
+          ></hans-icon>
           <hans-toggle
             #themeToggle
             [attr.aria-label]="'header.controls.theme' | translate"

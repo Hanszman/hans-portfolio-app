@@ -1,4 +1,5 @@
 import type { AppLanguageOption } from '../../core/translation/translation.types';
+import type { PopupOptionItem } from '../../core/design-lib/popup-option-item.types';
 
 export type HeaderLanguageDropdownOption = AppLanguageOption & {
   readonly action?: (option: HeaderLanguageDropdownOption) => void;
@@ -14,5 +15,5 @@ export interface HansToggleElement extends HTMLElement {
 }
 
 export interface HansDropdownElement extends HTMLElement {
-  options?: readonly HeaderLanguageDropdownOption[];
+  options?: readonly PopupOptionItem[];
 }
