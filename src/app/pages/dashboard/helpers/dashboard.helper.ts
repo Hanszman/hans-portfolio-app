@@ -140,7 +140,7 @@ export const mapDashboardStackRows = (
       name: resolveLocalizedText(
         locale,
         {
-          'pt-BR': stack.namePt,
+          'pt-br': stack.namePt,
           'en-us': stack.nameEn,
         },
         stack.nameEn,
@@ -239,7 +239,7 @@ export const mapDashboardTimelineCards = (
       title: resolveLocalizedText(
         locale,
         {
-          'pt-BR': item.titlePt,
+          'pt-br': item.titlePt,
           'en-us': item.titleEn,
         },
         item.titleEn,
@@ -263,7 +263,7 @@ const mapDashboardHighlightCard = (
   title: resolveLocalizedText(
     locale,
     {
-      'pt-BR': highlight.titlePt,
+      'pt-br': highlight.titlePt,
       'en-us': highlight.titleEn,
     },
     highlight.titleEn,
@@ -271,7 +271,7 @@ const mapDashboardHighlightCard = (
   subtitle: resolveLocalizedText(
     locale,
     {
-      'pt-BR': highlight.subtitlePt ?? undefined,
+      'pt-br': highlight.subtitlePt ?? undefined,
       'en-us': highlight.subtitleEn ?? undefined,
     },
     highlight.subtitleEn ?? '',

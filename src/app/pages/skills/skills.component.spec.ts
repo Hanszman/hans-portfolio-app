@@ -77,7 +77,7 @@ describe('SkillsComponent', () => {
   });
 
   it('should render localized labels in Portuguese', () => {
-    TestBed.inject(TranslationService).setLocale('pt-BR');
+    TestBed.inject(TranslationService).setLocale('pt-br');
 
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();

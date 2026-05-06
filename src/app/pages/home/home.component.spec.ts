@@ -67,7 +67,7 @@ describe('HomeComponent', () => {
   });
 
   it('should render localized dashboard fields in Portuguese', () => {
-    TestBed.inject(TranslationService).setLocale('pt-BR');
+    TestBed.inject(TranslationService).setLocale('pt-br');
 
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();

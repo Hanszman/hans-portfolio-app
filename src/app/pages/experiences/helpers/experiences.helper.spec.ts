@@ -19,7 +19,7 @@ describe('experiences helper', () => {
       formatExperienceDateRange(
         '2020-04-01T00:00:00.000Z',
         '2021-09-23T00:00:00.000Z',
-        'pt-BR',
+        'pt-br',
       ),
     ).toContain('2021');
   });
@@ -27,7 +27,7 @@ describe('experiences helper', () => {
   it('should map an API experience to a localized timeline item', () => {
     const experience = createExperiencesCollectionResponse().data[0];
 
-    const timelineItem = mapExperienceToTimelineItem(experience, 'pt-BR');
+    const timelineItem = mapExperienceToTimelineItem(experience, 'pt-br');
 
     expect(timelineItem.companyName).toBe('Stefanini Group');
     expect(timelineItem.title).toBe('Experiencia em Stefanini Group');

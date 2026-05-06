@@ -73,7 +73,7 @@ const mapProjectLink = (
     resolveLocalizedText(
       locale,
       {
-        'pt-BR': relation.link.labelPt ?? undefined,
+        'pt-br': relation.link.labelPt ?? undefined,
         'en-us': relation.link.labelEn ?? undefined,
       },
       '',
@@ -97,7 +97,7 @@ export const mapProjectToCaseCard = (
       resolveLocalizedText(
         locale,
         {
-          'pt-BR': experience.titlePt,
+          'pt-br': experience.titlePt,
           'en-us': experience.titleEn,
         },
         experience.titleEn,
@@ -107,7 +107,7 @@ export const mapProjectToCaseCard = (
   const localizedTitle = resolveLocalizedText(
     locale,
     {
-      'pt-BR': project.titlePt,
+      'pt-br': project.titlePt,
       'en-us': project.titleEn,
     },
     project.titleEn,
@@ -120,7 +120,7 @@ export const mapProjectToCaseCard = (
     summary: resolveLocalizedText(
       locale,
       {
-        'pt-BR': project.shortDescriptionPt,
+        'pt-br': project.shortDescriptionPt,
         'en-us': project.shortDescriptionEn,
       },
       project.shortDescriptionEn,
@@ -128,7 +128,7 @@ export const mapProjectToCaseCard = (
     description: resolveLocalizedText(
       locale,
       {
-        'pt-BR': project.fullDescriptionPt,
+        'pt-br': project.fullDescriptionPt,
         'en-us': project.fullDescriptionEn,
       },
       project.fullDescriptionEn,
@@ -152,7 +152,7 @@ export const mapProjectToCaseCard = (
       resolveLocalizedText(
         locale,
         {
-          'pt-BR': projectImage?.imageAsset.altPt ?? undefined,
+          'pt-br': projectImage?.imageAsset.altPt ?? undefined,
           'en-us': projectImage?.imageAsset.altEn ?? undefined,
         },
         localizedTitle,
@@ -164,7 +164,7 @@ export const mapProjectToCaseCard = (
         resolveLocalizedText(
           locale,
           {
-            'pt-BR': tag.labelPt,
+            'pt-br': tag.labelPt,
             'en-us': tag.labelEn,
           },
           tag.labelEn,
@@ -180,7 +180,7 @@ export const mapProjectToCaseCard = (
           resolveLocalizedText(
             locale,
             {
-              'pt-BR': imageAsset.altPt ?? undefined,
+              'pt-br': imageAsset.altPt ?? undefined,
               'en-us': imageAsset.altEn ?? undefined,
             },
             localizedTitle,
@@ -190,7 +190,7 @@ export const mapProjectToCaseCard = (
           resolveLocalizedText(
             locale,
             {
-              'pt-BR': imageAsset.captionPt ?? undefined,
+              'pt-br': imageAsset.captionPt ?? undefined,
               'en-us': imageAsset.captionEn ?? undefined,
             },
             '',
@@ -240,7 +240,7 @@ export const buildProjectsSummaryMetrics = (
         ? resolveLocalizedText(
             locale,
             {
-              'pt-BR': richestStackProject.titlePt,
+              'pt-br': richestStackProject.titlePt,
               'en-us': richestStackProject.titleEn,
             },
             richestStackProject.titleEn,

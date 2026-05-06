@@ -13,6 +13,26 @@ body {
   color: var(--text-color);
 }
 
+body[data-app-theme='light'] {
+  --app-chrome-surface-color: color-mix(
+    in srgb,
+    var(--base-strong-color) 62%,
+    var(--text-color)
+  );
+  --app-chrome-foreground-color: var(--background-color);
+  --app-chrome-accent-color: var(--primary-neutral-color);
+}
+
+body[data-app-theme='dark'] {
+  --app-chrome-surface-color: color-mix(
+    in srgb,
+    var(--background-color) 88%,
+    var(--base-neutral-color)
+  );
+  --app-chrome-foreground-color: var(--base-strong-color);
+  --app-chrome-accent-color: var(--primary-strong-color);
+}
+
 app-root {
   display: block;
   min-height: 100vh;

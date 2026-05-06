@@ -4,29 +4,28 @@
 
 .navigation-button {
   @apply inline-flex;
-  color: var(--header-foreground-color);
-  --text-color: currentColor;
+  color: var(--app-chrome-foreground-color);
+  --text-color: var(--app-chrome-foreground-color);
   --base-default-color: transparent;
-  --base-strong-color: currentColor;
+  --base-strong-color: var(--app-chrome-foreground-color);
   --base-neutral-color: transparent;
   --primary-default-color: transparent;
-  --primary-strong-color: currentColor;
+  --primary-strong-color: var(--app-chrome-accent-color);
   --primary-neutral-color: transparent;
 }
 
-.navigation-button:hover {
-  color: var(--header-accent-color);
-}
-
+.navigation-button:hover,
 .navigation-button-active {
-  color: var(--header-accent-color);
+  color: var(--app-chrome-accent-color);
+  --text-color: var(--app-chrome-accent-color);
+  --base-strong-color: var(--app-chrome-accent-color);
 }
 
 @media (max-width: 1023px) {
   .navigation {
     @apply absolute right-4 top-[calc(100%+0.75rem)] hidden min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
-    background-color: var(--header-surface-color);
-    border-color: color-mix(in srgb, var(--header-foreground-color) 18%, transparent);
+    background-color: var(--app-chrome-surface-color);
+    border-color: color-mix(in srgb, var(--app-chrome-foreground-color) 18%, transparent);
   }
 
   .navigation-open {

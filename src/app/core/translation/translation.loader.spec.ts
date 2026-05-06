@@ -9,7 +9,7 @@ import {
 
 describe('AppTranslationLoader', () => {
   it('should read a supported translation language', () => {
-    expect(readTranslationLanguage('pt-BR')).toBe(PT_BR_TRANSLATIONS);
+    expect(readTranslationLanguage('pt-br')).toBe(PT_BR_TRANSLATIONS);
   });
 
   it('should fall back to the default language for unsupported locales', () => {

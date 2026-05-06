@@ -9,7 +9,7 @@ export const APP_LOCALE_STORAGE_KEY = 'hans-portfolio-locale';
 
 export const APP_TRANSLATIONS = {
   'en-us': EN_TRANSLATIONS,
-  'pt-BR': PT_BR_TRANSLATIONS,
+  'pt-br': PT_BR_TRANSLATIONS,
   'es-es': ES_ES_TRANSLATIONS,
 } as const satisfies AppTranslationCatalog;
 

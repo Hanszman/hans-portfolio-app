@@ -13,7 +13,7 @@ describe('dashboard helper', () => {
   it('should build localized summary cards from dashboard counters', () => {
     const cards = buildDashboardSummaryCards(
       createDashboardOverviewResponse().summary,
-      'pt-BR',
+      'pt-br',
     );
 
     expect(cards[0]).toEqual({
@@ -204,7 +204,7 @@ describe('dashboard helper', () => {
           },
         ],
       },
-      'pt-BR',
+      'pt-br',
     );
 
     expect(cards[0].companyName).toBe('Stefanini Group');

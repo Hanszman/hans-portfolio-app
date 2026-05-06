@@ -37,7 +37,7 @@ describe('HeaderLanguageDropdownComponent', () => {
     const dropdown = fixture.nativeElement.querySelector('hans-dropdown') as HTMLElement & {
       options: readonly {
         label: string;
-        value: 'en-us' | 'pt-BR' | 'es-es';
+        value: 'en-us' | 'pt-br' | 'es-es';
         imageSrc: string;
       }[];
     };
@@ -48,14 +48,14 @@ describe('HeaderLanguageDropdownComponent', () => {
       'Spanish',
     ]);
     expect(dropdown.options.map((option) => option.imageSrc)).toEqual([
-      'assets/img/flags/svgs/us.svg',
-      'assets/img/flags/svgs/br.svg',
-      'assets/img/flags/svgs/es.svg',
+      'vendor/flag-icons/4x3/us.svg',
+      'vendor/flag-icons/4x3/br.svg',
+      'vendor/flag-icons/4x3/es.svg',
     ]);
 
     dropdown.dispatchEvent(new CustomEvent('select', { detail: dropdown.options[1] }));
     fixture.detectChanges();
 
-    expect(document.documentElement.lang).toBe('pt-BR');
+    expect(document.documentElement.lang).toBe('pt-br');
   });
 });

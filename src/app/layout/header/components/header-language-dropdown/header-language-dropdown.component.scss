@@ -8,22 +8,24 @@
 
 .header-language-dropdown-icon {
   @apply pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 transition-colors duration-200;
-  color: var(--header-foreground-color);
+  color: var(--app-chrome-foreground-color);
 }
 
 .header-language-dropdown {
-  @apply inline-flex;
-  --primary-default-color: var(--header-accent-color);
-  --primary-strong-color: var(--header-accent-color);
-  --white: var(--header-foreground-color);
+  @apply inline-flex min-w-[4.25rem];
+  --primary-default-color: var(--app-chrome-accent-color);
+  --primary-strong-color: var(--app-chrome-accent-color);
+  --text-color: var(--app-chrome-foreground-color);
+  --white: var(--app-chrome-foreground-color);
 }
 
 .header-language-dropdown:hover {
-  --primary-default-color: var(--header-foreground-color);
-  --primary-strong-color: var(--header-foreground-color);
-  --white: var(--header-accent-color);
+  --primary-default-color: var(--app-chrome-foreground-color);
+  --primary-strong-color: var(--app-chrome-foreground-color);
+  --text-color: var(--app-chrome-accent-color);
+  --white: var(--app-chrome-accent-color);
 }
 
 .header-language-dropdown-shell:hover .header-language-dropdown-icon {
-  color: var(--header-accent-color);
+  color: var(--app-chrome-accent-color);
 }

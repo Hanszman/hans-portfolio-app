@@ -14,11 +14,11 @@ export const getHeaderLanguageFlagAsset = (
   locale: HeaderLanguageDropdownItem['value'],
 ): string => {
   switch (locale) {
-    case 'pt-BR':
-      return 'assets/img/flags/svgs/br.svg';
+    case 'pt-br':
+      return 'vendor/flag-icons/4x3/br.svg';
     case 'es-es':
-      return 'assets/img/flags/svgs/es.svg';
+      return 'vendor/flag-icons/4x3/es.svg';
     default:
-      return 'assets/img/flags/svgs/us.svg';
+      return 'vendor/flag-icons/4x3/us.svg';
   }
 };

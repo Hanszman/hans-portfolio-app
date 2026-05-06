@@ -114,7 +114,7 @@ describe('skills helper', () => {
           },
         },
       } as TechnologyCollectionItemResponse,
-      'pt-BR',
+      'pt-br',
     );
 
     expect(card.levelLabel).toBe('Expert Plus');
@@ -133,7 +133,7 @@ describe('skills helper', () => {
   it('should summarize highlight density and strongest experience duration', () => {
     const metrics = buildSkillsSummaryMetrics(
       createTechnologiesCollectionResponse().data,
-      'pt-BR',
+      'pt-br',
     );
 
     expect(metrics).toEqual([

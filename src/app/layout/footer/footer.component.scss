@@ -1,7 +1,7 @@
 .footer {
   @apply mt-12 w-full;
-  background-color: var(--footer-surface-color);
-  color: var(--footer-foreground-color);
+  background-color: var(--app-chrome-surface-color);
+  color: var(--app-chrome-foreground-color);
 }
 
 .footer-shell {
@@ -18,21 +18,9 @@
 
 .footer-copy a {
   @apply font-bold no-underline transition-colors duration-200;
-  color: var(--footer-accent-color);
+  color: var(--app-chrome-accent-color);
 }
 
 .footer-copy a:hover {
-  color: var(--footer-foreground-color);
-}
-
-:host-context(body[data-app-theme='light']) .footer {
-  --footer-surface-color: color-mix(in srgb, var(--base-strong-color) 62%, var(--text-color));
-  --footer-foreground-color: var(--background-color);
-  --footer-accent-color: var(--primary-neutral-color);
-}
-
-:host-context(body[data-app-theme='dark']) .footer {
-  --footer-surface-color: color-mix(in srgb, var(--background-color) 88%, var(--base-neutral-color));
-  --footer-foreground-color: var(--base-strong-color);
-  --footer-accent-color: var(--primary-strong-color);
+  color: var(--app-chrome-foreground-color);
 }

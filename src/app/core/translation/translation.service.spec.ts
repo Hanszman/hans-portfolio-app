@@ -33,11 +33,11 @@ describe('TranslationService', () => {
   });
 
   it('should restore a persisted Portuguese locale', () => {
-    localStorage.setItem(APP_LOCALE_STORAGE_KEY, 'pt-BR');
+    localStorage.setItem(APP_LOCALE_STORAGE_KEY, 'pt-br');
 
     const service = TestBed.inject(TranslationService);
 
-    expect(service.locale()).toBe('pt-BR');
+    expect(service.locale()).toBe('pt-br');
     expect(service.instant('header.controls.english')).toBe('Inglês');
   });
 
@@ -52,15 +52,15 @@ describe('TranslationService', () => {
   it('should set locales and interpolate translation params', () => {
     const service = TestBed.inject(TranslationService);
 
-    service.setLocale('pt-BR');
+    service.setLocale('pt-br');
 
-    expect(service.locale()).toBe('pt-BR');
+    expect(service.locale()).toBe('pt-br');
     expect(
       service.instant('shell.api.connected.description', {
         checkedAtUtc: '2026-04-14T13:00:00.000Z',
       }),
     ).toContain('2026-04-14T13:00:00.000Z');
-    expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('pt-BR');
+    expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('pt-br');
   });
 
   it('should expose language options translated in the active locale', () => {
@@ -73,8 +73,8 @@ describe('TranslationService', () => {
         label: 'English',
       },
       {
-        id: 'pt-BR',
-        value: 'pt-BR',
+        id: 'pt-br',
+        value: 'pt-br',
         label: 'Portuguese',
       },
       {
@@ -84,7 +84,7 @@ describe('TranslationService', () => {
       },
     ]);
 
-    service.setLocale('pt-BR');
+    service.setLocale('pt-br');
 
     expect(service.languageOptions()).toEqual([
       {
@@ -93,8 +93,8 @@ describe('TranslationService', () => {
         label: 'Inglês',
       },
       {
-        id: 'pt-BR',
-        value: 'pt-BR',
+        id: 'pt-br',
+        value: 'pt-br',
         label: 'Português',
       },
       {
@@ -122,7 +122,7 @@ describe('TranslationService', () => {
     expect(
       service.translateContent({
         'en-us': 'All levels',
-        'pt-BR': 'Todos os niveis',
+        'pt-br': 'Todos os niveis',
         'es-es': 'Todos los niveles',
       }),
     ).toBe('Todos los niveles');
@@ -133,7 +133,7 @@ describe('TranslationService', () => {
       resolveLocalizedText(
         'es-es',
         {
-          'pt-BR': 'Somente portugues',
+          'pt-br': 'Somente portugues',
         },
         'fallback',
       ),

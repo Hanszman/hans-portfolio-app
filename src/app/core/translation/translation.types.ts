@@ -1,4 +1,4 @@
-export type AppLocale = 'en-us' | 'pt-BR' | 'es-es';
+export type AppLocale = 'en-us' | 'pt-br' | 'es-es';
 
 export type AppLocalizedText = Partial<Record<AppLocale, string>>;
 
@@ -382,6 +382,6 @@ export interface AppLanguageOption {
 
 export const APP_LANGUAGE_LABEL_KEYS: Record<AppLocale, AppTranslationKey> = {
   'en-us': 'header.controls.english',
-  'pt-BR': 'header.controls.portuguese',
+  'pt-br': 'header.controls.portuguese',
   'es-es': 'header.controls.spanish',
 };

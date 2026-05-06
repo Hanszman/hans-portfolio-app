@@ -107,7 +107,7 @@ export class HomeComponent {
         name: resolveLocalizedText(
           locale,
           {
-            'pt-BR': stack.namePt,
+            'pt-br': stack.namePt,
             'en-us': stack.nameEn,
           },
           stack.nameEn,
@@ -131,7 +131,7 @@ export class HomeComponent {
       title: resolveLocalizedText(
         locale,
         {
-          'pt-BR': highlight.titlePt,
+          'pt-br': highlight.titlePt,
           'en-us': highlight.titleEn,
         },
         highlight.titleEn,
@@ -139,7 +139,7 @@ export class HomeComponent {
       subtitle: resolveLocalizedText(
         locale,
         {
-          'pt-BR': highlight.subtitlePt ?? '',
+          'pt-br': highlight.subtitlePt ?? '',
           'en-us': highlight.subtitleEn ?? '',
         },
         highlight.subtitleEn ?? '',
@@ -183,7 +183,7 @@ export class HomeComponent {
         title: resolveLocalizedText(
           locale,
           {
-            'pt-BR': focus.titlePt,
+            'pt-br': focus.titlePt,
             'en-us': focus.titleEn,
           },
           focus.titleEn,

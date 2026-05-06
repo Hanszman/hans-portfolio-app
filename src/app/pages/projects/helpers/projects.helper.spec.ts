@@ -50,7 +50,7 @@ describe('projects helper', () => {
           },
         ],
       },
-      'pt-BR',
+      'pt-br',
     );
 
     expect(card.contextLabel).toBe('Open Source');
@@ -89,7 +89,7 @@ describe('projects helper', () => {
           },
         ],
       },
-      'pt-BR',
+      'pt-br',
     );
 
     expect(card.tagLabels).toEqual(['Angular PT']);
@@ -172,7 +172,7 @@ describe('projects helper', () => {
   it('should summarize featured density, in-progress work, linked assets, and richest stack', () => {
     const metrics = buildProjectsSummaryMetrics(
       createProjectsCollectionResponse().data,
-      'pt-BR',
+      'pt-br',
     );
 
     expect(metrics).toEqual([
@@ -210,7 +210,7 @@ describe('projects helper', () => {
 
   it('should expose localized empty-state helpers for companies, links, and assets', () => {
     expect(resolveProjectEmptyCompanyLabel('en-us')).toBe('No linked companies yet.');
-    expect(resolveProjectEmptyLinksLabel('pt-BR')).toBe(
+    expect(resolveProjectEmptyLinksLabel('pt-br')).toBe(
       'Nenhum link publicado foi vinculado ainda.',
     );
     expect(resolveProjectEmptyAssetsLabel('es-es')).toBe(

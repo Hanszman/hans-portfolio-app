@@ -30,6 +30,11 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/flag-icons/flags",
+                "output": "/vendor/flag-icons/"
               }
             ],
             "styles": ["src/styles.scss"]
@@ -94,6 +99,11 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/flag-icons/flags",
+                "output": "/vendor/flag-icons/"
               }
             ],
             "styles": ["src/styles.scss"]

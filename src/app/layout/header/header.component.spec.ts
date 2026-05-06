@@ -91,7 +91,7 @@ describe('HeaderComponent', () => {
     const dropdown = compiled.querySelector('hans-dropdown') as HTMLElement & {
       options: readonly {
         label: string;
-        value: 'en-us' | 'pt-BR' | 'es-es';
+        value: 'en-us' | 'pt-br' | 'es-es';
         action?: () => void;
       }[];
     };
@@ -101,12 +101,12 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
-    expect(document.documentElement.lang).toBe('pt-BR');
+    expect(document.documentElement.lang).toBe('pt-br');
     expect(compiled.querySelector('.header-theme-icon')).toBeTruthy();
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeTrue();
     expect(dropdown.options.map((option) => option.value)).toEqual([
       'en-us',
-      'pt-BR',
+      'pt-br',
       'es-es',
     ]);
 

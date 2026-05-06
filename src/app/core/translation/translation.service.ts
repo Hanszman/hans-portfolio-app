@@ -107,6 +107,6 @@ export class TranslationService {
   }
 
   private isAppLocale(locale: string | null): locale is AppLocale {
-    return locale === 'en-us' || locale === 'pt-BR' || locale === 'es-es';
+    return locale === 'en-us' || locale === 'pt-br' || locale === 'es-es';
   }
 }

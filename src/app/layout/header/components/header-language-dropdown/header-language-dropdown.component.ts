@@ -33,6 +33,7 @@ export class HeaderLanguageDropdownComponent {
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly translation = inject(TranslationService);
+  protected readonly triggerLabel = '\u200B';
   protected readonly languageOptions = computed<readonly HeaderLanguageDropdownItem[]>(() =>
     this.translation.languageOptions().map((option) => ({
       id: option.id,

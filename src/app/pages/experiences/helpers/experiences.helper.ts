@@ -56,7 +56,7 @@ const mapProject = (
   title: resolveLocalizedText(
     locale,
     {
-      'pt-BR': project.titlePt,
+      'pt-br': project.titlePt,
       'en-us': project.titleEn,
     },
     project.titleEn,
@@ -64,7 +64,7 @@ const mapProject = (
   summary: resolveLocalizedText(
     locale,
     {
-      'pt-BR': project.shortDescriptionPt,
+      'pt-br': project.shortDescriptionPt,
       'en-us': project.shortDescriptionEn,
     },
     project.shortDescriptionEn,
@@ -100,7 +100,7 @@ export const mapExperienceToTimelineItem = (
   const title = resolveLocalizedText(
     locale,
     {
-      'pt-BR': experience.titlePt,
+      'pt-br': experience.titlePt,
       'en-us': experience.titleEn,
     },
     experience.titleEn,
@@ -114,7 +114,7 @@ export const mapExperienceToTimelineItem = (
     summary: resolveLocalizedText(
       locale,
       {
-        'pt-BR': experience.summaryPt,
+        'pt-br': experience.summaryPt,
         'en-us': experience.summaryEn,
       },
       experience.summaryEn,
@@ -122,7 +122,7 @@ export const mapExperienceToTimelineItem = (
     description: resolveLocalizedText(
       locale,
       {
-        'pt-BR': experience.descriptionPt,
+        'pt-br': experience.descriptionPt,
         'en-us': experience.descriptionEn,
       },
       experience.descriptionEn,
@@ -140,7 +140,7 @@ export const mapExperienceToTimelineItem = (
         resolveLocalizedText(
           locale,
           {
-            'pt-BR': job.namePt,
+            'pt-br': job.namePt,
             'en-us': job.nameEn,
           },
           job.nameEn,
@@ -160,7 +160,7 @@ export const mapExperienceToTimelineItem = (
           resolveLocalizedText(
             locale,
             {
-              'pt-BR': imageAsset.altPt ?? undefined,
+              'pt-br': imageAsset.altPt ?? undefined,
               'en-us': imageAsset.altEn ?? undefined,
             },
             title,
@@ -170,7 +170,7 @@ export const mapExperienceToTimelineItem = (
           resolveLocalizedText(
             locale,
             {
-              'pt-BR': imageAsset.captionPt ?? undefined,
+              'pt-br': imageAsset.captionPt ?? undefined,
               'en-us': imageAsset.captionEn ?? undefined,
             },
             '',
@@ -211,7 +211,7 @@ export const buildExperiencePortfolioSummary = (
       ? resolveLocalizedText(
           locale,
           {
-            'pt-BR': currentExperience.titlePt,
+            'pt-br': currentExperience.titlePt,
             'en-us': currentExperience.titleEn,
           },
           currentExperience.titleEn,
