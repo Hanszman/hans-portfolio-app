@@ -48,9 +48,9 @@ describe('HeaderLanguageDropdownComponent', () => {
       'Spanish',
     ]);
     expect(dropdown.options.map((option) => option.imageSrc)).toEqual([
-      'assets/flags/4x3/us.svg',
-      'assets/flags/4x3/br.svg',
-      'assets/flags/4x3/es.svg',
+      'assets/img/flags/svgs/us.svg',
+      'assets/img/flags/svgs/br.svg',
+      'assets/img/flags/svgs/es.svg',
     ]);
 
     dropdown.dispatchEvent(new CustomEvent('select', { detail: dropdown.options[1] }));

@@ -10,26 +10,15 @@ import {
   viewChild,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PopupOptionItem } from '../../../../core/design-lib/popup-option-item.types';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import {
   HansDropdownElement,
-  HeaderLanguageDropdownOption,
   HeaderLanguageSelectEvent,
 } from '../../header.types';
-
-const getLanguageFlagAsset = (
-  locale: HeaderLanguageDropdownOption['value'],
-): string => {
-  switch (locale) {
-    case 'pt-BR':
-      return 'assets/flags/4x3/br.svg';
-    case 'es-es':
-      return 'assets/flags/4x3/es.svg';
-    default:
-      return 'assets/flags/4x3/us.svg';
-  }
-};
+import {
+  getHeaderLanguageFlagAsset,
+  HeaderLanguageDropdownItem,
+} from './header-language-dropdown.component.types';
 
 @Component({
   selector: 'app-header-language-dropdown',
@@ -44,13 +33,13 @@ export class HeaderLanguageDropdownComponent {
     viewChild<ElementRef<HansDropdownElement>>('languageDropdown');
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly translation = inject(TranslationService);
-  protected readonly languageOptions = computed<readonly PopupOptionItem[]>(() =>
+  protected readonly languageOptions = computed<readonly HeaderLanguageDropdownItem[]>(() =>
     this.translation.languageOptions().map((option) => ({
       id: option.id,
       label: option.label,
       value: option.value,
       imageAlt: option.label,
-      imageSrc: getLanguageFlagAsset(option.value),
+      imageSrc: getHeaderLanguageFlagAsset(option.value),
       action: () => this.setLanguage(option.value),
     })),
   );
@@ -89,7 +78,7 @@ export class HeaderLanguageDropdownComponent {
     this.setLanguage(option.value);
   }
 
-  private setLanguage(locale: HeaderLanguageDropdownOption['value']): void {
+  private setLanguage(locale: HeaderLanguageDropdownItem['value']): void {
     this.translation.setLocale(locale);
     this.changeDetectorRef.markForCheck();
   }

@@ -1,23 +1,32 @@
 .navigation {
-  @apply flex flex-wrap items-center justify-center gap-2;
+  @apply flex flex-wrap items-center justify-center gap-1;
 }
 
 .navigation-button {
   @apply inline-flex;
-  --text-color: #ffffff;
-  --primary-default-color: #7089fa;
-  --primary-strong-color: #7089fa;
+  color: var(--header-foreground-color);
+  --text-color: currentColor;
+  --base-default-color: transparent;
+  --base-strong-color: currentColor;
+  --base-neutral-color: transparent;
+  --primary-default-color: transparent;
+  --primary-strong-color: currentColor;
+  --primary-neutral-color: transparent;
 }
 
 .navigation-button:hover {
-  --text-color: #7089fa;
+  color: var(--header-accent-color);
+}
+
+.navigation-button-active {
+  color: var(--header-accent-color);
 }
 
 @media (max-width: 1023px) {
   .navigation {
     @apply absolute right-4 top-[calc(100%+0.75rem)] hidden min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
-    background-color: #373b3e;
-    border-color: rgba(255, 255, 255, 0.18);
+    background-color: var(--header-surface-color);
+    border-color: color-mix(in srgb, var(--header-foreground-color) 18%, transparent);
   }
 
   .navigation-open {
@@ -26,10 +35,5 @@
 
   .navigation-button {
     @apply w-full;
-    --text-color: #ffffff;
-  }
-
-  .navigation-button:hover {
-    --text-color: #7089fa;
   }
 }

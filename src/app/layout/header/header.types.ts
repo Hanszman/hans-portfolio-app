@@ -1,12 +1,11 @@
 import type { AppLanguageOption } from '../../core/translation/translation.types';
-import type { PopupOptionItem } from '../../core/design-lib/popup-option-item.types';
+import type { HeaderLanguageDropdownItem } from './components/header-language-dropdown/header-language-dropdown.component.types';
 
 export type HeaderLanguageDropdownOption = AppLanguageOption & {
   readonly action?: (option: HeaderLanguageDropdownOption) => void;
 };
 
-export type HeaderLanguageSelectEvent =
-  CustomEvent<HeaderLanguageDropdownOption>;
+export type HeaderLanguageSelectEvent = CustomEvent<HeaderLanguageDropdownItem>;
 
 export type HeaderThemeChangeEvent = CustomEvent<boolean>;
 
@@ -15,5 +14,5 @@ export interface HansToggleElement extends HTMLElement {
 }
 
 export interface HansDropdownElement extends HTMLElement {
-  options?: readonly PopupOptionItem[];
+  options?: readonly HeaderLanguageDropdownItem[];
 }

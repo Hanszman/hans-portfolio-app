@@ -7,17 +7,23 @@
 }
 
 .header-language-dropdown-icon {
-  @apply pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2;
-  color: #ffffff;
+  @apply pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 transition-colors duration-200;
+  color: var(--header-foreground-color);
 }
 
 .header-language-dropdown {
   @apply inline-flex;
-  --primary-default-color: #7089fa;
-  --white: #ffffff;
+  --primary-default-color: var(--header-accent-color);
+  --primary-strong-color: var(--header-accent-color);
+  --white: var(--header-foreground-color);
 }
 
 .header-language-dropdown:hover {
-  --primary-default-color: #ffffff;
-  --white: #7089fa;
+  --primary-default-color: var(--header-foreground-color);
+  --primary-strong-color: var(--header-foreground-color);
+  --white: var(--header-accent-color);
+}
+
+.header-language-dropdown-shell:hover .header-language-dropdown-icon {
+  color: var(--header-accent-color);
 }

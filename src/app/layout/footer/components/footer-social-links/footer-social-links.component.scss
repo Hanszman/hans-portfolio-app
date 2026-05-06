@@ -4,9 +4,9 @@
 
 .footer-social-links a {
   @apply inline-flex items-center justify-center transition-colors duration-200;
-  color: white;
+  color: var(--footer-foreground-color);
 }
 
 .footer-social-links a:hover {
-  color: #7089fa;
+  color: var(--footer-accent-color);
 }

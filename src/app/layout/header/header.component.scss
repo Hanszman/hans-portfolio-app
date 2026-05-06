@@ -1,7 +1,8 @@
 .header {
   @apply sticky top-0 z-40 w-full;
-  background-color: #373b3e;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+  background-color: var(--header-surface-color);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--base-strong-color) 18%, transparent);
+  color: var(--header-foreground-color);
 }
 
 .header-shell {
@@ -9,7 +10,7 @@
 }
 
 .header-content {
-  @apply mx-auto flex min-h-[5.5rem] max-w-[120rem] items-center justify-between gap-4 px-4;
+  @apply mx-auto flex min-h-[4.25rem] max-w-[120rem] items-center justify-between gap-4 px-4;
 }
 
 .header-brand {
@@ -17,7 +18,7 @@
 }
 
 .header-brand-image {
-  @apply h-auto w-14 transition-opacity duration-200;
+  @apply h-auto w-12 transition-opacity duration-200;
 }
 
 .header-brand-image-hover {
@@ -37,26 +38,40 @@
 }
 
 .header-actions {
-  @apply flex shrink-0 items-center gap-3;
+  @apply flex shrink-0 items-center gap-2;
 }
 
 .header-theme-control {
-  @apply inline-flex items-center gap-2 rounded-full border px-3 py-2;
-  background-color: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
+  @apply inline-flex items-center gap-2 rounded-full border px-3 py-1.5;
+  background-color: color-mix(in srgb, var(--header-foreground-color) 8%, transparent);
+  border-color: color-mix(in srgb, var(--header-foreground-color) 16%, transparent);
 }
 
 .header-theme-icon {
-  color: #ffffff;
+  @apply inline-flex items-center justify-center;
+  color: var(--header-foreground-color);
+  line-height: 0;
 }
 
 .header-menu-button {
   @apply hidden;
 }
 
+:host-context(body[data-app-theme='light']) .header {
+  --header-surface-color: color-mix(in srgb, var(--base-strong-color) 62%, var(--text-color));
+  --header-foreground-color: var(--background-color);
+  --header-accent-color: var(--primary-neutral-color);
+}
+
+:host-context(body[data-app-theme='dark']) .header {
+  --header-surface-color: color-mix(in srgb, var(--background-color) 88%, var(--base-neutral-color));
+  --header-foreground-color: var(--base-strong-color);
+  --header-accent-color: var(--primary-strong-color);
+}
+
 @media (max-width: 1023px) {
   .header-content {
-    @apply min-h-[5rem];
+    @apply min-h-[4rem];
   }
 
   .header-navigation {

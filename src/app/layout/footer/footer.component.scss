@@ -1,6 +1,7 @@
 .footer {
   @apply mt-12 w-full;
-  background-color: #373b3e;
+  background-color: var(--footer-surface-color);
+  color: var(--footer-foreground-color);
 }
 
 .footer-shell {
@@ -12,14 +13,26 @@
 }
 
 .footer-copy {
-  @apply m-0 flex items-center justify-center gap-2 text-base text-white;
+  @apply m-0 flex items-center justify-center gap-2 text-base;
 }
 
 .footer-copy a {
   @apply font-bold no-underline transition-colors duration-200;
-  color: #7089fa;
+  color: var(--footer-accent-color);
 }
 
 .footer-copy a:hover {
-  color: white;
+  color: var(--footer-foreground-color);
+}
+
+:host-context(body[data-app-theme='light']) .footer {
+  --footer-surface-color: color-mix(in srgb, var(--base-strong-color) 62%, var(--text-color));
+  --footer-foreground-color: var(--background-color);
+  --footer-accent-color: var(--primary-neutral-color);
+}
+
+:host-context(body[data-app-theme='dark']) .footer {
+  --footer-surface-color: color-mix(in srgb, var(--background-color) 88%, var(--base-neutral-color));
+  --footer-foreground-color: var(--base-strong-color);
+  --footer-accent-color: var(--primary-strong-color);
 }

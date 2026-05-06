@@ -1,5 +1,5 @@
 .shell {
-  @apply min-h-screen pb-12;
+  @apply flex min-h-screen flex-col;
 }
 
 .shell-content {
@@ -7,7 +7,7 @@
 }
 
 .shell-stage {
-  @apply px-4 py-2;
+  @apply flex-1 px-4 py-2;
 }
 
 .shell-api-status-wrapper {
