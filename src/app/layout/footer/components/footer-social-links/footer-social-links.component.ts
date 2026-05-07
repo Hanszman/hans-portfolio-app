@@ -12,4 +12,8 @@ import { FOOTER_SOCIAL_LINKS } from './footer-social-links.types';
 })
 export class FooterSocialLinksComponent {
   protected readonly links = FOOTER_SOCIAL_LINKS;
+
+  protected openLink(href: string): void {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  }
 }

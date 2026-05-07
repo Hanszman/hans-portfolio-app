@@ -36,7 +36,7 @@ describe('FooterComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelectorAll('app-footer-social-links a')).toHaveSize(3);
+    expect(compiled.querySelectorAll('app-footer-social-links hans-button')).toHaveSize(3);
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain(String(new Date().getFullYear()));
   });

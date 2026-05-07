@@ -11,18 +11,25 @@ describe('FooterSocialLinksComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the expected social links from the old portfolio', () => {
+  it('should render social action buttons and open the expected links', () => {
     const fixture = TestBed.createComponent(FooterSocialLinksComponent);
+    const openSpy = spyOn(window, 'open');
     fixture.detectChanges();
 
-    const links = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('a'),
-    ).map((anchor) => anchor.getAttribute('href'));
+    const buttons = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('hans-button'),
+    ) as HTMLElement[];
 
-    expect(links).toEqual([
-      'https://github.com/Hanszman',
-      'https://www.linkedin.com/in/victor-hanszman-b1362215b/',
-      'https://wa.me/5531994533811',
+    expect(buttons).toHaveSize(3);
+
+    buttons[0].click();
+    buttons[1].click();
+    buttons[2].click();
+
+    expect(openSpy.calls.allArgs()).toEqual([
+      ['https://github.com/Hanszman', '_blank', 'noopener,noreferrer'],
+      ['https://www.linkedin.com/in/victor-hanszman-b1362215b/', '_blank', 'noopener,noreferrer'],
+      ['https://wa.me/5531994533811', '_blank', 'noopener,noreferrer'],
     ]);
   });
 });

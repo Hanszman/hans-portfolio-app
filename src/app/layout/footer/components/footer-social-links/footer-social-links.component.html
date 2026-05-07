@@ -1,14 +1,17 @@
 <ul class="footer-social-links" [attr.aria-label]="'footer.social.navigation' | translate">
   @for (link of links; track link.href) {
     <li>
-      <a
-        [href]="link.href"
-        target="_blank"
-        rel="noreferrer"
+      <hans-button
+        class="footer-social-link-button"
         [attr.aria-label]="link.labelKey | translate"
+        buttonColor="base"
+        buttonShape="rounded"
+        buttonSize="small"
+        buttonVariant="transparent"
+        (click)="openLink(link.href)"
       >
         <hans-icon [name]="link.iconName" iconSize="medium"></hans-icon>
-      </a>
+      </hans-button>
     </li>
   }
 </ul>

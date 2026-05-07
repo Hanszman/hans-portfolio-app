@@ -1,7 +1,7 @@
 .footer {
   @apply mt-12 w-full;
-  background-color: var(--app-chrome-surface-color);
-  color: var(--app-chrome-foreground-color);
+  background-color: var(--app-shell-surface-color);
+  color: var(--app-shell-foreground-color);
 }
 
 .footer-shell {
@@ -18,9 +18,9 @@
 
 .footer-copy a {
   @apply font-bold no-underline transition-colors duration-200;
-  color: var(--app-chrome-accent-color);
+  color: var(--app-shell-accent-color);
 }
 
 .footer-copy a:hover {
-  color: var(--app-chrome-foreground-color);
+  color: var(--app-shell-foreground-color);
 }
