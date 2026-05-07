@@ -119,3 +119,9 @@ Beleza, vamos lá! Ainda tenho alguns pontos:
 -Se tiver algum impedimento com relação às cores dos botões (tanto do header, como footer e dropdown) por causa da lib, me avise que se precisar, vamos adaptar a lib para termos esse comportamento também
 ...
 Beleza, então realmente a limitação que temos é da lib. Nesse caso pode alterar a lib para incluirmos esse comportamentos que precisamos nos botões, então edite o hans-button, continue fazendo passar no lint e text:coverage 100% e faça com que não impacte comportamentos que ja existam... além disso, inclua esses casos novos nos stories/mdx 
+...
+-Sobre o styles.scss, essas regras todas relacionadas a header, footer, navigation e dropdown do header não deveriam estar no scss especificamente desses componentes ao invés de estar geral no styles? pq pelo oq eu entendi o styles seria somente para as regras gerais, como as cores novas baseadas nas cores base dos temas por exemplo.
+-Nenhum dos comandos de build da lib estão funcionando agora depois da sua atualização, nem npm run build, nem npm run build:storybook, nem npm run build:cdn-local, nem npm run storybook, etc. Está dando esse erro do print, corrija por favor
+...
+-Beleza, agora que editamos a lib, faça as substituições pelos botões com essa nova regra no portfolio
+-Altere a ordem do loading do button no stories da lib para a ultima, abaixo dessa do hover
