@@ -74,7 +74,7 @@ describe('HeaderComponent', () => {
     const brandImage = compiled.querySelector('.header-brand-image') as HTMLImageElement;
     const navigationButtons = Array.from(
       compiled.querySelectorAll('.header-navigation hans-button'),
-    ) as Array<HTMLElement & { label?: string }>;
+    ) as (HTMLElement & { label?: string })[];
 
     expect(brandImage.getAttribute('src')).toContain('assets/img/logo/vh_logo_blue.png');
     expect(compiled.querySelector('hans-toggle')).toBeTruthy();

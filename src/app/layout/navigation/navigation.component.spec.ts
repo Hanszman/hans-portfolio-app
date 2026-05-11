@@ -43,9 +43,9 @@ describe('NavigationComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = Array.from(compiled.querySelectorAll('hans-button')) as Array<
+    const buttons = Array.from(compiled.querySelectorAll('hans-button')) as (
       HTMLElement & { label?: string }
-    >;
+    )[];
 
     expect(buttons).toHaveSize(2);
     expect(buttons.map((button) => button.label)).toEqual(['Home', 'Projects']);

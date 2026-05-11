@@ -53,7 +53,7 @@ describe('ShellComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const navigationButtons = Array.from(
       compiled.querySelectorAll('.header-navigation hans-button'),
-    ) as Array<HTMLElement & { label?: string }>;
+    ) as (HTMLElement & { label?: string })[];
 
     expect(compiled.textContent).toContain('API connected');
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
