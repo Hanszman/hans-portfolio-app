@@ -27,7 +27,7 @@
           <hans-icon
             class="header-theme-icon"
             [name]="themeIconName"
-            iconSize="small"
+            [iconSize]="'small'"
             [attr.aria-label]="theme.mode() === 'dark'
               ? ('header.controls.lightTheme' | translate)
               : ('header.controls.darkTheme' | translate)"
@@ -37,8 +37,8 @@
             [attr.aria-label]="'header.controls.theme' | translate"
             [checked]="theme.mode() === 'dark'"
             (change)="setThemeMode($event)"
-            toggleColor="primary"
-            toggleSize="small"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
           ></hans-toggle>
         </div>
 
@@ -47,15 +47,15 @@
         <hans-button
           class="header-menu-button"
           [attr.aria-label]="'header.controls.navigation' | translate"
-          buttonColor="primary"
-          buttonShape="rounded"
-          buttonSize="small"
-          buttonVariant="default"
+          [buttonColor]="'primary'"
+          [buttonShape]="'rounded'"
+          [buttonSize]="'small'"
+          [buttonVariant]="'default'"
           (click)="toggleMobileMenu()"
         >
           <hans-icon
             [name]="isMobileMenuOpen() ? 'FaTimes' : 'FaBars'"
-            iconSize="small"
+            [iconSize]="'small'"
           ></hans-icon>
         </hans-button>
       </div>
