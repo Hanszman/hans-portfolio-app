@@ -1,4 +1,8 @@
-<ul class="footer-social-links" [attr.aria-label]="'footer.social.navigation' | translate">
+<ul
+  class="footer-social-links"
+  [attr.aria-label]="'footer.social.navigation' | translate"
+  style="--text-color: var(--app-shell-foreground-color)"
+>
   @for (link of links; track link.href) {
     <li>
       <hans-button

@@ -3,6 +3,7 @@
   [class.navigation-open]="menuOpen()"
   aria-label="Primary portfolio navigation"
   data-testid="navigation"
+  style="--text-color: var(--app-shell-foreground-color)"
 >
   @for (item of items(); track item.path) {
     <hans-button

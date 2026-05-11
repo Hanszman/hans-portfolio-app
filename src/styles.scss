@@ -20,8 +20,7 @@ body[data-app-theme='light'] {
     var(--text-color)
   );
   --app-shell-foreground-color: var(--background-color);
-  --app-shell-accent-color: var(--primary-neutral-color);
-  --app-shell-option-color: var(--base-strong-color);
+  --app-shell-accent-color: var(--primary-default-color);
 }
 
 body[data-app-theme='dark'] {
@@ -31,8 +30,7 @@ body[data-app-theme='dark'] {
     var(--base-neutral-color)
   );
   --app-shell-foreground-color: var(--base-strong-color);
-  --app-shell-accent-color: var(--primary-strong-color);
-  --app-shell-option-color: var(--base-strong-color);
+  --app-shell-accent-color: var(--primary-default-color);
 }
 
 app-root {
@@ -40,87 +38,16 @@ app-root {
   min-height: 100vh;
 }
 
-app-navigation hans-button.navigation-button {
-  --text-color: var(--app-shell-foreground-color);
-  --base-default-color: transparent;
-  --base-strong-color: var(--app-shell-foreground-color);
-  --base-neutral-color: transparent;
-  --primary-default-color: var(--app-shell-accent-color);
-  --primary-strong-color: var(--app-shell-accent-color);
-  --primary-neutral-color: transparent;
-}
-
-app-navigation hans-button.navigation-button .hans-button {
-  color: var(--app-shell-foreground-color);
-}
-
-app-navigation hans-button.navigation-button.navigation-button-active {
-  --text-color: var(--app-shell-accent-color);
-  --base-strong-color: var(--app-shell-accent-color);
-}
-
-app-navigation hans-button.navigation-button.navigation-button-active .hans-button {
-  color: var(--app-shell-accent-color);
-}
-
 app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-trigger {
   min-width: auto;
   gap: 0.375rem;
-  padding: 0.625rem 0.75rem 0.625rem 2.625rem;
-  border-color: transparent;
-}
-
-app-header-language-dropdown
-  hans-dropdown.header-language-dropdown
-  .hans-dropdown-trigger
-  > span:first-child {
-  display: none;
-}
-
-app-header-language-dropdown
-  .header-language-dropdown-shell:hover
-  hans-dropdown.header-language-dropdown
-  .hans-dropdown-trigger {
-  background-color: var(--app-shell-foreground-color);
-  color: var(--app-shell-accent-color);
+  padding: 0.625rem 0.75rem;
 }
 
 app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-popup {
   min-width: 20rem;
 }
 
-app-header-language-dropdown hans-dropdown.header-language-dropdown {
-  --primary-default-color: var(--app-shell-accent-color);
-  --primary-strong-color: var(--app-shell-accent-color);
-  --primary-neutral-color: var(--app-shell-foreground-color);
-  --white: var(--app-shell-foreground-color);
-}
-
-app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-option {
-  color: var(--app-shell-option-color);
-  transition:
-    color 200ms ease,
-    background-color 200ms ease;
-}
-
-app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-option:hover {
-  background-color: var(--app-shell-accent-color);
-  color: var(--app-shell-foreground-color);
-}
-
-app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-popup-item-list-empty {
-  color: var(--app-shell-option-color);
-}
-
-app-footer-social-links hans-button.footer-social-link-button {
-  --text-color: var(--app-shell-foreground-color);
-  --base-default-color: transparent;
-  --base-strong-color: var(--app-shell-foreground-color);
-  --base-neutral-color: transparent;
-  --primary-default-color: var(--app-shell-accent-color);
-}
-
 app-footer-social-links hans-button.footer-social-link-button .hans-button {
   padding: 0;
-  color: var(--app-shell-foreground-color);
 }

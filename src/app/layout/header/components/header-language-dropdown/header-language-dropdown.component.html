@@ -1,24 +1,21 @@
-<div class="header-language-dropdown-shell">
-  <hans-icon
-    class="header-language-dropdown-icon"
-    name="FaGlobe"
-    iconSize="small"
-    aria-hidden="true"
-  ></hans-icon>
-
-  <hans-dropdown
-    #languageDropdown
-    class="header-language-dropdown"
-    [noOptionsText]="'header.controls.noLanguages' | translate"
-    [options]="languageOptions()"
-    [triggerLabel]="triggerLabel"
-    [attr.aria-label]="'header.controls.language' | translate"
-    triggerColor="primary"
-    triggerHoverColor="primary"
-    triggerHoverVariant="neutral"
-    triggerShape="rounded"
-    triggerSize="small"
-    triggerVariant="default"
-    (select)="selectLanguage($event)"
-  ></hans-dropdown>
-</div>
+<hans-dropdown
+  #languageDropdown
+  class="header-language-dropdown"
+  [noOptionsText]="'header.controls.noLanguages' | translate"
+  [options]="languageOptions()"
+  triggerLabel=""
+  [triggerAriaLabel]="'header.controls.language' | translate"
+  popupBackgroundColor="var(--white)"
+  optionTextColor="var(--app-shell-surface-color)"
+  optionHoverBackgroundColor="var(--primary-default-color)"
+  optionHoverTextColor="var(--white)"
+  emptyTextColor="var(--app-shell-surface-color)"
+  triggerColor="primary"
+  triggerHoverColor="primary"
+  triggerHoverVariant="default"
+  triggerIconName="FaGlobe"
+  triggerShape="rounded"
+  triggerSize="small"
+  triggerVariant="inverse"
+  (select)="selectLanguage($event)"
+></hans-dropdown>
