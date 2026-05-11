@@ -43,11 +43,12 @@ describe('NavigationComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = compiled.querySelectorAll('hans-button');
+    const buttons = Array.from(compiled.querySelectorAll('hans-button')) as Array<
+      HTMLElement & { label?: string }
+    >;
 
     expect(buttons).toHaveSize(2);
-    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
-    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
+    expect(buttons.map((button) => button.label)).toEqual(['Home', 'Projects']);
   });
 
   it('should expose the mobile open state class when requested', () => {
@@ -82,8 +83,8 @@ describe('NavigationComponent', () => {
 
     const activeButton = (fixture.nativeElement as HTMLElement).querySelector(
       '.navigation-button-active',
-    );
+    ) as (HTMLElement & { label?: string }) | null;
 
-    expect(activeButton?.getAttribute('label')).toBe('Projects');
+    expect(activeButton?.label).toBe('Projects');
   });
 });

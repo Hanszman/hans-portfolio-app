@@ -72,13 +72,15 @@ describe('HeaderComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     const brandImage = compiled.querySelector('.header-brand-image') as HTMLImageElement;
+    const navigationButtons = Array.from(
+      compiled.querySelectorAll('.header-navigation hans-button'),
+    ) as Array<HTMLElement & { label?: string }>;
 
     expect(brandImage.getAttribute('src')).toContain('assets/img/logo/vh_logo_blue.png');
     expect(compiled.querySelector('hans-toggle')).toBeTruthy();
     expect(compiled.querySelector('hans-dropdown')).toBeTruthy();
     expect(compiled.querySelector('.header-menu-button')).toBeTruthy();
-    expect(compiled.querySelector('hans-button[label="Home"]')).toBeTruthy();
-    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
+    expect(navigationButtons.map((button) => button.label)).toEqual(['Home', 'Projects']);
   });
 
   it('should expose theme, language, and mobile menu handlers for design-lib controls', () => {

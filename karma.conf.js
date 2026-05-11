@@ -7,7 +7,23 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }, { type: 'lcov' }],
     },
-    browsers: ['ChromeHeadless'],
-    restartOnFileChange: true,
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--headless=new',
+          '--no-sandbox',
+          '--disable-gpu',
+          '--disable-software-rasterizer',
+          '--disable-dev-shm-usage',
+          '--disable-features=VizDisplayCompositor',
+          '--use-angle=swiftshader',
+          '--remote-debugging-port=9222',
+        ],
+      },
+    },
+    browsers: ['ChromeHeadlessNoSandbox'],
+    singleRun: true,
+    restartOnFileChange: false,
   });
 };

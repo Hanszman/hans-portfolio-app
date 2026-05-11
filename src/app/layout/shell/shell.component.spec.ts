@@ -51,12 +51,15 @@ describe('ShellComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    const navigationButtons = Array.from(
+      compiled.querySelectorAll('.header-navigation hans-button'),
+    ) as Array<HTMLElement & { label?: string }>;
 
     expect(compiled.textContent).toContain('API connected');
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
     expect(compiled.textContent).toContain(apiConfig.baseUrl);
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.querySelector('hans-button[label="Projects"]')).toBeTruthy();
+    expect(navigationButtons.map((button) => button.label)).toContain('Projects');
   });
 
   it('should render the loading API status while the health check is pending', async () => {
