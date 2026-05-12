@@ -73,4 +73,8 @@
   .header-menu-button {
     @apply inline-flex;
   }
+
+  .header-actions {
+    @apply gap-3;
+  }
 }

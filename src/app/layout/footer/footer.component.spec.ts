@@ -35,9 +35,12 @@ describe('FooterComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    const copyButton = compiled.querySelector('.footer-copy-button') as
+      | (HTMLElement & { label?: string })
+      | null;
 
     expect(compiled.querySelectorAll('app-footer-social-links hans-button')).toHaveSize(3);
-    expect(compiled.textContent).toContain('Victor Hanszman');
+    expect(copyButton?.label).toBe('Victor Hanszman');
     expect(compiled.textContent).toContain(String(new Date().getFullYear()));
   });
 });

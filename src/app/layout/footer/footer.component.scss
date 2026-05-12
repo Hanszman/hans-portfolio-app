@@ -9,18 +9,13 @@
 }
 
 .footer-content {
-  @apply mx-auto grid max-w-[120rem] gap-4 text-center;
+  @apply mx-auto grid max-w-[120rem] gap-3 text-center;
 }
 
 .footer-copy {
-  @apply m-0 flex items-center justify-center gap-2 text-base;
+  @apply m-0 flex items-center justify-center gap-1 text-base;
 }
 
-.footer-copy a {
-  @apply font-bold no-underline transition-colors duration-200;
-  color: var(--app-shell-accent-color);
-}
-
-.footer-copy a:hover {
-  color: var(--app-shell-foreground-color);
+.footer-copy-button {
+  @apply inline-flex;
 }

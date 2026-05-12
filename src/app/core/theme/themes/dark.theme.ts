@@ -2,9 +2,9 @@ import { HansThemeCombination } from '../../design-lib/design-lib.types';
 
 export const DARK_THEME = {
   primary: {
-    strong: '#c4b5fd',
-    default: '#7c3aed',
-    neutral: '#4b1f8a',
+    strong: '#c9d3ff',
+    default: '#7089fa',
+    neutral: '#3554d4',
   },
   secondary: {
     strong: '#93c5fd',

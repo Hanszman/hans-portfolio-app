@@ -54,11 +54,14 @@ describe('ShellComponent', () => {
     const navigationButtons = Array.from(
       compiled.querySelectorAll('.header-navigation hans-button'),
     ) as (HTMLElement & { label?: string })[];
+    const footerCopyButton = compiled.querySelector('.footer-copy-button') as
+      | (HTMLElement & { label?: string })
+      | null;
 
     expect(compiled.textContent).toContain('API connected');
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
     expect(compiled.textContent).toContain(apiConfig.baseUrl);
-    expect(compiled.textContent).toContain('Victor Hanszman');
+    expect(footerCopyButton?.label).toBe('Victor Hanszman');
     expect(navigationButtons.map((button) => button.label)).toContain('Projects');
   });
 

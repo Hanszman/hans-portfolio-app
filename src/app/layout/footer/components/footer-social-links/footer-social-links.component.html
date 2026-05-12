@@ -9,14 +9,14 @@
         class="footer-social-link-button"
         [attr.aria-label]="link.labelKey | translate"
         [buttonColor]="'base'"
-        [buttonShape]="'rounded'"
+        [buttonShape]="'square'"
         [buttonSize]="'small'"
         [hoverButtonColor]="'primary'"
         [hoverButtonVariant]="'transparent'"
         [buttonVariant]="'transparent'"
         (click)="openLink(link.href)"
       >
-        <hans-icon [name]="link.iconName" [iconSize]="'medium'"></hans-icon>
+        <hans-icon [name]="link.iconName" [iconSize]="'large'"></hans-icon>
       </hans-button>
     </li>
   }
