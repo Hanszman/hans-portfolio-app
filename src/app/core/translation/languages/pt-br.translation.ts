@@ -29,6 +29,11 @@ export const PT_BR_TRANSLATIONS = {
   'header.controls.portuguese': 'Português',
   'header.controls.english': 'Inglês',
   'header.controls.spanish': 'Espanhol',
+  'header.navigation.home': 'Home',
+  'header.navigation.experiences': 'Experiências',
+  'header.navigation.skills': 'Skills',
+  'header.navigation.projects': 'Projetos',
+  'header.navigation.dashboard': 'Dashboard',
   'header.statusLabel': 'Status da fundação',
   'header.eyebrow': 'Fundação do remake do portfolio',
   'header.title':

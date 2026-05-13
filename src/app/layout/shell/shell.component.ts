@@ -7,12 +7,21 @@ import { catchError, map, of, startWith } from 'rxjs';
 import { SystemService } from '../../core/api/system/system.service';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
+import { AppTranslationKey } from '../../core/translation/translation.types';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { readNavigationItems } from '../navigation/helpers/navigation.helper';
 import { ContainerTone } from '../container/container.types';
 import { ContainerComponent } from '../container/container.component';
 import { ShellApiStatusViewModel } from './shell.types';
+
+const NAVIGATION_LABEL_KEY_BY_PATH: Record<string, AppTranslationKey> = {
+  '/home': 'header.navigation.home',
+  '/experiences': 'header.navigation.experiences',
+  '/skills': 'header.navigation.skills',
+  '/projects': 'header.navigation.projects',
+  '/dashboard': 'header.navigation.dashboard',
+};
 
 @Component({
   selector: 'app-shell',
@@ -81,9 +90,14 @@ export class ShellComponent {
     },
   );
 
-  protected readonly navigationItems = computed(() =>
-    readNavigationItems(this.router.config),
-  );
+  protected readonly navigationItems = computed(() => {
+    this.translation.locale();
+
+    return readNavigationItems(this.router.config).map((item) => ({
+      ...item,
+      label: this.translation.instant(NAVIGATION_LABEL_KEY_BY_PATH[item.path]!),
+    }));
+  });
 
   protected readonly apiStatusTone = computed<ContainerTone>(() => {
     const statusState = this.apiStatus().state;

@@ -29,6 +29,11 @@ export const EN_TRANSLATIONS = {
   'header.controls.portuguese': 'Portuguese',
   'header.controls.english': 'English',
   'header.controls.spanish': 'Spanish',
+  'header.navigation.home': 'Home',
+  'header.navigation.experiences': 'Experiences',
+  'header.navigation.skills': 'Skills',
+  'header.navigation.projects': 'Projects',
+  'header.navigation.dashboard': 'Dashboard',
   'header.statusLabel': 'Foundation status',
   'header.eyebrow': 'Portfolio remake foundation',
   'header.title':

@@ -5,6 +5,7 @@ import { apiConfig } from '../../core/api/api.config';
 import { createSystemServiceMock } from '../../core/api/mocks/system.mocks';
 import { SystemService } from '../../core/api/system/system.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
+import { TranslationService } from '../../core/translation/translation.service';
 import { ShellComponent } from './shell.component';
 
 @Component({
@@ -44,25 +45,39 @@ describe('ShellComponent', () => {
     }).compileComponents();
   };
 
+  afterEach(() => {
+    localStorage.removeItem('hans-portfolio-locale');
+    document.documentElement.lang = '';
+  });
+
   it('should render the connected API status when the health check succeeds', async () => {
     await configureTestingModule('success');
 
     const fixture = TestBed.createComponent(ShellComponent);
+    const translation = TestBed.inject(TranslationService);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const navigationButtons = Array.from(
-      compiled.querySelectorAll('.header-navigation hans-button'),
-    ) as (HTMLElement & { label?: string })[];
     const footerCopyButton = compiled.querySelector('.footer-copy-button') as
       | (HTMLElement & { label?: string })
       | null;
+    const getNavigationLabels = (): string[] =>
+      Array.from(
+        compiled.querySelectorAll('.header-navigation hans-button'),
+      ).map((button) => (button as HTMLElement & { label?: string }).label ?? '');
 
     expect(compiled.textContent).toContain('API connected');
     expect(compiled.textContent).toContain('2026-04-14T13:00:00.000Z');
     expect(compiled.textContent).toContain(apiConfig.baseUrl);
     expect(footerCopyButton?.label).toBe('Victor Hanszman');
-    expect(navigationButtons.map((button) => button.label)).toContain('Projects');
+    expect(getNavigationLabels()).toContain('Projects');
+
+    translation.setLocale('pt-br');
+    fixture.detectChanges();
+
+    expect(getNavigationLabels()).toEqual(['Home', 'Projetos']);
+
+    translation.setLocale('en-us');
   });
 
   it('should render the loading API status while the health check is pending', async () => {

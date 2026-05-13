@@ -42,15 +42,19 @@
 }
 
 .header-theme-control {
-  @apply inline-flex items-center gap-2 rounded-full border px-3 py-1.5;
+  @apply inline-flex min-h-12 items-center gap-2 self-center rounded-full border px-3 py-1.5;
   background-color: color-mix(in srgb, var(--app-shell-foreground-color) 8%, transparent);
   border-color: color-mix(in srgb, var(--app-shell-foreground-color) 16%, transparent);
 }
 
 .header-theme-icon {
-  @apply inline-flex items-center justify-center;
+  @apply inline-flex items-center justify-center self-center;
   color: var(--app-shell-foreground-color);
   line-height: 0;
+}
+
+.header-theme-control hans-toggle {
+  @apply inline-flex items-center self-center;
 }
 
 .header-menu-dropdown {
@@ -64,10 +68,6 @@
 
   .header-navigation {
     @apply static flex-none;
-  }
-
-  .header-theme-control {
-    @apply hidden;
   }
 
   .header-navigation {

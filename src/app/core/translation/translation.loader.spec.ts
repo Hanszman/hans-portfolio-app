@@ -9,11 +9,11 @@ import {
 
 describe('AppTranslationLoader', () => {
   it('should read a supported translation language', () => {
-    expect(readTranslationLanguage('pt-br')).toBe(PT_BR_TRANSLATIONS);
+    expect(readTranslationLanguage('pt-br')).toEqual(PT_BR_TRANSLATIONS);
   });
 
   it('should fall back to the default language for unsupported locales', () => {
-    expect(readTranslationLanguage('es')).toBe(EN_TRANSLATIONS);
+    expect(readTranslationLanguage('es')).toEqual(EN_TRANSLATIONS);
   });
 
   it('should convert dot-path translation keys into nested objects', () => {
