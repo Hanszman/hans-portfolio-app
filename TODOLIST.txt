@@ -145,6 +145,6 @@ para um trio baseado na cor #7089fa como default ao invés de #7c3aed
 -Repare no print 4 que no nosso novo footer os ícones estão muito espaçados e pequenos, eles devem ficar iguais aos do antigo, como no print 5... alem disso, como vc pode ver no print 4, o botão "Victor Hanszman" é um <a> e não utiliza hans-button... ele também deve utilizar o hans-button mas com as cores inversas às dos outros botões, ou seja, ao invés do texto dele ser branco e ficar roxo quando passamos o mouse, ele deve ser ao contrário, texto roxo e fica branco ao passar o mouse... faça isso parametrizavel mesmo com a lib, sem gambiarra por favor
 -Repare também no print 6 que quando estamos no modo mobile, esse botão de hamburguer (com ícone FaBars) é bem diferente do nosso botão de dropdown, faça ele ser exatamente igual ao dropdown por favor, igual a como vc pode ver no print 7, ambos os dropdowns são padronizados... se necessário crie um componente no shared desse portfolio que padronize esse comportamento de dropdown
 ...
--Testes sem 100% de coverage
--Hamburguer mobile ainda não está usando hans-dropdown
--Icon Trigger Button do hans-dropdown ainda não está no tamanho correto
+-Como vc pode ver no print 1, os testes ainda não estão com 100% de coverage... corrija por favor e sempre aplique 100% de coverage
+-Como vc pode ver nos print 2 e 3, o trigger button do dropdown de idioma ainda está muito "fino", preciso que ele fique quadradinho, igual o outro dropdown, deixe o mesmo espaço interno em cima, em baixo e dos lados... ou seja, igual no print 4 ou pelo menos o mais proximo disso
+-Como vc pode ver nos print 2 e 3, vc ainda não colocou nosso menu mobile pra usar o hans-dropdown igual o dropdown de idioma, deixe ambos no mesmo estilo por favor... e não é pra trocar o icon dele quando abrir pra fatimes, mantenha sempre no fabars
