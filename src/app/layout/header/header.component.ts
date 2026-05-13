@@ -7,7 +7,6 @@ import {
   effect,
   inject,
   input,
-  signal,
   viewChild,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
@@ -44,7 +43,6 @@ export class HeaderComponent {
     viewChild<ElementRef<HansDropdownElement>>('mobileMenuDropdown');
   private readonly router = inject(Router);
   protected readonly theme = inject(ThemeService);
-  protected readonly isMobileMenuOpen = signal(false);
   protected readonly mobileMenuOptions = computed<readonly HeaderNavigationDropdownItem[]>(
     () =>
       this.navigationItems().map((item) => ({
@@ -99,20 +97,9 @@ export class HeaderComponent {
     this.theme.setMode(checked ? 'dark' : 'light');
   }
 
-  protected closeMobileMenu(): void {
-    this.isMobileMenuOpen.set(false);
-  }
-
-  protected setMobileMenuOpen(event: Event): void {
-    const { detail: isOpen } = event as CustomEvent<boolean>;
-
-    this.isMobileMenuOpen.set(Boolean(isOpen));
-  }
-
   protected selectMobileNavigation(event: Event): void {
     const { detail: option } = event as HeaderNavigationSelectEvent;
 
-    this.closeMobileMenu();
     void this.router.navigateByUrl(option.value);
   }
 }

@@ -1,10 +1,7 @@
 export interface FooterSocialLink {
   readonly href: string;
   readonly iconName: string;
-  readonly labelKey:
-    | 'footer.social.github'
-    | 'footer.social.linkedin'
-    | 'footer.social.whatsapp';
+  readonly labelKey: 'footer.social.github' | 'footer.social.linkedin' | 'footer.social.whatsapp';
 }
 
 export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
@@ -14,7 +11,7 @@ export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
     labelKey: 'footer.social.github',
   },
   {
-    href: 'https://www.linkedin.com/in/victor-hanszman-b1362215b/',
+    href: 'https://www.linkedin.com/in/victor-hanszman/',
     iconName: 'FaLinkedin',
     labelKey: 'footer.social.linkedin',
   },

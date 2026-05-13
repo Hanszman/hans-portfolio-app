@@ -18,7 +18,6 @@ describe('HeaderComponent', () => {
         'hans-dropdown',
         class extends HTMLElement {
           options?: readonly unknown[];
-          open?: boolean;
         },
       );
     }
@@ -111,7 +110,6 @@ describe('HeaderComponent', () => {
       }[];
     };
     const mobileDropdown = compiled.querySelector('.header-menu-dropdown') as HTMLElement & {
-      open?: boolean;
       options: readonly {
         label: string;
         value: string;
@@ -148,11 +146,6 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(document.documentElement.lang).toBe('es-es');
-
-    mobileDropdown.dispatchEvent(new CustomEvent('openChange', { detail: true }));
-    fixture.detectChanges();
-
-    expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeTrue();
     expect(mobileDropdown.options.map((option) => option.label)).toEqual([
       'Home',
       'Projects',
@@ -163,7 +156,6 @@ describe('HeaderComponent', () => {
     );
     fixture.detectChanges();
 
-    expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeFalse();
     expect(navigateSpy).toHaveBeenCalledWith('/projects');
   });
 });

@@ -28,7 +28,7 @@ describe('FooterSocialLinksComponent', () => {
 
     expect(openSpy.calls.allArgs()).toEqual([
       ['https://github.com/Hanszman', '_blank', 'noopener,noreferrer'],
-      ['https://www.linkedin.com/in/victor-hanszman-b1362215b/', '_blank', 'noopener,noreferrer'],
+      ['https://www.linkedin.com/in/victor-hanszman/', '_blank', 'noopener,noreferrer'],
       ['https://wa.me/5531994533811', '_blank', 'noopener,noreferrer'],
     ]);
   });
