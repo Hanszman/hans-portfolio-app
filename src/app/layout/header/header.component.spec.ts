@@ -1,11 +1,9 @@
 import { Component, provideZonelessChangeDetection } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { APP_THEME_STORAGE_KEY } from '../../core/theme/theme.config';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
-import { NavigationComponent } from '../navigation/navigation.component';
 import { HeaderComponent } from './header.component';
 
 @Component({
@@ -86,8 +84,19 @@ describe('HeaderComponent', () => {
   });
 
   it('should expose theme, language, and mobile menu handlers for design-lib controls', () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = spyOn(router, 'navigateByUrl').and.resolveTo(true);
     const fixture = TestBed.createComponent(HeaderComponent);
-    fixture.componentRef.setInput('navigationItems', []);
+    fixture.componentRef.setInput('navigationItems', [
+      {
+        path: '/home',
+        label: 'Home',
+      },
+      {
+        path: '/projects',
+        label: 'Projects',
+      },
+    ]);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
@@ -103,6 +112,10 @@ describe('HeaderComponent', () => {
     };
     const mobileDropdown = compiled.querySelector('.header-menu-dropdown') as HTMLElement & {
       open?: boolean;
+      options: readonly {
+        label: string;
+        value: string;
+      }[];
     };
 
     toggle.dispatchEvent(new CustomEvent('change', { detail: true }));
@@ -140,15 +153,17 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeTrue();
+    expect(mobileDropdown.options.map((option) => option.label)).toEqual([
+      'Home',
+      'Projects',
+    ]);
 
-    const navigationComponents = fixture.debugElement.queryAll(
-      By.directive(NavigationComponent),
+    mobileDropdown.dispatchEvent(
+      new CustomEvent('select', { detail: mobileDropdown.options[1] }),
     );
-    const mobileNavigation = navigationComponents[1].componentInstance as NavigationComponent;
-
-    mobileNavigation.itemSelected.emit();
     fixture.detectChanges();
 
     expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeFalse();
+    expect(navigateSpy).toHaveBeenCalledWith('/projects');
   });
 });

@@ -43,9 +43,16 @@
         <app-header-language-dropdown />
 
         <hans-dropdown
+          #mobileMenuDropdown
           class="header-menu-dropdown"
           [triggerLabel]="''"
           [triggerAriaLabel]="'header.controls.navigation' | translate"
+          [options]="mobileMenuOptions()"
+          [popupBackgroundColor]="'var(--white)'"
+          [optionTextColor]="'var(--app-shell-surface-color)'"
+          [optionHoverBackgroundColor]="'var(--primary-default-color)'"
+          [optionHoverTextColor]="'var(--white)'"
+          [emptyTextColor]="'var(--app-shell-surface-color)'"
           [triggerColor]="'primary'"
           [triggerHoverColor]="'primary'"
           [triggerHoverVariant]="'inverse'"
@@ -56,14 +63,8 @@
           [showTriggerCaret]="false"
           [open]="isMobileMenuOpen()"
           (openChange)="setMobileMenuOpen($event)"
-        >
-          <app-navigation
-            class="header-mobile-navigation"
-            [items]="navigationItems()"
-            [popupMode]="true"
-            (itemSelected)="handleMobileNavigationSelect()"
-          />
-        </hans-dropdown>
+          (select)="selectMobileNavigation($event)"
+        ></hans-dropdown>
       </div>
     </div>
   </div>
