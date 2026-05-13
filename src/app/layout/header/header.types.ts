@@ -15,4 +15,5 @@ export interface HansToggleElement extends HTMLElement {
 
 export interface HansDropdownElement extends HTMLElement {
   options?: readonly HeaderLanguageDropdownItem[];
+  open?: boolean;
 }

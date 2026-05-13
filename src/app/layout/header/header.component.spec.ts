@@ -20,6 +20,7 @@ describe('HeaderComponent', () => {
         'hans-dropdown',
         class extends HTMLElement {
           options?: readonly unknown[];
+          open?: boolean;
         },
       );
     }
@@ -75,11 +76,12 @@ describe('HeaderComponent', () => {
     const navigationButtons = Array.from(
       compiled.querySelectorAll('.header-navigation hans-button'),
     ) as (HTMLElement & { label?: string })[];
+    const dropdowns = compiled.querySelectorAll('hans-dropdown');
 
     expect(brandImage.getAttribute('src')).toContain('assets/img/logo/vh_logo_blue.png');
     expect(compiled.querySelector('hans-toggle')).toBeTruthy();
-    expect(compiled.querySelector('hans-dropdown')).toBeTruthy();
-    expect(compiled.querySelector('.header-menu-button')).toBeTruthy();
+    expect(dropdowns).toHaveSize(2);
+    expect(compiled.querySelector('.header-menu-dropdown')).toBeTruthy();
     expect(navigationButtons.map((button) => button.label)).toEqual(['Home', 'Projects']);
   });
 
@@ -90,30 +92,35 @@ describe('HeaderComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     const toggle = compiled.querySelector('hans-toggle') as HTMLElement;
-    const dropdown = compiled.querySelector('hans-dropdown') as HTMLElement & {
+    const languageDropdown = compiled.querySelector(
+      'app-header-language-dropdown hans-dropdown',
+    ) as HTMLElement & {
       options: readonly {
         label: string;
         value: 'en-us' | 'pt-br' | 'es-es';
         action?: () => void;
       }[];
     };
+    const mobileDropdown = compiled.querySelector('.header-menu-dropdown') as HTMLElement & {
+      open?: boolean;
+    };
 
     toggle.dispatchEvent(new CustomEvent('change', { detail: true }));
-    dropdown.options[1].action?.();
+    languageDropdown.options[1].action?.();
     fixture.detectChanges();
 
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('dark');
     expect(document.documentElement.lang).toBe('pt-br');
     expect(compiled.querySelector('.header-theme-icon')).toBeTruthy();
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeTrue();
-    expect(dropdown.options.map((option) => option.value)).toEqual([
+    expect(languageDropdown.options.map((option) => option.value)).toEqual([
       'en-us',
       'pt-br',
       'es-es',
     ]);
 
-    dropdown.dispatchEvent(
-      new CustomEvent('select', { detail: dropdown.options[0] }),
+    languageDropdown.dispatchEvent(
+      new CustomEvent('select', { detail: languageDropdown.options[0] }),
     );
     toggle.dispatchEvent(new CustomEvent('change', { detail: false }));
     fixture.detectChanges();
@@ -122,26 +129,26 @@ describe('HeaderComponent', () => {
     expect(document.documentElement.getAttribute('data-app-theme')).toBe('light');
     expect((toggle as HTMLElement & { checked: boolean }).checked).toBeFalse();
 
-    dropdown.dispatchEvent(
-      new CustomEvent('select', { detail: dropdown.options[2] }),
+    languageDropdown.dispatchEvent(
+      new CustomEvent('select', { detail: languageDropdown.options[2] }),
     );
     fixture.detectChanges();
 
     expect(document.documentElement.lang).toBe('es-es');
 
-    const menuButton = compiled.querySelector('.header-menu-button') as HTMLElement;
-    menuButton.click();
+    mobileDropdown.dispatchEvent(new CustomEvent('openChange', { detail: true }));
     fixture.detectChanges();
 
-    expect(compiled.querySelector('.navigation-open')).toBeTruthy();
+    expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeTrue();
 
-    const navigation = fixture.debugElement.query(
+    const navigationComponents = fixture.debugElement.queryAll(
       By.directive(NavigationComponent),
-    ).componentInstance as NavigationComponent;
+    );
+    const mobileNavigation = navigationComponents[1].componentInstance as NavigationComponent;
 
-    navigation.itemSelected.emit();
+    mobileNavigation.itemSelected.emit();
     fixture.detectChanges();
 
-    expect(compiled.querySelector('.navigation-open')).toBeFalsy();
+    expect((fixture.componentInstance as unknown as { isMobileMenuOpen: () => boolean }).isMobileMenuOpen()).toBeFalse();
   });
 });

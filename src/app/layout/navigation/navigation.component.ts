@@ -19,5 +19,6 @@ import { NavigationItem } from './navigation.types';
 export class NavigationComponent {
   readonly items = input.required<readonly NavigationItem[]>();
   readonly menuOpen = input(false);
+  readonly popupMode = input(false);
   readonly itemSelected = output<void>();
 }

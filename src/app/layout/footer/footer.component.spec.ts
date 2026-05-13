@@ -1,6 +1,6 @@
 import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { FooterComponent } from './footer.component';
 
@@ -42,5 +42,21 @@ describe('FooterComponent', () => {
     expect(compiled.querySelectorAll('app-footer-social-links hans-button')).toHaveSize(3);
     expect(copyButton?.label).toBe('Victor Hanszman');
     expect(compiled.textContent).toContain(String(new Date().getFullYear()));
+  });
+
+  it('should navigate home when the copyright button is clicked', async () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = spyOn(router, 'navigateByUrl').and.resolveTo(true);
+    const fixture = TestBed.createComponent(FooterComponent);
+    fixture.detectChanges();
+
+    const copyButton = (fixture.nativeElement as HTMLElement).querySelector(
+      '.footer-copy-button',
+    ) as HTMLElement;
+
+    copyButton.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith('/home');
   });
 });

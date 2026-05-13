@@ -8,7 +8,17 @@
 
 @media (max-width: 1023px) {
   .navigation {
-    @apply absolute right-4 top-[calc(100%+0.75rem)] hidden min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
+    @apply hidden;
+  }
+
+  .navigation-popup-mode {
+    @apply flex min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
+    background-color: var(--app-shell-surface-color);
+    border-color: color-mix(in srgb, var(--app-shell-foreground-color) 18%, transparent);
+  }
+
+  .navigation:not(.navigation-popup-mode) {
+    @apply absolute right-4 top-[calc(100%+0.75rem)] min-w-56 flex-col items-stretch gap-0 overflow-hidden rounded-xl border py-2 shadow-xl;
     background-color: var(--app-shell-surface-color);
     border-color: color-mix(in srgb, var(--app-shell-foreground-color) 18%, transparent);
   }

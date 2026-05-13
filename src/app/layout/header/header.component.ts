@@ -59,11 +59,17 @@ export class HeaderComponent {
     this.theme.setMode(checked ? 'dark' : 'light');
   }
 
-  protected toggleMobileMenu(): void {
-    this.isMobileMenuOpen.update((isOpen) => !isOpen);
-  }
-
   protected closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
+  }
+
+  protected setMobileMenuOpen(event: Event): void {
+    const { detail: isOpen } = event as CustomEvent<boolean>;
+
+    this.isMobileMenuOpen.set(Boolean(isOpen));
+  }
+
+  protected handleMobileNavigationSelect(): void {
+    this.closeMobileMenu();
   }
 }

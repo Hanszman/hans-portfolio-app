@@ -18,8 +18,6 @@
       <app-navigation
         class="header-navigation"
         [items]="navigationItems()"
-        [menuOpen]="isMobileMenuOpen()"
-        (itemSelected)="closeMobileMenu()"
       />
 
       <div class="header-actions">
@@ -44,22 +42,28 @@
 
         <app-header-language-dropdown />
 
-        <hans-button
-          class="header-menu-button"
-          [attr.aria-label]="'header.controls.navigation' | translate"
-          [buttonColor]="'primary'"
-          [hoverButtonColor]="'primary'"
-          [hoverButtonVariant]="'inverse'"
-          [buttonShape]="'square'"
-          [buttonSize]="'medium'"
-          [buttonVariant]="'default'"
-          (click)="toggleMobileMenu()"
+        <hans-dropdown
+          class="header-menu-dropdown"
+          [triggerLabel]="''"
+          [triggerAriaLabel]="'header.controls.navigation' | translate"
+          [triggerColor]="'primary'"
+          [triggerHoverColor]="'primary'"
+          [triggerHoverVariant]="'inverse'"
+          [triggerIconName]="'FaBars'"
+          [triggerShape]="'square'"
+          [triggerSize]="'large'"
+          [triggerVariant]="'default'"
+          [showTriggerCaret]="false"
+          [open]="isMobileMenuOpen()"
+          (openChange)="setMobileMenuOpen($event)"
         >
-          <hans-icon
-            [name]="isMobileMenuOpen() ? 'FaTimes' : 'FaBars'"
-            [iconSize]="'small'"
-          ></hans-icon>
-        </hans-button>
+          <app-navigation
+            class="header-mobile-navigation"
+            [items]="navigationItems()"
+            [popupMode]="true"
+            (itemSelected)="handleMobileNavigationSelect()"
+          />
+        </hans-dropdown>
       </div>
     </div>
   </div>

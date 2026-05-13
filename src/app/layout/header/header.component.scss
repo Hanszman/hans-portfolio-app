@@ -53,7 +53,7 @@
   line-height: 0;
 }
 
-.header-menu-button {
+.header-menu-dropdown {
   @apply hidden;
 }
 
@@ -70,11 +70,19 @@
     @apply hidden;
   }
 
-  .header-menu-button {
+  .header-navigation {
+    @apply hidden;
+  }
+
+  .header-menu-dropdown {
     @apply inline-flex;
   }
 
   .header-actions {
     @apply gap-3;
+  }
+
+  .header-mobile-navigation {
+    @apply block;
   }
 }
