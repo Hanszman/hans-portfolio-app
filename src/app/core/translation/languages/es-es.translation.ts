@@ -33,9 +33,9 @@ export const ES_ES_TRANSLATIONS = {
   'header.controls.spanish': 'Español',
   'header.navigation.home': 'Home',
   'header.navigation.experiences': 'Experiencias',
-  'header.navigation.skills': 'Skills',
+  'header.navigation.skills': 'Habilidades',
   'header.navigation.projects': 'Proyectos',
-  'header.navigation.dashboard': 'Dashboard',
+  'header.navigation.dashboard': 'Panel',
   'header.statusLabel': 'Estado de la fundación',
   'header.eyebrow': 'Fundación del remake del portfolio',
   'header.title':
