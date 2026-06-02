@@ -977,6 +977,10 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 - refatoracao estrutural obrigatoria das paginas publicas (`home`, `experiences`, `skills`, `projects`, `dashboard`) para reduzir responsabilidade excessiva dos componentes de pagina
 - refatoracao incremental, uma tela por vez, sem remover tudo de uma vez nem abrir varias frentes simultaneas
 - ordem oficial de execucao desta etapa: `home` -> `experiences` -> `skills` -> `projects` -> `dashboard`
+- base visual oficial desta etapa: os prints salvos na pasta `G:\\Meu Drive\\Victor\\Projetos\\Pessoais\\Hans\\Hans Portfolio Remake`
+- cada tela deve ser reconstruida com base nos seus prints correspondentes, usando a mesma sequencia visual/vertical apresentada nas imagens quando houver mais de um print para a mesma pagina
+- quando uma tela tiver multiplos prints, o conteudo deve ser interpretado como uma continuidade vertical de scroll, encaixando os blocos um apos o outro ao longo da pagina
+- a regra desta etapa e apagar/refazer o que estiver diferente no codigo atual do remake, usando os prints como guia primario de layout, estrutura, ordenacao e densidade de informacao
 - quebra de composicoes grandes em componentes menores seguindo clean code, SRP e separacao clara entre estado, mapeamento e renderizacao
 - quando o componente novo for usado apenas por uma pagina, ele deve nascer dentro da pasta da propria pagina, com seus arquivos `ts`, `html`, `scss`, `spec`, `types` e `helpers` quando necessario
 - quando o componente novo for reutilizavel entre multiplas paginas publicas e nao existir equivalente na `hans-ui-design-lib`, ele deve nascer em `src/app/shared/` como pasta irma de `layout/` e `pages/`
@@ -999,6 +1003,7 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 - reorganizacao dos cards para exibirem um resumo mais objetivo na listagem principal, com abertura de modal de detalhe ao clique do usuario
 - modais de detalhe para tecnologias, projetos, experiencias e outros itens relevantes, mostrando informacoes expandidas, conexoes com outras entidades, ativos visuais e graficos quando agregarem valor
 - quando houver imagens vinculadas suficientes, uso de `hans-carousel` dentro do detalhe para exibicao ampliada
+- na tela `home`, usar `vh_profile.png` no lugar de `vh_profile.jpeg`
 - atualizacao da documentacao a cada ajuste relevante de escopo, estrutura ou contrato de tela
 - execucao dos scripts de qualidade ao fim de cada refatoracao concluida: `test`, `test:coverage`, `lint` e `build`
 - testes adicionais necessarios
