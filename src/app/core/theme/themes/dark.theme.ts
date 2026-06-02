@@ -34,8 +34,8 @@ export const DARK_THEME = {
   base: {
     strong: '#f4f4fa',
     default: '#b7b7c3',
-    neutral: '#3a3a44',
+    neutral: '#2f3336',
   },
-  backgroundColor: '#3a3a44',
+  backgroundColor: '#373b3e',
   textColor: '#f4f4fa',
 } as const satisfies HansThemeCombination;
