@@ -1,0 +1,11 @@
+<section class="home-stack">
+  <span class="home-stack-eyebrow">{{ labelKey() | translate }}</span>
+  <h2 class="home-stack-title">{{ titleKey() | translate }}</h2>
+  <p class="home-stack-description">{{ descriptionKey() | translate }}</p>
+
+  <div class="home-stack-tags" [attr.aria-label]="labelKey() | translate">
+    @for (chip of chips(); track chip.slug) {
+      <hans-tag [attr.label]="chip.label" tagColor="base" tagSize="sm"></hans-tag>
+    }
+  </div>
+</section>

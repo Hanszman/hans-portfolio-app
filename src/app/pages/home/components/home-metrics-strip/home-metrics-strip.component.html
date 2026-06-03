@@ -1,0 +1,17 @@
+<section class="home-metrics" [attr.aria-label]="ariaLabelKey() | translate">
+  @for (metric of metrics(); track metric.labelKey) {
+    <article class="home-metric-card">
+      <div class="home-metric-icon">
+        <hans-icon [name]="metric.iconName" iconSize="medium"></hans-icon>
+      </div>
+
+      <strong class="home-metric-value">{{ metric.value }}</strong>
+
+      <span class="home-metric-label">{{ metric.labelKey | translate }}</span>
+
+      <p class="home-metric-description">
+        {{ metric.descriptionKey | translate }}
+      </p>
+    </article>
+  }
+</section>

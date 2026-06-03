@@ -1,0 +1,26 @@
+:host {
+  @apply block;
+}
+
+.home-stack {
+  @apply grid justify-items-center gap-4 text-center;
+}
+
+.home-stack-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.3em];
+  color: color-mix(in srgb, var(--primary-default-color) 84%, transparent);
+}
+
+.home-stack-title {
+  @apply m-0 text-3xl font-semibold leading-tight md:text-4xl;
+  color: var(--text-color);
+}
+
+.home-stack-description {
+  @apply m-0 max-w-3xl text-base leading-7;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.home-stack-tags {
+  @apply flex flex-wrap justify-center gap-2 pt-4;
+}

@@ -25,13 +25,15 @@ describe('AppTranslationLoader', () => {
       };
       pages: {
         home: {
-          title: string;
+          hero: {
+            greeting: string;
+          };
         };
       };
     };
 
     expect(nestedTranslations.header.controls.language).toBe('Language');
-    expect(nestedTranslations.pages.home.title).toBe('Home foundation');
+    expect(nestedTranslations.pages.home.hero.greeting).toBe("Hi, I'm");
   });
 
   it('should provide nested translations through the ngx loader contract', async () => {

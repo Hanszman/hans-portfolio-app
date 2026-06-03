@@ -1,0 +1,72 @@
+<section class="home-hero">
+  <div class="home-hero-copy">
+    <span class="home-hero-availability">
+      <span class="home-hero-availability-dot"></span>
+      {{ hero().availabilityKey | translate }}
+    </span>
+
+    <h1 class="home-hero-title">
+      <span>{{ hero().greetingKey | translate }}</span>
+      <strong>{{ hero().name }}</strong>
+    </h1>
+
+    <p class="home-hero-subtitle">{{ hero().subtitleKey | translate }}</p>
+
+    <p class="home-hero-description">{{ hero().descriptionKey | translate }}</p>
+
+    <div class="home-hero-actions">
+      <hans-button
+        [routerLink]="hero().primaryActionRoute"
+        [attr.label]="hero().primaryActionLabelKey | translate"
+        buttonColor="primary"
+        buttonShape="rounded"
+        buttonSize="large"
+      ></hans-button>
+
+      <hans-button
+        [routerLink]="hero().secondaryActionRoute"
+        [attr.label]="hero().secondaryActionLabelKey | translate"
+        buttonColor="base"
+        buttonShape="rounded"
+        buttonSize="large"
+        buttonVariant="outline"
+      ></hans-button>
+    </div>
+
+    <div
+      class="home-hero-links"
+      [attr.aria-label]="'pages.home.hero.social.navigation' | translate"
+    >
+      @for (link of hero().socialLinks; track link.href) {
+        <hans-button
+          class="home-hero-social-button"
+          [attr.aria-label]="link.labelKey | translate"
+          [buttonColor]="'base'"
+          [buttonShape]="'square'"
+          [buttonSize]="'small'"
+          [buttonVariant]="'transparent'"
+          [hoverButtonColor]="'primary'"
+          [hoverButtonVariant]="'transparent'"
+          (click)="openLink(link.href)"
+        >
+          <hans-icon [name]="link.iconName" [iconSize]="'large'"></hans-icon>
+        </hans-button>
+      }
+    </div>
+
+    <div class="home-hero-location">
+      <hans-icon name="LuMapPin" iconSize="small"></hans-icon>
+      <span>{{ hero().locationKey | translate }}</span>
+    </div>
+  </div>
+
+  <div class="home-hero-visual">
+    <div class="home-hero-image-frame">
+      <hans-avatar
+        [src]="hero().imageSrc"
+        [alt]="hero().name"
+        avatarSize="large"
+      ></hans-avatar>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<section class="home-navigation">
+  <div class="home-navigation-grid">
+    @for (card of cards(); track card.route) {
+      <a class="home-navigation-card" [routerLink]="card.route">
+        <span class="home-navigation-eyebrow">{{ card.eyebrowKey | translate }}</span>
+        <strong>{{ card.titleKey | translate }}</strong>
+        <p>{{ card.descriptionKey | translate }}</p>
+
+        <span class="home-navigation-action" aria-hidden="true">
+          <hans-icon name="LuArrowRight" iconSize="small"></hans-icon>
+        </span>
+      </a>
+    }
+  </div>
+</section>

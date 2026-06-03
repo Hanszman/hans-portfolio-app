@@ -1,53 +1,28 @@
-import {
-  buildRelativeImageAssetPath,
-  buildRelativeSkillImageAssetPath,
-} from '../../core/api/api.config';
+import { buildRelativeImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
-import { ContainerTone } from '../../layout/container/container.types';
 
-export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath(
-  'profile/vh_profile.jpeg',
-);
+export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
 
-const HOME_ENTITY_ICON_NAMES: Record<string, string> = {
-  project: 'LuFolderKanban',
-  experience: 'LuBriefcaseBusiness',
-  technology: 'LuCpu',
-  customer: 'LuHandshake',
-  formation: 'LuGraduationCap',
-  language: 'LuLanguages',
-};
+export interface HomeHeroSocialLinkViewModel {
+  labelKey: AppTranslationKey;
+  href: string;
+  iconName: string;
+}
 
-const HOME_STACK_ICON_NAMES: Record<string, string> = {
-  'front-end': 'LuMonitorSmartphone',
-  frontend: 'LuMonitorSmartphone',
-  'back-end': 'LuServer',
-  backend: 'LuServer',
-  fullstack: 'LuLayers3',
-  devops: 'LuCloud',
-  mobile: 'LuSmartphone',
-};
-
-const HOME_TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
-  FRAMEWORK: 'LuBlocks',
-  LANGUAGE: 'LuCpu',
-  LIBRARY: 'LuPackage',
-  DATABASE: 'LuDatabase',
-  ORM: 'LuDatabase',
-  DEVOPS: 'LuCloud',
-};
-
-const HOME_TECHNOLOGY_VISUAL_FILE_NAMES: Record<string, string> = {
-  angular: 'angular.png',
-  css: 'css.png',
-  html: 'html.png',
-  javascript: 'javascript.png',
-  json: 'json.png',
-  git: 'git.png',
-  typescript: 'typescript.png',
-  visualstudiocode: 'visualstudiocode.png',
-  'visual-studio-code': 'visualstudiocode.png',
-};
+export interface HomeHeroViewModel {
+  availabilityKey: AppTranslationKey;
+  greetingKey: AppTranslationKey;
+  name: string;
+  subtitleKey: AppTranslationKey;
+  descriptionKey: AppTranslationKey;
+  locationKey: AppTranslationKey;
+  primaryActionLabelKey: AppTranslationKey;
+  primaryActionRoute: string;
+  secondaryActionLabelKey: AppTranslationKey;
+  secondaryActionRoute: string;
+  socialLinks: readonly HomeHeroSocialLinkViewModel[];
+  imageSrc: string;
+}
 
 export interface HomeMetricViewModel {
   value: string;
@@ -56,111 +31,66 @@ export interface HomeMetricViewModel {
   iconName: string;
 }
 
-export interface HomeSeniorityPillar {
-  labelKey: AppTranslationKey;
+export interface HomeStackChipViewModel {
+  slug: string;
+  label: string;
+}
+
+export interface HomeNavigationCardViewModel {
+  eyebrowKey: AppTranslationKey;
   titleKey: AppTranslationKey;
   descriptionKey: AppTranslationKey;
-  tone: ContainerTone;
-  iconName: string;
-  tags: readonly AppTranslationKey[];
+  route: string;
 }
 
-export interface HomeHighlightViewModel {
-  entity: string;
-  slug: string;
-  title: string;
-  subtitle: string;
-  featured: boolean;
-  visualUrl: string;
-  iconName: string;
-}
+export const HOME_HERO: HomeHeroViewModel = {
+  availabilityKey: 'pages.home.hero.availability',
+  greetingKey: 'pages.home.hero.greeting',
+  name: 'Victor Hanszman',
+  subtitleKey: 'pages.home.hero.subtitle',
+  descriptionKey: 'pages.home.hero.description',
+  locationKey: 'pages.home.hero.location',
+  primaryActionLabelKey: 'pages.home.hero.cta.projects',
+  primaryActionRoute: '/projects',
+  secondaryActionLabelKey: 'pages.home.hero.cta.experiences',
+  secondaryActionRoute: '/experiences',
+  socialLinks: [
+    {
+      labelKey: 'pages.home.hero.social.github',
+      href: 'https://github.com/Hanszman',
+      iconName: 'LuGithub',
+    },
+    {
+      labelKey: 'pages.home.hero.social.linkedin',
+      href: 'https://www.linkedin.com/in/victor-hanszman/',
+      iconName: 'LuLinkedin',
+    },
+    {
+      labelKey: 'pages.home.hero.social.email',
+      href: 'mailto:victor.hanszman@hotmail.com',
+      iconName: 'LuMail',
+    },
+  ],
+  imageSrc: HOME_PROFILE_IMAGE_SRC,
+} as const;
 
-export interface HomeStackViewModel {
-  slug: string;
-  name: string;
-  projectCount: number;
-  technologyCount: number;
-  iconName: string;
-}
-
-export interface HomeCareerFocusViewModel {
-  companyName: string;
-  title: string;
-  technologies: readonly string[];
-  customers: readonly string[];
-  projects: readonly string[];
-  imageUrl: string;
-}
-
-export interface HomeTechnologyViewModel {
-  slug: string;
-  name: string;
-  usageCount: number;
-  iconName: string;
-  visualUrl: string;
-}
-
-export interface HomeVisualViewModel {
-  id: string;
-  alt: string;
-  src: string;
-}
-
-export interface HomeApiSnapshotMetricViewModel {
-  labelKey: AppTranslationKey;
-  value: string;
-  iconName: string;
-}
-
-export const HOME_SENIORITY_PILLARS = [
+export const HOME_NAVIGATION_CARDS = [
   {
-    labelKey: 'pages.home.pillars.architecture.label',
-    titleKey: 'pages.home.pillars.architecture.title',
-    descriptionKey: 'pages.home.pillars.architecture.description',
-    tone: 'primary',
-    iconName: 'LuBlocks',
-    tags: [
-      'pages.home.pillars.architecture.tag.angular',
-      'pages.home.pillars.architecture.tag.signals',
-      'pages.home.pillars.architecture.tag.designSystem',
-    ],
+    eyebrowKey: 'pages.home.navigation.experiences.eyebrow',
+    titleKey: 'pages.home.navigation.experiences.title',
+    descriptionKey: 'pages.home.navigation.experiences.description',
+    route: '/experiences',
   },
   {
-    labelKey: 'pages.home.pillars.delivery.label',
-    titleKey: 'pages.home.pillars.delivery.title',
-    descriptionKey: 'pages.home.pillars.delivery.description',
-    tone: 'success',
-    iconName: 'LuWorkflow',
-    tags: [
-      'pages.home.pillars.delivery.tag.tdd',
-      'pages.home.pillars.delivery.tag.ci',
-      'pages.home.pillars.delivery.tag.api',
-    ],
+    eyebrowKey: 'pages.home.navigation.skills.eyebrow',
+    titleKey: 'pages.home.navigation.skills.title',
+    descriptionKey: 'pages.home.navigation.skills.description',
+    route: '/skills',
   },
   {
-    labelKey: 'pages.home.pillars.product.label',
-    titleKey: 'pages.home.pillars.product.title',
-    descriptionKey: 'pages.home.pillars.product.description',
-    tone: 'info',
-    iconName: 'LuChartColumn',
-    tags: [
-      'pages.home.pillars.product.tag.dashboard',
-      'pages.home.pillars.product.tag.legacy',
-      'pages.home.pillars.product.tag.ux',
-    ],
+    eyebrowKey: 'pages.home.navigation.projects.eyebrow',
+    titleKey: 'pages.home.navigation.projects.title',
+    descriptionKey: 'pages.home.navigation.projects.description',
+    route: '/projects',
   },
-] as const satisfies readonly HomeSeniorityPillar[];
-
-export const resolveHomeEntityIconName = (entity: string): string =>
-  HOME_ENTITY_ICON_NAMES[entity] ?? 'LuSparkles';
-
-export const resolveHomeStackIconName = (slug: string): string =>
-  HOME_STACK_ICON_NAMES[slug.toLowerCase()] ?? 'LuLayers3';
-
-export const resolveHomeTechnologyIconName = (category: string): string =>
-  HOME_TECHNOLOGY_CATEGORY_ICON_NAMES[category] ?? 'LuCpu';
-
-export const resolveHomeTechnologyVisualUrl = (slug: string): string =>
-  HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]
-    ? buildRelativeSkillImageAssetPath(HOME_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()])
-    : '';
+] as const satisfies readonly HomeNavigationCardViewModel[];

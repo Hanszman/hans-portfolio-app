@@ -51,7 +51,7 @@ describe('app routes', () => {
     await harness.navigateByUrl('/');
 
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Strategic portfolio home',
+      "Hi, I'm",
     );
   });
 
@@ -92,7 +92,7 @@ describe('app routes', () => {
     await harness.navigateByUrl('/not-found');
 
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Strategic portfolio home',
+      "Hi, I'm",
     );
   });
 });

@@ -1,4 +1,4 @@
-import { AppTranslationLanguage } from '../translation.types';
+﻿import { AppTranslationLanguage } from '../translation.types';
 
 export const PT_BR_TRANSLATIONS = {
   'shell.api.eyebrow': 'API',
@@ -69,99 +69,46 @@ export const PT_BR_TRANSLATIONS = {
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
-  'pages.home.sectionLabel': 'Fundação',
-  'pages.home.title': 'Fundação da home',
-  'pages.home.description':
-    'A rota home está conectada e pronta para o próximo hero, highlights e resumo do portfolio via API.',
-  'pages.home.hero.eyebrow': 'Home estratégica do portfolio',
-  'pages.home.hero.title':
-    'Victor Hanszman constrói plataformas front-end que transformam produtos complexos em experiências claras e duráveis.',
+  'pages.home.hero.availability': 'Disponível para trabalho',
+  'pages.home.hero.greeting': 'Oi, eu sou',
+  'pages.home.hero.subtitle': 'Desenvolvedor Full Stack Web',
   'pages.home.hero.description':
-    'Engenheiro full stack com forte especialização em front-end, focado em Angular, TypeScript, design systems, dashboards analíticos, modernização de legados e experiências guiadas por API.',
-  'pages.home.cta.projects': 'Ver projetos',
-  'pages.home.cta.dashboard': 'Abrir dashboard',
-  'pages.home.metrics.years.label': 'Experiência',
+    'Desenvolvedor Full Stack Web especializado em Front-End e Back-End. Baseado em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
+  'pages.home.hero.location': 'Belo Horizonte, Brasil',
+  'pages.home.hero.cta.projects': 'Ver projetos',
+  'pages.home.hero.cta.experiences': 'Minha experiência',
+  'pages.home.hero.social.github': 'Abrir perfil no GitHub',
+  'pages.home.hero.social.linkedin': 'Abrir perfil no LinkedIn',
+  'pages.home.hero.social.email': 'Enviar um e-mail',
+  'pages.home.hero.social.navigation': 'Links sociais',
+  'pages.home.metrics.years.label': 'Anos de experiência',
   'pages.home.metrics.years.description': 'Anos construindo produtos web',
-  'pages.home.metrics.projects.label': 'Projetos',
+  'pages.home.metrics.projects.label': 'Projetos entregues',
   'pages.home.metrics.projects.description': 'Cases publicados no portfolio',
   'pages.home.metrics.technologies.label': 'Tecnologias',
   'pages.home.metrics.technologies.description': 'Sinais de stack mapeados',
-  'pages.home.metrics.experiences.label': 'Experiências',
-  'pages.home.metrics.experiences.description': 'Capítulos de carreira na API',
-  'pages.home.api.label': 'API real',
-  'pages.home.api.title': 'Dados reais desde a primeira tela',
-  'pages.home.api.description':
-    'A home já lê o endpoint agregado de dashboard, então o portfolio evolui a partir do backend em vez de mocks estáticos.',
-  'pages.home.api.loading': 'Conectando dados reais do portfolio...',
-  'pages.home.api.error':
-    'O endpoint de dashboard está indisponível agora, mas a página mantém o conteúdo estratégico pronto.',
-  'pages.home.api.featuredProjects': 'Destaques',
-  'pages.home.api.highlightedProjects': 'Realçados',
-  'pages.home.api.usageLinks': 'Links de stack',
-  'pages.home.pillars.label': 'Posicionamento',
-  'pages.home.pillars.title': 'Craft front-end senior com contexto full stack',
-  'pages.home.pillars.description':
-    'A home começa deixando o sinal profissional evidente: arquitetura, qualidade de entrega e clareza de produto.',
-  'pages.home.pillars.architecture.label': 'Arquitetura',
-  'pages.home.pillars.architecture.title': 'Fundações front-end com Angular primeiro',
-  'pages.home.pillars.architecture.description':
-    'Estratégia de componentes, fronteiras de estado, contratos tipados e sistemas de UI pensados para crescer sem ficarem opacos.',
-  'pages.home.pillars.architecture.tag.angular': 'Angular',
-  'pages.home.pillars.architecture.tag.signals': 'Signals',
-  'pages.home.pillars.architecture.tag.designSystem': 'Design Systems',
-  'pages.home.pillars.delivery.label': 'Entrega',
-  'pages.home.pillars.delivery.title':
-    'Hábitos de qualidade que sobrevivem à pressão de release',
-  'pages.home.pillars.delivery.description':
-    'Disciplina test-first, código lintado, visão de CI/CD e contratos de backend que tornam a evolução do produto previsível.',
-  'pages.home.pillars.delivery.tag.tdd': 'TDD',
-  'pages.home.pillars.delivery.tag.ci': 'CI/CD',
-  'pages.home.pillars.delivery.tag.api': 'REST APIs',
-  'pages.home.pillars.product.label': 'Produto',
-  'pages.home.pillars.product.title':
-    'Interfaces que tornam regra de negócio legível',
-  'pages.home.pillars.product.description':
-    'Dashboards, migrações de legado e fluxos corporativos convertidos em telas fáceis de escanear e confiar.',
-  'pages.home.pillars.product.tag.dashboard': 'Dashboards',
-  'pages.home.pillars.product.tag.legacy': 'Modernização de legados',
-  'pages.home.pillars.product.tag.ux': 'Clareza de UX',
-  'pages.home.highlights.label': 'Highlights',
-  'pages.home.highlights.title': 'Sinais em destaque vindos da API do portfolio',
-  'pages.home.highlights.description':
-    'Projetos, experiências, tecnologias e ativos de carreira marcados como destaque no backend.',
-  'pages.home.highlights.featured': 'Destaque',
-  'pages.home.highlights.empty': 'Nenhum item em destaque foi retornado ainda.',
-  'pages.home.stack.label': 'Stack',
-  'pages.home.stack.title': 'Áreas de stack com vínculos reais do portfolio',
+  'pages.home.metrics.ariaLabel': 'Métricas do portfolio',
+  'pages.home.loading': 'Conectando dados reais do portfolio...',
+  'pages.home.error': 'Os dados reais da home estão indisponíveis no momento.',
+  'pages.home.stack.label': '// CORE_STACK',
+  'pages.home.stack.title': 'Tecnologias principais',
   'pages.home.stack.description':
-    'Os grupos mais fortes vêm de relacionamentos entre projetos e tecnologias já modelados pela API.',
+    'Os sinais de stack mais visíveis coletados do agregado ao vivo do dashboard.',
   'pages.home.stack.projects': 'projetos',
   'pages.home.stack.technologies': 'tecnologias',
   'pages.home.stack.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
-  'pages.home.career.label': 'Carreira',
-  'pages.home.career.title': 'Foco profissional atual',
-  'pages.home.career.description':
-    'O primeiro sinal de carreira vem do endpoint público de timeline profissional.',
-  'pages.home.career.empty':
-    'Nenhum item de timeline profissional foi retornado ainda.',
-  'pages.home.topTechnologies.label': 'Uso de tecnologia',
-  'pages.home.topTechnologies.title': 'Tecnologias mais conectadas',
-  'pages.home.topTechnologies.description':
-    'As tecnologias principais são ranqueadas pelos relacionamentos de uso em projetos, experiências e formações.',
-  'pages.home.topTechnologies.empty':
-    'Nenhum dado de uso de tecnologia foi retornado ainda.',
-  'pages.home.roadmap.label': 'Roadmap',
-  'pages.home.roadmap.title': 'Hero, highlights e resumo via API',
-  'pages.home.roadmap.description':
-    'A home vai apresentar Victor, reforçar posicionamento e exibir os primeiros cards de resumo vindos do backend.',
-  'pages.home.status.label': 'Status',
-  'pages.home.status.title': 'Shell pronta',
-  'pages.home.status.description':
-    'Esta rota já está dentro da nova shell do portfolio e pronta para a implementação do hero, highlights e resumo via API.',
-  'pages.home.layout.label': 'Camada de layout',
-  'pages.home.layout.title': 'Componente específico da página',
-  'pages.home.layout.description':
-    'O conteúdo agora vive no componente Home em vez de ser passado como route data estática.',
+  'pages.home.navigation.experiences.eyebrow': '// carreira',
+  'pages.home.navigation.experiences.title': 'Experiências',
+  'pages.home.navigation.experiences.description':
+    'Jornada profissional e linha do tempo de carreira.',
+  'pages.home.navigation.skills.eyebrow': '// arsenal',
+  'pages.home.navigation.skills.title': 'Habilidades',
+  'pages.home.navigation.skills.description':
+    'Tecnologias, formações e idiomas.',
+  'pages.home.navigation.projects.eyebrow': '// entregas',
+  'pages.home.navigation.projects.title': 'Projetos',
+  'pages.home.navigation.projects.description':
+    'Aplicações reais e estudos de caso.',
   'pages.experiences.sectionLabel': 'Carreira',
   'pages.experiences.title': 'Narrativa de carreira',
   'pages.experiences.description':
@@ -452,3 +399,5 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',
 } as const satisfies AppTranslationLanguage;
+
+

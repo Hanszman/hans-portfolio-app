@@ -1,0 +1,108 @@
+:host {
+  @apply block;
+}
+
+.home-hero {
+  @apply grid items-center gap-10 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)];
+}
+
+.home-hero-copy {
+  @apply grid gap-5;
+}
+
+.home-hero-availability {
+  @apply inline-flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-[0.2em];
+  color: color-mix(in srgb, var(--primary-neutral-color) 20%, var(--primary-default-color));
+}
+
+.home-hero-availability-dot {
+  @apply h-2 w-2 rounded-full;
+  background-color: var(--success-default-color);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--success-default-color) 22%, transparent);
+}
+
+.home-hero-title {
+  @apply m-0 grid gap-1 text-5xl font-semibold leading-[0.9] md:text-7xl;
+  color: var(--text-color);
+}
+
+.home-hero-title span {
+  @apply block;
+}
+
+.home-hero-title strong {
+  @apply bg-gradient-to-r from-sky-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent;
+}
+
+.home-hero-subtitle {
+  @apply m-0 text-xl leading-8 md:text-2xl;
+  color: color-mix(in srgb, var(--text-color) 86%, transparent);
+}
+
+.home-hero-description {
+  @apply m-0 max-w-2xl text-base leading-8 md:text-lg;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.home-hero-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.home-hero-links {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.home-hero-social-button {
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
+.home-hero-location {
+  @apply inline-flex items-center gap-2 text-sm;
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}
+
+.home-hero-visual {
+  @apply flex justify-center xl:justify-end;
+}
+
+.home-hero-image-frame {
+  @apply overflow-hidden rounded-[2rem] border p-2;
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--primary-default-color) 18%, transparent) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background-color) 88%, white) 0%,
+      color-mix(in srgb, var(--primary-neutral-color) 18%, transparent) 100%
+    );
+  border-color: color-mix(in srgb, var(--base-neutral-color) 26%, transparent);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--primary-default-color) 14%, transparent);
+}
+
+.home-hero-image-frame hans-avatar {
+  @apply block;
+  width: min(100%, 21rem);
+}
+
+@media (max-width: 1024px) {
+  .home-hero {
+    @apply gap-8;
+  }
+
+  .home-hero-visual {
+    @apply justify-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero-title {
+    @apply text-4xl;
+  }
+
+  .home-hero-subtitle {
+    @apply text-lg;
+  }
+}
