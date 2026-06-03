@@ -3,7 +3,7 @@
 }
 
 .home-hero {
-  @apply grid items-center gap-10 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)];
+  @apply grid items-center gap-10 xl:grid-cols-[minmax(0,1.12fr)_minmax(24rem,0.88fr)];
 }
 
 .home-hero-copy {
@@ -19,11 +19,6 @@
   @apply h-2 w-2 rounded-full;
   background-color: var(--success-default-color);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--success-default-color) 22%, transparent);
-}
-
-.home-hero-title {
-  @apply m-0 grid gap-1 text-5xl font-semibold leading-[0.9] md:text-7xl;
-  color: var(--text-color);
 }
 
 .home-hero-title span {
@@ -48,17 +43,9 @@
   @apply flex flex-wrap gap-3;
 }
 
-.home-hero-links {
-  @apply flex flex-wrap items-center gap-2;
-}
-
-.home-hero-social-button {
-  color: color-mix(in srgb, var(--text-color) 76%, transparent);
-}
-
-.home-hero-location {
-  @apply inline-flex items-center gap-2 text-sm;
-  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+.home-hero-social {
+  --portfolio-social-links-justify: flex-start;
+  --portfolio-social-links-location-justify: flex-start;
 }
 
 .home-hero-visual {
@@ -66,7 +53,7 @@
 }
 
 .home-hero-image-frame {
-  @apply overflow-hidden rounded-[2rem] border p-2;
+  @apply overflow-hidden rounded-[2rem] border p-3;
   background:
     radial-gradient(
       circle at top,
@@ -84,7 +71,7 @@
 
 .home-hero-image-frame hans-avatar {
   @apply block;
-  width: min(100%, 21rem);
+  width: min(100%, 28rem);
 }
 
 @media (max-width: 1024px) {
@@ -98,10 +85,6 @@
 }
 
 @media (max-width: 768px) {
-  .home-hero-title {
-    @apply text-4xl;
-  }
-
   .home-hero-subtitle {
     @apply text-lg;
   }

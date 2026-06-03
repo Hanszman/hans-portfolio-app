@@ -1,0 +1,22 @@
+:host {
+  @apply block;
+}
+
+.portfolio-social-links {
+  @apply grid gap-3;
+}
+
+.portfolio-social-links-row {
+  @apply m-0 flex list-none flex-wrap items-center gap-3 p-0;
+  justify-content: var(--portfolio-social-links-justify, flex-start);
+}
+
+.portfolio-social-links-row li {
+  @apply inline-flex;
+}
+
+.portfolio-social-links-location {
+  @apply m-0 inline-flex items-center gap-2 text-sm;
+  justify-content: var(--portfolio-social-links-location-justify, flex-start);
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}

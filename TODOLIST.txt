@@ -102,3 +102,15 @@ Percebi que o número de tecnologias e de projetos está sendo calculado pelo o 
 Esse main technologies, ou seja, essa lista com as tecnologias principais ali, também é uma informação que vem do backend, certo? esse topTechnologies já vem definido do endpoint de dashboard ne? se sim, está certo, mas depois vou querer redefinir melhor no back exatamente quais tecnologias quero colocar ai. Nesse ponto só responda minha pergunta mesmo, não precisa fazer nada no código com relação a isso por enquanto, só me explicar como é feito no backend esses valores.
 Acho que tanto esses cards de home-navigation-cards quanto esses metrics de home-metrics-strip poderiam utilizar um mesmo componente que pode ser feito baseado/utilizando nosso componente hans-card da nossa lib, fazendo as devidas adaptações aqui no componente de card do portfolio para manter o visual atual, ou seja, devemos criar um componente que deve ser um componente de shared ou de layout (no lugar que fizer mais sentido semanticamente) construído utilizando o hans-card da lib e parametrizando coisas como centralização, alinhamento, se vai ter ícone em cima ou não, se vai ter link ou não, etc.
 Lembre de continuar aplicando os princípios de clean code, dry, kiss, yagni, solid, etc, ou seja, o mais limpo e reutilizável possível, com test:coverage 100%, lint, build e tudo passando corretamente.
+
+Título e imagem continuam pequenos
+Alguns estilos no styles que acredito que não deveriam estar
+Arrumar melhor o footer/redes sociais (espaçamento, alinhamento, posicionamento, etc)
+Cards ficaram todos vazios
+Cards deveriam ser mais roxos/primary no modo light
+Parametrização das informações dos Cards podem melhorar
+Conteúdo das páginas ficou muito colano no header agora que não tem mais o card de api connected
+O que deveria estar em layout e o que deveria estar em shared?
+componentes que começam com o nome portfolio e page devem remover esse prefixo
+NAVIGATION_LABEL_KEY_BY_PATH deveria estar no shell.types.ts
+CAREER_START_DATE deveria estar em algum types também

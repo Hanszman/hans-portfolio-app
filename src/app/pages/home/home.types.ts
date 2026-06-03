@@ -1,13 +1,8 @@
 import { buildRelativeImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import { PortfolioSocialLink, PORTFOLIO_SOCIAL_LINKS } from '../../shared/social-links/social-links.types';
 
 export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
-
-export interface HomeHeroSocialLinkViewModel {
-  labelKey: AppTranslationKey;
-  href: string;
-  iconName: string;
-}
 
 export interface HomeHeroViewModel {
   availabilityKey: AppTranslationKey;
@@ -20,7 +15,7 @@ export interface HomeHeroViewModel {
   primaryActionRoute: string;
   secondaryActionLabelKey: AppTranslationKey;
   secondaryActionRoute: string;
-  socialLinks: readonly HomeHeroSocialLinkViewModel[];
+  socialLinks: readonly PortfolioSocialLink[];
   imageSrc: string;
 }
 
@@ -54,23 +49,7 @@ export const HOME_HERO: HomeHeroViewModel = {
   primaryActionRoute: '/projects',
   secondaryActionLabelKey: 'pages.home.hero.cta.experiences',
   secondaryActionRoute: '/experiences',
-  socialLinks: [
-    {
-      labelKey: 'pages.home.hero.social.github',
-      href: 'https://github.com/Hanszman',
-      iconName: 'LuGithub',
-    },
-    {
-      labelKey: 'pages.home.hero.social.linkedin',
-      href: 'https://www.linkedin.com/in/victor-hanszman/',
-      iconName: 'LuLinkedin',
-    },
-    {
-      labelKey: 'pages.home.hero.social.email',
-      href: 'mailto:victor.hanszman@hotmail.com',
-      iconName: 'LuMail',
-    },
-  ],
+  socialLinks: PORTFOLIO_SOCIAL_LINKS,
   imageSrc: HOME_PROFILE_IMAGE_SRC,
 } as const;
 

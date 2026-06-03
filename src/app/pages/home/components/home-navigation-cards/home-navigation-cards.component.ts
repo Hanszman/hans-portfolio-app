@@ -1,21 +1,29 @@
 import {
-  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
   input,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
 import { HomeNavigationCardViewModel } from '../../home.types';
+import { PortfolioCardComponent } from '../../../../shared/portfolio-card/portfolio-card.component';
+import { PortfolioCardViewModel } from '../../../../shared/portfolio-card/portfolio-card.types';
 
 @Component({
   selector: 'app-home-navigation-cards',
-  imports: [RouterLink, TranslatePipe],
+  imports: [PortfolioCardComponent],
   templateUrl: './home-navigation-cards.component.html',
   styleUrl: './home-navigation-cards.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeNavigationCardsComponent {
   readonly cards = input<readonly HomeNavigationCardViewModel[]>([]);
+
+  protected toCard(card: HomeNavigationCardViewModel): PortfolioCardViewModel {
+    return {
+      variant: 'navigation',
+      eyebrowKey: card.eyebrowKey,
+      titleKey: card.titleKey,
+      descriptionKey: card.descriptionKey,
+      route: card.route,
+    };
+  }
 }

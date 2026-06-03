@@ -8,6 +8,9 @@ describe('HomeMetricsStripComponent', () => {
     if (!customElements.get('hans-icon')) {
       customElements.define('hans-icon', class extends HTMLElement {});
     }
+    if (!customElements.get('hans-card')) {
+      customElements.define('hans-card', class extends HTMLElement {});
+    }
   });
 
   beforeEach(async () => {
@@ -48,6 +51,6 @@ describe('HomeMetricsStripComponent', () => {
     expect(compiled.textContent).toContain('7+');
     expect(compiled.textContent).toContain('60+');
     expect(compiled.textContent).toContain('13+');
-    expect(compiled.querySelectorAll('hans-icon')).toHaveSize(3);
+    expect(compiled.querySelectorAll('hans-card')).toHaveSize(3);
   });
 });

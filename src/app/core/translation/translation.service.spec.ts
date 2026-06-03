@@ -56,10 +56,10 @@ describe('TranslationService', () => {
 
     expect(service.locale()).toBe('pt-br');
     expect(
-      service.instant('shell.api.connected.description', {
-        checkedAtUtc: '2026-04-14T13:00:00.000Z',
+      service.instant('footer.copyright.year', {
+        year: '2026',
       }),
-    ).toContain('2026-04-14T13:00:00.000Z');
+    ).toContain('2026');
     expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('pt-br');
   });
 

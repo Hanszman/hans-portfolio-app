@@ -1,0 +1,29 @@
+<section class="portfolio-social-links">
+  <ul
+    class="portfolio-social-links-row"
+    [attr.aria-label]="ariaLabelKey() | translate"
+  >
+    @for (link of links(); track link.href) {
+      <li>
+        <hans-button
+          class="portfolio-social-links-button"
+          [attr.aria-label]="link.labelKey | translate"
+          [buttonColor]="'base'"
+          [buttonShape]="'square'"
+          [buttonSize]="'small'"
+          [hoverButtonColor]="'primary'"
+          [hoverButtonVariant]="'transparent'"
+          [buttonVariant]="'transparent'"
+          (click)="openLink(link.href)"
+        >
+          <hans-icon [name]="link.iconName" [iconSize]="'large'"></hans-icon>
+        </hans-button>
+      </li>
+    }
+  </ul>
+
+  <p class="portfolio-social-links-location">
+    <hans-icon name="LuMapPin" iconSize="small"></hans-icon>
+    <span>{{ locationKey() | translate }}</span>
+  </p>
+</section>

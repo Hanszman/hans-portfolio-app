@@ -1,29 +1,6 @@
 <main class="shell" [attr.lang]="activeLocale()" data-testid="shell">
   <app-header [navigationItems]="navigationItems()" />
 
-  <div class="shell-api-status-wrapper">
-    <app-container [tone]="apiStatusTone()" spacing="compact">
-      <section class="shell-api-status" data-testid="shell-api-status">
-        <div class="shell-api-status-copy">
-          <span class="shell-api-status-eyebrow">
-            {{ 'shell.api.eyebrow' | translate }}
-          </span>
-          <strong class="shell-api-status-title">
-            {{ apiStatus().titleKey | translate }}
-          </strong>
-          <p class="shell-api-status-description">
-            {{
-              apiStatus().descriptionKey
-                | translate: apiStatus().descriptionParams
-            }}
-          </p>
-        </div>
-
-        <code class="shell-api-status-base-url">{{ apiStatus().baseUrl }}</code>
-      </section>
-    </app-container>
-  </div>
-
   <section class="shell-stage">
     <div class="shell-content">
       <router-outlet />

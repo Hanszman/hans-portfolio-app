@@ -1,10 +1,12 @@
-export interface FooterSocialLink {
+import { AppTranslationKey } from '../../core/translation/translation.types';
+
+export interface PortfolioSocialLink {
   readonly href: string;
   readonly iconName: string;
-  readonly labelKey: 'footer.social.github' | 'footer.social.linkedin' | 'footer.social.whatsapp';
+  readonly labelKey: AppTranslationKey;
 }
 
-export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
+export const PORTFOLIO_SOCIAL_LINKS: readonly PortfolioSocialLink[] = [
   {
     href: 'https://github.com/Hanszman',
     iconName: 'FaGithub',
@@ -20,4 +22,9 @@ export const FOOTER_SOCIAL_LINKS: readonly FooterSocialLink[] = [
     iconName: 'FaWhatsapp',
     labelKey: 'footer.social.whatsapp',
   },
-];
+  {
+    href: 'mailto:victor.hanszman@hotmail.com',
+    iconName: 'LuMail',
+    labelKey: 'footer.social.email',
+  },
+] as const;

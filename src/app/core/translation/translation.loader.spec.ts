@@ -41,15 +41,13 @@ describe('AppTranslationLoader', () => {
     const translations = (await firstValueFrom(
       loader.getTranslation('en-us'),
     )) as {
-      shell: {
-        api: {
-          connected: {
-            title: string;
-          };
+      footer: {
+        copyright: {
+          year: string;
         };
       };
     };
 
-    expect(translations.shell.api.connected.title).toBe('API connected');
+    expect(translations.footer.copyright.year).toBe('© {{ year }}');
   });
 });

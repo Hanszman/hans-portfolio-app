@@ -39,7 +39,8 @@ describe('FooterComponent', () => {
       | (HTMLElement & { label?: string })
       | null;
 
-    expect(compiled.querySelectorAll('app-footer-social-links hans-button')).toHaveSize(3);
+    expect(compiled.querySelectorAll('app-portfolio-social-links hans-button')).toHaveSize(4);
+    expect(compiled.textContent).toContain('Belo Horizonte, Brazil');
     expect(copyButton?.label).toBe('Victor Hanszman');
     expect(compiled.textContent).toContain(String(new Date().getFullYear()));
   });

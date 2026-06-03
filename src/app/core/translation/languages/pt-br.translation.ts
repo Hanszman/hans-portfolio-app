@@ -1,19 +1,6 @@
 ﻿import { AppTranslationLanguage } from '../translation.types';
 
 export const PT_BR_TRANSLATIONS = {
-  'shell.api.eyebrow': 'API',
-  'shell.api.connected.title': 'API conectada',
-  'shell.api.connected.description':
-    'Health check executado com sucesso em {{ checkedAtUtc }}.',
-  'shell.api.loading.title': 'Conectando com a API',
-  'shell.api.loading.description':
-    'Verificando a disponibilidade do backend para o ambiente atual.',
-  'shell.api.blocked.title': 'Requisição da API bloqueada',
-  'shell.api.blocked.description':
-    'O navegador não conseguiu concluir a requisição inicial ao backend a partir de {{ origin }}. A API pode estar online, mas o acesso ainda pode estar bloqueado por CORS ou política de rede.',
-  'shell.api.error.title': 'Requisição da API falhou',
-  'shell.api.error.description':
-    'Não foi possível concluir o health check inicial do backend no ambiente atual.',
   'header.brand.home': 'Ir para a home',
   'header.brand.role': 'Full Stack Engineer | Especialista Front-End',
   'header.tags.angular': 'Angular 20',
@@ -66,20 +53,19 @@ export const PT_BR_TRANSLATIONS = {
   'footer.social.github': 'Abrir perfil do GitHub',
   'footer.social.linkedin': 'Abrir perfil do LinkedIn',
   'footer.social.whatsapp': 'Abrir contato no WhatsApp',
+  'footer.social.email': 'Enviar um e-mail',
+  'footer.location': 'Belo Horizonte, Brasil',
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Oi, eu sou',
-  'pages.home.hero.subtitle': 'Desenvolvedor Full Stack Web',
+  'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack',
   'pages.home.hero.description':
-    'Desenvolvedor Full Stack Web especializado em Front-End e Back-End. Baseado em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
+    'Engenheiro de Software Full Stack especializado em Front-End e Back-End. Baseado em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
   'pages.home.hero.location': 'Belo Horizonte, Brasil',
   'pages.home.hero.cta.projects': 'Ver projetos',
   'pages.home.hero.cta.experiences': 'Minha experiência',
-  'pages.home.hero.social.github': 'Abrir perfil no GitHub',
-  'pages.home.hero.social.linkedin': 'Abrir perfil no LinkedIn',
-  'pages.home.hero.social.email': 'Enviar um e-mail',
   'pages.home.hero.social.navigation': 'Links sociais',
   'pages.home.metrics.years.label': 'Anos de experiência',
   'pages.home.metrics.years.description': 'Anos construindo produtos web',

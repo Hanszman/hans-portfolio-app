@@ -44,6 +44,11 @@ app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdo
   min-width: 20rem;
 }
 
-app-footer-social-links hans-button.footer-social-link-button .hans-button {
+app-portfolio-social-links hans-button.portfolio-social-links-button .hans-button {
   padding: 0;
+}
+
+.app-display-hero-title {
+  @apply m-0 grid gap-1 text-6xl font-semibold leading-[0.86] md:text-8xl xl:text-[7rem];
+  color: var(--text-color);
 }

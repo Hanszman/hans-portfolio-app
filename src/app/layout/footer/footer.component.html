@@ -1,7 +1,12 @@
 <footer class="footer" data-testid="footer">
   <div class="footer-shell">
     <div class="footer-content">
-      <app-footer-social-links />
+      <app-portfolio-social-links
+        class="footer-social-panel"
+        [ariaLabelKey]="'footer.social.navigation'"
+        [links]="socialLinks"
+        [locationKey]="locationKey"
+      />
 
       <p class="footer-copy">
         <hans-button

@@ -12,6 +12,11 @@
   @apply mx-auto grid max-w-[120rem] gap-3 text-center;
 }
 
+.footer-social-panel {
+  --portfolio-social-links-justify: center;
+  --portfolio-social-links-location-justify: center;
+}
+
 .footer-copy {
   @apply m-0 flex items-center justify-center gap-1 text-base;
 }

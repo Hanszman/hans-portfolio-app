@@ -3,10 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { HomeHeroSectionComponent } from './home-hero-section.component';
+import { PORTFOLIO_SOCIAL_LINKS } from '../../../../shared/social-links/social-links.types';
 
 describe('HomeHeroSectionComponent', () => {
   beforeAll(() => {
-    for (const elementName of ['hans-button', 'hans-avatar', 'hans-icon']) {
+    for (const elementName of [
+      'hans-button',
+      'hans-avatar',
+      'hans-icon',
+      'hans-card',
+    ]) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -35,23 +41,7 @@ describe('HomeHeroSectionComponent', () => {
       primaryActionRoute: '/projects',
       secondaryActionLabelKey: 'pages.home.hero.cta.experiences',
       secondaryActionRoute: '/experiences',
-      socialLinks: [
-        {
-          labelKey: 'pages.home.hero.social.github',
-          href: 'https://github.com/Hanszman',
-          iconName: 'LuGithub',
-        },
-        {
-          labelKey: 'pages.home.hero.social.linkedin',
-          href: 'https://www.linkedin.com/in/victor-hanszman/',
-          iconName: 'LuLinkedin',
-        },
-        {
-          labelKey: 'pages.home.hero.social.email',
-          href: 'mailto:victor.hanszman@hotmail.com',
-          iconName: 'LuMail',
-        },
-      ],
+      socialLinks: PORTFOLIO_SOCIAL_LINKS,
       imageSrc: '/assets/profile.png',
     });
 
@@ -60,20 +50,22 @@ describe('HomeHeroSectionComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain("Hi, I'm");
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('Full Stack Web Developer');
-    expect(compiled.querySelectorAll('hans-button')).toHaveSize(5);
+    expect(compiled.textContent).toContain('Full Stack Software Engineer');
+    expect(compiled.querySelectorAll('hans-button')).toHaveSize(6);
 
     const socialButtons = Array.from(
-      compiled.querySelectorAll('.home-hero-links hans-button'),
+      compiled.querySelectorAll('.home-hero-social hans-button'),
     ) as HTMLElement[];
 
     socialButtons[0].click();
     socialButtons[1].click();
     socialButtons[2].click();
+    socialButtons[3].click();
 
     expect(openSpy.calls.allArgs()).toEqual([
       ['https://github.com/Hanszman', '_blank', 'noopener,noreferrer'],
       ['https://www.linkedin.com/in/victor-hanszman/', '_blank', 'noopener,noreferrer'],
+      ['https://wa.me/5531994533811', '_blank', 'noopener,noreferrer'],
       ['mailto:victor.hanszman@hotmail.com', '_blank', 'noopener,noreferrer'],
     ]);
   });

@@ -1,0 +1,35 @@
+@if (card().variant === 'navigation') {
+  <a class="portfolio-card-link" [routerLink]="card().route!">
+    <hans-card class="portfolio-card portfolio-card-navigation">
+      <span class="portfolio-card-eyebrow">{{ card().eyebrowKey! | translate }}</span>
+      <strong class="portfolio-card-title">{{ card().titleKey! | translate }}</strong>
+      <p class="portfolio-card-description">
+        {{ card().descriptionKey | translate }}
+      </p>
+
+      <span class="portfolio-card-action" aria-hidden="true">
+        <hans-icon name="LuArrowRight" iconSize="small"></hans-icon>
+      </span>
+    </hans-card>
+  </a>
+} @else {
+  <hans-card class="portfolio-card portfolio-card-metric">
+    @if (card().iconName) {
+      <span class="portfolio-card-icon">
+        <hans-icon [name]="card().iconName!" iconSize="medium"></hans-icon>
+      </span>
+    }
+
+    @if (card().value) {
+      <strong class="portfolio-card-value">{{ card().value }}</strong>
+    }
+
+    @if (card().labelKey) {
+      <span class="portfolio-card-label">{{ card().labelKey | translate }}</span>
+    }
+
+    <p class="portfolio-card-description">
+      {{ card().descriptionKey | translate }}
+    </p>
+  </hans-card>
+}

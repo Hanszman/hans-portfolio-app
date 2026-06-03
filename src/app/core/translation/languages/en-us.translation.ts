@@ -1,19 +1,6 @@
 ﻿import { AppTranslationLanguage } from '../translation.types';
 
 export const EN_TRANSLATIONS = {
-  'shell.api.eyebrow': 'API',
-  'shell.api.connected.title': 'API connected',
-  'shell.api.connected.description':
-    'Health check passed at {{ checkedAtUtc }}.',
-  'shell.api.loading.title': 'Connecting to API',
-  'shell.api.loading.description':
-    'Checking the backend availability for the current environment.',
-  'shell.api.blocked.title': 'API request blocked',
-  'shell.api.blocked.description':
-    'The browser could not complete the initial backend request from {{ origin }}. The API may be online, but the access can still be blocked by CORS or network policy.',
-  'shell.api.error.title': 'API request failed',
-  'shell.api.error.description':
-    'The initial backend health check could not be completed for the current environment.',
   'header.brand.home': 'Go to home',
   'header.brand.role': 'Full Stack Engineer | Front-End specialist',
   'header.tags.angular': 'Angular 20',
@@ -66,20 +53,19 @@ export const EN_TRANSLATIONS = {
   'footer.social.github': 'Open GitHub profile',
   'footer.social.linkedin': 'Open LinkedIn profile',
   'footer.social.whatsapp': 'Open WhatsApp contact',
+  'footer.social.email': 'Send an email',
+  'footer.location': 'Belo Horizonte, Brazil',
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'View details',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",
-  'pages.home.hero.subtitle': 'Full Stack Web Developer',
+  'pages.home.hero.subtitle': 'Full Stack Software Engineer',
   'pages.home.hero.description':
-    'Full Stack Web Developer specializing in Front-End and Back-End. Based in Belo Horizonte, Minas Gerais, Brazil. Currently working remotely and open to new opportunities in software development.',
+    'Full Stack Software Engineer specializing in Front-End and Back-End. Based in Belo Horizonte, Minas Gerais, Brazil. Currently working remotely and open to new opportunities in software development.',
   'pages.home.hero.location': 'Belo Horizonte, Brazil',
   'pages.home.hero.cta.projects': 'View projects',
   'pages.home.hero.cta.experiences': 'My Experience',
-  'pages.home.hero.social.github': 'Open GitHub profile',
-  'pages.home.hero.social.linkedin': 'Open LinkedIn profile',
-  'pages.home.hero.social.email': 'Send an email',
   'pages.home.hero.social.navigation': 'Social links',
   'pages.home.metrics.years.label': 'Years of Experience',
   'pages.home.metrics.years.description': 'Years building web products',

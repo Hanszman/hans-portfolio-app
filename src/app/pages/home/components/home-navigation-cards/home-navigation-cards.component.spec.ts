@@ -6,8 +6,8 @@ import { HomeNavigationCardsComponent } from './home-navigation-cards.component'
 
 describe('HomeNavigationCardsComponent', () => {
   beforeAll(() => {
-    if (!customElements.get('hans-icon')) {
-      customElements.define('hans-icon', class extends HTMLElement {});
+    if (!customElements.get('hans-card')) {
+      customElements.define('hans-card', class extends HTMLElement {});
     }
   });
 
@@ -49,6 +49,6 @@ describe('HomeNavigationCardsComponent', () => {
     expect(compiled.textContent).toContain('Skills');
     expect(compiled.textContent).toContain('Projects');
     expect(compiled.querySelectorAll('a')).toHaveSize(3);
-    expect(compiled.querySelectorAll('hans-icon')).toHaveSize(3);
+    expect(compiled.querySelectorAll('hans-card')).toHaveSize(3);
   });
 });

@@ -16,6 +16,8 @@ import { HomeMetricsStripComponent } from './components/home-metrics-strip/home-
 import { HomeNavigationCardsComponent } from './components/home-navigation-cards/home-navigation-cards.component';
 import { HomeStackChipsComponent } from './components/home-stack-chips/home-stack-chips.component';
 
+const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
+
 @Component({
   selector: 'app-home',
   imports: [
@@ -49,7 +51,7 @@ export class HomeComponent {
 
       return [
         {
-          value: '7+',
+          value: `${this.calculateCareerYears()}+`,
           labelKey: 'pages.home.metrics.years.label',
           descriptionKey: 'pages.home.metrics.years.description',
           iconName: 'LuBadgeCheck',
@@ -101,5 +103,19 @@ export class HomeComponent {
 
   private formatCount(value: number | undefined, fallback: string): string {
     return typeof value === 'number' ? `${value}+` : fallback;
+  }
+
+  private calculateCareerYears(referenceDate = new Date()): number {
+    const yearDiff =
+      referenceDate.getUTCFullYear() - CAREER_START_DATE.getUTCFullYear();
+    const monthDiff =
+      referenceDate.getUTCMonth() - CAREER_START_DATE.getUTCMonth();
+    const dayDiff = referenceDate.getUTCDate() - CAREER_START_DATE.getUTCDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      return yearDiff - 1;
+    }
+
+    return yearDiff;
   }
 }
