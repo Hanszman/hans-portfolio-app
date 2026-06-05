@@ -25,4 +25,3 @@ export class ExperienceTimelineCardComponent {
     this.openDetails.emit(this.item());
   }
 }
-

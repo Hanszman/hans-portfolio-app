@@ -1,20 +1,20 @@
 import { Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { PageWrapperComponent } from './page-wrapper.component';
+import { WrapperComponent } from './wrapper.component';
 
 @Component({
-  imports: [PageWrapperComponent],
+  imports: [WrapperComponent],
   template: `
-    <app-page-wrapper>
+    <app-wrapper>
       <div page-main>Main slot</div>
       <div page-sidebar>Sidebar slot</div>
       <div page-content>Content slot</div>
-    </app-page-wrapper>
+    </app-wrapper>
   `,
 })
 class TestHostComponent {}
 
-describe('PageWrapperComponent', () => {
+describe('WrapperComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],

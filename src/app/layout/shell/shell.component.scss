@@ -7,38 +7,5 @@
 }
 
 .shell-stage {
-  @apply flex-1 px-4 py-2;
-}
-
-.shell-api-status-wrapper {
-  @apply mx-auto mb-6 mt-1 w-full max-w-6xl px-4;
-}
-
-.shell-api-status {
-  @apply flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between;
-}
-
-.shell-api-status-copy {
-  @apply grid gap-1;
-}
-
-.shell-api-status-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.08em];
-  color: var(--primary-default-color);
-}
-
-.shell-api-status-title {
-  @apply text-sm font-semibold;
-}
-
-.shell-api-status-description {
-  @apply m-0 text-sm leading-6;
-  color: color-mix(in srgb, var(--text-color) 70%, transparent);
-}
-
-.shell-api-status-base-url {
-  @apply rounded-full border px-3 py-2 text-xs;
-  background-color: color-mix(in srgb, var(--background-color) 82%, white);
-  border-color: color-mix(in srgb, var(--base-neutral-color) 40%, transparent);
-  color: var(--base-strong-color);
+  @apply flex-1 px-4 pt-8;
 }

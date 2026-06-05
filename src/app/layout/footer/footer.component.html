@@ -1,27 +1,16 @@
 <footer class="footer" data-testid="footer">
   <div class="footer-shell">
     <div class="footer-content">
-      <app-portfolio-social-links
+      <app-social-links
         class="footer-social-panel"
         [ariaLabelKey]="'footer.social.navigation'"
         [links]="socialLinks"
-        [locationKey]="locationKey"
       />
 
-      <p class="footer-copy">
-        <hans-button
-          class="footer-copy-button"
-          [label]="'footer.copyright.name' | translate"
-          [buttonColor]="'primary'"
-          [buttonVariant]="'transparent'"
-          [hoverButtonColor]="'base'"
-          [hoverButtonVariant]="'transparent'"
-          [buttonShape]="'square'"
-          [buttonSize]="'small'"
-          (click)="navigateHome()"
-        ></hans-button>
-        <span>{{ 'footer.copyright.year' | translate: { year: '' + currentYear() } }}</span>
-      </p>
+      <div class="footer-meta">
+        <app-footer-copyright />
+        <app-location [labelKey]="locationKey" />
+      </div>
     </div>
   </div>
 </footer>

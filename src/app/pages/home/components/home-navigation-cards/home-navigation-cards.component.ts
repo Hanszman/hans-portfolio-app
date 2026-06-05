@@ -4,12 +4,12 @@ import {
   input,
 } from '@angular/core';
 import { HomeNavigationCardViewModel } from '../../home.types';
-import { PortfolioCardComponent } from '../../../../shared/portfolio-card/portfolio-card.component';
-import { PortfolioCardViewModel } from '../../../../shared/portfolio-card/portfolio-card.types';
+import { CardComponent } from '../../../../shared/card/card.component';
+import { CardViewModel } from '../../../../shared/card/card.types';
 
 @Component({
   selector: 'app-home-navigation-cards',
-  imports: [PortfolioCardComponent],
+  imports: [CardComponent],
   templateUrl: './home-navigation-cards.component.html',
   styleUrl: './home-navigation-cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,9 +17,9 @@ import { PortfolioCardViewModel } from '../../../../shared/portfolio-card/portfo
 export class HomeNavigationCardsComponent {
   readonly cards = input<readonly HomeNavigationCardViewModel[]>([]);
 
-  protected toCard(card: HomeNavigationCardViewModel): PortfolioCardViewModel {
+  protected toCard(card: HomeNavigationCardViewModel): CardViewModel {
     return {
-      variant: 'navigation',
+      alignment: 'start',
       eyebrowKey: card.eyebrowKey,
       titleKey: card.titleKey,
       descriptionKey: card.descriptionKey,

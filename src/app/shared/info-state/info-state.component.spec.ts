@@ -1,9 +1,9 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PortfolioStateComponent } from './portfolio-state.component';
+import { InfoStateComponent } from './info-state.component';
 
-describe('PortfolioStateComponent', () => {
-  let fixture: ComponentFixture<PortfolioStateComponent>;
+describe('InfoStateComponent', () => {
+  let fixture: ComponentFixture<InfoStateComponent>;
 
   beforeAll(() => {
     if (!customElements.get('hans-loading')) {
@@ -13,11 +13,11 @@ describe('PortfolioStateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PortfolioStateComponent],
+      imports: [InfoStateComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PortfolioStateComponent);
+    fixture = TestBed.createComponent(InfoStateComponent);
   });
 
   it('renders loading state with hans loading', () => {

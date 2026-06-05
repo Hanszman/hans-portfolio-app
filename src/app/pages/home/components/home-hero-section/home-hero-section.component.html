@@ -5,7 +5,7 @@
       {{ hero().availabilityKey | translate }}
     </span>
 
-    <h1 class="app-display-hero-title home-hero-title">
+    <h1 class="home-hero-title">
       <span>{{ hero().greetingKey | translate }}</span>
       <strong>{{ hero().name }}</strong>
     </h1>
@@ -33,21 +33,22 @@
       ></hans-button>
     </div>
 
-    <app-portfolio-social-links
-      class="home-hero-social"
-      [ariaLabelKey]="'pages.home.hero.social.navigation'"
-      [links]="hero().socialLinks"
-      [locationKey]="hero().locationKey"
-    />
+    <div class="home-hero-contact">
+      <app-social-links
+        class="home-hero-social"
+        [ariaLabelKey]="'pages.home.hero.social.navigation'"
+        [links]="hero().socialLinks"
+      />
+      <app-location
+        class="home-hero-location"
+        [labelKey]="hero().locationKey"
+      />
+    </div>
   </div>
 
   <div class="home-hero-visual">
     <div class="home-hero-image-frame">
-      <hans-avatar
-        [src]="hero().imageSrc"
-        [alt]="hero().name"
-        avatarSize="large"
-      ></hans-avatar>
+      <img class="home-hero-image" [src]="hero().imageSrc" [alt]="hero().name" />
     </div>
   </div>
 </section>

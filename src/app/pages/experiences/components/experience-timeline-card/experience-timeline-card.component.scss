@@ -23,7 +23,7 @@
 
 .experience-entry-date {
   @apply px-[0.85rem] py-[0.55rem] text-[0.9rem] font-semibold;
-  background-color: color-mix(in srgb, var(--success-neutral-color) 45%, white);
+  background-color: color-mix(in srgb, var(--success-neutral-color) 45%, var(--white));
   color: var(--success-strong-color);
 }
 
@@ -35,7 +35,7 @@
 
 .experience-entry-card {
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
 }
 
 .experience-entry-head {
@@ -45,7 +45,7 @@
 .experience-entry-icon {
   @apply grid h-16 w-16 place-items-center rounded-full border;
   border-color: color-mix(in srgb, var(--warning-default-color) 24%, transparent);
-  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, white);
+  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, var(--white));
 }
 
 .experience-entry-copy {
@@ -76,7 +76,7 @@
 .experience-chip {
   @apply border px-[0.85rem] py-[0.55rem] text-[0.9rem];
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, white);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, var(--white));
 }
 
 .experience-chip-muted {
@@ -101,4 +101,3 @@
     @apply grid-cols-2;
   }
 }
-

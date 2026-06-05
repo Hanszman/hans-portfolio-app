@@ -1,17 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { PageIntroComponent } from './page-intro.component';
+import { IntroComponent } from './intro.component';
 
-describe('PageIntroComponent', () => {
+describe('IntroComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PageIntroComponent],
+      imports: [IntroComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
   it('should render the provided page intro copy', () => {
-    const fixture = TestBed.createComponent(PageIntroComponent);
+    const fixture = TestBed.createComponent(IntroComponent);
     fixture.componentRef.setInput('sectionLabel', 'Foundation');
     fixture.componentRef.setInput('title', 'Home page');
     fixture.componentRef.setInput('description', 'Home page description.');

@@ -1,10 +1,10 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
 
-export type PortfolioCardVariant = 'metric' | 'navigation';
+export type CardAlignment = 'center' | 'start';
 
-export interface PortfolioCardViewModel {
-  variant: PortfolioCardVariant;
-  descriptionKey: AppTranslationKey;
+export interface CardViewModel {
+  alignment?: CardAlignment;
+  descriptionKey?: AppTranslationKey;
   iconName?: string;
   value?: string;
   labelKey?: AppTranslationKey;

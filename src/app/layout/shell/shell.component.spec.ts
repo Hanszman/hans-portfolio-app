@@ -47,7 +47,7 @@ describe('ShellComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const footerCopyButton = compiled.querySelector('.footer-copy-button') as
+    const footerCopyButton = compiled.querySelector('.footer-copyright-button') as
       | (HTMLElement & { label?: string })
       | null;
     const getNavigationLabels = (): string[] =>
@@ -73,7 +73,7 @@ describe('ShellComponent', () => {
     fixture.detectChanges();
 
     const copyButton = (fixture.nativeElement as HTMLElement).querySelector(
-      '.footer-copy-button',
+      '.footer-copyright-button',
     ) as HTMLElement;
 
     copyButton.click();

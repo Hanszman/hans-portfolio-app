@@ -33,7 +33,7 @@
 .skills-summary-item,
 .skills-group {
   @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
 }
 
@@ -79,7 +79,7 @@
 .skills-group-icon {
   @apply grid h-16 min-w-16 place-items-center rounded-full border;
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
+  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, var(--white));
 }
 
 @media (min-width: 768px) {

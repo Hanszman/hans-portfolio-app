@@ -27,7 +27,7 @@
 
 .projects-summary-item {
   @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
 }
 

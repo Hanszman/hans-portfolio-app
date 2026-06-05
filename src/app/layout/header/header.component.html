@@ -1,7 +1,11 @@
 <header class="header" data-testid="header">
   <div class="header-shell">
     <div class="header-content">
-      <a class="header-brand" routerLink="/home" [attr.aria-label]="'header.brand.home' | translate">
+      <a
+        class="header-brand"
+        routerLink="/home"
+        [attr.aria-label]="'header.brand.home' | translate"
+      >
         <img
           class="header-brand-image header-brand-image-default"
           [src]="brandLogoBluePath"
@@ -15,10 +19,7 @@
         />
       </a>
 
-      <app-navigation
-        class="header-navigation"
-        [items]="navigationItems()"
-      />
+      <app-navigation class="header-navigation" [items]="navigationItems()" />
 
       <div class="header-actions">
         <div class="header-theme-control">
@@ -26,9 +27,11 @@
             class="header-theme-icon"
             [name]="themeIconName"
             [iconSize]="'medium'"
-            [attr.aria-label]="theme.mode() === 'dark'
-              ? ('header.controls.lightTheme' | translate)
-              : ('header.controls.darkTheme' | translate)"
+            [attr.aria-label]="
+              theme.mode() === 'dark'
+                ? ('header.controls.lightTheme' | translate)
+                : ('header.controls.darkTheme' | translate)
+            "
           ></hans-icon>
           <hans-toggle
             #themeToggle

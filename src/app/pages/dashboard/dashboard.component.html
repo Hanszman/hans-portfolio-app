@@ -1,6 +1,6 @@
-<app-page-wrapper>
+<app-wrapper>
   <div page-main class="dashboard-hero">
-    <app-page-intro
+    <app-intro
       [sectionLabel]="'pages.dashboard.sectionLabel' | translate"
       [title]="'pages.dashboard.title' | translate"
       [description]="'pages.dashboard.description' | translate"
@@ -15,12 +15,12 @@
     [description]="'pages.dashboard.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <app-portfolio-state
+      <app-info-state
         mode="loading"
         [message]="'pages.dashboard.snapshot.loading' | translate"
       />
     } @else if (hasError()) {
-      <app-portfolio-state
+      <app-info-state
         mode="error"
         [message]="'pages.dashboard.snapshot.error' | translate"
       />
@@ -47,17 +47,17 @@
       [description]="'pages.dashboard.stacks.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.dashboard.stacks.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.dashboard.stacks.error' | translate"
         />
       } @else if (stackRows().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.dashboard.stacks.empty' | translate"
         />
@@ -102,17 +102,17 @@
       [description]="'pages.dashboard.distribution.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.dashboard.distribution.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.dashboard.distribution.error' | translate"
         />
       } @else if (!projectDistribution()) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.dashboard.distribution.empty' | translate"
         />
@@ -142,7 +142,7 @@
                   <span>{{ item.label }}</span>
                 </div>
               } @empty {
-                <app-portfolio-state
+                <app-info-state
                   mode="empty"
                   [message]="'pages.dashboard.distribution.empty' | translate"
                 />
@@ -159,7 +159,7 @@
                   <span>{{ item.label }}</span>
                 </div>
               } @empty {
-                <app-portfolio-state
+                <app-info-state
                   mode="empty"
                   [message]="'pages.dashboard.distribution.empty' | translate"
                 />
@@ -177,17 +177,17 @@
       [description]="'pages.dashboard.technology.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.dashboard.technology.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.dashboard.technology.error' | translate"
         />
       } @else if (technologyLeaders().length === 0 && technologyBreakdowns().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.dashboard.technology.empty' | translate"
         />
@@ -220,7 +220,7 @@
                       <span>{{ item.label }}</span>
                     </div>
                   } @empty {
-                    <app-portfolio-state
+                    <app-info-state
                       mode="empty"
                       [message]="'pages.dashboard.technology.empty' | translate"
                     />
@@ -240,17 +240,17 @@
       [description]="'pages.dashboard.timeline.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.dashboard.timeline.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.dashboard.timeline.error' | translate"
         />
       } @else if (timelineCards().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.dashboard.timeline.empty' | translate"
         />
@@ -293,7 +293,7 @@
                         <span>{{ customer }}</span>
                       </div>
                     } @empty {
-                      <app-portfolio-state
+                      <app-info-state
                         mode="empty"
                         [message]="'pages.dashboard.timeline.emptyCustomers' | translate"
                       />
@@ -309,7 +309,7 @@
                         <span>{{ project }}</span>
                       </div>
                     } @empty {
-                      <app-portfolio-state
+                      <app-info-state
                         mode="empty"
                         [message]="'pages.dashboard.timeline.emptyProjects' | translate"
                       />
@@ -341,17 +341,17 @@
       [description]="'pages.dashboard.highlights.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.dashboard.highlights.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.dashboard.highlights.error' | translate"
         />
       } @else if (highlightCards().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.dashboard.highlights.empty' | translate"
         />
@@ -391,4 +391,4 @@
       }
     </app-container>
   </section>
-</app-page-wrapper>
+</app-wrapper>

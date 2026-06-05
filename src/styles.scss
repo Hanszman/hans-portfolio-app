@@ -33,22 +33,3 @@ app-root {
   display: block;
   min-height: 100vh;
 }
-
-app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-trigger {
-  min-width: auto;
-  gap: 0.375rem;
-  padding: 0.625rem 0.75rem;
-}
-
-app-header-language-dropdown hans-dropdown.header-language-dropdown .hans-dropdown-popup {
-  min-width: 20rem;
-}
-
-app-portfolio-social-links hans-button.portfolio-social-links-button .hans-button {
-  padding: 0;
-}
-
-.app-display-hero-title {
-  @apply m-0 grid gap-1 text-6xl font-semibold leading-[0.86] md:text-8xl xl:text-[7rem];
-  color: var(--text-color);
-}

@@ -1,4 +1,4 @@
-﻿import { AppTranslationLanguage } from '../translation.types';
+import { AppTranslationLanguage } from '../translation.types';
 
 export const PT_BR_TRANSLATIONS = {
   'header.brand.home': 'Ir para a home',
@@ -11,7 +11,7 @@ export const PT_BR_TRANSLATIONS = {
   'header.controls.darkTheme': 'Tema escuro',
   'header.controls.lightTheme': 'Tema claro',
   'header.controls.language': 'Idioma',
-  'header.controls.navigation': 'Menu de navegaÃ§Ã£o',
+  'header.controls.navigation': 'Menu de navegação',
   'header.controls.noLanguages': 'Nenhum idioma disponível',
   'header.controls.portuguese': 'Português',
   'header.controls.english': 'Inglês',
@@ -385,5 +385,3 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',
 } as const satisfies AppTranslationLanguage;
-
-

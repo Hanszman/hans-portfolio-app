@@ -1,0 +1,43 @@
+<hans-card
+  class="card"
+  [cardLayout]="'custom'"
+  [cardSize]="'large'"
+  [cardBackgroundColor]="'var(--card-background-color)'"
+  [cardBorderColor]="'var(--card-border-color)'"
+  [cardMutedColor]="'var(--card-muted-color)'"
+  [cardTextColor]="'var(--text-color)'"
+>
+  <div class="card-content" [attr.data-alignment]="card().alignment ?? 'start'">
+    @if (card().iconName) {
+      <span class="card-icon">
+        <hans-icon [name]="card().iconName!" iconSize="medium"></hans-icon>
+      </span>
+    }
+    @if (card().eyebrowKey) {
+      <span class="card-eyebrow">{{ card().eyebrowKey! | translate }}</span>
+    }
+    @if (card().value) {
+      <strong class="card-value">{{ card().value }}</strong>
+    }
+    @if (card().titleKey) {
+      <strong class="card-title">{{ card().titleKey! | translate }}</strong>
+    }
+    @if (card().labelKey) {
+      <span class="card-label">{{ card().labelKey! | translate }}</span>
+    }
+    @if (card().descriptionKey) {
+      <p class="card-description">
+        {{ card().descriptionKey! | translate }}
+      </p>
+    }
+    @if (card().route) {
+      <a
+        class="card-action"
+        [attr.aria-label]="card().titleKey! | translate"
+        [routerLink]="card().route!"
+      >
+        <hans-icon name="LuArrowRight" iconSize="small"></hans-icon>
+      </a>
+    }
+  </div>
+</hans-card>

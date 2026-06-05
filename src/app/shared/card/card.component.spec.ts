@@ -2,9 +2,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
-import { PortfolioCardComponent } from './portfolio-card.component';
+import { CardComponent } from './card.component';
 
-describe('PortfolioCardComponent', () => {
+describe('CardComponent', () => {
   beforeAll(() => {
     for (const elementName of ['hans-card', 'hans-icon']) {
       if (!customElements.get(elementName)) {
@@ -15,16 +15,16 @@ describe('PortfolioCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PortfolioCardComponent],
+      imports: [CardComponent],
       providers: [provideZonelessChangeDetection(), provideAppTranslations(), provideRouter([])],
     }).compileComponents();
   });
 
   it('should render a navigation card', () => {
-    const fixture = TestBed.createComponent(PortfolioCardComponent);
+    const fixture = TestBed.createComponent(CardComponent);
 
     fixture.componentRef.setInput('card', {
-      variant: 'navigation',
+      alignment: 'start',
       route: '/projects',
       eyebrowKey: 'pages.home.navigation.projects.eyebrow',
       titleKey: 'pages.home.navigation.projects.title',
@@ -35,15 +35,23 @@ describe('PortfolioCardComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.textContent).toContain('Projects');
-    expect(compiled.querySelector('a')).not.toBeNull();
-    expect(compiled.querySelector('hans-card')).not.toBeNull();
+    expect(compiled.querySelector('.card-action')).not.toBeNull();
+    const hansCard = compiled.querySelector('hans-card') as HTMLElement & {
+      cardLayout: string;
+      cardSize: string;
+    };
+
+    expect(hansCard).not.toBeNull();
+    expect(hansCard.cardLayout).toBe('custom');
+    expect(hansCard.cardSize).toBe('large');
+    expect(compiled.querySelectorAll('hans-card')).toHaveSize(1);
   });
 
   it('should render a metric card with adornments', () => {
-    const fixture = TestBed.createComponent(PortfolioCardComponent);
+    const fixture = TestBed.createComponent(CardComponent);
 
     fixture.componentRef.setInput('card', {
-      variant: 'metric',
+      alignment: 'center',
       iconName: 'LuSparkles',
       value: '12+',
       labelKey: 'pages.home.metrics.projects.label',
@@ -59,19 +67,18 @@ describe('PortfolioCardComponent', () => {
   });
 
   it('should render a metric card without optional adornments', () => {
-    const fixture = TestBed.createComponent(PortfolioCardComponent);
+    const fixture = TestBed.createComponent(CardComponent);
 
     fixture.componentRef.setInput('card', {
-      variant: 'metric',
-      descriptionKey: 'pages.home.metrics.description',
+      alignment: 'center',
     });
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('hans-icon')).toBeNull();
-    expect(compiled.querySelector('.portfolio-card-value')).toBeNull();
-    expect(compiled.querySelector('.portfolio-card-label')).toBeNull();
-    expect(compiled.textContent).toContain('pages.home.metrics.description');
+    expect(compiled.querySelector('.card-value')).toBeNull();
+    expect(compiled.querySelector('.card-label')).toBeNull();
+    expect(compiled.querySelector('.card-description')).toBeNull();
   });
 });

@@ -1,6 +1,6 @@
-<app-page-wrapper>
+<app-wrapper>
   <div page-main class="projects-hero">
-    <app-page-intro
+    <app-intro
       [sectionLabel]="'pages.projects.sectionLabel' | translate"
       [title]="'pages.projects.title' | translate"
       [description]="'pages.projects.description' | translate"
@@ -15,12 +15,12 @@
     [description]="'pages.projects.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <app-portfolio-state
+      <app-info-state
         mode="loading"
         [message]="'pages.projects.snapshot.loading' | translate"
       />
     } @else if (hasError()) {
-      <app-portfolio-state
+      <app-info-state
         mode="error"
         [message]="'pages.projects.snapshot.error' | translate"
       />
@@ -105,17 +105,17 @@
       [description]="'pages.projects.catalog.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.projects.catalog.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.projects.catalog.error' | translate"
         />
       } @else if (projectCases().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.projects.catalog.empty' | translate"
         />
@@ -137,4 +137,4 @@
     [project]="selectedProject()"
     (closed)="closeProjectDetails()"
   />
-</app-page-wrapper>
+</app-wrapper>

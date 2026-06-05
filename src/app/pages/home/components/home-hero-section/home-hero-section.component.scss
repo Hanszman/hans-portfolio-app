@@ -3,7 +3,7 @@
 }
 
 .home-hero {
-  @apply grid items-center gap-10 xl:grid-cols-[minmax(0,1.12fr)_minmax(24rem,0.88fr)];
+  @apply grid items-center gap-12 xl:grid-cols-[minmax(0,1.25fr)_minmax(20rem,0.75fr)];
 }
 
 .home-hero-copy {
@@ -21,12 +21,20 @@
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--success-default-color) 22%, transparent);
 }
 
-.home-hero-title span {
+.home-hero-title {
+  @apply m-0 grid gap-1 text-6xl font-semibold leading-[0.86] md:text-8xl xl:text-[5.5rem];
+  color: var(--text-color);
+}
+
+.home-hero-title span,
+.home-hero-title strong {
   @apply block;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .home-hero-title strong {
-  @apply bg-gradient-to-r from-sky-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent;
+  color: var(--primary-default-color);
 }
 
 .home-hero-subtitle {
@@ -43,9 +51,17 @@
   @apply flex flex-wrap gap-3;
 }
 
+.home-hero-contact {
+  @apply grid gap-3;
+}
+
 .home-hero-social {
-  --portfolio-social-links-justify: flex-start;
-  --portfolio-social-links-location-justify: flex-start;
+  --social-links-justify: flex-start;
+  --social-links-color: var(--text-color);
+}
+
+.home-hero-location {
+  --location-color: color-mix(in srgb, var(--text-color) 68%, transparent);
 }
 
 .home-hero-visual {
@@ -53,7 +69,7 @@
 }
 
 .home-hero-image-frame {
-  @apply overflow-hidden rounded-[2rem] border p-3;
+  @apply w-full max-w-[20rem] overflow-hidden rounded-[1.5rem] border;
   background:
     radial-gradient(
       circle at top,
@@ -62,16 +78,15 @@
     ),
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--background-color) 88%, white) 0%,
+      color-mix(in srgb, var(--background-color) 88%, var(--white)) 0%,
       color-mix(in srgb, var(--primary-neutral-color) 18%, transparent) 100%
     );
   border-color: color-mix(in srgb, var(--base-neutral-color) 26%, transparent);
   box-shadow: 0 24px 60px color-mix(in srgb, var(--primary-default-color) 14%, transparent);
 }
 
-.home-hero-image-frame hans-avatar {
-  @apply block;
-  width: min(100%, 28rem);
+.home-hero-image {
+  @apply block aspect-square h-auto w-full object-cover;
 }
 
 @media (max-width: 1024px) {

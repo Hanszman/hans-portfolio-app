@@ -3,6 +3,7 @@ import { AppTranslationKey } from '../../core/translation/translation.types';
 import { PortfolioSocialLink, PORTFOLIO_SOCIAL_LINKS } from '../../shared/social-links/social-links.types';
 
 export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
+export const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
 
 export interface HomeHeroViewModel {
   availabilityKey: AppTranslationKey;

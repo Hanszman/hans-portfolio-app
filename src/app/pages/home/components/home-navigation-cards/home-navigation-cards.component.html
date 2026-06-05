@@ -1,7 +1,7 @@
 <section class="home-navigation">
   <div class="home-navigation-grid">
     @for (card of cards(); track card.route) {
-      <app-portfolio-card [card]="toCard(card)" />
+      <app-card [card]="toCard(card)" />
     }
   </div>
 </section>

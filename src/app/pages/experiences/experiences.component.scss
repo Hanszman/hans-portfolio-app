@@ -17,7 +17,7 @@
 
 .experiences-summary-item {
   @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 90%, white);
+  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
   border-color: color-mix(in srgb, var(--secondary-default-color) 20%, transparent);
 }
 

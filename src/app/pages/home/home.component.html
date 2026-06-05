@@ -1,20 +1,14 @@
-<app-page-wrapper>
+<app-wrapper>
   <app-home-hero-section page-main [hero]="hero" />
 
   <div page-content class="home-page-body">
     @if (isLoading()) {
       <div class="home-page-state">
-        <app-portfolio-state
-          mode="loading"
-          [message]="'pages.home.loading' | translate"
-        />
+        <app-info-state mode="loading" [message]="'pages.home.loading' | translate" />
       </div>
     } @else if (hasError()) {
       <div class="home-page-state">
-        <app-portfolio-state
-          mode="error"
-          [message]="'pages.home.error' | translate"
-        />
+        <app-info-state mode="error" [message]="'pages.home.error' | translate" />
       </div>
     } @else {
       <app-home-metrics-strip
@@ -31,14 +25,11 @@
         />
       } @else {
         <div class="home-page-state">
-          <app-portfolio-state
-            mode="empty"
-            [message]="'pages.home.stack.empty' | translate"
-          />
+          <app-info-state mode="empty" [message]="'pages.home.stack.empty' | translate" />
         </div>
       }
     }
 
     <app-home-navigation-cards [cards]="navigationCards" />
   </div>
-</app-page-wrapper>
+</app-wrapper>

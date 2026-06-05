@@ -1004,6 +1004,15 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 - modais de detalhe para tecnologias, projetos, experiencias e outros itens relevantes, mostrando informacoes expandidas, conexoes com outras entidades, ativos visuais e graficos quando agregarem valor
 - quando houver imagens vinculadas suficientes, uso de `hans-carousel` dentro do detalhe para exibicao ampliada
 - na tela `home`, usar `vh_profile.png` no lugar de `vh_profile.jpeg`
+- refinamento complementar aprovado para a `home`: ampliar titulo e retrato para a proporcao do print `Home01`, mantendo o estilo do hero dentro do proprio componente
+- evoluir o `hans-card` na `hans-ui-design-lib` com um layout customizavel e suporte a slot para permitir composicoes do portfolio sem avatar ou conteudo predefinido
+- consolidar os cards de metricas e navegacao da `home` em um unico componente compartilhado, com conteudo opcional, alinhamento parametrizavel e somente a seta como area navegavel
+- separar redes sociais, localizacao e copyright em componentes independentes; a `home` usa redes + localizacao e o `footer` combina os tres
+- excecao aprovada para o `footer` nesta rodada: ajustar somente sua composicao interna para alinhar copyright e localizacao, preservando sua identidade visual
+- remover prefixos redundantes dos componentes compartilhados e estruturais: `page-wrapper` -> `wrapper`, `page-intro` -> `intro`, `portfolio-card` -> `card` e `portfolio-state` -> `info-state`
+- manter estilos especificos junto aos respectivos componentes, deixando `styles.scss` apenas com regras realmente globais
+- usar exclusivamente variaveis/tokens de tema em declaracoes de cor e garantir contraste dos componentes sociais nos contextos de `home` e `footer`
+- manter constantes declarativas junto aos arquivos de tipos do respectivo contexto, incluindo mapa de navegacao do shell e data inicial da carreira
 - atualizacao da documentacao a cada ajuste relevante de escopo, estrutura ou contrato de tela
 - execucao dos scripts de qualidade ao fim de cada refatoracao concluida: `test`, `test:coverage`, `lint` e `build`
 - testes adicionais necessarios

@@ -1,12 +1,9 @@
-import {
-  AppTranslationKey,
-  AppTranslationParams,
-} from '../../core/translation/translation.types';
+import { AppTranslationKey } from '../../core/translation/translation.types';
 
-export interface ShellApiStatusViewModel {
-  readonly state: 'loading' | 'connected' | 'error';
-  readonly titleKey: AppTranslationKey;
-  readonly descriptionKey: AppTranslationKey;
-  readonly descriptionParams?: AppTranslationParams;
-  readonly baseUrl: string;
-}
+export const NAVIGATION_LABEL_KEY_BY_PATH: Record<string, AppTranslationKey> = {
+  '/home': 'header.navigation.home',
+  '/experiences': 'header.navigation.experiences',
+  '/skills': 'header.navigation.skills',
+  '/projects': 'header.navigation.projects',
+  '/dashboard': 'header.navigation.dashboard',
+};

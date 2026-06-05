@@ -11,7 +11,7 @@
 .skill-card {
   @apply rounded-3xl border p-4;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 92%, white);
+  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
 }
 
 .skill-card-head {
@@ -21,7 +21,7 @@
 .skill-card-visual {
   @apply grid h-16 min-w-16 place-items-center rounded-full border;
   border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, white);
+  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, var(--white));
 }
 
 .skill-card-copy {
@@ -56,11 +56,10 @@
 .skill-card-context-item {
   @apply rounded-3xl border p-3;
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--base-neutral-color) 24%, white);
+  background-color: color-mix(in srgb, var(--base-neutral-color) 24%, var(--white));
 }
 
 .skill-card-context-item span {
   @apply mt-1 block text-[0.95rem];
   color: color-mix(in srgb, var(--text-color) 76%, transparent);
 }
-

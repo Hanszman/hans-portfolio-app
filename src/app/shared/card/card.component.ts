@@ -6,16 +6,16 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PortfolioCardViewModel } from './portfolio-card.types';
+import { CardViewModel } from './card.types';
 
 @Component({
-  selector: 'app-portfolio-card',
+  selector: 'app-card',
   imports: [RouterLink, TranslatePipe],
-  templateUrl: './portfolio-card.component.html',
-  styleUrl: './portfolio-card.component.scss',
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PortfolioCardComponent {
-  readonly card = input.required<PortfolioCardViewModel>();
+export class CardComponent {
+  readonly card = input.required<CardViewModel>();
 }

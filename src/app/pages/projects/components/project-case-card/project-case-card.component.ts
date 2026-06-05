@@ -25,4 +25,3 @@ export class ProjectCaseCardComponent {
     this.openDetails.emit(this.project());
   }
 }
-

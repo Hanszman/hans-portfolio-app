@@ -1,4 +1,4 @@
-﻿import { AppTranslationLanguage } from '../translation.types';
+import { AppTranslationLanguage } from '../translation.types';
 
 export const EN_TRANSLATIONS = {
   'header.brand.home': 'Go to home',
@@ -379,4 +379,3 @@ export const EN_TRANSLATIONS = {
   'taxonomy.dashboard.source.project': 'Project',
   'taxonomy.dashboard.source.formation': 'Formation',
 } as const satisfies AppTranslationLanguage;
-

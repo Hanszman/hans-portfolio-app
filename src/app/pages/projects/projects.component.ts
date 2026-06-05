@@ -16,9 +16,9 @@ import { ProjectsService } from '../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
-import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
-import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
-import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
+import { IntroComponent } from '../../layout/intro/intro.component';
+import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
+import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
 import { ProjectDetailModalComponent } from './components/project-detail-modal/project-detail-modal.component';
 import {
@@ -41,10 +41,10 @@ import {
 @Component({
   selector: 'app-projects',
   imports: [
-    PageIntroComponent,
-    PageWrapperComponent,
+    IntroComponent,
+    WrapperComponent,
     ContainerComponent,
-    PortfolioStateComponent,
+    InfoStateComponent,
     ProjectCaseCardComponent,
     ProjectDetailModalComponent,
     TranslatePipe,

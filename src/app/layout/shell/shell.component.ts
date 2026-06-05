@@ -2,18 +2,10 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Router, RouterOutlet } from '@angular/router';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
-import { AppTranslationKey } from '../../core/translation/translation.types';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { readNavigationItems } from '../navigation/helpers/navigation.helper';
-
-const NAVIGATION_LABEL_KEY_BY_PATH: Record<string, AppTranslationKey> = {
-  '/home': 'header.navigation.home',
-  '/experiences': 'header.navigation.experiences',
-  '/skills': 'header.navigation.skills',
-  '/projects': 'header.navigation.projects',
-  '/dashboard': 'header.navigation.dashboard',
-};
+import { NAVIGATION_LABEL_KEY_BY_PATH } from './shell.types';
 
 @Component({
   selector: 'app-shell',

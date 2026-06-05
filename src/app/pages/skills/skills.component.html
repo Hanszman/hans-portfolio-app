@@ -1,6 +1,6 @@
-<app-page-wrapper>
+<app-wrapper>
   <div page-main class="skills-hero">
-    <app-page-intro
+    <app-intro
       [sectionLabel]="'pages.skills.sectionLabel' | translate"
       [title]="'pages.skills.title' | translate"
       [description]="'pages.skills.description' | translate"
@@ -15,12 +15,12 @@
     [description]="'pages.skills.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <app-portfolio-state
+      <app-info-state
         mode="loading"
         [message]="'pages.skills.snapshot.loading' | translate"
       />
     } @else if (hasError()) {
-      <app-portfolio-state
+      <app-info-state
         mode="error"
         [message]="'pages.skills.snapshot.error' | translate"
       />
@@ -94,17 +94,17 @@
       [description]="'pages.skills.catalog.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.skills.catalog.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.skills.catalog.error' | translate"
         />
       } @else if (groupedTechnologies().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.skills.catalog.empty' | translate"
         />
@@ -143,4 +143,4 @@
     [item]="selectedSkill()"
     (closed)="closeSkillDetails()"
   />
-</app-page-wrapper>
+</app-wrapper>

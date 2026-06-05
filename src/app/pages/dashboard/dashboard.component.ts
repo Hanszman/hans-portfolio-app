@@ -12,9 +12,9 @@ import { forkJoin } from 'rxjs';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
-import { PageIntroComponent } from '../../layout/page-intro/page-intro.component';
-import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
-import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
+import { IntroComponent } from '../../layout/intro/intro.component';
+import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
+import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { DashboardPageData } from './dashboard.types';
 import {
   buildDashboardProjectDistribution,
@@ -29,10 +29,10 @@ import {
 @Component({
   selector: 'app-dashboard',
   imports: [
-    PageIntroComponent,
-    PageWrapperComponent,
+    IntroComponent,
+    WrapperComponent,
     ContainerComponent,
-    PortfolioStateComponent,
+    InfoStateComponent,
     TranslatePipe,
   ],
   templateUrl: './dashboard.component.html',

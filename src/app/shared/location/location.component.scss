@@ -1,0 +1,8 @@
+:host {
+  @apply block;
+}
+
+.location {
+  @apply m-0 inline-flex items-center gap-2 text-sm;
+  color: var(--location-color, color-mix(in srgb, var(--text-color) 68%, transparent));
+}

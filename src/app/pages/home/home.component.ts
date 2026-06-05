@@ -3,9 +3,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
-import { PortfolioStateComponent } from '../../shared/portfolio-state/portfolio-state.component';
-import { PageWrapperComponent } from '../../layout/page-wrapper/page-wrapper.component';
+import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import {
+  CAREER_START_DATE,
   HOME_HERO,
   HOME_NAVIGATION_CARDS,
   HomeMetricViewModel,
@@ -16,8 +17,6 @@ import { HomeMetricsStripComponent } from './components/home-metrics-strip/home-
 import { HomeNavigationCardsComponent } from './components/home-navigation-cards/home-navigation-cards.component';
 import { HomeStackChipsComponent } from './components/home-stack-chips/home-stack-chips.component';
 
-const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
-
 @Component({
   selector: 'app-home',
   imports: [
@@ -25,8 +24,8 @@ const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
     HomeMetricsStripComponent,
     HomeNavigationCardsComponent,
     HomeStackChipsComponent,
-    PageWrapperComponent,
-    PortfolioStateComponent,
+    WrapperComponent,
+    InfoStateComponent,
     TranslatePipe,
   ],
   templateUrl: './home.component.html',

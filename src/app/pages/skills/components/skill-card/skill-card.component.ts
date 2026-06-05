@@ -25,4 +25,3 @@ export class SkillCardComponent {
     this.openDetails.emit(this.item());
   }
 }
-

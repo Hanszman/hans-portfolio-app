@@ -1,23 +1,22 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
-import { PortfolioSocialLinksComponent } from './social-links.component';
+import { SocialLinksComponent } from './social-links.component';
 import { PORTFOLIO_SOCIAL_LINKS } from './social-links.types';
 
-describe('PortfolioSocialLinksComponent', () => {
+describe('SocialLinksComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PortfolioSocialLinksComponent],
+      imports: [SocialLinksComponent],
       providers: [provideZonelessChangeDetection(), provideAppTranslations()],
     }).compileComponents();
   });
 
-  it('should render the social actions and location text', () => {
-    const fixture = TestBed.createComponent(PortfolioSocialLinksComponent);
+  it('should render and open the social actions', () => {
+    const fixture = TestBed.createComponent(SocialLinksComponent);
     const openSpy = spyOn(window, 'open');
 
     fixture.componentRef.setInput('ariaLabelKey', 'footer.social.navigation');
-    fixture.componentRef.setInput('locationKey', 'footer.location');
     fixture.componentRef.setInput('links', PORTFOLIO_SOCIAL_LINKS);
     fixture.detectChanges();
 
@@ -27,7 +26,6 @@ describe('PortfolioSocialLinksComponent', () => {
     ) as HTMLElement[];
 
     expect(buttons).toHaveSize(4);
-    expect(compiled.textContent).toContain('Belo Horizonte, Brazil');
 
     buttons.forEach((button) => button.click());
 
@@ -39,16 +37,14 @@ describe('PortfolioSocialLinksComponent', () => {
     ]);
   });
 
-  it('should render only the location when there are no links', () => {
-    const fixture = TestBed.createComponent(PortfolioSocialLinksComponent);
+  it('should render no actions when there are no links', () => {
+    const fixture = TestBed.createComponent(SocialLinksComponent);
 
     fixture.componentRef.setInput('ariaLabelKey', 'footer.social.navigation');
-    fixture.componentRef.setInput('locationKey', 'footer.location');
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelectorAll('hans-button')).toHaveSize(0);
-    expect(compiled.textContent).toContain('Belo Horizonte, Brazil');
   });
 });

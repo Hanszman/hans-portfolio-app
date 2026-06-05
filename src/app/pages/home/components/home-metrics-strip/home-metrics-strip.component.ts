@@ -5,12 +5,12 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HomeMetricViewModel } from '../../home.types';
-import { PortfolioCardComponent } from '../../../../shared/portfolio-card/portfolio-card.component';
-import { PortfolioCardViewModel } from '../../../../shared/portfolio-card/portfolio-card.types';
+import { CardComponent } from '../../../../shared/card/card.component';
+import { CardViewModel } from '../../../../shared/card/card.types';
 
 @Component({
   selector: 'app-home-metrics-strip',
-  imports: [TranslatePipe, PortfolioCardComponent],
+  imports: [TranslatePipe, CardComponent],
   templateUrl: './home-metrics-strip.component.html',
   styleUrl: './home-metrics-strip.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,9 +19,9 @@ export class HomeMetricsStripComponent {
   readonly ariaLabelKey = input.required<string>();
   readonly metrics = input<readonly HomeMetricViewModel[]>([]);
 
-  protected toCard(metric: HomeMetricViewModel): PortfolioCardViewModel {
+  protected toCard(metric: HomeMetricViewModel): CardViewModel {
     return {
-      variant: 'metric',
+      alignment: 'center',
       value: metric.value,
       labelKey: metric.labelKey,
       descriptionKey: metric.descriptionKey,

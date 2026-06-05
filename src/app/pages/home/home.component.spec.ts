@@ -1,4 +1,4 @@
-﻿import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -213,4 +213,3 @@ describe('HomeComponent', () => {
     expect(component.formatCount(undefined, 'fallback')).toBe('fallback');
   });
 });
-

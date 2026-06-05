@@ -1,0 +1,14 @@
+<p class="footer-copyright">
+  <hans-button
+    class="footer-copyright-button"
+    [label]="'footer.copyright.name' | translate"
+    [buttonColor]="'primary'"
+    [buttonVariant]="'transparent'"
+    [hoverButtonColor]="'base'"
+    [hoverButtonVariant]="'transparent'"
+    [buttonShape]="'square'"
+    [buttonSize]="'small'"
+    (click)="navigateHome()"
+  ></hans-button>
+  <span>{{ 'footer.copyright.year' | translate: { year: '' + currentYear() } }}</span>
+</p>

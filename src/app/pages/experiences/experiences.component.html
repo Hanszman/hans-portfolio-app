@@ -1,6 +1,6 @@
-<app-page-wrapper>
+<app-wrapper>
   <div page-main class="experiences-hero">
-    <app-page-intro
+    <app-intro
       [sectionLabel]="'pages.experiences.sectionLabel' | translate"
       [title]="'pages.experiences.title' | translate"
       [description]="'pages.experiences.description' | translate"
@@ -15,12 +15,12 @@
     [description]="'pages.experiences.snapshot.description' | translate"
   >
     @if (isLoading()) {
-      <app-portfolio-state
+      <app-info-state
         mode="loading"
         [message]="'pages.experiences.snapshot.loading' | translate"
       />
     } @else if (hasError()) {
-      <app-portfolio-state
+      <app-info-state
         mode="error"
         [message]="'pages.experiences.snapshot.error' | translate"
       />
@@ -68,17 +68,17 @@
       [description]="'pages.experiences.timeline.description' | translate"
     >
       @if (isLoading()) {
-        <app-portfolio-state
+        <app-info-state
           mode="loading"
           [message]="'pages.experiences.timeline.loading' | translate"
         />
       } @else if (hasError()) {
-        <app-portfolio-state
+        <app-info-state
           mode="error"
           [message]="'pages.experiences.timeline.error' | translate"
         />
       } @else if (timelineItems().length === 0) {
-        <app-portfolio-state
+        <app-info-state
           mode="empty"
           [message]="'pages.experiences.timeline.empty' | translate"
         />
@@ -100,4 +100,4 @@
     [item]="selectedExperience()"
     (closed)="closeExperienceDetails()"
   />
-</app-page-wrapper>
+</app-wrapper>
