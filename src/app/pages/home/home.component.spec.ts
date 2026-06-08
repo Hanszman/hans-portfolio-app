@@ -73,6 +73,7 @@ describe('HomeComponent', () => {
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('Connecting live portfolio data');
     expect(compiled.querySelectorAll('hans-button')).toHaveSize(6);
+    expect(compiled.querySelectorAll('hans-button.social-links-button')).toHaveSize(4);
 
     request.flush(createDashboardOverviewResponse());
     fixture.detectChanges();

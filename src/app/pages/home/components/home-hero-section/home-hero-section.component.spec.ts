@@ -52,9 +52,10 @@ describe('HomeHeroSectionComponent', () => {
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('Full Stack Software Engineer');
     expect(compiled.querySelectorAll('hans-button')).toHaveSize(6);
+    expect(compiled.querySelectorAll('.home-hero-social hans-button.social-links-button')).toHaveSize(4);
 
     const socialButtons = Array.from(
-      compiled.querySelectorAll('.home-hero-social hans-button'),
+      compiled.querySelectorAll('.home-hero-social hans-button.social-links-button'),
     ) as HTMLElement[];
 
     socialButtons[0].click();

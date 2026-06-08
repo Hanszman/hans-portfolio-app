@@ -21,9 +21,7 @@ describe('SocialLinksComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = Array.from(
-      compiled.querySelectorAll('hans-button'),
-    ) as HTMLElement[];
+    const buttons = Array.from(compiled.querySelectorAll('hans-button.social-links-button')) as HTMLElement[];
 
     expect(buttons).toHaveSize(4);
 
@@ -45,6 +43,6 @@ describe('SocialLinksComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelectorAll('hans-button')).toHaveSize(0);
+    expect(compiled.querySelectorAll('hans-button.social-links-button')).toHaveSize(0);
   });
 });

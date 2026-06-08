@@ -14,5 +14,10 @@
 
 :host ::ng-deep hans-button.social-links-button .hans-button {
   padding: 0;
-  color: inherit;
+  color: var(--social-links-color, var(--text-color));
+}
+
+:host ::ng-deep hans-button.social-links-button:hover .hans-button,
+:host ::ng-deep hans-button.social-links-button:focus-visible .hans-button {
+  color: var(--primary-default-color);
 }

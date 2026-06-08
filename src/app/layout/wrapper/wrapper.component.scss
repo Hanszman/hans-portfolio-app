@@ -6,6 +6,16 @@
   @apply grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] xl:items-start;
 }
 
+@supports selector(.wrapper-hero:has(.wrapper-sidebar:empty)) {
+  .wrapper-hero:has(.wrapper-sidebar:empty) {
+    @apply xl:grid-cols-1;
+  }
+
+  .wrapper-sidebar:empty {
+    display: none;
+  }
+}
+
 .wrapper-main {
   @apply min-w-0;
 }
