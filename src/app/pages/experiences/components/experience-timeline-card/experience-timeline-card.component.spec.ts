@@ -11,24 +11,28 @@ describe('ExperienceTimelineCardComponent', () => {
   const item: ExperienceTimelineItemViewModel = {
     id: '1',
     slug: 'stefanini',
-    companyName: 'Stefanini',
-    title: 'Front-End Specialist',
+    companyName: 'Stefanini Group',
+    roleTitle: 'Full Stack Developer',
     summary: 'Summary',
-    description: 'Description',
-    dateRangeLabel: 'Set 2021 - Atual',
+    description: 'Enterprise delivery for international clients.',
+    dateRangeLabel: 'Sep 2021 - Present',
     isCurrent: true,
-    isHighlight: false,
-    imageUrl: '',
-    jobs: ['Front-End Specialist'],
-    customers: ['Ford'],
+    isHighlight: true,
+    jobs: ['Full Stack Developer'],
+    customers: ['Ford', 'Ale'],
     projects: [],
-    technologies: ['Angular'],
-    extraTechnologyCount: 0,
-    galleryItems: [],
+    technologies: ['Angular', 'TypeScript'],
+    extraTechnologyCount: 2,
+    technologyGroups: [
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: ['Angular', 'TypeScript'],
+      },
+    ],
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-avatar', 'hans-icon', 'hans-tag', 'hans-button']) {
+    for (const elementName of ['hans-icon', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -47,11 +51,13 @@ describe('ExperienceTimelineCardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('renders condensed timeline card', () => {
+  it('renders the redesigned timeline card', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain('Stefanini');
-    expect(compiled.querySelector('hans-button')).toBeTruthy();
+    expect(compiled.textContent).toContain('Stefanini Group');
+    expect(compiled.textContent).toContain('Full Stack Developer');
+    expect(compiled.textContent).toContain('View details');
+    expect(compiled.textContent).toContain('+2');
   });
 
   it('emits details request', () => {

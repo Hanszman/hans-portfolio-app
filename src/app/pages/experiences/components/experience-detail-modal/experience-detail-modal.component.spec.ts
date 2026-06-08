@@ -10,32 +10,34 @@ describe('ExperienceDetailModalComponent', () => {
   const item: ExperienceTimelineItemViewModel = {
     id: '1',
     slug: 'stefanini',
-    companyName: 'Stefanini',
-    title: 'Front-End Specialist',
+    companyName: 'Stefanini Group',
+    roleTitle: 'Full Stack Developer',
     summary: 'Summary',
     description: 'Description',
-    dateRangeLabel: 'Set 2021 - Atual',
+    dateRangeLabel: 'Sep 2021 - Present',
     isCurrent: true,
     isHighlight: false,
-    imageUrl: '',
-    jobs: ['Front-End Specialist'],
+    jobs: ['Full Stack Developer'],
     customers: ['Ford'],
     projects: [
       {
         slug: 'ford-app',
-        title: 'Ford App',
-        summary: 'Summary',
-        statusLabel: 'Concluido',
-        environmentLabel: 'Full stack',
+        title: 'Customer & Dealer Transformation App',
+        summary: 'Scheduling and service flows.',
       },
     ],
     technologies: ['Angular'],
     extraTechnologyCount: 0,
-    galleryItems: [{ id: 'gallery-1', imageSrc: '/img.png', imageAlt: 'Gallery' }],
+    technologyGroups: [
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: ['Angular'],
+      },
+    ],
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-modal', 'hans-tag', 'hans-chart', 'hans-carousel']) {
+    for (const elementName of ['hans-button', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -54,12 +56,12 @@ describe('ExperienceDetailModalComponent', () => {
     fixture.detectChanges();
   });
 
-  it('renders analytics and gallery', () => {
+  it('renders the detail drawer content', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('hans-chart')).toBeTruthy();
-    expect(compiled.querySelector('hans-carousel')).toBeTruthy();
-    expect(compiled.textContent).toContain('Front-End Specialist');
+    expect(compiled.textContent).toContain('Stefanini Group');
+    expect(compiled.textContent).toContain('Customer & Dealer Transformation App');
+    expect(compiled.textContent).toContain('Front-end');
   });
 
   it('emits close request', () => {
@@ -72,10 +74,12 @@ describe('ExperienceDetailModalComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('returns an empty chart series when no experience is selected', () => {
-    fixture.componentRef.setInput('item', null);
+  it('does not render the drawer when it is closed', () => {
+    fixture.componentRef.setInput('isOpen', false);
     fixture.detectChanges();
 
-    expect(fixture.componentInstance['chartSeries']()).toEqual([]);
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('[role="dialog"]')).toBeNull();
   });
 });

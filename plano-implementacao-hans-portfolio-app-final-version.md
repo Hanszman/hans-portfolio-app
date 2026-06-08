@@ -1029,6 +1029,15 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 - cada pagina refatorada deve passar por `test`, `test:coverage`, `lint` e `build` antes de avancar para a proxima
 - coverage total do escopo entregue
 
+#### Status de execucao atual
+
+- `home` concluida com hero, metricas, navegacao e componentes compartilhados alinhados aos prints `Home01` e `Home02`
+- `experiences` concluida com timeline vertical, cards resumidos e drawer lateral de detalhe alinhados aos prints da pasta `G:\\Meu Drive\\Victor\\Projetos\\Pessoais\\Hans\\Hans Portfolio Remake`
+- a pagina `experiences` continua consumindo `GET /experiences`, mas a leitura foi refeita para priorizar empresa, papel, clientes, projetos e stack em fluxo incremental
+- a composicao antiga com snapshot lateral, modal central, analytics e galeria foi removida desta tela por nao fazer parte do redesign atual
+- o detalhamento expandido de `experiences` agora acontece em painel lateral sobreposto, preservando tema, traducoes e integracao real com a API
+- proxima etapa oficial dentro da `F7`: refatoracao da pagina `skills`
+
 ### F8 - Preparacao da area administrativa visual
 
 #### Objetivo

@@ -58,6 +58,7 @@ export const EN_TRANSLATIONS = {
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'View details',
+  'common.actions.close': 'Close',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",
   'pages.home.hero.subtitle': 'Full Stack Software Engineer',
@@ -95,10 +96,10 @@ export const EN_TRANSLATIONS = {
   'pages.home.navigation.projects.title': 'Projects',
   'pages.home.navigation.projects.description':
     'Real-world applications and case studies.',
-  'pages.experiences.sectionLabel': 'Career',
-  'pages.experiences.title': 'Experience narrative',
+  'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
+  'pages.experiences.title': 'Professional Experience',
   'pages.experiences.description':
-    'Career chapters now read the public experiences endpoint and turn relationships into a scannable professional timeline.',
+    'A chronological journey through my career building impactful software solutions.',
   'pages.experiences.snapshot.label': 'Career snapshot',
   'pages.experiences.snapshot.title': 'Trajectory coverage from the live API',
   'pages.experiences.snapshot.description':
@@ -131,6 +132,7 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.timeline.emptyCustomers': 'No linked customers yet.',
   'pages.experiences.timeline.technologyStack': 'Technology stack',
   'pages.experiences.timeline.relatedProjects': 'Related projects',
+  'pages.experiences.timeline.moreTechnologies': 'more',
   'pages.experiences.timeline.emptyProjects':
     'No related projects were returned for this chapter.',
   'pages.experiences.detail.projectsCount': 'projects',
@@ -141,6 +143,13 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.detail.chart.projects': 'Projects',
   'pages.experiences.detail.chart.technologies': 'Technologies',
   'pages.experiences.detail.chart.series': 'Connections',
+  'pages.experiences.detail.projects': '// projects',
+  'pages.experiences.detail.clients': '// clients',
+  'pages.experiences.detail.techStack': '// tech_stack',
+  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
+  'pages.experiences.detail.stackGroups.backend': 'Back-end',
+  'pages.experiences.detail.stackGroups.databases': 'Databases',
+  'pages.experiences.detail.stackGroups.others': 'Others',
   'pages.skills.sectionLabel': 'Technology',
   'pages.skills.title': 'Technology depth',
   'pages.skills.description':

@@ -2,35 +2,35 @@
   @apply block;
 }
 
-.experiences-summary-grid,
+.experiences-hero,
+.experiences-section,
 .experiences-timeline {
-  @apply grid gap-4;
+  @apply grid;
 }
 
-.experiences-timeline {
+.experiences-hero {
+  @apply gap-4;
+}
+
+.experiences-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.experiences-title {
+  @apply m-0 text-4xl font-semibold leading-[0.98] md:text-5xl;
+  color: var(--text-color);
+}
+
+.experiences-description {
+  @apply m-0 max-w-3xl text-lg leading-9;
+  color: color-mix(in srgb, var(--text-color) 66%, transparent);
+}
+
+.experiences-section {
   @apply gap-6;
 }
 
-.experiences-summary-grid {
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-}
-
-.experiences-summary-item {
-  @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
-  border-color: color-mix(in srgb, var(--secondary-default-color) 20%, transparent);
-}
-
-.experiences-summary-item span {
-  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
-  color: var(--secondary-default-color);
-}
-
-.experiences-summary-item strong {
-  @apply mt-2 block text-[1.1rem] font-semibold leading-[1.2];
-}
-
-.experiences-summary-item small {
-  @apply mt-2 block text-[0.9rem] leading-[1.6];
-  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+.experiences-timeline {
+  @apply gap-8;
 }

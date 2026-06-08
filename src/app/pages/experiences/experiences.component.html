@@ -1,98 +1,41 @@
 <app-wrapper>
-  <div page-main class="experiences-hero">
-    <app-intro
-      [sectionLabel]="'pages.experiences.sectionLabel' | translate"
-      [title]="'pages.experiences.title' | translate"
-      [description]="'pages.experiences.description' | translate"
-    />
-  </div>
+  <section page-main class="experiences-hero">
+    <span class="experiences-eyebrow">
+      {{ 'pages.experiences.sectionLabel' | translate }}
+    </span>
+    <h1 class="experiences-title">{{ 'pages.experiences.title' | translate }}</h1>
+    <p class="experiences-description">
+      {{ 'pages.experiences.description' | translate }}
+    </p>
+  </section>
 
-  <app-container
-    page-sidebar
-    tone="secondary"
-    [label]="'pages.experiences.snapshot.label' | translate"
-    [containerTitle]="'pages.experiences.snapshot.title' | translate"
-    [description]="'pages.experiences.snapshot.description' | translate"
-  >
+  <section page-content class="experiences-section">
     @if (isLoading()) {
       <app-info-state
         mode="loading"
-        [message]="'pages.experiences.snapshot.loading' | translate"
+        [message]="'pages.experiences.timeline.loading' | translate"
       />
     } @else if (hasError()) {
       <app-info-state
         mode="error"
-        [message]="'pages.experiences.snapshot.error' | translate"
+        [message]="'pages.experiences.timeline.error' | translate"
+      />
+    } @else if (timelineItems().length === 0) {
+      <app-info-state
+        mode="empty"
+        [message]="'pages.experiences.timeline.empty' | translate"
       />
     } @else {
-      <dl class="experiences-summary-grid">
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.currentRole' | translate }}</span>
-          <strong>{{ experienceSummary().currentRoleTitle }}</strong>
-          <small>{{ experienceSummary().currentCompanyName }}</small>
-        </div>
-
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.experiences' | translate }}</span>
-          <strong>{{ experienceSummary().experienceCount }}</strong>
-        </div>
-
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.projects' | translate }}</span>
-          <strong>{{ experienceSummary().projectCount }}</strong>
-        </div>
-
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.technologies' | translate }}</span>
-          <strong>{{ experienceSummary().technologyCount }}</strong>
-        </div>
-
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.customers' | translate }}</span>
-          <strong>{{ experienceSummary().customerCount }}</strong>
-        </div>
-
-        <div class="experiences-summary-item">
-          <span>{{ 'pages.experiences.snapshot.metrics.highlights' | translate }}</span>
-          <strong>{{ experienceSummary().highlightCount }}</strong>
-        </div>
-      </dl>
+      <div class="experiences-timeline">
+        @for (item of timelineItems(); track item.id) {
+          <app-experience-timeline-card
+            [item]="item"
+            [isActive]="isSelectedExperience(item.id)"
+            (openDetails)="openExperienceDetails($event)"
+          />
+        }
+      </div>
     }
-  </app-container>
-
-  <section page-content class="experiences-section">
-    <app-container
-      tone="success"
-      [label]="'pages.experiences.timeline.label' | translate"
-      [containerTitle]="'pages.experiences.timeline.title' | translate"
-      [description]="'pages.experiences.timeline.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.experiences.timeline.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.experiences.timeline.error' | translate"
-        />
-      } @else if (timelineItems().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.experiences.timeline.empty' | translate"
-        />
-      } @else {
-        <div class="experiences-timeline">
-          @for (item of timelineItems(); track item.id) {
-            <app-experience-timeline-card
-              [item]="item"
-              (openDetails)="openExperienceDetails($event)"
-            />
-          }
-        </div>
-      }
-    </app-container>
   </section>
 
   <app-experience-detail-modal

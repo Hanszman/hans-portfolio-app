@@ -1,5 +1,16 @@
 import { AppTranslationLanguage } from '../translation.types';
 
+const PT_BR_EXPERIENCES_OVERRIDES = {
+  'pages.experiences.timeline.moreTechnologies': 'a mais',
+  'pages.experiences.detail.projects': '// projetos',
+  'pages.experiences.detail.clients': '// clientes',
+  'pages.experiences.detail.techStack': '// stack_tecnica',
+  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
+  'pages.experiences.detail.stackGroups.backend': 'Back-end',
+  'pages.experiences.detail.stackGroups.databases': 'Bancos de dados',
+  'pages.experiences.detail.stackGroups.others': 'Outros',
+} as const satisfies Partial<AppTranslationLanguage>;
+
 export const PT_BR_TRANSLATIONS = {
   'header.brand.home': 'Ir para a home',
   'header.brand.role': 'Full Stack Engineer | Especialista Front-End',
@@ -58,6 +69,7 @@ export const PT_BR_TRANSLATIONS = {
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
+  'common.actions.close': 'Fechar',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Oi, eu sou',
   'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack',
@@ -95,8 +107,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.navigation.projects.title': 'Projetos',
   'pages.home.navigation.projects.description':
     'Aplicações reais e estudos de caso.',
-  'pages.experiences.sectionLabel': 'Carreira',
-  'pages.experiences.title': 'Narrativa de carreira',
+  'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
+  'pages.experiences.title': 'Experiencia Profissional',
   'pages.experiences.description':
     'Os capítulos de carreira agora leem o endpoint público de experiences e transformam relacionamentos em uma timeline profissional fácil de escanear.',
   'pages.experiences.snapshot.label': 'Panorama',
@@ -384,4 +396,5 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',
+  ...PT_BR_EXPERIENCES_OVERRIDES,
 } as const satisfies AppTranslationLanguage;

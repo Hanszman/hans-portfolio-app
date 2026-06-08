@@ -1,7 +1,6 @@
-import { buildAssetUrl } from '../../../core/api/api.config';
 import {
   ExperienceCollectionItemResponse,
-  ExperienceProjectResponse,
+  ExperienceTechnologyResponse,
 } from '../../../core/api/experiences/experiences.types';
 import {
   resolveLocalizedText,
@@ -9,22 +8,14 @@ import {
 } from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
 import {
+  EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS,
   EXPERIENCE_PRESENT_LABEL_KEY,
-  EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS,
-  EXPERIENCE_PROJECT_STATUS_LABEL_KEYS,
-  ExperiencePortfolioSummaryViewModel,
   ExperienceProjectViewModel,
+  ExperienceTechnologyGroupViewModel,
   ExperienceTimelineItemViewModel,
 } from '../experiences.types';
 
 const dedupe = (values: string[]): string[] => [...new Set(values)];
-
-const normalizeLabel = (value: string): string =>
-  value
-    .toLowerCase()
-    .split('_')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
 
 const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
   new Intl.DateTimeFormat(locale, {
@@ -32,24 +23,43 @@ const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
     year: 'numeric',
   }).format(new Date(dateIso));
 
-const resolveProjectStatusLabel = (
-  status: string,
-  locale: AppLocale,
-): string =>
-  EXPERIENCE_PROJECT_STATUS_LABEL_KEYS[status]
-    ? translateStaticKey(locale, EXPERIENCE_PROJECT_STATUS_LABEL_KEYS[status])
-    : normalizeLabel(status);
+const FRONTEND_TECHNOLOGY_SLUGS = new Set([
+  'angular',
+  'typescript',
+  'javascript',
+  'html',
+  'css',
+  'sass',
+  'bootstrap',
+  'jquery',
+  'ajax',
+  'json',
+]);
 
-const resolveProjectEnvironmentLabel = (
-  environment: string,
-  locale: AppLocale,
-): string =>
-  EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS[environment]
-    ? translateStaticKey(locale, EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS[environment])
-    : normalizeLabel(environment);
+const BACKEND_TECHNOLOGY_SLUGS = new Set([
+  'node-js',
+  'nodejs',
+  'node',
+  'knex-js',
+  'knex',
+  'swagger',
+  'php',
+  'laravel',
+  'http',
+]);
+
+const DATABASE_TECHNOLOGY_SLUGS = new Set([
+  'sql-server',
+  'mysql',
+  'postgresql',
+  'dbeaver',
+]);
+
+const TECHNOLOGY_GROUP_ORDER = ['frontend', 'backend', 'databases', 'others'] as const;
+type TechnologyGroupKey = (typeof TECHNOLOGY_GROUP_ORDER)[number];
 
 const mapProject = (
-  project: ExperienceProjectResponse,
+  project: ExperienceCollectionItemResponse['projects'][number]['project'],
   locale: AppLocale,
 ): ExperienceProjectViewModel => ({
   slug: project.slug,
@@ -69,9 +79,56 @@ const mapProject = (
     },
     project.shortDescriptionEn,
   ),
-  statusLabel: resolveProjectStatusLabel(project.status, locale),
-  environmentLabel: resolveProjectEnvironmentLabel(project.environment, locale),
 });
+
+const resolveTechnologyGroupKey = (
+  technology: ExperienceTechnologyResponse,
+): TechnologyGroupKey => {
+  if (FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
+    return 'frontend';
+  }
+
+  if (BACKEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
+    return 'backend';
+  }
+
+  if (DATABASE_TECHNOLOGY_SLUGS.has(technology.slug)) {
+    return 'databases';
+  }
+
+  return technology.category === 'DATABASE' ? 'databases' : 'others';
+};
+
+const buildTechnologyGroups = (
+  technologies: ExperienceCollectionItemResponse['technologies'],
+): readonly ExperienceTechnologyGroupViewModel[] => {
+  const grouped = new Map<TechnologyGroupKey, string[]>();
+
+  for (const relation of technologies) {
+    const groupKey = resolveTechnologyGroupKey(relation.technology);
+    const technologyNames = grouped.get(groupKey) ?? [];
+
+    if (!technologyNames.includes(relation.technology.name)) {
+      technologyNames.push(relation.technology.name);
+      grouped.set(groupKey, technologyNames);
+    }
+  }
+
+  return TECHNOLOGY_GROUP_ORDER.flatMap((groupKey) => {
+    const groupTechnologies = grouped.get(groupKey);
+
+    if (!groupTechnologies?.length) {
+      return [];
+    }
+
+    return [
+      {
+        labelKey: EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS[groupKey],
+        technologies: groupTechnologies,
+      },
+    ];
+  });
+};
 
 export const formatExperienceDateRange = (
   startDate: string,
@@ -94,10 +151,19 @@ export const mapExperienceToTimelineItem = (
     experience.technologies.map(({ technology }) => technology.name),
   );
   const leadTechnologies = technologies.slice(0, 8);
-  const primaryImage =
-    experience.imageAssets.find(({ imageAsset }) => imageAsset.kind === 'ICON') ??
-    experience.imageAssets[0];
-  const title = resolveLocalizedText(
+  const jobs = dedupe(
+    experience.jobs.map(({ job }) =>
+      resolveLocalizedText(
+        locale,
+        {
+          'pt-br': job.namePt,
+          'en-us': job.nameEn,
+        },
+        job.nameEn,
+      ),
+    ),
+  );
+  const fallbackRoleTitle = resolveLocalizedText(
     locale,
     {
       'pt-br': experience.titlePt,
@@ -110,7 +176,7 @@ export const mapExperienceToTimelineItem = (
     id: experience.id,
     slug: experience.slug,
     companyName: experience.companyName,
-    title,
+    roleTitle: jobs[0] ?? fallbackRoleTitle,
     summary: resolveLocalizedText(
       locale,
       {
@@ -134,96 +200,11 @@ export const mapExperienceToTimelineItem = (
     ),
     isCurrent: experience.isCurrent,
     isHighlight: experience.highlight,
-    imageUrl: buildAssetUrl(primaryImage?.imageAsset.filePath),
-    jobs: dedupe(
-      experience.jobs.map(({ job }) =>
-        resolveLocalizedText(
-          locale,
-          {
-            'pt-br': job.namePt,
-            'en-us': job.nameEn,
-          },
-          job.nameEn,
-        ),
-      ),
-    ),
+    jobs,
     customers: dedupe(experience.customers.map(({ customer }) => customer.name)),
     projects: experience.projects.map(({ project }) => mapProject(project, locale)),
     technologies: leadTechnologies,
     extraTechnologyCount: Math.max(0, technologies.length - leadTechnologies.length),
-    galleryItems: [...experience.imageAssets]
-      .sort((left, right) => left.sortOrder - right.sortOrder)
-      .map(({ imageAsset }) => ({
-        id: imageAsset.id,
-        imageSrc: buildAssetUrl(imageAsset.filePath),
-        imageAlt:
-          resolveLocalizedText(
-            locale,
-            {
-              'pt-br': imageAsset.altPt ?? undefined,
-              'en-us': imageAsset.altEn ?? undefined,
-            },
-            title,
-          ) || title,
-        title: experience.companyName,
-        description:
-          resolveLocalizedText(
-            locale,
-            {
-              'pt-br': imageAsset.captionPt ?? undefined,
-              'en-us': imageAsset.captionEn ?? undefined,
-            },
-            '',
-          ) || undefined,
-      })),
-  };
-};
-
-export const buildExperiencePortfolioSummary = (
-  experiences: ExperienceCollectionItemResponse[],
-  locale: AppLocale,
-): ExperiencePortfolioSummaryViewModel => {
-  const currentExperience =
-    experiences.find((experience) => experience.isCurrent) ??
-    experiences.find((experience) => experience.highlight) ??
-    experiences[0];
-
-  const uniqueProjectSlugs = new Set<string>();
-  const uniqueTechnologySlugs = new Set<string>();
-  const uniqueCustomerSlugs = new Set<string>();
-
-  for (const experience of experiences) {
-    for (const relation of experience.projects) {
-      uniqueProjectSlugs.add(relation.project.slug);
-    }
-
-    for (const relation of experience.technologies) {
-      uniqueTechnologySlugs.add(relation.technology.slug);
-    }
-
-    for (const relation of experience.customers) {
-      uniqueCustomerSlugs.add(relation.customer.slug);
-    }
-  }
-
-  return {
-    currentRoleTitle: currentExperience
-      ? resolveLocalizedText(
-          locale,
-          {
-            'pt-br': currentExperience.titlePt,
-            'en-us': currentExperience.titleEn,
-          },
-          currentExperience.titleEn,
-        )
-      : '',
-    currentCompanyName: currentExperience?.companyName ?? '',
-    experienceCount: String(experiences.length),
-    projectCount: String(uniqueProjectSlugs.size),
-    technologyCount: String(uniqueTechnologySlugs.size),
-    customerCount: String(uniqueCustomerSlugs.size),
-    highlightCount: String(
-      experiences.filter((experience) => experience.highlight).length,
-    ),
+    technologyGroups: buildTechnologyGroups(experience.technologies),
   };
 };

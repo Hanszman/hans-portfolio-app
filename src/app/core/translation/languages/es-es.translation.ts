@@ -1,6 +1,18 @@
 import { AppTranslationLanguage } from '../translation.types';
 import { EN_TRANSLATIONS } from './en-us.translation';
 
+const ES_ES_EXPERIENCES_OVERRIDES = {
+  'common.actions.close': 'Cerrar',
+  'pages.experiences.timeline.moreTechnologies': 'mÃ¡s',
+  'pages.experiences.detail.projects': '// proyectos',
+  'pages.experiences.detail.clients': '// clientes',
+  'pages.experiences.detail.techStack': '// stack_tecnico',
+  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
+  'pages.experiences.detail.stackGroups.backend': 'Back-end',
+  'pages.experiences.detail.stackGroups.databases': 'Bases de datos',
+  'pages.experiences.detail.stackGroups.others': 'Otros',
+} as const satisfies Partial<AppTranslationLanguage>;
+
 export const ES_ES_TRANSLATIONS = {
   ...EN_TRANSLATIONS,
   'header.brand.home': 'Ir al inicio',
@@ -391,4 +403,5 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.dashboard.source.experience': 'Experiencia',
   'taxonomy.dashboard.source.project': 'Proyecto',
   'taxonomy.dashboard.source.formation': 'Formación',
+  ...ES_ES_EXPERIENCES_OVERRIDES,
 } as const satisfies AppTranslationLanguage;

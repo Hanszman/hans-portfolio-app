@@ -2,102 +2,107 @@
   @apply block;
 }
 
-.experience-entry {
-  @apply grid gap-4;
+.experience-card {
+  @apply relative grid gap-4;
+  grid-template-columns: auto minmax(0, 1fr);
 }
 
-.experience-entry-rail {
-  @apply relative flex flex-col gap-3 pl-4;
-  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+.experience-card-rail {
+  @apply relative hidden w-12 items-start justify-center md:flex;
 }
 
-.experience-entry-rail-line {
-  @apply absolute bottom-0 left-0 top-0 w-px;
-  background-color: color-mix(in srgb, var(--success-default-color) 35%, transparent);
+.experience-card-rail-dot {
+  @apply relative z-[1] mt-6 h-3 w-3 rounded-full border-2;
+  border-color: color-mix(in srgb, var(--primary-default-color) 26%, transparent);
+  background-color: var(--primary-default-color);
+  box-shadow: 0 0 0 0.55rem color-mix(in srgb, var(--primary-default-color) 10%, transparent);
 }
 
-.experience-entry-date,
-.experience-chip {
-  @apply inline-flex items-center gap-2 rounded-full;
+.experience-card-rail-line {
+  @apply absolute bottom-[-3rem] left-1/2 top-0 w-px -translate-x-1/2;
+  background-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
 }
 
-.experience-entry-date {
-  @apply px-[0.85rem] py-[0.55rem] text-[0.9rem] font-semibold;
-  background-color: color-mix(in srgb, var(--success-neutral-color) 45%, var(--white));
-  color: var(--success-strong-color);
+:host(:last-child) .experience-card-rail-line {
+  bottom: 0;
 }
 
-.experience-entry-card,
-.experience-entry-grid,
-.experience-meta-block {
-  @apply grid gap-4 rounded-[2rem] border p-5;
+.experience-card-panel {
+  @apply grid gap-5 rounded-[2rem] border p-6 shadow-[0_28px_64px_rgba(0,0,0,0.18)] md:p-7;
+  background-color: color-mix(in srgb, var(--background-color) 90%, var(--base-strong-color));
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
-.experience-entry-card {
-  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
+.experience-card-active .experience-card-panel,
+.experience-card-panel:hover {
+  border-color: color-mix(in srgb, var(--primary-default-color) 42%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 24%, transparent);
 }
 
-.experience-entry-head {
-  @apply flex flex-col gap-3 md:flex-row md:items-start;
+.experience-card-header {
+  @apply grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start;
 }
 
-.experience-entry-icon {
-  @apply grid h-16 w-16 place-items-center rounded-full border;
-  border-color: color-mix(in srgb, var(--warning-default-color) 24%, transparent);
-  background-color: color-mix(in srgb, var(--warning-neutral-color) 36%, var(--white));
+.experience-card-heading {
+  @apply grid gap-2;
 }
 
-.experience-entry-copy {
-  @apply grid flex-1 gap-3;
+.experience-card-company {
+  @apply m-0 text-[2rem] font-semibold leading-none;
+  color: var(--text-color);
 }
 
-.experience-entry-heading span,
-.experience-meta-block > span {
-  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
-  color: color-mix(in srgb, var(--text-color) 66%, transparent);
-}
-
-.experience-entry-heading strong {
-  @apply mt-[0.2rem] block text-[1.5rem] font-semibold leading-[1.15];
-}
-
-.experience-entry-flags,
-.experience-chip-list,
-.experience-tag-list {
-  @apply flex flex-wrap gap-2;
-}
-
-.experience-entry-summary {
-  @apply m-0 text-[1rem] leading-7;
-  color: color-mix(in srgb, var(--text-color) 78%, transparent);
-}
-
-.experience-chip {
-  @apply border px-[0.85rem] py-[0.55rem] text-[0.9rem];
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--base-neutral-color) 28%, var(--white));
-}
-
-.experience-chip-muted {
-  color: color-mix(in srgb, var(--text-color) 62%, transparent);
-}
-
-.experience-entry-footer {
-  @apply flex flex-col gap-3 md:flex-row md:items-center md:justify-between;
-}
-
-.experience-entry-footer span {
-  @apply text-sm;
+.experience-card-role {
+  @apply m-0 text-[1.15rem] leading-none;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
 }
 
-@media (min-width: 1024px) {
-  .experience-entry {
-    grid-template-columns: 11rem minmax(0, 1fr);
-  }
+.experience-card-date,
+.experience-card-customers,
+.experience-card-action {
+  @apply inline-flex items-center gap-2;
+}
 
-  .experience-entry-grid {
-    @apply grid-cols-2;
+.experience-card-date {
+  @apply text-sm font-semibold tracking-[0.08em];
+  color: var(--primary-default-color);
+}
+
+.experience-card-summary {
+  @apply m-0 max-w-5xl text-[1.05rem] leading-8;
+  color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.experience-card-customers {
+  @apply flex-wrap;
+  color: color-mix(in srgb, var(--text-color) 64%, transparent);
+}
+
+.experience-card-chip-list,
+.experience-card-stack {
+  @apply flex flex-wrap gap-2;
+}
+
+.experience-card-stack-more {
+  @apply inline-flex items-center text-sm;
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.experience-card-action {
+  @apply w-fit border-none bg-transparent p-0 text-sm font-semibold tracking-[0.08em];
+  color: var(--primary-default-color);
+}
+
+.experience-card-action:hover {
+  color: color-mix(in srgb, var(--primary-default-color) 78%, var(--text-color));
+}
+
+@media (max-width: 767px) {
+  .experience-card {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,6 +1,5 @@
 import { createExperiencesCollectionResponse } from '../../../core/api/mocks/experiences.mocks';
 import {
-  buildExperiencePortfolioSummary,
   formatExperienceDateRange,
   mapExperienceToTimelineItem,
 } from './experiences.helper';
@@ -8,11 +7,7 @@ import {
 describe('experiences helper', () => {
   it('should format an experience date range for both active and finished chapters', () => {
     expect(
-      formatExperienceDateRange(
-        '2021-09-23T00:00:00.000Z',
-        null,
-        'en-us',
-      ),
+      formatExperienceDateRange('2021-09-23T00:00:00.000Z', null, 'en-us'),
     ).toContain('Present');
 
     expect(
@@ -30,165 +25,96 @@ describe('experiences helper', () => {
     const timelineItem = mapExperienceToTimelineItem(experience, 'pt-br');
 
     expect(timelineItem.companyName).toBe('Stefanini Group');
-    expect(timelineItem.title).toBe('Experiencia em Stefanini Group');
-    expect(timelineItem.projects[0].statusLabel).toBe('Em andamento');
-    expect(timelineItem.projects[0].environmentLabel).toBe('Full stack');
-    expect(timelineItem.jobs).toEqual(['Especialista Front-End']);
+    expect(timelineItem.roleTitle).toBe('Desenvolvedor Full Stack');
     expect(timelineItem.customers).toEqual(['Ford', 'Ale']);
     expect(timelineItem.technologies).toEqual([
       'Angular',
       'TypeScript',
       'Microsoft Azure',
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'Sass',
+      'Bootstrap',
     ]);
-    expect(timelineItem.imageUrl).toContain('/assets/img/experiences/stefanini.jpg');
+    expect(timelineItem.extraTechnologyCount).toBe(4);
   });
 
-  it('should build the portfolio summary from all experience relationships', () => {
-    const summary = buildExperiencePortfolioSummary(
-      createExperiencesCollectionResponse().data,
-      'en-us',
-    );
-
-    expect(summary.currentRoleTitle).toBe('Experience at Stefanini Group');
-    expect(summary.currentCompanyName).toBe('Stefanini Group');
-    expect(summary.experienceCount).toBe('2');
-    expect(summary.projectCount).toBe('3');
-    expect(summary.technologyCount).toBe('4');
-    expect(summary.customerCount).toBe('3');
-    expect(summary.highlightCount).toBe('1');
-  });
-
-  it('should fallback to normalized labels and the first image asset when needed', () => {
-    const experience = createExperiencesCollectionResponse({
-      data: [
-        {
-          ...createExperiencesCollectionResponse().data[0],
-          imageAssets: [
-            {
-              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
-              imageAsset: {
-                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
-                  .imageAsset,
-                kind: 'SCREENSHOT',
-                filePath: '/assets/img/projects/github-consumer.png',
-              },
-            },
-          ],
-          projects: [
-            {
-              ...createExperiencesCollectionResponse().data[0].projects[0],
-              project: {
-                ...createExperiencesCollectionResponse().data[0].projects[0].project,
-                status: 'QA_REVIEW',
-                environment: 'MOBILE_APP',
-              },
-            },
-          ],
-        },
-      ],
-    }).data[0];
+  it('should group technologies for the detail drawer', () => {
+    const experience = createExperiencesCollectionResponse().data[0];
 
     const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
 
-    expect(timelineItem.imageUrl).toContain('/assets/img/projects/github-consumer.png');
-    expect(timelineItem.projects[0].statusLabel).toBe('Qa Review');
-    expect(timelineItem.projects[0].environmentLabel).toBe('Mobile App');
+    expect(timelineItem.technologyGroups).toEqual([
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: [
+          'Angular',
+          'TypeScript',
+          'JavaScript',
+          'HTML',
+          'CSS',
+          'Sass',
+          'Bootstrap',
+        ],
+      },
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.backend',
+        technologies: ['Node.js', 'Knex.js', 'Swagger'],
+      },
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        technologies: ['SQL Server'],
+      },
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.others',
+        technologies: ['Microsoft Azure'],
+      },
+    ]);
   });
 
-  it('should fallback to a highlighted chapter when there is no current one', () => {
-    const summary = buildExperiencePortfolioSummary(
-      createExperiencesCollectionResponse({
-        data: createExperiencesCollectionResponse().data.map((experience, index) => ({
-          ...experience,
-          isCurrent: false,
-          highlight: index === 1,
-        })),
-      }).data,
-      'en-us',
-    );
-
-    expect(summary.currentRoleTitle).toBe('Experience at M2M Telemetria');
-    expect(summary.currentCompanyName).toBe('M2M Telemetria');
-    expect(summary.highlightCount).toBe('1');
-  });
-
-  it('should fallback gallery alt text and omit gallery descriptions when captions are missing', () => {
-    const experience = createExperiencesCollectionResponse({
-      data: [
-        {
-          ...createExperiencesCollectionResponse().data[0],
-          imageAssets: [
-            {
-              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
-              sortOrder: 2,
-              imageAsset: {
-                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
-                  .imageAsset,
-                altPt: null,
-                altEn: null,
-                captionPt: null,
-                captionEn: null,
-              },
-            },
-            {
-              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
-              imageAssetId: 'image-second',
-              sortOrder: 1,
-              imageAsset: {
-                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
-                  .imageAsset,
-                id: 'image-second',
-                filePath: '/assets/img/experiences/secondary.png',
-                altPt: null,
-                altEn: null,
-                captionPt: null,
-                captionEn: null,
-              },
-            },
-          ],
-        },
-      ],
-    }).data[0];
+  it('should fallback to the experience title when no localized job is available', () => {
+    const experience = {
+      ...createExperiencesCollectionResponse().data[0],
+      jobs: [],
+    };
 
     const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
 
-    expect(timelineItem.galleryItems[0].imageAlt).toBe('Experience at Stefanini Group');
-    expect(timelineItem.galleryItems[0].imageSrc).toContain(
-      '/assets/img/experiences/secondary.png',
-    );
-    expect(timelineItem.galleryItems[0].description).toBeUndefined();
+    expect(timelineItem.roleTitle).toBe('Experience at Stefanini Group');
   });
 
-  it('should fallback to the experience title when gallery alt text is an empty string', () => {
-    const experience = createExperiencesCollectionResponse({
-      data: [
+  it('should classify database technologies by category when the slug is not mapped', () => {
+    const experience = {
+      ...createExperiencesCollectionResponse().data[1],
+      technologies: [
         {
-          ...createExperiencesCollectionResponse().data[0],
-          imageAssets: [
-            {
-              ...createExperiencesCollectionResponse().data[0].imageAssets[0],
-              imageAsset: {
-                ...createExperiencesCollectionResponse().data[0].imageAssets[0]
-                  .imageAsset,
-                altPt: '',
-                altEn: '',
-              },
-            },
-          ],
+          experienceId: 'experience-m2m',
+          technologyId: 'tech-oracle',
+          technology: {
+            id: 'tech-oracle',
+            slug: 'oracle-db',
+            name: 'Oracle DB',
+            category: 'DATABASE',
+            level: 'INTERMEDIATE',
+            frequency: 'OCCASIONAL',
+            highlight: false,
+            sortOrder: 1,
+            isPublished: true,
+            createdAt: '2026-03-25T17:44:29.830Z',
+            updatedAt: '2026-03-25T17:44:29.830Z',
+          },
         },
       ],
-    }).data[0];
+    };
 
     const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
 
-    expect(timelineItem.galleryItems[0].imageAlt).toBe('Experience at Stefanini Group');
-  });
-
-  it('should keep the summary empty when no experience is available', () => {
-    const summary = buildExperiencePortfolioSummary([], 'en-us');
-
-    expect(summary.currentRoleTitle).toBe('');
-    expect(summary.currentCompanyName).toBe('');
-    expect(summary.experienceCount).toBe('0');
+    expect(timelineItem.technologyGroups).toEqual([
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        technologies: ['Oracle DB'],
+      },
+    ]);
   });
 });

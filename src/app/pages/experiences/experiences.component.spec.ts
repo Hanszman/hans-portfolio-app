@@ -14,16 +14,7 @@ import { ExperiencesComponent } from './experiences.component';
 
 describe('ExperiencesComponent', () => {
   beforeAll(() => {
-    const elementNames = [
-      'hans-avatar',
-      'hans-icon',
-      'hans-tag',
-      'hans-button',
-      'hans-modal',
-      'hans-carousel',
-      'hans-chart',
-      'hans-loading',
-    ];
+    const elementNames = ['hans-icon', 'hans-tag', 'hans-button'];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -51,30 +42,40 @@ describe('ExperiencesComponent', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
-  it('should render the experience timeline with live API data', () => {
+  it('should render the redesigned experience timeline with live API data', () => {
     const fixture = TestBed.createComponent(ExperiencesComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    expect(compiled.textContent).toContain('Career narrative');
+    expect(compiled.textContent).toContain('Professional Experience');
     expect(compiled.textContent).toContain('Loading live experience relationships...');
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc',
-      ),
+      buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
     );
     request.flush(createExperiencesCollectionResponse());
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Experience narrative');
     expect(compiled.textContent).toContain('Stefanini Group');
-    expect(compiled.textContent).toContain('Experience at Stefanini Group');
-    expect(compiled.textContent).toContain('Ford');
-    expect(compiled.textContent).toContain('2 projects');
-    expect(compiled.querySelectorAll('hans-button').length).toBeGreaterThan(1);
+    expect(compiled.textContent).toContain('Full Stack Developer');
+    expect(compiled.textContent).toContain('View details');
+
+    const component = fixture.componentInstance as unknown as {
+      timelineItems: () => readonly [{ id: string }];
+      openExperienceDetails: (item: { id: string }) => void;
+      selectedExperience: () => { projects: readonly [{ title: string }] } | null;
+      isDetailOpen: () => boolean;
+    };
+
+    component.openExperienceDetails(component.timelineItems()[0]);
+    fixture.detectChanges();
+
+    expect(component.selectedExperience()?.projects[0]?.title).toBe(
+      'Customer & Dealer Transformation App',
+    );
+    expect(component.isDetailOpen()).toBeTrue();
   });
 
   it('should render localized experience labels in Portuguese', () => {
@@ -87,17 +88,13 @@ describe('ExperiencesComponent', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc',
-      ),
+      buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
     );
     request.flush(createExperiencesCollectionResponse());
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Narrativa de carreira');
-    expect(compiled.textContent).toContain('Experiencia em Stefanini Group');
-    expect(compiled.textContent).toContain('Atual');
-    expect(compiled.textContent).toContain('Clientes');
+    expect(compiled.textContent).toContain('Experiencia Profissional');
+    expect(compiled.textContent).toContain('Desenvolvedor Full Stack');
   });
 
   it('should render empty and error states for the experiences page', () => {
@@ -108,9 +105,7 @@ describe('ExperiencesComponent', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc',
-      ),
+      buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
     );
     request.flush(
       createExperiencesCollectionResponse({
@@ -138,9 +133,7 @@ describe('ExperiencesComponent', () => {
 
     const errorCompiled = errorFixture.nativeElement as HTMLElement;
     const errorRequest = httpTestingController.expectOne(
-      buildApiUrl(
-        '/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc',
-      ),
+      buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
     );
     errorRequest.flush(null, {
       status: 500,
@@ -153,7 +146,7 @@ describe('ExperiencesComponent', () => {
     );
   });
 
-  it('should open and close the experience detail modal state', () => {
+  it('should open and close the experience detail drawer state', () => {
     const fixture = TestBed.createComponent(ExperiencesComponent);
     fixture.detectChanges();
 
@@ -165,11 +158,12 @@ describe('ExperiencesComponent', () => {
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      timelineItems: () => readonly [{ slug: string }];
-      openExperienceDetails: (item: { slug: string }) => void;
+      timelineItems: () => readonly [{ id: string }];
+      openExperienceDetails: (item: { id: string }) => void;
       closeExperienceDetails: () => void;
-      selectedExperience: () => { slug: string } | null;
+      selectedExperience: () => { id: string } | null;
       isDetailOpen: () => boolean;
+      isSelectedExperience: (experienceId: string) => boolean;
     };
 
     const item = component.timelineItems()[0];
@@ -177,10 +171,12 @@ describe('ExperiencesComponent', () => {
 
     expect(component.selectedExperience()).toEqual(item);
     expect(component.isDetailOpen()).toBeTrue();
+    expect(component.isSelectedExperience(item.id)).toBeTrue();
 
     component.closeExperienceDetails();
 
     expect(component.selectedExperience()).toBeNull();
     expect(component.isDetailOpen()).toBeFalse();
+    expect(component.isSelectedExperience(item.id)).toBeFalse();
   });
 });

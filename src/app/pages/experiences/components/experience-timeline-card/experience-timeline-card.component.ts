@@ -19,6 +19,7 @@ import { ExperienceTimelineItemViewModel } from '../../experiences.types';
 })
 export class ExperienceTimelineCardComponent {
   readonly item = input.required<ExperienceTimelineItemViewModel>();
+  readonly isActive = input(false);
   readonly openDetails = output<ExperienceTimelineItemViewModel>();
 
   protected requestDetails(): void {

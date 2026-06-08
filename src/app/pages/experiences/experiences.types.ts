@@ -4,50 +4,29 @@ export interface ExperienceProjectViewModel {
   slug: string;
   title: string;
   summary: string;
-  statusLabel: string;
-  environmentLabel: string;
 }
 
-export interface ExperienceGalleryItemViewModel {
-  id: string;
-  imageSrc: string;
-  imageAlt: string;
-  title?: string;
-  description?: string;
-}
-
-export interface ExperienceChartSeries {
-  name: string;
-  data: number[];
+export interface ExperienceTechnologyGroupViewModel {
+  labelKey: AppTranslationKey;
+  technologies: string[];
 }
 
 export interface ExperienceTimelineItemViewModel {
   id: string;
   slug: string;
   companyName: string;
-  title: string;
+  roleTitle: string;
   summary: string;
   description: string;
   dateRangeLabel: string;
   isCurrent: boolean;
   isHighlight: boolean;
-  imageUrl: string;
   jobs: string[];
   customers: string[];
   projects: ExperienceProjectViewModel[];
   technologies: string[];
   extraTechnologyCount: number;
-  galleryItems: readonly ExperienceGalleryItemViewModel[];
-}
-
-export interface ExperiencePortfolioSummaryViewModel {
-  currentRoleTitle: string;
-  currentCompanyName: string;
-  experienceCount: string;
-  projectCount: string;
-  technologyCount: string;
-  customerCount: string;
-  highlightCount: string;
+  technologyGroups: readonly ExperienceTechnologyGroupViewModel[];
 }
 
 export const EXPERIENCE_PROJECT_STATUS_LABEL_KEYS: Record<string, AppTranslationKey> = {
@@ -65,3 +44,10 @@ export const EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS: Record<
 };
 
 export const EXPERIENCE_PRESENT_LABEL_KEY = 'taxonomy.experiences.present';
+
+export const EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS = {
+  frontend: 'pages.experiences.detail.stackGroups.frontend',
+  backend: 'pages.experiences.detail.stackGroups.backend',
+  databases: 'pages.experiences.detail.stackGroups.databases',
+  others: 'pages.experiences.detail.stackGroups.others',
+} as const satisfies Record<string, AppTranslationKey>;

@@ -64,12 +64,12 @@ describe('app routes', () => {
     );
   });
 
-  it('should load the experiences narrative route', async () => {
+  it('should load the professional experiences route', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/experiences');
 
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Experience narrative',
+      'Professional Experience',
     );
   });
 

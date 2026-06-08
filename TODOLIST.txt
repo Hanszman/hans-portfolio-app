@@ -122,3 +122,8 @@ EXPERIENCES:
 -Beleza! Agora vamos seguir pra próxima tela. Estou te mandando os prints do design sugerido pelo base44, aqueles que estão no diretório que combinamos (G:\Meu Drive\Victor\Projetos\Pessoais\Hans\Hans Portfolio Remake). Vamos fazer com a tela de experiences o mesmo que fizemos com essa de Home. Vamos mudar todo o layout atual pra esse novo, refatorando todo o código, removendo tudo o que não precisa, mas mantendo as cores dos temas e todos os padrões de código que temos atualmente, esses que vc já sabe pelo histórico da nossa conversa.
 Lembre-se de sempre manter os padrões de clean code, dry, kiss, yagni, solid, etc, ou seja, o mais limpo e reutilizável possível. E lembre-se sempre também de usar nossa hans-lib.
 Enfim! Faça as alterações necessárias por favor.
+-Ficou bom, mas tenho algumas questões:
+Por que temos esses overrides nos idiomas pt-br e es-es nos arquivos de tradução?
+Ao clicar em view details, nada acontece, deveria abrir o side-modal, mas não está funcionando. Esse side-modal deveria ser feito com o modal da nossa lib, passando a parametrização de modal abrindo pela direita.
+Coloque as imagens referentes às empresas e também aos clientes.
+Nas tags das tecnologias, deveria ser possível clicar e abrir um modal central com mais informações sobre ela, como imagem/ícone, meus níveis de conhecimento, quantidade de projetos que usei, etc.
