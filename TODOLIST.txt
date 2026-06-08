@@ -115,5 +115,5 @@ Sobre as pastas layout e shared, qual a diferença entre os componentes que exis
 Tem alguns componentes que tem uns prefixos desnecessários, como page (page-intro e page-intro) e portfolio (portfolio-card e portfolio-state). Pode renomeá-los todos esses componentes, seus respectivos arquivos e chamadas removendo esses prefixos por favor. No caso do portfolio-state, pra não ficar só "state", renomeie pra algo como info-state, ou algo que faça mais sentido pra ele.
 Temos algumas consts/types espalhados em arquivos ts, ao invés de estarem dentro de arquivos types. como por exemplo: NAVIGATION_LABEL_KEY_BY_PATH deveria estar no shell.types.ts  e CAREER_START_DATE deveria estar em algum types também. Vasculhe no projeto se temos mais algum outro cenários assim e corrija todos os que forem necessários por favor
 -Ficou ótimo! Mas algumas últimas questões:
-Devemos reposicionar a imagem pois ela ficou por cima do texto
-Ícones das redes sociais continuam não aparecendo no footer com tema light
+Devemos reposicionar a imagem pois ela ficou por cima do texto, como vc pode ver no print 1. Tem muito espaço sobrando à direita onde ela poderia ter ficado, mas ela ficou logo acima do texto à esquerda. Marquei de vermelho no print pra vc entender melhor. Corrija isso por favor. 
+Ícones das redes sociais continuam não aparecendo no footer com tema light, como vc pode ver no print 2, marquei de vermelho pra vc entender melhor. Corrija isso também por favor.
