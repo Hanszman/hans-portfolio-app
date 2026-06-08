@@ -127,3 +127,4 @@ Por que temos esses overrides nos idiomas pt-br e es-es nos arquivos de traduç�
 Ao clicar em view details, nada acontece, deveria abrir o side-modal, mas não está funcionando. Esse side-modal deveria ser feito com o modal da nossa lib, passando a parametrização de modal abrindo pela direita.
 Coloque as imagens referentes às empresas e também aos clientes.
 Nas tags das tecnologias, deveria ser possível clicar e abrir um modal central com mais informações sobre ela, como imagem/ícone, meus níveis de conhecimento, quantidade de projetos que usei, etc.
+Componete de linha de timeline deveria ser um componente reutilizável a parte, certo? como vc fez? não entendi... foi com css?
