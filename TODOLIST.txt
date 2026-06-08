@@ -117,3 +117,8 @@ Temos algumas consts/types espalhados em arquivos ts, ao invés de estarem dentr
 -Ficou ótimo! Mas algumas últimas questões:
 Devemos reposicionar a imagem pois ela ficou por cima do texto, como vc pode ver no print 1. Tem muito espaço sobrando à direita onde ela poderia ter ficado, mas ela ficou logo acima do texto à esquerda. Marquei de vermelho no print pra vc entender melhor. Corrija isso por favor. 
 Ícones das redes sociais continuam não aparecendo no footer com tema light, como vc pode ver no print 2, marquei de vermelho pra vc entender melhor. Corrija isso também por favor.
+
+EXPERIENCES:
+-Beleza! Agora vamos seguir pra próxima tela. Estou te mandando os prints do design sugerido pelo base44, aqueles que estão no diretório que combinamos (G:\Meu Drive\Victor\Projetos\Pessoais\Hans\Hans Portfolio Remake). Vamos fazer com a tela de experiences o mesmo que fizemos com essa de Home. Vamos mudar todo o layout atual pra esse novo, refatorando todo o código, removendo tudo o que não precisa, mas mantendo as cores dos temas e todos os padrões de código que temos atualmente, esses que vc já sabe pelo histórico da nossa conversa.
+Lembre-se de sempre manter os padrões de clean code, dry, kiss, yagni, solid, etc, ou seja, o mais limpo e reutilizável possível. E lembre-se sempre também de usar nossa hans-lib.
+Enfim! Faça as alterações necessárias por favor.
