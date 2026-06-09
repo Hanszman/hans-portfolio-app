@@ -123,8 +123,9 @@ EXPERIENCES:
 Lembre-se de sempre manter os padrões de clean code, dry, kiss, yagni, solid, etc, ou seja, o mais limpo e reutilizável possível. E lembre-se sempre também de usar nossa hans-lib.
 Enfim! Faça as alterações necessárias por favor.
 -Ficou bom, mas tenho algumas questões:
-Por que temos esses overrides nos idiomas pt-br e es-es nos arquivos de tradução?
-Ao clicar em view details, nada acontece, deveria abrir o side-modal, mas não está funcionando. Esse side-modal deveria ser feito com o modal da nossa lib, passando a parametrização de modal abrindo pela direita.
-Coloque as imagens referentes às empresas e também aos clientes.
+Por que temos esses overrides nos idiomas pt-br e es-es nos arquivos de tradução? precisamos disso mesmo? pq não colocamos essas traduções diretamente no objeto de translations igual fazemos com o inglês? corrija por favor.
+Além disso, o texto de "subtitulo", abaixo do professional experience ta diferente nos 3 idiomas, parece que o pt-br e o es-es ficaram mais como um comentário do que como a tradução referente ao texto em inglês. Dê uma passada ao longo dos arquivos de tradução e veja todas as traduções que não estão corretas e corrija por favor.
+Ao clicar em view details, nada acontece, deveria abrir o side-modal, mas não está funcionando. Esse side-modal deveria ser feito com o modal da nossa lib, não criando o componente do zero aqui, igual vc fez. Use a lib por favor, passando a parametrização de modal que abre pela direita. Temos um exemplo de como usar isso nos stories/mdx da nossa lib, acompanhe por lá.
+Coloque as imagens referentes às empresas e também aos clientes. Do backend/banco vem a informação de qual a pasta de imagens do front devemos usar para cada registro. No caso das experiencias/empresas e dos clientes, fica em assets > img > experiences.
 Nas tags das tecnologias, deveria ser possível clicar e abrir um modal central com mais informações sobre ela, como imagem/ícone, meus níveis de conhecimento, quantidade de projetos que usei, etc.
-Componete de linha de timeline deveria ser um componente reutilizável a parte, certo? como vc fez? não entendi... foi com css?
+Componete de linha da timeline deveria ser um componente reutilizável a parte, certo? como vc fez? não entendi... foi com css? Ficou ótimo visualmente, mas não entendi como vc fez no código. Imagino que o mais correto nesse caso seria criar um componente em shared. Mas pode tentar defender a forma que vc fez, se vc não concordar comigo nesse caso.
