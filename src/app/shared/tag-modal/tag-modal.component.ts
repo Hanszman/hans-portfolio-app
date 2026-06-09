@@ -6,20 +6,23 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ExperienceTechnologyViewModel } from '../../experiences.types';
+import { TagModalDetail, TagModalImage } from './tag-modal.types';
 
 @Component({
-  selector: 'app-experience-technology-modal',
+  selector: 'app-tag-modal',
   standalone: true,
   imports: [TranslatePipe],
-  templateUrl: './experience-technology-modal.component.html',
-  styleUrl: './experience-technology-modal.component.scss',
+  templateUrl: './tag-modal.component.html',
+  styleUrl: './tag-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExperienceTechnologyModalComponent {
-  readonly technology = input<ExperienceTechnologyViewModel | null>(null);
+export class TagModalComponent {
   readonly isOpen = input(false);
+  readonly title = input('');
+  readonly subtitle = input('');
+  readonly image = input<TagModalImage | null>(null);
+  readonly details = input<readonly TagModalDetail[]>([]);
   readonly closed = output<void>();
 
   protected requestClose(): void {

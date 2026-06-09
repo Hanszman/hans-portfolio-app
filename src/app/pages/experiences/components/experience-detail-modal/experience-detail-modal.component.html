@@ -6,6 +6,7 @@
   modalSize="large"
   modalVariant="outline"
   placement="right"
+  [renderBody]="true"
   [closeButtonLabel]="'common.actions.close' | translate"
   (close)="requestClose()"
 >
@@ -53,15 +54,14 @@
 
         <div class="experience-detail-modal-chip-list">
           @for (customer of currentItem.customers; track customer.slug) {
-            <span class="experience-detail-modal-customer">
-              <img
-                class="experience-detail-modal-customer-logo"
-                [src]="customer.image.src"
-                [alt]="customer.image.alt"
-                loading="lazy"
-              />
-              <hans-tag [attr.label]="customer.name" tagColor="base" tagSize="sm"></hans-tag>
-            </span>
+            <hans-tag
+              [attr.label]="customer.name"
+              [attr.image-src]="customer.image.src"
+              [attr.image-alt]="customer.image.alt"
+              mediaPosition="left"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
           } @empty {
             <p class="experience-detail-modal-inline-copy">
               {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
@@ -84,6 +84,9 @@
                 @for (technology of group.technologies; track technology.slug) {
                   <hans-tag
                     [attr.label]="technology.name"
+                    [attr.image-src]="technology.image.src"
+                    [attr.image-alt]="technology.image.alt"
+                    mediaPosition="left"
                     tagColor="info"
                     tagSize="sm"
                   ></hans-tag>

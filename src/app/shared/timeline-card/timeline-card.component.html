@@ -1,0 +1,7 @@
+<article class="timeline-card" [class.timeline-card-active]="isActive()">
+  <app-timeline-marker [isLast]="isLast()" />
+
+  <section class="timeline-card-panel">
+    <ng-content />
+  </section>
+</article>

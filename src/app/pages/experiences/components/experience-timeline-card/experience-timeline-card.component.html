@@ -1,7 +1,4 @@
-<article class="experience-card" [class.experience-card-active]="isActive()">
-  <app-timeline-marker [isLast]="isLast()" />
-
-  <section class="experience-card-panel">
+<app-timeline-card [isActive]="isActive()" [isLast]="isLast()">
     <header class="experience-card-header">
       <img
         class="experience-card-logo"
@@ -28,36 +25,49 @@
 
       <div class="experience-card-chip-list">
         @for (customer of item().customers; track customer.slug) {
-          <span class="experience-card-customer">
-            <img
-              class="experience-card-customer-logo"
-              [src]="customer.image.src"
-              [alt]="customer.image.alt"
-              loading="lazy"
-            />
-            <hans-tag [attr.label]="customer.name" tagColor="base" tagSize="sm"></hans-tag>
-          </span>
+          <button
+            type="button"
+            class="experience-card-tag-button"
+            (click)="requestCustomerDetails(customer)"
+          >
+            <hans-tag
+              [attr.label]="customer.name"
+              [attr.image-src]="customer.image.src"
+              [attr.image-alt]="customer.image.alt"
+              mediaPosition="left"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
+          </button>
         }
       </div>
     </div>
 
     <div class="experience-card-stack">
-      @for (technology of item().technologies; track technology) {
+      @for (technology of visibleTechnologies(); track technology.slug) {
         <button
           type="button"
-          class="experience-card-technology"
+          class="experience-card-tag-button"
           (click)="requestTechnologyDetails(technology)"
         >
-          <hans-tag [attr.label]="technology.name" tagColor="info" tagSize="sm"></hans-tag>
+          <hans-tag
+            [attr.label]="technology.name"
+            [attr.image-src]="technology.image.src"
+            [attr.image-alt]="technology.image.alt"
+            mediaPosition="left"
+            tagColor="info"
+            tagSize="sm"
+          ></hans-tag>
         </button>
       }
 
-      @if (item().extraTechnologyCount > 0) {
-        <span class="experience-card-stack-more">
-          +{{ item().extraTechnologyCount }}
-          {{ 'pages.experiences.timeline.moreTechnologies' | translate }}
-        </span>
-      }
+      <app-expandable-list-toggle
+        [isExpanded]="isTechnologyListExpanded()"
+        [hiddenCount]="hiddenTechnologyCount()"
+        expandLabelKey="pages.experiences.timeline.moreTechnologies"
+        collapseLabelKey="common.actions.showLess"
+        (toggled)="toggleTechnologyList()"
+      />
     </div>
 
     <button
@@ -68,5 +78,4 @@
       {{ 'common.actions.viewDetails' | translate }}
       <hans-icon name="LuArrowRight" iconSize="small"></hans-icon>
     </button>
-  </section>
-</article>
+</app-timeline-card>

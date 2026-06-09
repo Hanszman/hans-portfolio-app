@@ -175,6 +175,15 @@ describe('ExperiencesComponent', () => {
       closeTechnologyDetails: () => void;
       selectedTechnology: () => { slug: string } | null;
       isTechnologyDetailOpen: () => boolean;
+      openCustomerDetails: (customer: {
+        name: string;
+        companyName: string;
+        projectCount: number;
+      }) => void;
+      closeCustomerDetails: () => void;
+      selectedCustomer: () => { name: string } | null;
+      selectedCustomerDetails: () => readonly [{ value: string | number }];
+      isCustomerDetailOpen: () => boolean;
     };
 
     const item = component.timelineItems()[0];
@@ -199,5 +208,20 @@ describe('ExperiencesComponent', () => {
 
     expect(component.selectedTechnology()).toBeNull();
     expect(component.isTechnologyDetailOpen()).toBeFalse();
+
+    component.openCustomerDetails({
+      name: 'Ford',
+      companyName: 'Stefanini Group',
+      projectCount: 2,
+    });
+
+    expect(component.selectedCustomer()?.name).toBe('Ford');
+    expect(component.selectedCustomerDetails()[0].value).toBe('Stefanini Group');
+    expect(component.isCustomerDetailOpen()).toBeTrue();
+
+    component.closeCustomerDetails();
+
+    expect(component.selectedCustomer()).toBeNull();
+    expect(component.isCustomerDetailOpen()).toBeFalse();
   });
 });

@@ -1,0 +1,38 @@
+:host {
+  @apply block;
+}
+
+.tag-modal {
+  @apply grid gap-5;
+}
+
+.tag-modal-image {
+  @apply h-24 w-24 justify-self-center rounded-3xl object-contain p-3;
+  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 24%, transparent);
+}
+
+.tag-modal-subtitle {
+  @apply m-0 text-center text-base leading-7;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.tag-modal-details {
+  @apply m-0 grid gap-3;
+}
+
+.tag-modal-detail {
+  @apply grid gap-1 rounded-2xl border px-4 py-3;
+  background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.tag-modal-detail dt {
+  @apply text-xs font-semibold uppercase tracking-[0.08em];
+  color: var(--primary-default-color);
+}
+
+.tag-modal-detail dd {
+  @apply m-0 text-base font-semibold;
+  color: var(--text-color);
+}

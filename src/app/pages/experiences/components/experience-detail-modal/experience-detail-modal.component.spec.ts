@@ -30,6 +30,8 @@ describe('ExperienceDetailModalComponent', () => {
           src: '/assets/img/experiences/ford.jpg',
           alt: 'Ford logo',
         },
+        companyName: 'Stefanini Group',
+        projectCount: 1,
       },
     ],
     projects: [
@@ -104,6 +106,7 @@ describe('ExperienceDetailModalComponent', () => {
     };
 
     expect(modal.title).toBe('Stefanini Group');
+    expect((modal as HTMLElement & { renderBody?: boolean }).renderBody).toBeTrue();
     expect(compiled.textContent).toContain('Customer & Dealer Transformation App');
     expect(compiled.textContent).toContain('Front-end');
   });

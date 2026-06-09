@@ -15,6 +15,8 @@ export interface ExperienceCustomerViewModel {
   slug: string;
   name: string;
   image: ExperienceImageViewModel;
+  companyName: string;
+  projectCount: number;
 }
 
 export interface ExperienceTechnologyViewModel {

@@ -1,0 +1,9 @@
+@if (shouldShow()) {
+  <button type="button" class="expandable-list-toggle" (click)="requestToggle()">
+    @if (isExpanded()) {
+      {{ collapseLabelKey() | translate }}
+    } @else {
+      +{{ hiddenCount() }} {{ expandLabelKey() | translate }}
+    }
+  </button>
+}

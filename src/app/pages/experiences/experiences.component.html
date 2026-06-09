@@ -33,6 +33,7 @@
             [isActive]="isSelectedExperience(item.id)"
             [isLast]="$last"
             (openDetails)="openExperienceDetails($event)"
+            (openCustomer)="openCustomerDetails($event)"
             (openTechnology)="openTechnologyDetails($event)"
           />
         }
@@ -46,9 +47,18 @@
     (closed)="closeExperienceDetails()"
   />
 
-  <app-experience-technology-modal
+  <app-technology-modal
     [isOpen]="isTechnologyDetailOpen()"
     [technology]="selectedTechnology()"
     (closed)="closeTechnologyDetails()"
+  />
+
+  <app-tag-modal
+    [isOpen]="isCustomerDetailOpen()"
+    [title]="selectedCustomer()?.name ?? ''"
+    [subtitle]="selectedCustomer()?.companyName ?? ''"
+    [image]="selectedCustomer()?.image ?? null"
+    [details]="selectedCustomerDetails()"
+    (closed)="closeCustomerDetails()"
   />
 </app-wrapper>

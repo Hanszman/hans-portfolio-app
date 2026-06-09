@@ -13,11 +13,16 @@ import { ExperienceCollectionItemResponse } from '../../core/api/experiences/exp
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { TagModalComponent } from '../../shared/tag-modal/tag-modal.component';
+import { TagModalDetail } from '../../shared/tag-modal/tag-modal.types';
+import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
-import { ExperienceTechnologyModalComponent } from './components/experience-technology-modal/experience-technology-modal.component';
 import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
-import { ExperienceTechnologyViewModel } from './experiences.types';
+import {
+  ExperienceCustomerViewModel,
+  ExperienceTechnologyViewModel,
+} from './experiences.types';
 
 @Component({
   selector: 'app-experiences',
@@ -26,7 +31,8 @@ import { ExperienceTechnologyViewModel } from './experiences.types';
     InfoStateComponent,
     ExperienceTimelineCardComponent,
     ExperienceDetailModalComponent,
-    ExperienceTechnologyModalComponent,
+    TechnologyModalComponent,
+    TagModalComponent,
     TranslatePipe,
   ],
   templateUrl: './experiences.component.html',
@@ -42,12 +48,15 @@ export class ExperiencesComponent {
     signal<ReturnType<typeof mapExperienceToTimelineItem> | null>(null);
   private readonly selectedTechnologySignal =
     signal<ExperienceTechnologyViewModel | null>(null);
+  private readonly selectedCustomerSignal =
+    signal<ExperienceCustomerViewModel | null>(null);
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly experiences = this.experiencesSignal.asReadonly();
   protected readonly selectedExperience = this.selectedExperienceSignal.asReadonly();
   protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
+  protected readonly selectedCustomer = this.selectedCustomerSignal.asReadonly();
 
   protected readonly timelineItems = computed(() =>
     this.experiences().map((experience) =>
@@ -61,6 +70,27 @@ export class ExperiencesComponent {
   protected readonly isTechnologyDetailOpen = computed(
     () => this.selectedTechnology() !== null,
   );
+  protected readonly isCustomerDetailOpen = computed(
+    () => this.selectedCustomer() !== null,
+  );
+  protected readonly selectedCustomerDetails = computed<readonly TagModalDetail[]>(() => {
+    const customer = this.selectedCustomer();
+
+    if (!customer) {
+      return [];
+    }
+
+    return [
+      {
+        labelKey: 'pages.experiences.customer.company',
+        value: customer.companyName,
+      },
+      {
+        labelKey: 'pages.experiences.customer.projects',
+        value: customer.projectCount,
+      },
+    ];
+  });
 
   constructor() {
     this.experiencesService
@@ -100,5 +130,13 @@ export class ExperiencesComponent {
 
   protected closeTechnologyDetails(): void {
     this.selectedTechnologySignal.set(null);
+  }
+
+  protected openCustomerDetails(customer: ExperienceCustomerViewModel): void {
+    this.selectedCustomerSignal.set(customer);
+  }
+
+  protected closeCustomerDetails(): void {
+    this.selectedCustomerSignal.set(null);
   }
 }

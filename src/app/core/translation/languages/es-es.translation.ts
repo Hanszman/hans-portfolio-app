@@ -1,8 +1,6 @@
 import { AppTranslationLanguage } from '../translation.types';
-import { EN_TRANSLATIONS } from './en-us.translation';
 
 export const ES_ES_TRANSLATIONS = {
-  ...EN_TRANSLATIONS,
   'header.brand.home': 'Ir al inicio',
   'header.brand.role': 'Full Stack Engineer | Especialista Front-End',
   'header.tags.angular': 'Angular 20',
@@ -61,6 +59,7 @@ export const ES_ES_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalles',
   'common.actions.close': 'Cerrar',
+  'common.actions.showLess': 'Mostrar menos',
   'pages.home.hero.availability': 'Disponible para trabajar',
   'pages.home.hero.greeting': 'Hola, soy',
   'pages.home.hero.subtitle': 'Ingeniero de Software Full Stack',
@@ -158,6 +157,8 @@ export const ES_ES_TRANSLATIONS = {
   'pages.experiences.technology.level': 'Nivel de conocimiento',
   'pages.experiences.technology.frequency': 'Frecuencia de uso',
   'pages.experiences.technology.projects': 'Proyectos usados',
+  'pages.experiences.customer.company': 'Empresa relacionada',
+  'pages.experiences.customer.projects': 'Proyectos relacionados',
   'pages.skills.sectionLabel': 'Tecnología',
   'pages.skills.title': 'Profundidad técnica',
   'pages.skills.description':

@@ -102,9 +102,13 @@ const resolveCompanyImage = (
 
 const mapCustomer = (
   customer: ExperienceCollectionItemResponse['customers'][number]['customer'],
+  companyName: string,
+  projectCount: number,
 ): ExperienceCustomerViewModel => ({
   slug: customer.slug,
   name: customer.name,
+  companyName,
+  projectCount,
   image: {
     src: buildExperienceAssetPath(
       CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
@@ -223,7 +227,6 @@ export const mapExperienceToTimelineItem = (
   const technologies = experience.technologies.map(({ technology }) =>
     mapTechnology(technology, projects.length),
   );
-  const leadTechnologies = technologies.slice(0, 8);
   const jobs = dedupe(
     experience.jobs.map(({ job }) =>
       resolveLocalizedText(
@@ -275,10 +278,12 @@ export const mapExperienceToTimelineItem = (
     isHighlight: experience.highlight,
     jobs,
     companyImage: resolveCompanyImage(experience, locale),
-    customers: experience.customers.map(({ customer }) => mapCustomer(customer)),
+    customers: experience.customers.map(({ customer }) =>
+      mapCustomer(customer, experience.companyName, projects.length),
+    ),
     projects,
-    technologies: leadTechnologies,
-    extraTechnologyCount: Math.max(0, technologies.length - leadTechnologies.length),
+    technologies,
+    extraTechnologyCount: Math.max(0, technologies.length - 8),
     technologyGroups: buildTechnologyGroups(technologies),
   };
 };

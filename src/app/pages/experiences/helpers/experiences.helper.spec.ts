@@ -36,6 +36,8 @@ describe('experiences helper', () => {
     expect(timelineItem.customers[0].image.src).toBe(
       '/assets/img/experiences/ford.jpg',
     );
+    expect(timelineItem.customers[0].companyName).toBe('Stefanini Group');
+    expect(timelineItem.customers[0].projectCount).toBe(2);
     expect(timelineItem.technologies.map((technology) => technology.name)).toEqual([
       'Angular',
       'TypeScript',
@@ -45,6 +47,10 @@ describe('experiences helper', () => {
       'CSS',
       'Sass',
       'Bootstrap',
+      'Node.js',
+      'Knex.js',
+      'Swagger',
+      'SQL Server',
     ]);
     expect(timelineItem.extraTechnologyCount).toBe(4);
   });

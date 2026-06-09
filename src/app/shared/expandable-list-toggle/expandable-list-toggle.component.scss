@@ -1,0 +1,12 @@
+:host {
+  @apply inline-flex;
+}
+
+.expandable-list-toggle {
+  @apply inline-flex items-center border-none bg-transparent p-0 text-sm;
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.expandable-list-toggle:hover {
+  color: var(--primary-default-color);
+}

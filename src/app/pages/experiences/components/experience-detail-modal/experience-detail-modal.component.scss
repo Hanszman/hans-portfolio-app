@@ -65,13 +65,3 @@
 .experience-detail-modal-chip-list {
   @apply flex flex-wrap gap-2;
 }
-
-.experience-detail-modal-customer {
-  @apply inline-flex items-center gap-2;
-}
-
-.experience-detail-modal-customer-logo {
-  @apply h-6 w-6 rounded-full object-cover;
-  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--base-default-color) 20%, transparent);
-}

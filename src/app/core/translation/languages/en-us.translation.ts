@@ -59,6 +59,7 @@ export const EN_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'View details',
   'common.actions.close': 'Close',
+  'common.actions.showLess': 'Show less',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",
   'pages.home.hero.subtitle': 'Full Stack Software Engineer',
@@ -154,6 +155,8 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.technology.level': 'Knowledge level',
   'pages.experiences.technology.frequency': 'Usage frequency',
   'pages.experiences.technology.projects': 'Projects used',
+  'pages.experiences.customer.company': 'Related company',
+  'pages.experiences.customer.projects': 'Related projects',
   'pages.skills.sectionLabel': 'Technology',
   'pages.skills.title': 'Technology depth',
   'pages.skills.description':

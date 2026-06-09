@@ -1,0 +1,8 @@
+<app-tag-modal
+  [isOpen]="isOpen()"
+  [title]="technology()?.name ?? ''"
+  [subtitle]="technology()?.category ?? ''"
+  [image]="technology()?.image ?? null"
+  [details]="details()"
+  (closed)="requestClose()"
+/>

@@ -2,27 +2,6 @@
   @apply block;
 }
 
-.experience-card {
-  @apply relative grid gap-4;
-  grid-template-columns: auto minmax(0, 1fr);
-}
-
-.experience-card-panel {
-  @apply grid gap-5 rounded-[2rem] border p-6 shadow-[0_28px_64px_rgba(0,0,0,0.18)] md:p-7;
-  background-color: color-mix(in srgb, var(--background-color) 90%, var(--base-strong-color));
-  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
-}
-
-.experience-card-active .experience-card-panel,
-.experience-card-panel:hover {
-  border-color: color-mix(in srgb, var(--primary-default-color) 42%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 24%, transparent);
-}
-
 .experience-card-header {
   @apply grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start;
 }
@@ -73,27 +52,12 @@
   @apply flex flex-wrap gap-2;
 }
 
-.experience-card-customer {
-  @apply inline-flex items-center gap-2;
-}
-
-.experience-card-customer-logo {
-  @apply h-6 w-6 rounded-full object-cover;
-  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--base-default-color) 20%, transparent);
-}
-
-.experience-card-technology {
+.experience-card-tag-button {
   @apply border-none bg-transparent p-0;
 }
 
-.experience-card-technology:hover {
+.experience-card-tag-button:hover {
   filter: brightness(1.08);
-}
-
-.experience-card-stack-more {
-  @apply inline-flex items-center text-sm;
-  color: color-mix(in srgb, var(--text-color) 62%, transparent);
 }
 
 .experience-card-action {
@@ -103,10 +67,4 @@
 
 .experience-card-action:hover {
   color: color-mix(in srgb, var(--primary-default-color) 78%, var(--text-color));
-}
-
-@media (max-width: 767px) {
-  .experience-card {
-    grid-template-columns: 1fr;
-  }
 }

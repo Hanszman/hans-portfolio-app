@@ -1,0 +1,39 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="title()"
+  modalColor="primary"
+  modalSize="small"
+  modalVariant="outline"
+  placement="center"
+  [renderBody]="true"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
+  <article class="tag-modal">
+    @if (image(); as modalImage) {
+      <img
+        class="tag-modal-image"
+        [src]="modalImage.src"
+        [alt]="modalImage.alt"
+        loading="lazy"
+      />
+    }
+
+    @if (subtitle()) {
+      <p class="tag-modal-subtitle">{{ subtitle() }}</p>
+    }
+
+    @if (details().length) {
+      <dl class="tag-modal-details">
+        @for (detail of details(); track detail.labelKey) {
+          <div class="tag-modal-detail">
+            <dt>{{ detail.labelKey | translate }}</dt>
+            <dd>{{ detail.value }}</dd>
+          </div>
+        }
+      </dl>
+    }
+
+    <ng-content />
+  </article>
+</hans-modal>

@@ -59,6 +59,7 @@ export const PT_BR_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
   'common.actions.close': 'Fechar',
+  'common.actions.showLess': 'Mostrar menos',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Oi, eu sou',
   'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack',
@@ -155,6 +156,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.experiences.technology.level': 'Nível de conhecimento',
   'pages.experiences.technology.frequency': 'Frequência de uso',
   'pages.experiences.technology.projects': 'Projetos utilizados',
+  'pages.experiences.customer.company': 'Empresa relacionada',
+  'pages.experiences.customer.projects': 'Projetos relacionados',
   'pages.skills.sectionLabel': 'Tecnologia',
   'pages.skills.title': 'Profundidade técnica',
   'pages.skills.description':
