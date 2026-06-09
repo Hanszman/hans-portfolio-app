@@ -7,26 +7,6 @@
   grid-template-columns: auto minmax(0, 1fr);
 }
 
-.experience-card-rail {
-  @apply relative hidden w-12 items-start justify-center md:flex;
-}
-
-.experience-card-rail-dot {
-  @apply relative z-[1] mt-6 h-3 w-3 rounded-full border-2;
-  border-color: color-mix(in srgb, var(--primary-default-color) 26%, transparent);
-  background-color: var(--primary-default-color);
-  box-shadow: 0 0 0 0.55rem color-mix(in srgb, var(--primary-default-color) 10%, transparent);
-}
-
-.experience-card-rail-line {
-  @apply absolute bottom-[-3rem] left-1/2 top-0 w-px -translate-x-1/2;
-  background-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
-}
-
-:host(:last-child) .experience-card-rail-line {
-  bottom: 0;
-}
-
 .experience-card-panel {
   @apply grid gap-5 rounded-[2rem] border p-6 shadow-[0_28px_64px_rgba(0,0,0,0.18)] md:p-7;
   background-color: color-mix(in srgb, var(--background-color) 90%, var(--base-strong-color));
@@ -44,7 +24,13 @@
 }
 
 .experience-card-header {
-  @apply grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start;
+  @apply grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start;
+}
+
+.experience-card-logo {
+  @apply h-14 w-14 rounded-2xl object-cover;
+  background-color: color-mix(in srgb, var(--background-color) 82%, var(--base-strong-color));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 22%, transparent);
 }
 
 .experience-card-heading {
@@ -85,6 +71,24 @@
 .experience-card-chip-list,
 .experience-card-stack {
   @apply flex flex-wrap gap-2;
+}
+
+.experience-card-customer {
+  @apply inline-flex items-center gap-2;
+}
+
+.experience-card-customer-logo {
+  @apply h-6 w-6 rounded-full object-cover;
+  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--base-default-color) 20%, transparent);
+}
+
+.experience-card-technology {
+  @apply border-none bg-transparent p-0;
+}
+
+.experience-card-technology:hover {
+  filter: brightness(1.08);
 }
 
 .experience-card-stack-more {

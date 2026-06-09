@@ -18,7 +18,20 @@ describe('ExperienceDetailModalComponent', () => {
     isCurrent: true,
     isHighlight: false,
     jobs: ['Full Stack Developer'],
-    customers: ['Ford'],
+    companyImage: {
+      src: '/assets/img/experiences/stefanini.jpg',
+      alt: 'Stefanini logo',
+    },
+    customers: [
+      {
+        slug: 'ford',
+        name: 'Ford',
+        image: {
+          src: '/assets/img/experiences/ford.jpg',
+          alt: 'Ford logo',
+        },
+      },
+    ],
     projects: [
       {
         slug: 'ford-app',
@@ -26,18 +39,46 @@ describe('ExperienceDetailModalComponent', () => {
         summary: 'Scheduling and service flows.',
       },
     ],
-    technologies: ['Angular'],
+    technologies: [
+      {
+        slug: 'angular',
+        name: 'Angular',
+        category: 'FRAMEWORK',
+        level: 'ADVANCED',
+        frequency: 'FREQUENT',
+        image: {
+          src: '/assets/img/skills/angular.png',
+          alt: 'Angular icon',
+        },
+        projectCount: 1,
+        experienceCount: 1,
+      },
+    ],
     extraTechnologyCount: 0,
     technologyGroups: [
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
-        technologies: ['Angular'],
+        technologies: [
+          {
+            slug: 'angular',
+            name: 'Angular',
+            category: 'FRAMEWORK',
+            level: 'ADVANCED',
+            frequency: 'FREQUENT',
+            image: {
+              src: '/assets/img/skills/angular.png',
+              alt: 'Angular icon',
+            },
+            projectCount: 1,
+            experienceCount: 1,
+          },
+        ],
       },
     ],
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-button', 'hans-tag']) {
+    for (const elementName of ['hans-modal', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -58,8 +99,11 @@ describe('ExperienceDetailModalComponent', () => {
 
   it('renders the detail drawer content', () => {
     const compiled = fixture.nativeElement as HTMLElement;
+    const modal = compiled.querySelector('hans-modal') as HTMLElement & {
+      title?: string;
+    };
 
-    expect(compiled.textContent).toContain('Stefanini Group');
+    expect(modal.title).toBe('Stefanini Group');
     expect(compiled.textContent).toContain('Customer & Dealer Transformation App');
     expect(compiled.textContent).toContain('Front-end');
   });
@@ -79,7 +123,10 @@ describe('ExperienceDetailModalComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    const modal = compiled.querySelector('hans-modal') as HTMLElement & {
+      isOpen?: boolean;
+    };
 
-    expect(compiled.querySelector('[role="dialog"]')).toBeNull();
+    expect(modal.isOpen).toBeFalse();
   });
 });

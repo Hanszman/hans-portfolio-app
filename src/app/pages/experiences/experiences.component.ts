@@ -15,7 +15,9 @@ import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
+import { ExperienceTechnologyModalComponent } from './components/experience-technology-modal/experience-technology-modal.component';
 import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
+import { ExperienceTechnologyViewModel } from './experiences.types';
 
 @Component({
   selector: 'app-experiences',
@@ -24,6 +26,7 @@ import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
     InfoStateComponent,
     ExperienceTimelineCardComponent,
     ExperienceDetailModalComponent,
+    ExperienceTechnologyModalComponent,
     TranslatePipe,
   ],
   templateUrl: './experiences.component.html',
@@ -37,11 +40,14 @@ export class ExperiencesComponent {
   private readonly experiencesSignal = signal<ExperienceCollectionItemResponse[]>([]);
   private readonly selectedExperienceSignal =
     signal<ReturnType<typeof mapExperienceToTimelineItem> | null>(null);
+  private readonly selectedTechnologySignal =
+    signal<ExperienceTechnologyViewModel | null>(null);
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly experiences = this.experiencesSignal.asReadonly();
   protected readonly selectedExperience = this.selectedExperienceSignal.asReadonly();
+  protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
 
   protected readonly timelineItems = computed(() =>
     this.experiences().map((experience) =>
@@ -51,6 +57,9 @@ export class ExperiencesComponent {
 
   protected readonly isDetailOpen = computed(
     () => this.selectedExperience() !== null,
+  );
+  protected readonly isTechnologyDetailOpen = computed(
+    () => this.selectedTechnology() !== null,
   );
 
   constructor() {
@@ -83,5 +92,13 @@ export class ExperiencesComponent {
 
   protected closeExperienceDetails(): void {
     this.selectedExperienceSignal.set(null);
+  }
+
+  protected openTechnologyDetails(technology: ExperienceTechnologyViewModel): void {
+    this.selectedTechnologySignal.set(technology);
+  }
+
+  protected closeTechnologyDetails(): void {
+    this.selectedTechnologySignal.set(null);
   }
 }

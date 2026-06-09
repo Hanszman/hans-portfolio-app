@@ -2,74 +2,76 @@
   @apply block;
 }
 
-.experience-drawer-backdrop {
-  @apply fixed inset-0 z-40;
-  background-color: color-mix(in srgb, var(--base-strong-color) 74%, transparent);
-  backdrop-filter: blur(6px);
-}
-
-.experience-drawer {
-  @apply fixed inset-y-0 right-0 z-50 grid w-full max-w-[32rem] content-start gap-6 overflow-y-auto border-l p-6 md:p-8;
-  background-color: color-mix(in srgb, var(--background-color) 94%, var(--base-strong-color));
-  border-color: color-mix(in srgb, var(--primary-default-color) 20%, transparent);
-  box-shadow: -24px 0 64px color-mix(in srgb, var(--base-strong-color) 28%, transparent);
-}
-
-.experience-drawer-header,
-.experience-drawer-heading,
-.experience-drawer-section,
-.experience-drawer-projects,
-.experience-drawer-stack-groups,
-.experience-drawer-stack-group {
+.experience-detail-modal,
+.experience-detail-modal-heading,
+.experience-detail-modal-section,
+.experience-detail-modal-projects,
+.experience-detail-modal-stack-groups,
+.experience-detail-modal-stack-group {
   @apply grid gap-4;
 }
 
-.experience-drawer-header {
-  @apply grid-cols-[minmax(0,1fr)_auto] items-start;
+.experience-detail-modal {
+  @apply gap-6;
 }
 
-.experience-drawer-title {
-  @apply m-0 text-4xl font-semibold leading-none;
-  color: var(--text-color);
+.experience-detail-modal-head {
+  @apply grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4;
 }
 
-.experience-drawer-role {
+.experience-detail-modal-logo {
+  @apply h-16 w-16 rounded-2xl object-cover;
+  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 24%, transparent);
+}
+
+.experience-detail-modal-role {
   @apply m-0 text-[1.15rem];
   color: color-mix(in srgb, var(--text-color) 76%, transparent);
 }
 
-.experience-drawer-date,
-.experience-drawer-section-label,
-.experience-drawer-stack-group strong {
+.experience-detail-modal-date,
+.experience-detail-modal-section-label,
+.experience-detail-modal-stack-group strong {
   @apply text-sm font-semibold uppercase tracking-[0.08em];
 }
 
-.experience-drawer-date {
+.experience-detail-modal-date {
   color: var(--primary-default-color);
 }
 
-.experience-drawer-description,
-.experience-drawer-project-card p,
-.experience-drawer-inline-copy {
+.experience-detail-modal-description,
+.experience-detail-modal-project-card p,
+.experience-detail-modal-inline-copy {
   @apply m-0 text-[1rem] leading-8;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
 }
 
-.experience-drawer-section-label {
+.experience-detail-modal-section-label {
   color: var(--text-color);
 }
 
-.experience-drawer-project-card {
-  @apply grid gap-2 rounded-[1.25rem] border px-4 py-3;
+.experience-detail-modal-project-card {
+  @apply grid gap-2 rounded-2xl border px-4 py-3;
   background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
 }
 
-.experience-drawer-project-card strong,
-.experience-drawer-stack-group strong {
+.experience-detail-modal-project-card strong,
+.experience-detail-modal-stack-group strong {
   color: var(--text-color);
 }
 
-.experience-drawer-chip-list {
+.experience-detail-modal-chip-list {
   @apply flex flex-wrap gap-2;
+}
+
+.experience-detail-modal-customer {
+  @apply inline-flex items-center gap-2;
+}
+
+.experience-detail-modal-customer-logo {
+  @apply h-6 w-6 rounded-full object-cover;
+  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--base-default-color) 20%, transparent);
 }

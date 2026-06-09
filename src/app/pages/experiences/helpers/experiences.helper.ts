@@ -10,8 +10,11 @@ import { AppLocale } from '../../../core/translation/translation.types';
 import {
   EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS,
   EXPERIENCE_PRESENT_LABEL_KEY,
+  ExperienceCustomerViewModel,
+  ExperienceImageViewModel,
   ExperienceProjectViewModel,
   ExperienceTechnologyGroupViewModel,
+  ExperienceTechnologyViewModel,
   ExperienceTimelineItemViewModel,
 } from '../experiences.types';
 
@@ -58,6 +61,75 @@ const DATABASE_TECHNOLOGY_SLUGS = new Set([
 const TECHNOLOGY_GROUP_ORDER = ['frontend', 'backend', 'databases', 'others'] as const;
 type TechnologyGroupKey = (typeof TECHNOLOGY_GROUP_ORDER)[number];
 
+const CUSTOMER_IMAGE_FILE_BY_SLUG: Record<string, string> = {
+  'costa-tavares': 'costaetavares.jpg',
+};
+
+const normalizeAssetName = (value: string): string =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/&/g, 'e')
+    .replace(/[^a-z0-9]+/g, '');
+
+const buildExperienceAssetPath = (fileName: string): string =>
+  `/assets/img/experiences/${fileName}`;
+
+const buildSkillAssetPath = (slug: string): string =>
+  `/assets/img/skills/${slug.replace(/-js$/, '').replace(/-/g, '')}.png`;
+
+const resolveCompanyImage = (
+  experience: ExperienceCollectionItemResponse,
+  locale: AppLocale,
+): ExperienceImageViewModel => {
+  const imageAsset = experience.imageAssets[0]?.imageAsset;
+
+  return {
+    src:
+      imageAsset?.filePath ??
+      buildExperienceAssetPath(`${normalizeAssetName(experience.companyName)}.jpg`),
+    alt: resolveLocalizedText(
+      locale,
+      {
+        'pt-br': imageAsset?.altPt ?? undefined,
+        'en-us': imageAsset?.altEn ?? undefined,
+      },
+      `${experience.companyName} logo`,
+    ),
+  };
+};
+
+const mapCustomer = (
+  customer: ExperienceCollectionItemResponse['customers'][number]['customer'],
+): ExperienceCustomerViewModel => ({
+  slug: customer.slug,
+  name: customer.name,
+  image: {
+    src: buildExperienceAssetPath(
+      CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
+    ),
+    alt: `${customer.name} logo`,
+  },
+});
+
+const mapTechnology = (
+  technology: ExperienceTechnologyResponse,
+  projectCount: number,
+): ExperienceTechnologyViewModel => ({
+  slug: technology.slug,
+  name: technology.name,
+  category: technology.category,
+  level: technology.level,
+  frequency: technology.frequency,
+  image: {
+    src: buildSkillAssetPath(technology.slug),
+    alt: `${technology.name} icon`,
+  },
+  projectCount,
+  experienceCount: 1,
+});
+
 const mapProject = (
   project: ExperienceCollectionItemResponse['projects'][number]['project'],
   locale: AppLocale,
@@ -82,7 +154,7 @@ const mapProject = (
 });
 
 const resolveTechnologyGroupKey = (
-  technology: ExperienceTechnologyResponse,
+  technology: Pick<ExperienceTechnologyResponse, 'slug' | 'category'>,
 ): TechnologyGroupKey => {
   if (FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'frontend';
@@ -100,17 +172,17 @@ const resolveTechnologyGroupKey = (
 };
 
 const buildTechnologyGroups = (
-  technologies: ExperienceCollectionItemResponse['technologies'],
+  technologies: readonly ExperienceTechnologyViewModel[],
 ): readonly ExperienceTechnologyGroupViewModel[] => {
-  const grouped = new Map<TechnologyGroupKey, string[]>();
+  const grouped = new Map<TechnologyGroupKey, ExperienceTechnologyViewModel[]>();
 
-  for (const relation of technologies) {
-    const groupKey = resolveTechnologyGroupKey(relation.technology);
-    const technologyNames = grouped.get(groupKey) ?? [];
+  for (const technology of technologies) {
+    const groupKey = resolveTechnologyGroupKey(technology);
+    const groupTechnologies = grouped.get(groupKey) ?? [];
 
-    if (!technologyNames.includes(relation.technology.name)) {
-      technologyNames.push(relation.technology.name);
-      grouped.set(groupKey, technologyNames);
+    if (!groupTechnologies.some((item) => item.slug === technology.slug)) {
+      groupTechnologies.push(technology);
+      grouped.set(groupKey, groupTechnologies);
     }
   }
 
@@ -147,8 +219,9 @@ export const mapExperienceToTimelineItem = (
   experience: ExperienceCollectionItemResponse,
   locale: AppLocale,
 ): ExperienceTimelineItemViewModel => {
-  const technologies = dedupe(
-    experience.technologies.map(({ technology }) => technology.name),
+  const projects = experience.projects.map(({ project }) => mapProject(project, locale));
+  const technologies = experience.technologies.map(({ technology }) =>
+    mapTechnology(technology, projects.length),
   );
   const leadTechnologies = technologies.slice(0, 8);
   const jobs = dedupe(
@@ -201,10 +274,11 @@ export const mapExperienceToTimelineItem = (
     isCurrent: experience.isCurrent,
     isHighlight: experience.highlight,
     jobs,
-    customers: dedupe(experience.customers.map(({ customer }) => customer.name)),
-    projects: experience.projects.map(({ project }) => mapProject(project, locale)),
+    companyImage: resolveCompanyImage(experience, locale),
+    customers: experience.customers.map(({ customer }) => mapCustomer(customer)),
+    projects,
     technologies: leadTechnologies,
     extraTechnologyCount: Math.max(0, technologies.length - leadTechnologies.length),
-    technologyGroups: buildTechnologyGroups(experience.technologies),
+    technologyGroups: buildTechnologyGroups(technologies),
   };
 };

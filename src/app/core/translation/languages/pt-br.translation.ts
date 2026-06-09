@@ -1,16 +1,5 @@
 import { AppTranslationLanguage } from '../translation.types';
 
-const PT_BR_EXPERIENCES_OVERRIDES = {
-  'pages.experiences.timeline.moreTechnologies': 'a mais',
-  'pages.experiences.detail.projects': '// projetos',
-  'pages.experiences.detail.clients': '// clientes',
-  'pages.experiences.detail.techStack': '// stack_tecnica',
-  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
-  'pages.experiences.detail.stackGroups.backend': 'Back-end',
-  'pages.experiences.detail.stackGroups.databases': 'Bancos de dados',
-  'pages.experiences.detail.stackGroups.others': 'Outros',
-} as const satisfies Partial<AppTranslationLanguage>;
-
 export const PT_BR_TRANSLATIONS = {
   'header.brand.home': 'Ir para a home',
   'header.brand.role': 'Full Stack Engineer | Especialista Front-End',
@@ -108,9 +97,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.navigation.projects.description':
     'Aplicações reais e estudos de caso.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
-  'pages.experiences.title': 'Experiencia Profissional',
+  'pages.experiences.title': 'Experiência Profissional',
   'pages.experiences.description':
-    'Os capítulos de carreira agora leem o endpoint público de experiences e transformam relacionamentos em uma timeline profissional fácil de escanear.',
+    'Uma jornada cronológica pela minha carreira construindo soluções de software de impacto.',
   'pages.experiences.snapshot.label': 'Panorama',
   'pages.experiences.snapshot.title': 'Cobertura da trajetória vinda da API real',
   'pages.experiences.snapshot.description':
@@ -144,6 +133,7 @@ export const PT_BR_TRANSLATIONS = {
     'Nenhum cliente vinculado ainda.',
   'pages.experiences.timeline.technologyStack': 'Stack de tecnologia',
   'pages.experiences.timeline.relatedProjects': 'Projetos relacionados',
+  'pages.experiences.timeline.moreTechnologies': 'a mais',
   'pages.experiences.timeline.emptyProjects':
     'Nenhum projeto relacionado foi retornado para este capítulo.',
   'pages.experiences.detail.projectsCount': 'projetos',
@@ -154,6 +144,17 @@ export const PT_BR_TRANSLATIONS = {
   'pages.experiences.detail.chart.projects': 'Projetos',
   'pages.experiences.detail.chart.technologies': 'Tecnologias',
   'pages.experiences.detail.chart.series': 'Conexões',
+  'pages.experiences.detail.projects': '// projetos',
+  'pages.experiences.detail.clients': '// clientes',
+  'pages.experiences.detail.techStack': '// stack_tecnica',
+  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
+  'pages.experiences.detail.stackGroups.backend': 'Back-end',
+  'pages.experiences.detail.stackGroups.databases': 'Bancos de dados',
+  'pages.experiences.detail.stackGroups.others': 'Outros',
+  'pages.experiences.technology.category': 'Categoria',
+  'pages.experiences.technology.level': 'Nível de conhecimento',
+  'pages.experiences.technology.frequency': 'Frequência de uso',
+  'pages.experiences.technology.projects': 'Projetos utilizados',
   'pages.skills.sectionLabel': 'Tecnologia',
   'pages.skills.title': 'Profundidade técnica',
   'pages.skills.description':
@@ -396,5 +397,4 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',
-  ...PT_BR_EXPERIENCES_OVERRIDES,
 } as const satisfies AppTranslationLanguage;

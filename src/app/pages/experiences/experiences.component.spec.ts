@@ -14,7 +14,7 @@ import { ExperiencesComponent } from './experiences.component';
 
 describe('ExperiencesComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-icon', 'hans-tag', 'hans-button'];
+    const elementNames = ['hans-icon', 'hans-tag', 'hans-button', 'hans-modal'];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -50,6 +50,9 @@ describe('ExperiencesComponent', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     expect(compiled.textContent).toContain('Professional Experience');
+    expect(compiled.textContent).toContain(
+      'A chronological journey through my career building impactful software solutions.',
+    );
     expect(compiled.textContent).toContain('Loading live experience relationships...');
 
     const request = httpTestingController.expectOne(
@@ -61,6 +64,7 @@ describe('ExperiencesComponent', () => {
     expect(compiled.textContent).toContain('Stefanini Group');
     expect(compiled.textContent).toContain('Full Stack Developer');
     expect(compiled.textContent).toContain('View details');
+    expect(compiled.querySelector('img[src="/assets/img/experiences/stefanini.jpg"]')).toBeTruthy();
 
     const component = fixture.componentInstance as unknown as {
       timelineItems: () => readonly [{ id: string }];
@@ -93,7 +97,10 @@ describe('ExperiencesComponent', () => {
     request.flush(createExperiencesCollectionResponse());
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Experiencia Profissional');
+    expect(compiled.textContent).toContain('Experiência Profissional');
+    expect(compiled.textContent).toContain(
+      'Uma jornada cronológica pela minha carreira construindo soluções de software de impacto.',
+    );
     expect(compiled.textContent).toContain('Desenvolvedor Full Stack');
   });
 
@@ -164,6 +171,10 @@ describe('ExperiencesComponent', () => {
       selectedExperience: () => { id: string } | null;
       isDetailOpen: () => boolean;
       isSelectedExperience: (experienceId: string) => boolean;
+      openTechnologyDetails: (technology: { slug: string }) => void;
+      closeTechnologyDetails: () => void;
+      selectedTechnology: () => { slug: string } | null;
+      isTechnologyDetailOpen: () => boolean;
     };
 
     const item = component.timelineItems()[0];
@@ -178,5 +189,15 @@ describe('ExperiencesComponent', () => {
     expect(component.selectedExperience()).toBeNull();
     expect(component.isDetailOpen()).toBeFalse();
     expect(component.isSelectedExperience(item.id)).toBeFalse();
+
+    component.openTechnologyDetails({ slug: 'angular' });
+
+    expect(component.selectedTechnology()?.slug).toBe('angular');
+    expect(component.isTechnologyDetailOpen()).toBeTrue();
+
+    component.closeTechnologyDetails();
+
+    expect(component.selectedTechnology()).toBeNull();
+    expect(component.isTechnologyDetailOpen()).toBeFalse();
   });
 });

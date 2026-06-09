@@ -1,0 +1,43 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="technology()?.name ?? ''"
+  modalColor="primary"
+  modalSize="small"
+  modalVariant="outline"
+  placement="center"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
+  @if (technology(); as currentTechnology) {
+    <div class="experience-technology-modal">
+      <img
+        class="experience-technology-modal-icon"
+        [src]="currentTechnology.image.src"
+        [alt]="currentTechnology.image.alt"
+        loading="lazy"
+      />
+
+      <div class="experience-technology-modal-grid">
+        <div class="experience-technology-modal-metric">
+          <span>{{ 'pages.experiences.technology.category' | translate }}</span>
+          <strong>{{ currentTechnology.category }}</strong>
+        </div>
+
+        <div class="experience-technology-modal-metric">
+          <span>{{ 'pages.experiences.technology.level' | translate }}</span>
+          <strong>{{ currentTechnology.level }}</strong>
+        </div>
+
+        <div class="experience-technology-modal-metric">
+          <span>{{ 'pages.experiences.technology.frequency' | translate }}</span>
+          <strong>{{ currentTechnology.frequency }}</strong>
+        </div>
+
+        <div class="experience-technology-modal-metric">
+          <span>{{ 'pages.experiences.technology.projects' | translate }}</span>
+          <strong>{{ currentTechnology.projectCount }}</strong>
+        </div>
+      </div>
+    </div>
+  }
+</hans-modal>

@@ -1,90 +1,98 @@
-@if (isOpen()) {
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="item()?.companyName ?? ''"
+  [header]="item()?.roleTitle ?? ''"
+  modalColor="primary"
+  modalSize="large"
+  modalVariant="outline"
+  placement="right"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
   @if (item(); as currentItem) {
-    <div
-      class="experience-drawer-backdrop"
-      (click)="requestClose()"
-      aria-hidden="true"
-    ></div>
+    <div class="experience-detail-modal">
+      <header class="experience-detail-modal-head">
+        <img
+          class="experience-detail-modal-logo"
+          [src]="currentItem.companyImage.src"
+          [alt]="currentItem.companyImage.alt"
+          loading="lazy"
+        />
 
-    <aside
-      class="experience-drawer"
-      aria-modal="true"
-      role="dialog"
-      [attr.aria-label]="currentItem.companyName"
-    >
-      <header class="experience-drawer-header">
-        <div class="experience-drawer-heading">
-          <h2 class="experience-drawer-title">{{ currentItem.companyName }}</h2>
-          <p class="experience-drawer-role">{{ currentItem.roleTitle }}</p>
-          <span class="experience-drawer-date">{{ currentItem.dateRangeLabel }}</span>
+        <div class="experience-detail-modal-heading">
+          <p class="experience-detail-modal-role">{{ currentItem.roleTitle }}</p>
+          <span class="experience-detail-modal-date">{{ currentItem.dateRangeLabel }}</span>
         </div>
-
-        <hans-button
-          [attr.label]="'common.actions.close' | translate"
-          buttonColor="base"
-          buttonShape="rounded"
-          buttonSize="small"
-          buttonVariant="ghost"
-          (click)="requestClose()"
-        ></hans-button>
       </header>
 
-      <p class="experience-drawer-description">{{ currentItem.description }}</p>
+      <p class="experience-detail-modal-description">{{ currentItem.description }}</p>
 
-      <section class="experience-drawer-section">
-        <span class="experience-drawer-section-label">
+      <section class="experience-detail-modal-section">
+        <span class="experience-detail-modal-section-label">
           {{ 'pages.experiences.detail.projects' | translate }}
         </span>
 
-        <div class="experience-drawer-projects">
+        <div class="experience-detail-modal-projects">
           @for (project of currentItem.projects; track project.slug) {
-            <article class="experience-drawer-project-card">
+            <article class="experience-detail-modal-project-card">
               <strong>{{ project.title }}</strong>
               <p>{{ project.summary }}</p>
             </article>
           } @empty {
-            <p class="experience-drawer-inline-copy">
+            <p class="experience-detail-modal-inline-copy">
               {{ 'pages.experiences.timeline.emptyProjects' | translate }}
             </p>
           }
         </div>
       </section>
 
-      <section class="experience-drawer-section">
-        <span class="experience-drawer-section-label">
+      <section class="experience-detail-modal-section">
+        <span class="experience-detail-modal-section-label">
           {{ 'pages.experiences.detail.clients' | translate }}
         </span>
 
-        <div class="experience-drawer-chip-list">
-          @for (customer of currentItem.customers; track customer) {
-            <hans-tag [attr.label]="customer" tagColor="base" tagSize="sm"></hans-tag>
+        <div class="experience-detail-modal-chip-list">
+          @for (customer of currentItem.customers; track customer.slug) {
+            <span class="experience-detail-modal-customer">
+              <img
+                class="experience-detail-modal-customer-logo"
+                [src]="customer.image.src"
+                [alt]="customer.image.alt"
+                loading="lazy"
+              />
+              <hans-tag [attr.label]="customer.name" tagColor="base" tagSize="sm"></hans-tag>
+            </span>
           } @empty {
-            <p class="experience-drawer-inline-copy">
+            <p class="experience-detail-modal-inline-copy">
               {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
             </p>
           }
         </div>
       </section>
 
-      <section class="experience-drawer-section">
-        <span class="experience-drawer-section-label">
+      <section class="experience-detail-modal-section">
+        <span class="experience-detail-modal-section-label">
           {{ 'pages.experiences.detail.techStack' | translate }}
         </span>
 
-        <div class="experience-drawer-stack-groups">
+        <div class="experience-detail-modal-stack-groups">
           @for (group of currentItem.technologyGroups; track group.labelKey) {
-            <section class="experience-drawer-stack-group">
+            <section class="experience-detail-modal-stack-group">
               <strong>{{ group.labelKey | translate }}</strong>
 
-              <div class="experience-drawer-chip-list">
-                @for (technology of group.technologies; track technology) {
-                  <hans-tag [attr.label]="technology" tagColor="info" tagSize="sm"></hans-tag>
+              <div class="experience-detail-modal-chip-list">
+                @for (technology of group.technologies; track technology.slug) {
+                  <hans-tag
+                    [attr.label]="technology.name"
+                    tagColor="info"
+                    tagSize="sm"
+                  ></hans-tag>
                 }
               </div>
             </section>
           }
         </div>
       </section>
-    </aside>
+    </div>
   }
-}
+</hans-modal>

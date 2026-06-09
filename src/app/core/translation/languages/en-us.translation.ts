@@ -150,6 +150,10 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.detail.stackGroups.backend': 'Back-end',
   'pages.experiences.detail.stackGroups.databases': 'Databases',
   'pages.experiences.detail.stackGroups.others': 'Others',
+  'pages.experiences.technology.category': 'Category',
+  'pages.experiences.technology.level': 'Knowledge level',
+  'pages.experiences.technology.frequency': 'Usage frequency',
+  'pages.experiences.technology.projects': 'Projects used',
   'pages.skills.sectionLabel': 'Technology',
   'pages.skills.title': 'Technology depth',
   'pages.skills.description':

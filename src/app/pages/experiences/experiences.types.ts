@@ -6,9 +6,31 @@ export interface ExperienceProjectViewModel {
   summary: string;
 }
 
+export interface ExperienceImageViewModel {
+  src: string;
+  alt: string;
+}
+
+export interface ExperienceCustomerViewModel {
+  slug: string;
+  name: string;
+  image: ExperienceImageViewModel;
+}
+
+export interface ExperienceTechnologyViewModel {
+  slug: string;
+  name: string;
+  category: string;
+  level: string;
+  frequency: string;
+  image: ExperienceImageViewModel;
+  projectCount: number;
+  experienceCount: number;
+}
+
 export interface ExperienceTechnologyGroupViewModel {
   labelKey: AppTranslationKey;
-  technologies: string[];
+  technologies: ExperienceTechnologyViewModel[];
 }
 
 export interface ExperienceTimelineItemViewModel {
@@ -22,9 +44,10 @@ export interface ExperienceTimelineItemViewModel {
   isCurrent: boolean;
   isHighlight: boolean;
   jobs: string[];
-  customers: string[];
+  companyImage: ExperienceImageViewModel;
+  customers: ExperienceCustomerViewModel[];
   projects: ExperienceProjectViewModel[];
-  technologies: string[];
+  technologies: ExperienceTechnologyViewModel[];
   extraTechnologyCount: number;
   technologyGroups: readonly ExperienceTechnologyGroupViewModel[];
 }

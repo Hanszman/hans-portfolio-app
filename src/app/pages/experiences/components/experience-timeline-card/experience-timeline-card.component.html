@@ -1,11 +1,15 @@
 <article class="experience-card" [class.experience-card-active]="isActive()">
-  <div class="experience-card-rail" aria-hidden="true">
-    <span class="experience-card-rail-dot"></span>
-    <span class="experience-card-rail-line"></span>
-  </div>
+  <app-timeline-marker [isLast]="isLast()" />
 
   <section class="experience-card-panel">
     <header class="experience-card-header">
+      <img
+        class="experience-card-logo"
+        [src]="item().companyImage.src"
+        [alt]="item().companyImage.alt"
+        loading="lazy"
+      />
+
       <div class="experience-card-heading">
         <h2 class="experience-card-company">{{ item().companyName }}</h2>
         <p class="experience-card-role">{{ item().roleTitle }}</p>
@@ -23,15 +27,29 @@
       <hans-icon name="LuUsers" iconSize="small"></hans-icon>
 
       <div class="experience-card-chip-list">
-        @for (customer of item().customers; track customer) {
-          <hans-tag [attr.label]="customer" tagColor="base" tagSize="sm"></hans-tag>
+        @for (customer of item().customers; track customer.slug) {
+          <span class="experience-card-customer">
+            <img
+              class="experience-card-customer-logo"
+              [src]="customer.image.src"
+              [alt]="customer.image.alt"
+              loading="lazy"
+            />
+            <hans-tag [attr.label]="customer.name" tagColor="base" tagSize="sm"></hans-tag>
+          </span>
         }
       </div>
     </div>
 
     <div class="experience-card-stack">
       @for (technology of item().technologies; track technology) {
-        <hans-tag [attr.label]="technology" tagColor="info" tagSize="sm"></hans-tag>
+        <button
+          type="button"
+          class="experience-card-technology"
+          (click)="requestTechnologyDetails(technology)"
+        >
+          <hans-tag [attr.label]="technology.name" tagColor="info" tagSize="sm"></hans-tag>
+        </button>
       }
 
       @if (item().extraTechnologyCount > 0) {

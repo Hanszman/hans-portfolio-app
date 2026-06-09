@@ -19,14 +19,76 @@ describe('ExperienceTimelineCardComponent', () => {
     isCurrent: true,
     isHighlight: true,
     jobs: ['Full Stack Developer'],
-    customers: ['Ford', 'Ale'],
+    companyImage: {
+      src: '/assets/img/experiences/stefanini.jpg',
+      alt: 'Stefanini logo',
+    },
+    customers: [
+      {
+        slug: 'ford',
+        name: 'Ford',
+        image: {
+          src: '/assets/img/experiences/ford.jpg',
+          alt: 'Ford logo',
+        },
+      },
+      {
+        slug: 'ale',
+        name: 'Ale',
+        image: {
+          src: '/assets/img/experiences/ale.jpg',
+          alt: 'Ale logo',
+        },
+      },
+    ],
     projects: [],
-    technologies: ['Angular', 'TypeScript'],
+    technologies: [
+      {
+        slug: 'angular',
+        name: 'Angular',
+        category: 'FRAMEWORK',
+        level: 'ADVANCED',
+        frequency: 'FREQUENT',
+        image: {
+          src: '/assets/img/skills/angular.png',
+          alt: 'Angular icon',
+        },
+        projectCount: 2,
+        experienceCount: 1,
+      },
+      {
+        slug: 'typescript',
+        name: 'TypeScript',
+        category: 'LANGUAGE',
+        level: 'ADVANCED',
+        frequency: 'FREQUENT',
+        image: {
+          src: '/assets/img/skills/typescript.png',
+          alt: 'TypeScript icon',
+        },
+        projectCount: 2,
+        experienceCount: 1,
+      },
+    ],
     extraTechnologyCount: 2,
     technologyGroups: [
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
-        technologies: ['Angular', 'TypeScript'],
+        technologies: [
+          {
+            slug: 'angular',
+            name: 'Angular',
+            category: 'FRAMEWORK',
+            level: 'ADVANCED',
+            frequency: 'FREQUENT',
+            image: {
+              src: '/assets/img/skills/angular.png',
+              alt: 'Angular icon',
+            },
+            projectCount: 2,
+            experienceCount: 1,
+          },
+        ],
       },
     ],
   };
@@ -67,5 +129,14 @@ describe('ExperienceTimelineCardComponent', () => {
     component['requestDetails']();
 
     expect(spy).toHaveBeenCalledWith(item);
+  });
+
+  it('emits technology details request', () => {
+    const spy = jasmine.createSpy('openTechnology');
+    component.openTechnology.subscribe(spy);
+
+    component['requestTechnologyDetails'](item.technologies[0]);
+
+    expect(spy).toHaveBeenCalledWith(item.technologies[0]);
   });
 });

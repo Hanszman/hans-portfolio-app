@@ -31,7 +31,9 @@
           <app-experience-timeline-card
             [item]="item"
             [isActive]="isSelectedExperience(item.id)"
+            [isLast]="$last"
             (openDetails)="openExperienceDetails($event)"
+            (openTechnology)="openTechnologyDetails($event)"
           />
         }
       </div>
@@ -42,5 +44,11 @@
     [isOpen]="isDetailOpen()"
     [item]="selectedExperience()"
     (closed)="closeExperienceDetails()"
+  />
+
+  <app-experience-technology-modal
+    [isOpen]="isTechnologyDetailOpen()"
+    [technology]="selectedTechnology()"
+    (closed)="closeTechnologyDetails()"
   />
 </app-wrapper>

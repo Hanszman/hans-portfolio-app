@@ -26,8 +26,17 @@ describe('experiences helper', () => {
 
     expect(timelineItem.companyName).toBe('Stefanini Group');
     expect(timelineItem.roleTitle).toBe('Desenvolvedor Full Stack');
-    expect(timelineItem.customers).toEqual(['Ford', 'Ale']);
-    expect(timelineItem.technologies).toEqual([
+    expect(timelineItem.companyImage.src).toBe(
+      '/assets/img/experiences/stefanini.jpg',
+    );
+    expect(timelineItem.customers.map((customer) => customer.name)).toEqual([
+      'Ford',
+      'Ale',
+    ]);
+    expect(timelineItem.customers[0].image.src).toBe(
+      '/assets/img/experiences/ford.jpg',
+    );
+    expect(timelineItem.technologies.map((technology) => technology.name)).toEqual([
       'Angular',
       'TypeScript',
       'Microsoft Azure',
@@ -45,7 +54,12 @@ describe('experiences helper', () => {
 
     const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
 
-    expect(timelineItem.technologyGroups).toEqual([
+    expect(
+      timelineItem.technologyGroups.map((group) => ({
+        labelKey: group.labelKey,
+        technologies: group.technologies.map((technology) => technology.name),
+      })),
+    ).toEqual([
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
         technologies: [
@@ -84,6 +98,21 @@ describe('experiences helper', () => {
     expect(timelineItem.roleTitle).toBe('Experience at Stefanini Group');
   });
 
+  it('should fallback to a normalized company image path when no asset is available', () => {
+    const experience = {
+      ...createExperiencesCollectionResponse().data[0],
+      companyName: 'Empresa Ágil & Digital',
+      imageAssets: [],
+    };
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(timelineItem.companyImage).toEqual({
+      src: '/assets/img/experiences/empresaagiledigital.jpg',
+      alt: 'Empresa Ágil & Digital logo',
+    });
+  });
+
   it('should classify database technologies by category when the slug is not mapped', () => {
     const experience = {
       ...createExperiencesCollectionResponse().data[1],
@@ -110,7 +139,12 @@ describe('experiences helper', () => {
 
     const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
 
-    expect(timelineItem.technologyGroups).toEqual([
+    expect(
+      timelineItem.technologyGroups.map((group) => ({
+        labelKey: group.labelKey,
+        technologies: group.technologies.map((technology) => technology.name),
+      })),
+    ).toEqual([
       {
         labelKey: 'pages.experiences.detail.stackGroups.databases',
         technologies: ['Oracle DB'],

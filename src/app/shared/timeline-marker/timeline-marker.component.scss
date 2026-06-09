@@ -1,0 +1,15 @@
+:host {
+  @apply relative hidden w-12 items-start justify-center md:flex;
+}
+
+.timeline-marker-dot {
+  @apply relative z-[1] mt-6 h-3 w-3 rounded-full border-2;
+  border-color: color-mix(in srgb, var(--primary-default-color) 26%, transparent);
+  background-color: var(--primary-default-color);
+  box-shadow: 0 0 0 0.55rem color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.timeline-marker-line {
+  @apply absolute bottom-[-3rem] left-1/2 top-0 w-px -translate-x-1/2;
+  background-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+}
