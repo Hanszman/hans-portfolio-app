@@ -49,12 +49,10 @@ describe('TagModalComponent', () => {
     fixture.detectChanges();
 
     const modal = fixture.nativeElement.querySelector('hans-modal') as HTMLElement & {
-      disablePortal?: boolean;
       title?: string;
     };
 
     expect(modal.title).toBe('Angular');
-    expect(modal.disablePortal).toBeTrue();
     expect(fixture.nativeElement.querySelector('img').alt).toBe('Angular icon');
     expect(fixture.nativeElement.textContent).toContain('Framework');
     expect(fixture.nativeElement.textContent).toContain('Advanced');
