@@ -8,11 +8,18 @@ import {
 } from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
 import {
+  EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS,
+  EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG,
+  EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS,
+  EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS,
+  EXPERIENCE_TECHNOLOGY_GROUP_ORDER,
   EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS,
   EXPERIENCE_PRESENT_LABEL_KEY,
+  INITIAL_VISIBLE_TECHNOLOGY_COUNT,
   ExperienceCustomerViewModel,
   ExperienceImageViewModel,
   ExperienceProjectViewModel,
+  ExperienceTechnologyGroupKey,
   ExperienceTechnologyGroupViewModel,
   ExperienceTechnologyViewModel,
   ExperienceTimelineItemViewModel,
@@ -25,45 +32,6 @@ const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
     month: 'short',
     year: 'numeric',
   }).format(new Date(dateIso));
-
-const FRONTEND_TECHNOLOGY_SLUGS = new Set([
-  'angular',
-  'typescript',
-  'javascript',
-  'html',
-  'css',
-  'sass',
-  'bootstrap',
-  'jquery',
-  'ajax',
-  'json',
-]);
-
-const BACKEND_TECHNOLOGY_SLUGS = new Set([
-  'node-js',
-  'nodejs',
-  'node',
-  'knex-js',
-  'knex',
-  'swagger',
-  'php',
-  'laravel',
-  'http',
-]);
-
-const DATABASE_TECHNOLOGY_SLUGS = new Set([
-  'sql-server',
-  'mysql',
-  'postgresql',
-  'dbeaver',
-]);
-
-const TECHNOLOGY_GROUP_ORDER = ['frontend', 'backend', 'databases', 'others'] as const;
-type TechnologyGroupKey = (typeof TECHNOLOGY_GROUP_ORDER)[number];
-
-const CUSTOMER_IMAGE_FILE_BY_SLUG: Record<string, string> = {
-  'costa-tavares': 'costaetavares.jpg',
-};
 
 const normalizeAssetName = (value: string): string =>
   value
@@ -111,7 +79,7 @@ const mapCustomer = (
   projectCount,
   image: {
     src: buildExperienceAssetPath(
-      CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
+      EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
     ),
     alt: `${customer.name} logo`,
   },
@@ -159,16 +127,16 @@ const mapProject = (
 
 const resolveTechnologyGroupKey = (
   technology: Pick<ExperienceTechnologyResponse, 'slug' | 'category'>,
-): TechnologyGroupKey => {
-  if (FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
+): ExperienceTechnologyGroupKey => {
+  if (EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'frontend';
   }
 
-  if (BACKEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
+  if (EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'backend';
   }
 
-  if (DATABASE_TECHNOLOGY_SLUGS.has(technology.slug)) {
+  if (EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'databases';
   }
 
@@ -178,7 +146,10 @@ const resolveTechnologyGroupKey = (
 const buildTechnologyGroups = (
   technologies: readonly ExperienceTechnologyViewModel[],
 ): readonly ExperienceTechnologyGroupViewModel[] => {
-  const grouped = new Map<TechnologyGroupKey, ExperienceTechnologyViewModel[]>();
+  const grouped = new Map<
+    ExperienceTechnologyGroupKey,
+    ExperienceTechnologyViewModel[]
+  >();
 
   for (const technology of technologies) {
     const groupKey = resolveTechnologyGroupKey(technology);
@@ -190,7 +161,7 @@ const buildTechnologyGroups = (
     }
   }
 
-  return TECHNOLOGY_GROUP_ORDER.flatMap((groupKey) => {
+  return EXPERIENCE_TECHNOLOGY_GROUP_ORDER.flatMap((groupKey) => {
     const groupTechnologies = grouped.get(groupKey);
 
     if (!groupTechnologies?.length) {
@@ -283,7 +254,10 @@ export const mapExperienceToTimelineItem = (
     ),
     projects,
     technologies,
-    extraTechnologyCount: Math.max(0, technologies.length - 8),
+    extraTechnologyCount: Math.max(
+      0,
+      technologies.length - INITIAL_VISIBLE_TECHNOLOGY_COUNT,
+    ),
     technologyGroups: buildTechnologyGroups(technologies),
   };
 };

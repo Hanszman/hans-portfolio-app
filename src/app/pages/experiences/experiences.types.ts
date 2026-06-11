@@ -54,6 +54,8 @@ export interface ExperienceTimelineItemViewModel {
   technologyGroups: readonly ExperienceTechnologyGroupViewModel[];
 }
 
+export const INITIAL_VISIBLE_TECHNOLOGY_COUNT = 8;
+
 export const EXPERIENCE_PROJECT_STATUS_LABEL_KEYS: Record<string, AppTranslationKey> = {
   COMPLETED: 'taxonomy.experiences.projectStatus.completed',
   IN_PROGRESS: 'taxonomy.experiences.projectStatus.inProgress',
@@ -76,3 +78,49 @@ export const EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS = {
   databases: 'pages.experiences.detail.stackGroups.databases',
   others: 'pages.experiences.detail.stackGroups.others',
 } as const satisfies Record<string, AppTranslationKey>;
+
+export const EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS = new Set([
+  'angular',
+  'typescript',
+  'javascript',
+  'html',
+  'css',
+  'sass',
+  'bootstrap',
+  'jquery',
+  'ajax',
+  'json',
+]);
+
+export const EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS = new Set([
+  'node-js',
+  'nodejs',
+  'node',
+  'knex-js',
+  'knex',
+  'swagger',
+  'php',
+  'laravel',
+  'http',
+]);
+
+export const EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS = new Set([
+  'sql-server',
+  'mysql',
+  'postgresql',
+  'dbeaver',
+]);
+
+export const EXPERIENCE_TECHNOLOGY_GROUP_ORDER = [
+  'frontend',
+  'backend',
+  'databases',
+  'others',
+] as const;
+
+export type ExperienceTechnologyGroupKey =
+  (typeof EXPERIENCE_TECHNOLOGY_GROUP_ORDER)[number];
+
+export const EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG: Record<string, string> = {
+  'costa-tavares': 'costaetavares.jpg',
+};

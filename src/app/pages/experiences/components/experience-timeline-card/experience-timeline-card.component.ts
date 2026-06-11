@@ -9,14 +9,13 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExpandableListToggleComponent } from '../../../../shared/expandable-list-toggle/expandable-list-toggle.component';
-import { TimelineCardComponent } from '../../../../shared/timeline-card/timeline-card.component';
+import { TimelineCardComponent } from '../../../../shared/timeline/timeline-card/timeline-card.component';
 import {
   ExperienceCustomerViewModel,
   ExperienceTechnologyViewModel,
   ExperienceTimelineItemViewModel,
+  INITIAL_VISIBLE_TECHNOLOGY_COUNT,
 } from '../../experiences.types';
-
-const INITIAL_VISIBLE_TECHNOLOGY_COUNT = 8;
 
 @Component({
   selector: 'app-experience-timeline-card',
