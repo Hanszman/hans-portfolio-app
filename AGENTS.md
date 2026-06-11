@@ -2,7 +2,7 @@
 
 ## Project purpose
 
-`hans-portfolio-app` is the Angular frontend for the Hans Portfolio remake. It consumes `hans-portfolio-api` and uses `hans-ui-design-lib` as the official visual base.
+`hans-portfolio-app` is the Angular frontend for the Hans Portfolio remake. It consumes `hans-portfolio-api` as its backend and uses `hans-ui-design-lib` as the official visual base.
 
 The current focus is the public portfolio:
 
@@ -19,9 +19,9 @@ The implementation plan lives in `plano-implementacao-hans-portfolio-app-final-v
 - Angular `20.3.6`
 - TypeScript `5.9.2`
 - Standalone components only
-- Angular signals, `computed()`, and `effect()`
+- Angular signals, `computed()` and `effect()`
 - Angular new template syntax: `@if`, `@for`, `@switch`, `@defer` when appropriate
-- `input()`, `output()`, and `inject()`
+- `input()`, `output()` and `inject()`
 - Zoneless-ready app base
 - TailwindCSS `3.4.14` + SCSS
 - Karma + Jasmine
@@ -44,7 +44,9 @@ Every change must follow:
 - clear naming
 - small components
 - reusable composition
+- reusable and composable components
 - no unnecessary abstraction
+- no hidden behavior
 - no duplicated UI primitives already available in the design library
 
 Required validation before a task is done:
@@ -59,7 +61,7 @@ When useful during development, also run:
 - `npm run dev`
 - `npm run start`
 
-Coverage must stay at `100%` statements, branches, functions, and lines for relevant files. Lint must pass with no errors and no warnings. Builds must pass. Do not accept new warnings as "normal" without fixing or explicitly documenting why they are outside the touched scope.
+Coverage must stay at `100%` statements, branches, functions and lines for relevant files. Lint must pass with no errors and no warnings. Builds must pass. Do not accept new warnings as "normal" without fixing or explicitly documenting why they are outside the touched scope.
 
 ## Hans UI Design Library policy
 
@@ -90,7 +92,7 @@ Common library components include:
 - `hans-table`
 - `hans-tabs`
 
-Use library primitives for loading states, modals, tags, cards, buttons, charts, tables, tabs, dropdowns, and similar UI whenever possible.
+Use library primitives for loading states, modals, tags, cards, buttons, charts, tables, tabs, dropdowns and similar UI whenever possible.
 
 Portfolio-only compositions can live in this app when they are specific to the portfolio. If a missing capability is reusable across projects, pause and align before changing `hans-ui-design-lib`.
 
@@ -100,10 +102,10 @@ Use the current project structure:
 
 - `src/app/core/` - cross-cutting infrastructure.
 - `src/app/core/api/` - backend communication by domain.
-- `src/app/core/api/<domain>/` - `*.service.ts`, `*.types.ts`, and `*.service.spec.ts`.
+- `src/app/core/api/<domain>/` - `*.service.ts`, `*.types.ts` and `*.service.spec.ts`.
 - `src/app/core/api/mocks/` - shared factories and mocks for specs.
-- `src/app/core/theme/` - theme service, config, types, and theme tokens.
-- `src/app/core/translation/` - translation loader, service, providers, config, types, and language dictionaries.
+- `src/app/core/theme/` - theme service, config, types and theme tokens.
+- `src/app/core/translation/` - translation loader, service, providers, config, types and language dictionaries.
 - `src/app/core/design-lib/` - integration with `window.HansUI` and design library runtime theme API.
 - `src/app/layout/` - app shell and structural layout components.
 - `src/app/layout/header/` - header and header-local components.
@@ -114,7 +116,7 @@ Use the current project structure:
 - `src/app/pages/` - route-level pages.
 - `src/app/pages/<page>/components/` - components only used by that page.
 - `src/app/pages/<page>/helpers/` - page-local helper functions and tests.
-- `src/app/pages/<page>/<page>.types.ts` - page-local types, constants, view models, and support contracts.
+- `src/app/pages/<page>/<page>.types.ts` - page-local types, constants, view models and support contracts.
 - `src/app/shared/` - reusable app components that are not generic enough for the design library but are shared across app pages.
 
 Examples of shared components:
@@ -135,7 +137,7 @@ Use modern Angular consistently:
 - Do not create feature modules.
 - Do not use `*ngIf` or `*ngFor`.
 - Use `@if` and `@for`.
-- Prefer `signal()`, `computed()`, and `effect()`.
+- Prefer `signal()`, `computed()` and `effect()`.
 - Prefer `input()` and `output()`.
 - Prefer `inject()` instead of constructor injection when it improves clarity.
 - Keep templates readable and move derived view-model logic to TypeScript.
@@ -160,7 +162,7 @@ Cross-page app components live under `src/app/shared/`.
 
 Generic reusable UI primitives should be considered for `hans-ui-design-lib` instead of being created here.
 
-## What belongs in component TS, types, and helpers
+## What belongs in component TS, types and helpers
 
 Component `.ts` files should focus on:
 
@@ -206,7 +208,7 @@ Do not leave global or feature-level constants, types, interfaces, or helper fun
 
 ## Translation conventions
 
-The app supports `en-us`, `pt-br`, and `es-es`.
+The app supports `en-us`, `pt-br` and `es-es`.
 
 Rules:
 
@@ -248,7 +250,7 @@ Important public routes include:
 - `GET /dashboard`
 - dashboard aggregate endpoints
 
-Backend media is normalized through `imageAssets` relations. The frontend should use returned `filePath`, `folder`, `fileName`, and `kind` metadata instead of expecting old direct scalar icon or URL fields.
+Backend media is normalized through `imageAssets` relations. The frontend should use returned `filePath`, `folder`, `fileName` and `kind` metadata instead of expecting old direct scalar icon or URL fields.
 
 ## F7 redesign rules
 
@@ -289,8 +291,8 @@ Current status:
 
 ## Collaboration rules
 
-- Read the relevant page, service, helper, and types before changing behavior.
+- Read the relevant page, service, helper and types before changing behavior.
 - Preserve user changes and do not revert unrelated work.
 - Keep changes incremental and easy to review.
 - Update docs when decisions, contracts, scripts, or architecture change.
-- After any meaningful implementation, run lint, coverage, and build.
+- After any meaningful implementation, run lint, coverage and build.
