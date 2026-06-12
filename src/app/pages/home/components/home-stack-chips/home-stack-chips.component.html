@@ -5,7 +5,13 @@
 
   <div class="home-stack-tags" [attr.aria-label]="labelKey() | translate">
     @for (chip of chips(); track chip.slug) {
-      <hans-tag [attr.label]="chip.label" tagColor="base" tagSize="sm"></hans-tag>
+      <button
+        type="button"
+        class="home-stack-tag-button"
+        (click)="requestTechnologyDetails(chip)"
+      >
+        <hans-tag [attr.label]="chip.label" tagColor="base" tagSize="sm"></hans-tag>
+      </button>
     }
   </div>
 </section>

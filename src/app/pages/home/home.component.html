@@ -22,6 +22,7 @@
           [titleKey]="'pages.home.stack.title'"
           [descriptionKey]="'pages.home.stack.description'"
           [chips]="topTechnologyChips()"
+          (openTechnology)="openTechnologyDetails($event)"
         />
       } @else {
         <div class="home-page-state">
@@ -32,4 +33,10 @@
 
     <app-home-navigation-cards [cards]="navigationCards" />
   </div>
+
+  <app-technology-modal
+    [isOpen]="isTechnologyModalOpen()"
+    [technology]="selectedTechnology()"
+    (closed)="closeTechnologyDetails()"
+  />
 </app-wrapper>

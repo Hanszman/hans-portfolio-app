@@ -19,6 +19,12 @@ interface HomeComponentTestHook {
     set(value: DashboardOverviewResponse | null): void;
   };
   topTechnologyChips(): readonly unknown[];
+  openTechnologyDetails(technology: {
+    modal: { name: string };
+  }): void;
+  closeTechnologyDetails(): void;
+  selectedTechnology(): { name: string } | null;
+  isTechnologyModalOpen(): boolean;
   formatCount(value: number | undefined, fallback: string): string;
   calculateCareerYears(referenceDate?: Date): number;
 }
@@ -32,6 +38,7 @@ describe('HomeComponent', () => {
       'hans-icon',
       'hans-card',
       'hans-loading',
+      'hans-modal',
     ];
 
     for (const elementName of elementNames) {
@@ -212,5 +219,62 @@ describe('HomeComponent', () => {
 
     expect(component.topTechnologyChips()).toEqual([]);
     expect(component.formatCount(undefined, 'fallback')).toBe('fallback');
+  });
+
+  it('should keep technology modal image empty when the dashboard slug has no asset fallback', () => {
+    const fixture = TestBed.createComponent(HomeComponent);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const component = fixture.componentInstance as unknown as HomeComponentTestHook;
+
+    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
+    request.flush(
+      createDashboardOverviewResponse({
+        technologyUsage: {
+          generatedAtUtc: '2026-04-18T12:00:00.000Z',
+          totalUsageLinks: 1,
+          levels: [],
+          frequencies: [],
+          contexts: [],
+          sources: [],
+          topTechnologies: [
+            {
+              slug: 'unknown-stack',
+              name: 'Unknown Stack',
+              category: 'CUSTOM',
+              usageCount: 1,
+            },
+          ],
+        },
+      }),
+    );
+
+    const [chip] = component.topTechnologyChips() as readonly {
+      modal: { image: unknown };
+    }[];
+
+    expect(chip.modal.image).toBeNull();
+  });
+
+  it('should open and close technology details from the stack chips', () => {
+    const fixture = TestBed.createComponent(HomeComponent);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const component = fixture.componentInstance as unknown as HomeComponentTestHook;
+
+    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
+    request.flush(createDashboardOverviewResponse());
+    fixture.detectChanges();
+
+    const chip = component.topTechnologyChips()[0] as {
+      modal: { name: string };
+    };
+
+    component.openTechnologyDetails(chip);
+
+    expect(component.selectedTechnology()?.name).toBe(chip.modal.name);
+    expect(component.isTechnologyModalOpen()).toBeTrue();
+
+    component.closeTechnologyDetails();
+
+    expect(component.selectedTechnology()).toBeNull();
   });
 });

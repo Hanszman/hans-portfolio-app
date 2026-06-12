@@ -24,3 +24,13 @@
 .home-stack-tags {
   @apply flex flex-wrap justify-center gap-2 pt-4;
 }
+
+.home-stack-tag-button {
+  @apply cursor-pointer border-0 bg-transparent p-0;
+}
+
+.home-stack-tag-button:focus-visible {
+  @apply rounded-full outline-none;
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+}

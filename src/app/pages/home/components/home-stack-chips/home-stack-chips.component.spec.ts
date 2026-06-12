@@ -4,6 +4,24 @@ import { provideAppTranslations } from '../../../../core/translation/translation
 import { HomeStackChipsComponent } from './home-stack-chips.component';
 
 describe('HomeStackChipsComponent', () => {
+  const chips = [
+    {
+      slug: 'angular',
+      label: 'Angular',
+      modal: { name: 'Angular', category: 'Framework' },
+    },
+    {
+      slug: 'typescript',
+      label: 'TypeScript',
+      modal: { name: 'TypeScript', category: 'Language' },
+    },
+    {
+      slug: 'git',
+      label: 'Git',
+      modal: { name: 'Git', category: 'DevOps' },
+    },
+  ];
+
   beforeAll(() => {
     if (!customElements.get('hans-tag')) {
       customElements.define('hans-tag', class extends HTMLElement {});
@@ -23,16 +41,31 @@ describe('HomeStackChipsComponent', () => {
     fixture.componentRef.setInput('labelKey', 'pages.home.stack.label');
     fixture.componentRef.setInput('titleKey', 'pages.home.stack.title');
     fixture.componentRef.setInput('descriptionKey', 'pages.home.stack.description');
-    fixture.componentRef.setInput('chips', [
-      { slug: 'angular', label: 'Angular' },
-      { slug: 'typescript', label: 'TypeScript' },
-      { slug: 'git', label: 'Git' },
-    ]);
+    fixture.componentRef.setInput('chips', chips);
 
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Main Technologies');
     expect(compiled.querySelectorAll('hans-tag')).toHaveSize(3);
+  });
+
+  it('should emit the selected chip when a tag is clicked', () => {
+    const fixture = TestBed.createComponent(HomeStackChipsComponent);
+    const spy = jasmine.createSpy('openTechnology');
+
+    fixture.componentRef.setInput('labelKey', 'pages.home.stack.label');
+    fixture.componentRef.setInput('titleKey', 'pages.home.stack.title');
+    fixture.componentRef.setInput('descriptionKey', 'pages.home.stack.description');
+    fixture.componentRef.setInput('chips', chips);
+    fixture.componentInstance.openTechnology.subscribe(spy);
+    fixture.detectChanges();
+
+    const firstButton = fixture.nativeElement.querySelector(
+      '.home-stack-tag-button',
+    ) as HTMLButtonElement;
+    firstButton.click();
+
+    expect(spy).toHaveBeenCalledOnceWith(chips[0]);
   });
 });

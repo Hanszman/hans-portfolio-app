@@ -1,5 +1,9 @@
 import { TechnologyContextKey } from '../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import {
+  buildRelativeAssetPath,
+  buildRelativeSkillImageAssetPath,
+} from '../../core/api/api.config';
 import { ContainerTone } from '../../layout/container/container.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
@@ -193,22 +197,78 @@ export const SKILL_VISUAL_FILE_NAMES: Record<string, string> = {
   aws: 'aws.png',
   azure: 'azure.png',
   bootstrap: 'bootstrap.png',
+  chart: 'chart.png',
+  'chart-js': 'chart.png',
+  cicd: 'cicd.png',
+  'ci-cd': 'cicd.png',
+  composer: 'composer.png',
   css: 'css.png',
+  csharp: 'csharp.png',
+  'c-sharp': 'csharp.png',
+  dbeaver: 'dbeaver.png',
   docker: 'docker.png',
+  expo: 'expo.png',
   express: 'express.png',
+  'express-js': 'express.png',
+  ftp: 'ftp.png',
+  gcp: 'gcp.png',
   git: 'git.png',
+  github: 'github.png',
+  gitlab: 'gitlab.png',
+  heroku: 'heroku.png',
   html: 'html.png',
+  'html-css-js': 'html-css-js.png',
+  http: 'http.png',
+  java: 'java.png',
   javascript: 'javascript.png',
+  jenkins: 'jenkins.png',
+  jest: 'jest.png',
+  jquery: 'jquery.png',
   json: 'json.png',
+  jsx: 'jsx.png',
+  kanban: 'kanban.png',
+  knex: 'knex.png',
+  'knex-js': 'knex.png',
   laravel: 'laravel.png',
+  lint: 'lint.png',
+  mongodb: 'mongodb.png',
   mysql: 'mysql.png',
   node: 'node.png',
+  'node-js': 'node.png',
+  notepadplusplus: 'notepadplusplus.png',
+  'notepad-plus-plus': 'notepadplusplus.png',
+  npm: 'npm.png',
   php: 'php.png',
+  phpstorm: 'phpstorm.png',
+  'php-storm': 'phpstorm.png',
   postgresql: 'postgresql.png',
+  pycharm: 'pycharm.png',
+  python: 'python.png',
   react: 'react.png',
+  'react-native': 'reactnative.png',
+  reactnative: 'reactnative.png',
+  rest: 'rest.png',
+  sass: 'sass.png',
+  scrum: 'scrum.png',
+  soap: 'soap.png',
+  socketio: 'socketio.png',
+  'socket-io': 'socketio.png',
   sql: 'sql.png',
+  sqlserver: 'sqlserver.png',
+  'sql-server': 'sqlserver.png',
+  'microsoft-sql-server': 'sqlserver.png',
   swagger: 'swagger.png',
   typescript: 'typescript.png',
+  udemy: 'udemy.png',
+  unity: 'unity.png',
+  vercel: 'vercel.png',
+  visualstudio: 'visualstudio.png',
+  'visual-studio': 'visualstudio.png',
+  visualstudiocode: 'visualstudiocode.png',
+  'visual-studio-code': 'visualstudiocode.png',
+  vscode: 'visualstudiocode.png',
+  xampp: 'xampp.png',
+  xml: 'xml.png',
 };
 
 export interface StaticSkillCardConfig {
@@ -221,6 +281,7 @@ export interface StaticSkillCardConfig {
   badgeKey: AppTranslationKey;
   badgeColor: string;
   iconName: string;
+  visualUrl: string;
   levelKey: SkillLevelFilterValue;
 }
 
@@ -235,6 +296,7 @@ export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
     badgeKey: 'pages.skills.education.informationSystems.badge',
     badgeColor: 'info',
     iconName: 'LuGraduationCap',
+    visualUrl: buildRelativeSkillImageAssetPath('puc.png'),
     levelKey: 'ADVANCED',
   },
   {
@@ -247,6 +309,7 @@ export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
     badgeKey: 'pages.skills.education.fullStackWeb.badge',
     badgeColor: 'info',
     iconName: 'LuCode2',
+    visualUrl: buildRelativeSkillImageAssetPath('puc.png'),
     levelKey: 'ADVANCED',
   },
   {
@@ -259,6 +322,7 @@ export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
     badgeKey: 'pages.skills.education.angularNode.badge',
     badgeColor: 'info',
     iconName: 'LuBadgeCheck',
+    visualUrl: buildRelativeSkillImageAssetPath('udemy.png'),
     levelKey: 'INTERMEDIATE',
   },
 ];
@@ -274,6 +338,7 @@ export const SKILL_LANGUAGE_CARDS: readonly StaticSkillCardConfig[] = [
     badgeKey: 'pages.skills.languages.portuguese.badge',
     badgeColor: 'info',
     iconName: 'LuLanguages',
+    visualUrl: buildRelativeAssetPath('vendor/flag-icons/4x3/br.svg'),
     levelKey: 'ADVANCED',
   },
   {
@@ -286,6 +351,7 @@ export const SKILL_LANGUAGE_CARDS: readonly StaticSkillCardConfig[] = [
     badgeKey: 'pages.skills.languages.english.badge',
     badgeColor: 'info',
     iconName: 'LuLanguages',
+    visualUrl: buildRelativeAssetPath('vendor/flag-icons/4x3/us.svg'),
     levelKey: 'ADVANCED',
   },
 ];

@@ -179,9 +179,12 @@ export const mapTechnologyToSkillCard = (
     slug: technology.slug,
     kind: 'technology',
     name: technology.name,
-    subtitle:
-      technology.experienceMetrics?.total.label ??
-      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
+    subtitle: resolveCatalogLabel(
+      locale,
+      SKILL_FREQUENCY_LABEL_KEYS,
+      technology.frequency,
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.frequencyNotSet),
+    ),
     categoryLabel: resolveCatalogLabel(
       locale,
       SKILL_CATEGORY_LABEL_KEYS,
@@ -206,12 +209,14 @@ export const mapTechnologyToSkillCard = (
     isHighlight: technology.highlight,
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
-    badgeLabel: resolveCatalogLabel(
-      locale,
-      SKILL_LEVEL_LABEL_KEYS,
-      technology.level,
-      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
-    ),
+    badgeLabel: technology.level
+      ? resolveCatalogLabel(
+          locale,
+          SKILL_LEVEL_LABEL_KEYS,
+          technology.level,
+          translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
+        )
+      : '',
     badgeColor: resolveSkillBadgeColor(technology.level, technology.frequency),
     stackKey: resolveSkillStackKey(technology),
     levelKey: resolveSkillLevelKey(technology.level, technology.frequency),
@@ -230,18 +235,22 @@ export const mapTechnologyToSkillCard = (
         technology.category,
         translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.uncategorized),
       ),
-      level: resolveCatalogLabel(
-        locale,
-        SKILL_LEVEL_LABEL_KEYS,
-        technology.level,
-        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
-      ),
-      frequency: resolveCatalogLabel(
-        locale,
-        SKILL_FREQUENCY_LABEL_KEYS,
-        technology.frequency,
-        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.frequencyNotSet),
-      ),
+      level: technology.level
+        ? resolveCatalogLabel(
+            locale,
+            SKILL_LEVEL_LABEL_KEYS,
+            technology.level,
+            translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
+          )
+        : undefined,
+      frequency: technology.frequency
+        ? resolveCatalogLabel(
+            locale,
+            SKILL_FREQUENCY_LABEL_KEYS,
+            technology.frequency,
+            translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.frequencyNotSet),
+          )
+        : undefined,
       experience:
         technology.experienceMetrics?.total.label ??
         translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
@@ -281,7 +290,7 @@ const mapStaticSkillCard = (
     totalExperienceLabel: meta,
     isHighlight: false,
     iconName: config.iconName,
-    visualUrl: '',
+    visualUrl: config.visualUrl,
     badgeLabel,
     badgeColor: config.badgeColor,
     stackKey: 'OTHERS',
@@ -296,7 +305,7 @@ const mapStaticSkillCard = (
           : translateStaticKey(locale, 'pages.skills.languages.title'),
       level: badgeLabel,
       frequency: meta,
-      image: null,
+      image: { src: config.visualUrl, alt: name },
     },
   };
 };

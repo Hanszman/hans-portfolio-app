@@ -17,6 +17,17 @@ body[data-app-theme='light'] {
   --app-shell-surface-color: var(--text-color);
   --app-shell-foreground-color: var(--background-color);
   --app-shell-accent-color: var(--primary-default-color);
+  --app-tag-surface-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 14%,
+    var(--background-color)
+  );
+  --app-tag-border-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 28%,
+    transparent
+  );
+  --app-tag-text-color: var(--text-color);
 }
 
 body[data-app-theme='dark'] {
@@ -27,6 +38,34 @@ body[data-app-theme='dark'] {
   );
   --app-shell-foreground-color: var(--base-strong-color);
   --app-shell-accent-color: var(--primary-default-color);
+  --app-tag-surface-color: color-mix(
+    in srgb,
+    var(--background-color) 90%,
+    var(--base-neutral-color)
+  );
+  --app-tag-border-color: color-mix(
+    in srgb,
+    var(--base-default-color) 20%,
+    transparent
+  );
+  --app-tag-text-color: var(--text-color);
+}
+
+hans-tag {
+  --hans-tag-bg: var(--app-tag-surface-color);
+  --hans-tag-background: var(--app-tag-surface-color);
+  --hans-tag-background-color: var(--app-tag-surface-color);
+  --hans-tag-border: var(--app-tag-border-color);
+  --hans-tag-border-color: var(--app-tag-border-color);
+  --hans-tag-color: var(--app-tag-text-color);
+  --hans-tag-text-color: var(--app-tag-text-color);
+  --tag-bg: var(--app-tag-surface-color);
+  --tag-background: var(--app-tag-surface-color);
+  --tag-background-color: var(--app-tag-surface-color);
+  --tag-border: var(--app-tag-border-color);
+  --tag-border-color: var(--app-tag-border-color);
+  --tag-color: var(--app-tag-text-color);
+  --tag-text-color: var(--app-tag-text-color);
 }
 
 app-root {

@@ -20,6 +20,7 @@ describe('skills helper', () => {
     );
 
     expect(card.name).toBe('Angular');
+    expect(card.subtitle).toBe('Frequent');
     expect(card.categoryLabel).toBe('Framework');
     expect(card.totalExperienceLabel).toBe('6 years 2 months');
     expect(card.contexts).toEqual([
@@ -57,6 +58,8 @@ describe('skills helper', () => {
     expect(card.levelLabel).toBe('Nivel no informado');
     expect(card.frequencyLabel).toBe('Frecuencia no informada');
     expect(card.totalExperienceLabel).toBe('Sin período consolidado');
+    expect(card.badgeLabel).toBe('');
+    expect(card.modal.level).toBeUndefined();
     expect(card.iconName).toBe('LuSparkles');
     expect(card.visualUrl).toBe('');
     expect(card.contexts).toEqual([]);
@@ -104,7 +107,9 @@ describe('skills helper', () => {
         name: 'Information Systems',
         modal: jasmine.objectContaining({
           category: 'Education',
-          image: null,
+          image: jasmine.objectContaining({
+            src: jasmine.stringMatching(/puc\.png$/),
+          }),
         }),
       }),
     );
@@ -114,7 +119,9 @@ describe('skills helper', () => {
         name: 'Portuguese',
         modal: jasmine.objectContaining({
           category: 'Languages',
-          image: null,
+          image: jasmine.objectContaining({
+            src: jasmine.stringMatching(/br\.svg$/),
+          }),
         }),
       }),
     );
@@ -610,6 +617,15 @@ describe('skills helper', () => {
 
   it('should resolve skill visual URLs from fallback assets or return an empty string', () => {
     expect(resolveSkillVisualUrl('angular')).toContain('/assets/img/skills/angular.png');
+    expect(resolveSkillVisualUrl('react-native')).toContain(
+      '/assets/img/skills/reactnative.png',
+    );
+    expect(resolveSkillVisualUrl('microsoft-sql-server')).toContain(
+      '/assets/img/skills/sqlserver.png',
+    );
+    expect(resolveSkillVisualUrl('visual-studio-code')).toContain(
+      '/assets/img/skills/visualstudiocode.png',
+    );
     expect(resolveSkillVisualUrl('external', 'https://cdn.example.com/external.png')).toBe(
       'https://cdn.example.com/external.png',
     );

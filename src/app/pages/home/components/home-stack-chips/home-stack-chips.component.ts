@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HomeStackChipViewModel } from '../../home.types';
@@ -20,4 +21,9 @@ export class HomeStackChipsComponent {
   readonly titleKey = input.required<string>();
   readonly descriptionKey = input.required<string>();
   readonly chips = input<readonly HomeStackChipViewModel[]>([]);
+  readonly openTechnology = output<HomeStackChipViewModel>();
+
+  protected requestTechnologyDetails(chip: HomeStackChipViewModel): void {
+    this.openTechnology.emit(chip);
+  }
 }

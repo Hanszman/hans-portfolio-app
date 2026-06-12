@@ -30,7 +30,6 @@ describe('SkillsComponent', () => {
       'hans-card',
       'hans-icon',
       'hans-tag',
-      'hans-input',
       'hans-modal',
     ];
 
@@ -142,11 +141,14 @@ describe('SkillsComponent', () => {
     expect(technologiesText()).not.toContain('TypeScript');
 
     component.selectLevelFilter('ALL');
-    component.updateSearchTerm({
-      target: { value: 'type' },
-    } as unknown as Event);
+    const searchInput = compiled.querySelector(
+      '.skills-search input',
+    ) as HTMLInputElement;
+    searchInput.value = 'type';
+    searchInput.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
+    expect(searchInput.value).toBe('type');
     expect(technologiesText()).toContain('TypeScript');
     expect(technologiesText()).not.toContain('Angular');
   });

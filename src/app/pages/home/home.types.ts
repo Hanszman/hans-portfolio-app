@@ -1,6 +1,7 @@
 import { buildRelativeImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { PortfolioSocialLink, PORTFOLIO_SOCIAL_LINKS } from '../../shared/social-links/social-links.types';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
 export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
 export const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
@@ -30,6 +31,7 @@ export interface HomeMetricViewModel {
 export interface HomeStackChipViewModel {
   slug: string;
   label: string;
+  modal: TechnologyModalItem;
 }
 
 export interface HomeNavigationCardViewModel {

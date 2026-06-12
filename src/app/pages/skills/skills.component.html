@@ -29,7 +29,7 @@
       <section class="skills-panel">
         <header class="skills-panel-header">
           <h2>
-            <hans-icon name="LuGlobe2" iconSize="small"></hans-icon>
+            <hans-icon name="LuLanguages" iconSize="small"></hans-icon>
             {{ 'pages.skills.languages.title' | translate }}
           </h2>
         </header>
@@ -51,15 +51,15 @@
         </h2>
       </header>
 
-      <hans-input
-        class="skills-search"
-        inputColor="base"
-        inputSize="medium"
-        inputType="text"
-        [value]="searchTerm()"
-        [placeholder]="'pages.skills.search.placeholder' | translate"
-        (input)="updateSearchTerm($event)"
-      ></hans-input>
+      <label class="skills-search" [attr.aria-label]="'pages.skills.search.placeholder' | translate">
+        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
+        <input
+          type="search"
+          [value]="searchTerm()"
+          [placeholder]="'pages.skills.search.placeholder' | translate"
+          (input)="updateSearchTerm($event)"
+        />
+      </label>
 
       <div class="skills-filter-row">
         <span>{{ 'pages.skills.filters.stack' | translate }}:</span>

@@ -4,7 +4,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
+import { resolveSkillVisualUrl } from '../skills/helpers/skills.helper';
 import {
   CAREER_START_DATE,
   HOME_HERO,
@@ -24,6 +27,7 @@ import { HomeStackChipsComponent } from './components/home-stack-chips/home-stac
     HomeMetricsStripComponent,
     HomeNavigationCardsComponent,
     HomeStackChipsComponent,
+    TechnologyModalComponent,
     WrapperComponent,
     InfoStateComponent,
     TranslatePipe,
@@ -37,12 +41,17 @@ export class HomeComponent {
   private readonly dashboardSignal = signal<DashboardOverviewResponse | null>(
     null,
   );
+  private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
 
   protected readonly hero = HOME_HERO;
   protected readonly navigationCards = HOME_NAVIGATION_CARDS;
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly dashboard = this.dashboardSignal.asReadonly();
+  protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
+  protected readonly isTechnologyModalOpen = computed(
+    () => this.selectedTechnology() !== null,
+  );
 
   protected readonly heroMetrics = computed<readonly HomeMetricViewModel[]>(
     () => {
@@ -76,10 +85,25 @@ export class HomeComponent {
   >(() =>
     (this.dashboard()?.technologyUsage.topTechnologies ?? [])
       .slice(0, 8)
-      .map((technology) => ({
-        slug: technology.slug,
-        label: technology.name,
-      })),
+      .map((technology) => {
+        const imageSrc = resolveSkillVisualUrl(technology.slug);
+
+        return {
+          slug: technology.slug,
+          label: technology.name,
+          modal: {
+            name: technology.name,
+            category: technology.category,
+            projectCount: technology.usageCount,
+            image: imageSrc
+              ? {
+                  src: imageSrc,
+                  alt: `${technology.name} icon`,
+                }
+              : null,
+          },
+        };
+      }),
   );
 
   constructor() {
@@ -116,5 +140,13 @@ export class HomeComponent {
     }
 
     return yearDiff;
+  }
+
+  protected openTechnologyDetails(technology: HomeStackChipViewModel): void {
+    this.selectedTechnologySignal.set(technology.modal);
+  }
+
+  protected closeTechnologyDetails(): void {
+    this.selectedTechnologySignal.set(null);
   }
 }
