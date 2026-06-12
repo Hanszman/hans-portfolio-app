@@ -48,6 +48,7 @@
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "20.4.0",
     "autoprefixer": "^10.4.21",
+    "baseline-browser-mapping": "^2.10.36",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

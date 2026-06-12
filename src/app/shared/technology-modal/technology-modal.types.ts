@@ -2,9 +2,10 @@ import { TagModalImage } from '../tag-modal/tag-modal.types';
 
 export interface TechnologyModalItem {
   name: string;
-  category: string;
-  level: string;
-  frequency: string;
-  projectCount: number;
-  image: TagModalImage;
+  category?: string;
+  level?: string;
+  frequency?: string;
+  projectCount?: number;
+  experience?: string;
+  image?: TagModalImage | null;
 }

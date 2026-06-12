@@ -42,7 +42,7 @@ describe('HomeHeroSectionComponent', () => {
       secondaryActionLabelKey: 'pages.home.hero.cta.experiences',
       secondaryActionRoute: '/experiences',
       socialLinks: PORTFOLIO_SOCIAL_LINKS,
-      imageSrc: '/assets/profile.png',
+      imageSrc: '/assets/img/profile/vh_profile.png',
     });
 
     fixture.detectChanges();

@@ -2,92 +2,106 @@
   @apply block;
 }
 
-.skills-filter-summary span,
-.skills-group-copy span {
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
-.skills-summary-grid,
-.skills-filters,
-.skills-group-list,
-.skills-card-grid,
-.skills-section {
+.skills-hero,
+.skills-section,
+.skills-panel,
+.skills-panel-list,
+.skills-technologies,
+.skills-card-grid {
   @apply grid;
 }
 
-.skills-group-list,
-.skills-filters,
+.skills-hero {
+  @apply gap-4;
+}
+
+.skills-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.skills-title {
+  @apply m-0 text-4xl font-semibold leading-[0.98] md:text-5xl;
+  color: var(--text-color);
+}
+
+.skills-description {
+  @apply m-0 max-w-3xl text-lg leading-9;
+  color: color-mix(in srgb, var(--text-color) 66%, transparent);
+}
+
 .skills-section {
-  @apply gap-6;
+  @apply gap-14;
 }
 
-.skills-summary-grid,
+.skills-foundation-grid {
+  @apply grid gap-8 xl:grid-cols-2;
+}
+
+.skills-panel,
+.skills-technologies {
+  @apply gap-5;
+}
+
+.skills-panel-header h2 {
+  @apply m-0 flex items-center gap-2 text-xl font-semibold;
+  color: var(--text-color);
+}
+
+.skills-panel-header hans-icon {
+  color: var(--primary-default-color);
+}
+
+.skills-panel-header span {
+  @apply font-mono text-base font-normal;
+  color: color-mix(in srgb, var(--text-color) 56%, transparent);
+}
+
+.skills-panel-list {
+  @apply gap-4;
+}
+
+.skills-search {
+  @apply block max-w-md;
+}
+
+.skills-filter-row {
+  @apply flex flex-wrap items-center gap-3;
+}
+
+.skills-filter-row > span {
+  @apply font-mono text-sm;
+  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+}
+
+.skills-filter-list {
+  @apply flex flex-wrap gap-2;
+}
+
+.skills-filter-button {
+  @apply rounded-full border px-4 py-2 text-sm font-semibold transition duration-200;
+  background-color: color-mix(
+    in srgb,
+    var(--background-color) 88%,
+    var(--base-neutral-color)
+  );
+  border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.skills-filter-button:hover,
+.skills-filter-button-active {
+  background-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 88%,
+    var(--primary-neutral-color)
+  );
+  border-color: var(--primary-default-color);
+  color: var(--white);
+  box-shadow: 0 0.8rem 2rem
+    color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+}
+
 .skills-card-grid {
-  @apply gap-4;
-}
-
-.skills-summary-grid {
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-}
-
-.skills-summary-item,
-.skills-group {
-  @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-}
-
-.skills-summary-item span,
-.skills-group-copy span {
-  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
-}
-
-.skills-summary-item strong,
-.skills-group-copy strong {
-  @apply block font-semibold leading-tight;
-}
-
-.skills-summary-item strong {
-  @apply mt-2 text-[1.1rem];
-}
-
-.skills-summary-item small {
-  @apply mt-2 block text-[0.9rem] leading-6;
-}
-
-.skills-filter-summary {
-  @apply mt-4 flex flex-wrap items-baseline gap-3;
-}
-
-.skills-filter-summary strong {
-  @apply text-2xl;
-}
-
-.skills-group {
-  @apply gap-4;
-  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-}
-
-.skills-group-header {
-  @apply flex items-center justify-between gap-4;
-}
-
-.skills-group-copy strong {
-  @apply mt-1 text-2xl;
-}
-
-.skills-group-icon {
-  @apply grid h-16 min-w-16 place-items-center rounded-full border;
-  border-color: color-mix(in srgb, var(--success-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--success-neutral-color) 32%, var(--white));
-}
-
-@media (min-width: 768px) {
-  .skills-filters {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .skills-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  @apply gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
 }

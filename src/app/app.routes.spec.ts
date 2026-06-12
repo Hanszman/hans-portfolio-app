@@ -77,7 +77,9 @@ describe('app routes', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/skills');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Technology depth');
+    expect(harness.routeNativeElement?.textContent).toContain(
+      'Skills & Technologies',
+    );
   });
 
   it('should load the projects case-study route', async () => {

@@ -1,98 +1,98 @@
 <app-wrapper>
-  <div page-main class="skills-hero">
-    <app-intro
-      [sectionLabel]="'pages.skills.sectionLabel' | translate"
-      [title]="'pages.skills.title' | translate"
-      [description]="'pages.skills.description' | translate"
-    />
-  </div>
-
-  <app-container
-    page-sidebar
-    tone="secondary"
-    [label]="'pages.skills.snapshot.label' | translate"
-    [containerTitle]="'pages.skills.snapshot.title' | translate"
-    [description]="'pages.skills.snapshot.description' | translate"
-  >
-    @if (isLoading()) {
-      <app-info-state
-        mode="loading"
-        [message]="'pages.skills.snapshot.loading' | translate"
-      />
-    } @else if (hasError()) {
-      <app-info-state
-        mode="error"
-        [message]="'pages.skills.snapshot.error' | translate"
-      />
-    } @else {
-      <dl class="skills-summary-grid">
-        @for (metric of summaryMetrics(); track metric.label) {
-          <div class="skills-summary-item">
-            <span>{{ metric.label }}</span>
-            <strong>{{ metric.value }}</strong>
-            @if (metric.supportingText) {
-              <small>{{ metric.supportingText }}</small>
-            }
-          </div>
-        }
-      </dl>
-    }
-  </app-container>
+  <section page-main class="skills-hero">
+    <span class="skills-eyebrow">
+      {{ 'pages.skills.sectionLabel' | translate }}
+    </span>
+    <h1 class="skills-title">{{ 'pages.skills.title' | translate }}</h1>
+    <p class="skills-description">
+      {{ 'pages.skills.description' | translate }}
+    </p>
+  </section>
 
   <section page-content class="skills-section">
-    <app-container
-      tone="info"
-      [label]="'pages.skills.filters.label' | translate"
-      [containerTitle]="'pages.skills.filters.title' | translate"
-      [description]="'pages.skills.filters.description' | translate"
-    >
-      <div class="skills-filters">
-        <hans-dropdown
-          #categoryDropdown
-          [options]="categoryOptions()"
-          [triggerLabel]="'pages.skills.filters.category' | translate"
-          triggerColor="primary"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectCategory($event)"
-        ></hans-dropdown>
+    <div class="skills-foundation-grid">
+      <section class="skills-panel">
+        <header class="skills-panel-header">
+          <h2>
+            <hans-icon name="LuGraduationCap" iconSize="small"></hans-icon>
+            {{ 'pages.skills.education.title' | translate }}
+          </h2>
+        </header>
 
-        <hans-dropdown
-          #levelDropdown
-          [options]="levelOptions()"
-          [triggerLabel]="'pages.skills.filters.level' | translate"
-          triggerColor="secondary"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectLevel($event)"
-        ></hans-dropdown>
+        <div class="skills-panel-list">
+          @for (card of educationCards(); track card.id) {
+            <app-skill-card [item]="card" (openDetails)="openSkillDetails($event)" />
+          }
+        </div>
+      </section>
 
-        <hans-dropdown
-          #contextDropdown
-          [options]="contextOptions()"
-          [triggerLabel]="'pages.skills.filters.context' | translate"
-          triggerColor="success"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectContext($event)"
-        ></hans-dropdown>
+      <section class="skills-panel">
+        <header class="skills-panel-header">
+          <h2>
+            <hans-icon name="LuGlobe2" iconSize="small"></hans-icon>
+            {{ 'pages.skills.languages.title' | translate }}
+          </h2>
+        </header>
+
+        <div class="skills-panel-list">
+          @for (card of languageCards(); track card.id) {
+            <app-skill-card [item]="card" (openDetails)="openSkillDetails($event)" />
+          }
+        </div>
+      </section>
+    </div>
+
+    <section class="skills-technologies">
+      <header class="skills-panel-header">
+        <h2>
+          <hans-icon name="LuFilter" iconSize="small"></hans-icon>
+          {{ 'pages.skills.technologies.title' | translate }}
+          <span>({{ technologyCount() }})</span>
+        </h2>
+      </header>
+
+      <hans-input
+        class="skills-search"
+        inputColor="base"
+        inputSize="medium"
+        inputType="text"
+        [value]="searchTerm()"
+        [placeholder]="'pages.skills.search.placeholder' | translate"
+        (input)="updateSearchTerm($event)"
+      ></hans-input>
+
+      <div class="skills-filter-row">
+        <span>{{ 'pages.skills.filters.stack' | translate }}:</span>
+        <div class="skills-filter-list">
+          @for (filter of stackFilters; track filter.value) {
+            <button
+              type="button"
+              class="skills-filter-button"
+              [class.skills-filter-button-active]="selectedStack() === filter.value"
+              (click)="selectStackFilter(filter.value)"
+            >
+              {{ filter.labelKey | translate }}
+            </button>
+          }
+        </div>
       </div>
 
-      <div class="skills-filter-summary">
-        <span>{{ 'pages.skills.filters.total' | translate }}</span>
-        <strong>{{ filteredCountLabel() }}</strong>
+      <div class="skills-filter-row">
+        <span>{{ 'pages.skills.filters.level' | translate }}:</span>
+        <div class="skills-filter-list">
+          @for (filter of levelFilters; track filter.value) {
+            <button
+              type="button"
+              class="skills-filter-button"
+              [class.skills-filter-button-active]="selectedLevel() === filter.value"
+              (click)="selectLevelFilter(filter.value)"
+            >
+              {{ filter.labelKey | translate }}
+            </button>
+          }
+        </div>
       </div>
-    </app-container>
 
-    <app-container
-      tone="success"
-      [label]="'pages.skills.catalog.label' | translate"
-      [containerTitle]="'pages.skills.catalog.title' | translate"
-      [description]="'pages.skills.catalog.description' | translate"
-    >
       @if (isLoading()) {
         <app-info-state
           mode="loading"
@@ -103,44 +103,24 @@
           mode="error"
           [message]="'pages.skills.catalog.error' | translate"
         />
-      } @else if (groupedTechnologies().length === 0) {
+      } @else if (filteredTechnologyCards().length === 0) {
         <app-info-state
           mode="empty"
           [message]="'pages.skills.catalog.empty' | translate"
         />
       } @else {
-        <div class="skills-group-list">
-          @for (group of groupedTechnologies(); track group.id) {
-            <section class="skills-group">
-              <div class="skills-group-header">
-                <div class="skills-group-copy">
-                  <span>{{ group.description }}</span>
-                  <strong>{{ group.title }}</strong>
-                </div>
-
-                <div class="skills-group-icon">
-                  <hans-icon [name]="group.iconName" iconSize="medium"></hans-icon>
-                </div>
-              </div>
-
-              <div class="skills-card-grid">
-                @for (item of group.items; track item.id) {
-                  <app-skill-card
-                    [item]="item"
-                    (openDetails)="openSkillDetails($event)"
-                  />
-                }
-              </div>
-            </section>
+        <div class="skills-card-grid">
+          @for (card of filteredTechnologyCards(); track card.id) {
+            <app-skill-card [item]="card" (openDetails)="openSkillDetails($event)" />
           }
         </div>
       }
-    </app-container>
+    </section>
   </section>
 
-  <app-skill-detail-modal
-    [isOpen]="isDetailOpen()"
-    [item]="selectedSkill()"
+  <app-technology-modal
+    [isOpen]="isSkillModalOpen()"
+    [technology]="selectedSkill()"
     (closed)="closeSkillDetails()"
   />
 </app-wrapper>

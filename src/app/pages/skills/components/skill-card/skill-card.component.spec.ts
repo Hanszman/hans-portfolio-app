@@ -11,7 +11,9 @@ describe('SkillCardComponent', () => {
   const item: SkillCardViewModel = {
     id: '1',
     slug: 'angular',
+    kind: 'technology',
     name: 'Angular',
+    subtitle: '7 years',
     categoryLabel: 'Framework',
     levelLabel: 'Avancado',
     frequencyLabel: 'Frequente',
@@ -19,6 +21,10 @@ describe('SkillCardComponent', () => {
     isHighlight: true,
     iconName: 'LuBlocks',
     visualUrl: '',
+    badgeLabel: 'Avancado',
+    badgeColor: 'info',
+    stackKey: 'FRONT_END',
+    levelKey: 'ADVANCED',
     contexts: [
       {
         key: 'PROFESSIONAL',
@@ -28,10 +34,18 @@ describe('SkillCardComponent', () => {
       },
     ],
     timelineEntries: [],
+    modal: {
+      name: 'Angular',
+      category: 'Framework',
+      level: 'Avancado',
+      frequency: 'Frequente',
+      experience: '7 years',
+      image: null,
+    },
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-avatar', 'hans-icon', 'hans-tag', 'hans-button']) {
+    for (const elementName of ['hans-card', 'hans-icon', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -54,7 +68,8 @@ describe('SkillCardComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.textContent).toContain('Angular');
-    expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(1);
+    expect(compiled.querySelector('hans-card')).toBeTruthy();
+    expect(compiled.querySelectorAll('hans-tag').length).toBe(1);
   });
 
   it('emits details request', () => {

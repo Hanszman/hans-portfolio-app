@@ -2,10 +2,13 @@ import { TechnologyCollectionItemResponse } from '../../../core/api/technologies
 import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/technologies.mocks';
 import { translateStaticKey } from '../../../core/translation/translation.service';
 import {
+  buildEducationSkillCards,
+  buildLanguageSkillCards,
   buildSkillsGroups,
   buildSkillsSummaryMetrics,
   extractSkillFilterValues,
   mapTechnologyToSkillCard,
+  resolveSkillStackKey,
   resolveSkillVisualUrl,
 } from './skills.helper';
 
@@ -57,6 +60,64 @@ describe('skills helper', () => {
     expect(card.iconName).toBe('LuSparkles');
     expect(card.visualUrl).toBe('');
     expect(card.contexts).toEqual([]);
+  });
+
+  it('should map mobile and studying technologies for the redesigned filters', () => {
+    const card = mapTechnologyToSkillCard(
+      {
+        id: 'tech-react-native',
+        slug: 'react-native',
+        name: 'React Native',
+        category: 'FRAMEWORK',
+        level: 'INTERMEDIATE',
+        frequency: 'RARE',
+        highlight: false,
+      },
+      'en-us',
+    );
+
+    expect(card.stackKey).toBe('MOBILE');
+    expect(card.levelKey).toBe('STUDYING');
+    expect(card.badgeColor).toBe('success');
+    expect(card.badgeLabel).toBe('Intermediate');
+  });
+
+  it('should resolve backend and database stack filters', () => {
+    expect(resolveSkillStackKey({ slug: 'node-js', category: 'LANGUAGE' })).toBe(
+      'BACK_END',
+    );
+    expect(resolveSkillStackKey({ slug: 'mysql', category: 'DATABASE' })).toBe(
+      'DATABASES',
+    );
+    expect(resolveSkillStackKey({ slug: 'unknown-tool', category: 'TOOL' })).toBe(
+      'OTHERS',
+    );
+  });
+
+  it('should build static education and language cards for the shared modal', () => {
+    const educationCards = buildEducationSkillCards('en-us');
+    const languageCards = buildLanguageSkillCards('en-us');
+
+    expect(educationCards[0]).toEqual(
+      jasmine.objectContaining({
+        kind: 'education',
+        name: 'Information Systems',
+        modal: jasmine.objectContaining({
+          category: 'Education',
+          image: null,
+        }),
+      }),
+    );
+    expect(languageCards[0]).toEqual(
+      jasmine.objectContaining({
+        kind: 'language',
+        name: 'Portuguese',
+        modal: jasmine.objectContaining({
+          category: 'Languages',
+          image: null,
+        }),
+      }),
+    );
   });
 
   it('should use fallback duration labels when experience labels are missing', () => {
@@ -229,6 +290,14 @@ describe('skills helper', () => {
         supportingText: '8 months',
       },
     ]);
+  });
+
+  it('should summarize an empty technology collection safely', () => {
+    expect(buildSkillsSummaryMetrics([], 'en-us')[4]).toEqual({
+      label: 'Longest total time',
+      value: '-',
+      supportingText: '',
+    });
   });
 
   it('should keep summary support text empty when the strongest technology has no duration label', () => {

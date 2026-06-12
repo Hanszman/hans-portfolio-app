@@ -1,60 +1,55 @@
-<article class="skill-card">
-  <div class="skill-card-head">
-    <div class="skill-card-visual">
-      @if (item().visualUrl) {
-        <hans-avatar [src]="item().visualUrl" [alt]="item().name" avatarSize="medium"></hans-avatar>
-      } @else {
-        <hans-icon [name]="item().iconName" iconSize="medium"></hans-icon>
+<button
+  type="button"
+  class="skill-card-button"
+  [attr.data-kind]="item().kind"
+  (click)="requestDetails()"
+>
+  <hans-card
+    class="skill-card"
+    [cardLayout]="'custom'"
+    [cardSize]="'large'"
+    [cardBackgroundColor]="'var(--card-background-color)'"
+    [cardBorderColor]="'var(--card-border-color)'"
+    [cardMutedColor]="'var(--card-muted-color)'"
+    [cardTextColor]="'var(--text-color)'"
+  >
+    <article class="skill-card-content">
+      <header class="skill-card-header">
+        @if (item().visualUrl) {
+          <img
+            class="skill-card-image"
+            [src]="item().visualUrl"
+            [alt]="item().name"
+            loading="lazy"
+          />
+        } @else {
+          <span class="skill-card-icon">
+            <hans-icon [name]="item().iconName" iconSize="small"></hans-icon>
+          </span>
+        }
+
+        <h3>{{ item().name }}</h3>
+
+        @if (item().badgeLabel) {
+          <hans-tag
+            [attr.label]="item().badgeLabel"
+            [attr.tagColor]="item().badgeColor"
+            tagSize="sm"
+          ></hans-tag>
+        }
+      </header>
+
+      @if (item().subtitle) {
+        <p class="skill-card-subtitle">{{ item().subtitle }}</p>
       }
-    </div>
 
-    <div class="skill-card-copy">
-      <span>{{ item().categoryLabel }}</span>
-      <strong>{{ item().name }}</strong>
-    </div>
-
-    @if (item().isHighlight) {
-      <hans-tag
-        [attr.label]="'pages.skills.card.highlight' | translate"
-        tagColor="warning"
-        tagSize="sm"
-      ></hans-tag>
-    }
-  </div>
-
-  <div class="skill-card-tags">
-    <hans-tag [attr.label]="item().levelLabel" tagColor="primary" tagSize="sm"></hans-tag>
-    <hans-tag [attr.label]="item().frequencyLabel" tagColor="secondary" tagSize="sm"></hans-tag>
-  </div>
-
-  <div class="skill-card-metric">
-    <span>{{ 'pages.skills.card.totalExperience' | translate }}</span>
-    <strong>{{ item().totalExperienceLabel }}</strong>
-  </div>
-
-  <section class="skill-card-contexts">
-    <span>{{ 'pages.skills.card.contexts' | translate }}</span>
-    <div class="skill-card-context-list">
-      @for (context of item().contexts.slice(0, 2); track context.key) {
-        <div class="skill-card-context-item">
-          <strong>{{ context.label }}</strong>
-          <span>{{ context.value }}</span>
-        </div>
-      } @empty {
-        <div class="skill-card-context-item">
-          <strong>{{ 'pages.skills.card.contexts' | translate }}</strong>
-          <span>0</span>
-        </div>
+      @if (item().totalExperienceLabel) {
+        <span class="skill-card-meta">{{ item().totalExperienceLabel }}</span>
       }
-    </div>
-  </section>
 
-  <hans-button
-    [attr.label]="'common.actions.viewDetails' | translate"
-    buttonColor="primary"
-    buttonShape="rounded"
-    buttonSize="small"
-    buttonVariant="outline"
-    (click)="requestDetails()"
-  ></hans-button>
-</article>
+      @if (item().kind === 'technology') {
+        <span class="skill-card-category">{{ item().categoryLabel }}</span>
+      }
+    </article>
+  </hans-card>
+</button>

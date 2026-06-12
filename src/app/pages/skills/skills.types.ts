@@ -1,6 +1,29 @@
 import { TechnologyContextKey } from '../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { ContainerTone } from '../../layout/container/container.types';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+
+export type SkillCardKind = 'technology' | 'education' | 'language';
+
+export type SkillStackFilterValue =
+  | 'ALL'
+  | 'FRONT_END'
+  | 'BACK_END'
+  | 'DATABASES'
+  | 'MOBILE'
+  | 'OTHERS';
+
+export type SkillLevelFilterValue =
+  | 'ALL'
+  | 'ADVANCED'
+  | 'INTERMEDIATE'
+  | 'BEGINNER'
+  | 'STUDYING';
+
+export interface SkillFilterChipViewModel<TValue extends string = string> {
+  labelKey: AppTranslationKey;
+  value: TValue;
+}
 
 export interface SkillFilterOption {
   label: string;
@@ -42,7 +65,9 @@ export interface SkillTimelineEntryViewModel {
 export interface SkillCardViewModel {
   id: string;
   slug: string;
+  kind: SkillCardKind;
   name: string;
+  subtitle: string;
   categoryLabel: string;
   levelLabel: string;
   frequencyLabel: string;
@@ -50,8 +75,13 @@ export interface SkillCardViewModel {
   isHighlight: boolean;
   iconName: string;
   visualUrl: string;
+  badgeLabel: string;
+  badgeColor: string;
+  stackKey: SkillStackFilterValue;
+  levelKey: SkillLevelFilterValue;
   contexts: readonly SkillContextMetricViewModel[];
   timelineEntries: readonly SkillTimelineEntryViewModel[];
+  modal: TechnologyModalItem;
 }
 
 export interface SkillsGroupViewModel {
@@ -68,6 +98,25 @@ export const SKILL_FILTER_ALL_LABEL_KEYS = {
   levels: 'taxonomy.skills.filters.allLevels',
   contexts: 'taxonomy.skills.filters.allContexts',
 } as const satisfies Record<string, AppTranslationKey>;
+
+export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFilterValue>[] =
+  [
+    { labelKey: 'taxonomy.skills.stack.all', value: 'ALL' },
+    { labelKey: 'taxonomy.skills.stack.frontEnd', value: 'FRONT_END' },
+    { labelKey: 'taxonomy.skills.stack.backEnd', value: 'BACK_END' },
+    { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
+    { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
+    { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
+  ];
+
+export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFilterValue>[] =
+  [
+    { labelKey: 'taxonomy.skills.level.all', value: 'ALL' },
+    { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
+    { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
+    { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
+    { labelKey: 'taxonomy.skills.level.studying', value: 'STUDYING' },
+  ];
 
 export const SKILL_FALLBACK_LABEL_KEYS = {
   uncategorized: 'taxonomy.skills.fallback.uncategorized',
@@ -96,6 +145,7 @@ export const SKILL_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
   BEGINNER: 'taxonomy.skills.level.beginner',
+  STUDYING: 'taxonomy.skills.level.studying',
 };
 
 export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
@@ -160,3 +210,82 @@ export const SKILL_VISUAL_FILE_NAMES: Record<string, string> = {
   swagger: 'swagger.png',
   typescript: 'typescript.png',
 };
+
+export interface StaticSkillCardConfig {
+  id: string;
+  slug: string;
+  kind: Exclude<SkillCardKind, 'technology'>;
+  nameKey: AppTranslationKey;
+  subtitleKey: AppTranslationKey;
+  metaKey: AppTranslationKey;
+  badgeKey: AppTranslationKey;
+  badgeColor: string;
+  iconName: string;
+  levelKey: SkillLevelFilterValue;
+}
+
+export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
+  {
+    id: 'education-information-systems',
+    slug: 'information-systems',
+    kind: 'education',
+    nameKey: 'pages.skills.education.informationSystems.title',
+    subtitleKey: 'pages.skills.education.informationSystems.institution',
+    metaKey: 'pages.skills.education.informationSystems.period',
+    badgeKey: 'pages.skills.education.informationSystems.badge',
+    badgeColor: 'info',
+    iconName: 'LuGraduationCap',
+    levelKey: 'ADVANCED',
+  },
+  {
+    id: 'education-fullstack-web-development',
+    slug: 'fullstack-web-development',
+    kind: 'education',
+    nameKey: 'pages.skills.education.fullStackWeb.title',
+    subtitleKey: 'pages.skills.education.fullStackWeb.institution',
+    metaKey: 'pages.skills.education.fullStackWeb.period',
+    badgeKey: 'pages.skills.education.fullStackWeb.badge',
+    badgeColor: 'info',
+    iconName: 'LuCode2',
+    levelKey: 'ADVANCED',
+  },
+  {
+    id: 'education-angular-node',
+    slug: 'angular-node-programmer',
+    kind: 'education',
+    nameKey: 'pages.skills.education.angularNode.title',
+    subtitleKey: 'pages.skills.education.angularNode.institution',
+    metaKey: 'pages.skills.education.angularNode.period',
+    badgeKey: 'pages.skills.education.angularNode.badge',
+    badgeColor: 'info',
+    iconName: 'LuBadgeCheck',
+    levelKey: 'INTERMEDIATE',
+  },
+];
+
+export const SKILL_LANGUAGE_CARDS: readonly StaticSkillCardConfig[] = [
+  {
+    id: 'language-portuguese',
+    slug: 'portuguese',
+    kind: 'language',
+    nameKey: 'pages.skills.languages.portuguese.title',
+    subtitleKey: 'pages.skills.languages.portuguese.subtitle',
+    metaKey: 'pages.skills.languages.portuguese.meta',
+    badgeKey: 'pages.skills.languages.portuguese.badge',
+    badgeColor: 'info',
+    iconName: 'LuLanguages',
+    levelKey: 'ADVANCED',
+  },
+  {
+    id: 'language-english',
+    slug: 'english',
+    kind: 'language',
+    nameKey: 'pages.skills.languages.english.title',
+    subtitleKey: 'pages.skills.languages.english.subtitle',
+    metaKey: 'pages.skills.languages.english.meta',
+    badgeKey: 'pages.skills.languages.english.badge',
+    badgeColor: 'info',
+    iconName: 'LuLanguages',
+    levelKey: 'ADVANCED',
+  },
+];

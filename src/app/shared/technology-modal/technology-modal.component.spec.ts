@@ -35,6 +35,22 @@ describe('TechnologyModalComponent', () => {
     expect(fixture.nativeElement.textContent).toContain('4');
   });
 
+  it('should omit optional details when the selected item does not provide them', () => {
+    fixture.componentRef.setInput('technology', {
+      name: 'Portuguese',
+      image: null,
+    });
+    fixture.componentRef.setInput('isOpen', true);
+
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      details: () => readonly unknown[];
+    };
+
+    expect(component.details()).toEqual([]);
+  });
+
   it('should emit close request', () => {
     spyOn(fixture.componentInstance.closed, 'emit');
     fixture.detectChanges();

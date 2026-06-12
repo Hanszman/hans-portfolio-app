@@ -5,13 +5,11 @@ import {
   input,
   output,
 } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { SkillCardViewModel } from '../../skills.types';
 
 @Component({
   selector: 'app-skill-card',
   standalone: true,
-  imports: [TranslatePipe],
   templateUrl: './skill-card.component.html',
   styleUrl: './skill-card.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

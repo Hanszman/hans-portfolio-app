@@ -7,6 +7,7 @@ import {
   TechnologyCollectionItemResponse,
 } from '../../../core/api/technologies/technologies.types';
 import {
+  resolveLocalizedText,
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import {
@@ -17,16 +18,21 @@ import {
   SKILL_CATEGORY_LABEL_KEYS,
   SKILL_CONTEXT_ORDER,
   SKILL_CONTEXT_LABEL_KEYS,
+  SKILL_EDUCATION_CARDS,
   SKILL_FALLBACK_LABEL_KEYS,
   SKILL_FREQUENCY_LABEL_KEYS,
   SKILL_GROUP_ICON_NAMES,
   SKILL_GROUP_TONES,
+  SKILL_LANGUAGE_CARDS,
   SKILL_LEVEL_LABEL_KEYS,
   SKILL_VISUAL_FILE_NAMES,
   SkillCardViewModel,
   SkillContextMetricViewModel,
+  SkillLevelFilterValue,
+  SkillStackFilterValue,
   SkillsGroupViewModel,
   SkillsSummaryMetricViewModel,
+  StaticSkillCardConfig,
 } from '../skills.types';
 
 const normalizeLabel = (value: string): string =>
@@ -62,6 +68,96 @@ export const resolveSkillVisualUrl = (
         : ''),
   );
 
+const FRONT_END_TECHNOLOGY_SLUGS = new Set([
+  'angular',
+  'typescript',
+  'javascript',
+  'react',
+  'react-native',
+  'html',
+  'css',
+  'sass',
+  'bootstrap',
+  'jquery',
+  'chart-js',
+  'ajax',
+  'jsx',
+]);
+
+const BACK_END_TECHNOLOGY_SLUGS = new Set([
+  'node',
+  'node-js',
+  'express',
+  'express-js',
+  'php',
+  'laravel',
+  'java',
+  'csharp',
+  'c-sharp',
+  'knex',
+  'knex-js',
+]);
+
+const MOBILE_TECHNOLOGY_SLUGS = new Set(['react-native', 'expo']);
+
+const DATABASE_TECHNOLOGY_CATEGORIES = new Set(['DATABASE', 'ORM']);
+
+export const resolveSkillStackKey = (
+  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'category'>,
+): SkillStackFilterValue => {
+  const slug = technology.slug.toLowerCase();
+
+  if (MOBILE_TECHNOLOGY_SLUGS.has(slug)) {
+    return 'MOBILE';
+  }
+
+  if (DATABASE_TECHNOLOGY_CATEGORIES.has(technology.category)) {
+    return 'DATABASES';
+  }
+
+  if (FRONT_END_TECHNOLOGY_SLUGS.has(slug) || technology.category === 'FRAMEWORK') {
+    return 'FRONT_END';
+  }
+
+  if (BACK_END_TECHNOLOGY_SLUGS.has(slug)) {
+    return 'BACK_END';
+  }
+
+  return 'OTHERS';
+};
+
+const resolveSkillLevelKey = (
+  level: string | null,
+  frequency: string | null,
+): SkillLevelFilterValue => {
+  if (frequency === 'RARE') {
+    return 'STUDYING';
+  }
+
+  if (level === 'ADVANCED' || level === 'INTERMEDIATE' || level === 'BEGINNER') {
+    return level;
+  }
+
+  return 'BEGINNER';
+};
+
+const resolveSkillBadgeColor = (
+  level: string | null,
+  frequency: string | null,
+): string => {
+  const levelKey = resolveSkillLevelKey(level, frequency);
+
+  if (levelKey === 'BEGINNER') {
+    return 'warning';
+  }
+
+  if (levelKey === 'STUDYING') {
+    return 'success';
+  }
+
+  return 'info';
+};
+
 export const mapTechnologyToSkillCard = (
   technology: TechnologyCollectionItemResponse,
   locale: AppLocale,
@@ -81,7 +177,11 @@ export const mapTechnologyToSkillCard = (
   return {
     id: technology.id,
     slug: technology.slug,
+    kind: 'technology',
     name: technology.name,
+    subtitle:
+      technology.experienceMetrics?.total.label ??
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
     categoryLabel: resolveCatalogLabel(
       locale,
       SKILL_CATEGORY_LABEL_KEYS,
@@ -106,6 +206,15 @@ export const mapTechnologyToSkillCard = (
     isHighlight: technology.highlight,
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
+    badgeLabel: resolveCatalogLabel(
+      locale,
+      SKILL_LEVEL_LABEL_KEYS,
+      technology.level,
+      translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
+    ),
+    badgeColor: resolveSkillBadgeColor(technology.level, technology.frequency),
+    stackKey: resolveSkillStackKey(technology),
+    levelKey: resolveSkillLevelKey(technology.level, technology.frequency),
     contexts,
     timelineEntries: (technology.technologyContexts ?? []).map((context) => ({
       key: context.context,
@@ -113,8 +222,94 @@ export const mapTechnologyToSkillCard = (
       startedAt: context.startedAt,
       endedAt: context.endedAt,
     })),
+    modal: {
+      name: technology.name,
+      category: resolveCatalogLabel(
+        locale,
+        SKILL_CATEGORY_LABEL_KEYS,
+        technology.category,
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.uncategorized),
+      ),
+      level: resolveCatalogLabel(
+        locale,
+        SKILL_LEVEL_LABEL_KEYS,
+        technology.level,
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
+      ),
+      frequency: resolveCatalogLabel(
+        locale,
+        SKILL_FREQUENCY_LABEL_KEYS,
+        technology.frequency,
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.frequencyNotSet),
+      ),
+      experience:
+        technology.experienceMetrics?.total.label ??
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
+      image: {
+        src: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
+        alt: resolveLocalizedText(
+          locale,
+          {
+            'pt-br': imageAsset?.imageAsset.altPt ?? undefined,
+            'en-us': imageAsset?.imageAsset.altEn ?? undefined,
+          },
+          `${technology.name} icon`,
+        ),
+      },
+    },
   };
 };
+
+const mapStaticSkillCard = (
+  config: StaticSkillCardConfig,
+  locale: AppLocale,
+): SkillCardViewModel => {
+  const name = translateStaticKey(locale, config.nameKey);
+  const subtitle = translateStaticKey(locale, config.subtitleKey);
+  const meta = translateStaticKey(locale, config.metaKey);
+  const badgeLabel = translateStaticKey(locale, config.badgeKey);
+
+  return {
+    id: config.id,
+    slug: config.slug,
+    kind: config.kind,
+    name,
+    subtitle,
+    categoryLabel: subtitle,
+    levelLabel: badgeLabel,
+    frequencyLabel: meta,
+    totalExperienceLabel: meta,
+    isHighlight: false,
+    iconName: config.iconName,
+    visualUrl: '',
+    badgeLabel,
+    badgeColor: config.badgeColor,
+    stackKey: 'OTHERS',
+    levelKey: config.levelKey,
+    contexts: [],
+    timelineEntries: [],
+    modal: {
+      name,
+      category:
+        config.kind === 'education'
+          ? translateStaticKey(locale, 'pages.skills.education.title')
+          : translateStaticKey(locale, 'pages.skills.languages.title'),
+      level: badgeLabel,
+      frequency: meta,
+      image: null,
+    },
+  };
+};
+
+export const buildEducationSkillCards = (
+  locale: AppLocale,
+): readonly SkillCardViewModel[] =>
+  SKILL_EDUCATION_CARDS.map((config) => mapStaticSkillCard(config, locale));
+
+export const buildLanguageSkillCards = (
+  locale: AppLocale,
+): readonly SkillCardViewModel[] =>
+  SKILL_LANGUAGE_CARDS.map((config) => mapStaticSkillCard(config, locale));
 
 export const buildSkillsSummaryMetrics = (
   technologies: TechnologyCollectionItemResponse[],

@@ -7,11 +7,10 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
 import { createTechnologiesCollectionResponse } from '../../core/api/mocks/technologies.mocks';
-import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
-import { SkillFilterOption } from './skills.types';
+import { SkillLevelFilterValue, SkillStackFilterValue } from './skills.types';
 import { SkillsComponent } from './skills.component';
 
 const TECHNOLOGIES_REQUEST_URL = buildApiUrl(
@@ -27,7 +26,13 @@ const flushTechnologiesRequest = (
 
 describe('SkillsComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-avatar', 'hans-icon', 'hans-tag', 'hans-dropdown'];
+    const elementNames = [
+      'hans-card',
+      'hans-icon',
+      'hans-tag',
+      'hans-input',
+      'hans-modal',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -55,211 +60,95 @@ describe('SkillsComponent', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
-  it('should render the technologies page with live experience metrics', () => {
+  it('should render the redesigned skills page with education, languages, and technologies', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    expect(compiled.textContent).toContain('Technology depth');
-    expect(compiled.textContent).toContain('Loading technology experience metrics...');
+    expect(compiled.textContent).toContain('Skills & Technologies');
+    expect(compiled.textContent).toContain('Education');
+    expect(compiled.textContent).toContain('Languages');
+    expect(compiled.textContent).toContain('Building technology groups...');
 
     flushTechnologiesRequest(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Technology clarity from live API metrics');
+    expect(compiled.textContent).toContain('Information Systems');
+    expect(compiled.textContent).toContain('Portuguese');
+    expect(compiled.textContent).toContain('Technologies');
     expect(compiled.textContent).toContain('Angular');
     expect(compiled.textContent).toContain('TypeScript');
-    expect(compiled.textContent).toContain('6 years 2 months');
-    expect(compiled.querySelectorAll('hans-dropdown').length).toBe(3);
-    expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(6);
+    expect(compiled.querySelectorAll('app-skill-card').length).toBeGreaterThan(5);
+    expect(compiled.querySelectorAll('hans-card').length).toBeGreaterThan(5);
   });
 
-  it('should render localized labels in Portuguese', () => {
-    TestBed.inject(TranslationService).setLocale('pt-br');
+  it('should render localized labels in Portuguese and Spanish', () => {
+    const translationService = TestBed.inject(TranslationService);
 
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
+    translationService.setLocale('pt-br');
+    const ptFixture = TestBed.createComponent(SkillsComponent);
+    ptFixture.detectChanges();
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    ptFixture.detectChanges();
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    flushTechnologiesRequest(httpTestingController);
-    fixture.detectChanges();
-
-    expect(compiled.textContent).toContain('Profundidade técnica');
-    expect(compiled.textContent).toContain(
-      'Tecnologias com medição real por contexto',
+    expect(ptFixture.nativeElement.textContent).toContain(
+      'Habilidades & Tecnologias',
     );
-    expect(compiled.textContent).toContain('Profissional');
-    expect(compiled.querySelector('hans-tag[label="Avançado"]')).toBeTruthy();
+    expect(ptFixture.nativeElement.textContent).toContain('Formação');
+    ptFixture.destroy();
+
+    translationService.setLocale('es-es');
+    const esFixture = TestBed.createComponent(SkillsComponent);
+    esFixture.detectChanges();
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    esFixture.detectChanges();
+
+    expect(esFixture.nativeElement.textContent).toContain(
+      'Habilidades y Tecnologías',
+    );
+    expect(esFixture.nativeElement.textContent).toContain('Educación');
   });
 
-  it('should render localized labels in Spanish', () => {
-    TestBed.inject(TranslationService).setLocale('es-es');
-
+  it('should filter technologies by stack, level, and search term', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    const technologiesText = (): string =>
+      compiled.querySelector('.skills-technologies')?.textContent ?? '';
     const httpTestingController = TestBed.inject(HttpTestingController);
-
-    flushTechnologiesRequest(httpTestingController);
-    fixture.detectChanges();
-
-    expect(compiled.textContent).toContain('Profundidad técnica');
-    expect(compiled.textContent).toContain('Tecnologías con métricas reales por contexto');
-    expect(compiled.querySelector('hans-tag[label="Avanzado"]')).toBeTruthy();
-  });
-
-  it('should filter the catalog through category, level, and context selections', () => {
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
     flushTechnologiesRequest(httpTestingController);
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      selectCategory: (event: Event) => void;
-      selectLevel: (event: Event) => void;
-      selectContext: (event: Event) => void;
+      selectStackFilter: (value: SkillStackFilterValue) => void;
+      selectLevelFilter: (value: SkillLevelFilterValue) => void;
+      updateSearchTerm: (event: Event) => void;
     };
 
-    component.selectCategory(
-      new CustomEvent('select', {
-        detail: {
-          label: 'Framework',
-          value: 'FRAMEWORK',
-        },
-      }),
-    );
+    component.selectStackFilter('DATABASES');
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Angular');
-    expect(compiled.textContent).not.toContain('TypeScript');
+    expect(technologiesText()).toContain('SQL');
+    expect(technologiesText()).not.toContain('Angular');
 
-    component.selectLevel(
-      new CustomEvent('select', {
-        detail: {
-          label: 'Intermediate',
-          value: 'INTERMEDIATE',
-        },
-      }),
-    );
+    component.selectStackFilter('ALL');
+    component.selectLevelFilter('INTERMEDIATE');
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain(
-      'No published technologies matched the current filters.',
-    );
+    expect(technologiesText()).toContain('Docker');
+    expect(technologiesText()).not.toContain('TypeScript');
 
-    component.selectCategory(
-      new CustomEvent('select', {
-        detail: {
-          label: 'All categories',
-          value: 'ALL',
-        },
-      }),
-    );
-    component.selectContext(
-      new CustomEvent('select', {
-        detail: {
-          label: 'Study',
-          value: 'STUDY',
-        },
-      }),
-    );
+    component.selectLevelFilter('ALL');
+    component.updateSearchTerm({
+      target: { value: 'type' },
+    } as unknown as Event);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Docker');
-    expect(compiled.textContent).toContain('Angular');
-    expect(compiled.textContent).not.toContain('TypeScript');
-    expect(compiled.textContent).not.toContain('SQL');
-  });
-
-  it('should build dropdown options with localized fallbacks for unknown category and level values', () => {
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
-
-    const httpTestingController = TestBed.inject(HttpTestingController);
-    const unknownTechnology: TechnologyCollectionItemResponse = {
-      id: 'tech-custom',
-      slug: 'custom-tool',
-      name: 'Custom Tool',
-      category: 'CUSTOM_STACK',
-      level: 'EXPERT_PLUS',
-      frequency: 'FREQUENT',
-      highlight: false,
-      experienceMetrics: {
-        total: {
-          totalMonths: 2,
-          years: 0,
-          months: 2,
-          label: '2 months',
-          startedAt: '2026-01-01',
-          endedAt: '2026-03-01',
-        },
-        byContext: {
-          PROFESSIONAL: {
-            totalMonths: 2,
-            years: 0,
-            months: 2,
-            label: '2 months',
-            startedAt: '2026-01-01',
-            endedAt: '2026-03-01',
-          },
-          PERSONAL: {
-            totalMonths: 0,
-            years: 0,
-            months: 0,
-            label: '0 months',
-            startedAt: null,
-            endedAt: null,
-          },
-          ACADEMIC: {
-            totalMonths: 0,
-            years: 0,
-            months: 0,
-            label: '0 months',
-            startedAt: null,
-            endedAt: null,
-          },
-          STUDY: {
-            totalMonths: 0,
-            years: 0,
-            months: 0,
-            label: '0 months',
-            startedAt: null,
-            endedAt: null,
-          },
-        },
-      },
-    };
-
-    flushTechnologiesRequest(
-      httpTestingController,
-      createTechnologiesCollectionResponse({
-        data: [...createTechnologiesCollectionResponse().data, unknownTechnology],
-      }),
-    );
-    fixture.detectChanges();
-
-    const component = fixture.componentInstance as unknown as {
-      buildCategoryOptions: (values: readonly string[]) => readonly SkillFilterOption[];
-      buildLevelOptions: (values: readonly string[]) => readonly SkillFilterOption[];
-    };
-
-    expect(component.buildCategoryOptions(['CUSTOM_STACK'])).toEqual([
-      { label: 'All categories', value: 'ALL' },
-      { label: 'CUSTOM_STACK', value: 'CUSTOM_STACK' },
-    ]);
-    expect(component.buildLevelOptions(['EXPERT_PLUS'])).toEqual([
-      { label: 'All levels', value: 'ALL' },
-      { label: 'EXPERT_PLUS', value: 'EXPERT_PLUS' },
-    ]);
+    expect(technologiesText()).toContain('TypeScript');
+    expect(technologiesText()).not.toContain('Angular');
   });
 
   it('should render empty and error states from the technologies request', () => {
@@ -268,7 +157,6 @@ describe('SkillsComponent', () => {
     const emptyFixture = TestBed.createComponent(SkillsComponent);
     emptyFixture.detectChanges();
 
-    const emptyCompiled = emptyFixture.nativeElement as HTMLElement;
     flushTechnologiesRequest(
       httpTestingController,
       createTechnologiesCollectionResponse({
@@ -285,104 +173,69 @@ describe('SkillsComponent', () => {
     );
     emptyFixture.detectChanges();
 
-    expect(emptyCompiled.textContent).toContain(
+    expect(emptyFixture.nativeElement.textContent).toContain(
       'No published technologies matched the current filters.',
     );
-
     emptyFixture.destroy();
 
     const errorFixture = TestBed.createComponent(SkillsComponent);
     errorFixture.detectChanges();
 
-    const errorCompiled = errorFixture.nativeElement as HTMLElement;
     httpTestingController.expectOne(TECHNOLOGIES_REQUEST_URL).flush(null, {
       status: 500,
       statusText: 'Server Error',
     });
     errorFixture.detectChanges();
 
-    expect(errorCompiled.textContent).toContain(
+    expect(errorFixture.nativeElement.textContent).toContain(
       'The technologies endpoint is unavailable right now.',
     );
   });
 
-  it('should treat missing context metrics as zero when filtering by context', () => {
+  it('should render technologies without context metrics using the fallback ordering', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
-    const httpTestingController = TestBed.inject(HttpTestingController);
     flushTechnologiesRequest(
-      httpTestingController,
+      TestBed.inject(HttpTestingController),
       createTechnologiesCollectionResponse({
         data: [
           {
-            id: 'tech-no-metrics',
-            slug: 'no-metrics',
-            name: 'No Metrics',
-            category: 'LIBRARY',
-            level: 'BEGINNER',
-            frequency: 'RARE',
+            id: 'tech-a',
+            slug: 'alpha',
+            name: 'Alpha',
+            category: 'TOOL',
+            level: null,
+            frequency: null,
+            highlight: false,
+          },
+          {
+            id: 'tech-b',
+            slug: 'beta',
+            name: 'Beta',
+            category: 'TOOL',
+            level: null,
+            frequency: null,
             highlight: false,
           },
         ],
-      }),
-    );
-    fixture.detectChanges();
-
-    const component = fixture.componentInstance as unknown as {
-      selectContext: (event: Event) => void;
-    };
-
-    component.selectContext(
-      new CustomEvent('select', {
-        detail: {
-          label: 'Professional',
-          value: 'PROFESSIONAL',
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 2,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPreviousPage: false,
         },
       }),
     );
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.textContent).toContain(
-      'No published technologies matched the current filters.',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Alpha');
+    expect(fixture.nativeElement.textContent).toContain('Beta');
   });
 
-  it('should safely handle dropdown option binding branches', async () => {
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
-
-    const httpTestingController = TestBed.inject(HttpTestingController);
-    flushTechnologiesRequest(httpTestingController);
-
-    const component = fixture.componentInstance as unknown as {
-      bindDropdownOptions: (
-        dropdown: { options?: readonly SkillFilterOption[] } | undefined,
-        options: readonly SkillFilterOption[],
-        onCleanup: (cleanupFn: () => void) => void,
-      ) => void;
-    };
-
-    expect(() =>
-      component.bindDropdownOptions(undefined, [], () => undefined),
-    ).not.toThrow();
-
-    const dropdown: { options?: readonly SkillFilterOption[] } = {};
-    const options = [{ label: 'Queued option', value: 'QUEUED' }];
-
-    spyOn(customElements, 'get').and.returnValue(undefined);
-    spyOn(customElements, 'whenDefined').and.returnValue(
-      Promise.resolve(class extends HTMLElement {}),
-    );
-
-    component.bindDropdownOptions(dropdown, options, () => undefined);
-    await Promise.resolve();
-
-    expect(customElements.whenDefined).toHaveBeenCalledWith('hans-dropdown');
-    expect(dropdown.options).toEqual(options);
-  });
-
-  it('should open and close the skill detail modal state', () => {
+  it('should open and close the shared technology modal for any skill card', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
@@ -391,22 +244,22 @@ describe('SkillsComponent', () => {
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      groupedTechnologies: () => readonly { items: readonly [{ name: string }] }[];
-      openSkillDetails: (skill: { name: string }) => void;
+      educationCards: () => readonly [{ name: string; modal: { name: string } }];
+      openSkillDetails: (skill: { modal: { name: string } }) => void;
       closeSkillDetails: () => void;
       selectedSkill: () => { name: string } | null;
-      isDetailOpen: () => boolean;
+      isSkillModalOpen: () => boolean;
     };
 
-    const skill = component.groupedTechnologies()[0].items[0];
+    const skill = component.educationCards()[0];
     component.openSkillDetails(skill);
 
-    expect(component.selectedSkill()).toEqual(skill);
-    expect(component.isDetailOpen()).toBeTrue();
+    expect(component.selectedSkill()?.name).toBe('Information Systems');
+    expect(component.isSkillModalOpen()).toBeTrue();
 
     component.closeSkillDetails();
 
     expect(component.selectedSkill()).toBeNull();
-    expect(component.isDetailOpen()).toBeFalse();
+    expect(component.isSkillModalOpen()).toBeFalse();
   });
 });

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { TagModalComponent } from '../tag-modal/tag-modal.component';
 import { TagModalDetail } from '../tag-modal/tag-modal.types';
+import { buildTechnologyModalDetail } from './helpers/technology-modal.helper';
 import { TechnologyModalItem } from './technology-modal.types';
 
 @Component({
@@ -22,24 +23,15 @@ export class TechnologyModalComponent {
       return [];
     }
 
-    return [
-      {
-        labelKey: 'pages.experiences.technology.category',
-        value: technology.category,
-      },
-      {
-        labelKey: 'pages.experiences.technology.level',
-        value: technology.level,
-      },
-      {
-        labelKey: 'pages.experiences.technology.frequency',
-        value: technology.frequency,
-      },
-      {
-        labelKey: 'pages.experiences.technology.projects',
-        value: technology.projectCount,
-      },
-    ];
+    const details = [
+      buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
+      buildTechnologyModalDetail('pages.experiences.technology.category', technology.category),
+      buildTechnologyModalDetail('pages.experiences.technology.level', technology.level),
+      buildTechnologyModalDetail('pages.experiences.technology.frequency', technology.frequency),
+      buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),
+    ] satisfies readonly (TagModalDetail | null)[];
+
+    return details.filter((detail): detail is TagModalDetail => detail !== null);
   });
 
   protected requestClose(): void {
