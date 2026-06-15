@@ -2,6 +2,8 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  afterEveryRender,
   computed,
   inject,
   signal,
@@ -21,6 +23,7 @@ import {
   buildLanguageSkillCards,
   mapTechnologyToSkillCard,
 } from './helpers/skills.helper';
+import { applySkillsSelectOptionScrollPatch } from './helpers/skills-select-option.helper';
 import {
   SKILL_LEVEL_FILTERS,
   SKILL_STACK_FILTERS,
@@ -49,6 +52,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkillsComponent {
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly technologiesService = inject(TechnologiesService);
   private readonly translationService = inject(TranslationService);
   private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>([]);
@@ -120,6 +124,10 @@ export class SkillsComponent {
   protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
 
   constructor() {
+    afterEveryRender(() => {
+      applySkillsSelectOptionScrollPatch(this.host.nativeElement);
+    });
+
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed())

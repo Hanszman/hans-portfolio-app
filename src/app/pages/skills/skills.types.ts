@@ -296,6 +296,21 @@ export const SKILL_CONTEXT_ORDER: readonly TechnologyContextKey[] = [
   'STUDY',
 ];
 
+export const SKILLS_SELECT_OPTION_SCROLL_PATCH_ID =
+  'skills-select-option-scroll-patch';
+
+export const SKILLS_SELECT_OPTION_SCROLL_PATCH_CSS = `
+  .hans-popup-panel-content.hans-select-option-popup-content {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .hans-select-option-list {
+    max-height: 14rem;
+    overflow: auto;
+  }
+`;
+
 export const SKILL_VISUAL_FILE_NAMES: Record<string, string> = {
   ajax: 'ajax.png',
   angular: 'angular.png',
