@@ -62,7 +62,7 @@ export interface SkillsDropdownElement extends HTMLElement {
   options?: readonly SkillFilterOption[];
 }
 
-export type SkillsSelectEvent = CustomEvent<SkillFilterOption>;
+export type SkillsSelectEvent<TValue extends string = string> = CustomEvent<TValue>;
 
 export interface SkillsSummaryMetricViewModel {
   label: string;

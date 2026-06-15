@@ -25,8 +25,11 @@ import {
   SKILL_LEVEL_FILTERS,
   SKILL_STACK_FILTERS,
   SKILL_TYPE_FILTERS,
+  SkillFilterOption,
+  SkillFilterChipViewModel,
   SkillCardViewModel,
   SkillLevelFilterValue,
+  SkillsSelectEvent,
   SkillStackFilterValue,
   SkillTypeFilterValue,
 } from './skills.types';
@@ -65,6 +68,15 @@ export class SkillsComponent {
   protected readonly stackFilters = SKILL_STACK_FILTERS;
   protected readonly levelFilters = SKILL_LEVEL_FILTERS;
   protected readonly typeFilters = SKILL_TYPE_FILTERS;
+  protected readonly stackFilterOptions = computed(() =>
+    this.buildFilterOptions(this.stackFilters),
+  );
+  protected readonly levelFilterOptions = computed(() =>
+    this.buildFilterOptions(this.levelFilters),
+  );
+  protected readonly typeFilterOptions = computed(() =>
+    this.buildFilterOptions(this.typeFilters),
+  );
 
   protected readonly educationCards = computed(() =>
     buildEducationSkillCards(this.translationService.locale()),
@@ -133,12 +145,24 @@ export class SkillsComponent {
     this.selectedStackSignal.set(value);
   }
 
+  protected selectStackFilterFromEvent(event: Event): void {
+    this.selectStackFilter((event as SkillsSelectEvent<SkillStackFilterValue>).detail);
+  }
+
   protected selectLevelFilter(value: SkillLevelFilterValue): void {
     this.selectedLevelSignal.set(value);
   }
 
+  protected selectLevelFilterFromEvent(event: Event): void {
+    this.selectLevelFilter((event as SkillsSelectEvent<SkillLevelFilterValue>).detail);
+  }
+
   protected selectTypeFilter(value: SkillTypeFilterValue): void {
     this.selectedTypeSignal.set(value);
+  }
+
+  protected selectTypeFilterFromEvent(event: Event): void {
+    this.selectTypeFilter((event as SkillsSelectEvent<SkillTypeFilterValue>).detail);
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {
@@ -147,5 +171,17 @@ export class SkillsComponent {
 
   protected closeSkillDetails(): void {
     this.selectedSkillSignal.set(null);
+  }
+
+  private buildFilterOptions(
+    filters: readonly SkillFilterChipViewModel[],
+  ): readonly SkillFilterOption[] {
+    this.translationService.locale();
+
+    return filters.map((filter) => ({
+      id: filter.value,
+      label: this.translationService.instant(filter.labelKey),
+      value: filter.value,
+    }));
   }
 }

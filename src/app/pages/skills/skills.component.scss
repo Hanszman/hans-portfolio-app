@@ -87,41 +87,12 @@
   color: color-mix(in srgb, var(--text-color) 48%, transparent);
 }
 
-.skills-filter-row {
-  @apply flex flex-wrap items-center gap-3;
+.skills-filter-grid {
+  @apply grid gap-4 md:grid-cols-3;
 }
 
-.skills-filter-row > span {
-  @apply font-mono text-sm;
-  color: color-mix(in srgb, var(--text-color) 62%, transparent);
-}
-
-.skills-filter-list {
-  @apply flex flex-wrap gap-2;
-}
-
-.skills-filter-button {
-  @apply rounded-full border px-4 py-2 text-sm font-semibold transition duration-200;
-  background-color: color-mix(
-    in srgb,
-    var(--background-color) 88%,
-    var(--base-neutral-color)
-  );
-  border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
-.skills-filter-button:hover,
-.skills-filter-button-active {
-  background-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 88%,
-    var(--primary-neutral-color)
-  );
-  border-color: var(--primary-default-color);
-  color: var(--white);
-  box-shadow: 0 0.8rem 2rem
-    color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+.skills-filter-select {
+  @apply block min-w-0;
 }
 
 .skills-card-grid {

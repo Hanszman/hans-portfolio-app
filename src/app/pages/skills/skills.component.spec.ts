@@ -35,6 +35,7 @@ describe('SkillsComponent', () => {
       'hans-icon',
       'hans-tag',
       'hans-modal',
+      'hans-select-option',
     ];
 
     for (const elementName of elementNames) {
@@ -129,6 +130,9 @@ describe('SkillsComponent', () => {
       selectStackFilter: (value: SkillStackFilterValue) => void;
       selectLevelFilter: (value: SkillLevelFilterValue) => void;
       selectTypeFilter: (value: SkillTypeFilterValue) => void;
+      selectStackFilterFromEvent: (event: Event) => void;
+      selectLevelFilterFromEvent: (event: Event) => void;
+      selectTypeFilterFromEvent: (event: Event) => void;
       updateSearchTerm: (event: Event) => void;
     };
 
@@ -151,6 +155,22 @@ describe('SkillsComponent', () => {
 
     expect(technologiesText()).toContain('TypeScript');
     expect(technologiesText()).not.toContain('Angular');
+
+    component.selectTypeFilterFromEvent(
+      new CustomEvent<SkillTypeFilterValue>('change', { detail: 'ALL' }),
+    );
+    component.selectStackFilterFromEvent(
+      new CustomEvent<SkillStackFilterValue>('change', { detail: 'BACK_END' }),
+    );
+    component.selectLevelFilterFromEvent(
+      new CustomEvent<SkillLevelFilterValue>('change', { detail: 'ALL' }),
+    );
+    component.selectStackFilterFromEvent(
+      new CustomEvent<SkillStackFilterValue>('change', { detail: 'ALL' }),
+    );
+    fixture.detectChanges();
+
+    expect(technologiesText()).toContain('Angular');
 
     component.selectLevelFilter('ALL');
     component.selectTypeFilter('ALL');

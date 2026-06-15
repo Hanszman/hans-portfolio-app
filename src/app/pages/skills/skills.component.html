@@ -61,52 +61,51 @@
         />
       </label>
 
-      <div class="skills-filter-row">
-        <span>{{ 'pages.skills.filters.stack' | translate }}:</span>
-        <div class="skills-filter-list">
-          @for (filter of stackFilters; track filter.value) {
-            <button
-              type="button"
-              class="skills-filter-button"
-              [class.skills-filter-button-active]="selectedStack() === filter.value"
-              (click)="selectStackFilter(filter.value)"
-            >
-              {{ filter.labelKey | translate }}
-            </button>
-          }
-        </div>
-      </div>
+      <div class="skills-filter-grid">
+        <hans-select-option
+          class="skills-filter-select"
+          [label]="'pages.skills.filters.stack' | translate"
+          [options]="stackFilterOptions()"
+          [value]="selectedStack()"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.skills.catalog.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="selectStackFilterFromEvent($event)"
+        ></hans-select-option>
 
-      <div class="skills-filter-row">
-        <span>{{ 'pages.skills.filters.type' | translate }}:</span>
-        <div class="skills-filter-list">
-          @for (filter of typeFilters; track filter.value) {
-            <button
-              type="button"
-              class="skills-filter-button"
-              [class.skills-filter-button-active]="selectedType() === filter.value"
-              (click)="selectTypeFilter(filter.value)"
-            >
-              {{ filter.labelKey | translate }}
-            </button>
-          }
-        </div>
-      </div>
+        <hans-select-option
+          class="skills-filter-select"
+          [label]="'pages.skills.filters.type' | translate"
+          [options]="typeFilterOptions()"
+          [value]="selectedType()"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.skills.catalog.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="selectTypeFilterFromEvent($event)"
+        ></hans-select-option>
 
-      <div class="skills-filter-row">
-        <span>{{ 'pages.skills.filters.level' | translate }}:</span>
-        <div class="skills-filter-list">
-          @for (filter of levelFilters; track filter.value) {
-            <button
-              type="button"
-              class="skills-filter-button"
-              [class.skills-filter-button-active]="selectedLevel() === filter.value"
-              (click)="selectLevelFilter(filter.value)"
-            >
-              {{ filter.labelKey | translate }}
-            </button>
-          }
-        </div>
+        <hans-select-option
+          class="skills-filter-select"
+          [label]="'pages.skills.filters.level' | translate"
+          [options]="levelFilterOptions()"
+          [value]="selectedLevel()"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.skills.catalog.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="selectLevelFilterFromEvent($event)"
+        ></hans-select-option>
       </div>
 
       @if (isLoading()) {
