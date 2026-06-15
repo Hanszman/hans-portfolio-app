@@ -16,6 +16,7 @@ describe('TechnologyModalComponent', () => {
     fixture.componentRef.setInput('technology', {
       name: 'Angular',
       category: 'Framework',
+      stack: 'Front-End',
       level: 'Advanced',
       frequency: 'Frequent',
       projectCount: 4,
@@ -31,6 +32,7 @@ describe('TechnologyModalComponent', () => {
 
     const modal = fixture.nativeElement.querySelector('app-tag-modal');
     expect(modal).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('Front-End');
     expect(fixture.nativeElement.textContent).toContain('Advanced');
     expect(fixture.nativeElement.textContent).toContain('4');
   });

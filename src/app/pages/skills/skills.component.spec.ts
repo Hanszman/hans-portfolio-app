@@ -10,7 +10,11 @@ import { createTechnologiesCollectionResponse } from '../../core/api/mocks/techn
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
-import { SkillLevelFilterValue, SkillStackFilterValue } from './skills.types';
+import {
+  SkillLevelFilterValue,
+  SkillStackFilterValue,
+  SkillTypeFilterValue,
+} from './skills.types';
 import { SkillsComponent } from './skills.component';
 
 const TECHNOLOGIES_REQUEST_URL = buildApiUrl(
@@ -124,6 +128,7 @@ describe('SkillsComponent', () => {
     const component = fixture.componentInstance as unknown as {
       selectStackFilter: (value: SkillStackFilterValue) => void;
       selectLevelFilter: (value: SkillLevelFilterValue) => void;
+      selectTypeFilter: (value: SkillTypeFilterValue) => void;
       updateSearchTerm: (event: Event) => void;
     };
 
@@ -141,6 +146,14 @@ describe('SkillsComponent', () => {
     expect(technologiesText()).not.toContain('TypeScript');
 
     component.selectLevelFilter('ALL');
+    component.selectTypeFilter('PROGRAMMING_LANGUAGES');
+    fixture.detectChanges();
+
+    expect(technologiesText()).toContain('TypeScript');
+    expect(technologiesText()).not.toContain('Angular');
+
+    component.selectLevelFilter('ALL');
+    component.selectTypeFilter('ALL');
     const searchInput = compiled.querySelector(
       '.skills-search input',
     ) as HTMLInputElement;
@@ -151,6 +164,50 @@ describe('SkillsComponent', () => {
     expect(searchInput.value).toBe('type');
     expect(technologiesText()).toContain('TypeScript');
     expect(technologiesText()).not.toContain('Angular');
+  });
+
+  it('should filter studying technologies from level or frequency and games by stack', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const technologiesText = (): string =>
+      compiled.querySelector('.skills-technologies')?.textContent ?? '';
+
+    flushTechnologiesRequest(
+      TestBed.inject(HttpTestingController),
+      createTechnologiesCollectionResponse({
+        data: [
+          ...createTechnologiesCollectionResponse().data,
+          {
+            id: 'tech-unity',
+            slug: 'unity',
+            name: 'Unity',
+            category: 'TOOL',
+            level: null,
+            frequency: 'STUDYING',
+            highlight: false,
+          },
+        ],
+      }),
+    );
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      selectStackFilter: (value: SkillStackFilterValue) => void;
+      selectLevelFilter: (value: SkillLevelFilterValue) => void;
+    };
+
+    component.selectLevelFilter('STUDYING');
+    fixture.detectChanges();
+
+    expect(technologiesText()).toContain('Unity');
+    expect(technologiesText()).not.toContain('Angular');
+
+    component.selectStackFilter('GAMES');
+    fixture.detectChanges();
+
+    expect(technologiesText()).toContain('Unity');
   });
 
   it('should render empty and error states from the technologies request', () => {

@@ -3,11 +3,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
+import { TranslationService, translateStaticKey } from '../../core/translation/translation.service';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { resolveSkillVisualUrl } from '../skills/helpers/skills.helper';
+import {
+  resolveSkillStackKey,
+  resolveSkillTypeKey,
+  resolveSkillVisualUrl,
+} from '../skills/helpers/skills.helper';
+import { SKILL_STACK_LABEL_KEYS, SKILL_TYPE_LABEL_KEYS } from '../skills/skills.types';
 import {
   CAREER_START_DATE,
   HOME_HERO,
@@ -38,6 +44,7 @@ import { HomeStackChipsComponent } from './components/home-stack-chips/home-stac
 })
 export class HomeComponent {
   private readonly dashboardService = inject(DashboardService);
+  private readonly translationService = inject(TranslationService);
   private readonly dashboardSignal = signal<DashboardOverviewResponse | null>(
     null,
   );
@@ -87,13 +94,17 @@ export class HomeComponent {
       .slice(0, 8)
       .map((technology) => {
         const imageSrc = resolveSkillVisualUrl(technology.slug);
+        const stackKey = resolveSkillStackKey(technology);
+        const typeKey = resolveSkillTypeKey(technology);
+        const locale = this.translationService.locale();
 
         return {
           slug: technology.slug,
           label: technology.name,
           modal: {
             name: technology.name,
-            category: technology.category,
+            category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
+            stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
             projectCount: technology.usageCount,
             image: imageSrc
               ? {

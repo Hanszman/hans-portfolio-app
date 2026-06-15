@@ -14,6 +14,7 @@ export type SkillStackFilterValue =
   | 'FRONT_END'
   | 'BACK_END'
   | 'DATABASES'
+  | 'GAMES'
   | 'MOBILE'
   | 'OTHERS';
 
@@ -23,6 +24,28 @@ export type SkillLevelFilterValue =
   | 'INTERMEDIATE'
   | 'BEGINNER'
   | 'STUDYING';
+
+export type SkillTypeFilterValue =
+  | 'ALL'
+  | 'PROGRAMMING_LANGUAGES'
+  | 'WEB_LANGUAGES'
+  | 'LIBRARIES'
+  | 'FRAMEWORKS'
+  | 'RELATIONAL_DATA_BASES'
+  | 'NON_RELATIONAL_DATA_BASES'
+  | 'DATABASES_MANAGEMENT_SYSTEMS'
+  | 'CODE_EDITORS'
+  | 'TECHNIQUES'
+  | 'METHODOLOGIES'
+  | 'OBJECT_NOTATIONS'
+  | 'PACKAGE_MANAGERS'
+  | 'PACKAGES'
+  | 'VERSIONING_PLATFORMS'
+  | 'CLOUD_HOSTING_PLATFORMS'
+  | 'DEPLOYMENT_TOOLS'
+  | 'DEVELOPMENT_PLATFORMS'
+  | 'PROTOCOLS'
+  | 'OTHERS';
 
 export interface SkillFilterChipViewModel<TValue extends string = string> {
   labelKey: AppTranslationKey;
@@ -83,6 +106,7 @@ export interface SkillCardViewModel {
   badgeColor: string;
   stackKey: SkillStackFilterValue;
   levelKey: SkillLevelFilterValue;
+  typeKey: SkillTypeFilterValue;
   contexts: readonly SkillContextMetricViewModel[];
   timelineEntries: readonly SkillTimelineEntryViewModel[];
   modal: TechnologyModalItem;
@@ -108,8 +132,9 @@ export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFi
     { labelKey: 'taxonomy.skills.stack.all', value: 'ALL' },
     { labelKey: 'taxonomy.skills.stack.frontEnd', value: 'FRONT_END' },
     { labelKey: 'taxonomy.skills.stack.backEnd', value: 'BACK_END' },
-    { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
     { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
+    { labelKey: 'taxonomy.skills.stack.games', value: 'GAMES' },
+    { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
     { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
   ];
 
@@ -120,6 +145,51 @@ export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFi
     { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
     { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
     { labelKey: 'taxonomy.skills.level.studying', value: 'STUDYING' },
+  ];
+
+export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilterValue>[] =
+  [
+    { labelKey: 'taxonomy.skills.type.all', value: 'ALL' },
+    {
+      labelKey: 'taxonomy.skills.type.programmingLanguages',
+      value: 'PROGRAMMING_LANGUAGES',
+    },
+    { labelKey: 'taxonomy.skills.type.webLanguages', value: 'WEB_LANGUAGES' },
+    { labelKey: 'taxonomy.skills.type.libraries', value: 'LIBRARIES' },
+    { labelKey: 'taxonomy.skills.type.frameworks', value: 'FRAMEWORKS' },
+    {
+      labelKey: 'taxonomy.skills.type.relationalDataBases',
+      value: 'RELATIONAL_DATA_BASES',
+    },
+    {
+      labelKey: 'taxonomy.skills.type.nonRelationalDataBases',
+      value: 'NON_RELATIONAL_DATA_BASES',
+    },
+    {
+      labelKey: 'taxonomy.skills.type.databasesManagementSystems',
+      value: 'DATABASES_MANAGEMENT_SYSTEMS',
+    },
+    { labelKey: 'taxonomy.skills.type.codeEditors', value: 'CODE_EDITORS' },
+    { labelKey: 'taxonomy.skills.type.techniques', value: 'TECHNIQUES' },
+    { labelKey: 'taxonomy.skills.type.methodologies', value: 'METHODOLOGIES' },
+    { labelKey: 'taxonomy.skills.type.objectNotations', value: 'OBJECT_NOTATIONS' },
+    { labelKey: 'taxonomy.skills.type.packageManagers', value: 'PACKAGE_MANAGERS' },
+    { labelKey: 'taxonomy.skills.type.packages', value: 'PACKAGES' },
+    {
+      labelKey: 'taxonomy.skills.type.versioningPlatforms',
+      value: 'VERSIONING_PLATFORMS',
+    },
+    {
+      labelKey: 'taxonomy.skills.type.cloudHostingPlatforms',
+      value: 'CLOUD_HOSTING_PLATFORMS',
+    },
+    { labelKey: 'taxonomy.skills.type.deploymentTools', value: 'DEPLOYMENT_TOOLS' },
+    {
+      labelKey: 'taxonomy.skills.type.developmentPlatforms',
+      value: 'DEVELOPMENT_PLATFORMS',
+    },
+    { labelKey: 'taxonomy.skills.type.protocols', value: 'PROTOCOLS' },
+    { labelKey: 'taxonomy.skills.type.others', value: 'OTHERS' },
   ];
 
 export const SKILL_FALLBACK_LABEL_KEYS = {
@@ -145,6 +215,39 @@ export const SKILL_CATEGORY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ORM: 'taxonomy.skills.category.orm',
 };
 
+export const SKILL_STACK_LABEL_KEYS: Record<SkillStackFilterValue, AppTranslationKey> = {
+  ALL: 'taxonomy.skills.stack.all',
+  FRONT_END: 'taxonomy.skills.stack.frontEnd',
+  BACK_END: 'taxonomy.skills.stack.backEnd',
+  DATABASES: 'taxonomy.skills.stack.databases',
+  GAMES: 'taxonomy.skills.stack.games',
+  MOBILE: 'taxonomy.skills.stack.mobile',
+  OTHERS: 'taxonomy.skills.stack.others',
+};
+
+export const SKILL_TYPE_LABEL_KEYS: Record<SkillTypeFilterValue, AppTranslationKey> = {
+  ALL: 'taxonomy.skills.type.all',
+  PROGRAMMING_LANGUAGES: 'taxonomy.skills.type.programmingLanguages',
+  WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
+  LIBRARIES: 'taxonomy.skills.type.libraries',
+  FRAMEWORKS: 'taxonomy.skills.type.frameworks',
+  RELATIONAL_DATA_BASES: 'taxonomy.skills.type.relationalDataBases',
+  NON_RELATIONAL_DATA_BASES: 'taxonomy.skills.type.nonRelationalDataBases',
+  DATABASES_MANAGEMENT_SYSTEMS: 'taxonomy.skills.type.databasesManagementSystems',
+  CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
+  TECHNIQUES: 'taxonomy.skills.type.techniques',
+  METHODOLOGIES: 'taxonomy.skills.type.methodologies',
+  OBJECT_NOTATIONS: 'taxonomy.skills.type.objectNotations',
+  PACKAGE_MANAGERS: 'taxonomy.skills.type.packageManagers',
+  PACKAGES: 'taxonomy.skills.type.packages',
+  VERSIONING_PLATFORMS: 'taxonomy.skills.type.versioningPlatforms',
+  CLOUD_HOSTING_PLATFORMS: 'taxonomy.skills.type.cloudHostingPlatforms',
+  DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
+  DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
+  PROTOCOLS: 'taxonomy.skills.type.protocols',
+  OTHERS: 'taxonomy.skills.type.others',
+};
+
 export const SKILL_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
@@ -156,6 +259,8 @@ export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   FREQUENT: 'taxonomy.skills.frequency.frequent',
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   RARE: 'taxonomy.skills.frequency.rare',
+  PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
+  STUDYING: 'taxonomy.skills.frequency.studying',
 };
 
 export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> =

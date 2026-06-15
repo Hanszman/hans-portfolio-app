@@ -24,9 +24,11 @@ import {
 import {
   SKILL_LEVEL_FILTERS,
   SKILL_STACK_FILTERS,
+  SKILL_TYPE_FILTERS,
   SkillCardViewModel,
   SkillLevelFilterValue,
   SkillStackFilterValue,
+  SkillTypeFilterValue,
 } from './skills.types';
 
 @Component({
@@ -51,6 +53,7 @@ export class SkillsComponent {
   private readonly searchTermSignal = signal('');
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
+  private readonly selectedTypeSignal = signal<SkillTypeFilterValue>('ALL');
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -58,8 +61,10 @@ export class SkillsComponent {
   protected readonly searchTerm = this.searchTermSignal.asReadonly();
   protected readonly selectedStack = this.selectedStackSignal.asReadonly();
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
+  protected readonly selectedType = this.selectedTypeSignal.asReadonly();
   protected readonly stackFilters = SKILL_STACK_FILTERS;
   protected readonly levelFilters = SKILL_LEVEL_FILTERS;
+  protected readonly typeFilters = SKILL_TYPE_FILTERS;
 
   protected readonly educationCards = computed(() =>
     buildEducationSkillCards(this.translationService.locale()),
@@ -74,16 +79,14 @@ export class SkillsComponent {
       .map((technology) =>
         mapTechnologyToSkillCard(technology, this.translationService.locale()),
       )
-      .sort(
-        (left, right) =>
-          (right.contexts[0]?.totalMonths ?? 0) - (left.contexts[0]?.totalMonths ?? 0),
-      ),
+      .sort((left, right) => left.name.localeCompare(right.name)),
   );
 
   protected readonly filteredTechnologyCards = computed(() => {
     const searchTerm = this.searchTerm().trim().toLowerCase();
     const selectedStack = this.selectedStack();
     const selectedLevel = this.selectedLevel();
+    const selectedType = this.selectedType();
 
     return this.technologyCards().filter((card) => {
       const matchesSearch =
@@ -92,8 +95,9 @@ export class SkillsComponent {
         card.categoryLabel.toLowerCase().includes(searchTerm);
       const matchesStack = selectedStack === 'ALL' || card.stackKey === selectedStack;
       const matchesLevel = selectedLevel === 'ALL' || card.levelKey === selectedLevel;
+      const matchesType = selectedType === 'ALL' || card.typeKey === selectedType;
 
-      return matchesSearch && matchesStack && matchesLevel;
+      return matchesSearch && matchesStack && matchesLevel && matchesType;
     });
   });
 
@@ -131,6 +135,10 @@ export class SkillsComponent {
 
   protected selectLevelFilter(value: SkillLevelFilterValue): void {
     this.selectedLevelSignal.set(value);
+  }
+
+  protected selectTypeFilter(value: SkillTypeFilterValue): void {
+    this.selectedTypeSignal.set(value);
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {

@@ -25,6 +25,7 @@ describe('SkillCardComponent', () => {
     badgeColor: 'info',
     stackKey: 'FRONT_END',
     levelKey: 'ADVANCED',
+    typeKey: 'FRAMEWORKS',
     contexts: [
       {
         key: 'PROFESSIONAL',

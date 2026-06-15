@@ -22,11 +22,7 @@ body[data-app-theme='light'] {
     var(--primary-default-color) 14%,
     var(--background-color)
   );
-  --app-tag-border-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 28%,
-    transparent
-  );
+  --app-tag-border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
   --app-tag-text-color: var(--text-color);
 }
 
@@ -43,12 +39,39 @@ body[data-app-theme='dark'] {
     var(--background-color) 90%,
     var(--base-neutral-color)
   );
-  --app-tag-border-color: color-mix(
-    in srgb,
-    var(--base-default-color) 20%,
-    transparent
-  );
+  --app-tag-border-color: color-mix(in srgb, var(--base-default-color) 20%, transparent);
   --app-tag-text-color: var(--text-color);
+}
+
+body[data-app-theme='light'] hans-tag[tagcolor='base'] .hans-tag,
+body[data-app-theme='light'] hans-tag[tagcolor='info'] .hans-tag,
+body[data-app-theme='light'] app-skill-card hans-tag .hans-tag {
+  background-color: color-mix(in srgb, var(--primary-default-color) 14%, var(--background-color));
+  color: var(--primary-strong-color);
+}
+
+body[data-app-theme='light'] hans-tag[tagcolor='base'] .hans-tag-icon,
+body[data-app-theme='light'] hans-tag[tagcolor='info'] .hans-tag-icon,
+body[data-app-theme='light'] app-skill-card hans-tag .hans-tag-icon {
+  color: var(--primary-default-color);
+}
+
+body[data-app-theme='dark'] hans-tag[tagcolor='base'] .hans-tag,
+body[data-app-theme='dark'] hans-tag[tagcolor='info'] .hans-tag,
+body[data-app-theme='dark'] app-skill-card hans-tag .hans-tag {
+  background-color: color-mix(in srgb, var(--background-color) 90%, var(--base-neutral-color));
+  color: var(--text-color);
+}
+
+body[data-app-theme='dark'] hans-tag[tagcolor='base'] .hans-tag-icon,
+body[data-app-theme='dark'] hans-tag[tagcolor='info'] .hans-tag-icon,
+body[data-app-theme='dark'] app-skill-card hans-tag .hans-tag-icon {
+  color: var(--base-strong-color);
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
 }
 
 hans-tag {
@@ -66,9 +89,4 @@ hans-tag {
   --tag-border-color: var(--app-tag-border-color);
   --tag-color: var(--app-tag-text-color);
   --tag-text-color: var(--app-tag-text-color);
-}
-
-app-root {
-  display: block;
-  min-height: 100vh;
 }

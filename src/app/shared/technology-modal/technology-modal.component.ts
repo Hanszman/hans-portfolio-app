@@ -25,7 +25,8 @@ export class TechnologyModalComponent {
 
     const details = [
       buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
-      buildTechnologyModalDetail('pages.experiences.technology.category', technology.category),
+      buildTechnologyModalDetail('pages.experiences.technology.type', technology.category),
+      buildTechnologyModalDetail('pages.experiences.technology.stack', technology.stack),
       buildTechnologyModalDetail('pages.experiences.technology.level', technology.level),
       buildTechnologyModalDetail('pages.experiences.technology.frequency', technology.frequency),
       buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),

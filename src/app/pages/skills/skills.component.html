@@ -78,6 +78,22 @@
       </div>
 
       <div class="skills-filter-row">
+        <span>{{ 'pages.skills.filters.type' | translate }}:</span>
+        <div class="skills-filter-list">
+          @for (filter of typeFilters; track filter.value) {
+            <button
+              type="button"
+              class="skills-filter-button"
+              [class.skills-filter-button-active]="selectedType() === filter.value"
+              (click)="selectTypeFilter(filter.value)"
+            >
+              {{ filter.labelKey | translate }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="skills-filter-row">
         <span>{{ 'pages.skills.filters.level' | translate }}:</span>
         <div class="skills-filter-list">
           @for (filter of levelFilters; track filter.value) {

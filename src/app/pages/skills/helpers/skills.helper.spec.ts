@@ -9,6 +9,7 @@ import {
   extractSkillFilterValues,
   mapTechnologyToSkillCard,
   resolveSkillStackKey,
+  resolveSkillTypeKey,
   resolveSkillVisualUrl,
 } from './skills.helper';
 
@@ -21,7 +22,10 @@ describe('skills helper', () => {
 
     expect(card.name).toBe('Angular');
     expect(card.subtitle).toBe('Frequent');
-    expect(card.categoryLabel).toBe('Framework');
+    expect(card.categoryLabel).toBe('Frameworks');
+    expect(card.stackKey).toBe('FRONT_END');
+    expect(card.typeKey).toBe('FRAMEWORKS');
+    expect(card.modal.stack).toBe('Front-End');
     expect(card.totalExperienceLabel).toBe('6 years 2 months');
     expect(card.contexts).toEqual([
       {
@@ -54,7 +58,7 @@ describe('skills helper', () => {
       'es-es',
     );
 
-    expect(card.categoryLabel).toBe('Custom Stack');
+    expect(card.categoryLabel).toBe('Otros');
     expect(card.levelLabel).toBe('Nivel no informado');
     expect(card.frequencyLabel).toBe('Frecuencia no informada');
     expect(card.totalExperienceLabel).toBe('Sin período consolidado');
@@ -82,7 +86,7 @@ describe('skills helper', () => {
     expect(card.stackKey).toBe('MOBILE');
     expect(card.levelKey).toBe('STUDYING');
     expect(card.badgeColor).toBe('success');
-    expect(card.badgeLabel).toBe('Intermediate');
+    expect(card.badgeLabel).toBe('Studying');
   });
 
   it('should resolve backend and database stack filters', () => {
@@ -92,8 +96,26 @@ describe('skills helper', () => {
     expect(resolveSkillStackKey({ slug: 'mysql', category: 'DATABASE' })).toBe(
       'DATABASES',
     );
+    expect(resolveSkillStackKey({ slug: 'unity', category: 'TOOL' })).toBe(
+      'GAMES',
+    );
     expect(resolveSkillStackKey({ slug: 'unknown-tool', category: 'TOOL' })).toBe(
       'OTHERS',
+    );
+  });
+
+  it('should resolve legacy technology types from the old portfolio catalog', () => {
+    expect(resolveSkillTypeKey({ slug: 'javascript', category: 'LANGUAGE' })).toBe(
+      'PROGRAMMING_LANGUAGES',
+    );
+    expect(resolveSkillTypeKey({ slug: 'css', category: 'LANGUAGE' })).toBe(
+      'WEB_LANGUAGES',
+    );
+    expect(resolveSkillTypeKey({ slug: 'unity', category: 'TOOL' })).toBe(
+      'DEVELOPMENT_PLATFORMS',
+    );
+    expect(resolveSkillTypeKey({ slug: 'unknown', category: 'DATABASE' })).toBe(
+      'RELATIONAL_DATA_BASES',
     );
   });
 
