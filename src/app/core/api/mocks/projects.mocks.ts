@@ -11,14 +11,12 @@ export const createProjectsCollectionResponse = (
       slug: 'github-consumer',
       titlePt: "Github's API Consumer",
       titleEn: "Github's API Consumer",
-      shortDescriptionPt:
-        'Consumidor da API do Github que mostra usuarios e repositorios.',
-      shortDescriptionEn:
-        "Github's API Consumer that shows users and repositories.",
+      shortDescriptionPt: 'Consumidor da API do Github que mostra usuarios e repositorios.',
+      shortDescriptionEn: "Github's API Consumer that shows users and repositories.",
       fullDescriptionPt:
         'Projeto pessoal full stack com frontend React, backend Node.js e deploy publico para experimentar contratos de API reais.',
       fullDescriptionEn:
-        'Personal full stack project with a React frontend, Node.js backend, and public deploys to experiment with real API contracts.',
+        'Personal full stack project with a React frontend, Node.js backend and public deploys to experiment with real API contracts.',
       context: 'PERSONAL',
       status: 'IN_PROGRESS',
       environment: 'FULLSTACK',
@@ -154,10 +152,8 @@ export const createProjectsCollectionResponse = (
       slug: '4mti-dp',
       titlePt: 'Diagnostico Publico',
       titleEn: 'Public Diagnostics',
-      shortDescriptionPt:
-        'Sistema de agrupamento e analise de licitacoes e documentos publicos.',
-      shortDescriptionEn:
-        'System for grouping and analyzing bids and public documents.',
+      shortDescriptionPt: 'Sistema de agrupamento e analise de licitacoes e documentos publicos.',
+      shortDescriptionEn: 'System for grouping and analyzing bids and public documents.',
       fullDescriptionPt:
         'Projeto profissional full stack no contexto corporativo, com stack PHP e foco em leitura e processamento de documentos.',
       fullDescriptionEn:
@@ -247,11 +243,11 @@ export const createProjectsCollectionResponse = (
       shortDescriptionPt:
         'Sistema de gestao de projetos, pessoas e atividades desenvolvido para a pos-graduacao.',
       shortDescriptionEn:
-        'Project, people, and task management system developed for post-graduation.',
+        'Project, people and task management system developed for post-graduation.',
       fullDescriptionPt:
         'Case academico com Angular, Node.js e deploy publico para consolidar o TCC da pos-graduacao.',
       fullDescriptionEn:
-        'Academic case with Angular, Node.js, and public deploys to support the post-graduation final paper.',
+        'Academic case with Angular, Node.js and public deploys to support the post-graduation final paper.',
       context: 'ACADEMIC',
       status: 'COMPLETED',
       environment: 'FULLSTACK',
@@ -333,7 +329,7 @@ export const createProjectsCollectionResponse = (
       fullDescriptionPt:
         'Case pessoal focado em arquitetura frontend, design system, integracao com API real e narrativa profissional.',
       fullDescriptionEn:
-        'Personal case focused on front-end architecture, design system, live API integration, and professional storytelling.',
+        'Personal case focused on front-end architecture, design system, live API integration and professional storytelling.',
       context: 'PERSONAL',
       status: 'IN_PROGRESS',
       environment: 'FRONTEND',

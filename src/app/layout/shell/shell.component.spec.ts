@@ -41,7 +41,7 @@ describe('ShellComponent', () => {
     document.documentElement.lang = '';
   });
 
-  it('should render the shell header, routed content, and footer', async () => {
+  it('should render the shell header, routed content and footer', async () => {
     const fixture = TestBed.createComponent(ShellComponent);
     const translation = TestBed.inject(TranslationService);
     fixture.detectChanges();
@@ -51,9 +51,9 @@ describe('ShellComponent', () => {
       | (HTMLElement & { label?: string })
       | null;
     const getNavigationLabels = (): string[] =>
-      Array.from(
-        compiled.querySelectorAll('.header-navigation hans-button'),
-      ).map((button) => (button as HTMLElement & { label?: string }).label ?? '');
+      Array.from(compiled.querySelectorAll('.header-navigation hans-button')).map(
+        (button) => (button as HTMLElement & { label?: string }).label ?? '',
+      );
 
     expect(footerCopyButton?.label).toBe('Victor Hanszman');
     expect(getNavigationLabels()).toContain('Projects');

@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -10,11 +7,7 @@ import { createTechnologiesCollectionResponse } from '../../core/api/mocks/techn
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
-import {
-  SkillLevelFilterValue,
-  SkillStackFilterValue,
-  SkillTypeFilterValue,
-} from './skills.types';
+import { SkillLevelFilterValue, SkillStackFilterValue, SkillTypeFilterValue } from './skills.types';
 import { SkillsComponent } from './skills.component';
 
 const TECHNOLOGIES_REQUEST_URL = buildApiUrl(
@@ -30,13 +23,7 @@ const flushTechnologiesRequest = (
 
 describe('SkillsComponent', () => {
   beforeAll(() => {
-    const elementNames = [
-      'hans-card',
-      'hans-icon',
-      'hans-tag',
-      'hans-modal',
-      'hans-select-option',
-    ];
+    const elementNames = ['hans-card', 'hans-icon', 'hans-tag', 'hans-modal', 'hans-select-option'];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -64,7 +51,7 @@ describe('SkillsComponent', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
-  it('should render the redesigned skills page with education, languages, and technologies', () => {
+  it('should render the redesigned skills page with education, languages and technologies', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
@@ -97,9 +84,7 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(TestBed.inject(HttpTestingController));
     ptFixture.detectChanges();
 
-    expect(ptFixture.nativeElement.textContent).toContain(
-      'Habilidades & Tecnologias',
-    );
+    expect(ptFixture.nativeElement.textContent).toContain('Habilidades & Tecnologias');
     expect(ptFixture.nativeElement.textContent).toContain('Formação');
     ptFixture.destroy();
 
@@ -109,13 +94,11 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(TestBed.inject(HttpTestingController));
     esFixture.detectChanges();
 
-    expect(esFixture.nativeElement.textContent).toContain(
-      'Habilidades y Tecnologías',
-    );
+    expect(esFixture.nativeElement.textContent).toContain('Habilidades y Tecnologías');
     expect(esFixture.nativeElement.textContent).toContain('Educación');
   });
 
-  it('should filter technologies by stack, level, and search term', () => {
+  it('should filter technologies by stack, level and search term', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
@@ -174,9 +157,7 @@ describe('SkillsComponent', () => {
 
     component.selectLevelFilter('ALL');
     component.selectTypeFilter('ALL');
-    const searchInput = compiled.querySelector(
-      '.skills-search input',
-    ) as HTMLInputElement;
+    const searchInput = compiled.querySelector('.skills-search input') as HTMLInputElement;
     searchInput.value = 'type';
     searchInput.dispatchEvent(new Event('input'));
     fixture.detectChanges();

@@ -82,7 +82,7 @@ describe('HeaderComponent', () => {
     expect(navigationButtons.map((button) => button.label)).toEqual(['Home', 'Projects']);
   });
 
-  it('should expose theme, language, and mobile menu handlers for design-lib controls', () => {
+  it('should expose theme, language and mobile menu handlers for design-lib controls', () => {
     const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigateByUrl').and.resolveTo(true);
     const fixture = TestBed.createComponent(HeaderComponent);
@@ -146,14 +146,9 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(document.documentElement.lang).toBe('es-es');
-    expect(mobileDropdown.options.map((option) => option.label)).toEqual([
-      'Home',
-      'Projects',
-    ]);
+    expect(mobileDropdown.options.map((option) => option.label)).toEqual(['Home', 'Projects']);
 
-    mobileDropdown.dispatchEvent(
-      new CustomEvent('select', { detail: mobileDropdown.options[1] }),
-    );
+    mobileDropdown.dispatchEvent(new CustomEvent('select', { detail: mobileDropdown.options[1] }));
     fixture.detectChanges();
 
     expect(navigateSpy).toHaveBeenCalledWith('/projects');

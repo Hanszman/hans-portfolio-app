@@ -23,10 +23,9 @@ export const EN_TRANSLATIONS = {
   'header.navigation.dashboard': 'Dashboard',
   'header.statusLabel': 'Foundation status',
   'header.eyebrow': 'Portfolio remake foundation',
-  'header.title':
-    'A shell specific to the portfolio, already connected to real backend data.',
+  'header.title': 'A shell specific to the portfolio, already connected to real backend data.',
   'header.description':
-    'This first layout layer establishes the portfolio structure, keeps the app aligned with the design library, and prepares the next visual iterations on top of a responsive Angular shell.',
+    'This first layout layer establishes the portfolio structure, keeps the app aligned with the design library and prepares the next visual iterations on top of a responsive Angular shell.',
   'header.highlight.layout.label': 'Layout',
   'header.highlight.layout.title': 'Header, footer, nav and page wrappers',
   'header.highlight.layout.description':
@@ -36,14 +35,13 @@ export const EN_TRANSLATIONS = {
   'header.highlight.integration.description':
     'The shell stays wired to the backend so every next page can evolve on real data.',
   'header.highlight.direction.label': 'Direction',
-  'header.highlight.direction.title':
-    'Design-lib first, portfolio-specific structure second',
+  'header.highlight.direction.title': 'Design-lib first, portfolio-specific structure second',
   'header.highlight.direction.description':
     'Reusable lib components stay as the base while unique portfolio layout lives here.',
   'footer.eyebrow': 'Portfolio shell',
   'footer.title': 'Layout foundation ready for the next page builds',
   'footer.description':
-    'The portfolio-specific shell now separates layout from pages, keeps navigation centralized from the route config, and stays aligned with the design library.',
+    'The portfolio-specific shell now separates layout from pages, keeps navigation centralized from the route config and stays aligned with the design library.',
   'footer.navigationLabel': 'Footer navigation',
   'footer.principlesLabel': 'Implementation principles',
   'footer.tags.standalone': 'Standalone only',
@@ -87,16 +85,13 @@ export const EN_TRANSLATIONS = {
   'pages.home.stack.empty': 'No stack distribution was returned yet.',
   'pages.home.navigation.experiences.eyebrow': '// career',
   'pages.home.navigation.experiences.title': 'Experiences',
-  'pages.home.navigation.experiences.description':
-    'Professional journey and career timeline.',
+  'pages.home.navigation.experiences.description': 'Professional journey and career timeline.',
   'pages.home.navigation.skills.eyebrow': '// arsenal',
   'pages.home.navigation.skills.title': 'Skills',
-  'pages.home.navigation.skills.description':
-    'Technologies, formations and languages.',
+  'pages.home.navigation.skills.description': 'Technologies, formations and languages.',
   'pages.home.navigation.projects.eyebrow': '// builds',
   'pages.home.navigation.projects.title': 'Projects',
-  'pages.home.navigation.projects.description':
-    'Real-world applications and case studies.',
+  'pages.home.navigation.projects.description': 'Real-world applications and case studies.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
   'pages.experiences.title': 'Professional Experience',
   'pages.experiences.description':
@@ -104,11 +99,9 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.snapshot.label': 'Career snapshot',
   'pages.experiences.snapshot.title': 'Trajectory coverage from the live API',
   'pages.experiences.snapshot.description':
-    'Counts, current role signal, and relationship breadth are derived from the published experiences collection.',
-  'pages.experiences.snapshot.loading':
-    'Loading live experience relationships...',
-  'pages.experiences.snapshot.error':
-    'The experiences endpoint is unavailable right now.',
+    'Counts, current role signal and relationship breadth are derived from the published experiences collection.',
+  'pages.experiences.snapshot.loading': 'Loading live experience relationships...',
+  'pages.experiences.snapshot.error': 'The experiences endpoint is unavailable right now.',
   'pages.experiences.snapshot.metrics.currentRole': 'Current role',
   'pages.experiences.snapshot.metrics.experiences': 'Chapters',
   'pages.experiences.snapshot.metrics.projects': 'Projects',
@@ -116,16 +109,12 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.snapshot.metrics.customers': 'Customers',
   'pages.experiences.snapshot.metrics.highlights': 'Highlights',
   'pages.experiences.timeline.label': 'Career narrative',
-  'pages.experiences.timeline.title':
-    'Timeline, context, and impact in the same reading flow',
+  'pages.experiences.timeline.title': 'Timeline, context and impact in the same reading flow',
   'pages.experiences.timeline.description':
-    'Each chapter connects company, role, customers, projects, and stack signals so the professional story reads as a system instead of a flat list.',
-  'pages.experiences.timeline.loading':
-    'Loading live experience relationships...',
-  'pages.experiences.timeline.error':
-    'The experiences endpoint is unavailable right now.',
-  'pages.experiences.timeline.empty':
-    'No published experience chapters were returned yet.',
+    'Each chapter connects company, role, customers, projects and stack signals so the professional story reads as a system instead of a flat list.',
+  'pages.experiences.timeline.loading': 'Loading live experience relationships...',
+  'pages.experiences.timeline.error': 'The experiences endpoint is unavailable right now.',
+  'pages.experiences.timeline.empty': 'No published experience chapters were returned yet.',
   'pages.experiences.timeline.current': 'Current',
   'pages.experiences.timeline.highlight': 'Highlight',
   'pages.experiences.timeline.roles': 'Roles',
@@ -134,8 +123,7 @@ export const EN_TRANSLATIONS = {
   'pages.experiences.timeline.technologyStack': 'Technology stack',
   'pages.experiences.timeline.relatedProjects': 'Related projects',
   'pages.experiences.timeline.moreTechnologies': 'more',
-  'pages.experiences.timeline.emptyProjects':
-    'No related projects were returned for this chapter.',
+  'pages.experiences.timeline.emptyProjects': 'No related projects were returned for this chapter.',
   'pages.experiences.detail.projectsCount': 'projects',
   'pages.experiences.detail.analytics': 'Experience analytics',
   'pages.experiences.detail.gallery': 'Linked gallery',
@@ -162,16 +150,15 @@ export const EN_TRANSLATIONS = {
   'pages.skills.sectionLabel': '// SKILLS_ARSENAL',
   'pages.skills.title': 'Skills & Technologies',
   'pages.skills.description':
-    'A comprehensive view of my technical arsenal, education, and language proficiencies.',
+    'A comprehensive view of my technical arsenal, education and language proficiencies.',
   'pages.skills.snapshot.label': 'Portfolio snapshot',
   'pages.skills.snapshot.title': 'Technology clarity from live API metrics',
   'pages.skills.snapshot.description':
-    'The sidebar summarizes category breadth, highlight density, and the strongest duration signal already published by the backend.',
+    'The sidebar summarizes category breadth, highlight density and the strongest duration signal already published by the backend.',
   'pages.skills.snapshot.loading': 'Loading technology experience metrics...',
-  'pages.skills.snapshot.error':
-    'The technologies endpoint is unavailable right now.',
+  'pages.skills.snapshot.error': 'The technologies endpoint is unavailable right now.',
   'pages.skills.filters.label': 'Catalog filters',
-  'pages.skills.filters.title': 'Slice the stack by category, level, and context',
+  'pages.skills.filters.title': 'Slice the stack by category, level and context',
   'pages.skills.filters.description':
     'Filters stay lightweight in the UI while the real technology durations still come from the backend contracts.',
   'pages.skills.filters.category': 'Category',
@@ -191,8 +178,7 @@ export const EN_TRANSLATIONS = {
     'Pontifical Catholic University of Minas Gerais',
   'pages.skills.education.fullStackWeb.period': '03/2019 - 06/2021',
   'pages.skills.education.fullStackWeb.badge': 'Specialist',
-  'pages.skills.education.angularNode.title':
-    'FullStack Angular & Node Programmer',
+  'pages.skills.education.angularNode.title': 'FullStack Angular & Node Programmer',
   'pages.skills.education.angularNode.institution': 'Udemy',
   'pages.skills.education.angularNode.period': '03/2020 - 04/2020',
   'pages.skills.education.angularNode.badge': 'Certified',
@@ -203,7 +189,7 @@ export const EN_TRANSLATIONS = {
   'pages.skills.languages.portuguese.badge': 'Native',
   'pages.skills.languages.english.title': 'English',
   'pages.skills.languages.english.subtitle': 'Professional communication',
-  'pages.skills.languages.english.meta': 'Reading, writing, and conversation',
+  'pages.skills.languages.english.meta': 'Reading, writing and conversation',
   'pages.skills.languages.english.badge': 'Fluent',
   'pages.skills.technologies.title': 'Technologies',
   'pages.skills.search.placeholder': 'Search technology...',
@@ -212,10 +198,8 @@ export const EN_TRANSLATIONS = {
   'pages.skills.catalog.description':
     'Each technology card highlights total experience plus the contexts where that stack has already been used.',
   'pages.skills.catalog.loading': 'Building technology groups...',
-  'pages.skills.catalog.error':
-    'The technologies endpoint is unavailable right now.',
-  'pages.skills.catalog.empty':
-    'No published technologies matched the current filters.',
+  'pages.skills.catalog.error': 'The technologies endpoint is unavailable right now.',
+  'pages.skills.catalog.empty': 'No published technologies matched the current filters.',
   'pages.skills.card.highlight': 'Highlight',
   'pages.skills.card.totalExperience': 'Total experience',
   'pages.skills.card.contexts': 'Context coverage',
@@ -265,8 +249,7 @@ export const EN_TRANSLATIONS = {
   'taxonomy.skills.type.frameworks': 'Frameworks',
   'taxonomy.skills.type.relationalDataBases': 'Relational Data Bases',
   'taxonomy.skills.type.nonRelationalDataBases': 'Non-Relational Data Bases',
-  'taxonomy.skills.type.databasesManagementSystems':
-    'Databases Management Systems',
+  'taxonomy.skills.type.databasesManagementSystems': 'Databases Management Systems',
   'taxonomy.skills.type.codeEditors': 'Code Editors',
   'taxonomy.skills.type.techniques': 'Techniques',
   'taxonomy.skills.type.methodologies': 'Methodologies',
@@ -297,19 +280,18 @@ export const EN_TRANSLATIONS = {
   'pages.projects.sectionLabel': '// PROJECTS_SHOWCASE',
   'pages.projects.title': 'Projects',
   'pages.projects.description':
-    'A collection of real-world applications, academic works, and personal experiments.',
+    'A collection of real-world applications, academic works and personal experiments.',
   'pages.projects.snapshot.label': 'Cases snapshot',
   'pages.projects.snapshot.title': 'Published work with real linked assets',
   'pages.projects.snapshot.description':
-    'The sidebar summarizes featured density, linked references, and the broadest stack signal already exposed by the public projects endpoint.',
+    'The sidebar summarizes featured density, linked references and the broadest stack signal already exposed by the public projects endpoint.',
   'pages.projects.snapshot.loading': 'Loading live project cases...',
-  'pages.projects.snapshot.error':
-    'The projects endpoint is unavailable right now.',
+  'pages.projects.snapshot.error': 'The projects endpoint is unavailable right now.',
   'pages.projects.filters.label': 'Case filters',
   'pages.projects.filters.title':
-    'Slice the portfolio by context, environment, status, and reading order',
+    'Slice the portfolio by context, environment, status and reading order',
   'pages.projects.filters.description':
-    'The page stays lightweight in the UI while the project, experience, image, and link relationships come directly from the backend.',
+    'The page stays lightweight in the UI while the project, experience, image and link relationships come directly from the backend.',
   'pages.projects.filters.context': 'Context',
   'pages.projects.filters.environment': 'Environment',
   'pages.projects.filters.status': 'Status',
@@ -319,26 +301,22 @@ export const EN_TRANSLATIONS = {
   'pages.projects.catalog.label': 'Case studies',
   'pages.projects.catalog.title': 'Projects as cases, not just entries',
   'pages.projects.catalog.description':
-    'Each case connects timing, stack, delivery context, companies, deploys, repositories, and screenshots in the same reading block.',
+    'Each case connects timing, stack, delivery context, companies, deploys, repositories and screenshots in the same reading block.',
   'pages.projects.catalog.loading': 'Building project case studies...',
-  'pages.projects.catalog.error':
-    'The projects endpoint is unavailable right now.',
-  'pages.projects.catalog.empty':
-    'No published projects matched the current filters.',
+  'pages.projects.catalog.error': 'The projects endpoint is unavailable right now.',
+  'pages.projects.catalog.empty': 'No published projects matched the current filters.',
   'pages.projects.card.featured': 'Featured',
   'pages.projects.card.highlight': 'Highlight',
   'pages.projects.card.technologies': 'Technologies',
   'pages.projects.card.companies': 'Companies',
   'pages.projects.card.emptyCompanies': 'No linked companies yet.',
   'pages.projects.card.links': 'Links and references',
-  'pages.projects.card.emptyLinks':
-    'No published links were attached to this case yet.',
+  'pages.projects.card.emptyLinks': 'No published links were attached to this case yet.',
   'pages.projects.card.assets': 'Linked assets',
   'pages.projects.detail.linksCount': 'links',
   'pages.projects.detail.imagesCount': 'images',
   'pages.projects.detail.relatedExperiences': 'Related experiences',
-  'pages.projects.detail.noExperiences':
-    'No related experience has been published yet.',
+  'pages.projects.detail.noExperiences': 'No related experience has been published yet.',
   'pages.projects.detail.tags': 'Case tags',
   'pages.projects.detail.noTags': 'No published tags were attached.',
   'pages.projects.detail.clients': '// clients',
@@ -373,14 +351,13 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.sectionLabel': 'Foundation',
   'pages.dashboard.title': 'Portfolio analytics dashboard',
   'pages.dashboard.description':
-    'Aggregate signals across projects, stack, and career now live in their own route, fed by the public dashboard endpoints.',
+    'Aggregate signals across projects, stack and career now live in their own route, fed by the public dashboard endpoints.',
   'pages.dashboard.snapshot.label': 'Snapshot',
   'pages.dashboard.snapshot.title': 'Published footprint in one glance',
   'pages.dashboard.snapshot.description':
     'The sidebar concentrates the live headline counters that summarize the current public dataset.',
   'pages.dashboard.snapshot.loading': 'Loading dashboard aggregates...',
-  'pages.dashboard.snapshot.error':
-    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.snapshot.error': 'The dashboard aggregate endpoints are unavailable right now.',
   'pages.dashboard.snapshot.metrics.projects': 'Projects',
   'pages.dashboard.snapshot.metrics.experiences': 'Experiences',
   'pages.dashboard.snapshot.metrics.technologies': 'Technologies',
@@ -389,27 +366,23 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.snapshot.metrics.jobs': 'Roles',
   'pages.dashboard.snapshot.metrics.languages': 'Languages',
   'pages.dashboard.stacks.label': 'Stack distribution',
-  'pages.dashboard.stacks.title':
-    'Where the portfolio carries the most technical weight',
+  'pages.dashboard.stacks.title': 'Where the portfolio carries the most technical weight',
   'pages.dashboard.stacks.description':
     'Each stack area combines linked projects and mapped technologies so the strongest zones are obvious at a glance.',
   'pages.dashboard.stacks.loading': 'Loading stack distribution...',
-  'pages.dashboard.stacks.error':
-    'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.stacks.error': 'The dashboard aggregate endpoints are unavailable right now.',
   'pages.dashboard.stacks.empty': 'No stack distribution was returned yet.',
   'pages.dashboard.stacks.projects': 'projects',
   'pages.dashboard.stacks.technologies': 'technologies',
   'pages.dashboard.distribution.label': 'Project footprint',
   'pages.dashboard.distribution.title':
-    'Delivery context, environment spread, and highlight density',
+    'Delivery context, environment spread and highlight density',
   'pages.dashboard.distribution.description':
     'This block keeps the project catalog readable by separating featured volume from context and environment patterns.',
-  'pages.dashboard.distribution.loading':
-    'Loading project distribution aggregates...',
+  'pages.dashboard.distribution.loading': 'Loading project distribution aggregates...',
   'pages.dashboard.distribution.error':
     'The dashboard aggregate endpoints are unavailable right now.',
-  'pages.dashboard.distribution.empty':
-    'No project distribution data was returned yet.',
+  'pages.dashboard.distribution.empty': 'No project distribution data was returned yet.',
   'pages.dashboard.distribution.featured': 'Featured',
   'pages.dashboard.distribution.highlighted': 'Highlighted',
   'pages.dashboard.distribution.total': 'Total projects',
@@ -418,13 +391,11 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.technology.label': 'Technology usage',
   'pages.dashboard.technology.title': 'Technology usage signals',
   'pages.dashboard.technology.description':
-    'Top technologies and their frequency, context, and source patterns come straight from the aggregate API relations.',
-  'pages.dashboard.technology.loading':
-    'Loading technology usage aggregates...',
+    'Top technologies and their frequency, context and source patterns come straight from the aggregate API relations.',
+  'pages.dashboard.technology.loading': 'Loading technology usage aggregates...',
   'pages.dashboard.technology.error':
     'The dashboard aggregate endpoints are unavailable right now.',
-  'pages.dashboard.technology.empty':
-    'No technology usage aggregates were returned yet.',
+  'pages.dashboard.technology.empty': 'No technology usage aggregates were returned yet.',
   'pages.dashboard.technology.levels': 'Levels',
   'pages.dashboard.technology.frequencies': 'Frequencies',
   'pages.dashboard.technology.contexts': 'Contexts',
@@ -433,13 +404,10 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.timeline.label': 'Career',
   'pages.dashboard.timeline.title': 'Career focus timeline',
   'pages.dashboard.timeline.description':
-    'The public professional timeline becomes an analytical layer that shows active chapters, highlight density, and project/customer spread.',
-  'pages.dashboard.timeline.loading':
-    'Loading professional timeline aggregates...',
-  'pages.dashboard.timeline.error':
-    'The dashboard aggregate endpoints are unavailable right now.',
-  'pages.dashboard.timeline.empty':
-    'No professional timeline items were returned yet.',
+    'The public professional timeline becomes an analytical layer that shows active chapters, highlight density and project/customer spread.',
+  'pages.dashboard.timeline.loading': 'Loading professional timeline aggregates...',
+  'pages.dashboard.timeline.error': 'The dashboard aggregate endpoints are unavailable right now.',
+  'pages.dashboard.timeline.empty': 'No professional timeline items were returned yet.',
   'pages.dashboard.timeline.current': 'Current',
   'pages.dashboard.timeline.highlight': 'Highlight',
   'pages.dashboard.timeline.customers': 'Customers',
@@ -450,13 +418,11 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.highlights.label': 'Highlights',
   'pages.dashboard.highlights.title': 'Portfolio highlights',
   'pages.dashboard.highlights.description':
-    'Featured entities from the backend stay visible here as proof points across projects, experience, and technology.',
-  'pages.dashboard.highlights.loading':
-    'Loading highlighted portfolio entities...',
+    'Featured entities from the backend stay visible here as proof points across projects, experience and technology.',
+  'pages.dashboard.highlights.loading': 'Loading highlighted portfolio entities...',
   'pages.dashboard.highlights.error':
     'The dashboard aggregate endpoints are unavailable right now.',
-  'pages.dashboard.highlights.empty':
-    'No highlighted portfolio items were returned yet.',
+  'pages.dashboard.highlights.empty': 'No highlighted portfolio items were returned yet.',
   'pages.dashboard.highlights.featured': 'Featured',
   'taxonomy.dashboard.source.experience': 'Experience',
   'taxonomy.dashboard.source.project': 'Project',

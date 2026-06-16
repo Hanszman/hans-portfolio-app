@@ -12,14 +12,12 @@ export const createExperiencesCollectionResponse = (
       companyName: 'Stefanini Group',
       titlePt: 'Experiencia em Stefanini Group',
       titleEn: 'Experience at Stefanini Group',
-      summaryPt:
-        'Entrega de produtos corporativos com Angular, integracoes e squads distribuidas.',
-      summaryEn:
-        'Delivery of enterprise Angular products, integrations, and distributed squads.',
+      summaryPt: 'Entrega de produtos corporativos com Angular, integracoes e squads distribuidas.',
+      summaryEn: 'Delivery of enterprise Angular products, integrations and distributed squads.',
       descriptionPt:
         'Capitulo focado em plataformas front-end, contratos com APIs, design systems e jornadas corporativas para clientes de grande porte.',
       descriptionEn:
-        'A chapter focused on front-end platforms, API contracts, design systems, and enterprise journeys for large clients.',
+        'A chapter focused on front-end platforms, API contracts, design systems and enterprise journeys for large clients.',
       startDate: '2021-09-23T00:00:00.000Z',
       endDate: null,
       isCurrent: true,
@@ -246,11 +244,9 @@ export const createExperiencesCollectionResponse = (
             titleEn: 'Customer & Dealer Transformation App',
             shortDescriptionPt:
               'Fluxos de agendamento, manutencao e atendimento para a operacao Ford.',
-            shortDescriptionEn:
-              'Scheduling, maintenance, and service flows for the Ford operation.',
+            shortDescriptionEn: 'Scheduling, maintenance and service flows for the Ford operation.',
             fullDescriptionPt: 'Projeto corporativo com forte frente Angular.',
-            fullDescriptionEn:
-              'Enterprise project with a strong Angular front-end focus.',
+            fullDescriptionEn: 'Enterprise project with a strong Angular front-end focus.',
             context: 'PROFESSIONAL',
             status: 'IN_PROGRESS',
             environment: 'FULLSTACK',
@@ -273,10 +269,8 @@ export const createExperiencesCollectionResponse = (
             slug: 'stefanini-ale',
             titlePt: 'Clube Ale',
             titleEn: 'Clube Ale',
-            shortDescriptionPt:
-              'Sistema de fidelidade e resgate de premios para o posto Ale.',
-            shortDescriptionEn:
-              'Loyalty and rewards redemption system for Ale gas stations.',
+            shortDescriptionPt: 'Sistema de fidelidade e resgate de premios para o posto Ale.',
+            shortDescriptionEn: 'Loyalty and rewards redemption system for Ale gas stations.',
             fullDescriptionPt: 'Projeto de jornada digital para clientes finais.',
             fullDescriptionEn: 'Digital journey project for end customers.',
             context: 'PROFESSIONAL',
@@ -385,11 +379,11 @@ export const createExperiencesCollectionResponse = (
       summaryPt:
         'Ciclo com dashboards, telemetria, sistemas internos e contato direto com o dominio de energia.',
       summaryEn:
-        'A chapter with dashboards, telemetry, internal systems, and direct exposure to the energy domain.',
+        'A chapter with dashboards, telemetry, internal systems and direct exposure to the energy domain.',
       descriptionPt:
         'Atuacao full stack com forte frente visual, integracoes e leitura de contexto operacional.',
       descriptionEn:
-        'Full stack work with a strong visual surface, integrations, and operational context reading.',
+        'Full stack work with a strong visual surface, integrations and operational context reading.',
       startDate: '2020-04-01T00:00:00.000Z',
       endDate: '2021-09-23T00:00:00.000Z',
       isCurrent: false,
@@ -571,11 +565,11 @@ export const createExperiencesCollectionResponse = (
       summaryPt:
         'Projetos web para diferentes segmentos com foco em front-end, integracoes e manutencao.',
       summaryEn:
-        'Web projects across multiple industries with a focus on front-end, integrations, and maintenance.',
+        'Web projects across multiple industries with a focus on front-end, integrations and maintenance.',
       descriptionPt:
         'Desenvolvimento de aplicacoes web para escritorio de advocacia, locacao, pesquisa universitaria, setor publico e servicos financeiros.',
       descriptionEn:
-        'Developed web applications for law firms, rental services, university research, public sector, and financial services.',
+        'Developed web applications for law firms, rental services, university research, public sector and financial services.',
       startDate: '2018-09-03T00:00:00.000Z',
       endDate: '2020-04-01T00:00:00.000Z',
       isCurrent: false,

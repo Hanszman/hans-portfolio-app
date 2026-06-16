@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -38,9 +35,7 @@ const flushDashboardRequests = (
   httpTestingController
     .expectOne(DASHBOARD_REQUEST_URLS.professionalTimeline)
     .flush(response.professionalTimeline);
-  httpTestingController
-    .expectOne(DASHBOARD_REQUEST_URLS.highlights)
-    .flush(response.highlights);
+  httpTestingController.expectOne(DASHBOARD_REQUEST_URLS.highlights).flush(response.highlights);
 };
 
 describe('DashboardComponent', () => {
@@ -86,9 +81,7 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain(
-      'Aggregate signals across projects, stack, and career',
-    );
+    expect(compiled.textContent).toContain('Aggregate signals across projects, stack and career');
     expect(compiled.textContent).toContain('Stack distribution');
     expect(compiled.textContent).toContain('Project footprint');
     expect(compiled.textContent).toContain('Technology usage signals');
@@ -137,9 +130,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Dashboard analítico');
-    expect(compiled.textContent).toContain(
-      'Sinais agregados entre projetos, stack e carreira',
-    );
+    expect(compiled.textContent).toContain('Sinais agregados entre projetos, stack e carreira');
     expect(compiled.querySelector('hans-tag[label="Atual"]')).toBeTruthy();
   });
 
@@ -156,9 +147,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Dashboard analítico');
-    expect(compiled.textContent).toContain(
-      'Señales agregadas entre proyectos, stack y carrera',
-    );
+    expect(compiled.textContent).toContain('Señales agregadas entre proyectos, stack y carrera');
     expect(compiled.querySelector('hans-tag[label="Actual"]')).toBeTruthy();
   });
 
@@ -208,18 +197,10 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('No stack distribution was returned yet.');
-    expect(compiled.textContent).toContain(
-      'No project distribution data was returned yet.',
-    );
-    expect(compiled.textContent).toContain(
-      'No technology usage aggregates were returned yet.',
-    );
-    expect(compiled.textContent).toContain(
-      'No professional timeline items were returned yet.',
-    );
-    expect(compiled.textContent).toContain(
-      'No highlighted portfolio items were returned yet.',
-    );
+    expect(compiled.textContent).toContain('No project distribution data was returned yet.');
+    expect(compiled.textContent).toContain('No technology usage aggregates were returned yet.');
+    expect(compiled.textContent).toContain('No professional timeline items were returned yet.');
+    expect(compiled.textContent).toContain('No highlighted portfolio items were returned yet.');
   });
 
   it('should render an API error state when the dashboard aggregate requests fail', () => {

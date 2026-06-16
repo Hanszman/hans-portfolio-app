@@ -169,3 +169,4 @@ Como vc pode ver no print 4, esse filtro de type ficou muito enorme. Mude os 3 f
 
 PROJECTS:
 -Beleza! Agora dê uma olhada nos prints do layout do base44 para a tela de projects e faça o mesmo tipo de refatoração com ela igual fizemos com as outras 3 telas. Nessa tela vamos listar os projetos igual a forma como está no print, com esse filtro por ambiente/contexto e, ao clicar em qualquer projeto vai abrir esse modal central com as informações do projeto. Enfim, pode fazer por favor e tenha sempre em mente todos os padrões que descrevemos em todos os 3 agents.md.
+-Beleza, ficou ótimo, mas ainda tenho alguns questionamentos:

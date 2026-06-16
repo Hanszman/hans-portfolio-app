@@ -182,7 +182,7 @@ export const createDashboardOverviewResponse = (
         titlePt: 'TypeScript',
         titleEn: 'TypeScript',
         subtitlePt: 'Baseando componentes, contratos e integrações.',
-        subtitleEn: 'Powering components, contracts, and integrations.',
+        subtitleEn: 'Powering components, contracts and integrations.',
         icon: '/assets/img/skills/typescript.png',
         featured: false,
       },

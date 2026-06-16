@@ -10,10 +10,7 @@ import {
 
 describe('projects helper', () => {
   it('should map a project into a localized case-study card', () => {
-    const card = mapProjectToCaseCard(
-      createProjectsCollectionResponse().data[0],
-      'en-us',
-    );
+    const card = mapProjectToCaseCard(createProjectsCollectionResponse().data[0], 'en-us');
 
     expect(card.title).toBe("Github's API Consumer");
     expect(card.contextLabel).toBe('Personal');
@@ -44,7 +41,7 @@ describe('projects helper', () => {
     expect(card.assetCountLabel).toBe('3');
   });
 
-  it('should use localized fallbacks for unknown labels, empty companies, and missing alt text', () => {
+  it('should use localized fallbacks for unknown labels, empty companies and missing alt text', () => {
     const card = mapProjectToCaseCard(
       {
         ...createProjectsCollectionResponse().data[3],
@@ -213,11 +210,8 @@ describe('projects helper', () => {
     expect(card.galleryItems[0].description).toBeUndefined();
   });
 
-  it('should summarize featured density, in-progress work, linked assets, and richest stack', () => {
-    const metrics = buildProjectsSummaryMetrics(
-      createProjectsCollectionResponse().data,
-      'pt-br',
-    );
+  it('should summarize featured density, in-progress work, linked assets and richest stack', () => {
+    const metrics = buildProjectsSummaryMetrics(createProjectsCollectionResponse().data, 'pt-br');
 
     expect(metrics).toEqual([
       { label: 'Cases publicados', value: '4' },
@@ -242,7 +236,7 @@ describe('projects helper', () => {
     });
   });
 
-  it('should extract sorted contexts, environments, and statuses for filters', () => {
+  it('should extract sorted contexts, environments and statuses for filters', () => {
     const filters = extractProjectFilterValues(createProjectsCollectionResponse());
 
     expect(filters).toEqual({
@@ -252,7 +246,7 @@ describe('projects helper', () => {
     });
   });
 
-  it('should expose localized empty-state helpers for companies, links, and assets', () => {
+  it('should expose localized empty-state helpers for companies, links and assets', () => {
     expect(resolveProjectEmptyCompanyLabel('en-us')).toBe('No linked companies yet.');
     expect(resolveProjectEmptyLinksLabel('pt-br')).toBe(
       'Nenhum link publicado foi vinculado ainda.',

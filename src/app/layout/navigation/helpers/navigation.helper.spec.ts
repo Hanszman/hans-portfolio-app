@@ -40,7 +40,7 @@ describe('readNavigationItems', () => {
     ]);
   });
 
-  it('should ignore redirects, wildcard routes, and dynamic detail routes while keeping nested static children', () => {
+  it('should ignore redirects, wildcard routes and dynamic detail routes while keeping nested static children', () => {
     expect(
       readNavigationItems([
         {

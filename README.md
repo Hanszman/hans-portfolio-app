@@ -82,7 +82,7 @@ npm run build
 - `computed()` and `effect()` as primary reactive tools
 - RxJS only when it is truly necessary
 - new template syntax with `@if` and `@for`
-- `input()`, `output()`, and `inject()` instead of legacy patterns when applicable
+- `input()`, `output()` and `inject()` instead of legacy patterns when applicable
 - zoneless change detection kept as part of the current app base
 - SCSS + TailwindCSS for styling
 - `hans-ui-design-lib` consumed via CDN/web components
@@ -102,7 +102,7 @@ This project must follow the current Angular direction consistently:
 - prefer signals-based state over RxJS-based local state
 - keep templates simple and move view-model logic to TypeScript when useful
 - feature-specific helpers must live inside a local `helpers/` folder near the component, page, or domain they support
-- every feature-local typing structure must live in that feature's own `*.types.ts` file, including interfaces, type aliases, view-models, local aggregate contracts, and component/page support constants tied to that model
+- every feature-local typing structure must live in that feature's own `*.types.ts` file, including interfaces, type aliases, view-models, local aggregate contracts and component/page support constants tied to that model
 - component/page `.ts` and local helper files must not keep inline interfaces or type aliases when those structures belong to the feature's code model; move them to the owning `*.types.ts` file
 - helpers should keep only helper functions and should not become a mixed file for contracts/constants
 - stylesheets must prefer Tailwind utilities through `@apply`; plain CSS/SCSS should only be used when there is no adequate Tailwind utility for that rule
@@ -116,7 +116,7 @@ Every component, page, service, helper, facade, mapper, or any other file with r
 The working goal for this remake is:
 
 - `100%` coverage for relevant files and lines
-- `100%` statements, branches, functions, and lines for each file with relevant behavior
+- `100%` statements, branches, functions and lines for each file with relevant behavior
 - explicit exclusions only for configuration, generated files, or trivial framework glue that adds no real value to execution-based coverage
 
 For implementation steps, always validate the repo with the relevant scripts:
@@ -217,12 +217,12 @@ The backend also normalizes media and URLs through relations, so the frontend sh
 
 At the moment, this repository already has the first public pages evolving on real backend data:
 
-- the app shell, strategic home, and experiences timeline are implemented
+- the app shell, strategic home and experiences timeline are implemented
 - the skills route now consumes the public `GET /technologies` collection with real `experienceMetrics`
-- the projects route now consumes the public `GET /projects` collection with linked technologies, links, screenshots, and related experiences
+- the projects route now consumes the public `GET /projects` collection with linked technologies, links, screenshots and related experiences
 - home consumes the public dashboard aggregate endpoints
-- dashboard now consumes `GET /dashboard` plus the specialized aggregate endpoints for stack distribution, project contexts, technology usage, professional timeline, and highlights
-- experiences consumes the public `GET /experiences` collection with related projects, customers, jobs, technologies, and image assets
+- dashboard now consumes `GET /dashboard` plus the specialized aggregate endpoints for stack distribution, project contexts, technology usage, professional timeline and highlights
+- experiences consumes the public `GET /experiences` collection with related projects, customers, jobs, technologies and image assets
 - the design library CDN is already wired
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 

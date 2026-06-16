@@ -15,10 +15,7 @@ import {
 
 describe('skills helper', () => {
   it('should map a technology into a localized skills card', () => {
-    const card = mapTechnologyToSkillCard(
-      createTechnologiesCollectionResponse().data[0],
-      'en-us',
-    );
+    const card = mapTechnologyToSkillCard(createTechnologiesCollectionResponse().data[0], 'en-us');
 
     expect(card.name).toBe('Angular');
     expect(card.subtitle).toBe('Frequent');
@@ -44,7 +41,7 @@ describe('skills helper', () => {
     expect(card.visualUrl).toContain('/assets/img/skills/angular.png');
   });
 
-  it('should map fallback labels, icons, and empty metrics when a technology has sparse data', () => {
+  it('should map fallback labels, icons and empty metrics when a technology has sparse data', () => {
     const card = mapTechnologyToSkillCard(
       {
         id: 'tech-custom',
@@ -90,30 +87,18 @@ describe('skills helper', () => {
   });
 
   it('should resolve backend and database stack filters', () => {
-    expect(resolveSkillStackKey({ slug: 'node-js', category: 'LANGUAGE' })).toBe(
-      'BACK_END',
-    );
-    expect(resolveSkillStackKey({ slug: 'mysql', category: 'DATABASE' })).toBe(
-      'DATABASES',
-    );
-    expect(resolveSkillStackKey({ slug: 'unity', category: 'TOOL' })).toBe(
-      'GAMES',
-    );
-    expect(resolveSkillStackKey({ slug: 'unknown-tool', category: 'TOOL' })).toBe(
-      'OTHERS',
-    );
+    expect(resolveSkillStackKey({ slug: 'node-js', category: 'LANGUAGE' })).toBe('BACK_END');
+    expect(resolveSkillStackKey({ slug: 'mysql', category: 'DATABASE' })).toBe('DATABASES');
+    expect(resolveSkillStackKey({ slug: 'unity', category: 'TOOL' })).toBe('GAMES');
+    expect(resolveSkillStackKey({ slug: 'unknown-tool', category: 'TOOL' })).toBe('OTHERS');
   });
 
   it('should resolve legacy technology types from the old portfolio catalog', () => {
     expect(resolveSkillTypeKey({ slug: 'javascript', category: 'LANGUAGE' })).toBe(
       'PROGRAMMING_LANGUAGES',
     );
-    expect(resolveSkillTypeKey({ slug: 'css', category: 'LANGUAGE' })).toBe(
-      'WEB_LANGUAGES',
-    );
-    expect(resolveSkillTypeKey({ slug: 'unity', category: 'TOOL' })).toBe(
-      'DEVELOPMENT_PLATFORMS',
-    );
+    expect(resolveSkillTypeKey({ slug: 'css', category: 'LANGUAGE' })).toBe('WEB_LANGUAGES');
+    expect(resolveSkillTypeKey({ slug: 'unity', category: 'TOOL' })).toBe('DEVELOPMENT_PLATFORMS');
     expect(resolveSkillTypeKey({ slug: 'unknown', category: 'DATABASE' })).toBe(
       'RELATIONAL_DATA_BASES',
     );
@@ -221,10 +206,7 @@ describe('skills helper', () => {
   });
 
   it('should summarize highlight density and strongest experience duration', () => {
-    const metrics = buildSkillsSummaryMetrics(
-      createTechnologiesCollectionResponse().data,
-      'pt-br',
-    );
+    const metrics = buildSkillsSummaryMetrics(createTechnologiesCollectionResponse().data, 'pt-br');
 
     expect(metrics).toEqual([
       { label: 'Tecnologias mapeadas', value: '4' },
@@ -425,10 +407,7 @@ describe('skills helper', () => {
   });
 
   it('should group technologies by category and sort them by total duration', () => {
-    const groups = buildSkillsGroups(
-      createTechnologiesCollectionResponse().data,
-      'en-us',
-    );
+    const groups = buildSkillsGroups(createTechnologiesCollectionResponse().data, 'en-us');
 
     expect(groups.map((group) => group.id)).toEqual([
       'DATABASE',
@@ -439,7 +418,7 @@ describe('skills helper', () => {
     expect(groups[2]?.items[0]?.name).toBe('Angular');
   });
 
-  it('should group unknown categories with fallback tone, icon, and sorting', () => {
+  it('should group unknown categories with fallback tone, icon and sorting', () => {
     const groups = buildSkillsGroups(
       [
         {
@@ -592,21 +571,13 @@ describe('skills helper', () => {
       'en-us',
     );
 
-    expect(groups[0]?.items.map((item) => item.name)).toEqual([
-      'Custom Beta',
-      'Custom Alpha',
-    ]);
+    expect(groups[0]?.items.map((item) => item.name)).toEqual(['Custom Beta', 'Custom Alpha']);
   });
 
   it('should extract sorted categories and levels for filters', () => {
     const filters = extractSkillFilterValues(createTechnologiesCollectionResponse());
 
-    expect(filters.categories).toEqual([
-      'DATABASE',
-      'DEVOPS',
-      'FRAMEWORK',
-      'LANGUAGE',
-    ]);
+    expect(filters.categories).toEqual(['DATABASE', 'DEVOPS', 'FRAMEWORK', 'LANGUAGE']);
     expect(filters.levels).toEqual(['ADVANCED', 'INTERMEDIATE']);
   });
 
@@ -627,21 +598,13 @@ describe('skills helper', () => {
       ],
     });
 
-    expect(filters.categories).toEqual([
-      'DATABASE',
-      'DEVOPS',
-      'FRAMEWORK',
-      'LANGUAGE',
-      'LIBRARY',
-    ]);
+    expect(filters.categories).toEqual(['DATABASE', 'DEVOPS', 'FRAMEWORK', 'LANGUAGE', 'LIBRARY']);
     expect(filters.levels).toEqual(['ADVANCED', 'INTERMEDIATE']);
   });
 
   it('should resolve skill visual URLs from fallback assets or return an empty string', () => {
     expect(resolveSkillVisualUrl('angular')).toContain('/assets/img/skills/angular.png');
-    expect(resolveSkillVisualUrl('react-native')).toContain(
-      '/assets/img/skills/reactnative.png',
-    );
+    expect(resolveSkillVisualUrl('react-native')).toContain('/assets/img/skills/reactnative.png');
     expect(resolveSkillVisualUrl('microsoft-sql-server')).toContain(
       '/assets/img/skills/sqlserver.png',
     );
@@ -659,8 +622,6 @@ describe('skills helper', () => {
       translateStaticKey('fr-fr' as never, 'taxonomy.skills.group.description', {
         count: '3',
       }),
-    ).toBe(
-      '3 technologies with real duration coverage by context.',
-    );
+    ).toBe('3 technologies with real duration coverage by context.');
   });
 });
