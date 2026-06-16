@@ -170,3 +170,7 @@ Como vc pode ver no print 4, esse filtro de type ficou muito enorme. Mude os 3 f
 PROJECTS:
 -Beleza! Agora dê uma olhada nos prints do layout do base44 para a tela de projects e faça o mesmo tipo de refatoração com ela igual fizemos com as outras 3 telas. Nessa tela vamos listar os projetos igual a forma como está no print, com esse filtro por ambiente/contexto e, ao clicar em qualquer projeto vai abrir esse modal central com as informações do projeto. Enfim, pode fazer por favor e tenha sempre em mente todos os padrões que descrevemos em todos os 3 agents.md.
 -Beleza, ficou ótimo, mas ainda tenho alguns questionamentos:
+Como vc pode ver no print 1, os cards de projects não estão renderizando as informações que estão sendo passadas para eles, identifique qual é o problema e corrija. Mas não deixe de usar o componente hans-card da nossa lib, use como exemplo o que temos nos cards de technology, talvez lá tenha alguma dica para resolver o problema, pois lá funciona usando o hans-card e na home também temos alguns exemplos que usam o card shared que por sua vez usa o hans-card.
+Como vc pode ver no print 2, todos os filtros estão em uma linha só, mas achei que ficou estranho, pode fazer essa quebra de linha que tinha no layout do base44, igual vc pode ver no print 3.
+Tanto no input search de projects como de technologies você não usou o hans-input da nossa lib, faça essa refatoração para usarmos por favor.
+Como vc pode ver no print 4, o modal também não está renderizando nada, olhe os exemplos dos outros modais para corrigir esse caso por favor.
