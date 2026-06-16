@@ -30,19 +30,7 @@
 }
 
 .projects-search {
-  @apply flex min-h-12 w-full max-w-sm items-center gap-3 rounded-xl border px-4;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
-  color: color-mix(in srgb, var(--text-color) 64%, transparent);
-}
-
-.projects-search input {
-  @apply w-full border-0 bg-transparent text-sm outline-none;
-  color: var(--text-color);
-}
-
-.projects-search input::placeholder {
-  color: color-mix(in srgb, var(--text-color) 52%, transparent);
+  @apply block w-full max-w-sm;
 }
 
 .projects-filter-row {
@@ -84,11 +72,23 @@
 
 @media (min-width: 768px) {
   .projects-toolbar {
-    grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr) auto;
-    @apply items-end;
+    grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
+    @apply items-start;
+  }
+
+  .projects-search {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .projects-filter-row {
+    @apply col-span-2;
+    grid-row: 2;
   }
 
   .projects-total {
-    @apply justify-self-end pb-2;
+    grid-column: 2;
+    grid-row: 1;
+    @apply justify-self-end pt-3;
   }
 }

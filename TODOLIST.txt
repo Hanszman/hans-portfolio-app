@@ -174,3 +174,7 @@ Como vc pode ver no print 1, os cards de projects não estão renderizando as in
 Como vc pode ver no print 2, todos os filtros estão em uma linha só, mas achei que ficou estranho, pode fazer essa quebra de linha que tinha no layout do base44, igual vc pode ver no print 3.
 Tanto no input search de projects como de technologies você não usou o hans-input da nossa lib, faça essa refatoração para usarmos por favor.
 Como vc pode ver no print 4, o modal também não está renderizando nada, olhe os exemplos dos outros modais para corrigir esse caso por favor.
+-Beleza, ficou ótimo, mas ainda tenho alguns questionamentos:
+Input não está dando pra escrever, se precisar corrija na lib. Input deveria manter o ícone de Search, usando o componente hans-icon da lib também.
+Use o mesmo padrão de cores, componentização e click-modal pras tecnologias e informações no modal e card dos projetos.
+Padronize os tamanhos dos cards.

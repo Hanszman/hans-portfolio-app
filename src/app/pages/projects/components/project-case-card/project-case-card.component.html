@@ -6,9 +6,13 @@
 >
   <hans-card
     class="project-case-card"
-    cardLayout="custom"
-    cardSize="lg"
-    cardVariant="outline"
+    [cardLayout]="'custom'"
+    [cardSize]="'large'"
+    [cardVariant]="'outline'"
+    [cardBackgroundColor]="'var(--card-background-color)'"
+    [cardBorderColor]="'var(--card-border-color)'"
+    [cardMutedColor]="'var(--card-muted-color)'"
+    [cardTextColor]="'var(--text-color)'"
   >
     <article class="project-case-card-content">
       <header class="project-case-card-header">

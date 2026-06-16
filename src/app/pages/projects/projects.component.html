@@ -12,15 +12,18 @@
       class="projects-toolbar"
       [attr.aria-label]="'pages.projects.filters.label' | translate"
     >
-      <label class="projects-search">
-        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
-        <input
-          type="search"
-          [value]="searchTerm()"
-          [placeholder]="'pages.projects.search.placeholder' | translate"
-          (input)="updateSearchTerm($event)"
-        />
-      </label>
+      <hans-input
+        class="projects-search"
+        inputId="projects-search"
+        inputType="text"
+        inputColor="base"
+        inputSize="medium"
+        [value]="searchTerm()"
+        [placeholder]="'pages.projects.search.placeholder' | translate"
+        [attr.aria-label]="'pages.projects.search.placeholder' | translate"
+        (change)="updateSearchTerm($event)"
+        (input)="updateSearchTerm($event)"
+      ></hans-input>
 
       <div class="projects-filter-row">
         <span>{{ 'pages.projects.filters.environment' | translate }}:</span>

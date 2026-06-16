@@ -62,29 +62,7 @@
 }
 
 .skills-search {
-  @apply flex max-w-md items-center gap-3 rounded-xl border px-4 py-3;
-  background-color: color-mix(
-    in srgb,
-    var(--background-color) 90%,
-    var(--base-neutral-color)
-  );
-  border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
-  color: color-mix(in srgb, var(--text-color) 64%, transparent);
-}
-
-.skills-search:focus-within {
-  border-color: var(--primary-default-color);
-  box-shadow: 0 0 0 0.2rem
-    color-mix(in srgb, var(--primary-default-color) 14%, transparent);
-}
-
-.skills-search input {
-  @apply min-w-0 flex-1 border-0 bg-transparent p-0 text-sm outline-none;
-  color: var(--text-color);
-}
-
-.skills-search input::placeholder {
-  color: color-mix(in srgb, var(--text-color) 48%, transparent);
+  @apply block max-w-md;
 }
 
 .skills-filter-grid {

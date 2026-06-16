@@ -29,6 +29,7 @@ describe('ProjectsComponent', () => {
     const elementNames = [
       'hans-card',
       'hans-icon',
+      'hans-input',
       'hans-tag',
       'hans-modal',
       'hans-loading',

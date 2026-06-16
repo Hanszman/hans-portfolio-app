@@ -23,7 +23,14 @@ const flushTechnologiesRequest = (
 
 describe('SkillsComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-card', 'hans-icon', 'hans-tag', 'hans-modal', 'hans-select-option'];
+    const elementNames = [
+      'hans-card',
+      'hans-icon',
+      'hans-input',
+      'hans-tag',
+      'hans-modal',
+      'hans-select-option',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -117,6 +124,7 @@ describe('SkillsComponent', () => {
       selectLevelFilterFromEvent: (event: Event) => void;
       selectTypeFilterFromEvent: (event: Event) => void;
       updateSearchTerm: (event: Event) => void;
+      searchTerm: () => string;
     };
 
     component.selectStackFilter('DATABASES');
@@ -157,12 +165,10 @@ describe('SkillsComponent', () => {
 
     component.selectLevelFilter('ALL');
     component.selectTypeFilter('ALL');
-    const searchInput = compiled.querySelector('.skills-search input') as HTMLInputElement;
-    searchInput.value = 'type';
-    searchInput.dispatchEvent(new Event('input'));
+    component.updateSearchTerm(new CustomEvent('change', { detail: { value: 'type' } }));
     fixture.detectChanges();
 
-    expect(searchInput.value).toBe('type');
+    expect(component.searchTerm()).toBe('type');
     expect(technologiesText()).toContain('TypeScript');
     expect(technologiesText()).not.toContain('Angular');
   });

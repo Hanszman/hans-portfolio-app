@@ -51,15 +51,18 @@
         </h2>
       </header>
 
-      <label class="skills-search" [attr.aria-label]="'pages.skills.search.placeholder' | translate">
-        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
-        <input
-          type="search"
-          [value]="searchTerm()"
-          [placeholder]="'pages.skills.search.placeholder' | translate"
-          (input)="updateSearchTerm($event)"
-        />
-      </label>
+      <hans-input
+        class="skills-search"
+        inputId="skills-search"
+        inputType="text"
+        inputColor="base"
+        inputSize="medium"
+        [value]="searchTerm()"
+        [placeholder]="'pages.skills.search.placeholder' | translate"
+        [attr.aria-label]="'pages.skills.search.placeholder' | translate"
+        (change)="updateSearchTerm($event)"
+        (input)="updateSearchTerm($event)"
+      ></hans-input>
 
       <div class="skills-filter-grid">
         <hans-select-option

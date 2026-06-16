@@ -12,6 +12,7 @@ import { ProjectsService } from '../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
+import { getHansInputEventValue } from '../../shared/helpers/hans-input-event.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
 import { ProjectDetailModalComponent } from './components/project-detail-modal/project-detail-modal.component';
@@ -99,7 +100,7 @@ export class ProjectsComponent {
   }
 
   protected updateSearchTerm(event: Event): void {
-    this.searchTermSignal.set((event.target as HTMLInputElement).value);
+    this.searchTermSignal.set(getHansInputEventValue(event));
   }
 
   protected selectContext(value: ProjectContextFilterValue): void {
