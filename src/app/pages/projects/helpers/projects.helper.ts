@@ -16,11 +16,15 @@ import {
   PROJECT_ENVIRONMENT_LABEL_KEYS,
   PROJECT_FALLBACK_LABEL_KEYS,
   PROJECT_LINK_TYPE_LABEL_KEYS,
+  PROJECT_STACK_GROUP_LABEL_KEYS,
   PROJECT_STATUS_LABEL_KEYS,
   PROJECT_SUMMARY_LABEL_KEYS,
+  PROJECT_TECHNOLOGY_STACK_GROUPS,
+  PROJECT_VISIBLE_TECHNOLOGY_COUNT,
   ProjectCaseViewModel,
   ProjectFilterValues,
   ProjectLinkViewModel,
+  ProjectStackGroupViewModel,
   ProjectSummaryMetricViewModel,
 } from '../projects.types';
 
@@ -83,6 +87,57 @@ const mapProjectLink = (
   typeLabel: resolveCatalogLabel(locale, relation.link.type, PROJECT_LINK_TYPE_LABEL_KEYS),
 });
 
+const resolveTechnologyStackGroup = (
+  technologySlug: string,
+  technologyCategory: string,
+): keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS => {
+  const slugGroup = PROJECT_TECHNOLOGY_STACK_GROUPS[technologySlug];
+
+  if (slugGroup) {
+    return slugGroup;
+  }
+
+  if (technologyCategory === 'DATABASE') {
+    return 'databases';
+  }
+
+  return 'others';
+};
+
+const buildProjectStackGroups = (
+  relations: ProjectCollectionItemResponse['technologies'],
+): readonly ProjectStackGroupViewModel[] => {
+  const groupedTechnologies = new Map<
+    keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS,
+    string[]
+  >([
+    ['frontend', []],
+    ['backend', []],
+    ['databases', []],
+    ['others', []],
+  ]);
+
+  for (const { technology } of relations) {
+    groupedTechnologies
+      .get(resolveTechnologyStackGroup(technology.slug, technology.category))
+      ?.push(technology.name);
+  }
+
+  return [...groupedTechnologies.entries()]
+    .map(([group, technologies]) => ({
+      labelKey: PROJECT_STACK_GROUP_LABEL_KEYS[group],
+      technologies: dedupe(technologies),
+    }))
+    .filter((group) => group.technologies.length > 0);
+};
+
+const resolveProjectFilterContext = (
+  context: string,
+): ProjectCaseViewModel['filterContext'] =>
+  context === 'PROFESSIONAL' || context === 'ACADEMIC' || context === 'PERSONAL'
+    ? context
+    : 'ALL';
+
 export const mapProjectToCaseCard = (
   project: ProjectCollectionItemResponse,
   locale: AppLocale,
@@ -140,12 +195,17 @@ export const mapProjectToCaseCard = (
       project.environment,
       PROJECT_ENVIRONMENT_LABEL_KEYS,
     ),
+    filterContext: resolveProjectFilterContext(project.context),
+    stackGroups: buildProjectStackGroups(project.technologies),
     dateRangeLabel: formatProjectDateRange(project.startDate, project.endDate, locale),
     isFeatured: project.featured,
     isHighlight: project.highlight,
     companyNames,
-    technologies: technologies.slice(0, 8),
-    extraTechnologyCount: Math.max(technologies.length - 8, 0),
+    technologies: technologies.slice(0, PROJECT_VISIBLE_TECHNOLOGY_COUNT),
+    extraTechnologyCount: Math.max(
+      technologies.length - PROJECT_VISIBLE_TECHNOLOGY_COUNT,
+      0,
+    ),
     links: project.links.map((relation) => mapProjectLink(relation, locale)),
     imageUrl: buildAssetUrl(projectImage?.imageAsset.filePath),
     imageAlt:

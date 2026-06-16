@@ -86,7 +86,7 @@ describe('app routes', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/projects');
 
-    expect(harness.routeNativeElement?.textContent).toContain('Project case studies');
+    expect(harness.routeNativeElement?.textContent).toContain('Projects');
   });
 
   it('should redirect unknown routes to the strategic home route', async () => {

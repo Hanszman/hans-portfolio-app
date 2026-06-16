@@ -17,6 +17,13 @@ describe('ProjectCaseCardComponent', () => {
     contextLabel: 'Profissional',
     statusLabel: 'Concluido',
     environmentLabel: 'Full stack',
+    filterContext: 'PROFESSIONAL',
+    stackGroups: [
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: ['Angular', 'TypeScript'],
+      },
+    ],
     dateRangeLabel: 'Jan 2024 - Atual',
     isFeatured: true,
     isHighlight: false,
@@ -33,7 +40,7 @@ describe('ProjectCaseCardComponent', () => {
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-icon', 'hans-tag', 'hans-button']) {
+    for (const elementName of ['hans-card', 'hans-icon', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -57,6 +64,7 @@ describe('ProjectCaseCardComponent', () => {
 
     expect(compiled.textContent).toContain('Project');
     expect(compiled.textContent).toContain('Summary');
+    expect(compiled.textContent).toContain('+1');
     expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(2);
   });
 

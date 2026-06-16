@@ -2,57 +2,93 @@
   @apply block;
 }
 
-.projects-filter-summary span,
-.projects-summary-item small {
-  color: color-mix(in srgb, var(--text-color) 74%, transparent);
+.projects-page {
+  @apply mx-auto grid w-full max-w-6xl gap-10 py-8;
 }
 
-.projects-summary-grid,
-.projects-section,
-.projects-filters,
-.projects-case-list {
-  @apply grid;
+.projects-hero {
+  @apply grid max-w-2xl gap-4;
 }
 
-.projects-section,
-.projects-filters,
-.projects-case-list {
-  @apply gap-6;
+.projects-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.24em];
+  color: var(--primary-default-color);
 }
 
-.projects-summary-grid {
-  @apply gap-4;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+.projects-hero h1 {
+  @apply m-0 text-5xl font-semibold leading-none md:text-6xl;
+  color: var(--text-color);
 }
 
-.projects-summary-item {
-  @apply rounded-3xl border p-4;
-  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
+.projects-hero p {
+  @apply m-0 text-lg leading-8;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.projects-toolbar {
+  @apply grid gap-4;
+}
+
+.projects-search {
+  @apply flex min-h-12 w-full max-w-sm items-center gap-3 rounded-xl border px-4;
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 92%, var(--white));
+  color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
-.projects-summary-item span {
-  @apply block text-[0.72rem] font-bold uppercase tracking-[0.08em];
+.projects-search input {
+  @apply w-full border-0 bg-transparent text-sm outline-none;
+  color: var(--text-color);
 }
 
-.projects-summary-item strong {
-  @apply mt-2 block text-[1.1rem] font-semibold leading-tight;
+.projects-search input::placeholder {
+  color: color-mix(in srgb, var(--text-color) 52%, transparent);
 }
 
-.projects-summary-item small {
-  @apply mt-2 block text-[0.9rem] leading-6;
+.projects-filter-row {
+  @apply flex flex-wrap items-center gap-3;
 }
 
-.projects-filter-summary {
-  @apply mt-4 flex flex-wrap items-baseline gap-3;
+.projects-filter-row > span,
+.projects-total {
+  @apply font-mono text-xs font-medium;
+  color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
-.projects-filter-summary strong {
-  @apply text-2xl;
+.projects-filter-list {
+  @apply flex flex-wrap gap-2;
+}
+
+.projects-filter-chip {
+  @apply rounded-full border px-4 py-2 text-sm font-medium transition;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.projects-filter-chip:hover,
+.projects-filter-chip-active {
+  border-color: var(--primary-default-color);
+  background-color: var(--primary-default-color);
+  color: var(--primary-text-color);
+  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--primary-default-color) 22%, transparent);
+}
+
+.projects-total {
+  @apply justify-self-start;
+}
+
+.projects-grid {
+  @apply grid gap-5 md:grid-cols-2 xl:grid-cols-3;
 }
 
 @media (min-width: 768px) {
-  .projects-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .projects-toolbar {
+    grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr) auto;
+    @apply items-end;
+  }
+
+  .projects-total {
+    @apply justify-self-end pb-2;
   }
 }

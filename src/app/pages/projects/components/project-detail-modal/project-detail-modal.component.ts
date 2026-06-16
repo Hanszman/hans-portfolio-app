@@ -2,14 +2,11 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  computed,
-  inject,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { TranslationService } from '../../../../core/translation/translation.service';
-import { ProjectCaseViewModel, ProjectChartSeries } from '../../projects.types';
+import { ProjectCaseViewModel } from '../../projects.types';
 
 @Component({
   selector: 'app-project-detail-modal',
@@ -21,38 +18,9 @@ import { ProjectCaseViewModel, ProjectChartSeries } from '../../projects.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectDetailModalComponent {
-  private readonly translationService = inject(TranslationService);
-
   readonly project = input<ProjectCaseViewModel | null>(null);
   readonly isOpen = input(false);
   readonly closed = output<void>();
-
-  protected readonly chartCategories = computed(() => [
-    this.translationService.instant('pages.projects.detail.chart.technologies'),
-    this.translationService.instant('pages.projects.detail.chart.companies'),
-    this.translationService.instant('pages.projects.detail.chart.links'),
-    this.translationService.instant('pages.projects.detail.chart.images'),
-  ]);
-
-  protected readonly chartSeries = computed<readonly ProjectChartSeries[]>(() => {
-    const project = this.project();
-
-    if (!project) {
-      return [];
-    }
-
-    return [
-      {
-        name: this.translationService.instant('pages.projects.detail.chart.series'),
-        data: [
-          project.technologies.length + project.extraTechnologyCount,
-          project.companyNames.length,
-          project.links.length,
-          project.galleryItems.length,
-        ],
-      },
-    ];
-  });
 
   protected requestClose(): void {
     this.closed.emit();

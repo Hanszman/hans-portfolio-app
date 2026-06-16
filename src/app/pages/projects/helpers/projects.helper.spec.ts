@@ -17,8 +17,23 @@ describe('projects helper', () => {
 
     expect(card.title).toBe("Github's API Consumer");
     expect(card.contextLabel).toBe('Personal');
+    expect(card.filterContext).toBe('PERSONAL');
     expect(card.statusLabel).toBe('In progress');
     expect(card.environmentLabel).toBe('Full stack');
+    expect(card.stackGroups).toEqual([
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: ['React'],
+      },
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.backend',
+        technologies: ['Node.js'],
+      },
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.others',
+        technologies: ['Vercel'],
+      },
+    ]);
     expect(card.links[0]).toEqual({
       id: 'link-deploy-1',
       url: 'https://github-consumer-frontend.vercel.app/',
@@ -93,6 +108,35 @@ describe('projects helper', () => {
     );
 
     expect(card.tagLabels).toEqual(['Angular PT']);
+  });
+
+  it('should group unmapped database technologies as databases', () => {
+    const card = mapProjectToCaseCard(
+      {
+        ...createProjectsCollectionResponse().data[0],
+        technologies: [
+          {
+            projectId: 'project-consumer',
+            technologyId: 'tech-custom-database',
+            technology: {
+              ...createProjectsCollectionResponse().data[0].technologies[0].technology,
+              id: 'tech-custom-database',
+              slug: 'custom-database',
+              name: 'Custom DB',
+              category: 'DATABASE',
+            },
+          },
+        ],
+      },
+      'en-us',
+    );
+
+    expect(card.stackGroups).toEqual([
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        technologies: ['Custom DB'],
+      },
+    ]);
   });
 
   it('should use the untitled-link fallback and sort project images by relation order', () => {

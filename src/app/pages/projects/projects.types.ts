@@ -35,6 +35,8 @@ export interface ProjectCaseViewModel {
   contextLabel: string;
   statusLabel: string;
   environmentLabel: string;
+  filterContext: ProjectContextFilterValue;
+  stackGroups: readonly ProjectStackGroupViewModel[];
   dateRangeLabel: string;
   isFeatured: boolean;
   isHighlight: boolean;
@@ -48,6 +50,11 @@ export interface ProjectCaseViewModel {
   experienceTitles: readonly string[];
   tagLabels: readonly string[];
   galleryItems: readonly ProjectGalleryItemViewModel[];
+}
+
+export interface ProjectStackGroupViewModel {
+  labelKey: AppTranslationKey;
+  technologies: readonly string[];
 }
 
 export interface ProjectFilterValues {
@@ -74,6 +81,26 @@ export interface ProjectsSelectEvent extends Event {
   detail: ProjectsSelectEventDetail;
 }
 
+export type ProjectContextFilterValue =
+  | 'ALL'
+  | 'PROFESSIONAL'
+  | 'ACADEMIC'
+  | 'PERSONAL';
+
+export interface ProjectContextFilterViewModel {
+  labelKey: AppTranslationKey;
+  value: ProjectContextFilterValue;
+}
+
+export const PROJECT_CONTEXT_FILTERS: readonly ProjectContextFilterViewModel[] = [
+  { labelKey: 'taxonomy.projects.filters.allContexts', value: 'ALL' },
+  { labelKey: 'taxonomy.skills.context.professional', value: 'PROFESSIONAL' },
+  { labelKey: 'taxonomy.projects.context.formation', value: 'ACADEMIC' },
+  { labelKey: 'taxonomy.skills.context.personal', value: 'PERSONAL' },
+];
+
+export const PROJECT_VISIBLE_TECHNOLOGY_COUNT = 5;
+
 export const PROJECT_FILTER_ALL_LABEL_KEYS = {
   contexts: 'taxonomy.projects.filters.allContexts',
   environments: 'taxonomy.projects.filters.allEnvironments',
@@ -83,7 +110,7 @@ export const PROJECT_FILTER_ALL_LABEL_KEYS = {
 export const PROJECT_CONTEXT_LABEL_KEYS: Record<string, AppTranslationKey> = {
   PROFESSIONAL: 'taxonomy.skills.context.professional',
   PERSONAL: 'taxonomy.skills.context.personal',
-  ACADEMIC: 'taxonomy.skills.context.academic',
+  ACADEMIC: 'taxonomy.projects.context.formation',
   STUDY: 'taxonomy.skills.context.study',
 };
 
@@ -127,3 +154,40 @@ export const PROJECT_FALLBACK_LABEL_KEYS = {
   noCompanies: 'taxonomy.projects.fallback.noCompanies',
   untitledLink: 'taxonomy.projects.fallback.untitledLink',
 } as const satisfies Record<string, AppTranslationKey>;
+
+export const PROJECT_STACK_GROUP_LABEL_KEYS = {
+  frontend: 'pages.experiences.detail.stackGroups.frontend',
+  backend: 'pages.experiences.detail.stackGroups.backend',
+  databases: 'pages.experiences.detail.stackGroups.databases',
+  others: 'pages.experiences.detail.stackGroups.others',
+} as const satisfies Record<string, AppTranslationKey>;
+
+export const PROJECT_TECHNOLOGY_STACK_GROUPS: Record<string, keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS> =
+  {
+    angular: 'frontend',
+    react: 'frontend',
+    typescript: 'frontend',
+    javascript: 'frontend',
+    html: 'frontend',
+    css: 'frontend',
+    sass: 'frontend',
+    bootstrap: 'frontend',
+    jquery: 'frontend',
+    chart: 'frontend',
+    'chart-js': 'frontend',
+    node: 'backend',
+    'node-js': 'backend',
+    express: 'backend',
+    'express-js': 'backend',
+    knex: 'backend',
+    'knex-js': 'backend',
+    swagger: 'backend',
+    php: 'backend',
+    laravel: 'backend',
+    mysql: 'databases',
+    postgresql: 'databases',
+    sqlserver: 'databases',
+    'sql-server': 'databases',
+    'microsoft-sql-server': 'databases',
+    mongodb: 'databases',
+  };

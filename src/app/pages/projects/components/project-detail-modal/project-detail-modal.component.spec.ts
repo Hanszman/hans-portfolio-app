@@ -1,7 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
-import { TranslationService } from '../../../../core/translation/translation.service';
 import { ProjectCaseViewModel } from '../../projects.types';
 import { ProjectDetailModalComponent } from './project-detail-modal.component';
 
@@ -17,6 +16,13 @@ describe('ProjectDetailModalComponent', () => {
     contextLabel: 'Profissional',
     statusLabel: 'Concluido',
     environmentLabel: 'Full stack',
+    filterContext: 'PROFESSIONAL',
+    stackGroups: [
+      {
+        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        technologies: ['Angular', 'TypeScript'],
+      },
+    ],
     dateRangeLabel: 'Jan 2024 - Atual',
     isFeatured: true,
     isHighlight: false,
@@ -35,7 +41,7 @@ describe('ProjectDetailModalComponent', () => {
   };
 
   beforeAll(() => {
-    for (const elementName of ['hans-modal', 'hans-tag', 'hans-chart', 'hans-carousel']) {
+    for (const elementName of ['hans-modal', 'hans-tag']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -45,11 +51,7 @@ describe('ProjectDetailModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProjectDetailModalComponent],
-      providers: [
-        provideAppTranslations(),
-        provideZonelessChangeDetection(),
-        TranslationService,
-      ],
+      providers: [provideAppTranslations(), provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectDetailModalComponent);
@@ -62,11 +64,10 @@ describe('ProjectDetailModalComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('hans-modal')).toBeTruthy();
-    expect(compiled.querySelector('hans-chart')).toBeTruthy();
-    expect(compiled.querySelector('hans-carousel')).toBeTruthy();
-    expect(compiled.textContent).toContain('Summary');
     expect(compiled.textContent).toContain('Description');
-    expect(compiled.textContent).toContain('Lead Front-End');
+    expect(compiled.textContent).toContain('// clients');
+    expect(compiled.textContent).toContain('// tech_stack');
+    expect(compiled.querySelector('hans-tag[label="Angular"]')).toBeTruthy();
     expect(compiled.textContent).toContain('Company');
   });
 
@@ -80,10 +81,22 @@ describe('ProjectDetailModalComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('returns an empty chart series when no project is selected', () => {
+  it('renders no projected detail body when no project is selected', () => {
     fixture.componentRef.setInput('project', null);
     fixture.detectChanges();
 
-    expect(fixture.componentInstance['chartSeries']()).toEqual([]);
+    expect((fixture.nativeElement as HTMLElement).textContent).not.toContain(
+      'Description',
+    );
+  });
+
+  it('uses the summary when the detailed description is empty', () => {
+    fixture.componentRef.setInput('project', {
+      ...project,
+      description: '',
+    });
+    fixture.detectChanges();
+
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Summary');
   });
 });

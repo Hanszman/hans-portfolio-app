@@ -1,140 +1,80 @@
 <app-wrapper>
-  <div page-main class="projects-hero">
-    <app-intro
-      [sectionLabel]="'pages.projects.sectionLabel' | translate"
-      [title]="'pages.projects.title' | translate"
-      [description]="'pages.projects.description' | translate"
-    />
-  </div>
+  <section page-main class="projects-page">
+    <header class="projects-hero">
+      <span class="projects-eyebrow">
+        {{ 'pages.projects.sectionLabel' | translate }}
+      </span>
+      <h1>{{ 'pages.projects.title' | translate }}</h1>
+      <p>{{ 'pages.projects.description' | translate }}</p>
+    </header>
 
-  <app-container
-    page-sidebar
-    tone="secondary"
-    [label]="'pages.projects.snapshot.label' | translate"
-    [containerTitle]="'pages.projects.snapshot.title' | translate"
-    [description]="'pages.projects.snapshot.description' | translate"
-  >
+    <section
+      class="projects-toolbar"
+      [attr.aria-label]="'pages.projects.filters.label' | translate"
+    >
+      <label class="projects-search">
+        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
+        <input
+          type="search"
+          [value]="searchTerm()"
+          [placeholder]="'pages.projects.search.placeholder' | translate"
+          (input)="updateSearchTerm($event)"
+        />
+      </label>
+
+      <div class="projects-filter-row">
+        <span>{{ 'pages.projects.filters.environment' | translate }}:</span>
+
+        <div class="projects-filter-list">
+          @for (filter of contextFilters; track filter.value) {
+            <button
+              type="button"
+              class="projects-filter-chip"
+              [class.projects-filter-chip-active]="selectedContext() === filter.value"
+              (click)="selectContext(filter.value)"
+            >
+              {{ filter.labelKey | translate }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <span class="projects-total">
+        {{ filteredCountLabel() }}
+        {{ 'pages.projects.filters.total' | translate }}
+      </span>
+    </section>
+
     @if (isLoading()) {
       <app-info-state
         mode="loading"
-        [message]="'pages.projects.snapshot.loading' | translate"
-      />
+        [message]="'pages.projects.catalog.loading' | translate"
+      ></app-info-state>
     } @else if (hasError()) {
       <app-info-state
         mode="error"
-        [message]="'pages.projects.snapshot.error' | translate"
-      />
+        [message]="'pages.projects.catalog.error' | translate"
+      ></app-info-state>
+    } @else if (visibleProjectCases().length === 0) {
+      <app-info-state
+        mode="empty"
+        [message]="'pages.projects.catalog.empty' | translate"
+      ></app-info-state>
     } @else {
-      <dl class="projects-summary-grid">
-        @for (metric of summaryMetrics(); track metric.label) {
-          <div class="projects-summary-item">
-            <span>{{ metric.label }}</span>
-            <strong>{{ metric.value }}</strong>
-            @if (metric.supportingText) {
-              <small>{{ metric.supportingText }}</small>
-            }
-          </div>
+      <div class="projects-grid">
+        @for (project of visibleProjectCases(); track project.id) {
+          <app-project-case-card
+            [project]="project"
+            (openDetails)="openProjectDetails($event)"
+          ></app-project-case-card>
         }
-      </dl>
+      </div>
     }
-  </app-container>
-
-  <section page-content class="projects-section">
-    <app-container
-      tone="info"
-      [label]="'pages.projects.filters.label' | translate"
-      [containerTitle]="'pages.projects.filters.title' | translate"
-      [description]="'pages.projects.filters.description' | translate"
-    >
-      <div class="projects-filters">
-        <hans-dropdown
-          #contextDropdown
-          [options]="contextOptions()"
-          [triggerLabel]="'pages.projects.filters.context' | translate"
-          triggerColor="primary"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectContext($event)"
-        ></hans-dropdown>
-
-        <hans-dropdown
-          #environmentDropdown
-          [options]="environmentOptions()"
-          [triggerLabel]="'pages.projects.filters.environment' | translate"
-          triggerColor="secondary"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectEnvironment($event)"
-        ></hans-dropdown>
-
-        <hans-dropdown
-          #statusDropdown
-          [options]="statusOptions()"
-          [triggerLabel]="'pages.projects.filters.status' | translate"
-          triggerColor="success"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectStatus($event)"
-        ></hans-dropdown>
-
-        <hans-dropdown
-          #sortDropdown
-          [options]="sortOptions()"
-          [triggerLabel]="'pages.projects.filters.sort' | translate"
-          triggerColor="warning"
-          triggerShape="rounded"
-          triggerSize="small"
-          triggerVariant="default"
-          (select)="selectSort($event)"
-        ></hans-dropdown>
-      </div>
-
-      <div class="projects-filter-summary">
-        <span>{{ 'pages.projects.filters.total' | translate }}</span>
-        <strong>{{ filteredCountLabel() }}</strong>
-      </div>
-    </app-container>
-
-    <app-container
-      tone="success"
-      [label]="'pages.projects.catalog.label' | translate"
-      [containerTitle]="'pages.projects.catalog.title' | translate"
-      [description]="'pages.projects.catalog.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.projects.catalog.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.projects.catalog.error' | translate"
-        />
-      } @else if (projectCases().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.projects.catalog.empty' | translate"
-        />
-      } @else {
-        <div class="projects-case-list">
-          @for (project of projectCases(); track project.id) {
-            <app-project-case-card
-              [project]="project"
-              (openDetails)="openProjectDetails($event)"
-            />
-          }
-        </div>
-      }
-    </app-container>
   </section>
 
   <app-project-detail-modal
     [isOpen]="isDetailOpen()"
     [project]="selectedProject()"
     (closed)="closeProjectDetails()"
-  />
+  ></app-project-detail-modal>
 </app-wrapper>
