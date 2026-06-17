@@ -204,8 +204,12 @@ describe('ProjectsComponent', () => {
       projectCases: () => readonly ProjectCaseViewModel[];
       openProjectDetails: (project: ProjectCaseViewModel) => void;
       closeProjectDetails: () => void;
+      openTechnologyDetails: (technology: { name: string }) => void;
+      closeTechnologyDetails: () => void;
       selectedProject: () => ProjectCaseViewModel | null;
+      selectedTechnology: () => { name: string } | null;
       isDetailOpen: () => boolean;
+      isTechnologyModalOpen: () => boolean;
     };
 
     const project = component.projectCases()[0];
@@ -218,5 +222,15 @@ describe('ProjectsComponent', () => {
 
     expect(component.selectedProject()).toBeNull();
     expect(component.isDetailOpen()).toBeFalse();
+
+    component.openTechnologyDetails({ name: 'Angular' });
+
+    expect(component.selectedTechnology()?.name).toBe('Angular');
+    expect(component.isTechnologyModalOpen()).toBeTrue();
+
+    component.closeTechnologyDetails();
+
+    expect(component.selectedTechnology()).toBeNull();
+    expect(component.isTechnologyModalOpen()).toBeFalse();
   });
 });

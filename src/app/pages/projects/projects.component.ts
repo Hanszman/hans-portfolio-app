@@ -14,6 +14,8 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { getHansInputEventValue } from '../../shared/helpers/hans-input-event.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
 import { ProjectDetailModalComponent } from './components/project-detail-modal/project-detail-modal.component';
 import { mapProjectToCaseCard } from './helpers/projects.helper';
@@ -30,6 +32,7 @@ import {
     InfoStateComponent,
     ProjectCaseCardComponent,
     ProjectDetailModalComponent,
+    TechnologyModalComponent,
     TranslatePipe,
   ],
   templateUrl: './projects.component.html',
@@ -42,6 +45,7 @@ export class ProjectsComponent {
   private readonly translationService = inject(TranslationService);
   private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
   private readonly selectedProjectSignal = signal<ProjectCaseViewModel | null>(null);
+  private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
   private readonly selectedContextSignal = signal<ProjectContextFilterValue>('ALL');
   private readonly searchTermSignal = signal('');
 
@@ -49,6 +53,7 @@ export class ProjectsComponent {
   protected readonly hasError = signal(false);
   protected readonly projects = this.projectsSignal.asReadonly();
   protected readonly selectedProject = this.selectedProjectSignal.asReadonly();
+  protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
   protected readonly selectedContext = this.selectedContextSignal.asReadonly();
   protected readonly searchTerm = this.searchTermSignal.asReadonly();
   protected readonly contextFilters = PROJECT_CONTEXT_FILTERS;
@@ -80,6 +85,9 @@ export class ProjectsComponent {
   );
 
   protected readonly isDetailOpen = computed(() => this.selectedProject() !== null);
+  protected readonly isTechnologyModalOpen = computed(
+    () => this.selectedTechnology() !== null,
+  );
 
   constructor() {
     this.projectsService
@@ -113,5 +121,13 @@ export class ProjectsComponent {
 
   protected closeProjectDetails(): void {
     this.selectedProjectSignal.set(null);
+  }
+
+  protected openTechnologyDetails(technology: TechnologyModalItem): void {
+    this.selectedTechnologySignal.set(technology);
+  }
+
+  protected closeTechnologyDetails(): void {
+    this.selectedTechnologySignal.set(null);
   }
 }

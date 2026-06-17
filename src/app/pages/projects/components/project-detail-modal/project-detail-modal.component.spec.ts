@@ -20,14 +20,20 @@ describe('ProjectDetailModalComponent', () => {
     stackGroups: [
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
-        technologies: ['Angular', 'TypeScript'],
+        technologies: [
+          { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
+          { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+        ],
       },
     ],
     dateRangeLabel: 'Jan 2024 - Atual',
     isFeatured: true,
     isHighlight: false,
     companyNames: ['Company'],
-    technologies: ['Angular', 'TypeScript'],
+    technologies: [
+      { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
+      { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+    ],
     extraTechnologyCount: 0,
     links: [{ id: '1', url: 'https://example.com', label: 'Repo', typeLabel: 'GitHub' }],
     imageUrl: '',
@@ -98,5 +104,15 @@ describe('ProjectDetailModalComponent', () => {
     fixture.detectChanges();
 
     expect((fixture.nativeElement as HTMLElement).textContent).toContain('Summary');
+  });
+
+  it('emits technology detail requests', () => {
+    const component = fixture.componentInstance;
+    const spy = jasmine.createSpy('openTechnology');
+    component.openTechnology.subscribe(spy);
+
+    component['requestTechnologyDetails']({ name: 'Angular' });
+
+    expect(spy).toHaveBeenCalledWith({ name: 'Angular' });
   });
 });

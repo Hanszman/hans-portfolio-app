@@ -1,6 +1,7 @@
 import { buildAssetUrl } from '../../../core/api/api.config';
 import {
   ProjectCollectionItemResponse,
+  ProjectTechnologyResponse,
   ProjectsCollectionResponse,
 } from '../../../core/api/projects/projects.types';
 import {
@@ -11,6 +12,17 @@ import {
   AppLocale,
   AppTranslationKey,
 } from '../../../core/translation/translation.types';
+import {
+  resolveSkillStackKey,
+  resolveSkillTypeKey,
+  resolveSkillVisualUrl,
+} from '../../skills/helpers/skills.helper';
+import {
+  SKILL_FREQUENCY_LABEL_KEYS,
+  SKILL_LEVEL_LABEL_KEYS,
+  SKILL_STACK_LABEL_KEYS,
+  SKILL_TYPE_LABEL_KEYS,
+} from '../../skills/skills.types';
 import {
   PROJECT_CONTEXT_LABEL_KEYS,
   PROJECT_ENVIRONMENT_LABEL_KEYS,
@@ -26,6 +38,7 @@ import {
   ProjectLinkViewModel,
   ProjectStackGroupViewModel,
   ProjectSummaryMetricViewModel,
+  ProjectTechnologyTagViewModel,
 } from '../projects.types';
 
 const normalizeLabel = (value: string): string =>
@@ -37,6 +50,12 @@ const normalizeLabel = (value: string): string =>
     .join(' ');
 
 const dedupe = (values: readonly string[]): readonly string[] => [...new Set(values)];
+
+const dedupeProjectTechnologies = (
+  technologies: readonly ProjectTechnologyTagViewModel[],
+): readonly ProjectTechnologyTagViewModel[] => [
+  ...new Map(technologies.map((technology) => [technology.slug, technology])).values(),
+];
 
 const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
   new Intl.DateTimeFormat(locale, {
@@ -106,10 +125,11 @@ const resolveTechnologyStackGroup = (
 
 const buildProjectStackGroups = (
   relations: ProjectCollectionItemResponse['technologies'],
+  locale: AppLocale,
 ): readonly ProjectStackGroupViewModel[] => {
   const groupedTechnologies = new Map<
     keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS,
-    string[]
+    ProjectTechnologyTagViewModel[]
   >([
     ['frontend', []],
     ['backend', []],
@@ -120,13 +140,13 @@ const buildProjectStackGroups = (
   for (const { technology } of relations) {
     groupedTechnologies
       .get(resolveTechnologyStackGroup(technology.slug, technology.category))
-      ?.push(technology.name);
+      ?.push(mapProjectTechnologyTag(technology, locale));
   }
 
   return [...groupedTechnologies.entries()]
     .map(([group, technologies]) => ({
       labelKey: PROJECT_STACK_GROUP_LABEL_KEYS[group],
-      technologies: dedupe(technologies),
+      technologies: dedupeProjectTechnologies(technologies),
     }))
     .filter((group) => group.technologies.length > 0);
 };
@@ -138,12 +158,65 @@ const resolveProjectFilterContext = (
     ? context
     : 'ALL';
 
+const resolveNullableCatalogLabel = (
+  locale: AppLocale,
+  catalog: Record<string, AppTranslationKey>,
+  value: string | null,
+): string | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  return catalog[value] ? translateStaticKey(locale, catalog[value]) : normalizeLabel(value);
+};
+
+const mapProjectTechnologyTag = (
+  technology: ProjectTechnologyResponse,
+  locale: AppLocale,
+): ProjectTechnologyTagViewModel => {
+  const imageSrc = resolveSkillVisualUrl(technology.slug);
+  const stackKey = resolveSkillStackKey(technology);
+  const typeKey = resolveSkillTypeKey(technology);
+
+  return {
+    slug: technology.slug,
+    label: technology.name,
+    image: imageSrc
+      ? {
+          src: imageSrc,
+          alt: `${technology.name} icon`,
+        }
+      : null,
+    value: {
+      name: technology.name,
+      category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
+      stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
+      level: resolveNullableCatalogLabel(locale, SKILL_LEVEL_LABEL_KEYS, technology.level),
+      frequency: resolveNullableCatalogLabel(
+        locale,
+        SKILL_FREQUENCY_LABEL_KEYS,
+        technology.frequency,
+      ),
+      image: imageSrc
+        ? {
+            src: imageSrc,
+            alt: `${technology.name} icon`,
+          }
+        : null,
+    },
+  };
+};
+
 export const mapProjectToCaseCard = (
   project: ProjectCollectionItemResponse,
   locale: AppLocale,
 ): ProjectCaseViewModel => {
   const projectImage = [...project.imageAssets].sort((left, right) => left.sortOrder - right.sortOrder)[0];
-  const technologies = dedupe(project.technologies.map(({ technology }) => technology.name));
+  const technologies = dedupeProjectTechnologies(
+    project.technologies.map(({ technology }) =>
+      mapProjectTechnologyTag(technology, locale),
+    ),
+  );
   const companyNames = dedupe(
     project.experiences.map(({ experience }) => experience.companyName),
   );
@@ -196,7 +269,7 @@ export const mapProjectToCaseCard = (
       PROJECT_ENVIRONMENT_LABEL_KEYS,
     ),
     filterContext: resolveProjectFilterContext(project.context),
-    stackGroups: buildProjectStackGroups(project.technologies),
+    stackGroups: buildProjectStackGroups(project.technologies, locale),
     dateRangeLabel: formatProjectDateRange(project.startDate, project.endDate, locale),
     isFeatured: project.featured,
     isHighlight: project.highlight,

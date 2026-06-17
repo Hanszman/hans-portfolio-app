@@ -7,6 +7,14 @@ describe('getHansInputEventValue', () => {
     expect(getHansInputEventValue(event)).toBe('angular');
   });
 
+  it('returns the custom event detail target value', () => {
+    const event = new CustomEvent('change', {
+      detail: { target: { value: 'typescript' } },
+    });
+
+    expect(getHansInputEventValue(event)).toBe('typescript');
+  });
+
   it('returns the native target value', () => {
     const input = document.createElement('input');
     input.value = 'projects';

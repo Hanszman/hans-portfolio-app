@@ -18,12 +18,14 @@
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [value]="searchTerm()"
+        customClasses="hans-input-has-left-icon"
         [placeholder]="'pages.projects.search.placeholder' | translate"
         [attr.aria-label]="'pages.projects.search.placeholder' | translate"
         (change)="updateSearchTerm($event)"
         (input)="updateSearchTerm($event)"
-      ></hans-input>
+      >
+        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
+      </hans-input>
 
       <div class="projects-filter-row">
         <span>{{ 'pages.projects.filters.environment' | translate }}:</span>
@@ -69,6 +71,7 @@
           <app-project-case-card
             [project]="project"
             (openDetails)="openProjectDetails($event)"
+            (openTechnology)="openTechnologyDetails($event)"
           ></app-project-case-card>
         }
       </div>
@@ -78,6 +81,13 @@
   <app-project-detail-modal
     [isOpen]="isDetailOpen()"
     [project]="selectedProject()"
+    (openTechnology)="openTechnologyDetails($event)"
     (closed)="closeProjectDetails()"
   ></app-project-detail-modal>
+
+  <app-technology-modal
+    [isOpen]="isTechnologyModalOpen()"
+    [technology]="selectedTechnology()"
+    (closed)="closeTechnologyDetails()"
+  />
 </app-wrapper>

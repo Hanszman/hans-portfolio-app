@@ -21,14 +21,21 @@ describe('ProjectCaseCardComponent', () => {
     stackGroups: [
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
-        technologies: ['Angular', 'TypeScript'],
+        technologies: [
+          { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
+          { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+        ],
       },
     ],
     dateRangeLabel: 'Jan 2024 - Atual',
     isFeatured: true,
     isHighlight: false,
     companyNames: ['Company'],
-    technologies: ['Angular', 'TypeScript', 'Node.js'],
+    technologies: [
+      { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
+      { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+      { slug: 'node-js', label: 'Node.js', value: { name: 'Node.js' } },
+    ],
     extraTechnologyCount: 1,
     links: [{ id: '1', url: 'https://example.com', label: 'Repo', typeLabel: 'GitHub' }],
     imageUrl: '',
@@ -75,5 +82,37 @@ describe('ProjectCaseCardComponent', () => {
     component['requestDetails']();
 
     expect(spy).toHaveBeenCalledWith(project);
+  });
+
+  it('emits details request from keyboard activation', () => {
+    const spy = jasmine.createSpy('openDetails');
+    component.openDetails.subscribe(spy);
+    const event = new KeyboardEvent('keydown', { key: 'Enter' });
+    spyOn(event, 'preventDefault');
+
+    component['requestDetailsFromKeyboard'](event);
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(project);
+  });
+
+  it('ignores unrelated keyboard events', () => {
+    const spy = jasmine.createSpy('openDetails');
+    component.openDetails.subscribe(spy);
+
+    component['requestDetailsFromKeyboard'](
+      new KeyboardEvent('keydown', { key: 'Escape' }),
+    );
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('emits technology detail requests', () => {
+    const spy = jasmine.createSpy('openTechnology');
+    component.openTechnology.subscribe(spy);
+
+    component['requestTechnologyDetails']({ name: 'Angular' });
+
+    expect(spy).toHaveBeenCalledWith({ name: 'Angular' });
   });
 });

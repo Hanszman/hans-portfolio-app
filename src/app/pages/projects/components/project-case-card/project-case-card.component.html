@@ -1,8 +1,10 @@
-<button
-  type="button"
+<article
   class="project-case-card-trigger"
+  role="button"
+  tabindex="0"
   [attr.aria-label]="'common.actions.viewDetails' | translate"
   (click)="requestDetails()"
+  (keydown)="requestDetailsFromKeyboard($event)"
 >
   <hans-card
     class="project-case-card"
@@ -14,7 +16,7 @@
     [cardMutedColor]="'var(--card-muted-color)'"
     [cardTextColor]="'var(--text-color)'"
   >
-    <article class="project-case-card-content">
+    <div class="project-case-card-content">
       <header class="project-case-card-header">
         <h2>{{ project().title }}</h2>
 
@@ -39,11 +41,11 @@
 
       <div class="project-case-card-stack">
         @for (technology of project().technologies; track technology) {
-          <hans-tag
-            [attr.label]="technology"
-            tagColor="base"
-            tagSize="sm"
-          ></hans-tag>
+          <app-tag-button
+            [tag]="technology"
+            tagColor="info"
+            (selected)="requestTechnologyDetails($event)"
+          />
         }
 
         @if (project().extraTechnologyCount > 0) {
@@ -52,6 +54,6 @@
           </span>
         }
       </div>
-    </article>
+    </div>
   </hans-card>
-</button>
+</article>

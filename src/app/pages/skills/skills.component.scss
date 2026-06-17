@@ -62,7 +62,12 @@
 }
 
 .skills-search {
-  @apply block max-w-md;
+  @apply relative block max-w-md;
+}
+
+.skills-search hans-icon {
+  @apply pointer-events-none absolute left-4 top-1/2 z-[1] -translate-y-1/2;
+  color: color-mix(in srgb, var(--text-color) 56%, transparent);
 }
 
 .skills-filter-grid {

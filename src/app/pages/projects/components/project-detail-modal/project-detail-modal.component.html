@@ -50,11 +50,11 @@
 
               <div class="project-detail-modal-tags">
                 @for (technology of group.technologies; track technology) {
-                  <hans-tag
-                    [attr.label]="technology"
-                    tagColor="base"
-                    tagSize="sm"
-                  ></hans-tag>
+                  <app-tag-button
+                    [tag]="technology"
+                    tagColor="info"
+                    (selected)="requestTechnologyDetails($event)"
+                  />
                 }
               </div>
             </div>

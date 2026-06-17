@@ -1,4 +1,5 @@
 interface HansInputEventDetail {
+  target?: HansInputEventTarget;
   value?: string;
 }
 
@@ -11,6 +12,10 @@ export const getHansInputEventValue = (event: Event): string => {
 
   if (typeof detail?.value === 'string') {
     return detail.value;
+  }
+
+  if (typeof detail?.target?.value === 'string') {
+    return detail.target.value;
   }
 
   const target = event.target as HansInputEventTarget | null;

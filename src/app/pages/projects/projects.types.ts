@@ -1,4 +1,6 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import { TagButtonViewModel } from '../../shared/tag-button/tag-button.types';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
 export interface ProjectSummaryMetricViewModel {
   label: string;
@@ -41,7 +43,7 @@ export interface ProjectCaseViewModel {
   isFeatured: boolean;
   isHighlight: boolean;
   companyNames: readonly string[];
-  technologies: readonly string[];
+  technologies: readonly ProjectTechnologyTagViewModel[];
   extraTechnologyCount: number;
   links: readonly ProjectLinkViewModel[];
   imageUrl: string;
@@ -54,8 +56,13 @@ export interface ProjectCaseViewModel {
 
 export interface ProjectStackGroupViewModel {
   labelKey: AppTranslationKey;
-  technologies: readonly string[];
+  technologies: readonly ProjectTechnologyTagViewModel[];
 }
+
+export type ProjectTechnologyTagViewModel =
+  TagButtonViewModel<TechnologyModalItem> & {
+    slug: string;
+  };
 
 export interface ProjectFilterValues {
   contexts: readonly string[];

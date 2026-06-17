@@ -20,15 +20,42 @@ describe('projects helper', () => {
     expect(card.stackGroups).toEqual([
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
-        technologies: ['React'],
+        technologies: [
+          jasmine.objectContaining({
+            slug: 'react',
+            label: 'React',
+            value: jasmine.objectContaining({
+              name: 'React',
+              stack: 'Front-End',
+            }),
+          }),
+        ],
       },
       {
         labelKey: 'pages.experiences.detail.stackGroups.backend',
-        technologies: ['Node.js'],
+        technologies: [
+          jasmine.objectContaining({
+            slug: 'node',
+            label: 'Node.js',
+            value: jasmine.objectContaining({
+              name: 'Node.js',
+              stack: 'Back-End',
+            }),
+          }),
+        ],
       },
       {
         labelKey: 'pages.experiences.detail.stackGroups.others',
-        technologies: ['Vercel'],
+        technologies: [
+          jasmine.objectContaining({
+            slug: 'vercel',
+            label: 'Vercel',
+            value: jasmine.objectContaining({
+              name: 'Vercel',
+              stack: 'Others',
+            }),
+          }),
+        ],
       },
     ]);
     expect(card.links[0]).toEqual({
@@ -131,9 +158,49 @@ describe('projects helper', () => {
     expect(card.stackGroups).toEqual([
       {
         labelKey: 'pages.experiences.detail.stackGroups.databases',
-        technologies: ['Custom DB'],
+        technologies: [
+          jasmine.objectContaining({
+            slug: 'custom-database',
+            label: 'Custom DB',
+            value: jasmine.objectContaining({
+              name: 'Custom DB',
+              stack: 'Databases',
+            }),
+          }),
+        ],
       },
     ]);
+  });
+
+  it('should omit nullable technology labels when backend values are not available', () => {
+    const card = mapProjectToCaseCard(
+      {
+        ...createProjectsCollectionResponse().data[0],
+        technologies: [
+          {
+            projectId: 'project-consumer',
+            technologyId: 'tech-unknown',
+            technology: {
+              ...createProjectsCollectionResponse().data[0].technologies[0].technology,
+              id: 'tech-unknown',
+              slug: 'unknown-technology',
+              name: 'Unknown Technology',
+              level: null,
+              frequency: null,
+            },
+          },
+        ],
+      },
+      'en-us',
+    );
+
+    expect(card.technologies[0].value).toEqual(
+      jasmine.objectContaining({
+        name: 'Unknown Technology',
+        level: undefined,
+        frequency: undefined,
+      }),
+    );
   });
 
   it('should use the untitled-link fallback and sort project images by relation order', () => {

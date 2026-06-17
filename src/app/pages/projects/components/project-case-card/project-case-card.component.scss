@@ -3,7 +3,7 @@
 }
 
 .project-case-card-trigger {
-  @apply block h-full w-full border-0 bg-transparent p-0 text-left;
+  @apply block h-full w-full cursor-pointer border-0 bg-transparent p-0 text-left;
   color: inherit;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .project-case-card-content {
-  @apply flex min-h-[18rem] flex-col gap-5 p-6;
+  @apply flex h-full min-h-[19rem] flex-col gap-5 p-6;
 }
 
 .project-case-card-header {
@@ -49,8 +49,13 @@
 }
 
 .project-case-card-content p {
-  @apply m-0 min-h-[4.5rem] text-sm leading-7;
+  @apply m-0 text-sm leading-7;
   color: color-mix(in srgb, var(--text-color) 70%, transparent);
+  display: -webkit-box;
+  min-height: 5.25rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .project-case-card-date {

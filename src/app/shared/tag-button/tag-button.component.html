@@ -1,0 +1,10 @@
+<button type="button" class="tag-button" (click)="requestSelection($event)">
+  <hans-tag
+    [attr.label]="tag().label"
+    [attr.image-src]="tag().image?.src ?? null"
+    [attr.image-alt]="tag().image?.alt ?? null"
+    mediaPosition="left"
+    [tagColor]="tagColor()"
+    tagSize="sm"
+  ></hans-tag>
+</button>
