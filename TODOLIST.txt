@@ -175,6 +175,6 @@ Como vc pode ver no print 2, todos os filtros estão em uma linha só, mas achei
 Tanto no input search de projects como de technologies você não usou o hans-input da nossa lib, faça essa refatoração para usarmos por favor.
 Como vc pode ver no print 4, o modal também não está renderizando nada, olhe os exemplos dos outros modais para corrigir esse caso por favor.
 -Beleza, ficou ótimo, mas ainda tenho alguns questionamentos:
-Input não está dando pra escrever, se precisar corrija na lib. Input deveria manter o ícone de Search, usando o componente hans-icon da lib também.
-Use o mesmo padrão de cores, componentização e click-modal pras tecnologias e informações no modal e card dos projetos.
-Padronize os tamanhos dos cards.
+Os inputs não estão dando pra escrever, não consigo digitar nada neles. Se para corrigir o problema for preciso alterar alguma coisa na lib, pode ficar a vontade, o workspace é o hans-ui-design-lib, mas siga todos os padrões de lá, confira no agents.md. Além disso, o input deveria manter o ícone interno de Search, usando o componente hans-icon da lib também (acredito que no input já temos uma props/parametro pra isso).
+Use o mesmo padrão de cores e de comportamento (ao clicar abre o modal) pras tags de tecnologias no modal e card dos projetos. Se já não tiver um componente shared pra essa funcionalidade de tag de tecnologia/cliente como shared, pode criar para reutilizar tanto na tela de projects, como de technologies, como de home.
+Padronize os tamanhos dos cards, como vc pode ver no print, cada um ta de um tamanho diferente, variando de acordo com o tamanho da descrição.
