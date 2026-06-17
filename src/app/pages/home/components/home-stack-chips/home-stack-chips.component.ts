@@ -1,19 +1,14 @@
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
+import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
 import { HomeStackChipViewModel } from '../../home.types';
 
 @Component({
   selector: 'app-home-stack-chips',
-  imports: [TranslatePipe],
+  imports: [TagButtonComponent, TranslatePipe],
   templateUrl: './home-stack-chips.component.html',
   styleUrl: './home-stack-chips.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeStackChipsComponent {
@@ -21,9 +16,9 @@ export class HomeStackChipsComponent {
   readonly titleKey = input.required<string>();
   readonly descriptionKey = input.required<string>();
   readonly chips = input<readonly HomeStackChipViewModel[]>([]);
-  readonly openTechnology = output<HomeStackChipViewModel>();
+  readonly openTechnology = output<TechnologyModalItem>();
 
-  protected requestTechnologyDetails(chip: HomeStackChipViewModel): void {
-    this.openTechnology.emit(chip);
+  protected requestTechnologyDetails(technology: TechnologyModalItem): void {
+    this.openTechnology.emit(technology);
   }
 }

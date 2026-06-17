@@ -13,8 +13,8 @@ import { ExperienceCollectionItemResponse } from '../../core/api/experiences/exp
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
-import { TagModalComponent } from '../../shared/tag-modal/tag-modal.component';
-import { TagModalDetail } from '../../shared/tag-modal/tag-modal.types';
+import { TagModalComponent } from '../../shared/tag/tag-modal/tag-modal.component';
+import { TagModalDetail } from '../../shared/tag/tag-modal/tag-modal.types';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';

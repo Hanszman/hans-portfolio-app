@@ -9,7 +9,9 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExpandableListToggleComponent } from '../../../../shared/expandable-list-toggle/expandable-list-toggle.component';
+import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
 import { TimelineCardComponent } from '../../../../shared/timeline/timeline-card/timeline-card.component';
+import type { TagButtonViewModel } from '../../../../shared/tag/tag-button/tag-button.types';
 import {
   ExperienceCustomerViewModel,
   ExperienceTechnologyViewModel,
@@ -20,7 +22,12 @@ import {
 @Component({
   selector: 'app-experience-timeline-card',
   standalone: true,
-  imports: [ExpandableListToggleComponent, TimelineCardComponent, TranslatePipe],
+  imports: [
+    ExpandableListToggleComponent,
+    TagButtonComponent,
+    TimelineCardComponent,
+    TranslatePipe,
+  ],
   templateUrl: './experience-timeline-card.component.html',
   styleUrl: './experience-timeline-card.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -39,6 +46,24 @@ export class ExperienceTimelineCardComponent {
     this.isTechnologyListExpanded()
       ? this.item().technologies
       : this.item().technologies.slice(0, INITIAL_VISIBLE_TECHNOLOGY_COUNT),
+  );
+  protected readonly customerTags = computed(() =>
+    this.item().customers.map(
+      (customer): TagButtonViewModel<ExperienceCustomerViewModel> => ({
+        label: customer.name,
+        image: customer.image,
+        value: customer,
+      }),
+    ),
+  );
+  protected readonly visibleTechnologyTags = computed(() =>
+    this.visibleTechnologies().map(
+      (technology): TagButtonViewModel<ExperienceTechnologyViewModel> => ({
+        label: technology.name,
+        image: technology.image,
+        value: technology,
+      }),
+    ),
   );
   protected readonly hiddenTechnologyCount = computed(() =>
     Math.max(0, this.item().technologies.length - INITIAL_VISIBLE_TECHNOLOGY_COUNT),

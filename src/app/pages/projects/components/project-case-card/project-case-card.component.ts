@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
-import { TagButtonComponent } from '../../../../shared/tag-button/tag-button.component';
+import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
 import { ProjectCaseViewModel } from '../../projects.types';
 
 @Component({

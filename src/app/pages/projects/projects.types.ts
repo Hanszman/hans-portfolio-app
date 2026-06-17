@@ -1,5 +1,5 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
-import { TagButtonViewModel } from '../../shared/tag-button/tag-button.types';
+import { TagButtonViewModel } from '../../shared/tag/tag-button/tag-button.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
 export interface ProjectSummaryMetricViewModel {

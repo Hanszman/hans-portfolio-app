@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { TagModalComponent } from '../tag-modal/tag-modal.component';
-import { TagModalDetail } from '../tag-modal/tag-modal.types';
+import { TagModalComponent } from '../tag/tag-modal/tag-modal.component';
+import { TagModalDetail } from '../tag/tag-modal/tag-modal.types';
 import { buildTechnologyModalDetail } from './helpers/technology-modal.helper';
 import { TechnologyModalItem } from './technology-modal.types';
 

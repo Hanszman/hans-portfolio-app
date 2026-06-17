@@ -1,4 +1,4 @@
-import { AppTranslationKey } from '../../core/translation/translation.types';
+import { AppTranslationKey } from '../../../core/translation/translation.types';
 
 export interface TagModalImage {
   src: string;

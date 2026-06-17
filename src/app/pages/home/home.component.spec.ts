@@ -20,7 +20,7 @@ interface HomeComponentTestHook {
   };
   topTechnologyChips(): readonly unknown[];
   openTechnologyDetails(technology: {
-    modal: { name: string };
+    name: string;
   }): void;
   closeTechnologyDetails(): void;
   selectedTechnology(): { name: string } | null;
@@ -249,10 +249,10 @@ describe('HomeComponent', () => {
     );
 
     const [chip] = component.topTechnologyChips() as readonly {
-      modal: { image: unknown };
+      value: { image: unknown };
     }[];
 
-    expect(chip.modal.image).toBeNull();
+    expect(chip.value.image).toBeNull();
   });
 
   it('should open and close technology details from the stack chips', () => {
@@ -265,12 +265,12 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     const chip = component.topTechnologyChips()[0] as {
-      modal: { name: string };
+      value: { name: string };
     };
 
-    component.openTechnologyDetails(chip);
+    component.openTechnologyDetails(chip.value);
 
-    expect(component.selectedTechnology()?.name).toBe(chip.modal.name);
+    expect(component.selectedTechnology()?.name).toBe(chip.value.name);
     expect(component.isTechnologyModalOpen()).toBeTrue();
 
     component.closeTechnologyDetails();

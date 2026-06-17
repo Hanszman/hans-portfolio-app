@@ -57,14 +57,11 @@
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        customClasses="hans-input-has-left-icon"
+        leftIcon="LuSearch"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
-        (change)="updateSearchTerm($event)"
-        (input)="updateSearchTerm($event)"
-      >
-        <hans-icon name="LuSearch" iconSize="small"></hans-icon>
-      </hans-input>
+        (valueChange)="updateSearchTerm($any($event).detail)"
+      ></hans-input>
 
       <div class="skills-filter-grid">
         <hans-select-option

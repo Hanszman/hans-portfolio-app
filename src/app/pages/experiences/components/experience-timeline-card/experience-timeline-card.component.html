@@ -24,41 +24,23 @@
       <hans-icon name="LuUsers" iconSize="small"></hans-icon>
 
       <div class="experience-card-chip-list">
-        @for (customer of item().customers; track customer.slug) {
-          <button
-            type="button"
+        @for (customerTag of customerTags(); track customerTag.value.slug) {
+          <app-tag-button
             class="experience-card-tag-button"
-            (click)="requestCustomerDetails(customer)"
-          >
-            <hans-tag
-              [attr.label]="customer.name"
-              [attr.image-src]="customer.image.src"
-              [attr.image-alt]="customer.image.alt"
-              mediaPosition="left"
-              tagColor="base"
-              tagSize="sm"
-            ></hans-tag>
-          </button>
+            [tag]="customerTag"
+            (selected)="requestCustomerDetails($event)"
+          />
         }
       </div>
     </div>
 
     <div class="experience-card-stack">
-      @for (technology of visibleTechnologies(); track technology.slug) {
-        <button
-          type="button"
+      @for (technologyTag of visibleTechnologyTags(); track technologyTag.value.slug) {
+        <app-tag-button
           class="experience-card-tag-button"
-          (click)="requestTechnologyDetails(technology)"
-        >
-          <hans-tag
-            [attr.label]="technology.name"
-            [attr.image-src]="technology.image.src"
-            [attr.image-alt]="technology.image.alt"
-            mediaPosition="left"
-            tagColor="info"
-            tagSize="sm"
-          ></hans-tag>
-        </button>
+          [tag]="technologyTag"
+          (selected)="requestTechnologyDetails($event)"
+        />
       }
 
       <app-expandable-list-toggle

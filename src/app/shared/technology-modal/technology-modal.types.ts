@@ -1,4 +1,4 @@
-import { TagModalImage } from '../tag-modal/tag-modal.types';
+import { TagModalImage } from '../tag/tag-modal/tag-modal.types';
 
 export interface TechnologyModalItem {
   name: string;

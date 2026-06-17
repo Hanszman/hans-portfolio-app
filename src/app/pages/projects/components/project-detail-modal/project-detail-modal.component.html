@@ -52,7 +52,6 @@
                 @for (technology of group.technologies; track technology) {
                   <app-tag-button
                     [tag]="technology"
-                    tagColor="info"
                     (selected)="requestTechnologyDetails($event)"
                   />
                 }

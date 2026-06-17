@@ -17,7 +17,7 @@ import { TagButtonViewModel } from './tag-button.types';
 })
 export class TagButtonComponent<TValue = unknown> {
   readonly tag = input.required<TagButtonViewModel<TValue>>();
-  readonly tagColor = input('info');
+  readonly tagColor = input('base');
   readonly selected = output<TValue>();
 
   protected requestSelection(event: MouseEvent): void {

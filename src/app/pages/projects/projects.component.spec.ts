@@ -128,7 +128,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectContext: (value: ProjectContextFilterValue) => void;
-      updateSearchTerm: (event: Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
     };
 
@@ -140,7 +140,7 @@ describe('ProjectsComponent', () => {
       'Portfolio',
     ]);
 
-    component.updateSearchTerm({ target: { value: 'portfolio' } } as unknown as Event);
+    component.updateSearchTerm('portfolio');
     fixture.detectChanges();
 
     expect(component.visibleProjectCases().map((project) => project.title)).toEqual([

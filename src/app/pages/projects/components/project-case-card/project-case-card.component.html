@@ -43,7 +43,6 @@
         @for (technology of project().technologies; track technology) {
           <app-tag-button
             [tag]="technology"
-            tagColor="info"
             (selected)="requestTechnologyDetails($event)"
           />
         }

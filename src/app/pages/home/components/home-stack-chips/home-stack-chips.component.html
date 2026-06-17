@@ -5,13 +5,11 @@
 
   <div class="home-stack-tags" [attr.aria-label]="labelKey() | translate">
     @for (chip of chips(); track chip.slug) {
-      <button
-        type="button"
+      <app-tag-button
         class="home-stack-tag-button"
-        (click)="requestTechnologyDetails(chip)"
-      >
-        <hans-tag [attr.label]="chip.label" tagColor="base" tagSize="sm"></hans-tag>
-      </button>
+        [tag]="chip"
+        (selected)="requestTechnologyDetails($event)"
+      />
     }
   </div>
 </section>

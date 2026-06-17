@@ -123,7 +123,7 @@ describe('SkillsComponent', () => {
       selectStackFilterFromEvent: (event: Event) => void;
       selectLevelFilterFromEvent: (event: Event) => void;
       selectTypeFilterFromEvent: (event: Event) => void;
-      updateSearchTerm: (event: Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       searchTerm: () => string;
     };
 
@@ -165,7 +165,7 @@ describe('SkillsComponent', () => {
 
     component.selectLevelFilter('ALL');
     component.selectTypeFilter('ALL');
-    component.updateSearchTerm(new CustomEvent('change', { detail: { value: 'type' } }));
+    component.updateSearchTerm('type');
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('type');

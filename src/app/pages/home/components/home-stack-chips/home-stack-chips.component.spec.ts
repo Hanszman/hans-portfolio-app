@@ -8,17 +8,20 @@ describe('HomeStackChipsComponent', () => {
     {
       slug: 'angular',
       label: 'Angular',
-      modal: { name: 'Angular', category: 'Framework' },
+      image: null,
+      value: { name: 'Angular', category: 'Framework' },
     },
     {
       slug: 'typescript',
       label: 'TypeScript',
-      modal: { name: 'TypeScript', category: 'Language' },
+      image: null,
+      value: { name: 'TypeScript', category: 'Language' },
     },
     {
       slug: 'git',
       label: 'Git',
-      modal: { name: 'Git', category: 'DevOps' },
+      image: null,
+      value: { name: 'Git', category: 'DevOps' },
     },
   ];
 
@@ -62,10 +65,10 @@ describe('HomeStackChipsComponent', () => {
     fixture.detectChanges();
 
     const firstButton = fixture.nativeElement.querySelector(
-      '.home-stack-tag-button',
+      '.home-stack-tag-button button',
     ) as HTMLButtonElement;
     firstButton.click();
 
-    expect(spy).toHaveBeenCalledOnceWith(chips[0]);
+    expect(spy).toHaveBeenCalledOnceWith(chips[0].value);
   });
 });

@@ -12,7 +12,6 @@ import { ProjectsService } from '../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { getHansInputEventValue } from '../../shared/helpers/hans-input-event.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -107,8 +106,8 @@ export class ProjectsComponent {
       });
   }
 
-  protected updateSearchTerm(event: Event): void {
-    this.searchTermSignal.set(getHansInputEventValue(event));
+  protected updateSearchTerm(searchTerm: string): void {
+    this.searchTermSignal.set(searchTerm);
   }
 
   protected selectContext(value: ProjectContextFilterValue): void {

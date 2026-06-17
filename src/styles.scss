@@ -50,7 +50,8 @@ app-root {
 
 body[data-app-theme='light'] app-home hans-tag,
 body[data-app-theme='light'] app-experiences hans-tag,
-body[data-app-theme='light'] app-skills hans-tag {
+body[data-app-theme='light'] app-skills hans-tag,
+body[data-app-theme='light'] app-projects hans-tag {
   --base-neutral-color: color-mix(
     in srgb,
     var(--primary-default-color) 14%,
@@ -102,43 +103,16 @@ body[data-app-theme='light'] app-skills hans-tag {
 
 body[data-app-theme='dark'] app-home hans-tag,
 body[data-app-theme='dark'] app-experiences hans-tag,
-body[data-app-theme='dark'] app-skills hans-tag {
-  --base-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
+body[data-app-theme='dark'] app-skills hans-tag,
+body[data-app-theme='dark'] app-projects hans-tag {
+  --base-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
   --base-strong-color: var(--text-color);
-  --primary-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
-  --secondary-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
-  --success-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
-  --danger-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
-  --warning-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
-  --info-neutral-color: color-mix(
-    in srgb,
-    var(--background-color) 92%,
-    var(--text-color) 8%
-  );
+  --primary-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --secondary-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --success-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --danger-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --warning-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --info-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
   --secondary-default-color: var(--base-strong-color);
   --success-default-color: var(--base-strong-color);
   --danger-default-color: var(--base-strong-color);

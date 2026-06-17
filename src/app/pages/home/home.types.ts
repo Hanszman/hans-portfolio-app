@@ -1,6 +1,7 @@
 import { buildRelativeImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { PortfolioSocialLink, PORTFOLIO_SOCIAL_LINKS } from '../../shared/social-links/social-links.types';
+import { TagButtonViewModel } from '../../shared/tag/tag-button/tag-button.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
 export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
@@ -28,10 +29,8 @@ export interface HomeMetricViewModel {
   iconName: string;
 }
 
-export interface HomeStackChipViewModel {
+export interface HomeStackChipViewModel extends TagButtonViewModel<TechnologyModalItem> {
   slug: string;
-  label: string;
-  modal: TechnologyModalItem;
 }
 
 export interface HomeNavigationCardViewModel {

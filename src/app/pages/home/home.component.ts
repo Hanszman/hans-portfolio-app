@@ -101,7 +101,13 @@ export class HomeComponent {
         return {
           slug: technology.slug,
           label: technology.name,
-          modal: {
+          image: imageSrc
+            ? {
+                src: imageSrc,
+                alt: `${technology.name} icon`,
+              }
+            : null,
+          value: {
             name: technology.name,
             category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
             stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
@@ -153,8 +159,8 @@ export class HomeComponent {
     return yearDiff;
   }
 
-  protected openTechnologyDetails(technology: HomeStackChipViewModel): void {
-    this.selectedTechnologySignal.set(technology.modal);
+  protected openTechnologyDetails(technology: TechnologyModalItem): void {
+    this.selectedTechnologySignal.set(technology);
   }
 
   protected closeTechnologyDetails(): void {

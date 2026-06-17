@@ -1,4 +1,4 @@
-import { TagModalDetail } from '../../tag-modal/tag-modal.types';
+import { TagModalDetail } from '../../tag/tag-modal/tag-modal.types';
 
 export const buildTechnologyModalDetail = (
   labelKey: TagModalDetail['labelKey'],
