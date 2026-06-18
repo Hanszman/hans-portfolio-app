@@ -36,6 +36,7 @@ describe('SkillCardComponent', () => {
     ],
     timelineEntries: [],
     modal: {
+      slug: 'angular',
       name: 'Angular',
       category: 'Framework',
       level: 'Avancado',

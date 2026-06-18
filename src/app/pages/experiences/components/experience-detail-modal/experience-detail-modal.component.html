@@ -84,8 +84,8 @@
                 @for (technology of group.technologies; track technology.slug) {
                   <hans-tag
                     [attr.label]="technology.name"
-                    [attr.image-src]="technology.image.src"
-                    [attr.image-alt]="technology.image.alt"
+                    [attr.image-src]="technology.image?.src"
+                    [attr.image-alt]="technology.image?.alt"
                     mediaPosition="left"
                     tagColor="info"
                     tagSize="sm"

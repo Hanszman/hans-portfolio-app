@@ -1,6 +1,7 @@
 import { TagModalImage } from '../tag/tag-modal/tag-modal.types';
 
 export interface TechnologyModalItem {
+  slug: string;
   name: string;
   category?: string;
   stack?: string;

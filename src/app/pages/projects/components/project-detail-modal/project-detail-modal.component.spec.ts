@@ -6,6 +6,11 @@ import { ProjectDetailModalComponent } from './project-detail-modal.component';
 
 describe('ProjectDetailModalComponent', () => {
   let fixture: ComponentFixture<ProjectDetailModalComponent>;
+  const buildTechnologyTag = (slug: string, label: string) => ({
+    slug,
+    label,
+    value: { slug, name: label },
+  });
 
   const project: ProjectCaseViewModel = {
     id: '1',
@@ -21,8 +26,8 @@ describe('ProjectDetailModalComponent', () => {
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
         technologies: [
-          { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
-          { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+          buildTechnologyTag('angular', 'Angular'),
+          buildTechnologyTag('typescript', 'TypeScript'),
         ],
       },
     ],
@@ -31,8 +36,8 @@ describe('ProjectDetailModalComponent', () => {
     isHighlight: false,
     companyNames: ['Company'],
     technologies: [
-      { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
-      { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+      buildTechnologyTag('angular', 'Angular'),
+      buildTechnologyTag('typescript', 'TypeScript'),
     ],
     extraTechnologyCount: 0,
     links: [{ id: '1', url: 'https://example.com', label: 'Repo', typeLabel: 'GitHub' }],
@@ -111,8 +116,8 @@ describe('ProjectDetailModalComponent', () => {
     const spy = jasmine.createSpy('openTechnology');
     component.openTechnology.subscribe(spy);
 
-    component['requestTechnologyDetails']({ name: 'Angular' });
+    component['requestTechnologyDetails']({ slug: 'angular', name: 'Angular' });
 
-    expect(spy).toHaveBeenCalledWith({ name: 'Angular' });
+    expect(spy).toHaveBeenCalledWith({ slug: 'angular', name: 'Angular' });
   });
 });

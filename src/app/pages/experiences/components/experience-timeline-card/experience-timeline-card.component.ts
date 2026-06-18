@@ -11,10 +11,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ExpandableListToggleComponent } from '../../../../shared/expandable-list-toggle/expandable-list-toggle.component';
 import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
 import { TimelineCardComponent } from '../../../../shared/timeline/timeline-card/timeline-card.component';
+import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
 import type { TagButtonViewModel } from '../../../../shared/tag/tag-button/tag-button.types';
 import {
   ExperienceCustomerViewModel,
-  ExperienceTechnologyViewModel,
   ExperienceTimelineItemViewModel,
   INITIAL_VISIBLE_TECHNOLOGY_COUNT,
 } from '../../experiences.types';
@@ -39,7 +39,7 @@ export class ExperienceTimelineCardComponent {
   readonly isLast = input(false);
   readonly openDetails = output<ExperienceTimelineItemViewModel>();
   readonly openCustomer = output<ExperienceCustomerViewModel>();
-  readonly openTechnology = output<ExperienceTechnologyViewModel>();
+  readonly openTechnology = output<TechnologyModalItem>();
 
   protected readonly isTechnologyListExpanded = signal(false);
   protected readonly visibleTechnologies = computed(() =>
@@ -58,7 +58,7 @@ export class ExperienceTimelineCardComponent {
   );
   protected readonly visibleTechnologyTags = computed(() =>
     this.visibleTechnologies().map(
-      (technology): TagButtonViewModel<ExperienceTechnologyViewModel> => ({
+      (technology): TagButtonViewModel<TechnologyModalItem> => ({
         label: technology.name,
         image: technology.image,
         value: technology,
@@ -77,9 +77,7 @@ export class ExperienceTimelineCardComponent {
     this.openCustomer.emit(customer);
   }
 
-  protected requestTechnologyDetails(
-    technology: ExperienceTechnologyViewModel,
-  ): void {
+  protected requestTechnologyDetails(technology: TechnologyModalItem): void {
     this.openTechnology.emit(technology);
   }
 

@@ -128,7 +128,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectContext: (value: ProjectContextFilterValue) => void;
-      updateSearchTerm: (searchTerm: string) => void;
+      updateSearchTerm: (searchTerm: string | Event) => void;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
     };
 
@@ -204,10 +204,10 @@ describe('ProjectsComponent', () => {
       projectCases: () => readonly ProjectCaseViewModel[];
       openProjectDetails: (project: ProjectCaseViewModel) => void;
       closeProjectDetails: () => void;
-      openTechnologyDetails: (technology: { name: string }) => void;
+      openTechnologyDetails: (technology: { slug: string; name: string }) => void;
       closeTechnologyDetails: () => void;
       selectedProject: () => ProjectCaseViewModel | null;
-      selectedTechnology: () => { name: string } | null;
+      selectedTechnology: () => { slug: string; name: string } | null;
       isDetailOpen: () => boolean;
       isTechnologyModalOpen: () => boolean;
     };
@@ -223,7 +223,7 @@ describe('ProjectsComponent', () => {
     expect(component.selectedProject()).toBeNull();
     expect(component.isDetailOpen()).toBeFalse();
 
-    component.openTechnologyDetails({ name: 'Angular' });
+    component.openTechnologyDetails({ slug: 'angular', name: 'Angular' });
 
     expect(component.selectedTechnology()?.name).toBe('Angular');
     expect(component.isTechnologyModalOpen()).toBeTrue();
@@ -232,5 +232,27 @@ describe('ProjectsComponent', () => {
 
     expect(component.selectedTechnology()).toBeNull();
     expect(component.isTechnologyModalOpen()).toBeFalse();
+  });
+
+  it('should update project search from hans-input value events', () => {
+    const fixture = TestBed.createComponent(ProjectsComponent);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    flushProjectsRequest(httpTestingController);
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      updateSearchTerm: (searchTerm: string | Event) => void;
+      visibleProjectCases: () => readonly ProjectCaseViewModel[];
+    };
+
+    component.updateSearchTerm(
+      new CustomEvent<string>('valuechange', { detail: 'github' }),
+    );
+
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
+      "Github's API Consumer",
+    ]);
   });
 });

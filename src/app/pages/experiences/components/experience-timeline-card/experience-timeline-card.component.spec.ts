@@ -18,7 +18,6 @@ describe('ExperienceTimelineCardComponent', () => {
       alt: `Tech ${index} icon`,
     },
     projectCount: 2,
-    experienceCount: 1,
   });
 
   const item: ExperienceTimelineItemViewModel = {
@@ -78,7 +77,6 @@ describe('ExperienceTimelineCardComponent', () => {
               alt: 'Tech 1 icon',
             },
             projectCount: 2,
-            experienceCount: 1,
           },
         ],
       },

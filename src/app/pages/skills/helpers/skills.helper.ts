@@ -344,6 +344,7 @@ export const mapTechnologyToSkillCard = (
       endedAt: context.endedAt,
     })),
     modal: {
+      slug: technology.slug,
       name: technology.name,
       category: typeLabel,
       stack: stackLabel,
@@ -397,6 +398,7 @@ const mapStaticSkillCard = (
     contexts: [],
     timelineEntries: [],
     modal: {
+      slug: config.slug,
       name,
       category:
         config.kind === 'education'

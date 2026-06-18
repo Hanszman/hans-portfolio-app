@@ -108,6 +108,7 @@ export class HomeComponent {
               }
             : null,
           value: {
+            slug: technology.slug,
             name: technology.name,
             category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
             stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),

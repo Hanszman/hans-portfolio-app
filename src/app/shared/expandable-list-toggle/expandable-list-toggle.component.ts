@@ -20,7 +20,8 @@ export class ExpandableListToggleComponent {
     () => this.isExpanded() || this.hiddenCount() > 0,
   );
 
-  protected requestToggle(): void {
+  protected requestToggle(event: MouseEvent): void {
+    event.stopPropagation();
     this.toggled.emit();
   }
 }

@@ -40,18 +40,20 @@
       </span>
 
       <div class="project-case-card-stack">
-        @for (technology of project().technologies; track technology) {
+        @for (technology of visibleTechnologies(); track technology.slug) {
           <app-tag-button
             [tag]="technology"
             (selected)="requestTechnologyDetails($event)"
           />
         }
 
-        @if (project().extraTechnologyCount > 0) {
-          <span class="project-case-card-more">
-            +{{ project().extraTechnologyCount }}
-          </span>
-        }
+        <app-expandable-list-toggle
+          [isExpanded]="isTechnologyListExpanded()"
+          [hiddenCount]="hiddenTechnologyCount()"
+          expandLabelKey="common.actions.showMore"
+          collapseLabelKey="common.actions.showLess"
+          (toggled)="toggleTechnologyList()"
+        />
       </div>
     </div>
   </hans-card>

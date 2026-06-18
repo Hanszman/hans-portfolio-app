@@ -12,6 +12,7 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
+import { HansInputValueEvent } from '../../shared/forms/input.types';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -137,8 +138,8 @@ export class SkillsComponent {
       });
   }
 
-  protected updateSearchTerm(searchTerm: string): void {
-    this.searchTermSignal.set(searchTerm);
+  protected updateSearchTerm(searchTerm: string | Event): void {
+    this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
   }
 
   protected selectStackFilter(value: SkillStackFilterValue): void {
@@ -183,5 +184,15 @@ export class SkillsComponent {
       label: this.translationService.instant(filter.labelKey),
       value: filter.value,
     }));
+  }
+
+  private resolveSearchTerm(searchTerm: string | Event): string {
+    if (typeof searchTerm === 'string') {
+      return searchTerm;
+    }
+
+    const inputEvent = searchTerm as HansInputValueEvent;
+
+    return inputEvent.detail ?? inputEvent.target?.value ?? '';
   }
 }

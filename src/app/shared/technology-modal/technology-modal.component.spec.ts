@@ -1,5 +1,13 @@
+import { provideHttpClient } from '@angular/common/http';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { buildApiUrl } from '../../core/api/api.config';
+import { createProjectsCollectionResponse } from '../../core/api/mocks/projects.mocks';
+import { createTechnologiesCollectionResponse } from '../../core/api/mocks/technologies.mocks';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TechnologyModalComponent } from './technology-modal.component';
 
@@ -9,11 +17,17 @@ describe('TechnologyModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TechnologyModalComponent],
-      providers: [provideZonelessChangeDetection(), provideAppTranslations()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideAppTranslations(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TechnologyModalComponent);
     fixture.componentRef.setInput('technology', {
+      slug: 'angular',
       name: 'Angular',
       category: 'Framework',
       stack: 'Front-End',
@@ -27,6 +41,10 @@ describe('TechnologyModalComponent', () => {
     });
   });
 
+  afterEach(() => {
+    TestBed.inject(HttpTestingController).verify();
+  });
+
   it('should pass technology details to tag modal', () => {
     fixture.detectChanges();
 
@@ -37,12 +55,36 @@ describe('TechnologyModalComponent', () => {
     expect(fixture.nativeElement.textContent).toContain('4');
   });
 
+  it('should enrich the selected technology with backend catalog data when opened', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/technologies?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
+    );
+    const projectsRequest = httpTestingController.expectOne(
+      buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
+    );
+    request.flush(createTechnologiesCollectionResponse());
+    projectsRequest.flush(createProjectsCollectionResponse());
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      details: () => readonly { value: string | number }[];
+    };
+
+    expect(component.details().map((detail) => detail.value)).toContain('Frameworks');
+    expect(component.details().map((detail) => detail.value)).toContain('Front-End');
+    expect(component.details().map((detail) => detail.value)).toContain(2);
+  });
+
   it('should omit optional details when the selected item does not provide them', () => {
     fixture.componentRef.setInput('technology', {
+      slug: 'portuguese',
       name: 'Portuguese',
       image: null,
     });
-    fixture.componentRef.setInput('isOpen', true);
 
     fixture.detectChanges();
 

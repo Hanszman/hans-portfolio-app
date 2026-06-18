@@ -171,10 +171,10 @@ describe('ExperiencesComponent', () => {
       selectedExperience: () => { id: string } | null;
       isDetailOpen: () => boolean;
       isSelectedExperience: (experienceId: string) => boolean;
-      openTechnologyDetails: (technology: { slug: string }) => void;
+      openTechnologyDetails: (technology: { slug: string; name: string }) => void;
       closeTechnologyDetails: () => void;
       selectedTechnology: () => { slug: string } | null;
-      isTechnologyDetailOpen: () => boolean;
+      isTechnologyModalOpen: () => boolean;
       openCustomerDetails: (customer: {
         name: string;
         companyName: string;
@@ -199,15 +199,15 @@ describe('ExperiencesComponent', () => {
     expect(component.isDetailOpen()).toBeFalse();
     expect(component.isSelectedExperience(item.id)).toBeFalse();
 
-    component.openTechnologyDetails({ slug: 'angular' });
+    component.openTechnologyDetails({ slug: 'angular', name: 'Angular' });
 
     expect(component.selectedTechnology()?.slug).toBe('angular');
-    expect(component.isTechnologyDetailOpen()).toBeTrue();
+    expect(component.isTechnologyModalOpen()).toBeTrue();
 
     component.closeTechnologyDetails();
 
     expect(component.selectedTechnology()).toBeNull();
-    expect(component.isTechnologyDetailOpen()).toBeFalse();
+    expect(component.isTechnologyModalOpen()).toBeFalse();
 
     component.openCustomerDetails({
       name: 'Ford',

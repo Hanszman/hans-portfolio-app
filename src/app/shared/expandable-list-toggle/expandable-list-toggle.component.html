@@ -1,5 +1,5 @@
 @if (shouldShow()) {
-  <button type="button" class="expandable-list-toggle" (click)="requestToggle()">
+  <button type="button" class="expandable-list-toggle" (click)="requestToggle($event)">
     @if (isExpanded()) {
       {{ collapseLabelKey() | translate }}
     } @else {

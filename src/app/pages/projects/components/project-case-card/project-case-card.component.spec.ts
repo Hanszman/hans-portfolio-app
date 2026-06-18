@@ -7,6 +7,11 @@ import { ProjectCaseViewModel } from '../../projects.types';
 describe('ProjectCaseCardComponent', () => {
   let fixture: ComponentFixture<ProjectCaseCardComponent>;
   let component: ProjectCaseCardComponent;
+  const buildTechnologyTag = (slug: string, label: string) => ({
+    slug,
+    label,
+    value: { slug, name: label },
+  });
 
   const project: ProjectCaseViewModel = {
     id: '1',
@@ -22,8 +27,8 @@ describe('ProjectCaseCardComponent', () => {
       {
         labelKey: 'pages.experiences.detail.stackGroups.frontend',
         technologies: [
-          { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
-          { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
+          buildTechnologyTag('angular', 'Angular'),
+          buildTechnologyTag('typescript', 'TypeScript'),
         ],
       },
     ],
@@ -32,9 +37,12 @@ describe('ProjectCaseCardComponent', () => {
     isHighlight: false,
     companyNames: ['Company'],
     technologies: [
-      { slug: 'angular', label: 'Angular', value: { name: 'Angular' } },
-      { slug: 'typescript', label: 'TypeScript', value: { name: 'TypeScript' } },
-      { slug: 'node-js', label: 'Node.js', value: { name: 'Node.js' } },
+      buildTechnologyTag('angular', 'Angular'),
+      buildTechnologyTag('typescript', 'TypeScript'),
+      buildTechnologyTag('node-js', 'Node.js'),
+      buildTechnologyTag('html', 'HTML'),
+      buildTechnologyTag('css', 'CSS'),
+      buildTechnologyTag('sass', 'Sass'),
     ],
     extraTechnologyCount: 1,
     links: [{ id: '1', url: 'https://example.com', label: 'Repo', typeLabel: 'GitHub' }],
@@ -111,8 +119,8 @@ describe('ProjectCaseCardComponent', () => {
     const spy = jasmine.createSpy('openTechnology');
     component.openTechnology.subscribe(spy);
 
-    component['requestTechnologyDetails']({ name: 'Angular' });
+    component['requestTechnologyDetails']({ slug: 'angular', name: 'Angular' });
 
-    expect(spy).toHaveBeenCalledWith({ name: 'Angular' });
+    expect(spy).toHaveBeenCalledWith({ slug: 'angular', name: 'Angular' });
   });
 });

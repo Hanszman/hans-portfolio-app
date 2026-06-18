@@ -1,7 +1,26 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProjectsService } from '../../core/api/projects/projects.service';
+import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
+import { TechnologiesService } from '../../core/api/technologies/technologies.service';
+import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
+import { TranslationService } from '../../core/translation/translation.service';
 import { TagModalComponent } from '../tag/tag-modal/tag-modal.component';
 import { TagModalDetail } from '../tag/tag-modal/tag-modal.types';
-import { buildTechnologyModalDetail } from './helpers/technology-modal.helper';
+import {
+  buildTechnologyModalDetails,
+  resolveTechnologyModalItem,
+} from './helpers/technology-modal.helper';
 import { TechnologyModalItem } from './technology-modal.types';
 
 @Component({
@@ -12,28 +31,75 @@ import { TechnologyModalItem } from './technology-modal.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TechnologyModalComponent {
+  private readonly technologiesService = inject(TechnologiesService);
+  private readonly projectsService = inject(ProjectsService);
+  private readonly translationService = inject(TranslationService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>([]);
+  private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
+  private readonly hasRequestedTechnologiesSignal = signal(false);
+  private readonly hasRequestedProjectsSignal = signal(false);
+
   readonly technology = input<TechnologyModalItem | null>(null);
   readonly isOpen = input(false);
   readonly closed = output<void>();
 
+  protected readonly resolvedTechnology = computed(() =>
+    resolveTechnologyModalItem(
+      this.technology(),
+      this.technologiesSignal(),
+      this.projectsSignal(),
+      this.translationService.locale(),
+    ),
+  );
+
   protected readonly details = computed<readonly TagModalDetail[]>(() => {
-    const technology = this.technology();
+    const technology = this.resolvedTechnology();
 
-    if (!technology) {
-      return [];
-    }
-
-    const details = [
-      buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
-      buildTechnologyModalDetail('pages.experiences.technology.type', technology.category),
-      buildTechnologyModalDetail('pages.experiences.technology.stack', technology.stack),
-      buildTechnologyModalDetail('pages.experiences.technology.level', technology.level),
-      buildTechnologyModalDetail('pages.experiences.technology.frequency', technology.frequency),
-      buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),
-    ] satisfies readonly (TagModalDetail | null)[];
-
-    return details.filter((detail): detail is TagModalDetail => detail !== null);
+    return technology ? buildTechnologyModalDetails(technology) : [];
   });
+
+  constructor() {
+    effect(() => {
+      if (
+        !this.isOpen() ||
+        !this.technology() ||
+        this.hasRequestedTechnologiesSignal()
+      ) {
+        return;
+      }
+
+      this.hasRequestedTechnologiesSignal.set(true);
+      this.technologiesService
+        .getTechnologies()
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (response) => {
+            this.technologiesSignal.set(response.data);
+          },
+          error: () => {
+            this.technologiesSignal.set([]);
+          },
+        });
+
+      if (this.hasRequestedProjectsSignal()) {
+        return;
+      }
+
+      this.hasRequestedProjectsSignal.set(true);
+      this.projectsService
+        .getProjects()
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (response) => {
+            this.projectsSignal.set(response.data);
+          },
+          error: () => {
+            this.projectsSignal.set([]);
+          },
+        });
+    });
+  }
 
   protected requestClose(): void {
     this.closed.emit();

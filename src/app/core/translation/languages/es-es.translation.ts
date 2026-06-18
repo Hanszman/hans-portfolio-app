@@ -59,6 +59,7 @@ export const ES_ES_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalles',
   'common.actions.close': 'Cerrar',
+  'common.actions.showMore': 'más',
   'common.actions.showLess': 'Mostrar menos',
   'pages.home.hero.availability': 'Disponible para trabajar',
   'pages.home.hero.greeting': 'Hola, soy',

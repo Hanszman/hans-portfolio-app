@@ -43,4 +43,5 @@ describe('TechnologiesService', () => {
 
     request.flush(createTechnologiesCollectionResponse());
   });
+
 });

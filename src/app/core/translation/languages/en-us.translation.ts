@@ -57,6 +57,7 @@ export const EN_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'View details',
   'common.actions.close': 'Close',
+  'common.actions.showMore': 'more',
   'common.actions.showLess': 'Show less',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",

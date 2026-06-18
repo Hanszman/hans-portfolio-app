@@ -41,4 +41,5 @@ describe('ProjectsService', () => {
 
     request.flush(createProjectsCollectionResponse());
   });
+
 });

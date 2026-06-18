@@ -1,4 +1,5 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
 export interface ExperienceProjectViewModel {
   slug: string;
@@ -19,20 +20,9 @@ export interface ExperienceCustomerViewModel {
   projectCount: number;
 }
 
-export interface ExperienceTechnologyViewModel {
-  slug: string;
-  name: string;
-  category: string;
-  level: string;
-  frequency: string;
-  image: ExperienceImageViewModel;
-  projectCount: number;
-  experienceCount: number;
-}
-
 export interface ExperienceTechnologyGroupViewModel {
   labelKey: AppTranslationKey;
-  technologies: ExperienceTechnologyViewModel[];
+  technologies: TechnologyModalItem[];
 }
 
 export interface ExperienceTimelineItemViewModel {
@@ -49,7 +39,7 @@ export interface ExperienceTimelineItemViewModel {
   companyImage: ExperienceImageViewModel;
   customers: ExperienceCustomerViewModel[];
   projects: ExperienceProjectViewModel[];
-  technologies: ExperienceTechnologyViewModel[];
+  technologies: TechnologyModalItem[];
   extraTechnologyCount: number;
   technologyGroups: readonly ExperienceTechnologyGroupViewModel[];
 }

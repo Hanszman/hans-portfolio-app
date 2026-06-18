@@ -20,10 +20,11 @@ interface HomeComponentTestHook {
   };
   topTechnologyChips(): readonly unknown[];
   openTechnologyDetails(technology: {
+    slug: string;
     name: string;
   }): void;
   closeTechnologyDetails(): void;
-  selectedTechnology(): { name: string } | null;
+  selectedTechnology(): { slug: string; name: string } | null;
   isTechnologyModalOpen(): boolean;
   formatCount(value: number | undefined, fallback: string): string;
   calculateCareerYears(referenceDate?: Date): number;
@@ -249,7 +250,7 @@ describe('HomeComponent', () => {
     );
 
     const [chip] = component.topTechnologyChips() as readonly {
-      value: { image: unknown };
+      value: { slug: string; image: unknown };
     }[];
 
     expect(chip.value.image).toBeNull();
@@ -265,7 +266,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     const chip = component.topTechnologyChips()[0] as {
-      value: { name: string };
+      value: { slug: string; name: string };
     };
 
     component.openTechnologyDetails(chip.value);

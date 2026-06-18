@@ -1,8 +1,8 @@
 <app-tag-modal
   [isOpen]="isOpen()"
-  [title]="technology()?.name ?? ''"
-  [subtitle]="technology()?.category ?? ''"
-  [image]="technology()?.image ?? null"
+  [title]="resolvedTechnology()?.name ?? ''"
+  [subtitle]="resolvedTechnology()?.category ?? ''"
+  [image]="resolvedTechnology()?.image ?? null"
   [details]="details()"
   (closed)="requestClose()"
 />

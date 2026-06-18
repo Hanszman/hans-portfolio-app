@@ -57,10 +57,12 @@
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        leftIcon="LuSearch"
+        left-icon="LuSearch"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
-        (valueChange)="updateSearchTerm($any($event).detail)"
+        (input)="updateSearchTerm($event)"
+        (change)="updateSearchTerm($event)"
+        (valuechange)="updateSearchTerm($event)"
       ></hans-input>
 
       <div class="skills-filter-grid">

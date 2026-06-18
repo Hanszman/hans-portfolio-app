@@ -7,6 +7,7 @@ import {
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
+import { TechnologyModalItem } from '../../../shared/technology-modal/technology-modal.types';
 import {
   EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS,
   EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG,
@@ -21,7 +22,6 @@ import {
   ExperienceProjectViewModel,
   ExperienceTechnologyGroupKey,
   ExperienceTechnologyGroupViewModel,
-  ExperienceTechnologyViewModel,
   ExperienceTimelineItemViewModel,
 } from '../experiences.types';
 
@@ -88,7 +88,7 @@ const mapCustomer = (
 const mapTechnology = (
   technology: ExperienceTechnologyResponse,
   projectCount: number,
-): ExperienceTechnologyViewModel => ({
+): TechnologyModalItem => ({
   slug: technology.slug,
   name: technology.name,
   category: technology.category,
@@ -99,7 +99,6 @@ const mapTechnology = (
     alt: `${technology.name} icon`,
   },
   projectCount,
-  experienceCount: 1,
 });
 
 const mapProject = (
@@ -126,7 +125,7 @@ const mapProject = (
 });
 
 const resolveTechnologyGroupKey = (
-  technology: Pick<ExperienceTechnologyResponse, 'slug' | 'category'>,
+  technology: Pick<TechnologyModalItem, 'slug' | 'category'>,
 ): ExperienceTechnologyGroupKey => {
   if (EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'frontend';
@@ -144,12 +143,9 @@ const resolveTechnologyGroupKey = (
 };
 
 const buildTechnologyGroups = (
-  technologies: readonly ExperienceTechnologyViewModel[],
+  technologies: readonly TechnologyModalItem[],
 ): readonly ExperienceTechnologyGroupViewModel[] => {
-  const grouped = new Map<
-    ExperienceTechnologyGroupKey,
-    ExperienceTechnologyViewModel[]
-  >();
+  const grouped = new Map<ExperienceTechnologyGroupKey, TechnologyModalItem[]>();
 
   for (const technology of technologies) {
     const groupKey = resolveTechnologyGroupKey(technology);

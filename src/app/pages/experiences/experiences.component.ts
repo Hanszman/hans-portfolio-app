@@ -16,13 +16,11 @@ import { InfoStateComponent } from '../../shared/info-state/info-state.component
 import { TagModalComponent } from '../../shared/tag/tag-modal/tag-modal.component';
 import { TagModalDetail } from '../../shared/tag/tag-modal/tag-modal.types';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
+import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
 import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
-import {
-  ExperienceCustomerViewModel,
-  ExperienceTechnologyViewModel,
-} from './experiences.types';
+import { ExperienceCustomerViewModel } from './experiences.types';
 
 @Component({
   selector: 'app-experiences',
@@ -46,8 +44,7 @@ export class ExperiencesComponent {
   private readonly experiencesSignal = signal<ExperienceCollectionItemResponse[]>([]);
   private readonly selectedExperienceSignal =
     signal<ReturnType<typeof mapExperienceToTimelineItem> | null>(null);
-  private readonly selectedTechnologySignal =
-    signal<ExperienceTechnologyViewModel | null>(null);
+  private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
   private readonly selectedCustomerSignal =
     signal<ExperienceCustomerViewModel | null>(null);
 
@@ -67,7 +64,7 @@ export class ExperiencesComponent {
   protected readonly isDetailOpen = computed(
     () => this.selectedExperience() !== null,
   );
-  protected readonly isTechnologyDetailOpen = computed(
+  protected readonly isTechnologyModalOpen = computed(
     () => this.selectedTechnology() !== null,
   );
   protected readonly isCustomerDetailOpen = computed(
@@ -124,7 +121,7 @@ export class ExperiencesComponent {
     this.selectedExperienceSignal.set(null);
   }
 
-  protected openTechnologyDetails(technology: ExperienceTechnologyViewModel): void {
+  protected openTechnologyDetails(technology: TechnologyModalItem): void {
     this.selectedTechnologySignal.set(technology);
   }
 

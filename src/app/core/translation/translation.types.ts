@@ -56,6 +56,7 @@ export type AppTranslationKey =
   | 'footer.copyright.year'
   | 'common.actions.viewDetails'
   | 'common.actions.close'
+  | 'common.actions.showMore'
   | 'common.actions.showLess'
   | 'pages.home.hero.availability'
   | 'pages.home.hero.greeting'

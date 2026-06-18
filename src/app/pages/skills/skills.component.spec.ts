@@ -123,7 +123,7 @@ describe('SkillsComponent', () => {
       selectStackFilterFromEvent: (event: Event) => void;
       selectLevelFilterFromEvent: (event: Event) => void;
       selectTypeFilterFromEvent: (event: Event) => void;
-      updateSearchTerm: (searchTerm: string) => void;
+      updateSearchTerm: (searchTerm: string | Event) => void;
       searchTerm: () => string;
     };
 
@@ -170,6 +170,32 @@ describe('SkillsComponent', () => {
 
     expect(component.searchTerm()).toBe('type');
     expect(technologiesText()).toContain('TypeScript');
+    expect(technologiesText()).not.toContain('Angular');
+  });
+
+  it('should update technology search from hans-input value events', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const technologiesText = (): string =>
+      compiled.querySelector('.skills-technologies')?.textContent ?? '';
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    flushTechnologiesRequest(httpTestingController);
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      updateSearchTerm: (searchTerm: string | Event) => void;
+      searchTerm: () => string;
+    };
+
+    component.updateSearchTerm(
+      new CustomEvent<string>('valuechange', { detail: 'docker' }),
+    );
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('docker');
+    expect(technologiesText()).toContain('Docker');
     expect(technologiesText()).not.toContain('Angular');
   });
 
