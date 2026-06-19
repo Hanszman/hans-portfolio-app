@@ -13,18 +13,29 @@
       [attr.aria-label]="'pages.projects.filters.label' | translate"
     >
       <hans-input
+        #projectsSearch
         class="projects-search"
         inputId="projects-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        left-icon="LuSearch"
+        [leftIcon]="'LuSearch'"
         [placeholder]="'pages.projects.search.placeholder' | translate"
         [attr.aria-label]="'pages.projects.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
+        (keyup)="applyFilters(projectsSearch)"
         (change)="updateSearchTerm($event)"
         (valuechange)="updateSearchTerm($event)"
+        (valueChange)="updateSearchTerm($event)"
       ></hans-input>
+
+      <hans-button
+        class="projects-search-submit"
+        buttonColor="primary"
+        buttonSize="medium"
+        [buttonLabel]="'common.actions.applyFilters' | translate"
+        (click)="applyFilters(projectsSearch)"
+      ></hans-button>
 
       <div class="projects-filter-row">
         <span>{{ 'pages.projects.filters.environment' | translate }}:</span>

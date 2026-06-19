@@ -79,6 +79,45 @@ describe('TechnologyModalComponent', () => {
     expect(component.details().map((detail) => detail.value)).toContain(2);
   });
 
+  it('should keep fallback details and avoid duplicate requests when catalog requests fail', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    httpTestingController
+      .expectOne(
+        buildApiUrl(
+          '/technologies?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
+        ),
+      )
+      .flush(null, {
+        status: 500,
+        statusText: 'Server Error',
+      });
+    httpTestingController
+      .expectOne(
+        buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
+      )
+      .flush(null, {
+        status: 500,
+        statusText: 'Server Error',
+      });
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      details: () => readonly { value: string | number }[];
+    };
+
+    expect(component.details().map((detail) => detail.value)).toContain('Framework');
+
+    fixture.componentRef.setInput('technology', {
+      slug: 'json',
+      name: 'JSON',
+      category: 'Object Notations',
+    });
+    fixture.detectChanges();
+  });
+
   it('should omit optional details when the selected item does not provide them', () => {
     fixture.componentRef.setInput('technology', {
       slug: 'portuguese',

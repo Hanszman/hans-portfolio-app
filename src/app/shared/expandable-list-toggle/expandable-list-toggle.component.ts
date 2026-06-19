@@ -12,8 +12,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class ExpandableListToggleComponent {
   readonly isExpanded = input(false);
   readonly hiddenCount = input(0);
-  readonly expandLabelKey = input.required<string>();
-  readonly collapseLabelKey = input.required<string>();
   readonly toggled = output<void>();
 
   protected readonly shouldShow = computed(

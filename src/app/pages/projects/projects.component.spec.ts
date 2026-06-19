@@ -33,6 +33,7 @@ describe('ProjectsComponent', () => {
       'hans-tag',
       'hans-modal',
       'hans-loading',
+      'hans-button',
     ];
 
     for (const elementName of elementNames) {
@@ -254,5 +255,55 @@ describe('ProjectsComponent', () => {
     expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
       "Github's API Consumer",
     ]);
+
+    component.updateSearchTerm(
+      new CustomEvent<{ value: string }>('valuechange', {
+        detail: { value: 'public' },
+      }),
+    );
+
+    expect(component.visibleProjectCases().map((project) => project.title)).toContain(
+      'Public Diagnostics',
+    );
+
+    component.updateSearchTerm({
+      target: { value: 'hard' },
+    } as unknown as Event);
+
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
+      'HardWorker',
+    ]);
+
+    component.updateSearchTerm(new Event('valuechange'));
+
+    expect(component.visibleProjectCases().length).toBeGreaterThan(1);
+  });
+
+  it('should apply the project search value from the custom element', () => {
+    const fixture = TestBed.createComponent(ProjectsComponent);
+    fixture.detectChanges();
+
+    flushProjectsRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      applyFilters: (searchInput: HTMLElement) => void;
+      visibleProjectCases: () => readonly ProjectCaseViewModel[];
+      searchTerm: () => string;
+    };
+
+    component.applyFilters({ value: 'portfolio' } as HTMLElement & { value: string });
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('portfolio');
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
+      'Portfolio',
+    ]);
+
+    component.applyFilters({} as HTMLElement);
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('');
+    expect(component.visibleProjectCases().length).toBeGreaterThan(1);
   });
 });

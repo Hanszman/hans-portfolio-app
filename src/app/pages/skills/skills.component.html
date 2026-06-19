@@ -52,21 +52,25 @@
       </header>
 
       <hans-input
+        #skillsSearch
         class="skills-search"
         inputId="skills-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        left-icon="LuSearch"
+        [leftIcon]="'LuSearch'"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
+        (keyup)="applyFilters(skillsSearch, stackSelect, typeSelect, levelSelect)"
         (change)="updateSearchTerm($event)"
         (valuechange)="updateSearchTerm($event)"
+        (valueChange)="updateSearchTerm($event)"
       ></hans-input>
 
       <div class="skills-filter-grid">
         <hans-select-option
+          #stackSelect
           class="skills-filter-select"
           [label]="'pages.skills.filters.stack' | translate"
           [options]="stackFilterOptions()"
@@ -79,9 +83,12 @@
           dropdownBackgroundColor="var(--background-color)"
           dropdownHoverColor="var(--primary-neutral-color)"
           (change)="selectStackFilterFromEvent($event)"
+          (valuechange)="selectStackFilterFromEvent($event)"
+          (valueChange)="selectStackFilterFromEvent($event)"
         ></hans-select-option>
 
         <hans-select-option
+          #typeSelect
           class="skills-filter-select"
           [label]="'pages.skills.filters.type' | translate"
           [options]="typeFilterOptions()"
@@ -94,9 +101,12 @@
           dropdownBackgroundColor="var(--background-color)"
           dropdownHoverColor="var(--primary-neutral-color)"
           (change)="selectTypeFilterFromEvent($event)"
+          (valuechange)="selectTypeFilterFromEvent($event)"
+          (valueChange)="selectTypeFilterFromEvent($event)"
         ></hans-select-option>
 
         <hans-select-option
+          #levelSelect
           class="skills-filter-select"
           [label]="'pages.skills.filters.level' | translate"
           [options]="levelFilterOptions()"
@@ -109,7 +119,17 @@
           dropdownBackgroundColor="var(--background-color)"
           dropdownHoverColor="var(--primary-neutral-color)"
           (change)="selectLevelFilterFromEvent($event)"
+          (valuechange)="selectLevelFilterFromEvent($event)"
+          (valueChange)="selectLevelFilterFromEvent($event)"
         ></hans-select-option>
+
+        <hans-button
+          class="skills-filter-submit"
+          buttonColor="primary"
+          buttonSize="medium"
+          [buttonLabel]="'common.actions.applyFilters' | translate"
+          (click)="applyFilters(skillsSearch, stackSelect, typeSelect, levelSelect)"
+        ></hans-button>
       </div>
 
       @if (isLoading()) {

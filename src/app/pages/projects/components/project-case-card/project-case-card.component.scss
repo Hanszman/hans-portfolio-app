@@ -26,7 +26,7 @@
 }
 
 .project-case-card-content {
-  @apply flex h-full min-h-[19rem] flex-col gap-5 p-6;
+  @apply flex h-full min-h-0 flex-col gap-5 overflow-hidden p-6;
 }
 
 .project-case-card-header {

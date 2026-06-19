@@ -28,8 +28,6 @@ describe('ExpandableListToggleComponent', () => {
       .compileComponents();
 
     fixture = TestBed.createComponent(ExpandableListToggleComponent);
-    fixture.componentRef.setInput('expandLabelKey', 'more');
-    fixture.componentRef.setInput('collapseLabelKey', 'less');
   });
 
   it('should hide when there are no hidden items and list is collapsed', () => {
@@ -47,5 +45,19 @@ describe('ExpandableListToggleComponent', () => {
     fixture.nativeElement.querySelector('button').click();
 
     expect(fixture.componentInstance.toggled.emit).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render the internal show more and show less labels', () => {
+    fixture.componentRef.setInput('hiddenCount', 2);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain(
+      '+2 common.actions.showMore',
+    );
+
+    fixture.componentRef.setInput('isExpanded', true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('common.actions.showLess');
   });
 });

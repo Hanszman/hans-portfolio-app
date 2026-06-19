@@ -12,7 +12,10 @@ import { ProjectsService } from '../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { HansInputValueEvent } from '../../shared/forms/input.types';
+import {
+  HansFormValueElement,
+  HansInputValueEvent,
+} from '../../shared/forms/input.types';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -111,6 +114,10 @@ export class ProjectsComponent {
     this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
   }
 
+  protected applyFilters(searchInput: HTMLElement): void {
+    this.searchTermSignal.set(this.resolveElementValue(searchInput));
+  }
+
   protected selectContext(value: ProjectContextFilterValue): void {
     this.selectedContextSignal.set(value);
   }
@@ -138,6 +145,14 @@ export class ProjectsComponent {
 
     const inputEvent = searchTerm as HansInputValueEvent;
 
-    return inputEvent.detail ?? inputEvent.target?.value ?? '';
+    if (typeof inputEvent.detail === 'string') {
+      return inputEvent.detail;
+    }
+
+    return inputEvent.detail?.value ?? inputEvent.target?.value ?? '';
+  }
+
+  private resolveElementValue(element: HTMLElement): string {
+    return (element as HansFormValueElement).value ?? '';
   }
 }

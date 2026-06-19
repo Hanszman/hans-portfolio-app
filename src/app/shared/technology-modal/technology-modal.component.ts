@@ -61,47 +61,54 @@ export class TechnologyModalComponent {
 
   constructor() {
     effect(() => {
-      if (
-        !this.isOpen() ||
-        !this.technology() ||
-        this.hasRequestedTechnologiesSignal()
-      ) {
+      if (!this.isOpen() || !this.technology()) {
         return;
       }
 
-      this.hasRequestedTechnologiesSignal.set(true);
-      this.technologiesService
-        .getTechnologies()
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: (response) => {
-            this.technologiesSignal.set(response.data);
-          },
-          error: () => {
-            this.technologiesSignal.set([]);
-          },
-        });
-
-      if (this.hasRequestedProjectsSignal()) {
-        return;
-      }
-
-      this.hasRequestedProjectsSignal.set(true);
-      this.projectsService
-        .getProjects()
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: (response) => {
-            this.projectsSignal.set(response.data);
-          },
-          error: () => {
-            this.projectsSignal.set([]);
-          },
-        });
+      this.requestTechnologyCatalog();
+      this.requestProjectCatalog();
     });
   }
 
   protected requestClose(): void {
     this.closed.emit();
+  }
+
+  private requestTechnologyCatalog(): void {
+    if (this.hasRequestedTechnologiesSignal()) {
+      return;
+    }
+
+    this.hasRequestedTechnologiesSignal.set(true);
+    this.technologiesService
+      .getTechnologies()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          this.technologiesSignal.set(response.data);
+        },
+        error: () => {
+          this.technologiesSignal.set([]);
+        },
+      });
+  }
+
+  private requestProjectCatalog(): void {
+    if (this.hasRequestedProjectsSignal()) {
+      return;
+    }
+
+    this.hasRequestedProjectsSignal.set(true);
+    this.projectsService
+      .getProjects()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          this.projectsSignal.set(response.data);
+        },
+        error: () => {
+          this.projectsSignal.set([]);
+        },
+      });
   }
 }

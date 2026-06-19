@@ -265,7 +265,7 @@ export const resolveTechnologyModalItem = (
         TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY,
         technology.category,
       ) ?? reference.category,
-    stack: resolveStackLabel(technology, locale) ?? reference.stack,
+    stack: resolveStackLabel(technology, locale),
     level:
       resolveCatalogLabel(locale, TECHNOLOGY_LEVEL_LABEL_KEYS, technology.level) ??
       reference.level,

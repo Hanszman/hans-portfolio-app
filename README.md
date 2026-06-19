@@ -176,6 +176,20 @@ Current setup:
 - stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css`
 - script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js`
 
+### CDN cache busting
+
+The optional `?v=` query string used in local HTML files is a browser cache-busting marker, not a runtime option consumed by the library.
+
+Use it when you need to force the browser to fetch a fresh CDN asset after a local or published library rebuild. Keep the same value on both the CSS and JS files so both assets come from the same library build.
+
+Examples:
+
+- local validation: `?v=local-input-valuechange`
+- production release: `?v=<published-version-or-build-id>`
+
+The production `src/index.html` can stay without `?v=` when the CDN URL already serves the desired immutable release. If production cache invalidation is needed,
+append a deterministic release value to both CDN URLs rather than using a local debug label.
+
 The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
 
 ## 🔀 API Integration Notes

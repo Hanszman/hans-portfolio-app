@@ -66,11 +66,15 @@
 }
 
 .skills-filter-grid {
-  @apply grid gap-4 md:grid-cols-3;
+  @apply grid items-end gap-4 md:grid-cols-4;
 }
 
 .skills-filter-select {
   @apply block min-w-0;
+}
+
+.skills-filter-submit {
+  @apply block;
 }
 
 .skills-card-grid {

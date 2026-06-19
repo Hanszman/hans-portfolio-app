@@ -1,10 +1,26 @@
 import { createProjectsCollectionResponse } from '../../../core/api/mocks/projects.mocks';
 import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/technologies.mocks';
+import { TechnologyCollectionItemResponse } from '../../../core/api/technologies/technologies.types';
 import {
   buildTechnologyModalDetail,
   buildTechnologyModalDetails,
   resolveTechnologyModalItem,
 } from './technology-modal.helper';
+
+const buildTechnology = (
+  overrides: Partial<TechnologyCollectionItemResponse>,
+): TechnologyCollectionItemResponse =>
+  ({
+    id: overrides.id ?? `tech-${overrides.slug ?? 'custom'}`,
+    slug: overrides.slug ?? 'custom',
+    name: overrides.name ?? 'Custom',
+    category: overrides.category ?? 'TOOL',
+    level: overrides.level ?? null,
+    frequency: overrides.frequency ?? null,
+    highlight: overrides.highlight ?? false,
+    imageAssets: overrides.imageAssets,
+    experienceMetrics: overrides.experienceMetrics,
+  }) as TechnologyCollectionItemResponse;
 
 describe('technology modal helper', () => {
   it('should build a modal detail when the value is present', () => {
@@ -91,6 +107,129 @@ describe('technology modal helper', () => {
       slug: 'custom-stack',
       name: 'Custom Stack',
       projectCount: 3,
+    });
+  });
+
+  it('should return null without a selected technology reference', () => {
+    expect(resolveTechnologyModalItem(null, [], [], 'en-us')).toBeNull();
+  });
+
+  it('should resolve catalog technologies by normalized name when the slug changes', () => {
+    const technology = resolveTechnologyModalItem(
+      { slug: 'react-js', name: 'React' },
+      [buildTechnology({ slug: 'react', name: 'React', category: 'LIBRARY' })],
+      [],
+      'en-us',
+    );
+
+    expect(technology).toEqual(
+      jasmine.objectContaining({
+        slug: 'react',
+        name: 'React',
+        category: 'Libraries',
+        projectCount: undefined,
+      }),
+    );
+  });
+
+  it('should fallback to the selected category when the catalog category is missing', () => {
+    const technology = resolveTechnologyModalItem(
+      {
+        slug: 'custom',
+        name: 'Custom',
+        category: 'Custom fallback',
+      },
+      [
+        {
+          ...buildTechnology({ slug: 'custom', name: 'Custom' }),
+          category: undefined,
+        } as unknown as TechnologyCollectionItemResponse,
+      ],
+      [],
+      'en-us',
+    );
+
+    expect(technology?.category).toBe('Custom fallback');
+  });
+
+  it('should resolve stack labels from slug and category rules', () => {
+    const technologies = [
+      buildTechnology({ slug: 'unity', name: 'Unity' }),
+      buildTechnology({ slug: 'expo', name: 'Expo' }),
+      buildTechnology({ slug: 'sql-server', name: 'SQL Server', category: 'DATABASE' }),
+      buildTechnology({ slug: 'node-js', name: 'Node.js' }),
+      buildTechnology({ slug: 'unknown', name: 'Unknown', category: 'CUSTOM_CATEGORY' }),
+    ];
+
+    expect(
+      resolveTechnologyModalItem({ slug: 'unity', name: 'Unity' }, technologies, [], 'en-us')
+        ?.stack,
+    ).toBe('Games');
+    expect(
+      resolveTechnologyModalItem({ slug: 'expo', name: 'Expo' }, technologies, [], 'en-us')
+        ?.stack,
+    ).toBe('Mobile');
+    expect(
+      resolveTechnologyModalItem(
+        { slug: 'sql-server', name: 'SQL Server' },
+        technologies,
+        [],
+        'en-us',
+      )?.stack,
+    ).toBe('Databases');
+    expect(
+      resolveTechnologyModalItem(
+        { slug: 'node-js', name: 'Node.js' },
+        technologies,
+        [],
+        'en-us',
+      )?.stack,
+    ).toBe('Back-End');
+    expect(
+      resolveTechnologyModalItem(
+        { slug: 'unknown', name: 'Unknown' },
+        technologies,
+        [],
+        'en-us',
+      )?.category,
+    ).toBe('Custom Category');
+  });
+
+  it('should prefer backend images and fallback to the selected image otherwise', () => {
+    const fallbackImage = { src: '/fallback.svg', alt: 'Fallback icon' };
+    const withoutBackendImage = resolveTechnologyModalItem(
+      { slug: 'custom', name: 'Custom', image: fallbackImage },
+      [buildTechnology({ slug: 'custom', name: 'Custom' })],
+      [],
+      'en-us',
+    );
+
+    const withBackendImage = resolveTechnologyModalItem(
+      { slug: 'custom', name: 'Custom', image: fallbackImage },
+      [
+        buildTechnology({
+          slug: 'custom',
+          name: 'Custom',
+          imageAssets: [
+            {
+              imageAsset: {
+                filePath: '/assets/img/skills/custom.svg',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
+              },
+            },
+          ],
+        }),
+      ],
+      [],
+      'en-us',
+    );
+
+    expect(withoutBackendImage?.image).toEqual(fallbackImage);
+    expect(withBackendImage?.image).toEqual({
+      src: 'http://localhost:4200/assets/img/skills/custom.svg',
+      alt: 'Custom icon',
     });
   });
 });

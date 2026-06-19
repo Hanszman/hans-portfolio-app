@@ -12,7 +12,10 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { HansInputValueEvent } from '../../shared/forms/input.types';
+import {
+  HansFormValueElement,
+  HansInputValueEvent,
+} from '../../shared/forms/input.types';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -30,7 +33,6 @@ import {
   SkillFilterChipViewModel,
   SkillCardViewModel,
   SkillLevelFilterValue,
-  SkillsSelectEvent,
   SkillStackFilterValue,
   SkillTypeFilterValue,
 } from './skills.types';
@@ -142,12 +144,30 @@ export class SkillsComponent {
     this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
   }
 
+  protected applyFilters(
+    searchInput: HTMLElement,
+    stackSelect: HTMLElement,
+    typeSelect: HTMLElement,
+    levelSelect: HTMLElement,
+  ): void {
+    this.searchTermSignal.set(this.resolveElementValue(searchInput));
+    this.selectedStackSignal.set(
+      (this.resolveElementValue(stackSelect) || this.selectedStack()) as SkillStackFilterValue,
+    );
+    this.selectedTypeSignal.set(
+      (this.resolveElementValue(typeSelect) || this.selectedType()) as SkillTypeFilterValue,
+    );
+    this.selectedLevelSignal.set(
+      (this.resolveElementValue(levelSelect) || this.selectedLevel()) as SkillLevelFilterValue,
+    );
+  }
+
   protected selectStackFilter(value: SkillStackFilterValue): void {
     this.selectedStackSignal.set(value);
   }
 
   protected selectStackFilterFromEvent(event: Event): void {
-    this.selectStackFilter((event as SkillsSelectEvent<SkillStackFilterValue>).detail);
+    this.selectStackFilter(this.resolveEventValue(event) as SkillStackFilterValue);
   }
 
   protected selectLevelFilter(value: SkillLevelFilterValue): void {
@@ -155,7 +175,7 @@ export class SkillsComponent {
   }
 
   protected selectLevelFilterFromEvent(event: Event): void {
-    this.selectLevelFilter((event as SkillsSelectEvent<SkillLevelFilterValue>).detail);
+    this.selectLevelFilter(this.resolveEventValue(event) as SkillLevelFilterValue);
   }
 
   protected selectTypeFilter(value: SkillTypeFilterValue): void {
@@ -163,7 +183,7 @@ export class SkillsComponent {
   }
 
   protected selectTypeFilterFromEvent(event: Event): void {
-    this.selectTypeFilter((event as SkillsSelectEvent<SkillTypeFilterValue>).detail);
+    this.selectTypeFilter(this.resolveEventValue(event) as SkillTypeFilterValue);
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {
@@ -193,6 +213,20 @@ export class SkillsComponent {
 
     const inputEvent = searchTerm as HansInputValueEvent;
 
-    return inputEvent.detail ?? inputEvent.target?.value ?? '';
+    return this.resolveEventValue(inputEvent);
+  }
+
+  private resolveEventValue(event: Event): string {
+    const inputEvent = event as HansInputValueEvent;
+
+    if (typeof inputEvent.detail === 'string') {
+      return inputEvent.detail;
+    }
+
+    return inputEvent.detail?.value ?? inputEvent.target?.value ?? '';
+  }
+
+  private resolveElementValue(element: HTMLElement): string {
+    return (element as HansFormValueElement).value ?? '';
   }
 }

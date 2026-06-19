@@ -104,6 +104,18 @@ describe('ProjectCaseCardComponent', () => {
     expect(spy).toHaveBeenCalledWith(project);
   });
 
+  it('emits details request from space keyboard activation', () => {
+    const spy = jasmine.createSpy('openDetails');
+    component.openDetails.subscribe(spy);
+    const event = new KeyboardEvent('keydown', { key: ' ' });
+    spyOn(event, 'preventDefault');
+
+    component['requestDetailsFromKeyboard'](event);
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(project);
+  });
+
   it('ignores unrelated keyboard events', () => {
     const spy = jasmine.createSpy('openDetails');
     component.openDetails.subscribe(spy);
@@ -122,5 +134,29 @@ describe('ProjectCaseCardComponent', () => {
     component['requestTechnologyDetails']({ slug: 'angular', name: 'Angular' });
 
     expect(spy).toHaveBeenCalledWith({ slug: 'angular', name: 'Angular' });
+  });
+
+  it('toggles the hidden technology list', () => {
+    const viewModel = component as unknown as {
+      visibleTechnologies: () => readonly { label: string }[];
+    };
+
+    expect(viewModel.visibleTechnologies().map((technology) => technology.label)).not.toContain(
+      'Sass',
+    );
+
+    component['toggleTechnologyList']();
+    fixture.detectChanges();
+
+    expect(viewModel.visibleTechnologies().map((technology) => technology.label)).toContain(
+      'Sass',
+    );
+
+    component['toggleTechnologyList']();
+    fixture.detectChanges();
+
+    expect(viewModel.visibleTechnologies().map((technology) => technology.label)).not.toContain(
+      'Sass',
+    );
   });
 });
