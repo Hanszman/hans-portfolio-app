@@ -58,11 +58,10 @@
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [leftIcon]="'LuSearch'"
+        [attr.leftIcon]="'LuSearch'"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
-        (keyup)="applyFilters(skillsSearch, stackSelect, typeSelect, levelSelect)"
         (change)="updateSearchTerm($event)"
         (valuechange)="updateSearchTerm($event)"
         (valueChange)="updateSearchTerm($event)"
@@ -125,9 +124,10 @@
 
         <hans-button
           class="skills-filter-submit"
+          [attr.label]="'common.actions.applyFilters' | translate"
           buttonColor="primary"
           buttonSize="medium"
-          [buttonLabel]="'common.actions.applyFilters' | translate"
+          [attr.aria-label]="'common.actions.applyFilters' | translate"
           (click)="applyFilters(skillsSearch, stackSelect, typeSelect, levelSelect)"
         ></hans-button>
       </div>

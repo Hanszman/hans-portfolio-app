@@ -225,6 +225,31 @@ describe('SkillsComponent', () => {
     expect(component.searchTerm()).toBe('');
   });
 
+  it('should update technology search from the bound hans-input host events', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const technologiesText = (): string =>
+      compiled.querySelector('.skills-technologies')?.textContent ?? '';
+
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const input = compiled.querySelector('hans-input') as HTMLElement & { value?: string };
+    const component = fixture.componentInstance as unknown as {
+      searchTerm: () => string;
+    };
+
+    input.value = 'angular';
+    input.dispatchEvent(new Event('valuechange'));
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('angular');
+    expect(technologiesText()).toContain('Angular');
+    expect(technologiesText()).not.toContain('Docker');
+  });
+
   it('should apply the current custom element values from the filter form', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
@@ -265,6 +290,30 @@ describe('SkillsComponent', () => {
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('');
+    expect(component.filteredTechnologyCards().map((card) => card.name)).toEqual([
+      'Angular',
+    ]);
+  });
+
+  it('should resolve the technology search term from an html element input host', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      updateSearchTerm: (searchTerm: string | Event | HTMLElement) => void;
+      searchTerm: () => string;
+      filteredTechnologyCards: () => readonly { name: string }[];
+    };
+    const input = document.createElement('hans-input') as HTMLElement & { value?: string };
+    input.value = 'angular';
+
+    component.updateSearchTerm(input);
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('angular');
     expect(component.filteredTechnologyCards().map((card) => card.name)).toEqual([
       'Angular',
     ]);

@@ -279,6 +279,31 @@ describe('ProjectsComponent', () => {
     expect(component.visibleProjectCases().length).toBeGreaterThan(1);
   });
 
+  it('should update project search from the bound hans-input host events', () => {
+    const fixture = TestBed.createComponent(ProjectsComponent);
+    fixture.detectChanges();
+
+    flushProjectsRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const input = fixture.nativeElement.querySelector('hans-input') as HTMLElement & {
+      value?: string;
+    };
+    const component = fixture.componentInstance as unknown as {
+      searchTerm: () => string;
+      visibleProjectCases: () => readonly ProjectCaseViewModel[];
+    };
+
+    input.value = 'github';
+    input.dispatchEvent(new Event('valuechange'));
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('github');
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
+      "Github's API Consumer",
+    ]);
+  });
+
   it('should apply the project search value from the custom element', () => {
     const fixture = TestBed.createComponent(ProjectsComponent);
     fixture.detectChanges();
@@ -305,5 +330,29 @@ describe('ProjectsComponent', () => {
 
     expect(component.searchTerm()).toBe('');
     expect(component.visibleProjectCases().length).toBeGreaterThan(1);
+  });
+
+  it('should resolve the project search term from an html element input host', () => {
+    const fixture = TestBed.createComponent(ProjectsComponent);
+    fixture.detectChanges();
+
+    flushProjectsRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      updateSearchTerm: (searchTerm: string | Event | HTMLElement) => void;
+      searchTerm: () => string;
+      visibleProjectCases: () => readonly ProjectCaseViewModel[];
+    };
+    const input = document.createElement('hans-input') as HTMLElement & { value?: string };
+    input.value = 'hard';
+
+    component.updateSearchTerm(input);
+    fixture.detectChanges();
+
+    expect(component.searchTerm()).toBe('hard');
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
+      'HardWorker',
+    ]);
   });
 });

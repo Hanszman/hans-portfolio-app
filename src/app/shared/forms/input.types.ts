@@ -10,3 +10,7 @@ export interface HansFormValueDetail {
 export interface HansFormValueElement extends HTMLElement {
   value?: string;
 }
+
+export type HansInputShadowControl = HTMLInputElement | HTMLTextAreaElement;
+
+export type HansInputListener = (value: string) => void;

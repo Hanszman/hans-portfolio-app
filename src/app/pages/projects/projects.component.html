@@ -19,11 +19,10 @@
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [leftIcon]="'LuSearch'"
+        [attr.leftIcon]="'LuSearch'"
         [placeholder]="'pages.projects.search.placeholder' | translate"
         [attr.aria-label]="'pages.projects.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
-        (keyup)="applyFilters(projectsSearch)"
         (change)="updateSearchTerm($event)"
         (valuechange)="updateSearchTerm($event)"
         (valueChange)="updateSearchTerm($event)"
@@ -31,9 +30,10 @@
 
       <hans-button
         class="projects-search-submit"
+        [attr.label]="'common.actions.applyFilters' | translate"
         buttonColor="primary"
         buttonSize="medium"
-        [buttonLabel]="'common.actions.applyFilters' | translate"
+        [attr.aria-label]="'common.actions.applyFilters' | translate"
         (click)="applyFilters(projectsSearch)"
       ></hans-button>
 

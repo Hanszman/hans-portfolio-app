@@ -171,10 +171,14 @@ Portfolio-only UI can live in this repository when it is not a good fit for the 
 
 The app is currently prepared to consume the design library through the CDN entrypoints declared in [src/index.html](src/index.html).
 
+This section documents the integration behavior used by this app. The canonical explanation of shared CDN parameters should also exist in `hans-ui-design-lib`, because other consumers may need the same guidance.
+
 Current setup:
 
 - stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css`
 - script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js`
+
+The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
 
 ### CDN cache busting
 
@@ -187,10 +191,15 @@ Examples:
 - local validation: `?v=local-input-valuechange`
 - production release: `?v=<published-version-or-build-id>`
 
-The production `src/index.html` can stay without `?v=` when the CDN URL already serves the desired immutable release. If production cache invalidation is needed,
-append a deterministic release value to both CDN URLs rather than using a local debug label.
+The production `src/index.html` can stay without `?v=` when the CDN URL already serves the desired immutable release. If production cache invalidation is needed, append a deterministic release value to both CDN URLs rather than using a local debug label.
 
-The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
+The recommended production strategy is to inject the same release identifier into both assets at deploy time, for example:
+
+- the npm package version
+- a git SHA
+- a CI build id
+
+That automation belongs to the consuming app deployment, because the consuming app decides which library build it wants to pin.
 
 ## 🔀 API Integration Notes
 

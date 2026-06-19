@@ -63,10 +63,11 @@
   border-color: var(--primary-default-color);
   background-color: var(--primary-default-color);
   box-shadow: 0 1rem 2rem color-mix(in srgb, var(--primary-default-color) 22%, transparent);
+  color: var(--white);
 }
 
 .projects-filter-chip:hover {
-  color: var(--primary-text-color);
+  color: var(--white);
 }
 
 .projects-filter-chip-active {
@@ -78,8 +79,7 @@
 }
 
 .projects-grid {
-  @apply grid gap-5 md:grid-cols-2 xl:grid-cols-3;
-  grid-auto-rows: 23rem;
+  @apply grid auto-rows-fr items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3;
 }
 
 @media (min-width: 768px) {

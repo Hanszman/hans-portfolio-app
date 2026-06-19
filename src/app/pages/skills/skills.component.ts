@@ -2,9 +2,12 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   computed,
+  effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -16,6 +19,10 @@ import {
   HansFormValueElement,
   HansInputValueEvent,
 } from '../../shared/forms/input.types';
+import {
+  bindHansInputValue,
+  readHansInputValue,
+} from '../../shared/forms/input.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -54,6 +61,7 @@ import {
 export class SkillsComponent {
   private readonly technologiesService = inject(TechnologiesService);
   private readonly translationService = inject(TranslationService);
+  private readonly skillsSearchRef = viewChild<ElementRef<HTMLElement>>('skillsSearch');
   private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>([]);
   private readonly selectedSkillSignal = signal<TechnologyModalItem | null>(null);
   private readonly searchTermSignal = signal('');
@@ -107,7 +115,9 @@ export class SkillsComponent {
       const matchesSearch =
         !searchTerm ||
         card.name.toLowerCase().includes(searchTerm) ||
-        card.categoryLabel.toLowerCase().includes(searchTerm);
+        card.categoryLabel.toLowerCase().includes(searchTerm) ||
+        card.levelLabel.toLowerCase().includes(searchTerm) ||
+        card.frequencyLabel.toLowerCase().includes(searchTerm);
       const matchesStack = selectedStack === 'ALL' || card.stackKey === selectedStack;
       const matchesLevel = selectedLevel === 'ALL' || card.levelKey === selectedLevel;
       const matchesType = selectedType === 'ALL' || card.typeKey === selectedType;
@@ -123,6 +133,14 @@ export class SkillsComponent {
   protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
 
   constructor() {
+    effect((onCleanup) => {
+      onCleanup(
+        bindHansInputValue(this.skillsSearchRef()?.nativeElement, (value) =>
+          this.searchTermSignal.set(value),
+        ),
+      );
+    });
+
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed())
@@ -140,7 +158,7 @@ export class SkillsComponent {
       });
   }
 
-  protected updateSearchTerm(searchTerm: string | Event): void {
+  protected updateSearchTerm(searchTerm: string | Event | HTMLElement): void {
     this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
   }
 
@@ -150,7 +168,7 @@ export class SkillsComponent {
     typeSelect: HTMLElement,
     levelSelect: HTMLElement,
   ): void {
-    this.searchTermSignal.set(this.resolveElementValue(searchInput));
+    this.searchTermSignal.set(readHansInputValue(searchInput));
     this.selectedStackSignal.set(
       (this.resolveElementValue(stackSelect) || this.selectedStack()) as SkillStackFilterValue,
     );
@@ -206,9 +224,13 @@ export class SkillsComponent {
     }));
   }
 
-  private resolveSearchTerm(searchTerm: string | Event): string {
+  private resolveSearchTerm(searchTerm: string | Event | HTMLElement): string {
     if (typeof searchTerm === 'string') {
       return searchTerm;
+    }
+
+    if (searchTerm instanceof HTMLElement) {
+      return readHansInputValue(searchTerm);
     }
 
     const inputEvent = searchTerm as HansInputValueEvent;
