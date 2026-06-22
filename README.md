@@ -175,8 +175,8 @@ This section documents the integration behavior used by this app. The canonical 
 
 Current setup:
 
-- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css`
-- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js`
+- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css?v=1.0.22`
+- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js?v=1.0.22`
 
 The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
 
@@ -188,10 +188,10 @@ Use it when you need to force the browser to fetch a fresh CDN asset after a loc
 
 Examples:
 
-- local validation: `?v=local-input-valuechange`
+- local validation: `?v=1.0.22`
 - production release: `?v=<published-version-or-build-id>`
 
-The production `src/index.html` can stay without `?v=` when the CDN URL already serves the desired immutable release. If production cache invalidation is needed, append a deterministic release value to both CDN URLs rather than using a local debug label.
+This portfolio currently pins both `src/index.html` and `src/index.local.html` to the same published library release value. When a new `hans-ui-design-lib` version is published and the app should consume it immediately, update both files together or automate that replacement in the consumer deploy pipeline.
 
 The recommended production strategy is to inject the same release identifier into both assets at deploy time, for example:
 
