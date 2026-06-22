@@ -30,7 +30,6 @@ describe('SkillsComponent', () => {
       'hans-tag',
       'hans-modal',
       'hans-select-option',
-      'hans-button',
     ];
 
     for (const elementName of elementNames) {
@@ -236,87 +235,23 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
 
-    const input = compiled.querySelector('hans-input') as HTMLElement & { value?: string };
+    const input = compiled.querySelector('hans-input') as HTMLElement;
     const component = fixture.componentInstance as unknown as {
       searchTerm: () => string;
     };
 
-    input.value = 'angular';
-    input.dispatchEvent(new Event('valuechange'));
+    input.dispatchEvent(
+      new CustomEvent<string>('valuechange', {
+        bubbles: true,
+        composed: true,
+        detail: 'angular',
+      }),
+    );
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('angular');
     expect(technologiesText()).toContain('Angular');
     expect(technologiesText()).not.toContain('Docker');
-  });
-
-  it('should apply the current custom element values from the filter form', () => {
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
-
-    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
-    fixture.detectChanges();
-
-    const component = fixture.componentInstance as unknown as {
-      applyFilters: (
-        searchInput: HTMLElement,
-        stackSelect: HTMLElement,
-        typeSelect: HTMLElement,
-        levelSelect: HTMLElement,
-      ) => void;
-      filteredTechnologyCards: () => readonly { name: string }[];
-      searchTerm: () => string;
-    };
-
-    component.applyFilters(
-      { value: 'angular' } as HTMLElement & { value: string },
-      { value: 'FRONT_END' } as HTMLElement & { value: string },
-      { value: 'FRAMEWORKS' } as HTMLElement & { value: string },
-      { value: 'ADVANCED' } as HTMLElement & { value: string },
-    );
-    fixture.detectChanges();
-
-    expect(component.searchTerm()).toBe('angular');
-    expect(component.filteredTechnologyCards().map((card) => card.name)).toEqual([
-      'Angular',
-    ]);
-
-    component.applyFilters(
-      {} as HTMLElement,
-      {} as HTMLElement,
-      {} as HTMLElement,
-      {} as HTMLElement,
-    );
-    fixture.detectChanges();
-
-    expect(component.searchTerm()).toBe('');
-    expect(component.filteredTechnologyCards().map((card) => card.name)).toEqual([
-      'Angular',
-    ]);
-  });
-
-  it('should resolve the technology search term from an html element input host', () => {
-    const fixture = TestBed.createComponent(SkillsComponent);
-    fixture.detectChanges();
-
-    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
-    fixture.detectChanges();
-
-    const component = fixture.componentInstance as unknown as {
-      updateSearchTerm: (searchTerm: string | Event | HTMLElement) => void;
-      searchTerm: () => string;
-      filteredTechnologyCards: () => readonly { name: string }[];
-    };
-    const input = document.createElement('hans-input') as HTMLElement & { value?: string };
-    input.value = 'angular';
-
-    component.updateSearchTerm(input);
-    fixture.detectChanges();
-
-    expect(component.searchTerm()).toBe('angular');
-    expect(component.filteredTechnologyCards().map((card) => card.name)).toEqual([
-      'Angular',
-    ]);
   });
 
   it('should filter studying technologies from level or frequency and games by stack', () => {

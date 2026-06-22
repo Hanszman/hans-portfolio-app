@@ -6,11 +6,3 @@ export interface HansInputValueEvent extends Event {
 export interface HansFormValueDetail {
   value?: string;
 }
-
-export interface HansFormValueElement extends HTMLElement {
-  value?: string;
-}
-
-export type HansInputShadowControl = HTMLInputElement | HTMLTextAreaElement;
-
-export type HansInputListener = (value: string) => void;

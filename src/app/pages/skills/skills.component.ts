@@ -2,12 +2,9 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   computed,
-  effect,
   inject,
   signal,
-  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -15,14 +12,7 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import {
-  HansFormValueElement,
-  HansInputValueEvent,
-} from '../../shared/forms/input.types';
-import {
-  bindHansInputValue,
-  readHansInputValue,
-} from '../../shared/forms/input.helper';
+import { HansInputValueEvent } from '../../shared/forms/input.types';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -61,7 +51,6 @@ import {
 export class SkillsComponent {
   private readonly technologiesService = inject(TechnologiesService);
   private readonly translationService = inject(TranslationService);
-  private readonly skillsSearchRef = viewChild<ElementRef<HTMLElement>>('skillsSearch');
   private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>([]);
   private readonly selectedSkillSignal = signal<TechnologyModalItem | null>(null);
   private readonly searchTermSignal = signal('');
@@ -133,14 +122,6 @@ export class SkillsComponent {
   protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
 
   constructor() {
-    effect((onCleanup) => {
-      onCleanup(
-        bindHansInputValue(this.skillsSearchRef()?.nativeElement, (value) =>
-          this.searchTermSignal.set(value),
-        ),
-      );
-    });
-
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed())
@@ -158,26 +139,8 @@ export class SkillsComponent {
       });
   }
 
-  protected updateSearchTerm(searchTerm: string | Event | HTMLElement): void {
+  protected updateSearchTerm(searchTerm: string | Event): void {
     this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
-  }
-
-  protected applyFilters(
-    searchInput: HTMLElement,
-    stackSelect: HTMLElement,
-    typeSelect: HTMLElement,
-    levelSelect: HTMLElement,
-  ): void {
-    this.searchTermSignal.set(readHansInputValue(searchInput));
-    this.selectedStackSignal.set(
-      (this.resolveElementValue(stackSelect) || this.selectedStack()) as SkillStackFilterValue,
-    );
-    this.selectedTypeSignal.set(
-      (this.resolveElementValue(typeSelect) || this.selectedType()) as SkillTypeFilterValue,
-    );
-    this.selectedLevelSignal.set(
-      (this.resolveElementValue(levelSelect) || this.selectedLevel()) as SkillLevelFilterValue,
-    );
   }
 
   protected selectStackFilter(value: SkillStackFilterValue): void {
@@ -224,13 +187,9 @@ export class SkillsComponent {
     }));
   }
 
-  private resolveSearchTerm(searchTerm: string | Event | HTMLElement): string {
+  private resolveSearchTerm(searchTerm: string | Event): string {
     if (typeof searchTerm === 'string') {
       return searchTerm;
-    }
-
-    if (searchTerm instanceof HTMLElement) {
-      return readHansInputValue(searchTerm);
     }
 
     const inputEvent = searchTerm as HansInputValueEvent;
@@ -246,9 +205,5 @@ export class SkillsComponent {
     }
 
     return inputEvent.detail?.value ?? inputEvent.target?.value ?? '';
-  }
-
-  private resolveElementValue(element: HTMLElement): string {
-    return (element as HansFormValueElement).value ?? '';
   }
 }

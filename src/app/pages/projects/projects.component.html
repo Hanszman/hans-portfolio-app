@@ -13,13 +13,12 @@
       [attr.aria-label]="'pages.projects.filters.label' | translate"
     >
       <hans-input
-        #projectsSearch
         class="projects-search"
         inputId="projects-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [attr.leftIcon]="'LuSearch'"
+        leftIcon="FaSearch"
         [placeholder]="'pages.projects.search.placeholder' | translate"
         [attr.aria-label]="'pages.projects.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
@@ -27,15 +26,6 @@
         (valuechange)="updateSearchTerm($event)"
         (valueChange)="updateSearchTerm($event)"
       ></hans-input>
-
-      <hans-button
-        class="projects-search-submit"
-        [attr.label]="'common.actions.applyFilters' | translate"
-        buttonColor="primary"
-        buttonSize="medium"
-        [attr.aria-label]="'common.actions.applyFilters' | translate"
-        (click)="applyFilters(projectsSearch)"
-      ></hans-button>
 
       <div class="projects-filter-row">
         <span>{{ 'pages.projects.filters.environment' | translate }}:</span>

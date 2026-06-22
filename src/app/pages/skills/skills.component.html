@@ -52,13 +52,12 @@
       </header>
 
       <hans-input
-        #skillsSearch
         class="skills-search"
         inputId="skills-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [attr.leftIcon]="'LuSearch'"
+        leftIcon="FaSearch"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
         (input)="updateSearchTerm($event)"
@@ -121,15 +120,6 @@
           (valuechange)="selectLevelFilterFromEvent($event)"
           (valueChange)="selectLevelFilterFromEvent($event)"
         ></hans-select-option>
-
-        <hans-button
-          class="skills-filter-submit"
-          [attr.label]="'common.actions.applyFilters' | translate"
-          buttonColor="primary"
-          buttonSize="medium"
-          [attr.aria-label]="'common.actions.applyFilters' | translate"
-          (click)="applyFilters(skillsSearch, stackSelect, typeSelect, levelSelect)"
-        ></hans-button>
       </div>
 
       @if (isLoading()) {

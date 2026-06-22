@@ -26,7 +26,7 @@
 }
 
 .project-case-card-content {
-  @apply flex h-full min-h-[31rem] flex-col gap-5 overflow-hidden p-6;
+  @apply flex h-[31rem] min-h-[31rem] flex-col gap-5 overflow-hidden p-6;
 }
 
 .project-case-card-header {
@@ -63,15 +63,14 @@
   color: color-mix(in srgb, var(--text-color) 62%, transparent);
 }
 
+.project-case-card-stack-section {
+  @apply mt-1 grid gap-2;
+}
+
 .project-case-card-stack {
-  @apply mt-1 flex min-h-0 max-h-28 flex-wrap content-start items-start gap-2 overflow-y-auto pr-1;
+  @apply flex min-h-0 max-h-24 flex-wrap content-start items-start gap-2 overflow-hidden pr-1;
 }
 
 .project-case-card-stack-expanded {
-  @apply max-h-40;
-}
-
-.project-case-card-more {
-  @apply font-mono text-xs font-medium;
-  color: color-mix(in srgb, var(--text-color) 62%, transparent);
+  @apply max-h-40 overflow-y-auto;
 }

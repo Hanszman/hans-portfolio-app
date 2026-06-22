@@ -39,16 +39,18 @@
         {{ project().dateRangeLabel }}
       </span>
 
-      <div
-        class="project-case-card-stack"
-        [class.project-case-card-stack-expanded]="isTechnologyListExpanded()"
-      >
-        @for (technology of visibleTechnologies(); track technology.slug) {
-          <app-tag-button
-            [tag]="technology"
-            (selected)="requestTechnologyDetails($event)"
-          />
-        }
+      <div class="project-case-card-stack-section">
+        <div
+          class="project-case-card-stack"
+          [class.project-case-card-stack-expanded]="isTechnologyListExpanded()"
+        >
+          @for (technology of visibleTechnologies(); track technology.slug) {
+            <app-tag-button
+              [tag]="technology"
+              (selected)="requestTechnologyDetails($event)"
+            />
+          }
+        </div>
 
         <app-expandable-list-toggle
           [isExpanded]="isTechnologyListExpanded()"

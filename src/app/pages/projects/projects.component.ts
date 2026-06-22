@@ -2,12 +2,9 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   computed,
-  effect,
   inject,
   signal,
-  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -16,7 +13,6 @@ import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { HansInputValueEvent } from '../../shared/forms/input.types';
-import { bindHansInputValue, readHansInputValue } from '../../shared/forms/input.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -47,9 +43,6 @@ import {
 export class ProjectsComponent {
   private readonly projectsService = inject(ProjectsService);
   private readonly translationService = inject(TranslationService);
-  private readonly projectsSearchRef = viewChild<ElementRef<HTMLElement>>(
-    'projectsSearch',
-  );
   private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
   private readonly selectedProjectSignal = signal<ProjectCaseViewModel | null>(null);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
@@ -105,14 +98,6 @@ export class ProjectsComponent {
   );
 
   constructor() {
-    effect((onCleanup) => {
-      onCleanup(
-        bindHansInputValue(this.projectsSearchRef()?.nativeElement, (value) =>
-          this.searchTermSignal.set(value),
-        ),
-      );
-    });
-
     this.projectsService
       .getProjects()
       .pipe(takeUntilDestroyed())
@@ -130,12 +115,8 @@ export class ProjectsComponent {
       });
   }
 
-  protected updateSearchTerm(searchTerm: string | Event | HTMLElement): void {
+  protected updateSearchTerm(searchTerm: string | Event): void {
     this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
-  }
-
-  protected applyFilters(searchInput: HTMLElement): void {
-    this.searchTermSignal.set(readHansInputValue(searchInput));
   }
 
   protected selectContext(value: ProjectContextFilterValue): void {
@@ -158,13 +139,9 @@ export class ProjectsComponent {
     this.selectedTechnologySignal.set(null);
   }
 
-  private resolveSearchTerm(searchTerm: string | Event | HTMLElement): string {
+  private resolveSearchTerm(searchTerm: string | Event): string {
     if (typeof searchTerm === 'string') {
       return searchTerm;
-    }
-
-    if (searchTerm instanceof HTMLElement) {
-      return readHansInputValue(searchTerm);
     }
 
     const inputEvent = searchTerm as HansInputValueEvent;
