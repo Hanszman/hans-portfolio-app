@@ -213,3 +213,8 @@ Os arquivos index.html e index.local.html aqui do portfolio agora não deveriam 
 Obrigado que vc removeu os arquivos de input helper aqui do portfolio, não era responsabilidade dele isso mesmo. Porém os filtros de input search das telas de skills e projects pararam de funcionar novamente, como vc pode ver nos prints 1 e 2. Não se é pq os index.html (local e prod) não estão com os parametros de versão nos links do cdn, ou se foi pq sua correção no input da lib não funcionou mesmo. Investigue e corrija de forma definitiva na lib por favor.
 O arquivo Input.helper.test.ts deu vários erros como vc pode ver nos print de 3 a 6, corrija-os por favor.
 -Beleza, mas como vc pode ver nos prints ainda não resolveu o problema dos inputs, eles ainda não estão filtrando os valores. Corrija na lib por favor, para que funcione para todo app consumidor desse componente. Abra o chrome-devtools para que vc possa testar e acompanhar sua correção.
+-Vc não finalizou a ultima sessão pois os tokens acabaram, então tenho alguns questionamentos:
+Continue o raciocínio que vc estava fazendo, pois os tokens acabaram e o problema do input ainda não foi corrigido totalmente. O filtro está funcionando teoricamente, mas não está limpando totalmente, a primeira letra que digitamos permanece no filtro.
+Pq vc precisou colocar esse termo "-local-input-fix-20260622" na versão do index.local.html? precisamos disso apenas pro local, o de prod não? documente isso melhor por favor onde necessário (readme e agents do portfolio e da lib).
+Os testes da lib não passaram com 100% de coverage.
+Erros no arquivo reactToWebComponent.ts da lib.
