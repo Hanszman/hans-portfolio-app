@@ -214,7 +214,7 @@ Obrigado que vc removeu os arquivos de input helper aqui do portfolio, não era 
 O arquivo Input.helper.test.ts deu vários erros como vc pode ver nos print de 3 a 6, corrija-os por favor.
 -Beleza, mas como vc pode ver nos prints ainda não resolveu o problema dos inputs, eles ainda não estão filtrando os valores. Corrija na lib por favor, para que funcione para todo app consumidor desse componente. Abra o chrome-devtools para que vc possa testar e acompanhar sua correção.
 -Vc não finalizou a ultima sessão pois os tokens acabaram, então tenho alguns questionamentos:
-Continue o raciocínio que vc estava fazendo, pois os tokens acabaram e o problema do input ainda não foi corrigido totalmente. O filtro está funcionando teoricamente, mas não está limpando totalmente, a primeira letra que digitamos permanece no filtro.
+Continue o raciocínio que vc estava fazendo, pois os tokens acabaram e o problema do input ainda não foi corrigido totalmente. O filtro está funcionando teoricamente, mas não está limpando totalmente, a primeira letra que digitamos permanece no filtro. Continue utilizando o chrome-devtools para validar, testar e conferir se o problema foi corrigido.
 Pq vc precisou colocar esse termo "-local-input-fix-20260622" na versão do index.local.html? precisamos disso apenas pro local, o de prod não? documente isso melhor por favor onde necessário (readme e agents do portfolio e da lib).
-Os testes da lib não passaram com 100% de coverage.
-Erros no arquivo reactToWebComponent.ts da lib.
+Os testes da lib não passaram com 100% de coverage como vc pode ver no print 1.
+Erros no arquivo reactToWebComponent.ts da lib como vc pode ver no print 2 e 3.
