@@ -218,3 +218,14 @@ Continue o raciocínio que vc estava fazendo, pois os tokens acabaram e o proble
 Pq vc precisou colocar esse termo "-local-input-fix-20260622" na versão do index.local.html? precisamos disso apenas pro local, o de prod não? documente isso melhor por favor onde necessário (readme e agents do portfolio e da lib).
 Os testes da lib não passaram com 100% de coverage como vc pode ver no print 1.
 Erros no arquivo reactToWebComponent.ts da lib como vc pode ver no print 2 e 3.
+-Vc não finalizou a última sessão pois seus tokens acabaram, como vc pode ver, ainda temos alguns problemas:
+O Lint da lib está com esse warning do print 1, corrija por favor
+Como vc pode ver no print 2, o teste de lib antes não estava com 100% de coverage, mas agora nem passando ele ta mais, ta dando erro em um dos testes. Preciso que todos passem com 100% de coverage.
+Vc havia corrigido aqueles erros do reactToWebComponent.ts, mas com vc pode ver agora estamos com erro nessa linha que mostrei no print 3.
+Como pode ver no print 4, também estamos com um errinho no build:storybook.
+Como pode ver nos prints 5 e 6, também estamos com erros nos arquivos de input e no teste dele.
+Todos esses erros acredito que estejam sendo causados porque vc não está finalizando o raciocínio e está acabando os tokens antes disso, tanto que esses itens da ultima mensagem ainda não foram solucionados também:
+  "-Continue o raciocínio que vc estava fazendo, pois os tokens acabaram e o problema do input ainda não foi corrigido totalmente. O filtro está funcionando teoricamente, mas não está limpando totalmente, a primeira letra que digitamos permanece no filtro. Continue utilizando o chrome-devtools para validar, testar e conferir se o problema foi corrigido.
+  -Pq vc precisou colocar esse termo "-local-input-fix-20260622" na versão do index.local.html? precisamos disso apenas pro local, o de prod não? documente isso melhor por favor onde necessário (readme e agents do portfolio e da lib).
+  -Os testes da lib não passaram com 100% de coverage como vc pode ver no print 1."
+Continue o raciocínio anterior e corrija tudo por favor e tome cuidado para não acabarem os tokens novamente no meio do caminho, use com cuidado e sabedoria, pois acabaram de renovar e estão acabando muito rápido.
