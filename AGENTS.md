@@ -96,6 +96,22 @@ Use library primitives for loading states, modals, tags, cards, buttons, charts,
 
 Portfolio-only compositions can live in this app when they are specific to the portfolio. If a missing capability is reusable across projects, pause and align before changing `hans-ui-design-lib`.
 
+## CDN version pinning
+
+This app consumes `hans-ui-design-lib` through CDN assets declared in:
+
+- `src/index.html`
+- `src/index.local.html`
+
+Rules:
+
+- keep CSS and JS on the same library version marker
+- production should use the real published library version, for example `?v=1.0.22`
+- local development may temporarily append a local-only suffix, for example `?v=1.0.22-local-dev`, only to bust browser cache against a local CDN preview
+- that local suffix is optional and purely descriptive; it exists only to make temporary local cache resets easier to track during debugging
+- the `?v=` parameter is only a cache-busting marker; it is not interpreted by the component runtime
+- whenever the library release changes and this app should consume it immediately, update both HTML entry files together or automate that replacement in the consumer deploy pipeline
+
 ## App folder structure
 
 Use the current project structure:

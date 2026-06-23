@@ -3,8 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -12,7 +15,10 @@ import { ProjectsService } from '../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { HansInputValueEvent } from '../../shared/forms/input.types';
+import {
+  bindHansInputValueListener,
+  syncHansInputDisplayedValue,
+} from '../../shared/forms/hans-input.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -48,6 +54,8 @@ export class ProjectsComponent {
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
   private readonly selectedContextSignal = signal<ProjectContextFilterValue>('ALL');
   private readonly searchTermSignal = signal('');
+  private readonly searchInputRef =
+    viewChild<ElementRef<HTMLElement>>('projectsSearchInput');
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -98,6 +106,18 @@ export class ProjectsComponent {
   );
 
   constructor() {
+    effect((onCleanup) => {
+      const host = this.searchInputRef()?.nativeElement;
+
+      syncHansInputDisplayedValue(host, this.searchTerm());
+
+      onCleanup(
+        bindHansInputValueListener(host, (value) => {
+          this.searchTermSignal.set(value);
+        }),
+      );
+    });
+
     this.projectsService
       .getProjects()
       .pipe(takeUntilDestroyed())
@@ -112,11 +132,11 @@ export class ProjectsComponent {
           this.hasError.set(true);
           this.isLoading.set(false);
         },
-      });
+    });
   }
 
   protected updateSearchTerm(searchTerm: string | Event): void {
-    this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
+    this.searchTermSignal.set(this.resolveEventValue(searchTerm));
   }
 
   protected selectContext(value: ProjectContextFilterValue): void {
@@ -139,12 +159,15 @@ export class ProjectsComponent {
     this.selectedTechnologySignal.set(null);
   }
 
-  private resolveSearchTerm(searchTerm: string | Event): string {
+  private resolveEventValue(searchTerm: string | Event): string {
     if (typeof searchTerm === 'string') {
       return searchTerm;
     }
 
-    const inputEvent = searchTerm as HansInputValueEvent;
+    const inputEvent = searchTerm as Event & {
+      detail?: string | { value?: string };
+      target: (EventTarget & { value?: string }) | null;
+    };
 
     if (typeof inputEvent.detail === 'string') {
       return inputEvent.detail;
@@ -152,4 +175,5 @@ export class ProjectsComponent {
 
     return inputEvent.detail?.value ?? inputEvent.target?.value ?? '';
   }
+
 }

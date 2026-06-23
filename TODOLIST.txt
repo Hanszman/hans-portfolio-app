@@ -229,3 +229,9 @@ Todos esses erros acredito que estejam sendo causados porque vc não está final
   -Pq vc precisou colocar esse termo "-local-input-fix-20260622" na versão do index.local.html? precisamos disso apenas pro local, o de prod não? documente isso melhor por favor onde necessário (readme e agents do portfolio e da lib).
   -Os testes da lib não passaram com 100% de coverage como vc pode ver no print 1."
 Continue o raciocínio anterior e corrija tudo por favor e tome cuidado para não acabarem os tokens novamente no meio do caminho, use com cuidado e sabedoria, pois acabaram de renovar e estão acabando muito rápido.
+-Ainda temos alguns pontos:
+Acabou os tokens no mesmo prompt novamente (instalar RTK) / continuar de onde parou.
+Test:coverage do portfolio não ta 100%.
+Problema do input resolveu, mas voltou novamente a ter lógica do hans-input aqui no portfolio quando deveria estar tudo na lib.
+Tags ficaram com css estranho do nada.
+Modal de detalhes do projects ficou com css estranho do nada também.

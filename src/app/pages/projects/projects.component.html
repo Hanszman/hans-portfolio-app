@@ -13,18 +13,16 @@
       [attr.aria-label]="'pages.projects.filters.label' | translate"
     >
       <hans-input
+        #projectsSearchInput
         class="projects-search"
         inputId="projects-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        leftIcon="FaSearch"
+        [leftIcon]="'FaSearch'"
+        [value]="searchTerm()"
         [placeholder]="'pages.projects.search.placeholder' | translate"
         [attr.aria-label]="'pages.projects.search.placeholder' | translate"
-        (input)="updateSearchTerm($event)"
-        (change)="updateSearchTerm($event)"
-        (valuechange)="updateSearchTerm($event)"
-        (valueChange)="updateSearchTerm($event)"
       ></hans-input>
 
       <div class="projects-filter-row">

@@ -6,3 +6,18 @@ export interface HansInputValueEvent extends Event {
 export interface HansFormValueDetail {
   value?: string;
 }
+
+export interface HansInputHostElement extends HTMLElement {
+  value?: string;
+  shadowRoot: ShadowRoot | null;
+}
+
+export type HansInputValueListener = (value: string) => void;
+
+export const HANS_INPUT_VALUE_EVENT_NAMES = [
+  'input',
+  'change',
+  'valueChange',
+  'valuechange',
+  'value-change',
+] as const;

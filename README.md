@@ -182,16 +182,20 @@ The root app also already prepares a runtime theme override through `window.Hans
 
 ### CDN cache busting
 
-The optional `?v=` query string used in local HTML files is a browser cache-busting marker, not a runtime option consumed by the library.
+The optional `?v=` query string used in local and production HTML files is a browser cache-busting marker, not a runtime option consumed by the library.
 
 Use it when you need to force the browser to fetch a fresh CDN asset after a local or published library rebuild. Keep the same value on both the CSS and JS files so both assets come from the same library build.
 
 Examples:
 
-- local validation: `?v=1.0.22`
+- local validation: `?v=1.0.22-local-dev`
 - production release: `?v=<published-version-or-build-id>`
 
-This portfolio currently pins both `src/index.html` and `src/index.local.html` to the same published library release value. When a new `hans-ui-design-lib` version is published and the app should consume it immediately, update both files together or automate that replacement in the consumer deploy pipeline.
+Use a local-only suffix only when you need to invalidate browser cache against a local CDN preview while keeping the underlying library release clear, for example `1.0.22-local-dev`.
+
+That suffix is not mandatory and is not a special library feature. It was chosen only to make local cache resets easy to identify during debugging. Production should not use a local suffix; it should use the real published library version or a CI-injected build identifier.
+
+When a new `hans-ui-design-lib` version is published and the app should consume it immediately, update both files together or automate that replacement in the consumer deploy pipeline.
 
 The recommended production strategy is to inject the same release identifier into both assets at deploy time, for example:
 

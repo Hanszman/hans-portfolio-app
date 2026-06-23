@@ -3,8 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -12,7 +15,10 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import { HansInputValueEvent } from '../../shared/forms/input.types';
+import {
+  bindHansInputValueListener,
+  syncHansInputDisplayedValue,
+} from '../../shared/forms/hans-input.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -57,6 +63,7 @@ export class SkillsComponent {
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
   private readonly selectedTypeSignal = signal<SkillTypeFilterValue>('ALL');
+  private readonly searchInputRef = viewChild<ElementRef<HTMLElement>>('skillsSearchInput');
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -122,6 +129,18 @@ export class SkillsComponent {
   protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
 
   constructor() {
+    effect((onCleanup) => {
+      const host = this.searchInputRef()?.nativeElement;
+
+      syncHansInputDisplayedValue(host, this.searchTerm());
+
+      onCleanup(
+        bindHansInputValueListener(host, (value) => {
+          this.searchTermSignal.set(value);
+        }),
+      );
+    });
+
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed())
@@ -136,11 +155,11 @@ export class SkillsComponent {
           this.hasError.set(true);
           this.isLoading.set(false);
         },
-      });
+    });
   }
 
   protected updateSearchTerm(searchTerm: string | Event): void {
-    this.searchTermSignal.set(this.resolveSearchTerm(searchTerm));
+    this.searchTermSignal.set(this.resolveEventValue(searchTerm));
   }
 
   protected selectStackFilter(value: SkillStackFilterValue): void {
@@ -187,18 +206,15 @@ export class SkillsComponent {
     }));
   }
 
-  private resolveSearchTerm(searchTerm: string | Event): string {
+  private resolveEventValue(searchTerm: string | Event): string {
     if (typeof searchTerm === 'string') {
       return searchTerm;
     }
 
-    const inputEvent = searchTerm as HansInputValueEvent;
-
-    return this.resolveEventValue(inputEvent);
-  }
-
-  private resolveEventValue(event: Event): string {
-    const inputEvent = event as HansInputValueEvent;
+    const inputEvent = searchTerm as Event & {
+      detail?: string | { value?: string };
+      target: (EventTarget & { value?: string }) | null;
+    };
 
     if (typeof inputEvent.detail === 'string') {
       return inputEvent.detail;
