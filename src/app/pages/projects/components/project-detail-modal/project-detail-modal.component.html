@@ -1,9 +1,7 @@
 <hans-modal
   [isOpen]="isOpen()"
   [title]="project()?.title ?? ''"
-  modalColor="primary"
   modalSize="large"
-  modalVariant="default"
   placement="center"
   [renderBody]="true"
   [closeButtonLabel]="'common.actions.close' | translate"
@@ -15,7 +13,7 @@
         <hans-tag
           [attr.label]="currentProject.contextLabel"
           iconName="LuTag"
-          tagColor="primary"
+          tagColor="base"
           tagSize="sm"
         ></hans-tag>
 

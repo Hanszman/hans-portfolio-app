@@ -1,4 +1,11 @@
 module.exports = function (config) {
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const chromeUserDataDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'hans-portfolio-karma-chrome-'),
+  );
+
   config.set({
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     reporters: ['progress', 'kjhtml', 'coverage'],
@@ -13,6 +20,7 @@ module.exports = function (config) {
         flags: [
           '--headless=new',
           '--no-sandbox',
+          `--user-data-dir=${chromeUserDataDir}`,
           '--disable-gpu',
           '--disable-software-rasterizer',
           '--disable-dev-shm-usage',

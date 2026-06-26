@@ -48,79 +48,18 @@ app-root {
   min-height: 100vh;
 }
 
-body[data-app-theme='light'] app-home hans-tag,
-body[data-app-theme='light'] app-experiences hans-tag,
-body[data-app-theme='light'] app-skills hans-tag,
-body[data-app-theme='light'] app-projects hans-tag {
+body[data-app-theme='light'] app-tag-button {
   --base-neutral-color: color-mix(
     in srgb,
     var(--primary-default-color) 14%,
     var(--background-color)
   );
+  --base-default-color: var(--primary-default-color);
   --base-strong-color: var(--primary-default-color);
-  --primary-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --secondary-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --success-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --danger-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --warning-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --info-neutral-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 14%,
-    var(--background-color)
-  );
-  --secondary-default-color: var(--primary-default-color);
-  --success-default-color: var(--primary-default-color);
-  --danger-default-color: var(--primary-default-color);
-  --warning-default-color: var(--primary-default-color);
-  --info-default-color: var(--primary-default-color);
-  --secondary-strong-color: var(--primary-strong-color);
-  --success-strong-color: var(--primary-strong-color);
-  --danger-strong-color: var(--primary-strong-color);
-  --warning-strong-color: var(--primary-strong-color);
-  --info-strong-color: var(--primary-strong-color);
-  --text-color: var(--primary-strong-color);
 }
 
-body[data-app-theme='dark'] app-home hans-tag,
-body[data-app-theme='dark'] app-experiences hans-tag,
-body[data-app-theme='dark'] app-skills hans-tag,
-body[data-app-theme='dark'] app-projects hans-tag {
+body[data-app-theme='dark'] app-tag-button {
   --base-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
+  --base-default-color: var(--base-strong-color);
   --base-strong-color: var(--text-color);
-  --primary-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --secondary-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --success-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --danger-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --warning-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --info-neutral-color: color-mix(in srgb, var(--background-color) 92%, var(--text-color) 8%);
-  --secondary-default-color: var(--base-strong-color);
-  --success-default-color: var(--base-strong-color);
-  --danger-default-color: var(--base-strong-color);
-  --warning-default-color: var(--base-strong-color);
-  --info-default-color: var(--base-strong-color);
-  --secondary-strong-color: var(--text-color);
-  --success-strong-color: var(--text-color);
-  --danger-strong-color: var(--text-color);
-  --warning-strong-color: var(--text-color);
-  --info-strong-color: var(--text-color);
 }

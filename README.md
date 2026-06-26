@@ -175,8 +175,8 @@ This section documents the integration behavior used by this app. The canonical 
 
 Current setup:
 
-- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css?v=1.0.22`
-- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js?v=1.0.22`
+- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css?v=1.0.26`
+- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js?v=1.0.26`
 
 The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
 
@@ -188,10 +188,10 @@ Use it when you need to force the browser to fetch a fresh CDN asset after a loc
 
 Examples:
 
-- local validation: `?v=1.0.22-local-dev`
+- local validation: `?v=1.0.25-local-dev`
 - production release: `?v=<published-version-or-build-id>`
 
-Use a local-only suffix only when you need to invalidate browser cache against a local CDN preview while keeping the underlying library release clear, for example `1.0.22-local-dev`.
+Use a local-only suffix only when you need to invalidate browser cache against a local CDN preview while keeping the underlying library release clear, for example `1.0.25-local-dev`.
 
 That suffix is not mandatory and is not a special library feature. It was chosen only to make local cache resets easy to identify during debugging. Production should not use a local suffix; it should use the real published library version or a CI-injected build identifier.
 

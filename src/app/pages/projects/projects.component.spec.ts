@@ -128,7 +128,7 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectContext: (value: ProjectContextFilterValue) => void;
-      updateSearchTerm: (searchTerm: string | Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
     };
 
@@ -243,37 +243,29 @@ describe('ProjectsComponent', () => {
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      updateSearchTerm: (searchTerm: string | Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
     };
 
-    component.updateSearchTerm(
-      new CustomEvent<string>('valuechange', { detail: 'github' }),
-    );
+    component.updateSearchTerm('github');
 
     expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
       "Github's API Consumer",
     ]);
 
-    component.updateSearchTerm(
-      new CustomEvent<{ value: string }>('valuechange', {
-        detail: { value: 'public' },
-      }),
-    );
+    component.updateSearchTerm('public');
 
     expect(component.visibleProjectCases().map((project) => project.title)).toContain(
       'Public Diagnostics',
     );
 
-    component.updateSearchTerm({
-      target: { value: 'hard' },
-    } as unknown as Event);
+    component.updateSearchTerm('hard');
 
     expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
       'HardWorker',
     ]);
 
-    component.updateSearchTerm(new Event('valuechange'));
+    component.updateSearchTerm('');
 
     expect(component.visibleProjectCases().length).toBeGreaterThan(1);
   });
@@ -293,6 +285,13 @@ describe('ProjectsComponent', () => {
 
     input.dispatchEvent(
       new CustomEvent<string>('valuechange', {
+        bubbles: true,
+        composed: true,
+        detail: 'github',
+      }),
+    );
+    input.dispatchEvent(
+      new CustomEvent<string>('valueChange', {
         bubbles: true,
         composed: true,
         detail: 'github',

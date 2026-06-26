@@ -3,11 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
-  ElementRef,
   inject,
   signal,
-  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -15,10 +12,6 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
-import {
-  bindHansInputValueListener,
-  syncHansInputDisplayedValue,
-} from '../../shared/forms/hans-input.helper';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -63,7 +56,6 @@ export class SkillsComponent {
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
   private readonly selectedTypeSignal = signal<SkillTypeFilterValue>('ALL');
-  private readonly searchInputRef = viewChild<ElementRef<HTMLElement>>('skillsSearchInput');
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -129,18 +121,6 @@ export class SkillsComponent {
   protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
 
   constructor() {
-    effect((onCleanup) => {
-      const host = this.searchInputRef()?.nativeElement;
-
-      syncHansInputDisplayedValue(host, this.searchTerm());
-
-      onCleanup(
-        bindHansInputValueListener(host, (value) => {
-          this.searchTermSignal.set(value);
-        }),
-      );
-    });
-
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed())
@@ -158,8 +138,8 @@ export class SkillsComponent {
     });
   }
 
-  protected updateSearchTerm(searchTerm: string | Event): void {
-    this.searchTermSignal.set(this.resolveEventValue(searchTerm));
+  protected updateSearchTerm(searchTerm: string): void {
+    this.searchTermSignal.set(searchTerm);
   }
 
   protected selectStackFilter(value: SkillStackFilterValue): void {
@@ -167,7 +147,7 @@ export class SkillsComponent {
   }
 
   protected selectStackFilterFromEvent(event: Event): void {
-    this.selectStackFilter(this.resolveEventValue(event) as SkillStackFilterValue);
+    this.selectStackFilter(this.resolveSelectValue(event) as SkillStackFilterValue);
   }
 
   protected selectLevelFilter(value: SkillLevelFilterValue): void {
@@ -175,7 +155,7 @@ export class SkillsComponent {
   }
 
   protected selectLevelFilterFromEvent(event: Event): void {
-    this.selectLevelFilter(this.resolveEventValue(event) as SkillLevelFilterValue);
+    this.selectLevelFilter(this.resolveSelectValue(event) as SkillLevelFilterValue);
   }
 
   protected selectTypeFilter(value: SkillTypeFilterValue): void {
@@ -183,7 +163,7 @@ export class SkillsComponent {
   }
 
   protected selectTypeFilterFromEvent(event: Event): void {
-    this.selectTypeFilter(this.resolveEventValue(event) as SkillTypeFilterValue);
+    this.selectTypeFilter(this.resolveSelectValue(event) as SkillTypeFilterValue);
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {
@@ -206,20 +186,16 @@ export class SkillsComponent {
     }));
   }
 
-  private resolveEventValue(searchTerm: string | Event): string {
-    if (typeof searchTerm === 'string') {
-      return searchTerm;
-    }
-
-    const inputEvent = searchTerm as Event & {
+  private resolveSelectValue(event: Event): string {
+    const customEvent = event as Event & {
       detail?: string | { value?: string };
       target: (EventTarget & { value?: string }) | null;
     };
 
-    if (typeof inputEvent.detail === 'string') {
-      return inputEvent.detail;
+    if (typeof customEvent.detail === 'string') {
+      return customEvent.detail;
     }
 
-    return inputEvent.detail?.value ?? inputEvent.target?.value ?? '';
+    return customEvent.detail?.value ?? customEvent.target?.value ?? '';
   }
 }

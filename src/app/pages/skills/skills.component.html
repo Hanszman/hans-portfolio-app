@@ -52,16 +52,16 @@
       </header>
 
       <hans-input
-        #skillsSearchInput
         class="skills-search"
         inputId="skills-search"
         inputType="text"
         inputColor="base"
         inputSize="medium"
-        [leftIcon]="'FaSearch'"
+        leftIcon="FaSearch"
         [value]="searchTerm()"
         [placeholder]="'pages.skills.search.placeholder' | translate"
         [attr.aria-label]="'pages.skills.search.placeholder' | translate"
+        (input)="updateSearchTerm($any($event).target?.value ?? '')"
       ></hans-input>
 
       <div class="skills-filter-grid">

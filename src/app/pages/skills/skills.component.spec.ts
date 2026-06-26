@@ -123,7 +123,7 @@ describe('SkillsComponent', () => {
       selectStackFilterFromEvent: (event: Event) => void;
       selectLevelFilterFromEvent: (event: Event) => void;
       selectTypeFilterFromEvent: (event: Event) => void;
-      updateSearchTerm: (searchTerm: string | Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       searchTerm: () => string;
     };
 
@@ -187,38 +187,30 @@ describe('SkillsComponent', () => {
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      updateSearchTerm: (searchTerm: string | Event) => void;
+      updateSearchTerm: (searchTerm: string) => void;
       searchTerm: () => string;
     };
 
-    component.updateSearchTerm(
-      new CustomEvent<string>('valuechange', { detail: 'docker' }),
-    );
+    component.updateSearchTerm('docker');
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('docker');
     expect(technologiesText()).toContain('Docker');
     expect(technologiesText()).not.toContain('Angular');
 
-    component.updateSearchTerm(
-      new CustomEvent<{ value: string }>('valuechange', {
-        detail: { value: 'angular' },
-      }),
-    );
+    component.updateSearchTerm('angular');
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('angular');
     expect(technologiesText()).toContain('Angular');
 
-    component.updateSearchTerm({
-      target: { value: 'docker' },
-    } as unknown as Event);
+    component.updateSearchTerm('docker');
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('docker');
     expect(technologiesText()).toContain('Docker');
 
-    component.updateSearchTerm(new Event('valuechange'));
+    component.updateSearchTerm('');
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('');
@@ -242,6 +234,13 @@ describe('SkillsComponent', () => {
 
     input.dispatchEvent(
       new CustomEvent<string>('valuechange', {
+        bubbles: true,
+        composed: true,
+        detail: 'angular',
+      }),
+    );
+    input.dispatchEvent(
+      new CustomEvent<string>('valueChange', {
         bubbles: true,
         composed: true,
         detail: 'angular',
@@ -296,6 +295,33 @@ describe('SkillsComponent', () => {
     fixture.detectChanges();
 
     expect(technologiesText()).toContain('Unity');
+  });
+
+  it('should resolve select filter values from target fallback and empty events', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      selectTypeFilterFromEvent: (event: Event) => void;
+      selectLevelFilterFromEvent: (event: Event) => void;
+      selectedType: () => SkillTypeFilterValue;
+      selectedLevel: () => SkillLevelFilterValue;
+    };
+
+    component.selectTypeFilterFromEvent({
+      target: { value: 'FRAMEWORKS' },
+    } as unknown as Event);
+    fixture.detectChanges();
+
+    expect(component.selectedType()).toBe('FRAMEWORKS');
+
+    component.selectLevelFilterFromEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(component.selectedLevel()).toBe('');
   });
 
   it('should render empty and error states from the technologies request', () => {
