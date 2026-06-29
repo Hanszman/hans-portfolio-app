@@ -277,26 +277,16 @@ describe('ProjectsComponent', () => {
     flushProjectsRequest(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
 
-    const input = fixture.nativeElement.querySelector('hans-input') as HTMLElement;
+    const input = fixture.nativeElement.querySelector('hans-input') as HTMLElement & {
+      value?: string;
+    };
     const component = fixture.componentInstance as unknown as {
       searchTerm: () => string;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
     };
 
-    input.dispatchEvent(
-      new CustomEvent<string>('valuechange', {
-        bubbles: true,
-        composed: true,
-        detail: 'github',
-      }),
-    );
-    input.dispatchEvent(
-      new CustomEvent<string>('valueChange', {
-        bubbles: true,
-        composed: true,
-        detail: 'github',
-      }),
-    );
+    input.value = 'github';
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('github');

@@ -227,25 +227,15 @@ describe('SkillsComponent', () => {
     flushTechnologiesRequest(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
 
-    const input = compiled.querySelector('hans-input') as HTMLElement;
+    const input = compiled.querySelector('hans-input') as HTMLElement & {
+      value?: string;
+    };
     const component = fixture.componentInstance as unknown as {
       searchTerm: () => string;
     };
 
-    input.dispatchEvent(
-      new CustomEvent<string>('valuechange', {
-        bubbles: true,
-        composed: true,
-        detail: 'angular',
-      }),
-    );
-    input.dispatchEvent(
-      new CustomEvent<string>('valueChange', {
-        bubbles: true,
-        composed: true,
-        detail: 'angular',
-      }),
-    );
+    input.value = 'angular';
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
     fixture.detectChanges();
 
     expect(component.searchTerm()).toBe('angular');
