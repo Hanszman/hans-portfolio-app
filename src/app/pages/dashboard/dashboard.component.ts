@@ -10,30 +10,32 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
+import { ProjectsService } from '../../core/api/projects/projects.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { ContainerComponent } from '../../layout/container/container.component';
-import { IntroComponent } from '../../layout/intro/intro.component';
-import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { DashboardPageData } from './dashboard.types';
 import {
-  buildDashboardProjectDistribution,
+  buildDashboardProjectTechnologyChart,
+  buildDashboardTechnologyLevelChart,
+  buildDashboardTechnologyTypeOptions,
+  buildDashboardTechnologyUsageChart,
+  buildDashboardStackChart,
+  buildDashboardProjectEnvironmentChart,
   buildDashboardSummaryCards,
-  buildDashboardTechnologyBreakdowns,
   buildDashboardTechnologyLeaders,
-  mapDashboardHighlightCards,
   mapDashboardStackRows,
-  mapDashboardTimelineCards,
 } from './helpers/dashboard.helper';
+import { SkillTypeFilterValue } from '../skills/skills.types';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
-    IntroComponent,
-    WrapperComponent,
     ContainerComponent,
     InfoStateComponent,
     TranslatePipe,
+    WrapperComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -42,12 +44,17 @@ import {
 })
 export class DashboardComponent {
   private readonly dashboardService = inject(DashboardService);
+  private readonly projectsService = inject(ProjectsService);
   private readonly translationService = inject(TranslationService);
   private readonly dashboardDataSignal = signal<DashboardPageData | null>(null);
+  private readonly selectedTechnologyTypeSignal =
+    signal<SkillTypeFilterValue>('PROGRAMMING_LANGUAGES');
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly dashboardData = this.dashboardDataSignal.asReadonly();
+  protected readonly selectedTechnologyType =
+    this.selectedTechnologyTypeSignal.asReadonly();
 
   protected readonly summaryCards = computed(() => {
     const overview = this.dashboardData()?.overview;
@@ -61,7 +68,7 @@ export class DashboardComponent {
   });
 
   protected readonly stackRows = computed(() => {
-    const stackDistribution = this.dashboardData()?.stackDistribution;
+    const stackDistribution = this.dashboardData()?.overview.stackDistribution;
 
     return stackDistribution
       ? mapDashboardStackRows(
@@ -71,18 +78,31 @@ export class DashboardComponent {
       : [];
   });
 
-  protected readonly maxStackConnections = computed(() =>
-    Math.max(
-      ...this.stackRows().map((stack) => stack.totalConnections),
-      1,
-    ),
-  );
+  protected readonly stackChart = computed(() => {
+    const rows = this.stackRows();
+    const locale = this.translationService.locale();
 
-  protected readonly projectDistribution = computed(() => {
-    const projectContexts = this.dashboardData()?.projectContexts;
+    return rows.length > 0
+      ? buildDashboardStackChart(rows, locale)
+      : null;
+  });
 
-    return projectContexts
-      ? buildDashboardProjectDistribution(
+  protected readonly technologyLevelChart = computed(() => {
+    const technologyUsage = this.dashboardData()?.overview.technologyUsage;
+
+    return technologyUsage && technologyUsage.levels.length > 0
+      ? buildDashboardTechnologyLevelChart(
+          technologyUsage,
+          this.translationService.locale(),
+        )
+      : null;
+  });
+
+  protected readonly projectEnvironmentChart = computed(() => {
+    const projectContexts = this.dashboardData()?.overview.projectContexts;
+
+    return projectContexts && projectContexts.environments.length > 0
+      ? buildDashboardProjectEnvironmentChart(
           projectContexts,
           this.translationService.locale(),
         )
@@ -90,49 +110,71 @@ export class DashboardComponent {
   });
 
   protected readonly technologyLeaders = computed(() => {
-    const technologyUsage = this.dashboardData()?.technologyUsage;
+    const technologyUsage = this.dashboardData()?.overview.technologyUsage;
 
     return technologyUsage ? buildDashboardTechnologyLeaders(technologyUsage) : [];
   });
 
-  protected readonly technologyBreakdowns = computed(() => {
-    const technologyUsage = this.dashboardData()?.technologyUsage;
+  protected readonly technologyUsageChart = computed(() => {
+    const technologyUsage = this.dashboardData()?.overview.technologyUsage;
 
-    return technologyUsage
-      ? buildDashboardTechnologyBreakdowns(
+    return technologyUsage && technologyUsage.topTechnologies.length > 0
+      ? buildDashboardTechnologyUsageChart(
           technologyUsage,
           this.translationService.locale(),
         )
-      : [];
+      : null;
   });
 
-  protected readonly timelineCards = computed(() => {
-    const professionalTimeline = this.dashboardData()?.professionalTimeline;
+  protected readonly technologyTypeOptions = computed(() => {
+    const projects = this.dashboardData()?.projects;
 
-    return professionalTimeline
-      ? mapDashboardTimelineCards(
-          professionalTimeline,
+    return projects
+      ? buildDashboardTechnologyTypeOptions(
+          projects,
           this.translationService.locale(),
         )
       : [];
   });
 
-  protected readonly highlightCards = computed(() => {
-    const highlights = this.dashboardData()?.highlights;
+  protected readonly activeTechnologyType = computed<SkillTypeFilterValue>(() => {
+    const selectedType = this.selectedTechnologyType();
+    const availableTypes = this.technologyTypeOptions();
 
-    return highlights
-      ? mapDashboardHighlightCards(highlights, this.translationService.locale())
-      : [];
+    return availableTypes.some((option) => option.value === selectedType)
+      ? selectedType
+      : availableTypes[0]?.value ?? selectedType;
+  });
+
+  protected readonly projectTechnologyChart = computed(() => {
+    const projects = this.dashboardData()?.projects;
+    const availableTypes = this.technologyTypeOptions();
+
+    return projects && availableTypes.length > 0
+      ? buildDashboardProjectTechnologyChart(
+          projects,
+          this.activeTechnologyType(),
+          this.translationService.locale(),
+        )
+      : null;
   });
 
   constructor() {
+    this.loadDashboardData();
+  }
+
+  protected selectTechnologyTypeFromEvent(event: Event): void {
+    this.selectedTechnologyTypeSignal.set(
+      this.resolveSelectValue(event) as SkillTypeFilterValue,
+    );
+  }
+
+  private loadDashboardData(): void {
+    this.isLoading.set(true);
+
     forkJoin({
       overview: this.dashboardService.getOverview(),
-      stackDistribution: this.dashboardService.getStackDistribution(),
-      projectContexts: this.dashboardService.getProjectContexts(),
-      technologyUsage: this.dashboardService.getTechnologyUsage(),
-      professionalTimeline: this.dashboardService.getProfessionalTimeline(),
-      highlights: this.dashboardService.getHighlights(),
+      projects: this.projectsService.getProjects(),
     })
       .pipe(takeUntilDestroyed())
       .subscribe({
@@ -149,11 +191,16 @@ export class DashboardComponent {
       });
   }
 
-  protected resolveBarWidth(value: number, maxValue: number): string {
-    if (maxValue <= 0) {
-      return '0%';
+  private resolveSelectValue(event: Event): string {
+    const customEvent = event as Event & {
+      detail?: string | { value?: string };
+      target: (EventTarget & { value?: string }) | null;
+    };
+
+    if (typeof customEvent.detail === 'string') {
+      return customEvent.detail;
     }
 
-    return `${Math.max((value / maxValue) * 100, 12)}%`;
+    return customEvent.detail?.value ?? customEvent.target?.value ?? '';
   }
 }

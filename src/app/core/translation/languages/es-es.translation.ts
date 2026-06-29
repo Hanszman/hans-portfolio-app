@@ -444,6 +444,17 @@ export const ES_ES_TRANSLATIONS = {
   'pages.dashboard.technology.contexts': 'Contextos',
   'pages.dashboard.technology.sources': 'Orígenes',
   'pages.dashboard.technology.links': 'señales vinculadas',
+  'pages.dashboard.projectsByType.label': 'Proyectos por tipo de tecnología',
+  'pages.dashboard.projectsByType.title': 'Proyectos por tipo de tecnologías',
+  'pages.dashboard.projectsByType.description':
+    'El gráfico final mantiene vivo el patrón del dashboard antiguo al agrupar los proyectos publicados por la familia de tecnología que realmente usan.',
+  'pages.dashboard.projectsByType.loading':
+    'Cargando la distribución de tecnologías por proyecto...',
+  'pages.dashboard.projectsByType.error':
+    'La distribución de tecnologías por proyecto no está disponible ahora.',
+  'pages.dashboard.projectsByType.empty':
+    'Todavía no se devolvió ninguna distribución de tecnologías por proyecto.',
+  'pages.dashboard.projectsByType.selectLabel': 'Tipo de tecnología',
   'pages.dashboard.timeline.label': 'Carrera',
   'pages.dashboard.timeline.title': 'Timeline de foco profesional',
   'pages.dashboard.timeline.description':

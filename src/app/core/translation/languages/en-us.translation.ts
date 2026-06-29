@@ -403,6 +403,16 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.technology.contexts': 'Contexts',
   'pages.dashboard.technology.sources': 'Sources',
   'pages.dashboard.technology.links': 'linked signals',
+  'pages.dashboard.projectsByType.label': 'Projects by technology type',
+  'pages.dashboard.projectsByType.title': 'Projects by type of technologies',
+  'pages.dashboard.projectsByType.description':
+    'The final chart keeps the old dashboard pattern alive by grouping published projects by the technology family they actually use.',
+  'pages.dashboard.projectsByType.loading': 'Loading project technology breakdown...',
+  'pages.dashboard.projectsByType.error':
+    'The project technology breakdown is unavailable right now.',
+  'pages.dashboard.projectsByType.empty':
+    'No project technology breakdown was returned yet.',
+  'pages.dashboard.projectsByType.selectLabel': 'Technology type',
   'pages.dashboard.timeline.label': 'Career',
   'pages.dashboard.timeline.title': 'Career focus timeline',
   'pages.dashboard.timeline.description':

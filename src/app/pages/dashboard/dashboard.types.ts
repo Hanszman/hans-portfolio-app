@@ -1,21 +1,19 @@
 import {
-  DashboardHighlightsResponse,
   DashboardOverviewResponse,
-  DashboardProfessionalTimelineResponse,
-  DashboardProjectContextsResponse,
-  DashboardStackDistributionResponse,
-  DashboardTechnologyUsageResponse,
 } from '../../core/api/dashboard/dashboard.types';
+import { ProjectsCollectionResponse } from '../../core/api/projects/projects.types';
 import { buildRelativeSkillImageAssetPath } from '../../core/api/api.config';
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import { SkillTypeFilterValue } from '../skills/skills.types';
 
 export interface DashboardPageData {
   overview: DashboardOverviewResponse;
-  stackDistribution: DashboardStackDistributionResponse;
-  projectContexts: DashboardProjectContextsResponse;
-  technologyUsage: DashboardTechnologyUsageResponse;
-  professionalTimeline: DashboardProfessionalTimelineResponse;
-  highlights: DashboardHighlightsResponse;
+  projects: ProjectsCollectionResponse;
+}
+
+export interface DashboardTechnologyTypeOptionViewModel {
+  label: string;
+  value: SkillTypeFilterValue;
 }
 
 export interface DashboardSummaryCardViewModel {
@@ -81,6 +79,27 @@ export interface DashboardHighlightCardViewModel {
   featured: boolean;
   iconName: string;
   visualUrl: string;
+}
+
+export interface DashboardChartSeriesViewModel {
+  name: string;
+  type?: 'bar' | 'doughnut';
+  data: readonly number[];
+  smooth?: boolean;
+  label?: {
+    position?: 'horizontal' | 'vertical' | 'diagonal' | 'inside' | 'none';
+    formatter?: string;
+  };
+}
+
+export interface DashboardChartViewModel {
+  chartType: 'bar' | 'doughnut';
+  categories: readonly string[];
+  seriesName: string;
+  series: readonly DashboardChartSeriesViewModel[];
+  colors: readonly string[];
+  height: number;
+  showLegend: boolean;
 }
 
 export const DASHBOARD_SUMMARY_LABEL_KEYS = {

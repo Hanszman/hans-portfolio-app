@@ -1,9 +1,16 @@
 import { createDashboardOverviewResponse } from '../../../core/api/mocks/dashboard.mocks';
+import { createProjectsCollectionResponse } from '../../../core/api/mocks/projects.mocks';
 import {
   buildDashboardProjectDistribution,
+  buildDashboardProjectEnvironmentChart,
+  buildDashboardProjectTechnologyChart,
   buildDashboardSummaryCards,
+  buildDashboardStackChart,
+  buildDashboardTechnologyLevelChart,
   buildDashboardTechnologyBreakdowns,
   buildDashboardTechnologyLeaders,
+  buildDashboardTechnologyTypeOptions,
+  buildDashboardTechnologyUsageChart,
   mapDashboardHighlightCards,
   mapDashboardStackRows,
   mapDashboardTimelineCards,
@@ -180,6 +187,102 @@ describe('dashboard helper', () => {
         items: [{ label: 'Project', count: 9 }],
       },
     ]);
+  });
+
+  it('should build chart models for stack, levels, environments and top usage', () => {
+    const overview = createDashboardOverviewResponse();
+
+    const stackChart = buildDashboardStackChart(
+      mapDashboardStackRows(overview.stackDistribution, 'en-us'),
+      'en-us',
+    );
+    const levelChart = buildDashboardTechnologyLevelChart(
+      overview.technologyUsage,
+      'en-us',
+    );
+    const environmentChart = buildDashboardProjectEnvironmentChart(
+      overview.projectContexts,
+      'en-us',
+    );
+    const usageChart = buildDashboardTechnologyUsageChart(
+      overview.technologyUsage,
+      'en-us',
+    );
+
+    expect(stackChart).toEqual({
+      chartType: 'doughnut',
+      categories: ['Front-End', 'Back-End', 'DevOps', 'Mobile'],
+      seriesName: 'Stack distribution',
+      series: [
+        {
+          name: 'Stack distribution',
+          type: 'doughnut',
+          data: [26, 14, 9, 6],
+          label: { position: 'none' },
+        },
+      ],
+      colors: ['primary', 'secondary', 'success', 'warning'],
+      height: 320,
+      showLegend: true,
+    });
+    expect(levelChart.chartType).toBe('doughnut');
+    expect(levelChart.categories).toEqual(['Advanced']);
+    expect(environmentChart.categories).toEqual(['Web', 'Mobile']);
+    expect(usageChart.chartType).toBe('bar');
+    expect(usageChart.categories).toEqual([
+      'Angular',
+      'TypeScript',
+      'CSS',
+      'HTML',
+      'JavaScript',
+      'JSON',
+    ]);
+  });
+
+  it('should build technology type options and project technology charts from live project relations', () => {
+    const projects = createProjectsCollectionResponse();
+
+    const options = buildDashboardTechnologyTypeOptions(projects, 'en-us');
+    const chart = buildDashboardProjectTechnologyChart(
+      projects,
+      'PROGRAMMING_LANGUAGES',
+      'en-us',
+    );
+
+    expect(options).toEqual([
+      {
+        label: 'Programming Languages',
+        value: 'PROGRAMMING_LANGUAGES',
+      },
+      {
+        label: 'Cloud Hosting Platforms',
+        value: 'CLOUD_HOSTING_PLATFORMS',
+      },
+      {
+        label: 'Frameworks',
+        value: 'FRAMEWORKS',
+      },
+      {
+        label: 'Libraries',
+        value: 'LIBRARIES',
+      },
+    ]);
+    expect(chart).toEqual({
+      chartType: 'bar',
+      categories: ['Node.js', 'PHP', 'TypeScript'],
+      seriesName: 'Programming Languages',
+      series: [
+        {
+          name: 'Programming Languages',
+          type: 'bar',
+          data: [2, 1, 1],
+          label: { position: 'inside', formatter: '{c}' },
+        },
+      ],
+      colors: ['primary', 'secondary', 'success'],
+      height: 360,
+      showLegend: false,
+    });
   });
 
   it('should sort timeline cards by current/highlight priority and format present ranges', () => {

@@ -1,394 +1,181 @@
 <app-wrapper>
-  <div page-main class="dashboard-hero">
-    <app-intro
-      [sectionLabel]="'pages.dashboard.sectionLabel' | translate"
-      [title]="'pages.dashboard.title' | translate"
-      [description]="'pages.dashboard.description' | translate"
-    />
-  </div>
+  <section page-main class="dashboard-hero">
+    <span class="dashboard-eyebrow">
+      {{ 'pages.dashboard.sectionLabel' | translate }}
+    </span>
+    <h1 class="dashboard-title">{{ 'pages.dashboard.title' | translate }}</h1>
+    <p class="dashboard-description">
+      {{ 'pages.dashboard.description' | translate }}
+    </p>
+  </section>
 
-  <app-container
-    page-sidebar
-    tone="warning"
-    [label]="'pages.dashboard.snapshot.label' | translate"
-    [containerTitle]="'pages.dashboard.snapshot.title' | translate"
-    [description]="'pages.dashboard.snapshot.description' | translate"
-  >
+  <div page-content class="dashboard-page-content">
     @if (isLoading()) {
-      <app-info-state
-        mode="loading"
-        [message]="'pages.dashboard.snapshot.loading' | translate"
-      />
+      <section class="dashboard-state-shell">
+        <app-info-state
+          mode="loading"
+          [message]="'pages.dashboard.snapshot.loading' | translate"
+        />
+      </section>
     } @else if (hasError()) {
-      <app-info-state
-        mode="error"
-        [message]="'pages.dashboard.snapshot.error' | translate"
-      />
+      <section class="dashboard-state-shell">
+        <app-info-state
+          mode="error"
+          [message]="'pages.dashboard.snapshot.error' | translate"
+        />
+      </section>
     } @else {
-      <dl class="dashboard-summary-grid">
+      <section class="dashboard-metrics-grid" aria-label="dashboard metrics">
         @for (card of summaryCards(); track card.label) {
-          <div class="dashboard-summary-card">
-            <div class="dashboard-summary-icon">
+          <article class="dashboard-metric-card">
+            <span class="dashboard-metric-icon">
               <hans-icon [name]="card.iconName" iconSize="small"></hans-icon>
-            </div>
+            </span>
             <strong>{{ card.value }}</strong>
             <span>{{ card.label }}</span>
-          </div>
+          </article>
         }
-      </dl>
+      </section>
+
+      <section class="dashboard-chart-grid">
+        <app-container
+          tone="primary"
+          [label]="'pages.dashboard.stacks.label' | translate"
+          [containerTitle]="'pages.dashboard.stacks.title' | translate"
+          [description]="'pages.dashboard.stacks.description' | translate"
+        >
+          @if (stackChart(); as chart) {
+            <hans-chart
+              class="dashboard-chart"
+              [chartType]="chart.chartType"
+              [categories]="chart.categories"
+              [series]="chart.series"
+              [colors]="chart.colors"
+              [height]="chart.height"
+              [showLegend]="chart.showLegend"
+            ></hans-chart>
+          } @else {
+            <app-info-state
+              mode="empty"
+              [message]="'pages.dashboard.stacks.empty' | translate"
+            />
+          }
+        </app-container>
+
+        <app-container
+          tone="secondary"
+          [label]="'pages.dashboard.technology.label' | translate"
+          [containerTitle]="'pages.dashboard.technology.title' | translate"
+          [description]="'pages.dashboard.technology.description' | translate"
+        >
+          @if (technologyLevelChart(); as chart) {
+            <hans-chart
+              class="dashboard-chart"
+              [chartType]="chart.chartType"
+              [categories]="chart.categories"
+              [series]="chart.series"
+              [colors]="chart.colors"
+              [height]="chart.height"
+              [showLegend]="chart.showLegend"
+            ></hans-chart>
+          } @else {
+            <app-info-state
+              mode="empty"
+              [message]="'pages.dashboard.technology.empty' | translate"
+            />
+          }
+        </app-container>
+
+        <app-container
+          tone="success"
+          [label]="'pages.dashboard.distribution.label' | translate"
+          [containerTitle]="'pages.dashboard.distribution.title' | translate"
+          [description]="'pages.dashboard.distribution.description' | translate"
+        >
+          @if (projectEnvironmentChart(); as chart) {
+            <hans-chart
+              class="dashboard-chart"
+              [chartType]="chart.chartType"
+              [categories]="chart.categories"
+              [series]="chart.series"
+              [colors]="chart.colors"
+              [height]="chart.height"
+              [showLegend]="chart.showLegend"
+            ></hans-chart>
+          } @else {
+            <app-info-state
+              mode="empty"
+              [message]="'pages.dashboard.distribution.empty' | translate"
+            />
+          }
+        </app-container>
+
+        <app-container
+          tone="info"
+          [label]="'pages.dashboard.technology.label' | translate"
+          [containerTitle]="'pages.dashboard.technology.title' | translate"
+          [description]="'pages.dashboard.technology.description' | translate"
+        >
+          @if (technologyUsageChart(); as chart) {
+            <hans-chart
+              class="dashboard-chart"
+              [chartType]="chart.chartType"
+              [categories]="chart.categories"
+              [series]="chart.series"
+              [colors]="chart.colors"
+              [height]="chart.height"
+              [showLegend]="chart.showLegend"
+            ></hans-chart>
+          } @else {
+            <app-info-state
+              mode="empty"
+              [message]="'pages.dashboard.technology.empty' | translate"
+            />
+          }
+        </app-container>
+      </section>
+
+      <app-container
+        tone="warning"
+        [label]="'pages.dashboard.projectsByType.label' | translate"
+        [containerTitle]="'pages.dashboard.projectsByType.title' | translate"
+        [description]="'pages.dashboard.projectsByType.description' | translate"
+      >
+        <div class="dashboard-type-toolbar">
+          <hans-select-option
+            class="dashboard-type-select"
+            [label]="'pages.dashboard.projectsByType.selectLabel' | translate"
+            [options]="technologyTypeOptions()"
+            [value]="selectedTechnologyType()"
+            [enableAutocomplete]="false"
+            inputSize="medium"
+            inputColor="base"
+            labelColor="base"
+            dropdownBackgroundColor="var(--background-color)"
+            dropdownHoverColor="var(--primary-neutral-color)"
+            (change)="selectTechnologyTypeFromEvent($event)"
+            (valuechange)="selectTechnologyTypeFromEvent($event)"
+            (valueChange)="selectTechnologyTypeFromEvent($event)"
+          ></hans-select-option>
+        </div>
+
+        @if (projectTechnologyChart(); as chart) {
+          <hans-chart
+            class="dashboard-chart dashboard-chart-wide"
+            [chartType]="chart.chartType"
+            [categories]="chart.categories"
+            [series]="chart.series"
+            [colors]="chart.colors"
+            [height]="chart.height"
+            [showLegend]="chart.showLegend"
+          ></hans-chart>
+        } @else {
+          <app-info-state
+            mode="empty"
+            [message]="'pages.dashboard.projectsByType.empty' | translate"
+          />
+        }
+      </app-container>
     }
-  </app-container>
-
-  <section page-content class="dashboard-section">
-    <app-container
-      tone="primary"
-      [label]="'pages.dashboard.stacks.label' | translate"
-      [containerTitle]="'pages.dashboard.stacks.title' | translate"
-      [description]="'pages.dashboard.stacks.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.dashboard.stacks.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.dashboard.stacks.error' | translate"
-        />
-      } @else if (stackRows().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.dashboard.stacks.empty' | translate"
-        />
-      } @else {
-        <div class="dashboard-stack-list">
-          @for (stack of stackRows(); track stack.slug) {
-            <article class="dashboard-stack-row">
-              <div class="dashboard-stack-copy">
-                <span class="dashboard-stack-icon">
-                  <hans-icon [name]="stack.iconName" iconSize="small"></hans-icon>
-                </span>
-                <div>
-                  <strong>{{ stack.name }}</strong>
-                  <small>
-                    {{ stack.projectCount }}
-                    {{ 'pages.dashboard.stacks.projects' | translate }}
-                    ·
-                    {{ stack.technologyCount }}
-                    {{ 'pages.dashboard.stacks.technologies' | translate }}
-                  </small>
-                </div>
-              </div>
-
-              <div class="dashboard-bar-shell">
-                <span
-                  class="dashboard-bar-fill"
-                  [style.width]="resolveBarWidth(stack.totalConnections, maxStackConnections())"
-                ></span>
-              </div>
-
-              <strong class="dashboard-bar-value">{{ stack.totalConnections }}</strong>
-            </article>
-          }
-        </div>
-      }
-    </app-container>
-
-    <app-container
-      tone="secondary"
-      [label]="'pages.dashboard.distribution.label' | translate"
-      [containerTitle]="'pages.dashboard.distribution.title' | translate"
-      [description]="'pages.dashboard.distribution.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.dashboard.distribution.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.dashboard.distribution.error' | translate"
-        />
-      } @else if (!projectDistribution()) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.dashboard.distribution.empty' | translate"
-        />
-      } @else {
-        <div class="dashboard-kpis">
-          <div class="dashboard-kpi">
-            <span>{{ 'pages.dashboard.distribution.featured' | translate }}</span>
-            <strong>{{ projectDistribution()?.featuredProjects }}</strong>
-          </div>
-          <div class="dashboard-kpi">
-            <span>{{ 'pages.dashboard.distribution.highlighted' | translate }}</span>
-            <strong>{{ projectDistribution()?.highlightedProjects }}</strong>
-          </div>
-          <div class="dashboard-kpi">
-            <span>{{ 'pages.dashboard.distribution.total' | translate }}</span>
-            <strong>{{ projectDistribution()?.totalProjects }}</strong>
-          </div>
-        </div>
-
-        <div class="dashboard-dual-grid">
-          <section class="dashboard-breakdown">
-            <span>{{ 'pages.dashboard.distribution.contexts' | translate }}</span>
-            <div class="dashboard-chip-list">
-              @for (item of projectDistribution()?.contexts ?? []; track item.label) {
-                <div class="dashboard-chip">
-                  <strong>{{ item.count }}</strong>
-                  <span>{{ item.label }}</span>
-                </div>
-              } @empty {
-                <app-info-state
-                  mode="empty"
-                  [message]="'pages.dashboard.distribution.empty' | translate"
-                />
-              }
-            </div>
-          </section>
-
-          <section class="dashboard-breakdown">
-            <span>{{ 'pages.dashboard.distribution.environments' | translate }}</span>
-            <div class="dashboard-chip-list">
-              @for (item of projectDistribution()?.environments ?? []; track item.label) {
-                <div class="dashboard-chip">
-                  <strong>{{ item.count }}</strong>
-                  <span>{{ item.label }}</span>
-                </div>
-              } @empty {
-                <app-info-state
-                  mode="empty"
-                  [message]="'pages.dashboard.distribution.empty' | translate"
-                />
-              }
-            </div>
-          </section>
-        </div>
-      }
-    </app-container>
-
-    <app-container
-      tone="success"
-      [label]="'pages.dashboard.technology.label' | translate"
-      [containerTitle]="'pages.dashboard.technology.title' | translate"
-      [description]="'pages.dashboard.technology.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.dashboard.technology.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.dashboard.technology.error' | translate"
-        />
-      } @else if (technologyLeaders().length === 0 && technologyBreakdowns().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.dashboard.technology.empty' | translate"
-        />
-      } @else {
-        <div class="dashboard-tech-grid">
-          <div class="dashboard-tech-leaders">
-            @for (technology of technologyLeaders(); track technology.slug) {
-              <article class="dashboard-tech-card">
-                @if (technology.visualUrl) {
-                  <img [src]="technology.visualUrl" [alt]="technology.name" />
-                } @else {
-                  <span class="dashboard-tech-icon">
-                    <hans-icon [name]="technology.iconName" iconSize="medium"></hans-icon>
-                  </span>
-                }
-                <strong>{{ technology.name }}</strong>
-                <span>{{ technology.usageCount }} {{ 'pages.dashboard.technology.links' | translate }}</span>
-              </article>
-            }
-          </div>
-
-          <div class="dashboard-tech-breakdowns">
-            @for (breakdown of technologyBreakdowns(); track breakdown.labelKey) {
-              <section class="dashboard-breakdown">
-                <span>{{ breakdown.labelKey | translate }}</span>
-                <div class="dashboard-chip-list">
-                  @for (item of breakdown.items; track item.label) {
-                    <div class="dashboard-chip">
-                      <strong>{{ item.count }}</strong>
-                      <span>{{ item.label }}</span>
-                    </div>
-                  } @empty {
-                    <app-info-state
-                      mode="empty"
-                      [message]="'pages.dashboard.technology.empty' | translate"
-                    />
-                  }
-                </div>
-              </section>
-            }
-          </div>
-        </div>
-      }
-    </app-container>
-
-    <app-container
-      tone="info"
-      [label]="'pages.dashboard.timeline.label' | translate"
-      [containerTitle]="'pages.dashboard.timeline.title' | translate"
-      [description]="'pages.dashboard.timeline.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.dashboard.timeline.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.dashboard.timeline.error' | translate"
-        />
-      } @else if (timelineCards().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.dashboard.timeline.empty' | translate"
-        />
-      } @else {
-        <div class="dashboard-timeline-list">
-          @for (item of timelineCards(); track item.slug) {
-            <article class="dashboard-timeline-card">
-              <div class="dashboard-timeline-head">
-                <div>
-                  <span>{{ item.periodLabel }}</span>
-                  <strong>{{ item.companyName }}</strong>
-                  <p>{{ item.title }}</p>
-                </div>
-
-                <div class="dashboard-timeline-flags">
-                  @if (item.isCurrent) {
-                    <hans-tag
-                      [attr.label]="'pages.dashboard.timeline.current' | translate"
-                      tagColor="success"
-                      tagSize="sm"
-                    ></hans-tag>
-                  }
-
-                  @if (item.isHighlight) {
-                    <hans-tag
-                      [attr.label]="'pages.dashboard.timeline.highlight' | translate"
-                      tagColor="warning"
-                      tagSize="sm"
-                    ></hans-tag>
-                  }
-                </div>
-              </div>
-
-              <div class="dashboard-dual-grid">
-                <section class="dashboard-breakdown">
-                  <span>{{ 'pages.dashboard.timeline.customers' | translate }}</span>
-                  <div class="dashboard-chip-list">
-                    @for (customer of item.customers; track customer) {
-                      <div class="dashboard-chip">
-                        <span>{{ customer }}</span>
-                      </div>
-                    } @empty {
-                      <app-info-state
-                        mode="empty"
-                        [message]="'pages.dashboard.timeline.emptyCustomers' | translate"
-                      />
-                    }
-                  </div>
-                </section>
-
-                <section class="dashboard-breakdown">
-                  <span>{{ 'pages.dashboard.timeline.projects' | translate }}</span>
-                  <div class="dashboard-chip-list">
-                    @for (project of item.projects; track project) {
-                      <div class="dashboard-chip">
-                        <span>{{ project }}</span>
-                      </div>
-                    } @empty {
-                      <app-info-state
-                        mode="empty"
-                        [message]="'pages.dashboard.timeline.emptyProjects' | translate"
-                      />
-                    }
-                  </div>
-                </section>
-              </div>
-
-              <section class="dashboard-breakdown">
-                <span>{{ 'pages.dashboard.timeline.technologies' | translate }}</span>
-                <div class="dashboard-chip-list">
-                  @for (technology of item.technologies; track technology) {
-                    <div class="dashboard-chip">
-                      <span>{{ technology }}</span>
-                    </div>
-                  }
-                </div>
-              </section>
-            </article>
-          }
-        </div>
-      }
-    </app-container>
-
-    <app-container
-      tone="danger"
-      [label]="'pages.dashboard.highlights.label' | translate"
-      [containerTitle]="'pages.dashboard.highlights.title' | translate"
-      [description]="'pages.dashboard.highlights.description' | translate"
-    >
-      @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.dashboard.highlights.loading' | translate"
-        />
-      } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.dashboard.highlights.error' | translate"
-        />
-      } @else if (highlightCards().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.dashboard.highlights.empty' | translate"
-        />
-      } @else {
-        <div class="dashboard-highlight-grid">
-          @for (highlight of highlightCards(); track highlight.slug) {
-            <article class="dashboard-highlight-card">
-              <div class="dashboard-highlight-visual">
-                @if (highlight.visualUrl) {
-                  <img [src]="highlight.visualUrl" [alt]="highlight.title" />
-                } @else {
-                  <span class="dashboard-tech-icon">
-                    <hans-icon [name]="highlight.iconName" iconSize="large"></hans-icon>
-                  </span>
-                }
-              </div>
-
-              <div class="dashboard-highlight-copy">
-                <div class="dashboard-highlight-head">
-                  <strong>{{ highlight.title }}</strong>
-
-                  @if (highlight.featured) {
-                    <hans-tag
-                      [attr.label]="'pages.dashboard.highlights.featured' | translate"
-                      tagColor="warning"
-                      tagSize="sm"
-                    ></hans-tag>
-                  }
-                </div>
-
-                <p>{{ highlight.subtitle }}</p>
-                <span>{{ highlight.entity }}</span>
-              </div>
-            </article>
-          }
-        </div>
-      }
-    </app-container>
-  </section>
+  </div>
 </app-wrapper>
