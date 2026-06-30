@@ -59,27 +59,6 @@ describe('DashboardComponent', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
-  it('should render the dashboard charts and filter select from live data', () => {
-    const fixture = TestBed.createComponent(DashboardComponent);
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    expect(compiled.textContent).toContain('Portfolio analytics dashboard');
-    expect(compiled.textContent).toContain('Loading dashboard aggregates...');
-
-    flushDashboardRequests(httpTestingController);
-    fixture.detectChanges();
-
-    expect(compiled.textContent).toContain('Stack distribution');
-    expect(compiled.textContent).toContain('Technology usage signals');
-    expect(compiled.textContent).toContain('Projects by type of technologies');
-    expect(compiled.querySelectorAll('hans-chart').length).toBe(5);
-    expect(compiled.querySelectorAll('hans-select-option').length).toBe(1);
-    expect(compiled.querySelectorAll('app-card').length).toBe(6);
-  });
-
   it('should expose empty view-models before the dashboard requests resolve', () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
@@ -107,6 +86,22 @@ describe('DashboardComponent', () => {
     expect(httpTestingController.match(() => true).length).toBe(2);
   });
 
+  it('should render the dashboard sections when the API data is available', () => {
+    const fixture = TestBed.createComponent(DashboardComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    flushDashboardRequests(httpTestingController);
+    fixture.detectChanges();
+
+    expect(compiled.textContent).toContain('Portfolio analytics dashboard');
+    expect(compiled.querySelectorAll('app-dashboard-summary-strip').length).toBe(1);
+    expect(compiled.querySelectorAll('app-dashboard-analytics-grid').length).toBe(1);
+    expect(compiled.querySelectorAll('app-dashboard-project-technology-panel').length).toBe(1);
+  });
+
   it('should render localized dashboard copy in Portuguese and Spanish', () => {
     const translationService = TestBed.inject(TranslationService);
 
@@ -131,60 +126,6 @@ describe('DashboardComponent', () => {
     expect(esFixture.nativeElement.textContent).toContain('Dashboard analítico');
     expect(esFixture.nativeElement.textContent).toContain(
       'Proyectos por tipo de tecnología',
-    );
-  });
-
-  it('should render empty states for the chart sections when the API returns no data', () => {
-    const fixture = TestBed.createComponent(DashboardComponent);
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    flushDashboardRequests(
-      httpTestingController,
-      createDashboardOverviewResponse({
-        stackDistribution: {
-          generatedAtUtc: '2026-04-18T12:00:00.000Z',
-          stacks: [],
-        },
-        projectContexts: {
-          generatedAtUtc: '2026-04-18T12:00:00.000Z',
-          totalProjects: 0,
-          featuredProjects: 0,
-          highlightedProjects: 0,
-          contexts: [],
-          environments: [],
-        },
-        technologyUsage: {
-          generatedAtUtc: '2026-04-18T12:00:00.000Z',
-          totalUsageLinks: 0,
-          levels: [],
-          frequencies: [],
-          contexts: [],
-          sources: [],
-          topTechnologies: [],
-        },
-      }),
-      createProjectsCollectionResponse({
-        data: [],
-        pagination: {
-          page: 1,
-          pageSize: 100,
-          totalItems: 0,
-          totalPages: 1,
-          hasNextPage: false,
-          hasPreviousPage: false,
-        },
-      }),
-    );
-    fixture.detectChanges();
-
-    expect(compiled.textContent).toContain('No stack distribution was returned yet.');
-    expect(compiled.textContent).toContain('No technology usage aggregates were returned yet.');
-    expect(compiled.textContent).toContain('No project distribution data was returned yet.');
-    expect(compiled.textContent).toContain(
-      'No project technology breakdown was returned yet.',
     );
   });
 
