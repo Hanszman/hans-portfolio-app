@@ -2,88 +2,10 @@
   @apply block;
 }
 
-.dashboard-hero,
-.dashboard-state-shell {
-  @apply grid;
-}
-
-.dashboard-hero {
-  @apply max-w-3xl gap-4;
-}
-
-.dashboard-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.24em];
-  color: var(--primary-default-color);
-}
-
-.dashboard-title {
-  @apply m-0 text-5xl font-semibold leading-[0.95] md:text-6xl;
-  color: var(--text-color);
-}
-
-.dashboard-description {
-  @apply m-0 max-w-2xl text-lg leading-8;
-  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+.dashboard-page-content {
+  @apply grid gap-6;
 }
 
 .dashboard-state-shell {
   @apply py-2;
-}
-
-.dashboard-metrics-grid {
-  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
-}
-
-.dashboard-metric-card {
-  @apply flex min-h-36 flex-col justify-between rounded-[2rem] border p-5 shadow-sm;
-  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
-  background-color: color-mix(
-    in srgb,
-    var(--primary-neutral-color) 36%,
-    var(--white)
-  );
-}
-
-.dashboard-metric-icon {
-  @apply flex size-11 items-center justify-center rounded-2xl text-[var(--primary-default-color)];
-  background-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 12%,
-    transparent
-  );
-}
-
-.dashboard-metric-card strong {
-  @apply text-3xl font-semibold leading-none text-[var(--text-color)];
-}
-
-.dashboard-metric-card span:last-child {
-  @apply text-sm leading-5;
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
-.dashboard-chart-grid {
-  @apply grid gap-5 lg:grid-cols-2;
-}
-
-.dashboard-chart {
-  @apply block w-full;
-}
-
-.dashboard-chart-wide {
-  @apply min-h-[20rem];
-}
-
-.dashboard-type-toolbar {
-  @apply mb-5 flex flex-wrap items-end gap-4;
-}
-
-.dashboard-type-select {
-  @apply block w-full max-w-md;
-}
-
-@media (max-width: 767px) {
-  .dashboard-metric-card {
-    @apply min-h-32;
-  }
 }

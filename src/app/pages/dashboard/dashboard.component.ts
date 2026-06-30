@@ -12,7 +12,6 @@ import { forkJoin } from 'rxjs';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
 import { TranslationService } from '../../core/translation/translation.service';
-import { ContainerComponent } from '../../layout/container/container.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { DashboardPageData } from './dashboard.types';
@@ -24,15 +23,22 @@ import {
   buildDashboardStackChart,
   buildDashboardProjectEnvironmentChart,
   buildDashboardSummaryCards,
-  buildDashboardTechnologyLeaders,
   mapDashboardStackRows,
 } from './helpers/dashboard.helper';
 import { SkillTypeFilterValue } from '../skills/skills.types';
+import { DashboardHeroComponent } from './components/dashboard-hero/dashboard-hero.component';
+import { DashboardSummaryStripComponent } from './components/dashboard-summary-strip/dashboard-summary-strip.component';
+import { DashboardAnalyticsGridComponent } from './components/dashboard-analytics-grid/dashboard-analytics-grid.component';
+import { DashboardProjectTechnologyPanelComponent } from './components/dashboard-project-technology-panel/dashboard-project-technology-panel.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [
-    ContainerComponent,
+    DashboardAnalyticsGridComponent,
+    DashboardHeroComponent,
+    DashboardProjectTechnologyPanelComponent,
+    DashboardSummaryStripComponent,
     InfoStateComponent,
     TranslatePipe,
     WrapperComponent,
@@ -60,10 +66,7 @@ export class DashboardComponent {
     const overview = this.dashboardData()?.overview;
 
     return overview
-      ? buildDashboardSummaryCards(
-          overview.summary,
-          this.translationService.locale(),
-        )
+      ? buildDashboardSummaryCards(overview.summary)
       : [];
   });
 
@@ -107,12 +110,6 @@ export class DashboardComponent {
           this.translationService.locale(),
         )
       : null;
-  });
-
-  protected readonly technologyLeaders = computed(() => {
-    const technologyUsage = this.dashboardData()?.overview.technologyUsage;
-
-    return technologyUsage ? buildDashboardTechnologyLeaders(technologyUsage) : [];
   });
 
   protected readonly technologyUsageChart = computed(() => {
@@ -163,10 +160,8 @@ export class DashboardComponent {
     this.loadDashboardData();
   }
 
-  protected selectTechnologyTypeFromEvent(event: Event): void {
-    this.selectedTechnologyTypeSignal.set(
-      this.resolveSelectValue(event) as SkillTypeFilterValue,
-    );
+  protected selectTechnologyType(value: SkillTypeFilterValue): void {
+    this.selectedTechnologyTypeSignal.set(value);
   }
 
   private loadDashboardData(): void {
@@ -189,18 +184,5 @@ export class DashboardComponent {
           this.isLoading.set(false);
         },
       });
-  }
-
-  private resolveSelectValue(event: Event): string {
-    const customEvent = event as Event & {
-      detail?: string | { value?: string };
-      target: (EventTarget & { value?: string }) | null;
-    };
-
-    if (typeof customEvent.detail === 'string') {
-      return customEvent.detail;
-    }
-
-    return customEvent.detail?.value ?? customEvent.target?.value ?? '';
   }
 }

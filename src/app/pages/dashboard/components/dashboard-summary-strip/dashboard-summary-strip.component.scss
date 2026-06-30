@@ -1,0 +1,7 @@
+:host {
+  @apply block;
+}
+
+.dashboard-summary-grid {
+  @apply grid gap-5 md:grid-cols-2 xl:grid-cols-4;
+}

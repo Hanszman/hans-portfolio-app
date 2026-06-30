@@ -1,0 +1,43 @@
+<app-surface-card class="dashboard-chart-panel dashboard-project-panel">
+  <span class="dashboard-chart-panel-eyebrow">
+    {{ labelKey() | translate }}
+  </span>
+  <strong class="dashboard-chart-panel-title">{{ titleKey() | translate }}</strong>
+  <p class="dashboard-chart-panel-description">
+    {{ descriptionKey() | translate }}
+  </p>
+
+  <div class="dashboard-type-toolbar">
+    <hans-select-option
+      class="dashboard-type-select"
+      [label]="selectLabelKey() | translate"
+      [options]="options()"
+      [value]="selectedTechnologyType()"
+      [enableAutocomplete]="false"
+      inputSize="medium"
+      inputColor="base"
+      labelColor="base"
+      dropdownBackgroundColor="var(--background-color)"
+      dropdownHoverColor="var(--primary-neutral-color)"
+      (change)="technologyTypeChange.emit(resolveSelectValue($event))"
+      (valuechange)="technologyTypeChange.emit(resolveSelectValue($event))"
+      (valueChange)="technologyTypeChange.emit(resolveSelectValue($event))"
+    ></hans-select-option>
+  </div>
+
+  @if (chart(); as chartModel) {
+    <div class="dashboard-chart-scroll dashboard-chart-scrollable">
+      <hans-chart
+        class="dashboard-chart dashboard-chart-wide"
+        [chartType]="chartModel.chartType"
+        [categories]="chartModel.categories"
+        [series]="chartModel.series"
+        [colors]="chartModel.colors"
+        [height]="chartModel.height"
+        [showLegend]="chartModel.showLegend"
+      ></hans-chart>
+    </div>
+  } @else {
+    <app-info-state mode="empty" [message]="emptyMessageKey() | translate" />
+  }
+</app-surface-card>

@@ -1,0 +1,7 @@
+:host {
+  @apply block;
+}
+
+.dashboard-chart-grid {
+  @apply grid gap-6 lg:grid-cols-2;
+}

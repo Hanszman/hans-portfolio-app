@@ -18,18 +18,15 @@ import {
 
 describe('dashboard helper', () => {
   it('should build localized summary cards from dashboard counters', () => {
-    const cards = buildDashboardSummaryCards(
-      createDashboardOverviewResponse().summary,
-      'pt-br',
-    );
+    const cards = buildDashboardSummaryCards(createDashboardOverviewResponse().summary);
 
     expect(cards[0]).toEqual({
-      label: 'Projetos',
+      labelKey: 'pages.dashboard.snapshot.metrics.projects',
       value: '12',
       iconName: 'LuFolderKanban',
     });
     expect(cards[5]).toEqual({
-      label: 'Formações / idiomas',
+      labelKey: 'pages.dashboard.snapshot.metrics.formations',
       value: '3 / 2',
       iconName: 'LuGraduationCap',
     });
@@ -239,6 +236,31 @@ describe('dashboard helper', () => {
     ]);
   });
 
+  it('should sort technology usage ties alphabetically', () => {
+    const usageChart = buildDashboardTechnologyUsageChart(
+      {
+        ...createDashboardOverviewResponse().technologyUsage,
+        topTechnologies: [
+          {
+            slug: 'zulu',
+            name: 'Zulu',
+            category: 'LANGUAGE',
+            usageCount: 7,
+          },
+          {
+            slug: 'alpha',
+            name: 'Alpha',
+            category: 'LANGUAGE',
+            usageCount: 7,
+          },
+        ],
+      },
+      'en-us',
+    );
+
+    expect(usageChart.categories).toEqual(['Alpha', 'Zulu']);
+  });
+
   it('should build technology type options and project technology charts from live project relations', () => {
     const projects = createProjectsCollectionResponse();
 
@@ -283,6 +305,222 @@ describe('dashboard helper', () => {
       height: 360,
       showLegend: false,
     });
+  });
+
+  it('should sort technology type options alphabetically when totals tie', () => {
+    const projects = createProjectsCollectionResponse({
+      data: [
+        {
+          id: 'project-alpha',
+          slug: 'alpha',
+          titlePt: 'Alpha',
+          titleEn: 'Alpha',
+          shortDescriptionPt: 'Alpha',
+          shortDescriptionEn: 'Alpha',
+          fullDescriptionPt: 'Alpha',
+          fullDescriptionEn: 'Alpha',
+          context: 'PERSONAL',
+          status: 'IN_PROGRESS',
+          environment: 'FULLSTACK',
+          featured: false,
+          highlight: false,
+          startDate: '2026-01-01T00:00:00.000Z',
+          endDate: null,
+          sortOrder: 1,
+          isPublished: true,
+          createdAt: '2026-04-18T12:00:00.000Z',
+          updatedAt: '2026-04-18T12:00:00.000Z',
+          technologies: [
+            {
+              projectId: 'project-alpha',
+              technologyId: 'tech-node-alpha',
+              technology: {
+                id: 'tech-node-alpha',
+                slug: 'node',
+                name: 'Node.js',
+                category: 'LANGUAGE',
+                level: 'ADVANCED',
+                frequency: 'FREQUENT',
+                highlight: true,
+                sortOrder: 36,
+                isPublished: true,
+                createdAt: '2026-03-25T17:44:29.830Z',
+                updatedAt: '2026-03-25T17:44:29.830Z',
+              },
+            },
+            {
+              projectId: 'project-alpha',
+              technologyId: 'tech-vercel-alpha',
+              technology: {
+                id: 'tech-vercel-alpha',
+                slug: 'vercel',
+                name: 'Vercel',
+                category: 'CLOUD',
+                level: 'INTERMEDIATE',
+                frequency: 'OCCASIONAL',
+                highlight: false,
+                sortOrder: 56,
+                isPublished: true,
+                createdAt: '2026-03-25T17:44:29.830Z',
+                updatedAt: '2026-03-25T17:44:29.830Z',
+              },
+            },
+          ],
+          experiences: [],
+          tags: [],
+          links: [],
+          imageAssets: [],
+        },
+        {
+          id: 'project-beta',
+          slug: 'beta',
+          titlePt: 'Beta',
+          titleEn: 'Beta',
+          shortDescriptionPt: 'Beta',
+          shortDescriptionEn: 'Beta',
+          fullDescriptionPt: 'Beta',
+          fullDescriptionEn: 'Beta',
+          context: 'PERSONAL',
+          status: 'IN_PROGRESS',
+          environment: 'FRONTEND',
+          featured: false,
+          highlight: false,
+          startDate: '2026-02-01T00:00:00.000Z',
+          endDate: null,
+          sortOrder: 2,
+          isPublished: true,
+          createdAt: '2026-04-18T12:00:00.000Z',
+          updatedAt: '2026-04-18T12:00:00.000Z',
+          technologies: [
+            {
+              projectId: 'project-beta',
+              technologyId: 'tech-php-beta',
+              technology: {
+                id: 'tech-php-beta',
+                slug: 'php',
+                name: 'PHP',
+                category: 'LANGUAGE',
+                level: 'ADVANCED',
+                frequency: 'FREQUENT',
+                highlight: true,
+                sortOrder: 39,
+                isPublished: true,
+                createdAt: '2026-03-25T17:44:29.830Z',
+                updatedAt: '2026-03-25T17:44:29.830Z',
+              },
+            },
+            {
+              projectId: 'project-beta',
+              technologyId: 'tech-gcp-beta',
+              technology: {
+                id: 'tech-gcp-beta',
+                slug: 'gcp',
+                name: 'Google Cloud Platform',
+                category: 'CLOUD',
+                level: 'INTERMEDIATE',
+                frequency: 'OCCASIONAL',
+                highlight: false,
+                sortOrder: 7,
+                isPublished: true,
+                createdAt: '2026-03-25T17:44:29.830Z',
+                updatedAt: '2026-03-25T17:44:29.830Z',
+              },
+            },
+          ],
+          experiences: [],
+          tags: [],
+          links: [],
+          imageAssets: [],
+        },
+      ],
+      pagination: {
+        page: 1,
+        pageSize: 100,
+        totalItems: 2,
+        totalPages: 1,
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
+    });
+
+    const options = buildDashboardTechnologyTypeOptions(projects, 'en-us');
+
+    expect(options).toEqual([
+      {
+        label: 'Cloud Hosting Platforms',
+        value: 'CLOUD_HOSTING_PLATFORMS',
+      },
+      {
+        label: 'Programming Languages',
+        value: 'PROGRAMMING_LANGUAGES',
+      },
+    ]);
+  });
+
+  it('should build an empty technology chart when the selected type has no matching projects', () => {
+    const chart = buildDashboardProjectTechnologyChart(
+      createProjectsCollectionResponse({
+        data: [
+          {
+            id: 'project-only-languages',
+            slug: 'only-languages',
+            titlePt: 'Only languages',
+            titleEn: 'Only languages',
+            shortDescriptionPt: 'Only languages',
+            shortDescriptionEn: 'Only languages',
+            fullDescriptionPt: 'Only languages',
+            fullDescriptionEn: 'Only languages',
+            context: 'PERSONAL',
+            status: 'IN_PROGRESS',
+            environment: 'FULLSTACK',
+            featured: false,
+            highlight: false,
+            startDate: '2026-01-01T00:00:00.000Z',
+            endDate: null,
+            sortOrder: 1,
+            isPublished: true,
+            createdAt: '2026-04-18T12:00:00.000Z',
+            updatedAt: '2026-04-18T12:00:00.000Z',
+            technologies: [
+              {
+                projectId: 'project-only-languages',
+                technologyId: 'tech-css',
+                technology: {
+                  id: 'tech-css',
+                  slug: 'css',
+                  name: 'CSS',
+                  category: 'LANGUAGE',
+                  level: 'ADVANCED',
+                  frequency: 'FREQUENT',
+                  highlight: true,
+                  sortOrder: 5,
+                  isPublished: true,
+                  createdAt: '2026-03-25T17:44:29.830Z',
+                  updatedAt: '2026-03-25T17:44:29.830Z',
+                },
+              },
+            ],
+            experiences: [],
+            tags: [],
+            links: [],
+            imageAssets: [],
+          },
+        ],
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 1,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPreviousPage: false,
+        },
+      }),
+      'DEPLOYMENT_TOOLS',
+      'en-us',
+    );
+
+    expect(chart.categories).toEqual([]);
+    expect(chart.series[0].data).toEqual([]);
   });
 
   it('should sort timeline cards by current/highlight priority and format present ranges', () => {

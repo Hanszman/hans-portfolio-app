@@ -1,0 +1,37 @@
+<section class="dashboard-chart-grid">
+  <app-dashboard-chart-panel
+    [labelKey]="'pages.dashboard.stacks.label'"
+    [titleKey]="'pages.dashboard.stacks.title'"
+    [descriptionKey]="'pages.dashboard.stacks.description'"
+    [emptyMessageKey]="'pages.dashboard.stacks.empty'"
+    [chart]="stackChart()"
+    [scrollable]="true"
+  />
+
+  <app-dashboard-chart-panel
+    [labelKey]="'pages.dashboard.technology.label'"
+    [titleKey]="'pages.dashboard.technology.title'"
+    [descriptionKey]="'pages.dashboard.technology.description'"
+    [emptyMessageKey]="'pages.dashboard.technology.empty'"
+    [chart]="technologyLevelChart()"
+    [scrollable]="true"
+  />
+
+  <app-dashboard-chart-panel
+    [labelKey]="'pages.dashboard.distribution.label'"
+    [titleKey]="'pages.dashboard.distribution.title'"
+    [descriptionKey]="'pages.dashboard.distribution.description'"
+    [emptyMessageKey]="'pages.dashboard.distribution.empty'"
+    [chart]="projectEnvironmentChart()"
+    [scrollable]="true"
+  />
+
+  <app-dashboard-chart-panel
+    [labelKey]="'pages.dashboard.technology.label'"
+    [titleKey]="'pages.dashboard.technology.title'"
+    [descriptionKey]="'pages.dashboard.technology.description'"
+    [emptyMessageKey]="'pages.dashboard.technology.empty'"
+    [chart]="technologyUsageChart()"
+    [scrollable]="true"
+  />
+</section>

@@ -77,7 +77,7 @@ describe('DashboardComponent', () => {
     expect(compiled.textContent).toContain('Projects by type of technologies');
     expect(compiled.querySelectorAll('hans-chart').length).toBe(5);
     expect(compiled.querySelectorAll('hans-select-option').length).toBe(1);
-    expect(compiled.querySelectorAll('article.dashboard-metric-card').length).toBe(6);
+    expect(compiled.querySelectorAll('app-card').length).toBe(6);
   });
 
   it('should expose empty view-models before the dashboard requests resolve', () => {
@@ -221,26 +221,19 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
-      selectTechnologyTypeFromEvent: (event: Event) => void;
+      selectTechnologyType: (value: string) => void;
       selectedTechnologyType: () => string;
+      activeTechnologyType: () => string;
       projectTechnologyChart: () => { categories: readonly string[] } | null;
     };
 
-    component.selectTechnologyTypeFromEvent(
-      new CustomEvent('change', {
-        detail: { value: 'FRAMEWORKS' },
-      }),
-    );
+    component.selectTechnologyType('FRAMEWORKS');
     fixture.detectChanges();
 
     expect(component.selectedTechnologyType()).toBe('FRAMEWORKS');
     expect(component.projectTechnologyChart()?.categories).toEqual(['Angular']);
 
-    component.selectTechnologyTypeFromEvent(
-      new CustomEvent('change', {
-        detail: 'LIBRARIES',
-      }),
-    );
+    component.selectTechnologyType('LIBRARIES');
     fixture.detectChanges();
 
     expect(component.selectedTechnologyType()).toBe('LIBRARIES');
@@ -249,13 +242,7 @@ describe('DashboardComponent', () => {
       'Tailwind CSS',
     ]);
 
-    component.selectTechnologyTypeFromEvent(
-      {
-        target: {
-          value: 'PROGRAMMING_LANGUAGES',
-        },
-      } as unknown as Event,
-    );
+    component.selectTechnologyType('PROGRAMMING_LANGUAGES');
     fixture.detectChanges();
 
     expect(component.selectedTechnologyType()).toBe('PROGRAMMING_LANGUAGES');
@@ -264,15 +251,37 @@ describe('DashboardComponent', () => {
       'PHP',
       'TypeScript',
     ]);
+  });
 
-    component.selectTechnologyTypeFromEvent(new Event('change'));
+  it('should keep the selected technology when the available options list is empty', () => {
+    const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
 
-    expect(component.selectedTechnologyType()).toBe('');
-    expect(component.projectTechnologyChart()?.categories).toEqual([
-      'Node.js',
-      'PHP',
-      'TypeScript',
-    ]);
+    flushDashboardRequests(
+      TestBed.inject(HttpTestingController),
+      createDashboardOverviewResponse(),
+      createProjectsCollectionResponse({
+        data: [],
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 0,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPreviousPage: false,
+        },
+      }),
+    );
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      activeTechnologyType: () => string;
+      selectedTechnologyType: () => string;
+      projectTechnologyChart: () => unknown;
+    };
+
+    expect(component.selectedTechnologyType()).toBe('PROGRAMMING_LANGUAGES');
+    expect(component.activeTechnologyType()).toBe('PROGRAMMING_LANGUAGES');
+    expect(component.projectTechnologyChart()).toBeNull();
   });
 });

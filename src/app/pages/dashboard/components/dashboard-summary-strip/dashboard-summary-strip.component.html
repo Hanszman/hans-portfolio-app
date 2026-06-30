@@ -1,0 +1,5 @@
+<section class="dashboard-summary-grid" aria-label="dashboard metrics">
+  @for (card of cards(); track card.labelKey) {
+    <app-card [card]="toCard(card)" />
+  }
+</section>

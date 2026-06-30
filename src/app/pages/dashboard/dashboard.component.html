@@ -1,13 +1,10 @@
 <app-wrapper>
-  <section page-main class="dashboard-hero">
-    <span class="dashboard-eyebrow">
-      {{ 'pages.dashboard.sectionLabel' | translate }}
-    </span>
-    <h1 class="dashboard-title">{{ 'pages.dashboard.title' | translate }}</h1>
-    <p class="dashboard-description">
-      {{ 'pages.dashboard.description' | translate }}
-    </p>
-  </section>
+  <app-dashboard-hero
+    page-main
+    [sectionLabelKey]="'pages.dashboard.sectionLabel'"
+    [titleKey]="'pages.dashboard.title'"
+    [descriptionKey]="'pages.dashboard.description'"
+  />
 
   <div page-content class="dashboard-page-content">
     @if (isLoading()) {
@@ -25,157 +22,26 @@
         />
       </section>
     } @else {
-      <section class="dashboard-metrics-grid" aria-label="dashboard metrics">
-        @for (card of summaryCards(); track card.label) {
-          <article class="dashboard-metric-card">
-            <span class="dashboard-metric-icon">
-              <hans-icon [name]="card.iconName" iconSize="small"></hans-icon>
-            </span>
-            <strong>{{ card.value }}</strong>
-            <span>{{ card.label }}</span>
-          </article>
-        }
-      </section>
+      <app-dashboard-summary-strip [cards]="summaryCards()" />
 
-      <section class="dashboard-chart-grid">
-        <app-container
-          tone="primary"
-          [label]="'pages.dashboard.stacks.label' | translate"
-          [containerTitle]="'pages.dashboard.stacks.title' | translate"
-          [description]="'pages.dashboard.stacks.description' | translate"
-        >
-          @if (stackChart(); as chart) {
-            <hans-chart
-              class="dashboard-chart"
-              [chartType]="chart.chartType"
-              [categories]="chart.categories"
-              [series]="chart.series"
-              [colors]="chart.colors"
-              [height]="chart.height"
-              [showLegend]="chart.showLegend"
-            ></hans-chart>
-          } @else {
-            <app-info-state
-              mode="empty"
-              [message]="'pages.dashboard.stacks.empty' | translate"
-            />
-          }
-        </app-container>
+      <app-dashboard-analytics-grid
+        [stackChart]="stackChart()"
+        [technologyLevelChart]="technologyLevelChart()"
+        [projectEnvironmentChart]="projectEnvironmentChart()"
+        [technologyUsageChart]="technologyUsageChart()"
+      />
 
-        <app-container
-          tone="secondary"
-          [label]="'pages.dashboard.technology.label' | translate"
-          [containerTitle]="'pages.dashboard.technology.title' | translate"
-          [description]="'pages.dashboard.technology.description' | translate"
-        >
-          @if (technologyLevelChart(); as chart) {
-            <hans-chart
-              class="dashboard-chart"
-              [chartType]="chart.chartType"
-              [categories]="chart.categories"
-              [series]="chart.series"
-              [colors]="chart.colors"
-              [height]="chart.height"
-              [showLegend]="chart.showLegend"
-            ></hans-chart>
-          } @else {
-            <app-info-state
-              mode="empty"
-              [message]="'pages.dashboard.technology.empty' | translate"
-            />
-          }
-        </app-container>
-
-        <app-container
-          tone="success"
-          [label]="'pages.dashboard.distribution.label' | translate"
-          [containerTitle]="'pages.dashboard.distribution.title' | translate"
-          [description]="'pages.dashboard.distribution.description' | translate"
-        >
-          @if (projectEnvironmentChart(); as chart) {
-            <hans-chart
-              class="dashboard-chart"
-              [chartType]="chart.chartType"
-              [categories]="chart.categories"
-              [series]="chart.series"
-              [colors]="chart.colors"
-              [height]="chart.height"
-              [showLegend]="chart.showLegend"
-            ></hans-chart>
-          } @else {
-            <app-info-state
-              mode="empty"
-              [message]="'pages.dashboard.distribution.empty' | translate"
-            />
-          }
-        </app-container>
-
-        <app-container
-          tone="info"
-          [label]="'pages.dashboard.technology.label' | translate"
-          [containerTitle]="'pages.dashboard.technology.title' | translate"
-          [description]="'pages.dashboard.technology.description' | translate"
-        >
-          @if (technologyUsageChart(); as chart) {
-            <hans-chart
-              class="dashboard-chart"
-              [chartType]="chart.chartType"
-              [categories]="chart.categories"
-              [series]="chart.series"
-              [colors]="chart.colors"
-              [height]="chart.height"
-              [showLegend]="chart.showLegend"
-            ></hans-chart>
-          } @else {
-            <app-info-state
-              mode="empty"
-              [message]="'pages.dashboard.technology.empty' | translate"
-            />
-          }
-        </app-container>
-      </section>
-
-      <app-container
-        tone="warning"
-        [label]="'pages.dashboard.projectsByType.label' | translate"
-        [containerTitle]="'pages.dashboard.projectsByType.title' | translate"
-        [description]="'pages.dashboard.projectsByType.description' | translate"
-      >
-        <div class="dashboard-type-toolbar">
-          <hans-select-option
-            class="dashboard-type-select"
-            [label]="'pages.dashboard.projectsByType.selectLabel' | translate"
-            [options]="technologyTypeOptions()"
-            [value]="selectedTechnologyType()"
-            [enableAutocomplete]="false"
-            inputSize="medium"
-            inputColor="base"
-            labelColor="base"
-            dropdownBackgroundColor="var(--background-color)"
-            dropdownHoverColor="var(--primary-neutral-color)"
-            (change)="selectTechnologyTypeFromEvent($event)"
-            (valuechange)="selectTechnologyTypeFromEvent($event)"
-            (valueChange)="selectTechnologyTypeFromEvent($event)"
-          ></hans-select-option>
-        </div>
-
-        @if (projectTechnologyChart(); as chart) {
-          <hans-chart
-            class="dashboard-chart dashboard-chart-wide"
-            [chartType]="chart.chartType"
-            [categories]="chart.categories"
-            [series]="chart.series"
-            [colors]="chart.colors"
-            [height]="chart.height"
-            [showLegend]="chart.showLegend"
-          ></hans-chart>
-        } @else {
-          <app-info-state
-            mode="empty"
-            [message]="'pages.dashboard.projectsByType.empty' | translate"
-          />
-        }
-      </app-container>
+      <app-dashboard-project-technology-panel
+        [labelKey]="'pages.dashboard.projectsByType.label'"
+        [titleKey]="'pages.dashboard.projectsByType.title'"
+        [descriptionKey]="'pages.dashboard.projectsByType.description'"
+        [selectLabelKey]="'pages.dashboard.projectsByType.selectLabel'"
+        [emptyMessageKey]="'pages.dashboard.projectsByType.empty'"
+        [options]="technologyTypeOptions()"
+        [selectedTechnologyType]="selectedTechnologyType()"
+        [chart]="projectTechnologyChart()"
+        (technologyTypeChange)="selectTechnologyType($event)"
+      />
     }
   </div>
 </app-wrapper>

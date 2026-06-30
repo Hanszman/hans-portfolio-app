@@ -17,7 +17,7 @@ export interface DashboardTechnologyTypeOptionViewModel {
 }
 
 export interface DashboardSummaryCardViewModel {
-  label: string;
+  labelKey: AppTranslationKey;
   value: string;
   iconName: string;
 }

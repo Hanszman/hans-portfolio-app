@@ -166,35 +166,34 @@ const getProjectTechnologyCounts = (
 
 export const buildDashboardSummaryCards = (
   summary: DashboardSummaryCountersResponse,
-  locale: AppLocale,
 ): readonly DashboardSummaryCardViewModel[] => [
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.projects),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.projects,
     value: String(summary.projects),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.projects,
   },
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.experiences),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.experiences,
     value: String(summary.experiences),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.experiences,
   },
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.technologies),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.technologies,
     value: String(summary.technologies),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.technologies,
   },
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.customers),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.customers,
     value: String(summary.customers),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.customers,
   },
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.jobs),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.jobs,
     value: String(summary.jobs),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.jobs,
   },
   {
-    label: translateStaticKey(locale, DASHBOARD_SUMMARY_LABEL_KEYS.formations),
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.formations,
     value: `${summary.formations} / ${summary.spokenLanguages}`,
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.formations,
   },
@@ -276,7 +275,7 @@ export const buildDashboardTechnologyTypeOptions = (
   return SKILL_TYPE_FILTERS.filter(({ value }) => value !== 'ALL' && typeCounts.has(value))
     .sort(
       (left, right) =>
-        (typeCounts.get(right.value) ?? 0) - (typeCounts.get(left.value) ?? 0) ||
+        typeCounts.get(right.value)! - typeCounts.get(left.value)! ||
         translateStaticKey(locale, left.labelKey).localeCompare(
           translateStaticKey(locale, right.labelKey),
         ),

@@ -1,0 +1,52 @@
+:host {
+  @apply block;
+}
+
+.dashboard-project-panel {
+  @apply gap-4;
+}
+
+.dashboard-type-toolbar {
+  @apply flex flex-wrap items-end gap-4;
+}
+
+.dashboard-type-select {
+  @apply block w-full max-w-md;
+}
+
+.dashboard-chart-panel-eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.24em];
+  color: var(--primary-default-color);
+}
+
+.dashboard-chart-panel-title {
+  @apply text-3xl font-semibold leading-tight;
+  color: var(--text-color);
+}
+
+.dashboard-chart-panel-description {
+  @apply m-0 text-sm leading-7;
+  color: color-mix(in srgb, var(--text-color) 68%, transparent);
+}
+
+.dashboard-chart-scroll {
+  @apply min-w-0;
+}
+
+.dashboard-chart-scrollable {
+  @apply overflow-x-auto overflow-y-hidden pb-2;
+}
+
+.dashboard-chart {
+  @apply block w-full;
+}
+
+.dashboard-chart-wide {
+  @apply min-h-[20rem];
+}
+
+@media (max-width: 1279px) {
+  .dashboard-chart-scrollable .dashboard-chart {
+    min-width: 38rem;
+  }
+}
