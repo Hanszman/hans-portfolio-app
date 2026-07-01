@@ -175,8 +175,8 @@ This section documents the integration behavior used by this app. The canonical 
 
 Current setup:
 
-- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css?v=1.0.26`
-- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js?v=1.0.26`
+- stylesheet: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-design-lib.css?v=x.x.x`
+- script: `https://hans-ui-design-lib-cdn.vercel.app/hans-ui-web-components.js?v=x.x.x`
 
 The root app also already prepares a runtime theme override through `window.HansUI.setTheme(...)`.
 
