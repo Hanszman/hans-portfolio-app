@@ -1,13 +1,10 @@
 <app-wrapper>
-  <section page-main class="skills-hero">
-    <span class="skills-eyebrow">
-      {{ 'pages.skills.sectionLabel' | translate }}
-    </span>
-    <h1 class="skills-title">{{ 'pages.skills.title' | translate }}</h1>
-    <p class="skills-description">
-      {{ 'pages.skills.description' | translate }}
-    </p>
-  </section>
+  <app-section-header
+    page-main
+    [sectionLabel]="'pages.skills.sectionLabel' | translate"
+    [title]="'pages.skills.title' | translate"
+    [description]="'pages.skills.description' | translate"
+  ></app-section-header>
 
   <section page-content class="skills-section">
     <div class="skills-foundation-grid">

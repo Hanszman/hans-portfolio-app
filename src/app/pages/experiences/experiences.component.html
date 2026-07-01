@@ -1,13 +1,10 @@
 <app-wrapper>
-  <section page-main class="experiences-hero">
-    <span class="experiences-eyebrow">
-      {{ 'pages.experiences.sectionLabel' | translate }}
-    </span>
-    <h1 class="experiences-title">{{ 'pages.experiences.title' | translate }}</h1>
-    <p class="experiences-description">
-      {{ 'pages.experiences.description' | translate }}
-    </p>
-  </section>
+  <app-section-header
+    page-main
+    [sectionLabel]="'pages.experiences.sectionLabel' | translate"
+    [title]="'pages.experiences.title' | translate"
+    [description]="'pages.experiences.description' | translate"
+  ></app-section-header>
 
   <section page-content class="experiences-section">
     @if (isLoading()) {

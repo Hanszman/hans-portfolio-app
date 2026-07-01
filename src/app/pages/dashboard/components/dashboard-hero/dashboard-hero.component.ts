@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { SectionHeaderComponent } from '../../../../shared/section-header/section-header.component';
 
 @Component({
   selector: 'app-dashboard-hero',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [SectionHeaderComponent, TranslatePipe],
   templateUrl: './dashboard-hero.component.html',
   styleUrl: './dashboard-hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

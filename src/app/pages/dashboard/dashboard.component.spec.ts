@@ -31,7 +31,11 @@ const flushDashboardRequests = (
 
 describe('DashboardComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-chart', 'hans-icon', 'hans-select-option'];
+    const elementNames = [
+      'hans-chart',
+      'hans-icon',
+      'hans-select-option',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {

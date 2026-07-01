@@ -7,7 +7,7 @@
 }
 
 .home-hero-copy {
-  @apply grid max-w-[36rem] gap-4;
+  @apply grid w-full max-w-[36rem] gap-4;
 }
 
 .home-hero-availability {
@@ -65,11 +65,11 @@
 }
 
 .home-hero-visual {
-  @apply flex justify-center xl:justify-end xl:pl-12;
+  @apply flex w-full justify-center xl:justify-end xl:pl-12;
 }
 
 .home-hero-image-frame {
-  @apply w-full max-w-[30rem] overflow-hidden rounded-[1.5rem] border;
+  @apply mx-auto w-full max-w-[30rem] overflow-hidden rounded-[1.5rem] border;
   background:
     radial-gradient(
       circle at top,
@@ -99,7 +99,17 @@
   }
 
   .home-hero-visual {
-    @apply justify-start;
+    @apply justify-center;
+  }
+}
+
+@media (max-width: 1279px) {
+  .home-hero-copy {
+    @apply max-w-none;
+  }
+
+  .home-hero-visual {
+    @apply justify-center;
   }
 }
 

@@ -13,6 +13,7 @@ import { TechnologyCollectionItemResponse } from '../../core/api/technologies/te
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { SkillCardComponent } from './components/skill-card/skill-card.component';
@@ -39,6 +40,7 @@ import {
     WrapperComponent,
     InfoStateComponent,
     SkillCardComponent,
+    SectionHeaderComponent,
     TechnologyModalComponent,
     TranslatePipe,
   ],

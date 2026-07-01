@@ -1,12 +1,10 @@
 <app-wrapper>
   <section page-main class="projects-page">
-    <header class="projects-hero">
-      <span class="projects-eyebrow">
-        {{ 'pages.projects.sectionLabel' | translate }}
-      </span>
-      <h1>{{ 'pages.projects.title' | translate }}</h1>
-      <p>{{ 'pages.projects.description' | translate }}</p>
-    </header>
+    <app-section-header
+      [sectionLabel]="'pages.projects.sectionLabel' | translate"
+      [title]="'pages.projects.title' | translate"
+      [description]="'pages.projects.description' | translate"
+    ></app-section-header>
 
     <section
       class="projects-toolbar"

@@ -14,7 +14,12 @@ import { ExperiencesComponent } from './experiences.component';
 
 describe('ExperiencesComponent', () => {
   beforeAll(() => {
-    const elementNames = ['hans-icon', 'hans-tag', 'hans-button', 'hans-modal'];
+    const elementNames = [
+      'hans-icon',
+      'hans-tag',
+      'hans-button',
+      'hans-modal',
+    ];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {

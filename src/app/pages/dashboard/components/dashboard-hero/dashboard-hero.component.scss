@@ -1,22 +1,3 @@
 :host {
   @apply block;
 }
-
-.dashboard-hero {
-  @apply gap-4;
-}
-
-.dashboard-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.24em];
-  color: var(--primary-default-color);
-}
-
-.dashboard-title {
-  @apply m-0 text-5xl font-semibold leading-[0.95] md:text-6xl;
-  color: var(--text-color);
-}
-
-.dashboard-description {
-  @apply m-0 max-w-2xl text-lg leading-8;
-  color: color-mix(in srgb, var(--text-color) 68%, transparent);
-}

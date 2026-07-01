@@ -13,6 +13,7 @@ import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
@@ -31,6 +32,7 @@ import {
     InfoStateComponent,
     ProjectCaseCardComponent,
     ProjectDetailModalComponent,
+    SectionHeaderComponent,
     TechnologyModalComponent,
     TranslatePipe,
   ],

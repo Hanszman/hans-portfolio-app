@@ -6,25 +6,6 @@
   @apply mx-auto grid w-full max-w-6xl gap-10 py-8;
 }
 
-.projects-hero {
-  @apply grid gap-4;
-}
-
-.projects-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.24em];
-  color: var(--primary-default-color);
-}
-
-.projects-hero h1 {
-  @apply m-0 text-5xl font-semibold leading-none md:text-6xl;
-  color: var(--text-color);
-}
-
-.projects-hero p {
-  @apply m-0 text-lg leading-8;
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
 .projects-toolbar {
   @apply grid gap-4;
 }

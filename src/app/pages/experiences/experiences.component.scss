@@ -2,29 +2,9 @@
   @apply block;
 }
 
-.experiences-hero,
 .experiences-section,
 .experiences-timeline {
   @apply grid;
-}
-
-.experiences-hero {
-  @apply gap-4;
-}
-
-.experiences-eyebrow {
-  @apply text-xs font-bold uppercase tracking-[0.18em];
-  color: var(--primary-default-color);
-}
-
-.experiences-title {
-  @apply m-0 text-4xl font-semibold leading-[0.98] md:text-5xl;
-  color: var(--text-color);
-}
-
-.experiences-description {
-  @apply m-0 max-w-3xl text-lg leading-9;
-  color: color-mix(in srgb, var(--text-color) 66%, transparent);
 }
 
 .experiences-section {
