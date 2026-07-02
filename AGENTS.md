@@ -289,7 +289,36 @@ Current status:
 
 - `home` redesign is complete.
 - `experiences` redesign is complete.
-- Next F7 target is `skills`.
+- `skills` redesign is complete.
+- `projects` redesign is complete.
+- `dashboard` redesign is complete.
+- F7 public redesign is complete.
+- Next official target is `F8`, the final authenticated admin area.
+
+## F8 admin rules
+
+The current final phase is `F8`.
+
+Rules:
+
+- create a hidden admin login route that is not exposed in the public menu
+- authenticate with the existing `POST /auth/login` endpoint
+- validate authenticated sessions with `GET /admin/session`
+- protect every admin route with a frontend guard
+- keep the admin area visually aligned with the current app theme
+- do not introduce new colors; always use theme variables/tokens
+- build admin actions and forms with `hans-ui-design-lib` primitives first
+- each admin entity entry should expose `create`, `update` and `delete` actions
+- each action should open modal-driven flows when appropriate
+- model relationship CRUD according to the API contracts:
+  - `technology-contexts` is the only dedicated relationship entity with its own protected CRUD
+  - the other relationship tables must be managed through relation arrays in the owning entity payloads
+- split F8 into substeps:
+  - `F8.1` admin login
+  - `F8.2` admin shell
+  - next substeps one per admin entity
+- update documentation after every relevant interaction in this phase
+- run quality scripts after every meaningful implementation increment
 
 ## Important scripts
 

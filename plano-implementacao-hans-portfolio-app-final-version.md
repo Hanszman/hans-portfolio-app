@@ -1037,27 +1037,201 @@ Fechar consistencia visual e tecnica do portfolio publico com a integracao real 
 - a pagina `experiences` continua consumindo `GET /experiences`, mas a leitura foi refeita para priorizar empresa, papel, clientes, projetos e stack em fluxo incremental
 - a composicao antiga com snapshot lateral, modal central, analytics e galeria foi removida desta tela por nao fazer parte do redesign atual
 - o detalhamento expandido de `experiences` agora acontece em painel lateral sobreposto, preservando tema, traducoes e integracao real com a API
-- proxima etapa oficial dentro da `F7`: refatoracao da pagina `skills`
+- `skills` concluida com agrupamentos, filtros, modal compartilhado e consumo real de `GET /technologies`
+- `projects` concluida com cards de case study, modal de detalhe e integracao real de relacionamentos
+- `dashboard` concluida com a composicao analitica final integrada aos endpoints agregados
+- todas as paginas publicas previstas na F7 foram finalizadas: `home`, `experiences`, `skills`, `projects` e `dashboard`
+- proxima etapa oficial: `F8 - Area administrativa final do portfolio`
 
-### F8 - Preparacao da area administrativa visual
+### F8 - Area administrativa final do portfolio
 
 #### Objetivo
 
-Deixar o frontend pronto para, em etapa apropriada, receber a area admin consumindo os endpoints protegidos da API.
+Implementar a etapa final do remake com uma area administrativa autenticada no frontend, consumindo os endpoints protegidos ja existentes no `hans-portfolio-api` para criar, editar e remover o conteudo do portfolio.
 
 #### Entregas
 
-- definicao da estrutura de rotas/admin
-- contratos de autenticacao
-- base para formularios administrativos
-- avaliacao de quais componentes da `hans-ui-design-lib` servem para o admin
-- alinhamento de gaps reutilizaveis antes de qualquer mudanca na lib
+- tela de login admin oculta da navegacao publica e acessivel apenas por URL
+- autenticacao real com `POST /auth/login`
+- validacao de sessao autenticada com `GET /admin/session`
+- rotas administrativas protegidas por guard no frontend
+- shell administrativa dedicada e nao publica
+- lista inicial de entidades e entidade relacional administraveis
+- operacoes `create`, `update` e `delete` para todas as entidades protegidas pela API
+- modais administrativos com formularios usando `hans-button`, `hans-input`, `hans-dropdown`, `hans-select-option`, `hans-toggle`, `hans-date-picker`, `hans-modal`, `hans-table`, `hans-loading` e `hans-toast` sempre que aplicavel
+- cobertura de testes unitarios completa para auth admin, guards, services, helpers, mapeadores, componentes, modais e formularios do escopo implementado
+- atualizacao obrigatoria da documentacao a cada interacao relevante desta etapa
+
+#### Direcao funcional obrigatoria
+
+- a rota de login admin nao deve aparecer no menu publico nem em atalhos visuais da shell publica
+- o acesso deve acontecer apenas por URL conhecida, com implementacao recomendada em `/admin/login`
+- apos login valido, o usuario deve ser redirecionado para a rota administrativa recomendada em `/admin`
+- toda rota sob `/admin` deve ser protegida por guard e exigir token bearer valido
+- tentativas de acesso admin sem token devem redirecionar para `/admin/login`
+- quando ja autenticado, acessar `/admin/login` deve redirecionar para `/admin`
+- a sessao deve ser reidratada no carregamento do app por meio do token persistido e de uma chamada de validacao em `GET /admin/session`
+- a F8 nao deve alterar a experiencia do portfolio publico, nem o menu, nem a navegacao publica, nem a paleta do projeto
+
+#### Estrutura tecnica alvo da F8
+
+- `src/app/core/auth-admin/`
+  - service global de sessao admin com `signal()`, `computed()` e `effect()`
+  - tipos de auth admin
+  - adapter/service HTTP para `login` e `session`
+  - helper de persistencia de token
+  - guard de rota admin
+  - interceptor opcional para anexar `Authorization: Bearer <token>` nas chamadas protegidas
+- `src/app/pages/admin-login/`
+  - tela standalone de login
+  - formulario com componentes da `hans-ui-design-lib`
+  - loading, erro e feedback de autenticacao
+- `src/app/pages/admin/`
+  - shell/pagina raiz do admin
+  - lista das entidades administraveis
+  - componentes de cards/tabela/resumo por entidade
+  - modais de acao por entidade
+- `src/app/pages/admin/components/`
+  - componentes compartilhados apenas do dominio admin
+- `src/app/pages/admin/helpers/`
+  - normalizadores de payload
+  - mapeadores view-model <-> API
+  - configuracao declarativa das entidades, operacoes e formularios
+
+#### Estrategia oficial de sessao admin
+
+- `POST /auth/login` recebe `email` e `password`
+- a resposta devolve `accessToken`, `tokenType`, `expiresIn` e `user`
+- o frontend deve trafegar somente com bearer token, seguindo o contrato ja existente da API
+- para a primeira versao da F8, a persistencia oficial recomendada e `sessionStorage`, evitando manter sessao administrativa ativa alem do necessario
+- o estado global admin deve expor pelo menos:
+  - `adminUser`
+  - `accessToken`
+  - `isAuthenticated`
+  - `isHydratingSession`
+  - `loginError`
+- o fluxo de bootstrap da sessao deve ser:
+  - ler token persistido
+  - se existir token, chamar `GET /admin/session`
+  - se a sessao for valida, preencher o estado global
+  - se a sessao falhar, limpar token e redirecionar para login ao tentar acessar rota protegida
+- logout deve limpar estado global, token persistido e qualquer cache admin carregado
+
+#### Mapa oficial das entidades administrativas
+
+Entidades top-level com CRUD protegido existente:
+
+- `projects`
+- `experiences`
+- `technologies`
+- `formations`
+- `spoken-languages`
+- `customers`
+- `jobs`
+- `links`
+- `image-assets`
+- `tags`
+- `portfolio-settings`
+
+Entidade relacional com CRUD protegido dedicado:
+
+- `technology-contexts`
+
+Regra importante de modelagem para a F8:
+
+- fora `technology-contexts`, as tabelas relacionais nao possuem CRUD dedicado na API
+- os demais relacionamentos sao administrados pelos endpoints da entidade dona por meio de arrays de IDs ou arrays relacionais no payload
+- portanto, a UI do admin deve tratar esses vinculos como campos relacionais dentro dos formularios das entidades principais, e nao como telas CRUD independentes para cada join table
+
+#### Matriz oficial de formularios da F8
+
+- `F8.1` - login admin
+  - endpoint: `POST /auth/login`
+  - campos: `email`, `password`
+- `F8.2` - shell admin e pagina raiz
+  - endpoint de bootstrap: `GET /admin/session`
+  - entregas: rota `/admin`, guard, estrutura com lista de entidades e area de operacoes por entidade
+- `F8.3` - `portfolio-settings`
+  - campos: `key`, `value`, `description`
+  - observacao: `value` e `Json`, entao a primeira versao deve ter editor textual validado antes do submit
+- `F8.4` - `tags`
+  - campos: `slug`, `namePt`, `nameEn`, `type`, `sortOrder`
+  - relacionamentos: `projectIds`, `technologyIds`
+- `F8.5` - `links`
+  - campos: `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`
+  - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`
+- `F8.6` - `image-assets`
+  - campos: `fileName`, `filePath`, `folder`, `kind`, `altPt`, `altEn`, `captionPt`, `captionEn`, `mimeType`, `width`, `height`, `sortOrder`, `isPublished`
+  - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`, `spokenLanguageIds`, `customerIds`, `jobIds`
+- `F8.7` - `spoken-languages`
+  - campos: `code`, `namePt`, `nameEn`, `proficiency`, `highlight`, `sortOrder`
+  - relacionamentos: `imageAssetIds`
+- `F8.8` - `customers`
+  - campos: `slug`, `name`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
+  - relacionamentos: `experienceIds`, `imageAssetIds`
+- `F8.9` - `jobs`
+  - campos: `slug`, `namePt`, `nameEn`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
+  - relacionamentos: `experienceIds`, `imageAssetIds`
+- `F8.10` - `formations`
+  - campos: `slug`, `institution`, `titlePt`, `titleEn`, `degreeType`, `summaryPt`, `summaryEn`, `startDate`, `endDate`, `highlight`, `sortOrder`, `isPublished`
+  - relacionamentos: `technologyRelations`, `linkIds`, `imageAssetIds`
+- `F8.11` - `technologies`
+  - campos: `slug`, `name`, `category`, `level`, `frequency`, `highlight`, `sortOrder`, `isPublished`
+  - relacionamentos: `projectRelations`, `experienceRelations`, `formationRelations`, `technologyContexts`, `tagIds`, `linkIds`, `imageAssetIds`
+- `F8.12` - `technology-contexts`
+  - campos: `technologyId`, `context`, `startedAt`, `endedAt`
+  - observacao: unica entidade relacional com CRUD dedicado
+- `F8.13` - `experiences`
+  - campos: `slug`, `companyName`, `titlePt`, `titleEn`, `summaryPt`, `summaryEn`, `descriptionPt`, `descriptionEn`, `startDate`, `endDate`, `isCurrent`, `highlight`, `sortOrder`, `isPublished`
+  - relacionamentos: `technologyRelations`, `projectIds`, `customerIds`, `jobIds`, `linkIds`, `imageAssetIds`
+- `F8.14` - `projects`
+  - campos: `slug`, `titlePt`, `titleEn`, `shortDescriptionPt`, `shortDescriptionEn`, `fullDescriptionPt`, `fullDescriptionEn`, `context`, `status`, `environment`, `featured`, `highlight`, `startDate`, `endDate`, `sortOrder`, `isPublished`
+  - relacionamentos: `technologyRelations`, `experienceIds`, `tagIds`, `linkIds`, `imageAssetIds`
+
+#### Ordem oficial recomendada da F8
+
+1. `F8.1` - login admin
+2. `F8.2` - shell admin, sessao, guard, rota protegida e base visual
+3. `F8.3` - `portfolio-settings`
+4. `F8.4` - `tags`
+5. `F8.5` - `links`
+6. `F8.6` - `image-assets`
+7. `F8.7` - `spoken-languages`
+8. `F8.8` - `customers`
+9. `F8.9` - `jobs`
+10. `F8.10` - `formations`
+11. `F8.11` - `technologies`
+12. `F8.12` - `technology-contexts`
+13. `F8.13` - `experiences`
+14. `F8.14` - `projects`
+
+#### Regras obrigatorias da F8
+
+- usar somente Angular moderno e standalone components
+- manter estado admin em services signal-based; evitar `BehaviorSubject` como padrao
+- nao vazar `HttpClient` para os componentes
+- formularios e contratos tipados devem nascer junto dos testes
+- modais e formularios devem reutilizar `hans-ui-design-lib` antes de qualquer UI customizada
+- qualquer gap reutilizavel de componente deve ser alinhado antes de alterar `hans-ui-design-lib`
+- manter traducoes sincronizadas entre `en-us`, `pt-br` e `es-es`
+- manter o admin com o mesmo sistema de tema do app publico
+- atualizar documentacoes a cada interacao relevante desta etapa, incluindo este plano e o plano especifico da F8
+- ao final de cada subetapa concluida, rodar `npm run lint`, `npm run test:coverage -- --watch=false` e `npm run build`
 
 #### Criterios de aceite
 
-- direcao da area admin documentada
-- sem implementacao prematura desnecessaria
-- sem criar componente reutilizavel novo na lib sem alinhamento previo
+- login admin funcional via API real
+- rota administrativa oculta da navegacao publica e protegida por guard
+- sessao reidratada corretamente entre reloads enquanto o token for valido
+- area administrativa inicial listando todas as entidades suportadas
+- cada entidade com operacoes claras de `create`, `update` e `delete`
+- formularios administrativos aderentes aos contratos reais da API
+- relacionamentos administrados com seletores adequados aos arrays suportados pelos payloads
+- `technology-contexts` exposta como entidade relacional com CRUD proprio
+- feedback visual consistente para loading, sucesso, erro e confirmacao
+- portfolio publico preservado sem regressao visual ou de navegacao
+- coverage total do escopo entregue em cada subetapa
+- documentacao sempre atualizada junto das decisoes e implementacoes
 
 ---
 
@@ -1071,8 +1245,8 @@ Fluxo oficial:
 - consumir dados reais nas paginas publicas desde as primeiras features
 - integrar dashboard com endpoints agregados assim que a pagina existir
 - consolidar estados de loading/erro/empty ao longo do desenvolvimento
-- preparar autenticacao admin no front em momento apropriado
-- depois integrar CRUDs protegidos quando a etapa administrativa chegar
+- implementar autenticacao admin no front na `F8.1`
+- integrar CRUDs protegidos da area admin ao longo da `F8`
 
 Escopo continuo da integracao:
 
@@ -1081,8 +1255,8 @@ Escopo continuo da integracao:
 - integrar dashboard com endpoints agregados
 - integrar technologies com `experienceMetrics`
 - integrar projetos, experiencias e settings da API
-- preparar autenticacao admin no front
-- depois integrar CRUDs protegidos quando a etapa administrativa chegar
+- integrar autenticacao admin no front
+- integrar CRUDs protegidos da area admin por subetapa
 
 ### Regras da integracao
 
@@ -1175,7 +1349,7 @@ O Codex deve:
 
 - portfolio publico consumindo a API
 - dashboard consumindo endpoints agregados
-- area administrativa preparada para consumo dos endpoints protegidos
+- area administrativa autenticada consumindo os endpoints protegidos da API
 - manutencao futura do portfolio sem depender de JSON hardcoded do legado
 
 ---
@@ -1204,4 +1378,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Comecar a etapa de frontend pela fundacao do app e da integracao antecipada com a API, seguindo `F1.1` e `F1.2` antes de avançar para as primeiras paginas publicas.
+Iniciar a `F8` pelo login admin, guard, sessao autenticada e shell administrativa, seguindo a ordem detalhada neste plano e no planejamento especifico da F8.

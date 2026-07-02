@@ -253,15 +253,16 @@ At the moment, this repository already has the first public pages evolving on re
 - the design library CDN is already wired
 - the remake plan is documented in [plano-implementacao-hans-portfolio-app-final-version.md](plano-implementacao-hans-portfolio-app-final-version.md)
 
-The next official frontend step after the current implementation is `F7`, focused on the final visual integration pass of the public portfolio.
+The next official frontend step after the current implementation is `F8`, focused on the authenticated administrative area of the portfolio.
 
 That step includes:
 
-- responsive and UX refinement across all public pages
-- denser and better-balanced information layout inspired by `victor_hanszman_portfolio-old`
-- extraction of oversized page components into smaller page-local/shared components
-- broader use of real API relationships and aggregate data
-- concise cards with richer detail modals backed by the design library
+- hidden admin login route reached only by URL
+- real authentication through `POST /auth/login`
+- protected admin session flow validated by `GET /admin/session`
+- non-public admin routes guarded in the frontend
+- entity management UI with create, update and delete operations backed by `/admin/<resource>`
+- modal-based admin forms built primarily with `hans-ui-design-lib`
 
 ## 📜 History of commands used to build this project:
 
