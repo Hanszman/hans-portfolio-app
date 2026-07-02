@@ -1,36 +1,30 @@
 [TODO ATUAL]:
--Codex não arrumou praticamente nada do redesign visual ainda e ainda estou sentindo os arquivos meio grandes, precisamos rever as telas:
-  Alterar infos/design do portfolio, refatorando telas em subcomponentes e revisando implementações, etc
--Partir pra próxima etapa de implementação (telas de cadastros/admin)
+-Partir pra próxima etapa de implementação (telas de cadastros/admin).
+-Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End.
+-Fazer próximos TODO's (de melhoria abaixo)
 
 [PROXIMOS TODO's]:
--Refatorar e readaptar telas e componentes da versão antiga do portfolio
 -Criar mais features e componentes
 -Criar pipeline ci/cd e configurar docker no projeto
 -Criar skills
 -Verificar lista de TODO's antigos:
 // TODO: Criar separação entre tempos de experiência
 // TODO: Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures
-// TODO: Melhorar a apresentação dos cards no css de cada página (tirar espaços brancos, centralizar, dividir informações em boxes, colocar tamanho padronizado, centralizar filtros)
-// TODO: Melhorar apresentação das imagens (talvez colocar animações na interação com eles)
 // TODO: Colocar imagens dos prints das telas do projetos
-// TODO: Colocar links de referência entre as entidades e criar modais de visualização
+// TODO: Melhorar apresentação das imagens (talvez colocar animações na interação com eles) / utilizar carrossel
+// TODO: Colocar links de referência entre as entidades e atualizar modais de visualização
 // TODO: Criar listas de links de prod e git nos cards (com os ícones do git e vercel)
-// TODO: Arrumar espaço para footer quando as pesquisas resultam em poucos resultados ou nenhum
+// TODO: Arrumar cores da mensagem de resultados vazios dos filtros / resposta vazia da api
 // TODO: Terminar de fazer os projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio
 // TODO: Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção
-// TODO: Escolher a paleta cores para os gráficos
-// TODO: Ajustar responsividade
-// TODO: Remover mensagem de projeto ainda em desenvolvimento
 // TODO: Talvez separar em abas a tela de skills
-// TODO: Talvez finalizar último gráfico (BarChart TechnologiesByExperience) e organizar melhor a posição deles na tela
-// TODO: Talvez colocar as certificações e diplomas exibidas em um carrossel
-// TODO: Talvez adicionar o idioma espanhol
+// TODO: Revisar gráficos comparando com projeto antigo
+// TODO: Talvez finalizar último gráfico (BarChart TechnologiesByExperience)
+// TODO: Colocar as certificações e diplomas exibidas em um carrossel
+// TODO: Adicionar o idioma espanhol
 // TODO: Talvez fazer paginação
-// TODO: Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês
-// TODO: Talvez ordenar por prioridade os agrupamentos na função formatList
-// TODO: Talvez melhorar agrupamento da formatList caso o usuário queira mudar agrupamentos de type ou stack ou os dois juntos por exemplo
-// TODO: Talvez inserir no json de skills os padrões de projeto como POO e MVC por exemplo
+// TODO: Mostrar datas com dia e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês
+// TODO: Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo
 // TODO: Talvez fazer página sobre meus gostos e vida pessoal
 
 
@@ -83,7 +77,7 @@ Ou seja, refatore esses componentes de header e footer em termos de código tamb
 Uma observação, o portfolio antigo ainda não tinha o idioma espanhol, mas agora é pra manter os 3 idiomas que ja temos nesse portfolio atual.
 Segue os prints dos componentes de header e footer do portfolio antigo para vc usar de base.
 
-[REDESIGN BASE44:]
+[REDESIGN BASE44]:
 
 HOME:
 -Preciso que vc analise o plano-implementacao-hans-portfolio-app-final-version.md. Leia o documento todo antes de começar, para que vc possa pegar o contexto. Como vc pode ver ja fizemos ate a etapa F6 e estamos na F7. Quando for implementar agora os proximos passos, lembre-se de usar nossa lib de hans design sempre que precisar de algum componente que ela já tenha. Lembre-se de sempre que necessário atualizar as documentações E lembre-se de sempre (no final de toda etapa/implementação que vc fizer) rodar os scripts de lint, build, test (mantenha sempre 100% de coverage em todos os arquivos), etc para verificar se tudo passou corretamente. Lembre-se também de sempre manter os padrões de clean code, dry, kiss, yagni, solid, etc, ou seja, o mais limpo e reutilizável possível.
@@ -260,3 +254,11 @@ Repare no print 1 que as legendas dos gráficos no tema dark estão com a cor mu
 Cara como vc pode ver no print 3, o gap 1 continua sem ser aplicado entre o titulo e o subtitulo da tela de dashboard, diferente das outras, e a descrição/subtitulo dessa tela continua com esse max-width, quebrando a linha descrição no meio da tela, remova isso por favor. Além disso, notei que em cada uma dessas telas aparentemente são duplicados esses comportamentos, quando deveriamos criar um componente só, pra essa section de span+titulo+subtitulo, e reutilizá-lo nessas telas. Crie um componente aqui na lib, reutilizável, para usar nas telas de experiences, skills, projects e dashboard, de forma que fique semelhante à estrutura e estilo desse print 4 que te mandei, ou seja, seguindo o padrão de igual está atualmente na tela de projects.
 Como vc pode ver no print 5, a partir dessa resolução 1279px de largura, a imagem quebra a linha pra baixo, o que está correto. Porém, a sessão dos textos do titulo/subtitulo continuam ocupando aquela mesma area limitada, deixando um espaço muito vazio à direita. Faça essa sessão ocupar o espaço todo quando a imagem quebrar alinha pra baixo. Além disso, como pode ver no print 6, a partir da resolução 944px de largura, não só o texto fica limitado à esquerda, com espaço sobrando a direita, mas a imagem também, pq por algum motivo, ela deixa de ficar centralizada na div dela, quando deveria estar centralizada o tempo todo dentro de sua propria div, em todas as resoluções. Faça esses ajustes de responsividade por favor.
 -Esse section header que vc criou não precisa ser um componente da lib. É pra vc fazê-lo como um componente reutilizável do próprio portfolio app, crie esse componente na pasta shared ou na pasta layour, onde fizer mais sentido. Nessa migração do componente sectionheader, lembre de seguir os padrões de componente do portfolio, pra onde ele será migrado, não os padrões da lib, de onde ele ta saindo
+
+[ADMIN]:
+Estamos fazendo nesse projeto um remake do projeto victor_hanszman_portfolio-old.
+Para pegar contexto, preciso que vc leia toda a documentação desse projeto antes de começarmos, nos arquivos: plano-implementacao-hans-portfolio-app-final-version.md desse portfolio app e nos README.md e AGENTS.md dos 3 projetos: hans-portfolio-app, hans-portfolio-api e hans-ui-design-lib. Atualmente já implementamos tudo até a etapa F7 e a próxima etapa agora é a F8, a final (inclusive pode atualizar no plano-implementacao-hans-portfolio-app-final-version.md pois lá fala que ainda estamos nela em "proxima etapa oficial dentro da `F7`: refatoracao da pagina `skills`", mas já finalizamos home, experiences, skills, projects e dashboard).
+A ideia agora não é implementar nada ainda da etapa F8, vamos primeiro criar um novo plano de implementação pra ela e a atualizar o plano-implementacao-hans-portfolio-app-final-version.md com as novas informações necessárias. Precisamos detalhar melhor a etapa F8, planejando tudo que faremos nela. Preciso que vc investigue na API, na documentação, no swagger, etc, todos os endpoints relacionados às telas de admin, ou seja, os create/update/delete das entidades.
+Para essa etapa, vamos precisar de uma tela de login no Front (vai ser uma rota que não vai estar navegável no menu, vamos acessar ela apenas via url) e, assim que logado com o usuário que temos no banco (uitilizando o endpoint de auth que ja temos), o usuário vai ser redirecionado pra uma rota de tela de admin no Front protegida/guard/oculta que não vai ser publica. Nessa tela/rota, teremos uma lista de entidades e entidades de relacionamento que, em cada uma delas terão alguns botões de operação para create/update/delete e ao clicarmos neles, será aberto um modal com o formulário contendo os inputs, selectoptions, toggles, etc para cadastrarmos/editarmos/excluirmos os registros do banco via os endpoints da api, sacou?
+Descreva tudo isso na nossa documentação da forma mais detalhada possível. Para criar esses botões, formulários, modais, inputs, selectoptions, toggles, etc, vamos usar os componentes da hans-ui-design-lib. Preciso que vc siga todos os padrões dos 3 projetos, incluindo rodar os scripts de lint, build, test:coverage, etc para verificar se tudo passou corretamente, precisamos de 100% de test:coverage em tudo. Para fazer essas telas, siga o padrão visual atual do projeto. Não coloque cores novas, utilize sempre variáveis das cores dos temas.
+Vamos deixar separado a etapa F8 em subetapas, sendo a primeira etapa a tela de login, a segunda etapa a tela de admin e as próximas, cada uma pra uma entidade do sistema (ou seja, ela sendo listada na tela de admin com os botões, modais, formulários, etc). Lembre de deixar documentado para sempre atualizar as documentações a cada interação.
