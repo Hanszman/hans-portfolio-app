@@ -2,6 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { AdminAuthApiService } from './core/api/auth-admin/auth-admin.service';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
 import { createProjectsServiceMock } from './core/api/mocks/projects.mocks';
@@ -16,6 +17,23 @@ import { provideAppTranslations } from './core/translation/translation.providers
 import { routes } from './app.routes';
 
 describe('app routes', () => {
+  beforeAll(() => {
+    for (const elementName of [
+      'hans-input',
+      'hans-button',
+      'hans-icon',
+      'hans-loading',
+    ]) {
+      if (!customElements.get(elementName)) {
+        customElements.define(elementName, class extends HTMLElement {});
+      }
+    }
+  });
+
+  beforeEach(() => {
+    sessionStorage.removeItem('hans-admin-access-token');
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
@@ -42,8 +60,19 @@ describe('app routes', () => {
           provide: ProjectsService,
           useValue: createProjectsServiceMock(),
         },
+        {
+          provide: AdminAuthApiService,
+          useValue: {
+            login: jasmine.createSpy(),
+            getSession: jasmine.createSpy(),
+          },
+        },
       ],
     }).compileComponents();
+  });
+
+  afterEach(() => {
+    sessionStorage.removeItem('hans-admin-access-token');
   });
 
   it('should redirect the empty path to the strategic home route', async () => {
@@ -87,6 +116,20 @@ describe('app routes', () => {
     await harness.navigateByUrl('/projects');
 
     expect(harness.routeNativeElement?.textContent).toContain('Projects');
+  });
+
+  it('should load the hidden admin login route outside the public shell', async () => {
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/admin/login');
+
+    expect(harness.routeNativeElement?.textContent).toContain('Admin access');
+  });
+
+  it('should redirect unauthenticated access from the admin route to the login route', async () => {
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/admin');
+
+    expect(harness.routeNativeElement?.textContent).toContain('Admin access');
   });
 
   it('should redirect unknown routes to the strategic home route', async () => {

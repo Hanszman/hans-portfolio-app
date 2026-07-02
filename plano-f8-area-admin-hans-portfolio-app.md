@@ -463,6 +463,20 @@ Cada entidade deve ter, no minimo:
 13. `F8.13` - Experiences
 14. `F8.14` - Projects
 
+## 8.1) Status atual da F8
+
+- `F8.1` concluida em `2026-07-02`
+- entregas concluidas na `F8.1`:
+  - rota oculta `/admin/login` implementada fora da navegacao publica
+  - integracao real com `POST /auth/login`
+  - dominio `src/app/core/api/auth-admin/` criado para contratos e chamadas HTTP de autenticacao
+  - dominio `src/app/core/auth-admin/` criado para sessao, token, guard e restauracao de autenticacao
+  - persistencia de token em `sessionStorage`
+  - redirecionamento de login bem-sucedido para `/admin`
+  - pagina placeholder protegida em `/admin` ja criada como destino temporario da autenticacao
+  - cobertura de testes para auth admin, guards, rotas e pagina de login
+- proxima subetapa oficial: `F8.2` - Guard, sessao e shell admin
+
 ## 9) Regras de implementacao por subetapa
 
 Para cada subetapa:

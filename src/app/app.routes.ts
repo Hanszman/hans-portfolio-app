@@ -1,5 +1,19 @@
 import { Routes } from '@angular/router';
+import {
+  adminAuthGuard,
+  adminLoginGuard,
+} from './core/auth-admin/auth-admin.guard';
 import { ShellComponent } from './layout/shell/shell.component';
+
+const loadAdminLogin = () =>
+  import('./pages/admin-login/admin-login.component').then(
+    (module) => module.AdminLoginComponent,
+  );
+
+const loadAdmin = () =>
+  import('./pages/admin/admin.component').then(
+    (module) => module.AdminComponent,
+  );
 
 const loadHome = () =>
   import('./pages/home/home.component').then((module) => module.HomeComponent);
@@ -23,6 +37,16 @@ const loadDashboard = () =>
   );
 
 export const routes: Routes = [
+  {
+    path: 'admin/login',
+    canActivate: [adminLoginGuard],
+    loadComponent: loadAdminLogin,
+  },
+  {
+    path: 'admin',
+    canActivate: [adminAuthGuard],
+    loadComponent: loadAdmin,
+  },
   {
     path: '',
     component: ShellComponent,

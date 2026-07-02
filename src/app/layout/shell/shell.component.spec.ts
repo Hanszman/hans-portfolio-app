@@ -29,6 +29,14 @@ describe('ShellComponent', () => {
                 path: 'projects',
                 component: TestRouteComponent,
               },
+              {
+                path: 'admin',
+                component: TestRouteComponent,
+              },
+              {
+                path: 'admin/login',
+                component: TestRouteComponent,
+              },
             ],
           },
         ]),
@@ -57,6 +65,7 @@ describe('ShellComponent', () => {
 
     expect(footerCopyButton?.label).toBe('Victor Hanszman');
     expect(getNavigationLabels()).toContain('Projects');
+    expect(getNavigationLabels()).not.toContain('Admin');
 
     translation.setLocale('pt-br');
     fixture.detectChanges();

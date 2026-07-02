@@ -22,7 +22,7 @@ export const EN_TRANSLATIONS = {
   'header.navigation.projects': 'Projects',
   'header.navigation.dashboard': 'Dashboard',
   'header.statusLabel': 'Foundation status',
-  'header.eyebrow': 'Portfolio remake foundation',
+  'header.eyebrow': 'Portfolio foundation',
   'header.title': 'A shell specific to the portfolio, already connected to real backend data.',
   'header.description':
     'This first layout layer establishes the portfolio structure, keeps the app aligned with the design library and prepares the next visual iterations on top of a responsive Angular shell.',
@@ -410,8 +410,7 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.projectsByType.loading': 'Loading project technology breakdown...',
   'pages.dashboard.projectsByType.error':
     'The project technology breakdown is unavailable right now.',
-  'pages.dashboard.projectsByType.empty':
-    'No project technology breakdown was returned yet.',
+  'pages.dashboard.projectsByType.empty': 'No project technology breakdown was returned yet.',
   'pages.dashboard.projectsByType.selectLabel': 'Technology type',
   'pages.dashboard.timeline.label': 'Career',
   'pages.dashboard.timeline.title': 'Career focus timeline',
@@ -436,6 +435,32 @@ export const EN_TRANSLATIONS = {
     'The dashboard aggregate endpoints are unavailable right now.',
   'pages.dashboard.highlights.empty': 'No highlighted portfolio items were returned yet.',
   'pages.dashboard.highlights.featured': 'Featured',
+  'pages.adminLogin.sectionLabel': '// ADMIN_ACCESS',
+  'pages.adminLogin.title': 'Admin access',
+  'pages.adminLogin.description':
+    'A protected, non-public route for managing the portfolio through the authenticated admin flow.',
+  'pages.adminLogin.security.title': 'Protected route',
+  'pages.adminLogin.security.description':
+    'Use the existing admin account from the API to unlock the next administrative steps of the portfolio.',
+  'pages.adminLogin.form.title': 'Authenticate admin session',
+  'pages.adminLogin.form.description':
+    'This login is intentionally hidden from the public navigation and is only available through its direct URL.',
+  'pages.adminLogin.form.emailLabel': 'Admin email',
+  'pages.adminLogin.form.emailPlaceholder': 'victor@example.com',
+  'pages.adminLogin.form.passwordLabel': 'Admin password',
+  'pages.adminLogin.form.passwordPlaceholder': 'Enter your password',
+  'pages.adminLogin.form.submit': 'Enter admin area',
+  'pages.adminLogin.feedback.invalidCredentials':
+    'The admin credentials are invalid or the session could not be started.',
+  'pages.admin.placeholder.eyebrow': '// ADMIN_ROUTE',
+  'pages.admin.placeholder.title': 'Admin route unlocked',
+  'pages.admin.placeholder.description':
+    'The first administrative substep is active: authentication, hidden routing and protected access are already in place.',
+  'pages.admin.placeholder.session': 'Authenticated session',
+  'pages.admin.placeholder.nextStep': 'Next implementation step',
+  'pages.admin.placeholder.nextStepDescription':
+    'F8.2 will replace this temporary destination with the complete administrative shell and entity navigation.',
+  'pages.admin.placeholder.actions.logout': 'Log out',
   'taxonomy.dashboard.source.experience': 'Experience',
   'taxonomy.dashboard.source.project': 'Project',
   'taxonomy.dashboard.source.formation': 'Formation',

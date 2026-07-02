@@ -1148,9 +1148,19 @@ Regra importante de modelagem para a F8:
 - `F8.1` - login admin
   - endpoint: `POST /auth/login`
   - campos: `email`, `password`
+  - status: concluida em `2026-07-02`
+  - entregue:
+    - rota oculta `/admin/login` fora da shell publica
+    - integracao real com `POST /auth/login`
+    - estado global de autenticacao admin em `src/app/core/auth-admin/`
+    - persistencia de token em `sessionStorage`
+    - redirecionamento para `/admin` apos login valido
+    - feedback de erro para credenciais invalidas
+    - cobertura de testes para service, guard, rotas e pagina de login
 - `F8.2` - shell admin e pagina raiz
   - endpoint de bootstrap: `GET /admin/session`
   - entregas: rota `/admin`, guard, estrutura com lista de entidades e area de operacoes por entidade
+  - status: proxima subetapa oficial
 - `F8.3` - `portfolio-settings`
   - campos: `key`, `value`, `description`
   - observacao: `value` e `Json`, entao a primeira versao deve ter editor textual validado antes do submit
@@ -1378,4 +1388,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Iniciar a `F8` pelo login admin, guard, sessao autenticada e shell administrativa, seguindo a ordem detalhada neste plano e no planejamento especifico da F8.
+Implementar a `F8.2`, consolidando a shell administrativa protegida em `/admin`, a validacao de sessao com `GET /admin/session`, a base visual da area admin e a lista inicial das entidades com suas acoes futuras.

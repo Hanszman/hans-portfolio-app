@@ -22,9 +22,8 @@ export const ES_ES_TRANSLATIONS = {
   'header.navigation.projects': 'Proyectos',
   'header.navigation.dashboard': 'Panel',
   'header.statusLabel': 'Estado de la fundación',
-  'header.eyebrow': 'Fundación del remake del portfolio',
-  'header.title':
-    'Una shell específica del portfolio, ya conectada a datos reales del backend.',
+  'header.eyebrow': 'Fundación del portfolio',
+  'header.title': 'Una shell específica del portfolio, ya conectada a datos reales del backend.',
   'header.description':
     'Esta primera capa de layout establece la estructura del portfolio, mantiene la app alineada con la design lib y prepara las próximas iteraciones visuales sobre una shell Angular responsiva.',
   'header.highlight.layout.label': 'Layout',
@@ -93,25 +92,20 @@ export const ES_ES_TRANSLATIONS = {
     'Trayectoria profesional y línea de tiempo de carrera.',
   'pages.home.navigation.skills.eyebrow': '// arsenal',
   'pages.home.navigation.skills.title': 'Habilidades',
-  'pages.home.navigation.skills.description':
-    'Tecnologías, formaciones e idiomas.',
+  'pages.home.navigation.skills.description': 'Tecnologías, formaciones e idiomas.',
   'pages.home.navigation.projects.eyebrow': '// entregas',
   'pages.home.navigation.projects.title': 'Proyectos',
-  'pages.home.navigation.projects.description':
-    'Aplicaciones reales y estudios de caso.',
+  'pages.home.navigation.projects.description': 'Aplicaciones reales y estudios de caso.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
   'pages.experiences.title': 'Experiencia Profesional',
   'pages.experiences.description':
     'Un recorrido cronológico por mi carrera construyendo soluciones de software de impacto.',
   'pages.experiences.snapshot.label': 'Panorama',
-  'pages.experiences.snapshot.title':
-    'Cobertura de la trayectoria proveniente de la API real',
+  'pages.experiences.snapshot.title': 'Cobertura de la trayectoria proveniente de la API real',
   'pages.experiences.snapshot.description':
     'Conteos, señal del rol actual y amplitud de relaciones salen directamente de la colección publicada de experiences.',
-  'pages.experiences.snapshot.loading':
-    'Cargando relaciones reales de experiences...',
-  'pages.experiences.snapshot.error':
-    'El endpoint de experiences no está disponible ahora.',
+  'pages.experiences.snapshot.loading': 'Cargando relaciones reales de experiences...',
+  'pages.experiences.snapshot.error': 'El endpoint de experiences no está disponible ahora.',
   'pages.experiences.snapshot.metrics.currentRole': 'Rol actual',
   'pages.experiences.snapshot.metrics.experiences': 'Capítulos',
   'pages.experiences.snapshot.metrics.projects': 'Proyectos',
@@ -119,22 +113,18 @@ export const ES_ES_TRANSLATIONS = {
   'pages.experiences.snapshot.metrics.customers': 'Clientes',
   'pages.experiences.snapshot.metrics.highlights': 'Destacados',
   'pages.experiences.timeline.label': 'Narrativa de carrera',
-  'pages.experiences.timeline.title':
-    'Timeline, contexto e impacto en el mismo flujo de lectura',
+  'pages.experiences.timeline.title': 'Timeline, contexto e impacto en el mismo flujo de lectura',
   'pages.experiences.timeline.description':
     'Cada capítulo conecta empresa, rol, clientes, proyectos y stack para que la historia profesional se lea como un sistema y no como una lista suelta.',
-  'pages.experiences.timeline.loading':
-    'Cargando relaciones reales de experiences...',
-  'pages.experiences.timeline.error':
-    'El endpoint de experiences no está disponible ahora.',
+  'pages.experiences.timeline.loading': 'Cargando relaciones reales de experiences...',
+  'pages.experiences.timeline.error': 'El endpoint de experiences no está disponible ahora.',
   'pages.experiences.timeline.empty':
     'Todavía no se devolvió ningún capítulo publicado de experiencia.',
   'pages.experiences.timeline.current': 'Actual',
   'pages.experiences.timeline.highlight': 'Destacado',
   'pages.experiences.timeline.roles': 'Roles',
   'pages.experiences.timeline.customers': 'Clientes',
-  'pages.experiences.timeline.emptyCustomers':
-    'Todavía no hay ningún cliente vinculado.',
+  'pages.experiences.timeline.emptyCustomers': 'Todavía no hay ningún cliente vinculado.',
   'pages.experiences.timeline.technologyStack': 'Stack de tecnología',
   'pages.experiences.timeline.relatedProjects': 'Proyectos relacionados',
   'pages.experiences.timeline.moreTechnologies': 'más',
@@ -171,13 +161,10 @@ export const ES_ES_TRANSLATIONS = {
   'pages.skills.snapshot.title': 'Tecnologías con métricas reales por contexto',
   'pages.skills.snapshot.description':
     'La barra lateral resume cobertura por categoría, densidad de destacados y la señal de mayor duración publicada por la API.',
-  'pages.skills.snapshot.loading':
-    'Cargando métricas de experiencia de tecnologías...',
-  'pages.skills.snapshot.error':
-    'El endpoint de technologies no está disponible ahora.',
+  'pages.skills.snapshot.loading': 'Cargando métricas de experiencia de tecnologías...',
+  'pages.skills.snapshot.error': 'El endpoint de technologies no está disponible ahora.',
   'pages.skills.filters.label': 'Filtros del catálogo',
-  'pages.skills.filters.title':
-    'Recorta el stack por categoría, nivel y contexto',
+  'pages.skills.filters.title': 'Recorta el stack por categoría, nivel y contexto',
   'pages.skills.filters.description':
     'Los filtros siguen ligeros en la UI mientras las duraciones reales vienen del contrato del backend.',
   'pages.skills.filters.category': 'Categoría',
@@ -197,8 +184,7 @@ export const ES_ES_TRANSLATIONS = {
     'Pontificia Universidad Católica de Minas Gerais',
   'pages.skills.education.fullStackWeb.period': '03/2019 - 06/2021',
   'pages.skills.education.fullStackWeb.badge': 'Especialista',
-  'pages.skills.education.angularNode.title':
-    'Programador FullStack Angular & Node',
+  'pages.skills.education.angularNode.title': 'Programador FullStack Angular & Node',
   'pages.skills.education.angularNode.institution': 'Udemy',
   'pages.skills.education.angularNode.period': '03/2020 - 04/2020',
   'pages.skills.education.angularNode.badge': 'Certificado',
@@ -218,10 +204,8 @@ export const ES_ES_TRANSLATIONS = {
   'pages.skills.catalog.description':
     'Cada tarjeta destaca experiencia total y los contextos en los que esa stack ya fue usada.',
   'pages.skills.catalog.loading': 'Construyendo grupos de tecnología...',
-  'pages.skills.catalog.error':
-    'El endpoint de technologies no está disponible ahora.',
-  'pages.skills.catalog.empty':
-    'Ninguna tecnología publicada coincide con los filtros actuales.',
+  'pages.skills.catalog.error': 'El endpoint de technologies no está disponible ahora.',
+  'pages.skills.catalog.empty': 'Ninguna tecnología publicada coincide con los filtros actuales.',
   'pages.skills.card.highlight': 'Destacado',
   'pages.skills.card.totalExperience': 'Experiencia total',
   'pages.skills.card.contexts': 'Cobertura por contexto',
@@ -230,8 +214,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.skills.detail.chartSeries': 'Meses',
   'pages.skills.detail.coverage': 'Cobertura detallada',
   'pages.skills.detail.timeline': 'Timeline de contexto',
-  'pages.skills.detail.noTimeline':
-    'No se devolvió ningún intervalo publicado.',
+  'pages.skills.detail.noTimeline': 'No se devolvió ningún intervalo publicado.',
   'taxonomy.skills.filters.allCategories': 'Todas las categorías',
   'taxonomy.skills.filters.allLevels': 'Todos los niveles',
   'taxonomy.skills.filters.allContexts': 'Todos los contextos',
@@ -271,10 +254,8 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.skills.type.libraries': 'Bibliotecas',
   'taxonomy.skills.type.frameworks': 'Frameworks',
   'taxonomy.skills.type.relationalDataBases': 'Bases de datos relacionales',
-  'taxonomy.skills.type.nonRelationalDataBases':
-    'Bases de datos no relacionales',
-  'taxonomy.skills.type.databasesManagementSystems':
-    'Sistemas de gestión de bases de datos',
+  'taxonomy.skills.type.nonRelationalDataBases': 'Bases de datos no relacionales',
+  'taxonomy.skills.type.databasesManagementSystems': 'Sistemas de gestión de bases de datos',
   'taxonomy.skills.type.codeEditors': 'Editores de código',
   'taxonomy.skills.type.techniques': 'Técnicas',
   'taxonomy.skills.type.methodologies': 'Metodologías',
@@ -282,8 +263,7 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.skills.type.packageManagers': 'Gestores de paquetes',
   'taxonomy.skills.type.packages': 'Paquetes',
   'taxonomy.skills.type.versioningPlatforms': 'Plataformas de versionado',
-  'taxonomy.skills.type.cloudHostingPlatforms':
-    'Plataformas de alojamiento en la nube',
+  'taxonomy.skills.type.cloudHostingPlatforms': 'Plataformas de alojamiento en la nube',
   'taxonomy.skills.type.deploymentTools': 'Herramientas de deploy',
   'taxonomy.skills.type.developmentPlatforms': 'Plataformas de desarrollo',
   'taxonomy.skills.type.protocols': 'Protocolos',
@@ -312,8 +292,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.projects.snapshot.description':
     'La barra lateral resume densidad de featured, referencias vinculadas y la señal de stack más amplia ya expuesta por el endpoint público de proyectos.',
   'pages.projects.snapshot.loading': 'Cargando casos reales de proyecto...',
-  'pages.projects.snapshot.error':
-    'El endpoint de projects no está disponible ahora.',
+  'pages.projects.snapshot.error': 'El endpoint de projects no está disponible ahora.',
   'pages.projects.filters.label': 'Filtros de casos',
   'pages.projects.filters.title':
     'Recorta el portfolio por contexto, entorno, estado y orden de lectura',
@@ -330,27 +309,22 @@ export const ES_ES_TRANSLATIONS = {
   'pages.projects.catalog.description':
     'Cada caso conecta período, stack, contexto de entrega, empresas, deploys, repositorios y screenshots en el mismo bloque de lectura.',
   'pages.projects.catalog.loading': 'Construyendo los casos de proyecto...',
-  'pages.projects.catalog.error':
-    'El endpoint de projects no está disponible ahora.',
-  'pages.projects.catalog.empty':
-    'Ningún proyecto publicado coincide con los filtros actuales.',
+  'pages.projects.catalog.error': 'El endpoint de projects no está disponible ahora.',
+  'pages.projects.catalog.empty': 'Ningún proyecto publicado coincide con los filtros actuales.',
   'pages.projects.card.featured': 'Destacado',
   'pages.projects.card.highlight': 'Destacado',
   'pages.projects.card.technologies': 'Tecnologías',
   'pages.projects.card.companies': 'Empresas',
   'pages.projects.card.emptyCompanies': 'Todavía no hay empresas vinculadas.',
   'pages.projects.card.links': 'Links y referencias',
-  'pages.projects.card.emptyLinks':
-    'Todavía no se vinculó ningún link publicado a este caso.',
+  'pages.projects.card.emptyLinks': 'Todavía no se vinculó ningún link publicado a este caso.',
   'pages.projects.card.assets': 'Assets vinculados',
   'pages.projects.detail.linksCount': 'links',
   'pages.projects.detail.imagesCount': 'imágenes',
   'pages.projects.detail.relatedExperiences': 'Experiencias relacionadas',
-  'pages.projects.detail.noExperiences':
-    'Todavía no se publicó ninguna experiencia relacionada.',
+  'pages.projects.detail.noExperiences': 'Todavía no se publicó ninguna experiencia relacionada.',
   'pages.projects.detail.tags': 'Tags del caso',
-  'pages.projects.detail.noTags':
-    'Todavía no se vinculó ninguna tag publicada.',
+  'pages.projects.detail.noTags': 'Todavía no se vinculó ninguna tag publicada.',
   'pages.projects.detail.clients': '// clientes',
   'pages.projects.detail.techStack': '// stack_tecnico',
   'pages.projects.detail.analytics': 'Analítica del caso',
@@ -376,12 +350,9 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.projects.summary.inProgress': 'En progreso',
   'taxonomy.projects.summary.linkedAssets': 'Assets vinculados',
   'taxonomy.projects.summary.richestStack': 'Stack más amplia',
-  'taxonomy.projects.fallback.noAssets':
-    'Todavía no se publicó ningún asset visual vinculado.',
-  'taxonomy.projects.fallback.noLinks':
-    'Todavía no se vinculó ningún link publicado.',
-  'taxonomy.projects.fallback.noCompanies':
-    'Todavía no hay empresas vinculadas.',
+  'taxonomy.projects.fallback.noAssets': 'Todavía no se publicó ningún asset visual vinculado.',
+  'taxonomy.projects.fallback.noLinks': 'Todavía no se vinculó ningún link publicado.',
+  'taxonomy.projects.fallback.noCompanies': 'Todavía no hay empresas vinculadas.',
   'taxonomy.projects.fallback.untitledLink': 'Link sin título',
   'pages.dashboard.sectionLabel': 'Fundación',
   'pages.dashboard.title': 'Dashboard analítico',
@@ -402,24 +373,20 @@ export const ES_ES_TRANSLATIONS = {
   'pages.dashboard.snapshot.metrics.jobs': 'Cargos',
   'pages.dashboard.snapshot.metrics.languages': 'Idiomas',
   'pages.dashboard.stacks.label': 'Distribución de stack',
-  'pages.dashboard.stacks.title':
-    'Dónde el portfolio carga hoy más peso técnico',
+  'pages.dashboard.stacks.title': 'Dónde el portfolio carga hoy más peso técnico',
   'pages.dashboard.stacks.description':
     'Cada área combina proyectos relacionados y tecnologías mapeadas para dejar claras las zonas más fuertes al instante.',
   'pages.dashboard.stacks.loading': 'Cargando distribución de stack...',
   'pages.dashboard.stacks.error':
     'Los endpoints agregados del dashboard no están disponibles ahora.',
-  'pages.dashboard.stacks.empty':
-    'Todavía no se devolvió ninguna distribución de stack.',
+  'pages.dashboard.stacks.empty': 'Todavía no se devolvió ninguna distribución de stack.',
   'pages.dashboard.stacks.projects': 'proyectos',
   'pages.dashboard.stacks.technologies': 'tecnologías',
   'pages.dashboard.distribution.label': 'Huella de proyectos',
-  'pages.dashboard.distribution.title':
-    'Contexto de entrega, ambientes y densidad de destaque',
+  'pages.dashboard.distribution.title': 'Contexto de entrega, ambientes y densidad de destaque',
   'pages.dashboard.distribution.description':
     'Este bloque separa volumen destacado, contexto y ambiente para que el catálogo de proyectos sea más legible.',
-  'pages.dashboard.distribution.loading':
-    'Cargando agregados de distribución de proyectos...',
+  'pages.dashboard.distribution.loading': 'Cargando agregados de distribución de proyectos...',
   'pages.dashboard.distribution.error':
     'Los endpoints agregados del dashboard no están disponibles ahora.',
   'pages.dashboard.distribution.empty':
@@ -433,8 +400,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.dashboard.technology.title': 'Señales de uso de stack',
   'pages.dashboard.technology.description':
     'Las tecnologías líderes y sus patrones de frecuencia, contexto y origen salen directo de las relaciones agregadas de la API.',
-  'pages.dashboard.technology.loading':
-    'Cargando agregados de uso de tecnología...',
+  'pages.dashboard.technology.loading': 'Cargando agregados de uso de tecnología...',
   'pages.dashboard.technology.error':
     'Los endpoints agregados del dashboard no están disponibles ahora.',
   'pages.dashboard.technology.empty':
@@ -459,8 +425,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.dashboard.timeline.title': 'Timeline de foco profesional',
   'pages.dashboard.timeline.description':
     'La timeline pública se vuelve una capa analítica para mostrar capítulos activos, densidad de highlight y distribución entre proyectos y clientes.',
-  'pages.dashboard.timeline.loading':
-    'Cargando agregados de la timeline profesional...',
+  'pages.dashboard.timeline.loading': 'Cargando agregados de la timeline profesional...',
   'pages.dashboard.timeline.error':
     'Los endpoints agregados del dashboard no están disponibles ahora.',
   'pages.dashboard.timeline.empty':
@@ -468,23 +433,45 @@ export const ES_ES_TRANSLATIONS = {
   'pages.dashboard.timeline.current': 'Actual',
   'pages.dashboard.timeline.highlight': 'Highlight',
   'pages.dashboard.timeline.customers': 'Clientes',
-  'pages.dashboard.timeline.emptyCustomers':
-    'Todavía no hay clientes vinculados.',
+  'pages.dashboard.timeline.emptyCustomers': 'Todavía no hay clientes vinculados.',
   'pages.dashboard.timeline.projects': 'Proyectos',
-  'pages.dashboard.timeline.emptyProjects':
-    'Todavía no hay proyectos vinculados.',
+  'pages.dashboard.timeline.emptyProjects': 'Todavía no hay proyectos vinculados.',
   'pages.dashboard.timeline.technologies': 'Tecnologías',
   'pages.dashboard.highlights.label': 'Highlights',
   'pages.dashboard.highlights.title': 'Destacados del portfolio',
   'pages.dashboard.highlights.description':
     'Las entidades marcadas en el backend siguen visibles aquí como prueba de repertorio entre proyectos, experiencia y tecnología.',
-  'pages.dashboard.highlights.loading':
-    'Cargando entidades destacadas del portfolio...',
+  'pages.dashboard.highlights.loading': 'Cargando entidades destacadas del portfolio...',
   'pages.dashboard.highlights.error':
     'Los endpoints agregados del dashboard no están disponibles ahora.',
-  'pages.dashboard.highlights.empty':
-    'Todavía no se devolvió ningún item destacado del portfolio.',
+  'pages.dashboard.highlights.empty': 'Todavía no se devolvió ningún item destacado del portfolio.',
   'pages.dashboard.highlights.featured': 'Destacado',
+  'pages.adminLogin.sectionLabel': '// ACCESO_ADMIN',
+  'pages.adminLogin.title': 'Acceso administrativo',
+  'pages.adminLogin.description':
+    'Una ruta protegida y no pública para gestionar el portfolio a través del flujo autenticado de admin.',
+  'pages.adminLogin.security.title': 'Ruta protegida',
+  'pages.adminLogin.security.description':
+    'Usa la cuenta admin existente en la API para desbloquear los próximos pasos administrativos del portfolio.',
+  'pages.adminLogin.form.title': 'Autenticar sesión administrativa',
+  'pages.adminLogin.form.description':
+    'Este login permanece intencionalmente oculto de la navegación pública y solo está disponible por URL directa.',
+  'pages.adminLogin.form.emailLabel': 'Correo administrativo',
+  'pages.adminLogin.form.emailPlaceholder': 'victor@example.com',
+  'pages.adminLogin.form.passwordLabel': 'Contraseña administrativa',
+  'pages.adminLogin.form.passwordPlaceholder': 'Ingresa tu contraseña',
+  'pages.adminLogin.form.submit': 'Entrar al área admin',
+  'pages.adminLogin.feedback.invalidCredentials':
+    'Las credenciales administrativas son inválidas o la sesión no pudo iniciarse.',
+  'pages.admin.placeholder.eyebrow': '// RUTA_ADMIN',
+  'pages.admin.placeholder.title': 'Ruta administrativa desbloqueada',
+  'pages.admin.placeholder.description':
+    'El primer subpaso administrativo ya está activo: autenticación, ruta oculta y acceso protegido ya funcionan.',
+  'pages.admin.placeholder.session': 'Sesión autenticada',
+  'pages.admin.placeholder.nextStep': 'Próximo paso de implementación',
+  'pages.admin.placeholder.nextStepDescription':
+    'La F8.2 reemplazará este destino temporal por la shell administrativa completa y la navegación de entidades.',
+  'pages.admin.placeholder.actions.logout': 'Cerrar sesión',
   'taxonomy.dashboard.source.experience': 'Experiencia',
   'taxonomy.dashboard.source.project': 'Proyecto',
   'taxonomy.dashboard.source.formation': 'Formación',

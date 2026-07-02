@@ -1,0 +1,53 @@
+:host {
+  @apply block min-h-screen;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background-color) 95%, var(--white)) 0%,
+      var(--background-color) 100%
+    );
+  color: var(--text-color);
+}
+
+.admin-page {
+  @apply min-h-screen px-6 py-10 md:px-10 lg:px-16;
+}
+
+.admin-page-shell {
+  @apply mx-auto flex max-w-4xl flex-col gap-5 rounded-[2rem] border p-8 md:p-10;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+  box-shadow: 0 20px 60px color-mix(in srgb, var(--base-default-color) 10%, transparent);
+}
+
+.admin-page-eyebrow {
+  @apply text-sm font-semibold uppercase tracking-[0.24em];
+  color: var(--primary-default-color);
+}
+
+.admin-page-shell h1 {
+  @apply text-4xl font-semibold leading-tight;
+}
+
+.admin-page-shell > p,
+.admin-page-session p,
+.admin-page-next-step p {
+  @apply text-base leading-7;
+  color: var(--base-strong-color);
+}
+
+.admin-page-session,
+.admin-page-next-step {
+  @apply rounded-3xl border p-5;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 92%, var(--white));
+}
+
+.admin-page-session h2,
+.admin-page-next-step h2 {
+  @apply mb-2 text-lg font-semibold;
+}
+
+.admin-page-logout {
+  @apply mt-2 block w-fit;
+}

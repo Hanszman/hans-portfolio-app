@@ -23,9 +23,11 @@ export class ShellComponent {
   protected readonly navigationItems = computed(() => {
     this.translation.locale();
 
-    return readNavigationItems(this.router.config).map((item) => ({
-      ...item,
-      label: this.translation.instant(NAVIGATION_LABEL_KEY_BY_PATH[item.path]!),
-    }));
+    return readNavigationItems(this.router.config)
+      .filter((item) => item.path in NAVIGATION_LABEL_KEY_BY_PATH)
+      .map((item) => ({
+        ...item,
+        label: this.translation.instant(NAVIGATION_LABEL_KEY_BY_PATH[item.path]!),
+      }));
   });
 }

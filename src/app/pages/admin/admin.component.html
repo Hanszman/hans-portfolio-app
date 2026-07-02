@@ -1,0 +1,31 @@
+<section class="admin-page">
+  <div class="admin-page-shell">
+    <span class="admin-page-eyebrow">
+      {{ 'pages.admin.placeholder.eyebrow' | translate }}
+    </span>
+
+    <h1>{{ 'pages.admin.placeholder.title' | translate }}</h1>
+    <p>{{ 'pages.admin.placeholder.description' | translate }}</p>
+
+    <div class="admin-page-session">
+      <h2>{{ 'pages.admin.placeholder.session' | translate }}</h2>
+      <p>{{ adminIdentity() }}</p>
+    </div>
+
+    <div class="admin-page-next-step">
+      <h2>{{ 'pages.admin.placeholder.nextStep' | translate }}</h2>
+      <p>{{ 'pages.admin.placeholder.nextStepDescription' | translate }}</p>
+    </div>
+
+    <hans-button
+      class="admin-page-logout"
+      [attr.aria-label]="'pages.admin.placeholder.actions.logout' | translate"
+      [buttonColor]="'base'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'outline'"
+      (click)="logout()"
+    >
+      {{ 'pages.admin.placeholder.actions.logout' | translate }}
+    </hans-button>
+  </div>
+</section>
