@@ -269,9 +269,9 @@ Faça os testes passarem com 100% de coverage.
 O componente/rota/arquivos de login não precisam ser chamados de admin-login ou admin/login, chame apenas de login. Renomeie em todo lugar que estiver assim por favor.
 Existem consts/types/interfaces/etc fora de arquivos types e estão diretamente em arquivos de components ts, mova por favor para o local correto (exemplos: auth-admin.service.ts).
 Pq temos duas pastas de services separadas pra auth-admin? se tratam da mesma coisa? se são coisas diferentes, não deveriam estar com nomenclaturas diferentes? vamos utilizar DDD e o conceito de linguagem ubíqua para não nos perdermos.
-Pra que serve o button de admin-login-hidden-submit?
-Mude o texto do botão "Enter admin area" para apenas "Enter/Entrar" (atualize também nos outros idiomas).
-Coloque o ícone de olho no input da senha com a action para visualizá-la.
-Pode colocar o header e o footer nas telas de login e admin.
+Pra que serve o button de admin-login-hidden-submit? Me explique por favor, não precisa corrigir ainda, só responda a pergunta.
+Mude o texto do botão "Enter admin area" para apenas "Enter" (atualize também nos outros idiomas).
+Coloque o ícone de olho no input da senha com a action para visualizá-la. Mas não deixe de usar a nossa hans-lib pra usar os componentes de input e icon.
+Pode colocar o header e o footer nas telas de login e admin, vc deixou elas sem eles.
 Faça o botão de submit do login ser acionado ao apertarmos a tecla Enter.
-Coloque o botão de logout no sectionheader passando como propriedade do componente, ai faça a adaptação do sectionheader pra receber conteúdos.
+Coloque o botão de logout no canto superior direito do sectionheader passando como propriedade do componente, ai faça a adaptação do sectionheader pra receber conteúdos.
