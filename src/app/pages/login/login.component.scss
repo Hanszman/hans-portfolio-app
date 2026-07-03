@@ -61,20 +61,6 @@
   @apply grid gap-4;
 }
 
-.login-password-field {
-  @apply relative;
-}
-
-.login-password-visibility {
-  @apply absolute top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border-0 bg-transparent p-0;
-  right: 0.875rem;
-  color: var(--base-strong-color);
-}
-
-.login-password-visibility:hover {
-  color: var(--primary-default-color);
-}
-
 .login-feedback {
   @apply m-0 rounded-2xl border px-4 py-3;
   border-color: color-mix(in srgb, var(--error-default-color) 28%, transparent);

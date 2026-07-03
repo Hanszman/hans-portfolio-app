@@ -38,32 +38,24 @@
           (input)="updateEmail($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="login-password-field">
-          <hans-input
-            [inputId]="fieldIds.password"
-            [inputType]="passwordInputType()"
-            inputColor="base"
-            inputSize="medium"
-            leftIcon="LuLockKeyhole"
-            [value]="password()"
-            [placeholder]="'pages.login.form.passwordPlaceholder' | translate"
-            [attr.aria-label]="'pages.login.form.passwordLabel' | translate"
-            (input)="updatePassword($any($event).target?.value ?? '')"
-          ></hans-input>
-
-          <button
-            type="button"
-            class="login-password-visibility"
-            [attr.aria-label]="
-              (isPasswordVisible()
-                ? 'pages.login.form.passwordVisibility.hide'
-                : 'pages.login.form.passwordVisibility.show') | translate
-            "
-            (click)="togglePasswordVisibility()"
-          >
-            <hans-icon [name]="passwordVisibilityIconName()" iconSize="small"></hans-icon>
-          </button>
-        </div>
+        <hans-input
+          [inputId]="fieldIds.password"
+          [inputType]="passwordInputType()"
+          inputColor="base"
+          inputSize="medium"
+          leftIcon="LuLockKeyhole"
+          [rightIcon]="passwordVisibilityIconName()"
+          [rightIconAriaLabel]="
+            (isPasswordVisible()
+              ? 'pages.login.form.passwordVisibility.hide'
+              : 'pages.login.form.passwordVisibility.show') | translate
+          "
+          [value]="password()"
+          [placeholder]="'pages.login.form.passwordPlaceholder' | translate"
+          [attr.aria-label]="'pages.login.form.passwordLabel' | translate"
+          (input)="updatePassword($any($event).target?.value ?? '')"
+          (righticonclick)="togglePasswordVisibility()"
+        ></hans-input>
       </div>
 
       @if (loginErrorKey(); as errorKey) {
