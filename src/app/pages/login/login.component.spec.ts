@@ -1,7 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
-import { ADMIN_HOME_ROUTE } from '../../core/admin-session/admin-session.types';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { LoginComponent } from './login.component';
@@ -118,7 +117,7 @@ describe('LoginComponent', () => {
       email: 'victor@example.com',
       password: 'ChangeMe!123',
     });
-    expect(router.navigateByUrl).toHaveBeenCalledWith(ADMIN_HOME_ROUTE);
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/admin');
   });
 
   it('should not navigate when the login attempt fails', async () => {

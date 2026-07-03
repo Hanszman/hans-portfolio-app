@@ -1,7 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
-import { ADMIN_LOGIN_ROUTE } from '../../core/admin-session/admin-session.types';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
@@ -78,6 +77,6 @@ describe('AdminComponent', () => {
     await component.logout();
 
     expect(adminSessionService.logout).toHaveBeenCalled();
-    expect(router.navigateByUrl).toHaveBeenCalledWith(ADMIN_LOGIN_ROUTE);
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
   });
 });

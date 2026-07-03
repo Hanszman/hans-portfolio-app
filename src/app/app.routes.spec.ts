@@ -4,11 +4,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationApiService } from './core/api/admin-auth/admin-auth-api.service';
-import {
-  ADMIN_HOME_ROUTE,
-  ADMIN_LOGIN_ROUTE,
-  ADMIN_SESSION_STORAGE_KEY,
-} from './core/admin-session/admin-session.types';
+import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
 import { createProjectsServiceMock } from './core/api/mocks/projects.mocks';
@@ -134,14 +130,14 @@ describe('app routes', () => {
 
   it('should load the hidden login route outside the public shell', async () => {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl(ADMIN_LOGIN_ROUTE);
+    await harness.navigateByUrl('/login');
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin access');
   });
 
   it('should redirect unauthenticated access from the admin route to the login route', async () => {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl(ADMIN_HOME_ROUTE);
+    await harness.navigateByUrl('/admin');
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin access');
   });
@@ -163,7 +159,7 @@ describe('app routes', () => {
     );
 
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl(ADMIN_HOME_ROUTE);
+    await harness.navigateByUrl('/admin');
 
     expect(harness.routeNativeElement?.textContent).toContain(
       'Admin route unlocked',
@@ -187,7 +183,7 @@ describe('app routes', () => {
     );
 
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl(ADMIN_LOGIN_ROUTE);
+    await harness.navigateByUrl('/login');
 
     expect(harness.routeNativeElement?.textContent).toContain(
       'Admin route unlocked',

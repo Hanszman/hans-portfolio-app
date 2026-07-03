@@ -14,8 +14,6 @@ export interface AdminSessionState {
   loginErrorKey: AppTranslationKey | null;
 }
 
-export const ADMIN_LOGIN_ROUTE = '/login';
-export const ADMIN_HOME_ROUTE = '/admin';
 export const ADMIN_SESSION_STORAGE_KEY = 'hans-admin-access-token';
 
 export const createAdminSessionState = (

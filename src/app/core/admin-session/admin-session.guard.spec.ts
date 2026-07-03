@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, UrlTree } from '@angular/router';
 import { loginPageGuard, adminSessionGuard } from './admin-session.guard';
 import { AdminSessionService } from './admin-session.service';
-import { ADMIN_HOME_ROUTE, ADMIN_LOGIN_ROUTE } from './admin-session.types';
 
 describe('admin session guards', () => {
   it('should allow the protected admin route when the session is valid', async () => {
@@ -52,7 +51,7 @@ describe('admin session guards', () => {
     const router = TestBed.inject(Router);
 
     expect(result instanceof UrlTree).toBeTrue();
-    expect(router.serializeUrl(result as UrlTree)).toBe(ADMIN_LOGIN_ROUTE);
+    expect(router.serializeUrl(result as UrlTree)).toBe('/login');
   });
 
   it('should redirect authenticated users away from the login route', async () => {
@@ -80,7 +79,7 @@ describe('admin session guards', () => {
     const router = TestBed.inject(Router);
 
     expect(result instanceof UrlTree).toBeTrue();
-    expect(router.serializeUrl(result as UrlTree)).toBe(ADMIN_HOME_ROUTE);
+    expect(router.serializeUrl(result as UrlTree)).toBe('/admin');
   });
 
   it('should allow unauthenticated users to access the login route', async () => {

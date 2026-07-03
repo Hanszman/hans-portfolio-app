@@ -8,7 +8,6 @@ import {
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
-import { ADMIN_LOGIN_ROUTE } from '../../core/admin-session/admin-session.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { HeaderComponent } from '../../layout/header/header.component';
@@ -47,6 +46,6 @@ export class AdminComponent {
 
   protected async logout(): Promise<void> {
     this.adminSessionService.logout();
-    await this.router.navigateByUrl(ADMIN_LOGIN_ROUTE);
+    await this.router.navigateByUrl('/login');
   }
 }

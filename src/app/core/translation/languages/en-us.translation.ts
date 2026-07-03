@@ -446,7 +446,7 @@ export const EN_TRANSLATIONS = {
   'pages.login.form.description':
     'This login is intentionally hidden from the public navigation and is only available through its direct URL.',
   'pages.login.form.emailLabel': 'Admin email',
-  'pages.login.form.emailPlaceholder': 'victor@example.com',
+  'pages.login.form.emailPlaceholder': 'Enter your email',
   'pages.login.form.passwordLabel': 'Admin password',
   'pages.login.form.passwordPlaceholder': 'Enter your password',
   'pages.login.form.passwordVisibility.show': 'Show password',

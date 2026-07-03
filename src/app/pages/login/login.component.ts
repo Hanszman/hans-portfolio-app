@@ -15,7 +15,6 @@ import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TranslationService } from '../../core/translation/translation.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
-import { ADMIN_HOME_ROUTE } from '../../core/admin-session/admin-session.types';
 import {
   LOGIN_FIELD_IDS,
   PASSWORD_VISIBILITY_ICON_BY_STATE,
@@ -91,7 +90,7 @@ export class LoginComponent {
     });
 
     if (success) {
-      await this.router.navigateByUrl(ADMIN_HOME_ROUTE);
+      await this.router.navigateByUrl('/admin');
     }
   }
 

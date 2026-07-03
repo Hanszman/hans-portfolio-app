@@ -457,7 +457,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.login.form.description':
     'Este login permanece intencionalmente oculto de la navegación pública y solo está disponible por URL directa.',
   'pages.login.form.emailLabel': 'Correo administrativo',
-  'pages.login.form.emailPlaceholder': 'victor@example.com',
+  'pages.login.form.emailPlaceholder': 'Ingresa tu correo',
   'pages.login.form.passwordLabel': 'Contraseña administrativa',
   'pages.login.form.passwordPlaceholder': 'Ingresa tu contraseña',
   'pages.login.form.passwordVisibility.show': 'Mostrar contraseña',

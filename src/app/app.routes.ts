@@ -3,10 +3,6 @@ import {
   adminSessionGuard,
   loginPageGuard,
 } from './core/admin-session/admin-session.guard';
-import {
-  ADMIN_HOME_ROUTE,
-  ADMIN_LOGIN_ROUTE,
-} from './core/admin-session/admin-session.types';
 import { ShellComponent } from './layout/shell/shell.component';
 
 const loadLogin = () =>
@@ -42,12 +38,12 @@ const loadDashboard = () =>
 
 export const routes: Routes = [
   {
-    path: ADMIN_LOGIN_ROUTE.slice(1),
+    path: 'login',
     canActivate: [loginPageGuard],
     loadComponent: loadLogin,
   },
   {
-    path: ADMIN_HOME_ROUTE.slice(1),
+    path: 'admin',
     canActivate: [adminSessionGuard],
     loadComponent: loadAdmin,
   },
