@@ -95,6 +95,31 @@ describe('LoginComponent', () => {
     expect(component.passwordVisibilityIconName()).toBe('LuEyeOff');
   });
 
+  it('should react to the custom right icon click event from hans-input', () => {
+    const fixture = TestBed.createComponent(LoginComponent);
+    fixture.detectChanges();
+
+    const passwordInput = fixture.nativeElement.querySelectorAll(
+      'hans-input',
+    )[1] as HTMLElement;
+    const component = fixture.componentInstance as unknown as {
+      isPasswordVisible(): boolean;
+    };
+
+    expect(component.isPasswordVisible()).toBeFalse();
+
+    passwordInput.dispatchEvent(
+      new CustomEvent('righticonclick', {
+        bubbles: true,
+        composed: true,
+      }),
+    );
+
+    fixture.detectChanges();
+
+    expect(component.isPasswordVisible()).toBeTrue();
+  });
+
   it('should authenticate and navigate to the protected admin route on success', async () => {
     const fixture = TestBed.createComponent(LoginComponent);
     const router = TestBed.inject(Router);
