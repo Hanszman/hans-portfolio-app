@@ -4,7 +4,7 @@ import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
-import { readNavigationItems } from '../navigation/helpers/navigation.helper';
+import { buildShellNavigationItems } from './helpers/shell-navigation.helper';
 import { NAVIGATION_LABEL_KEY_BY_PATH } from './shell.types';
 
 @Component({
@@ -23,11 +23,10 @@ export class ShellComponent {
   protected readonly navigationItems = computed(() => {
     this.translation.locale();
 
-    return readNavigationItems(this.router.config)
-      .filter((item) => item.path in NAVIGATION_LABEL_KEY_BY_PATH)
-      .map((item) => ({
-        ...item,
-        label: this.translation.instant(NAVIGATION_LABEL_KEY_BY_PATH[item.path]!),
-      }));
+    return buildShellNavigationItems(
+      this.router.config,
+      (key) => this.translation.instant(key),
+      NAVIGATION_LABEL_KEY_BY_PATH,
+    );
   });
 }

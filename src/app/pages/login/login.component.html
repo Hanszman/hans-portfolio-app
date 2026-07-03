@@ -1,0 +1,99 @@
+<app-header [navigationItems]="navigationItems()" />
+
+<section class="login-page">
+  <div class="login-shell">
+    <div class="login-copy">
+      <app-section-header
+        [sectionLabel]="'pages.login.sectionLabel' | translate"
+        [title]="'pages.login.title' | translate"
+        [description]="'pages.login.description' | translate"
+      />
+
+      <div class="login-security">
+        <h2>
+          <hans-icon name="LuShieldCheck" iconSize="small"></hans-icon>
+          {{ 'pages.login.security.title' | translate }}
+        </h2>
+
+        <p>{{ 'pages.login.security.description' | translate }}</p>
+      </div>
+    </div>
+
+    <form class="login-form" (submit)="submitFromForm($event)" (keydown)="submitOnEnter($event)">
+      <div class="login-form-header">
+        <h2>{{ 'pages.login.form.title' | translate }}</h2>
+        <p>{{ 'pages.login.form.description' | translate }}</p>
+      </div>
+
+      <div class="login-form-fields">
+        <hans-input
+          [inputId]="fieldIds.email"
+          inputType="email"
+          inputColor="base"
+          inputSize="medium"
+          leftIcon="LuMail"
+          [value]="email()"
+          [placeholder]="'pages.login.form.emailPlaceholder' | translate"
+          [attr.aria-label]="'pages.login.form.emailLabel' | translate"
+          (input)="updateEmail($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="login-password-field">
+          <hans-input
+            [inputId]="fieldIds.password"
+            [inputType]="passwordInputType()"
+            inputColor="base"
+            inputSize="medium"
+            leftIcon="LuLockKeyhole"
+            [value]="password()"
+            [placeholder]="'pages.login.form.passwordPlaceholder' | translate"
+            [attr.aria-label]="'pages.login.form.passwordLabel' | translate"
+            (input)="updatePassword($any($event).target?.value ?? '')"
+          ></hans-input>
+
+          <button
+            type="button"
+            class="login-password-visibility"
+            [attr.aria-label]="
+              (isPasswordVisible()
+                ? 'pages.login.form.passwordVisibility.hide'
+                : 'pages.login.form.passwordVisibility.show') | translate
+            "
+            (click)="togglePasswordVisibility()"
+          >
+            <hans-icon [name]="passwordVisibilityIconName()" iconSize="small"></hans-icon>
+          </button>
+        </div>
+      </div>
+
+      @if (loginErrorKey(); as errorKey) {
+        <p class="login-feedback" role="alert">
+          {{ errorKey | translate }}
+        </p>
+      }
+
+      <hans-button
+        class="login-submit"
+        [attr.aria-label]="'pages.login.form.submit' | translate"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        [disabled]="!canSubmit()"
+        (click)="submit()"
+      >
+        @if (isSubmitting()) {
+          <hans-loading
+            [attr.aria-label]="'pages.login.form.submit' | translate"
+            loadingColor="base"
+            loadingSize="small"
+            loadingType="spinner"
+          ></hans-loading>
+        } @else {
+          <span>{{ 'pages.login.form.submit' | translate }}</span>
+        }
+      </hans-button>
+    </form>
+  </div>
+</section>
+
+<app-footer />

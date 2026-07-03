@@ -314,6 +314,77 @@ describe('SkillsComponent', () => {
     expect(component.selectedLevel()).toBe('');
   });
 
+  it('should resolve select filter values from partial custom event payloads', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      selectTypeFilterFromEvent: (event: Event) => void;
+      selectLevelFilterFromEvent: (event: Event) => void;
+      selectedType: () => SkillTypeFilterValue;
+      selectedLevel: () => SkillLevelFilterValue;
+    };
+
+    component.selectTypeFilterFromEvent({
+      detail: {},
+      target: { value: 'FRAMEWORKS' },
+    } as unknown as Event);
+    fixture.detectChanges();
+
+    expect(component.selectedType()).toBe('FRAMEWORKS');
+
+    component.selectLevelFilterFromEvent({
+      detail: {},
+      target: null,
+    } as unknown as Event);
+    fixture.detectChanges();
+
+    expect(component.selectedLevel()).toBe('');
+  });
+
+  it('should resolve raw select event values for every fallback branch', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    flushTechnologiesRequest(TestBed.inject(HttpTestingController));
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      resolveSelectValue(event: Event): string;
+    };
+
+    expect(
+      component.resolveSelectValue({
+        detail: 'BACK_END',
+        target: null,
+      } as unknown as Event),
+    ).toBe('BACK_END');
+
+    expect(
+      component.resolveSelectValue({
+        detail: { value: 'FRAMEWORKS' },
+        target: null,
+      } as unknown as Event),
+    ).toBe('FRAMEWORKS');
+
+    expect(
+      component.resolveSelectValue({
+        detail: {},
+        target: { value: 'ALL' },
+      } as unknown as Event),
+    ).toBe('ALL');
+
+    expect(
+      component.resolveSelectValue({
+        detail: {},
+        target: null,
+      } as unknown as Event),
+    ).toBe('');
+  });
+
   it('should render empty and error states from the technologies request', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 

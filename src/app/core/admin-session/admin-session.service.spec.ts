@@ -1,37 +1,39 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { AdminAuthApiService } from '../api/auth-admin/auth-admin.service';
+import { AdminAuthenticationApiService } from '../api/admin-auth/admin-auth-api.service';
 import {
-  AdminLoginResponse,
-  AdminSessionResponse,
-} from '../api/auth-admin/auth-admin.types';
+  AdminLoginResult,
+  AdminSessionSnapshot,
+} from '../api/admin-auth/admin-auth-api.types';
 import {
-  AdminAuthService,
-  ADMIN_AUTH_STORAGE_KEY,
-} from './auth-admin.service';
+  AdminSessionService,
+} from './admin-session.service';
+import {
+  ADMIN_SESSION_STORAGE_KEY,
+} from './admin-session.types';
 
-const createAdminUserResponse = (): AdminSessionResponse => ({
+const createAdminUserResponse = (): AdminSessionSnapshot => ({
   id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
   email: 'victor@example.com',
   name: 'Victor Hanszman',
   role: 'ADMIN',
 });
 
-const createAdminLoginResponse = (): AdminLoginResponse => ({
+const createAdminLoginResponse = (): AdminLoginResult => ({
   accessToken: 'token-123',
   tokenType: 'Bearer',
   expiresIn: '1d',
   user: createAdminUserResponse(),
 });
 
-describe('AdminAuthService', () => {
+describe('AdminSessionService', () => {
   beforeEach(() => {
-    sessionStorage.removeItem(ADMIN_AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
   });
 
   afterEach(() => {
-    sessionStorage.removeItem(ADMIN_AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
   });
 
   it('should authenticate and persist the admin session on successful login', async () => {
@@ -39,10 +41,10 @@ describe('AdminAuthService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login,
             getSession: jasmine.createSpy(),
@@ -51,13 +53,14 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
     const success = await service.login({
       email: 'victor@example.com',
       password: 'ChangeMe!123',
     });
 
     expect(success).toBeTrue();
+    expect(service.isRestoringSession()).toBeFalse();
     expect(login).toHaveBeenCalledWith({
       email: 'victor@example.com',
       password: 'ChangeMe!123',
@@ -66,16 +69,16 @@ describe('AdminAuthService', () => {
     expect(service.user()).toEqual(createAdminUserResponse());
     expect(service.isAuthenticated()).toBeTrue();
     expect(service.loginErrorKey()).toBeNull();
-    expect(sessionStorage.getItem(ADMIN_AUTH_STORAGE_KEY)).toBe('token-123');
+    expect(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).toBe('token-123');
   });
 
   it('should expose the translated error key and clear session data when login fails', async () => {
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login: jasmine
               .createSpy()
@@ -86,7 +89,7 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
     const success = await service.login({
       email: 'victor@example.com',
       password: 'WrongPassword!123',
@@ -96,24 +99,22 @@ describe('AdminAuthService', () => {
     expect(service.accessToken()).toBeNull();
     expect(service.user()).toBeNull();
     expect(service.isAuthenticated()).toBeFalse();
-    expect(service.loginErrorKey()).toBe(
-      'pages.adminLogin.feedback.invalidCredentials',
-    );
-    expect(sessionStorage.getItem(ADMIN_AUTH_STORAGE_KEY)).toBeNull();
+    expect(service.loginErrorKey()).toBe('pages.login.feedback.invalidCredentials');
+    expect(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).toBeNull();
   });
 
   it('should restore the admin session from the persisted token', async () => {
-    sessionStorage.setItem(ADMIN_AUTH_STORAGE_KEY, 'token-123');
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
     const getSession = jasmine
       .createSpy()
       .and.returnValue(of(createAdminUserResponse()));
 
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login: jasmine.createSpy(),
             getSession,
@@ -122,24 +123,25 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
     const user = await service.restoreSession();
 
     expect(getSession).toHaveBeenCalledWith('token-123');
     expect(user).toEqual(createAdminUserResponse());
     expect(service.user()).toEqual(createAdminUserResponse());
     expect(service.isAuthenticated()).toBeTrue();
+    expect(service.isRestoringSession()).toBeFalse();
   });
 
   it('should clear the persisted token when session validation fails', async () => {
-    sessionStorage.setItem(ADMIN_AUTH_STORAGE_KEY, 'token-123');
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
 
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine
@@ -150,28 +152,28 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
     const user = await service.restoreSession();
 
     expect(user).toBeNull();
     expect(service.accessToken()).toBeNull();
     expect(service.user()).toBeNull();
     expect(service.isAuthenticated()).toBeFalse();
-    expect(sessionStorage.getItem(ADMIN_AUTH_STORAGE_KEY)).toBeNull();
+    expect(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).toBeNull();
   });
 
   it('should return the current user immediately when the session is already hydrated', async () => {
-    sessionStorage.setItem(ADMIN_AUTH_STORAGE_KEY, 'token-123');
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
     const getSession = jasmine
       .createSpy()
       .and.returnValue(of(createAdminUserResponse()));
 
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login: jasmine.createSpy(),
             getSession,
@@ -180,7 +182,7 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
 
     await service.restoreSession();
     const user = await service.restoreSession();
@@ -194,10 +196,10 @@ describe('AdminAuthService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthService,
+        AdminSessionService,
         provideZonelessChangeDetection(),
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login,
             getSession: jasmine.createSpy(),
@@ -206,7 +208,7 @@ describe('AdminAuthService', () => {
       ],
     });
 
-    const service = TestBed.inject(AdminAuthService);
+    const service = TestBed.inject(AdminSessionService);
 
     await service.login({
       email: 'victor@example.com',
@@ -217,6 +219,34 @@ describe('AdminAuthService', () => {
     expect(service.accessToken()).toBeNull();
     expect(service.user()).toBeNull();
     expect(service.isAuthenticated()).toBeFalse();
-    expect(sessionStorage.getItem(ADMIN_AUTH_STORAGE_KEY)).toBeNull();
+    expect(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).toBeNull();
+  });
+
+  it('should clear the login error when logging out after a failed login attempt', async () => {
+    TestBed.configureTestingModule({
+      providers: [
+        AdminSessionService,
+        provideZonelessChangeDetection(),
+        {
+          provide: AdminAuthenticationApiService,
+          useValue: {
+            login: jasmine
+              .createSpy()
+              .and.returnValue(throwError(() => new Error('Unauthorized'))),
+            getSession: jasmine.createSpy(),
+          },
+        },
+      ],
+    });
+
+    const service = TestBed.inject(AdminSessionService);
+
+    await service.login({
+      email: 'victor@example.com',
+      password: 'WrongPassword!123',
+    });
+    service.logout();
+
+    expect(service.loginErrorKey()).toBeNull();
   });
 });

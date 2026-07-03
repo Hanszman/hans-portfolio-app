@@ -435,22 +435,24 @@ export const EN_TRANSLATIONS = {
     'The dashboard aggregate endpoints are unavailable right now.',
   'pages.dashboard.highlights.empty': 'No highlighted portfolio items were returned yet.',
   'pages.dashboard.highlights.featured': 'Featured',
-  'pages.adminLogin.sectionLabel': '// ADMIN_ACCESS',
-  'pages.adminLogin.title': 'Admin access',
-  'pages.adminLogin.description':
+  'pages.login.sectionLabel': '// ADMIN_ACCESS',
+  'pages.login.title': 'Admin access',
+  'pages.login.description':
     'A protected, non-public route for managing the portfolio through the authenticated admin flow.',
-  'pages.adminLogin.security.title': 'Protected route',
-  'pages.adminLogin.security.description':
+  'pages.login.security.title': 'Protected route',
+  'pages.login.security.description':
     'Use the existing admin account from the API to unlock the next administrative steps of the portfolio.',
-  'pages.adminLogin.form.title': 'Authenticate admin session',
-  'pages.adminLogin.form.description':
+  'pages.login.form.title': 'Authenticate admin session',
+  'pages.login.form.description':
     'This login is intentionally hidden from the public navigation and is only available through its direct URL.',
-  'pages.adminLogin.form.emailLabel': 'Admin email',
-  'pages.adminLogin.form.emailPlaceholder': 'victor@example.com',
-  'pages.adminLogin.form.passwordLabel': 'Admin password',
-  'pages.adminLogin.form.passwordPlaceholder': 'Enter your password',
-  'pages.adminLogin.form.submit': 'Enter admin area',
-  'pages.adminLogin.feedback.invalidCredentials':
+  'pages.login.form.emailLabel': 'Admin email',
+  'pages.login.form.emailPlaceholder': 'victor@example.com',
+  'pages.login.form.passwordLabel': 'Admin password',
+  'pages.login.form.passwordPlaceholder': 'Enter your password',
+  'pages.login.form.passwordVisibility.show': 'Show password',
+  'pages.login.form.passwordVisibility.hide': 'Hide password',
+  'pages.login.form.submit': 'Enter',
+  'pages.login.feedback.invalidCredentials':
     'The admin credentials are invalid or the session could not be started.',
   'pages.admin.placeholder.eyebrow': '// ADMIN_ROUTE',
   'pages.admin.placeholder.title': 'Admin route unlocked',

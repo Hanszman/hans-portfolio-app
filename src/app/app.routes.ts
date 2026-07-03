@@ -1,13 +1,17 @@
 import { Routes } from '@angular/router';
 import {
-  adminAuthGuard,
-  adminLoginGuard,
-} from './core/auth-admin/auth-admin.guard';
+  adminSessionGuard,
+  loginPageGuard,
+} from './core/admin-session/admin-session.guard';
+import {
+  ADMIN_HOME_ROUTE,
+  ADMIN_LOGIN_ROUTE,
+} from './core/admin-session/admin-session.types';
 import { ShellComponent } from './layout/shell/shell.component';
 
-const loadAdminLogin = () =>
-  import('./pages/admin-login/admin-login.component').then(
-    (module) => module.AdminLoginComponent,
+const loadLogin = () =>
+  import('./pages/login/login.component').then(
+    (module) => module.LoginComponent,
   );
 
 const loadAdmin = () =>
@@ -38,13 +42,13 @@ const loadDashboard = () =>
 
 export const routes: Routes = [
   {
-    path: 'admin/login',
-    canActivate: [adminLoginGuard],
-    loadComponent: loadAdminLogin,
+    path: ADMIN_LOGIN_ROUTE.slice(1),
+    canActivate: [loginPageGuard],
+    loadComponent: loadLogin,
   },
   {
-    path: 'admin',
-    canActivate: [adminAuthGuard],
+    path: ADMIN_HOME_ROUTE.slice(1),
+    canActivate: [adminSessionGuard],
     loadComponent: loadAdmin,
   },
   {

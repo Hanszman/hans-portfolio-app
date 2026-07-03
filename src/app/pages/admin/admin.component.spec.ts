@@ -1,14 +1,28 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
-import { AdminAuthService } from '../../core/auth-admin/auth-admin.service';
+import { ADMIN_LOGIN_ROUTE } from '../../core/admin-session/admin-session.types';
+import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
 
 describe('AdminComponent', () => {
   beforeAll(() => {
-    if (!customElements.get('hans-button')) {
-      customElements.define('hans-button', class extends HTMLElement {});
+    for (const elementName of [
+      'hans-button',
+      'hans-icon',
+      'hans-toggle',
+      'hans-dropdown',
+    ]) {
+      if (!customElements.get(elementName)) {
+        customElements.define(
+          elementName,
+          class extends HTMLElement {
+            checked?: boolean;
+            options?: readonly unknown[];
+          },
+        );
+      }
     }
   });
 
@@ -20,7 +34,7 @@ describe('AdminComponent', () => {
         provideRouter([]),
         provideAppTranslations(),
         {
-          provide: AdminAuthService,
+          provide: AdminSessionService,
           useValue: {
             user: () => ({
               id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
@@ -35,31 +49,35 @@ describe('AdminComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the temporary protected admin destination', () => {
+  it('should render the protected admin page with app chrome and the projected logout action', () => {
     const fixture = TestBed.createComponent(AdminComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
+    expect(compiled.querySelector('app-header')).toBeTruthy();
+    expect(compiled.querySelector('app-footer')).toBeTruthy();
     expect(compiled.textContent).toContain('Admin route unlocked');
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.querySelector('hans-button')).toBeTruthy();
+    expect(
+      compiled.querySelector('.app-section-header-actions hans-button'),
+    ).toBeTruthy();
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
     const fixture = TestBed.createComponent(AdminComponent);
     const router = TestBed.inject(Router);
     spyOn(router, 'navigateByUrl').and.resolveTo(true);
-    const adminAuthService = TestBed.inject(
-      AdminAuthService,
-    ) as jasmine.SpyObj<AdminAuthService>;
+    const adminSessionService = TestBed.inject(
+      AdminSessionService,
+    ) as jasmine.SpyObj<AdminSessionService>;
     const component = fixture.componentInstance as unknown as {
       logout(): Promise<void>;
     };
 
     await component.logout();
 
-    expect(adminAuthService.logout).toHaveBeenCalled();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/admin/login');
+    expect(adminSessionService.logout).toHaveBeenCalled();
+    expect(router.navigateByUrl).toHaveBeenCalledWith(ADMIN_LOGIN_ROUTE);
   });
 });

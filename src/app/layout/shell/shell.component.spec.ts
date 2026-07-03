@@ -34,7 +34,7 @@ describe('ShellComponent', () => {
                 component: TestRouteComponent,
               },
               {
-                path: 'admin/login',
+                path: 'login',
                 component: TestRouteComponent,
               },
             ],

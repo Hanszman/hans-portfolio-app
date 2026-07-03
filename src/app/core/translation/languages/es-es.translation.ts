@@ -446,22 +446,24 @@ export const ES_ES_TRANSLATIONS = {
     'Los endpoints agregados del dashboard no están disponibles ahora.',
   'pages.dashboard.highlights.empty': 'Todavía no se devolvió ningún item destacado del portfolio.',
   'pages.dashboard.highlights.featured': 'Destacado',
-  'pages.adminLogin.sectionLabel': '// ACCESO_ADMIN',
-  'pages.adminLogin.title': 'Acceso administrativo',
-  'pages.adminLogin.description':
+  'pages.login.sectionLabel': '// ACCESO_ADMIN',
+  'pages.login.title': 'Acceso administrativo',
+  'pages.login.description':
     'Una ruta protegida y no pública para gestionar el portfolio a través del flujo autenticado de admin.',
-  'pages.adminLogin.security.title': 'Ruta protegida',
-  'pages.adminLogin.security.description':
+  'pages.login.security.title': 'Ruta protegida',
+  'pages.login.security.description':
     'Usa la cuenta admin existente en la API para desbloquear los próximos pasos administrativos del portfolio.',
-  'pages.adminLogin.form.title': 'Autenticar sesión administrativa',
-  'pages.adminLogin.form.description':
+  'pages.login.form.title': 'Autenticar sesión administrativa',
+  'pages.login.form.description':
     'Este login permanece intencionalmente oculto de la navegación pública y solo está disponible por URL directa.',
-  'pages.adminLogin.form.emailLabel': 'Correo administrativo',
-  'pages.adminLogin.form.emailPlaceholder': 'victor@example.com',
-  'pages.adminLogin.form.passwordLabel': 'Contraseña administrativa',
-  'pages.adminLogin.form.passwordPlaceholder': 'Ingresa tu contraseña',
-  'pages.adminLogin.form.submit': 'Entrar al área admin',
-  'pages.adminLogin.feedback.invalidCredentials':
+  'pages.login.form.emailLabel': 'Correo administrativo',
+  'pages.login.form.emailPlaceholder': 'victor@example.com',
+  'pages.login.form.passwordLabel': 'Contraseña administrativa',
+  'pages.login.form.passwordPlaceholder': 'Ingresa tu contraseña',
+  'pages.login.form.passwordVisibility.show': 'Mostrar contraseña',
+  'pages.login.form.passwordVisibility.hide': 'Ocultar contraseña',
+  'pages.login.form.submit': 'Entrar',
+  'pages.login.feedback.invalidCredentials':
     'Las credenciales administrativas son inválidas o la sesión no pudo iniciarse.',
   'pages.admin.placeholder.eyebrow': '// RUTA_ADMIN',
   'pages.admin.placeholder.title': 'Ruta administrativa desbloqueada',

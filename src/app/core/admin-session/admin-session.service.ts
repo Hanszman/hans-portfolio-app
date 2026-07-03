@@ -1,25 +1,24 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { AdminAuthApiService } from '../api/auth-admin/auth-admin.service';
-import { AdminAuthUserResponse } from '../api/auth-admin/auth-admin.types';
-import { AdminAuthCredentials, AdminAuthState } from './auth-admin.types';
-
-export const ADMIN_AUTH_STORAGE_KEY = 'hans-admin-access-token';
-
-const createInitialState = (): AdminAuthState => ({
-  accessToken: sessionStorage.getItem(ADMIN_AUTH_STORAGE_KEY),
-  user: null,
-  isSubmittingLogin: false,
-  isRestoringSession: false,
-  loginErrorKey: null,
-});
+import { AdminAuthenticationApiService } from '../api/admin-auth/admin-auth-api.service';
+import { AdminAuthenticatedUser } from '../api/admin-auth/admin-auth-api.types';
+import {
+  ADMIN_SESSION_STORAGE_KEY,
+  AdminLoginCredentials,
+  AdminSessionState,
+  createAdminSessionState,
+} from './admin-session.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminAuthService {
-  private readonly adminAuthApiService = inject(AdminAuthApiService);
-  private readonly stateSignal = signal<AdminAuthState>(createInitialState());
+export class AdminSessionService {
+  private readonly adminAuthenticationApiService = inject(
+    AdminAuthenticationApiService,
+  );
+  private readonly stateSignal = signal<AdminSessionState>(
+    createAdminSessionState(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)),
+  );
 
   readonly state = this.stateSignal.asReadonly();
   readonly accessToken = computed(() => this.stateSignal().accessToken);
@@ -34,7 +33,7 @@ export class AdminAuthService {
     () => this.hasAccessToken() && this.user() !== null,
   );
 
-  async login(credentials: AdminAuthCredentials): Promise<boolean> {
+  async login(credentials: AdminLoginCredentials): Promise<boolean> {
     this.patchState({
       isSubmittingLogin: true,
       loginErrorKey: null,
@@ -42,7 +41,7 @@ export class AdminAuthService {
 
     try {
       const response = await firstValueFrom(
-        this.adminAuthApiService.login(credentials),
+        this.adminAuthenticationApiService.login(credentials),
       );
 
       this.setSession(response.accessToken, response.user);
@@ -51,7 +50,7 @@ export class AdminAuthService {
     } catch {
       this.clearSession();
       this.patchState({
-        loginErrorKey: 'pages.adminLogin.feedback.invalidCredentials',
+        loginErrorKey: 'pages.login.feedback.invalidCredentials',
       });
 
       return false;
@@ -62,7 +61,7 @@ export class AdminAuthService {
     }
   }
 
-  async restoreSession(): Promise<AdminAuthUserResponse | null> {
+  async restoreSession(): Promise<AdminAuthenticatedUser | null> {
     const accessToken = this.accessToken();
 
     if (!accessToken) {
@@ -80,7 +79,7 @@ export class AdminAuthService {
 
     try {
       const user = await firstValueFrom(
-        this.adminAuthApiService.getSession(accessToken),
+        this.adminAuthenticationApiService.getSession(accessToken),
       );
 
       this.patchState({
@@ -104,9 +103,9 @@ export class AdminAuthService {
 
   private setSession(
     accessToken: string,
-    user: AdminAuthUserResponse,
+    user: AdminAuthenticatedUser,
   ): void {
-    sessionStorage.setItem(ADMIN_AUTH_STORAGE_KEY, accessToken);
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, accessToken);
     this.patchState({
       accessToken,
       user,
@@ -115,14 +114,15 @@ export class AdminAuthService {
   }
 
   private clearSession(): void {
-    sessionStorage.removeItem(ADMIN_AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
     this.patchState({
       accessToken: null,
       user: null,
+      loginErrorKey: null,
     });
   }
 
-  private patchState(patch: Partial<AdminAuthState>): void {
+  private patchState(patch: Partial<AdminSessionState>): void {
     this.stateSignal.update((state) => ({
       ...state,
       ...patch,

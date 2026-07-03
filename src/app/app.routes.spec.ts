@@ -2,7 +2,13 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { AdminAuthApiService } from './core/api/auth-admin/auth-admin.service';
+import { of } from 'rxjs';
+import { AdminAuthenticationApiService } from './core/api/admin-auth/admin-auth-api.service';
+import {
+  ADMIN_HOME_ROUTE,
+  ADMIN_LOGIN_ROUTE,
+  ADMIN_SESSION_STORAGE_KEY,
+} from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
 import { createProjectsServiceMock } from './core/api/mocks/projects.mocks';
@@ -23,15 +29,23 @@ describe('app routes', () => {
       'hans-button',
       'hans-icon',
       'hans-loading',
+      'hans-toggle',
+      'hans-dropdown',
     ]) {
       if (!customElements.get(elementName)) {
-        customElements.define(elementName, class extends HTMLElement {});
+        customElements.define(
+          elementName,
+          class extends HTMLElement {
+            checked?: boolean;
+            options?: readonly unknown[];
+          },
+        );
       }
     }
   });
 
   beforeEach(() => {
-    sessionStorage.removeItem('hans-admin-access-token');
+    sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
   });
 
   beforeEach(async () => {
@@ -61,7 +75,7 @@ describe('app routes', () => {
           useValue: createProjectsServiceMock(),
         },
         {
-          provide: AdminAuthApiService,
+          provide: AdminAuthenticationApiService,
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
@@ -72,7 +86,7 @@ describe('app routes', () => {
   });
 
   afterEach(() => {
-    sessionStorage.removeItem('hans-admin-access-token');
+    sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
   });
 
   it('should redirect the empty path to the strategic home route', async () => {
@@ -118,18 +132,66 @@ describe('app routes', () => {
     expect(harness.routeNativeElement?.textContent).toContain('Projects');
   });
 
-  it('should load the hidden admin login route outside the public shell', async () => {
+  it('should load the hidden login route outside the public shell', async () => {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/admin/login');
+    await harness.navigateByUrl(ADMIN_LOGIN_ROUTE);
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin access');
   });
 
   it('should redirect unauthenticated access from the admin route to the login route', async () => {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/admin');
+    await harness.navigateByUrl(ADMIN_HOME_ROUTE);
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin access');
+  });
+
+  it('should load the protected admin route when a persisted session is valid', async () => {
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
+    const adminAuthenticationApiService = TestBed.inject(
+      AdminAuthenticationApiService,
+    ) as unknown as {
+      getSession: jasmine.Spy;
+    };
+    adminAuthenticationApiService.getSession.and.returnValue(
+      of({
+        id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
+        email: 'victor@example.com',
+        name: 'Victor Hanszman',
+        role: 'ADMIN',
+      }),
+    );
+
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl(ADMIN_HOME_ROUTE);
+
+    expect(harness.routeNativeElement?.textContent).toContain(
+      'Admin route unlocked',
+    );
+  });
+
+  it('should redirect authenticated access from the login route to the protected admin route', async () => {
+    sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
+    const adminAuthenticationApiService = TestBed.inject(
+      AdminAuthenticationApiService,
+    ) as unknown as {
+      getSession: jasmine.Spy;
+    };
+    adminAuthenticationApiService.getSession.and.returnValue(
+      of({
+        id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
+        email: 'victor@example.com',
+        name: 'Victor Hanszman',
+        role: 'ADMIN',
+      }),
+    );
+
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl(ADMIN_LOGIN_ROUTE);
+
+    expect(harness.routeNativeElement?.textContent).toContain(
+      'Admin route unlocked',
+    );
   });
 
   it('should redirect unknown routes to the strategic home route', async () => {

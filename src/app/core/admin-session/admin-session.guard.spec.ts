@@ -1,17 +1,18 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router, UrlTree } from '@angular/router';
-import { AdminAuthService } from './auth-admin.service';
-import { adminAuthGuard, adminLoginGuard } from './auth-admin.guard';
+import { loginPageGuard, adminSessionGuard } from './admin-session.guard';
+import { AdminSessionService } from './admin-session.service';
+import { ADMIN_HOME_ROUTE, ADMIN_LOGIN_ROUTE } from './admin-session.types';
 
-describe('admin auth guards', () => {
+describe('admin session guards', () => {
   it('should allow the protected admin route when the session is valid', async () => {
     TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
         provideRouter([]),
         {
-          provide: AdminAuthService,
+          provide: AdminSessionService,
           useValue: {
             restoreSession: jasmine.createSpy().and.resolveTo({
               id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
@@ -25,7 +26,7 @@ describe('admin auth guards', () => {
     });
 
     const result = await TestBed.runInInjectionContext(() =>
-      adminAuthGuard({} as never, {} as never),
+      adminSessionGuard({} as never, {} as never),
     );
 
     expect(result).toBeTrue();
@@ -37,7 +38,7 @@ describe('admin auth guards', () => {
         provideZonelessChangeDetection(),
         provideRouter([]),
         {
-          provide: AdminAuthService,
+          provide: AdminSessionService,
           useValue: {
             restoreSession: jasmine.createSpy().and.resolveTo(null),
           },
@@ -46,12 +47,12 @@ describe('admin auth guards', () => {
     });
 
     const result = await TestBed.runInInjectionContext(() =>
-      adminAuthGuard({} as never, {} as never),
+      adminSessionGuard({} as never, {} as never),
     );
     const router = TestBed.inject(Router);
 
     expect(result instanceof UrlTree).toBeTrue();
-    expect(router.serializeUrl(result as UrlTree)).toBe('/admin/login');
+    expect(router.serializeUrl(result as UrlTree)).toBe(ADMIN_LOGIN_ROUTE);
   });
 
   it('should redirect authenticated users away from the login route', async () => {
@@ -60,7 +61,7 @@ describe('admin auth guards', () => {
         provideZonelessChangeDetection(),
         provideRouter([]),
         {
-          provide: AdminAuthService,
+          provide: AdminSessionService,
           useValue: {
             restoreSession: jasmine.createSpy().and.resolveTo({
               id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
@@ -74,12 +75,12 @@ describe('admin auth guards', () => {
     });
 
     const result = await TestBed.runInInjectionContext(() =>
-      adminLoginGuard({} as never, {} as never),
+      loginPageGuard({} as never, {} as never),
     );
     const router = TestBed.inject(Router);
 
     expect(result instanceof UrlTree).toBeTrue();
-    expect(router.serializeUrl(result as UrlTree)).toBe('/admin');
+    expect(router.serializeUrl(result as UrlTree)).toBe(ADMIN_HOME_ROUTE);
   });
 
   it('should allow unauthenticated users to access the login route', async () => {
@@ -88,7 +89,7 @@ describe('admin auth guards', () => {
         provideZonelessChangeDetection(),
         provideRouter([]),
         {
-          provide: AdminAuthService,
+          provide: AdminSessionService,
           useValue: {
             restoreSession: jasmine.createSpy().and.resolveTo(null),
           },
@@ -97,7 +98,7 @@ describe('admin auth guards', () => {
     });
 
     const result = await TestBed.runInInjectionContext(() =>
-      adminLoginGuard({} as never, {} as never),
+      loginPageGuard({} as never, {} as never),
     );
 
     expect(result).toBeTrue();

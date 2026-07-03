@@ -3,26 +3,26 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../api.config';
 import {
-  AdminLoginRequest,
-  AdminLoginResponse,
-  AdminSessionResponse,
-} from './auth-admin.types';
+  AdminLoginPayload,
+  AdminLoginResult,
+  AdminSessionSnapshot,
+} from './admin-auth-api.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminAuthApiService {
+export class AdminAuthenticationApiService {
   private readonly httpClient = inject(HttpClient);
 
-  login(request: AdminLoginRequest): Observable<AdminLoginResponse> {
-    return this.httpClient.post<AdminLoginResponse>(
+  login(payload: AdminLoginPayload): Observable<AdminLoginResult> {
+    return this.httpClient.post<AdminLoginResult>(
       buildApiUrl('/auth/login'),
-      request,
+      payload,
     );
   }
 
-  getSession(accessToken: string): Observable<AdminSessionResponse> {
-    return this.httpClient.get<AdminSessionResponse>(
+  getSession(accessToken: string): Observable<AdminSessionSnapshot> {
+    return this.httpClient.get<AdminSessionSnapshot>(
       buildApiUrl('/admin/session'),
       {
         headers: new HttpHeaders({

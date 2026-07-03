@@ -6,31 +6,31 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { AdminAuthApiService } from './auth-admin.service';
+import { AdminAuthenticationApiService } from './admin-auth-api.service';
 import {
-  AdminLoginResponse,
-  AdminSessionResponse,
-} from './auth-admin.types';
+  AdminLoginResult,
+  AdminSessionSnapshot,
+} from './admin-auth-api.types';
 
-const createAdminUserResponse = (): AdminSessionResponse => ({
+const createAdminUserResponse = (): AdminSessionSnapshot => ({
   id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
   email: 'victor@example.com',
   name: 'Victor Hanszman',
   role: 'ADMIN',
 });
 
-const createAdminLoginResponse = (): AdminLoginResponse => ({
+const createAdminLoginResponse = (): AdminLoginResult => ({
   accessToken: 'token-123',
   tokenType: 'Bearer',
   expiresIn: '1d',
   user: createAdminUserResponse(),
 });
 
-describe('AdminAuthApiService', () => {
+describe('AdminAuthenticationApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        AdminAuthApiService,
+        AdminAuthenticationApiService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -43,7 +43,7 @@ describe('AdminAuthApiService', () => {
   });
 
   it('should authenticate the admin user through the login endpoint', () => {
-    const service = TestBed.inject(AdminAuthApiService);
+    const service = TestBed.inject(AdminAuthenticationApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -67,7 +67,7 @@ describe('AdminAuthApiService', () => {
   });
 
   it('should validate the current admin session with a bearer token', () => {
-    const service = TestBed.inject(AdminAuthApiService);
+    const service = TestBed.inject(AdminAuthenticationApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getSession('token-123').subscribe((response) => {

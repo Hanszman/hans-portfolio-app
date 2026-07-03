@@ -198,6 +198,14 @@ export class SkillsComponent {
       return customEvent.detail;
     }
 
-    return customEvent.detail?.value ?? customEvent.target?.value ?? '';
+    if (customEvent.detail?.value) {
+      return customEvent.detail.value;
+    }
+
+    if (customEvent.target?.value) {
+      return customEvent.target.value;
+    }
+
+    return '';
   }
 }

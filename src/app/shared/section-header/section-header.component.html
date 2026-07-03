@@ -1,5 +1,12 @@
 <div class="app-section-header">
-  <span class="app-section-header-label">{{ sectionLabel() }}</span>
+  <div class="app-section-header-top-row">
+    <span class="app-section-header-label">{{ sectionLabel() }}</span>
+
+    <div class="app-section-header-actions">
+      <ng-content select="[sectionHeaderActions]"></ng-content>
+    </div>
+  </div>
+
   <h1 class="app-section-header-title">{{ title() }}</h1>
   <p class="app-section-header-description">{{ description() }}</p>
 </div>

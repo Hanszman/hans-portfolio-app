@@ -1051,7 +1051,7 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
 
 #### Entregas
 
-- tela de login admin oculta da navegacao publica e acessivel apenas por URL
+- tela de login oculta da navegacao publica e acessivel apenas por URL
 - autenticacao real com `POST /auth/login`
 - validacao de sessao autenticada com `GET /admin/session`
 - rotas administrativas protegidas por guard no frontend
@@ -1059,30 +1059,32 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
 - lista inicial de entidades e entidade relacional administraveis
 - operacoes `create`, `update` e `delete` para todas as entidades protegidas pela API
 - modais administrativos com formularios usando `hans-button`, `hans-input`, `hans-dropdown`, `hans-select-option`, `hans-toggle`, `hans-date-picker`, `hans-modal`, `hans-table`, `hans-loading` e `hans-toast` sempre que aplicavel
-- cobertura de testes unitarios completa para auth admin, guards, services, helpers, mapeadores, componentes, modais e formularios do escopo implementado
+- cobertura de testes unitarios completa para admin auth API, admin session, guards, services, helpers, mapeadores, componentes, modais e formularios do escopo implementado
 - atualizacao obrigatoria da documentacao a cada interacao relevante desta etapa
 
 #### Direcao funcional obrigatoria
 
-- a rota de login admin nao deve aparecer no menu publico nem em atalhos visuais da shell publica
-- o acesso deve acontecer apenas por URL conhecida, com implementacao recomendada em `/admin/login`
+- a rota de login nao deve aparecer no menu publico nem em atalhos visuais da shell publica
+- o acesso deve acontecer apenas por URL conhecida, com implementacao oficial em `/login`
 - apos login valido, o usuario deve ser redirecionado para a rota administrativa recomendada em `/admin`
 - toda rota sob `/admin` deve ser protegida por guard e exigir token bearer valido
-- tentativas de acesso admin sem token devem redirecionar para `/admin/login`
-- quando ja autenticado, acessar `/admin/login` deve redirecionar para `/admin`
+- tentativas de acesso admin sem token devem redirecionar para `/login`
+- quando ja autenticado, acessar `/login` deve redirecionar para `/admin`
 - a sessao deve ser reidratada no carregamento do app por meio do token persistido e de uma chamada de validacao em `GET /admin/session`
 - a F8 nao deve alterar a experiencia do portfolio publico, nem o menu, nem a navegacao publica, nem a paleta do projeto
 
 #### Estrutura tecnica alvo da F8
 
-- `src/app/core/auth-admin/`
+- `src/app/core/api/admin-auth/`
+  - adapter/service HTTP de autenticacao administrativa
+  - contratos tipados de `POST /auth/login` e `GET /admin/session`
+- `src/app/core/admin-session/`
   - service global de sessao admin com `signal()`, `computed()` e `effect()`
-  - tipos de auth admin
-  - adapter/service HTTP para `login` e `session`
+  - tipos da sessao administrativa
   - helper de persistencia de token
   - guard de rota admin
   - interceptor opcional para anexar `Authorization: Bearer <token>` nas chamadas protegidas
-- `src/app/pages/admin-login/`
+- `src/app/pages/login/`
   - tela standalone de login
   - formulario com componentes da `hans-ui-design-lib`
   - loading, erro e feedback de autenticacao
@@ -1145,18 +1147,22 @@ Regra importante de modelagem para a F8:
 
 #### Matriz oficial de formularios da F8
 
-- `F8.1` - login admin
+- `F8.1` - login
   - endpoint: `POST /auth/login`
   - campos: `email`, `password`
   - status: concluida em `2026-07-02`
+  - atualizada em `2026-07-03`
   - entregue:
-    - rota oculta `/admin/login` fora da shell publica
+    - rota oculta `/login` fora da shell publica
     - integracao real com `POST /auth/login`
-    - estado global de autenticacao admin em `src/app/core/auth-admin/`
+    - dominio `src/app/core/api/admin-auth/` criado para transporte HTTP e contratos de autenticacao administrativa
+    - dominio `src/app/core/admin-session/` criado para sessao, token, guard e restauracao de autenticacao
     - persistencia de token em `sessionStorage`
     - redirecionamento para `/admin` apos login valido
     - feedback de erro para credenciais invalidas
-    - cobertura de testes para service, guard, rotas e pagina de login
+    - pagina de login com header, footer, submit por Enter e alternancia de visibilidade da senha com componentes da `hans-ui-design-lib`
+    - `SectionHeaderComponent` adaptado para receber acoes projetadas, permitindo o botao de logout no canto superior direito da area admin
+    - cobertura de testes para service, guard, rotas, helpers, projection e pagina de login
 - `F8.2` - shell admin e pagina raiz
   - endpoint de bootstrap: `GET /admin/session`
   - entregas: rota `/admin`, guard, estrutura com lista de entidades e area de operacoes por entidade
@@ -1200,7 +1206,7 @@ Regra importante de modelagem para a F8:
 
 #### Ordem oficial recomendada da F8
 
-1. `F8.1` - login admin
+1. `F8.1` - login
 2. `F8.2` - shell admin, sessao, guard, rota protegida e base visual
 3. `F8.3` - `portfolio-settings`
 4. `F8.4` - `tags`
@@ -1230,7 +1236,7 @@ Regra importante de modelagem para a F8:
 
 #### Criterios de aceite
 
-- login admin funcional via API real
+- login funcional via API real
 - rota administrativa oculta da navegacao publica e protegida por guard
 - sessao reidratada corretamente entre reloads enquanto o token for valido
 - area administrativa inicial listando todas as entidades suportadas
@@ -1335,7 +1341,7 @@ O Codex deve:
 ### Backend
 
 - API NestJS/TypeScript documentada
-- auth admin
+- autenticacao administrativa
 - CRUDs completos
 - dashboard endpoints
 - seed real

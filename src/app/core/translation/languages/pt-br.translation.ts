@@ -443,22 +443,24 @@ export const PT_BR_TRANSLATIONS = {
     'Os endpoints agregados do dashboard estão indisponíveis agora.',
   'pages.dashboard.highlights.empty': 'Nenhum item destacado do portfolio foi retornado ainda.',
   'pages.dashboard.highlights.featured': 'Em destaque',
-  'pages.adminLogin.sectionLabel': '// ACESSO_ADMIN',
-  'pages.adminLogin.title': 'Acesso administrativo',
-  'pages.adminLogin.description':
+  'pages.login.sectionLabel': '// ACESSO_ADMIN',
+  'pages.login.title': 'Acesso administrativo',
+  'pages.login.description':
     'Uma rota protegida e não pública para gerenciar o portfolio pelo fluxo autenticado de admin.',
-  'pages.adminLogin.security.title': 'Rota protegida',
-  'pages.adminLogin.security.description':
+  'pages.login.security.title': 'Rota protegida',
+  'pages.login.security.description':
     'Use a conta admin existente na API para desbloquear as próximas etapas administrativas do portfolio.',
-  'pages.adminLogin.form.title': 'Autenticar sessão administrativa',
-  'pages.adminLogin.form.description':
+  'pages.login.form.title': 'Autenticar sessão administrativa',
+  'pages.login.form.description':
     'Este login permanece intencionalmente oculto da navegação pública e só fica disponível pela URL direta.',
-  'pages.adminLogin.form.emailLabel': 'E-mail administrativo',
-  'pages.adminLogin.form.emailPlaceholder': 'victor@example.com',
-  'pages.adminLogin.form.passwordLabel': 'Senha administrativa',
-  'pages.adminLogin.form.passwordPlaceholder': 'Digite sua senha',
-  'pages.adminLogin.form.submit': 'Entrar na área admin',
-  'pages.adminLogin.feedback.invalidCredentials':
+  'pages.login.form.emailLabel': 'E-mail administrativo',
+  'pages.login.form.emailPlaceholder': 'victor@example.com',
+  'pages.login.form.passwordLabel': 'Senha administrativa',
+  'pages.login.form.passwordPlaceholder': 'Digite sua senha',
+  'pages.login.form.passwordVisibility.show': 'Mostrar senha',
+  'pages.login.form.passwordVisibility.hide': 'Ocultar senha',
+  'pages.login.form.submit': 'Entrar',
+  'pages.login.feedback.invalidCredentials':
     'As credenciais administrativas são inválidas ou a sessão não pôde ser iniciada.',
   'pages.admin.placeholder.eyebrow': '// ROTA_ADMIN',
   'pages.admin.placeholder.title': 'Rota administrativa liberada',

@@ -40,7 +40,7 @@ Essa etapa nao faz parte da navegacao publica. Ela deve:
 
 ### Publicas
 
-- `/admin/login`
+- `/login`
 
 ### Protegidas
 
@@ -49,22 +49,36 @@ Essa etapa nao faz parte da navegacao publica. Ela deve:
 
 ### Regras
 
-- `/admin/login` nao entra na navegacao publica
+- `/login` nao entra na navegacao publica
 - ao autenticar com sucesso, redirecionar para `/admin`
-- ao tentar acessar `/admin` sem token valido, redirecionar para `/admin/login`
-- ao tentar acessar `/admin/login` ja autenticado, redirecionar para `/admin`
+- ao tentar acessar `/admin` sem token valido, redirecionar para `/login`
+- ao tentar acessar `/login` ja autenticado, redirecionar para `/admin`
 - a wildcard publica do app continua apontando para `home`; rotas admin devem entrar antes dessa captura
 
 ## 4) Arquitetura frontend alvo
 
-### 4.1. Core admin auth
+### 4.1. Infraestrutura HTTP de autenticacao admin
 
-Criar um dominio dedicado em `src/app/core/auth-admin/` com:
+Criar um dominio dedicado em `src/app/core/api/admin-auth/` com:
 
-- `auth-admin.service.ts`
-- `auth-admin.types.ts`
-- `auth-admin.guard.ts`
-- `auth-admin.interceptor.ts` se o fluxo com bearer token ficar mais limpo com interceptor
+- `admin-auth-api.service.ts`
+- `admin-auth-api.types.ts`
+- specs dos contratos e chamadas HTTP
+
+Responsabilidades:
+
+- encapsular `POST /auth/login`
+- encapsular `GET /admin/session`
+- tipar request e response do fluxo autenticado
+
+### 4.2. Sessao administrativa
+
+Criar um dominio dedicado em `src/app/core/admin-session/` com:
+
+- `admin-session.service.ts`
+- `admin-session.types.ts`
+- `admin-session.guard.ts`
+- `admin-session.interceptor.ts` se o fluxo com bearer token ficar mais limpo com interceptor
 - helpers de persistencia e limpeza de sessao
 - specs de cada arquivo relevante
 
@@ -74,18 +88,18 @@ Responsabilidades:
 - logout
 - hydrate de sessao
 - armazenamento de token
-- chamada de `GET /admin/session`
+- chamada de `GET /admin/session` via `admin-auth-api`
 - exposicao do estado global da sessao com signals
 
-### 4.2. Pagina de login
+### 4.3. Pagina de login
 
-Criar `src/app/pages/admin-login/` com:
+Criar `src/app/pages/login/` com:
 
-- `admin-login.component.ts`
-- `admin-login.component.html`
-- `admin-login.component.scss`
-- `admin-login.component.spec.ts`
-- `admin-login.types.ts` se necessario
+- `login.component.ts`
+- `login.component.html`
+- `login.component.scss`
+- `login.component.spec.ts`
+- `login.types.ts`
 - `helpers/` se o formulario crescer
 
 Responsabilidades:
@@ -94,9 +108,12 @@ Responsabilidades:
 - validar campos obrigatorios
 - disparar o login
 - renderizar loading e erro
+- renderizar header e footer do app para manter alinhamento com a shell publica
+- permitir submit por clique e pela tecla `Enter`
+- oferecer alternancia de visibilidade da senha com `hans-input` + `hans-icon`
 - redirecionar em caso de sucesso
 
-### 4.3. Dominio admin
+### 4.4. Dominio admin
 
 Criar `src/app/pages/admin/` com:
 
@@ -179,7 +196,7 @@ Logout:
 1. limpar token
 2. limpar estado global
 3. limpar caches administrativos locais
-4. redirecionar para `/admin/login`
+4. redirecionar para `/login`
 
 ## 6) UI/UX oficial da F8
 
@@ -448,7 +465,7 @@ Cada entidade deve ter, no minimo:
 
 ## 8) Ordem oficial das subetapas
 
-1. `F8.1` - Login admin
+1. `F8.1` - Login
 2. `F8.2` - Guard, sessao e shell admin
 3. `F8.3` - Portfolio settings
 4. `F8.4` - Tags
@@ -466,15 +483,20 @@ Cada entidade deve ter, no minimo:
 ## 8.1) Status atual da F8
 
 - `F8.1` concluida em `2026-07-02`
+- `F8.1` ajustada em `2026-07-03` para alinhar nomenclatura, UX e documentacao
 - entregas concluidas na `F8.1`:
-  - rota oculta `/admin/login` implementada fora da navegacao publica
+  - rota oculta `/login` implementada fora da navegacao publica
   - integracao real com `POST /auth/login`
-  - dominio `src/app/core/api/auth-admin/` criado para contratos e chamadas HTTP de autenticacao
-  - dominio `src/app/core/auth-admin/` criado para sessao, token, guard e restauracao de autenticacao
+  - dominio `src/app/core/api/admin-auth/` criado para contratos e chamadas HTTP de autenticacao
+  - dominio `src/app/core/admin-session/` criado para sessao, token, guard e restauracao de autenticacao
   - persistencia de token em `sessionStorage`
   - redirecionamento de login bem-sucedido para `/admin`
+  - pagina de login integrada ao header e footer do app
+  - submit via tecla `Enter`
+  - campo de senha com alternancia de visibilidade usando componentes da `hans-ui-design-lib`
   - pagina placeholder protegida em `/admin` ja criada como destino temporario da autenticacao
-  - cobertura de testes para auth admin, guards, rotas e pagina de login
+  - `SectionHeaderComponent` preparado para receber acoes projetadas, habilitando o logout no canto superior direito da tela admin
+  - cobertura de testes para admin auth API, admin session, guards, rotas e pagina de login
 - proxima subetapa oficial: `F8.2` - Guard, sessao e shell admin
 
 ## 9) Regras de implementacao por subetapa

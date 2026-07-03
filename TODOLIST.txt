@@ -275,3 +275,8 @@ Coloque o ícone de olho no input da senha com a action para visualizá-la. Mas 
 Pode colocar o header e o footer nas telas de login e admin, vc deixou elas sem eles.
 Faça o botão de submit do login ser acionado ao apertarmos a tecla Enter.
 Coloque o botão de logout no canto superior direito do sectionheader passando como propriedade do componente, ai faça a adaptação do sectionheader pra receber conteúdos.
+-Ótimo! Mas ainda tenho alguns pontos:
+Não precisa usar ADMIN_LOGIN_ROUTE e ADMIN_HOME_ROUTE como consts para as rotas login e admin, pode escrever elas diretamente mesmo, esses nomes não vão ser alterados, então não tem necessidade de criar const pra isso. Se vc discordar, me explique o motivo.
+No input de senha vi que vc criou um button auxiliar ali pra fazer a mecanica de visualizar/esconder a senha. Esse comportamento não dava pra fazer com a abstração que temos na hans-lib? Não daria pra deixar a lib mais preparada pra esse tipo de comportamento? Se outros consumidores da lib precisarem de action em icons parecidos, seria interessante deixar a lib preparada pra isso para que não seja necessario implementar isso sempre nos consumidores.
+Além disso, no input de senha, como vc pode ver no print 1, o padding de espaço entre o ícone de olho e a extremidade do input não está do mesmo tamanho que do outro ícone de cadeado, deixe o mesmo espaço por favor.
+E como vc pode ver também no print 1, o placeholder do campo de e-mail é um exemplo de e-mail enquanto o da senha é "Digite sua senha", pra ficar padronizado ambos, mude o de e-mail para "Digite seu e-mail" por favor.
