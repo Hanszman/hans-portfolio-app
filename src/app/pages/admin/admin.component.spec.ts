@@ -84,4 +84,33 @@ describe('AdminComponent', () => {
     expect(adminSessionService.logout).toHaveBeenCalled();
     expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
   });
+
+  it('should expose an empty admin email when the authenticated user is unavailable', () => {
+    TestBed.resetTestingModule();
+
+    TestBed.configureTestingModule({
+      imports: [AdminComponent],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        provideAppTranslations(),
+        {
+          provide: AdminSessionService,
+          useValue: {
+            user: () => null,
+            logout: jasmine.createSpy(),
+          },
+        },
+      ],
+    });
+
+    const fixture = TestBed.createComponent(AdminComponent);
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      adminUserEmail(): string;
+    };
+
+    expect(component.adminUserEmail()).toBe('');
+  });
 });
