@@ -10,6 +10,7 @@ describe('AdminComponent', () => {
     for (const elementName of [
       'hans-button',
       'hans-icon',
+      'hans-input',
       'hans-toggle',
       'hans-dropdown',
     ]) {
@@ -56,11 +57,15 @@ describe('AdminComponent', () => {
 
     expect(compiled.querySelector('app-header')).toBeTruthy();
     expect(compiled.querySelector('app-footer')).toBeTruthy();
-    expect(compiled.textContent).toContain('Admin route unlocked');
+    expect(compiled.textContent).toContain('Admin workspace');
     expect(compiled.textContent).toContain('Victor Hanszman');
+    expect(compiled.textContent).toContain('12 entity workflows');
+    expect(compiled.textContent).toContain('Portfolio settings');
+    expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(12);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {

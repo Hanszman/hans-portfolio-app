@@ -372,15 +372,15 @@ describe('SkillsComponent', () => {
 
     expect(
       component.resolveSelectValue({
-        detail: {},
+        detail: { value: undefined },
         target: { value: 'ALL' },
       } as unknown as Event),
     ).toBe('ALL');
 
     expect(
       component.resolveSelectValue({
-        detail: {},
-        target: null,
+        detail: { value: undefined },
+        target: { value: undefined },
       } as unknown as Event),
     ).toBe('');
   });

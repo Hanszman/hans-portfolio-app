@@ -454,15 +454,70 @@ export const EN_TRANSLATIONS = {
   'pages.login.form.submit': 'Enter',
   'pages.login.feedback.invalidCredentials':
     'The admin credentials are invalid or the session could not be started.',
-  'pages.admin.placeholder.eyebrow': '// ADMIN_ROUTE',
-  'pages.admin.placeholder.title': 'Admin route unlocked',
-  'pages.admin.placeholder.description':
-    'The first administrative substep is active: authentication, hidden routing and protected access are already in place.',
-  'pages.admin.placeholder.session': 'Authenticated session',
-  'pages.admin.placeholder.nextStep': 'Next implementation step',
-  'pages.admin.placeholder.nextStepDescription':
-    'F8.2 will replace this temporary destination with the complete administrative shell and entity navigation.',
-  'pages.admin.placeholder.actions.logout': 'Log out',
+  'pages.admin.shell.eyebrow': '// ADMIN_WORKSPACE',
+  'pages.admin.shell.title': 'Admin workspace',
+  'pages.admin.shell.description':
+    'Protected operational shell for the final F8 flows, already aligned with hidden routing, authenticated session handling and the entity roadmap.',
+  'pages.admin.shell.actions.logout': 'Log out',
+  'pages.admin.shell.session.kicker': 'Authenticated session',
+  'pages.admin.shell.registry.kicker': 'Entity registry',
+  'pages.admin.shell.registry.title': '{{count}} entity workflows',
+  'pages.admin.shell.registry.description':
+    'The administrative shell now centralizes every protected domain planned for the remaining CRUD substeps.',
+  'pages.admin.facts.route.title': 'Hidden route confirmed',
+  'pages.admin.facts.route.description':
+    'The public menu stays untouched while /admin remains available only through direct access and guard enforcement.',
+  'pages.admin.facts.validation.title': 'Session validation active',
+  'pages.admin.facts.validation.description':
+    'Every protected entry still depends on a valid bearer token plus server confirmation through GET /admin/session.',
+  'pages.admin.facts.storage.title': 'Scoped persistence',
+  'pages.admin.facts.storage.description':
+    'The current admin session continues isolated in sessionStorage to avoid unnecessary long-lived access.',
+  'pages.admin.entitiesSection.eyebrow': '// NEXT_SUBSTEPS',
+  'pages.admin.entitiesSection.title': 'Protected entities roadmap',
+  'pages.admin.entitiesSection.description':
+    'Each card below marks the official F8 order, its protected endpoint family and the create, update and delete actions that will be enabled in the following deliveries.',
+  'pages.admin.operations.create': 'Create',
+  'pages.admin.operations.update': 'Update',
+  'pages.admin.operations.delete': 'Delete',
+  'pages.admin.relationMode.owner': 'Owned relationships',
+  'pages.admin.relationMode.dedicated': 'Dedicated relationship entity',
+  'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
+  'pages.admin.entities.portfolio-settings.description':
+    'Global configuration, highlighted content and structured settings that drive the portfolio shell.',
+  'pages.admin.entities.tags.title': 'Tags',
+  'pages.admin.entities.tags.description':
+    'Reusable classification labels shared across projects, technologies and future editorial flows.',
+  'pages.admin.entities.links.title': 'Links',
+  'pages.admin.entities.links.description':
+    'External references such as repositories, live demos, documents and complementary navigation targets.',
+  'pages.admin.entities.image-assets.title': 'Image assets',
+  'pages.admin.entities.image-assets.description':
+    'Normalized media records used by the portfolio through image asset relations instead of direct file fields.',
+  'pages.admin.entities.spoken-languages.title': 'Spoken languages',
+  'pages.admin.entities.spoken-languages.description':
+    'Administrative control of language proficiency entries displayed in the profile and skills contexts.',
+  'pages.admin.entities.customers.title': 'Customers',
+  'pages.admin.entities.customers.description':
+    'Customer organizations referenced by experience histories and relationship-based storytelling.',
+  'pages.admin.entities.jobs.title': 'Jobs',
+  'pages.admin.entities.jobs.description':
+    'Role catalog entries that support consistent job naming and relation mapping across experiences.',
+  'pages.admin.entities.formations.title': 'Formations',
+  'pages.admin.entities.formations.description':
+    'Academic and professional education records, including their supporting links, images and stack relations.',
+  'pages.admin.entities.technologies.title': 'Technologies',
+  'pages.admin.entities.technologies.description':
+    'Core stack catalog with highlight rules, metrics, tags and relationship arrays owned by the technology entity.',
+  'pages.admin.entities.technology-contexts.title': 'Technology contexts',
+  'pages.admin.entities.technology-contexts.description':
+    'The only dedicated relationship entity, used to register contextual usage windows for each technology.',
+  'pages.admin.entities.experiences.title': 'Experiences',
+  'pages.admin.entities.experiences.description':
+    'Professional history records with company, role, chronology, customers, projects and stack relationships.',
+  'pages.admin.entities.projects.title': 'Projects',
+  'pages.admin.entities.projects.description':
+    'Case-study style project entries with environment, status, date range and owned relationship arrays.',
   'taxonomy.dashboard.source.experience': 'Experience',
   'taxonomy.dashboard.source.project': 'Project',
   'taxonomy.dashboard.source.formation': 'Formation',

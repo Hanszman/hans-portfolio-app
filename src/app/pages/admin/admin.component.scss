@@ -14,28 +14,107 @@
 }
 
 .admin-page-shell {
-  @apply mx-auto flex max-w-5xl flex-col gap-5 rounded-[2rem] border p-8 md:p-10;
+  @apply mx-auto flex max-w-6xl flex-col gap-5 rounded-[2rem] border p-8 md:p-10;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
   box-shadow: 0 20px 60px color-mix(in srgb, var(--base-default-color) 10%, transparent);
 }
 
-.admin-page-session p,
-.admin-page-next-step p {
-  @apply text-base leading-7;
-  color: var(--base-strong-color);
+.admin-page-overview,
+.admin-page-protection {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
 }
 
-.admin-page-session,
-.admin-page-next-step {
+.admin-page-card {
   @apply rounded-3xl border p-5;
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 92%, var(--white));
 }
 
-.admin-page-session h2,
-.admin-page-next-step h2 {
+.admin-page-card-accent {
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--background-color) 90%, var(--white)) 0%,
+    color-mix(in srgb, var(--background-color) 96%, var(--white)) 100%
+  );
+}
+
+.admin-page-card p,
+.admin-page-block-header p,
+.admin-page-entity-copy p,
+.admin-page-endpoint {
+  @apply text-base leading-7;
+  color: var(--base-strong-color);
+}
+
+.admin-page-card h2,
+.admin-page-block-header h2 {
   @apply mb-2 text-lg font-semibold;
+}
+
+.admin-page-kicker {
+  @apply mb-2 text-xs font-semibold uppercase tracking-[0.24em];
+  color: var(--primary-default-color);
+}
+
+.admin-page-entities {
+  @apply flex flex-col gap-4;
+}
+
+.admin-page-block-header {
+  @apply rounded-3xl border p-5;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.admin-page-entity-grid {
+  @apply grid gap-4 xl:grid-cols-2;
+}
+
+.admin-page-entity-card {
+  @apply flex h-full flex-col gap-4;
+}
+
+.admin-page-entity-meta {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.admin-page-substep,
+.admin-page-relation-chip {
+  @apply inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em];
+}
+
+.admin-page-substep {
+  color: var(--primary-default-color);
+  background: color-mix(
+    in srgb,
+    var(--primary-default-color) 12%,
+    transparent
+  );
+}
+
+.admin-page-relation-chip {
+  color: var(--base-strong-color);
+  background: color-mix(in srgb, var(--base-default-color) 10%, transparent);
+}
+
+.admin-page-entity-copy h3 {
+  @apply mb-2 text-lg font-semibold;
+}
+
+.admin-page-endpoint {
+  @apply rounded-2xl border px-4 py-3 text-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 88%, var(--white));
+}
+
+.admin-page-entity-actions {
+  @apply mt-auto grid gap-3 sm:grid-cols-3;
+}
+
+.admin-page-entity-actions hans-button {
+  @apply block;
 }
 
 .admin-page-logout {

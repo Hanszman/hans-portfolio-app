@@ -1394,4 +1394,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.2`, consolidando a shell administrativa protegida em `/admin`, a validacao de sessao com `GET /admin/session`, a base visual da area admin e a lista inicial das entidades com suas acoes futuras.
+Implementar a `F8.3`, iniciando o primeiro CRUD protegido da area admin com `portfolio-settings` sobre a shell administrativa ja consolidada na `F8.2`.

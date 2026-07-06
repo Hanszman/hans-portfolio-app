@@ -193,17 +193,19 @@ export class SkillsComponent {
       detail?: string | { value?: string };
       target: (EventTarget & { value?: string }) | null;
     };
+    const detail = customEvent.detail;
+    const target = customEvent.target;
 
-    if (typeof customEvent.detail === 'string') {
-      return customEvent.detail;
+    if (typeof detail === 'string') {
+      return detail;
     }
 
-    if (customEvent.detail?.value) {
-      return customEvent.detail.value;
+    if (detail && typeof detail === 'object' && typeof detail.value === 'string') {
+      return detail.value;
     }
 
-    if (customEvent.target?.value) {
-      return customEvent.target.value;
+    if (target && typeof target.value === 'string') {
+      return target.value;
     }
 
     return '';

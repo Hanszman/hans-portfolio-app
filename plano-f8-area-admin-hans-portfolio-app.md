@@ -484,6 +484,15 @@ Cada entidade deve ter, no minimo:
 
 - `F8.1` concluida em `2026-07-02`
 - `F8.1` ajustada em `2026-07-03` para alinhar nomenclatura, UX e documentacao
+- `F8.2` concluida em `2026-07-06`
+- entregas concluidas na `F8.2`:
+  - shell administrativa definitiva implementada em `/admin` com header, footer e logout preservando o tema atual
+  - leitura operacional da sessao autenticada consolidada dentro da pagina admin
+  - fatos de protecao documentados visualmente na shell: rota oculta, validacao via `GET /admin/session` e persistencia em `sessionStorage`
+  - lista inicial de todas as entidades protegidas oficializadas na UI, com endpoint, subetapa da F8 e acoes `create`, `update` e `delete` visiveis
+  - modelagem da shell organizada em `admin.types.ts` e helpers dedicados para manter SRP
+  - traducoes sincronizadas para `en-us`, `pt-br` e `es-es`
+  - cobertura de testes da shell administrativa e de seus helpers
 - entregas concluidas na `F8.1`:
   - rota oculta `/login` implementada fora da navegacao publica
   - integracao real com `POST /auth/login`
@@ -497,7 +506,7 @@ Cada entidade deve ter, no minimo:
   - pagina placeholder protegida em `/admin` ja criada como destino temporario da autenticacao
   - `SectionHeaderComponent` preparado para receber acoes projetadas, habilitando o logout no canto superior direito da tela admin
   - cobertura de testes para admin auth API, admin session, guards, rotas e pagina de login
-- proxima subetapa oficial: `F8.2` - Guard, sessao e shell admin
+- proxima subetapa oficial: `F8.3` - Portfolio settings
 
 ## 9) Regras de implementacao por subetapa
 

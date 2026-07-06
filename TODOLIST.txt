@@ -291,3 +291,5 @@ Na lib, sobre o arquivo Input.tsx, reparei que vc deixou duas funções/consts (
 Além disso, na lib, temos alguns estilos em input.scss que poderiam estar em um input-action-icon.scss dentro da pasta do InputActionIcon, ou seja, aqueles estilos referentes apenas ao subcomponente.
 -Ficou ótimo! Corrigiu o problema, obrigado!
 Agora podemos ir pra proxima subetapa da etapa F8
+-Beleza, obrigado! Mas tenho um ponto:
+Resolva agora o test:coverage pra chegar a 100% e anote na sua memória para resolver isso sempre por favor, a cada interação precisamos manter 100% de coverage nos testes. Não é pra dar como concluída nenhuma tarefa que eu pedir sem garantir a cobertura total.

@@ -14,7 +14,16 @@ import { HeaderComponent } from '../../layout/header/header.component';
 import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navigation.helper';
 import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
-import { formatAdminIdentity } from './helpers/admin.helper';
+import {
+  ADMIN_ENTITY_DEFINITIONS,
+  ADMIN_ENTITY_OPERATIONS,
+  ADMIN_SESSION_FACT_DEFINITIONS,
+} from './admin.types';
+import {
+  buildAdminEntityViewModels,
+  buildAdminSessionFactViewModels,
+  formatAdminIdentity,
+} from './helpers/admin.helper';
 
 @Component({
   selector: 'app-admin',
@@ -43,6 +52,25 @@ export class AdminComponent {
   protected readonly adminIdentity = computed(() =>
     formatAdminIdentity(this.adminUser()),
   );
+  protected readonly adminEntities = computed(() => {
+    this.translation.locale();
+
+    return buildAdminEntityViewModels(
+      ADMIN_ENTITY_DEFINITIONS,
+      (key) => this.translation.instant(key),
+      ADMIN_ENTITY_OPERATIONS,
+    );
+  });
+  protected readonly adminFacts = computed(() => {
+    this.translation.locale();
+
+    return buildAdminSessionFactViewModels(
+      ADMIN_SESSION_FACT_DEFINITIONS,
+      (key) => this.translation.instant(key),
+    );
+  });
+  protected readonly adminEntityCount = computed(() => this.adminEntities().length);
+  protected readonly adminUserEmail = computed(() => this.adminUser()?.email ?? '');
 
   protected async logout(): Promise<void> {
     this.adminSessionService.logout();

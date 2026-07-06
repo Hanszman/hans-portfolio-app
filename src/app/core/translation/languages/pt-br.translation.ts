@@ -462,15 +462,70 @@ export const PT_BR_TRANSLATIONS = {
   'pages.login.form.submit': 'Entrar',
   'pages.login.feedback.invalidCredentials':
     'As credenciais administrativas são inválidas ou a sessão não pôde ser iniciada.',
-  'pages.admin.placeholder.eyebrow': '// ROTA_ADMIN',
-  'pages.admin.placeholder.title': 'Rota administrativa liberada',
-  'pages.admin.placeholder.description':
-    'A primeira subetapa administrativa está ativa: autenticação, rota oculta e acesso protegido já estão funcionando.',
-  'pages.admin.placeholder.session': 'Sessão autenticada',
-  'pages.admin.placeholder.nextStep': 'Próxima etapa de implementação',
-  'pages.admin.placeholder.nextStepDescription':
-    'A F8.2 vai substituir este destino temporário pela shell administrativa completa e pela navegação das entidades.',
-  'pages.admin.placeholder.actions.logout': 'Sair',
+  'pages.admin.shell.eyebrow': '// ADMIN_WORKSPACE',
+  'pages.admin.shell.title': 'Workspace administrativo',
+  'pages.admin.shell.description':
+    'Shell operacional protegida para os fluxos finais da F8, já alinhada com rota oculta, sessão autenticada e roadmap das entidades.',
+  'pages.admin.shell.actions.logout': 'Sair',
+  'pages.admin.shell.session.kicker': 'Sessão autenticada',
+  'pages.admin.shell.registry.kicker': 'Registro de entidades',
+  'pages.admin.shell.registry.title': '{{count}} fluxos de entidade',
+  'pages.admin.shell.registry.description':
+    'A shell administrativa agora centraliza todos os domínios protegidos planejados para as próximas subetapas de CRUD.',
+  'pages.admin.facts.route.title': 'Rota oculta confirmada',
+  'pages.admin.facts.route.description':
+    'O menu público continua intacto enquanto /admin permanece acessível apenas por URL direta e pelo guard.',
+  'pages.admin.facts.validation.title': 'Validação de sessão ativa',
+  'pages.admin.facts.validation.description':
+    'Toda entrada protegida continua dependente de bearer token válido e confirmação do servidor via GET /admin/session.',
+  'pages.admin.facts.storage.title': 'Persistência com escopo',
+  'pages.admin.facts.storage.description':
+    'A sessão administrativa atual continua isolada em sessionStorage para evitar acesso prolongado sem necessidade.',
+  'pages.admin.entitiesSection.eyebrow': '// PROXIMAS_SUBETAPAS',
+  'pages.admin.entitiesSection.title': 'Roadmap das entidades protegidas',
+  'pages.admin.entitiesSection.description':
+    'Cada card abaixo marca a ordem oficial da F8, sua família de endpoint protegido e as ações de create, update e delete que serão habilitadas nas próximas entregas.',
+  'pages.admin.operations.create': 'Criar',
+  'pages.admin.operations.update': 'Editar',
+  'pages.admin.operations.delete': 'Excluir',
+  'pages.admin.relationMode.owner': 'Relacionamentos da entidade dona',
+  'pages.admin.relationMode.dedicated': 'Entidade relacional dedicada',
+  'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
+  'pages.admin.entities.portfolio-settings.description':
+    'Configuração global, destaques e ajustes estruturados que dirigem a shell do portfolio.',
+  'pages.admin.entities.tags.title': 'Tags',
+  'pages.admin.entities.tags.description':
+    'Rótulos reutilizáveis de classificação compartilhados entre projetos, tecnologias e fluxos editoriais futuros.',
+  'pages.admin.entities.links.title': 'Links',
+  'pages.admin.entities.links.description':
+    'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
+  'pages.admin.entities.image-assets.title': 'Image assets',
+  'pages.admin.entities.image-assets.description':
+    'Registros normalizados de mídia usados pelo portfolio por meio de relacionamentos de image assets.',
+  'pages.admin.entities.spoken-languages.title': 'Spoken languages',
+  'pages.admin.entities.spoken-languages.description':
+    'Controle administrativo das entradas de proficiência linguística exibidas no perfil e nos contextos de skills.',
+  'pages.admin.entities.customers.title': 'Customers',
+  'pages.admin.entities.customers.description':
+    'Organizações clientes referenciadas pelo histórico de experiências e pela narrativa baseada em relacionamentos.',
+  'pages.admin.entities.jobs.title': 'Jobs',
+  'pages.admin.entities.jobs.description':
+    'Catálogo de cargos para manter nomeação consistente de papéis e mapeamento relacional nas experiências.',
+  'pages.admin.entities.formations.title': 'Formations',
+  'pages.admin.entities.formations.description':
+    'Registros acadêmicos e de formação profissional, incluindo links, imagens e relacionamentos de stack.',
+  'pages.admin.entities.technologies.title': 'Technologies',
+  'pages.admin.entities.technologies.description':
+    'Catálogo principal de stack com destaques, métricas, tags e arrays relacionais geridos pela entidade.',
+  'pages.admin.entities.technology-contexts.title': 'Technology contexts',
+  'pages.admin.entities.technology-contexts.description':
+    'A única entidade relacional dedicada, usada para registrar janelas contextuais de uso por tecnologia.',
+  'pages.admin.entities.experiences.title': 'Experiences',
+  'pages.admin.entities.experiences.description':
+    'Registros do histórico profissional com empresa, papel, cronologia, clientes, projetos e relacionamentos de stack.',
+  'pages.admin.entities.projects.title': 'Projects',
+  'pages.admin.entities.projects.description':
+    'Entradas de projeto em formato de case, com ambiente, status, período e arrays relacionais próprios.',
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',

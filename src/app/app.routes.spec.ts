@@ -161,8 +161,9 @@ describe('app routes', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/admin');
 
+    expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Admin route unlocked',
+      '12 entity workflows',
     );
   });
 
@@ -185,8 +186,9 @@ describe('app routes', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/login');
 
+    expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
     expect(harness.routeNativeElement?.textContent).toContain(
-      'Admin route unlocked',
+      '12 entity workflows',
     );
   });
 

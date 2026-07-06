@@ -3,31 +3,95 @@
 <section class="admin-page">
   <div class="admin-page-shell">
     <app-section-header
-      [sectionLabel]="'pages.admin.placeholder.eyebrow' | translate"
-      [title]="'pages.admin.placeholder.title' | translate"
-      [description]="'pages.admin.placeholder.description' | translate"
+      [sectionLabel]="'pages.admin.shell.eyebrow' | translate"
+      [title]="'pages.admin.shell.title' | translate"
+      [description]="'pages.admin.shell.description' | translate"
     >
       <hans-button
         sectionHeaderActions
         class="admin-page-logout"
-        [attr.aria-label]="'pages.admin.placeholder.actions.logout' | translate"
+        [attr.aria-label]="'pages.admin.shell.actions.logout' | translate"
         [buttonColor]="'base'"
         [buttonSize]="'medium'"
         [buttonVariant]="'outline'"
         (click)="logout()"
       >
-        {{ 'pages.admin.placeholder.actions.logout' | translate }}
+        {{ 'pages.admin.shell.actions.logout' | translate }}
       </hans-button>
     </app-section-header>
 
-    <div class="admin-page-session">
-      <h2>{{ 'pages.admin.placeholder.session' | translate }}</h2>
-      <p>{{ adminIdentity() }}</p>
+    <div class="admin-page-overview">
+      <article class="admin-page-card admin-page-card-accent">
+        <p class="admin-page-kicker">
+          {{ 'pages.admin.shell.session.kicker' | translate }}
+        </p>
+        <h2>{{ adminIdentity() }}</h2>
+        <p>{{ adminUserEmail() }}</p>
+      </article>
+
+      <article class="admin-page-card admin-page-card-accent">
+        <p class="admin-page-kicker">
+          {{ 'pages.admin.shell.registry.kicker' | translate }}
+        </p>
+        <h2>
+          {{
+            'pages.admin.shell.registry.title'
+              | translate: { count: adminEntityCount() }
+          }}
+        </h2>
+        <p>{{ 'pages.admin.shell.registry.description' | translate }}</p>
+      </article>
     </div>
 
-    <div class="admin-page-next-step">
-      <h2>{{ 'pages.admin.placeholder.nextStep' | translate }}</h2>
-      <p>{{ 'pages.admin.placeholder.nextStepDescription' | translate }}</p>
+    <div class="admin-page-protection">
+      @for (fact of adminFacts(); track fact.id) {
+        <article class="admin-page-card">
+          <h2>{{ fact.title }}</h2>
+          <p>{{ fact.description }}</p>
+        </article>
+      }
+    </div>
+
+    <div class="admin-page-entities">
+      <div class="admin-page-block-header">
+        <p class="admin-page-kicker">
+          {{ 'pages.admin.entitiesSection.eyebrow' | translate }}
+        </p>
+        <h2>{{ 'pages.admin.entitiesSection.title' | translate }}</h2>
+        <p>{{ 'pages.admin.entitiesSection.description' | translate }}</p>
+      </div>
+
+      <div class="admin-page-entity-grid">
+        @for (entity of adminEntities(); track entity.id) {
+          <article class="admin-page-card admin-page-entity-card">
+            <div class="admin-page-entity-meta">
+              <span class="admin-page-substep">{{ entity.substep }}</span>
+              <span class="admin-page-relation-chip">{{ entity.relationModeLabel }}</span>
+            </div>
+
+            <div class="admin-page-entity-copy">
+              <h3>{{ entity.title }}</h3>
+              <p>{{ entity.description }}</p>
+            </div>
+
+            <p class="admin-page-endpoint">{{ entity.endpoint }}</p>
+
+            <div class="admin-page-entity-actions">
+              @for (operation of entity.operations; track operation.id) {
+                <hans-button
+                  [attr.aria-label]="operation.label"
+                  [buttonColor]="'base'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'outline'"
+                  [disabled]="true"
+                >
+                  {{ operation.label }}
+                </hans-button>
+              }
+            </div>
+          </article>
+        }
+      </div>
     </div>
   </div>
 </section>
