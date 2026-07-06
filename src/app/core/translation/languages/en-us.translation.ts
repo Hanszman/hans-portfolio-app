@@ -485,6 +485,66 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
   'pages.admin.entities.portfolio-settings.description':
     'Global configuration, highlighted content and structured settings that drive the portfolio shell.',
+  'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
+  'pages.admin.portfolioSettings.title': 'Portfolio settings operations',
+  'pages.admin.portfolioSettings.description':
+    'Live protected CRUD for the JSON-based settings that shape the portfolio shell, highlights and structured content.',
+  'pages.admin.portfolioSettings.actions.create': 'Create setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Save setting',
+  'pages.admin.portfolioSettings.states.loading':
+    'Loading the protected portfolio settings collection...',
+  'pages.admin.portfolioSettings.states.empty':
+    'No protected portfolio setting has been registered yet.',
+  'pages.admin.portfolioSettings.card.key': 'Setting key',
+  'pages.admin.portfolioSettings.card.description': 'Description',
+  'pages.admin.portfolioSettings.card.emptyDescription':
+    'No description was registered for this setting yet.',
+  'pages.admin.portfolioSettings.card.value': 'JSON value',
+  'pages.admin.portfolioSettings.fields.key.label': 'Setting key',
+  'pages.admin.portfolioSettings.fields.key.placeholder':
+    'Enter the unique setting key',
+  'pages.admin.portfolioSettings.fields.description.label': 'Description',
+  'pages.admin.portfolioSettings.fields.description.placeholder':
+    'Describe the responsibility of this setting',
+  'pages.admin.portfolioSettings.fields.value.label': 'JSON value',
+  'pages.admin.portfolioSettings.fields.value.placeholder':
+    'Enter a valid JSON object, array or scalar value',
+  'pages.admin.portfolioSettings.modal.create.title':
+    'Create portfolio setting',
+  'pages.admin.portfolioSettings.modal.pickUpdate.title':
+    'Select a setting to update',
+  'pages.admin.portfolioSettings.modal.pickUpdate.description':
+    'Choose one of the current protected settings to open its update form.',
+  'pages.admin.portfolioSettings.modal.pickDelete.title':
+    'Select a setting to delete',
+  'pages.admin.portfolioSettings.modal.pickDelete.description':
+    'Choose one of the current protected settings to confirm its removal.',
+  'pages.admin.portfolioSettings.modal.update.title':
+    'Update portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.title':
+    'Delete portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.description':
+    'This action permanently removes the selected protected setting from the portfolio configuration.',
+  'pages.admin.portfolioSettings.feedback.created':
+    'Portfolio setting created successfully.',
+  'pages.admin.portfolioSettings.feedback.updated':
+    'Portfolio setting updated successfully.',
+  'pages.admin.portfolioSettings.feedback.deleted':
+    'Portfolio setting deleted successfully.',
+  'pages.admin.portfolioSettings.feedback.requiredKey':
+    'The setting key is required before submitting.',
+  'pages.admin.portfolioSettings.feedback.invalidJson':
+    'The JSON value is invalid. Review the structure before submitting.',
+  'pages.admin.portfolioSettings.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.portfolioSettings.feedback.selectionRequired':
+    'Select a portfolio setting before continuing with this action.',
+  'pages.admin.portfolioSettings.feedback.loadError':
+    'The protected portfolio settings collection could not be loaded right now.',
+  'pages.admin.portfolioSettings.feedback.saveError':
+    'The portfolio setting could not be saved right now.',
+  'pages.admin.portfolioSettings.feedback.deleteError':
+    'The portfolio setting could not be deleted right now.',
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Reusable classification labels shared across projects, technologies and future editorial flows.',

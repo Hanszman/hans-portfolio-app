@@ -1,6 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
+import { of } from 'rxjs';
+import { AdminPortfolioSettingsApiService } from '../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
@@ -11,6 +13,8 @@ describe('AdminComponent', () => {
       'hans-button',
       'hans-icon',
       'hans-input',
+      'hans-loading',
+      'hans-modal',
       'hans-toggle',
       'hans-dropdown',
     ]) {
@@ -36,6 +40,7 @@ describe('AdminComponent', () => {
         {
           provide: AdminSessionService,
           useValue: {
+            accessToken: () => 'token-123',
             user: () => ({
               id: '5f8e1e74-2d49-4b5c-9724-2e8c9c8b0e11',
               email: 'victor@example.com',
@@ -43,6 +48,25 @@ describe('AdminComponent', () => {
               role: 'ADMIN',
             }),
             logout: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: AdminPortfolioSettingsApiService,
+          useValue: {
+            getAll: () =>
+              of([
+                {
+                  id: 'setting-1',
+                  key: 'hero.metrics',
+                  value: {
+                    projects: 12,
+                  },
+                  description: 'Controls the highlighted portfolio metrics.',
+                },
+              ]),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
       ],
@@ -61,6 +85,7 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('12 entity workflows');
     expect(compiled.textContent).toContain('Portfolio settings');
+    expect(compiled.textContent).toContain('Portfolio settings operations');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
@@ -97,8 +122,18 @@ describe('AdminComponent', () => {
         {
           provide: AdminSessionService,
           useValue: {
+            accessToken: () => null,
             user: () => null,
             logout: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: AdminPortfolioSettingsApiService,
+          useValue: {
+            getAll: () => of([]),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
       ],

@@ -1166,10 +1166,20 @@ Regra importante de modelagem para a F8:
 - `F8.2` - shell admin e pagina raiz
   - endpoint de bootstrap: `GET /admin/session`
   - entregas: rota `/admin`, guard, estrutura com lista de entidades e area de operacoes por entidade
-  - status: proxima subetapa oficial
+  - status: concluida em `2026-07-06`
 - `F8.3` - `portfolio-settings`
   - campos: `key`, `value`, `description`
   - observacao: `value` e `Json`, entao a primeira versao deve ter editor textual validado antes do submit
+  - status: concluida em `2026-07-06`
+  - entregue:
+    - dominio `src/app/core/api/admin-portfolio-settings/` criado para contratos e chamadas HTTP protegidas da entidade
+    - listagem autenticada de `portfolio-settings` integrada na shell admin existente
+    - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
+    - workspace administrativo dedicado com modais de selecao, formulario e confirmacao
+    - validacao explicita de JSON antes do submit do campo `value`
+    - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
+    - traducoes sincronizadas nos tres idiomas
+    - cobertura total de testes para API, helpers, workspace e composicao admin
 - `F8.4` - `tags`
   - campos: `slug`, `namePt`, `nameEn`, `type`, `sortOrder`
   - relacionamentos: `projectIds`, `technologyIds`
@@ -1394,4 +1404,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.3`, iniciando o primeiro CRUD protegido da area admin com `portfolio-settings` sobre a shell administrativa ja consolidada na `F8.2`.
+Implementar a `F8.4`, expandindo a area admin para a entidade `tags` com seus campos proprios e relacionamentos via arrays da entidade dona.

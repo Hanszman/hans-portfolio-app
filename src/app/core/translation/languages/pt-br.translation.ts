@@ -493,6 +493,66 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
   'pages.admin.entities.portfolio-settings.description':
     'Configuração global, destaques e ajustes estruturados que dirigem a shell do portfolio.',
+  'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
+  'pages.admin.portfolioSettings.title': 'Operações de portfolio settings',
+  'pages.admin.portfolioSettings.description':
+    'CRUD protegido e real para os ajustes em JSON que moldam a shell, os destaques e os conteúdos estruturados do portfolio.',
+  'pages.admin.portfolioSettings.actions.create': 'Criar setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Salvar setting',
+  'pages.admin.portfolioSettings.states.loading':
+    'Carregando a coleção protegida de portfolio settings...',
+  'pages.admin.portfolioSettings.states.empty':
+    'Nenhum portfolio setting protegido foi cadastrado ainda.',
+  'pages.admin.portfolioSettings.card.key': 'Chave do setting',
+  'pages.admin.portfolioSettings.card.description': 'Descrição',
+  'pages.admin.portfolioSettings.card.emptyDescription':
+    'Nenhuma descrição foi registrada para este setting ainda.',
+  'pages.admin.portfolioSettings.card.value': 'Valor JSON',
+  'pages.admin.portfolioSettings.fields.key.label': 'Chave do setting',
+  'pages.admin.portfolioSettings.fields.key.placeholder':
+    'Digite a chave única do setting',
+  'pages.admin.portfolioSettings.fields.description.label': 'Descrição',
+  'pages.admin.portfolioSettings.fields.description.placeholder':
+    'Descreva a responsabilidade deste setting',
+  'pages.admin.portfolioSettings.fields.value.label': 'Valor JSON',
+  'pages.admin.portfolioSettings.fields.value.placeholder':
+    'Digite um objeto, array ou valor escalar JSON válido',
+  'pages.admin.portfolioSettings.modal.create.title':
+    'Criar portfolio setting',
+  'pages.admin.portfolioSettings.modal.pickUpdate.title':
+    'Selecione um setting para editar',
+  'pages.admin.portfolioSettings.modal.pickUpdate.description':
+    'Escolha um dos settings protegidos atuais para abrir seu formulário de edição.',
+  'pages.admin.portfolioSettings.modal.pickDelete.title':
+    'Selecione um setting para excluir',
+  'pages.admin.portfolioSettings.modal.pickDelete.description':
+    'Escolha um dos settings protegidos atuais para confirmar sua remoção.',
+  'pages.admin.portfolioSettings.modal.update.title':
+    'Editar portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.title':
+    'Excluir portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.description':
+    'Esta ação remove permanentemente o setting protegido selecionado da configuração do portfolio.',
+  'pages.admin.portfolioSettings.feedback.created':
+    'Portfolio setting criado com sucesso.',
+  'pages.admin.portfolioSettings.feedback.updated':
+    'Portfolio setting atualizado com sucesso.',
+  'pages.admin.portfolioSettings.feedback.deleted':
+    'Portfolio setting excluído com sucesso.',
+  'pages.admin.portfolioSettings.feedback.requiredKey':
+    'A chave do setting é obrigatória antes do envio.',
+  'pages.admin.portfolioSettings.feedback.invalidJson':
+    'O valor JSON está inválido. Revise a estrutura antes de enviar.',
+  'pages.admin.portfolioSettings.feedback.missingSession':
+    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+  'pages.admin.portfolioSettings.feedback.selectionRequired':
+    'Selecione um portfolio setting antes de continuar com esta ação.',
+  'pages.admin.portfolioSettings.feedback.loadError':
+    'A coleção protegida de portfolio settings não pode ser carregada agora.',
+  'pages.admin.portfolioSettings.feedback.saveError':
+    'O portfolio setting não pode ser salvo agora.',
+  'pages.admin.portfolioSettings.feedback.deleteError':
+    'O portfolio setting não pode ser excluído agora.',
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Rótulos reutilizáveis de classificação compartilhados entre projetos, tecnologias e fluxos editoriais futuros.',

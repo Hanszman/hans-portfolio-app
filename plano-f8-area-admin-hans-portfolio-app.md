@@ -506,7 +506,17 @@ Cada entidade deve ter, no minimo:
   - pagina placeholder protegida em `/admin` ja criada como destino temporario da autenticacao
   - `SectionHeaderComponent` preparado para receber acoes projetadas, habilitando o logout no canto superior direito da tela admin
   - cobertura de testes para admin auth API, admin session, guards, rotas e pagina de login
-- proxima subetapa oficial: `F8.3` - Portfolio settings
+- `F8.3` concluida em `2026-07-06`
+- entregas concluidas na `F8.3`:
+  - dominio `src/app/core/api/admin-portfolio-settings/` criado para o CRUD protegido de `portfolio-settings`
+  - leitura autenticada de `GET /admin/portfolio-settings` integrada a shell admin existente
+  - fluxo real de `create`, `update` e `delete` implementado com modal e validacao de JSON antes do submit
+  - acoes da entidade `portfolio-settings` habilitadas diretamente na lista oficial da F8 dentro de `/admin`
+  - workspace dedicado da entidade criado dentro do dominio admin para manter a shell enxuta e o SRP
+  - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa
+- proxima subetapa oficial: `F8.4` - Tags
 
 ## 9) Regras de implementacao por subetapa
 

@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationApiService } from './core/api/admin-auth/admin-auth-api.service';
+import { AdminPortfolioSettingsApiService } from './core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -75,6 +76,28 @@ describe('app routes', () => {
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: AdminPortfolioSettingsApiService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of([
+                  {
+                    id: 'setting-1',
+                    key: 'hero.metrics',
+                    value: {
+                      projects: 12,
+                    },
+                    description: 'Controls the highlighted portfolio metrics.',
+                  },
+                ]),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
       ],

@@ -14,6 +14,7 @@ import { HeaderComponent } from '../../layout/header/header.component';
 import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navigation.helper';
 import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
+import { AdminPortfolioSettingsWorkspaceComponent } from './components/admin-portfolio-settings-workspace/admin-portfolio-settings-workspace.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
   ADMIN_ENTITY_OPERATIONS,
@@ -28,7 +29,13 @@ import {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [TranslatePipe, HeaderComponent, FooterComponent, SectionHeaderComponent],
+  imports: [
+    TranslatePipe,
+    HeaderComponent,
+    FooterComponent,
+    SectionHeaderComponent,
+    AdminPortfolioSettingsWorkspaceComponent,
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -71,6 +78,10 @@ export class AdminComponent {
   });
   protected readonly adminEntityCount = computed(() => this.adminEntities().length);
   protected readonly adminUserEmail = computed(() => this.adminUser()?.email ?? '');
+
+  protected isPortfolioSettingsEntity(entityId: string): boolean {
+    return entityId === 'portfolio-settings';
+  }
 
   protected async logout(): Promise<void> {
     this.adminSessionService.logout();

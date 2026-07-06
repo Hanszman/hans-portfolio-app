@@ -496,6 +496,66 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
   'pages.admin.entities.portfolio-settings.description':
     'Configuración global, destacados y ajustes estructurados que conducen la shell del portfolio.',
+  'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
+  'pages.admin.portfolioSettings.title': 'Operaciones de portfolio settings',
+  'pages.admin.portfolioSettings.description':
+    'CRUD protegido y real para los ajustes en JSON que moldean la shell, los destacados y los contenidos estructurados del portfolio.',
+  'pages.admin.portfolioSettings.actions.create': 'Crear setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Guardar setting',
+  'pages.admin.portfolioSettings.states.loading':
+    'Cargando la colección protegida de portfolio settings...',
+  'pages.admin.portfolioSettings.states.empty':
+    'Todavía no se registró ningún portfolio setting protegido.',
+  'pages.admin.portfolioSettings.card.key': 'Clave del setting',
+  'pages.admin.portfolioSettings.card.description': 'Descripción',
+  'pages.admin.portfolioSettings.card.emptyDescription':
+    'Todavía no se registró una descripción para este setting.',
+  'pages.admin.portfolioSettings.card.value': 'Valor JSON',
+  'pages.admin.portfolioSettings.fields.key.label': 'Clave del setting',
+  'pages.admin.portfolioSettings.fields.key.placeholder':
+    'Ingresa la clave única del setting',
+  'pages.admin.portfolioSettings.fields.description.label': 'Descripción',
+  'pages.admin.portfolioSettings.fields.description.placeholder':
+    'Describe la responsabilidad de este setting',
+  'pages.admin.portfolioSettings.fields.value.label': 'Valor JSON',
+  'pages.admin.portfolioSettings.fields.value.placeholder':
+    'Ingresa un objeto, array o valor escalar JSON válido',
+  'pages.admin.portfolioSettings.modal.create.title':
+    'Crear portfolio setting',
+  'pages.admin.portfolioSettings.modal.pickUpdate.title':
+    'Selecciona un setting para editar',
+  'pages.admin.portfolioSettings.modal.pickUpdate.description':
+    'Elige uno de los settings protegidos actuales para abrir su formulario de edición.',
+  'pages.admin.portfolioSettings.modal.pickDelete.title':
+    'Selecciona un setting para eliminar',
+  'pages.admin.portfolioSettings.modal.pickDelete.description':
+    'Elige uno de los settings protegidos actuales para confirmar su eliminación.',
+  'pages.admin.portfolioSettings.modal.update.title':
+    'Editar portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.title':
+    'Eliminar portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.description':
+    'Esta acción elimina permanentemente el setting protegido seleccionado de la configuración del portfolio.',
+  'pages.admin.portfolioSettings.feedback.created':
+    'Portfolio setting creado con éxito.',
+  'pages.admin.portfolioSettings.feedback.updated':
+    'Portfolio setting actualizado con éxito.',
+  'pages.admin.portfolioSettings.feedback.deleted':
+    'Portfolio setting eliminado con éxito.',
+  'pages.admin.portfolioSettings.feedback.requiredKey':
+    'La clave del setting es obligatoria antes de enviar.',
+  'pages.admin.portfolioSettings.feedback.invalidJson':
+    'El valor JSON es inválido. Revisa la estructura antes de enviar.',
+  'pages.admin.portfolioSettings.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.portfolioSettings.feedback.selectionRequired':
+    'Selecciona un portfolio setting antes de continuar con esta acción.',
+  'pages.admin.portfolioSettings.feedback.loadError':
+    'La colección protegida de portfolio settings no puede cargarse ahora.',
+  'pages.admin.portfolioSettings.feedback.saveError':
+    'El portfolio setting no puede guardarse ahora.',
+  'pages.admin.portfolioSettings.feedback.deleteError':
+    'El portfolio setting no puede eliminarse ahora.',
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Etiquetas reutilizables de clasificación compartidas entre proyectos, tecnologías y futuros flujos editoriales.',
