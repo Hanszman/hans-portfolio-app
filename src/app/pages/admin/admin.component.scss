@@ -1,5 +1,5 @@
 :host {
-  @apply block min-h-screen;
+  @apply block min-h-screen min-w-0 overflow-x-hidden;
   background:
     linear-gradient(
       180deg,
@@ -10,11 +10,11 @@
 }
 
 .admin-page {
-  @apply px-6 py-10 md:px-10 lg:px-16;
+  @apply min-w-0 overflow-x-hidden px-6 py-10 md:px-10 lg:px-16;
 }
 
 .admin-page-shell {
-  @apply mx-auto flex max-w-6xl flex-col gap-5 rounded-[2rem] border p-8 md:p-10;
+  @apply mx-auto flex min-w-0 max-w-6xl flex-col gap-5 overflow-x-hidden rounded-[2rem] border p-8 md:p-10;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
   box-shadow: 0 20px 60px color-mix(in srgb, var(--base-default-color) 10%, transparent);
@@ -59,7 +59,7 @@
 }
 
 .admin-page-entities {
-  @apply flex flex-col gap-4;
+  @apply flex min-w-0 flex-col gap-4;
 }
 
 .admin-page-block-header {
@@ -69,7 +69,7 @@
 }
 
 .admin-page-entity-grid {
-  @apply grid gap-4 xl:grid-cols-2;
+  @apply grid min-w-0 gap-4 xl:grid-cols-2;
 }
 
 .admin-page-entity-card {

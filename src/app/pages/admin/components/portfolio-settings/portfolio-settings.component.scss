@@ -1,9 +1,9 @@
 :host {
-  @apply block;
+  @apply block min-w-0;
 }
 
 .portfolio-settings {
-  @apply flex flex-col gap-4 rounded-[2rem] border p-6;
+  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
@@ -24,17 +24,17 @@
 }
 
 .portfolio-settings-list {
-  @apply grid gap-4;
+  @apply grid min-w-0 gap-4;
 }
 
 .portfolio-settings-card {
-  @apply flex flex-col gap-4 rounded-3xl border p-5;
+  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-3xl border p-5;
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
 
 .portfolio-settings-card-header {
-  @apply flex flex-col gap-4 md:flex-row md:items-start md:justify-between;
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
 }
 
 .portfolio-settings-card-header h3 {
@@ -46,7 +46,7 @@
 }
 
 .portfolio-settings-card-copy {
-  @apply flex flex-col gap-2;
+  @apply flex min-w-0 flex-col gap-2;
 }
 
 .portfolio-settings-card-label,
@@ -64,7 +64,7 @@
 }
 
 .portfolio-settings-card-copy pre {
-  @apply overflow-x-auto rounded-2xl border p-4 text-sm leading-6;
+  @apply max-h-80 min-w-0 overflow-x-auto overflow-y-auto rounded-2xl border p-4 text-sm leading-6;
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: color-mix(in srgb, var(--background-color) 88%, var(--white));
   color: var(--text-color);
@@ -83,10 +83,12 @@
 }
 
 .portfolio-settings-json-field textarea {
-  @apply min-h-56 rounded-3xl border px-4 py-3 text-sm leading-6 outline-none transition;
+  @apply min-h-56 max-h-96 rounded-3xl border px-4 py-3 text-sm leading-6 outline-none transition;
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
   color: var(--text-color);
+  overflow-x: auto;
+  overflow-y: auto;
   resize: vertical;
 }
 

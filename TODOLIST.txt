@@ -298,4 +298,6 @@ Vi que em todos os componentes/services de portfolio-settings vc colocou a nomen
 Como vc pode ver no print 1, recebi essa mensagem "The protected portfolio settings collection could not be loaded right now." no card de "Portfolio settings operations", o que isso quer dizer? Resolva esse problema por favor, precisamos dos 3 botões que abrem os modais com os formulários dos CRUDs funcionando.
 -Cara, beleza! Agora não tem mais erro, mas vamos lá:
 Esses containers todos que vc pode ver nos prints 1, 2 e 3 estão saindo pra fora dos containers pais, gerando um scroll horizontal da tela toda. Resolva isso colocando um scroll horizontal apenas dentro do elemento, para não acontecer igual no print 4. E verticalmente também esses elementos jsons estão ocupando muito espaço, coloque um scroll vertical neles também com uma altura máxima que eles podem ocupar.
-OBS: Testar fluxo do CRUD após as correções.
+-Beleza, vamos lá:
+Separar hans-modal do portfolio settings
+Testar fluxo do CRUD após as correções ver se tudo funciona e ver se faz sentido mesmo manter esses jsons como read.
