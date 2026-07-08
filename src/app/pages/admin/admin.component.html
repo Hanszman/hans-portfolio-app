@@ -61,7 +61,7 @@
         <p>{{ 'pages.admin.entitiesSection.description' | translate }}</p>
       </div>
 
-      <app-admin-portfolio-settings-workspace #portfolioSettingsWorkspace />
+      <app-portfolio-settings #portfolioSettingsWorkspace />
 
       <div class="admin-page-entity-grid">
         @for (entity of adminEntities(); track entity.id) {

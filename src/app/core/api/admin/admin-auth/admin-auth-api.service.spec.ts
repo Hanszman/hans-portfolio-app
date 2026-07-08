@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { buildApiUrl } from '../api.config';
+import { buildApiUrl } from '../../api.config';
 import { AdminAuthenticationApiService } from './admin-auth-api.service';
 import {
   AdminLoginResult,

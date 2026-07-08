@@ -1,5 +1,5 @@
 import { AppTranslationKey } from '../../../core/translation/translation.types';
-import { AdminAuthenticatedUser } from '../../../core/api/admin-auth/admin-auth-api.types';
+import { AdminAuthenticatedUser } from '../../../core/api/admin/admin-auth/admin-auth-api.types';
 import {
   AdminEntityDefinition,
   AdminEntityOperation,

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { buildApiUrl } from '../api.config';
+import { buildApiUrl } from '../../api.config';
 import {
   AdminLoginPayload,
   AdminLoginResult,

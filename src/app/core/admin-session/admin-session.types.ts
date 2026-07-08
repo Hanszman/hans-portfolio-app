@@ -2,7 +2,7 @@ import { AppTranslationKey } from '../translation/translation.types';
 import {
   AdminAuthenticatedUser,
   AdminLoginPayload,
-} from '../api/admin-auth/admin-auth-api.types';
+} from '../api/admin/admin-auth/admin-auth-api.types';
 
 export type AdminLoginCredentials = AdminLoginPayload;
 

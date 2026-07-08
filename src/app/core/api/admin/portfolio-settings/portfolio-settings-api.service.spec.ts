@@ -5,24 +5,40 @@ import {
 } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { buildApiUrl } from '../api.config';
-import { AdminPortfolioSettingsApiService } from './admin-portfolio-settings-api.service';
+import { buildApiUrl } from '../../api.config';
+import { PortfolioSettingsApiService } from './portfolio-settings-api.service';
 import {
-  AdminPortfolioSettingMutationPayload,
-  AdminPortfolioSettingRecord,
-} from './admin-portfolio-settings-api.types';
+  PortfolioSettingMutationPayload,
+  PortfolioSettingRecord,
+  PortfolioSettingsCollectionResponse,
+} from './portfolio-settings-api.types';
 
-const createPortfolioSetting = (): AdminPortfolioSettingRecord => ({
+const createPortfolioSetting = (): PortfolioSettingRecord => ({
   id: 'setting-1',
   key: 'hero.metrics',
   value: {
     projects: 12,
   },
   description: 'Controls the highlighted portfolio metrics.',
+  createdAt: '2026-07-06T00:00:00.000Z',
+  updatedAt: '2026-07-06T00:00:00.000Z',
 });
 
+const createPortfolioSettingsCollectionResponse =
+  (): PortfolioSettingsCollectionResponse => ({
+    data: [createPortfolioSetting()],
+    pagination: {
+      page: 1,
+      pageSize: 100,
+      totalItems: 1,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
+
 const createPortfolioSettingPayload =
-  (): AdminPortfolioSettingMutationPayload => ({
+  (): PortfolioSettingMutationPayload => ({
     key: 'hero.metrics',
     value: {
       projects: 12,
@@ -30,11 +46,11 @@ const createPortfolioSettingPayload =
     description: 'Controls the highlighted portfolio metrics.',
   });
 
-describe('AdminPortfolioSettingsApiService', () => {
+describe('PortfolioSettingsApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        AdminPortfolioSettingsApiService,
+        PortfolioSettingsApiService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -46,26 +62,25 @@ describe('AdminPortfolioSettingsApiService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the protected portfolio settings collection', () => {
-    const service = TestBed.inject(AdminPortfolioSettingsApiService);
+  it('should load the portfolio settings collection through the public read endpoint', () => {
+    const service = TestBed.inject(PortfolioSettingsApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123').subscribe((response) => {
-      expect(response).toEqual([createPortfolioSetting()]);
+    service.getAll().subscribe((response) => {
+      expect(response).toEqual(createPortfolioSettingsCollectionResponse());
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/portfolio-settings'),
+      buildApiUrl('/portfolio-settings?page=1&pageSize=100&sortBy=key&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
-    request.flush([createPortfolioSetting()]);
+    request.flush(createPortfolioSettingsCollectionResponse());
   });
 
   it('should create a protected portfolio setting', () => {
-    const service = TestBed.inject(AdminPortfolioSettingsApiService);
+    const service = TestBed.inject(PortfolioSettingsApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -85,8 +100,8 @@ describe('AdminPortfolioSettingsApiService', () => {
     request.flush(createPortfolioSetting());
   });
 
-  it('should update a protected portfolio setting', () => {
-    const service = TestBed.inject(AdminPortfolioSettingsApiService);
+  it('should update a protected portfolio setting through PUT', () => {
+    const service = TestBed.inject(PortfolioSettingsApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -99,7 +114,7 @@ describe('AdminPortfolioSettingsApiService', () => {
       buildApiUrl('/admin/portfolio-settings/setting-1'),
     );
 
-    expect(request.request.method).toBe('PATCH');
+    expect(request.request.method).toBe('PUT');
     expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
     expect(request.request.body).toEqual(createPortfolioSettingPayload());
 
@@ -107,7 +122,7 @@ describe('AdminPortfolioSettingsApiService', () => {
   });
 
   it('should delete a protected portfolio setting', () => {
-    const service = TestBed.inject(AdminPortfolioSettingsApiService);
+    const service = TestBed.inject(PortfolioSettingsApiService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('token-123', 'setting-1').subscribe((response) => {

@@ -1,4 +1,4 @@
-<section class="admin-portfolio-settings">
+<section class="portfolio-settings">
   <app-section-header
     [sectionLabel]="'pages.admin.portfolioSettings.sectionLabel' | translate"
     [title]="'pages.admin.portfolioSettings.title' | translate"
@@ -17,7 +17,7 @@
   </app-section-header>
 
   @if (feedbackKey(); as feedbackKey) {
-    <p class="admin-portfolio-settings-feedback" [attr.data-tone]="feedbackTone()">
+    <p class="portfolio-settings-feedback" [attr.data-tone]="feedbackTone()">
       {{ feedbackKey | translate }}
     </p>
   }
@@ -35,18 +35,18 @@
       [message]="'pages.admin.portfolioSettings.states.empty' | translate"
     />
   } @else {
-    <div class="admin-portfolio-settings-list">
+    <div class="portfolio-settings-list">
       @for (setting of settings(); track trackSettingById($index, setting)) {
-        <article class="admin-portfolio-settings-card">
-          <div class="admin-portfolio-settings-card-header">
+        <article class="portfolio-settings-card">
+          <div class="portfolio-settings-card-header">
             <div>
-              <p class="admin-portfolio-settings-card-label">
+              <p class="portfolio-settings-card-label">
                 {{ 'pages.admin.portfolioSettings.card.key' | translate }}
               </p>
               <h3>{{ setting.key }}</h3>
             </div>
 
-            <div class="admin-portfolio-settings-card-actions">
+            <div class="portfolio-settings-card-actions">
               <hans-button
                 [attr.aria-label]="'pages.admin.operations.update' | translate"
                 [buttonColor]="'base'"
@@ -69,15 +69,15 @@
             </div>
           </div>
 
-          <div class="admin-portfolio-settings-card-copy">
-            <p class="admin-portfolio-settings-card-label">
+          <div class="portfolio-settings-card-copy">
+            <p class="portfolio-settings-card-label">
               {{ 'pages.admin.portfolioSettings.card.description' | translate }}
             </p>
             <p>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
           </div>
 
-          <div class="admin-portfolio-settings-card-copy">
-            <p class="admin-portfolio-settings-card-label">
+          <div class="portfolio-settings-card-copy">
+            <p class="portfolio-settings-card-label">
               {{ 'pages.admin.portfolioSettings.card.value' | translate }}
             </p>
             <pre>{{ setting.formattedValue }}</pre>
@@ -96,18 +96,18 @@
     [closeButtonLabel]="'common.actions.close' | translate"
     (close)="closeModal()"
   >
-    <div class="admin-portfolio-settings-modal">
+    <div class="portfolio-settings-modal">
       @switch (modalMode()) {
         @case ('pick-update') {
-          <p class="admin-portfolio-settings-modal-description">
+          <p class="portfolio-settings-modal-description">
             {{ 'pages.admin.portfolioSettings.modal.pickUpdate.description' | translate }}
           </p>
 
-          <div class="admin-portfolio-settings-picker">
+          <div class="portfolio-settings-picker">
             @for (setting of settings(); track trackSettingById($index, setting)) {
               <button
                 type="button"
-                class="admin-portfolio-settings-picker-option"
+                class="portfolio-settings-picker-option"
                 (click)="openUpdateModal(setting.id)"
               >
                 <strong>{{ setting.key }}</strong>
@@ -117,15 +117,15 @@
           </div>
         }
         @case ('pick-delete') {
-          <p class="admin-portfolio-settings-modal-description">
+          <p class="portfolio-settings-modal-description">
             {{ 'pages.admin.portfolioSettings.modal.pickDelete.description' | translate }}
           </p>
 
-          <div class="admin-portfolio-settings-picker">
+          <div class="portfolio-settings-picker">
             @for (setting of settings(); track trackSettingById($index, setting)) {
               <button
                 type="button"
-                class="admin-portfolio-settings-picker-option"
+                class="portfolio-settings-picker-option"
                 (click)="openDeleteModal(setting.id)"
               >
                 <strong>{{ setting.key }}</strong>
@@ -135,16 +135,16 @@
           </div>
         }
         @case ('delete') {
-          <p class="admin-portfolio-settings-modal-description">
+          <p class="portfolio-settings-modal-description">
             {{ 'pages.admin.portfolioSettings.modal.delete.description' | translate }}
           </p>
 
-          <div class="admin-portfolio-settings-delete-summary">
+          <div class="portfolio-settings-delete-summary">
             <strong>{{ selectedSetting()?.key }}</strong>
             <p>{{ selectedSetting()?.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
           </div>
 
-          <div class="admin-portfolio-settings-modal-actions">
+          <div class="portfolio-settings-modal-actions">
             <hans-button
               [attr.aria-label]="'common.actions.close' | translate"
               [buttonColor]="'base'"
@@ -169,7 +169,7 @@
           </div>
         }
         @default {
-          <div class="admin-portfolio-settings-form">
+          <div class="portfolio-settings-form">
             <hans-input
               inputColor="base"
               inputSize="medium"
@@ -188,7 +188,7 @@
               (input)="updateDescription($any($event).target?.value ?? '')"
             ></hans-input>
 
-            <label class="admin-portfolio-settings-json-field">
+            <label class="portfolio-settings-json-field">
               <span>{{ 'pages.admin.portfolioSettings.fields.value.label' | translate }}</span>
               <textarea
                 [value]="form().valueText"
@@ -198,7 +198,7 @@
             </label>
           </div>
 
-          <div class="admin-portfolio-settings-modal-actions">
+          <div class="portfolio-settings-modal-actions">
             <hans-button
               [attr.aria-label]="'common.actions.close' | translate"
               [buttonColor]="'base'"

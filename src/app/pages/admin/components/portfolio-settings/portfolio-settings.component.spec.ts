@@ -1,15 +1,15 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { AdminPortfolioSettingsApiService } from '../../../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
-import { AdminPortfolioSettingRecord } from '../../../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.types';
+import { PortfolioSettingsApiService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.service';
+import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
-import { AdminPortfolioSettingsWorkspaceComponent } from './admin-portfolio-settings-workspace.component';
+import { PortfolioSettingsComponent } from './portfolio-settings.component';
 
 const createSetting = (
-  overrides: Partial<AdminPortfolioSettingRecord> = {},
-): AdminPortfolioSettingRecord => ({
+  overrides: Partial<PortfolioSettingRecord> = {},
+): PortfolioSettingRecord => ({
   id: 'setting-1',
   key: 'hero.metrics',
   value: {
@@ -19,9 +19,23 @@ const createSetting = (
   ...overrides,
 });
 
-describe('AdminPortfolioSettingsWorkspaceComponent', () => {
-  let fixture: ComponentFixture<AdminPortfolioSettingsWorkspaceComponent>;
-  let apiService: jasmine.SpyObj<AdminPortfolioSettingsApiService>;
+const createCollectionResponse = (
+  data: PortfolioSettingRecord[] = [createSetting()],
+) => ({
+  data,
+  pagination: {
+    page: 1,
+    pageSize: 100,
+    totalItems: data.length,
+    totalPages: data.length === 0 ? 0 : 1,
+    hasPreviousPage: false,
+    hasNextPage: false,
+  },
+});
+
+describe('PortfolioSettingsComponent', () => {
+  let fixture: ComponentFixture<PortfolioSettingsComponent>;
+  let apiService: jasmine.SpyObj<PortfolioSettingsApiService>;
 
   beforeAll(() => {
     for (const elementName of [
@@ -41,22 +55,22 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
   });
 
   beforeEach(async () => {
-    apiService = jasmine.createSpyObj<AdminPortfolioSettingsApiService>(
-      'AdminPortfolioSettingsApiService',
+    apiService = jasmine.createSpyObj<PortfolioSettingsApiService>(
+      'PortfolioSettingsApiService',
       ['getAll', 'create', 'update', 'delete'],
     );
-    apiService.getAll.and.returnValue(of([createSetting()]));
+    apiService.getAll.and.returnValue(of(createCollectionResponse()));
     apiService.create.and.returnValue(of(createSetting()));
     apiService.update.and.returnValue(of(createSetting()));
     apiService.delete.and.returnValue(of(void 0));
 
     await TestBed.configureTestingModule({
-      imports: [AdminPortfolioSettingsWorkspaceComponent],
+      imports: [PortfolioSettingsComponent],
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: apiService,
         },
         {
@@ -68,7 +82,7 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AdminPortfolioSettingsWorkspaceComponent);
+    fixture = TestBed.createComponent(PortfolioSettingsComponent);
   });
 
   it('should load and render the protected portfolio settings workspace', async () => {
@@ -78,10 +92,12 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(apiService.getAll).toHaveBeenCalledWith('token-123');
+    expect(apiService.getAll).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Portfolio settings operations');
     expect(compiled.textContent).toContain('hero.metrics');
-    expect(compiled.textContent).toContain('Controls the highlighted portfolio metrics.');
+    expect(compiled.textContent).toContain(
+      'Controls the highlighted portfolio metrics.',
+    );
   });
 
   it('should create a portfolio setting from the modal form', async () => {
@@ -257,36 +273,37 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
     expect(apiService.delete).not.toHaveBeenCalled();
   });
 
-  it('should expose the missing-session feedback when the access token is unavailable', async () => {
+  it('should render the empty state when the protected collection has no settings yet', async () => {
     TestBed.resetTestingModule();
+    apiService.getAll.and.returnValue(of(createCollectionResponse([])));
 
     await TestBed.configureTestingModule({
-      imports: [AdminPortfolioSettingsWorkspaceComponent],
+      imports: [PortfolioSettingsComponent],
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: apiService,
         },
         {
           provide: AdminSessionService,
           useValue: {
-            accessToken: () => null,
+            accessToken: () => 'token-123',
           },
         },
       ],
     }).compileComponents();
 
     const missingSessionFixture = TestBed.createComponent(
-      AdminPortfolioSettingsWorkspaceComponent,
+      PortfolioSettingsComponent,
     );
     missingSessionFixture.detectChanges();
     await missingSessionFixture.whenStable();
     missingSessionFixture.detectChanges();
 
     expect(missingSessionFixture.nativeElement.textContent).toContain(
-      'The authenticated admin session is unavailable. Log in again to continue.',
+      'No protected portfolio setting has been registered yet.',
     );
   });
 
@@ -294,12 +311,12 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
     TestBed.resetTestingModule();
 
     await TestBed.configureTestingModule({
-      imports: [AdminPortfolioSettingsWorkspaceComponent],
+      imports: [PortfolioSettingsComponent],
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: apiService,
         },
         {
@@ -312,7 +329,7 @@ describe('AdminPortfolioSettingsWorkspaceComponent', () => {
     }).compileComponents();
 
     const missingSessionFixture = TestBed.createComponent(
-      AdminPortfolioSettingsWorkspaceComponent,
+      PortfolioSettingsComponent,
     );
     missingSessionFixture.detectChanges();
     await missingSessionFixture.whenStable();

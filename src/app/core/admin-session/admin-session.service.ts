@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { AdminAuthenticationApiService } from '../api/admin-auth/admin-auth-api.service';
-import { AdminAuthenticatedUser } from '../api/admin-auth/admin-auth-api.types';
+import { AdminAuthenticationApiService } from '../api/admin/admin-auth/admin-auth-api.service';
+import { AdminAuthenticatedUser } from '../api/admin/admin-auth/admin-auth-api.types';
 import {
   ADMIN_SESSION_STORAGE_KEY,
   AdminLoginCredentials,

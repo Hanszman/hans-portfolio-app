@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { AdminPortfolioSettingsApiService } from '../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
+import { PortfolioSettingsApiService } from '../../core/api/admin/portfolio-settings/portfolio-settings-api.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
@@ -51,19 +51,29 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: {
             getAll: () =>
-              of([
-                {
-                  id: 'setting-1',
-                  key: 'hero.metrics',
-                  value: {
-                    projects: 12,
+              of({
+                data: [
+                  {
+                    id: 'setting-1',
+                    key: 'hero.metrics',
+                    value: {
+                      projects: 12,
+                    },
+                    description: 'Controls the highlighted portfolio metrics.',
                   },
-                  description: 'Controls the highlighted portfolio metrics.',
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
                 },
-              ]),
+              }),
             create: jasmine.createSpy(),
             update: jasmine.createSpy(),
             delete: jasmine.createSpy(),
@@ -128,9 +138,20 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: {
-            getAll: () => of([]),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
             create: jasmine.createSpy(),
             update: jasmine.createSpy(),
             delete: jasmine.createSpy(),

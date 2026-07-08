@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { AdminAuthenticationApiService } from './core/api/admin-auth/admin-auth-api.service';
-import { AdminPortfolioSettingsApiService } from './core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
+import { AdminAuthenticationApiService } from './core/api/admin/admin-auth/admin-auth-api.service';
+import { PortfolioSettingsApiService } from './core/api/admin/portfolio-settings/portfolio-settings-api.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -79,21 +79,31 @@ describe('app routes', () => {
           },
         },
         {
-          provide: AdminPortfolioSettingsApiService,
+          provide: PortfolioSettingsApiService,
           useValue: {
             getAll: jasmine
               .createSpy()
               .and.returnValue(
-                of([
-                  {
-                    id: 'setting-1',
-                    key: 'hero.metrics',
-                    value: {
-                      projects: 12,
+                of({
+                  data: [
+                    {
+                      id: 'setting-1',
+                      key: 'hero.metrics',
+                      value: {
+                        projects: 12,
+                      },
+                      description: 'Controls the highlighted portfolio metrics.',
                     },
-                    description: 'Controls the highlighted portfolio metrics.',
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 100,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
                   },
-                ]),
+                }),
               ),
             create: jasmine.createSpy(),
             update: jasmine.createSpy(),

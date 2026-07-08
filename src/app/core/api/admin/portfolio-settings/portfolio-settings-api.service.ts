@@ -1,32 +1,37 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { buildApiUrl } from '../api.config';
+import { buildApiUrl } from '../../api.config';
 import {
-  AdminPortfolioSettingMutationPayload,
-  AdminPortfolioSettingRecord,
-} from './admin-portfolio-settings-api.types';
+  PortfolioSettingMutationPayload,
+  PortfolioSettingRecord,
+  PortfolioSettingsCollectionResponse,
+} from './portfolio-settings-api.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminPortfolioSettingsApiService {
+export class PortfolioSettingsApiService {
   private readonly httpClient = inject(HttpClient);
 
-  getAll(accessToken: string): Observable<readonly AdminPortfolioSettingRecord[]> {
-    return this.httpClient.get<readonly AdminPortfolioSettingRecord[]>(
-      buildApiUrl('/admin/portfolio-settings'),
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
+  getAll(): Observable<PortfolioSettingsCollectionResponse> {
+    const searchParams = new URLSearchParams({
+      page: '1',
+      pageSize: '100',
+      sortBy: 'key',
+      sortDirection: 'asc',
+    });
+
+    return this.httpClient.get<PortfolioSettingsCollectionResponse>(
+      buildApiUrl(`/portfolio-settings?${searchParams.toString()}`),
     );
   }
 
   create(
     accessToken: string,
-    payload: AdminPortfolioSettingMutationPayload,
-  ): Observable<AdminPortfolioSettingRecord> {
-    return this.httpClient.post<AdminPortfolioSettingRecord>(
+    payload: PortfolioSettingMutationPayload,
+  ): Observable<PortfolioSettingRecord> {
+    return this.httpClient.post<PortfolioSettingRecord>(
       buildApiUrl('/admin/portfolio-settings'),
       payload,
       {
@@ -38,9 +43,9 @@ export class AdminPortfolioSettingsApiService {
   update(
     accessToken: string,
     settingId: string,
-    payload: AdminPortfolioSettingMutationPayload,
-  ): Observable<AdminPortfolioSettingRecord> {
-    return this.httpClient.patch<AdminPortfolioSettingRecord>(
+    payload: PortfolioSettingMutationPayload,
+  ): Observable<PortfolioSettingRecord> {
+    return this.httpClient.put<PortfolioSettingRecord>(
       buildApiUrl(`/admin/portfolio-settings/${settingId}`),
       payload,
       {

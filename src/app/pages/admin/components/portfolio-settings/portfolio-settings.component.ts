@@ -9,57 +9,53 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AdminPortfolioSettingsApiService } from '../../../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.service';
+import { PortfolioSettingsApiService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.service';
 import {
-  AdminPortfolioSettingMutationPayload,
-  AdminPortfolioSettingRecord,
-} from '../../../../core/api/admin-portfolio-settings/admin-portfolio-settings-api.types';
+  PortfolioSettingMutationPayload,
+  PortfolioSettingRecord,
+} from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { SectionHeaderComponent } from '../../../../shared/section-header/section-header.component';
 import {
-  buildAdminPortfolioSettingsFormValue,
-  buildAdminPortfolioSettingsViewModels,
-  parseAdminPortfolioSettingsJsonValue,
-} from '../../helpers/admin-portfolio-settings.helper';
+  buildPortfolioSettingsFormValue,
+  buildPortfolioSettingsViewModels,
+  parsePortfolioSettingsJsonValue,
+} from './helpers/portfolio-settings.helper';
 import {
-  AdminPortfolioSettingsFormValue,
-  AdminPortfolioSettingsModalMode,
-  createEmptyAdminPortfolioSettingsFormValue,
-} from './admin-portfolio-settings-workspace.types';
+  PortfolioSettingsFormValue,
+  PortfolioSettingsModalMode,
+  createEmptyPortfolioSettingsFormValue,
+} from './portfolio-settings.types';
 
 @Component({
-  selector: 'app-admin-portfolio-settings-workspace',
+  selector: 'app-portfolio-settings',
   standalone: true,
   imports: [TranslatePipe, SectionHeaderComponent, InfoStateComponent],
-  templateUrl: './admin-portfolio-settings-workspace.component.html',
-  styleUrl: './admin-portfolio-settings-workspace.component.scss',
+  templateUrl: './portfolio-settings.component.html',
+  styleUrl: './portfolio-settings.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
-  private readonly adminPortfolioSettingsApiService = inject(
-    AdminPortfolioSettingsApiService,
-  );
+export class PortfolioSettingsComponent implements OnInit {
+  private readonly portfolioSettingsApiService = inject(PortfolioSettingsApiService);
   private readonly adminSessionService = inject(AdminSessionService);
 
-  private readonly settingsSignal = signal<readonly AdminPortfolioSettingRecord[]>([]);
+  private readonly settingsSignal = signal<readonly PortfolioSettingRecord[]>([]);
   private readonly isLoadingSignal = signal(true);
   private readonly isSubmittingSignal = signal(false);
   private readonly loadErrorKeySignal = signal<AppTranslationKey | null>(null);
   private readonly feedbackKeySignal = signal<AppTranslationKey | null>(null);
   private readonly feedbackToneSignal = signal<'success' | 'error' | null>(null);
-  private readonly modalModeSignal =
-    signal<AdminPortfolioSettingsModalMode | null>(null);
-  private readonly selectedSettingSignal =
-    signal<AdminPortfolioSettingRecord | null>(null);
-  private readonly formSignal = signal<AdminPortfolioSettingsFormValue>(
-    createEmptyAdminPortfolioSettingsFormValue(),
+  private readonly modalModeSignal = signal<PortfolioSettingsModalMode | null>(null);
+  private readonly selectedSettingSignal = signal<PortfolioSettingRecord | null>(null);
+  private readonly formSignal = signal<PortfolioSettingsFormValue>(
+    createEmptyPortfolioSettingsFormValue(),
   );
 
   protected readonly settings = computed(() =>
-    buildAdminPortfolioSettingsViewModels(this.settingsSignal()),
+    buildPortfolioSettingsViewModels(this.settingsSignal()),
   );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
@@ -94,7 +90,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
 
   openCreateModal(): void {
     this.selectedSettingSignal.set(null);
-    this.formSignal.set(createEmptyAdminPortfolioSettingsFormValue());
+    this.formSignal.set(createEmptyPortfolioSettingsFormValue());
     this.feedbackKeySignal.set(null);
     this.feedbackToneSignal.set(null);
     this.modalModeSignal.set('create');
@@ -120,7 +116,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
     }
 
     this.selectedSettingSignal.set(setting);
-    this.formSignal.set(buildAdminPortfolioSettingsFormValue(setting));
+    this.formSignal.set(buildPortfolioSettingsFormValue(setting));
     this.modalModeSignal.set('update');
   }
 
@@ -191,25 +187,12 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
   }
 
   private async loadSettings(): Promise<void> {
-    const accessToken = this.adminSessionService.accessToken();
-
-    if (!accessToken) {
-      this.isLoadingSignal.set(false);
-      this.loadErrorKeySignal.set(
-        'pages.admin.portfolioSettings.feedback.missingSession',
-      );
-      return;
-    }
-
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
     try {
-      const settings = await firstValueFrom(
-        this.adminPortfolioSettingsApiService.getAll(accessToken),
-      );
-
-      this.settingsSignal.set(settings);
+      const response = await firstValueFrom(this.portfolioSettingsApiService.getAll());
+      this.settingsSignal.set(response.data);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.portfolioSettings.feedback.loadError');
     } finally {
@@ -217,7 +200,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
     }
   }
 
-  private buildMutationPayload(): AdminPortfolioSettingMutationPayload | null {
+  private buildMutationPayload(): PortfolioSettingMutationPayload | null {
     const formValue = this.form();
 
     if (!formValue.key.trim()) {
@@ -225,7 +208,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
       return null;
     }
 
-    const parsedValue = parseAdminPortfolioSettingsJsonValue(formValue.valueText);
+    const parsedValue = parsePortfolioSettingsJsonValue(formValue.valueText);
 
     if (!parsedValue.isValid) {
       this.setErrorFeedback(parsedValue.errorKey);
@@ -241,14 +224,14 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
 
   private async submitUpsert(
     accessToken: string,
-    payload: AdminPortfolioSettingMutationPayload,
+    payload: PortfolioSettingMutationPayload,
   ): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
         await firstValueFrom(
-          this.adminPortfolioSettingsApiService.create(accessToken, payload),
+          this.portfolioSettingsApiService.create(accessToken, payload),
         );
 
         this.setSuccessFeedback('pages.admin.portfolioSettings.feedback.created');
@@ -263,7 +246,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.adminPortfolioSettingsApiService.update(
+          this.portfolioSettingsApiService.update(
             accessToken,
             selectedSetting.id,
             payload,
@@ -294,7 +277,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
 
     try {
       await firstValueFrom(
-        this.adminPortfolioSettingsApiService.delete(accessToken, selectedSetting.id),
+        this.portfolioSettingsApiService.delete(accessToken, selectedSetting.id),
       );
 
       this.closeModal();
@@ -307,7 +290,7 @@ export class AdminPortfolioSettingsWorkspaceComponent implements OnInit {
     }
   }
 
-  private patchForm(patch: Partial<AdminPortfolioSettingsFormValue>): void {
+  private patchForm(patch: Partial<PortfolioSettingsFormValue>): void {
     this.formSignal.update((formValue) => ({
       ...formValue,
       ...patch,

@@ -59,7 +59,7 @@ Essa etapa nao faz parte da navegacao publica. Ela deve:
 
 ### 4.1. Infraestrutura HTTP de autenticacao admin
 
-Criar um dominio dedicado em `src/app/core/api/admin-auth/` com:
+Criar um dominio dedicado em `src/app/core/api/admin/admin-auth/` com:
 
 - `admin-auth-api.service.ts`
 - `admin-auth-api.types.ts`
@@ -496,7 +496,7 @@ Cada entidade deve ter, no minimo:
 - entregas concluidas na `F8.1`:
   - rota oculta `/login` implementada fora da navegacao publica
   - integracao real com `POST /auth/login`
-  - dominio `src/app/core/api/admin-auth/` criado para contratos e chamadas HTTP de autenticacao
+  - dominio `src/app/core/api/admin/admin-auth/` criado para contratos e chamadas HTTP de autenticacao
   - dominio `src/app/core/admin-session/` criado para sessao, token, guard e restauracao de autenticacao
   - persistencia de token em `sessionStorage`
   - redirecionamento de login bem-sucedido para `/admin`
@@ -508,11 +508,11 @@ Cada entidade deve ter, no minimo:
   - cobertura de testes para admin auth API, admin session, guards, rotas e pagina de login
 - `F8.3` concluida em `2026-07-06`
 - entregas concluidas na `F8.3`:
-  - dominio `src/app/core/api/admin-portfolio-settings/` criado para o CRUD protegido de `portfolio-settings`
-  - leitura autenticada de `GET /admin/portfolio-settings` integrada a shell admin existente
+  - dominio `src/app/core/api/admin/portfolio-settings/` criado para o CRUD de `portfolio-settings` dentro da estrutura administrativa
+  - leitura da colecao ajustada para o contrato real da API via `GET /portfolio-settings`, mantendo `POST`, `PUT` e `DELETE` em `/admin/portfolio-settings`
   - fluxo real de `create`, `update` e `delete` implementado com modal e validacao de JSON antes do submit
   - acoes da entidade `portfolio-settings` habilitadas diretamente na lista oficial da F8 dentro de `/admin`
-  - workspace dedicado da entidade criado dentro do dominio admin para manter a shell enxuta e o SRP
+  - componente dedicado da entidade organizado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos para manter a shell enxuta e o SRP
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa

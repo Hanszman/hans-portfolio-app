@@ -1075,7 +1075,7 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
 
 #### Estrutura tecnica alvo da F8
 
-- `src/app/core/api/admin-auth/`
+- `src/app/core/api/admin/admin-auth/`
   - adapter/service HTTP de autenticacao administrativa
   - contratos tipados de `POST /auth/login` e `GET /admin/session`
 - `src/app/core/admin-session/`
@@ -1155,7 +1155,7 @@ Regra importante de modelagem para a F8:
   - entregue:
     - rota oculta `/login` fora da shell publica
     - integracao real com `POST /auth/login`
-    - dominio `src/app/core/api/admin-auth/` criado para transporte HTTP e contratos de autenticacao administrativa
+    - dominio `src/app/core/api/admin/admin-auth/` criado para transporte HTTP e contratos de autenticacao administrativa
     - dominio `src/app/core/admin-session/` criado para sessao, token, guard e restauracao de autenticacao
     - persistencia de token em `sessionStorage`
     - redirecionamento para `/admin` apos login valido
@@ -1172,10 +1172,10 @@ Regra importante de modelagem para a F8:
   - observacao: `value` e `Json`, entao a primeira versao deve ter editor textual validado antes do submit
   - status: concluida em `2026-07-06`
   - entregue:
-    - dominio `src/app/core/api/admin-portfolio-settings/` criado para contratos e chamadas HTTP protegidas da entidade
-    - listagem autenticada de `portfolio-settings` integrada na shell admin existente
+    - dominio `src/app/core/api/admin/portfolio-settings/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
+    - listagem de `portfolio-settings` integrada na shell admin usando o contrato real da API: `GET /portfolio-settings` para leitura e `/admin/portfolio-settings` para mutacoes protegidas
     - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
-    - workspace administrativo dedicado com modais de selecao, formulario e confirmacao
+    - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos e modais de selecao, formulario e confirmacao
     - validacao explicita de JSON antes do submit do campo `value`
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
     - traducoes sincronizadas nos tres idiomas
