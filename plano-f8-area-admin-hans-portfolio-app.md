@@ -515,6 +515,7 @@ Cada entidade deve ter, no minimo:
   - componente dedicado da entidade organizado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos para manter a shell enxuta e o SRP
   - modal extraido para `src/app/pages/admin/components/portfolio-settings/components/portfolio-settings-modal/`, separando formulario, seletores e confirmacao do componente pai
   - leitura visual da colecao refinada com um toggle `Read`, mantendo o card administrativo compacto por padrao e exibindo os JSONs somente sob demanda
+  - card da entidade consolidado em uma unica superficie funcional dentro da shell admin, incorporando endpoint, acoes gerais `create/read/update/delete` e eliminando a duplicidade visual com o roadmap
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa

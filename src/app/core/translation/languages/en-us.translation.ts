@@ -487,9 +487,9 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entities.portfolio-settings.description':
     'Global configuration, highlighted content and structured settings that drive the portfolio shell.',
   'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
-  'pages.admin.portfolioSettings.title': 'Portfolio settings operations',
+  'pages.admin.portfolioSettings.title': 'Portfolio settings',
   'pages.admin.portfolioSettings.description':
-    'Live protected CRUD for the JSON-based settings that shape the portfolio shell, highlights and structured content.',
+    'Live protected CRUD for the JSON-based settings that shape the shell, highlights and structured content.',
   'pages.admin.portfolioSettings.actions.create': 'Create',
   'pages.admin.portfolioSettings.actions.submit': 'Save setting',
   'pages.admin.portfolioSettings.states.loading':

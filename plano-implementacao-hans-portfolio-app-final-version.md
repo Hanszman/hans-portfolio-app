@@ -1177,6 +1177,7 @@ Regra importante de modelagem para a F8:
     - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
     - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos e modal segregado em `components/portfolio-settings-modal/`
     - leitura operacional refinada com acao `Read`, preservando o card administrativo compacto e exibindo os JSONs apenas sob demanda
+    - apresentacao consolidada em um unico card funcional de `Portfolio settings`, com endpoint e acoes gerais reposicionadas acima da leitura expandida
     - validacao explicita de JSON antes do submit do campo `value`
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
     - traducoes sincronizadas nos tres idiomas

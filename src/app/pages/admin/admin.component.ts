@@ -68,6 +68,9 @@ export class AdminComponent {
       ADMIN_ENTITY_OPERATIONS,
     );
   });
+  protected readonly secondaryAdminEntities = computed(() =>
+    this.adminEntities().filter((entity) => !this.isPortfolioSettingsEntity(entity.id)),
+  );
   protected readonly adminFacts = computed(() => {
     this.translation.locale();
 

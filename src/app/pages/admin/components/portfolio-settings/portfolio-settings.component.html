@@ -1,9 +1,25 @@
 <section class="portfolio-settings">
-  <app-section-header
-    [sectionLabel]="'pages.admin.portfolioSettings.sectionLabel' | translate"
-    [title]="'pages.admin.portfolioSettings.title' | translate"
-    [description]="'pages.admin.portfolioSettings.description' | translate"
-  />
+  <div class="portfolio-settings-meta">
+    <span class="portfolio-settings-substep">F8.3</span>
+    <span class="portfolio-settings-relation-chip">
+      {{ 'pages.admin.relationMode.owner' | translate }}
+    </span>
+  </div>
+
+  <div class="portfolio-settings-copy">
+    <p class="portfolio-settings-kicker">
+      {{ 'pages.admin.portfolioSettings.sectionLabel' | translate }}
+    </p>
+    <h2>{{ 'pages.admin.portfolioSettings.title' | translate }}</h2>
+    <p>
+      {{ 'pages.admin.entities.portfolio-settings.description' | translate }}
+      {{ 'pages.admin.portfolioSettings.description' | translate }}
+    </p>
+  </div>
+
+  <p class="portfolio-settings-endpoint">
+    GET/POST/PATCH/DELETE /portfolio-settings
+  </p>
 
   @if (feedbackKey(); as feedbackKey) {
     <p class="portfolio-settings-feedback" [attr.data-tone]="feedbackTone()">
@@ -12,6 +28,52 @@
   }
 
   <div class="portfolio-settings-body">
+    <div class="portfolio-settings-actions">
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.create' | translate"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        (click)="openCreateModal()"
+      >
+        {{ 'pages.admin.operations.create' | translate }}
+      </hans-button>
+
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.read' | translate"
+        [attr.aria-pressed]="isReadVisible()"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+        (click)="toggleReadVisibility()"
+      >
+        {{ 'pages.admin.operations.read' | translate }}
+      </hans-button>
+
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.update' | translate"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+        (click)="openUpdatePickerModal()"
+      >
+        {{ 'pages.admin.operations.update' | translate }}
+      </hans-button>
+
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.delete' | translate"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+        (click)="openDeletePickerModal()"
+      >
+        {{ 'pages.admin.operations.delete' | translate }}
+      </hans-button>
+    </div>
+
     @if (isLoading()) {
       <app-info-state
         mode="loading"
@@ -76,30 +138,6 @@
         }
       </div>
     }
-
-    <div class="portfolio-settings-actions">
-      <hans-button
-        [attr.aria-label]="'pages.admin.operations.create' | translate"
-        [buttonColor]="'primary'"
-        [buttonSize]="'medium'"
-        [buttonVariant]="'default'"
-        (click)="openCreateModal()"
-      >
-        {{ 'pages.admin.operations.create' | translate }}
-      </hans-button>
-
-      <hans-button
-        [attr.aria-label]="'pages.admin.operations.read' | translate"
-        [attr.aria-pressed]="isReadVisible()"
-        [buttonColor]="'base'"
-        [buttonSize]="'medium'"
-        [buttonVariant]="'outline'"
-        [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-        (click)="toggleReadVisibility()"
-      >
-        {{ 'pages.admin.operations.read' | translate }}
-      </hans-button>
-    </div>
   </div>
 
   <app-portfolio-settings-modal

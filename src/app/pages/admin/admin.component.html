@@ -64,7 +64,7 @@
       <app-portfolio-settings #portfolioSettingsWorkspace />
 
       <div class="admin-page-entity-grid">
-        @for (entity of adminEntities(); track entity.id) {
+        @for (entity of secondaryAdminEntities(); track entity.id) {
           <article class="admin-page-card admin-page-entity-card">
             <div class="admin-page-entity-meta">
               <span class="admin-page-substep">{{ entity.substep }}</span>

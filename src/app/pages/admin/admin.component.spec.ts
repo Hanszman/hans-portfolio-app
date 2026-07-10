@@ -95,12 +95,11 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('12 entity workflows');
     expect(compiled.textContent).toContain('Portfolio settings');
-    expect(compiled.textContent).toContain('Portfolio settings operations');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(12);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(11);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {

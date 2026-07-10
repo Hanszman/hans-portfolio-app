@@ -17,7 +17,6 @@ import {
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { SectionHeaderComponent } from '../../../../shared/section-header/section-header.component';
 import { PortfolioSettingsModalComponent } from './components/portfolio-settings-modal/portfolio-settings-modal.component';
 import {
   buildPortfolioSettingsFormValue,
@@ -35,7 +34,6 @@ import {
   standalone: true,
   imports: [
     TranslatePipe,
-    SectionHeaderComponent,
     InfoStateComponent,
     PortfolioSettingsModalComponent,
   ],

@@ -8,6 +8,50 @@
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
 
+.portfolio-settings-meta {
+  @apply flex flex-wrap items-center gap-3;
+}
+
+.portfolio-settings-substep,
+.portfolio-settings-relation-chip {
+  @apply rounded-full px-3 py-1 text-sm font-semibold;
+}
+
+.portfolio-settings-substep {
+  color: var(--primary-default-color);
+  background: color-mix(in srgb, var(--primary-default-color) 16%, transparent);
+}
+
+.portfolio-settings-relation-chip {
+  color: var(--text-color);
+  background: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+}
+
+.portfolio-settings-copy {
+  @apply flex min-w-0 flex-col gap-3;
+}
+
+.portfolio-settings-kicker {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.portfolio-settings-copy h2 {
+  @apply text-4xl font-semibold md:text-5xl;
+}
+
+.portfolio-settings-copy p:last-child,
+.portfolio-settings-endpoint {
+  @apply text-sm leading-8 md:text-base;
+  color: var(--base-strong-color);
+}
+
+.portfolio-settings-endpoint {
+  @apply rounded-2xl border px-4 py-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
 .portfolio-settings-feedback {
   @apply rounded-2xl border px-4 py-3 text-sm;
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);

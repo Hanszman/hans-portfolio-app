@@ -93,9 +93,12 @@ describe('PortfolioSettingsComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(apiService.getAll).toHaveBeenCalled();
-    expect(compiled.textContent).toContain('Portfolio settings operations');
+    expect(compiled.textContent).toContain('Portfolio settings');
+    expect(compiled.textContent).toContain('GET/POST/PATCH/DELETE /portfolio-settings');
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
+    expect(compiled.textContent).toContain('Update');
+    expect(compiled.textContent).toContain('Delete');
     expect(compiled.textContent).not.toContain('Create setting');
     expect(compiled.textContent).not.toContain('hero.metrics');
   });
