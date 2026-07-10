@@ -1175,7 +1175,8 @@ Regra importante de modelagem para a F8:
     - dominio `src/app/core/api/admin/portfolio-settings/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
     - listagem de `portfolio-settings` integrada na shell admin usando o contrato real da API: `GET /portfolio-settings` para leitura e `/admin/portfolio-settings` para mutacoes protegidas
     - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
-    - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos e modais de selecao, formulario e confirmacao
+    - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos e modal segregado em `components/portfolio-settings-modal/`
+    - leitura operacional refinada com acao `Read`, preservando o card administrativo compacto e exibindo os JSONs apenas sob demanda
     - validacao explicita de JSON antes do submit do campo `value`
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
     - traducoes sincronizadas nos tres idiomas

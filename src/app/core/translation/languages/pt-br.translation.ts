@@ -486,6 +486,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.entitiesSection.description':
     'Cada card abaixo marca a ordem oficial da F8, sua família de endpoint protegido e as ações de create, update e delete que serão habilitadas nas próximas entregas.',
   'pages.admin.operations.create': 'Criar',
+  'pages.admin.operations.read': 'Ler',
   'pages.admin.operations.update': 'Editar',
   'pages.admin.operations.delete': 'Excluir',
   'pages.admin.relationMode.owner': 'Relacionamentos da entidade dona',
@@ -497,7 +498,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.portfolioSettings.title': 'Operações de portfolio settings',
   'pages.admin.portfolioSettings.description':
     'CRUD protegido e real para os ajustes em JSON que moldam a shell, os destaques e os conteúdos estruturados do portfolio.',
-  'pages.admin.portfolioSettings.actions.create': 'Criar setting',
+  'pages.admin.portfolioSettings.actions.create': 'Criar',
   'pages.admin.portfolioSettings.actions.submit': 'Salvar setting',
   'pages.admin.portfolioSettings.states.loading':
     'Carregando a coleção protegida de portfolio settings...',

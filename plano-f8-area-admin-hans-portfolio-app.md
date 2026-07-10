@@ -513,6 +513,8 @@ Cada entidade deve ter, no minimo:
   - fluxo real de `create`, `update` e `delete` implementado com modal e validacao de JSON antes do submit
   - acoes da entidade `portfolio-settings` habilitadas diretamente na lista oficial da F8 dentro de `/admin`
   - componente dedicado da entidade organizado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos para manter a shell enxuta e o SRP
+  - modal extraido para `src/app/pages/admin/components/portfolio-settings/components/portfolio-settings-modal/`, separando formulario, seletores e confirmacao do componente pai
+  - leitura visual da colecao refinada com um toggle `Read`, mantendo o card administrativo compacto por padrao e exibindo os JSONs somente sob demanda
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa

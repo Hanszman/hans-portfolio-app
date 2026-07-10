@@ -94,10 +94,10 @@ describe('PortfolioSettingsComponent', () => {
 
     expect(apiService.getAll).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Portfolio settings operations');
-    expect(compiled.textContent).toContain('hero.metrics');
-    expect(compiled.textContent).toContain(
-      'Controls the highlighted portfolio metrics.',
-    );
+    expect(compiled.textContent).toContain('Create');
+    expect(compiled.textContent).toContain('Read');
+    expect(compiled.textContent).not.toContain('Create setting');
+    expect(compiled.textContent).not.toContain('hero.metrics');
   });
 
   it('should create a portfolio setting from the modal form', async () => {
@@ -450,5 +450,66 @@ describe('PortfolioSettingsComponent', () => {
     expect(component.feedbackKey()).toBe(
       'pages.admin.portfolioSettings.feedback.deleteError',
     );
+  });
+
+  it('should toggle the read view only when protected settings exist', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      toggleReadVisibility(): void;
+      isReadVisible(): boolean;
+    };
+
+    expect(fixture.nativeElement.textContent).not.toContain('hero.metrics');
+
+    component.toggleReadVisibility();
+    fixture.detectChanges();
+
+    expect(component.isReadVisible()).toBeTrue();
+    expect(fixture.nativeElement.textContent).toContain('hero.metrics');
+
+    component.toggleReadVisibility();
+    fixture.detectChanges();
+
+    expect(component.isReadVisible()).toBeFalse();
+    expect(fixture.nativeElement.textContent).not.toContain('hero.metrics');
+  });
+
+  it('should keep the read view disabled when there are no settings to display', async () => {
+    TestBed.resetTestingModule();
+    apiService.getAll.and.returnValue(of(createCollectionResponse([])));
+
+    await TestBed.configureTestingModule({
+      imports: [PortfolioSettingsComponent],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideAppTranslations(),
+        {
+          provide: PortfolioSettingsApiService,
+          useValue: apiService,
+        },
+        {
+          provide: AdminSessionService,
+          useValue: {
+            accessToken: () => 'token-123',
+          },
+        },
+      ],
+    }).compileComponents();
+
+    const emptyFixture = TestBed.createComponent(PortfolioSettingsComponent);
+    emptyFixture.detectChanges();
+    await emptyFixture.whenStable();
+
+    const component = emptyFixture.componentInstance as unknown as {
+      toggleReadVisibility(): void;
+      isReadVisible(): boolean;
+    };
+
+    component.toggleReadVisibility();
+
+    expect(component.isReadVisible()).toBeFalse();
   });
 });

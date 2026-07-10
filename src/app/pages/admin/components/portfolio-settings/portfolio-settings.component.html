@@ -3,18 +3,7 @@
     [sectionLabel]="'pages.admin.portfolioSettings.sectionLabel' | translate"
     [title]="'pages.admin.portfolioSettings.title' | translate"
     [description]="'pages.admin.portfolioSettings.description' | translate"
-  >
-    <hans-button
-      sectionHeaderActions
-      [attr.aria-label]="'pages.admin.portfolioSettings.actions.create' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      (click)="openCreateModal()"
-    >
-      {{ 'pages.admin.portfolioSettings.actions.create' | translate }}
-    </hans-button>
-  </app-section-header>
+  />
 
   @if (feedbackKey(); as feedbackKey) {
     <p class="portfolio-settings-feedback" [attr.data-tone]="feedbackTone()">
@@ -22,216 +11,111 @@
     </p>
   }
 
-  @if (isLoading()) {
-    <app-info-state
-      mode="loading"
-      [message]="'pages.admin.portfolioSettings.states.loading' | translate"
-    />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasSettings()) {
-    <app-info-state
-      mode="empty"
-      [message]="'pages.admin.portfolioSettings.states.empty' | translate"
-    />
-  } @else {
-    <div class="portfolio-settings-list">
-      @for (setting of settings(); track trackSettingById($index, setting)) {
-        <article class="portfolio-settings-card">
-          <div class="portfolio-settings-card-header">
-            <div>
+  <div class="portfolio-settings-body">
+    @if (isLoading()) {
+      <app-info-state
+        mode="loading"
+        [message]="'pages.admin.portfolioSettings.states.loading' | translate"
+      />
+    } @else if (loadErrorKey(); as loadErrorKey) {
+      <app-info-state mode="error" [message]="loadErrorKey | translate" />
+    } @else if (!hasSettings()) {
+      <app-info-state
+        mode="empty"
+        [message]="'pages.admin.portfolioSettings.states.empty' | translate"
+      />
+    } @else if (isReadVisible()) {
+      <div class="portfolio-settings-list">
+        @for (setting of settings(); track trackSettingById($index, setting)) {
+          <article class="portfolio-settings-card">
+            <div class="portfolio-settings-card-header">
+              <div>
+                <p class="portfolio-settings-card-label">
+                  {{ 'pages.admin.portfolioSettings.card.key' | translate }}
+                </p>
+                <h3>{{ setting.key }}</h3>
+              </div>
+
+              <div class="portfolio-settings-card-actions">
+                <hans-button
+                  [attr.aria-label]="'pages.admin.operations.update' | translate"
+                  [buttonColor]="'base'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'outline'"
+                  (click)="openUpdateModal(setting.id)"
+                >
+                  {{ 'pages.admin.operations.update' | translate }}
+                </hans-button>
+
+                <hans-button
+                  [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                  [buttonColor]="'base'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'outline'"
+                  (click)="openDeleteModal(setting.id)"
+                >
+                  {{ 'pages.admin.operations.delete' | translate }}
+                </hans-button>
+              </div>
+            </div>
+
+            <div class="portfolio-settings-card-copy">
               <p class="portfolio-settings-card-label">
-                {{ 'pages.admin.portfolioSettings.card.key' | translate }}
+                {{ 'pages.admin.portfolioSettings.card.description' | translate }}
               </p>
-              <h3>{{ setting.key }}</h3>
+              <p>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
             </div>
 
-            <div class="portfolio-settings-card-actions">
-              <hans-button
-                [attr.aria-label]="'pages.admin.operations.update' | translate"
-                [buttonColor]="'base'"
-                [buttonSize]="'medium'"
-                [buttonVariant]="'outline'"
-                (click)="openUpdateModal(setting.id)"
-              >
-                {{ 'pages.admin.operations.update' | translate }}
-              </hans-button>
-
-              <hans-button
-                [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                [buttonColor]="'base'"
-                [buttonSize]="'medium'"
-                [buttonVariant]="'outline'"
-                (click)="openDeleteModal(setting.id)"
-              >
-                {{ 'pages.admin.operations.delete' | translate }}
-              </hans-button>
+            <div class="portfolio-settings-card-copy">
+              <p class="portfolio-settings-card-label">
+                {{ 'pages.admin.portfolioSettings.card.value' | translate }}
+              </p>
+              <pre>{{ setting.formattedValue }}</pre>
             </div>
-          </div>
+          </article>
+        }
+      </div>
+    }
 
-          <div class="portfolio-settings-card-copy">
-            <p class="portfolio-settings-card-label">
-              {{ 'pages.admin.portfolioSettings.card.description' | translate }}
-            </p>
-            <p>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
-          </div>
+    <div class="portfolio-settings-actions">
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.create' | translate"
+        [buttonColor]="'primary'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'default'"
+        (click)="openCreateModal()"
+      >
+        {{ 'pages.admin.operations.create' | translate }}
+      </hans-button>
 
-          <div class="portfolio-settings-card-copy">
-            <p class="portfolio-settings-card-label">
-              {{ 'pages.admin.portfolioSettings.card.value' | translate }}
-            </p>
-            <pre>{{ setting.formattedValue }}</pre>
-          </div>
-        </article>
-      }
+      <hans-button
+        [attr.aria-label]="'pages.admin.operations.read' | translate"
+        [attr.aria-pressed]="isReadVisible()"
+        [buttonColor]="'base'"
+        [buttonSize]="'medium'"
+        [buttonVariant]="'outline'"
+        [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+        (click)="toggleReadVisibility()"
+      >
+        {{ 'pages.admin.operations.read' | translate }}
+      </hans-button>
     </div>
-  }
+  </div>
 
-  <hans-modal
+  <app-portfolio-settings-modal
     [isOpen]="isModalOpen()"
-    [title]="modalTitleKey() | translate"
-    modalSize="medium"
-    placement="center"
-    [renderBody]="true"
-    [closeButtonLabel]="'common.actions.close' | translate"
-    (close)="closeModal()"
-  >
-    <div class="portfolio-settings-modal">
-      @switch (modalMode()) {
-        @case ('pick-update') {
-          <p class="portfolio-settings-modal-description">
-            {{ 'pages.admin.portfolioSettings.modal.pickUpdate.description' | translate }}
-          </p>
-
-          <div class="portfolio-settings-picker">
-            @for (setting of settings(); track trackSettingById($index, setting)) {
-              <button
-                type="button"
-                class="portfolio-settings-picker-option"
-                (click)="openUpdateModal(setting.id)"
-              >
-                <strong>{{ setting.key }}</strong>
-                <span>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <p class="portfolio-settings-modal-description">
-            {{ 'pages.admin.portfolioSettings.modal.pickDelete.description' | translate }}
-          </p>
-
-          <div class="portfolio-settings-picker">
-            @for (setting of settings(); track trackSettingById($index, setting)) {
-              <button
-                type="button"
-                class="portfolio-settings-picker-option"
-                (click)="openDeleteModal(setting.id)"
-              >
-                <strong>{{ setting.key }}</strong>
-                <span>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <p class="portfolio-settings-modal-description">
-            {{ 'pages.admin.portfolioSettings.modal.delete.description' | translate }}
-          </p>
-
-          <div class="portfolio-settings-delete-summary">
-            <strong>{{ selectedSetting()?.key }}</strong>
-            <p>{{ selectedSetting()?.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
-          </div>
-
-          <div class="portfolio-settings-modal-actions">
-            <hans-button
-              [attr.aria-label]="'common.actions.close' | translate"
-              [buttonColor]="'base'"
-              [buttonSize]="'medium'"
-              [buttonVariant]="'outline'"
-              [disabled]="isSubmitting()"
-              (click)="closeModal()"
-            >
-              {{ 'common.actions.close' | translate }}
-            </hans-button>
-
-            <hans-button
-              [attr.aria-label]="'pages.admin.operations.delete' | translate"
-              [buttonColor]="'primary'"
-              [buttonSize]="'medium'"
-              [buttonVariant]="'default'"
-              [disabled]="isSubmitting()"
-              (click)="submitModal()"
-            >
-              {{ 'pages.admin.operations.delete' | translate }}
-            </hans-button>
-          </div>
-        }
-        @default {
-          <div class="portfolio-settings-form">
-            <hans-input
-              inputColor="base"
-              inputSize="medium"
-              [value]="form().key"
-              [placeholder]="'pages.admin.portfolioSettings.fields.key.placeholder' | translate"
-              [attr.aria-label]="'pages.admin.portfolioSettings.fields.key.label' | translate"
-              (input)="updateKey($any($event).target?.value ?? '')"
-            ></hans-input>
-
-            <hans-input
-              inputColor="base"
-              inputSize="medium"
-              [value]="form().description"
-              [placeholder]="'pages.admin.portfolioSettings.fields.description.placeholder' | translate"
-              [attr.aria-label]="'pages.admin.portfolioSettings.fields.description.label' | translate"
-              (input)="updateDescription($any($event).target?.value ?? '')"
-            ></hans-input>
-
-            <label class="portfolio-settings-json-field">
-              <span>{{ 'pages.admin.portfolioSettings.fields.value.label' | translate }}</span>
-              <textarea
-                [value]="form().valueText"
-                [placeholder]="'pages.admin.portfolioSettings.fields.value.placeholder' | translate"
-                (input)="updateValueText($any($event).target?.value ?? '')"
-              ></textarea>
-            </label>
-          </div>
-
-          <div class="portfolio-settings-modal-actions">
-            <hans-button
-              [attr.aria-label]="'common.actions.close' | translate"
-              [buttonColor]="'base'"
-              [buttonSize]="'medium'"
-              [buttonVariant]="'outline'"
-              [disabled]="isSubmitting()"
-              (click)="closeModal()"
-            >
-              {{ 'common.actions.close' | translate }}
-            </hans-button>
-
-            <hans-button
-              [attr.aria-label]="'pages.admin.portfolioSettings.actions.submit' | translate"
-              [buttonColor]="'primary'"
-              [buttonSize]="'medium'"
-              [buttonVariant]="'default'"
-              [disabled]="isSubmitting()"
-              (click)="submitModal()"
-            >
-              @if (isSubmitting()) {
-                <hans-loading
-                  [attr.aria-label]="'pages.admin.portfolioSettings.actions.submit' | translate"
-                  loadingColor="base"
-                  loadingSize="small"
-                  loadingType="spinner"
-                ></hans-loading>
-              } @else {
-                {{ 'pages.admin.portfolioSettings.actions.submit' | translate }}
-              }
-            </hans-button>
-          </div>
-        }
-      }
-    </div>
-  </hans-modal>
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [settings]="settings()"
+    [selectedSetting]="selectedSetting()"
+    [form]="form()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (keyChanged)="updateKey($event)"
+    (descriptionChanged)="updateDescription($event)"
+    (valueTextChanged)="updateValueText($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+  />
 </section>

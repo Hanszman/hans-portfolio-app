@@ -478,6 +478,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entitiesSection.description':
     'Each card below marks the official F8 order, its protected endpoint family and the create, update and delete actions that will be enabled in the following deliveries.',
   'pages.admin.operations.create': 'Create',
+  'pages.admin.operations.read': 'Read',
   'pages.admin.operations.update': 'Update',
   'pages.admin.operations.delete': 'Delete',
   'pages.admin.relationMode.owner': 'Owned relationships',
@@ -489,7 +490,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.portfolioSettings.title': 'Portfolio settings operations',
   'pages.admin.portfolioSettings.description':
     'Live protected CRUD for the JSON-based settings that shape the portfolio shell, highlights and structured content.',
-  'pages.admin.portfolioSettings.actions.create': 'Create setting',
+  'pages.admin.portfolioSettings.actions.create': 'Create',
   'pages.admin.portfolioSettings.actions.submit': 'Save setting',
   'pages.admin.portfolioSettings.states.loading':
     'Loading the protected portfolio settings collection...',

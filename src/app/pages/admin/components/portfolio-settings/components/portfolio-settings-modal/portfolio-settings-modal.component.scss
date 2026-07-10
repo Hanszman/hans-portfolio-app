@@ -1,0 +1,87 @@
+:host {
+  @apply block;
+}
+
+.portfolio-settings-modal {
+  @apply flex flex-col gap-4;
+}
+
+.portfolio-settings-modal-description,
+.portfolio-settings-delete-summary p,
+.portfolio-settings-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.portfolio-settings-form {
+  @apply flex flex-col gap-4;
+}
+
+.portfolio-settings-json-field {
+  @apply flex flex-col gap-2;
+}
+
+.portfolio-settings-json-field span {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.portfolio-settings-json-field textarea {
+  @apply min-h-56 max-h-96 rounded-3xl border px-4 py-3 text-sm leading-6 outline-none transition;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+  color: var(--text-color);
+  overflow-x: auto;
+  overflow-y: auto;
+  resize: vertical;
+}
+
+.portfolio-settings-json-field textarea:focus {
+  border-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 32%,
+    transparent
+  );
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--primary-default-color) 12%, transparent);
+}
+
+.portfolio-settings-modal-actions {
+  @apply flex flex-wrap justify-end gap-3;
+}
+
+.portfolio-settings-picker {
+  @apply grid gap-3;
+}
+
+.portfolio-settings-picker-option {
+  @apply flex w-full flex-col items-start gap-1 rounded-2xl border px-4 py-3 text-left transition;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.portfolio-settings-picker-option:hover,
+.portfolio-settings-picker-option:focus-visible {
+  border-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 32%,
+    transparent
+  );
+  background: color-mix(in srgb, var(--primary-default-color) 6%, transparent);
+}
+
+.portfolio-settings-picker-option strong,
+.portfolio-settings-delete-summary strong {
+  @apply text-sm font-semibold;
+  color: var(--text-color);
+}
+
+.portfolio-settings-delete-summary {
+  @apply rounded-2xl border p-4;
+  border-color: color-mix(in srgb, var(--danger-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--danger-default-color) 6%, transparent);
+}
+
+:host ::ng-deep .portfolio-settings-modal-actions .hans-loading {
+  display: inline-flex;
+}

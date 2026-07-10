@@ -437,6 +437,7 @@ export type AppTranslationKey =
   | 'pages.admin.entitiesSection.title'
   | 'pages.admin.entitiesSection.description'
   | 'pages.admin.operations.create'
+  | 'pages.admin.operations.read'
   | 'pages.admin.operations.update'
   | 'pages.admin.operations.delete'
   | 'pages.admin.relationMode.owner'

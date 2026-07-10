@@ -18,6 +18,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { SectionHeaderComponent } from '../../../../shared/section-header/section-header.component';
+import { PortfolioSettingsModalComponent } from './components/portfolio-settings-modal/portfolio-settings-modal.component';
 import {
   buildPortfolioSettingsFormValue,
   buildPortfolioSettingsViewModels,
@@ -32,7 +33,12 @@ import {
 @Component({
   selector: 'app-portfolio-settings',
   standalone: true,
-  imports: [TranslatePipe, SectionHeaderComponent, InfoStateComponent],
+  imports: [
+    TranslatePipe,
+    SectionHeaderComponent,
+    InfoStateComponent,
+    PortfolioSettingsModalComponent,
+  ],
   templateUrl: './portfolio-settings.component.html',
   styleUrl: './portfolio-settings.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -50,6 +56,7 @@ export class PortfolioSettingsComponent implements OnInit {
   private readonly feedbackToneSignal = signal<'success' | 'error' | null>(null);
   private readonly modalModeSignal = signal<PortfolioSettingsModalMode | null>(null);
   private readonly selectedSettingSignal = signal<PortfolioSettingRecord | null>(null);
+  private readonly isReadVisibleSignal = signal(false);
   private readonly formSignal = signal<PortfolioSettingsFormValue>(
     createEmptyPortfolioSettingsFormValue(),
   );
@@ -67,6 +74,7 @@ export class PortfolioSettingsComponent implements OnInit {
   protected readonly selectedSetting = this.selectedSettingSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly isModalOpen = computed(() => this.modalMode() !== null);
+  protected readonly isReadVisible = this.isReadVisibleSignal.asReadonly();
   protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
     switch (this.modalMode()) {
       case 'create':
@@ -134,6 +142,14 @@ export class PortfolioSettingsComponent implements OnInit {
   closeModal(): void {
     this.modalModeSignal.set(null);
     this.selectedSettingSignal.set(null);
+  }
+
+  toggleReadVisibility(): void {
+    if (!this.hasSettings()) {
+      return;
+    }
+
+    this.isReadVisibleSignal.update((currentValue) => !currentValue);
   }
 
   updateKey(value: string): void {
