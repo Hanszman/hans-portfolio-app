@@ -1185,6 +1185,18 @@ Regra importante de modelagem para a F8:
 - `F8.4` - `tags`
   - campos: `slug`, `namePt`, `nameEn`, `type`, `sortOrder`
   - relacionamentos: `projectIds`, `technologyIds`
+  - status: concluida em `2026-07-10`
+  - entregue:
+    - dominio `src/app/core/api/admin/tags/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
+    - leitura protegida de `tags` integrada por `GET /tags`, com mutacoes reais em `/admin/tags`
+    - componente administrativo dedicado em `src/app/pages/admin/components/tags/` com `helpers/` internos e modal segregado em `components/tags-modal/`
+    - card funcional de `Tags` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
+    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura colapsavel dos registros
+    - formulario administrativo com suporte aos campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
+    - opcoes relacionais carregadas a partir de `GET /projects` e `GET /technologies`, permitindo vincular tags aos registros ja disponiveis no portfolio publico
+    - normalizacao da leitura de tags preparada para lidar com campos planejados da F8 e nomes legados vindos do contrato publico
+    - traducoes sincronizadas nos tres idiomas
+    - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
 - `F8.5` - `links`
   - campos: `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`
   - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`
@@ -1406,4 +1418,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.4`, expandindo a area admin para a entidade `tags` com seus campos proprios e relacionamentos via arrays da entidade dona.
+Implementar a `F8.5`, expandindo a area admin para a entidade `links` com seus campos proprios e relacionamentos via arrays da entidade dona.

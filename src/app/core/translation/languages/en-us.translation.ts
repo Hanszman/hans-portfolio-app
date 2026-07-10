@@ -549,6 +549,86 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Reusable classification labels shared across projects, technologies and future editorial flows.',
+  'pages.admin.tags.description':
+    'Protected CRUD for reusable labels that classify projects and technologies through relation arrays owned by each tag.',
+  'pages.admin.tags.actions.submit': 'Save tag',
+  'pages.admin.tags.states.loading':
+    'Loading the protected tags collection...',
+  'pages.admin.tags.states.empty':
+    'No protected tag has been registered yet.',
+  'pages.admin.tags.card.slug': 'Tag slug',
+  'pages.admin.tags.card.namePt': 'Portuguese name',
+  'pages.admin.tags.card.nameEn': 'English name',
+  'pages.admin.tags.card.type': 'Type',
+  'pages.admin.tags.card.sortOrder': 'Sort order',
+  'pages.admin.tags.card.projects': 'Projects',
+  'pages.admin.tags.card.technologies': 'Technologies',
+  'pages.admin.tags.card.emptyRelations':
+    'No related records are currently linked to this tag.',
+  'pages.admin.tags.fields.slug.label': 'Tag slug',
+  'pages.admin.tags.fields.slug.placeholder':
+    'Enter the unique tag slug',
+  'pages.admin.tags.fields.namePt.label': 'Portuguese name',
+  'pages.admin.tags.fields.namePt.placeholder':
+    'Enter the Portuguese tag name',
+  'pages.admin.tags.fields.nameEn.label': 'English name',
+  'pages.admin.tags.fields.nameEn.placeholder':
+    'Enter the English tag name',
+  'pages.admin.tags.fields.type.label': 'Type',
+  'pages.admin.tags.fields.type.placeholder':
+    'Enter the tag type',
+  'pages.admin.tags.fields.sortOrder.label': 'Sort order',
+  'pages.admin.tags.fields.sortOrder.placeholder':
+    'Enter the integer sort order',
+  'pages.admin.tags.fields.projects.label': 'Related projects',
+  'pages.admin.tags.fields.projects.description':
+    'Select every project that should expose this tag in its public relationships.',
+  'pages.admin.tags.fields.projects.empty':
+    'No public project is available to relate right now.',
+  'pages.admin.tags.fields.technologies.label': 'Related technologies',
+  'pages.admin.tags.fields.technologies.description':
+    'Select every technology that should keep this tag in its relationship arrays.',
+  'pages.admin.tags.fields.technologies.empty':
+    'No public technology is available to relate right now.',
+  'pages.admin.tags.modal.create.title': 'Create tag',
+  'pages.admin.tags.modal.pickUpdate.title':
+    'Select a tag to update',
+  'pages.admin.tags.modal.pickUpdate.description':
+    'Choose one of the current protected tags to open its update form.',
+  'pages.admin.tags.modal.pickDelete.title':
+    'Select a tag to delete',
+  'pages.admin.tags.modal.pickDelete.description':
+    'Choose one of the current protected tags to confirm its removal.',
+  'pages.admin.tags.modal.update.title': 'Update tag',
+  'pages.admin.tags.modal.delete.title': 'Delete tag',
+  'pages.admin.tags.modal.delete.description':
+    'This action permanently removes the selected protected tag and its current relations from the portfolio.',
+  'pages.admin.tags.feedback.created':
+    'Protected tag created successfully.',
+  'pages.admin.tags.feedback.updated':
+    'Protected tag updated successfully.',
+  'pages.admin.tags.feedback.deleted':
+    'Protected tag deleted successfully.',
+  'pages.admin.tags.feedback.requiredSlug':
+    'The tag slug is required before submitting.',
+  'pages.admin.tags.feedback.requiredNamePt':
+    'The Portuguese tag name is required before submitting.',
+  'pages.admin.tags.feedback.requiredNameEn':
+    'The English tag name is required before submitting.',
+  'pages.admin.tags.feedback.requiredType':
+    'The tag type is required before submitting.',
+  'pages.admin.tags.feedback.invalidSortOrder':
+    'The sort order must be a valid integer number.',
+  'pages.admin.tags.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.tags.feedback.selectionRequired':
+    'Select a protected tag before continuing with this action.',
+  'pages.admin.tags.feedback.loadError':
+    'The protected tags collection could not be loaded right now.',
+  'pages.admin.tags.feedback.saveError':
+    'The protected tag could not be saved right now.',
+  'pages.admin.tags.feedback.deleteError':
+    'The protected tag could not be deleted right now.',
   'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'External references such as repositories, live demos, documents and complementary navigation targets.',

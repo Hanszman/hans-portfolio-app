@@ -560,6 +560,86 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Etiquetas reutilizables de clasificación compartidas entre proyectos, tecnologías y futuros flujos editoriales.',
+  'pages.admin.tags.description':
+    'CRUD protegido para etiquetas reutilizables que clasifican proyectos y tecnologías mediante arrays relacionales mantenidos por la propia tag.',
+  'pages.admin.tags.actions.submit': 'Guardar tag',
+  'pages.admin.tags.states.loading':
+    'Cargando la colección protegida de tags...',
+  'pages.admin.tags.states.empty':
+    'Todavía no se registró ninguna tag protegida.',
+  'pages.admin.tags.card.slug': 'Slug de la tag',
+  'pages.admin.tags.card.namePt': 'Nombre en portugués',
+  'pages.admin.tags.card.nameEn': 'Nombre en inglés',
+  'pages.admin.tags.card.type': 'Tipo',
+  'pages.admin.tags.card.sortOrder': 'Orden',
+  'pages.admin.tags.card.projects': 'Proyectos',
+  'pages.admin.tags.card.technologies': 'Tecnologías',
+  'pages.admin.tags.card.emptyRelations':
+    'Ningún registro relacionado está vinculado actualmente a esta tag.',
+  'pages.admin.tags.fields.slug.label': 'Slug de la tag',
+  'pages.admin.tags.fields.slug.placeholder':
+    'Ingresa el slug único de la tag',
+  'pages.admin.tags.fields.namePt.label': 'Nombre en portugués',
+  'pages.admin.tags.fields.namePt.placeholder':
+    'Ingresa el nombre de la tag en portugués',
+  'pages.admin.tags.fields.nameEn.label': 'Nombre en inglés',
+  'pages.admin.tags.fields.nameEn.placeholder':
+    'Ingresa el nombre de la tag en inglés',
+  'pages.admin.tags.fields.type.label': 'Tipo',
+  'pages.admin.tags.fields.type.placeholder':
+    'Ingresa el tipo de la tag',
+  'pages.admin.tags.fields.sortOrder.label': 'Orden',
+  'pages.admin.tags.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de la tag',
+  'pages.admin.tags.fields.projects.label': 'Proyectos relacionados',
+  'pages.admin.tags.fields.projects.description':
+    'Selecciona todos los proyectos que deben exponer esta tag en sus relaciones públicas.',
+  'pages.admin.tags.fields.projects.empty':
+    'Ningún proyecto público está disponible para relacionar ahora.',
+  'pages.admin.tags.fields.technologies.label': 'Tecnologías relacionadas',
+  'pages.admin.tags.fields.technologies.description':
+    'Selecciona todas las tecnologías que deben mantener esta tag en sus arrays relacionales.',
+  'pages.admin.tags.fields.technologies.empty':
+    'Ninguna tecnología pública está disponible para relacionar ahora.',
+  'pages.admin.tags.modal.create.title': 'Crear tag',
+  'pages.admin.tags.modal.pickUpdate.title':
+    'Selecciona una tag para editar',
+  'pages.admin.tags.modal.pickUpdate.description':
+    'Elige una de las tags protegidas actuales para abrir su formulario de edición.',
+  'pages.admin.tags.modal.pickDelete.title':
+    'Selecciona una tag para eliminar',
+  'pages.admin.tags.modal.pickDelete.description':
+    'Elige una de las tags protegidas actuales para confirmar su eliminación.',
+  'pages.admin.tags.modal.update.title': 'Editar tag',
+  'pages.admin.tags.modal.delete.title': 'Eliminar tag',
+  'pages.admin.tags.modal.delete.description':
+    'Esta acción elimina permanentemente la tag protegida seleccionada y sus relaciones actuales del portfolio.',
+  'pages.admin.tags.feedback.created':
+    'Tag protegida creada con éxito.',
+  'pages.admin.tags.feedback.updated':
+    'Tag protegida actualizada con éxito.',
+  'pages.admin.tags.feedback.deleted':
+    'Tag protegida eliminada con éxito.',
+  'pages.admin.tags.feedback.requiredSlug':
+    'El slug de la tag es obligatorio antes de enviar.',
+  'pages.admin.tags.feedback.requiredNamePt':
+    'El nombre de la tag en portugués es obligatorio antes de enviar.',
+  'pages.admin.tags.feedback.requiredNameEn':
+    'El nombre de la tag en inglés es obligatorio antes de enviar.',
+  'pages.admin.tags.feedback.requiredType':
+    'El tipo de la tag es obligatorio antes de enviar.',
+  'pages.admin.tags.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.tags.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.tags.feedback.selectionRequired':
+    'Selecciona una tag protegida antes de continuar con esta acción.',
+  'pages.admin.tags.feedback.loadError':
+    'La colección protegida de tags no puede cargarse ahora.',
+  'pages.admin.tags.feedback.saveError':
+    'La tag protegida no puede guardarse ahora.',
+  'pages.admin.tags.feedback.deleteError':
+    'La tag protegida no puede eliminarse ahora.',
   'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'Referencias externas como repositorios, demos, documentos y destinos complementarios de navegación.',

@@ -3,7 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { PortfolioSettingsApiService } from '../../core/api/admin/portfolio-settings/portfolio-settings-api.service';
+import { TagsApiService } from '../../core/api/admin/tags/tags-api.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
+import { ProjectsService } from '../../core/api/projects/projects.service';
+import { TechnologiesService } from '../../core/api/technologies/technologies.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
 
@@ -79,6 +82,108 @@ describe('AdminComponent', () => {
             delete: jasmine.createSpy(),
           },
         },
+        {
+          provide: TagsApiService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'tag-1',
+                    slug: 'frontend',
+                    namePt: 'Front-end',
+                    nameEn: 'Front-end',
+                    type: 'stack',
+                    sortOrder: 1,
+                    projectIds: ['project-1'],
+                    technologyIds: ['technology-1'],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: ProjectsService,
+          useValue: {
+            getProjects: () =>
+              of({
+                data: [
+                  {
+                    id: 'project-1',
+                    slug: 'portfolio-remake',
+                    titlePt: 'Portfolio remake',
+                    titleEn: 'Portfolio remake',
+                    shortDescriptionPt: 'Resumo',
+                    shortDescriptionEn: 'Summary',
+                    fullDescriptionPt: 'Descricao',
+                    fullDescriptionEn: 'Description',
+                    context: 'personal',
+                    status: 'in-progress',
+                    environment: 'fullstack',
+                    featured: true,
+                    highlight: true,
+                    startDate: '2024-01-01',
+                    endDate: null,
+                    sortOrder: 1,
+                    isPublished: true,
+                    createdAt: '2024-01-01T00:00:00.000Z',
+                    updatedAt: '2024-01-01T00:00:00.000Z',
+                    technologies: [],
+                    experiences: [],
+                    tags: [],
+                    links: [],
+                    imageAssets: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+          },
+        },
+        {
+          provide: TechnologiesService,
+          useValue: {
+            getTechnologies: () =>
+              of({
+                data: [
+                  {
+                    id: 'technology-1',
+                    slug: 'angular',
+                    name: 'Angular',
+                    category: 'framework',
+                    level: 'advanced',
+                    frequency: 'frequent',
+                    highlight: true,
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+          },
+        },
       ],
     }).compileComponents();
   });
@@ -95,6 +200,7 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('12 entity workflows');
     expect(compiled.textContent).toContain('Portfolio settings');
+    expect(compiled.textContent).toContain('Tags');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
@@ -154,6 +260,60 @@ describe('AdminComponent', () => {
             create: jasmine.createSpy(),
             update: jasmine.createSpy(),
             delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: TagsApiService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: ProjectsService,
+          useValue: {
+            getProjects: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+          },
+        },
+        {
+          provide: TechnologiesService,
+          useValue: {
+            getTechnologies: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
           },
         },
       ],

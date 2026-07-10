@@ -64,6 +64,8 @@
       <app-portfolio-settings #portfolioSettingsWorkspace />
 
       <div class="admin-page-entity-grid">
+        <app-tags #tagsWorkspace />
+
         @for (entity of secondaryAdminEntities(); track entity.id) {
           <article class="admin-page-card admin-page-entity-card">
             <div class="admin-page-entity-meta">
@@ -80,33 +82,15 @@
 
             <div class="admin-page-entity-actions">
               @for (operation of entity.operations; track operation.id) {
-                @if (isPortfolioSettingsEntity(entity.id)) {
-                  <hans-button
-                    [attr.aria-label]="operation.label"
-                    [buttonColor]="'base'"
-                    [buttonSize]="'medium'"
-                    [buttonVariant]="'outline'"
-                    (click)="
-                      operation.id === 'create'
-                        ? portfolioSettingsWorkspace.openCreateModal()
-                        : operation.id === 'update'
-                          ? portfolioSettingsWorkspace.openUpdatePickerModal()
-                          : portfolioSettingsWorkspace.openDeletePickerModal()
-                    "
-                  >
-                    {{ operation.label }}
-                  </hans-button>
-                } @else {
-                  <hans-button
-                    [attr.aria-label]="operation.label"
-                    [buttonColor]="'base'"
-                    [buttonSize]="'medium'"
-                    [buttonVariant]="'outline'"
-                    [disabled]="true"
-                  >
-                    {{ operation.label }}
-                  </hans-button>
-                }
+                <hans-button
+                  [attr.aria-label]="operation.label"
+                  [buttonColor]="'base'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'outline'"
+                  [disabled]="true"
+                >
+                  {{ operation.label }}
+                </hans-button>
               }
             </div>
           </article>

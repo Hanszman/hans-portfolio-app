@@ -519,7 +519,20 @@ Cada entidade deve ter, no minimo:
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa
-- proxima subetapa oficial: `F8.4` - Tags
+- `F8.4` concluida em `2026-07-10`
+- entregas concluidas na `F8.4`:
+  - dominio `src/app/core/api/admin/tags/` criado para o CRUD de `tags` dentro da estrutura administrativa
+  - leitura protegida integrada por `GET /tags`, mantendo `POST`, `PUT` e `DELETE` em `/admin/tags`
+  - componente administrativo dedicado em `src/app/pages/admin/components/tags/` implementado com `helpers/` internos e modal segregado em `components/tags-modal/`
+  - card funcional de `Tags` habilitado diretamente na grid oficial da shell admin, substituindo o placeholder da subetapa `F8.4`
+  - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura colapsavel, seletores relacionais e feedbacks de sucesso, erro, sessao ausente e selecao obrigatoria
+  - formulario administrativo modelado com os campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
+  - carregamento auxiliar de `projects` e `technologies` conectado aos endpoints publicos para montar as opcoes relacionais da tag dentro dos modais
+  - normalizacao defensiva do contrato de `tags` adicionada para suportar tanto campos planejados da F8 (`namePt`, `nameEn`) quanto retornos legados (`labelPt`, `labelEn`) sem quebrar a leitura administrativa
+  - shell admin atualizada para tratar `portfolio-settings` e `tags` como workspaces especiais ja funcionais, mantendo as demais entidades seguintes como roadmap bloqueado
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
+- proxima subetapa oficial: `F8.5` - Links
 
 ## 9) Regras de implementacao por subetapa
 

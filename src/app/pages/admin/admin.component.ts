@@ -15,6 +15,7 @@ import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navi
 import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { PortfolioSettingsComponent } from './components/portfolio-settings/portfolio-settings.component';
+import { TagsComponent } from './components/tags/tags.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
   ADMIN_ENTITY_OPERATIONS,
@@ -35,6 +36,7 @@ import {
     FooterComponent,
     SectionHeaderComponent,
     PortfolioSettingsComponent,
+    TagsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -69,7 +71,7 @@ export class AdminComponent {
     );
   });
   protected readonly secondaryAdminEntities = computed(() =>
-    this.adminEntities().filter((entity) => !this.isPortfolioSettingsEntity(entity.id)),
+    this.adminEntities().filter((entity) => !this.isWorkspaceEntity(entity.id)),
   );
   protected readonly adminFacts = computed(() => {
     this.translation.locale();
@@ -82,8 +84,8 @@ export class AdminComponent {
   protected readonly adminEntityCount = computed(() => this.adminEntities().length);
   protected readonly adminUserEmail = computed(() => this.adminUser()?.email ?? '');
 
-  protected isPortfolioSettingsEntity(entityId: string): boolean {
-    return entityId === 'portfolio-settings';
+  protected isWorkspaceEntity(entityId: string): boolean {
+    return entityId === 'portfolio-settings' || entityId === 'tags';
   }
 
   protected async logout(): Promise<void> {

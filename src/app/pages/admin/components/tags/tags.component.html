@@ -1,0 +1,188 @@
+<section class="tags-workspace admin-page-card admin-page-entity-card">
+  <div class="tags-workspace-meta">
+    <span class="tags-workspace-substep">F8.4</span>
+    <span class="tags-workspace-relation-chip">
+      {{ 'pages.admin.relationMode.owner' | translate }}
+    </span>
+  </div>
+
+  <div class="tags-workspace-copy">
+    <h3>{{ 'pages.admin.entities.tags.title' | translate }}</h3>
+    <p>{{ 'pages.admin.tags.description' | translate }}</p>
+  </div>
+
+  <p class="tags-workspace-endpoint">GET/POST/PATCH/DELETE /tags</p>
+
+  @if (feedbackKey(); as feedbackKey) {
+    <p class="tags-workspace-feedback" [attr.data-tone]="feedbackTone()">
+      {{ feedbackKey | translate }}
+    </p>
+  }
+
+  <div class="tags-workspace-actions">
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.create' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      (click)="openCreateModal()"
+    >
+      {{ 'pages.admin.operations.create' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.read' | translate"
+      [attr.aria-pressed]="isReadVisible()"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="toggleReadVisibility()"
+    >
+      {{ 'pages.admin.operations.read' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.update' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="openUpdatePickerModal()"
+    >
+      {{ 'pages.admin.operations.update' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="openDeletePickerModal()"
+    >
+      {{ 'pages.admin.operations.delete' | translate }}
+    </hans-button>
+  </div>
+
+  @if (isLoading()) {
+    <app-info-state
+      mode="loading"
+      [message]="'pages.admin.tags.states.loading' | translate"
+    />
+  } @else if (loadErrorKey(); as loadErrorKey) {
+    <app-info-state mode="error" [message]="loadErrorKey | translate" />
+  } @else if (!hasTags()) {
+    <app-info-state
+      mode="empty"
+      [message]="'pages.admin.tags.states.empty' | translate"
+    />
+  } @else if (isReadVisible()) {
+    <div class="tags-workspace-list">
+      @for (tag of tags(); track trackById($index, tag)) {
+        <article class="tags-workspace-item">
+          <div class="tags-workspace-item-header">
+            <div>
+              <p class="tags-workspace-label">
+                {{ 'pages.admin.tags.card.slug' | translate }}
+              </p>
+              <h4>{{ tag.slug }}</h4>
+            </div>
+
+            <div class="tags-workspace-item-actions">
+              <hans-button
+                [attr.aria-label]="'pages.admin.operations.update' | translate"
+                [buttonColor]="'primary'"
+                [buttonSize]="'medium'"
+                [buttonVariant]="'default'"
+                (click)="openUpdateModal(tag.id)"
+              >
+                {{ 'pages.admin.operations.update' | translate }}
+              </hans-button>
+
+              <hans-button
+                [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                [buttonColor]="'primary'"
+                [buttonSize]="'medium'"
+                [buttonVariant]="'default'"
+                (click)="openDeleteModal(tag.id)"
+              >
+                {{ 'pages.admin.operations.delete' | translate }}
+              </hans-button>
+            </div>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.namePt' | translate }}
+            </p>
+            <p>{{ tag.namePt }}</p>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.nameEn' | translate }}
+            </p>
+            <p>{{ tag.nameEn }}</p>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.type' | translate }}
+            </p>
+            <p>{{ tag.type }}</p>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.sortOrder' | translate }}
+            </p>
+            <p>{{ tag.sortOrderLabel }}</p>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.projects' | translate }}
+            </p>
+            <p>{{ tag.projectLabels.join(', ') || ('pages.admin.tags.card.emptyRelations' | translate) }}</p>
+          </div>
+
+          <div class="tags-workspace-item-copy">
+            <p class="tags-workspace-label">
+              {{ 'pages.admin.tags.card.technologies' | translate }}
+            </p>
+            <p>
+              {{
+                tag.technologyLabels.join(', ') ||
+                  ('pages.admin.tags.card.emptyRelations' | translate)
+              }}
+            </p>
+          </div>
+        </article>
+      }
+    </div>
+  }
+
+  <app-tags-modal
+    [isOpen]="isModalOpen()"
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [tags]="tags()"
+    [selectedTag]="selectedTag()"
+    [form]="form()"
+    [projectOptions]="projectOptions()"
+    [technologyOptions]="technologyOptions()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (slugChanged)="updateSlug($event)"
+    (namePtChanged)="updateNamePt($event)"
+    (nameEnChanged)="updateNameEn($event)"
+    (typeChanged)="updateType($event)"
+    (sortOrderChanged)="updateSortOrder($event)"
+    (projectToggled)="toggleProject($event)"
+    (technologyToggled)="toggleTechnology($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+  />
+</section>

@@ -5,6 +5,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationApiService } from './core/api/admin/admin-auth/admin-auth-api.service';
 import { PortfolioSettingsApiService } from './core/api/admin/portfolio-settings/portfolio-settings-api.service';
+import { TagsApiService } from './core/api/admin/tags/tags-api.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -26,6 +27,7 @@ describe('app routes', () => {
       'hans-button',
       'hans-icon',
       'hans-loading',
+      'hans-modal',
       'hans-toggle',
       'hans-dropdown',
     ]) {
@@ -93,6 +95,40 @@ describe('app routes', () => {
                         projects: 12,
                       },
                       description: 'Controls the highlighted portfolio metrics.',
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 100,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: TagsApiService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'tag-1',
+                      slug: 'frontend',
+                      namePt: 'Front-end',
+                      nameEn: 'Front-end',
+                      type: 'stack',
+                      sortOrder: 1,
+                      projectIds: ['project-1'],
+                      technologyIds: ['technology-1'],
                     },
                   ],
                   pagination: {
