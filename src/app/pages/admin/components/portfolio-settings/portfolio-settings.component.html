@@ -1,11 +1,4 @@
 <section class="portfolio-settings">
-  <div class="portfolio-settings-meta">
-    <span class="portfolio-settings-substep">F8.3</span>
-    <span class="portfolio-settings-relation-chip">
-      {{ 'pages.admin.relationMode.owner' | translate }}
-    </span>
-  </div>
-
   <div class="portfolio-settings-copy">
     <p class="portfolio-settings-kicker">
       {{ 'pages.admin.portfolioSettings.sectionLabel' | translate }}
@@ -17,9 +10,7 @@
     </p>
   </div>
 
-  <p class="portfolio-settings-endpoint">
-    GET/POST/PATCH/DELETE /portfolio-settings
-  </p>
+  <p class="portfolio-settings-endpoint">GET/POST/PATCH/DELETE /portfolio-settings</p>
 
   @if (feedbackKey(); as feedbackKey) {
     <p class="portfolio-settings-feedback" [attr.data-tone]="feedbackTone()">
@@ -125,7 +116,12 @@
               <p class="portfolio-settings-card-label">
                 {{ 'pages.admin.portfolioSettings.card.description' | translate }}
               </p>
-              <p>{{ setting.description || ('pages.admin.portfolioSettings.card.emptyDescription' | translate) }}</p>
+              <p>
+                {{
+                  setting.description ||
+                    ('pages.admin.portfolioSettings.card.emptyDescription' | translate)
+                }}
+              </p>
             </div>
 
             <div class="portfolio-settings-card-copy">
