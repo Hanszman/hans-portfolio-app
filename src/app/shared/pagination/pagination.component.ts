@@ -9,15 +9,15 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-pagination-controls',
+  selector: 'app-pagination',
   standalone: true,
   imports: [TranslatePipe],
-  templateUrl: './pagination-controls.component.html',
-  styleUrl: './pagination-controls.component.scss',
+  templateUrl: './pagination.component.html',
+  styleUrl: './pagination.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationControlsComponent {
+export class PaginationComponent {
   readonly currentPage = input(1);
   readonly totalPages = input(0);
   readonly disabled = input(false);

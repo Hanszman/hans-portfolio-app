@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { AdminAuthenticationApiService } from './core/api/admin/admin-auth/admin-auth-api.service';
+import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
 import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
@@ -75,7 +75,7 @@ describe('app routes', () => {
           useValue: createProjectsServiceMock(),
         },
         {
-          provide: AdminAuthenticationApiService,
+          provide: AdminAuthenticationService,
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
@@ -100,7 +100,7 @@ describe('app routes', () => {
                   ],
                   pagination: {
                     page: 1,
-                    pageSize: 6,
+                    pageSize: 5,
                     totalItems: 1,
                     totalPages: 1,
                     hasPreviousPage: false,
@@ -134,7 +134,7 @@ describe('app routes', () => {
                   ],
                   pagination: {
                     page: 1,
-                    pageSize: 6,
+                    pageSize: 5,
                     totalItems: 1,
                     totalPages: 1,
                     hasPreviousPage: false,
@@ -215,7 +215,7 @@ describe('app routes', () => {
   it('should load the protected admin route when a persisted session is valid', async () => {
     sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
     const adminAuthenticationApiService = TestBed.inject(
-      AdminAuthenticationApiService,
+      AdminAuthenticationService,
     ) as unknown as {
       getSession: jasmine.Spy;
     };
@@ -240,7 +240,7 @@ describe('app routes', () => {
   it('should redirect authenticated access from the login route to the protected admin route', async () => {
     sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, 'token-123');
     const adminAuthenticationApiService = TestBed.inject(
-      AdminAuthenticationApiService,
+      AdminAuthenticationService,
     ) as unknown as {
       getSession: jasmine.Spy;
     };

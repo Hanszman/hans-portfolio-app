@@ -2,14 +2,18 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PortfolioSettingRecord } from '../../../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+import { PortfolioSettingRecord } from '../../../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
-import { PaginationControlsComponent } from '../../../../../../shared/pagination-controls/pagination-controls.component';
-import { AdminCollectionPagination } from '../../../../admin.types';
+import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import {
+  AdminCollectionPagination,
+  createAdminCollectionPagination,
+} from '../../../../admin.types';
 import {
   PortfolioSettingsOperationsFormValue,
   PortfolioSettingsOperationsModalMode,
@@ -19,7 +23,7 @@ import {
 @Component({
   selector: 'app-portfolio-settings-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, PaginationControlsComponent],
+  imports: [TranslatePipe, OperationsModalComponent],
   templateUrl: './portfolio-settings-operations-modal.component.html',
   styleUrl: './portfolio-settings-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -38,14 +42,9 @@ export class PortfolioSettingsOperationsModalComponent {
     description: '',
     valueText: '',
   });
-  readonly pagination = input<AdminCollectionPagination>({
-    page: 1,
-    pageSize: 6,
-    totalItems: 0,
-    totalPages: 0,
-    hasPreviousPage: false,
-    hasNextPage: false,
-  });
+  readonly pagination = input<AdminCollectionPagination>(
+    createAdminCollectionPagination(),
+  );
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly isLoading = input(false);
@@ -59,6 +58,37 @@ export class PortfolioSettingsOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+
+  protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
+    switch (this.modalMode()) {
+      case 'read':
+        return 'pages.admin.portfolioSettings.modal.read.description';
+      case 'pick-update':
+        return 'pages.admin.portfolioSettings.modal.pickUpdate.description';
+      case 'pick-delete':
+        return 'pages.admin.portfolioSettings.modal.pickDelete.description';
+      case 'delete':
+        return 'pages.admin.portfolioSettings.modal.delete.description';
+      default:
+        return null;
+    }
+  });
+
+  protected readonly showPagination = computed(() => {
+    const mode = this.modalMode();
+    return mode === 'read' || mode === 'pick-update' || mode === 'pick-delete';
+  });
+
+  protected readonly showSubmit = computed(() => {
+    const mode = this.modalMode();
+    return mode === 'create' || mode === 'update' || mode === 'delete';
+  });
+
+  protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
+    this.modalMode() === 'delete'
+      ? 'pages.admin.operations.delete'
+      : 'common.actions.save',
+  );
 
   protected requestClose(): void {
     this.closed.emit();

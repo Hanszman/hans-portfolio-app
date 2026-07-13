@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
-import { TagRecord } from '../../../../core/api/admin/tags/tags-api.types';
+import { TagRecord } from '../../../../core/api/admin/tags/tags-operations.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -73,7 +73,7 @@ const createCollectionResponse = (
   data,
   pagination: {
     page,
-    pageSize: 6,
+    pageSize: 5,
     totalItems: data.length,
     totalPages: data.length === 0 ? 0 : 2,
     hasPreviousPage: page > 1,
@@ -188,7 +188,7 @@ describe('TagsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 6);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
     expect(projectsService.getProjects).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Tags');
@@ -325,7 +325,7 @@ describe('TagsOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(tagsOperationsService.getAll).toHaveBeenCalledTimes(2);
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(2, 6);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(2, 5);
 
     component.openCreateModal();
     component.toggleProject('project-1');
@@ -509,7 +509,7 @@ describe('TagsOperationsComponent', () => {
     pagedComponent.openDeleteModal('tag-1');
     await pagedComponent.submitModal();
 
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 6);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
   });
 
   it('should render empty and load error states and keep read disabled without tags', async () => {

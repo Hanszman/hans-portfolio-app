@@ -1,6 +1,6 @@
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
-import { TagRecord } from '../../../../../core/api/admin/tags/tags-api.types';
+import { TagRecord } from '../../../../../core/api/admin/tags/tags-operations.types';
 import {
   buildTagCatalogOptions,
   buildTagsFormValue,
@@ -8,7 +8,7 @@ import {
   buildTagsViewModels,
   normalizeTagProjectIds,
   normalizeTagTechnologyIds,
-} from './tags.helper';
+} from './tags-operations.helper';
 
 const createProject = (
   overrides: Partial<ProjectCollectionItemResponse> = {},

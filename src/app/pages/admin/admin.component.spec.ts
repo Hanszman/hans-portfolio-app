@@ -71,7 +71,7 @@ describe('AdminComponent', () => {
                 ],
                 pagination: {
                   page: 1,
-                  pageSize: 6,
+                  pageSize: 5,
                   totalItems: 1,
                   totalPages: 1,
                   hasPreviousPage: false,
@@ -102,7 +102,7 @@ describe('AdminComponent', () => {
                 ],
                 pagination: {
                   page: 1,
-                  pageSize: 6,
+                  pageSize: 5,
                   totalItems: 1,
                   totalPages: 1,
                   hasPreviousPage: false,
@@ -189,14 +189,12 @@ describe('AdminComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the protected admin page with app chrome and the projected logout action', () => {
+  it('should render the protected admin page content and the projected logout action', () => {
     const fixture = TestBed.createComponent(AdminComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('app-header')).toBeTruthy();
-    expect(compiled.querySelector('app-footer')).toBeTruthy();
     expect(compiled.textContent).toContain('Admin workspace');
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.textContent).toContain('12 entity workflows');
@@ -251,7 +249,7 @@ describe('AdminComponent', () => {
                 data: [],
                 pagination: {
                   page: 1,
-                  pageSize: 6,
+                  pageSize: 5,
                   totalItems: 0,
                   totalPages: 0,
                   hasPreviousPage: false,
@@ -271,7 +269,7 @@ describe('AdminComponent', () => {
                 data: [],
                 pagination: {
                   page: 1,
-                  pageSize: 6,
+                  pageSize: 5,
                   totalItems: 0,
                   totalPages: 0,
                   hasPreviousPage: false,

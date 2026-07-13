@@ -1,5 +1,5 @@
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 
 export type PortfolioSettingsOperationsModalMode =
   | 'create'

@@ -1088,6 +1088,7 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
   - tela standalone de login
   - formulario com componentes da `hans-ui-design-lib`
   - loading, erro e feedback de autenticacao
+  - renderizada dentro do `ShellComponent`, reaproveitando o header e o footer globais
 - `src/app/pages/admin/`
   - shell/pagina raiz do admin
   - lista das entidades administraveis
@@ -1095,6 +1096,10 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
   - modais de acao por entidade
 - `src/app/pages/admin/components/`
   - componentes compartilhados apenas do dominio admin
+- `src/app/shared/operations-modal/`
+  - wrapper compartilhado dos modais administrativos com footer padronizado
+- `src/app/shared/pagination/`
+  - componente compartilhado de paginacao para listas administrativas
 - `src/app/pages/admin/helpers/`
   - normalizadores de payload
   - mapeadores view-model <-> API
@@ -1177,10 +1182,12 @@ Regra importante de modelagem para a F8:
     - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
     - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings-operations/` com `helpers/` internos e modal segregado em `components/portfolio-settings-operations-modal/`
     - service administrativo padronizado em `src/app/core/api/admin/portfolio-settings/portfolio-settings-operations.service.ts`
+    - contracts HTTP renomeados para `portfolio-settings-operations.types.ts`
     - leitura operacional refinada com acao `Read` em modal grande, preservando o card administrativo compacto e removendo a expansao inline
     - apresentacao consolidada em um unico card funcional de `Portfolio settings`, com endpoint e acoes gerais `create/read/update/delete`
     - validacao explicita de JSON antes do submit do campo `value`
     - footer fixo do modal com feedback contextual, acoes e paginacao compartilhada
+    - wrapper shared `operations-modal` adotado para alinhar a estrutura do modal ao padrao visual consolidado da `hans-ui-design-lib`
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helpers, workspace e composicao admin
@@ -1193,12 +1200,14 @@ Regra importante de modelagem para a F8:
     - leitura protegida de `tags` integrada por `GET /tags`, com mutacoes reais em `/admin/tags`
     - componente administrativo dedicado em `src/app/pages/admin/components/tags-operations/` com `helpers/` internos e modal segregado em `components/tags-operations-modal/`
     - service administrativo padronizado em `src/app/core/api/admin/tags/tags-operations.service.ts`
+    - contracts HTTP renomeados para `tags-operations.types.ts`
     - card funcional de `Tags` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
     - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados para `read`, `update` e `delete`
     - formulario administrativo com suporte aos campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
     - campo `type` ajustado para seletor com os valores validos da API
     - opcoes relacionais carregadas a partir de `GET /projects` e `GET /technologies`, permitindo vincular tags aos registros ja disponiveis no portfolio publico
     - feedback de erro mantido dentro do modal quando a submissao falha e o fluxo permanece aberto
+    - seletores diretos de `update` e `delete` refinados para cards clicaveis, sem botoes internos redundantes, com `slug` exibida entre parentesis
     - normalizacao da leitura de tags preparada para lidar com campos planejados da F8 e nomes legados vindos do contrato publico
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
@@ -1263,9 +1272,12 @@ Regra importante de modelagem para a F8:
 - atualizar documentacoes a cada interacao relevante desta etapa, incluindo este plano e o plano especifico da F8
 - ao final de cada subetapa concluida, rodar `npm run lint`, `npm run test:coverage -- --watch=false` e `npm run build`
 - padronizar componentes e services de CRUD administrativo com o sufixo `-operations`
+- padronizar os contracts HTTP administrativos com o sufixo `-operations.types.ts`
 - remover o selo textual da subetapa concluida no card da entidade quando ela deixar de ser placeholder
 - usar `Read` em modal grande, e nao em expansao inline do card
 - manter footer fixo de modal com feedback, acoes e paginacao compartilhada sempre que a consulta protegida for paginada
+- `login` e `admin` devem ser renderizados dentro do `ShellComponent`, sem duplicar `header` e `footer` nas paginas
+- o page size administrativo padrao consolidado passa a ser `5`, centralizado em constants/types compartilhados
 
 #### Criterios de aceite
 

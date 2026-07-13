@@ -1,4 +1,5 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../core/api/api.types';
 
 export type AdminEntityOperation = 'create' | 'update' | 'delete';
 
@@ -33,6 +34,8 @@ export interface AdminCollectionPagination {
   readonly hasPreviousPage: boolean;
   readonly hasNextPage: boolean;
 }
+
+export const ADMIN_MODAL_PAGE_SIZE = DEFAULT_PAGE_SIZE;
 
 export type AdminEntityRelationMode = AdminEntityDefinition['relationMode'];
 
@@ -161,9 +164,9 @@ export const ADMIN_SESSION_FACT_DEFINITIONS: readonly AdminSessionFactDefinition
   ] as const;
 
 export const createAdminCollectionPagination = (
-  pageSize: number,
+  pageSize = ADMIN_MODAL_PAGE_SIZE,
 ): AdminCollectionPagination => ({
-  page: 1,
+  page: DEFAULT_PAGE,
   pageSize,
   totalItems: 0,
   totalPages: 0,

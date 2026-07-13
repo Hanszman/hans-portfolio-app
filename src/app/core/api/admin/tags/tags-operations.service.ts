@@ -2,14 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../api.types';
 import {
   TagMutationPayload,
   TagRecord,
   TagsCollectionResponse,
-} from './tags-api.types';
-
-const DEFAULT_PAGE = 1;
-const DEFAULT_PAGE_SIZE = 6;
+} from './tags-operations.types';
 
 @Injectable({
   providedIn: 'root',

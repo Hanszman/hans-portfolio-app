@@ -1,11 +1,11 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
-import { PaginationControlsComponent } from './pagination-controls.component';
+import { PaginationComponent } from './pagination.component';
 
-describe('PaginationControlsComponent', () => {
-  let fixture: ComponentFixture<PaginationControlsComponent>;
-  let component: PaginationControlsComponent;
+describe('PaginationComponent', () => {
+  let fixture: ComponentFixture<PaginationComponent>;
+  let component: PaginationComponent;
 
   beforeAll(() => {
     if (!customElements.get('hans-button')) {
@@ -15,11 +15,11 @@ describe('PaginationControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaginationControlsComponent],
+      imports: [PaginationComponent],
       providers: [provideZonelessChangeDetection(), provideAppTranslations()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PaginationControlsComponent);
+    fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('currentPage', 2);
     fixture.componentRef.setInput('totalPages', 3);

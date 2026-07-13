@@ -5,7 +5,7 @@ import {
   TagProjectRelationRecord,
   TagRecord,
   TagTechnologyRelationRecord,
-} from '../../../../core/api/admin/tags/tags-api.types';
+} from '../../../../core/api/admin/tags/tags-operations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 
 export const TAG_TYPE_VALUES = [

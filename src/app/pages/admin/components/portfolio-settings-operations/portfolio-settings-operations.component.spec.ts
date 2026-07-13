@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
-import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { PortfolioSettingsOperationsComponent } from './portfolio-settings-operations.component';
@@ -26,7 +26,7 @@ const createCollectionResponse = (
   data,
   pagination: {
     page,
-    pageSize: 6,
+    pageSize: 5,
     totalItems: data.length,
     totalPages: data.length === 0 ? 0 : 2,
     hasPreviousPage: page > 1,
@@ -96,7 +96,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(operationsService.getAll).toHaveBeenCalledWith(1, 6);
+    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
     expect(compiled.textContent).toContain('Portfolio settings');
     expect(compiled.textContent).toContain('GET/POST/PATCH/DELETE /portfolio-settings');
     expect(compiled.textContent).toContain('Create');
@@ -237,7 +237,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(operationsService.getAll).toHaveBeenCalledTimes(2);
-    expect(operationsService.getAll).toHaveBeenCalledWith(2, 6);
+    expect(operationsService.getAll).toHaveBeenCalledWith(2, 5);
   });
 
   it('should prevent save when validation fails or the admin session is unavailable', async () => {
@@ -388,7 +388,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     pagedComponent.openDeleteModal('setting-1');
     await pagedComponent.submitModal();
 
-    expect(operationsService.getAll).toHaveBeenCalledWith(1, 6);
+    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
   });
 
   it('should render empty and load error states and keep read disabled without data', async () => {

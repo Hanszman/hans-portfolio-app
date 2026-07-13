@@ -108,7 +108,7 @@ Responsabilidades:
 - validar campos obrigatorios
 - disparar o login
 - renderizar loading e erro
-- renderizar header e footer do app para manter alinhamento com a shell publica
+- ser renderizada dentro do `ShellComponent`, reutilizando o header e o footer globais do app
 - permitir submit por clique e pela tecla `Enter`
 - oferecer alternancia de visibilidade da senha com `hans-input` + `hans-icon`
 - redirecionar em caso de sucesso
@@ -128,6 +128,16 @@ Criar `src/app/pages/admin/` com:
   - blocos de filtros e estado vazio
 
 Se uma composicao passar a ser reutilizada entre varias entidades administrativas, ela pode viver em `src/app/pages/admin/components/` ou `src/app/shared/` se o reaproveitamento sair do dominio admin.
+
+### 4.5. Convencoes estruturais consolidadas
+
+- `login` e `admin` devem ser filhos do `ShellComponent`, sem chamar `header`/`footer` diretamente nas paginas
+- contracts HTTP das entidades administrativas devem seguir a nomenclatura `*-operations.types.ts`
+- services HTTP de CRUD administrativo devem seguir `*-operations.service.ts`
+- autenticacao administrativa deve seguir `admin-auth.service.ts` e `admin-auth.types.ts`
+- helpers locais de entidades administrativas devem seguir `*-operations.helper.ts`
+- o componente shared de paginacao oficial passa a se chamar `pagination`
+- o wrapper shared oficial para modais administrativos passa a ser `operations-modal`
 
 ## 5) Estrategia de sessao e seguranca
 
@@ -238,14 +248,18 @@ Cada entidade deve ter, no minimo:
 - leitura `Read` em modal grande, e nao expandida inline no card principal apos a consolidacao da subetapa
 - footer fixo nos modais com acoes, feedback e paginacao
 - paginacao visual obrigatoria sempre que a consulta protegida for paginada
+- o seletor de item para `pick-update` e `pick-delete` deve ser feito por card clicavel, sem botao redundante dentro do card
+- ao sair de `read` para `update` ou `delete`, a paginacao nao deve permanecer visivel
 
 ### 6.4. Convencoes consolidadas da shell admin
 
 - componentes e services de CRUD administrativo devem usar o sufixo `-operations`
 - dentro de `src/app/core/api/admin/`, cada entidade administrativa deve ter sua propria pasta
 - os services administrativos nao devem usar o sufixo `-api` quando representam o CRUD da entidade; o nome oficial passa a ser `*-operations.service.ts`
+- os tipos administrativos nao devem usar o sufixo `-api`; o nome oficial passa a ser `*-operations.types.ts`
 - componentes por entidade devem manter `helpers/` e `components/` internos para preservar SRP
 - quando uma subetapa deixa de ser placeholder e passa a ter CRUD funcional, remover da UI o selo textual com o titulo meta da subetapa, mantendo apenas a identificacao visual necessaria do card
+- o page size oficial consolidado para as operacoes administrativas passa a ser `5`, centralizado em constants/types compartilhados
 
 ### 6.5. Padrao de feedback
 
@@ -527,10 +541,12 @@ Cada entidade deve ter, no minimo:
   - acoes da entidade `portfolio-settings` habilitadas diretamente na lista oficial da F8 dentro de `/admin`
   - componente dedicado da entidade consolidado em `src/app/pages/admin/components/portfolio-settings-operations/` com `helpers/` e `components/` internos para manter SRP
   - service administrativo padronizado em `src/app/core/api/admin/portfolio-settings/portfolio-settings-operations.service.ts`
+  - contracts HTTP renomeados para `portfolio-settings-operations.types.ts`
   - modal extraido para `src/app/pages/admin/components/portfolio-settings-operations/components/portfolio-settings-operations-modal/`, separando formulario, leitura, seletores, confirmacao e paginacao do componente pai
   - leitura visual da colecao consolidada em modal grande `Read`, removendo a expansao inline do card principal
   - card da entidade consolidado em uma unica superficie funcional dentro da shell admin, incorporando endpoint e acoes gerais `create/read/update/delete`
   - footer fixo no modal com feedback contextual, acoes e paginacao compartilhada
+  - wrapper shared `operations-modal` adotado para aproximar os fluxos administrativos do padrao visual da `hans-ui-design-lib`
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa
@@ -540,12 +556,14 @@ Cada entidade deve ter, no minimo:
   - leitura protegida integrada por `GET /tags`, mantendo `POST`, `PUT` e `DELETE` em `/admin/tags`
   - componente administrativo dedicado em `src/app/pages/admin/components/tags-operations/` implementado com `helpers/` internos e modal segregado em `components/tags-operations-modal/`
   - service administrativo padronizado em `src/app/core/api/admin/tags/tags-operations.service.ts`
+  - contracts HTTP renomeados para `tags-operations.types.ts`
   - card funcional de `Tags` habilitado diretamente na grid oficial da shell admin, substituindo o placeholder da subetapa `F8.4`
   - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande, seletores relacionais e feedbacks de sucesso, erro, sessao ausente e selecao obrigatoria
   - formulario administrativo modelado com os campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
   - campo `type` convertido para seletor com valores validos do contrato da API, evitando erro `400` por enumeracao invalida
   - carregamento auxiliar de `projects` e `technologies` conectado aos endpoints publicos para montar as opcoes relacionais da tag dentro dos modais
   - footer fixo de modal aplicado com feedback contextual e paginacao compartilhada
+  - seletores de `update` e `delete` refinados para cards clicaveis, sem botoes internos redundantes e com `slug` apresentada entre parenteses
   - normalizacao defensiva do contrato de `tags` adicionada para suportar tanto campos planejados da F8 (`namePt`, `nameEn`) quanto retornos legados (`labelPt`, `labelEn`) sem quebrar a leitura administrativa
   - shell admin atualizada para tratar `portfolio-settings` e `tags` como workspaces especiais ja funcionais, mantendo as demais entidades seguintes como roadmap bloqueado
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`

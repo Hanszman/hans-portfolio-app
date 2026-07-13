@@ -6,12 +6,12 @@ import {
   AdminLoginPayload,
   AdminLoginResult,
   AdminSessionSnapshot,
-} from './admin-auth-api.types';
+} from './admin-auth.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminAuthenticationApiService {
+export class AdminAuthenticationService {
   private readonly httpClient = inject(HttpClient);
 
   login(payload: AdminLoginPayload): Observable<AdminLoginResult> {

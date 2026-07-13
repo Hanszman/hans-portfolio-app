@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { AdminAuthenticationApiService } from '../api/admin/admin-auth/admin-auth-api.service';
-import { AdminAuthenticatedUser } from '../api/admin/admin-auth/admin-auth-api.types';
+import { AdminAuthenticationService } from '../api/admin/admin-auth/admin-auth.service';
+import { AdminAuthenticatedUser } from '../api/admin/admin-auth/admin-auth.types';
 import {
   ADMIN_SESSION_STORAGE_KEY,
   AdminLoginCredentials,
@@ -13,9 +13,7 @@ import {
   providedIn: 'root',
 })
 export class AdminSessionService {
-  private readonly adminAuthenticationApiService = inject(
-    AdminAuthenticationApiService,
-  );
+  private readonly adminAuthenticationService = inject(AdminAuthenticationService);
   private readonly stateSignal = signal<AdminSessionState>(
     createAdminSessionState(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)),
   );
@@ -41,7 +39,7 @@ export class AdminSessionService {
 
     try {
       const response = await firstValueFrom(
-        this.adminAuthenticationApiService.login(credentials),
+        this.adminAuthenticationService.login(credentials),
       );
 
       this.setSession(response.accessToken, response.user);
@@ -79,7 +77,7 @@ export class AdminSessionService {
 
     try {
       const user = await firstValueFrom(
-        this.adminAuthenticationApiService.getSession(accessToken),
+        this.adminAuthenticationService.getSession(accessToken),
       );
 
       this.patchState({

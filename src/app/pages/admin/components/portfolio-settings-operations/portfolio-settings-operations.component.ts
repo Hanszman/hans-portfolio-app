@@ -13,11 +13,12 @@ import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/p
 import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
-} from '../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+} from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import {
+  ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../admin.types';
@@ -26,14 +27,12 @@ import {
   buildPortfolioSettingsFormValue,
   buildPortfolioSettingsViewModels,
   parsePortfolioSettingsJsonValue,
-} from './helpers/portfolio-settings.helper';
+} from './helpers/portfolio-settings-operations.helper';
 import {
   PortfolioSettingsOperationsFormValue,
   PortfolioSettingsOperationsModalMode,
   createEmptyPortfolioSettingsOperationsFormValue,
 } from './portfolio-settings-operations.types';
-
-const PORTFOLIO_SETTINGS_PAGE_SIZE = 6;
 
 @Component({
   selector: 'app-portfolio-settings-operations',
@@ -56,7 +55,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
 
   private readonly settingsSignal = signal<readonly PortfolioSettingRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
-    createAdminCollectionPagination(PORTFOLIO_SETTINGS_PAGE_SIZE),
+    createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
   private readonly isLoadingSignal = signal(true);
   private readonly isSubmittingSignal = signal(false);

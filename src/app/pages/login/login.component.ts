@@ -8,12 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { HeaderComponent } from '../../layout/header/header.component';
-import { FooterComponent } from '../../layout/footer/footer.component';
-import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navigation.helper';
-import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
-import { TranslationService } from '../../core/translation/translation.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import {
   LOGIN_FIELD_IDS,
@@ -23,7 +18,7 @@ import {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [TranslatePipe, HeaderComponent, FooterComponent, SectionHeaderComponent],
+  imports: [TranslatePipe, SectionHeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,7 +27,6 @@ import {
 export class LoginComponent {
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly router = inject(Router);
-  private readonly translation = inject(TranslationService);
   private readonly emailSignal = signal('');
   private readonly passwordSignal = signal('');
   private readonly isPasswordVisibleSignal = signal(false);
@@ -43,15 +37,6 @@ export class LoginComponent {
   protected readonly isPasswordVisible = this.isPasswordVisibleSignal.asReadonly();
   protected readonly isSubmitting = this.adminSessionService.isSubmittingLogin;
   protected readonly loginErrorKey = this.adminSessionService.loginErrorKey;
-  protected readonly navigationItems = computed(() => {
-    this.translation.locale();
-
-    return buildShellNavigationItems(
-      this.router.config,
-      (key) => this.translation.instant(key),
-      NAVIGATION_LABEL_KEY_BY_PATH,
-    );
-  });
   protected readonly passwordInputType = computed(() =>
     this.isPasswordVisibleSignal() ? 'text' : 'password',
   );

@@ -11,7 +11,7 @@ import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
   PortfolioSettingsCollectionResponse,
-} from './portfolio-settings-api.types';
+} from './portfolio-settings-operations.types';
 
 const createPortfolioSetting = (): PortfolioSettingRecord => ({
   id: 'setting-1',
@@ -29,7 +29,7 @@ const createPortfolioSettingsCollectionResponse =
     data: [createPortfolioSetting()],
     pagination: {
       page: 1,
-      pageSize: 6,
+      pageSize: 5,
       totalItems: 1,
       totalPages: 1,
       hasNextPage: false,
@@ -71,7 +71,7 @@ describe('PortfolioSettingsOperationsService', () => {
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/portfolio-settings?page=1&pageSize=6&sortBy=key&sortDirection=asc'),
+      buildApiUrl('/portfolio-settings?page=1&pageSize=5&sortBy=key&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');

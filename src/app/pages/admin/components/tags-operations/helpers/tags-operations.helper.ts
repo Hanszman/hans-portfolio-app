@@ -1,6 +1,9 @@
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
-import { TagMutationPayload, TagRecord } from '../../../../../core/api/admin/tags/tags-api.types';
+import {
+  TagMutationPayload,
+  TagRecord,
+} from '../../../../../core/api/admin/tags/tags-operations.types';
 import {
   TAG_TYPE_VALUES,
   TagCatalogOptionViewModel,

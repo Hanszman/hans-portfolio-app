@@ -1,0 +1,58 @@
+:host {
+  @apply block;
+}
+
+.operations-modal {
+  @apply flex max-h-[75vh] flex-col overflow-hidden;
+}
+
+.operations-modal-scroll {
+  @apply flex min-h-0 flex-col gap-6 overflow-y-auto pr-2;
+}
+
+.operations-modal-description {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.operations-modal-body {
+  @apply min-h-0;
+}
+
+.operations-modal-footer {
+  @apply sticky bottom-0 z-[1] mt-4 flex flex-col gap-4 border-t pt-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 98%, var(--white));
+}
+
+.operations-modal-feedback {
+  @apply rounded-2xl border px-4 py-3 text-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.operations-modal-feedback[data-tone='error'] {
+  color: var(--danger-default-color);
+  background: color-mix(in srgb, var(--danger-default-color) 10%, transparent);
+}
+
+.operations-modal-feedback[data-tone='success'] {
+  color: var(--success-default-color);
+  background: color-mix(in srgb, var(--success-default-color) 10%, transparent);
+}
+
+.operations-modal-footer-bar {
+  @apply flex flex-col gap-4 border-t pt-4 md:flex-row md:items-end md:justify-between;
+  border-color: color-mix(in srgb, var(--base-default-color) 12%, transparent);
+}
+
+.operations-modal-footer-pagination {
+  @apply min-w-0 flex-1;
+}
+
+.operations-modal-footer-actions {
+  @apply flex flex-wrap justify-end gap-3;
+}
+
+:host ::ng-deep .operations-modal-footer-actions .hans-loading {
+  display: inline-flex;
+}

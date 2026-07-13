@@ -1,4 +1,4 @@
-import { PortfolioSettingRecord } from '../../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+import { PortfolioSettingRecord } from '../../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import {
   PortfolioSettingsOperationsFormValue,
   PortfolioSettingsJsonParseResult,

@@ -9,10 +9,6 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { TranslationService } from '../../core/translation/translation.service';
-import { FooterComponent } from '../../layout/footer/footer.component';
-import { HeaderComponent } from '../../layout/header/header.component';
-import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navigation.helper';
-import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
@@ -32,8 +28,6 @@ import {
   standalone: true,
   imports: [
     TranslatePipe,
-    HeaderComponent,
-    FooterComponent,
     SectionHeaderComponent,
     PortfolioSettingsOperationsComponent,
     TagsOperationsComponent,
@@ -49,15 +43,6 @@ export class AdminComponent {
   private readonly translation = inject(TranslationService);
 
   protected readonly adminUser = this.adminSessionService.user;
-  protected readonly navigationItems = computed(() => {
-    this.translation.locale();
-
-    return buildShellNavigationItems(
-      this.router.config,
-      (key) => this.translation.instant(key),
-      NAVIGATION_LABEL_KEY_BY_PATH,
-    );
-  });
   protected readonly adminIdentity = computed(() =>
     formatAdminIdentity(this.adminUser()),
   );

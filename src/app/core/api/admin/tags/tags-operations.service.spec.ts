@@ -11,7 +11,7 @@ import {
   TagMutationPayload,
   TagRecord,
   TagsCollectionResponse,
-} from './tags-api.types';
+} from './tags-operations.types';
 
 const createTag = (): TagRecord => ({
   id: 'tag-1',
@@ -30,7 +30,7 @@ const createTagsCollectionResponse = (): TagsCollectionResponse => ({
   data: [createTag()],
   pagination: {
     page: 1,
-    pageSize: 6,
+    pageSize: 5,
     totalItems: 1,
     totalPages: 1,
     hasNextPage: false,
@@ -73,7 +73,7 @@ describe('TagsOperationsService', () => {
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/tags?page=1&pageSize=6&sortBy=sortOrder&sortDirection=asc'),
+      buildApiUrl('/tags?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');

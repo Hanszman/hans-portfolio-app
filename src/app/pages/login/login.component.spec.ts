@@ -46,14 +46,12 @@ describe('LoginComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the login page with app chrome and form controls', () => {
+  it('should render the login page content and form controls', () => {
     const fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('app-header')).toBeTruthy();
-    expect(compiled.querySelector('app-footer')).toBeTruthy();
     expect(compiled.textContent).toContain('Admin access');
     expect(compiled.textContent).toContain('Protected route');
     expect(compiled.querySelectorAll('hans-input')).toHaveSize(2);

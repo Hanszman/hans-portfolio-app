@@ -82,7 +82,7 @@ describe('TagsOperationsModalComponent', () => {
     ]);
     fixture.componentRef.setInput('pagination', {
       page: 1,
-      pageSize: 6,
+      pageSize: 5,
       totalItems: 2,
       totalPages: 2,
       hasPreviousPage: false,

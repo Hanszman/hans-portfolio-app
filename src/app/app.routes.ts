@@ -38,16 +38,6 @@ const loadDashboard = () =>
 
 export const routes: Routes = [
   {
-    path: 'login',
-    canActivate: [loginPageGuard],
-    loadComponent: loadLogin,
-  },
-  {
-    path: 'admin',
-    canActivate: [adminSessionGuard],
-    loadComponent: loadAdmin,
-  },
-  {
     path: '',
     component: ShellComponent,
     children: [
@@ -75,6 +65,16 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: loadDashboard,
+      },
+      {
+        path: 'login',
+        canActivate: [loginPageGuard],
+        loadComponent: loadLogin,
+      },
+      {
+        path: 'admin',
+        canActivate: [adminSessionGuard],
+        loadComponent: loadAdmin,
       },
       {
         path: '**',

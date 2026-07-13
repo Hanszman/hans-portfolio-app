@@ -1,9 +1,9 @@
-import { PortfolioSettingRecord } from '../../../../../core/api/admin/portfolio-settings/portfolio-settings-api.types';
+import { PortfolioSettingRecord } from '../../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import {
   buildPortfolioSettingsFormValue,
   buildPortfolioSettingsViewModels,
   parsePortfolioSettingsJsonValue,
-} from './portfolio-settings.helper';
+} from './portfolio-settings-operations.helper';
 import { createPortfolioSettingOperationsViewModel } from '../portfolio-settings-operations.types';
 
 const createSetting = (

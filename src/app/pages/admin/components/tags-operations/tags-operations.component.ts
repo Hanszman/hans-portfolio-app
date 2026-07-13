@@ -10,7 +10,10 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
-import { TagMutationPayload, TagRecord } from '../../../../core/api/admin/tags/tags-api.types';
+import {
+  TagMutationPayload,
+  TagRecord,
+} from '../../../../core/api/admin/tags/tags-operations.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -19,6 +22,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import {
+  ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../admin.types';
@@ -28,7 +32,7 @@ import {
   buildTagsFormValue,
   buildTagsMutationPayload,
   buildTagsViewModels,
-} from './helpers/tags.helper';
+} from './helpers/tags-operations.helper';
 import {
   TagTypeValue,
   TagsOperationsFormValue,
@@ -36,8 +40,6 @@ import {
   createEmptyTagsOperationsFormValue,
   createTagTypeOptions,
 } from './tags-operations.types';
-
-const TAGS_PAGE_SIZE = 6;
 
 @Component({
   selector: 'app-tags-operations',
@@ -60,7 +62,7 @@ export class TagsOperationsComponent implements OnInit {
     readonly TechnologyCollectionItemResponse[]
   >([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
-    createAdminCollectionPagination(TAGS_PAGE_SIZE),
+    createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
   private readonly isLoadingSignal = signal(true);
   private readonly isSubmittingSignal = signal(false);

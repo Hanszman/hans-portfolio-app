@@ -2,15 +2,6 @@
   @apply block;
 }
 
-.tags-operations-modal {
-  @apply flex max-h-[75vh] flex-col overflow-hidden;
-}
-
-.tags-operations-modal-scroll {
-  @apply flex min-h-0 flex-col gap-6 overflow-y-auto pr-2;
-}
-
-.tags-operations-modal-description,
 .tags-operations-delete-summary p,
 .tags-operations-selection-copy span,
 .tags-operations-selection-empty,
@@ -32,6 +23,21 @@
   @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.tags-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.tags-operations-picker-option:hover,
+.tags-operations-picker-option:focus-visible {
+  border-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 28%,
+    transparent
+  );
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--primary-default-color) 10%, transparent);
 }
 
 .tags-operations-item-header,
@@ -91,34 +97,10 @@
   word-break: keep-all;
 }
 
-.tags-operations-modal-footer {
-  @apply sticky bottom-0 z-[1] mt-4 flex flex-col gap-4 border-t pt-4;
-  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
-  background: color-mix(in srgb, var(--background-color) 98%, var(--white));
-}
-
-.tags-operations-modal-feedback {
-  @apply rounded-2xl border px-4 py-3 text-sm;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-}
-
-.tags-operations-modal-feedback[data-tone='error'] {
-  color: var(--danger-default-color);
-  background: color-mix(in srgb, var(--danger-default-color) 10%, transparent);
-}
-
-.tags-operations-modal-actions {
-  @apply justify-end;
-}
-
 :host ::ng-deep .tags-operations-selection-grid hans-button .hans-button-content,
 :host ::ng-deep .tags-operations-selection-grid hans-button .hans-button {
   align-items: flex-start;
   justify-content: flex-start;
   text-align: left;
   white-space: normal;
-}
-
-:host ::ng-deep .tags-operations-modal-actions .hans-loading {
-  display: inline-flex;
 }
