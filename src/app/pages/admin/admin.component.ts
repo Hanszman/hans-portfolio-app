@@ -14,8 +14,8 @@ import { HeaderComponent } from '../../layout/header/header.component';
 import { buildShellNavigationItems } from '../../layout/shell/helpers/shell-navigation.helper';
 import { NAVIGATION_LABEL_KEY_BY_PATH } from '../../layout/shell/shell.types';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
-import { PortfolioSettingsComponent } from './components/portfolio-settings/portfolio-settings.component';
-import { TagsComponent } from './components/tags/tags.component';
+import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
+import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
   ADMIN_ENTITY_OPERATIONS,
@@ -35,8 +35,8 @@ import {
     HeaderComponent,
     FooterComponent,
     SectionHeaderComponent,
-    PortfolioSettingsComponent,
-    TagsComponent,
+    PortfolioSettingsOperationsComponent,
+    TagsOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',

@@ -58,9 +58,14 @@ export const ES_ES_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalles',
   'common.actions.close': 'Cerrar',
+  'common.actions.save': 'Guardar',
   'common.actions.applyFilters': 'Aplicar filtros',
   'common.actions.showMore': 'Mostrar más',
   'common.actions.showLess': 'Mostrar menos',
+  'common.pagination.navigation': 'Paginacion',
+  'common.pagination.previous': 'Anterior',
+  'common.pagination.next': 'Siguiente',
+  'common.pagination.page': 'Ir a la pagina {{ page }}',
   'pages.home.hero.availability': 'Disponible para trabajar',
   'pages.home.hero.greeting': 'Hola, soy',
   'pages.home.hero.subtitle': 'Ingeniero de Software Full Stack',
@@ -502,7 +507,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.portfolioSettings.description':
     'CRUD protegido y real para los ajustes en JSON que moldean la shell, los destacados y los contenidos estructurados.',
   'pages.admin.portfolioSettings.actions.create': 'Crear',
-  'pages.admin.portfolioSettings.actions.submit': 'Guardar setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Guardar',
   'pages.admin.portfolioSettings.states.loading':
     'Cargando la colección protegida de portfolio settings...',
   'pages.admin.portfolioSettings.states.empty':
@@ -523,6 +528,10 @@ export const ES_ES_TRANSLATIONS = {
     'Ingresa un objeto, array o valor escalar JSON válido',
   'pages.admin.portfolioSettings.modal.create.title':
     'Crear portfolio setting',
+  'pages.admin.portfolioSettings.modal.read.title':
+    'Leer configuraciones del portfolio',
+  'pages.admin.portfolioSettings.modal.read.description':
+    'Revise las configuraciones JSON protegidas actuales y acceda directamente a los flujos de edicion o eliminacion desde cada registro.',
   'pages.admin.portfolioSettings.modal.pickUpdate.title':
     'Selecciona un setting para editar',
   'pages.admin.portfolioSettings.modal.pickUpdate.description':
@@ -560,9 +569,10 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Etiquetas reutilizables de clasificación compartidas entre proyectos, tecnologías y futuros flujos editoriales.',
+  'pages.admin.tags.sectionLabel': '// TAGS',
   'pages.admin.tags.description':
     'CRUD protegido para etiquetas reutilizables que clasifican proyectos y tecnologías mediante arrays relacionales mantenidos por la propia tag.',
-  'pages.admin.tags.actions.submit': 'Guardar tag',
+  'pages.admin.tags.actions.submit': 'Guardar',
   'pages.admin.tags.states.loading':
     'Cargando la colección protegida de tags...',
   'pages.admin.tags.states.empty':
@@ -587,7 +597,9 @@ export const ES_ES_TRANSLATIONS = {
     'Ingresa el nombre de la tag en inglés',
   'pages.admin.tags.fields.type.label': 'Tipo',
   'pages.admin.tags.fields.type.placeholder':
-    'Ingresa el tipo de la tag',
+    'Seleccione el tipo de la tag',
+  'pages.admin.tags.fields.type.empty':
+    'No hay tipos de tag disponibles en este momento.',
   'pages.admin.tags.fields.sortOrder.label': 'Orden',
   'pages.admin.tags.fields.sortOrder.placeholder':
     'Ingresa el orden entero de la tag',
@@ -602,6 +614,9 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.tags.fields.technologies.empty':
     'Ninguna tecnología pública está disponible para relacionar ahora.',
   'pages.admin.tags.modal.create.title': 'Crear tag',
+  'pages.admin.tags.modal.read.title': 'Leer tags',
+  'pages.admin.tags.modal.read.description':
+    'Revise las tags protegidas actuales y abra directamente los flujos de edicion o eliminacion desde cada registro.',
   'pages.admin.tags.modal.pickUpdate.title':
     'Selecciona una tag para editar',
   'pages.admin.tags.modal.pickUpdate.description':
@@ -628,6 +643,8 @@ export const ES_ES_TRANSLATIONS = {
     'El nombre de la tag en inglés es obligatorio antes de enviar.',
   'pages.admin.tags.feedback.requiredType':
     'El tipo de la tag es obligatorio antes de enviar.',
+  'pages.admin.tags.feedback.invalidType':
+    'Seleccione uno de los tipos de tag compatibles antes de enviar.',
   'pages.admin.tags.feedback.invalidSortOrder':
     'El orden debe ser un número entero válido.',
   'pages.admin.tags.feedback.missingSession':

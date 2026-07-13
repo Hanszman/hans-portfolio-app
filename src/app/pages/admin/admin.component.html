@@ -61,10 +61,10 @@
         <p>{{ 'pages.admin.entitiesSection.description' | translate }}</p>
       </div>
 
-      <app-portfolio-settings #portfolioSettingsWorkspace />
+      <app-portfolio-settings-operations #portfolioSettingsWorkspace />
 
       <div class="admin-page-entity-grid">
-        <app-tags #tagsWorkspace />
+        <app-tags-operations #tagsWorkspace />
 
         @for (entity of secondaryAdminEntities(); track entity.id) {
           <article class="admin-page-card admin-page-entity-card">

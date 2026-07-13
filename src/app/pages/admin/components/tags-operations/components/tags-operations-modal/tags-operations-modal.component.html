@@ -1,0 +1,366 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="modalTitleKey() | translate"
+  modalSize="large"
+  placement="center"
+  [renderBody]="true"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
+  <div class="tags-operations-modal">
+    <div class="tags-operations-modal-scroll">
+      @switch (modalMode()) {
+        @case ('read') {
+          <p class="tags-operations-modal-description">
+            {{ 'pages.admin.tags.modal.read.description' | translate }}
+          </p>
+
+          <div class="tags-operations-list">
+            @for (tag of tags(); track trackById($index, tag)) {
+              <article class="tags-operations-item">
+                <div class="tags-operations-item-header">
+                  <div>
+                    <p class="tags-operations-label">
+                      {{ 'pages.admin.tags.card.slug' | translate }}
+                    </p>
+                    <h4>{{ tag.slug }}</h4>
+                  </div>
+
+                  <div class="tags-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectTagForUpdate(tag.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectTagForDelete(tag.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.namePt' | translate }}
+                  </p>
+                  <p>{{ tag.namePt }}</p>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.nameEn' | translate }}
+                  </p>
+                  <p>{{ tag.nameEn }}</p>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.type' | translate }}
+                  </p>
+                  <p>{{ tag.type }}</p>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.sortOrder' | translate }}
+                  </p>
+                  <p>{{ tag.sortOrderLabel }}</p>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.projects' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      tag.projectLabels.join(', ') ||
+                        ('pages.admin.tags.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+
+                <div class="tags-operations-item-copy">
+                  <p class="tags-operations-label">
+                    {{ 'pages.admin.tags.card.technologies' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      tag.technologyLabels.join(', ') ||
+                        ('pages.admin.tags.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <p class="tags-operations-modal-description">
+            {{ 'pages.admin.tags.modal.pickUpdate.description' | translate }}
+          </p>
+
+          <div class="tags-operations-picker">
+            @for (tag of tags(); track trackById($index, tag)) {
+              <article class="tags-operations-picker-option">
+                <div>
+                  <strong>{{ tag.namePt }}</strong>
+                  <span>{{ tag.slug }}</span>
+                </div>
+
+                <hans-button
+                  [attr.aria-label]="'pages.admin.operations.update' | translate"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'default'"
+                  (click)="selectTagForUpdate(tag.id)"
+                >
+                  {{ 'pages.admin.operations.update' | translate }}
+                </hans-button>
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <p class="tags-operations-modal-description">
+            {{ 'pages.admin.tags.modal.pickDelete.description' | translate }}
+          </p>
+
+          <div class="tags-operations-picker">
+            @for (tag of tags(); track trackById($index, tag)) {
+              <article class="tags-operations-picker-option">
+                <div>
+                  <strong>{{ tag.namePt }}</strong>
+                  <span>{{ tag.slug }}</span>
+                </div>
+
+                <hans-button
+                  [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="'default'"
+                  (click)="selectTagForDelete(tag.id)"
+                >
+                  {{ 'pages.admin.operations.delete' | translate }}
+                </hans-button>
+              </article>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <p class="tags-operations-modal-description">
+            {{ 'pages.admin.tags.modal.delete.description' | translate }}
+          </p>
+
+          <div class="tags-operations-delete-summary">
+            <strong>{{ selectedTag()?.slug }}</strong>
+            <p>{{ selectedTag()?.namePt }}</p>
+            <p>{{ selectedTag()?.nameEn }}</p>
+          </div>
+        }
+        @default {
+          <div class="tags-operations-form">
+            <hans-input
+              inputColor="base"
+              inputSize="medium"
+              [value]="form().slug"
+              [placeholder]="'pages.admin.tags.fields.slug.placeholder' | translate"
+              [attr.aria-label]="'pages.admin.tags.fields.slug.label' | translate"
+              (input)="emitSlugChange($any($event).target?.value ?? '')"
+            ></hans-input>
+
+            <hans-input
+              inputColor="base"
+              inputSize="medium"
+              [value]="form().namePt"
+              [placeholder]="'pages.admin.tags.fields.namePt.placeholder' | translate"
+              [attr.aria-label]="'pages.admin.tags.fields.namePt.label' | translate"
+              (input)="emitNamePtChange($any($event).target?.value ?? '')"
+            ></hans-input>
+
+            <hans-input
+              inputColor="base"
+              inputSize="medium"
+              [value]="form().nameEn"
+              [placeholder]="'pages.admin.tags.fields.nameEn.placeholder' | translate"
+              [attr.aria-label]="'pages.admin.tags.fields.nameEn.label' | translate"
+              (input)="emitNameEnChange($any($event).target?.value ?? '')"
+            ></hans-input>
+
+            <hans-select-option
+              [label]="'pages.admin.tags.fields.type.label' | translate"
+              [options]="tagTypeOptions()"
+              [value]="form().type"
+              [enableAutocomplete]="false"
+              [noOptionsText]="'pages.admin.tags.fields.type.empty' | translate"
+              inputSize="medium"
+              inputColor="base"
+              labelColor="base"
+              dropdownBackgroundColor="var(--background-color)"
+              dropdownHoverColor="var(--primary-neutral-color)"
+              (change)="emitTypeChange(resolveSelectValue($event))"
+              (valuechange)="emitTypeChange(resolveSelectValue($event))"
+              (valueChange)="emitTypeChange(resolveSelectValue($event))"
+            ></hans-select-option>
+
+            <hans-input
+              inputColor="base"
+              inputSize="medium"
+              [value]="form().sortOrder"
+              [placeholder]="'pages.admin.tags.fields.sortOrder.placeholder' | translate"
+              [attr.aria-label]="'pages.admin.tags.fields.sortOrder.label' | translate"
+              (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+            ></hans-input>
+
+            <div class="tags-operations-selection-section">
+              <div class="tags-operations-selection-copy">
+                <p>{{ 'pages.admin.tags.fields.projects.label' | translate }}</p>
+                <span>
+                  {{ 'pages.admin.tags.fields.projects.description' | translate }}
+                </span>
+              </div>
+
+              @if (projectOptions().length > 0) {
+                <div class="tags-operations-selection-grid">
+                  @for (project of projectOptions(); track trackById($index, project)) {
+                    <hans-button
+                      [attr.aria-pressed]="isProjectSelected(project.id)"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="isProjectSelected(project.id) ? 'default' : 'outline'"
+                      (click)="toggleProject(project.id)"
+                    >
+                      <span class="tags-operations-selection-option">
+                        <span class="tags-operations-selection-option-title">
+                          {{ project.title }}
+                        </span>
+                        <span class="tags-operations-selection-option-subtitle">
+                          {{ project.subtitle }}
+                        </span>
+                      </span>
+                    </hans-button>
+                  }
+                </div>
+              } @else {
+                <p class="tags-operations-selection-empty">
+                  {{ 'pages.admin.tags.fields.projects.empty' | translate }}
+                </p>
+              }
+            </div>
+
+            <div class="tags-operations-selection-section">
+              <div class="tags-operations-selection-copy">
+                <p>{{ 'pages.admin.tags.fields.technologies.label' | translate }}</p>
+                <span>
+                  {{ 'pages.admin.tags.fields.technologies.description' | translate }}
+                </span>
+              </div>
+
+              @if (technologyOptions().length > 0) {
+                <div class="tags-operations-selection-grid">
+                  @for (
+                    technology of technologyOptions();
+                    track trackById($index, technology)
+                  ) {
+                    <hans-button
+                      [attr.aria-pressed]="isTechnologySelected(technology.id)"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="
+                        isTechnologySelected(technology.id) ? 'default' : 'outline'
+                      "
+                      (click)="toggleTechnology(technology.id)"
+                    >
+                      <span class="tags-operations-selection-option">
+                        <span class="tags-operations-selection-option-title">
+                          {{ technology.title }}
+                        </span>
+                        <span class="tags-operations-selection-option-subtitle">
+                          {{ technology.subtitle }}
+                        </span>
+                      </span>
+                    </hans-button>
+                  }
+                </div>
+              } @else {
+                <p class="tags-operations-selection-empty">
+                  {{ 'pages.admin.tags.fields.technologies.empty' | translate }}
+                </p>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <div class="tags-operations-modal-footer">
+      @if (feedbackKey(); as feedbackKey) {
+        <p class="tags-operations-modal-feedback" [attr.data-tone]="feedbackTone()">
+          {{ feedbackKey | translate }}
+        </p>
+      }
+
+      <app-pagination-controls
+        [currentPage]="pagination().page"
+        [totalPages]="pagination().totalPages"
+        [disabled]="isLoading() || isSubmitting()"
+        (pageSelected)="selectPage($event)"
+      />
+
+      <div class="tags-operations-modal-actions">
+        <hans-button
+          [attr.aria-label]="'common.actions.close' | translate"
+          [buttonColor]="'primary'"
+          [buttonSize]="'medium'"
+          [buttonVariant]="'outline'"
+          [disabled]="isSubmitting()"
+          (click)="requestClose()"
+        >
+          {{ 'common.actions.close' | translate }}
+        </hans-button>
+
+        @if (modalMode() === 'create' || modalMode() === 'update') {
+          <hans-button
+            [attr.aria-label]="'common.actions.save' | translate"
+            [buttonColor]="'primary'"
+            [buttonSize]="'medium'"
+            [buttonVariant]="'default'"
+            [disabled]="isSubmitting()"
+            (click)="submit()"
+          >
+            @if (isSubmitting()) {
+              <hans-loading
+                [attr.aria-label]="'common.actions.save' | translate"
+                loadingColor="base"
+                loadingSize="small"
+                loadingType="spinner"
+              ></hans-loading>
+            } @else {
+              {{ 'common.actions.save' | translate }}
+            }
+          </hans-button>
+        } @else if (modalMode() === 'delete') {
+          <hans-button
+            [attr.aria-label]="'pages.admin.operations.delete' | translate"
+            [buttonColor]="'primary'"
+            [buttonSize]="'medium'"
+            [buttonVariant]="'default'"
+            [disabled]="isSubmitting()"
+            (click)="submit()"
+          >
+            {{ 'pages.admin.operations.delete' | translate }}
+          </hans-button>
+        }
+      </div>
+    </div>
+  </div>
+</hans-modal>

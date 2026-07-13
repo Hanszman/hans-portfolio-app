@@ -1,0 +1,103 @@
+<section class="portfolio-settings-operations">
+  <div class="portfolio-settings-operations-copy">
+    <p class="portfolio-settings-operations-kicker">
+      {{ 'pages.admin.portfolioSettings.sectionLabel' | translate }}
+    </p>
+    <h2>{{ 'pages.admin.portfolioSettings.title' | translate }}</h2>
+    <p>
+      {{ 'pages.admin.entities.portfolio-settings.description' | translate }}
+      {{ 'pages.admin.portfolioSettings.description' | translate }}
+    </p>
+  </div>
+
+  <p class="portfolio-settings-operations-endpoint">
+    GET/POST/PATCH/DELETE /portfolio-settings
+  </p>
+
+  @if (feedbackKey(); as feedbackKey) {
+    <p class="portfolio-settings-operations-feedback" [attr.data-tone]="feedbackTone()">
+      {{ feedbackKey | translate }}
+    </p>
+  }
+
+  <div class="portfolio-settings-operations-actions">
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.create' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      (click)="openCreateModal()"
+    >
+      {{ 'pages.admin.operations.create' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.read' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+      (click)="openReadModal()"
+    >
+      {{ 'pages.admin.operations.read' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.update' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+      (click)="openUpdatePickerModal()"
+    >
+      {{ 'pages.admin.operations.update' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+      (click)="openDeletePickerModal()"
+    >
+      {{ 'pages.admin.operations.delete' | translate }}
+    </hans-button>
+  </div>
+
+  @if (isLoading()) {
+    <app-info-state
+      mode="loading"
+      [message]="'pages.admin.portfolioSettings.states.loading' | translate"
+    />
+  } @else if (loadErrorKey(); as loadErrorKey) {
+    <app-info-state mode="error" [message]="loadErrorKey | translate" />
+  } @else if (!hasSettings()) {
+    <app-info-state
+      mode="empty"
+      [message]="'pages.admin.portfolioSettings.states.empty' | translate"
+    />
+  }
+
+  <app-portfolio-settings-operations-modal
+    [isOpen]="isModalOpen()"
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [settings]="settings()"
+    [selectedSetting]="selectedSetting()"
+    [form]="form()"
+    [pagination]="pagination()"
+    [feedbackKey]="modalFeedbackKey()"
+    [feedbackTone]="modalFeedbackTone()"
+    [isLoading]="isLoading()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (keyChanged)="updateKey($event)"
+    (descriptionChanged)="updateDescription($event)"
+    (valueTextChanged)="updateValueText($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+    (pageSelected)="goToPage($event)"
+  />
+</section>

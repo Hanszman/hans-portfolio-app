@@ -58,9 +58,14 @@ export const PT_BR_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
   'common.actions.close': 'Fechar',
+  'common.actions.save': 'Salvar',
   'common.actions.applyFilters': 'Aplicar filtros',
   'common.actions.showMore': 'Mostrar mais',
   'common.actions.showLess': 'Mostrar menos',
+  'common.pagination.navigation': 'Paginacao',
+  'common.pagination.previous': 'Anterior',
+  'common.pagination.next': 'Proxima',
+  'common.pagination.page': 'Ir para a pagina {{ page }}',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Oi, eu sou',
   'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack',
@@ -499,7 +504,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.portfolioSettings.description':
     'CRUD protegido e real para os ajustes em JSON que moldam a shell, os destaques e os conteúdos estruturados.',
   'pages.admin.portfolioSettings.actions.create': 'Criar',
-  'pages.admin.portfolioSettings.actions.submit': 'Salvar setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Salvar',
   'pages.admin.portfolioSettings.states.loading':
     'Carregando a coleção protegida de portfolio settings...',
   'pages.admin.portfolioSettings.states.empty':
@@ -520,6 +525,10 @@ export const PT_BR_TRANSLATIONS = {
     'Digite um objeto, array ou valor escalar JSON válido',
   'pages.admin.portfolioSettings.modal.create.title':
     'Criar portfolio setting',
+  'pages.admin.portfolioSettings.modal.read.title':
+    'Ler configuracoes do portfolio',
+  'pages.admin.portfolioSettings.modal.read.description':
+    'Revise as configuracoes JSON protegidas atuais e acesse diretamente os fluxos de edicao ou exclusao de cada registro.',
   'pages.admin.portfolioSettings.modal.pickUpdate.title':
     'Selecione um setting para editar',
   'pages.admin.portfolioSettings.modal.pickUpdate.description':
@@ -557,9 +566,10 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Rótulos reutilizáveis de classificação compartilhados entre projetos, tecnologias e fluxos editoriais futuros.',
+  'pages.admin.tags.sectionLabel': '// TAGS',
   'pages.admin.tags.description':
     'CRUD protegido para rótulos reutilizáveis que classificam projetos e tecnologias por meio de arrays relacionais mantidos pela própria tag.',
-  'pages.admin.tags.actions.submit': 'Salvar tag',
+  'pages.admin.tags.actions.submit': 'Salvar',
   'pages.admin.tags.states.loading':
     'Carregando a coleção protegida de tags...',
   'pages.admin.tags.states.empty':
@@ -584,7 +594,9 @@ export const PT_BR_TRANSLATIONS = {
     'Digite o nome da tag em inglês',
   'pages.admin.tags.fields.type.label': 'Tipo',
   'pages.admin.tags.fields.type.placeholder':
-    'Digite o tipo da tag',
+    'Selecione o tipo da tag',
+  'pages.admin.tags.fields.type.empty':
+    'Nenhum tipo de tag esta disponivel no momento.',
   'pages.admin.tags.fields.sortOrder.label': 'Ordem',
   'pages.admin.tags.fields.sortOrder.placeholder':
     'Digite a ordem inteira da tag',
@@ -599,6 +611,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.fields.technologies.empty':
     'Nenhuma tecnologia pública está disponível para relacionamento agora.',
   'pages.admin.tags.modal.create.title': 'Criar tag',
+  'pages.admin.tags.modal.read.title': 'Ler tags',
+  'pages.admin.tags.modal.read.description':
+    'Revise as tags protegidas atuais e abra os fluxos de edicao ou exclusao diretamente de cada registro.',
   'pages.admin.tags.modal.pickUpdate.title':
     'Selecione uma tag para editar',
   'pages.admin.tags.modal.pickUpdate.description':
@@ -625,6 +640,8 @@ export const PT_BR_TRANSLATIONS = {
     'O nome da tag em inglês é obrigatório antes do envio.',
   'pages.admin.tags.feedback.requiredType':
     'O tipo da tag é obrigatório antes do envio.',
+  'pages.admin.tags.feedback.invalidType':
+    'Selecione um dos tipos de tag suportados antes de enviar.',
   'pages.admin.tags.feedback.invalidSortOrder':
     'A ordem deve ser um número inteiro válido.',
   'pages.admin.tags.feedback.missingSession':

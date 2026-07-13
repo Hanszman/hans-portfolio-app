@@ -57,9 +57,14 @@ export const EN_TRANSLATIONS = {
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'View details',
   'common.actions.close': 'Close',
+  'common.actions.save': 'Save',
   'common.actions.applyFilters': 'Apply filters',
   'common.actions.showMore': 'Show more',
   'common.actions.showLess': 'Show less',
+  'common.pagination.navigation': 'Pagination',
+  'common.pagination.previous': 'Previous',
+  'common.pagination.next': 'Next',
+  'common.pagination.page': 'Go to page {{ page }}',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",
   'pages.home.hero.subtitle': 'Full Stack Software Engineer',
@@ -491,7 +496,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.portfolioSettings.description':
     'Live protected CRUD for the JSON-based settings that shape the shell, highlights and structured content.',
   'pages.admin.portfolioSettings.actions.create': 'Create',
-  'pages.admin.portfolioSettings.actions.submit': 'Save setting',
+  'pages.admin.portfolioSettings.actions.submit': 'Save',
   'pages.admin.portfolioSettings.states.loading':
     'Loading the protected portfolio settings collection...',
   'pages.admin.portfolioSettings.states.empty':
@@ -512,6 +517,10 @@ export const EN_TRANSLATIONS = {
     'Enter a valid JSON object, array or scalar value',
   'pages.admin.portfolioSettings.modal.create.title':
     'Create portfolio setting',
+  'pages.admin.portfolioSettings.modal.read.title':
+    'Read portfolio settings',
+  'pages.admin.portfolioSettings.modal.read.description':
+    'Review the current protected JSON settings and jump directly to update or delete from each record.',
   'pages.admin.portfolioSettings.modal.pickUpdate.title':
     'Select a setting to update',
   'pages.admin.portfolioSettings.modal.pickUpdate.description':
@@ -549,9 +558,10 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Reusable classification labels shared across projects, technologies and future editorial flows.',
+  'pages.admin.tags.sectionLabel': '// TAGS',
   'pages.admin.tags.description':
     'Protected CRUD for reusable labels that classify projects and technologies through relation arrays owned by each tag.',
-  'pages.admin.tags.actions.submit': 'Save tag',
+  'pages.admin.tags.actions.submit': 'Save',
   'pages.admin.tags.states.loading':
     'Loading the protected tags collection...',
   'pages.admin.tags.states.empty':
@@ -576,7 +586,9 @@ export const EN_TRANSLATIONS = {
     'Enter the English tag name',
   'pages.admin.tags.fields.type.label': 'Type',
   'pages.admin.tags.fields.type.placeholder':
-    'Enter the tag type',
+    'Select the tag type',
+  'pages.admin.tags.fields.type.empty':
+    'No tag type is available right now.',
   'pages.admin.tags.fields.sortOrder.label': 'Sort order',
   'pages.admin.tags.fields.sortOrder.placeholder':
     'Enter the integer sort order',
@@ -591,6 +603,9 @@ export const EN_TRANSLATIONS = {
   'pages.admin.tags.fields.technologies.empty':
     'No public technology is available to relate right now.',
   'pages.admin.tags.modal.create.title': 'Create tag',
+  'pages.admin.tags.modal.read.title': 'Read tags',
+  'pages.admin.tags.modal.read.description':
+    'Review the current protected tags and open update or delete flows directly from each record.',
   'pages.admin.tags.modal.pickUpdate.title':
     'Select a tag to update',
   'pages.admin.tags.modal.pickUpdate.description':
@@ -617,6 +632,8 @@ export const EN_TRANSLATIONS = {
     'The English tag name is required before submitting.',
   'pages.admin.tags.feedback.requiredType':
     'The tag type is required before submitting.',
+  'pages.admin.tags.feedback.invalidType':
+    'Select one of the supported tag types before submitting.',
   'pages.admin.tags.feedback.invalidSortOrder':
     'The sort order must be a valid integer number.',
   'pages.admin.tags.feedback.missingSession':

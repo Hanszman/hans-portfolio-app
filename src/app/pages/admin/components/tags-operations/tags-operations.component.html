@@ -1,0 +1,106 @@
+<section class="tags-operations">
+  <div class="tags-operations-copy">
+    <p class="tags-operations-kicker">{{ 'pages.admin.tags.sectionLabel' | translate }}</p>
+    <h3>{{ 'pages.admin.entities.tags.title' | translate }}</h3>
+    <p>
+      {{ 'pages.admin.entities.tags.description' | translate }}
+      {{ 'pages.admin.tags.description' | translate }}
+    </p>
+  </div>
+
+  <p class="tags-operations-endpoint">GET/POST/PATCH/DELETE /tags</p>
+
+  @if (feedbackKey(); as feedbackKey) {
+    <p class="tags-operations-feedback" [attr.data-tone]="feedbackTone()">
+      {{ feedbackKey | translate }}
+    </p>
+  }
+
+  <div class="tags-operations-actions">
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.create' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      (click)="openCreateModal()"
+    >
+      {{ 'pages.admin.operations.create' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.read' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="openReadModal()"
+    >
+      {{ 'pages.admin.operations.read' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.update' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="openUpdatePickerModal()"
+    >
+      {{ 'pages.admin.operations.update' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasTags() || !!loadErrorKey() || isLoading()"
+      (click)="openDeletePickerModal()"
+    >
+      {{ 'pages.admin.operations.delete' | translate }}
+    </hans-button>
+  </div>
+
+  @if (isLoading()) {
+    <app-info-state
+      mode="loading"
+      [message]="'pages.admin.tags.states.loading' | translate"
+    />
+  } @else if (loadErrorKey(); as loadErrorKey) {
+    <app-info-state mode="error" [message]="loadErrorKey | translate" />
+  } @else if (!hasTags()) {
+    <app-info-state
+      mode="empty"
+      [message]="'pages.admin.tags.states.empty' | translate"
+    />
+  }
+
+  <app-tags-operations-modal
+    [isOpen]="isModalOpen()"
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [tags]="tags()"
+    [selectedTag]="selectedTag()"
+    [form]="form()"
+    [projectOptions]="projectOptions()"
+    [technologyOptions]="technologyOptions()"
+    [tagTypeOptions]="tagTypeOptions"
+    [pagination]="pagination()"
+    [feedbackKey]="modalFeedbackKey()"
+    [feedbackTone]="modalFeedbackTone()"
+    [isLoading]="isLoading()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (slugChanged)="updateSlug($event)"
+    (namePtChanged)="updateNamePt($event)"
+    (nameEnChanged)="updateNameEn($event)"
+    (typeChanged)="updateType($event)"
+    (sortOrderChanged)="updateSortOrder($event)"
+    (projectToggled)="toggleProject($event)"
+    (technologyToggled)="toggleTechnology($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+    (pageSelected)="goToPage($event)"
+  />
+</section>

@@ -1,0 +1,53 @@
+:host {
+  @apply block min-w-0;
+}
+
+.tags-operations {
+  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.tags-operations-copy {
+  @apply flex min-w-0 flex-col gap-3;
+}
+
+.tags-operations-kicker {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.tags-operations-copy h3 {
+  @apply text-2xl font-semibold;
+}
+
+.tags-operations-copy p:last-child,
+.tags-operations-endpoint {
+  @apply text-sm leading-8;
+  color: var(--base-strong-color);
+}
+
+.tags-operations-endpoint {
+  @apply rounded-2xl border px-4 py-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.tags-operations-feedback {
+  @apply rounded-2xl border px-4 py-3 text-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.tags-operations-feedback[data-tone='success'] {
+  color: var(--success-default-color);
+  background: color-mix(in srgb, var(--success-default-color) 10%, transparent);
+}
+
+.tags-operations-feedback[data-tone='error'] {
+  color: var(--danger-default-color);
+  background: color-mix(in srgb, var(--danger-default-color) 10%, transparent);
+}
+
+.tags-operations-actions {
+  @apply flex flex-wrap gap-3;
+}

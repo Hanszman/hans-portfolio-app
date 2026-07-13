@@ -1,0 +1,11 @@
+:host {
+  @apply block min-w-0;
+}
+
+.pagination-controls {
+  @apply flex flex-wrap items-center justify-between gap-3;
+}
+
+.pagination-controls-pages {
+  @apply flex flex-wrap items-center gap-2;
+}

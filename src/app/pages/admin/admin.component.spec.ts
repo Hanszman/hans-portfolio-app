@@ -2,8 +2,8 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { PortfolioSettingsApiService } from '../../core/api/admin/portfolio-settings/portfolio-settings-api.service';
-import { TagsApiService } from '../../core/api/admin/tags/tags-api.service';
+import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
+import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
 import { TechnologiesService } from '../../core/api/technologies/technologies.service';
@@ -18,6 +18,7 @@ describe('AdminComponent', () => {
       'hans-input',
       'hans-loading',
       'hans-modal',
+      'hans-select-option',
       'hans-toggle',
       'hans-dropdown',
     ]) {
@@ -54,7 +55,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: PortfolioSettingsApiService,
+          provide: PortfolioSettingsOperationsService,
           useValue: {
             getAll: () =>
               of({
@@ -70,7 +71,7 @@ describe('AdminComponent', () => {
                 ],
                 pagination: {
                   page: 1,
-                  pageSize: 100,
+                  pageSize: 6,
                   totalItems: 1,
                   totalPages: 1,
                   hasPreviousPage: false,
@@ -83,7 +84,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TagsApiService,
+          provide: TagsOperationsService,
           useValue: {
             getAll: () =>
               of({
@@ -93,15 +94,15 @@ describe('AdminComponent', () => {
                     slug: 'frontend',
                     namePt: 'Front-end',
                     nameEn: 'Front-end',
-                    type: 'stack',
-                    sortOrder: 1,
+                      type: 'STACK',
+                      sortOrder: 1,
                     projectIds: ['project-1'],
                     technologyIds: ['technology-1'],
                   },
                 ],
                 pagination: {
                   page: 1,
-                  pageSize: 100,
+                  pageSize: 6,
                   totalItems: 1,
                   totalPages: 1,
                   hasPreviousPage: false,
@@ -205,7 +206,7 @@ describe('AdminComponent', () => {
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(11);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(10);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -243,14 +244,14 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: PortfolioSettingsApiService,
+          provide: PortfolioSettingsOperationsService,
           useValue: {
             getAll: () =>
               of({
                 data: [],
                 pagination: {
                   page: 1,
-                  pageSize: 100,
+                  pageSize: 6,
                   totalItems: 0,
                   totalPages: 0,
                   hasPreviousPage: false,
@@ -263,14 +264,14 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TagsApiService,
+          provide: TagsOperationsService,
           useValue: {
             getAll: () =>
               of({
                 data: [],
                 pagination: {
                   page: 1,
-                  pageSize: 100,
+                  pageSize: 6,
                   totalItems: 0,
                   totalPages: 0,
                   hasPreviousPage: false,

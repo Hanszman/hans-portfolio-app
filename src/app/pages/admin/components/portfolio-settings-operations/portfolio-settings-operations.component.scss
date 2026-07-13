@@ -1,0 +1,53 @@
+:host {
+  @apply block min-w-0;
+}
+
+.portfolio-settings-operations {
+  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.portfolio-settings-operations-copy {
+  @apply flex min-w-0 flex-col gap-3;
+}
+
+.portfolio-settings-operations-kicker {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.portfolio-settings-operations-copy h2 {
+  @apply text-4xl font-semibold md:text-5xl;
+}
+
+.portfolio-settings-operations-copy p:last-child,
+.portfolio-settings-operations-endpoint {
+  @apply text-sm leading-8 md:text-base;
+  color: var(--base-strong-color);
+}
+
+.portfolio-settings-operations-endpoint {
+  @apply rounded-2xl border px-4 py-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.portfolio-settings-operations-feedback {
+  @apply rounded-2xl border px-4 py-3 text-sm;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.portfolio-settings-operations-feedback[data-tone='success'] {
+  color: var(--success-default-color);
+  background: color-mix(in srgb, var(--success-default-color) 10%, transparent);
+}
+
+.portfolio-settings-operations-feedback[data-tone='error'] {
+  color: var(--danger-default-color);
+  background: color-mix(in srgb, var(--danger-default-color) 10%, transparent);
+}
+
+.portfolio-settings-operations-actions {
+  @apply flex flex-wrap gap-3;
+}

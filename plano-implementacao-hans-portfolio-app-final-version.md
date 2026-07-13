@@ -1175,10 +1175,12 @@ Regra importante de modelagem para a F8:
     - dominio `src/app/core/api/admin/portfolio-settings/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
     - listagem de `portfolio-settings` integrada na shell admin usando o contrato real da API: `GET /portfolio-settings` para leitura e `/admin/portfolio-settings` para mutacoes protegidas
     - habilitacao real das acoes `create`, `update` e `delete` da entidade diretamente em `/admin`
-    - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos e modal segregado em `components/portfolio-settings-modal/`
-    - leitura operacional refinada com acao `Read`, preservando o card administrativo compacto e exibindo os JSONs apenas sob demanda
-    - apresentacao consolidada em um unico card funcional de `Portfolio settings`, com endpoint e acoes gerais reposicionadas acima da leitura expandida
+    - componente administrativo dedicado em `src/app/pages/admin/components/portfolio-settings-operations/` com `helpers/` internos e modal segregado em `components/portfolio-settings-operations-modal/`
+    - service administrativo padronizado em `src/app/core/api/admin/portfolio-settings/portfolio-settings-operations.service.ts`
+    - leitura operacional refinada com acao `Read` em modal grande, preservando o card administrativo compacto e removendo a expansao inline
+    - apresentacao consolidada em um unico card funcional de `Portfolio settings`, com endpoint e acoes gerais `create/read/update/delete`
     - validacao explicita de JSON antes do submit do campo `value`
+    - footer fixo do modal com feedback contextual, acoes e paginacao compartilhada
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helpers, workspace e composicao admin
@@ -1189,11 +1191,14 @@ Regra importante de modelagem para a F8:
   - entregue:
     - dominio `src/app/core/api/admin/tags/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
     - leitura protegida de `tags` integrada por `GET /tags`, com mutacoes reais em `/admin/tags`
-    - componente administrativo dedicado em `src/app/pages/admin/components/tags/` com `helpers/` internos e modal segregado em `components/tags-modal/`
+    - componente administrativo dedicado em `src/app/pages/admin/components/tags-operations/` com `helpers/` internos e modal segregado em `components/tags-operations-modal/`
+    - service administrativo padronizado em `src/app/core/api/admin/tags/tags-operations.service.ts`
     - card funcional de `Tags` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
-    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura colapsavel dos registros
+    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados para `read`, `update` e `delete`
     - formulario administrativo com suporte aos campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
+    - campo `type` ajustado para seletor com os valores validos da API
     - opcoes relacionais carregadas a partir de `GET /projects` e `GET /technologies`, permitindo vincular tags aos registros ja disponiveis no portfolio publico
+    - feedback de erro mantido dentro do modal quando a submissao falha e o fluxo permanece aberto
     - normalizacao da leitura de tags preparada para lidar com campos planejados da F8 e nomes legados vindos do contrato publico
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
@@ -1257,6 +1262,10 @@ Regra importante de modelagem para a F8:
 - manter o admin com o mesmo sistema de tema do app publico
 - atualizar documentacoes a cada interacao relevante desta etapa, incluindo este plano e o plano especifico da F8
 - ao final de cada subetapa concluida, rodar `npm run lint`, `npm run test:coverage -- --watch=false` e `npm run build`
+- padronizar componentes e services de CRUD administrativo com o sufixo `-operations`
+- remover o selo textual da subetapa concluida no card da entidade quando ela deixar de ser placeholder
+- usar `Read` em modal grande, e nao em expansao inline do card
+- manter footer fixo de modal com feedback, acoes e paginacao compartilhada sempre que a consulta protegida for paginada
 
 #### Criterios de aceite
 

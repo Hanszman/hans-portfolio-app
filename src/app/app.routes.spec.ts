@@ -4,8 +4,8 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationApiService } from './core/api/admin/admin-auth/admin-auth-api.service';
-import { PortfolioSettingsApiService } from './core/api/admin/portfolio-settings/portfolio-settings-api.service';
-import { TagsApiService } from './core/api/admin/tags/tags-api.service';
+import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
+import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -28,6 +28,7 @@ describe('app routes', () => {
       'hans-icon',
       'hans-loading',
       'hans-modal',
+      'hans-select-option',
       'hans-toggle',
       'hans-dropdown',
     ]) {
@@ -81,7 +82,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: PortfolioSettingsApiService,
+          provide: PortfolioSettingsOperationsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -99,7 +100,7 @@ describe('app routes', () => {
                   ],
                   pagination: {
                     page: 1,
-                    pageSize: 100,
+                    pageSize: 6,
                     totalItems: 1,
                     totalPages: 1,
                     hasPreviousPage: false,
@@ -113,7 +114,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: TagsApiService,
+          provide: TagsOperationsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -125,7 +126,7 @@ describe('app routes', () => {
                       slug: 'frontend',
                       namePt: 'Front-end',
                       nameEn: 'Front-end',
-                      type: 'stack',
+                      type: 'STACK',
                       sortOrder: 1,
                       projectIds: ['project-1'],
                       technologyIds: ['technology-1'],
@@ -133,7 +134,7 @@ describe('app routes', () => {
                   ],
                   pagination: {
                     page: 1,
-                    pageSize: 100,
+                    pageSize: 6,
                     totalItems: 1,
                     totalPages: 1,
                     hasPreviousPage: false,

@@ -25,6 +25,15 @@ export interface AdminSessionFactDefinition {
   readonly id: 'route' | 'validation' | 'storage';
 }
 
+export interface AdminCollectionPagination {
+  readonly page: number;
+  readonly pageSize: number;
+  readonly totalItems: number;
+  readonly totalPages: number;
+  readonly hasPreviousPage: boolean;
+  readonly hasNextPage: boolean;
+}
+
 export type AdminEntityRelationMode = AdminEntityDefinition['relationMode'];
 
 export type AdminEntityTitleTranslationKey =
@@ -150,3 +159,14 @@ export const ADMIN_SESSION_FACT_DEFINITIONS: readonly AdminSessionFactDefinition
       id: 'storage',
     },
   ] as const;
+
+export const createAdminCollectionPagination = (
+  pageSize: number,
+): AdminCollectionPagination => ({
+  page: 1,
+  pageSize,
+  totalItems: 0,
+  totalPages: 0,
+  hasPreviousPage: false,
+  hasNextPage: false,
+});

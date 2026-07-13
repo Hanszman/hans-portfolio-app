@@ -235,13 +235,26 @@ Cada entidade deve ter, no minimo:
 - modal de update
 - modal de delete com confirmacao
 - loading, empty e erro
+- leitura `Read` em modal grande, e nao expandida inline no card principal apos a consolidacao da subetapa
+- footer fixo nos modais com acoes, feedback e paginacao
+- paginacao visual obrigatoria sempre que a consulta protegida for paginada
 
-### 6.4. Padrao de feedback
+### 6.4. Convencoes consolidadas da shell admin
+
+- componentes e services de CRUD administrativo devem usar o sufixo `-operations`
+- dentro de `src/app/core/api/admin/`, cada entidade administrativa deve ter sua propria pasta
+- os services administrativos nao devem usar o sufixo `-api` quando representam o CRUD da entidade; o nome oficial passa a ser `*-operations.service.ts`
+- componentes por entidade devem manter `helpers/` e `components/` internos para preservar SRP
+- quando uma subetapa deixa de ser placeholder e passa a ter CRUD funcional, remover da UI o selo textual com o titulo meta da subetapa, mantendo apenas a identificacao visual necessaria do card
+
+### 6.5. Padrao de feedback
 
 - loading de submissao no botao
 - loading de listagem com `hans-loading`
 - toast de sucesso apos create/update/delete
 - toast ou mensagem de erro legivel em falhas da API
+- quando o modal permanecer aberto, o erro deve aparecer dentro do proprio modal
+- mensagens fora do modal ficam reservadas para feedbacks da tela apos fechamento da operacao
 
 ## 7) Matriz de entidades e formularios
 
@@ -512,10 +525,12 @@ Cada entidade deve ter, no minimo:
   - leitura da colecao ajustada para o contrato real da API via `GET /portfolio-settings`, mantendo `POST`, `PUT` e `DELETE` em `/admin/portfolio-settings`
   - fluxo real de `create`, `update` e `delete` implementado com modal e validacao de JSON antes do submit
   - acoes da entidade `portfolio-settings` habilitadas diretamente na lista oficial da F8 dentro de `/admin`
-  - componente dedicado da entidade organizado em `src/app/pages/admin/components/portfolio-settings/` com `helpers/` internos para manter a shell enxuta e o SRP
-  - modal extraido para `src/app/pages/admin/components/portfolio-settings/components/portfolio-settings-modal/`, separando formulario, seletores e confirmacao do componente pai
-  - leitura visual da colecao refinada com um toggle `Read`, mantendo o card administrativo compacto por padrao e exibindo os JSONs somente sob demanda
-  - card da entidade consolidado em uma unica superficie funcional dentro da shell admin, incorporando endpoint, acoes gerais `create/read/update/delete` e eliminando a duplicidade visual com o roadmap
+  - componente dedicado da entidade consolidado em `src/app/pages/admin/components/portfolio-settings-operations/` com `helpers/` e `components/` internos para manter SRP
+  - service administrativo padronizado em `src/app/core/api/admin/portfolio-settings/portfolio-settings-operations.service.ts`
+  - modal extraido para `src/app/pages/admin/components/portfolio-settings-operations/components/portfolio-settings-operations-modal/`, separando formulario, leitura, seletores, confirmacao e paginacao do componente pai
+  - leitura visual da colecao consolidada em modal grande `Read`, removendo a expansao inline do card principal
+  - card da entidade consolidado em uma unica superficie funcional dentro da shell admin, incorporando endpoint e acoes gerais `create/read/update/delete`
+  - footer fixo no modal com feedback contextual, acoes e paginacao compartilhada
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa
@@ -523,11 +538,14 @@ Cada entidade deve ter, no minimo:
 - entregas concluidas na `F8.4`:
   - dominio `src/app/core/api/admin/tags/` criado para o CRUD de `tags` dentro da estrutura administrativa
   - leitura protegida integrada por `GET /tags`, mantendo `POST`, `PUT` e `DELETE` em `/admin/tags`
-  - componente administrativo dedicado em `src/app/pages/admin/components/tags/` implementado com `helpers/` internos e modal segregado em `components/tags-modal/`
+  - componente administrativo dedicado em `src/app/pages/admin/components/tags-operations/` implementado com `helpers/` internos e modal segregado em `components/tags-operations-modal/`
+  - service administrativo padronizado em `src/app/core/api/admin/tags/tags-operations.service.ts`
   - card funcional de `Tags` habilitado diretamente na grid oficial da shell admin, substituindo o placeholder da subetapa `F8.4`
-  - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura colapsavel, seletores relacionais e feedbacks de sucesso, erro, sessao ausente e selecao obrigatoria
+  - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande, seletores relacionais e feedbacks de sucesso, erro, sessao ausente e selecao obrigatoria
   - formulario administrativo modelado com os campos `slug`, `namePt`, `nameEn`, `type`, `sortOrder`, `projectIds` e `technologyIds`
+  - campo `type` convertido para seletor com valores validos do contrato da API, evitando erro `400` por enumeracao invalida
   - carregamento auxiliar de `projects` e `technologies` conectado aos endpoints publicos para montar as opcoes relacionais da tag dentro dos modais
+  - footer fixo de modal aplicado com feedback contextual e paginacao compartilhada
   - normalizacao defensiva do contrato de `tags` adicionada para suportar tanto campos planejados da F8 (`namePt`, `nameEn`) quanto retornos legados (`labelPt`, `labelEn`) sem quebrar a leitura administrativa
   - shell admin atualizada para tratar `portfolio-settings` e `tags` como workspaces especiais ja funcionais, mantendo as demais entidades seguintes como roadmap bloqueado
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
