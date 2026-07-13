@@ -305,7 +305,7 @@ O CRUD funcionou, mas acho que da pra apresentá-lo melhor na tela. Atualmente e
 -Beleza, ficou ótimo! Pode partir pra próxima subetapa de implementação por favor! Acredito que seja a F8.4, certo?
 -Beleza, obrigado! Mas tenho alguns pontos:
 Acho que a nomenclatura dos components/services ainda não ta legal. Pois esses components/services dos cruds das telas de admin que estamos fazendo podem acabar tendo os mesmos nomes das outras entidades/telas do sistema, fora do contexto de admin. Vamos colocar um sufixo em portfolio-settings, tags e também nas próximas entidades das próximas etapas, algo como "-operations". E pode remover também o sufixo "-api" dos services, substituindo por esse mesmo sufixo padrão que vamos colocar.
-A cor de fundo do Card de Tags está ausente, deveria ser igual colocamos no Portfolio Settings.
+Como vc pode ver no print 1, cor de fundo do Card de Tags está ausente, deveria ser igual colocamos no Portfolio Settings e igual nos outros cards. O container de Tags está sem o fundo de card.
 Não precisamos mais desse titulo da subetapa meta "F8.4 Owned relationships", pode remover dessa tag e anotar na memória/documentação pra sempre remover esse titulo da subetapa quando finalizar a implementação daquela subetapa.
-Read de todas as operações poderia ser um modal grande, com os objetos/jsons.
+Read de todas as operações poderia ser um modal grande, com os objetos/jsons, ao invés de já aparecer na mesma tela. Arrume pro Portfolio Setting, pra Tags e ajuste na memória pras próximas entidades que fizermos.
 OBS: Testar CRUDs
