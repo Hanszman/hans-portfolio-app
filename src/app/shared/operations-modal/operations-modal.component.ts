@@ -8,13 +8,12 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppTranslationKey } from '../../core/translation/translation.types';
-import { PaginationComponent } from '../pagination/pagination.component';
 import { createAdminCollectionPagination } from '../../pages/admin/admin.types';
 
 @Component({
   selector: 'app-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, PaginationComponent],
+  imports: [TranslatePipe],
   templateUrl: './operations-modal.component.html',
   styleUrl: './operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,7 +48,33 @@ export class OperationsModalComponent {
     this.submitted.emit();
   }
 
-  protected selectPage(page: number): void {
-    this.pageSelected.emit(page);
+  protected selectPage(event: Event | number): void {
+    if (typeof event === 'number') {
+      this.pageSelected.emit(event);
+      return;
+    }
+
+    const customEvent = event as Event & {
+      detail?: number | { page?: number };
+      target: (EventTarget & { page?: number }) | null;
+    };
+
+    if (typeof customEvent.detail === 'number') {
+      this.pageSelected.emit(customEvent.detail);
+      return;
+    }
+
+    if (
+      customEvent.detail &&
+      typeof customEvent.detail === 'object' &&
+      typeof customEvent.detail.page === 'number'
+    ) {
+      this.pageSelected.emit(customEvent.detail.page);
+      return;
+    }
+
+    if (customEvent.target && typeof customEvent.target.page === 'number') {
+      this.pageSelected.emit(customEvent.target.page);
+    }
   }
 }

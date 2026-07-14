@@ -2,6 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
+import { ToastService } from '../../core/toast/toast.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { LoginComponent } from './login.component';
 
@@ -144,13 +145,22 @@ describe('LoginComponent', () => {
   });
 
   it('should not navigate when the login attempt fails', async () => {
-    const fixture = TestBed.createComponent(LoginComponent);
     const router = TestBed.inject(Router);
-    spyOn(router, 'navigateByUrl').and.resolveTo(true);
+    const toastService = TestBed.inject(ToastService);
     const adminSessionService = TestBed.inject(
       AdminSessionService,
     ) as jasmine.SpyObj<AdminSessionService>;
+
     adminSessionService.login.and.resolveTo(false);
+    (
+      adminSessionService as unknown as {
+        loginErrorKey: () => string;
+      }
+    ).loginErrorKey = () => 'pages.login.feedback.invalidCredentials';
+
+    const fixture = TestBed.createComponent(LoginComponent);
+    spyOn(router, 'navigateByUrl').and.resolveTo(true);
+    spyOn(toastService, 'showError');
     const component = fixture.componentInstance as unknown as {
       updateEmail(value: string): void;
       updatePassword(value: string): void;
@@ -163,6 +173,9 @@ describe('LoginComponent', () => {
     await component.submit();
 
     expect(router.navigateByUrl).not.toHaveBeenCalled();
+    expect(toastService.showError).toHaveBeenCalledWith(
+      'pages.login.feedback.invalidCredentials',
+    );
   });
 
   it('should not submit when the form is incomplete', async () => {

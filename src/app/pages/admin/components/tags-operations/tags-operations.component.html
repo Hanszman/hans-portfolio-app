@@ -10,12 +10,6 @@
 
   <p class="tags-operations-endpoint">GET/POST/PATCH/DELETE /tags</p>
 
-  @if (feedbackKey(); as feedbackKey) {
-    <p class="tags-operations-feedback" [attr.data-tone]="feedbackTone()">
-      {{ feedbackKey | translate }}
-    </p>
-  }
-
   <div class="tags-operations-actions">
     <hans-button
       [attr.aria-label]="'pages.admin.operations.create' | translate"

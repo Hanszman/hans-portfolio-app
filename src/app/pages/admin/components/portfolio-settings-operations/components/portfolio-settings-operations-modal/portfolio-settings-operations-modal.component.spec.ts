@@ -82,7 +82,15 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     componentAccess.submit();
     componentAccess.requestClose();
 
-    expect(fixture.nativeElement.textContent).toContain('Save');
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          confirmLabel?: string;
+          paginationCurrentPage?: number;
+        })
+      | null;
+
+    expect(modalElement?.confirmLabel).toBe('Save');
+    expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(keySpy).toHaveBeenCalledOnceWith('profile');
     expect(descriptionSpy).toHaveBeenCalledOnceWith('Profile assets.');
     expect(valueSpy).toHaveBeenCalledOnceWith('{ "avatar": true }');
@@ -156,9 +164,16 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     );
     fixture.detectChanges();
 
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          confirmLabel?: string;
+        })
+      | null;
+
     expect(fixture.nativeElement.textContent).toContain(
       'This action permanently removes the selected protected setting from the portfolio configuration.',
     );
     expect(fixture.nativeElement.textContent).toContain('Branding assets.');
+    expect(modalElement?.confirmLabel).toBe('Delete');
   });
 });

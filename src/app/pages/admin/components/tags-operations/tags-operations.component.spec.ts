@@ -8,6 +8,7 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
+import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { TagsOperationsComponent } from './tags-operations.component';
 
@@ -86,6 +87,7 @@ describe('TagsOperationsComponent', () => {
   let tagsOperationsService: jasmine.SpyObj<TagsOperationsService>;
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
+  let toastService: jasmine.SpyObj<ToastService>;
 
   const settleWorkspace = async (
     currentFixture: ComponentFixture<TagsOperationsComponent>,
@@ -122,6 +124,10 @@ describe('TagsOperationsComponent', () => {
       'TechnologiesService',
       ['getTechnologies'],
     );
+    toastService = jasmine.createSpyObj<ToastService>('ToastService', [
+      'showSuccess',
+      'showError',
+    ]);
 
     tagsOperationsService.getAll.and.returnValue(of(createCollectionResponse()));
     tagsOperationsService.create.and.returnValue(of(createTag()));
@@ -176,6 +182,10 @@ describe('TagsOperationsComponent', () => {
           useValue: {
             accessToken: () => 'token-123',
           },
+        },
+        {
+          provide: ToastService,
+          useValue: toastService,
         },
       ],
     }).compileComponents();
@@ -388,6 +398,7 @@ describe('TagsOperationsComponent', () => {
         { provide: TagsOperationsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -486,6 +497,7 @@ describe('TagsOperationsComponent', () => {
         { provide: TagsOperationsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
           useValue: {

@@ -1,11 +1,5 @@
 :host {
   @apply block min-h-screen min-w-0 overflow-x-hidden;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--background-color) 95%, var(--white)) 0%,
-      var(--background-color) 100%
-    );
   color: var(--text-color);
 }
 

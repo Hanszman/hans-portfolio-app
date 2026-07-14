@@ -63,6 +63,7 @@ export type AppTranslationKey =
   | 'common.pagination.navigation'
   | 'common.pagination.previous'
   | 'common.pagination.next'
+  | 'common.pagination.pageLabel'
   | 'common.pagination.page'
   | 'pages.home.hero.availability'
   | 'pages.home.hero.greeting'

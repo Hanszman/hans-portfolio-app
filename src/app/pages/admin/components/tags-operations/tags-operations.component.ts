@@ -19,6 +19,7 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
+import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import {
@@ -55,6 +56,7 @@ export class TagsOperationsComponent implements OnInit {
   private readonly projectsService = inject(ProjectsService);
   private readonly technologiesService = inject(TechnologiesService);
   private readonly adminSessionService = inject(AdminSessionService);
+  private readonly toastService = inject(ToastService);
 
   private readonly tagsSignal = signal<readonly TagRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
@@ -284,6 +286,7 @@ export class TagsOperationsComponent implements OnInit {
       this.technologiesSignal.set(technologiesResponse.data);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.tags.feedback.loadError');
+      this.toastService.showError('pages.admin.tags.feedback.loadError');
     } finally {
       this.isLoadingSignal.set(false);
     }
@@ -374,10 +377,12 @@ export class TagsOperationsComponent implements OnInit {
   private setSuccessFeedback(feedbackKey: AppTranslationKey): void {
     this.feedbackKeySignal.set(feedbackKey);
     this.feedbackToneSignal.set('success');
+    this.toastService.showSuccess(feedbackKey);
   }
 
   private setModalErrorFeedback(feedbackKey: AppTranslationKey): void {
     this.modalFeedbackKeySignal.set(feedbackKey);
     this.modalFeedbackToneSignal.set('error');
+    this.toastService.showError(feedbackKey);
   }
 }

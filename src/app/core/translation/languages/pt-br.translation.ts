@@ -65,6 +65,7 @@ export const PT_BR_TRANSLATIONS = {
   'common.pagination.navigation': 'Paginacao',
   'common.pagination.previous': 'Anterior',
   'common.pagination.next': 'Proxima',
+  'common.pagination.pageLabel': 'Pagina',
   'common.pagination.page': 'Ir para a pagina {{ page }}',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Oi, eu sou',

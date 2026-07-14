@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Router, RouterOutlet } from '@angular/router';
 import { ThemeService } from '../../core/theme/theme.service';
 import { TranslationService } from '../../core/translation/translation.service';
+import { ToastOutletComponent } from '../../shared/toast-outlet/toast-outlet.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { buildShellNavigationItems } from './helpers/shell-navigation.helper';
@@ -9,7 +10,7 @@ import { NAVIGATION_LABEL_KEY_BY_PATH } from './shell.types';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastOutletComponent],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

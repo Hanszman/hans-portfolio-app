@@ -1,11 +1,31 @@
 <hans-modal
   [isOpen]="isOpen()"
   [title]="titleKey() | translate"
+  [cancelButtonColor]="'primary'"
+  [cancelDisabled]="isSubmitting()"
+  [cancelLabel]="'common.actions.close' | translate"
+  [closeOnConfirm]="false"
+  [confirmButtonColor]="'primary'"
+  [confirmDisabled]="isInteractionDisabled()"
+  [confirmLabel]="showSubmit() ? (submitLabelKey() | translate) : ''"
+  [confirmLoading]="isSubmitting()"
+  [dismissible]="!isSubmitting()"
+  [paginationAriaLabel]="'common.pagination.navigation' | translate"
+  [paginationCurrentPage]="showPagination() ? pagination().page : 0"
+  [paginationDisabled]="isInteractionDisabled()"
+  [paginationNextLabel]="'common.pagination.next' | translate"
+  [paginationPageLabel]="'common.pagination.pageLabel' | translate"
+  [paginationPreviousLabel]="'common.pagination.previous' | translate"
+  [paginationTotalPages]="showPagination() ? pagination().totalPages : 0"
   modalSize="large"
   placement="center"
   [renderBody]="true"
   [closeButtonLabel]="'common.actions.close' | translate"
   (close)="requestClose()"
+  (cancel)="requestClose()"
+  (confirm)="submit()"
+  (pagechange)="selectPage($event)"
+  (pageChange)="selectPage($event)"
 >
   <div class="operations-modal">
     <div class="operations-modal-scroll">
@@ -17,62 +37,6 @@
 
       <div class="operations-modal-body">
         <ng-content />
-      </div>
-    </div>
-
-    <div class="operations-modal-footer">
-      @if (feedbackKey(); as feedbackKey) {
-        <p class="operations-modal-feedback" [attr.data-tone]="feedbackTone()">
-          {{ feedbackKey | translate }}
-        </p>
-      }
-
-      <div class="operations-modal-footer-bar">
-        <div class="operations-modal-footer-pagination">
-          @if (showPagination()) {
-            <app-pagination
-              [currentPage]="pagination().page"
-              [totalPages]="pagination().totalPages"
-              [disabled]="isInteractionDisabled()"
-              (pageSelected)="selectPage($event)"
-            />
-          }
-        </div>
-
-        <div class="operations-modal-footer-actions">
-          <hans-button
-            [attr.aria-label]="'common.actions.close' | translate"
-            [buttonColor]="'primary'"
-            [buttonSize]="'medium'"
-            [buttonVariant]="'outline'"
-            [disabled]="isSubmitting()"
-            (click)="requestClose()"
-          >
-            {{ 'common.actions.close' | translate }}
-          </hans-button>
-
-          @if (showSubmit()) {
-            <hans-button
-              [attr.aria-label]="submitLabelKey() | translate"
-              [buttonColor]="'primary'"
-              [buttonSize]="'medium'"
-              [buttonVariant]="'default'"
-              [disabled]="isSubmitting()"
-              (click)="submit()"
-            >
-              @if (isSubmitting()) {
-                <hans-loading
-                  [attr.aria-label]="submitLabelKey() | translate"
-                  loadingColor="base"
-                  loadingSize="small"
-                  loadingType="spinner"
-                ></hans-loading>
-              } @else {
-                {{ submitLabelKey() | translate }}
-              }
-            </hans-button>
-          }
-        </div>
       </div>
     </div>
   </div>

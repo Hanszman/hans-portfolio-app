@@ -14,12 +14,6 @@
     GET/POST/PATCH/DELETE /portfolio-settings
   </p>
 
-  @if (feedbackKey(); as feedbackKey) {
-    <p class="portfolio-settings-operations-feedback" [attr.data-tone]="feedbackTone()">
-      {{ feedbackKey | translate }}
-    </p>
-  }
-
   <div class="portfolio-settings-operations-actions">
     <hans-button
       [attr.aria-label]="'pages.admin.operations.create' | translate"

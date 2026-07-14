@@ -138,6 +138,8 @@ Se uma composicao passar a ser reutilizada entre varias entidades administrativa
 - helpers locais de entidades administrativas devem seguir `*-operations.helper.ts`
 - o componente shared de paginacao oficial passa a se chamar `pagination`
 - o wrapper shared oficial para modais administrativos passa a ser `operations-modal`
+- a paginacao administrativa oficial passa a ser provida pela `hans-ui-design-lib`, substituindo qualquer implementacao local no app
+- feedbacks operacionais do portfolio passam a usar `hans-toast` como padrao oficial no lugar de mensagens inline persistentes
 
 ## 5) Estrategia de sessao e seguranca
 
@@ -269,6 +271,7 @@ Cada entidade deve ter, no minimo:
 - toast ou mensagem de erro legivel em falhas da API
 - quando o modal permanecer aberto, o erro deve aparecer dentro do proprio modal
 - mensagens fora do modal ficam reservadas para feedbacks da tela apos fechamento da operacao
+- apos a consolidacao do padrao de feedback, o portfolio deve priorizar `hans-toast` tambem para falhas de autenticacao, consultas administrativas e mutacoes protegidas
 
 ## 7) Matriz de entidades e formularios
 
@@ -547,6 +550,9 @@ Cada entidade deve ter, no minimo:
   - card da entidade consolidado em uma unica superficie funcional dentro da shell admin, incorporando endpoint e acoes gerais `create/read/update/delete`
   - footer fixo no modal com feedback contextual, acoes e paginacao compartilhada
   - wrapper shared `operations-modal` adotado para aproximar os fluxos administrativos do padrao visual da `hans-ui-design-lib`
+  - padrao de paginacao migrado para a `hans-ui-design-lib`, removendo a necessidade de um componente local de paginacao no app
+  - feedbacks operacionais consolidados com `hans-toast`, reduzindo mensagens inline na tela administrativa
+  - login e admin mantidos definitivamente dentro do `ShellComponent`, com remocao do fundo adicional que havia ficado duplicado nas paginas
   - feedbacks de loading, empty, erro, sucesso, sessao ausente e selecao obrigatoria adicionados ao fluxo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helpers, workspace e integracao da shell administrativa com a subetapa
@@ -565,6 +571,8 @@ Cada entidade deve ter, no minimo:
   - footer fixo de modal aplicado com feedback contextual e paginacao compartilhada
   - seletores de `update` e `delete` refinados para cards clicaveis, sem botoes internos redundantes e com `slug` apresentada entre parenteses
   - normalizacao defensiva do contrato de `tags` adicionada para suportar tanto campos planejados da F8 (`namePt`, `nameEn`) quanto retornos legados (`labelPt`, `labelEn`) sem quebrar a leitura administrativa
+  - footer dos modais administrativos realinhado ao padrao da `hans-ui-design-lib`, reaproveitando configuracao de acoes e paginacao fornecida pela propria lib
+  - feedbacks de `tags` migrados para `hans-toast`, mantendo o modal focado no formulario e nas acoes da operacao
   - shell admin atualizada para tratar `portfolio-settings` e `tags` como workspaces especiais ja funcionais, mantendo as demais entidades seguintes como roadmap bloqueado
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas

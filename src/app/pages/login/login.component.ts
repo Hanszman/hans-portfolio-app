@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
+import { ToastService } from '../../core/toast/toast.service';
 import {
   LOGIN_FIELD_IDS,
   PASSWORD_VISIBILITY_ICON_BY_STATE,
@@ -26,6 +27,7 @@ import {
 })
 export class LoginComponent {
   private readonly adminSessionService = inject(AdminSessionService);
+  private readonly toastService = inject(ToastService);
   private readonly router = inject(Router);
   private readonly emailSignal = signal('');
   private readonly passwordSignal = signal('');
@@ -76,6 +78,11 @@ export class LoginComponent {
 
     if (success) {
       await this.router.navigateByUrl('/admin');
+      return;
+    }
+
+    if (this.loginErrorKey()) {
+      this.toastService.showError(this.loginErrorKey()!);
     }
   }
 

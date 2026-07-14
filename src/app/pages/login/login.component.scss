@@ -1,11 +1,5 @@
 :host {
   @apply block min-h-screen;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--background-color) 95%, var(--white)) 0%,
-      var(--background-color) 100%
-    );
   color: var(--text-color);
 }
 
@@ -31,8 +25,7 @@
 
 .login-copy > p,
 .login-security p,
-.login-form-header p,
-.login-feedback {
+.login-form-header p {
   @apply text-base leading-7;
   color: var(--base-strong-color);
 }
@@ -59,13 +52,6 @@
 
 .login-form-fields {
   @apply grid gap-4;
-}
-
-.login-feedback {
-  @apply m-0 rounded-2xl border px-4 py-3;
-  border-color: color-mix(in srgb, var(--error-default-color) 28%, transparent);
-  background: color-mix(in srgb, var(--error-default-color) 8%, transparent);
-  color: var(--error-default-color);
 }
 
 .login-submit {

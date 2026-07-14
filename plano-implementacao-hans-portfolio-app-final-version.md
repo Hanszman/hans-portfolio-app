@@ -1098,8 +1098,7 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
   - componentes compartilhados apenas do dominio admin
 - `src/app/shared/operations-modal/`
   - wrapper compartilhado dos modais administrativos com footer padronizado
-- `src/app/shared/pagination/`
-  - componente compartilhado de paginacao para listas administrativas
+- a paginacao administrativa deve ser consumida da `hans-ui-design-lib`, e nao implementada localmente em `src/app/shared/`
 - `src/app/pages/admin/helpers/`
   - normalizadores de payload
   - mapeadores view-model <-> API
@@ -1189,6 +1188,8 @@ Regra importante de modelagem para a F8:
     - footer fixo do modal com feedback contextual, acoes e paginacao compartilhada
     - wrapper shared `operations-modal` adotado para alinhar a estrutura do modal ao padrao visual consolidado da `hans-ui-design-lib`
     - feedbacks de loading, empty, erro, sessao ausente, sucesso e selecao obrigatoria
+    - padrao posterior consolidado com paginacao provida pela `hans-ui-design-lib`, sem componente local de paginacao no portfolio
+    - feedbacks administrativos migrados para `hans-toast`, reduzindo mensagens inline na tela
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helpers, workspace e composicao admin
 - `F8.4` - `tags`
@@ -1209,6 +1210,8 @@ Regra importante de modelagem para a F8:
     - feedback de erro mantido dentro do modal quando a submissao falha e o fluxo permanece aberto
     - seletores diretos de `update` e `delete` refinados para cards clicaveis, sem botoes internos redundantes, com `slug` exibida entre parentesis
     - normalizacao da leitura de tags preparada para lidar com campos planejados da F8 e nomes legados vindos do contrato publico
+    - footer dos modais administrativos posteriormente consolidado sobre o padrao da `hans-ui-design-lib`, incluindo paginacao e acoes no proprio footer da lib
+    - feedbacks administrativos de `tags` migrados para `hans-toast`, mantendo a tela e os modais livres de mensagens inline persistentes
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
 - `F8.5` - `links`
@@ -1278,6 +1281,8 @@ Regra importante de modelagem para a F8:
 - manter footer fixo de modal com feedback, acoes e paginacao compartilhada sempre que a consulta protegida for paginada
 - `login` e `admin` devem ser renderizados dentro do `ShellComponent`, sem duplicar `header` e `footer` nas paginas
 - o page size administrativo padrao consolidado passa a ser `5`, centralizado em constants/types compartilhados
+- a paginacao administrativa oficial deve vir da `hans-ui-design-lib`, evitando duplicacao de componente no app
+- feedbacks operacionais devem priorizar `hans-toast` em toda a aplicacao, inclusive autenticacao e CRUDs administrativos
 
 #### Criterios de aceite
 

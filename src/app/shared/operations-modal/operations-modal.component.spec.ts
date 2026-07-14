@@ -8,7 +8,7 @@ describe('OperationsModalComponent', () => {
   let component: OperationsModalComponent;
 
   beforeAll(() => {
-    for (const elementName of ['hans-button', 'hans-loading', 'hans-modal']) {
+    for (const elementName of ['hans-modal']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -25,7 +25,7 @@ describe('OperationsModalComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should render description, pagination and submit action when configured', () => {
+  it('should expose modal footer props, pagination props and output emitters', () => {
     const closedSpy = jasmine.createSpy('closed');
     const submittedSpy = jasmine.createSpy('submitted');
     const pageSpy = jasmine.createSpy('pageSelected');
@@ -52,31 +52,95 @@ describe('OperationsModalComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.textContent).toContain('Review the current protected tags');
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          cancelLabel?: string;
+          confirmLabel?: string;
+          closeOnConfirm?: boolean;
+          paginationCurrentPage?: number;
+          paginationTotalPages?: number;
+          paginationPageLabel?: string;
+        })
+      | null;
+
+    expect(modalElement?.cancelLabel).toBe('Close');
+    expect(modalElement?.confirmLabel).toBe('Save');
+    expect(modalElement?.closeOnConfirm).toBeFalse();
+    expect(modalElement?.paginationCurrentPage).toBe(2);
+    expect(modalElement?.paginationTotalPages).toBe(3);
+    expect(modalElement?.paginationPageLabel).toBe('Page');
 
     (
       component as unknown as {
         requestClose(): void;
         submit(): void;
-        selectPage(page: number): void;
+        selectPage(event: Event | number): void;
       }
     ).selectPage(3);
     (
       component as unknown as {
         requestClose(): void;
         submit(): void;
-        selectPage(page: number): void;
+        selectPage(event: Event | number): void;
+      }
+    ).selectPage(
+      new CustomEvent('pagechange', {
+        detail: 6,
+      }),
+    );
+    (
+      component as unknown as {
+        requestClose(): void;
+        submit(): void;
+        selectPage(event: Event | number): void;
+      }
+    ).selectPage(
+      new CustomEvent('pagechange', {
+        detail: {
+          page: 4,
+        },
+      }),
+    );
+    (
+      component as unknown as {
+        requestClose(): void;
+        submit(): void;
+        selectPage(event: Event | number): void;
+      }
+    ).selectPage(
+      {
+        target: {
+          page: 5,
+        },
+      } as unknown as Event,
+    );
+    (
+      component as unknown as {
+        requestClose(): void;
+        submit(): void;
+        selectPage(event: Event | number): void;
+      }
+    ).selectPage(new Event('pagechange'));
+    (
+      component as unknown as {
+        requestClose(): void;
+        submit(): void;
+        selectPage(event: Event | number): void;
       }
     ).submit();
     (
       component as unknown as {
         requestClose(): void;
         submit(): void;
-        selectPage(page: number): void;
+        selectPage(event: Event | number): void;
       }
     ).requestClose();
 
-    expect(pageSpy).toHaveBeenCalledOnceWith(3);
+    expect(pageSpy).toHaveBeenCalledWith(3);
+    expect(pageSpy).toHaveBeenCalledWith(6);
+    expect(pageSpy).toHaveBeenCalledWith(4);
+    expect(pageSpy).toHaveBeenCalledWith(5);
+    expect(pageSpy).toHaveBeenCalledTimes(4);
     expect(submittedSpy).toHaveBeenCalledTimes(1);
     expect(closedSpy).toHaveBeenCalledTimes(1);
   });
@@ -111,7 +175,20 @@ describe('OperationsModalComponent', () => {
       ).isInteractionDisabled(),
     ).toBeTrue();
 
-    expect(fixture.nativeElement.textContent).not.toContain('Previous');
-    expect(fixture.nativeElement.textContent).not.toContain('Save');
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          paginationCurrentPage?: number;
+          confirmLabel?: string;
+          dismissible?: boolean;
+          cancelDisabled?: boolean;
+          confirmDisabled?: boolean;
+        })
+      | null;
+
+    expect(modalElement?.paginationCurrentPage).toBe(0);
+    expect(modalElement?.confirmLabel).toBe('');
+    expect(modalElement?.dismissible).toBeFalse();
+    expect(modalElement?.cancelDisabled).toBeTrue();
+    expect(modalElement?.confirmDisabled).toBeTrue();
   });
 });

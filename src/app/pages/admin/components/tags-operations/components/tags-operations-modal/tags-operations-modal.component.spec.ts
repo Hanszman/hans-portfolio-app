@@ -117,7 +117,15 @@ describe('TagsOperationsModalComponent', () => {
     componentAccess.submit();
     componentAccess.requestClose();
 
-    expect(fixture.nativeElement.textContent).toContain('Save');
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          confirmLabel?: string;
+          paginationCurrentPage?: number;
+        })
+      | null;
+
+    expect(modalElement?.confirmLabel).toBe('Save');
+    expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(slugSpy).toHaveBeenCalledOnceWith('backend');
     expect(namePtSpy).toHaveBeenCalledOnceWith('Back-end');
     expect(nameEnSpy).toHaveBeenCalledOnceWith('Back-end');
@@ -226,11 +234,17 @@ describe('TagsOperationsModalComponent', () => {
       isProjectSelected(projectId: string): boolean;
       isTechnologySelected(technologyId: string): boolean;
     };
+    const modalElement = fixture.nativeElement.querySelector('hans-modal') as
+      | (HTMLElement & {
+          confirmLabel?: string;
+        })
+      | null;
 
     expect(fixture.nativeElement.textContent).toContain(
       'This action permanently removes the selected protected tag and its current relations from the portfolio.',
     );
     expect(component.isProjectSelected('project-1')).toBeTrue();
     expect(component.isTechnologySelected('technology-1')).toBeTrue();
+    expect(modalElement?.confirmLabel).toBe('Delete');
   });
 });

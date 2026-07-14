@@ -64,6 +64,7 @@ export const EN_TRANSLATIONS = {
   'common.pagination.navigation': 'Pagination',
   'common.pagination.previous': 'Previous',
   'common.pagination.next': 'Next',
+  'common.pagination.pageLabel': 'Page',
   'common.pagination.page': 'Go to page {{ page }}',
   'pages.home.hero.availability': 'Available for work',
   'pages.home.hero.greeting': "Hi, I'm",

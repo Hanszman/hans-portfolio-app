@@ -15,6 +15,7 @@ import {
   PortfolioSettingRecord,
 } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
+import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import {
@@ -52,6 +53,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     PortfolioSettingsOperationsService,
   );
   private readonly adminSessionService = inject(AdminSessionService);
+  private readonly toastService = inject(ToastService);
 
   private readonly settingsSignal = signal<readonly PortfolioSettingRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
@@ -246,6 +248,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
       this.paginationSignal.set(response.pagination);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.portfolioSettings.feedback.loadError');
+      this.toastService.showError('pages.admin.portfolioSettings.feedback.loadError');
     } finally {
       this.isLoadingSignal.set(false);
     }
@@ -366,10 +369,12 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   private setSuccessFeedback(feedbackKey: AppTranslationKey): void {
     this.feedbackKeySignal.set(feedbackKey);
     this.feedbackToneSignal.set('success');
+    this.toastService.showSuccess(feedbackKey);
   }
 
   private setModalErrorFeedback(feedbackKey: AppTranslationKey): void {
     this.modalFeedbackKeySignal.set(feedbackKey);
     this.modalFeedbackToneSignal.set('error');
+    this.toastService.showError(feedbackKey);
   }
 }

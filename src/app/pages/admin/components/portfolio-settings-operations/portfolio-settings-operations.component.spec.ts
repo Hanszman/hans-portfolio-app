@@ -4,6 +4,7 @@ import { of, throwError } from 'rxjs';
 import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
+import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { PortfolioSettingsOperationsComponent } from './portfolio-settings-operations.component';
 
@@ -37,6 +38,7 @@ const createCollectionResponse = (
 describe('PortfolioSettingsOperationsComponent', () => {
   let fixture: ComponentFixture<PortfolioSettingsOperationsComponent>;
   let operationsService: jasmine.SpyObj<PortfolioSettingsOperationsService>;
+  let toastService: jasmine.SpyObj<ToastService>;
 
   const settleWorkspace = async (
     currentFixture: ComponentFixture<PortfolioSettingsOperationsComponent>,
@@ -65,6 +67,10 @@ describe('PortfolioSettingsOperationsComponent', () => {
       'PortfolioSettingsOperationsService',
       ['getAll', 'create', 'update', 'delete'],
     );
+    toastService = jasmine.createSpyObj<ToastService>('ToastService', [
+      'showSuccess',
+      'showError',
+    ]);
     operationsService.getAll.and.returnValue(of(createCollectionResponse()));
     operationsService.create.and.returnValue(of(createSetting()));
     operationsService.update.and.returnValue(of(createSetting()));
@@ -84,6 +90,10 @@ describe('PortfolioSettingsOperationsComponent', () => {
           useValue: {
             accessToken: () => 'token-123',
           },
+        },
+        {
+          provide: ToastService,
+          useValue: toastService,
         },
       ],
     }).compileComponents();
@@ -132,8 +142,8 @@ describe('PortfolioSettingsOperationsComponent', () => {
         headline: 'Hello',
       },
     });
-    expect(fixture.nativeElement.textContent).toContain(
-      'Portfolio setting created successfully.',
+    expect(toastService.showSuccess).toHaveBeenCalledWith(
+      'pages.admin.portfolioSettings.feedback.created',
     );
   });
 
@@ -272,6 +282,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -365,6 +376,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
           useValue: {

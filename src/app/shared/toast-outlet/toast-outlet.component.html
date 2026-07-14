@@ -1,0 +1,12 @@
+@for (toast of toasts(); track trackToastById($index, toast)) {
+  <hans-toast
+    [closeButtonLabel]="'common.actions.close' | translate"
+    [duration]="toast.duration"
+    [iconName]="resolveToastIconName(toast.tone)"
+    [message]="toast.messageKey | translate : toast.messageParams"
+    position="top-right"
+    [toastColor]="resolveToastColor(toast.tone)"
+    toastVariant="outline"
+    (close)="dismiss(toast.id)"
+  ></hans-toast>
+}

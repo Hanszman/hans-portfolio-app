@@ -33,21 +33,6 @@
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
 
-.tags-operations-feedback {
-  @apply rounded-2xl border px-4 py-3 text-sm;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-}
-
-.tags-operations-feedback[data-tone='success'] {
-  color: var(--success-default-color);
-  background: color-mix(in srgb, var(--success-default-color) 10%, transparent);
-}
-
-.tags-operations-feedback[data-tone='error'] {
-  color: var(--danger-default-color);
-  background: color-mix(in srgb, var(--danger-default-color) 10%, transparent);
-}
-
 .tags-operations-actions {
   @apply flex flex-wrap gap-3;
 }

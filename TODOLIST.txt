@@ -328,3 +328,8 @@ Vamos utilizar o componente de toast da lib em toda a aplicação do portfolio a
 Como vc pode ver no print 1, esse fundo da tela de admin/login é desnecessário agora que movemos ele pra dentro do shell, remova por favor.
 Como vc pode ver no print 2, o footer do Modal ainda está estranho, repare que parece que ele tem dois fundos e a linha de separação do footer não está conectando de uma extremidade a outra igual no header do modal. Acredito que vc não esteja usando as opções do footer do modal da melhor forma e acho que o componente de modal da lib pode ser adaptado lá para permitir opções children/ngcontent, caso a gente precise passar algo como a pagination agora. Já que vamos criar o componente de pagination lá na lib, podemos criar uma opção de modal com props já estabelecida de pagination, mas caso seja necessário algum dia passarmos mais informações, utilizariamos esse children (tanto pro conteúdo interno do modal (esse já existe), como pro footer e pro header, passando ids pra fazermos separação de qual conteúdo vai aonde). Mas nesse exemplo não usariamos mais o ngcontent/children pra header/footer do modal, apenas para o conteúdo, pois a pagination ja vamos passar pela própria lib mesmo, assim como os buttons de confirm e cancel, e a mensagem não vamos exibir mais diretamente no modal, vamos chamar o toast component da lib.
 Enfim, faça essa alterações seguindo todos os padrões do portfolio e da lib por favor.
+-...
+Colocar possibilidade de ícones nos previous/next da pagination, incluir first/last buttons, verificar comportamento quando tiver várias páginas, se é possível criar lógica de "...".
+Alinhar buttons do modal pro end (a direita)
+Validar arquivos desse último commit
+OBS: Testar CRUD

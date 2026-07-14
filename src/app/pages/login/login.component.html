@@ -56,12 +56,6 @@
         ></hans-input>
       </div>
 
-      @if (loginErrorKey(); as errorKey) {
-        <p class="login-feedback" role="alert">
-          {{ errorKey | translate }}
-        </p>
-      }
-
       <hans-button
         class="login-submit"
         [attr.aria-label]="'pages.login.form.submit' | translate"
