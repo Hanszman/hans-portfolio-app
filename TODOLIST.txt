@@ -322,7 +322,7 @@ Como vc pode ver no print 4, quando clicamos nos modais diretos de update e dele
 Acho que podemos fazer uma abstração de operations modal, criando um componente reutilizável em shared, chamando nos modais de todos os cruds das entidades. Pois pelo o que eu percebi, portfolio-settings-operations-modal e tags-operarions-modal tem muito em comum, por exemplo, ambos chamam pagination, botões de close e submit, etc.
 Esse PORTFOLIO_SETTINGS_PAGE_SIZE e esse TAGS_PAGE_SIZE poderiam ser 5 ao invés de 6, deveriam ser uma variável só (pois pretendo colocar o mesmo número pra todas as paginações) e deveriam estar em algum arquivo de types ao invés de diretamente no ts.
 DEFAULT_PAGE e DEFAULT_PAGE_SIZE também deveriam estar em algum arquivo de types geral dos services.
--...
+-Ficou ótimo, obrigado! Mas tenho alguns questionamentos:
 Vamos mover o componente de pagination pra lib, crie o componente lá na lib, utilizando todos os padrões dela, colocando-a no Storybook, com documentação, tests, etc, e depois utilize o componente aqui ao invés de criarmos um do zero no shared, substituindo o que temos atualmente para paginação.
 Vamos utilizar o componente de toast da lib em toda a aplicação do portfolio ao invés de utilizar mensagens. Vamos substituir em todos os lugares que hoje em dai usamos via mensagem (erro/consulta api/etc).
 Como vc pode ver no print 1, esse fundo da tela de admin/login é desnecessário agora que movemos ele pra dentro do shell, remova por favor.
