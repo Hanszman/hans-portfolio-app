@@ -34,6 +34,7 @@ describe('ToastOutletComponent', () => {
           message?: string;
           toastColor?: string;
           iconName?: string;
+          toastVariant?: string;
         })
       | null;
 
@@ -42,6 +43,7 @@ describe('ToastOutletComponent', () => {
     );
     expect(toastElement?.toastColor).toBe('danger');
     expect(toastElement?.iconName).toBe('MdError');
+    expect(toastElement?.toastVariant).toBe('default');
 
     toastElement?.dispatchEvent(
       new CustomEvent('close', {

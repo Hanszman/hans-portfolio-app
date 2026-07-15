@@ -53,22 +53,40 @@ describe('OperationsModalComponent', () => {
     fixture.detectChanges();
 
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
-      | (HTMLElement & {
+        | (HTMLElement & {
           cancelLabel?: string;
           confirmLabel?: string;
           closeOnConfirm?: boolean;
+          paginationFirstLabel?: string;
+          paginationFirstContent?: string;
+          paginationLastLabel?: string;
+          paginationLastContent?: string;
+          paginationNextContent?: string;
           paginationCurrentPage?: number;
           paginationTotalPages?: number;
           paginationPageLabel?: string;
+          paginationPreviousContent?: string;
         })
       | null;
 
     expect(modalElement?.cancelLabel).toBe('Close');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.closeOnConfirm).toBeFalse();
+    expect(modalElement?.paginationFirstLabel).toBe('First');
+    expect(modalElement?.paginationFirstContent).toBe(
+      'MdKeyboardDoubleArrowLeft',
+    );
     expect(modalElement?.paginationCurrentPage).toBe(2);
+    expect(modalElement?.paginationLastLabel).toBe('Last');
+    expect(modalElement?.paginationLastContent).toBe(
+      'MdKeyboardDoubleArrowRight',
+    );
+    expect(modalElement?.paginationNextContent).toBe('MdKeyboardArrowRight');
     expect(modalElement?.paginationTotalPages).toBe(3);
     expect(modalElement?.paginationPageLabel).toBe('Page');
+    expect(modalElement?.paginationPreviousContent).toBe(
+      'MdKeyboardArrowLeft',
+    );
 
     (
       component as unknown as {

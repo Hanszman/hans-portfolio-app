@@ -6,7 +6,7 @@
     [message]="toast.messageKey | translate : toast.messageParams"
     position="top-right"
     [toastColor]="resolveToastColor(toast.tone)"
-    toastVariant="outline"
+    [toastVariant]="'default'"
     (close)="dismiss(toast.id)"
   ></hans-toast>
 }
