@@ -1,9 +1,9 @@
 :host {
-  @apply block min-w-0;
+  @apply block h-full min-w-0;
 }
 
 .portfolio-settings-operations {
-  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  @apply flex h-full min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
@@ -18,12 +18,12 @@
 }
 
 .portfolio-settings-operations-copy h2 {
-  @apply text-4xl font-semibold md:text-5xl;
+  @apply text-lg font-semibold;
 }
 
 .portfolio-settings-operations-copy p:last-child,
 .portfolio-settings-operations-endpoint {
-  @apply text-sm leading-8 md:text-base;
+  @apply text-base leading-7;
   color: var(--base-strong-color);
 }
 
@@ -34,5 +34,5 @@
 }
 
 .portfolio-settings-operations-actions {
-  @apply flex flex-wrap gap-3;
+  @apply mt-auto flex flex-wrap gap-3;
 }

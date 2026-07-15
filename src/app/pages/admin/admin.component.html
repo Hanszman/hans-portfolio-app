@@ -32,10 +32,7 @@
           {{ 'pages.admin.shell.registry.kicker' | translate }}
         </p>
         <h2>
-          {{
-            'pages.admin.shell.registry.title'
-              | translate: { count: adminEntityCount() }
-          }}
+          {{ 'pages.admin.shell.registry.title' | translate: { count: adminEntityCount() } }}
         </h2>
         <p>{{ 'pages.admin.shell.registry.description' | translate }}</p>
       </article>
@@ -59,9 +56,9 @@
         <p>{{ 'pages.admin.entitiesSection.description' | translate }}</p>
       </div>
 
-      <app-portfolio-settings-operations #portfolioSettingsWorkspace />
-
       <div class="admin-page-entity-grid">
+        <app-portfolio-settings-operations #portfolioSettingsWorkspace />
+
         <app-tags-operations #tagsWorkspace />
 
         @for (entity of secondaryAdminEntities(); track entity.id) {

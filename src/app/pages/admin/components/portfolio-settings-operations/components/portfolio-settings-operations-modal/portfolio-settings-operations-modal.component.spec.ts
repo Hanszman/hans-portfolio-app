@@ -88,7 +88,15 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
           paginationCurrentPage?: number;
         })
       | null;
+    const inputElements = Array.from(
+      fixture.nativeElement.querySelectorAll('hans-input'),
+    ) as (HTMLElement & { label?: string })[];
 
+    expect(inputElements.map((element) => element.label)).toEqual([
+      'Setting key',
+      'Description',
+    ]);
+    expect(fixture.nativeElement.textContent).toContain('JSON value');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(keySpy).toHaveBeenCalledOnceWith('profile');
@@ -175,5 +183,14 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     );
     expect(fixture.nativeElement.textContent).toContain('Branding assets.');
     expect(modalElement?.confirmLabel).toBe('Delete');
+  });
+
+  it('should not render any fallback form content when the modal mode is cleared', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('modalMode', null);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
+    expect(fixture.nativeElement.textContent).not.toContain('JSON value');
   });
 });

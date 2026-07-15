@@ -123,7 +123,16 @@ describe('TagsOperationsModalComponent', () => {
           paginationCurrentPage?: number;
         })
       | null;
+    const inputElements = Array.from(
+      fixture.nativeElement.querySelectorAll('hans-input'),
+    ) as (HTMLElement & { label?: string })[];
 
+    expect(inputElements.map((element) => element.label)).toEqual([
+      'Tag slug',
+      'Portuguese name',
+      'English name',
+      'Sort order',
+    ]);
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(slugSpy).toHaveBeenCalledOnceWith('backend');
@@ -246,5 +255,13 @@ describe('TagsOperationsModalComponent', () => {
     expect(component.isProjectSelected('project-1')).toBeTrue();
     expect(component.isTechnologySelected('technology-1')).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Delete');
+  });
+
+  it('should not render any fallback form content when the modal mode is cleared', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('modalMode', null);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
   });
 });

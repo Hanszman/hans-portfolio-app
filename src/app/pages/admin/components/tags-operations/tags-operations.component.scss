@@ -1,9 +1,9 @@
 :host {
-  @apply block min-w-0;
+  @apply block h-full min-w-0;
 }
 
 .tags-operations {
-  @apply flex min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  @apply flex h-full min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
@@ -18,12 +18,12 @@
 }
 
 .tags-operations-copy h3 {
-  @apply text-2xl font-semibold;
+  @apply text-lg font-semibold;
 }
 
 .tags-operations-copy p:last-child,
 .tags-operations-endpoint {
-  @apply text-sm leading-8;
+  @apply text-base leading-7;
   color: var(--base-strong-color);
 }
 
@@ -34,5 +34,5 @@
 }
 
 .tags-operations-actions {
-  @apply flex flex-wrap gap-3;
+  @apply mt-auto flex flex-wrap gap-3;
 }
