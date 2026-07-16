@@ -345,3 +345,4 @@ Tudo aquilo que aplicamos e estabelecemos pra esses dois cruds de entidade, apli
 -Ótimo, obrigado! Antes de prosseguirmos:
 Esse "POST/GET/PUT/DELETE" poderia ser uma variável de types de admin, já quer repete ao longo de todo código.
 Deixe anotado na memória/documentação que as entidades que já possuem services, ou seja, as reponsáveis pelas telas (experiences, projects, technologies, dashboard) não precisamos colocar o sufixo operations e nem criar outra pasta delas dentro de admin somente para as operações de "cud" (as outras além do read), podemos aproveitar e colocar nos arquivos que já existem de services mesmo.
+Ao tentar cadastrar um link, recebi esse erro "type must be one of the following values: GITHUB, DEPLOY, NPM, DOCS, LINKEDIN, WEBSITE, ARTICLE, FIGMA, OTHER". Deixe anotado na memória que todos os campos que forem necessário colocarmos algum item de uma lista, criemos um campo de select-option (da lib) ao invés de usarmos o input.
