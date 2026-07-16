@@ -10,6 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
+import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
@@ -33,6 +34,7 @@ import {
     PortfolioSettingsOperationsComponent,
     TagsOperationsComponent,
     LinksOperationsComponent,
+    ImageAssetsOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -75,7 +77,8 @@ export class AdminComponent {
     return (
       entityId === 'portfolio-settings' ||
       entityId === 'tags' ||
-      entityId === 'links'
+      entityId === 'links' ||
+      entityId === 'image-assets'
     );
   }
 

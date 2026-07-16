@@ -775,6 +775,138 @@ export const ES_ES_TRANSLATIONS = {
     'El link protegido no puede guardarse ahora.',
   'pages.admin.links.feedback.deleteError':
     'El link protegido no puede eliminarse ahora.',
+  'pages.admin.imageAssets.sectionLabel': '// IMAGE_ASSETS',
+  'pages.admin.imageAssets.description':
+    'CRUD protegido para archivos multimedia normalizados conectados a proyectos, experiencias y tecnologías mediante arreglos relacionales propios.',
+  'pages.admin.imageAssets.states.loading':
+    'Cargando la colección protegida de image assets...',
+  'pages.admin.imageAssets.states.empty':
+    'Todavía no se registró ningún image asset protegido.',
+  'pages.admin.imageAssets.card.fileName': 'Nombre del archivo',
+  'pages.admin.imageAssets.card.filePath': 'Ruta del archivo',
+  'pages.admin.imageAssets.card.folder': 'Carpeta',
+  'pages.admin.imageAssets.card.kind': 'Tipo',
+  'pages.admin.imageAssets.card.mimeType': 'MIME type',
+  'pages.admin.imageAssets.card.dimensions': 'Dimensiones',
+  'pages.admin.imageAssets.card.sortOrder': 'Orden',
+  'pages.admin.imageAssets.card.altPt': 'Alt en portugués',
+  'pages.admin.imageAssets.card.altEn': 'Alt en inglés',
+  'pages.admin.imageAssets.card.captionPt': 'Leyenda en portugués',
+  'pages.admin.imageAssets.card.captionEn': 'Leyenda en inglés',
+  'pages.admin.imageAssets.card.isPublished': 'Publicación',
+  'pages.admin.imageAssets.card.projects': 'Proyectos',
+  'pages.admin.imageAssets.card.experiences': 'Experiencias',
+  'pages.admin.imageAssets.card.technologies': 'Tecnologías',
+  'pages.admin.imageAssets.card.emptyRelations':
+    'Ningún registro relacionado está vinculado a este image asset en este momento.',
+  'pages.admin.imageAssets.card.emptyText':
+    'Todavía no se registró ningún texto.',
+  'pages.admin.imageAssets.fields.fileName.label': 'Nombre del archivo',
+  'pages.admin.imageAssets.fields.fileName.placeholder':
+    'Ingresa el nombre único del archivo del asset',
+  'pages.admin.imageAssets.fields.filePath.label': 'Ruta del archivo',
+  'pages.admin.imageAssets.fields.filePath.placeholder':
+    'Ingresa la ruta pública del archivo usada por el portfolio',
+  'pages.admin.imageAssets.fields.folder.label': 'Carpeta',
+  'pages.admin.imageAssets.fields.folder.placeholder':
+    'Ingresa la carpeta del asset',
+  'pages.admin.imageAssets.fields.kind.label': 'Tipo',
+  'pages.admin.imageAssets.fields.kind.placeholder':
+    'Selecciona el tipo del asset',
+  'pages.admin.imageAssets.fields.kind.empty':
+    'No hay tipos de image asset disponibles ahora.',
+  'pages.admin.imageAssets.fields.altPt.label': 'Alt en portugués',
+  'pages.admin.imageAssets.fields.altPt.placeholder':
+    'Describe el asset en portugués para accesibilidad',
+  'pages.admin.imageAssets.fields.altEn.label': 'Alt en inglés',
+  'pages.admin.imageAssets.fields.altEn.placeholder':
+    'Describe el asset en inglés para accesibilidad',
+  'pages.admin.imageAssets.fields.captionPt.label': 'Leyenda en portugués',
+  'pages.admin.imageAssets.fields.captionPt.placeholder':
+    'Ingresa la leyenda en portugués mostrada con este asset',
+  'pages.admin.imageAssets.fields.captionEn.label': 'Leyenda en inglés',
+  'pages.admin.imageAssets.fields.captionEn.placeholder':
+    'Ingresa la leyenda en inglés mostrada con este asset',
+  'pages.admin.imageAssets.fields.mimeType.label': 'MIME type',
+  'pages.admin.imageAssets.fields.mimeType.placeholder':
+    'Ingresa el MIME type del asset',
+  'pages.admin.imageAssets.fields.width.label': 'Ancho',
+  'pages.admin.imageAssets.fields.width.placeholder':
+    'Ingresa el ancho del asset en píxeles',
+  'pages.admin.imageAssets.fields.height.label': 'Altura',
+  'pages.admin.imageAssets.fields.height.placeholder':
+    'Ingresa la altura del asset en píxeles',
+  'pages.admin.imageAssets.fields.sortOrder.label': 'Orden',
+  'pages.admin.imageAssets.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de exhibición',
+  'pages.admin.imageAssets.fields.isPublished.label': 'Estado de publicación',
+  'pages.admin.imageAssets.fields.isPublished.description':
+    'Controla si este archivo multimedia debe permanecer disponible en el portfolio público.',
+  'pages.admin.imageAssets.fields.isPublished.enabled': 'Publicado',
+  'pages.admin.imageAssets.fields.isPublished.disabled': 'Oculto',
+  'pages.admin.imageAssets.fields.projects.label': 'Proyectos relacionados',
+  'pages.admin.imageAssets.fields.projects.description':
+    'Selecciona todos los proyectos que deben exponer este archivo multimedia en su galería pública.',
+  'pages.admin.imageAssets.fields.projects.empty':
+    'Ningún proyecto público está disponible para relacionar ahora.',
+  'pages.admin.imageAssets.fields.experiences.label': 'Experiencias relacionadas',
+  'pages.admin.imageAssets.fields.experiences.description':
+    'Selecciona todas las experiencias que deben mantener este archivo multimedia en sus arreglos relacionales.',
+  'pages.admin.imageAssets.fields.experiences.empty':
+    'Ninguna experiencia pública está disponible para relacionar ahora.',
+  'pages.admin.imageAssets.fields.technologies.label': 'Tecnologías relacionadas',
+  'pages.admin.imageAssets.fields.technologies.description':
+    'Selecciona todas las tecnologías que deben exponer este archivo multimedia en sus referencias públicas.',
+  'pages.admin.imageAssets.fields.technologies.empty':
+    'Ninguna tecnología pública está disponible para relacionar ahora.',
+  'pages.admin.imageAssets.modal.create.title': 'Crear image asset',
+  'pages.admin.imageAssets.modal.read.title': 'Leer image assets',
+  'pages.admin.imageAssets.modal.read.description':
+    'Revisa los image assets protegidos actuales y abre flujos de edición o eliminación directamente desde cada registro.',
+  'pages.admin.imageAssets.modal.pickUpdate.title':
+    'Selecciona un image asset para editar',
+  'pages.admin.imageAssets.modal.pickUpdate.description':
+    'Elige uno de los image assets protegidos actuales para abrir su formulario de edición.',
+  'pages.admin.imageAssets.modal.pickDelete.title':
+    'Selecciona un image asset para eliminar',
+  'pages.admin.imageAssets.modal.pickDelete.description':
+    'Elige uno de los image assets protegidos actuales para confirmar su eliminación.',
+  'pages.admin.imageAssets.modal.update.title': 'Editar image asset',
+  'pages.admin.imageAssets.modal.delete.title': 'Eliminar image asset',
+  'pages.admin.imageAssets.modal.delete.description':
+    'Esta acción elimina permanentemente el image asset protegido seleccionado del portfolio.',
+  'pages.admin.imageAssets.feedback.created':
+    'Image asset protegido creado con éxito.',
+  'pages.admin.imageAssets.feedback.updated':
+    'Image asset protegido actualizado con éxito.',
+  'pages.admin.imageAssets.feedback.deleted':
+    'Image asset protegido eliminado con éxito.',
+  'pages.admin.imageAssets.feedback.requiredFileName':
+    'El nombre del archivo es obligatorio antes de enviar.',
+  'pages.admin.imageAssets.feedback.requiredFilePath':
+    'La ruta del archivo es obligatoria antes de enviar.',
+  'pages.admin.imageAssets.feedback.requiredFolder':
+    'La carpeta es obligatoria antes de enviar.',
+  'pages.admin.imageAssets.feedback.requiredKind':
+    'El tipo del image asset es obligatorio antes de enviar.',
+  'pages.admin.imageAssets.feedback.invalidKind':
+    'Selecciona uno de los tipos de image asset compatibles antes de enviar.',
+  'pages.admin.imageAssets.feedback.requiredMimeType':
+    'El MIME type es obligatorio antes de enviar.',
+  'pages.admin.imageAssets.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.imageAssets.feedback.invalidDimensions':
+    'El ancho y la altura deben ser números enteros válidos cuando se informen.',
+  'pages.admin.imageAssets.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.imageAssets.feedback.selectionRequired':
+    'Selecciona un image asset protegido antes de continuar con esta acción.',
+  'pages.admin.imageAssets.feedback.loadError':
+    'La colección protegida de image assets no puede cargarse ahora.',
+  'pages.admin.imageAssets.feedback.saveError':
+    'El image asset protegido no puede guardarse ahora.',
+  'pages.admin.imageAssets.feedback.deleteError':
+    'El image asset protegido no puede eliminarse ahora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de medios usados por el portfolio a través de relaciones de image assets.',

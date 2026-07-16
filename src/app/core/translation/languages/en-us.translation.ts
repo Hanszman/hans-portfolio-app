@@ -756,6 +756,137 @@ export const EN_TRANSLATIONS = {
     'The protected link could not be saved right now.',
   'pages.admin.links.feedback.deleteError':
     'The protected link could not be deleted right now.',
+  'pages.admin.imageAssets.sectionLabel': '// IMAGE_ASSETS',
+  'pages.admin.imageAssets.description':
+    'Protected CRUD for normalized media files connected to projects, experiences and technologies through owned relationship arrays.',
+  'pages.admin.imageAssets.states.loading':
+    'Loading the protected image assets collection...',
+  'pages.admin.imageAssets.states.empty':
+    'No protected image asset has been registered yet.',
+  'pages.admin.imageAssets.card.fileName': 'File name',
+  'pages.admin.imageAssets.card.filePath': 'File path',
+  'pages.admin.imageAssets.card.folder': 'Folder',
+  'pages.admin.imageAssets.card.kind': 'Kind',
+  'pages.admin.imageAssets.card.mimeType': 'MIME type',
+  'pages.admin.imageAssets.card.dimensions': 'Dimensions',
+  'pages.admin.imageAssets.card.sortOrder': 'Sort order',
+  'pages.admin.imageAssets.card.altPt': 'Portuguese alt text',
+  'pages.admin.imageAssets.card.altEn': 'English alt text',
+  'pages.admin.imageAssets.card.captionPt': 'Portuguese caption',
+  'pages.admin.imageAssets.card.captionEn': 'English caption',
+  'pages.admin.imageAssets.card.isPublished': 'Published',
+  'pages.admin.imageAssets.card.projects': 'Projects',
+  'pages.admin.imageAssets.card.experiences': 'Experiences',
+  'pages.admin.imageAssets.card.technologies': 'Technologies',
+  'pages.admin.imageAssets.card.emptyRelations':
+    'No related records are currently linked to this image asset.',
+  'pages.admin.imageAssets.card.emptyText': 'No text was registered yet.',
+  'pages.admin.imageAssets.fields.fileName.label': 'File name',
+  'pages.admin.imageAssets.fields.fileName.placeholder':
+    'Enter the unique asset file name',
+  'pages.admin.imageAssets.fields.filePath.label': 'File path',
+  'pages.admin.imageAssets.fields.filePath.placeholder':
+    'Enter the public file path used by the portfolio',
+  'pages.admin.imageAssets.fields.folder.label': 'Folder',
+  'pages.admin.imageAssets.fields.folder.placeholder':
+    'Enter the asset folder',
+  'pages.admin.imageAssets.fields.kind.label': 'Kind',
+  'pages.admin.imageAssets.fields.kind.placeholder':
+    'Select the asset kind',
+  'pages.admin.imageAssets.fields.kind.empty':
+    'No image asset kind is available right now.',
+  'pages.admin.imageAssets.fields.altPt.label': 'Portuguese alt text',
+  'pages.admin.imageAssets.fields.altPt.placeholder':
+    'Describe the asset in Portuguese for accessibility',
+  'pages.admin.imageAssets.fields.altEn.label': 'English alt text',
+  'pages.admin.imageAssets.fields.altEn.placeholder':
+    'Describe the asset in English for accessibility',
+  'pages.admin.imageAssets.fields.captionPt.label': 'Portuguese caption',
+  'pages.admin.imageAssets.fields.captionPt.placeholder':
+    'Enter the Portuguese caption shown with this asset',
+  'pages.admin.imageAssets.fields.captionEn.label': 'English caption',
+  'pages.admin.imageAssets.fields.captionEn.placeholder':
+    'Enter the English caption shown with this asset',
+  'pages.admin.imageAssets.fields.mimeType.label': 'MIME type',
+  'pages.admin.imageAssets.fields.mimeType.placeholder':
+    'Enter the asset MIME type',
+  'pages.admin.imageAssets.fields.width.label': 'Width',
+  'pages.admin.imageAssets.fields.width.placeholder':
+    'Enter the asset width in pixels',
+  'pages.admin.imageAssets.fields.height.label': 'Height',
+  'pages.admin.imageAssets.fields.height.placeholder':
+    'Enter the asset height in pixels',
+  'pages.admin.imageAssets.fields.sortOrder.label': 'Sort order',
+  'pages.admin.imageAssets.fields.sortOrder.placeholder':
+    'Enter the integer sort order',
+  'pages.admin.imageAssets.fields.isPublished.label': 'Publication status',
+  'pages.admin.imageAssets.fields.isPublished.description':
+    'Control whether this media file should stay available to the public portfolio.',
+  'pages.admin.imageAssets.fields.isPublished.enabled': 'Published',
+  'pages.admin.imageAssets.fields.isPublished.disabled': 'Hidden',
+  'pages.admin.imageAssets.fields.projects.label': 'Related projects',
+  'pages.admin.imageAssets.fields.projects.description':
+    'Select every project that should expose this media file in its public gallery.',
+  'pages.admin.imageAssets.fields.projects.empty':
+    'No public project is available to relate right now.',
+  'pages.admin.imageAssets.fields.experiences.label': 'Related experiences',
+  'pages.admin.imageAssets.fields.experiences.description':
+    'Select every experience that should keep this media file in its relationship arrays.',
+  'pages.admin.imageAssets.fields.experiences.empty':
+    'No public experience is available to relate right now.',
+  'pages.admin.imageAssets.fields.technologies.label': 'Related technologies',
+  'pages.admin.imageAssets.fields.technologies.description':
+    'Select every technology that should expose this media file in its public references.',
+  'pages.admin.imageAssets.fields.technologies.empty':
+    'No public technology is available to relate right now.',
+  'pages.admin.imageAssets.modal.create.title': 'Create image asset',
+  'pages.admin.imageAssets.modal.read.title': 'Read image assets',
+  'pages.admin.imageAssets.modal.read.description':
+    'Review the current protected image assets and open update or delete flows directly from each record.',
+  'pages.admin.imageAssets.modal.pickUpdate.title':
+    'Select an image asset to update',
+  'pages.admin.imageAssets.modal.pickUpdate.description':
+    'Choose one of the current protected image assets to open its update form.',
+  'pages.admin.imageAssets.modal.pickDelete.title':
+    'Select an image asset to delete',
+  'pages.admin.imageAssets.modal.pickDelete.description':
+    'Choose one of the current protected image assets to confirm its removal.',
+  'pages.admin.imageAssets.modal.update.title': 'Update image asset',
+  'pages.admin.imageAssets.modal.delete.title': 'Delete image asset',
+  'pages.admin.imageAssets.modal.delete.description':
+    'This action permanently removes the selected protected image asset from the portfolio.',
+  'pages.admin.imageAssets.feedback.created':
+    'Protected image asset created successfully.',
+  'pages.admin.imageAssets.feedback.updated':
+    'Protected image asset updated successfully.',
+  'pages.admin.imageAssets.feedback.deleted':
+    'Protected image asset deleted successfully.',
+  'pages.admin.imageAssets.feedback.requiredFileName':
+    'The file name is required before submitting.',
+  'pages.admin.imageAssets.feedback.requiredFilePath':
+    'The file path is required before submitting.',
+  'pages.admin.imageAssets.feedback.requiredFolder':
+    'The folder is required before submitting.',
+  'pages.admin.imageAssets.feedback.requiredKind':
+    'The image asset kind is required before submitting.',
+  'pages.admin.imageAssets.feedback.invalidKind':
+    'Select one of the supported image asset kinds before submitting.',
+  'pages.admin.imageAssets.feedback.requiredMimeType':
+    'The MIME type is required before submitting.',
+  'pages.admin.imageAssets.feedback.invalidSortOrder':
+    'The sort order must be a valid integer number.',
+  'pages.admin.imageAssets.feedback.invalidDimensions':
+    'Width and height must be valid integer numbers when informed.',
+  'pages.admin.imageAssets.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.imageAssets.feedback.selectionRequired':
+    'Select a protected image asset before continuing with this action.',
+  'pages.admin.imageAssets.feedback.loadError':
+    'The protected image assets collection could not be loaded right now.',
+  'pages.admin.imageAssets.feedback.saveError':
+    'The protected image asset could not be saved right now.',
+  'pages.admin.imageAssets.feedback.deleteError':
+    'The protected image asset could not be deleted right now.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Normalized media records used by the portfolio through image asset relations instead of direct file fields.',

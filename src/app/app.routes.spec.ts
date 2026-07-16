@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
+import { ImageAssetsOperationsService } from './core/api/admin/image-assets/image-assets-operations.service';
 import { LinksOperationsService } from './core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
@@ -104,6 +105,53 @@ describe('app routes', () => {
                       experienceIds: ['experience-1'],
                       technologyIds: ['technology-1'],
                       formationIds: ['formation-1'],
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 5,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: ImageAssetsOperationsService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'image-asset-1',
+                      fileName: 'vh_logo_blue.svg',
+                      filePath: '/assets/img/logo/vh_logo_blue.svg',
+                      folder: 'logo',
+                      kind: 'ICON',
+                      altPt: 'Logo azul',
+                      altEn: 'Blue logo',
+                      captionPt: 'Marca azul',
+                      captionEn: 'Blue brand',
+                      mimeType: 'image/svg+xml',
+                      width: 240,
+                      height: 96,
+                      sortOrder: 1,
+                      isPublished: true,
+                      projectIds: ['project-1'],
+                      experienceIds: ['experience-1'],
+                      technologyIds: ['technology-1'],
+                      formationIds: [],
+                      spokenLanguageIds: [],
+                      customerIds: [],
+                      jobIds: [],
                     },
                   ],
                   pagination: {

@@ -1,0 +1,75 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { buildApiUrl } from '../../api.config';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../api.types';
+import {
+  ImageAssetMutationPayload,
+  ImageAssetRecord,
+  ImageAssetsCollectionResponse,
+} from './image-assets-operations.types';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ImageAssetsOperationsService {
+  private readonly httpClient = inject(HttpClient);
+
+  getAll(
+    page = DEFAULT_PAGE,
+    pageSize = DEFAULT_PAGE_SIZE,
+  ): Observable<ImageAssetsCollectionResponse> {
+    const searchParams = new URLSearchParams({
+      page: String(page),
+      pageSize: String(pageSize),
+      sortBy: 'sortOrder',
+      sortDirection: 'asc',
+    });
+
+    return this.httpClient.get<ImageAssetsCollectionResponse>(
+      buildApiUrl(`/image-assets?${searchParams.toString()}`),
+    );
+  }
+
+  create(
+    accessToken: string,
+    payload: ImageAssetMutationPayload,
+  ): Observable<ImageAssetRecord> {
+    return this.httpClient.post<ImageAssetRecord>(
+      buildApiUrl('/admin/image-assets'),
+      payload,
+      {
+        headers: this.buildAuthHeaders(accessToken),
+      },
+    );
+  }
+
+  update(
+    accessToken: string,
+    imageAssetId: string,
+    payload: ImageAssetMutationPayload,
+  ): Observable<ImageAssetRecord> {
+    return this.httpClient.put<ImageAssetRecord>(
+      buildApiUrl(`/admin/image-assets/${imageAssetId}`),
+      payload,
+      {
+        headers: this.buildAuthHeaders(accessToken),
+      },
+    );
+  }
+
+  delete(accessToken: string, imageAssetId: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      buildApiUrl(`/admin/image-assets/${imageAssetId}`),
+      {
+        headers: this.buildAuthHeaders(accessToken),
+      },
+    );
+  }
+
+  private buildAuthHeaders(accessToken: string): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+  }
+}

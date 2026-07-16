@@ -2,6 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
+import { ImageAssetsOperationsService } from '../../core/api/admin/image-assets/image-assets-operations.service';
 import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
@@ -69,6 +70,50 @@ describe('AdminComponent', () => {
                       projects: 12,
                     },
                     description: 'Controls the highlighted portfolio metrics.',
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: ImageAssetsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'image-asset-1',
+                    fileName: 'vh_logo_blue.svg',
+                    filePath: '/assets/img/logo/vh_logo_blue.svg',
+                    folder: 'logo',
+                    kind: 'ICON',
+                    altPt: 'Logo azul',
+                    altEn: 'Blue logo',
+                    captionPt: 'Marca azul',
+                    captionEn: 'Blue brand',
+                    mimeType: 'image/svg+xml',
+                    width: 240,
+                    height: 96,
+                    sortOrder: 1,
+                    isPublished: true,
+                    projectIds: ['project-1'],
+                    experienceIds: ['experience-1'],
+                    technologyIds: ['technology-1'],
+                    formationIds: [],
+                    spokenLanguageIds: [],
+                    customerIds: [],
+                    jobIds: [],
                   },
                 ],
                 pagination: {
@@ -282,11 +327,12 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Portfolio settings');
     expect(compiled.textContent).toContain('Tags');
     expect(compiled.textContent).toContain('Links');
+    expect(compiled.textContent).toContain('Image assets');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(9);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(8);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -325,6 +371,26 @@ describe('AdminComponent', () => {
         },
         {
           provide: PortfolioSettingsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: ImageAssetsOperationsService,
           useValue: {
             getAll: () =>
               of({

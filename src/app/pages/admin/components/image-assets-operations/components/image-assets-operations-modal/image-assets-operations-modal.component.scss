@@ -1,0 +1,109 @@
+:host {
+  @apply block;
+}
+
+.image-assets-operations-delete-summary p,
+.image-assets-operations-selection-copy span,
+.image-assets-operations-selection-empty,
+.image-assets-operations-item-copy p:last-child,
+.image-assets-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.image-assets-operations-list,
+.image-assets-operations-picker {
+  @apply grid gap-4;
+}
+
+.image-assets-operations-item,
+.image-assets-operations-picker-option,
+.image-assets-operations-delete-summary,
+.image-assets-operations-selection-section,
+.image-assets-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.image-assets-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.image-assets-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.image-assets-operations-picker-option:hover,
+.image-assets-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.image-assets-operations-item-header,
+.image-assets-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.image-assets-operations-item-header h4,
+.image-assets-operations-picker-option strong,
+.image-assets-operations-delete-summary strong,
+.image-assets-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.image-assets-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.image-assets-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.image-assets-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.image-assets-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.image-assets-operations-dimensions {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.image-assets-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.image-assets-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.image-assets-operations-selection-option {
+  @apply flex max-w-full flex-col items-start text-left;
+}
+
+.image-assets-operations-selection-option-title,
+.image-assets-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.image-assets-operations-selection-option-title {
+  @apply font-semibold;
+}
+
+.image-assets-operations-selection-option-subtitle {
+  @apply text-xs uppercase tracking-[0.14em];
+  word-break: keep-all;
+}
+
+:host ::ng-deep .image-assets-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .image-assets-operations-selection-grid hans-button .hans-button {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+}
