@@ -704,7 +704,9 @@ export const ES_ES_TRANSLATIONS = {
     'Describe este link en inglés',
   'pages.admin.links.fields.type.label': 'Tipo',
   'pages.admin.links.fields.type.placeholder':
-    'Ingresa el tipo de link usado por el backend',
+    'Seleccione el tipo del link',
+  'pages.admin.links.fields.type.empty':
+    'No hay tipos de link disponibles en este momento.',
   'pages.admin.links.fields.sortOrder.label': 'Orden',
   'pages.admin.links.fields.sortOrder.placeholder':
     'Ingresa el orden entero del link',
@@ -759,6 +761,8 @@ export const ES_ES_TRANSLATIONS = {
     'La URL del link es obligatoria antes de enviar.',
   'pages.admin.links.feedback.requiredType':
     'El tipo del link es obligatorio antes de enviar.',
+  'pages.admin.links.feedback.invalidType':
+    'Seleccione uno de los tipos de link compatibles antes de enviar.',
   'pages.admin.links.feedback.invalidSortOrder':
     'El orden debe ser un número entero válido.',
   'pages.admin.links.feedback.missingSession':

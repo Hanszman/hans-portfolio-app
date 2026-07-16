@@ -17,6 +17,7 @@ import {
 import {
   LinkCatalogOptionViewModel,
   LinkOperationsViewModel,
+  LinkTypeOptionViewModel,
   LinksOperationsFormValue,
   LinksOperationsModalMode,
 } from '../../links-operations.types';
@@ -56,6 +57,7 @@ export class LinksOperationsModalComponent {
   readonly experienceOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
   readonly technologyOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
   readonly formationOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
+  readonly linkTypeOptions = input<readonly LinkTypeOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(
     createAdminCollectionPagination(),
   );
@@ -143,6 +145,31 @@ export class LinksOperationsModalComponent {
 
   protected emitTypeChange(value: string): void {
     this.typeChanged.emit(value);
+  }
+
+  protected resolveSelectValue(event: Event): string {
+    const customEvent = event as Event & {
+      detail?: string | { value?: string };
+      target: (EventTarget & { value?: string }) | null;
+    };
+
+    if (typeof customEvent.detail === 'string') {
+      return customEvent.detail;
+    }
+
+    if (
+      customEvent.detail &&
+      typeof customEvent.detail === 'object' &&
+      typeof customEvent.detail.value === 'string'
+    ) {
+      return customEvent.detail.value;
+    }
+
+    if (customEvent.target && typeof customEvent.target.value === 'string') {
+      return customEvent.target.value;
+    }
+
+    return '';
   }
 
   protected emitSortOrderChange(value: string): void {

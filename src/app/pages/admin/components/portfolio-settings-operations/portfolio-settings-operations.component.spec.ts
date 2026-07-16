@@ -6,6 +6,7 @@ import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-set
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
+import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { PortfolioSettingsOperationsComponent } from './portfolio-settings-operations.component';
 
 const createSetting = (
@@ -105,7 +106,9 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
     expect(compiled.textContent).toContain('Portfolio settings');
-    expect(compiled.textContent).toContain('POST/GET/PUT/DELETE /portfolio-settings');
+    expect(compiled.textContent).toContain(
+      createAdminEntityEndpointLabel('/portfolio-settings'),
+    );
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');

@@ -27,6 +27,7 @@ import { InfoStateComponent } from '../../../../shared/info-state/info-state.com
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
+  createAdminEntityEndpointLabel,
   createAdminCollectionPagination,
 } from '../../admin.types';
 import { LinksOperationsModalComponent } from './components/links-operations-modal/links-operations-modal.component';
@@ -40,6 +41,7 @@ import {
   LinksOperationsFormValue,
   LinksOperationsModalMode,
   createEmptyLinksOperationsFormValue,
+  createLinkTypeOptions,
 } from './links-operations.types';
 
 @Component({
@@ -101,6 +103,7 @@ export class LinksOperationsComponent implements OnInit {
     buildLinkCatalogOptions(this.technologiesSignal()),
   );
   protected readonly formationOptions = computed(() => []);
+  protected readonly linkTypeOptions = createLinkTypeOptions();
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();
@@ -109,6 +112,7 @@ export class LinksOperationsComponent implements OnInit {
   protected readonly modalFeedbackKey = this.modalFeedbackKeySignal.asReadonly();
   protected readonly modalFeedbackTone = this.modalFeedbackToneSignal.asReadonly();
   protected readonly modalMode = this.modalModeSignal.asReadonly();
+  protected readonly endpointLabel = createAdminEntityEndpointLabel('/links');
   protected readonly selectedLink = this.selectedLinkSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly pagination = this.paginationSignal.asReadonly();

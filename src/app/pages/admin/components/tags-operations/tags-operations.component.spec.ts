@@ -10,6 +10,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
+import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { TagsOperationsComponent } from './tags-operations.component';
 
 const createTag = (overrides: Partial<TagRecord> = {}): TagRecord => ({
@@ -195,7 +196,7 @@ describe('TagsOperationsComponent', () => {
     expect(projectsService.getProjects).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Tags');
-    expect(compiled.textContent).toContain('POST/GET/PUT/DELETE /tags');
+    expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/tags'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');

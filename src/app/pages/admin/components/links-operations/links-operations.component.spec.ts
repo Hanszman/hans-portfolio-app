@@ -12,6 +12,7 @@ import { TechnologiesService } from '../../../../core/api/technologies/technolog
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
+import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { LinksOperationsComponent } from './links-operations.component';
 
 const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
@@ -137,6 +138,7 @@ describe('LinksOperationsComponent', () => {
       'hans-input',
       'hans-loading',
       'hans-modal',
+      'hans-select-option',
       'hans-toggle',
     ]) {
       if (!customElements.get(elementName)) {
@@ -235,7 +237,7 @@ describe('LinksOperationsComponent', () => {
     expect(experiencesService.getExperiences).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Links');
-    expect(compiled.textContent).toContain('POST/GET/PUT/DELETE /links');
+    expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/links'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');
@@ -431,6 +433,10 @@ describe('LinksOperationsComponent', () => {
     component.updateUrl('https://github.com/vh/portfolio');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.links.feedback.requiredType');
+
+    component.updateType('INVALID');
+    await component.submitModal();
+    expect(component.modalFeedbackKey()).toBe('pages.admin.links.feedback.invalidType');
 
     component.updateType('GITHUB');
     component.updateSortOrder('abc');

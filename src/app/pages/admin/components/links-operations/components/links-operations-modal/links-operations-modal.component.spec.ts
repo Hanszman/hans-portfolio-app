@@ -1,7 +1,10 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import { LinkOperationsViewModel } from '../../links-operations.types';
+import {
+  createLinkTypeOptions,
+  LinkOperationsViewModel,
+} from '../../links-operations.types';
 import { LinksOperationsModalComponent } from './links-operations-modal.component';
 
 const LINKS: readonly LinkOperationsViewModel[] = [
@@ -31,6 +34,7 @@ describe('LinksOperationsModalComponent', () => {
       'hans-input',
       'hans-loading',
       'hans-modal',
+      'hans-select-option',
       'hans-toggle',
     ]) {
       if (!customElements.get(elementName)) {
@@ -93,6 +97,7 @@ describe('LinksOperationsModalComponent', () => {
     fixture.componentRef.setInput('technologyOptions', [
       { id: 'technology-1', title: 'Angular', subtitle: 'angular' },
     ]);
+    fixture.componentRef.setInput('linkTypeOptions', createLinkTypeOptions());
     fixture.componentRef.setInput('pagination', {
       page: 1,
       pageSize: 5,
@@ -159,6 +164,9 @@ describe('LinksOperationsModalComponent', () => {
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
     ) as (HTMLElement & { label?: string })[];
+    const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
+      | (HTMLElement & { label?: string })
+      | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
       'URL',
@@ -166,9 +174,9 @@ describe('LinksOperationsModalComponent', () => {
       'English label',
       'Portuguese description',
       'English description',
-      'Type',
       'Sort order',
     ]);
+    expect(selectElement?.label).toBe('Type');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(urlSpy).toHaveBeenCalledOnceWith('https://example.com');
@@ -191,6 +199,27 @@ describe('LinksOperationsModalComponent', () => {
     expect(componentAccess.isExperienceSelected('experience-1')).toBeFalse();
     expect(componentAccess.isTechnologySelected('technology-1')).toBeFalse();
     expect(componentAccess.isFormationSelected('formation-1')).toBeFalse();
+  });
+
+  it('should resolve select-option payloads for the type field', () => {
+    const componentAccess = fixture.componentInstance as unknown as {
+      resolveSelectValue(event: Event): string;
+    };
+
+    expect(
+      componentAccess.resolveSelectValue(
+        new CustomEvent('valueChange', { detail: 'DEPLOY' }),
+      ),
+    ).toBe('DEPLOY');
+    expect(
+      componentAccess.resolveSelectValue(
+        new CustomEvent('valueChange', { detail: { value: 'GITHUB' } }),
+      ),
+    ).toBe('GITHUB');
+    expect(
+      componentAccess.resolveSelectValue({ target: { value: 'DOCS' } } as unknown as Event),
+    ).toBe('DOCS');
+    expect(componentAccess.resolveSelectValue({ target: null } as unknown as Event)).toBe('');
   });
 
   it('should render the picker and read flows and emit selection events', () => {

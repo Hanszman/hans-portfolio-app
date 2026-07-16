@@ -67,15 +67,21 @@
           (input)="emitDescriptionEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-input
+        <hans-select-option
           [label]="'pages.admin.links.fields.type.label' | translate"
-          inputColor="base"
-          inputSize="medium"
+          [options]="linkTypeOptions()"
           [value]="form().type"
-          [placeholder]="'pages.admin.links.fields.type.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.type.label' | translate"
-          (input)="emitTypeChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.admin.links.fields.type.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="emitTypeChange(resolveSelectValue($event))"
+          (valuechange)="emitTypeChange(resolveSelectValue($event))"
+          (valueChange)="emitTypeChange(resolveSelectValue($event))"
+        ></hans-select-option>
 
         <hans-input
           [label]="'pages.admin.links.fields.sortOrder.label' | translate"

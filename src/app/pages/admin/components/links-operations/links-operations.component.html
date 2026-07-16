@@ -10,7 +10,7 @@
     </p>
   </div>
 
-  <p class="links-operations-endpoint">POST/GET/PUT/DELETE /links</p>
+  <p class="links-operations-endpoint">{{ endpointLabel }}</p>
 
   <div class="links-operations-actions">
     <hans-button
@@ -76,6 +76,7 @@
     [experienceOptions]="experienceOptions()"
     [technologyOptions]="technologyOptions()"
     [formationOptions]="formationOptions()"
+    [linkTypeOptions]="linkTypeOptions"
     [pagination]="pagination()"
     [feedbackKey]="modalFeedbackKey()"
     [feedbackTone]="modalFeedbackTone()"

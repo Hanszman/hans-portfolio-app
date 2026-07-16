@@ -690,7 +690,9 @@ export const EN_TRANSLATIONS = {
     'Describe this link in English',
   'pages.admin.links.fields.type.label': 'Type',
   'pages.admin.links.fields.type.placeholder':
-    'Enter the link type used by the backend',
+    'Select the link type',
+  'pages.admin.links.fields.type.empty':
+    'No link type is available right now.',
   'pages.admin.links.fields.sortOrder.label': 'Sort order',
   'pages.admin.links.fields.sortOrder.placeholder':
     'Enter the integer sort order',
@@ -740,6 +742,8 @@ export const EN_TRANSLATIONS = {
     'The link URL is required before submitting.',
   'pages.admin.links.feedback.requiredType':
     'The link type is required before submitting.',
+  'pages.admin.links.feedback.invalidType':
+    'Select one of the supported link types before submitting.',
   'pages.admin.links.feedback.invalidSortOrder':
     'The sort order must be a valid integer number.',
   'pages.admin.links.feedback.missingSession':

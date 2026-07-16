@@ -4,6 +4,20 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 
+export const LINK_TYPE_VALUES = [
+  'GITHUB',
+  'DEPLOY',
+  'NPM',
+  'DOCS',
+  'LINKEDIN',
+  'WEBSITE',
+  'ARTICLE',
+  'FIGMA',
+  'OTHER',
+] as const;
+
+export type LinkTypeValue = (typeof LINK_TYPE_VALUES)[number];
+
 export type LinksOperationsModalMode =
   | 'create'
   | 'read'
@@ -31,6 +45,12 @@ export interface LinkCatalogOptionViewModel {
   id: string;
   title: string;
   subtitle: string;
+}
+
+export interface LinkTypeOptionViewModel {
+  id: LinkTypeValue;
+  label: string;
+  value: LinkTypeValue;
 }
 
 export interface LinkOperationsViewModel {
@@ -84,6 +104,13 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   technologyIds: [],
   formationIds: [],
 });
+
+export const createLinkTypeOptions = (): readonly LinkTypeOptionViewModel[] =>
+  LINK_TYPE_VALUES.map((value) => ({
+    id: value,
+    label: value,
+    value,
+  }));
 
 export const createLinkCatalogOptionViewModel = (
   item:

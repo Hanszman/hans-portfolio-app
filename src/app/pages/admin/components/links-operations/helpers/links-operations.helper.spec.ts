@@ -604,6 +604,26 @@ describe('links helper', () => {
         labelEn: '',
         descriptionPt: '',
         descriptionEn: '',
+        type: 'INVALID',
+        sortOrder: 'abc',
+        isPublished: true,
+        projectIds: [],
+        experienceIds: [],
+        technologyIds: [],
+        formationIds: [],
+      }),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'pages.admin.links.feedback.invalidType',
+    });
+
+    expect(
+      buildLinksMutationPayload({
+        url: 'https://github.com/vh/portfolio',
+        labelPt: '',
+        labelEn: '',
+        descriptionPt: '',
+        descriptionEn: '',
         type: 'GITHUB',
         sortOrder: 'abc',
         isPublished: true,

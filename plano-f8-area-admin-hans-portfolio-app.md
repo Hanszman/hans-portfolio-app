@@ -284,14 +284,17 @@ Cada nova entidade protegida deve:
 - usar `operations-modal` como wrapper estrutural dos modais administrativos
 - usar a paginacao da `hans-ui-design-lib` no footer fixo dos modais paginados
 - usar `hans-toast` como feedback padrao de sucesso, erro e estados operacionais
+- centralizar labels repetidos do dominio admin em `admin.types.ts`, incluindo o prefixo padrao de endpoints `POST/GET/PUT/DELETE`
 - usar `Read` em modal grande
 - usar fluxos separados de `pick-update` e `pick-delete` com cards clicaveis
 - manter labels explicitas em todos os campos de formulario, sem depender apenas de placeholder
+- sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, usar `hans-select-option` em vez de `input`
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
 - preservar o mesmo page size administrativo oficial compartilhado
 - manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
 - atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida
+- quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao criar uma segunda pasta paralela apenas para CUD dentro de `admin`; reaproveitar e expandir o service ja existente no dominio oficial da entidade
 
 ## 7) Matriz de entidades e formularios
 

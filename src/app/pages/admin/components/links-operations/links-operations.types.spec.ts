@@ -1,6 +1,7 @@
 import {
   createEmptyLinksOperationsFormValue,
   createLinkCatalogOptionViewModel,
+  createLinkTypeOptions,
 } from './links-operations.types';
 
 describe('links types helpers', () => {
@@ -102,5 +103,19 @@ describe('links types helpers', () => {
       title: 'Angular',
       subtitle: 'angular',
     });
+  });
+
+  it('should create the supported link type options', () => {
+    expect(createLinkTypeOptions()).toEqual([
+      { id: 'GITHUB', label: 'GITHUB', value: 'GITHUB' },
+      { id: 'DEPLOY', label: 'DEPLOY', value: 'DEPLOY' },
+      { id: 'NPM', label: 'NPM', value: 'NPM' },
+      { id: 'DOCS', label: 'DOCS', value: 'DOCS' },
+      { id: 'LINKEDIN', label: 'LINKEDIN', value: 'LINKEDIN' },
+      { id: 'WEBSITE', label: 'WEBSITE', value: 'WEBSITE' },
+      { id: 'ARTICLE', label: 'ARTICLE', value: 'ARTICLE' },
+      { id: 'FIGMA', label: 'FIGMA', value: 'FIGMA' },
+      { id: 'OTHER', label: 'OTHER', value: 'OTHER' },
+    ]);
   });
 });

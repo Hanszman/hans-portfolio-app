@@ -36,6 +36,7 @@ export interface AdminCollectionPagination {
 }
 
 export const ADMIN_MODAL_PAGE_SIZE = DEFAULT_PAGE_SIZE;
+export const ADMIN_ENTITY_ENDPOINT_METHODS_LABEL = 'POST/GET/PUT/DELETE';
 
 export type AdminEntityRelationMode = AdminEntityDefinition['relationMode'];
 
@@ -73,76 +74,79 @@ export const ADMIN_ENTITY_OPERATIONS: readonly AdminEntityOperation[] = [
   'delete',
 ] as const;
 
+export const createAdminEntityEndpointLabel = (resourcePath: string): string =>
+  `${ADMIN_ENTITY_ENDPOINT_METHODS_LABEL} ${resourcePath}`;
+
 export const ADMIN_ENTITY_DEFINITIONS: readonly AdminEntityDefinition[] = [
   {
     id: 'portfolio-settings',
-    endpoint: 'POST/GET/PUT/DELETE /portfolio-settings',
+    endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
     substep: 'F8.3',
     relationMode: 'owner',
   },
   {
     id: 'tags',
-    endpoint: 'POST/GET/PUT/DELETE /tags',
+    endpoint: createAdminEntityEndpointLabel('/tags'),
     substep: 'F8.4',
     relationMode: 'owner',
   },
   {
     id: 'links',
-    endpoint: 'POST/GET/PUT/DELETE /links',
+    endpoint: createAdminEntityEndpointLabel('/links'),
     substep: 'F8.5',
     relationMode: 'owner',
   },
   {
     id: 'image-assets',
-    endpoint: 'POST/GET/PUT/DELETE /image-assets',
+    endpoint: createAdminEntityEndpointLabel('/image-assets'),
     substep: 'F8.6',
     relationMode: 'owner',
   },
   {
     id: 'spoken-languages',
-    endpoint: 'POST/GET/PUT/DELETE /spoken-languages',
+    endpoint: createAdminEntityEndpointLabel('/spoken-languages'),
     substep: 'F8.7',
     relationMode: 'owner',
   },
   {
     id: 'customers',
-    endpoint: 'POST/GET/PUT/DELETE /customers',
+    endpoint: createAdminEntityEndpointLabel('/customers'),
     substep: 'F8.8',
     relationMode: 'owner',
   },
   {
     id: 'jobs',
-    endpoint: 'POST/GET/PUT/DELETE /jobs',
+    endpoint: createAdminEntityEndpointLabel('/jobs'),
     substep: 'F8.9',
     relationMode: 'owner',
   },
   {
     id: 'formations',
-    endpoint: 'POST/GET/PUT/DELETE /formations',
+    endpoint: createAdminEntityEndpointLabel('/formations'),
     substep: 'F8.10',
     relationMode: 'owner',
   },
   {
     id: 'technologies',
-    endpoint: 'POST/GET/PUT/DELETE /technologies',
+    endpoint: createAdminEntityEndpointLabel('/technologies'),
     substep: 'F8.11',
     relationMode: 'owner',
   },
   {
     id: 'technology-contexts',
-    endpoint: 'POST/GET/PUT/DELETE /technology-contexts',
+    endpoint: createAdminEntityEndpointLabel('/technology-contexts'),
     substep: 'F8.12',
     relationMode: 'dedicated',
   },
   {
     id: 'experiences',
-    endpoint: 'POST/GET/PUT/DELETE /experiences',
+    endpoint: createAdminEntityEndpointLabel('/experiences'),
     substep: 'F8.13',
     relationMode: 'owner',
   },
   {
     id: 'projects',
-    endpoint: 'POST/GET/PUT/DELETE /projects',
+    endpoint: createAdminEntityEndpointLabel('/projects'),
     substep: 'F8.14',
     relationMode: 'owner',
   },

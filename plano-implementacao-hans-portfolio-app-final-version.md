@@ -1300,6 +1300,9 @@ Regra importante de modelagem para a F8:
 - feedbacks operacionais devem priorizar `hans-toast` em toda a aplicacao, inclusive autenticacao e CRUDs administrativos
 - tudo o que foi consolidado em `portfolio-settings`, `tags` e `links` passa a ser o template obrigatorio das proximas entidades administrativas
 - cada nova entidade deve nascer com `operations-modal`, leitura em modal grande, fluxos `pick-update` e `pick-delete` por cards clicaveis, labels explicitas em todos os campos, footer fixo, paginacao compartilhada da lib, mesmo padrao visual dos cards e documentacao atualizada antes de encerrar a subetapa
+- labels repetidos do dominio admin, como o prefixo padrao de endpoint `POST/GET/PUT/DELETE`, devem ficar centralizados em `admin.types.ts`
+- sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
+- quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao devemos criar uma segunda pasta paralela apenas para as operacoes de CUD dentro de `admin`; devemos reaproveitar e expandir o service ja existente no dominio oficial da entidade
 
 #### Criterios de aceite
 

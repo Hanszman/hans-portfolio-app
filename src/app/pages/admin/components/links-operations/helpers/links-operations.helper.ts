@@ -11,6 +11,7 @@ import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   LinkCatalogOptionViewModel,
+  LINK_TYPE_VALUES,
   LinkOperationsViewModel,
   LinksOperationsFormValue,
   LinksMutationBuildResult,
@@ -265,6 +266,13 @@ export const buildLinksMutationPayload = (
     return {
       isValid: false,
       errorKey: 'pages.admin.links.feedback.requiredType',
+    };
+  }
+
+  if (!LINK_TYPE_VALUES.includes(type as (typeof LINK_TYPE_VALUES)[number])) {
+    return {
+      isValid: false,
+      errorKey: 'pages.admin.links.feedback.invalidType',
     };
   }
 

@@ -25,6 +25,7 @@ import { InfoStateComponent } from '../../../../shared/info-state/info-state.com
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
+  createAdminEntityEndpointLabel,
   createAdminCollectionPagination,
 } from '../../admin.types';
 import { TagsOperationsModalComponent } from './components/tags-operations-modal/tags-operations-modal.component';
@@ -101,6 +102,7 @@ export class TagsOperationsComponent implements OnInit {
   protected readonly modalFeedbackKey = this.modalFeedbackKeySignal.asReadonly();
   protected readonly modalFeedbackTone = this.modalFeedbackToneSignal.asReadonly();
   protected readonly modalMode = this.modalModeSignal.asReadonly();
+  protected readonly endpointLabel = createAdminEntityEndpointLabel('/tags');
   protected readonly selectedTag = this.selectedTagSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly pagination = this.paginationSignal.asReadonly();

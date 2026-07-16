@@ -21,6 +21,7 @@ import { InfoStateComponent } from '../../../../shared/info-state/info-state.com
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
+  createAdminEntityEndpointLabel,
   createAdminCollectionPagination,
 } from '../../admin.types';
 import { PortfolioSettingsOperationsModalComponent } from './components/portfolio-settings-operations-modal/portfolio-settings-operations-modal.component';
@@ -84,6 +85,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   protected readonly modalFeedbackKey = this.modalFeedbackKeySignal.asReadonly();
   protected readonly modalFeedbackTone = this.modalFeedbackToneSignal.asReadonly();
   protected readonly modalMode = this.modalModeSignal.asReadonly();
+  protected readonly endpointLabel = createAdminEntityEndpointLabel('/portfolio-settings');
   protected readonly hasSettings = computed(
     () => this.pagination().totalItems > 0 && this.settings().length > 0,
   );

@@ -8,6 +8,7 @@ import {
   ADMIN_ENTITY_DEFINITIONS,
   ADMIN_ENTITY_OPERATIONS,
   ADMIN_SESSION_FACT_DEFINITIONS,
+  createAdminEntityEndpointLabel,
 } from '../admin.types';
 
 describe('formatAdminIdentity', () => {
@@ -38,7 +39,7 @@ describe('formatAdminIdentity', () => {
     ).toEqual([
       {
         id: 'portfolio-settings',
-        endpoint: 'POST/GET/PUT/DELETE /portfolio-settings',
+        endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
         substep: 'F8.3',
         relationModeLabel: 'pages.admin.relationMode.owner',
         title: 'pages.admin.entities.portfolio-settings.title',
