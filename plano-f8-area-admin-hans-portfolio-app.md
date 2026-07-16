@@ -273,6 +273,26 @@ Cada entidade deve ter, no minimo:
 - mensagens fora do modal ficam reservadas para feedbacks da tela apos fechamento da operacao
 - apos a consolidacao do padrao de feedback, o portfolio deve priorizar `hans-toast` tambem para falhas de autenticacao, consultas administrativas e mutacoes protegidas
 
+### 6.6. Template obrigatorio para as proximas entidades da F8
+
+Tudo o que foi consolidado em `portfolio-settings`, `tags` e `links` passa a ser o template oficial obrigatorio das proximas subetapas administrativas.
+
+Cada nova entidade protegida deve:
+
+- nascer em `src/app/core/api/admin/<entity>/` com `*-operations.service.ts`, `*-operations.types.ts` e specs
+- nascer em `src/app/pages/admin/components/<entity>-operations/` com `helpers/`, `components/` internos e specs completos
+- usar `operations-modal` como wrapper estrutural dos modais administrativos
+- usar a paginacao da `hans-ui-design-lib` no footer fixo dos modais paginados
+- usar `hans-toast` como feedback padrao de sucesso, erro e estados operacionais
+- usar `Read` em modal grande
+- usar fluxos separados de `pick-update` e `pick-delete` com cards clicaveis
+- manter labels explicitas em todos os campos de formulario, sem depender apenas de placeholder
+- manter os cards administrativos com a mesma altura visual consolidada na shell
+- remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
+- preservar o mesmo page size administrativo oficial compartilhado
+- manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
+- atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida
+
 ## 7) Matriz de entidades e formularios
 
 ### 7.1. `portfolio-settings`
@@ -576,7 +596,23 @@ Cada entidade deve ter, no minimo:
   - shell admin atualizada para tratar `portfolio-settings` e `tags` como workspaces especiais ja funcionais, mantendo as demais entidades seguintes como roadmap bloqueado
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
-- proxima subetapa oficial: `F8.5` - Links
+- `F8.5` concluida em `2026-07-16`
+- entregas concluidas na `F8.5`:
+  - dominio `src/app/core/api/admin/links/` criado para o CRUD de `links` dentro da estrutura administrativa
+  - leitura publica de `links` integrada por `GET /links`, mantendo mutacoes reais em `/admin/links`
+  - componente administrativo dedicado em `src/app/pages/admin/components/links-operations/` implementado com `helpers/` internos e modal segregado em `components/links-operations-modal/`
+  - service administrativo padronizado em `src/app/core/api/admin/links/links-operations.service.ts`
+  - contracts HTTP padronizados em `links-operations.types.ts`
+  - card funcional de `Links` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
+  - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande, fluxos de selecao paginados e footer fixo compartilhado
+  - formulario administrativo com suporte aos campos `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder` e `isPublished`
+  - relacionamentos `projectIds`, `experienceIds`, `technologyIds` e `formationIds` modelados no formulario seguindo o mesmo padrao consolidado das subetapas anteriores
+  - normalizacao defensiva da leitura de links criada para suportar IDs explicitos, relacoes aninhadas e inferencias a partir do catalogo publico quando necessario
+  - opcoes relacionais carregadas a partir de `GET /projects`, `GET /experiences` e `GET /technologies`, mantendo `formations` preparado para conexao assim que o catalogo publico da entidade for exposto no app
+  - feedbacks administrativos de `links` consolidados com `hans-toast`
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
+- proxima subetapa oficial: `F8.6` - Image assets
 
 ## 9) Regras de implementacao por subetapa
 

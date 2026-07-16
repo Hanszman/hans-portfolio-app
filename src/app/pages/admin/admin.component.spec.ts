@@ -2,9 +2,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
+import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
+import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
 import { TechnologiesService } from '../../core/api/technologies/technologies.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
@@ -67,6 +69,42 @@ describe('AdminComponent', () => {
                       projects: 12,
                     },
                     description: 'Controls the highlighted portfolio metrics.',
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: LinksOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'link-1',
+                    url: 'https://github.com/vh/portfolio',
+                    labelPt: 'Repositorio',
+                    labelEn: 'Repository',
+                    descriptionPt: 'Codigo fonte',
+                    descriptionEn: 'Source code',
+                    type: 'GITHUB',
+                    sortOrder: 1,
+                    isPublished: true,
+                    projectIds: ['project-1'],
+                    experienceIds: ['experience-1'],
+                    technologyIds: ['technology-1'],
+                    formationIds: ['formation-1'],
                   },
                 ],
                 pagination: {
@@ -159,6 +197,49 @@ describe('AdminComponent', () => {
           },
         },
         {
+          provide: ExperiencesService,
+          useValue: {
+            getExperiences: () =>
+              of({
+                data: [
+                  {
+                    id: 'experience-1',
+                    slug: 'stefanini-ford',
+                    companyName: 'Stefanini Ford',
+                    titlePt: 'Analista',
+                    titleEn: 'Analyst',
+                    summaryPt: 'Resumo',
+                    summaryEn: 'Summary',
+                    descriptionPt: 'Descricao',
+                    descriptionEn: 'Description',
+                    startDate: '2024-01-01',
+                    endDate: null,
+                    isCurrent: true,
+                    highlight: true,
+                    sortOrder: 1,
+                    isPublished: true,
+                    createdAt: '2024-01-01T00:00:00.000Z',
+                    updatedAt: '2024-01-01T00:00:00.000Z',
+                    technologies: [],
+                    projects: [],
+                    customers: [],
+                    jobs: [],
+                    links: [],
+                    imageAssets: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 20,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+          },
+        },
+        {
           provide: TechnologiesService,
           useValue: {
             getTechnologies: () =>
@@ -200,11 +281,12 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('12 entity workflows');
     expect(compiled.textContent).toContain('Portfolio settings');
     expect(compiled.textContent).toContain('Tags');
+    expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(10);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(9);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -262,6 +344,26 @@ describe('AdminComponent', () => {
           },
         },
         {
+          provide: LinksOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
           provide: TagsOperationsService,
           useValue: {
             getAll: () =>
@@ -290,6 +392,23 @@ describe('AdminComponent', () => {
                 pagination: {
                   page: 1,
                   pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+          },
+        },
+        {
+          provide: ExperiencesService,
+          useValue: {
+            getExperiences: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 20,
                   totalItems: 0,
                   totalPages: 0,
                   hasPreviousPage: false,

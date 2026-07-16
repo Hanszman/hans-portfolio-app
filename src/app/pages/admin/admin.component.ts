@@ -10,6 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
+import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
 import {
@@ -31,6 +32,7 @@ import {
     SectionHeaderComponent,
     PortfolioSettingsOperationsComponent,
     TagsOperationsComponent,
+    LinksOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -70,7 +72,11 @@ export class AdminComponent {
   protected readonly adminUserEmail = computed(() => this.adminUser()?.email ?? '');
 
   protected isWorkspaceEntity(entityId: string): boolean {
-    return entityId === 'portfolio-settings' || entityId === 'tags';
+    return (
+      entityId === 'portfolio-settings' ||
+      entityId === 'tags' ||
+      entityId === 'links'
+    );
   }
 
   protected async logout(): Promise<void> {

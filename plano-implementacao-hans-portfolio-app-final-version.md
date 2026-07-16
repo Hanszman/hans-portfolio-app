@@ -1217,6 +1217,21 @@ Regra importante de modelagem para a F8:
 - `F8.5` - `links`
   - campos: `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`
   - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`
+  - status: concluida em `2026-07-16`
+  - entregue:
+    - dominio `src/app/core/api/admin/links/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
+    - leitura protegida de `links` integrada por `GET /links`, com mutacoes reais em `/admin/links`
+    - componente administrativo dedicado em `src/app/pages/admin/components/links-operations/` com `helpers/` internos e modal segregado em `components/links-operations-modal/`
+    - service administrativo padronizado em `src/app/core/api/admin/links/links-operations.service.ts`
+    - contracts HTTP renomeados para `links-operations.types.ts`
+    - card funcional de `Links` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
+    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados para `read`, `update` e `delete`
+    - formulario administrativo com suporte aos campos `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`, `projectIds`, `experienceIds`, `technologyIds` e `formationIds`
+    - opcoes relacionais carregadas a partir de `GET /projects`, `GET /experiences` e `GET /technologies`, mantendo `formations` preparado para conexao posterior assim que a entidade publica for exposta no app
+    - normalizacao defensiva da leitura de links preparada para lidar com arrays de IDs, relacoes aninhadas e inferencias derivadas do catalogo publico de projetos
+    - feedbacks administrativos de `links` migrados para `hans-toast`
+    - traducoes sincronizadas nos tres idiomas
+    - cobertura total de testes para API, helper, modal, workspace, shell admin, rotas e fallbacks relacionais
 - `F8.6` - `image-assets`
   - campos: `fileName`, `filePath`, `folder`, `kind`, `altPt`, `altEn`, `captionPt`, `captionEn`, `mimeType`, `width`, `height`, `sortOrder`, `isPublished`
   - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`, `spokenLanguageIds`, `customerIds`, `jobIds`
@@ -1283,6 +1298,8 @@ Regra importante de modelagem para a F8:
 - o page size administrativo padrao consolidado passa a ser `5`, centralizado em constants/types compartilhados
 - a paginacao administrativa oficial deve vir da `hans-ui-design-lib`, evitando duplicacao de componente no app
 - feedbacks operacionais devem priorizar `hans-toast` em toda a aplicacao, inclusive autenticacao e CRUDs administrativos
+- tudo o que foi consolidado em `portfolio-settings`, `tags` e `links` passa a ser o template obrigatorio das proximas entidades administrativas
+- cada nova entidade deve nascer com `operations-modal`, leitura em modal grande, fluxos `pick-update` e `pick-delete` por cards clicaveis, labels explicitas em todos os campos, footer fixo, paginacao compartilhada da lib, mesmo padrao visual dos cards e documentacao atualizada antes de encerrar a subetapa
 
 #### Criterios de aceite
 
@@ -1444,4 +1461,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.5`, expandindo a area admin para a entidade `links` com seus campos proprios e relacionamentos via arrays da entidade dona.
+Implementar a `F8.6`, expandindo a area admin para a entidade `image-assets` seguindo integralmente o template consolidado em `portfolio-settings`, `tags` e `links`.

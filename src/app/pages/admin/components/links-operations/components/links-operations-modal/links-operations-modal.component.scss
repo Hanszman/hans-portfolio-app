@@ -1,0 +1,110 @@
+:host {
+  @apply block;
+}
+
+.links-operations-delete-summary p,
+.links-operations-selection-copy span,
+.links-operations-selection-empty,
+.links-operations-item-copy p:last-child,
+.links-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.links-operations-list,
+.links-operations-picker {
+  @apply grid gap-4;
+}
+
+.links-operations-item,
+.links-operations-picker-option,
+.links-operations-delete-summary,
+.links-operations-selection-section,
+.links-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.links-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.links-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.links-operations-picker-option:hover,
+.links-operations-picker-option:focus-visible {
+  border-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 28%,
+    transparent
+  );
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.links-operations-item-header,
+.links-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.links-operations-item-header h4,
+.links-operations-picker-option strong,
+.links-operations-delete-summary strong,
+.links-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.links-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.links-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.links-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.links-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.links-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.links-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.links-operations-selection-option {
+  @apply flex max-w-full flex-col items-start text-left;
+}
+
+.links-operations-selection-option-title,
+.links-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.links-operations-selection-option-title {
+  @apply font-semibold;
+}
+
+.links-operations-selection-option-subtitle {
+  @apply text-xs uppercase tracking-[0.14em];
+  word-break: keep-all;
+}
+
+:host ::ng-deep .links-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .links-operations-selection-grid hans-button .hans-button {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+}

@@ -38,7 +38,7 @@ describe('formatAdminIdentity', () => {
     ).toEqual([
       {
         id: 'portfolio-settings',
-        endpoint: 'GET/POST/PATCH/DELETE /portfolio-settings',
+        endpoint: 'POST/GET/PUT/DELETE /portfolio-settings',
         substep: 'F8.3',
         relationModeLabel: 'pages.admin.relationMode.owner',
         title: 'pages.admin.entities.portfolio-settings.title',
@@ -64,12 +64,7 @@ describe('formatAdminIdentity', () => {
   it('should build translated admin session facts', () => {
     const translate = (key: AppTranslationKey) => key;
 
-    expect(
-      buildAdminSessionFactViewModels(
-        ADMIN_SESSION_FACT_DEFINITIONS,
-        translate,
-      ),
-    ).toEqual([
+    expect(buildAdminSessionFactViewModels(ADMIN_SESSION_FACT_DEFINITIONS, translate)).toEqual([
       {
         id: 'route',
         title: 'pages.admin.facts.route.title',

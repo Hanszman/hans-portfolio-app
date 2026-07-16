@@ -652,6 +652,106 @@ export const EN_TRANSLATIONS = {
   'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'External references such as repositories, live demos, documents and complementary navigation targets.',
+  'pages.admin.links.sectionLabel': '// LINKS',
+  'pages.admin.links.description':
+    'Protected CRUD for reusable external references connected to projects, experiences, technologies and future formation records through owned relationship arrays.',
+  'pages.admin.links.actions.submit': 'Save',
+  'pages.admin.links.states.loading': 'Loading the protected links collection...',
+  'pages.admin.links.states.empty':
+    'No protected link has been registered yet.',
+  'pages.admin.links.card.url': 'URL',
+  'pages.admin.links.card.labelPt': 'Portuguese label',
+  'pages.admin.links.card.labelEn': 'English label',
+  'pages.admin.links.card.descriptionPt': 'Portuguese description',
+  'pages.admin.links.card.descriptionEn': 'English description',
+  'pages.admin.links.card.type': 'Type',
+  'pages.admin.links.card.sortOrder': 'Sort order',
+  'pages.admin.links.card.isPublished': 'Published',
+  'pages.admin.links.card.projects': 'Projects',
+  'pages.admin.links.card.experiences': 'Experiences',
+  'pages.admin.links.card.technologies': 'Technologies',
+  'pages.admin.links.card.formations': 'Formations',
+  'pages.admin.links.card.emptyRelations':
+    'No related records are currently linked to this link.',
+  'pages.admin.links.card.emptyText': 'No text was registered yet.',
+  'pages.admin.links.fields.url.label': 'URL',
+  'pages.admin.links.fields.url.placeholder': 'Enter the public link URL',
+  'pages.admin.links.fields.labelPt.label': 'Portuguese label',
+  'pages.admin.links.fields.labelPt.placeholder':
+    'Enter the Portuguese label shown to visitors',
+  'pages.admin.links.fields.labelEn.label': 'English label',
+  'pages.admin.links.fields.labelEn.placeholder':
+    'Enter the English label shown to visitors',
+  'pages.admin.links.fields.descriptionPt.label': 'Portuguese description',
+  'pages.admin.links.fields.descriptionPt.placeholder':
+    'Describe this link in Portuguese',
+  'pages.admin.links.fields.descriptionEn.label': 'English description',
+  'pages.admin.links.fields.descriptionEn.placeholder':
+    'Describe this link in English',
+  'pages.admin.links.fields.type.label': 'Type',
+  'pages.admin.links.fields.type.placeholder':
+    'Enter the link type used by the backend',
+  'pages.admin.links.fields.sortOrder.label': 'Sort order',
+  'pages.admin.links.fields.sortOrder.placeholder':
+    'Enter the integer sort order',
+  'pages.admin.links.fields.isPublished.label': 'Publication status',
+  'pages.admin.links.fields.isPublished.description':
+    'Control whether this external reference should stay visible in the public portfolio.',
+  'pages.admin.links.fields.isPublished.enabled': 'Published',
+  'pages.admin.links.fields.isPublished.disabled': 'Hidden',
+  'pages.admin.links.fields.projects.label': 'Related projects',
+  'pages.admin.links.fields.projects.description':
+    'Select every project that should expose this link in its public references.',
+  'pages.admin.links.fields.projects.empty':
+    'No public project is available to relate right now.',
+  'pages.admin.links.fields.experiences.label': 'Related experiences',
+  'pages.admin.links.fields.experiences.description':
+    'Select every experience that should keep this link in its relationship arrays.',
+  'pages.admin.links.fields.experiences.empty':
+    'No public experience is available to relate right now.',
+  'pages.admin.links.fields.technologies.label': 'Related technologies',
+  'pages.admin.links.fields.technologies.description':
+    'Select every technology that should expose this link in future public contexts.',
+  'pages.admin.links.fields.technologies.empty':
+    'No public technology is available to relate right now.',
+  'pages.admin.links.fields.formations.label': 'Related formations',
+  'pages.admin.links.fields.formations.description':
+    'Formation relationships are already supported in the payload and will become selectable as soon as the dedicated public catalog is available.',
+  'pages.admin.links.fields.formations.empty':
+    'No public formation catalog is available yet for relationship selection.',
+  'pages.admin.links.modal.create.title': 'Create link',
+  'pages.admin.links.modal.read.title': 'Read links',
+  'pages.admin.links.modal.read.description':
+    'Review the current protected links and open update or delete flows directly from each record.',
+  'pages.admin.links.modal.pickUpdate.title': 'Select a link to update',
+  'pages.admin.links.modal.pickUpdate.description':
+    'Choose one of the current protected links to open its update form.',
+  'pages.admin.links.modal.pickDelete.title': 'Select a link to delete',
+  'pages.admin.links.modal.pickDelete.description':
+    'Choose one of the current protected links to confirm its removal.',
+  'pages.admin.links.modal.update.title': 'Update link',
+  'pages.admin.links.modal.delete.title': 'Delete link',
+  'pages.admin.links.modal.delete.description':
+    'This action permanently removes the selected protected link from the portfolio.',
+  'pages.admin.links.feedback.created': 'Protected link created successfully.',
+  'pages.admin.links.feedback.updated': 'Protected link updated successfully.',
+  'pages.admin.links.feedback.deleted': 'Protected link deleted successfully.',
+  'pages.admin.links.feedback.requiredUrl':
+    'The link URL is required before submitting.',
+  'pages.admin.links.feedback.requiredType':
+    'The link type is required before submitting.',
+  'pages.admin.links.feedback.invalidSortOrder':
+    'The sort order must be a valid integer number.',
+  'pages.admin.links.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.links.feedback.selectionRequired':
+    'Select a protected link before continuing with this action.',
+  'pages.admin.links.feedback.loadError':
+    'The protected links collection could not be loaded right now.',
+  'pages.admin.links.feedback.saveError':
+    'The protected link could not be saved right now.',
+  'pages.admin.links.feedback.deleteError':
+    'The protected link could not be deleted right now.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Normalized media records used by the portfolio through image asset relations instead of direct file fields.',

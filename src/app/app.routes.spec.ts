@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
+import { LinksOperationsService } from './core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
@@ -79,6 +80,45 @@ describe('app routes', () => {
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: LinksOperationsService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'link-1',
+                      url: 'https://github.com/vh/portfolio',
+                      labelPt: 'Repositorio',
+                      labelEn: 'Repository',
+                      descriptionPt: 'Codigo fonte',
+                      descriptionEn: 'Source code',
+                      type: 'GITHUB',
+                      sortOrder: 1,
+                      isPublished: true,
+                      projectIds: ['project-1'],
+                      experienceIds: ['experience-1'],
+                      technologyIds: ['technology-1'],
+                      formationIds: ['formation-1'],
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 5,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {

@@ -1,0 +1,437 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="requestClose()"
+  (submitted)="submit()"
+  (pageSelected)="selectPage($event)"
+>
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
+      <div class="links-operations-form">
+        <hans-input
+          [label]="'pages.admin.links.fields.url.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().url"
+          [placeholder]="'pages.admin.links.fields.url.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.url.label' | translate"
+          (input)="emitUrlChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.labelPt.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().labelPt"
+          [placeholder]="'pages.admin.links.fields.labelPt.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.labelPt.label' | translate"
+          (input)="emitLabelPtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.labelEn.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().labelEn"
+          [placeholder]="'pages.admin.links.fields.labelEn.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.labelEn.label' | translate"
+          (input)="emitLabelEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.descriptionPt.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().descriptionPt"
+          [placeholder]="'pages.admin.links.fields.descriptionPt.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.descriptionPt.label' | translate"
+          (input)="emitDescriptionPtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.descriptionEn.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().descriptionEn"
+          [placeholder]="'pages.admin.links.fields.descriptionEn.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.descriptionEn.label' | translate"
+          (input)="emitDescriptionEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.type.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().type"
+          [placeholder]="'pages.admin.links.fields.type.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.type.label' | translate"
+          (input)="emitTypeChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="'pages.admin.links.fields.sortOrder.label' | translate"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="'pages.admin.links.fields.sortOrder.placeholder' | translate"
+          [attr.aria-label]="'pages.admin.links.fields.sortOrder.label' | translate"
+          (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="links-operations-toggle">
+          <div class="links-operations-selection-copy">
+            <p>{{ 'pages.admin.links.fields.isPublished.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.links.fields.isPublished.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().isPublished"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.links.fields.isPublished.label' | translate"
+            (change)="emitPublicationChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <div class="links-operations-selection-section">
+          <div class="links-operations-selection-copy">
+            <p>{{ 'pages.admin.links.fields.projects.label' | translate }}</p>
+            <span>{{ 'pages.admin.links.fields.projects.description' | translate }}</span>
+          </div>
+
+          @if (projectOptions().length > 0) {
+            <div class="links-operations-selection-grid">
+              @for (project of projectOptions(); track trackById($index, project)) {
+                <hans-button
+                  [attr.aria-pressed]="isProjectSelected(project.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isProjectSelected(project.id) ? 'default' : 'outline'"
+                  (click)="toggleProject(project.id)"
+                >
+                  <span class="links-operations-selection-option">
+                    <span class="links-operations-selection-option-title">
+                      {{ project.title }}
+                    </span>
+                    <span class="links-operations-selection-option-subtitle">
+                      {{ project.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="links-operations-selection-empty">
+              {{ 'pages.admin.links.fields.projects.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="links-operations-selection-section">
+          <div class="links-operations-selection-copy">
+            <p>{{ 'pages.admin.links.fields.experiences.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.links.fields.experiences.description' | translate }}
+            </span>
+          </div>
+
+          @if (experienceOptions().length > 0) {
+            <div class="links-operations-selection-grid">
+              @for (experience of experienceOptions(); track trackById($index, experience)) {
+                <hans-button
+                  [attr.aria-pressed]="isExperienceSelected(experience.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="
+                    isExperienceSelected(experience.id) ? 'default' : 'outline'
+                  "
+                  (click)="toggleExperience(experience.id)"
+                >
+                  <span class="links-operations-selection-option">
+                    <span class="links-operations-selection-option-title">
+                      {{ experience.title }}
+                    </span>
+                    <span class="links-operations-selection-option-subtitle">
+                      {{ experience.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="links-operations-selection-empty">
+              {{ 'pages.admin.links.fields.experiences.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="links-operations-selection-section">
+          <div class="links-operations-selection-copy">
+            <p>{{ 'pages.admin.links.fields.technologies.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.links.fields.technologies.description' | translate }}
+            </span>
+          </div>
+
+          @if (technologyOptions().length > 0) {
+            <div class="links-operations-selection-grid">
+              @for (technology of technologyOptions(); track trackById($index, technology)) {
+                <hans-button
+                  [attr.aria-pressed]="isTechnologySelected(technology.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="
+                    isTechnologySelected(technology.id) ? 'default' : 'outline'
+                  "
+                  (click)="toggleTechnology(technology.id)"
+                >
+                  <span class="links-operations-selection-option">
+                    <span class="links-operations-selection-option-title">
+                      {{ technology.title }}
+                    </span>
+                    <span class="links-operations-selection-option-subtitle">
+                      {{ technology.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="links-operations-selection-empty">
+              {{ 'pages.admin.links.fields.technologies.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="links-operations-selection-section">
+          <div class="links-operations-selection-copy">
+            <p>{{ 'pages.admin.links.fields.formations.label' | translate }}</p>
+            <span>{{ 'pages.admin.links.fields.formations.description' | translate }}</span>
+          </div>
+
+          @if (formationOptions().length > 0) {
+            <div class="links-operations-selection-grid">
+              @for (formation of formationOptions(); track trackById($index, formation)) {
+                <hans-button
+                  [attr.aria-pressed]="isFormationSelected(formation.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="
+                    isFormationSelected(formation.id) ? 'default' : 'outline'
+                  "
+                  (click)="toggleFormation(formation.id)"
+                >
+                  <span class="links-operations-selection-option">
+                    <span class="links-operations-selection-option-title">
+                      {{ formation.title }}
+                    </span>
+                    <span class="links-operations-selection-option-subtitle">
+                      {{ formation.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="links-operations-selection-empty">
+              {{ 'pages.admin.links.fields.formations.empty' | translate }}
+            </p>
+          }
+        </div>
+      </div>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="links-operations-list">
+            @for (link of links(); track trackById($index, link)) {
+              <article class="links-operations-item">
+                <div class="links-operations-item-header">
+                  <div>
+                    <p class="links-operations-label">
+                      {{ 'pages.admin.links.card.url' | translate }}
+                    </p>
+                    <h4>{{ link.url }}</h4>
+                  </div>
+
+                  <div class="links-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectLinkForUpdate(link.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectLinkForDelete(link.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.labelPt' | translate }}
+                  </p>
+                  <p>{{ link.labelPt || ('pages.admin.links.card.emptyText' | translate) }}</p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.labelEn' | translate }}
+                  </p>
+                  <p>{{ link.labelEn || ('pages.admin.links.card.emptyText' | translate) }}</p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.descriptionPt' | translate }}
+                  </p>
+                  <p>
+                    {{ link.descriptionPt || ('pages.admin.links.card.emptyText' | translate) }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.descriptionEn' | translate }}
+                  </p>
+                  <p>
+                    {{ link.descriptionEn || ('pages.admin.links.card.emptyText' | translate) }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.type' | translate }}
+                  </p>
+                  <p>{{ link.type }}</p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.sortOrder' | translate }}
+                  </p>
+                  <p>{{ link.sortOrderLabel }}</p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.isPublished' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      link.isPublished
+                        ? ('pages.admin.links.fields.isPublished.enabled' | translate)
+                        : ('pages.admin.links.fields.isPublished.disabled' | translate)
+                    }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.projects' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      link.projectLabels.join(', ') ||
+                        ('pages.admin.links.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.experiences' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      link.experienceLabels.join(', ') ||
+                        ('pages.admin.links.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.technologies' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      link.technologyLabels.join(', ') ||
+                        ('pages.admin.links.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+
+                <div class="links-operations-item-copy">
+                  <p class="links-operations-label">
+                    {{ 'pages.admin.links.card.formations' | translate }}
+                  </p>
+                  <p>
+                    {{
+                      link.formationLabels.join(', ') ||
+                        ('pages.admin.links.card.emptyRelations' | translate)
+                    }}
+                  </p>
+                </div>
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="links-operations-picker">
+            @for (link of links(); track trackById($index, link)) {
+              <button
+                type="button"
+                class="links-operations-picker-option"
+                (click)="selectLinkForUpdate(link.id)"
+              >
+                <strong>{{ link.labelPt || link.url }} ({{ link.type }})</strong>
+                <span>{{ link.url }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="links-operations-picker">
+            @for (link of links(); track trackById($index, link)) {
+              <button
+                type="button"
+                class="links-operations-picker-option"
+                (click)="selectLinkForDelete(link.id)"
+              >
+                <strong>{{ link.labelPt || link.url }} ({{ link.type }})</strong>
+                <span>{{ link.url }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="links-operations-delete-summary">
+            <strong>{{ selectedLink()?.labelPt || selectedLink()?.url }}</strong>
+            <p>{{ selectedLink()?.url }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>

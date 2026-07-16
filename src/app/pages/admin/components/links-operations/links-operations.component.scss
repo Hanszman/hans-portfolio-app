@@ -1,0 +1,38 @@
+:host {
+  @apply block h-full min-w-0;
+}
+
+.links-operations {
+  @apply flex h-full min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.links-operations-copy {
+  @apply flex min-w-0 flex-col gap-3;
+}
+
+.links-operations-kicker {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.links-operations-copy h3 {
+  @apply text-lg font-semibold;
+}
+
+.links-operations-copy p:last-child,
+.links-operations-endpoint {
+  @apply text-base leading-7;
+  color: var(--base-strong-color);
+}
+
+.links-operations-endpoint {
+  @apply rounded-2xl border px-4 py-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.links-operations-actions {
+  @apply mt-auto flex flex-wrap gap-3;
+}

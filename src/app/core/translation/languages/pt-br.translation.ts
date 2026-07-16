@@ -660,6 +660,114 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
+  'pages.admin.links.sectionLabel': '// LINKS',
+  'pages.admin.links.description':
+    'CRUD protegido para referências externas reutilizáveis conectadas a projetos, experiências, tecnologias e futuros registros de formação por meio de arrays relacionais próprios.',
+  'pages.admin.links.actions.submit': 'Salvar',
+  'pages.admin.links.states.loading':
+    'Carregando a coleção protegida de links...',
+  'pages.admin.links.states.empty':
+    'Nenhum link protegido foi cadastrado ainda.',
+  'pages.admin.links.card.url': 'URL',
+  'pages.admin.links.card.labelPt': 'Rótulo em português',
+  'pages.admin.links.card.labelEn': 'Rótulo em inglês',
+  'pages.admin.links.card.descriptionPt': 'Descrição em português',
+  'pages.admin.links.card.descriptionEn': 'Descrição em inglês',
+  'pages.admin.links.card.type': 'Tipo',
+  'pages.admin.links.card.sortOrder': 'Ordem',
+  'pages.admin.links.card.isPublished': 'Publicação',
+  'pages.admin.links.card.projects': 'Projetos',
+  'pages.admin.links.card.experiences': 'Experiências',
+  'pages.admin.links.card.technologies': 'Tecnologias',
+  'pages.admin.links.card.formations': 'Formações',
+  'pages.admin.links.card.emptyRelations':
+    'Nenhum registro relacionado está vinculado a este link no momento.',
+  'pages.admin.links.card.emptyText':
+    'Nenhum texto foi registrado ainda.',
+  'pages.admin.links.fields.url.label': 'URL',
+  'pages.admin.links.fields.url.placeholder':
+    'Digite a URL pública do link',
+  'pages.admin.links.fields.labelPt.label': 'Rótulo em português',
+  'pages.admin.links.fields.labelPt.placeholder':
+    'Digite o rótulo em português exibido ao visitante',
+  'pages.admin.links.fields.labelEn.label': 'Rótulo em inglês',
+  'pages.admin.links.fields.labelEn.placeholder':
+    'Digite o rótulo em inglês exibido ao visitante',
+  'pages.admin.links.fields.descriptionPt.label': 'Descrição em português',
+  'pages.admin.links.fields.descriptionPt.placeholder':
+    'Descreva este link em português',
+  'pages.admin.links.fields.descriptionEn.label': 'Descrição em inglês',
+  'pages.admin.links.fields.descriptionEn.placeholder':
+    'Descreva este link em inglês',
+  'pages.admin.links.fields.type.label': 'Tipo',
+  'pages.admin.links.fields.type.placeholder':
+    'Digite o tipo de link usado pelo backend',
+  'pages.admin.links.fields.sortOrder.label': 'Ordem',
+  'pages.admin.links.fields.sortOrder.placeholder':
+    'Digite a ordem inteira do link',
+  'pages.admin.links.fields.isPublished.label': 'Status de publicação',
+  'pages.admin.links.fields.isPublished.description':
+    'Controle se esta referência externa deve permanecer visível no portfolio público.',
+  'pages.admin.links.fields.isPublished.enabled': 'Publicado',
+  'pages.admin.links.fields.isPublished.disabled': 'Oculto',
+  'pages.admin.links.fields.projects.label': 'Projetos relacionados',
+  'pages.admin.links.fields.projects.description':
+    'Selecione todos os projetos que devem expor este link em suas referências públicas.',
+  'pages.admin.links.fields.projects.empty':
+    'Nenhum projeto público está disponível para relacionamento agora.',
+  'pages.admin.links.fields.experiences.label': 'Experiências relacionadas',
+  'pages.admin.links.fields.experiences.description':
+    'Selecione todas as experiências que devem manter este link em seus arrays relacionais.',
+  'pages.admin.links.fields.experiences.empty':
+    'Nenhuma experiência pública está disponível para relacionamento agora.',
+  'pages.admin.links.fields.technologies.label': 'Tecnologias relacionadas',
+  'pages.admin.links.fields.technologies.description':
+    'Selecione todas as tecnologias que devem expor este link em futuros contextos públicos.',
+  'pages.admin.links.fields.technologies.empty':
+    'Nenhuma tecnologia pública está disponível para relacionamento agora.',
+  'pages.admin.links.fields.formations.label': 'Formações relacionadas',
+  'pages.admin.links.fields.formations.description':
+    'Os relacionamentos de formações já são suportados no payload e se tornarão selecionáveis assim que o catálogo público dedicado estiver disponível.',
+  'pages.admin.links.fields.formations.empty':
+    'Ainda não há catálogo público de formações disponível para seleção relacional.',
+  'pages.admin.links.modal.create.title': 'Criar link',
+  'pages.admin.links.modal.read.title': 'Ler links',
+  'pages.admin.links.modal.read.description':
+    'Revise os links protegidos atuais e abra os fluxos de edição ou exclusão diretamente de cada registro.',
+  'pages.admin.links.modal.pickUpdate.title':
+    'Selecione um link para editar',
+  'pages.admin.links.modal.pickUpdate.description':
+    'Escolha um dos links protegidos atuais para abrir seu formulário de edição.',
+  'pages.admin.links.modal.pickDelete.title':
+    'Selecione um link para excluir',
+  'pages.admin.links.modal.pickDelete.description':
+    'Escolha um dos links protegidos atuais para confirmar sua remoção.',
+  'pages.admin.links.modal.update.title': 'Editar link',
+  'pages.admin.links.modal.delete.title': 'Excluir link',
+  'pages.admin.links.modal.delete.description':
+    'Esta ação remove permanentemente o link protegido selecionado do portfolio.',
+  'pages.admin.links.feedback.created':
+    'Link protegido criado com sucesso.',
+  'pages.admin.links.feedback.updated':
+    'Link protegido atualizado com sucesso.',
+  'pages.admin.links.feedback.deleted':
+    'Link protegido excluído com sucesso.',
+  'pages.admin.links.feedback.requiredUrl':
+    'A URL do link é obrigatória antes do envio.',
+  'pages.admin.links.feedback.requiredType':
+    'O tipo do link é obrigatório antes do envio.',
+  'pages.admin.links.feedback.invalidSortOrder':
+    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.links.feedback.missingSession':
+    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+  'pages.admin.links.feedback.selectionRequired':
+    'Selecione um link protegido antes de continuar com esta ação.',
+  'pages.admin.links.feedback.loadError':
+    'A coleção protegida de links não pode ser carregada agora.',
+  'pages.admin.links.feedback.saveError':
+    'O link protegido não pode ser salvo agora.',
+  'pages.admin.links.feedback.deleteError':
+    'O link protegido não pode ser excluído agora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de mídia usados pelo portfolio por meio de relacionamentos de image assets.',

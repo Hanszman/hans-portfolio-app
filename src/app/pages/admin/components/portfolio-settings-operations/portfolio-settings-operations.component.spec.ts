@@ -67,10 +67,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       'PortfolioSettingsOperationsService',
       ['getAll', 'create', 'update', 'delete'],
     );
-    toastService = jasmine.createSpyObj<ToastService>('ToastService', [
-      'showSuccess',
-      'showError',
-    ]);
+    toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     operationsService.getAll.and.returnValue(of(createCollectionResponse()));
     operationsService.create.and.returnValue(of(createSetting()));
     operationsService.update.and.returnValue(of(createSetting()));
@@ -108,7 +105,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
     expect(compiled.textContent).toContain('Portfolio settings');
-    expect(compiled.textContent).toContain('GET/POST/PATCH/DELETE /portfolio-settings');
+    expect(compiled.textContent).toContain('POST/GET/PUT/DELETE /portfolio-settings');
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');
@@ -191,36 +188,24 @@ describe('PortfolioSettingsOperationsComponent', () => {
     };
 
     component.openCreateModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.create.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.create.title');
 
     component.openReadModal();
     fixture.detectChanges();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.read.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.read.title');
     expect(fixture.nativeElement.textContent).toContain('hero.metrics');
 
     component.openUpdatePickerModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.pickUpdate.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.pickUpdate.title');
 
     component.openDeletePickerModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.pickDelete.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.pickDelete.title');
 
     component.openUpdateModal('setting-1');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.update.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.update.title');
 
     component.openDeleteModal('setting-1');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.portfolioSettings.modal.delete.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.portfolioSettings.modal.delete.title');
 
     component.closeModal();
     component.openUpdateModal('missing-setting');
@@ -263,16 +248,12 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     component.openCreateModal();
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.portfolioSettings.feedback.requiredKey',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.portfolioSettings.feedback.requiredKey');
 
     component.updateKey('hero.banner');
     component.updateValueText('{ invalid }');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.portfolioSettings.feedback.invalidJson',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.portfolioSettings.feedback.invalidJson');
 
     TestBed.resetTestingModule();
 
@@ -292,9 +273,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       ],
     }).compileComponents();
 
-    const missingSessionFixture = TestBed.createComponent(
-      PortfolioSettingsOperationsComponent,
-    );
+    const missingSessionFixture = TestBed.createComponent(PortfolioSettingsOperationsComponent);
     await settleWorkspace(missingSessionFixture);
 
     const missingSessionComponent = missingSessionFixture.componentInstance as unknown as {
@@ -352,15 +331,11 @@ describe('PortfolioSettingsOperationsComponent', () => {
     component.updateKey('hero.banner');
     component.updateValueText('{ "headline": "Hello" }');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.portfolioSettings.feedback.saveError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.portfolioSettings.feedback.saveError');
 
     component.openDeleteModal('setting-1');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.portfolioSettings.feedback.deleteError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.portfolioSettings.feedback.deleteError');
   });
 
   it('should expose trackBy and move deletion reload to the previous page when removing the last item', async () => {
