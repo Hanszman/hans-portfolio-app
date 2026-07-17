@@ -615,7 +615,23 @@ Cada nova entidade protegida deve:
   - feedbacks administrativos de `links` consolidados com `hans-toast`
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
-- proxima subetapa oficial: `F8.6` - Image assets
+- `F8.6` concluida em `2026-07-17`
+- entregas concluidas na `F8.6`:
+  - dominio `src/app/core/api/admin/image-assets/` criado para o CRUD de `image-assets`
+  - workspace administrativo dedicado em `src/app/pages/admin/components/image-assets-operations/`
+  - padrao consolidado de CRUD com modal, busca, paginacao, toasts e seletores relacionais aplicado integralmente
+  - relacoes publicas com `projects`, `experiences` e `technologies` conectadas ao formulario administrativo
+  - cobertura total de testes para API, helper, modal, workspace e shell administrativa
+- `F8.7` concluida em `2026-07-17`
+- entregas concluidas na `F8.7`:
+  - dominio `src/app/core/api/admin/spoken-languages/` criado para o CRUD de `spoken-languages`
+  - workspace administrativo dedicado em `src/app/pages/admin/components/spoken-languages-operations/`
+  - `proficiency` modelado com `hans-select-option` seguindo o contrato real da API
+  - relacionamento com `imageAssets` integrado ao formulario administrativo
+  - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` adicionados ao shell
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
+- proxima subetapa oficial: `F8.8` - Customers
 
 ## 9) Regras de implementacao por subetapa
 

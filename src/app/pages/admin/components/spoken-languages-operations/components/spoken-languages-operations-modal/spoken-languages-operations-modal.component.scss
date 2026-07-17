@@ -1,0 +1,102 @@
+:host {
+  @apply block;
+}
+
+.spoken-languages-operations-delete-summary p,
+.spoken-languages-operations-selection-copy span,
+.spoken-languages-operations-selection-empty,
+.spoken-languages-operations-item-copy p:last-child,
+.spoken-languages-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.spoken-languages-operations-list,
+.spoken-languages-operations-picker {
+  @apply grid gap-4;
+}
+
+.spoken-languages-operations-item,
+.spoken-languages-operations-picker-option,
+.spoken-languages-operations-delete-summary,
+.spoken-languages-operations-selection-section,
+.spoken-languages-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.spoken-languages-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.spoken-languages-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.spoken-languages-operations-picker-option:hover,
+.spoken-languages-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.spoken-languages-operations-item-header,
+.spoken-languages-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.spoken-languages-operations-item-header h4,
+.spoken-languages-operations-picker-option strong,
+.spoken-languages-operations-delete-summary strong,
+.spoken-languages-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.spoken-languages-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.spoken-languages-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.spoken-languages-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.spoken-languages-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.spoken-languages-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.spoken-languages-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.spoken-languages-operations-selection-option {
+  @apply flex max-w-full flex-col items-start text-left;
+}
+
+.spoken-languages-operations-selection-option-title,
+.spoken-languages-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.spoken-languages-operations-selection-option-title {
+  @apply font-semibold;
+}
+
+.spoken-languages-operations-selection-option-subtitle {
+  @apply text-xs uppercase tracking-[0.14em];
+  word-break: keep-all;
+}
+
+:host ::ng-deep .spoken-languages-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .spoken-languages-operations-selection-grid hans-button .hans-button {
+  @apply items-start justify-start whitespace-normal text-left;
+}

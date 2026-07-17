@@ -1,0 +1,103 @@
+<section class="spoken-languages-operations">
+  <div class="spoken-languages-operations-copy">
+    <p class="spoken-languages-operations-kicker">
+      {{ 'pages.admin.spokenLanguages.sectionLabel' | translate }}
+    </p>
+    <h3>{{ 'pages.admin.entities.spoken-languages.title' | translate }}</h3>
+    <p>
+      {{ 'pages.admin.entities.spoken-languages.description' | translate }}
+      {{ 'pages.admin.spokenLanguages.description' | translate }}
+    </p>
+  </div>
+
+  <p class="spoken-languages-operations-endpoint">{{ endpointLabel }}</p>
+
+  <div class="spoken-languages-operations-actions">
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.create' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      (click)="openCreateModal()"
+    >
+      {{ 'pages.admin.operations.create' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.read' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
+      (click)="openReadModal()"
+    >
+      {{ 'pages.admin.operations.read' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.update' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
+      (click)="openUpdatePickerModal()"
+    >
+      {{ 'pages.admin.operations.update' | translate }}
+    </hans-button>
+
+    <hans-button
+      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
+      (click)="openDeletePickerModal()"
+    >
+      {{ 'pages.admin.operations.delete' | translate }}
+    </hans-button>
+  </div>
+
+  @if (isLoading()) {
+    <app-info-state
+      mode="loading"
+      [message]="'pages.admin.spokenLanguages.states.loading' | translate"
+    />
+  } @else if (loadErrorKey(); as loadErrorKey) {
+    <app-info-state mode="error" [message]="loadErrorKey | translate" />
+  } @else if (!hasSpokenLanguages()) {
+    <app-info-state
+      mode="empty"
+      [message]="'pages.admin.spokenLanguages.states.empty' | translate"
+    />
+  }
+
+  <app-spoken-languages-operations-modal
+    [isOpen]="isModalOpen()"
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [spokenLanguages]="spokenLanguages()"
+    [selectedSpokenLanguage]="selectedSpokenLanguage()"
+    [form]="form()"
+    [imageAssetOptions]="imageAssetOptions()"
+    [proficiencyOptions]="proficiencyOptions"
+    [pagination]="pagination()"
+    [searchValue]="searchQuery()"
+    [feedbackKey]="modalFeedbackKey()"
+    [feedbackTone]="modalFeedbackTone()"
+    [isLoading]="isLoading()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (codeChanged)="updateCode($event)"
+    (namePtChanged)="updateNamePt($event)"
+    (nameEnChanged)="updateNameEn($event)"
+    (proficiencyChanged)="updateProficiency($event)"
+    (highlightChanged)="updateHighlight($event)"
+    (sortOrderChanged)="updateSortOrder($event)"
+    (imageAssetToggled)="toggleImageAsset($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+    (pageSelected)="goToPage($event)"
+    (searchChanged)="updateSearchQuery($event)"
+  />
+</section>

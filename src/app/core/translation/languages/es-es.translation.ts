@@ -909,6 +909,188 @@ export const ES_ES_TRANSLATIONS = {
     'El image asset protegido no puede guardarse ahora.',
   'pages.admin.imageAssets.feedback.deleteError':
     'El image asset protegido no puede eliminarse ahora.',
+  'pages.admin.spokenLanguages.sectionLabel': '// SPOKEN_LANGUAGES',
+  'pages.admin.spokenLanguages.description':
+    'CRUD protegido para los registros de dominio de idiomas mostrados en el perfil y en los flujos de skills del portfolio.',
+  'pages.admin.spokenLanguages.states.loading':
+    'Cargando la colección protegida de idiomas...',
+  'pages.admin.spokenLanguages.states.empty':
+    'Todavía no se ha registrado ningún idioma protegido.',
+  'pages.admin.spokenLanguages.card.code': 'Código',
+  'pages.admin.spokenLanguages.card.namePt': 'Nombre en portugués',
+  'pages.admin.spokenLanguages.card.nameEn': 'Nombre en inglés',
+  'pages.admin.spokenLanguages.card.proficiency': 'Dominio',
+  'pages.admin.spokenLanguages.card.highlight': 'Destacado',
+  'pages.admin.spokenLanguages.card.sortOrder': 'Orden',
+  'pages.admin.spokenLanguages.card.imageAssets': 'Image assets',
+  'pages.admin.spokenLanguages.card.emptyRelations':
+    'Ningún image asset relacionado está vinculado a esta entrada de idioma.',
+  'pages.admin.spokenLanguages.fields.code.label': 'Código',
+  'pages.admin.spokenLanguages.fields.code.placeholder':
+    'Ingresa el código del idioma',
+  'pages.admin.spokenLanguages.fields.namePt.label': 'Nombre en portugués',
+  'pages.admin.spokenLanguages.fields.namePt.placeholder':
+    'Ingresa el nombre del idioma en portugués',
+  'pages.admin.spokenLanguages.fields.nameEn.label': 'Nombre en inglés',
+  'pages.admin.spokenLanguages.fields.nameEn.placeholder':
+    'Ingresa el nombre del idioma en inglés',
+  'pages.admin.spokenLanguages.fields.proficiency.label': 'Dominio',
+  'pages.admin.spokenLanguages.fields.proficiency.empty':
+    'Ninguna opción de dominio está disponible en este momento.',
+  'pages.admin.spokenLanguages.fields.highlight.label': 'Estado destacado',
+  'pages.admin.spokenLanguages.fields.highlight.description':
+    'Controla si este idioma debe seguir destacado en el portfolio público.',
+  'pages.admin.spokenLanguages.fields.highlight.enabled': 'Destacado',
+  'pages.admin.spokenLanguages.fields.highlight.disabled': 'Sin destacar',
+  'pages.admin.spokenLanguages.fields.sortOrder.label': 'Orden',
+  'pages.admin.spokenLanguages.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de exhibición',
+  'pages.admin.spokenLanguages.fields.imageAssets.label':
+    'Image assets relacionados',
+  'pages.admin.spokenLanguages.fields.imageAssets.description':
+    'Selecciona todos los image assets que deben representar visualmente este idioma en el portfolio público.',
+  'pages.admin.spokenLanguages.fields.imageAssets.empty':
+    'Ningún image asset público está disponible para relacionar ahora.',
+  'pages.admin.spokenLanguages.modal.create.title': 'Crear spoken language',
+  'pages.admin.spokenLanguages.modal.read.title': 'Leer spoken languages',
+  'pages.admin.spokenLanguages.modal.read.description':
+    'Revisa los spoken languages protegidos actuales y abre flujos de edición o eliminación directamente desde cada registro.',
+  'pages.admin.spokenLanguages.modal.pickUpdate.title':
+    'Selecciona un spoken language para editar',
+  'pages.admin.spokenLanguages.modal.pickUpdate.description':
+    'Elige uno de los spoken languages protegidos actuales para abrir su formulario de edición.',
+  'pages.admin.spokenLanguages.modal.pickDelete.title':
+    'Selecciona un spoken language para eliminar',
+  'pages.admin.spokenLanguages.modal.pickDelete.description':
+    'Elige uno de los spoken languages protegidos actuales para confirmar su eliminación.',
+  'pages.admin.spokenLanguages.modal.update.title': 'Editar spoken language',
+  'pages.admin.spokenLanguages.modal.delete.title': 'Eliminar spoken language',
+  'pages.admin.spokenLanguages.modal.delete.description':
+    'Esta acción elimina permanentemente la entrada de idioma protegida seleccionada del portfolio.',
+  'pages.admin.spokenLanguages.feedback.created':
+    'Spoken language protegido creado con éxito.',
+  'pages.admin.spokenLanguages.feedback.updated':
+    'Spoken language protegido actualizado con éxito.',
+  'pages.admin.spokenLanguages.feedback.deleted':
+    'Spoken language protegido eliminado con éxito.',
+  'pages.admin.spokenLanguages.feedback.requiredCode':
+    'El código del idioma es obligatorio antes de enviar.',
+  'pages.admin.spokenLanguages.feedback.requiredNamePt':
+    'El nombre del idioma en portugués es obligatorio antes de enviar.',
+  'pages.admin.spokenLanguages.feedback.requiredNameEn':
+    'El nombre del idioma en inglés es obligatorio antes de enviar.',
+  'pages.admin.spokenLanguages.feedback.requiredProficiency':
+    'El dominio del idioma es obligatorio antes de enviar.',
+  'pages.admin.spokenLanguages.feedback.invalidProficiency':
+    'Selecciona uno de los niveles de dominio compatibles antes de enviar.',
+  'pages.admin.spokenLanguages.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.spokenLanguages.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.spokenLanguages.feedback.selectionRequired':
+    'Selecciona un spoken language protegido antes de continuar con esta acción.',
+  'pages.admin.spokenLanguages.feedback.loadError':
+    'La colección protegida de spoken languages no puede cargarse ahora.',
+  'pages.admin.spokenLanguages.feedback.saveError':
+    'El spoken language protegido no puede guardarse ahora.',
+  'pages.admin.spokenLanguages.feedback.deleteError':
+    'El spoken language protegido no puede eliminarse ahora.',
+  'pages.admin.customers.sectionLabel': '// CUSTOMERS',
+  'pages.admin.customers.description':
+    'CRUD protegido para los registros de clientes conectados a experiencias y relaciones de medios del portfolio.',
+  'pages.admin.customers.states.loading':
+    'Cargando la colección protegida de customers...',
+  'pages.admin.customers.states.empty':
+    'Todavía no se ha registrado ningún customer protegido.',
+  'pages.admin.customers.card.slug': 'Slug',
+  'pages.admin.customers.card.name': 'Nombre',
+  'pages.admin.customers.card.summaryPt': 'Resumen en portugués',
+  'pages.admin.customers.card.summaryEn': 'Resumen en inglés',
+  'pages.admin.customers.card.highlight': 'Destacado',
+  'pages.admin.customers.card.isPublished': 'Estado de publicación',
+  'pages.admin.customers.card.sortOrder': 'Orden',
+  'pages.admin.customers.card.experiences': 'Experiences',
+  'pages.admin.customers.card.imageAssets': 'Image assets',
+  'pages.admin.customers.card.emptyRelations':
+    'Ningún registro relacionado está conectado a este customer.',
+  'pages.admin.customers.fields.slug.label': 'Slug',
+  'pages.admin.customers.fields.slug.placeholder':
+    'Ingresa el slug único del customer',
+  'pages.admin.customers.fields.name.label': 'Nombre',
+  'pages.admin.customers.fields.name.placeholder':
+    'Ingresa el nombre del customer',
+  'pages.admin.customers.fields.summaryPt.label': 'Resumen en portugués',
+  'pages.admin.customers.fields.summaryPt.placeholder':
+    'Ingresa el resumen en portugués del customer',
+  'pages.admin.customers.fields.summaryEn.label': 'Resumen en inglés',
+  'pages.admin.customers.fields.summaryEn.placeholder':
+    'Ingresa el resumen en inglés del customer',
+  'pages.admin.customers.fields.highlight.label': 'Estado destacado',
+  'pages.admin.customers.fields.highlight.description':
+    'Controla si este customer debe seguir destacado en las secciones públicas del portfolio.',
+  'pages.admin.customers.fields.highlight.enabled': 'Destacado',
+  'pages.admin.customers.fields.highlight.disabled': 'Sin destacar',
+  'pages.admin.customers.fields.isPublished.label': 'Estado de publicación',
+  'pages.admin.customers.fields.isPublished.description':
+    'Controla si este customer debe permanecer visible en las experiences públicas.',
+  'pages.admin.customers.fields.isPublished.enabled': 'Publicado',
+  'pages.admin.customers.fields.isPublished.disabled': 'No publicado',
+  'pages.admin.customers.fields.sortOrder.label': 'Orden',
+  'pages.admin.customers.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de exhibición',
+  'pages.admin.customers.fields.experiences.label': 'Experiences relacionadas',
+  'pages.admin.customers.fields.experiences.description':
+    'Selecciona todas las experiences que deben exponer este customer en el storytelling público.',
+  'pages.admin.customers.fields.experiences.empty':
+    'Ninguna experience está disponible para relacionar ahora.',
+  'pages.admin.customers.fields.imageAssets.label':
+    'Image assets relacionados',
+  'pages.admin.customers.fields.imageAssets.description':
+    'Selecciona todos los image assets vinculados a este customer.',
+  'pages.admin.customers.fields.imageAssets.empty':
+    'Ningún image asset está disponible para relacionar ahora.',
+  'pages.admin.customers.modal.create.title': 'Crear customer',
+  'pages.admin.customers.modal.read.title': 'Leer customers',
+  'pages.admin.customers.modal.read.description':
+    'Revisa los customers protegidos actuales y abre flujos de edición o eliminación directamente desde cada registro.',
+  'pages.admin.customers.modal.pickUpdate.title':
+    'Selecciona un customer para editar',
+  'pages.admin.customers.modal.pickUpdate.description':
+    'Elige uno de los customers protegidos actuales para abrir su formulario de edición.',
+  'pages.admin.customers.modal.pickDelete.title':
+    'Selecciona un customer para eliminar',
+  'pages.admin.customers.modal.pickDelete.description':
+    'Elige uno de los customers protegidos actuales para confirmar su eliminación.',
+  'pages.admin.customers.modal.update.title': 'Editar customer',
+  'pages.admin.customers.modal.delete.title': 'Eliminar customer',
+  'pages.admin.customers.modal.delete.description':
+    'Esta acción elimina permanentemente el customer protegido seleccionado del portfolio.',
+  'pages.admin.customers.feedback.created':
+    'Customer protegido creado con éxito.',
+  'pages.admin.customers.feedback.updated':
+    'Customer protegido actualizado con éxito.',
+  'pages.admin.customers.feedback.deleted':
+    'Customer protegido eliminado con éxito.',
+  'pages.admin.customers.feedback.requiredSlug':
+    'El slug del customer es obligatorio antes del envío.',
+  'pages.admin.customers.feedback.requiredName':
+    'El nombre del customer es obligatorio antes del envío.',
+  'pages.admin.customers.feedback.requiredSummaryPt':
+    'El resumen en portugués es obligatorio antes del envío.',
+  'pages.admin.customers.feedback.requiredSummaryEn':
+    'El resumen en inglés es obligatorio antes del envío.',
+  'pages.admin.customers.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.customers.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.customers.feedback.selectionRequired':
+    'Selecciona un customer protegido antes de continuar con esta acción.',
+  'pages.admin.customers.feedback.loadError':
+    'La colección protegida de customers no puede cargarse ahora.',
+  'pages.admin.customers.feedback.saveError':
+    'El customer protegido no puede guardarse ahora.',
+  'pages.admin.customers.feedback.deleteError':
+    'El customer protegido no puede eliminarse ahora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de medios usados por el portfolio a través de relaciones de image assets.',

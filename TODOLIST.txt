@@ -356,3 +356,9 @@ Além disso, notei que vc colocou os asteriscos de campo obrigatório manualment
 -Beleza, obrigado! Mas tenho alguns pontos:
 Reparei que a função resolveFieldLabel é basicamente a mesma em todos essas entidades. Não deveriamos ter uma função comum pra isso ao invés de duplicarmos ela em cada entidade? Talvez faça mais sentido colocá-la num helper do admin, ou algo do tipo mais geral. Faça o mesmo para outras funções que também possam estar aparecendo duplicadas entre as entidades assim, eu percebi essa agora, mas imagino que tenham outras.
 Além disso, reparei também que no arquivo operations-modal.component.scss vc colocou display: block; ao invés de @apply block. Achei que tinhamos documentado que sempre que tivermos uma classe pronta do tailwind usariamos ela ao invés de usarmos o estilo de css normal. Faça essa refatoração em todo o código scss/css do portfolio e da lib procurando por trechos css que possam estar com propriedades diretas assim sem usar o @apply do tailwind e passe a usar. Sei que tem casos que não da pra usar, como por exemplo o do color, ai nesses casos não precisa mesmo. Faça apenas para os casos que são exatamente aquela linha de css, igual foi esse do display: block / @apply block.
+-Beleza, obrigado! podemos seguir para a próxima subetapa da F8
+-Beleza, mas vamos lá:
+Vc fez duas subetapas de uma vez, atualize sua memória e documentação para não fazer isso novamente.
+Esses arquivos tão com erros: customers-operations.helper.spec.ts e customers-operations.component.spec.ts
+Testes não passaram com 100% de coverage
+OBS: Verificar último commit e testar CRUDs

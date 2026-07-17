@@ -1464,4 +1464,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.6`, expandindo a area admin para a entidade `image-assets` seguindo integralmente o template consolidado em `portfolio-settings`, `tags` e `links`.
+Implementar a `F8.8`, expandindo a area admin para a entidade `customers` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets` e `spoken-languages`.

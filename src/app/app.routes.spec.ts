@@ -4,9 +4,11 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
+import { CustomersOperationsService } from './core/api/admin/customers/customers-operations.service';
 import { ImageAssetsOperationsService } from './core/api/admin/image-assets/image-assets-operations.service';
 import { LinksOperationsService } from './core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
+import { SpokenLanguagesOperationsService } from './core/api/admin/spoken-languages/spoken-languages-operations.service';
 import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
@@ -81,6 +83,42 @@ describe('app routes', () => {
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: CustomersOperationsService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'customer-1',
+                      slug: 'enterprise-client',
+                      name: 'Enterprise Client',
+                      summaryPt: 'Cliente corporativo',
+                      summaryEn: 'Corporate client',
+                      highlight: true,
+                      sortOrder: 1,
+                      isPublished: true,
+                      experienceIds: ['experience-1'],
+                      imageAssetIds: ['image-asset-1'],
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 5,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {
@@ -184,6 +222,41 @@ describe('app routes', () => {
                         projects: 12,
                       },
                       description: 'Controls the highlighted portfolio metrics.',
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 5,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: SpokenLanguagesOperationsService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'spoken-language-1',
+                      code: 'en',
+                      namePt: 'Ingles',
+                      nameEn: 'English',
+                      proficiency: 'FLUENT',
+                      highlight: true,
+                      sortOrder: 1,
+                      imageAssetIds: ['image-asset-1'],
+                      imageAssets: [],
                     },
                   ],
                   pagination: {

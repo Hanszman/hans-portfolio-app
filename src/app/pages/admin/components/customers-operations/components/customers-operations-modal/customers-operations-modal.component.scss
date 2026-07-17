@@ -1,0 +1,102 @@
+:host {
+  @apply block;
+}
+
+.customers-operations-delete-summary p,
+.customers-operations-selection-copy span,
+.customers-operations-selection-empty,
+.customers-operations-item-copy p:last-child,
+.customers-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.customers-operations-list,
+.customers-operations-picker {
+  @apply grid gap-4;
+}
+
+.customers-operations-item,
+.customers-operations-picker-option,
+.customers-operations-delete-summary,
+.customers-operations-selection-section,
+.customers-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.customers-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.customers-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.customers-operations-picker-option:hover,
+.customers-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.customers-operations-item-header,
+.customers-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.customers-operations-item-header h4,
+.customers-operations-picker-option strong,
+.customers-operations-delete-summary strong,
+.customers-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.customers-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.customers-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.customers-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.customers-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.customers-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.customers-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.customers-operations-selection-option {
+  @apply flex max-w-full flex-col items-start text-left;
+}
+
+.customers-operations-selection-option-title,
+.customers-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.customers-operations-selection-option-title {
+  @apply font-semibold;
+}
+
+.customers-operations-selection-option-subtitle {
+  @apply text-xs uppercase tracking-[0.14em];
+  word-break: keep-all;
+}
+
+:host ::ng-deep .customers-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .customers-operations-selection-grid hans-button .hans-button {
+  @apply items-start justify-start whitespace-normal text-left;
+}

@@ -2,9 +2,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
+import { CustomersOperationsService } from '../../core/api/admin/customers/customers-operations.service';
 import { ImageAssetsOperationsService } from '../../core/api/admin/image-assets/image-assets-operations.service';
 import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
+import { SpokenLanguagesOperationsService } from '../../core/api/admin/spoken-languages/spoken-languages-operations.service';
 import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
@@ -55,6 +57,41 @@ describe('AdminComponent', () => {
               role: 'ADMIN',
             }),
             logout: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: CustomersOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'customer-1',
+                    slug: 'enterprise-client',
+                    name: 'Enterprise Client',
+                    summaryPt: 'Cliente corporativo',
+                    summaryEn: 'Corporate client',
+                    highlight: true,
+                    sortOrder: 1,
+                    isPublished: true,
+                    experienceIds: ['experience-1'],
+                    imageAssetIds: ['image-asset-1'],
+                    experiences: [],
+                    imageAssets: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {
@@ -114,6 +151,38 @@ describe('AdminComponent', () => {
                     spokenLanguageIds: [],
                     customerIds: [],
                     jobIds: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: SpokenLanguagesOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'spoken-language-1',
+                    code: 'en',
+                    namePt: 'Ingles',
+                    nameEn: 'English',
+                    proficiency: 'FLUENT',
+                    highlight: true,
+                    sortOrder: 1,
+                    imageAssetIds: ['image-asset-1'],
+                    imageAssets: [],
                   },
                 ],
                 pagination: {
@@ -328,11 +397,13 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Tags');
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Image assets');
+    expect(compiled.textContent).toContain('Spoken languages');
+    expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(8);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(6);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -370,6 +441,26 @@ describe('AdminComponent', () => {
           },
         },
         {
+          provide: CustomersOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
           provide: PortfolioSettingsOperationsService,
           useValue: {
             getAll: () =>
@@ -391,6 +482,26 @@ describe('AdminComponent', () => {
         },
         {
           provide: ImageAssetsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: SpokenLanguagesOperationsService,
           useValue: {
             getAll: () =>
               of({

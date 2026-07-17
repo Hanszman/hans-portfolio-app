@@ -10,9 +10,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
+import { CustomersOperationsComponent } from './components/customers-operations/customers-operations.component';
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
+import { SpokenLanguagesOperationsComponent } from './components/spoken-languages-operations/spoken-languages-operations.component';
 import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -35,6 +37,8 @@ import {
     TagsOperationsComponent,
     LinksOperationsComponent,
     ImageAssetsOperationsComponent,
+    SpokenLanguagesOperationsComponent,
+    CustomersOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -78,7 +82,9 @@ export class AdminComponent {
       entityId === 'portfolio-settings' ||
       entityId === 'tags' ||
       entityId === 'links' ||
-      entityId === 'image-assets'
+      entityId === 'image-assets' ||
+      entityId === 'spoken-languages' ||
+      entityId === 'customers'
     );
   }
 

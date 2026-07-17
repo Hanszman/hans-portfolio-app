@@ -1,0 +1,239 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="selectPage($event)"
+>
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
+      <div class="spoken-languages-operations-form">
+        <hans-input
+          [label]="resolveFieldLabel('code')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().code"
+          [placeholder]="fields.code.placeholderKey! | translate"
+          [attr.aria-label]="fields.code.labelKey | translate"
+          (input)="emitCodeChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('namePt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().namePt"
+          [placeholder]="fields.namePt.placeholderKey! | translate"
+          [attr.aria-label]="fields.namePt.labelKey | translate"
+          (input)="emitNamePtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('nameEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().nameEn"
+          [placeholder]="fields.nameEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.nameEn.labelKey | translate"
+          (input)="emitNameEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-select-option
+          [label]="resolveFieldLabel('proficiency')"
+          [options]="proficiencyOptions()"
+          [value]="form().proficiency"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.admin.spokenLanguages.fields.proficiency.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="emitProficiencyChange(resolveSelectValue($event))"
+          (valuechange)="emitProficiencyChange(resolveSelectValue($event))"
+          (valueChange)="emitProficiencyChange(resolveSelectValue($event))"
+        ></hans-select-option>
+
+        <div class="spoken-languages-operations-toggle">
+          <div class="spoken-languages-operations-selection-copy">
+            <p>{{ 'pages.admin.spokenLanguages.fields.highlight.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.spokenLanguages.fields.highlight.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().highlight"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.spokenLanguages.fields.highlight.label' | translate"
+            (change)="emitHighlightChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <hans-input
+          [label]="resolveFieldLabel('sortOrder')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
+          (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="spoken-languages-operations-selection-section">
+          <div class="spoken-languages-operations-selection-copy">
+            <p>{{ 'pages.admin.spokenLanguages.fields.imageAssets.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.spokenLanguages.fields.imageAssets.description' | translate }}
+            </span>
+          </div>
+
+          @if (imageAssetOptions().length > 0) {
+            <div class="spoken-languages-operations-selection-grid">
+              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
+                <hans-button
+                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
+                  (click)="toggleImageAsset(imageAsset.id)"
+                >
+                  <span class="spoken-languages-operations-selection-option">
+                    <span class="spoken-languages-operations-selection-option-title">
+                      {{ imageAsset.title }}
+                    </span>
+                    <span class="spoken-languages-operations-selection-option-subtitle">
+                      {{ imageAsset.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="spoken-languages-operations-selection-empty">
+              {{ 'pages.admin.spokenLanguages.fields.imageAssets.empty' | translate }}
+            </p>
+          }
+        </div>
+      </div>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="spoken-languages-operations-list">
+            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
+              <article class="spoken-languages-operations-item">
+                <div class="spoken-languages-operations-item-header">
+                  <div>
+                    <p class="spoken-languages-operations-label">
+                      {{ 'pages.admin.spokenLanguages.card.code' | translate }}
+                    </p>
+                    <h4>{{ spokenLanguage.code }}</h4>
+                  </div>
+
+                  <div class="spoken-languages-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectSpokenLanguageForUpdate(spokenLanguage.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectSpokenLanguageForDelete(spokenLanguage.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                @for (
+                  item of [
+                    ['pages.admin.spokenLanguages.card.namePt', spokenLanguage.namePt],
+                    ['pages.admin.spokenLanguages.card.nameEn', spokenLanguage.nameEn],
+                    ['pages.admin.spokenLanguages.card.proficiency', spokenLanguage.proficiency],
+                    [
+                      'pages.admin.spokenLanguages.card.highlight',
+                      spokenLanguage.highlight
+                        ? ('pages.admin.spokenLanguages.fields.highlight.enabled' | translate)
+                        : ('pages.admin.spokenLanguages.fields.highlight.disabled' | translate),
+                    ],
+                    ['pages.admin.spokenLanguages.card.sortOrder', spokenLanguage.sortOrderLabel],
+                    [
+                      'pages.admin.spokenLanguages.card.imageAssets',
+                      spokenLanguage.imageAssetLabels.join(', ') ||
+                        ('pages.admin.spokenLanguages.card.emptyRelations' | translate),
+                    ],
+                  ];
+                  track item[0]
+                ) {
+                  <div class="spoken-languages-operations-item-copy">
+                    <p class="spoken-languages-operations-label">
+                      {{ item[0] | translate }}
+                    </p>
+                    <p>{{ item[1] }}</p>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="spoken-languages-operations-picker">
+            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
+              <button
+                type="button"
+                class="spoken-languages-operations-picker-option"
+                (click)="selectSpokenLanguageForUpdate(spokenLanguage.id)"
+              >
+                <strong>{{ spokenLanguage.namePt }} ({{ spokenLanguage.code }})</strong>
+                <span>{{ spokenLanguage.nameEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="spoken-languages-operations-picker">
+            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
+              <button
+                type="button"
+                class="spoken-languages-operations-picker-option"
+                (click)="selectSpokenLanguageForDelete(spokenLanguage.id)"
+              >
+                <strong>{{ spokenLanguage.namePt }} ({{ spokenLanguage.code }})</strong>
+                <span>{{ spokenLanguage.nameEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="spoken-languages-operations-delete-summary">
+            <strong
+              >{{ selectedSpokenLanguage()?.namePt }} ({{ selectedSpokenLanguage()?.code }})</strong
+            >
+            <p>{{ selectedSpokenLanguage()?.nameEn }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>

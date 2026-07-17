@@ -1,0 +1,295 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="selectPage($event)"
+>
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
+      <div class="customers-operations-form">
+        <hans-input
+          [label]="resolveFieldLabel('slug')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().slug"
+          [placeholder]="fields.slug.placeholderKey! | translate"
+          [attr.aria-label]="fields.slug.labelKey | translate"
+          (input)="emitSlugChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('name')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().name"
+          [placeholder]="fields.name.placeholderKey! | translate"
+          [attr.aria-label]="fields.name.labelKey | translate"
+          (input)="emitNameChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryPt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryPt"
+          [placeholder]="fields.summaryPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryPt.labelKey | translate"
+          (input)="emitSummaryPtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEn"
+          [placeholder]="fields.summaryEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEn.labelKey | translate"
+          (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="customers-operations-toggle">
+          <div class="customers-operations-selection-copy">
+            <p>{{ 'pages.admin.customers.fields.highlight.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.customers.fields.highlight.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().highlight"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.customers.fields.highlight.label' | translate"
+            (change)="emitHighlightChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <div class="customers-operations-toggle">
+          <div class="customers-operations-selection-copy">
+            <p>{{ 'pages.admin.customers.fields.isPublished.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.customers.fields.isPublished.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().isPublished"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.customers.fields.isPublished.label' | translate"
+            (change)="emitPublicationChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <hans-input
+          [label]="resolveFieldLabel('sortOrder')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
+          (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="customers-operations-selection-section">
+          <div class="customers-operations-selection-copy">
+            <p>{{ 'pages.admin.customers.fields.experiences.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.customers.fields.experiences.description' | translate }}
+            </span>
+          </div>
+
+          @if (experienceOptions().length > 0) {
+            <div class="customers-operations-selection-grid">
+              @for (experience of experienceOptions(); track trackById($index, experience)) {
+                <hans-button
+                  [attr.aria-pressed]="isExperienceSelected(experience.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isExperienceSelected(experience.id) ? 'default' : 'outline'"
+                  (click)="toggleExperience(experience.id)"
+                >
+                  <span class="customers-operations-selection-option">
+                    <span class="customers-operations-selection-option-title">
+                      {{ experience.title }}
+                    </span>
+                    <span class="customers-operations-selection-option-subtitle">
+                      {{ experience.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="customers-operations-selection-empty">
+              {{ 'pages.admin.customers.fields.experiences.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="customers-operations-selection-section">
+          <div class="customers-operations-selection-copy">
+            <p>{{ 'pages.admin.customers.fields.imageAssets.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.customers.fields.imageAssets.description' | translate }}
+            </span>
+          </div>
+
+          @if (imageAssetOptions().length > 0) {
+            <div class="customers-operations-selection-grid">
+              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
+                <hans-button
+                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
+                  (click)="toggleImageAsset(imageAsset.id)"
+                >
+                  <span class="customers-operations-selection-option">
+                    <span class="customers-operations-selection-option-title">
+                      {{ imageAsset.title }}
+                    </span>
+                    <span class="customers-operations-selection-option-subtitle">
+                      {{ imageAsset.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="customers-operations-selection-empty">
+              {{ 'pages.admin.customers.fields.imageAssets.empty' | translate }}
+            </p>
+          }
+        </div>
+      </div>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="customers-operations-list">
+            @for (customer of customers(); track trackById($index, customer)) {
+              <article class="customers-operations-item">
+                <div class="customers-operations-item-header">
+                  <div>
+                    <p class="customers-operations-label">
+                      {{ 'pages.admin.customers.card.slug' | translate }}
+                    </p>
+                    <h4>{{ customer.slug }}</h4>
+                  </div>
+
+                  <div class="customers-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectCustomerForUpdate(customer.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectCustomerForDelete(customer.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                @for (
+                  item of [
+                    ['pages.admin.customers.card.name', customer.name],
+                    ['pages.admin.customers.card.summaryPt', customer.summaryPt],
+                    ['pages.admin.customers.card.summaryEn', customer.summaryEn],
+                    [
+                      'pages.admin.customers.card.highlight',
+                      customer.highlight
+                        ? ('pages.admin.customers.fields.highlight.enabled' | translate)
+                        : ('pages.admin.customers.fields.highlight.disabled' | translate),
+                    ],
+                    [
+                      'pages.admin.customers.card.isPublished',
+                      customer.isPublished
+                        ? ('pages.admin.customers.fields.isPublished.enabled' | translate)
+                        : ('pages.admin.customers.fields.isPublished.disabled' | translate),
+                    ],
+                    ['pages.admin.customers.card.sortOrder', customer.sortOrderLabel],
+                    [
+                      'pages.admin.customers.card.experiences',
+                      customer.experienceLabels.join(', ') ||
+                        ('pages.admin.customers.card.emptyRelations' | translate),
+                    ],
+                    [
+                      'pages.admin.customers.card.imageAssets',
+                      customer.imageAssetLabels.join(', ') ||
+                        ('pages.admin.customers.card.emptyRelations' | translate),
+                    ],
+                  ];
+                  track item[0]
+                ) {
+                  <div class="customers-operations-item-copy">
+                    <p class="customers-operations-label">
+                      {{ item[0] | translate }}
+                    </p>
+                    <p>{{ item[1] }}</p>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="customers-operations-picker">
+            @for (customer of customers(); track trackById($index, customer)) {
+              <button
+                type="button"
+                class="customers-operations-picker-option"
+                (click)="selectCustomerForUpdate(customer.id)"
+              >
+                <strong>{{ customer.name }} ({{ customer.slug }})</strong>
+                <span>{{ customer.summaryEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="customers-operations-picker">
+            @for (customer of customers(); track trackById($index, customer)) {
+              <button
+                type="button"
+                class="customers-operations-picker-option"
+                (click)="selectCustomerForDelete(customer.id)"
+              >
+                <strong>{{ customer.name }} ({{ customer.slug }})</strong>
+                <span>{{ customer.summaryEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="customers-operations-delete-summary">
+            <strong>{{ selectedCustomer()?.name }} ({{ selectedCustomer()?.slug }})</strong>
+            <p>{{ selectedCustomer()?.summaryEn }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>
