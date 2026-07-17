@@ -49,11 +49,10 @@
 }
 
 .project-case-card-content p {
-  @apply m-0 text-sm leading-7;
+  @apply m-0 text-sm leading-7 overflow-hidden;
   color: color-mix(in srgb, var(--text-color) 70%, transparent);
   display: -webkit-box;
   min-height: 5.25rem;
-  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }

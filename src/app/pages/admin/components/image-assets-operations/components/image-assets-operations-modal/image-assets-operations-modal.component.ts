@@ -12,7 +12,11 @@ import { ImageAssetRecord } from '../../../../../../core/api/admin/image-assets/
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
-import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
+import {
+  createAdminFieldLabelResolver,
+  resolveAdminSelectValue,
+  trackAdminItemById,
+} from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -86,6 +90,12 @@ export class ImageAssetsOperationsModalComponent {
   readonly pageSelected = output<number>();
 
   protected readonly fields = IMAGE_ASSETS_OPERATIONS_FIELDS;
+  protected readonly trackById = trackAdminItemById;
+  protected readonly resolveSelectValue = resolveAdminSelectValue;
+  protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
+    this.fields,
+    this.translation.instant.bind(this.translation),
+  );
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -174,31 +184,6 @@ export class ImageAssetsOperationsModalComponent {
     this.sortOrderChanged.emit(value);
   }
 
-  protected resolveSelectValue(event: Event): string {
-    const customEvent = event as Event & {
-      detail?: string | { value?: string };
-      target: (EventTarget & { value?: string }) | null;
-    };
-
-    if (typeof customEvent.detail === 'string') {
-      return customEvent.detail;
-    }
-
-    if (
-      customEvent.detail &&
-      typeof customEvent.detail === 'object' &&
-      typeof customEvent.detail.value === 'string'
-    ) {
-      return customEvent.detail.value;
-    }
-
-    if (customEvent.target && typeof customEvent.target.value === 'string') {
-      return customEvent.target.value;
-    }
-
-    return '';
-  }
-
   protected emitPublicationChange(event: Event): void {
     const customEvent = event as Event & {
       detail?: boolean;
@@ -249,16 +234,4 @@ export class ImageAssetsOperationsModalComponent {
     return this.form().technologyIds.includes(technologyId);
   }
 
-  protected trackById(index: number, item: { id: string }): string {
-    return item.id;
-  }
-
-  protected resolveFieldLabel(
-    fieldKey: keyof typeof IMAGE_ASSETS_OPERATIONS_FIELDS,
-  ): string {
-    return resolveAdminFieldLabel(
-      this.fields[fieldKey],
-      this.translation.instant.bind(this.translation),
-    );
-  }
 }

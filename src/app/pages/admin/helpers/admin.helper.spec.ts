@@ -2,8 +2,11 @@ import { AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   buildAdminEntityViewModels,
   buildAdminSessionFactViewModels,
+  createAdminFieldLabelResolver,
   formatAdminIdentity,
   resolveAdminFieldLabel,
+  resolveAdminSelectValue,
+  trackAdminItemById,
 } from './admin.helper';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -49,6 +52,55 @@ describe('formatAdminIdentity', () => {
         translate,
       ),
     ).toBe('pages.admin.tags.fields.namePt.label');
+  });
+
+  it('should create a reusable field label resolver', () => {
+    const translate = (key: AppTranslationKey) => key;
+    const resolveFieldLabel = createAdminFieldLabelResolver(
+      {
+        slug: {
+          labelKey: 'pages.admin.tags.fields.slug.label',
+          required: true,
+        },
+        namePt: {
+          labelKey: 'pages.admin.tags.fields.namePt.label',
+        },
+      },
+      translate,
+    );
+
+    expect(resolveFieldLabel('slug')).toBe('pages.admin.tags.fields.slug.label *');
+    expect(resolveFieldLabel('namePt')).toBe('pages.admin.tags.fields.namePt.label');
+  });
+
+  it('should resolve select values from the event detail string', () => {
+    expect(resolveAdminSelectValue({ detail: 'STACK' } as unknown as Event)).toBe(
+      'STACK',
+    );
+  });
+
+  it('should resolve select values from the event detail object', () => {
+    expect(
+      resolveAdminSelectValue({
+        detail: { value: 'STACK' },
+      } as unknown as Event),
+    ).toBe('STACK');
+  });
+
+  it('should resolve select values from the event target value', () => {
+    expect(
+      resolveAdminSelectValue({
+        target: { value: 'STACK' },
+      } as unknown as Event),
+    ).toBe('STACK');
+  });
+
+  it('should return an empty string when the select event does not expose a value', () => {
+    expect(resolveAdminSelectValue({} as Event)).toBe('');
+  });
+
+  it('should track admin items by id', () => {
+    expect(trackAdminItemById(0, { id: 'tag-1' })).toBe('tag-1');
   });
 
   it('should build translated admin entity view models', () => {

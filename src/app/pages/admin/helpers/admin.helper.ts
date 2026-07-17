@@ -21,6 +21,44 @@ export const resolveAdminFieldLabel = (
   return field.required ? `${label} *` : label;
 };
 
+export const createAdminFieldLabelResolver = <
+  TFields extends Record<string, AdminFormFieldConfig>,
+>(
+  fields: TFields,
+  translate: (key: AppTranslationKey) => string,
+) => (fieldKey: keyof TFields): string =>
+  resolveAdminFieldLabel(fields[fieldKey], translate);
+
+export const resolveAdminSelectValue = (event: Event): string => {
+  const customEvent = event as Event & {
+    detail?: string | { value?: string };
+    target: (EventTarget & { value?: string }) | null;
+  };
+
+  if (typeof customEvent.detail === 'string') {
+    return customEvent.detail;
+  }
+
+  if (
+    customEvent.detail &&
+    typeof customEvent.detail === 'object' &&
+    typeof customEvent.detail.value === 'string'
+  ) {
+    return customEvent.detail.value;
+  }
+
+  if (customEvent.target && typeof customEvent.target.value === 'string') {
+    return customEvent.target.value;
+  }
+
+  return '';
+};
+
+export const trackAdminItemById = (
+  index: number,
+  item: { id: string },
+): string => item.id;
+
 export interface AdminEntityViewModel {
   readonly id: AdminEntityDefinition['id'];
   readonly endpoint: string;

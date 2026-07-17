@@ -24,5 +24,5 @@
 }
 
 :host ::ng-deep .operations-modal-search hans-input {
-  display: block;
+  @apply block;
 }

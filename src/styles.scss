@@ -44,7 +44,7 @@ body[data-app-theme='dark'] {
 }
 
 app-root {
-  display: block;
+  @apply block;
   min-height: 100vh;
 }
 

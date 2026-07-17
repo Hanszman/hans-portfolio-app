@@ -103,8 +103,5 @@
 
 :host ::ng-deep .links-operations-selection-grid hans-button .hans-button-content,
 :host ::ng-deep .links-operations-selection-grid hans-button .hans-button {
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  white-space: normal;
+  @apply items-start justify-start whitespace-normal text-left;
 }

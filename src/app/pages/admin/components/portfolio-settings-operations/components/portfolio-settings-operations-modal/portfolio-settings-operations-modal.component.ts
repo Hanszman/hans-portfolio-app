@@ -12,7 +12,10 @@ import { PortfolioSettingRecord } from '../../../../../../core/api/admin/portfol
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
-import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
+import {
+  createAdminFieldLabelResolver,
+  trackAdminItemById,
+} from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -68,6 +71,11 @@ export class PortfolioSettingsOperationsModalComponent {
   readonly pageSelected = output<number>();
 
   protected readonly fields = PORTFOLIO_SETTINGS_OPERATIONS_FIELDS;
+  protected readonly trackSettingById = trackAdminItemById;
+  protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
+    this.fields,
+    this.translation.instant.bind(this.translation),
+  );
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -132,16 +140,4 @@ export class PortfolioSettingsOperationsModalComponent {
     this.pageSelected.emit(page);
   }
 
-  protected trackSettingById(index: number, setting: { id: string }): string {
-    return setting.id;
-  }
-
-  protected resolveFieldLabel(
-    fieldKey: keyof typeof PORTFOLIO_SETTINGS_OPERATIONS_FIELDS,
-  ): string {
-    return resolveAdminFieldLabel(
-      this.fields[fieldKey],
-      this.translation.instant.bind(this.translation),
-    );
-  }
 }
