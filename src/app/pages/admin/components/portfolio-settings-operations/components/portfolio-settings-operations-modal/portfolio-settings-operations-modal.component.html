@@ -6,11 +6,14 @@
   [feedbackTone]="feedbackTone()"
   [pagination]="pagination()"
   [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
   [isLoading]="isLoading()"
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
   (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
 >
@@ -18,7 +21,7 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="portfolio-settings-operations-form">
         <hans-input
-          [label]="'pages.admin.portfolioSettings.fields.key.label' | translate"
+          [label]="(('pages.admin.portfolioSettings.fields.key.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().key"
@@ -38,7 +41,7 @@
         ></hans-input>
 
         <label class="portfolio-settings-operations-json-field">
-          <span>{{ 'pages.admin.portfolioSettings.fields.value.label' | translate }}</span>
+          <span>{{ ('pages.admin.portfolioSettings.fields.value.label' | translate) + ' *' }}</span>
           <textarea
             [value]="form().valueText"
             [placeholder]="'pages.admin.portfolioSettings.fields.value.placeholder' | translate"

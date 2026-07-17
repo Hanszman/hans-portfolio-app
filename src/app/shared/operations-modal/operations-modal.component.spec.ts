@@ -8,7 +8,7 @@ describe('OperationsModalComponent', () => {
   let component: OperationsModalComponent;
 
   beforeAll(() => {
-    for (const elementName of ['hans-modal']) {
+    for (const elementName of ['hans-input', 'hans-modal']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -27,10 +27,12 @@ describe('OperationsModalComponent', () => {
 
   it('should expose modal footer props, pagination props and output emitters', () => {
     const closedSpy = jasmine.createSpy('closed');
+    const searchSpy = jasmine.createSpy('searchChanged');
     const submittedSpy = jasmine.createSpy('submitted');
     const pageSpy = jasmine.createSpy('pageSelected');
 
     component.closed.subscribe(closedSpy);
+    component.searchChanged.subscribe(searchSpy);
     component.submitted.subscribe(submittedSpy);
     component.pageSelected.subscribe(pageSpy);
 
@@ -41,6 +43,8 @@ describe('OperationsModalComponent', () => {
       'pages.admin.tags.modal.read.description',
     );
     fixture.componentRef.setInput('showPagination', true);
+    fixture.componentRef.setInput('showSearch', true);
+    fixture.componentRef.setInput('searchValue', 'angular');
     fixture.componentRef.setInput('showSubmit', true);
     fixture.componentRef.setInput('pagination', {
       page: 2,
@@ -68,6 +72,12 @@ describe('OperationsModalComponent', () => {
           paginationPreviousContent?: string;
         })
       | null;
+    const searchElement = fixture.nativeElement.querySelector('hans-input') as
+      | (HTMLElement & {
+          label?: string;
+          value?: string;
+        })
+      | null;
 
     expect(modalElement?.cancelLabel).toBe('Close');
     expect(modalElement?.confirmLabel).toBe('Save');
@@ -87,10 +97,21 @@ describe('OperationsModalComponent', () => {
     expect(modalElement?.paginationPreviousContent).toBe(
       'MdKeyboardArrowLeft',
     );
+    expect(searchElement?.label).toBe('Search');
+    expect(searchElement?.value).toBe('angular');
 
     (
       component as unknown as {
         requestClose(): void;
+        emitSearchChange(value: string): void;
+        submit(): void;
+        selectPage(event: Event | number): void;
+      }
+    ).emitSearchChange('react');
+    (
+      component as unknown as {
+        requestClose(): void;
+        emitSearchChange(value: string): void;
         submit(): void;
         selectPage(event: Event | number): void;
       }
@@ -159,6 +180,7 @@ describe('OperationsModalComponent', () => {
     expect(pageSpy).toHaveBeenCalledWith(4);
     expect(pageSpy).toHaveBeenCalledWith(5);
     expect(pageSpy).toHaveBeenCalledTimes(4);
+    expect(searchSpy).toHaveBeenCalledOnceWith('react');
     expect(submittedSpy).toHaveBeenCalledTimes(1);
     expect(closedSpy).toHaveBeenCalledTimes(1);
   });

@@ -62,6 +62,8 @@ export const PT_BR_TRANSLATIONS = {
   'common.actions.applyFilters': 'Aplicar filtros',
   'common.actions.showMore': 'Mostrar mais',
   'common.actions.showLess': 'Mostrar menos',
+  'common.search.label': 'Busca',
+  'common.search.placeholder': 'Buscar registros',
   'common.pagination.navigation': 'Paginacao',
   'common.pagination.first': 'Primeira',
   'common.pagination.previous': 'Anterior',

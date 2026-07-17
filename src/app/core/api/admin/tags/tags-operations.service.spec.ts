@@ -96,6 +96,21 @@ describe('TagsOperationsService', () => {
     request.flush(createTagsCollectionResponse());
   });
 
+  it('should append the search term when loading the collection', () => {
+    const service = TestBed.inject(TagsOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service.getAll(1, 5, 'angular').subscribe();
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/tags?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=angular'),
+    );
+
+    expect(request.request.method).toBe('GET');
+
+    request.flush(createTagsCollectionResponse());
+  });
+
   it('should create a protected tag', () => {
     const service = TestBed.inject(TagsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);

@@ -50,12 +50,14 @@ export class ImageAssetsOperationsModalComponent {
   readonly pagination = input<AdminCollectionPagination>(
     createAdminCollectionPagination(),
   );
+  readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly isLoading = input(false);
   readonly isSubmitting = input(false);
 
   readonly closed = output<void>();
+  readonly searchChanged = output<string>();
   readonly fileNameChanged = output<string>();
   readonly filePathChanged = output<string>();
   readonly folderChanged = output<string>();

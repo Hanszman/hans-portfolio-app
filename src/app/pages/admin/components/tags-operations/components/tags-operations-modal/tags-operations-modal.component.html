@@ -6,11 +6,14 @@
   [feedbackTone]="feedbackTone()"
   [pagination]="pagination()"
   [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
   [isLoading]="isLoading()"
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
   (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
 >
@@ -18,7 +21,7 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="tags-operations-form">
         <hans-input
-          [label]="'pages.admin.tags.fields.slug.label' | translate"
+          [label]="(('pages.admin.tags.fields.slug.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().slug"
@@ -28,7 +31,7 @@
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.tags.fields.namePt.label' | translate"
+          [label]="(('pages.admin.tags.fields.namePt.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().namePt"
@@ -38,7 +41,7 @@
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.tags.fields.nameEn.label' | translate"
+          [label]="(('pages.admin.tags.fields.nameEn.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().nameEn"
@@ -48,7 +51,7 @@
         ></hans-input>
 
         <hans-select-option
-          [label]="'pages.admin.tags.fields.type.label' | translate"
+          [label]="(('pages.admin.tags.fields.type.label' | translate) + ' *')"
           [options]="tagTypeOptions()"
           [value]="form().type"
           [enableAutocomplete]="false"
@@ -64,7 +67,7 @@
         ></hans-select-option>
 
         <hans-input
-          [label]="'pages.admin.tags.fields.sortOrder.label' | translate"
+          [label]="(('pages.admin.tags.fields.sortOrder.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

@@ -41,6 +41,20 @@
         </p>
       }
 
+      @if (showSearch()) {
+        <div class="operations-modal-search">
+          <hans-input
+            [label]="'common.search.label' | translate"
+            inputColor="base"
+            inputSize="medium"
+            [value]="searchValue()"
+            [placeholder]="'common.search.placeholder' | translate"
+            [attr.aria-label]="'common.search.label' | translate"
+            (input)="emitSearchChange($any($event).target?.value ?? '')"
+          ></hans-input>
+        </div>
+      }
+
       <div class="operations-modal-body">
         <ng-content />
       </div>

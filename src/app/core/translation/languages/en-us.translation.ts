@@ -61,6 +61,8 @@ export const EN_TRANSLATIONS = {
   'common.actions.applyFilters': 'Apply filters',
   'common.actions.showMore': 'Show more',
   'common.actions.showLess': 'Show less',
+  'common.search.label': 'Search',
+  'common.search.placeholder': 'Search records',
   'common.pagination.navigation': 'Pagination',
   'common.pagination.first': 'First',
   'common.pagination.previous': 'Previous',

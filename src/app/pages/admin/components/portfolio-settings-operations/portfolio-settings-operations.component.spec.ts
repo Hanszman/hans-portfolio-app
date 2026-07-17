@@ -104,7 +104,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(compiled.textContent).toContain('Portfolio settings');
     expect(compiled.textContent).toContain(
       createAdminEntityEndpointLabel('/portfolio-settings'),
@@ -221,6 +221,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
   it('should support modal paging and block invalid paging requests', async () => {
     operationsService.getAll.and.returnValues(
       of(createCollectionResponse()),
+      of(createCollectionResponse([createSetting({ id: 'setting-search', key: 'hero.banner' })], 1)),
       of(createCollectionResponse([createSetting({ id: 'setting-2', key: 'zeta' })], 2)),
     );
 
@@ -228,14 +229,18 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       goToPage(page: number): Promise<void>;
+      updateSearchQuery(value: string): Promise<void>;
     };
 
     await component.goToPage(2);
+    await component.updateSearchQuery('hero');
+    await component.updateSearchQuery('hero');
     await component.goToPage(2);
     await component.goToPage(99);
 
-    expect(operationsService.getAll).toHaveBeenCalledTimes(2);
-    expect(operationsService.getAll).toHaveBeenCalledWith(2, 5);
+    expect(operationsService.getAll).toHaveBeenCalledTimes(3);
+    expect(operationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5, 'hero');
   });
 
   it('should prevent save when validation fails or the admin session is unavailable', async () => {
@@ -378,7 +383,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     pagedComponent.openDeleteModal('setting-1');
     await pagedComponent.submitModal();
 
-    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(operationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without data', async () => {

@@ -169,14 +169,14 @@ describe('LinksOperationsModalComponent', () => {
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'URL',
+      'URL *',
       'Portuguese label',
       'English label',
       'Portuguese description',
       'English description',
-      'Sort order',
+      'Sort order *',
     ]);
-    expect(selectElement?.label).toBe('Type');
+    expect(selectElement?.label).toBe('Type *');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(urlSpy).toHaveBeenCalledOnceWith('https://example.com');

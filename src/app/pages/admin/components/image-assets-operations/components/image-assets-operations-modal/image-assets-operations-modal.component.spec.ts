@@ -182,19 +182,19 @@ describe('ImageAssetsOperationsModalComponent', () => {
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'File name',
-      'File path',
-      'Folder',
+      'File name *',
+      'File path *',
+      'Folder *',
       'Portuguese alt text',
       'English alt text',
       'Portuguese caption',
       'English caption',
-      'MIME type',
+      'MIME type *',
       'Width',
       'Height',
-      'Sort order',
+      'Sort order *',
     ]);
-    expect(selectElement?.label).toBe('Kind');
+    expect(selectElement?.label).toBe('Kind *');
     expect(fileNameSpy).toHaveBeenCalledOnceWith('vh_logo_blue.svg');
     expect(filePathSpy).toHaveBeenCalledOnceWith('/assets/img/logo/vh_logo_blue.svg');
     expect(folderSpy).toHaveBeenCalledOnceWith('logo');

@@ -78,6 +78,7 @@
     [formationOptions]="formationOptions()"
     [linkTypeOptions]="linkTypeOptions"
     [pagination]="pagination()"
+    [searchValue]="searchQuery()"
     [feedbackKey]="modalFeedbackKey()"
     [feedbackTone]="modalFeedbackTone()"
     [isLoading]="isLoading()"
@@ -99,5 +100,6 @@
     (updateSelected)="openUpdateModal($event)"
     (deleteSelected)="openDeleteModal($event)"
     (pageSelected)="goToPage($event)"
+    (searchChanged)="updateSearchQuery($event)"
   />
 </section>

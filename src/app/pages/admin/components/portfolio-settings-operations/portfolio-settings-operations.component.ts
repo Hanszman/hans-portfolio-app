@@ -70,6 +70,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   private readonly modalModeSignal =
     signal<PortfolioSettingsOperationsModalMode | null>(null);
   private readonly selectedSettingSignal = signal<PortfolioSettingRecord | null>(null);
+  private readonly searchQuerySignal = signal('');
   private readonly formSignal = signal<PortfolioSettingsOperationsFormValue>(
     createEmptyPortfolioSettingsOperationsFormValue(),
   );
@@ -92,6 +93,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   protected readonly selectedSetting = this.selectedSettingSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly pagination = this.paginationSignal.asReadonly();
+  protected readonly searchQuery = this.searchQuerySignal.asReadonly();
   protected readonly isModalOpen = computed(() => this.modalMode() !== null);
   protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
     switch (this.modalMode()) {
@@ -182,7 +184,18 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
       return;
     }
 
-    await this.loadSettings(page);
+    await this.loadSettings(page, this.searchQuery());
+  }
+
+  async updateSearchQuery(value: string): Promise<void> {
+    const normalizedValue = value.trim();
+
+    if (normalizedValue === this.searchQuery()) {
+      return;
+    }
+
+    this.searchQuerySignal.set(normalizedValue);
+    await this.loadSettings(1, normalizedValue);
   }
 
   updateKey(value: string): void {
@@ -235,7 +248,10 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     return setting.id;
   }
 
-  private async loadSettings(page = this.pagination().page): Promise<void> {
+  private async loadSettings(
+    page = this.pagination().page,
+    search = this.searchQuery(),
+  ): Promise<void> {
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
@@ -244,6 +260,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
         this.portfolioSettingsOperationsService.getAll(
           page,
           this.pagination().pageSize,
+          search,
         ),
       );
       this.settingsSignal.set(response.data);
@@ -313,7 +330,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
       }
 
       this.closeModal();
-      await this.loadSettings(this.pagination().page);
+      await this.loadSettings(this.pagination().page, this.searchQuery());
     } catch {
       this.setModalErrorFeedback('pages.admin.portfolioSettings.feedback.saveError');
     } finally {
@@ -348,7 +365,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
 
       this.closeModal();
       this.setSuccessFeedback('pages.admin.portfolioSettings.feedback.deleted');
-      await this.loadSettings(nextPage);
+      await this.loadSettings(nextPage, this.searchQuery());
     } catch {
       this.setModalErrorFeedback('pages.admin.portfolioSettings.feedback.deleteError');
     } finally {

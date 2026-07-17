@@ -122,6 +122,21 @@ describe('ImageAssetsOperationsService', () => {
     request.flush(createImageAssetsCollectionResponse());
   });
 
+  it('should append the search term when loading the collection', () => {
+    const service = TestBed.inject(ImageAssetsOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service.getAll(1, 5, 'logo').subscribe();
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/image-assets?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=logo'),
+    );
+
+    expect(request.request.method).toBe('GET');
+
+    request.flush(createImageAssetsCollectionResponse());
+  });
+
   it('should create a protected image asset', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);

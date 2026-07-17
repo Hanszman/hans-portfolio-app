@@ -18,6 +18,7 @@ export class TagsOperationsService {
   getAll(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
+    search = '',
   ): Observable<TagsCollectionResponse> {
     const searchParams = new URLSearchParams({
       page: String(page),
@@ -25,6 +26,12 @@ export class TagsOperationsService {
       sortBy: 'sortOrder',
       sortDirection: 'asc',
     });
+
+    const normalizedSearch = search.trim();
+
+    if (normalizedSearch) {
+      searchParams.set('search', normalizedSearch);
+    }
 
     return this.httpClient.get<TagsCollectionResponse>(
       buildApiUrl(`/tags?${searchParams.toString()}`),

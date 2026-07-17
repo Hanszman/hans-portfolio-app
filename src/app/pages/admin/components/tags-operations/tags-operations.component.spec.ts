@@ -192,7 +192,7 @@ describe('TagsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(projectsService.getProjects).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
     expect(compiled.textContent).toContain('Tags');
@@ -308,6 +308,7 @@ describe('TagsOperationsComponent', () => {
   it('should support paging and relation deselection inside the modal workflows', async () => {
     tagsOperationsService.getAll.and.returnValues(
       of(createCollectionResponse()),
+      of(createCollectionResponse([createTag({ id: 'tag-search', slug: 'angular' })], 1)),
       of(createCollectionResponse([createTag({ id: 'tag-2', slug: 'zeta' })], 2)),
     );
 
@@ -315,6 +316,7 @@ describe('TagsOperationsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       goToPage(page: number): Promise<void>;
+      updateSearchQuery(value: string): Promise<void>;
       openCreateModal(): void;
       toggleProject(projectId: string): void;
       toggleTechnology(technologyId: string): void;
@@ -325,11 +327,14 @@ describe('TagsOperationsComponent', () => {
     };
 
     await component.goToPage(2);
+    await component.updateSearchQuery('angular');
+    await component.updateSearchQuery('angular');
     await component.goToPage(2);
     await component.goToPage(99);
 
-    expect(tagsOperationsService.getAll).toHaveBeenCalledTimes(2);
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(2, 5);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledTimes(3);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'angular');
 
     component.openCreateModal();
     component.toggleProject('project-1');
@@ -509,7 +514,7 @@ describe('TagsOperationsComponent', () => {
     pagedComponent.openDeleteModal('tag-1');
     await pagedComponent.submitModal();
 
-    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(tagsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without tags', async () => {

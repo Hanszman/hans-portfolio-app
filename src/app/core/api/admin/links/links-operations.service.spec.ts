@@ -106,6 +106,21 @@ describe('LinksOperationsService', () => {
     request.flush(createLinksCollectionResponse());
   });
 
+  it('should append the search term when loading the collection', () => {
+    const service = TestBed.inject(LinksOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service.getAll(1, 5, 'github').subscribe();
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/links?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=github'),
+    );
+
+    expect(request.request.method).toBe('GET');
+
+    request.flush(createLinksCollectionResponse());
+  });
+
   it('should create a protected link', () => {
     const service = TestBed.inject(LinksOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);

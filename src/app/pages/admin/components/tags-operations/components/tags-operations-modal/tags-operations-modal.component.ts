@@ -54,12 +54,14 @@ export class TagsOperationsModalComponent {
   readonly pagination = input<AdminCollectionPagination>(
     createAdminCollectionPagination(),
   );
+  readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly isLoading = input(false);
   readonly isSubmitting = input(false);
 
   readonly closed = output<void>();
+  readonly searchChanged = output<string>();
   readonly slugChanged = output<string>();
   readonly namePtChanged = output<string>();
   readonly nameEnChanged = output<string>();

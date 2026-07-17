@@ -18,6 +18,7 @@ export class ImageAssetsOperationsService {
   getAll(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
+    search = '',
   ): Observable<ImageAssetsCollectionResponse> {
     const searchParams = new URLSearchParams({
       page: String(page),
@@ -25,6 +26,12 @@ export class ImageAssetsOperationsService {
       sortBy: 'sortOrder',
       sortDirection: 'asc',
     });
+
+    const normalizedSearch = search.trim();
+
+    if (normalizedSearch) {
+      searchParams.set('search', normalizedSearch);
+    }
 
     return this.httpClient.get<ImageAssetsCollectionResponse>(
       buildApiUrl(`/image-assets?${searchParams.toString()}`),

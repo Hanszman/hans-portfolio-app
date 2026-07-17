@@ -94,6 +94,21 @@ describe('PortfolioSettingsOperationsService', () => {
     request.flush(createPortfolioSettingsCollectionResponse());
   });
 
+  it('should append the search term when loading the collection', () => {
+    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service.getAll(1, 5, 'hero').subscribe();
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/portfolio-settings?page=1&pageSize=5&sortBy=key&sortDirection=asc&search=hero'),
+    );
+
+    expect(request.request.method).toBe('GET');
+
+    request.flush(createPortfolioSettingsCollectionResponse());
+  });
+
   it('should create a protected portfolio setting', () => {
     const service = TestBed.inject(PortfolioSettingsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);

@@ -18,6 +18,7 @@ export class LinksOperationsService {
   getAll(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
+    search = '',
   ): Observable<LinksCollectionResponse> {
     const searchParams = new URLSearchParams({
       page: String(page),
@@ -25,6 +26,12 @@ export class LinksOperationsService {
       sortBy: 'sortOrder',
       sortDirection: 'asc',
     });
+
+    const normalizedSearch = search.trim();
+
+    if (normalizedSearch) {
+      searchParams.set('search', normalizedSearch);
+    }
 
     return this.httpClient.get<LinksCollectionResponse>(
       buildApiUrl(`/links?${searchParams.toString()}`),

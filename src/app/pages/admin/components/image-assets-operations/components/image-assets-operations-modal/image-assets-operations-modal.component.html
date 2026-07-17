@@ -6,11 +6,14 @@
   [feedbackTone]="feedbackTone()"
   [pagination]="pagination()"
   [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
   [isLoading]="isLoading()"
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
   (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
 >
@@ -18,7 +21,7 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="image-assets-operations-form">
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.fileName.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.fileName.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().fileName"
@@ -28,7 +31,7 @@
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.filePath.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.filePath.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().filePath"
@@ -38,7 +41,7 @@
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.folder.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.folder.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().folder"
@@ -48,7 +51,7 @@
         ></hans-input>
 
         <hans-select-option
-          [label]="'pages.admin.imageAssets.fields.kind.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.kind.label' | translate) + ' *')"
           [options]="imageAssetKindOptions()"
           [value]="form().kind"
           [enableAutocomplete]="false"
@@ -104,7 +107,7 @@
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.mimeType.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.mimeType.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().mimeType"
@@ -136,7 +139,7 @@
         </div>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.sortOrder.label' | translate"
+          [label]="(('pages.admin.imageAssets.fields.sortOrder.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

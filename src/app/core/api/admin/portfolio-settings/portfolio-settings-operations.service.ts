@@ -18,6 +18,7 @@ export class PortfolioSettingsOperationsService {
   getAll(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
+    search = '',
   ): Observable<PortfolioSettingsCollectionResponse> {
     const searchParams = new URLSearchParams({
       page: String(page),
@@ -25,6 +26,12 @@ export class PortfolioSettingsOperationsService {
       sortBy: 'key',
       sortDirection: 'asc',
     });
+
+    const normalizedSearch = search.trim();
+
+    if (normalizedSearch) {
+      searchParams.set('search', normalizedSearch);
+    }
 
     return this.httpClient.get<PortfolioSettingsCollectionResponse>(
       buildApiUrl(`/portfolio-settings?${searchParams.toString()}`),

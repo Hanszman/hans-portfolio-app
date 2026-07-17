@@ -27,12 +27,15 @@ export class OperationsModalComponent {
   readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly pagination = input(createAdminCollectionPagination());
   readonly showPagination = input(false);
+  readonly showSearch = input(false);
+  readonly searchValue = input('');
   readonly isLoading = input(false);
   readonly isSubmitting = input(false);
   readonly showSubmit = input(false);
   readonly submitLabelKey = input<AppTranslationKey>('common.actions.save');
 
   readonly closed = output<void>();
+  readonly searchChanged = output<string>();
   readonly submitted = output<void>();
   readonly pageSelected = output<number>();
 
@@ -42,6 +45,10 @@ export class OperationsModalComponent {
 
   protected requestClose(): void {
     this.closed.emit();
+  }
+
+  protected emitSearchChange(value: string): void {
+    this.searchChanged.emit(value);
   }
 
   protected submit(): void {

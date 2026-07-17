@@ -128,10 +128,10 @@ describe('TagsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Tag slug',
-      'Portuguese name',
-      'English name',
-      'Sort order',
+      'Tag slug *',
+      'Portuguese name *',
+      'English name *',
+      'Sort order *',
     ]);
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);

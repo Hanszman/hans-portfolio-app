@@ -93,10 +93,10 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Setting key',
+      'Setting key *',
       'Description',
     ]);
-    expect(fixture.nativeElement.textContent).toContain('JSON value');
+    expect(fixture.nativeElement.textContent).toContain('JSON value *');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(keySpy).toHaveBeenCalledOnceWith('profile');

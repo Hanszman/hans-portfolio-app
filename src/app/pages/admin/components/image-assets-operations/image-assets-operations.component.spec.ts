@@ -246,7 +246,7 @@ describe('ImageAssetsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(compiled.textContent).toContain('Image assets');
     expect(compiled.textContent).toContain(
       createAdminEntityEndpointLabel('/image-assets'),
@@ -469,6 +469,7 @@ describe('ImageAssetsOperationsComponent', () => {
       openDeleteModal(imageAssetId: string): void;
       closeModal(): void;
       goToPage(page: number): Promise<void>;
+      updateSearchQuery(value: string): Promise<void>;
       modalMode(): string | null;
       modalTitleKey(): string;
       isModalOpen(): boolean;
@@ -522,10 +523,14 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(component.selectedImageAsset()).toBeNull();
 
     await component.goToPage(2);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(2, 5);
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
 
-    const callsAfterValidPageChange = imageAssetsOperationsService.getAll.calls.count();
+    await component.updateSearchQuery('logo');
+    await component.updateSearchQuery('logo');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'logo');
+
     await component.goToPage(2);
+    const callsAfterValidPageChange = imageAssetsOperationsService.getAll.calls.count();
     await component.goToPage(0);
     await component.goToPage(99);
 
@@ -661,7 +666,7 @@ describe('ImageAssetsOperationsComponent', () => {
       'token-123',
       'image-asset-1',
     );
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should ignore submit requests when no modal mode is active', async () => {

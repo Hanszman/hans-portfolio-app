@@ -81,6 +81,7 @@ export class LinksOperationsComponent implements OnInit {
   private readonly modalFeedbackToneSignal = signal<'success' | 'error' | null>(null);
   private readonly modalModeSignal = signal<LinksOperationsModalMode | null>(null);
   private readonly selectedLinkSignal = signal<LinkRecord | null>(null);
+  private readonly searchQuerySignal = signal('');
   private readonly formSignal = signal<LinksOperationsFormValue>(
     createEmptyLinksOperationsFormValue(),
   );
@@ -116,6 +117,7 @@ export class LinksOperationsComponent implements OnInit {
   protected readonly selectedLink = this.selectedLinkSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly pagination = this.paginationSignal.asReadonly();
+  protected readonly searchQuery = this.searchQuerySignal.asReadonly();
   protected readonly isModalOpen = computed(() => this.modalMode() !== null);
   protected readonly hasLinks = computed(
     () => this.pagination().totalItems > 0 && this.links().length > 0,
@@ -209,7 +211,18 @@ export class LinksOperationsComponent implements OnInit {
       return;
     }
 
-    await this.loadWorkspace(page);
+    await this.loadWorkspace(page, this.searchQuery());
+  }
+
+  async updateSearchQuery(value: string): Promise<void> {
+    const normalizedValue = value.trim();
+
+    if (normalizedValue === this.searchQuery()) {
+      return;
+    }
+
+    this.searchQuerySignal.set(normalizedValue);
+    await this.loadWorkspace(1, normalizedValue);
   }
 
   updateUrl(value: string): void {
@@ -305,7 +318,10 @@ export class LinksOperationsComponent implements OnInit {
     return item.id;
   }
 
-  private async loadWorkspace(page = this.pagination().page): Promise<void> {
+  private async loadWorkspace(
+    page = this.pagination().page,
+    search = this.searchQuery(),
+  ): Promise<void> {
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
@@ -313,7 +329,7 @@ export class LinksOperationsComponent implements OnInit {
       const [linksResponse, projectsResponse, experiencesResponse, technologiesResponse] =
         await Promise.all([
           firstValueFrom(
-            this.linksOperationsService.getAll(page, this.pagination().pageSize),
+            this.linksOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
           firstValueFrom(this.projectsService.getProjects()),
           firstValueFrom(this.experiencesService.getExperiences()),
@@ -358,7 +374,7 @@ export class LinksOperationsComponent implements OnInit {
       }
 
       this.closeModal();
-      await this.loadWorkspace(this.pagination().page);
+      await this.loadWorkspace(this.pagination().page, this.searchQuery());
     } catch {
       this.setModalErrorFeedback('pages.admin.links.feedback.saveError');
     } finally {
@@ -386,7 +402,7 @@ export class LinksOperationsComponent implements OnInit {
 
       this.closeModal();
       this.setSuccessFeedback('pages.admin.links.feedback.deleted');
-      await this.loadWorkspace(nextPage);
+      await this.loadWorkspace(nextPage, this.searchQuery());
     } catch {
       this.setModalErrorFeedback('pages.admin.links.feedback.deleteError');
     } finally {

@@ -60,6 +60,8 @@ export type AppTranslationKey =
   | 'common.actions.applyFilters'
   | 'common.actions.showMore'
   | 'common.actions.showLess'
+  | 'common.search.label'
+  | 'common.search.placeholder'
   | 'common.pagination.navigation'
   | 'common.pagination.first'
   | 'common.pagination.previous'

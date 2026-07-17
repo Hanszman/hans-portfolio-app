@@ -232,7 +232,7 @@ describe('LinksOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(projectsService.getProjects).toHaveBeenCalled();
     expect(experiencesService.getExperiences).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
@@ -371,6 +371,7 @@ describe('LinksOperationsComponent', () => {
   it('should support paging and relation deselection inside the modal workflows', async () => {
     linksOperationsService.getAll.and.returnValues(
       of(createCollectionResponse()),
+      of(createCollectionResponse([createLink({ id: 'link-search', url: 'https://github.com/angular/angular' })], 1)),
       of(createCollectionResponse([createLink({ id: 'link-2', url: 'https://zeta.dev' })], 2)),
     );
 
@@ -378,6 +379,7 @@ describe('LinksOperationsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       goToPage(page: number): Promise<void>;
+      updateSearchQuery(value: string): Promise<void>;
       openCreateModal(): void;
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
@@ -392,11 +394,14 @@ describe('LinksOperationsComponent', () => {
     };
 
     await component.goToPage(2);
+    await component.updateSearchQuery('github');
+    await component.updateSearchQuery('github');
     await component.goToPage(2);
     await component.goToPage(99);
 
-    expect(linksOperationsService.getAll).toHaveBeenCalledTimes(2);
-    expect(linksOperationsService.getAll).toHaveBeenCalledWith(2, 5);
+    expect(linksOperationsService.getAll).toHaveBeenCalledTimes(3);
+    expect(linksOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'github');
 
     component.openCreateModal();
     component.toggleProject('project-1');
@@ -568,7 +573,7 @@ describe('LinksOperationsComponent', () => {
     pagedComponent.openDeleteModal('link-1');
     await pagedComponent.submitModal();
 
-    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5);
+    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without links', async () => {

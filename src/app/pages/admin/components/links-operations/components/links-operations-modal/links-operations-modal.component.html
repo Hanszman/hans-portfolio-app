@@ -6,11 +6,14 @@
   [feedbackTone]="feedbackTone()"
   [pagination]="pagination()"
   [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
   [isLoading]="isLoading()"
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
   (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
 >
@@ -18,7 +21,7 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="links-operations-form">
         <hans-input
-          [label]="'pages.admin.links.fields.url.label' | translate"
+          [label]="(('pages.admin.links.fields.url.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().url"
@@ -68,7 +71,7 @@
         ></hans-input>
 
         <hans-select-option
-          [label]="'pages.admin.links.fields.type.label' | translate"
+          [label]="(('pages.admin.links.fields.type.label' | translate) + ' *')"
           [options]="linkTypeOptions()"
           [value]="form().type"
           [enableAutocomplete]="false"
@@ -84,7 +87,7 @@
         ></hans-select-option>
 
         <hans-input
-          [label]="'pages.admin.links.fields.sortOrder.label' | translate"
+          [label]="(('pages.admin.links.fields.sortOrder.label' | translate) + ' *')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

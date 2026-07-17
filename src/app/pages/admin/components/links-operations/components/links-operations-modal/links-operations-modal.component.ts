@@ -61,12 +61,14 @@ export class LinksOperationsModalComponent {
   readonly pagination = input<AdminCollectionPagination>(
     createAdminCollectionPagination(),
   );
+  readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly isLoading = input(false);
   readonly isSubmitting = input(false);
 
   readonly closed = output<void>();
+  readonly searchChanged = output<string>();
   readonly urlChanged = output<string>();
   readonly labelPtChanged = output<string>();
   readonly labelEnChanged = output<string>();
