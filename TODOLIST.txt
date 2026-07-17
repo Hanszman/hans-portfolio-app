@@ -349,3 +349,4 @@ Ao tentar cadastrar um link, recebi esse erro "type must be one of the following
 -Beleza, podemos continuar! Vamos pra próxima subetapa do F8
 -Ficou ótimo, mas temos alguns pontos ainda:
 Os campos obrigatórios de todos os formulários, coloque um asterisco por favor, logo após o label.
+Coloque também um campo de busca no topo (dentro do content mesmo, abaixo do header) dos modais de read, update e delete (poderia ser no operations modal geral), para que possamos buscar pelo campo "search" dos endpoints.
