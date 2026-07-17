@@ -16,9 +16,13 @@
 }
 
 .operations-modal-search {
-  @apply min-h-0;
+  @apply min-h-0 flex-none pb-2;
 }
 
 .operations-modal-body {
   @apply min-h-0;
+}
+
+:host ::ng-deep .operations-modal-search hans-input {
+  display: block;
 }

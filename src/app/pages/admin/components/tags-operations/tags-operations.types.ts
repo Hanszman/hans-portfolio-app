@@ -7,6 +7,7 @@ import {
   TagTechnologyRelationRecord,
 } from '../../../../core/api/admin/tags/tags-operations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { AdminFormFieldConfig } from '../../admin.types';
 
 export const TAG_TYPE_VALUES = [
   'STACK',
@@ -37,6 +38,33 @@ export interface TagsOperationsFormValue {
   projectIds: readonly string[];
   technologyIds: readonly string[];
 }
+
+export const TAGS_OPERATIONS_FIELDS = {
+  slug: {
+    labelKey: 'pages.admin.tags.fields.slug.label',
+    placeholderKey: 'pages.admin.tags.fields.slug.placeholder',
+    required: true,
+  },
+  namePt: {
+    labelKey: 'pages.admin.tags.fields.namePt.label',
+    placeholderKey: 'pages.admin.tags.fields.namePt.placeholder',
+    required: true,
+  },
+  nameEn: {
+    labelKey: 'pages.admin.tags.fields.nameEn.label',
+    placeholderKey: 'pages.admin.tags.fields.nameEn.placeholder',
+    required: true,
+  },
+  type: {
+    labelKey: 'pages.admin.tags.fields.type.label',
+    required: true,
+  },
+  sortOrder: {
+    labelKey: 'pages.admin.tags.fields.sortOrder.label',
+    placeholderKey: 'pages.admin.tags.fields.sortOrder.placeholder',
+    required: true,
+  },
+} as const satisfies Record<string, AdminFormFieldConfig>;
 
 export interface TagCatalogOptionViewModel {
   id: string;

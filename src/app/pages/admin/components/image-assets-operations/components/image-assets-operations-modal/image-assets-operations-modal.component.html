@@ -21,37 +21,37 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="image-assets-operations-form">
         <hans-input
-          [label]="(('pages.admin.imageAssets.fields.fileName.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('fileName')"
           inputColor="base"
           inputSize="medium"
           [value]="form().fileName"
-          [placeholder]="'pages.admin.imageAssets.fields.fileName.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.fileName.label' | translate"
+          [placeholder]="fields.fileName.placeholderKey! | translate"
+          [attr.aria-label]="fields.fileName.labelKey | translate"
           (input)="emitFileNameChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="(('pages.admin.imageAssets.fields.filePath.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('filePath')"
           inputColor="base"
           inputSize="medium"
           [value]="form().filePath"
-          [placeholder]="'pages.admin.imageAssets.fields.filePath.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.filePath.label' | translate"
+          [placeholder]="fields.filePath.placeholderKey! | translate"
+          [attr.aria-label]="fields.filePath.labelKey | translate"
           (input)="emitFilePathChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="(('pages.admin.imageAssets.fields.folder.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('folder')"
           inputColor="base"
           inputSize="medium"
           [value]="form().folder"
-          [placeholder]="'pages.admin.imageAssets.fields.folder.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.folder.label' | translate"
+          [placeholder]="fields.folder.placeholderKey! | translate"
+          [attr.aria-label]="fields.folder.labelKey | translate"
           (input)="emitFolderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-select-option
-          [label]="(('pages.admin.imageAssets.fields.kind.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('kind')"
           [options]="imageAssetKindOptions()"
           [value]="form().kind"
           [enableAutocomplete]="false"
@@ -67,84 +67,84 @@
         ></hans-select-option>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.altPt.label' | translate"
+          [label]="resolveFieldLabel('altPt')"
           inputColor="base"
           inputSize="medium"
           [value]="form().altPt"
-          [placeholder]="'pages.admin.imageAssets.fields.altPt.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.altPt.label' | translate"
+          [placeholder]="fields.altPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.altPt.labelKey | translate"
           (input)="emitAltPtChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.altEn.label' | translate"
+          [label]="resolveFieldLabel('altEn')"
           inputColor="base"
           inputSize="medium"
           [value]="form().altEn"
-          [placeholder]="'pages.admin.imageAssets.fields.altEn.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.altEn.label' | translate"
+          [placeholder]="fields.altEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.altEn.labelKey | translate"
           (input)="emitAltEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.captionPt.label' | translate"
+          [label]="resolveFieldLabel('captionPt')"
           inputColor="base"
           inputSize="medium"
           [value]="form().captionPt"
-          [placeholder]="'pages.admin.imageAssets.fields.captionPt.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.captionPt.label' | translate"
+          [placeholder]="fields.captionPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.captionPt.labelKey | translate"
           (input)="emitCaptionPtChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.imageAssets.fields.captionEn.label' | translate"
+          [label]="resolveFieldLabel('captionEn')"
           inputColor="base"
           inputSize="medium"
           [value]="form().captionEn"
-          [placeholder]="'pages.admin.imageAssets.fields.captionEn.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.captionEn.label' | translate"
+          [placeholder]="fields.captionEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.captionEn.labelKey | translate"
           (input)="emitCaptionEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="(('pages.admin.imageAssets.fields.mimeType.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('mimeType')"
           inputColor="base"
           inputSize="medium"
           [value]="form().mimeType"
-          [placeholder]="'pages.admin.imageAssets.fields.mimeType.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.mimeType.label' | translate"
+          [placeholder]="fields.mimeType.placeholderKey! | translate"
+          [attr.aria-label]="fields.mimeType.labelKey | translate"
           (input)="emitMimeTypeChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <div class="image-assets-operations-dimensions">
           <hans-input
-            [label]="'pages.admin.imageAssets.fields.width.label' | translate"
+            [label]="resolveFieldLabel('width')"
             inputColor="base"
             inputSize="medium"
             [value]="form().width"
-            [placeholder]="'pages.admin.imageAssets.fields.width.placeholder' | translate"
-            [attr.aria-label]="'pages.admin.imageAssets.fields.width.label' | translate"
+            [placeholder]="fields.width.placeholderKey! | translate"
+            [attr.aria-label]="fields.width.labelKey | translate"
             (input)="emitWidthChange($any($event).target?.value ?? '')"
           ></hans-input>
 
           <hans-input
-            [label]="'pages.admin.imageAssets.fields.height.label' | translate"
+            [label]="resolveFieldLabel('height')"
             inputColor="base"
             inputSize="medium"
             [value]="form().height"
-            [placeholder]="'pages.admin.imageAssets.fields.height.placeholder' | translate"
-            [attr.aria-label]="'pages.admin.imageAssets.fields.height.label' | translate"
+            [placeholder]="fields.height.placeholderKey! | translate"
+            [attr.aria-label]="fields.height.labelKey | translate"
             (input)="emitHeightChange($any($event).target?.value ?? '')"
           ></hans-input>
         </div>
 
         <hans-input
-          [label]="(('pages.admin.imageAssets.fields.sortOrder.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('sortOrder')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"
-          [placeholder]="'pages.admin.imageAssets.fields.sortOrder.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.imageAssets.fields.sortOrder.label' | translate"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 

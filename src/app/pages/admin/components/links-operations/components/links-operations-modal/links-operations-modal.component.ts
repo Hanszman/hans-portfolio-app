@@ -3,18 +3,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LinkRecord } from '../../../../../../core/api/admin/links/links-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
 import {
+  LINKS_OPERATIONS_FIELDS,
   LinkCatalogOptionViewModel,
   LinkOperationsViewModel,
   LinkTypeOptionViewModel,
@@ -32,6 +36,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinksOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
+
   readonly isOpen = input(false);
   readonly modalTitleKey = input<AppTranslationKey>(
     'pages.admin.links.modal.create.title',
@@ -85,6 +91,8 @@ export class LinksOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+
+  protected readonly fields = LINKS_OPERATIONS_FIELDS;
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -238,5 +246,14 @@ export class LinksOperationsModalComponent {
 
   protected trackById(index: number, item: { id: string }): string {
     return item.id;
+  }
+
+  protected resolveFieldLabel(
+    fieldKey: keyof typeof LINKS_OPERATIONS_FIELDS,
+  ): string {
+    return resolveAdminFieldLabel(
+      this.fields[fieldKey],
+      this.translation.instant.bind(this.translation),
+    );
   }
 }

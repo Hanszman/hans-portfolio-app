@@ -1,5 +1,6 @@
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
+import { AdminFormFieldConfig } from '../../admin.types';
 
 export type PortfolioSettingsOperationsModalMode =
   | 'create'
@@ -14,6 +15,23 @@ export interface PortfolioSettingsOperationsFormValue {
   valueText: string;
   description: string;
 }
+
+export const PORTFOLIO_SETTINGS_OPERATIONS_FIELDS = {
+  key: {
+    labelKey: 'pages.admin.portfolioSettings.fields.key.label',
+    placeholderKey: 'pages.admin.portfolioSettings.fields.key.placeholder',
+    required: true,
+  },
+  description: {
+    labelKey: 'pages.admin.portfolioSettings.fields.description.label',
+    placeholderKey: 'pages.admin.portfolioSettings.fields.description.placeholder',
+  },
+  valueText: {
+    labelKey: 'pages.admin.portfolioSettings.fields.value.label',
+    placeholderKey: 'pages.admin.portfolioSettings.fields.value.placeholder',
+    required: true,
+  },
+} as const satisfies Record<string, AdminFormFieldConfig>;
 
 export interface PortfolioSettingOperationsViewModel {
   id: string;

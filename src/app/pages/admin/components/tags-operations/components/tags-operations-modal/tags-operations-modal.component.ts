@@ -3,18 +3,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TagRecord } from '../../../../../../core/api/admin/tags/tags-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
 import {
+  TAGS_OPERATIONS_FIELDS,
   TagCatalogOptionViewModel,
   TagOperationsViewModel,
   TagTypeOptionViewModel,
@@ -32,6 +36,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagsOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
+
   readonly isOpen = input(false);
   readonly modalTitleKey = input<AppTranslationKey>(
     'pages.admin.tags.modal.create.title',
@@ -73,6 +79,8 @@ export class TagsOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+
+  protected readonly fields = TAGS_OPERATIONS_FIELDS;
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -188,5 +196,12 @@ export class TagsOperationsModalComponent {
 
   protected trackById(index: number, item: { id: string }): string {
     return item.id;
+  }
+
+  protected resolveFieldLabel(fieldKey: keyof typeof TAGS_OPERATIONS_FIELDS): string {
+    return resolveAdminFieldLabel(
+      this.fields[fieldKey],
+      this.translation.instant.bind(this.translation),
+    );
   }
 }

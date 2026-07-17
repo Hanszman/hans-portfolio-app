@@ -3,18 +3,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ImageAssetRecord } from '../../../../../../core/api/admin/image-assets/image-assets-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
 import {
+  IMAGE_ASSETS_OPERATIONS_FIELDS,
   ImageAssetCatalogOptionViewModel,
   ImageAssetKindOptionViewModel,
   ImageAssetOperationsViewModel,
@@ -33,6 +37,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageAssetsOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
+
   readonly isOpen = input(false);
   readonly modalTitleKey = input<AppTranslationKey>(
     'pages.admin.imageAssets.modal.create.title',
@@ -78,6 +84,8 @@ export class ImageAssetsOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+
+  protected readonly fields = IMAGE_ASSETS_OPERATIONS_FIELDS;
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -243,5 +251,14 @@ export class ImageAssetsOperationsModalComponent {
 
   protected trackById(index: number, item: { id: string }): string {
     return item.id;
+  }
+
+  protected resolveFieldLabel(
+    fieldKey: keyof typeof IMAGE_ASSETS_OPERATIONS_FIELDS,
+  ): string {
+    return resolveAdminFieldLabel(
+      this.fields[fieldKey],
+      this.translation.instant.bind(this.translation),
+    );
   }
 }

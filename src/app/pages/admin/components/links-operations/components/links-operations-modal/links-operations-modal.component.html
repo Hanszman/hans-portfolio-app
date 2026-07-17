@@ -21,57 +21,57 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="links-operations-form">
         <hans-input
-          [label]="(('pages.admin.links.fields.url.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('url')"
           inputColor="base"
           inputSize="medium"
           [value]="form().url"
-          [placeholder]="'pages.admin.links.fields.url.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.url.label' | translate"
+          [placeholder]="fields.url.placeholderKey! | translate"
+          [attr.aria-label]="fields.url.labelKey | translate"
           (input)="emitUrlChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.links.fields.labelPt.label' | translate"
+          [label]="resolveFieldLabel('labelPt')"
           inputColor="base"
           inputSize="medium"
           [value]="form().labelPt"
-          [placeholder]="'pages.admin.links.fields.labelPt.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.labelPt.label' | translate"
+          [placeholder]="fields.labelPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.labelPt.labelKey | translate"
           (input)="emitLabelPtChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.links.fields.labelEn.label' | translate"
+          [label]="resolveFieldLabel('labelEn')"
           inputColor="base"
           inputSize="medium"
           [value]="form().labelEn"
-          [placeholder]="'pages.admin.links.fields.labelEn.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.labelEn.label' | translate"
+          [placeholder]="fields.labelEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.labelEn.labelKey | translate"
           (input)="emitLabelEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.links.fields.descriptionPt.label' | translate"
+          [label]="resolveFieldLabel('descriptionPt')"
           inputColor="base"
           inputSize="medium"
           [value]="form().descriptionPt"
-          [placeholder]="'pages.admin.links.fields.descriptionPt.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.descriptionPt.label' | translate"
+          [placeholder]="fields.descriptionPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.descriptionPt.labelKey | translate"
           (input)="emitDescriptionPtChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.links.fields.descriptionEn.label' | translate"
+          [label]="resolveFieldLabel('descriptionEn')"
           inputColor="base"
           inputSize="medium"
           [value]="form().descriptionEn"
-          [placeholder]="'pages.admin.links.fields.descriptionEn.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.descriptionEn.label' | translate"
+          [placeholder]="fields.descriptionEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.descriptionEn.labelKey | translate"
           (input)="emitDescriptionEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-select-option
-          [label]="(('pages.admin.links.fields.type.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('type')"
           [options]="linkTypeOptions()"
           [value]="form().type"
           [enableAutocomplete]="false"
@@ -87,12 +87,12 @@
         ></hans-select-option>
 
         <hans-input
-          [label]="(('pages.admin.links.fields.sortOrder.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('sortOrder')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"
-          [placeholder]="'pages.admin.links.fields.sortOrder.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.links.fields.sortOrder.label' | translate"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 

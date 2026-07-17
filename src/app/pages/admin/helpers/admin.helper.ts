@@ -1,6 +1,7 @@
 import { AppTranslationKey } from '../../../core/translation/translation.types';
 import { AdminAuthenticatedUser } from '../../../core/api/admin/admin-auth/admin-auth.types';
 import {
+  AdminFormFieldConfig,
   AdminEntityDefinition,
   AdminEntityOperation,
   AdminSessionFactDefinition,
@@ -10,6 +11,15 @@ import {
 export const formatAdminIdentity = (
   user: AdminAuthenticatedUser | null,
 ): string => (user ? `${user.name} · ${user.role}` : '');
+
+export const resolveAdminFieldLabel = (
+  field: AdminFormFieldConfig,
+  translate: (key: AppTranslationKey) => string,
+): string => {
+  const label = translate(field.labelKey);
+
+  return field.required ? `${label} *` : label;
+};
 
 export interface AdminEntityViewModel {
   readonly id: AdminEntityDefinition['id'];

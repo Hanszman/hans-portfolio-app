@@ -3,6 +3,7 @@ import {
   buildAdminEntityViewModels,
   buildAdminSessionFactViewModels,
   formatAdminIdentity,
+  resolveAdminFieldLabel,
 } from './admin.helper';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -25,6 +26,29 @@ describe('formatAdminIdentity', () => {
 
   it('should return an empty string when there is no authenticated user', () => {
     expect(formatAdminIdentity(null)).toBe('');
+  });
+
+  it('should append the required suffix only when the field is mandatory', () => {
+    const translate = (key: AppTranslationKey) => key;
+
+    expect(
+      resolveAdminFieldLabel(
+        {
+          labelKey: 'pages.admin.tags.fields.slug.label',
+          required: true,
+        },
+        translate,
+      ),
+    ).toBe('pages.admin.tags.fields.slug.label *');
+
+    expect(
+      resolveAdminFieldLabel(
+        {
+          labelKey: 'pages.admin.tags.fields.namePt.label',
+        },
+        translate,
+      ),
+    ).toBe('pages.admin.tags.fields.namePt.label');
   });
 
   it('should build translated admin entity view models', () => {

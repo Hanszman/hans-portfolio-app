@@ -21,37 +21,37 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="tags-operations-form">
         <hans-input
-          [label]="(('pages.admin.tags.fields.slug.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('slug')"
           inputColor="base"
           inputSize="medium"
           [value]="form().slug"
-          [placeholder]="'pages.admin.tags.fields.slug.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.tags.fields.slug.label' | translate"
+          [placeholder]="fields.slug.placeholderKey! | translate"
+          [attr.aria-label]="fields.slug.labelKey | translate"
           (input)="emitSlugChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="(('pages.admin.tags.fields.namePt.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('namePt')"
           inputColor="base"
           inputSize="medium"
           [value]="form().namePt"
-          [placeholder]="'pages.admin.tags.fields.namePt.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.tags.fields.namePt.label' | translate"
+          [placeholder]="fields.namePt.placeholderKey! | translate"
+          [attr.aria-label]="fields.namePt.labelKey | translate"
           (input)="emitNamePtChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="(('pages.admin.tags.fields.nameEn.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('nameEn')"
           inputColor="base"
           inputSize="medium"
           [value]="form().nameEn"
-          [placeholder]="'pages.admin.tags.fields.nameEn.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.tags.fields.nameEn.label' | translate"
+          [placeholder]="fields.nameEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.nameEn.labelKey | translate"
           (input)="emitNameEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-select-option
-          [label]="(('pages.admin.tags.fields.type.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('type')"
           [options]="tagTypeOptions()"
           [value]="form().type"
           [enableAutocomplete]="false"
@@ -67,12 +67,12 @@
         ></hans-select-option>
 
         <hans-input
-          [label]="(('pages.admin.tags.fields.sortOrder.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('sortOrder')"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"
-          [placeholder]="'pages.admin.tags.fields.sortOrder.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.tags.fields.sortOrder.label' | translate"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 

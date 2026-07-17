@@ -35,6 +35,12 @@ export interface AdminCollectionPagination {
   readonly hasNextPage: boolean;
 }
 
+export interface AdminFormFieldConfig {
+  readonly labelKey: AppTranslationKey;
+  readonly placeholderKey?: AppTranslationKey;
+  readonly required?: boolean;
+}
+
 export const ADMIN_MODAL_PAGE_SIZE = DEFAULT_PAGE_SIZE;
 export const ADMIN_ENTITY_ENDPOINT_METHODS_LABEL = 'POST/GET/PUT/DELETE';
 

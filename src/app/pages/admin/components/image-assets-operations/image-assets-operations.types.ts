@@ -9,6 +9,7 @@ import { ExperienceCollectionItemResponse } from '../../../../core/api/experienc
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { AdminFormFieldConfig } from '../../admin.types';
 
 export const IMAGE_ASSET_KIND_VALUES = ['ICON', 'SCREENSHOT'] as const;
 
@@ -44,6 +45,62 @@ export interface ImageAssetsOperationsFormValue {
   customerIds: readonly string[];
   jobIds: readonly string[];
 }
+
+export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
+  fileName: {
+    labelKey: 'pages.admin.imageAssets.fields.fileName.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.fileName.placeholder',
+    required: true,
+  },
+  filePath: {
+    labelKey: 'pages.admin.imageAssets.fields.filePath.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.filePath.placeholder',
+    required: true,
+  },
+  folder: {
+    labelKey: 'pages.admin.imageAssets.fields.folder.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.folder.placeholder',
+    required: true,
+  },
+  kind: {
+    labelKey: 'pages.admin.imageAssets.fields.kind.label',
+    required: true,
+  },
+  altPt: {
+    labelKey: 'pages.admin.imageAssets.fields.altPt.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.altPt.placeholder',
+  },
+  altEn: {
+    labelKey: 'pages.admin.imageAssets.fields.altEn.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.altEn.placeholder',
+  },
+  captionPt: {
+    labelKey: 'pages.admin.imageAssets.fields.captionPt.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.captionPt.placeholder',
+  },
+  captionEn: {
+    labelKey: 'pages.admin.imageAssets.fields.captionEn.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.captionEn.placeholder',
+  },
+  mimeType: {
+    labelKey: 'pages.admin.imageAssets.fields.mimeType.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.mimeType.placeholder',
+    required: true,
+  },
+  width: {
+    labelKey: 'pages.admin.imageAssets.fields.width.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.width.placeholder',
+  },
+  height: {
+    labelKey: 'pages.admin.imageAssets.fields.height.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.height.placeholder',
+  },
+  sortOrder: {
+    labelKey: 'pages.admin.imageAssets.fields.sortOrder.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.sortOrder.placeholder',
+    required: true,
+  },
+} as const satisfies Record<string, AdminFormFieldConfig>;
 
 export interface ImageAssetCatalogOptionViewModel {
   id: string;

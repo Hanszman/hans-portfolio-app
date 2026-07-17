@@ -21,30 +21,30 @@
     @if (modalMode === 'create' || modalMode === 'update') {
       <div class="portfolio-settings-operations-form">
         <hans-input
-          [label]="(('pages.admin.portfolioSettings.fields.key.label' | translate) + ' *')"
+          [label]="resolveFieldLabel('key')"
           inputColor="base"
           inputSize="medium"
           [value]="form().key"
-          [placeholder]="'pages.admin.portfolioSettings.fields.key.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.portfolioSettings.fields.key.label' | translate"
+          [placeholder]="fields.key.placeholderKey! | translate"
+          [attr.aria-label]="fields.key.labelKey | translate"
           (input)="emitKeyChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input
-          [label]="'pages.admin.portfolioSettings.fields.description.label' | translate"
+          [label]="resolveFieldLabel('description')"
           inputColor="base"
           inputSize="medium"
           [value]="form().description"
-          [placeholder]="'pages.admin.portfolioSettings.fields.description.placeholder' | translate"
-          [attr.aria-label]="'pages.admin.portfolioSettings.fields.description.label' | translate"
+          [placeholder]="fields.description.placeholderKey! | translate"
+          [attr.aria-label]="fields.description.labelKey | translate"
           (input)="emitDescriptionChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <label class="portfolio-settings-operations-json-field">
-          <span>{{ ('pages.admin.portfolioSettings.fields.value.label' | translate) + ' *' }}</span>
+          <span>{{ resolveFieldLabel('valueText') }}</span>
           <textarea
             [value]="form().valueText"
-            [placeholder]="'pages.admin.portfolioSettings.fields.value.placeholder' | translate"
+            [placeholder]="fields.valueText.placeholderKey! | translate"
             (input)="emitValueTextChange($any($event).target?.value ?? '')"
           ></textarea>
         </label>

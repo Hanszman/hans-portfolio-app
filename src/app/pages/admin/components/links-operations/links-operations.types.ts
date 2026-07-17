@@ -3,6 +3,7 @@ import { LinkMutationPayload } from '../../../../core/api/admin/links/links-oper
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { AdminFormFieldConfig } from '../../admin.types';
 
 export const LINK_TYPE_VALUES = [
   'GITHUB',
@@ -40,6 +41,39 @@ export interface LinksOperationsFormValue {
   technologyIds: readonly string[];
   formationIds: readonly string[];
 }
+
+export const LINKS_OPERATIONS_FIELDS = {
+  url: {
+    labelKey: 'pages.admin.links.fields.url.label',
+    placeholderKey: 'pages.admin.links.fields.url.placeholder',
+    required: true,
+  },
+  labelPt: {
+    labelKey: 'pages.admin.links.fields.labelPt.label',
+    placeholderKey: 'pages.admin.links.fields.labelPt.placeholder',
+  },
+  labelEn: {
+    labelKey: 'pages.admin.links.fields.labelEn.label',
+    placeholderKey: 'pages.admin.links.fields.labelEn.placeholder',
+  },
+  descriptionPt: {
+    labelKey: 'pages.admin.links.fields.descriptionPt.label',
+    placeholderKey: 'pages.admin.links.fields.descriptionPt.placeholder',
+  },
+  descriptionEn: {
+    labelKey: 'pages.admin.links.fields.descriptionEn.label',
+    placeholderKey: 'pages.admin.links.fields.descriptionEn.placeholder',
+  },
+  type: {
+    labelKey: 'pages.admin.links.fields.type.label',
+    required: true,
+  },
+  sortOrder: {
+    labelKey: 'pages.admin.links.fields.sortOrder.label',
+    placeholderKey: 'pages.admin.links.fields.sortOrder.placeholder',
+    required: true,
+  },
+} as const satisfies Record<string, AdminFormFieldConfig>;
 
 export interface LinkCatalogOptionViewModel {
   id: string;

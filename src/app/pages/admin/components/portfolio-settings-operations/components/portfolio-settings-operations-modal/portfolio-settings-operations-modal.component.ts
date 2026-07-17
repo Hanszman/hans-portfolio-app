@@ -3,18 +3,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PortfolioSettingRecord } from '../../../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import { resolveAdminFieldLabel } from '../../../../helpers/admin.helper';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
 import {
+  PORTFOLIO_SETTINGS_OPERATIONS_FIELDS,
   PortfolioSettingsOperationsFormValue,
   PortfolioSettingsOperationsModalMode,
   PortfolioSettingOperationsViewModel,
@@ -30,6 +34,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioSettingsOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
+
   readonly isOpen = input(false);
   readonly modalTitleKey = input<AppTranslationKey>(
     'pages.admin.portfolioSettings.modal.create.title',
@@ -60,6 +66,8 @@ export class PortfolioSettingsOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+
+  protected readonly fields = PORTFOLIO_SETTINGS_OPERATIONS_FIELDS;
 
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
@@ -126,5 +134,14 @@ export class PortfolioSettingsOperationsModalComponent {
 
   protected trackSettingById(index: number, setting: { id: string }): string {
     return setting.id;
+  }
+
+  protected resolveFieldLabel(
+    fieldKey: keyof typeof PORTFOLIO_SETTINGS_OPERATIONS_FIELDS,
+  ): string {
+    return resolveAdminFieldLabel(
+      this.fields[fieldKey],
+      this.translation.instant.bind(this.translation),
+    );
   }
 }
