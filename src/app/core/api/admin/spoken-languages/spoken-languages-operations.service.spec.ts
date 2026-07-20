@@ -65,22 +65,21 @@ describe('SpokenLanguagesOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the protected spoken languages collection through the admin read endpoint', () => {
+  it('should load the spoken languages collection through the public read endpoint', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123').subscribe((response) => {
+    service.getAll().subscribe((response) => {
       expect(response).toEqual(createSpokenLanguagesCollectionResponse());
     });
 
     const request = httpTestingController.expectOne(
       buildApiUrl(
-        '/admin/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc',
+        '/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc',
       ),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createSpokenLanguagesCollectionResponse());
   });
@@ -89,16 +88,15 @@ describe('SpokenLanguagesOperationsService', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123', 2, 4).subscribe();
+    service.getAll(2, 4).subscribe();
 
     const request = httpTestingController.expectOne(
       buildApiUrl(
-        '/admin/spoken-languages?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc',
+        '/spoken-languages?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc',
       ),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createSpokenLanguagesCollectionResponse());
   });
@@ -107,16 +105,15 @@ describe('SpokenLanguagesOperationsService', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123', 1, 5, 'english').subscribe();
+    service.getAll(1, 5, 'english').subscribe();
 
     const request = httpTestingController.expectOne(
       buildApiUrl(
-        '/admin/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=english',
+        '/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=english',
       ),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createSpokenLanguagesCollectionResponse());
   });

@@ -68,20 +68,19 @@ describe('CustomersOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the protected customers collection through the admin read endpoint', () => {
+  it('should load the customers collection through the public read endpoint', () => {
     const service = TestBed.inject(CustomersOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123').subscribe((response) => {
+    service.getAll().subscribe((response) => {
       expect(response).toEqual(createCustomersCollectionResponse());
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/customers?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
+      buildApiUrl('/customers?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createCustomersCollectionResponse());
   });
@@ -90,16 +89,15 @@ describe('CustomersOperationsService', () => {
     const service = TestBed.inject(CustomersOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123', 2, 4, ' enterprise ').subscribe();
+    service.getAll(2, 4, ' enterprise ').subscribe();
 
     const request = httpTestingController.expectOne(
       buildApiUrl(
-        '/admin/customers?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc&search=enterprise',
+        '/customers?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc&search=enterprise',
       ),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createCustomersCollectionResponse());
   });

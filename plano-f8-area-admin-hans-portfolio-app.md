@@ -636,7 +636,7 @@ Cada nova entidade protegida deve:
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
 - `F8.7` ajustada em `2026-07-20`:
-  - leitura administrativa migrada para `GET /admin/spoken-languages`, mantendo consistencia com as mutacoes protegidas
+  - leitura administrativa consolidada em `GET /spoken-languages`, mantendo as mutacoes protegidas em `/admin/spoken-languages`
   - seletores de `image-assets` refinados para trabalhar com IDs UUID reais do catalogo protegido
   - previews reais de `image-assets` adicionados nas tags/cards de selecao do formulario
   - cobertura total preservada apos os ajustes
@@ -644,7 +644,7 @@ Cada nova entidade protegida deve:
 - entregas concluidas na `F8.8`:
   - dominio `src/app/core/api/admin/customers/` consolidado para o CRUD de `customers`
   - workspace administrativo dedicado em `src/app/pages/admin/components/customers-operations/` estabilizado com helper, modal interno e specs
-  - leitura administrativa migrada para `GET /admin/customers`, eliminando divergencia entre listagem publica e estado autenticado do admin
+  - leitura administrativa consolidada em `GET /customers`, mantendo as mutacoes protegidas em `/admin/customers`
   - relacoes com `experiences` e `image-assets` integradas ao formulario seguindo o template oficial da F8
   - seletores de `image-assets` ajustados para usar UUIDs reais e exibir preview visual da imagem nas tags/cards
   - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` estabilizados com `hans-toast`

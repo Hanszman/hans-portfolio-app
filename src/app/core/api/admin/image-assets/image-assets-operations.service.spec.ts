@@ -90,20 +90,19 @@ describe('ImageAssetsOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the protected image-assets collection through the admin read endpoint', () => {
+  it('should load the image-assets collection through the public read endpoint', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123').subscribe((response) => {
+    service.getAll().subscribe((response) => {
       expect(response).toEqual(createImageAssetsCollectionResponse());
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/image-assets?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
+      buildApiUrl('/image-assets?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createImageAssetsCollectionResponse());
   });
@@ -112,14 +111,13 @@ describe('ImageAssetsOperationsService', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123', 2, 4).subscribe();
+    service.getAll(2, 4).subscribe();
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/image-assets?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc'),
+      buildApiUrl('/image-assets?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createImageAssetsCollectionResponse());
   });
@@ -128,14 +126,13 @@ describe('ImageAssetsOperationsService', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getAll('token-123', 1, 5, 'logo').subscribe();
+    service.getAll(1, 5, 'logo').subscribe();
 
     const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/image-assets?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=logo'),
+      buildApiUrl('/image-assets?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc&search=logo'),
     );
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createImageAssetsCollectionResponse());
   });

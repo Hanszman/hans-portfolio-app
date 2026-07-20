@@ -16,7 +16,6 @@ export class ImageAssetsOperationsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(
-    accessToken: string,
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
     search = '',
@@ -35,10 +34,7 @@ export class ImageAssetsOperationsService {
     }
 
     return this.httpClient.get<ImageAssetsCollectionResponse>(
-      buildApiUrl(`/admin/image-assets?${searchParams.toString()}`),
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
+      buildApiUrl(`/image-assets?${searchParams.toString()}`),
     );
   }
 

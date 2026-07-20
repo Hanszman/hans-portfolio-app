@@ -1,3 +1,4 @@
+import { appConfig } from '../../../core/api/api.config';
 import { createProjectsCollectionResponse } from '../../../core/api/mocks/projects.mocks';
 import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/technologies.mocks';
 import { TechnologyCollectionItemResponse } from '../../../core/api/technologies/technologies.types';
@@ -24,9 +25,7 @@ const buildTechnology = (
 
 describe('technology modal helper', () => {
   it('should build a modal detail when the value is present', () => {
-    expect(
-      buildTechnologyModalDetail('pages.experiences.technology.projects', 4),
-    ).toEqual({
+    expect(buildTechnologyModalDetail('pages.experiences.technology.projects', 4)).toEqual({
       labelKey: 'pages.experiences.technology.projects',
       value: 4,
     });
@@ -36,9 +35,7 @@ describe('technology modal helper', () => {
     expect(
       buildTechnologyModalDetail('pages.experiences.technology.category', undefined),
     ).toBeNull();
-    expect(
-      buildTechnologyModalDetail('pages.experiences.technology.category', ''),
-    ).toBeNull();
+    expect(buildTechnologyModalDetail('pages.experiences.technology.category', '')).toBeNull();
   });
 
   it('should build the complete modal detail list from an enriched technology', () => {
@@ -166,8 +163,7 @@ describe('technology modal helper', () => {
         ?.stack,
     ).toBe('Games');
     expect(
-      resolveTechnologyModalItem({ slug: 'expo', name: 'Expo' }, technologies, [], 'en-us')
-        ?.stack,
+      resolveTechnologyModalItem({ slug: 'expo', name: 'Expo' }, technologies, [], 'en-us')?.stack,
     ).toBe('Mobile');
     expect(
       resolveTechnologyModalItem(
@@ -178,20 +174,12 @@ describe('technology modal helper', () => {
       )?.stack,
     ).toBe('Databases');
     expect(
-      resolveTechnologyModalItem(
-        { slug: 'node-js', name: 'Node.js' },
-        technologies,
-        [],
-        'en-us',
-      )?.stack,
+      resolveTechnologyModalItem({ slug: 'node-js', name: 'Node.js' }, technologies, [], 'en-us')
+        ?.stack,
     ).toBe('Back-End');
     expect(
-      resolveTechnologyModalItem(
-        { slug: 'unknown', name: 'Unknown' },
-        technologies,
-        [],
-        'en-us',
-      )?.category,
+      resolveTechnologyModalItem({ slug: 'unknown', name: 'Unknown' }, technologies, [], 'en-us')
+        ?.category,
     ).toBe('Custom Category');
   });
 
@@ -228,7 +216,7 @@ describe('technology modal helper', () => {
 
     expect(withoutBackendImage?.image).toEqual(fallbackImage);
     expect(withBackendImage?.image).toEqual({
-      src: 'http://localhost:4200/assets/img/skills/custom.svg',
+      src: `${appConfig.baseUrl}/assets/img/skills/custom.svg`,
       alt: 'Custom icon',
     });
   });

@@ -1,3 +1,4 @@
+import { appConfig } from '../../../../../core/api/api.config';
 import { ImageAssetRecord } from '../../../../../core/api/admin/image-assets/image-assets-operations.types';
 import { CustomerRecord } from '../../../../../core/api/admin/customers/customers-operations.types';
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
@@ -136,13 +137,13 @@ describe('customers operations helper', () => {
         id: 'image-asset-1',
         title: 'alpha.svg',
         subtitle: '/assets/img/customers/ford.svg',
-        imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
+        imageUrl: `${appConfig.baseUrl}/assets/img/customers/ford.svg`,
       },
       {
         id: 'image-asset-2',
         title: 'zeta.svg',
         subtitle: '/assets/img/customers/ford.svg',
-        imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
+        imageUrl: `${appConfig.baseUrl}/assets/img/customers/ford.svg`,
       },
     ]);
   });

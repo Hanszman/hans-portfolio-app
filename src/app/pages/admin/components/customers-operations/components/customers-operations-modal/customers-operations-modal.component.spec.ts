@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
 import { CustomerOperationsViewModel } from '../../customers-operations.types';
 import { CustomersOperationsModalComponent } from './customers-operations-modal.component';
+import { appConfig } from '../../../../../../core/api/api.config';
 
 const CUSTOMERS: readonly CustomerOperationsViewModel[] = [
   {
@@ -89,7 +90,7 @@ describe('CustomersOperationsModalComponent', () => {
         id: 'image-asset-1',
         title: 'ford.svg',
         subtitle: '/assets/img/customers/ford.svg',
-        imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
+        imageUrl: `${appConfig.baseUrl}/assets/img/customers/ford.svg`,
       },
     ]);
     fixture.componentRef.setInput('pagination', {

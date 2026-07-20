@@ -177,13 +177,8 @@ describe('SpokenLanguagesOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      'token-123',
-      1,
-      5,
-      '',
-    );
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith('token-123', 1, 100);
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Spoken languages');
     expect(compiled.textContent).toContain(
       createAdminEntityEndpointLabel('/spoken-languages'),
@@ -356,13 +351,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
 
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledTimes(3);
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      'token-123',
       2,
       5,
       '',
     );
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      'token-123',
       1,
       5,
       'es',
@@ -585,7 +578,6 @@ describe('SpokenLanguagesOperationsComponent', () => {
     await pagedComponent.submitModal();
 
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      'token-123',
       1,
       5,
       '',

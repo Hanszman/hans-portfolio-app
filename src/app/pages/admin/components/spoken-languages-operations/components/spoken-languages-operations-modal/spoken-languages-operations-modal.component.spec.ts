@@ -1,3 +1,4 @@
+import { appConfig } from '../../../../../../core/api/api.config';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
@@ -76,7 +77,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
         id: 'image-asset-1',
         title: 'english-flag.svg',
         subtitle: '/assets/img/languages/english-flag.svg',
-        imageUrl: 'http://localhost:4200/assets/img/languages/english-flag.svg',
+        imageUrl: `${appConfig.baseUrl}/assets/img/languages/english-flag.svg`,
       },
     ]);
     fixture.componentRef.setInput('proficiencyOptions', [
@@ -111,9 +112,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     componentAccess.emitNamePtChange('Portugues');
     componentAccess.emitNameEnChange('Portuguese');
     componentAccess.emitProficiencyChange('NATIVE');
-    componentAccess.emitHighlightChange(
-      new CustomEvent('change', { detail: true }),
-    );
+    componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleImageAsset('image-asset-1');
@@ -161,9 +160,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       ),
     ).toBe('FLUENT');
     expect(
-      componentAccess.resolveSelectValue(
-        new CustomEvent('valueChange', { detail: 'ADVANCED' }),
-      ),
+      componentAccess.resolveSelectValue(new CustomEvent('valueChange', { detail: 'ADVANCED' })),
     ).toBe('ADVANCED');
     expect(componentAccess.resolveSelectValue(new Event('valueChange'))).toBe('');
     expect(

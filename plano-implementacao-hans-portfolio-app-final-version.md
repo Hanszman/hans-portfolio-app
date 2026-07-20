@@ -1238,11 +1238,11 @@ Regra importante de modelagem para a F8:
 - `F8.7` - `spoken-languages`
   - campos: `code`, `namePt`, `nameEn`, `proficiency`, `highlight`, `sortOrder`
   - relacionamentos: `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura protegida em `GET /admin/spoken-languages`, UUIDs reais para `imageAssetIds` e previews visuais nas selecoes de imagem
+  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /spoken-languages`, UUIDs reais para `imageAssetIds` e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/spoken-languages`
 - `F8.8` - `customers`
   - campos: `slug`, `name`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura protegida em `GET /admin/customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, e previews visuais nas selecoes de imagem
+  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/customers`
 - `F8.9` - `jobs`
   - campos: `slug`, `namePt`, `nameEn`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
@@ -1305,7 +1305,7 @@ Regra importante de modelagem para a F8:
 - labels repetidos do dominio admin, como o prefixo padrao de endpoint `POST/GET/PUT/DELETE`, devem ficar centralizados em `admin.types.ts`
 - cada entrega da F8 deve fechar apenas uma subetapa oficial por vez, salvo alinhamento explicito para agrupar mais de uma no mesmo incremento
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
-- quando a shell admin operar uma entidade com endpoint protegido proprio, a leitura da colecao deve priorizar `/admin/<entity>` para manter consistencia com create/update/delete autenticados
+- quando a shell admin operar uma entidade com endpoint protegido proprio de leitura, a colecao deve priorizar `/admin/<entity>`; quando a API expuser apenas leitura publica, devemos consumir o endpoint publico e manter somente as mutacoes em `/admin/<entity>`
 - relacoes com `image-assets` devem exibir previews reais da imagem nas tags/cards de selecao das entidades atuais e futuras
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao devemos criar uma segunda pasta paralela apenas para as operacoes de CUD dentro de `admin`; devemos reaproveitar e expandir o service ja existente no dominio oficial da entidade
 
