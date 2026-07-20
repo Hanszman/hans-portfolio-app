@@ -368,3 +368,4 @@ Eu tentei cadastrar um customer "teste" pelo formulário de customers (com uma i
 OBS: Verificar último commit e testar CRUDs
 -Beleza, obrigado! Mas vamos lá:
 Vi que em vários lugares, testes, images, etc vc chamou "localhost:..." nesses casos deveriamos usar nossa variável do environment, para não termos que alterar em vários lugares caso esse endereço mude. Faça essas substituições por favor.
+Como vc pode ver, ao entrar na tela de admin, recebo esse tanto de toast de erros com vários endpoints 404 no network. Além disso, as 3 entidades (image assets, spoken languages e customers) estão com os botões das operations (exceto create) desabilitados e com a mensagem "The protected ... collection could not be loaded right now."
