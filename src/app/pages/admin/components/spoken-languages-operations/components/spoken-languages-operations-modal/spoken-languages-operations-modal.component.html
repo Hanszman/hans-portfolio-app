@@ -112,6 +112,11 @@
                   (click)="toggleImageAsset(imageAsset.id)"
                 >
                   <span class="spoken-languages-operations-selection-option">
+                    <img
+                      class="spoken-languages-operations-selection-option-image"
+                      [src]="imageAsset.imageUrl"
+                      [alt]="imageAsset.title"
+                    />
                     <span class="spoken-languages-operations-selection-option-title">
                       {{ imageAsset.title }}
                     </span>

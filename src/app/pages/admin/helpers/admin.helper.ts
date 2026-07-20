@@ -1,5 +1,7 @@
-import { AppTranslationKey } from '../../../core/translation/translation.types';
 import { AdminAuthenticatedUser } from '../../../core/api/admin/admin-auth/admin-auth.types';
+import { ImageAssetRecord } from '../../../core/api/admin/image-assets/image-assets-operations.types';
+import { buildAssetUrl } from '../../../core/api/api.config';
+import { AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   AdminFormFieldConfig,
   AdminEntityDefinition,
@@ -58,6 +60,25 @@ export const trackAdminItemById = (
   index: number,
   item: { id: string },
 ): string => item.id;
+
+export interface AdminImageAssetOptionViewModel {
+  readonly id: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly imageUrl: string;
+}
+
+export const createAdminImageAssetOptionViewModel = (
+  imageAsset: ImageAssetRecord,
+): AdminImageAssetOptionViewModel => ({
+  id: imageAsset.id,
+  title: imageAsset.fileName,
+  subtitle: imageAsset.filePath,
+  imageUrl: buildAssetUrl(imageAsset.filePath),
+});
+
+export const resolveAdminImageAssetLabel = (imageAsset: ImageAssetRecord): string =>
+  `${imageAsset.fileName} (${imageAsset.kind})`;
 
 export interface AdminEntityViewModel {
   readonly id: AdminEntityDefinition['id'];

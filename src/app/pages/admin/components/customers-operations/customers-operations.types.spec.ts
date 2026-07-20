@@ -68,6 +68,7 @@ describe('customers operations types helpers', () => {
       id: 'image-asset-1',
       title: 'ford.svg',
       subtitle: '/assets/img/customers/ford.svg',
+      imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
     });
 
     expect(

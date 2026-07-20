@@ -50,6 +50,7 @@ describe('spoken languages types helpers', () => {
       id: 'image-asset-1',
       title: 'usa.png',
       subtitle: '/assets/img/skills/usa.png',
+      imageUrl: 'http://localhost:4200/assets/img/skills/usa.png',
     });
 
     expect(

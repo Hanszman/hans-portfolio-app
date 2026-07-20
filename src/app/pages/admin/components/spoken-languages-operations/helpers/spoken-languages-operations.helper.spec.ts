@@ -58,11 +58,13 @@ describe('spoken languages helper', () => {
         id: 'image-asset-1',
         title: 'alpha.png',
         subtitle: '/assets/img/skills/usa.png',
+        imageUrl: 'http://localhost:4200/assets/img/skills/usa.png',
       },
       {
         id: 'image-asset-2',
         title: 'zeta.png',
         subtitle: '/assets/img/skills/usa.png',
+        imageUrl: 'http://localhost:4200/assets/img/skills/usa.png',
       },
     ]);
   });

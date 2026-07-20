@@ -136,6 +136,7 @@ Se uma composicao passar a ser reutilizada entre varias entidades administrativa
 - services HTTP de CRUD administrativo devem seguir `*-operations.service.ts`
 - autenticacao administrativa deve seguir `admin-auth.service.ts` e `admin-auth.types.ts`
 - helpers locais de entidades administrativas devem seguir `*-operations.helper.ts`
+- implementacoes da F8 devem avancar uma subetapa oficial por entrega, sem puxar duas subetapas de uma vez sem alinhamento explicito
 - o componente shared de paginacao oficial passa a se chamar `pagination`
 - o wrapper shared oficial para modais administrativos passa a ser `operations-modal`
 - a paginacao administrativa oficial passa a ser provida pela `hans-ui-design-lib`, substituindo qualquer implementacao local no app
@@ -272,6 +273,7 @@ Cada entidade deve ter, no minimo:
 - quando o modal permanecer aberto, o erro deve aparecer dentro do proprio modal
 - mensagens fora do modal ficam reservadas para feedbacks da tela apos fechamento da operacao
 - apos a consolidacao do padrao de feedback, o portfolio deve priorizar `hans-toast` tambem para falhas de autenticacao, consultas administrativas e mutacoes protegidas
+- quando estivermos dentro da shell admin, a leitura da colecao deve priorizar o endpoint protegido `/admin/<entity>` sempre que esse contrato existir, evitando divergencia entre o estado publico e o estado autenticado da area administrativa
 
 ### 6.6. Template obrigatorio para as proximas entidades da F8
 
@@ -292,6 +294,8 @@ Cada nova entidade protegida deve:
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
 - preservar o mesmo page size administrativo oficial compartilhado
+- exibir preview real de `image-assets` nas tags/cards de selecao de todas as entidades que relacionarem imagens
+- centralizar no helper compartilhado do dominio admin os mapeamentos repetidos de `image-assets` e labels estruturais que se repetirem entre entidades
 - manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
 - atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao criar uma segunda pasta paralela apenas para CUD dentro de `admin`; reaproveitar e expandir o service ja existente no dominio oficial da entidade
@@ -631,7 +635,24 @@ Cada nova entidade protegida deve:
   - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` adicionados ao shell
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
-- proxima subetapa oficial: `F8.8` - Customers
+- `F8.7` ajustada em `2026-07-20`:
+  - leitura administrativa migrada para `GET /admin/spoken-languages`, mantendo consistencia com as mutacoes protegidas
+  - seletores de `image-assets` refinados para trabalhar com IDs UUID reais do catalogo protegido
+  - previews reais de `image-assets` adicionados nas tags/cards de selecao do formulario
+  - cobertura total preservada apos os ajustes
+- `F8.8` concluida em `2026-07-20`
+- entregas concluidas na `F8.8`:
+  - dominio `src/app/core/api/admin/customers/` consolidado para o CRUD de `customers`
+  - workspace administrativo dedicado em `src/app/pages/admin/components/customers-operations/` estabilizado com helper, modal interno e specs
+  - leitura administrativa migrada para `GET /admin/customers`, eliminando divergencia entre listagem publica e estado autenticado do admin
+  - relacoes com `experiences` e `image-assets` integradas ao formulario seguindo o template oficial da F8
+  - seletores de `image-assets` ajustados para usar UUIDs reais e exibir preview visual da imagem nas tags/cards
+  - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` estabilizados com `hans-toast`
+  - comportamento pos-delete corrigido para impedir travamento indevido das acoes ate refresh manual
+  - contratos, services e specs alinhados ao contrato paginado e protegido do backend administrativo
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
+- proxima subetapa oficial: `F8.9` - Jobs
 
 ## 9) Regras de implementacao por subetapa
 

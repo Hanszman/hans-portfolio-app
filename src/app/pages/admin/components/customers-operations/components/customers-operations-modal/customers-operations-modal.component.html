@@ -159,6 +159,11 @@
                   (click)="toggleImageAsset(imageAsset.id)"
                 >
                   <span class="customers-operations-selection-option">
+                    <img
+                      class="customers-operations-selection-option-image"
+                      [src]="imageAsset.imageUrl"
+                      [alt]="imageAsset.title"
+                    />
                     <span class="customers-operations-selection-option-title">
                       {{ imageAsset.title }}
                     </span>

@@ -82,6 +82,11 @@
   @apply flex max-w-full flex-col items-start text-left;
 }
 
+.customers-operations-selection-option-image {
+  @apply mb-3 h-12 w-12 rounded-2xl object-cover;
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
 .customers-operations-selection-option-title,
 .customers-operations-selection-option-subtitle {
   @apply block whitespace-normal text-left;

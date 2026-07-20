@@ -285,16 +285,25 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
+    const accessToken = this.adminSessionService.accessToken();
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set('pages.admin.spokenLanguages.feedback.missingSession');
+      this.isLoadingSignal.set(false);
+      return;
+    }
+
     try {
       const [spokenLanguagesResponse, imageAssetsResponse] = await Promise.all([
         firstValueFrom(
           this.spokenLanguagesOperationsService.getAll(
+            accessToken,
             page,
             this.pagination().pageSize,
             search,
           ),
         ),
-        firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+        firstValueFrom(this.imageAssetsOperationsService.getAll(accessToken, 1, 100)),
       ]);
 
       this.spokenLanguagesSignal.set(spokenLanguagesResponse.data);

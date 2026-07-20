@@ -7,6 +7,11 @@ import {
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
+import {
+  AdminImageAssetOptionViewModel,
+  createAdminImageAssetOptionViewModel,
+  resolveAdminImageAssetLabel,
+} from '../../helpers/admin.helper';
 
 export type CustomersOperationsModalMode =
   | 'create'
@@ -62,11 +67,7 @@ export interface CustomerExperienceOptionViewModel {
   subtitle: string;
 }
 
-export interface CustomerImageAssetOptionViewModel {
-  id: string;
-  title: string;
-  subtitle: string;
-}
+export type CustomerImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
 export interface CustomerOperationsViewModel {
   id: string;
@@ -120,11 +121,7 @@ export const createCustomerExperienceOptionViewModel = (
 
 export const createCustomerImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,
-): CustomerImageAssetOptionViewModel => ({
-  id: imageAsset.id,
-  title: imageAsset.fileName,
-  subtitle: imageAsset.filePath,
-});
+): CustomerImageAssetOptionViewModel => createAdminImageAssetOptionViewModel(imageAsset);
 
 export const resolveCustomerExperienceIdFromRelation = (
   relation: CustomerExperienceRelationRecord,
@@ -135,4 +132,4 @@ export const resolveCustomerImageAssetIdFromRelation = (
 ): string | null => relation.imageAssetId ?? relation.imageAsset?.id ?? null;
 
 export const resolveCustomerImageAssetLabel = (imageAsset: ImageAssetRecord): string =>
-  `${imageAsset.fileName} (${imageAsset.kind})`;
+  resolveAdminImageAssetLabel(imageAsset);

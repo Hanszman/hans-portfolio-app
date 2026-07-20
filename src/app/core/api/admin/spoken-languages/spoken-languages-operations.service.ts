@@ -16,6 +16,7 @@ export class SpokenLanguagesOperationsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(
+    accessToken: string,
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
     search = '',
@@ -34,7 +35,10 @@ export class SpokenLanguagesOperationsService {
     }
 
     return this.httpClient.get<SpokenLanguagesCollectionResponse>(
-      buildApiUrl(`/spoken-languages?${searchParams.toString()}`),
+      buildApiUrl(`/admin/spoken-languages?${searchParams.toString()}`),
+      {
+        headers: this.buildAuthHeaders(accessToken),
+      },
     );
   }
 

@@ -88,6 +88,24 @@ const createCustomer = (overrides: Partial<CustomerRecord> = {}): CustomerRecord
   ...overrides,
 });
 
+const createExperienceCustomer = (): ExperienceCollectionItemResponse['customers'][number] => ({
+  experienceId: 'experience-1',
+  customerId: 'customer-1',
+  sortOrder: 1,
+  customer: {
+    id: 'customer-1',
+    slug: 'enterprise-client',
+    name: 'Enterprise Client',
+    summaryPt: 'Cliente corporativo',
+    summaryEn: 'Corporate client',
+    highlight: true,
+    sortOrder: 2,
+    isPublished: true,
+    createdAt: '2024-01-01T00:00:00.000Z',
+    updatedAt: '2024-01-01T00:00:00.000Z',
+  },
+});
+
 describe('customers operations helper', () => {
   it('should sort experience and image asset catalog options by title', () => {
     expect(
@@ -118,11 +136,13 @@ describe('customers operations helper', () => {
         id: 'image-asset-1',
         title: 'alpha.svg',
         subtitle: '/assets/img/customers/ford.svg',
+        imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
       },
       {
         id: 'image-asset-2',
         title: 'zeta.svg',
         subtitle: '/assets/img/customers/ford.svg',
+        imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
       },
     ]);
   });
@@ -134,16 +154,7 @@ describe('customers operations helper', () => {
       normalizeCustomerExperienceIds(customer, [
         createExperience({
           id: 'experience-1',
-          customers: [
-            {
-              customerId: 'customer-1',
-              customer: {
-                id: 'customer-1',
-                slug: 'enterprise-client',
-                name: 'Enterprise Client',
-              },
-            },
-          ],
+          customers: [createExperienceCustomer()],
         }),
       ]),
     ).toEqual(['experience-2', 'experience-3', 'experience-1']);
@@ -154,8 +165,70 @@ describe('customers operations helper', () => {
           id: 'image-asset-1',
           customerIds: ['customer-1'],
         }),
+        createImageAsset({
+          id: 'image-asset-4',
+          customerIds: undefined,
+        }),
       ]),
     ).toEqual(['image-asset-2', 'image-asset-3', 'image-asset-1']);
+  });
+
+  it('should resolve catalog relations through nested customer identifiers when the explicit customerId is absent', () => {
+    const customer = createCustomer();
+
+    expect(
+      normalizeCustomerExperienceIds(customer, [
+        createExperience({
+          id: 'experience-4',
+          customers: [
+            {
+              experienceId: 'experience-4',
+              customerId: '',
+              sortOrder: 1,
+              customer: {
+                id: 'customer-1',
+                slug: 'different-slug',
+                name: 'Enterprise Client',
+                summaryPt: 'Cliente corporativo',
+                summaryEn: 'Corporate client',
+                highlight: true,
+                sortOrder: 2,
+                isPublished: true,
+                createdAt: '2024-01-01T00:00:00.000Z',
+                updatedAt: '2024-01-01T00:00:00.000Z',
+              },
+            },
+          ],
+        }),
+        createExperience({
+          id: 'experience-5',
+          customers: [
+            {
+              experienceId: 'experience-5',
+              customerId: '',
+              sortOrder: 1,
+              customer: {
+                id: 'another-customer',
+                slug: 'enterprise-client',
+                name: 'Enterprise Client',
+                summaryPt: 'Cliente corporativo',
+                summaryEn: 'Corporate client',
+                highlight: true,
+                sortOrder: 2,
+                isPublished: true,
+                createdAt: '2024-01-01T00:00:00.000Z',
+                updatedAt: '2024-01-01T00:00:00.000Z',
+              },
+            },
+          ],
+        }),
+      ]),
+    ).toEqual([
+      'experience-2',
+      'experience-3',
+      'experience-4',
+      'experience-5',
+    ]);
   });
 
   it('should build an empty form when no customer is selected', () => {
@@ -179,16 +252,7 @@ describe('customers operations helper', () => {
         [
           createExperience({
             id: 'experience-1',
-            customers: [
-              {
-                customerId: 'customer-1',
-                customer: {
-                  id: 'customer-1',
-                  slug: 'enterprise-client',
-                  name: 'Enterprise Client',
-                },
-              },
-            ],
+            customers: [createExperienceCustomer()],
           }),
         ],
         [
@@ -309,6 +373,54 @@ describe('customers operations helper', () => {
     expect(viewModels[0].isPublished).toBeTrue();
     expect(viewModels[0].experienceLabels).toEqual(['missing-experience']);
     expect(viewModels[0].imageAssetLabels).toEqual(['missing-image-asset']);
+  });
+
+  it('should fallback nullish sort orders to zero in labels and during ordering comparisons', () => {
+    const viewModels = buildCustomersViewModels(
+      [
+        createCustomer({
+          id: 'customer-2',
+          name: 'Beta Client',
+          slug: 'beta-client',
+          sortOrder: null,
+          experienceIds: [],
+          experiences: [],
+          imageAssetIds: [],
+          imageAssets: [],
+        }),
+        createCustomer({
+          id: 'customer-3',
+          name: 'Alpha Client',
+          slug: 'alpha-client',
+          sortOrder: 1,
+          experienceIds: [],
+          experiences: [],
+          imageAssetIds: [],
+          imageAssets: [],
+        }),
+        createCustomer({
+          id: 'customer-4',
+          name: 'Gamma Client',
+          slug: 'gamma-client',
+          sortOrder: null,
+          experienceIds: [],
+          experiences: [],
+          imageAssetIds: [],
+          imageAssets: [],
+        }),
+      ],
+      [],
+      [],
+    );
+
+    expect(viewModels.map((viewModel) => viewModel.slug)).toEqual([
+      'alpha-client',
+      'beta-client',
+      'gamma-client',
+    ]);
+    expect(viewModels[1].sortOrderLabel).toBe('0');
+    expect(viewModels[2].sortOrderLabel).toBe('0');
+    expect(viewModels[0].sortOrderLabel).toBe('1');
   });
 
   it('should build a valid mutation payload with deduplicated relations', () => {

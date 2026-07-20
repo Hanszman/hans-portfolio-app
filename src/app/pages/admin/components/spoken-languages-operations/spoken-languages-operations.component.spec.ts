@@ -177,8 +177,13 @@ describe('SpokenLanguagesOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
+      'token-123',
+      1,
+      5,
+      '',
+    );
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith('token-123', 1, 100);
     expect(compiled.textContent).toContain('Spoken languages');
     expect(compiled.textContent).toContain(
       createAdminEntityEndpointLabel('/spoken-languages'),
@@ -350,8 +355,18 @@ describe('SpokenLanguagesOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledTimes(3);
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'es');
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
+      'token-123',
+      2,
+      5,
+      '',
+    );
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
+      'token-123',
+      1,
+      5,
+      'es',
+    );
 
     component.openCreateModal();
     component.toggleImageAsset('image-asset-1');
@@ -569,7 +584,12 @@ describe('SpokenLanguagesOperationsComponent', () => {
     pagedComponent.openDeleteModal('spoken-language-1');
     await pagedComponent.submitModal();
 
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
+      'token-123',
+      1,
+      5,
+      '',
+    );
   });
 
   it('should render empty and load error states and keep read disabled without spoken languages', async () => {

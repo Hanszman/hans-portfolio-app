@@ -340,6 +340,14 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
+    const accessToken = this.adminSessionService.accessToken();
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set('pages.admin.imageAssets.feedback.missingSession');
+      this.isLoadingSignal.set(false);
+      return;
+    }
+
     try {
       const [
         imageAssetsResponse,
@@ -349,6 +357,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
       ] = await Promise.all([
         firstValueFrom(
           this.imageAssetsOperationsService.getAll(
+            accessToken,
             page,
             this.pagination().pageSize,
             search,

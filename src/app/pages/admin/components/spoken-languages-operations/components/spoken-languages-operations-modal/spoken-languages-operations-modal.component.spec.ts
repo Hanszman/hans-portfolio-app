@@ -76,6 +76,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
         id: 'image-asset-1',
         title: 'english-flag.svg',
         subtitle: '/assets/img/languages/english-flag.svg',
+        imageUrl: 'http://localhost:4200/assets/img/languages/english-flag.svg',
       },
     ]);
     fixture.componentRef.setInput('proficiencyOptions', [

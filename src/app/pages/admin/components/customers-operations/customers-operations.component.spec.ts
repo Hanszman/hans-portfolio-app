@@ -7,7 +7,10 @@ import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-a
 import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
+import {
+  ExperienceCollectionItemResponse,
+  ExperiencesCollectionResponse,
+} from '../../../../core/api/experiences/experiences.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
@@ -95,6 +98,20 @@ const createCollectionResponse = (data: CustomerRecord[] = [createCustomer()], p
   },
 });
 
+const createExperiencesCollectionResponse = (
+  data: ExperienceCollectionItemResponse[] = [createExperience()],
+): ExperiencesCollectionResponse => ({
+  data,
+  pagination: {
+    page: 1,
+    pageSize: 5,
+    totalItems: data.length,
+    totalPages: data.length === 0 ? 0 : 1,
+    hasPreviousPage: false,
+    hasNextPage: false,
+  },
+});
+
 describe('CustomersOperationsComponent', () => {
   let fixture: ComponentFixture<CustomersOperationsComponent>;
   let customersOperationsService: jasmine.SpyObj<CustomersOperationsService>;
@@ -150,7 +167,9 @@ describe('CustomersOperationsComponent', () => {
     customersOperationsService.create.and.returnValue(of(createCustomer()));
     customersOperationsService.update.and.returnValue(of(createCustomer()));
     customersOperationsService.delete.and.returnValue(of(void 0));
-    experiencesService.getExperiences.and.returnValue(of({ data: [createExperience()] }));
+    experiencesService.getExperiences.and.returnValue(
+      of(createExperiencesCollectionResponse()),
+    );
     imageAssetsOperationsService.getAll.and.returnValue(
       of({
         data: [createImageAsset()],
@@ -201,9 +220,9 @@ describe('CustomersOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith('token-123', 1, 5, '');
     expect(experiencesService.getExperiences).toHaveBeenCalledTimes(1);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith('token-123', 1, 100);
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/customers'));
     expect(compiled.textContent).toContain('Create');
@@ -356,8 +375,13 @@ describe('CustomersOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(customersOperationsService.getAll).toHaveBeenCalledTimes(3);
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'search');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith('token-123', 2, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
+      'token-123',
+      1,
+      5,
+      'search',
+    );
 
     component.openCreateModal();
     component.toggleExperience('experience-1');
@@ -557,7 +581,7 @@ describe('CustomersOperationsComponent', () => {
     pagedComponent.openDeleteModal('customer-1');
     await pagedComponent.submitModal();
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith('token-123', 1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without customers', async () => {

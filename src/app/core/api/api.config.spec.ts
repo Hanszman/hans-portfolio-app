@@ -9,9 +9,8 @@ import {
   buildRelativeAssetPath,
   buildRelativeImageAssetPath,
   buildRelativeSkillImageAssetPath,
-  IMAGE_ASSETS_ROOT_PATH,
-  SKILLS_IMAGE_ASSETS_ROOT_PATH,
 } from './api.config';
+import { IMAGE_ASSETS_ROOT_PATH, SKILLS_IMAGE_ASSETS_ROOT_PATH } from './api.types';
 
 describe('apiConfig', () => {
   it('should expose the normalized API base URL from the environment', () => {

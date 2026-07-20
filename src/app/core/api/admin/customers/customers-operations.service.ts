@@ -16,6 +16,7 @@ export class CustomersOperationsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(
+    accessToken: string,
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
     search = '',
@@ -34,7 +35,10 @@ export class CustomersOperationsService {
     }
 
     return this.httpClient.get<CustomersCollectionResponse>(
-      buildApiUrl(`/customers?${searchParams.toString()}`),
+      buildApiUrl(`/admin/customers?${searchParams.toString()}`),
+      {
+        headers: this.buildAuthHeaders(accessToken),
+      },
     );
   }
 

@@ -1,13 +1,14 @@
 import { environment } from '../../../environments/environment';
+import {
+  ABSOLUTE_URL_PATTERN,
+  ASSETS_ROOT_PATH,
+  IMAGE_ASSETS_ROOT_PATH,
+  SKILLS_IMAGE_ASSETS_ROOT_PATH,
+} from './api.types';
 
 const normalizeBaseUrl = (baseUrl: string): string => baseUrl.replace(/\/+$/, '');
 const normalizeRelativePathSegment = (pathSegment: string): string =>
   pathSegment.replace(/^\/+|\/+$/g, '');
-const ABSOLUTE_URL_PATTERN = /^https?:\/\//i;
-
-export const ASSETS_ROOT_PATH = 'assets';
-export const IMAGE_ASSETS_ROOT_PATH = `${ASSETS_ROOT_PATH}/img`;
-export const SKILLS_IMAGE_ASSETS_ROOT_PATH = `${IMAGE_ASSETS_ROOT_PATH}/skills`;
 
 export const appConfig = {
   baseUrl: normalizeBaseUrl(environment.appBaseUrl),

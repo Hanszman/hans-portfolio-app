@@ -295,13 +295,26 @@ export class CustomersOperationsComponent implements OnInit {
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
 
+    const accessToken = this.adminSessionService.accessToken();
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set('pages.admin.customers.feedback.missingSession');
+      this.isLoadingSignal.set(false);
+      return;
+    }
+
     try {
       const [customersResponse, experiencesResponse, imageAssetsResponse] = await Promise.all([
         firstValueFrom(
-          this.customersOperationsService.getAll(page, this.pagination().pageSize, search),
+          this.customersOperationsService.getAll(
+            accessToken,
+            page,
+            this.pagination().pageSize,
+            search,
+          ),
         ),
         firstValueFrom(this.experiencesService.getExperiences()),
-        firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+        firstValueFrom(this.imageAssetsOperationsService.getAll(accessToken, 1, 100)),
       ]);
 
       this.customersSignal.set(customersResponse.data);

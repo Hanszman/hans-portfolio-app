@@ -5,6 +5,11 @@ import {
 } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
+import {
+  AdminImageAssetOptionViewModel,
+  createAdminImageAssetOptionViewModel,
+  resolveAdminImageAssetLabel,
+} from '../../helpers/admin.helper';
 
 export const SPOKEN_LANGUAGE_PROFICIENCY_VALUES = [
   'NATIVE',
@@ -62,11 +67,7 @@ export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
 
-export interface SpokenLanguageImageAssetOptionViewModel {
-  id: string;
-  title: string;
-  subtitle: string;
-}
+export type SpokenLanguageImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
 export interface SpokenLanguageProficiencyOptionViewModel {
   id: SpokenLanguageProficiencyValue;
@@ -121,11 +122,8 @@ export const createSpokenLanguageProficiencyOptions =
 
 export const createSpokenLanguageImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,
-): SpokenLanguageImageAssetOptionViewModel => ({
-  id: imageAsset.id,
-  title: imageAsset.fileName,
-  subtitle: imageAsset.filePath,
-});
+): SpokenLanguageImageAssetOptionViewModel =>
+  createAdminImageAssetOptionViewModel(imageAsset);
 
 export const resolveSpokenLanguageImageAssetIdFromRelation = (
   relation: SpokenLanguageImageAssetRelationRecord,
@@ -133,4 +131,4 @@ export const resolveSpokenLanguageImageAssetIdFromRelation = (
 
 export const resolveSpokenLanguageImageAssetLabel = (
   imageAsset: ImageAssetRecord,
-): string => `${imageAsset.fileName} (${imageAsset.kind})`;
+): string => resolveAdminImageAssetLabel(imageAsset);
