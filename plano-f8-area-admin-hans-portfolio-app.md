@@ -644,7 +644,7 @@ Cada nova entidade protegida deve:
 - entregas concluidas na `F8.8`:
   - dominio `src/app/core/api/admin/customers/` consolidado para o CRUD de `customers`
   - workspace administrativo dedicado em `src/app/pages/admin/components/customers-operations/` estabilizado com helper, modal interno e specs
-  - leitura administrativa consolidada em `GET /customers`, mantendo as mutacoes protegidas em `/admin/customers`
+  - leitura administrativa consolidada em `GET /admin/customers`, mantendo `create`, `update` e `delete` no mesmo dominio protegido
   - relacoes com `experiences` e `image-assets` integradas ao formulario seguindo o template oficial da F8
   - seletores de `image-assets` ajustados para usar UUIDs reais e exibir preview visual da imagem nas tags/cards
   - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` estabilizados com `hans-toast`

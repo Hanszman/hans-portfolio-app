@@ -81,6 +81,7 @@ describe('CustomersOperationsService', () => {
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(createCustomersCollectionResponse());
   });
@@ -92,9 +93,7 @@ describe('CustomersOperationsService', () => {
     service.getAll(2, 4, ' enterprise ').subscribe();
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/customers?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc&search=enterprise',
-      ),
+      buildApiUrl('/customers?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc&search=enterprise'),
     );
 
     expect(request.request.method).toBe('GET');
@@ -106,14 +105,14 @@ describe('CustomersOperationsService', () => {
     const service = TestBed.inject(CustomersOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.create('token-123', createCustomerPayload()).subscribe((response) => {
+    service.create(createCustomerPayload()).subscribe((response) => {
       expect(response).toEqual(createCustomer());
     });
 
     const request = httpTestingController.expectOne(buildApiUrl('/admin/customers'));
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createCustomerPayload());
 
     request.flush(createCustomer());
@@ -123,18 +122,16 @@ describe('CustomersOperationsService', () => {
     const service = TestBed.inject(CustomersOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service
-      .update('token-123', 'customer-1', createCustomerPayload())
-      .subscribe((response) => {
-        expect(response).toEqual(createCustomer());
-      });
+    service.update('customer-1', createCustomerPayload()).subscribe((response) => {
+      expect(response).toEqual(createCustomer());
+    });
 
     const request = httpTestingController.expectOne(
       buildApiUrl('/admin/customers/customer-1'),
     );
 
     expect(request.request.method).toBe('PUT');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createCustomerPayload());
 
     request.flush(createCustomer());
@@ -144,7 +141,7 @@ describe('CustomersOperationsService', () => {
     const service = TestBed.inject(CustomersOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.delete('token-123', 'customer-1').subscribe((response) => {
+    service.delete('customer-1').subscribe((response) => {
       expect(response).toBeNull();
     });
 
@@ -153,7 +150,7 @@ describe('CustomersOperationsService', () => {
     );
 
     expect(request.request.method).toBe('DELETE');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(null);
   });

@@ -15,20 +15,19 @@ import {
 
 const createLink = (): LinkRecord => ({
   id: 'link-1',
-  url: 'https://github.com/vh/portfolio',
+  url: 'https://github.com/victor/hans',
   labelPt: 'Repositorio',
   labelEn: 'Repository',
   descriptionPt: 'Codigo fonte',
   descriptionEn: 'Source code',
   type: 'GITHUB',
   sortOrder: 1,
-  isPublished: true,
   projectIds: ['project-1'],
   experienceIds: ['experience-1'],
   technologyIds: ['technology-1'],
   formationIds: ['formation-1'],
-  createdAt: '2026-07-16T00:00:00.000Z',
-  updatedAt: '2026-07-16T00:00:00.000Z',
+  createdAt: '2026-07-12T00:00:00.000Z',
+  updatedAt: '2026-07-12T00:00:00.000Z',
 });
 
 const createLinksCollectionResponse = (): LinksCollectionResponse => ({
@@ -44,7 +43,7 @@ const createLinksCollectionResponse = (): LinksCollectionResponse => ({
 });
 
 const createLinkPayload = (): LinkMutationPayload => ({
-  url: 'https://github.com/vh/portfolio',
+  url: 'https://github.com/victor/hans',
   labelPt: 'Repositorio',
   labelEn: 'Repository',
   descriptionPt: 'Codigo fonte',
@@ -74,7 +73,7 @@ describe('LinksOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the protected links collection through the public read endpoint', () => {
+  it('should load the links collection', () => {
     const service = TestBed.inject(LinksOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
@@ -87,6 +86,7 @@ describe('LinksOperationsService', () => {
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(createLinksCollectionResponse());
   });
@@ -125,14 +125,14 @@ describe('LinksOperationsService', () => {
     const service = TestBed.inject(LinksOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.create('token-123', createLinkPayload()).subscribe((response) => {
+    service.create(createLinkPayload()).subscribe((response) => {
       expect(response).toEqual(createLink());
     });
 
     const request = httpTestingController.expectOne(buildApiUrl('/admin/links'));
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createLinkPayload());
 
     request.flush(createLink());
@@ -142,18 +142,14 @@ describe('LinksOperationsService', () => {
     const service = TestBed.inject(LinksOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service
-      .update('token-123', 'link-1', createLinkPayload())
-      .subscribe((response) => {
-        expect(response).toEqual(createLink());
-      });
+    service.update('link-1', createLinkPayload()).subscribe((response) => {
+      expect(response).toEqual(createLink());
+    });
 
-    const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/links/link-1'),
-    );
+    const request = httpTestingController.expectOne(buildApiUrl('/admin/links/link-1'));
 
     expect(request.request.method).toBe('PUT');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createLinkPayload());
 
     request.flush(createLink());
@@ -163,17 +159,16 @@ describe('LinksOperationsService', () => {
     const service = TestBed.inject(LinksOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.delete('token-123', 'link-1').subscribe((response) => {
+    service.delete('link-1').subscribe((response) => {
       expect(response).toBeNull();
     });
 
-    const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/links/link-1'),
-    );
+    const request = httpTestingController.expectOne(buildApiUrl('/admin/links/link-1'));
 
     expect(request.request.method).toBe('DELETE');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(null);
   });
 });
+

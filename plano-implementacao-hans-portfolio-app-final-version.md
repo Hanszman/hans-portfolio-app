@@ -1242,7 +1242,7 @@ Regra importante de modelagem para a F8:
 - `F8.8` - `customers`
   - campos: `slug`, `name`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/customers`
+  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /admin/customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/customers`
 - `F8.9` - `jobs`
   - campos: `slug`, `namePt`, `nameEn`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`

@@ -263,11 +263,11 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, buildResult.payload);
+        await this.submitUpsert(buildResult.payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -282,17 +282,23 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     page = this.pagination().page,
     search = this.searchQuery(),
   ): Promise<void> {
+    const accessToken = this.adminSessionService.accessToken();
+
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set(
+        'pages.admin.spokenLanguages.feedback.missingSession',
+      );
+      this.isLoadingSignal.set(false);
+      return;
+    }
 
     try {
       const [spokenLanguagesResponse, imageAssetsResponse] = await Promise.all([
         firstValueFrom(
-          this.spokenLanguagesOperationsService.getAll(
-            page,
-            this.pagination().pageSize,
-            search,
-          ),
+          this.spokenLanguagesOperationsService.getAll(page, this.pagination().pageSize, search),
         ),
         firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
       ]);
@@ -309,7 +315,6 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   }
 
   private async submitUpsert(
-    accessToken: string,
     payload: SpokenLanguageMutationPayload,
   ): Promise<void> {
     this.isSubmittingSignal.set(true);
@@ -317,7 +322,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     try {
       if (this.modalMode() === 'create') {
         await firstValueFrom(
-          this.spokenLanguagesOperationsService.create(accessToken, payload),
+          this.spokenLanguagesOperationsService.create(payload),
         );
         this.toastService.showSuccess('pages.admin.spokenLanguages.feedback.created');
       } else {
@@ -331,11 +336,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.spokenLanguagesOperationsService.update(
-            accessToken,
-            selectedSpokenLanguage.id,
-            payload,
-          ),
+          this.spokenLanguagesOperationsService.update(selectedSpokenLanguage.id, payload),
         );
         this.toastService.showSuccess('pages.admin.spokenLanguages.feedback.updated');
       }
@@ -349,7 +350,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedSpokenLanguage = this.selectedSpokenLanguage();
 
     if (!selectedSpokenLanguage) {
@@ -363,10 +364,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
 
     try {
       await firstValueFrom(
-        this.spokenLanguagesOperationsService.delete(
-          accessToken,
-          selectedSpokenLanguage.id,
-        ),
+        this.spokenLanguagesOperationsService.delete(selectedSpokenLanguage.id),
       );
 
       const nextPage =

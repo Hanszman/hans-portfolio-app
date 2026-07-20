@@ -15,15 +15,15 @@ import {
 
 const createSpokenLanguage = (): SpokenLanguageRecord => ({
   id: 'spoken-language-1',
-  code: 'en-us',
+  code: 'en',
   namePt: 'Ingles',
   nameEn: 'English',
-  proficiency: 'FLUENT',
+  proficiency: 'ADVANCED',
   highlight: true,
-  sortOrder: 2,
+  sortOrder: 1,
   imageAssetIds: ['image-asset-1'],
-  createdAt: '2026-07-17T00:00:00.000Z',
-  updatedAt: '2026-07-17T00:00:00.000Z',
+  createdAt: '2026-07-18T00:00:00.000Z',
+  updatedAt: '2026-07-18T00:00:00.000Z',
 });
 
 const createSpokenLanguagesCollectionResponse =
@@ -40,12 +40,12 @@ const createSpokenLanguagesCollectionResponse =
   });
 
 const createSpokenLanguagePayload = (): SpokenLanguageMutationPayload => ({
-  code: 'en-us',
+  code: 'en',
   namePt: 'Ingles',
   nameEn: 'English',
-  proficiency: 'FLUENT',
+  proficiency: 'ADVANCED',
   highlight: true,
-  sortOrder: 2,
+  sortOrder: 1,
   imageAssetIds: ['image-asset-1'],
 });
 
@@ -65,7 +65,7 @@ describe('SpokenLanguagesOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the spoken languages collection through the public read endpoint', () => {
+  it('should load the spoken-languages collection', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
@@ -74,12 +74,11 @@ describe('SpokenLanguagesOperationsService', () => {
     });
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc',
-      ),
+      buildApiUrl('/spoken-languages?page=1&pageSize=5&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(createSpokenLanguagesCollectionResponse());
   });
@@ -91,9 +90,7 @@ describe('SpokenLanguagesOperationsService', () => {
     service.getAll(2, 4).subscribe();
 
     const request = httpTestingController.expectOne(
-      buildApiUrl(
-        '/spoken-languages?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc',
-      ),
+      buildApiUrl('/spoken-languages?page=2&pageSize=4&sortBy=sortOrder&sortDirection=asc'),
     );
 
     expect(request.request.method).toBe('GET');
@@ -122,18 +119,16 @@ describe('SpokenLanguagesOperationsService', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service
-      .create('token-123', createSpokenLanguagePayload())
-      .subscribe((response) => {
-        expect(response).toEqual(createSpokenLanguage());
-      });
+    service.create(createSpokenLanguagePayload()).subscribe((response) => {
+      expect(response).toEqual(createSpokenLanguage());
+    });
 
     const request = httpTestingController.expectOne(
       buildApiUrl('/admin/spoken-languages'),
     );
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createSpokenLanguagePayload());
 
     request.flush(createSpokenLanguage());
@@ -144,7 +139,7 @@ describe('SpokenLanguagesOperationsService', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
-      .update('token-123', 'spoken-language-1', createSpokenLanguagePayload())
+      .update('spoken-language-1', createSpokenLanguagePayload())
       .subscribe((response) => {
         expect(response).toEqual(createSpokenLanguage());
       });
@@ -154,7 +149,7 @@ describe('SpokenLanguagesOperationsService', () => {
     );
 
     expect(request.request.method).toBe('PUT');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createSpokenLanguagePayload());
 
     request.flush(createSpokenLanguage());
@@ -164,7 +159,7 @@ describe('SpokenLanguagesOperationsService', () => {
     const service = TestBed.inject(SpokenLanguagesOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.delete('token-123', 'spoken-language-1').subscribe((response) => {
+    service.delete('spoken-language-1').subscribe((response) => {
       expect(response).toBeNull();
     });
 
@@ -173,7 +168,7 @@ describe('SpokenLanguagesOperationsService', () => {
     );
 
     expect(request.request.method).toBe('DELETE');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(null);
   });

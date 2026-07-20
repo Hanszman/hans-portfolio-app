@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
@@ -38,35 +38,15 @@ export class TagsOperationsService {
     );
   }
 
-  create(accessToken: string, payload: TagMutationPayload): Observable<TagRecord> {
-    return this.httpClient.post<TagRecord>(buildApiUrl('/admin/tags'), payload, {
-      headers: this.buildAuthHeaders(accessToken),
-    });
+  create(payload: TagMutationPayload): Observable<TagRecord> {
+    return this.httpClient.post<TagRecord>(buildApiUrl('/admin/tags'), payload);
   }
 
-  update(
-    accessToken: string,
-    tagId: string,
-    payload: TagMutationPayload,
-  ): Observable<TagRecord> {
-    return this.httpClient.put<TagRecord>(
-      buildApiUrl(`/admin/tags/${tagId}`),
-      payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
-    );
+  update(tagId: string, payload: TagMutationPayload): Observable<TagRecord> {
+    return this.httpClient.put<TagRecord>(buildApiUrl(`/admin/tags/${tagId}`), payload);
   }
 
-  delete(accessToken: string, tagId: string): Observable<void> {
-    return this.httpClient.delete<void>(buildApiUrl(`/admin/tags/${tagId}`), {
-      headers: this.buildAuthHeaders(accessToken),
-    });
-  }
-
-  private buildAuthHeaders(accessToken: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
+  delete(tagId: string): Observable<void> {
+    return this.httpClient.delete<void>(buildApiUrl(`/admin/tags/${tagId}`));
   }
 }

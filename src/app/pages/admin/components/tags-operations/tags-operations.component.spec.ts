@@ -231,7 +231,7 @@ describe('TagsOperationsComponent', () => {
     component.toggleTechnology('technology-1');
     await component.submitModal();
 
-    expect(tagsOperationsService.create).toHaveBeenCalledWith('token-123', {
+    expect(tagsOperationsService.create).toHaveBeenCalledWith({
       slug: 'backend',
       namePt: 'Back-end',
       nameEn: 'Back-end',
@@ -245,7 +245,7 @@ describe('TagsOperationsComponent', () => {
     component.updateNamePt('Front-end atualizado');
     await component.submitModal();
 
-    expect(tagsOperationsService.update).toHaveBeenCalledWith('token-123', 'tag-1', {
+    expect(tagsOperationsService.update).toHaveBeenCalledWith('tag-1', {
       slug: 'frontend',
       namePt: 'Front-end atualizado',
       nameEn: 'Front-end',
@@ -257,7 +257,7 @@ describe('TagsOperationsComponent', () => {
 
     component.openDeleteModal('tag-1');
     await component.submitModal();
-    expect(tagsOperationsService.delete).toHaveBeenCalledWith('token-123', 'tag-1');
+    expect(tagsOperationsService.delete).toHaveBeenCalledWith('tag-1');
   });
 
   it('should expose the modal titles for every workflow and open the read modal', async () => {

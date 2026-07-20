@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
@@ -39,44 +39,27 @@ export class PortfolioSettingsOperationsService {
   }
 
   create(
-    accessToken: string,
     payload: PortfolioSettingMutationPayload,
   ): Observable<PortfolioSettingRecord> {
     return this.httpClient.post<PortfolioSettingRecord>(
       buildApiUrl('/admin/portfolio-settings'),
       payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
     );
   }
 
   update(
-    accessToken: string,
     settingId: string,
     payload: PortfolioSettingMutationPayload,
   ): Observable<PortfolioSettingRecord> {
     return this.httpClient.put<PortfolioSettingRecord>(
       buildApiUrl(`/admin/portfolio-settings/${settingId}`),
       payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
     );
   }
 
-  delete(accessToken: string, settingId: string): Observable<void> {
+  delete(settingId: string): Observable<void> {
     return this.httpClient.delete<void>(
       buildApiUrl(`/admin/portfolio-settings/${settingId}`),
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
     );
-  }
-
-  private buildAuthHeaders(accessToken: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
   }
 }

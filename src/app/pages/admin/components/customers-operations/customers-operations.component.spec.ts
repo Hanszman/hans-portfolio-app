@@ -220,9 +220,16 @@ describe('CustomersOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      5,
+      '',
+    );
     expect(experiencesService.getExperiences).toHaveBeenCalledTimes(1);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      100,
+    );
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/customers'));
     expect(compiled.textContent).toContain('Create');
@@ -263,7 +270,7 @@ describe('CustomersOperationsComponent', () => {
     component.toggleImageAsset('image-asset-1');
     await component.submitModal();
 
-    expect(customersOperationsService.create).toHaveBeenCalledWith('token-123', {
+    expect(customersOperationsService.create).toHaveBeenCalledWith({
       slug: 'startup-client',
       name: 'Startup Client',
       summaryPt: 'Cliente startup',
@@ -279,7 +286,7 @@ describe('CustomersOperationsComponent', () => {
     component.updateName('Enterprise Client Updated');
     await component.submitModal();
 
-    expect(customersOperationsService.update).toHaveBeenCalledWith('token-123', 'customer-1', {
+    expect(customersOperationsService.update).toHaveBeenCalledWith('customer-1', {
       slug: 'enterprise-client',
       name: 'Enterprise Client Updated',
       summaryPt: 'Cliente corporativo',
@@ -294,7 +301,7 @@ describe('CustomersOperationsComponent', () => {
     component.openDeleteModal('customer-1');
     await component.submitModal();
 
-    expect(customersOperationsService.delete).toHaveBeenCalledWith('token-123', 'customer-1');
+    expect(customersOperationsService.delete).toHaveBeenCalledWith('customer-1');
   });
 
   it('should expose the modal titles for every workflow and open the read modal', async () => {
@@ -375,7 +382,11 @@ describe('CustomersOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(customersOperationsService.getAll).toHaveBeenCalledTimes(3);
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
+      2,
+      5,
+      '',
+    );
     expect(customersOperationsService.getAll).toHaveBeenCalledWith(
       1,
       5,
@@ -580,7 +591,11 @@ describe('CustomersOperationsComponent', () => {
     pagedComponent.openDeleteModal('customer-1');
     await pagedComponent.submitModal();
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      5,
+      '',
+    );
   });
 
   it('should render empty and load error states and keep read disabled without customers', async () => {
@@ -688,3 +703,5 @@ describe('CustomersOperationsComponent', () => {
     expect(customersOperationsService.delete).not.toHaveBeenCalled();
   });
 });
+
+

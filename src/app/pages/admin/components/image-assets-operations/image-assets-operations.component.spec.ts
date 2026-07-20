@@ -246,7 +246,11 @@ describe('ImageAssetsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      5,
+      '',
+    );
     expect(compiled.textContent).toContain('Image assets');
     expect(compiled.textContent).toContain(
       createAdminEntityEndpointLabel('/image-assets'),
@@ -301,7 +305,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.toggleTechnology('technology-1');
     await component.submitModal();
 
-    expect(imageAssetsOperationsService.create).toHaveBeenCalledWith('token-123', {
+    expect(imageAssetsOperationsService.create).toHaveBeenCalledWith({
       fileName: 'brand-light.svg',
       filePath: '/assets/img/logo/brand-light.svg',
       folder: 'logo',
@@ -329,7 +333,6 @@ describe('ImageAssetsOperationsComponent', () => {
     await component.submitModal();
 
     expect(imageAssetsOperationsService.update).toHaveBeenCalledWith(
-      'token-123',
       'image-asset-1',
       jasmine.objectContaining({
         altPt: 'Logo azul atualizado',
@@ -341,7 +344,6 @@ describe('ImageAssetsOperationsComponent', () => {
     await component.submitModal();
 
     expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith(
-      'token-123',
       'image-asset-1',
     );
   });
@@ -523,11 +525,19 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(component.selectedImageAsset()).toBeNull();
 
     await component.goToPage(2);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
+      2,
+      5,
+      '',
+    );
 
     await component.updateSearchQuery('logo');
     await component.updateSearchQuery('logo');
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'logo');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      5,
+      'logo',
+    );
 
     await component.goToPage(2);
     const callsAfterValidPageChange = imageAssetsOperationsService.getAll.calls.count();
@@ -663,10 +673,13 @@ describe('ImageAssetsOperationsComponent', () => {
     await component.submitModal();
 
     expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith(
-      'token-123',
       'image-asset-1',
     );
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
+      1,
+      5,
+      '',
+    );
   });
 
   it('should ignore submit requests when no modal mode is active', async () => {
@@ -686,3 +699,5 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(imageAssetsOperationsService.delete).not.toHaveBeenCalled();
   });
 });
+
+

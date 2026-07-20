@@ -103,6 +103,7 @@ describe('ImageAssetsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(createImageAssetsCollectionResponse());
   });
@@ -141,7 +142,7 @@ describe('ImageAssetsOperationsService', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.create('token-123', createImageAssetPayload()).subscribe((response) => {
+    service.create(createImageAssetPayload()).subscribe((response) => {
       expect(response).toEqual(createImageAsset());
     });
 
@@ -150,7 +151,7 @@ describe('ImageAssetsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createImageAssetPayload());
 
     request.flush(createImageAsset());
@@ -161,7 +162,7 @@ describe('ImageAssetsOperationsService', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
-      .update('token-123', 'image-asset-1', createImageAssetPayload())
+      .update('image-asset-1', createImageAssetPayload())
       .subscribe((response) => {
         expect(response).toEqual(createImageAsset());
       });
@@ -171,7 +172,7 @@ describe('ImageAssetsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('PUT');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createImageAssetPayload());
 
     request.flush(createImageAsset());
@@ -181,7 +182,7 @@ describe('ImageAssetsOperationsService', () => {
     const service = TestBed.inject(ImageAssetsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.delete('token-123', 'image-asset-1').subscribe((response) => {
+    service.delete('image-asset-1').subscribe((response) => {
       expect(response).toBeNull();
     });
 
@@ -190,7 +191,7 @@ describe('ImageAssetsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('DELETE');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(null);
   });

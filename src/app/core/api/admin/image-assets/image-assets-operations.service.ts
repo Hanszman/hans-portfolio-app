@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
@@ -38,45 +38,21 @@ export class ImageAssetsOperationsService {
     );
   }
 
-  create(
-    accessToken: string,
-    payload: ImageAssetMutationPayload,
-  ): Observable<ImageAssetRecord> {
-    return this.httpClient.post<ImageAssetRecord>(
-      buildApiUrl('/admin/image-assets'),
-      payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
-    );
+  create(payload: ImageAssetMutationPayload): Observable<ImageAssetRecord> {
+    return this.httpClient.post<ImageAssetRecord>(buildApiUrl('/admin/image-assets'), payload);
   }
 
   update(
-    accessToken: string,
     imageAssetId: string,
     payload: ImageAssetMutationPayload,
   ): Observable<ImageAssetRecord> {
     return this.httpClient.put<ImageAssetRecord>(
       buildApiUrl(`/admin/image-assets/${imageAssetId}`),
       payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
     );
   }
 
-  delete(accessToken: string, imageAssetId: string): Observable<void> {
-    return this.httpClient.delete<void>(
-      buildApiUrl(`/admin/image-assets/${imageAssetId}`),
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
-    );
-  }
-
-  private buildAuthHeaders(accessToken: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
+  delete(imageAssetId: string): Observable<void> {
+    return this.httpClient.delete<void>(buildApiUrl(`/admin/image-assets/${imageAssetId}`));
   }
 }

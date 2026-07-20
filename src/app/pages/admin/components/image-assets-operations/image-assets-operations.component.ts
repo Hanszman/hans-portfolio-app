@@ -318,11 +318,11 @@ export class ImageAssetsOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, buildResult.payload);
+        await this.submitUpsert(buildResult.payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -337,8 +337,16 @@ export class ImageAssetsOperationsComponent implements OnInit {
     page = this.pagination().page,
     search = this.searchQuery(),
   ): Promise<void> {
+    const accessToken = this.adminSessionService.accessToken();
+
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set('pages.admin.imageAssets.feedback.missingSession');
+      this.isLoadingSignal.set(false);
+      return;
+    }
 
     try {
       const [
@@ -369,14 +377,13 @@ export class ImageAssetsOperationsComponent implements OnInit {
   }
 
   private async submitUpsert(
-    accessToken: string,
     payload: ImageAssetMutationPayload,
   ): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(this.imageAssetsOperationsService.create(accessToken, payload));
+        await firstValueFrom(this.imageAssetsOperationsService.create(payload));
         this.toastService.showSuccess('pages.admin.imageAssets.feedback.created');
       } else {
         const selectedImageAsset = this.selectedImageAsset();
@@ -389,11 +396,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.imageAssetsOperationsService.update(
-            accessToken,
-            selectedImageAsset.id,
-            payload,
-          ),
+          this.imageAssetsOperationsService.update(selectedImageAsset.id, payload),
         );
         this.toastService.showSuccess('pages.admin.imageAssets.feedback.updated');
       }
@@ -407,7 +410,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedImageAsset = this.selectedImageAsset();
 
     if (!selectedImageAsset) {
@@ -419,7 +422,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
 
     try {
       await firstValueFrom(
-        this.imageAssetsOperationsService.delete(accessToken, selectedImageAsset.id),
+        this.imageAssetsOperationsService.delete(selectedImageAsset.id),
       );
 
       const nextPage =

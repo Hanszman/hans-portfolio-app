@@ -267,11 +267,11 @@ export class TagsOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, buildResult.payload);
+        await this.submitUpsert(buildResult.payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -310,15 +310,12 @@ export class TagsOperationsComponent implements OnInit {
     }
   }
 
-  private async submitUpsert(
-    accessToken: string,
-    payload: TagMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: TagMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(this.tagsOperationsService.create(accessToken, payload));
+        await firstValueFrom(this.tagsOperationsService.create(payload));
         this.setSuccessFeedback('pages.admin.tags.feedback.created');
       } else {
         const selectedTag = this.selectedTag();
@@ -329,7 +326,7 @@ export class TagsOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.tagsOperationsService.update(accessToken, selectedTag.id, payload),
+          this.tagsOperationsService.update(selectedTag.id, payload),
         );
         this.setSuccessFeedback('pages.admin.tags.feedback.updated');
       }
@@ -343,7 +340,7 @@ export class TagsOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedTag = this.selectedTag();
 
     if (!selectedTag) {
@@ -354,7 +351,7 @@ export class TagsOperationsComponent implements OnInit {
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(this.tagsOperationsService.delete(accessToken, selectedTag.id));
+      await firstValueFrom(this.tagsOperationsService.delete(selectedTag.id));
 
       const nextPage =
         this.tags().length === 1 && this.pagination().page > 1

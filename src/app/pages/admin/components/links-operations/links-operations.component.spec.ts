@@ -282,7 +282,7 @@ describe('LinksOperationsComponent', () => {
     component.toggleFormation('formation-1');
     await component.submitModal();
 
-    expect(linksOperationsService.create).toHaveBeenCalledWith('token-123', {
+    expect(linksOperationsService.create).toHaveBeenCalledWith({
       url: 'https://example.com/demo',
       labelPt: 'Demo',
       labelEn: 'Demo',
@@ -301,7 +301,7 @@ describe('LinksOperationsComponent', () => {
     component.updateLabelPt('Repositorio atualizado');
     await component.submitModal();
 
-    expect(linksOperationsService.update).toHaveBeenCalledWith('token-123', 'link-1', {
+    expect(linksOperationsService.update).toHaveBeenCalledWith('link-1', {
       url: 'https://github.com/vh/portfolio',
       labelPt: 'Repositorio atualizado',
       labelEn: 'Repository',
@@ -319,7 +319,7 @@ describe('LinksOperationsComponent', () => {
     component.openDeleteModal('link-1');
     await component.submitModal();
 
-    expect(linksOperationsService.delete).toHaveBeenCalledWith('token-123', 'link-1');
+    expect(linksOperationsService.delete).toHaveBeenCalledWith('link-1');
   });
 
   it('should expose the modal titles for every workflow and open the read modal', async () => {
@@ -371,7 +371,12 @@ describe('LinksOperationsComponent', () => {
   it('should support paging and relation deselection inside the modal workflows', async () => {
     linksOperationsService.getAll.and.returnValues(
       of(createCollectionResponse()),
-      of(createCollectionResponse([createLink({ id: 'link-search', url: 'https://github.com/angular/angular' })], 1)),
+      of(
+        createCollectionResponse(
+          [createLink({ id: 'link-search', url: 'https://github.com/angular/angular' })],
+          1,
+        ),
+      ),
       of(createCollectionResponse([createLink({ id: 'link-2', url: 'https://zeta.dev' })], 2)),
     );
 

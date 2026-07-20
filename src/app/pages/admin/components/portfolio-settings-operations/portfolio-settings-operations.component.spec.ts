@@ -106,9 +106,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     expect(operationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(compiled.textContent).toContain('Portfolio settings');
-    expect(compiled.textContent).toContain(
-      createAdminEntityEndpointLabel('/portfolio-settings'),
-    );
+    expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/portfolio-settings'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');
@@ -135,7 +133,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     await component.submitModal();
     fixture.detectChanges();
 
-    expect(operationsService.create).toHaveBeenCalledWith('token-123', {
+    expect(operationsService.create).toHaveBeenCalledWith({
       key: 'hero.banner',
       description: 'Controls the hero banner payload.',
       value: {
@@ -161,7 +159,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     component.updateDescription('Updated description');
     await component.submitModal();
 
-    expect(operationsService.update).toHaveBeenCalledWith('token-123', 'setting-1', {
+    expect(operationsService.update).toHaveBeenCalledWith('setting-1', {
       key: 'hero.metrics',
       description: 'Updated description',
       value: {
@@ -172,7 +170,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     component.openDeleteModal('setting-1');
     await component.submitModal();
 
-    expect(operationsService.delete).toHaveBeenCalledWith('token-123', 'setting-1');
+    expect(operationsService.delete).toHaveBeenCalledWith('setting-1');
   });
 
   it('should expose the modal titles for every workflow and open the read modal', async () => {
@@ -221,7 +219,9 @@ describe('PortfolioSettingsOperationsComponent', () => {
   it('should support modal paging and block invalid paging requests', async () => {
     operationsService.getAll.and.returnValues(
       of(createCollectionResponse()),
-      of(createCollectionResponse([createSetting({ id: 'setting-search', key: 'hero.banner' })], 1)),
+      of(
+        createCollectionResponse([createSetting({ id: 'setting-search', key: 'hero.banner' })], 1),
+      ),
       of(createCollectionResponse([createSetting({ id: 'setting-2', key: 'zeta' })], 2)),
     );
 

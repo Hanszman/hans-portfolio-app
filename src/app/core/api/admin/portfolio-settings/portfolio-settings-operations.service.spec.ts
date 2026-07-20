@@ -15,13 +15,11 @@ import {
 
 const createPortfolioSetting = (): PortfolioSettingRecord => ({
   id: 'setting-1',
-  key: 'hero.metrics',
-  value: {
-    projects: 12,
-  },
-  description: 'Controls the highlighted portfolio metrics.',
-  createdAt: '2026-07-06T00:00:00.000Z',
-  updatedAt: '2026-07-06T00:00:00.000Z',
+  key: 'hero',
+  description: 'Hero content',
+  value: { titleEn: 'Hans Portfolio' },
+  createdAt: '2026-07-09T00:00:00.000Z',
+  updatedAt: '2026-07-09T00:00:00.000Z',
 });
 
 const createPortfolioSettingsCollectionResponse =
@@ -37,14 +35,11 @@ const createPortfolioSettingsCollectionResponse =
     },
   });
 
-const createPortfolioSettingPayload =
-  (): PortfolioSettingMutationPayload => ({
-    key: 'hero.metrics',
-    value: {
-      projects: 12,
-    },
-    description: 'Controls the highlighted portfolio metrics.',
-  });
+const createPortfolioSettingPayload = (): PortfolioSettingMutationPayload => ({
+  key: 'hero',
+  description: 'Hero content',
+  value: { titleEn: 'Hans Portfolio' },
+});
 
 describe('PortfolioSettingsOperationsService', () => {
   beforeEach(() => {
@@ -62,7 +57,7 @@ describe('PortfolioSettingsOperationsService', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should load the portfolio settings collection through the public read endpoint', () => {
+  it('should load the portfolio-settings collection', () => {
     const service = TestBed.inject(PortfolioSettingsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
@@ -75,6 +70,7 @@ describe('PortfolioSettingsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(createPortfolioSettingsCollectionResponse());
   });
@@ -113,18 +109,16 @@ describe('PortfolioSettingsOperationsService', () => {
     const service = TestBed.inject(PortfolioSettingsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service
-      .create('token-123', createPortfolioSettingPayload())
-      .subscribe((response) => {
-        expect(response).toEqual(createPortfolioSetting());
-      });
+    service.create(createPortfolioSettingPayload()).subscribe((response) => {
+      expect(response).toEqual(createPortfolioSetting());
+    });
 
     const request = httpTestingController.expectOne(
       buildApiUrl('/admin/portfolio-settings'),
     );
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createPortfolioSettingPayload());
 
     request.flush(createPortfolioSetting());
@@ -135,7 +129,7 @@ describe('PortfolioSettingsOperationsService', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
-      .update('token-123', 'setting-1', createPortfolioSettingPayload())
+      .update('setting-1', createPortfolioSettingPayload())
       .subscribe((response) => {
         expect(response).toEqual(createPortfolioSetting());
       });
@@ -145,7 +139,7 @@ describe('PortfolioSettingsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('PUT');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createPortfolioSettingPayload());
 
     request.flush(createPortfolioSetting());
@@ -155,7 +149,7 @@ describe('PortfolioSettingsOperationsService', () => {
     const service = TestBed.inject(PortfolioSettingsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.delete('token-123', 'setting-1').subscribe((response) => {
+    service.delete('setting-1').subscribe((response) => {
       expect(response).toBeNull();
     });
 
@@ -164,7 +158,7 @@ describe('PortfolioSettingsOperationsService', () => {
     );
 
     expect(request.request.method).toBe('DELETE');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
+    expect(request.request.headers.has('Authorization')).toBeFalse();
 
     request.flush(null);
   });

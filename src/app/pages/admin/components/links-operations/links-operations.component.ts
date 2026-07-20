@@ -303,11 +303,11 @@ export class LinksOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, buildResult.payload);
+        await this.submitUpsert(buildResult.payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -349,15 +349,12 @@ export class LinksOperationsComponent implements OnInit {
     }
   }
 
-  private async submitUpsert(
-    accessToken: string,
-    payload: LinkMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: LinkMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(this.linksOperationsService.create(accessToken, payload));
+        await firstValueFrom(this.linksOperationsService.create(payload));
         this.setSuccessFeedback('pages.admin.links.feedback.created');
       } else {
         const selectedLink = this.selectedLink();
@@ -368,7 +365,7 @@ export class LinksOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.linksOperationsService.update(accessToken, selectedLink.id, payload),
+          this.linksOperationsService.update(selectedLink.id, payload),
         );
         this.setSuccessFeedback('pages.admin.links.feedback.updated');
       }
@@ -382,7 +379,7 @@ export class LinksOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedLink = this.selectedLink();
 
     if (!selectedLink) {
@@ -393,7 +390,7 @@ export class LinksOperationsComponent implements OnInit {
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(this.linksOperationsService.delete(accessToken, selectedLink.id));
+      await firstValueFrom(this.linksOperationsService.delete(selectedLink.id));
 
       const nextPage =
         this.links().length === 1 && this.pagination().page > 1

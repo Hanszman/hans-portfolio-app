@@ -233,11 +233,11 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, payload);
+        await this.submitUpsert(payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -296,7 +296,6 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   }
 
   private async submitUpsert(
-    accessToken: string,
     payload: PortfolioSettingMutationPayload,
   ): Promise<void> {
     this.isSubmittingSignal.set(true);
@@ -304,7 +303,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     try {
       if (this.modalMode() === 'create') {
         await firstValueFrom(
-          this.portfolioSettingsOperationsService.create(accessToken, payload),
+          this.portfolioSettingsOperationsService.create(payload),
         );
 
         this.setSuccessFeedback('pages.admin.portfolioSettings.feedback.created');
@@ -319,11 +318,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.portfolioSettingsOperationsService.update(
-            accessToken,
-            selectedSetting.id,
-            payload,
-          ),
+          this.portfolioSettingsOperationsService.update(selectedSetting.id, payload),
         );
 
         this.setSuccessFeedback('pages.admin.portfolioSettings.feedback.updated');
@@ -338,7 +333,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedSetting = this.selectedSetting();
 
     if (!selectedSetting) {
@@ -352,10 +347,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
 
     try {
       await firstValueFrom(
-        this.portfolioSettingsOperationsService.delete(
-          accessToken,
-          selectedSetting.id,
-        ),
+        this.portfolioSettingsOperationsService.delete(selectedSetting.id),
       );
 
       const nextPage =

@@ -26,9 +26,7 @@ const createSpokenLanguage = (
   ...overrides,
 });
 
-const createImageAsset = (
-  overrides: Partial<ImageAssetRecord> = {},
-): ImageAssetRecord => ({
+const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
   id: 'image-asset-1',
   fileName: 'english-flag.svg',
   filePath: '/assets/img/languages/english-flag.svg',
@@ -101,35 +99,24 @@ describe('SpokenLanguagesOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    spokenLanguagesOperationsService =
-      jasmine.createSpyObj<SpokenLanguagesOperationsService>(
-        'SpokenLanguagesOperationsService',
-        ['getAll', 'create', 'update', 'delete'],
-      );
-    imageAssetsOperationsService =
-      jasmine.createSpyObj<ImageAssetsOperationsService>(
-        'ImageAssetsOperationsService',
-        ['getAll'],
-      );
-    toastService = jasmine.createSpyObj<ToastService>('ToastService', [
-      'showSuccess',
-      'showError',
-    ]);
+    spokenLanguagesOperationsService = jasmine.createSpyObj<SpokenLanguagesOperationsService>(
+      'SpokenLanguagesOperationsService',
+      ['getAll', 'create', 'update', 'delete'],
+    );
+    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsOperationsService>(
+      'ImageAssetsOperationsService',
+      ['getAll'],
+    );
+    toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     adminSessionServiceMock = {
-      accessToken: jasmine.createSpy<() => string | null>('accessToken').and.returnValue(
-        'token-123',
-      ),
+      accessToken: jasmine
+        .createSpy<() => string | null>('accessToken')
+        .and.returnValue('token-123'),
     };
 
-    spokenLanguagesOperationsService.getAll.and.returnValue(
-      of(createCollectionResponse()),
-    );
-    spokenLanguagesOperationsService.create.and.returnValue(
-      of(createSpokenLanguage()),
-    );
-    spokenLanguagesOperationsService.update.and.returnValue(
-      of(createSpokenLanguage()),
-    );
+    spokenLanguagesOperationsService.getAll.and.returnValue(of(createCollectionResponse()));
+    spokenLanguagesOperationsService.create.and.returnValue(of(createSpokenLanguage()));
+    spokenLanguagesOperationsService.update.and.returnValue(of(createSpokenLanguage()));
     spokenLanguagesOperationsService.delete.and.returnValue(of(void 0));
     imageAssetsOperationsService.getAll.and.returnValue(
       of({
@@ -180,9 +167,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Spoken languages');
-    expect(compiled.textContent).toContain(
-      createAdminEntityEndpointLabel('/spoken-languages'),
-    );
+    expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/spoken-languages'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).toContain('Update');
@@ -217,44 +202,34 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.toggleImageAsset('image-asset-1');
     await component.submitModal();
 
-    expect(spokenLanguagesOperationsService.create).toHaveBeenCalledWith(
-      'token-123',
-      {
-        code: 'pt',
-        namePt: 'Portugues',
-        nameEn: 'Portuguese',
-        proficiency: 'NATIVE',
-        highlight: false,
-        sortOrder: 2,
-        imageAssetIds: ['image-asset-1'],
-      },
-    );
+    expect(spokenLanguagesOperationsService.create).toHaveBeenCalledWith({
+      code: 'pt',
+      namePt: 'Portugues',
+      nameEn: 'Portuguese',
+      proficiency: 'NATIVE',
+      highlight: false,
+      sortOrder: 2,
+      imageAssetIds: ['image-asset-1'],
+    });
 
     component.openUpdateModal('spoken-language-1');
     component.updateNamePt('Ingles atualizado');
     await component.submitModal();
 
-    expect(spokenLanguagesOperationsService.update).toHaveBeenCalledWith(
-      'token-123',
-      'spoken-language-1',
-      {
-        code: 'en',
-        namePt: 'Ingles atualizado',
-        nameEn: 'English',
-        proficiency: 'FLUENT',
-        highlight: true,
-        sortOrder: 1,
-        imageAssetIds: ['image-asset-1'],
-      },
-    );
+    expect(spokenLanguagesOperationsService.update).toHaveBeenCalledWith('spoken-language-1', {
+      code: 'en',
+      namePt: 'Ingles atualizado',
+      nameEn: 'English',
+      proficiency: 'FLUENT',
+      highlight: true,
+      sortOrder: 1,
+      imageAssetIds: ['image-asset-1'],
+    });
 
     component.openDeleteModal('spoken-language-1');
     await component.submitModal();
 
-    expect(spokenLanguagesOperationsService.delete).toHaveBeenCalledWith(
-      'token-123',
-      'spoken-language-1',
-    );
+    expect(spokenLanguagesOperationsService.delete).toHaveBeenCalledWith('spoken-language-1');
   });
 
   it('should expose the modal titles for every workflow and open the read modal', async () => {
@@ -273,38 +248,26 @@ describe('SpokenLanguagesOperationsComponent', () => {
     };
 
     component.openCreateModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.create.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.create.title');
 
     component.openReadModal();
     fixture.detectChanges();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.read.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.read.title');
     expect(fixture.nativeElement.textContent).toContain('English');
     expect(fixture.nativeElement.textContent).toContain('FLUENT');
     expect(fixture.nativeElement.textContent).toContain('english-flag.svg');
 
     component.openUpdatePickerModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.pickUpdate.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.pickUpdate.title');
 
     component.openDeletePickerModal();
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.pickDelete.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.pickDelete.title');
 
     component.openUpdateModal('spoken-language-1');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.update.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.update.title');
 
     component.openDeleteModal('spoken-language-1');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.spokenLanguages.modal.delete.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.spokenLanguages.modal.delete.title');
 
     component.closeModal();
     component.openUpdateModal('missing-spoken-language');
@@ -350,16 +313,8 @@ describe('SpokenLanguagesOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledTimes(3);
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      2,
-      5,
-      '',
-    );
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      'es',
-    );
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'es');
 
     component.openCreateModal();
     component.toggleImageAsset('image-asset-1');
@@ -384,9 +339,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
 
     component.openCreateModal();
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.requiredCode',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.spokenLanguages.feedback.requiredCode');
 
     component.updateCode('en');
     await component.submitModal();
@@ -447,17 +400,14 @@ describe('SpokenLanguagesOperationsComponent', () => {
       ],
     }).compileComponents();
 
-    const missingSessionFixture = TestBed.createComponent(
-      SpokenLanguagesOperationsComponent,
-    );
+    const missingSessionFixture = TestBed.createComponent(SpokenLanguagesOperationsComponent);
     await settleWorkspace(missingSessionFixture);
 
-    const missingSessionComponent =
-      missingSessionFixture.componentInstance as unknown as {
-        openCreateModal(): void;
-        submitModal(): Promise<void>;
-        modalFeedbackKey(): string | null;
-      };
+    const missingSessionComponent = missingSessionFixture.componentInstance as unknown as {
+      openCreateModal(): void;
+      submitModal(): Promise<void>;
+      modalFeedbackKey(): string | null;
+    };
 
     missingSessionComponent.openCreateModal();
     await missingSessionComponent.submitModal();
@@ -517,15 +467,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.updateProficiency('NATIVE');
     component.updateSortOrder('2');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.saveError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.spokenLanguages.feedback.saveError');
 
     component.openDeleteModal('spoken-language-1');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.deleteError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.spokenLanguages.feedback.deleteError');
   });
 
   it('should expose trackBy and move deletion reload to the previous page when removing the last item', async () => {
@@ -570,25 +516,17 @@ describe('SpokenLanguagesOperationsComponent', () => {
       trackById(index: number, item: { id: string }): string;
     };
 
-    expect(pagedComponent.trackById(0, { id: 'spoken-language-1' })).toBe(
-      'spoken-language-1',
-    );
+    expect(pagedComponent.trackById(0, { id: 'spoken-language-1' })).toBe('spoken-language-1');
 
     pagedComponent.openDeleteModal('spoken-language-1');
     await pagedComponent.submitModal();
 
-    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      '',
-    );
+    expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without spoken languages', async () => {
     TestBed.resetTestingModule();
-    spokenLanguagesOperationsService.getAll.and.returnValue(
-      of(createCollectionResponse([])),
-    );
+    spokenLanguagesOperationsService.getAll.and.returnValue(of(createCollectionResponse([])));
 
     await TestBed.configureTestingModule({
       imports: [SpokenLanguagesOperationsComponent],
@@ -662,9 +600,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       loadErrorKey(): string | null;
     };
 
-    expect(errorComponent.loadErrorKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.loadError',
-    );
+    expect(errorComponent.loadErrorKey()).toBe('pages.admin.spokenLanguages.feedback.loadError');
   });
 
   it('should ignore submit requests when no modal workflow is active', async () => {

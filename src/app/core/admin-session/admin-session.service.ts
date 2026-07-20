@@ -60,9 +60,7 @@ export class AdminSessionService {
   }
 
   async restoreSession(): Promise<AdminAuthenticatedUser | null> {
-    const accessToken = this.accessToken();
-
-    if (!accessToken) {
+    if (!this.accessToken()) {
       return null;
     }
 
@@ -77,7 +75,7 @@ export class AdminSessionService {
 
     try {
       const user = await firstValueFrom(
-        this.adminAuthenticationService.getSession(accessToken),
+        this.adminAuthenticationService.getSession(),
       );
 
       this.patchState({

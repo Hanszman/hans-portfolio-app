@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
@@ -38,38 +38,21 @@ export class CustomersOperationsService {
     );
   }
 
-  create(
-    accessToken: string,
-    payload: CustomerMutationPayload,
-  ): Observable<CustomerRecord> {
-    return this.httpClient.post<CustomerRecord>(buildApiUrl('/admin/customers'), payload, {
-      headers: this.buildAuthHeaders(accessToken),
-    });
+  create(payload: CustomerMutationPayload): Observable<CustomerRecord> {
+    return this.httpClient.post<CustomerRecord>(buildApiUrl('/admin/customers'), payload);
   }
 
   update(
-    accessToken: string,
     customerId: string,
     payload: CustomerMutationPayload,
   ): Observable<CustomerRecord> {
     return this.httpClient.put<CustomerRecord>(
       buildApiUrl(`/admin/customers/${customerId}`),
       payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
     );
   }
 
-  delete(accessToken: string, customerId: string): Observable<void> {
-    return this.httpClient.delete<void>(buildApiUrl(`/admin/customers/${customerId}`), {
-      headers: this.buildAuthHeaders(accessToken),
-    });
-  }
-
-  private buildAuthHeaders(accessToken: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
+  delete(customerId: string): Observable<void> {
+    return this.httpClient.delete<void>(buildApiUrl(`/admin/customers/${customerId}`));
   }
 }

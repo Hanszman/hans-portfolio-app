@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../../api.config';
@@ -38,35 +38,15 @@ export class LinksOperationsService {
     );
   }
 
-  create(accessToken: string, payload: LinkMutationPayload): Observable<LinkRecord> {
-    return this.httpClient.post<LinkRecord>(buildApiUrl('/admin/links'), payload, {
-      headers: this.buildAuthHeaders(accessToken),
-    });
+  create(payload: LinkMutationPayload): Observable<LinkRecord> {
+    return this.httpClient.post<LinkRecord>(buildApiUrl('/admin/links'), payload);
   }
 
-  update(
-    accessToken: string,
-    linkId: string,
-    payload: LinkMutationPayload,
-  ): Observable<LinkRecord> {
-    return this.httpClient.put<LinkRecord>(
-      buildApiUrl(`/admin/links/${linkId}`),
-      payload,
-      {
-        headers: this.buildAuthHeaders(accessToken),
-      },
-    );
+  update(linkId: string, payload: LinkMutationPayload): Observable<LinkRecord> {
+    return this.httpClient.put<LinkRecord>(buildApiUrl(`/admin/links/${linkId}`), payload);
   }
 
-  delete(accessToken: string, linkId: string): Observable<void> {
-    return this.httpClient.delete<void>(buildApiUrl(`/admin/links/${linkId}`), {
-      headers: this.buildAuthHeaders(accessToken),
-    });
-  }
-
-  private buildAuthHeaders(accessToken: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
+  delete(linkId: string): Observable<void> {
+    return this.httpClient.delete<void>(buildApiUrl(`/admin/links/${linkId}`));
   }
 }

@@ -273,11 +273,11 @@ export class CustomersOperationsComponent implements OnInit {
           return;
         }
 
-        await this.submitUpsert(accessToken, buildResult.payload);
+        await this.submitUpsert(buildResult.payload);
         return;
       }
       case 'delete':
-        await this.submitDelete(accessToken);
+        await this.submitDelete();
         return;
       default:
         return;
@@ -292,8 +292,16 @@ export class CustomersOperationsComponent implements OnInit {
     page = this.pagination().page,
     search = this.searchQuery(),
   ): Promise<void> {
+    const accessToken = this.adminSessionService.accessToken();
+
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
+
+    if (!accessToken) {
+      this.loadErrorKeySignal.set('pages.admin.customers.feedback.missingSession');
+      this.isLoadingSignal.set(false);
+      return;
+    }
 
     try {
       const [customersResponse, experiencesResponse, imageAssetsResponse] = await Promise.all([
@@ -316,15 +324,12 @@ export class CustomersOperationsComponent implements OnInit {
     }
   }
 
-  private async submitUpsert(
-    accessToken: string,
-    payload: CustomerMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: CustomerMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(this.customersOperationsService.create(accessToken, payload));
+        await firstValueFrom(this.customersOperationsService.create(payload));
         this.toastService.showSuccess('pages.admin.customers.feedback.created');
       } else {
         const selectedCustomer = this.selectedCustomer();
@@ -335,7 +340,7 @@ export class CustomersOperationsComponent implements OnInit {
         }
 
         await firstValueFrom(
-          this.customersOperationsService.update(accessToken, selectedCustomer.id, payload),
+          this.customersOperationsService.update(selectedCustomer.id, payload),
         );
         this.toastService.showSuccess('pages.admin.customers.feedback.updated');
       }
@@ -349,7 +354,7 @@ export class CustomersOperationsComponent implements OnInit {
     }
   }
 
-  private async submitDelete(accessToken: string): Promise<void> {
+  private async submitDelete(): Promise<void> {
     const selectedCustomer = this.selectedCustomer();
 
     if (!selectedCustomer) {
@@ -360,7 +365,7 @@ export class CustomersOperationsComponent implements OnInit {
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(this.customersOperationsService.delete(accessToken, selectedCustomer.id));
+      await firstValueFrom(this.customersOperationsService.delete(selectedCustomer.id));
 
       const nextPage =
         this.customers().length === 1 && this.pagination().page > 1

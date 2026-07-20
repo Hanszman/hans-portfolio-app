@@ -79,12 +79,16 @@
 }
 
 .customers-operations-selection-option {
-  @apply flex max-w-full flex-col items-start text-left;
+  @apply flex max-w-full items-center gap-3 text-left;
 }
 
 .customers-operations-selection-option-image {
-  @apply mb-3 h-12 w-12 rounded-2xl object-cover;
+  @apply h-12 w-12 shrink-0 rounded-2xl object-cover;
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.customers-operations-selection-option-copy {
+  @apply flex min-w-0 flex-1 flex-col;
 }
 
 .customers-operations-selection-option-title,
@@ -93,12 +97,11 @@
 }
 
 .customers-operations-selection-option-title {
-  @apply font-semibold;
+  @apply break-words font-semibold;
 }
 
 .customers-operations-selection-option-subtitle {
-  @apply text-xs uppercase tracking-[0.14em];
-  word-break: keep-all;
+  @apply break-words text-xs uppercase tracking-[0.14em];
 }
 
 :host ::ng-deep .customers-operations-selection-grid hans-button .hans-button-content,

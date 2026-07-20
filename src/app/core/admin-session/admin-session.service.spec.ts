@@ -126,7 +126,7 @@ describe('AdminSessionService', () => {
     const service = TestBed.inject(AdminSessionService);
     const user = await service.restoreSession();
 
-    expect(getSession).toHaveBeenCalledWith('token-123');
+    expect(getSession).toHaveBeenCalledTimes(1);
     expect(user).toEqual(createAdminUserResponse());
     expect(service.user()).toEqual(createAdminUserResponse());
     expect(service.isAuthenticated()).toBeTrue();

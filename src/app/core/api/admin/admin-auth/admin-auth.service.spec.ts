@@ -66,20 +66,17 @@ describe('AdminAuthenticationService', () => {
     request.flush(createAdminLoginResponse());
   });
 
-  it('should validate the current admin session with a bearer token', () => {
+  it('should validate the current admin session', () => {
     const service = TestBed.inject(AdminAuthenticationService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    service.getSession('token-123').subscribe((response) => {
+    service.getSession().subscribe((response) => {
       expect(response).toEqual(createAdminUserResponse());
     });
 
-    const request = httpTestingController.expectOne(
-      buildApiUrl('/admin/session'),
-    );
+    const request = httpTestingController.expectOne(buildApiUrl('/admin/session'));
 
     expect(request.request.method).toBe('GET');
-    expect(request.request.headers.get('Authorization')).toBe('Bearer token-123');
 
     request.flush(createAdminUserResponse());
   });

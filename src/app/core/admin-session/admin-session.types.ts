@@ -15,6 +15,7 @@ export interface AdminSessionState {
 }
 
 export const ADMIN_SESSION_STORAGE_KEY = 'hans-admin-access-token';
+export const ADMIN_SESSION_AUTH_EXCLUDED_PATHS = ['/auth/login'] as const;
 
 export const createAdminSessionState = (
   accessToken: string | null,
