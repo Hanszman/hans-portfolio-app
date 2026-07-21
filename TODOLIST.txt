@@ -391,3 +391,5 @@ Mas agora que testei novamente os CRUDs, ainda temos o problema das imagens. Com
 Como vc pode ver no print 1, tivemos erros no arquivo content-image-asset-uuid-validation.spec.ts. Resolva esse problema alertado pelo vs code por favor.
 Além disso, os arquivos content-contracts.constants.ts e content-image-asset-uuid-validation.spec.ts acho que poderiam estar em alguma pasta, como a shared por exemplo, ao invés de na raiz de contracts assim.
 Essa parte que vc colocou "message: 'each value in imageAssetIds must be a UUID'," em todos os contracts, acho que poderiamos abstrair essa parte para não ter que repetir tudo em todos eles.
+-Show de bola, valeu! Outra coisa:
+Reparei que muitos arquivos do Back-End sem teste unitário: controllers, contracts, decorators, etc. Como que está passando com 100% de coverage se nem todas as linhas estão sendo testadas unitariamente? implemente testes para todos os arquivos que estão sem por favor. Se já existirem os testes, mas estiverem localizados todos nos testes dos services respectivos, agrupe melhor os arquivos de teste, separando qual ta testando o service, o controller, o contract, etc.
