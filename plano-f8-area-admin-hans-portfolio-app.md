@@ -78,7 +78,7 @@ Criar um dominio dedicado em `src/app/core/admin-session/` com:
 - `admin-session.service.ts`
 - `admin-session.types.ts`
 - `admin-session.guard.ts`
-- `admin-session.interceptor.ts` se o fluxo com bearer token ficar mais limpo com interceptor
+- `admin-session-auth.interceptor.ts`
 - helpers de persistencia e limpeza de sessao
 - specs de cada arquivo relevante
 
@@ -88,6 +88,7 @@ Responsabilidades:
 - logout
 - hydrate de sessao
 - armazenamento de token
+- anexar `Authorization: Bearer <token>` de forma centralizada em chamadas protegidas via interceptor
 - chamada de `GET /admin/session` via `admin-auth-api`
 - exposicao do estado global da sessao com signals
 
@@ -273,7 +274,10 @@ Cada entidade deve ter, no minimo:
 - quando o modal permanecer aberto, o erro deve aparecer dentro do proprio modal
 - mensagens fora do modal ficam reservadas para feedbacks da tela apos fechamento da operacao
 - apos a consolidacao do padrao de feedback, o portfolio deve priorizar `hans-toast` tambem para falhas de autenticacao, consultas administrativas e mutacoes protegidas
-- quando estivermos dentro da shell admin, a leitura da colecao deve priorizar o endpoint protegido `/admin/<entity>` sempre que esse contrato existir, evitando divergencia entre o estado publico e o estado autenticado da area administrativa
+- quando estivermos dentro da shell admin, a leitura continua partindo dos endpoints `GET` publicos da entidade, preservando a arquitetura original da API
+- a visao autenticada da shell admin deve ser resolvida sem duplicar controladores `GET` em `/admin/<entity>`
+- o backend deve centralizar o preview administrativo em um service dedicado por request, habilitando leitura sincronizada com o banco quando houver sessao admin valida sem quebrar o contrato publico das rotas `GET`
+- o frontend nao deve propagar bearer token manualmente em cada service ou componente; chamadas protegidas devem depender do interceptor administrativo centralizado
 
 ### 6.6. Template obrigatorio para as proximas entidades da F8
 
@@ -637,6 +641,8 @@ Cada nova entidade protegida deve:
   - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
 - `F8.7` ajustada em `2026-07-20`:
   - leitura administrativa consolidada em `GET /spoken-languages`, mantendo as mutacoes protegidas em `/admin/spoken-languages`
+  - preview autenticado centralizado no backend para manter a shell admin sincronizada com o banco sem duplicar `GET` administrativos
+  - interceptor administrativo consolidado no frontend para anexar bearer token apenas nas chamadas protegidas, sem plugar `accessToken` manualmente nos componentes
   - seletores de `image-assets` refinados para trabalhar com IDs UUID reais do catalogo protegido
   - previews reais de `image-assets` adicionados nas tags/cards de selecao do formulario
   - cobertura total preservada apos os ajustes
@@ -644,7 +650,8 @@ Cada nova entidade protegida deve:
 - entregas concluidas na `F8.8`:
   - dominio `src/app/core/api/admin/customers/` consolidado para o CRUD de `customers`
   - workspace administrativo dedicado em `src/app/pages/admin/components/customers-operations/` estabilizado com helper, modal interno e specs
-  - leitura administrativa consolidada em `GET /admin/customers`, mantendo `create`, `update` e `delete` no mesmo dominio protegido
+  - leitura administrativa consolidada em `GET /customers`, mantendo `create`, `update` e `delete` no dominio protegido `/admin/customers`
+  - preview autenticado centralizado no backend para manter a shell admin sincronizada com o banco sem replicar `GET` em `/admin/customers`
   - relacoes com `experiences` e `image-assets` integradas ao formulario seguindo o template oficial da F8
   - seletores de `image-assets` ajustados para usar UUIDs reais e exibir preview visual da imagem nas tags/cards
   - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` estabilizados com `hans-toast`

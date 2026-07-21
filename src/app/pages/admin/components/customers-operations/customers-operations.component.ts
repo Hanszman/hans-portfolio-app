@@ -292,16 +292,8 @@ export class CustomersOperationsComponent implements OnInit {
     page = this.pagination().page,
     search = this.searchQuery(),
   ): Promise<void> {
-    const accessToken = this.adminSessionService.accessToken();
-
     this.isLoadingSignal.set(true);
     this.loadErrorKeySignal.set(null);
-
-    if (!accessToken) {
-      this.loadErrorKeySignal.set('pages.admin.customers.feedback.missingSession');
-      this.isLoadingSignal.set(false);
-      return;
-    }
 
     try {
       const [customersResponse, experiencesResponse, imageAssetsResponse] = await Promise.all([

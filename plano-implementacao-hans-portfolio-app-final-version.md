@@ -1083,7 +1083,7 @@ Implementar a etapa final do remake com uma area administrativa autenticada no f
   - tipos da sessao administrativa
   - helper de persistencia de token
   - guard de rota admin
-  - interceptor opcional para anexar `Authorization: Bearer <token>` nas chamadas protegidas
+  - interceptor administrativo obrigatorio para anexar `Authorization: Bearer <token>` nas chamadas protegidas de forma centralizada
 - `src/app/pages/login/`
   - tela standalone de login
   - formulario com componentes da `hans-ui-design-lib`
@@ -1238,11 +1238,11 @@ Regra importante de modelagem para a F8:
 - `F8.7` - `spoken-languages`
   - campos: `code`, `namePt`, `nameEn`, `proficiency`, `highlight`, `sortOrder`
   - relacionamentos: `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /spoken-languages`, UUIDs reais para `imageAssetIds` e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/spoken-languages`
+  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /spoken-languages`, preview autenticado centralizado no backend, interceptor administrativo centralizado no frontend, UUIDs reais para `imageAssetIds` e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/spoken-languages`
 - `F8.8` - `customers`
   - campos: `slug`, `name`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /admin/customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/customers`
+  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /customers`, preview autenticado centralizado no backend, CRUD estabilizado com relacoes de `experiences` e `image-assets`, previews visuais nas selecoes de imagem e mutacoes preservadas em `/admin/customers`
 - `F8.9` - `jobs`
   - campos: `slug`, `namePt`, `nameEn`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
@@ -1307,6 +1307,8 @@ Regra importante de modelagem para a F8:
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
 - quando a shell admin operar uma entidade com endpoint protegido proprio de leitura, a colecao deve priorizar `/admin/<entity>`; quando a API expuser apenas leitura publica, devemos consumir o endpoint publico e manter somente as mutacoes em `/admin/<entity>`
 - relacoes com `image-assets` devem exibir previews reais da imagem nas tags/cards de selecao das entidades atuais e futuras
+- as rotas `GET` publicas das entidades devem permanecer publicas; quando a shell admin precisar de leitura sincronizada com o banco para sessao autenticada, isso deve ser resolvido por preview centralizado no backend, sem duplicar controladores `GET` em `/admin`
+- o frontend deve centralizar autenticacao HTTP administrativa em interceptor; nao devemos injetar bearer token manualmente em cada service, componente ou fluxo de leitura
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao devemos criar uma segunda pasta paralela apenas para as operacoes de CUD dentro de `admin`; devemos reaproveitar e expandir o service ja existente no dominio oficial da entidade
 
 #### Criterios de aceite
