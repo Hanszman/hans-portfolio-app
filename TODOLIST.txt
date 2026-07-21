@@ -387,3 +387,7 @@ Então vc fez toda a refatoração que eu pedi, removendo os isPublished, só fa
 OBS: Testar CRUDS e corrigir problema da imagem UUID (endpoints com 404 pra salvar/editar imagens).
 -Beleza, ótimo! Obrigado!
 Mas agora que testei novamente os CRUDs, ainda temos o problema das imagens. Como vc pode ver no print 1, quando tentamos criar/atualizar algum registro relacionando-o com algumas imagens específicas, intermitentemente, dependendo da imagem, recebemos esse erro "each value in imageAssetIds must be a UUID". Resolva por favor, seguindo os padrões que temos nos projetos e sem desrespetiar a arquitetura, mantendo lint e test 100% passando.
+-Ótimo! O problema foi corrigido, porém ainda temos algumas questões:
+Como vc pode ver no print 1, tivemos erros no arquivo content-image-asset-uuid-validation.spec.ts. Resolva esse problema alertado pelo vs code por favor.
+Além disso, os arquivos content-contracts.constants.ts e content-image-asset-uuid-validation.spec.ts acho que poderiam estar em alguma pasta, como a shared por exemplo, ao invés de na raiz de contracts assim.
+Essa parte que vc colocou "message: 'each value in imageAssetIds must be a UUID'," em todos os contracts, acho que poderiamos abstrair essa parte para não ter que repetir tudo em todos eles.
