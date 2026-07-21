@@ -21,7 +21,6 @@ const createCustomer = (): CustomerRecord => ({
   summaryEn: 'Corporate client',
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   experienceIds: ['experience-1'],
   imageAssetIds: ['image-asset-1'],
   createdAt: '2026-07-17T00:00:00.000Z',
@@ -47,7 +46,6 @@ const createCustomerPayload = (): CustomerMutationPayload => ({
   summaryEn: 'Corporate client',
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   experienceIds: ['experience-1'],
   imageAssetIds: ['image-asset-1'],
 });

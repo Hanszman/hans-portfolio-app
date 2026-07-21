@@ -80,7 +80,6 @@ export class ImageAssetsOperationsModalComponent {
   readonly widthChanged = output<string>();
   readonly heightChanged = output<string>();
   readonly sortOrderChanged = output<string>();
-  readonly publicationChanged = output<boolean>();
   readonly projectToggled = output<string>();
   readonly experienceToggled = output<string>();
   readonly technologyToggled = output<string>();
@@ -182,20 +181,6 @@ export class ImageAssetsOperationsModalComponent {
 
   protected emitSortOrderChange(value: string): void {
     this.sortOrderChanged.emit(value);
-  }
-
-  protected emitPublicationChange(event: Event): void {
-    const customEvent = event as Event & {
-      detail?: boolean;
-      target: (EventTarget & { checked?: boolean }) | null;
-    };
-
-    if (typeof customEvent.detail === 'boolean') {
-      this.publicationChanged.emit(customEvent.detail);
-      return;
-    }
-
-    this.publicationChanged.emit(Boolean(customEvent.target?.checked));
   }
 
   protected toggleProject(projectId: string): void {

@@ -135,7 +135,6 @@ describe('experiences helper', () => {
             frequency: 'OCCASIONAL',
             highlight: false,
             sortOrder: 1,
-            isPublished: true,
             createdAt: '2026-03-25T17:44:29.830Z',
             updatedAt: '2026-03-25T17:44:29.830Z',
           },

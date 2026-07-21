@@ -96,23 +96,6 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="links-operations-toggle">
-          <div class="links-operations-selection-copy">
-            <p>{{ 'pages.admin.links.fields.isPublished.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.links.fields.isPublished.description' | translate }}
-            </span>
-          </div>
-
-          <hans-toggle
-            [checked]="form().isPublished"
-            [toggleColor]="'primary'"
-            [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.links.fields.isPublished.label' | translate"
-            (change)="emitPublicationChange($event)"
-          ></hans-toggle>
-        </div>
-
         <div class="links-operations-selection-section">
           <div class="links-operations-selection-copy">
             <p>{{ 'pages.admin.links.fields.projects.label' | translate }}</p>
@@ -340,19 +323,6 @@
                     {{ 'pages.admin.links.card.sortOrder' | translate }}
                   </p>
                   <p>{{ link.sortOrderLabel }}</p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.isPublished' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      link.isPublished
-                        ? ('pages.admin.links.fields.isPublished.enabled' | translate)
-                        : ('pages.admin.links.fields.isPublished.disabled' | translate)
-                    }}
-                  </p>
                 </div>
 
                 <div class="links-operations-item-copy">

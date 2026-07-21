@@ -21,7 +21,6 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     mimeType: 'image/svg+xml',
     dimensionsLabel: '240 x 96',
     sortOrderLabel: '1',
-    isPublished: true,
     projectLabels: ['Portfolio remake'],
     experienceLabels: ['Analista (Stefanini Ford)'],
     technologyLabels: ['Angular'],
@@ -73,7 +72,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const widthSpy = jasmine.createSpy('widthChanged');
     const heightSpy = jasmine.createSpy('heightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
-    const publicationSpy = jasmine.createSpy('publicationChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
     const experienceSpy = jasmine.createSpy('experienceToggled');
     const technologySpy = jasmine.createSpy('technologyToggled');
@@ -93,7 +91,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     component.widthChanged.subscribe(widthSpy);
     component.heightChanged.subscribe(heightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
-    component.publicationChanged.subscribe(publicationSpy);
     component.projectToggled.subscribe(projectSpy);
     component.experienceToggled.subscribe(experienceSpy);
     component.technologyToggled.subscribe(technologySpy);
@@ -139,7 +136,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
       emitWidthChange(value: string): void;
       emitHeightChange(value: string): void;
       emitSortOrderChange(value: string): void;
-      emitPublicationChange(event: Event): void;
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
@@ -163,10 +159,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     componentAccess.emitWidthChange('240');
     componentAccess.emitHeightChange('96');
     componentAccess.emitSortOrderChange('7');
-    componentAccess.emitPublicationChange(
-      new CustomEvent('change', { detail: true }),
-    );
-    componentAccess.emitPublicationChange({ target: { checked: false } } as never);
     componentAccess.toggleProject('project-1');
     componentAccess.toggleExperience('experience-1');
     componentAccess.toggleTechnology('technology-1');
@@ -207,8 +199,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(widthSpy).toHaveBeenCalledOnceWith('240');
     expect(heightSpy).toHaveBeenCalledOnceWith('96');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
-    expect(publicationSpy).toHaveBeenCalledWith(true);
-    expect(publicationSpy).toHaveBeenCalledWith(false);
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
     expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
     expect(technologySpy).toHaveBeenCalledOnceWith('technology-1');
@@ -309,7 +299,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
       width: '240',
       height: '96',
       sortOrder: '1',
-      isPublished: true,
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],

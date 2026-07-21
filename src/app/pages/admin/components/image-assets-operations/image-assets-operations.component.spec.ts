@@ -29,7 +29,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   width: 240,
   height: 96,
   sortOrder: 1,
-  isPublished: true,
   projectIds: ['project-1'],
   experienceIds: ['experience-1'],
   technologyIds: ['technology-1'],
@@ -59,7 +58,6 @@ const createProject = (
   startDate: '2024-01-01',
   endDate: null,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -87,7 +85,6 @@ const createExperience = (
   isCurrent: true,
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -279,7 +276,6 @@ describe('ImageAssetsOperationsComponent', () => {
       updateWidth(value: string): void;
       updateHeight(value: string): void;
       updateSortOrder(value: string): void;
-      updatePublication(value: boolean): void;
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
@@ -299,7 +295,6 @@ describe('ImageAssetsOperationsComponent', () => {
     component.updateWidth('180');
     component.updateHeight('72');
     component.updateSortOrder('3');
-    component.updatePublication(false);
     component.toggleProject('project-1');
     component.toggleExperience('experience-1');
     component.toggleTechnology('technology-1');
@@ -318,7 +313,6 @@ describe('ImageAssetsOperationsComponent', () => {
       width: 180,
       height: 72,
       sortOrder: 3,
-      isPublished: false,
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],

@@ -24,7 +24,6 @@ const createCustomer = (overrides: Partial<CustomerRecord> = {}): CustomerRecord
   summaryEn: 'Corporate client',
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   experienceIds: ['experience-1'],
   imageAssetIds: ['image-asset-1'],
   experiences: [],
@@ -49,7 +48,6 @@ const createExperience = (
   isCurrent: true,
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -75,7 +73,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   width: 128,
   height: 128,
   sortOrder: 1,
-  isPublished: true,
   projectIds: [],
   experienceIds: [],
   technologyIds: [],
@@ -252,7 +249,6 @@ describe('CustomersOperationsComponent', () => {
       updateSummaryEn(value: string): void;
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
-      updatePublication(value: boolean): void;
       toggleExperience(experienceId: string): void;
       toggleImageAsset(imageAssetId: string): void;
       submitModal(): Promise<void>;
@@ -265,7 +261,6 @@ describe('CustomersOperationsComponent', () => {
     component.updateSummaryEn('Startup client');
     component.updateHighlight(false);
     component.updateSortOrder('2');
-    component.updatePublication(false);
     component.toggleExperience('experience-1');
     component.toggleImageAsset('image-asset-1');
     await component.submitModal();
@@ -277,7 +272,6 @@ describe('CustomersOperationsComponent', () => {
       summaryEn: 'Startup client',
       highlight: false,
       sortOrder: 2,
-      isPublished: false,
       experienceIds: ['experience-1'],
       imageAssetIds: ['image-asset-1'],
     });
@@ -293,7 +287,6 @@ describe('CustomersOperationsComponent', () => {
       summaryEn: 'Corporate client',
       highlight: true,
       sortOrder: 1,
-      isPublished: true,
       experienceIds: ['experience-1'],
       imageAssetIds: ['image-asset-1'],
     });

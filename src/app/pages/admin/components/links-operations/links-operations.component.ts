@@ -253,10 +253,6 @@ export class LinksOperationsComponent implements OnInit {
     this.patchForm({ sortOrder: value });
   }
 
-  updatePublication(value: boolean): void {
-    this.patchForm({ isPublished: value });
-  }
-
   toggleProject(projectId: string): void {
     this.formSignal.update((formValue) => ({
       ...formValue,

@@ -121,7 +121,6 @@ describe('projects helper', () => {
               labelEn: 'Angular EN',
               color: '#dd0031',
               sortOrder: 1,
-              isPublished: true,
               createdAt: '2026-01-01T00:00:00.000Z',
               updatedAt: '2026-01-01T00:00:00.000Z',
             },

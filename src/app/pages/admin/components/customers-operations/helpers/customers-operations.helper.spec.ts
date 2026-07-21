@@ -29,7 +29,6 @@ const createExperience = (
   isCurrent: true,
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -60,7 +59,6 @@ const createCustomer = (overrides: Partial<CustomerRecord> = {}): CustomerRecord
   summaryEn: 'Corporate client',
   highlight: true,
   sortOrder: 2,
-  isPublished: true,
   experienceIds: ['experience-2'],
   imageAssetIds: ['image-asset-2'],
   experiences: [
@@ -101,7 +99,6 @@ const createExperienceCustomer = (): ExperienceCollectionItemResponse['customers
     summaryEn: 'Corporate client',
     highlight: true,
     sortOrder: 2,
-    isPublished: true,
     createdAt: '2024-01-01T00:00:00.000Z',
     updatedAt: '2024-01-01T00:00:00.000Z',
   },
@@ -194,7 +191,6 @@ describe('customers operations helper', () => {
                 summaryEn: 'Corporate client',
                 highlight: true,
                 sortOrder: 2,
-                isPublished: true,
                 createdAt: '2024-01-01T00:00:00.000Z',
                 updatedAt: '2024-01-01T00:00:00.000Z',
               },
@@ -216,7 +212,6 @@ describe('customers operations helper', () => {
                 summaryEn: 'Corporate client',
                 highlight: true,
                 sortOrder: 2,
-                isPublished: true,
                 createdAt: '2024-01-01T00:00:00.000Z',
                 updatedAt: '2024-01-01T00:00:00.000Z',
               },
@@ -240,7 +235,6 @@ describe('customers operations helper', () => {
       summaryEn: '',
       highlight: true,
       sortOrder: '0',
-      isPublished: true,
       experienceIds: [],
       imageAssetIds: [],
     });
@@ -270,7 +264,6 @@ describe('customers operations helper', () => {
       summaryEn: 'Corporate client',
       highlight: true,
       sortOrder: '2',
-      isPublished: true,
       experienceIds: ['experience-2', 'experience-3', 'experience-1'],
       imageAssetIds: ['image-asset-2', 'image-asset-3', 'image-asset-1'],
     });
@@ -286,7 +279,6 @@ describe('customers operations helper', () => {
           imageAssets: undefined,
           highlight: null,
           sortOrder: null,
-          isPublished: null,
         }),
         [],
         [],
@@ -298,7 +290,6 @@ describe('customers operations helper', () => {
       summaryEn: 'Corporate client',
       highlight: false,
       sortOrder: '0',
-      isPublished: true,
       experienceIds: [],
       imageAssetIds: [],
     });
@@ -358,7 +349,6 @@ describe('customers operations helper', () => {
           slug: 'alpha-client',
           sortOrder: 1,
           highlight: null,
-          isPublished: null,
           experienceIds: ['missing-experience'],
           experiences: [],
           imageAssetIds: ['missing-image-asset'],
@@ -371,7 +361,6 @@ describe('customers operations helper', () => {
 
     expect(viewModels.map((viewModel) => viewModel.name)).toEqual(['Alpha Client', 'Zeta Client']);
     expect(viewModels[0].highlight).toBeFalse();
-    expect(viewModels[0].isPublished).toBeTrue();
     expect(viewModels[0].experienceLabels).toEqual(['missing-experience']);
     expect(viewModels[0].imageAssetLabels).toEqual(['missing-image-asset']);
   });
@@ -433,7 +422,6 @@ describe('customers operations helper', () => {
         summaryEn: ' Corporate client ',
         highlight: true,
         sortOrder: '5',
-        isPublished: false,
         experienceIds: ['experience-1', 'experience-1'],
         imageAssetIds: ['image-asset-1', 'image-asset-1'],
       }),
@@ -446,7 +434,6 @@ describe('customers operations helper', () => {
         summaryEn: 'Corporate client',
         highlight: true,
         sortOrder: 5,
-        isPublished: false,
         experienceIds: ['experience-1'],
         imageAssetIds: ['image-asset-1'],
       },
@@ -462,7 +449,6 @@ describe('customers operations helper', () => {
         summaryEn: '',
         highlight: true,
         sortOrder: 'abc',
-        isPublished: true,
         experienceIds: [],
         imageAssetIds: [],
       }),
@@ -479,7 +465,6 @@ describe('customers operations helper', () => {
         summaryEn: '',
         highlight: true,
         sortOrder: 'abc',
-        isPublished: true,
         experienceIds: [],
         imageAssetIds: [],
       }),
@@ -496,7 +481,6 @@ describe('customers operations helper', () => {
         summaryEn: '',
         highlight: true,
         sortOrder: 'abc',
-        isPublished: true,
         experienceIds: [],
         imageAssetIds: [],
       }),
@@ -513,7 +497,6 @@ describe('customers operations helper', () => {
         summaryEn: '',
         highlight: true,
         sortOrder: 'abc',
-        isPublished: true,
         experienceIds: [],
         imageAssetIds: [],
       }),
@@ -530,7 +513,6 @@ describe('customers operations helper', () => {
         summaryEn: 'Corporate client',
         highlight: true,
         sortOrder: 'abc',
-        isPublished: true,
         experienceIds: [],
         imageAssetIds: [],
       }),

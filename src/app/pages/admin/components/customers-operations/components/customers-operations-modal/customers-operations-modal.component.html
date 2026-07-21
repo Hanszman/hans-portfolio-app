@@ -77,23 +77,6 @@
           ></hans-toggle>
         </div>
 
-        <div class="customers-operations-toggle">
-          <div class="customers-operations-selection-copy">
-            <p>{{ 'pages.admin.customers.fields.isPublished.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.customers.fields.isPublished.description' | translate }}
-            </span>
-          </div>
-
-          <hans-toggle
-            [checked]="form().isPublished"
-            [toggleColor]="'primary'"
-            [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.customers.fields.isPublished.label' | translate"
-            (change)="emitPublicationChange($event)"
-          ></hans-toggle>
-        </div>
-
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
           inputColor="base"
@@ -230,12 +213,6 @@
                       customer.highlight
                         ? ('pages.admin.customers.fields.highlight.enabled' | translate)
                         : ('pages.admin.customers.fields.highlight.disabled' | translate),
-                    ],
-                    [
-                      'pages.admin.customers.card.isPublished',
-                      customer.isPublished
-                        ? ('pages.admin.customers.fields.isPublished.enabled' | translate)
-                        : ('pages.admin.customers.fields.isPublished.disabled' | translate),
                     ],
                     ['pages.admin.customers.card.sortOrder', customer.sortOrderLabel],
                     [

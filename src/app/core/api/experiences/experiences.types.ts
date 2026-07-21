@@ -19,7 +19,6 @@ export interface ExperienceTechnologyResponse {
   frequency: string;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,7 +40,6 @@ export interface ExperienceProjectResponse {
   startDate: string;
   endDate: string | null;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -54,7 +52,6 @@ export interface ExperienceCustomerResponse {
   summaryEn: string;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -68,7 +65,6 @@ export interface ExperienceJobResponse {
   summaryEn: string;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -87,7 +83,6 @@ export interface ExperienceImageAssetResponse {
   width: number | null;
   height: number | null;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -141,7 +136,6 @@ export interface ExperienceCollectionItemResponse {
   isCurrent: boolean;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
   technologies: ExperienceTechnologyRelationResponse[];

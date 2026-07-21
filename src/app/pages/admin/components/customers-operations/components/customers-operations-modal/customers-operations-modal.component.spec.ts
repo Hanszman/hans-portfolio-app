@@ -13,7 +13,6 @@ const CUSTOMERS: readonly CustomerOperationsViewModel[] = [
     summaryPt: 'Cliente corporativo',
     summaryEn: 'Corporate client',
     highlight: true,
-    isPublished: true,
     sortOrderLabel: '1',
     experienceLabels: ['Analista (Ford)'],
     imageAssetLabels: ['ford.svg (ICON)'],
@@ -55,7 +54,6 @@ describe('CustomersOperationsModalComponent', () => {
     const summaryPtSpy = jasmine.createSpy('summaryPtChanged');
     const summaryEnSpy = jasmine.createSpy('summaryEnChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
-    const publicationSpy = jasmine.createSpy('publicationChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const experienceSpy = jasmine.createSpy('experienceToggled');
     const imageAssetSpy = jasmine.createSpy('imageAssetToggled');
@@ -68,7 +66,6 @@ describe('CustomersOperationsModalComponent', () => {
     component.summaryPtChanged.subscribe(summaryPtSpy);
     component.summaryEnChanged.subscribe(summaryEnSpy);
     component.highlightChanged.subscribe(highlightSpy);
-    component.publicationChanged.subscribe(publicationSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.experienceToggled.subscribe(experienceSpy);
     component.imageAssetToggled.subscribe(imageAssetSpy);
@@ -109,7 +106,6 @@ describe('CustomersOperationsModalComponent', () => {
       emitSummaryPtChange(value: string): void;
       emitSummaryEnChange(value: string): void;
       emitHighlightChange(event: Event): void;
-      emitPublicationChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleExperience(experienceId: string): void;
       toggleImageAsset(imageAssetId: string): void;
@@ -126,8 +122,6 @@ describe('CustomersOperationsModalComponent', () => {
     componentAccess.emitSummaryEnChange('Corporate client');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
-    componentAccess.emitPublicationChange(new CustomEvent('change', { detail: true }));
-    componentAccess.emitPublicationChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleExperience('experience-1');
     componentAccess.toggleImageAsset('image-asset-1');
@@ -160,8 +154,6 @@ describe('CustomersOperationsModalComponent', () => {
     expect(summaryEnSpy).toHaveBeenCalledOnceWith('Corporate client');
     expect(highlightSpy).toHaveBeenCalledWith(true);
     expect(highlightSpy).toHaveBeenCalledWith(false);
-    expect(publicationSpy).toHaveBeenCalledWith(true);
-    expect(publicationSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
     expect(imageAssetSpy).toHaveBeenCalledOnceWith('image-asset-1');
@@ -231,7 +223,6 @@ describe('CustomersOperationsModalComponent', () => {
       summaryEn: 'Corporate client',
       highlight: true,
       sortOrder: 1,
-      isPublished: true,
       experienceIds: ['experience-1'],
       imageAssetIds: ['image-asset-1'],
     });
@@ -242,7 +233,6 @@ describe('CustomersOperationsModalComponent', () => {
       summaryEn: 'Corporate client',
       highlight: true,
       sortOrder: '1',
-      isPublished: true,
       experienceIds: ['experience-1'],
       imageAssetIds: ['image-asset-1'],
     });

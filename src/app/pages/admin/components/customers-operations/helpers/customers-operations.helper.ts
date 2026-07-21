@@ -153,7 +153,6 @@ export const buildCustomersFormValue = (
     summaryEn: customer.summaryEn,
     highlight: customer.highlight ?? false,
     sortOrder: String(customer.sortOrder ?? 0),
-    isPublished: customer.isPublished ?? true,
     experienceIds: normalizeCustomerExperienceIds(customer, experiences),
     imageAssetIds: normalizeCustomerImageAssetIds(customer, imageAssets),
   };
@@ -189,7 +188,6 @@ export const buildCustomersViewModels = (
         summaryPt: customer.summaryPt,
         summaryEn: customer.summaryEn,
         highlight: customer.highlight ?? false,
-        isPublished: customer.isPublished ?? true,
         sortOrderLabel: String(customer.sortOrder ?? 0),
         experienceLabels: experienceIds.map((experienceId) =>
           resolveExperienceLabel(experienceId, experienceMap),
@@ -256,7 +254,6 @@ export const buildCustomersMutationPayload = (
       summaryEn,
       highlight: formValue.highlight,
       sortOrder,
-      isPublished: formValue.isPublished,
       experienceIds: [...new Set(formValue.experienceIds)],
       imageAssetIds: [...new Set(formValue.imageAssetIds)],
     } satisfies CustomerMutationPayload,

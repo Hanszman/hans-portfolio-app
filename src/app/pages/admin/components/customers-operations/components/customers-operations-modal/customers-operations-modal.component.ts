@@ -71,7 +71,6 @@ export class CustomersOperationsModalComponent {
   readonly summaryEnChanged = output<string>();
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
-  readonly publicationChanged = output<boolean>();
   readonly experienceToggled = output<string>();
   readonly imageAssetToggled = output<string>();
   readonly submitted = output<void>();
@@ -157,20 +156,6 @@ export class CustomersOperationsModalComponent {
     }
 
     this.highlightChanged.emit(Boolean(customEvent.target?.checked));
-  }
-
-  protected emitPublicationChange(event: Event): void {
-    const customEvent = event as Event & {
-      detail?: boolean;
-      target: (EventTarget & { checked?: boolean }) | null;
-    };
-
-    if (typeof customEvent.detail === 'boolean') {
-      this.publicationChanged.emit(customEvent.detail);
-      return;
-    }
-
-    this.publicationChanged.emit(Boolean(customEvent.target?.checked));
   }
 
   protected toggleExperience(experienceId: string): void {

@@ -189,7 +189,6 @@ export const buildLinksFormValue = (
     descriptionEn: link.descriptionEn ?? '',
     type: link.type ?? '',
     sortOrder: String(link.sortOrder ?? 0),
-    isPublished: link.isPublished ?? true,
     projectIds: normalizeLinkProjectIds(link, projects),
     experienceIds: normalizeLinkExperienceIds(link),
     technologyIds: normalizeLinkTechnologyIds(link),
@@ -233,7 +232,6 @@ export const buildLinksViewModels = (
         descriptionEn: link.descriptionEn ?? '',
         type: link.type ?? '',
         sortOrderLabel: String(link.sortOrder ?? 0),
-        isPublished: link.isPublished ?? true,
         projectLabels: projectIds.map((projectId) =>
           resolveProjectLabel(projectId, projectMap),
         ),
@@ -293,7 +291,6 @@ export const buildLinksMutationPayload = (
       descriptionEn: formValue.descriptionEn.trim(),
       type,
       sortOrder,
-      isPublished: formValue.isPublished,
       projectIds: [...new Set(formValue.projectIds)],
       experienceIds: [...new Set(formValue.experienceIds)],
       technologyIds: [...new Set(formValue.technologyIds)],

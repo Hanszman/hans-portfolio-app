@@ -237,10 +237,6 @@ export class CustomersOperationsComponent implements OnInit {
     this.patchForm({ sortOrder: value });
   }
 
-  updatePublication(value: boolean): void {
-    this.patchForm({ isPublished: value });
-  }
-
   toggleExperience(experienceId: string): void {
     this.formSignal.update((formValue) => ({
       ...formValue,

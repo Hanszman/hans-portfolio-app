@@ -50,7 +50,6 @@ export interface ImageAssetRecord {
   width?: number | null;
   height?: number | null;
   sortOrder?: number | null;
-  isPublished?: boolean | null;
   projectIds?: string[] | null;
   experienceIds?: string[] | null;
   technologyIds?: string[] | null;
@@ -78,7 +77,6 @@ export interface ImageAssetMutationPayload {
   width: number | null;
   height: number | null;
   sortOrder: number;
-  isPublished: boolean;
   projectIds: string[];
   experienceIds: string[];
   technologyIds: string[];

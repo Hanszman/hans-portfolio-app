@@ -214,7 +214,6 @@ export const buildImageAssetsFormValue = (
         ? ''
         : String(imageAsset.height),
     sortOrder: String(imageAsset.sortOrder ?? 0),
-    isPublished: imageAsset.isPublished ?? true,
     projectIds: normalizeImageAssetProjectIds(imageAsset, projects),
     experienceIds: normalizeImageAssetExperienceIds(imageAsset, experiences),
     technologyIds: normalizeImageAssetTechnologyIds(imageAsset, technologies),
@@ -267,7 +266,6 @@ export const buildImageAssetsViewModels = (
             ? `${imageAsset.width} x ${imageAsset.height}`
             : '-',
         sortOrderLabel: String(imageAsset.sortOrder ?? 0),
-        isPublished: imageAsset.isPublished ?? true,
         projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
         experienceLabels: experienceIds.map((experienceId) =>
           resolveExperienceLabel(experienceId, experienceMap),
@@ -377,7 +375,6 @@ export const buildImageAssetsMutationPayload = (
       width,
       height,
       sortOrder,
-      isPublished: formValue.isPublished,
       projectIds: [...new Set(formValue.projectIds)],
       experienceIds: [...new Set(formValue.experienceIds)],
       technologyIds: [...new Set(formValue.technologyIds)],

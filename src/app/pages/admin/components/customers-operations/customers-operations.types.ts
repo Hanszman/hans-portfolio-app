@@ -28,7 +28,6 @@ export interface CustomersOperationsFormValue {
   summaryEn: string;
   highlight: boolean;
   sortOrder: string;
-  isPublished: boolean;
   experienceIds: readonly string[];
   imageAssetIds: readonly string[];
 }
@@ -76,7 +75,6 @@ export interface CustomerOperationsViewModel {
   summaryPt: string;
   summaryEn: string;
   highlight: boolean;
-  isPublished: boolean;
   sortOrderLabel: string;
   experienceLabels: readonly string[];
   imageAssetLabels: readonly string[];
@@ -106,7 +104,6 @@ export const createEmptyCustomersOperationsFormValue =
     summaryEn: '',
     highlight: true,
     sortOrder: '0',
-    isPublished: true,
     experienceIds: [],
     imageAssetIds: [],
   });

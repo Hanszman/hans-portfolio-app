@@ -50,7 +50,6 @@ const createLinkPayload = (): LinkMutationPayload => ({
   descriptionEn: 'Source code',
   type: 'GITHUB',
   sortOrder: 1,
-  isPublished: true,
   projectIds: ['project-1'],
   experienceIds: ['experience-1'],
   technologyIds: ['technology-1'],

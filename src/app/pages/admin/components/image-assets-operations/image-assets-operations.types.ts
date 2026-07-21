@@ -36,7 +36,6 @@ export interface ImageAssetsOperationsFormValue {
   width: string;
   height: string;
   sortOrder: string;
-  isPublished: boolean;
   projectIds: readonly string[];
   experienceIds: readonly string[];
   technologyIds: readonly string[];
@@ -127,7 +126,6 @@ export interface ImageAssetOperationsViewModel {
   mimeType: string;
   dimensionsLabel: string;
   sortOrderLabel: string;
-  isPublished: boolean;
   projectLabels: readonly string[];
   experienceLabels: readonly string[];
   technologyLabels: readonly string[];
@@ -165,7 +163,6 @@ export const createEmptyImageAssetsOperationsFormValue =
     width: '',
     height: '',
     sortOrder: '0',
-    isPublished: true,
     projectIds: [],
     experienceIds: [],
     technologyIds: [],

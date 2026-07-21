@@ -24,7 +24,6 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   descriptionEn: 'Source code',
   type: 'GITHUB',
   sortOrder: 1,
-  isPublished: true,
   projectIds: ['project-1'],
   experienceIds: ['experience-1'],
   technologyIds: ['technology-1'],
@@ -51,7 +50,6 @@ const createProject = (
   startDate: '2024-01-01',
   endDate: null,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -79,7 +77,6 @@ const createExperience = (
   isCurrent: true,
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -259,7 +256,6 @@ describe('LinksOperationsComponent', () => {
       updateDescriptionEn(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
-      updatePublication(value: boolean): void;
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
@@ -275,7 +271,6 @@ describe('LinksOperationsComponent', () => {
     component.updateDescriptionEn('Description');
     component.updateType('deploy');
     component.updateSortOrder('3');
-    component.updatePublication(false);
     component.toggleProject('project-1');
     component.toggleExperience('experience-1');
     component.toggleTechnology('technology-1');
@@ -290,7 +285,6 @@ describe('LinksOperationsComponent', () => {
       descriptionEn: 'Description',
       type: 'DEPLOY',
       sortOrder: 3,
-      isPublished: false,
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],
@@ -309,7 +303,6 @@ describe('LinksOperationsComponent', () => {
       descriptionEn: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
-      isPublished: true,
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],

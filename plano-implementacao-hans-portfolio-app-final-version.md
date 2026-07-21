@@ -1215,7 +1215,6 @@ Regra importante de modelagem para a F8:
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace, shell admin e rotas associadas
 - `F8.5` - `links`
-  - campos: `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`
   - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`
   - status: concluida em `2026-07-16`
   - entregue:
@@ -1226,40 +1225,32 @@ Regra importante de modelagem para a F8:
     - contracts HTTP renomeados para `links-operations.types.ts`
     - card funcional de `Links` habilitado diretamente na grid administrativa da F8, substituindo o placeholder da subetapa
     - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados para `read`, `update` e `delete`
-    - formulario administrativo com suporte aos campos `url`, `labelPt`, `labelEn`, `descriptionPt`, `descriptionEn`, `type`, `sortOrder`, `isPublished`, `projectIds`, `experienceIds`, `technologyIds` e `formationIds`
     - opcoes relacionais carregadas a partir de `GET /projects`, `GET /experiences` e `GET /technologies`, mantendo `formations` preparado para conexao posterior assim que a entidade publica for exposta no app
     - normalizacao defensiva da leitura de links preparada para lidar com arrays de IDs, relacoes aninhadas e inferencias derivadas do catalogo publico de projetos
     - feedbacks administrativos de `links` migrados para `hans-toast`
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace, shell admin, rotas e fallbacks relacionais
 - `F8.6` - `image-assets`
-  - campos: `fileName`, `filePath`, `folder`, `kind`, `altPt`, `altEn`, `captionPt`, `captionEn`, `mimeType`, `width`, `height`, `sortOrder`, `isPublished`
   - relacionamentos: `projectIds`, `experienceIds`, `formationIds`, `technologyIds`, `spokenLanguageIds`, `customerIds`, `jobIds`
 - `F8.7` - `spoken-languages`
   - campos: `code`, `namePt`, `nameEn`, `proficiency`, `highlight`, `sortOrder`
   - relacionamentos: `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /spoken-languages`, preview autenticado centralizado no backend, interceptor administrativo centralizado no frontend, UUIDs reais para `imageAssetIds` e previews visuais nas selecoes de imagem, mantendo mutacoes em `/admin/spoken-languages`
+  - estado consolidado em `2026-07-21`: leitura administrativa em `GET /spoken-languages`, interceptor administrativo centralizado no frontend, UUIDs reais para `imageAssetIds`, previews visuais nas selecoes de imagem e remocao completa de `isPublished`, mantendo mutacoes em `/admin/spoken-languages`
 - `F8.8` - `customers`
-  - campos: `slug`, `name`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
-  - estado consolidado em `2026-07-20`: leitura administrativa em `GET /customers`, preview autenticado centralizado no backend, CRUD estabilizado com relacoes de `experiences` e `image-assets`, previews visuais nas selecoes de imagem e mutacoes preservadas em `/admin/customers`
+  - estado consolidado em `2026-07-21`: leitura administrativa em `GET /customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, previews visuais nas selecoes de imagem, remocao completa de `isPublished` e mutacoes preservadas em `/admin/customers`
 - `F8.9` - `jobs`
-  - campos: `slug`, `namePt`, `nameEn`, `summaryPt`, `summaryEn`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `experienceIds`, `imageAssetIds`
 - `F8.10` - `formations`
-  - campos: `slug`, `institution`, `titlePt`, `titleEn`, `degreeType`, `summaryPt`, `summaryEn`, `startDate`, `endDate`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `technologyRelations`, `linkIds`, `imageAssetIds`
 - `F8.11` - `technologies`
-  - campos: `slug`, `name`, `category`, `level`, `frequency`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `projectRelations`, `experienceRelations`, `formationRelations`, `technologyContexts`, `tagIds`, `linkIds`, `imageAssetIds`
 - `F8.12` - `technology-contexts`
   - campos: `technologyId`, `context`, `startedAt`, `endedAt`
   - observacao: unica entidade relacional com CRUD dedicado
 - `F8.13` - `experiences`
-  - campos: `slug`, `companyName`, `titlePt`, `titleEn`, `summaryPt`, `summaryEn`, `descriptionPt`, `descriptionEn`, `startDate`, `endDate`, `isCurrent`, `highlight`, `sortOrder`, `isPublished`
   - relacionamentos: `technologyRelations`, `projectIds`, `customerIds`, `jobIds`, `linkIds`, `imageAssetIds`
 - `F8.14` - `projects`
-  - campos: `slug`, `titlePt`, `titleEn`, `shortDescriptionPt`, `shortDescriptionEn`, `fullDescriptionPt`, `fullDescriptionEn`, `context`, `status`, `environment`, `featured`, `highlight`, `startDate`, `endDate`, `sortOrder`, `isPublished`
   - relacionamentos: `technologyRelations`, `experienceIds`, `tagIds`, `linkIds`, `imageAssetIds`
 
 #### Ordem oficial recomendada da F8
@@ -1307,7 +1298,7 @@ Regra importante de modelagem para a F8:
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
 - quando a shell admin operar uma entidade com endpoint protegido proprio de leitura, a colecao deve priorizar `/admin/<entity>`; quando a API expuser apenas leitura publica, devemos consumir o endpoint publico e manter somente as mutacoes em `/admin/<entity>`
 - relacoes com `image-assets` devem exibir previews reais da imagem nas tags/cards de selecao das entidades atuais e futuras
-- as rotas `GET` publicas das entidades devem permanecer publicas; quando a shell admin precisar de leitura sincronizada com o banco para sessao autenticada, isso deve ser resolvido por preview centralizado no backend, sem duplicar controladores `GET` em `/admin`
+- as rotas `GET` publicas das entidades devem permanecer publicas; apos a remocao de `isPublished`, a shell admin deve consumir essa mesma leitura publica sem depender de preview autenticado dedicado no backend e sem duplicar controladores `GET` em `/admin`
 - o frontend deve centralizar autenticacao HTTP administrativa em interceptor; nao devemos injetar bearer token manualmente em cada service, componente ou fluxo de leitura
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao devemos criar uma segunda pasta paralela apenas para as operacoes de CUD dentro de `admin`; devemos reaproveitar e expandir o service ja existente no dominio oficial da entidade
 

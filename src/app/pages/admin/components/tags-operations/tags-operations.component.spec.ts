@@ -44,7 +44,6 @@ const createProject = (
   startDate: '2024-01-01',
   endDate: null,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],

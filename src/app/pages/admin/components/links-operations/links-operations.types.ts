@@ -35,7 +35,6 @@ export interface LinksOperationsFormValue {
   descriptionEn: string;
   type: string;
   sortOrder: string;
-  isPublished: boolean;
   projectIds: readonly string[];
   experienceIds: readonly string[];
   technologyIds: readonly string[];
@@ -96,7 +95,6 @@ export interface LinkOperationsViewModel {
   descriptionEn: string;
   type: string;
   sortOrderLabel: string;
-  isPublished: boolean;
   projectLabels: readonly string[];
   experienceLabels: readonly string[];
   technologyLabels: readonly string[];
@@ -132,7 +130,6 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   descriptionEn: '',
   type: '',
   sortOrder: '0',
-  isPublished: true,
   projectIds: [],
   experienceIds: [],
   technologyIds: [],

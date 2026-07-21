@@ -677,7 +677,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.card.descriptionEn': 'Descrição em inglês',
   'pages.admin.links.card.type': 'Tipo',
   'pages.admin.links.card.sortOrder': 'Ordem',
-  'pages.admin.links.card.isPublished': 'Publicação',
   'pages.admin.links.card.projects': 'Projetos',
   'pages.admin.links.card.experiences': 'Experiências',
   'pages.admin.links.card.technologies': 'Tecnologias',
@@ -709,11 +708,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.sortOrder.label': 'Ordem',
   'pages.admin.links.fields.sortOrder.placeholder':
     'Digite a ordem inteira do link',
-  'pages.admin.links.fields.isPublished.label': 'Status de publicação',
-  'pages.admin.links.fields.isPublished.description':
-    'Controle se esta referência externa deve permanecer visível no portfolio público.',
-  'pages.admin.links.fields.isPublished.enabled': 'Publicado',
-  'pages.admin.links.fields.isPublished.disabled': 'Oculto',
   'pages.admin.links.fields.projects.label': 'Projetos relacionados',
   'pages.admin.links.fields.projects.description':
     'Selecione todos os projetos que devem expor este link em suas referências públicas.',
@@ -792,7 +786,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.card.altEn': 'Alt em inglês',
   'pages.admin.imageAssets.card.captionPt': 'Legenda em português',
   'pages.admin.imageAssets.card.captionEn': 'Legenda em inglês',
-  'pages.admin.imageAssets.card.isPublished': 'Publicação',
   'pages.admin.imageAssets.card.projects': 'Projetos',
   'pages.admin.imageAssets.card.experiences': 'Experiências',
   'pages.admin.imageAssets.card.technologies': 'Tecnologias',
@@ -838,11 +831,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.sortOrder.label': 'Ordem',
   'pages.admin.imageAssets.fields.sortOrder.placeholder':
     'Digite a ordem inteira de exibição',
-  'pages.admin.imageAssets.fields.isPublished.label': 'Status de publicação',
-  'pages.admin.imageAssets.fields.isPublished.description':
-    'Controle se este arquivo de mídia deve permanecer disponível no portfolio público.',
-  'pages.admin.imageAssets.fields.isPublished.enabled': 'Publicado',
-  'pages.admin.imageAssets.fields.isPublished.disabled': 'Oculto',
   'pages.admin.imageAssets.fields.projects.label': 'Projetos relacionados',
   'pages.admin.imageAssets.fields.projects.description':
     'Selecione todos os projetos que devem expor este arquivo de mídia em sua galeria pública.',
@@ -1004,7 +992,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.customers.card.summaryPt': 'Resumo em português',
   'pages.admin.customers.card.summaryEn': 'Resumo em inglês',
   'pages.admin.customers.card.highlight': 'Destaque',
-  'pages.admin.customers.card.isPublished': 'Status de publicação',
   'pages.admin.customers.card.sortOrder': 'Ordem',
   'pages.admin.customers.card.experiences': 'Experiences',
   'pages.admin.customers.card.imageAssets': 'Image assets',
@@ -1026,11 +1013,6 @@ export const PT_BR_TRANSLATIONS = {
     'Controle se este customer deve permanecer em destaque nas seções públicas do portfolio.',
   'pages.admin.customers.fields.highlight.enabled': 'Em destaque',
   'pages.admin.customers.fields.highlight.disabled': 'Sem destaque',
-  'pages.admin.customers.fields.isPublished.label': 'Status de publicação',
-  'pages.admin.customers.fields.isPublished.description':
-    'Controle se este customer deve permanecer visível nas experiences públicas.',
-  'pages.admin.customers.fields.isPublished.enabled': 'Publicado',
-  'pages.admin.customers.fields.isPublished.disabled': 'Não publicado',
   'pages.admin.customers.fields.sortOrder.label': 'Ordem',
   'pages.admin.customers.fields.sortOrder.placeholder':
     'Digite a ordem inteira de exibição',

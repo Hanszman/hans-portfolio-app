@@ -33,7 +33,6 @@ export interface CustomerRecord {
   summaryEn: string;
   highlight?: boolean | null;
   sortOrder?: number | null;
-  isPublished?: boolean | null;
   experienceIds?: string[] | null;
   imageAssetIds?: string[] | null;
   experiences?: CustomerExperienceRelationRecord[] | null;
@@ -49,7 +48,6 @@ export interface CustomerMutationPayload {
   summaryEn: string;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   experienceIds: string[];
   imageAssetIds: string[];
 }

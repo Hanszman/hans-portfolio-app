@@ -148,23 +148,6 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="image-assets-operations-toggle">
-          <div class="image-assets-operations-selection-copy">
-            <p>{{ 'pages.admin.imageAssets.fields.isPublished.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.imageAssets.fields.isPublished.description' | translate }}
-            </span>
-          </div>
-
-          <hans-toggle
-            [checked]="form().isPublished"
-            [toggleColor]="'primary'"
-            [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.imageAssets.fields.isPublished.label' | translate"
-            (change)="emitPublicationChange($event)"
-          ></hans-toggle>
-        </div>
-
         <div class="image-assets-operations-selection-section">
           <div class="image-assets-operations-selection-copy">
             <p>{{ 'pages.admin.imageAssets.fields.projects.label' | translate }}</p>
@@ -322,12 +305,6 @@
                     ['pages.admin.imageAssets.card.altEn', imageAsset.altEn],
                     ['pages.admin.imageAssets.card.captionPt', imageAsset.captionPt],
                     ['pages.admin.imageAssets.card.captionEn', imageAsset.captionEn],
-                    [
-                      'pages.admin.imageAssets.card.isPublished',
-                      imageAsset.isPublished
-                        ? ('pages.admin.imageAssets.fields.isPublished.enabled' | translate)
-                        : ('pages.admin.imageAssets.fields.isPublished.disabled' | translate),
-                    ],
                     [
                       'pages.admin.imageAssets.card.projects',
                       imageAsset.projectLabels.join(', ') ||

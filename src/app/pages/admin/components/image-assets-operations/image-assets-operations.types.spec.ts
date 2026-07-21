@@ -38,7 +38,6 @@ describe('image-assets operations types', () => {
       width: '',
       height: '',
       sortOrder: '0',
-      isPublished: true,
       projectIds: [],
       experienceIds: [],
       technologyIds: [],

@@ -31,7 +31,6 @@ const createProject = (
   startDate: '2024-01-01',
   endDate: null,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -59,7 +58,6 @@ const createExperience = (
   isCurrent: true,
   highlight: true,
   sortOrder: 1,
-  isPublished: true,
   createdAt: '2024-01-01T00:00:00.000Z',
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
@@ -98,7 +96,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   width: 240,
   height: 96,
   sortOrder: 2,
-  isPublished: true,
   projectIds: ['project-2'],
   experienceIds: ['experience-2'],
   technologyIds: ['technology-2'],
@@ -165,7 +162,6 @@ describe('image-assets operations helper', () => {
                   width: 240,
                   height: 96,
                   sortOrder: 1,
-                  isPublished: true,
                   createdAt: '2024-01-01T00:00:00.000Z',
                   updatedAt: '2024-01-01T00:00:00.000Z',
                 },
@@ -201,7 +197,6 @@ describe('image-assets operations helper', () => {
                   width: 240,
                   height: 96,
                   sortOrder: 1,
-                  isPublished: true,
                   createdAt: '2024-01-01T00:00:00.000Z',
                   updatedAt: '2024-01-01T00:00:00.000Z',
                 },
@@ -245,7 +240,6 @@ describe('image-assets operations helper', () => {
           width: null,
           height: null,
           sortOrder: null,
-          isPublished: null,
           formationIds: undefined,
           spokenLanguageIds: undefined,
           customerIds: undefined,
@@ -268,7 +262,6 @@ describe('image-assets operations helper', () => {
       width: '',
       height: '',
       sortOrder: '0',
-      isPublished: true,
       projectIds: ['project-2', 'project-3'],
       experienceIds: ['experience-2', 'experience-3'],
       technologyIds: ['technology-2', 'technology-3'],
@@ -333,7 +326,6 @@ describe('image-assets operations helper', () => {
       width: '',
       height: '',
       sortOrder: '0',
-      isPublished: true,
       projectIds: [],
       experienceIds: [],
       technologyIds: [],
@@ -437,7 +429,6 @@ describe('image-assets operations helper', () => {
           width: null,
           height: 96,
           sortOrder: null,
-          isPublished: null,
           kind: undefined,
           altPt: null,
           altEn: null,
@@ -455,7 +446,6 @@ describe('image-assets operations helper', () => {
     expect(viewModel.technologyLabels).toEqual(['technology-x']);
     expect(viewModel.dimensionsLabel).toBe('-');
     expect(viewModel.sortOrderLabel).toBe('0');
-    expect(viewModel.isPublished).toBeTrue();
     expect(viewModel.kind).toBe('');
     expect(viewModel.altPt).toBe('');
     expect(viewModel.altEn).toBe('');
@@ -478,7 +468,6 @@ describe('image-assets operations helper', () => {
         width: '240',
         height: '96',
         sortOrder: '4',
-        isPublished: true,
         projectIds: ['project-1', 'project-1'],
         experienceIds: ['experience-1', 'experience-1'],
         technologyIds: ['technology-1', 'technology-1'],
@@ -502,7 +491,6 @@ describe('image-assets operations helper', () => {
         width: 240,
         height: 96,
         sortOrder: 4,
-        isPublished: true,
         projectIds: ['project-1'],
         experienceIds: ['experience-1'],
         technologyIds: ['technology-1'],

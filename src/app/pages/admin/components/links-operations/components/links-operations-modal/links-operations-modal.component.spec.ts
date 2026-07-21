@@ -17,7 +17,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     descriptionEn: 'Source code',
     type: 'GITHUB',
     sortOrderLabel: '1',
-    isPublished: true,
     projectLabels: ['Portfolio remake'],
     experienceLabels: ['Analista (Stefanini Ford)'],
     technologyLabels: ['Angular'],
@@ -61,7 +60,6 @@ describe('LinksOperationsModalComponent', () => {
     const descriptionEnSpy = jasmine.createSpy('descriptionEnChanged');
     const typeSpy = jasmine.createSpy('typeChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
-    const publicationSpy = jasmine.createSpy('publicationChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
     const experienceSpy = jasmine.createSpy('experienceToggled');
     const technologySpy = jasmine.createSpy('technologyToggled');
@@ -77,7 +75,6 @@ describe('LinksOperationsModalComponent', () => {
     component.descriptionEnChanged.subscribe(descriptionEnSpy);
     component.typeChanged.subscribe(typeSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
-    component.publicationChanged.subscribe(publicationSpy);
     component.projectToggled.subscribe(projectSpy);
     component.experienceToggled.subscribe(experienceSpy);
     component.technologyToggled.subscribe(technologySpy);
@@ -116,7 +113,6 @@ describe('LinksOperationsModalComponent', () => {
       emitDescriptionEnChange(value: string): void;
       emitTypeChange(value: string): void;
       emitSortOrderChange(value: string): void;
-      emitPublicationChange(event: Event): void;
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
@@ -137,16 +133,6 @@ describe('LinksOperationsModalComponent', () => {
     componentAccess.emitDescriptionEnChange('Description');
     componentAccess.emitTypeChange('DEPLOY');
     componentAccess.emitSortOrderChange('7');
-    componentAccess.emitPublicationChange(
-      new CustomEvent('change', { detail: true }),
-    );
-    componentAccess.emitPublicationChange(
-      {
-        target: {
-          checked: false,
-        },
-      } as unknown as Event,
-    );
     componentAccess.toggleProject('project-1');
     componentAccess.toggleExperience('experience-1');
     componentAccess.toggleTechnology('technology-1');
@@ -186,8 +172,6 @@ describe('LinksOperationsModalComponent', () => {
     expect(descriptionEnSpy).toHaveBeenCalledOnceWith('Description');
     expect(typeSpy).toHaveBeenCalledOnceWith('DEPLOY');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
-    expect(publicationSpy).toHaveBeenCalledWith(true);
-    expect(publicationSpy).toHaveBeenCalledWith(false);
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
     expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
     expect(technologySpy).toHaveBeenCalledOnceWith('technology-1');
@@ -283,7 +267,6 @@ describe('LinksOperationsModalComponent', () => {
       descriptionEn: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
-      isPublished: true,
     });
     fixture.componentRef.setInput('form', {
       url: 'https://github.com/vh/portfolio',
@@ -293,7 +276,6 @@ describe('LinksOperationsModalComponent', () => {
       descriptionEn: 'Source code',
       type: 'GITHUB',
       sortOrder: '1',
-      isPublished: true,
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],

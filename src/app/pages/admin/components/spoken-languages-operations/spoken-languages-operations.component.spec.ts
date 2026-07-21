@@ -40,7 +40,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   width: 128,
   height: 128,
   sortOrder: 1,
-  isPublished: true,
   projectIds: [],
   experienceIds: [],
   technologyIds: [],

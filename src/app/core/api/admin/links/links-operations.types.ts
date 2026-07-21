@@ -57,7 +57,6 @@ export interface LinkRecord {
   descriptionEn?: string | null;
   type?: string | null;
   sortOrder?: number | null;
-  isPublished?: boolean | null;
   projectIds?: string[] | null;
   experienceIds?: string[] | null;
   technologyIds?: string[] | null;
@@ -78,7 +77,6 @@ export interface LinkMutationPayload {
   descriptionEn: string;
   type: string;
   sortOrder: number;
-  isPublished: boolean;
   projectIds: string[];
   experienceIds: string[];
   technologyIds: string[];

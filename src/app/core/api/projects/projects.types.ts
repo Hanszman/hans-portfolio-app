@@ -9,7 +9,6 @@ export interface ProjectTechnologyResponse {
   frequency: string | null;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -29,7 +28,6 @@ export interface ProjectExperienceResponse {
   isCurrent: boolean;
   highlight: boolean;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,7 +39,6 @@ export interface ProjectTagResponse {
   labelEn: string;
   color: string | null;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -55,7 +52,6 @@ export interface ProjectLinkResponse {
   descriptionEn: string | null;
   type: string;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -74,7 +70,6 @@ export interface ProjectImageAssetResponse {
   width: number | null;
   height: number | null;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -130,7 +125,6 @@ export interface ProjectCollectionItemResponse {
   startDate: string;
   endDate: string | null;
   sortOrder: number;
-  isPublished: boolean;
   createdAt: string;
   updatedAt: string;
   technologies: ProjectTechnologyRelationResponse[];

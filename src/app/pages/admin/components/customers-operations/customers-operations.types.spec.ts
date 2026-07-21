@@ -17,7 +17,6 @@ describe('customers operations types helpers', () => {
       summaryEn: '',
       highlight: true,
       sortOrder: '0',
-      isPublished: true,
       experienceIds: [],
       imageAssetIds: [],
     });
@@ -40,7 +39,6 @@ describe('customers operations types helpers', () => {
         isCurrent: true,
         highlight: true,
         sortOrder: 1,
-        isPublished: true,
         createdAt: '2024-01-01T00:00:00.000Z',
         updatedAt: '2024-01-01T00:00:00.000Z',
         technologies: [],
