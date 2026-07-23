@@ -402,3 +402,5 @@ Também acho que os casos de teste do content-image-asset-uuid-validation.spec.t
 -Beleza, show de bola, obrigado! Ficou ótimo!
 Só um detalhe: reparei que nos {entidade}-operatations.component.html, temos sempre a div {entidade}-operations-actions. Vamos fazer um componente shared oprations-actions abstraindo esses 4 hans-buttons e, pra não repetir o hans-button 4 vezes, vamos fazer um for com as 4 operações do crud. Crie uma pasta operations dentro de shared, coloque esse novo componente lá e mova também pra dentro de operations o componente operations-modal, para ficar mais organizado. Vamos chamar esse {entidade}-operations-actions em todos os {entidade}-operatations.component.html, para evitar repetições. Continue seguindo os padrões do projeto por favor.
 -Beleza, ficou ótimo, obrigado! Pode continuar pra próxima sub-etapa da F8, ou seja, o crud da entidade formations no Front. Siga os padrões e exemplos do que fizemos nas outras entidades.
+-...
+campos de data e degree
