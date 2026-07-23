@@ -12,50 +12,15 @@
 
   <p class="jobs-operations-endpoint">{{ endpointLabel }}</p>
 
-  <div class="jobs-operations-actions">
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.create' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      (click)="openCreateModal()"
-    >
-      {{ 'pages.admin.operations.create' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.read' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-      (click)="openReadModal()"
-    >
-      {{ 'pages.admin.operations.read' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.update' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-      (click)="openUpdatePickerModal()"
-    >
-      {{ 'pages.admin.operations.update' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-      (click)="openDeletePickerModal()"
-    >
-      {{ 'pages.admin.operations.delete' | translate }}
-    </hans-button>
-  </div>
+  <app-operations-actions
+    [readDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
+    [updateDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
+    [deleteDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
+    (createClicked)="openCreateModal()"
+    (readClicked)="openReadModal()"
+    (updateClicked)="openUpdatePickerModal()"
+    (deleteClicked)="openDeletePickerModal()"
+  />
 
   @if (isLoading()) {
     <app-info-state mode="loading" [message]="'pages.admin.jobs.states.loading' | translate" />

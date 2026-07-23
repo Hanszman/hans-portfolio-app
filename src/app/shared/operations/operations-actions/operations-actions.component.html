@@ -1,0 +1,14 @@
+<div class="operations-actions">
+  @for (action of actions(); track trackByActionKey($index, action)) {
+    <hans-button
+      [attr.aria-label]="action.labelKey | translate"
+      [buttonColor]="'primary'"
+      [buttonSize]="'medium'"
+      [buttonVariant]="'default'"
+      [disabled]="action.disabled"
+      (click)="emitAction(action.key)"
+    >
+      {{ action.labelKey | translate }}
+    </hans-button>
+  }
+</div>

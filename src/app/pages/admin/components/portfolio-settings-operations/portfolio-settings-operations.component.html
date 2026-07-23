@@ -12,50 +12,15 @@
 
   <p class="portfolio-settings-operations-endpoint">{{ endpointLabel }}</p>
 
-  <div class="portfolio-settings-operations-actions">
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.create' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      (click)="openCreateModal()"
-    >
-      {{ 'pages.admin.operations.create' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.read' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-      (click)="openReadModal()"
-    >
-      {{ 'pages.admin.operations.read' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.update' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-      (click)="openUpdatePickerModal()"
-    >
-      {{ 'pages.admin.operations.update' | translate }}
-    </hans-button>
-
-    <hans-button
-      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-      [buttonColor]="'primary'"
-      [buttonSize]="'medium'"
-      [buttonVariant]="'default'"
-      [disabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-      (click)="openDeletePickerModal()"
-    >
-      {{ 'pages.admin.operations.delete' | translate }}
-    </hans-button>
-  </div>
+  <app-operations-actions
+    [readDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+    [updateDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+    [deleteDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
+    (createClicked)="openCreateModal()"
+    (readClicked)="openReadModal()"
+    (updateClicked)="openUpdatePickerModal()"
+    (deleteClicked)="openDeletePickerModal()"
+  />
 
   @if (isLoading()) {
     <app-info-state

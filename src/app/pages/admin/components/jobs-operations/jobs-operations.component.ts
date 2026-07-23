@@ -22,6 +22,7 @@ import { ExperienceCollectionItemResponse } from '../../../../core/api/experienc
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
+import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -45,7 +46,12 @@ import {
 @Component({
   selector: 'app-jobs-operations',
   standalone: true,
-  imports: [TranslatePipe, InfoStateComponent, JobsOperationsModalComponent],
+  imports: [
+    TranslatePipe,
+    InfoStateComponent,
+    OperationsActionsComponent,
+    JobsOperationsModalComponent,
+  ],
   templateUrl: './jobs-operations.component.html',
   styleUrl: './jobs-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

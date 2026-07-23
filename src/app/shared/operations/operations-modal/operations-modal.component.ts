@@ -7,8 +7,8 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AppTranslationKey } from '../../core/translation/translation.types';
-import { createAdminCollectionPagination } from '../../pages/admin/admin.types';
+import { AppTranslationKey } from '../../../core/translation/translation.types';
+import { createAdminCollectionPagination } from '../../../pages/admin/admin.types';
 
 @Component({
   selector: 'app-operations-modal',

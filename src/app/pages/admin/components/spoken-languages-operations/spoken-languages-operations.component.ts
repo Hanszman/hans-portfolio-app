@@ -20,6 +20,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
+import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -44,7 +45,12 @@ import {
 @Component({
   selector: 'app-spoken-languages-operations',
   standalone: true,
-  imports: [TranslatePipe, InfoStateComponent, SpokenLanguagesOperationsModalComponent],
+  imports: [
+    TranslatePipe,
+    InfoStateComponent,
+    OperationsActionsComponent,
+    SpokenLanguagesOperationsModalComponent,
+  ],
   templateUrl: './spoken-languages-operations.component.html',
   styleUrl: './spoken-languages-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

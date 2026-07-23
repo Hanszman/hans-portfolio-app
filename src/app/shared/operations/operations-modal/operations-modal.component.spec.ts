@@ -1,6 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideAppTranslations } from '../../core/translation/translation.providers';
+import { provideAppTranslations } from '../../../core/translation/translation.providers';
 import { OperationsModalComponent } from './operations-modal.component';
 
 describe('OperationsModalComponent', () => {

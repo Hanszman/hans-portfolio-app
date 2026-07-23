@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TagRecord } from '../../../../../../core/api/admin/tags/tags-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
-import { OperationsModalComponent } from '../../../../../../shared/operations-modal/operations-modal.component';
+import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,

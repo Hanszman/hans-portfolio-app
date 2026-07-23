@@ -24,6 +24,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
+import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -47,7 +48,12 @@ import {
 @Component({
   selector: 'app-links-operations',
   standalone: true,
-  imports: [TranslatePipe, InfoStateComponent, LinksOperationsModalComponent],
+  imports: [
+    TranslatePipe,
+    InfoStateComponent,
+    OperationsActionsComponent,
+    LinksOperationsModalComponent,
+  ],
   templateUrl: './links-operations.component.html',
   styleUrl: './links-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

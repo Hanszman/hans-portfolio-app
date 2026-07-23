@@ -32,7 +32,3 @@
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
-
-.tags-operations-actions {
-  @apply mt-auto flex flex-wrap gap-3;
-}

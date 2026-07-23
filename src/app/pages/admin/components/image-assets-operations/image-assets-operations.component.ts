@@ -24,6 +24,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
+import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -47,7 +48,12 @@ import {
 @Component({
   selector: 'app-image-assets-operations',
   standalone: true,
-  imports: [TranslatePipe, InfoStateComponent, ImageAssetsOperationsModalComponent],
+  imports: [
+    TranslatePipe,
+    InfoStateComponent,
+    OperationsActionsComponent,
+    ImageAssetsOperationsModalComponent,
+  ],
   templateUrl: './image-assets-operations.component.html',
   styleUrl: './image-assets-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
