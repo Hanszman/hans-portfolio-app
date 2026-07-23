@@ -12,6 +12,7 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { CustomersOperationsComponent } from './components/customers-operations/customers-operations.component';
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
+import { JobsOperationsComponent } from './components/jobs-operations/jobs-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { SpokenLanguagesOperationsComponent } from './components/spoken-languages-operations/spoken-languages-operations.component';
@@ -39,6 +40,7 @@ import {
     ImageAssetsOperationsComponent,
     SpokenLanguagesOperationsComponent,
     CustomersOperationsComponent,
+    JobsOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -84,7 +86,8 @@ export class AdminComponent {
       entityId === 'links' ||
       entityId === 'image-assets' ||
       entityId === 'spoken-languages' ||
-      entityId === 'customers'
+      entityId === 'customers' ||
+      entityId === 'jobs'
     );
   }
 

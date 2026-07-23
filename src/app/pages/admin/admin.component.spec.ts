@@ -4,6 +4,7 @@ import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { CustomersOperationsService } from '../../core/api/admin/customers/customers-operations.service';
 import { ImageAssetsOperationsService } from '../../core/api/admin/image-assets/image-assets-operations.service';
+import { JobsOperationsService } from '../../core/api/admin/jobs/jobs-operations.service';
 import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
 import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { SpokenLanguagesOperationsService } from '../../core/api/admin/spoken-languages/spoken-languages-operations.service';
@@ -264,6 +265,41 @@ describe('AdminComponent', () => {
           },
         },
         {
+          provide: JobsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'job-1',
+                    slug: 'frontend-engineer',
+                    namePt: 'Engenheiro Front-End',
+                    nameEn: 'Front-End Engineer',
+                    summaryPt: 'Interfaces publicas e privadas.',
+                    summaryEn: 'Public and private interfaces.',
+                    highlight: true,
+                    sortOrder: 1,
+                    experienceIds: ['experience-1'],
+                    imageAssetIds: ['image-asset-1'],
+                    experiences: [],
+                    imageAssets: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
           provide: ProjectsService,
           useValue: {
             getProjects: () =>
@@ -394,11 +430,12 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Image assets');
     expect(compiled.textContent).toContain('Spoken languages');
     expect(compiled.textContent).toContain('Customers');
+    expect(compiled.textContent).toContain('Jobs');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(6);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(5);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -537,6 +574,26 @@ describe('AdminComponent', () => {
         },
         {
           provide: TagsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: JobsOperationsService,
           useValue: {
             getAll: () =>
               of({

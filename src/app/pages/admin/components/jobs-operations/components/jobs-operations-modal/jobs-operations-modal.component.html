@@ -1,0 +1,290 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="selectPage($event)"
+>
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
+      <div class="jobs-operations-form">
+        <hans-input
+          [label]="resolveFieldLabel('slug')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().slug"
+          [placeholder]="fields.slug.placeholderKey! | translate"
+          [attr.aria-label]="fields.slug.labelKey | translate"
+          (input)="emitSlugChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('namePt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().namePt"
+          [placeholder]="fields.namePt.placeholderKey! | translate"
+          [attr.aria-label]="fields.namePt.labelKey | translate"
+          (input)="emitNamePtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('nameEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().nameEn"
+          [placeholder]="fields.nameEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.nameEn.labelKey | translate"
+          (input)="emitNameEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryPt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryPt"
+          [placeholder]="fields.summaryPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryPt.labelKey | translate"
+          (input)="emitSummaryPtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEn"
+          [placeholder]="fields.summaryEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEn.labelKey | translate"
+          (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="jobs-operations-toggle">
+          <div class="jobs-operations-selection-copy">
+            <p>{{ 'pages.admin.jobs.fields.highlight.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.jobs.fields.highlight.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().highlight"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.jobs.fields.highlight.label' | translate"
+            (change)="emitHighlightChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <hans-input
+          [label]="resolveFieldLabel('sortOrder')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
+          (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="jobs-operations-selection-section">
+          <div class="jobs-operations-selection-copy">
+            <p>{{ 'pages.admin.jobs.fields.experiences.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.jobs.fields.experiences.description' | translate }}
+            </span>
+          </div>
+
+          @if (experienceOptions().length > 0) {
+            <div class="jobs-operations-selection-grid">
+              @for (experience of experienceOptions(); track trackById($index, experience)) {
+                <hans-button
+                  [attr.aria-pressed]="isExperienceSelected(experience.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isExperienceSelected(experience.id) ? 'default' : 'outline'"
+                  (click)="toggleExperience(experience.id)"
+                >
+                  <span class="jobs-operations-selection-option">
+                    <span class="jobs-operations-selection-option-title">
+                      {{ experience.title }}
+                    </span>
+                    <span class="jobs-operations-selection-option-subtitle">
+                      {{ experience.subtitle }}
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="jobs-operations-selection-empty">
+              {{ 'pages.admin.jobs.fields.experiences.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="jobs-operations-selection-section">
+          <div class="jobs-operations-selection-copy">
+            <p>{{ 'pages.admin.jobs.fields.imageAssets.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.jobs.fields.imageAssets.description' | translate }}
+            </span>
+          </div>
+
+          @if (imageAssetOptions().length > 0) {
+            <div class="jobs-operations-selection-grid">
+              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
+                <hans-button
+                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
+                  (click)="toggleImageAsset(imageAsset.id)"
+                >
+                  <span class="jobs-operations-selection-option">
+                    <img
+                      class="jobs-operations-selection-option-image"
+                      [src]="imageAsset.imageUrl"
+                      [alt]="imageAsset.title"
+                    />
+                    <span class="jobs-operations-selection-option-copy">
+                      <span class="jobs-operations-selection-option-title">
+                        {{ imageAsset.title }}
+                      </span>
+                      <span class="jobs-operations-selection-option-subtitle">
+                        {{ imageAsset.subtitle }}
+                      </span>
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="jobs-operations-selection-empty">
+              {{ 'pages.admin.jobs.fields.imageAssets.empty' | translate }}
+            </p>
+          }
+        </div>
+      </div>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="jobs-operations-list">
+            @for (job of jobs(); track trackById($index, job)) {
+              <article class="jobs-operations-item">
+                <div class="jobs-operations-item-header">
+                  <div>
+                    <p class="jobs-operations-label">
+                      {{ 'pages.admin.jobs.card.slug' | translate }}
+                    </p>
+                    <h4>{{ job.slug }}</h4>
+                  </div>
+
+                  <div class="jobs-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectJobForUpdate(job.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectJobForDelete(job.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                @for (
+                  item of [
+                    ['pages.admin.jobs.card.namePt', job.namePt],
+                    ['pages.admin.jobs.card.nameEn', job.nameEn],
+                    ['pages.admin.jobs.card.summaryPt', job.summaryPt],
+                    ['pages.admin.jobs.card.summaryEn', job.summaryEn],
+                    [
+                      'pages.admin.jobs.card.highlight',
+                      job.highlight
+                        ? ('pages.admin.jobs.fields.highlight.enabled' | translate)
+                        : ('pages.admin.jobs.fields.highlight.disabled' | translate),
+                    ],
+                    ['pages.admin.jobs.card.sortOrder', job.sortOrderLabel],
+                    [
+                      'pages.admin.jobs.card.experiences',
+                      job.experienceLabels.join(', ') ||
+                        ('pages.admin.jobs.card.emptyRelations' | translate),
+                    ],
+                    [
+                      'pages.admin.jobs.card.imageAssets',
+                      job.imageAssetLabels.join(', ') ||
+                        ('pages.admin.jobs.card.emptyRelations' | translate),
+                    ],
+                  ];
+                  track item[0]
+                ) {
+                  <div class="jobs-operations-item-copy">
+                    <p class="jobs-operations-label">
+                      {{ item[0] | translate }}
+                    </p>
+                    <p>{{ item[1] }}</p>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="jobs-operations-picker">
+            @for (job of jobs(); track trackById($index, job)) {
+              <button
+                type="button"
+                class="jobs-operations-picker-option"
+                (click)="selectJobForUpdate(job.id)"
+              >
+                <strong>{{ job.namePt }} ({{ job.slug }})</strong>
+                <span>{{ job.nameEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="jobs-operations-picker">
+            @for (job of jobs(); track trackById($index, job)) {
+              <button
+                type="button"
+                class="jobs-operations-picker-option"
+                (click)="selectJobForDelete(job.id)"
+              >
+                <strong>{{ job.namePt }} ({{ job.slug }})</strong>
+                <span>{{ job.nameEn }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="jobs-operations-delete-summary">
+            <strong>{{ selectedJob()?.namePt }} ({{ selectedJob()?.slug }})</strong>
+            <p>{{ selectedJob()?.nameEn }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>

@@ -1,0 +1,110 @@
+:host {
+  @apply block;
+}
+
+.jobs-operations-delete-summary p,
+.jobs-operations-selection-copy span,
+.jobs-operations-selection-empty,
+.jobs-operations-item-copy p:last-child,
+.jobs-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.jobs-operations-list,
+.jobs-operations-picker {
+  @apply grid gap-4;
+}
+
+.jobs-operations-item,
+.jobs-operations-picker-option,
+.jobs-operations-delete-summary,
+.jobs-operations-selection-section,
+.jobs-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.jobs-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.jobs-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.jobs-operations-picker-option:hover,
+.jobs-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.jobs-operations-item-header,
+.jobs-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.jobs-operations-item-header h4,
+.jobs-operations-picker-option strong,
+.jobs-operations-delete-summary strong,
+.jobs-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.jobs-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.jobs-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.jobs-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.jobs-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.jobs-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.jobs-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.jobs-operations-selection-option {
+  @apply flex max-w-full items-center gap-3 text-left;
+}
+
+.jobs-operations-selection-option-image {
+  @apply h-12 w-12 shrink-0 rounded-2xl object-cover;
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.jobs-operations-selection-option-copy {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.jobs-operations-selection-option-title,
+.jobs-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.jobs-operations-selection-option-title {
+  @apply break-words font-semibold;
+}
+
+.jobs-operations-selection-option-subtitle {
+  @apply break-words text-xs uppercase tracking-[0.14em];
+}
+
+:host ::ng-deep .jobs-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .jobs-operations-selection-grid hans-button .hans-button {
+  @apply items-start justify-start whitespace-normal text-left;
+}

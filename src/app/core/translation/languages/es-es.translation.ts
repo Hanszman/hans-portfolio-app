@@ -1073,6 +1073,96 @@ export const ES_ES_TRANSLATIONS = {
     'El customer protegido no puede guardarse ahora.',
   'pages.admin.customers.feedback.deleteError':
     'El customer protegido no puede eliminarse ahora.',
+  'pages.admin.jobs.sectionLabel': '// JOBS',
+  'pages.admin.jobs.description':
+    'CRUD protegido para registros de cargos usados para normalizar posiciones de experiences y relaciones con medios.',
+  'pages.admin.jobs.states.loading':
+    'Cargando la colección protegida de jobs...',
+  'pages.admin.jobs.states.empty':
+    'Todavía no se ha registrado ningún job protegido.',
+  'pages.admin.jobs.card.slug': 'Slug',
+  'pages.admin.jobs.card.namePt': 'Nombre en portugués',
+  'pages.admin.jobs.card.nameEn': 'Nombre en inglés',
+  'pages.admin.jobs.card.summaryPt': 'Resumen en portugués',
+  'pages.admin.jobs.card.summaryEn': 'Resumen en inglés',
+  'pages.admin.jobs.card.highlight': 'Destacado',
+  'pages.admin.jobs.card.sortOrder': 'Orden',
+  'pages.admin.jobs.card.experiences': 'Experiences',
+  'pages.admin.jobs.card.imageAssets': 'Image assets',
+  'pages.admin.jobs.card.emptyRelations':
+    'Ningún registro relacionado está conectado a este job en este momento.',
+  'pages.admin.jobs.fields.slug.label': 'Slug',
+  'pages.admin.jobs.fields.slug.placeholder': 'Ingresa el slug único del job',
+  'pages.admin.jobs.fields.namePt.label': 'Nombre en portugués',
+  'pages.admin.jobs.fields.namePt.placeholder':
+    'Ingresa el nombre del job en portugués',
+  'pages.admin.jobs.fields.nameEn.label': 'Nombre en inglés',
+  'pages.admin.jobs.fields.nameEn.placeholder':
+    'Ingresa el nombre del job en inglés',
+  'pages.admin.jobs.fields.summaryPt.label': 'Resumen en portugués',
+  'pages.admin.jobs.fields.summaryPt.placeholder':
+    'Ingresa el resumen del job en portugués',
+  'pages.admin.jobs.fields.summaryEn.label': 'Resumen en inglés',
+  'pages.admin.jobs.fields.summaryEn.placeholder':
+    'Ingresa el resumen del job en inglés',
+  'pages.admin.jobs.fields.highlight.label': 'Estado destacado',
+  'pages.admin.jobs.fields.highlight.description':
+    'Controla si este job debe permanecer destacado en las secciones públicas del portfolio.',
+  'pages.admin.jobs.fields.highlight.enabled': 'Destacado',
+  'pages.admin.jobs.fields.highlight.disabled': 'Sin destaque',
+  'pages.admin.jobs.fields.sortOrder.label': 'Orden',
+  'pages.admin.jobs.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de exhibición',
+  'pages.admin.jobs.fields.experiences.label': 'Experiences relacionadas',
+  'pages.admin.jobs.fields.experiences.description':
+    'Selecciona todas las experiences que deben exponer este job en la narrativa pública.',
+  'pages.admin.jobs.fields.experiences.empty':
+    'Ninguna experience está disponible para relacionar ahora.',
+  'pages.admin.jobs.fields.imageAssets.label': 'Image assets relacionados',
+  'pages.admin.jobs.fields.imageAssets.description':
+    'Selecciona todos los image assets vinculados a este job.',
+  'pages.admin.jobs.fields.imageAssets.empty':
+    'Ningún image asset está disponible para relacionar ahora.',
+  'pages.admin.jobs.modal.create.title': 'Crear job',
+  'pages.admin.jobs.modal.read.title': 'Leer jobs',
+  'pages.admin.jobs.modal.read.description':
+    'Revisa los jobs protegidos actuales y abre flujos de update o delete directamente desde cada registro.',
+  'pages.admin.jobs.modal.pickUpdate.title':
+    'Selecciona un job para actualizar',
+  'pages.admin.jobs.modal.pickUpdate.description':
+    'Elige uno de los jobs protegidos actuales para abrir su formulario de update.',
+  'pages.admin.jobs.modal.pickDelete.title': 'Selecciona un job para eliminar',
+  'pages.admin.jobs.modal.pickDelete.description':
+    'Elige uno de los jobs protegidos actuales para confirmar su eliminación.',
+  'pages.admin.jobs.modal.update.title': 'Actualizar job',
+  'pages.admin.jobs.modal.delete.title': 'Eliminar job',
+  'pages.admin.jobs.modal.delete.description':
+    'Esta acción elimina permanentemente el job protegido seleccionado del portfolio.',
+  'pages.admin.jobs.feedback.created': 'Job protegido creado con éxito.',
+  'pages.admin.jobs.feedback.updated': 'Job protegido actualizado con éxito.',
+  'pages.admin.jobs.feedback.deleted': 'Job protegido eliminado con éxito.',
+  'pages.admin.jobs.feedback.requiredSlug':
+    'El slug del job es obligatorio antes del envío.',
+  'pages.admin.jobs.feedback.requiredNamePt':
+    'El nombre del job en portugués es obligatorio antes del envío.',
+  'pages.admin.jobs.feedback.requiredNameEn':
+    'El nombre del job en inglés es obligatorio antes del envío.',
+  'pages.admin.jobs.feedback.requiredSummaryPt':
+    'El resumen en portugués es obligatorio antes del envío.',
+  'pages.admin.jobs.feedback.requiredSummaryEn':
+    'El resumen en inglés es obligatorio antes del envío.',
+  'pages.admin.jobs.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.jobs.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.jobs.feedback.selectionRequired':
+    'Selecciona un job protegido antes de continuar con esta acción.',
+  'pages.admin.jobs.feedback.loadError':
+    'La colección protegida de jobs no puede cargarse ahora.',
+  'pages.admin.jobs.feedback.saveError':
+    'El job protegido no puede guardarse ahora.',
+  'pages.admin.jobs.feedback.deleteError':
+    'El job protegido no puede eliminarse ahora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de medios usados por el portfolio a través de relaciones de image assets.',

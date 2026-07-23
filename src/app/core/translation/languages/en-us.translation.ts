@@ -1050,6 +1050,92 @@ export const EN_TRANSLATIONS = {
     'The protected customer could not be saved right now.',
   'pages.admin.customers.feedback.deleteError':
     'The protected customer could not be deleted right now.',
+  'pages.admin.jobs.sectionLabel': '// JOBS',
+  'pages.admin.jobs.description':
+    'Protected CRUD for role catalog records used to normalize experience positions and media relationships.',
+  'pages.admin.jobs.states.loading': 'Loading the protected jobs collection...',
+  'pages.admin.jobs.states.empty': 'No protected job has been registered yet.',
+  'pages.admin.jobs.card.slug': 'Slug',
+  'pages.admin.jobs.card.namePt': 'Portuguese name',
+  'pages.admin.jobs.card.nameEn': 'English name',
+  'pages.admin.jobs.card.summaryPt': 'Portuguese summary',
+  'pages.admin.jobs.card.summaryEn': 'English summary',
+  'pages.admin.jobs.card.highlight': 'Highlight',
+  'pages.admin.jobs.card.sortOrder': 'Sort order',
+  'pages.admin.jobs.card.experiences': 'Experiences',
+  'pages.admin.jobs.card.imageAssets': 'Image assets',
+  'pages.admin.jobs.card.emptyRelations':
+    'No linked record is currently connected to this job.',
+  'pages.admin.jobs.fields.slug.label': 'Slug',
+  'pages.admin.jobs.fields.slug.placeholder': 'Enter the unique job slug',
+  'pages.admin.jobs.fields.namePt.label': 'Portuguese name',
+  'pages.admin.jobs.fields.namePt.placeholder':
+    'Enter the Portuguese job name',
+  'pages.admin.jobs.fields.nameEn.label': 'English name',
+  'pages.admin.jobs.fields.nameEn.placeholder': 'Enter the English job name',
+  'pages.admin.jobs.fields.summaryPt.label': 'Portuguese summary',
+  'pages.admin.jobs.fields.summaryPt.placeholder':
+    'Enter the Portuguese job summary',
+  'pages.admin.jobs.fields.summaryEn.label': 'English summary',
+  'pages.admin.jobs.fields.summaryEn.placeholder':
+    'Enter the English job summary',
+  'pages.admin.jobs.fields.highlight.label': 'Highlight status',
+  'pages.admin.jobs.fields.highlight.description':
+    'Control whether this job should stay highlighted in public portfolio sections.',
+  'pages.admin.jobs.fields.highlight.enabled': 'Highlighted',
+  'pages.admin.jobs.fields.highlight.disabled': 'Not highlighted',
+  'pages.admin.jobs.fields.sortOrder.label': 'Sort order',
+  'pages.admin.jobs.fields.sortOrder.placeholder':
+    'Enter the integer sort order',
+  'pages.admin.jobs.fields.experiences.label': 'Related experiences',
+  'pages.admin.jobs.fields.experiences.description':
+    'Select every experience that should expose this job in public storytelling.',
+  'pages.admin.jobs.fields.experiences.empty':
+    'No experience is available to relate right now.',
+  'pages.admin.jobs.fields.imageAssets.label': 'Related image assets',
+  'pages.admin.jobs.fields.imageAssets.description':
+    'Select every image asset linked to this job.',
+  'pages.admin.jobs.fields.imageAssets.empty':
+    'No image asset is available to relate right now.',
+  'pages.admin.jobs.modal.create.title': 'Create job',
+  'pages.admin.jobs.modal.read.title': 'Read jobs',
+  'pages.admin.jobs.modal.read.description':
+    'Review the current protected jobs and open update or delete flows directly from each record.',
+  'pages.admin.jobs.modal.pickUpdate.title': 'Select a job to update',
+  'pages.admin.jobs.modal.pickUpdate.description':
+    'Choose one of the current protected jobs to open its update form.',
+  'pages.admin.jobs.modal.pickDelete.title': 'Select a job to delete',
+  'pages.admin.jobs.modal.pickDelete.description':
+    'Choose one of the current protected jobs to confirm its removal.',
+  'pages.admin.jobs.modal.update.title': 'Update job',
+  'pages.admin.jobs.modal.delete.title': 'Delete job',
+  'pages.admin.jobs.modal.delete.description':
+    'This action permanently removes the selected protected job from the portfolio.',
+  'pages.admin.jobs.feedback.created': 'Protected job created successfully.',
+  'pages.admin.jobs.feedback.updated': 'Protected job updated successfully.',
+  'pages.admin.jobs.feedback.deleted': 'Protected job deleted successfully.',
+  'pages.admin.jobs.feedback.requiredSlug':
+    'The job slug is required before submitting.',
+  'pages.admin.jobs.feedback.requiredNamePt':
+    'The Portuguese job name is required before submitting.',
+  'pages.admin.jobs.feedback.requiredNameEn':
+    'The English job name is required before submitting.',
+  'pages.admin.jobs.feedback.requiredSummaryPt':
+    'The Portuguese summary is required before submitting.',
+  'pages.admin.jobs.feedback.requiredSummaryEn':
+    'The English summary is required before submitting.',
+  'pages.admin.jobs.feedback.invalidSortOrder':
+    'The sort order must be a valid integer number.',
+  'pages.admin.jobs.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.jobs.feedback.selectionRequired':
+    'Select a protected job before continuing with this action.',
+  'pages.admin.jobs.feedback.loadError':
+    'The protected jobs collection could not be loaded right now.',
+  'pages.admin.jobs.feedback.saveError':
+    'The protected job could not be saved right now.',
+  'pages.admin.jobs.feedback.deleteError':
+    'The protected job could not be deleted right now.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Normalized media records used by the portfolio through image asset relations instead of direct file fields.',
