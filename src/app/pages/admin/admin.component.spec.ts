@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { CustomersOperationsService } from '../../core/api/admin/customers/customers-operations.service';
+import { FormationsOperationsService } from '../../core/api/admin/formations/formations-operations.service';
 import { ImageAssetsOperationsService } from '../../core/api/admin/image-assets/image-assets-operations.service';
 import { JobsOperationsService } from '../../core/api/admin/jobs/jobs-operations.service';
 import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
@@ -58,6 +59,46 @@ describe('AdminComponent', () => {
               role: 'ADMIN',
             }),
             logout: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: FormationsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [
+                  {
+                    id: 'formation-1',
+                    slug: 'systems-analysis',
+                    institution: 'PUC Minas',
+                    titlePt: 'Analise e Desenvolvimento de Sistemas',
+                    titleEn: 'Systems Analysis and Development',
+                    degreeType: 'BACHELOR',
+                    summaryPt: 'Resumo PT',
+                    summaryEn: 'Summary EN',
+                    startDate: '2020-01-01',
+                    endDate: '2023-12-01',
+                    highlight: true,
+                    sortOrder: 1,
+                    technologyRelations: [],
+                    linkIds: ['link-1'],
+                    imageAssetIds: ['image-asset-1'],
+                    links: [],
+                    imageAssets: [],
+                  },
+                ],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 1,
+                  totalPages: 1,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {
@@ -431,11 +472,12 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Spoken languages');
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain('Jobs');
+    expect(compiled.textContent).toContain('Formations');
     expect(compiled.textContent).toContain('Technology contexts');
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(5);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(4);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -470,6 +512,26 @@ describe('AdminComponent', () => {
             accessToken: () => null,
             user: () => null,
             logout: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: FormationsOperationsService,
+          useValue: {
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {

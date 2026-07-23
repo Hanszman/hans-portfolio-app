@@ -652,7 +652,31 @@ Cada nova entidade protegida deve:
   - contratos, services e specs alinhados ao contrato paginado e protegido do backend administrativo
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total de testes para API, helper, modal, workspace e integracao da shell administrativa
-- proxima subetapa oficial: `F8.9` - Jobs
+- `F8.9` concluida em `2026-07-23`
+- entregas concluidas na `F8.9`:
+  - dominio `src/app/core/api/admin/jobs/` criado para o CRUD de `jobs`
+  - workspace administrativo dedicado em `src/app/pages/admin/components/jobs-operations/` alinhado ao template oficial da F8
+  - leitura administrativa consolidada em `GET /jobs`, mantendo `create`, `update` e `delete` no dominio protegido `/admin/jobs`
+  - relacionamentos com `experiences` e `image-assets` integrados ao formulario com previews reais das imagens selecionaveis
+  - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` estabilizados com `hans-toast`, `operations-modal` e `operations-actions`
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total preservada para API, helper, modal, workspace e integracao da shell administrativa
+- `F8.10` concluida em `2026-07-23`
+- entregas concluidas na `F8.10`:
+  - dominio `src/app/core/api/admin/formations/` criado para o CRUD de `formations`
+  - workspace administrativo dedicado em `src/app/pages/admin/components/formations-operations/` implementado com `helpers/` e modal interno em `components/formations-operations-modal/`
+  - leitura administrativa consolidada em `GET /formations`, mantendo `create`, `update` e `delete` no dominio protegido `/admin/formations`
+  - formulario administrativo modelado com `slug`, `institution`, `titlePt`, `titleEn`, `degreeType`, `summaryPt`, `summaryEn`, `startDate`, `endDate`, `highlight` e `sortOrder`
+  - `degreeType` consolidado com `hans-select-option`, respeitando os enums reais da API
+  - relacionamentos com `technologies`, `links` e `image-assets` integrados ao formulario, incluindo previews reais para as imagens
+  - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` adicionados ao shell seguindo o template visual das entidades anteriores
+  - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
+  - cobertura total preservada para API, helper, modal, workspace e integracao da shell administrativa
+- validacao final da iteracao em `2026-07-23`:
+  - `npm run lint` verde
+  - `npm run test:coverage -- --watch=false --progress=false --browsers=ChromeHeadless` com `100%` em statements, branches, functions e lines
+  - `npm run build` verde
+- proxima subetapa oficial: `F8.11` - Technologies
 
 ## 9) Regras de implementacao por subetapa
 

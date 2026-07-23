@@ -1,0 +1,385 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="requestClose()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="selectPage($event)"
+>
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
+      <div class="formations-operations-form">
+        <hans-input
+          [label]="resolveFieldLabel('slug')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().slug"
+          [placeholder]="fields.slug.placeholderKey! | translate"
+          [attr.aria-label]="fields.slug.labelKey | translate"
+          (input)="emitSlugChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('institution')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().institution"
+          [placeholder]="fields.institution.placeholderKey! | translate"
+          [attr.aria-label]="fields.institution.labelKey | translate"
+          (input)="emitInstitutionChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('titlePt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().titlePt"
+          [placeholder]="fields.titlePt.placeholderKey! | translate"
+          [attr.aria-label]="fields.titlePt.labelKey | translate"
+          (input)="emitTitlePtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('titleEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().titleEn"
+          [placeholder]="fields.titleEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.titleEn.labelKey | translate"
+          (input)="emitTitleEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-select-option
+          [label]="resolveFieldLabel('degreeType')"
+          [options]="degreeTypeOptions()"
+          [value]="form().degreeType"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.admin.formations.fields.degreeType.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="emitDegreeTypeChange(resolveSelectValue($event))"
+          (valuechange)="emitDegreeTypeChange(resolveSelectValue($event))"
+          (valueChange)="emitDegreeTypeChange(resolveSelectValue($event))"
+        ></hans-select-option>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryPt')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryPt"
+          [placeholder]="fields.summaryPt.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryPt.labelKey | translate"
+          (input)="emitSummaryPtChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryEn')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEn"
+          [placeholder]="fields.summaryEn.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEn.labelKey | translate"
+          (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('startDate')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().startDate"
+          [placeholder]="fields.startDate.placeholderKey! | translate"
+          [attr.aria-label]="fields.startDate.labelKey | translate"
+          (input)="emitStartDateChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('endDate')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().endDate"
+          [placeholder]="fields.endDate.placeholderKey! | translate"
+          [attr.aria-label]="fields.endDate.labelKey | translate"
+          (input)="emitEndDateChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="formations-operations-toggle">
+          <div class="formations-operations-selection-copy">
+            <p>{{ 'pages.admin.formations.fields.highlight.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.formations.fields.highlight.description' | translate }}
+            </span>
+          </div>
+
+          <hans-toggle
+            [checked]="form().highlight"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.formations.fields.highlight.label' | translate"
+            (change)="emitHighlightChange($event)"
+          ></hans-toggle>
+        </div>
+
+        <hans-input
+          [label]="resolveFieldLabel('sortOrder')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          [attr.aria-label]="fields.sortOrder.labelKey | translate"
+          (input)="emitSortOrderChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <div class="formations-operations-selection-section">
+          <div class="formations-operations-selection-copy">
+            <p>{{ 'pages.admin.formations.fields.technologies.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.formations.fields.technologies.description' | translate }}
+            </span>
+          </div>
+
+          @if (technologyOptions().length > 0) {
+            <div class="formations-operations-selection-grid">
+              @for (technology of technologyOptions(); track trackById($index, technology)) {
+                <hans-button
+                  [attr.aria-pressed]="isTechnologySelected(technology.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isTechnologySelected(technology.id) ? 'default' : 'outline'"
+                  (click)="toggleTechnology(technology.id)"
+                >
+                  <span class="formations-operations-selection-option">
+                    <span class="formations-operations-selection-option-copy">
+                      <span class="formations-operations-selection-option-title">
+                        {{ technology.title }}
+                      </span>
+                      <span class="formations-operations-selection-option-subtitle">
+                        {{ technology.subtitle }}
+                      </span>
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="formations-operations-selection-empty">
+              {{ 'pages.admin.formations.fields.technologies.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="formations-operations-selection-section">
+          <div class="formations-operations-selection-copy">
+            <p>{{ 'pages.admin.formations.fields.links.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.formations.fields.links.description' | translate }}
+            </span>
+          </div>
+
+          @if (linkOptions().length > 0) {
+            <div class="formations-operations-selection-grid">
+              @for (link of linkOptions(); track trackById($index, link)) {
+                <hans-button
+                  [attr.aria-pressed]="isLinkSelected(link.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isLinkSelected(link.id) ? 'default' : 'outline'"
+                  (click)="toggleLink(link.id)"
+                >
+                  <span class="formations-operations-selection-option">
+                    <span class="formations-operations-selection-option-copy">
+                      <span class="formations-operations-selection-option-title">
+                        {{ link.title }}
+                      </span>
+                      <span class="formations-operations-selection-option-subtitle">
+                        {{ link.subtitle }}
+                      </span>
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="formations-operations-selection-empty">
+              {{ 'pages.admin.formations.fields.links.empty' | translate }}
+            </p>
+          }
+        </div>
+
+        <div class="formations-operations-selection-section">
+          <div class="formations-operations-selection-copy">
+            <p>{{ 'pages.admin.formations.fields.imageAssets.label' | translate }}</p>
+            <span>
+              {{ 'pages.admin.formations.fields.imageAssets.description' | translate }}
+            </span>
+          </div>
+
+          @if (imageAssetOptions().length > 0) {
+            <div class="formations-operations-selection-grid">
+              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
+                <hans-button
+                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
+                  [buttonColor]="'primary'"
+                  [buttonSize]="'medium'"
+                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
+                  (click)="toggleImageAsset(imageAsset.id)"
+                >
+                  <span class="formations-operations-selection-option">
+                    <img
+                      class="formations-operations-selection-option-image"
+                      [src]="imageAsset.imageUrl"
+                      [alt]="imageAsset.title"
+                    />
+                    <span class="formations-operations-selection-option-copy">
+                      <span class="formations-operations-selection-option-title">
+                        {{ imageAsset.title }}
+                      </span>
+                      <span class="formations-operations-selection-option-subtitle">
+                        {{ imageAsset.subtitle }}
+                      </span>
+                    </span>
+                  </span>
+                </hans-button>
+              }
+            </div>
+          } @else {
+            <p class="formations-operations-selection-empty">
+              {{ 'pages.admin.formations.fields.imageAssets.empty' | translate }}
+            </p>
+          }
+        </div>
+      </div>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="formations-operations-list">
+            @for (formation of formations(); track trackById($index, formation)) {
+              <article class="formations-operations-item">
+                <div class="formations-operations-item-header">
+                  <div>
+                    <p class="formations-operations-label">
+                      {{ 'pages.admin.formations.card.slug' | translate }}
+                    </p>
+                    <h4>{{ formation.slug }}</h4>
+                  </div>
+
+                  <div class="formations-operations-item-actions">
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectFormationForUpdate(formation.id)"
+                    >
+                      {{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+
+                    <hans-button
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [buttonVariant]="'default'"
+                      (click)="selectFormationForDelete(formation.id)"
+                    >
+                      {{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+
+                @for (
+                  item of [
+                    ['pages.admin.formations.card.institution', formation.institution],
+                    ['pages.admin.formations.card.titlePt', formation.titlePt],
+                    ['pages.admin.formations.card.titleEn', formation.titleEn],
+                    ['pages.admin.formations.card.degreeType', formation.degreeType],
+                    ['pages.admin.formations.card.summaryPt', formation.summaryPt],
+                    ['pages.admin.formations.card.summaryEn', formation.summaryEn],
+                    ['pages.admin.formations.card.startDate', formation.startDate],
+                    ['pages.admin.formations.card.endDate', formation.endDateLabel],
+                    [
+                      'pages.admin.formations.card.highlight',
+                      formation.highlight
+                        ? ('pages.admin.formations.fields.highlight.enabled' | translate)
+                        : ('pages.admin.formations.fields.highlight.disabled' | translate),
+                    ],
+                    ['pages.admin.formations.card.sortOrder', formation.sortOrderLabel],
+                    [
+                      'pages.admin.formations.card.technologies',
+                      formation.technologyLabels.join(', ') ||
+                        ('pages.admin.formations.card.emptyRelations' | translate),
+                    ],
+                    [
+                      'pages.admin.formations.card.links',
+                      formation.linkLabels.join(', ') ||
+                        ('pages.admin.formations.card.emptyRelations' | translate),
+                    ],
+                    [
+                      'pages.admin.formations.card.imageAssets',
+                      formation.imageAssetLabels.join(', ') ||
+                        ('pages.admin.formations.card.emptyRelations' | translate),
+                    ],
+                  ];
+                  track item[0]
+                ) {
+                  <div class="formations-operations-item-copy">
+                    <p class="formations-operations-label">
+                      {{ item[0] | translate }}
+                    </p>
+                    <p>{{ item[1] }}</p>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="formations-operations-picker">
+            @for (formation of formations(); track trackById($index, formation)) {
+              <button
+                type="button"
+                class="formations-operations-picker-option"
+                (click)="selectFormationForUpdate(formation.id)"
+              >
+                <strong>{{ formation.titlePt }} ({{ formation.slug }})</strong>
+                <span>{{ formation.institution }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="formations-operations-picker">
+            @for (formation of formations(); track trackById($index, formation)) {
+              <button
+                type="button"
+                class="formations-operations-picker-option"
+                (click)="selectFormationForDelete(formation.id)"
+              >
+                <strong>{{ formation.titlePt }} ({{ formation.slug }})</strong>
+                <span>{{ formation.institution }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="formations-operations-delete-summary">
+            <strong>{{ selectedFormation()?.titlePt }} ({{ selectedFormation()?.slug }})</strong>
+            <p>{{ selectedFormation()?.institution }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>

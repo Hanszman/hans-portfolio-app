@@ -1,0 +1,74 @@
+<section class="formations-operations">
+  <div class="formations-operations-copy">
+    <p class="formations-operations-kicker">
+      {{ 'pages.admin.formations.sectionLabel' | translate }}
+    </p>
+    <h3>{{ 'pages.admin.entities.formations.title' | translate }}</h3>
+    <p>
+      {{ 'pages.admin.entities.formations.description' | translate }}
+      {{ 'pages.admin.formations.description' | translate }}
+    </p>
+  </div>
+
+  <p class="formations-operations-endpoint">{{ endpointLabel }}</p>
+
+  <app-operations-actions
+    [readDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
+    [updateDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
+    [deleteDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
+    (createClicked)="openCreateModal()"
+    (readClicked)="openReadModal()"
+    (updateClicked)="openUpdatePickerModal()"
+    (deleteClicked)="openDeletePickerModal()"
+  />
+
+  @if (isLoading()) {
+    <app-info-state
+      mode="loading"
+      [message]="'pages.admin.formations.states.loading' | translate"
+    />
+  } @else if (loadErrorKey(); as loadErrorKey) {
+    <app-info-state mode="error" [message]="loadErrorKey | translate" />
+  } @else if (!hasFormations()) {
+    <app-info-state mode="empty" [message]="'pages.admin.formations.states.empty' | translate" />
+  }
+
+  <app-formations-operations-modal
+    [isOpen]="isModalOpen()"
+    [modalTitleKey]="modalTitleKey()"
+    [modalMode]="modalMode()"
+    [formations]="formations()"
+    [selectedFormation]="selectedFormation()"
+    [form]="form()"
+    [technologyOptions]="technologyOptions()"
+    [linkOptions]="linkOptions()"
+    [imageAssetOptions]="imageAssetOptions()"
+    [degreeTypeOptions]="degreeTypeOptions"
+    [pagination]="pagination()"
+    [searchValue]="searchQuery()"
+    [feedbackKey]="modalFeedbackKey()"
+    [feedbackTone]="modalFeedbackTone()"
+    [isLoading]="isLoading()"
+    [isSubmitting]="isSubmitting()"
+    (closed)="closeModal()"
+    (slugChanged)="updateSlug($event)"
+    (institutionChanged)="updateInstitution($event)"
+    (titlePtChanged)="updateTitlePt($event)"
+    (titleEnChanged)="updateTitleEn($event)"
+    (degreeTypeChanged)="updateDegreeType($event)"
+    (summaryPtChanged)="updateSummaryPt($event)"
+    (summaryEnChanged)="updateSummaryEn($event)"
+    (startDateChanged)="updateStartDate($event)"
+    (endDateChanged)="updateEndDate($event)"
+    (highlightChanged)="updateHighlight($event)"
+    (sortOrderChanged)="updateSortOrder($event)"
+    (technologyToggled)="toggleTechnology($event)"
+    (linkToggled)="toggleLink($event)"
+    (imageAssetToggled)="toggleImageAsset($event)"
+    (submitted)="submitModal()"
+    (updateSelected)="openUpdateModal($event)"
+    (deleteSelected)="openDeleteModal($event)"
+    (pageSelected)="goToPage($event)"
+    (searchChanged)="updateSearchQuery($event)"
+  />
+</section>

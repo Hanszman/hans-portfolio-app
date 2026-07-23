@@ -1163,6 +1163,139 @@ export const ES_ES_TRANSLATIONS = {
     'El job protegido no puede guardarse ahora.',
   'pages.admin.jobs.feedback.deleteError':
     'El job protegido no puede eliminarse ahora.',
+  'pages.admin.formations.sectionLabel': '// FORMATIONS',
+  'pages.admin.formations.description':
+    'CRUD protegido para registros académicos y de formación profesional, incluyendo relaciones de stack, links de apoyo e image assets.',
+  'pages.admin.formations.states.loading':
+    'Cargando la colección protegida de formations...',
+  'pages.admin.formations.states.empty':
+    'Todavía no se ha registrado ninguna formation protegida.',
+  'pages.admin.formations.card.slug': 'Slug',
+  'pages.admin.formations.card.institution': 'Institución',
+  'pages.admin.formations.card.titlePt': 'Título en portugués',
+  'pages.admin.formations.card.titleEn': 'Título en inglés',
+  'pages.admin.formations.card.degreeType': 'Tipo de formación',
+  'pages.admin.formations.card.summaryPt': 'Resumen en portugués',
+  'pages.admin.formations.card.summaryEn': 'Resumen en inglés',
+  'pages.admin.formations.card.startDate': 'Fecha de inicio',
+  'pages.admin.formations.card.endDate': 'Fecha de término',
+  'pages.admin.formations.card.highlight': 'Destacado',
+  'pages.admin.formations.card.sortOrder': 'Orden',
+  'pages.admin.formations.card.technologies': 'Technologies',
+  'pages.admin.formations.card.links': 'Links',
+  'pages.admin.formations.card.imageAssets': 'Image assets',
+  'pages.admin.formations.card.emptyRelations':
+    'Ningún registro relacionado está conectado a esta formation en este momento.',
+  'pages.admin.formations.fields.slug.label': 'Slug',
+  'pages.admin.formations.fields.slug.placeholder':
+    'Ingresa el slug único de la formation',
+  'pages.admin.formations.fields.institution.label': 'Institución',
+  'pages.admin.formations.fields.institution.placeholder':
+    'Ingresa el nombre de la institución',
+  'pages.admin.formations.fields.titlePt.label': 'Título en portugués',
+  'pages.admin.formations.fields.titlePt.placeholder':
+    'Ingresa el título de la formation en portugués',
+  'pages.admin.formations.fields.titleEn.label': 'Título en inglés',
+  'pages.admin.formations.fields.titleEn.placeholder':
+    'Ingresa el título de la formation en inglés',
+  'pages.admin.formations.fields.degreeType.label': 'Tipo de formación',
+  'pages.admin.formations.fields.degreeType.empty':
+    'Ningún tipo de formación está disponible ahora.',
+  'pages.admin.formations.fields.degreeType.options.TECHNICAL': 'Técnico',
+  'pages.admin.formations.fields.degreeType.options.BACHELOR': 'Licenciatura',
+  'pages.admin.formations.fields.degreeType.options.POSTGRADUATE': 'Posgrado',
+  'pages.admin.formations.fields.degreeType.options.MBA': 'MBA',
+  'pages.admin.formations.fields.degreeType.options.MASTER': 'Maestría',
+  'pages.admin.formations.fields.degreeType.options.DOCTORATE': 'Doctorado',
+  'pages.admin.formations.fields.degreeType.options.BOOTCAMP': 'Bootcamp',
+  'pages.admin.formations.fields.degreeType.options.CERTIFICATION': 'Certificación',
+  'pages.admin.formations.fields.degreeType.options.COURSE': 'Curso',
+  'pages.admin.formations.fields.degreeType.options.OTHER': 'Otro',
+  'pages.admin.formations.fields.summaryPt.label': 'Resumen en portugués',
+  'pages.admin.formations.fields.summaryPt.placeholder':
+    'Ingresa el resumen de la formation en portugués',
+  'pages.admin.formations.fields.summaryEn.label': 'Resumen en inglés',
+  'pages.admin.formations.fields.summaryEn.placeholder':
+    'Ingresa el resumen de la formation en inglés',
+  'pages.admin.formations.fields.startDate.label': 'Fecha de inicio',
+  'pages.admin.formations.fields.startDate.placeholder':
+    'Ingresa la fecha inicial en ISO',
+  'pages.admin.formations.fields.endDate.label': 'Fecha de término',
+  'pages.admin.formations.fields.endDate.placeholder':
+    'Ingresa la fecha final en ISO cuando corresponda',
+  'pages.admin.formations.fields.highlight.label': 'Estado destacado',
+  'pages.admin.formations.fields.highlight.description':
+    'Controla si esta formation debe permanecer destacada en las secciones públicas del portfolio.',
+  'pages.admin.formations.fields.highlight.enabled': 'Destacado',
+  'pages.admin.formations.fields.highlight.disabled': 'Sin destaque',
+  'pages.admin.formations.fields.sortOrder.label': 'Orden',
+  'pages.admin.formations.fields.sortOrder.placeholder':
+    'Ingresa el orden entero de exhibición',
+  'pages.admin.formations.fields.technologies.label': 'Technologies relacionadas',
+  'pages.admin.formations.fields.technologies.description':
+    'Selecciona todas las technologies que deben permanecer relacionadas con esta formation.',
+  'pages.admin.formations.fields.technologies.empty':
+    'Ninguna technology está disponible para relacionar ahora.',
+  'pages.admin.formations.fields.links.label': 'Links relacionados',
+  'pages.admin.formations.fields.links.description':
+    'Selecciona todos los links de apoyo conectados a esta formation.',
+  'pages.admin.formations.fields.links.empty':
+    'Ningún link está disponible para relacionar ahora.',
+  'pages.admin.formations.fields.imageAssets.label': 'Image assets relacionados',
+  'pages.admin.formations.fields.imageAssets.description':
+    'Selecciona todos los image assets vinculados a esta formation.',
+  'pages.admin.formations.fields.imageAssets.empty':
+    'Ningún image asset está disponible para relacionar ahora.',
+  'pages.admin.formations.modal.create.title': 'Crear formation',
+  'pages.admin.formations.modal.read.title': 'Leer formations',
+  'pages.admin.formations.modal.read.description':
+    'Revisa las formations protegidas actuales y abre flujos de update o delete directamente desde cada registro.',
+  'pages.admin.formations.modal.pickUpdate.title':
+    'Selecciona una formation para actualizar',
+  'pages.admin.formations.modal.pickUpdate.description':
+    'Elige una de las formations protegidas actuales para abrir su formulario de update.',
+  'pages.admin.formations.modal.pickDelete.title':
+    'Selecciona una formation para eliminar',
+  'pages.admin.formations.modal.pickDelete.description':
+    'Elige una de las formations protegidas actuales para confirmar su eliminación.',
+  'pages.admin.formations.modal.update.title': 'Actualizar formation',
+  'pages.admin.formations.modal.delete.title': 'Eliminar formation',
+  'pages.admin.formations.modal.delete.description':
+    'Esta acción elimina permanentemente la formation protegida seleccionada del portfolio.',
+  'pages.admin.formations.feedback.created':
+    'Formation protegida creada con éxito.',
+  'pages.admin.formations.feedback.updated':
+    'Formation protegida actualizada con éxito.',
+  'pages.admin.formations.feedback.deleted':
+    'Formation protegida eliminada con éxito.',
+  'pages.admin.formations.feedback.requiredSlug':
+    'El slug de la formation es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredInstitution':
+    'La institución es obligatoria antes del envío.',
+  'pages.admin.formations.feedback.requiredTitlePt':
+    'El título de la formation en portugués es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredTitleEn':
+    'El título de la formation en inglés es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredDegreeType':
+    'El tipo de formación es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredSummaryPt':
+    'El resumen en portugués es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredSummaryEn':
+    'El resumen en inglés es obligatorio antes del envío.',
+  'pages.admin.formations.feedback.requiredStartDate':
+    'La fecha de inicio es obligatoria antes del envío.',
+  'pages.admin.formations.feedback.invalidSortOrder':
+    'El orden debe ser un número entero válido.',
+  'pages.admin.formations.feedback.missingSession':
+    'La sesión administrativa autenticada no está disponible. Inicia sesión nuevamente para continuar.',
+  'pages.admin.formations.feedback.selectionRequired':
+    'Selecciona una formation protegida antes de continuar con esta acción.',
+  'pages.admin.formations.feedback.loadError':
+    'La colección protegida de formations no puede cargarse ahora.',
+  'pages.admin.formations.feedback.saveError':
+    'La formation protegida no puede guardarse ahora.',
+  'pages.admin.formations.feedback.deleteError':
+    'La formation protegida no puede eliminarse ahora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de medios usados por el portfolio a través de relaciones de image assets.',

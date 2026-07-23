@@ -1,0 +1,110 @@
+:host {
+  @apply block;
+}
+
+.formations-operations-delete-summary p,
+.formations-operations-selection-copy span,
+.formations-operations-selection-empty,
+.formations-operations-item-copy p:last-child,
+.formations-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.formations-operations-list,
+.formations-operations-picker {
+  @apply grid gap-4;
+}
+
+.formations-operations-item,
+.formations-operations-picker-option,
+.formations-operations-delete-summary,
+.formations-operations-selection-section,
+.formations-operations-toggle {
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
+}
+
+.formations-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
+}
+
+.formations-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.formations-operations-picker-option:hover,
+.formations-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.formations-operations-item-header,
+.formations-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.formations-operations-item-header h4,
+.formations-operations-picker-option strong,
+.formations-operations-delete-summary strong,
+.formations-operations-selection-copy p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.formations-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.formations-operations-item-copy {
+  @apply flex min-w-0 flex-col gap-2;
+}
+
+.formations-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.formations-operations-form {
+  @apply flex flex-col gap-4;
+}
+
+.formations-operations-selection-copy {
+  @apply flex flex-col gap-1;
+}
+
+.formations-operations-selection-grid {
+  @apply grid gap-3 md:grid-cols-2;
+}
+
+.formations-operations-selection-option {
+  @apply flex max-w-full items-center gap-3 text-left;
+}
+
+.formations-operations-selection-option-image {
+  @apply h-12 w-12 shrink-0 rounded-2xl object-cover;
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.formations-operations-selection-option-copy {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.formations-operations-selection-option-title,
+.formations-operations-selection-option-subtitle {
+  @apply block whitespace-normal text-left;
+}
+
+.formations-operations-selection-option-title {
+  @apply break-words font-semibold;
+}
+
+.formations-operations-selection-option-subtitle {
+  @apply break-words text-xs uppercase tracking-[0.14em];
+}
+
+:host ::ng-deep .formations-operations-selection-grid hans-button .hans-button-content,
+:host ::ng-deep .formations-operations-selection-grid hans-button .hans-button {
+  @apply items-start justify-start whitespace-normal text-left;
+}

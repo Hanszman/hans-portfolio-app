@@ -1241,8 +1241,28 @@ Regra importante de modelagem para a F8:
   - estado consolidado em `2026-07-21`: leitura administrativa em `GET /customers`, CRUD estabilizado com relacoes de `experiences` e `image-assets`, previews visuais nas selecoes de imagem, remocao completa de `isPublished` e mutacoes preservadas em `/admin/customers`
 - `F8.9` - `jobs`
   - relacionamentos: `experienceIds`, `imageAssetIds`
+  - status: concluida em `2026-07-23`
+  - entregue:
+    - dominio `src/app/core/api/admin/jobs/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
+    - leitura administrativa consolidada em `GET /jobs`, com mutacoes reais em `/admin/jobs`
+    - componente administrativo dedicado em `src/app/pages/admin/components/jobs-operations/` com `helpers/` internos e modal segregado em `components/jobs-operations-modal/`
+    - relacoes com `experiences` e `image-assets` integradas ao formulario administrativo, com previews reais das imagens
+    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados
+    - traducoes sincronizadas nos tres idiomas
+    - cobertura total de testes para API, helper, modal, workspace e shell admin
 - `F8.10` - `formations`
   - relacionamentos: `technologyRelations`, `linkIds`, `imageAssetIds`
+  - status: concluida em `2026-07-23`
+  - entregue:
+    - dominio `src/app/core/api/admin/formations/` criado para contratos e chamadas HTTP da entidade dentro da estrutura administrativa
+    - leitura administrativa consolidada em `GET /formations`, com mutacoes reais em `/admin/formations`
+    - componente administrativo dedicado em `src/app/pages/admin/components/formations-operations/` com `helpers/` internos e modal segregado em `components/formations-operations-modal/`
+    - formulario administrativo com suporte aos campos `slug`, `institution`, `titlePt`, `titleEn`, `degreeType`, `summaryPt`, `summaryEn`, `startDate`, `endDate`, `highlight` e `sortOrder`
+    - campo `degreeType` ajustado para seletor com os valores validos do contrato da API
+    - opcoes relacionais carregadas a partir de `GET /technologies`, `GET /links` e `GET /image-assets`, com previews reais das imagens selecionaveis
+    - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados
+    - traducoes sincronizadas nos tres idiomas
+    - cobertura total de testes para API, helper, modal, workspace e shell admin
 - `F8.11` - `technologies`
   - relacionamentos: `projectRelations`, `experienceRelations`, `formationRelations`, `technologyContexts`, `tagIds`, `linkIds`, `imageAssetIds`
 - `F8.12` - `technology-contexts`
@@ -1462,4 +1482,4 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.9`, expandindo a area admin para a entidade `jobs` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets`, `spoken-languages` e `customers`.
+Implementar a `F8.11`, expandindo a area admin para a entidade `technologies` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets`, `spoken-languages`, `customers`, `jobs` e `formations`.

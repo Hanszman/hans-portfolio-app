@@ -1136,6 +1136,138 @@ export const EN_TRANSLATIONS = {
     'The protected job could not be saved right now.',
   'pages.admin.jobs.feedback.deleteError':
     'The protected job could not be deleted right now.',
+  'pages.admin.formations.sectionLabel': '// FORMATIONS',
+  'pages.admin.formations.description':
+    'Protected CRUD for academic and professional education records, including stack relations, supporting links and image assets.',
+  'pages.admin.formations.states.loading':
+    'Loading the protected formations collection...',
+  'pages.admin.formations.states.empty':
+    'No protected formation has been registered yet.',
+  'pages.admin.formations.card.slug': 'Slug',
+  'pages.admin.formations.card.institution': 'Institution',
+  'pages.admin.formations.card.titlePt': 'Portuguese title',
+  'pages.admin.formations.card.titleEn': 'English title',
+  'pages.admin.formations.card.degreeType': 'Degree type',
+  'pages.admin.formations.card.summaryPt': 'Portuguese summary',
+  'pages.admin.formations.card.summaryEn': 'English summary',
+  'pages.admin.formations.card.startDate': 'Start date',
+  'pages.admin.formations.card.endDate': 'End date',
+  'pages.admin.formations.card.highlight': 'Highlight',
+  'pages.admin.formations.card.sortOrder': 'Sort order',
+  'pages.admin.formations.card.technologies': 'Technologies',
+  'pages.admin.formations.card.links': 'Links',
+  'pages.admin.formations.card.imageAssets': 'Image assets',
+  'pages.admin.formations.card.emptyRelations':
+    'No linked record is currently connected to this formation.',
+  'pages.admin.formations.fields.slug.label': 'Slug',
+  'pages.admin.formations.fields.slug.placeholder':
+    'Enter the unique formation slug',
+  'pages.admin.formations.fields.institution.label': 'Institution',
+  'pages.admin.formations.fields.institution.placeholder':
+    'Enter the institution name',
+  'pages.admin.formations.fields.titlePt.label': 'Portuguese title',
+  'pages.admin.formations.fields.titlePt.placeholder':
+    'Enter the Portuguese formation title',
+  'pages.admin.formations.fields.titleEn.label': 'English title',
+  'pages.admin.formations.fields.titleEn.placeholder':
+    'Enter the English formation title',
+  'pages.admin.formations.fields.degreeType.label': 'Degree type',
+  'pages.admin.formations.fields.degreeType.empty':
+    'No degree type is available right now.',
+  'pages.admin.formations.fields.degreeType.options.TECHNICAL': 'Technical',
+  'pages.admin.formations.fields.degreeType.options.BACHELOR': 'Bachelor',
+  'pages.admin.formations.fields.degreeType.options.POSTGRADUATE': 'Postgraduate',
+  'pages.admin.formations.fields.degreeType.options.MBA': 'MBA',
+  'pages.admin.formations.fields.degreeType.options.MASTER': 'Master',
+  'pages.admin.formations.fields.degreeType.options.DOCTORATE': 'Doctorate',
+  'pages.admin.formations.fields.degreeType.options.BOOTCAMP': 'Bootcamp',
+  'pages.admin.formations.fields.degreeType.options.CERTIFICATION': 'Certification',
+  'pages.admin.formations.fields.degreeType.options.COURSE': 'Course',
+  'pages.admin.formations.fields.degreeType.options.OTHER': 'Other',
+  'pages.admin.formations.fields.summaryPt.label': 'Portuguese summary',
+  'pages.admin.formations.fields.summaryPt.placeholder':
+    'Enter the Portuguese formation summary',
+  'pages.admin.formations.fields.summaryEn.label': 'English summary',
+  'pages.admin.formations.fields.summaryEn.placeholder':
+    'Enter the English formation summary',
+  'pages.admin.formations.fields.startDate.label': 'Start date',
+  'pages.admin.formations.fields.startDate.placeholder': 'Enter the ISO start date',
+  'pages.admin.formations.fields.endDate.label': 'End date',
+  'pages.admin.formations.fields.endDate.placeholder':
+    'Enter the ISO end date when applicable',
+  'pages.admin.formations.fields.highlight.label': 'Highlight status',
+  'pages.admin.formations.fields.highlight.description':
+    'Control whether this formation should stay highlighted in public portfolio sections.',
+  'pages.admin.formations.fields.highlight.enabled': 'Highlighted',
+  'pages.admin.formations.fields.highlight.disabled': 'Not highlighted',
+  'pages.admin.formations.fields.sortOrder.label': 'Sort order',
+  'pages.admin.formations.fields.sortOrder.placeholder':
+    'Enter the integer sort order',
+  'pages.admin.formations.fields.technologies.label': 'Related technologies',
+  'pages.admin.formations.fields.technologies.description':
+    'Select every technology that should remain related to this formation.',
+  'pages.admin.formations.fields.technologies.empty':
+    'No technology is available to relate right now.',
+  'pages.admin.formations.fields.links.label': 'Related links',
+  'pages.admin.formations.fields.links.description':
+    'Select every supporting link connected to this formation.',
+  'pages.admin.formations.fields.links.empty':
+    'No link is available to relate right now.',
+  'pages.admin.formations.fields.imageAssets.label': 'Related image assets',
+  'pages.admin.formations.fields.imageAssets.description':
+    'Select every image asset linked to this formation.',
+  'pages.admin.formations.fields.imageAssets.empty':
+    'No image asset is available to relate right now.',
+  'pages.admin.formations.modal.create.title': 'Create formation',
+  'pages.admin.formations.modal.read.title': 'Read formations',
+  'pages.admin.formations.modal.read.description':
+    'Review the current protected formations and open update or delete flows directly from each record.',
+  'pages.admin.formations.modal.pickUpdate.title':
+    'Select a formation to update',
+  'pages.admin.formations.modal.pickUpdate.description':
+    'Choose one of the current protected formations to open its update form.',
+  'pages.admin.formations.modal.pickDelete.title':
+    'Select a formation to delete',
+  'pages.admin.formations.modal.pickDelete.description':
+    'Choose one of the current protected formations to confirm its removal.',
+  'pages.admin.formations.modal.update.title': 'Update formation',
+  'pages.admin.formations.modal.delete.title': 'Delete formation',
+  'pages.admin.formations.modal.delete.description':
+    'This action permanently removes the selected protected formation from the portfolio.',
+  'pages.admin.formations.feedback.created':
+    'Protected formation created successfully.',
+  'pages.admin.formations.feedback.updated':
+    'Protected formation updated successfully.',
+  'pages.admin.formations.feedback.deleted':
+    'Protected formation deleted successfully.',
+  'pages.admin.formations.feedback.requiredSlug':
+    'The formation slug is required before submitting.',
+  'pages.admin.formations.feedback.requiredInstitution':
+    'The institution is required before submitting.',
+  'pages.admin.formations.feedback.requiredTitlePt':
+    'The Portuguese formation title is required before submitting.',
+  'pages.admin.formations.feedback.requiredTitleEn':
+    'The English formation title is required before submitting.',
+  'pages.admin.formations.feedback.requiredDegreeType':
+    'The degree type is required before submitting.',
+  'pages.admin.formations.feedback.requiredSummaryPt':
+    'The Portuguese summary is required before submitting.',
+  'pages.admin.formations.feedback.requiredSummaryEn':
+    'The English summary is required before submitting.',
+  'pages.admin.formations.feedback.requiredStartDate':
+    'The start date is required before submitting.',
+  'pages.admin.formations.feedback.invalidSortOrder':
+    'The sort order must be a valid integer number.',
+  'pages.admin.formations.feedback.missingSession':
+    'The authenticated admin session is unavailable. Log in again to continue.',
+  'pages.admin.formations.feedback.selectionRequired':
+    'Select a protected formation before continuing with this action.',
+  'pages.admin.formations.feedback.loadError':
+    'The protected formations collection could not be loaded right now.',
+  'pages.admin.formations.feedback.saveError':
+    'The protected formation could not be saved right now.',
+  'pages.admin.formations.feedback.deleteError':
+    'The protected formation could not be deleted right now.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Normalized media records used by the portfolio through image asset relations instead of direct file fields.',

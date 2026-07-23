@@ -5,6 +5,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
 import { CustomersOperationsService } from './core/api/admin/customers/customers-operations.service';
+import { FormationsOperationsService } from './core/api/admin/formations/formations-operations.service';
 import { ImageAssetsOperationsService } from './core/api/admin/image-assets/image-assets-operations.service';
 import { JobsOperationsService } from './core/api/admin/jobs/jobs-operations.service';
 import { LinksOperationsService } from './core/api/admin/links/links-operations.service';
@@ -84,6 +85,47 @@ describe('app routes', () => {
           useValue: {
             login: jasmine.createSpy(),
             getSession: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: FormationsOperationsService,
+          useValue: {
+            getAll: jasmine
+              .createSpy()
+              .and.returnValue(
+                of({
+                  data: [
+                    {
+                      id: 'formation-1',
+                      slug: 'systems-analysis',
+                      institution: 'PUC Minas',
+                      titlePt: 'Analise e Desenvolvimento de Sistemas',
+                      titleEn: 'Systems Analysis and Development',
+                      degreeType: 'BACHELOR',
+                      summaryPt: 'Resumo PT',
+                      summaryEn: 'Summary EN',
+                      startDate: '2020-01-01',
+                      endDate: '2023-12-01',
+                      highlight: true,
+                      sortOrder: 1,
+                      technologyRelations: [],
+                      linkIds: ['link-1'],
+                      imageAssetIds: ['image-asset-1'],
+                    },
+                  ],
+                  pagination: {
+                    page: 1,
+                    pageSize: 5,
+                    totalItems: 1,
+                    totalPages: 1,
+                    hasPreviousPage: false,
+                    hasNextPage: false,
+                  },
+                }),
+              ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
           },
         },
         {
