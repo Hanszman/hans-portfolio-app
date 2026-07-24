@@ -104,15 +104,35 @@ describe('links types helpers', () => {
 
   it('should create the supported link type options', () => {
     expect(createLinkTypeOptions()).toEqual([
-      { id: 'GITHUB', label: 'GITHUB', value: 'GITHUB' },
-      { id: 'DEPLOY', label: 'DEPLOY', value: 'DEPLOY' },
-      { id: 'NPM', label: 'NPM', value: 'NPM' },
-      { id: 'DOCS', label: 'DOCS', value: 'DOCS' },
-      { id: 'LINKEDIN', label: 'LINKEDIN', value: 'LINKEDIN' },
-      { id: 'WEBSITE', label: 'WEBSITE', value: 'WEBSITE' },
-      { id: 'ARTICLE', label: 'ARTICLE', value: 'ARTICLE' },
-      { id: 'FIGMA', label: 'FIGMA', value: 'FIGMA' },
-      { id: 'OTHER', label: 'OTHER', value: 'OTHER' },
+      {
+        id: 'GITHUB',
+        labelKey: 'pages.admin.links.fields.type.options.GITHUB',
+        value: 'GITHUB',
+      },
+      {
+        id: 'DEPLOY',
+        labelKey: 'pages.admin.links.fields.type.options.DEPLOY',
+        value: 'DEPLOY',
+      },
+      { id: 'NPM', labelKey: 'pages.admin.links.fields.type.options.NPM', value: 'NPM' },
+      { id: 'DOCS', labelKey: 'pages.admin.links.fields.type.options.DOCS', value: 'DOCS' },
+      {
+        id: 'LINKEDIN',
+        labelKey: 'pages.admin.links.fields.type.options.LINKEDIN',
+        value: 'LINKEDIN',
+      },
+      {
+        id: 'WEBSITE',
+        labelKey: 'pages.admin.links.fields.type.options.WEBSITE',
+        value: 'WEBSITE',
+      },
+      {
+        id: 'ARTICLE',
+        labelKey: 'pages.admin.links.fields.type.options.ARTICLE',
+        value: 'ARTICLE',
+      },
+      { id: 'FIGMA', labelKey: 'pages.admin.links.fields.type.options.FIGMA', value: 'FIGMA' },
+      { id: 'OTHER', labelKey: 'pages.admin.links.fields.type.options.OTHER', value: 'OTHER' },
     ]);
   });
 });

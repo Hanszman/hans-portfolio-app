@@ -18,6 +18,7 @@ import {
 } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
+import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
@@ -41,6 +42,7 @@ import {
   createEmptySpokenLanguagesOperationsFormValue,
   createSpokenLanguageProficiencyOptions,
 } from './spoken-languages-operations.types';
+import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-spoken-languages-operations',
@@ -63,6 +65,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
+  private readonly translation = inject(TranslationService);
 
   private readonly spokenLanguagesSignal = signal<readonly SpokenLanguageRecord[]>([]);
   private readonly imageAssetsSignal = signal<readonly ImageAssetRecord[]>([]);
@@ -92,7 +95,12 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   protected readonly imageAssetOptions = computed(() =>
     buildSpokenLanguageImageAssetOptions(this.imageAssetsSignal()),
   );
-  protected readonly proficiencyOptions = createSpokenLanguageProficiencyOptions();
+  protected readonly proficiencyOptions = computed(() =>
+    translateAdminSelectOptions(
+      createSpokenLanguageProficiencyOptions(),
+      this.translation.instant.bind(this.translation),
+    ),
+  );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

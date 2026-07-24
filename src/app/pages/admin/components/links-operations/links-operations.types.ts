@@ -4,6 +4,11 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
+import {
+  AdminSelectOptionDefinition,
+  AdminSelectOptionViewModel,
+  createAdminSelectOptionDefinitions,
+} from '../../helpers/admin.helper';
 
 export const LINK_TYPE_VALUES = [
   'GITHUB',
@@ -80,11 +85,9 @@ export interface LinkCatalogOptionViewModel {
   subtitle: string;
 }
 
-export interface LinkTypeOptionViewModel {
-  id: LinkTypeValue;
-  label: string;
-  value: LinkTypeValue;
-}
+export type LinkTypeOptionDefinition = AdminSelectOptionDefinition<LinkTypeValue>;
+
+export type LinkTypeOptionViewModel = AdminSelectOptionViewModel<LinkTypeValue>;
 
 export interface LinkOperationsViewModel {
   id: string;
@@ -136,12 +139,11 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   formationIds: [],
 });
 
-export const createLinkTypeOptions = (): readonly LinkTypeOptionViewModel[] =>
-  LINK_TYPE_VALUES.map((value) => ({
-    id: value,
-    label: value,
-    value,
-  }));
+export const createLinkTypeOptions = (): readonly LinkTypeOptionDefinition[] =>
+  createAdminSelectOptionDefinitions(
+    LINK_TYPE_VALUES,
+    (value) => `pages.admin.links.fields.type.options.${value}` as AppTranslationKey,
+  );
 
 export const createLinkCatalogOptionViewModel = (
   item:

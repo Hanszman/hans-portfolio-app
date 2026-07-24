@@ -7,6 +7,9 @@ import { AppTranslationKey } from '../../../../core/translation/translation.type
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,
+  AdminSelectOptionDefinition,
+  AdminSelectOptionViewModel,
+  createAdminSelectOptionDefinitions,
   createAdminImageAssetOptionViewModel,
   resolveAdminImageAssetLabel,
 } from '../../helpers/admin.helper';
@@ -69,11 +72,11 @@ export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
 
 export type SpokenLanguageImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
-export interface SpokenLanguageProficiencyOptionViewModel {
-  id: SpokenLanguageProficiencyValue;
-  label: string;
-  value: SpokenLanguageProficiencyValue;
-}
+export type SpokenLanguageProficiencyOptionDefinition =
+  AdminSelectOptionDefinition<SpokenLanguageProficiencyValue>;
+
+export type SpokenLanguageProficiencyOptionViewModel =
+  AdminSelectOptionViewModel<SpokenLanguageProficiencyValue>;
 
 export interface SpokenLanguageOperationsViewModel {
   id: string;
@@ -113,12 +116,12 @@ export const createEmptySpokenLanguagesOperationsFormValue =
   });
 
 export const createSpokenLanguageProficiencyOptions =
-  (): readonly SpokenLanguageProficiencyOptionViewModel[] =>
-    SPOKEN_LANGUAGE_PROFICIENCY_VALUES.map((value) => ({
-      id: value,
-      label: value,
-      value,
-    }));
+  (): readonly SpokenLanguageProficiencyOptionDefinition[] =>
+    createAdminSelectOptionDefinitions(
+      SPOKEN_LANGUAGE_PROFICIENCY_VALUES,
+      (value) =>
+        `pages.admin.spokenLanguages.fields.proficiency.options.${value}` as AppTranslationKey,
+    );
 
 export const createSpokenLanguageImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,

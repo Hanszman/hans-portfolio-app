@@ -1,6 +1,7 @@
 [TODO ATUAL]:
 -Partir pra próxima etapa de implementação (telas de cadastros/admin), seguindo o mesmo template consolidado em portfolio-settings, tags e links para todas as próximas entidades da F8.
 -Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End.
+-Entender motivo da organização dos services de consumo da api está com technologies fora de admin, ao invés de skills
 -Fazer próximos TODO's (de melhoria abaixo)
 
 [PROXIMOS TODO's]:

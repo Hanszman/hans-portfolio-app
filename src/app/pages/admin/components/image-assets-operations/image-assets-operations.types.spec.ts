@@ -19,8 +19,16 @@ describe('image-assets operations types', () => {
   it('should expose the supported image-asset kind values and options', () => {
     expect(IMAGE_ASSET_KIND_VALUES).toEqual(['ICON', 'SCREENSHOT']);
     expect(createImageAssetKindOptions()).toEqual([
-      { id: 'ICON', label: 'ICON', value: 'ICON' },
-      { id: 'SCREENSHOT', label: 'SCREENSHOT', value: 'SCREENSHOT' },
+      {
+        id: 'ICON',
+        labelKey: 'pages.admin.imageAssets.fields.kind.options.ICON',
+        value: 'ICON',
+      },
+      {
+        id: 'SCREENSHOT',
+        labelKey: 'pages.admin.imageAssets.fields.kind.options.SCREENSHOT',
+        value: 'SCREENSHOT',
+      },
     ]);
   });
 

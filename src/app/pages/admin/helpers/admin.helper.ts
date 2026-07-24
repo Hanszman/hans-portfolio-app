@@ -56,6 +56,38 @@ export const resolveAdminSelectValue = (event: Event): string => {
   return '';
 };
 
+export interface AdminSelectOptionDefinition<TValue extends string = string> {
+  readonly id: TValue;
+  readonly labelKey: AppTranslationKey;
+  readonly value: TValue;
+}
+
+export interface AdminSelectOptionViewModel<TValue extends string = string> {
+  readonly id: TValue;
+  readonly label: string;
+  readonly value: TValue;
+}
+
+export const createAdminSelectOptionDefinitions = <TValue extends string>(
+  values: readonly TValue[],
+  resolveLabelKey: (value: TValue) => AppTranslationKey,
+): readonly AdminSelectOptionDefinition<TValue>[] =>
+  values.map((value) => ({
+    id: value,
+    labelKey: resolveLabelKey(value),
+    value,
+  }));
+
+export const translateAdminSelectOptions = <TValue extends string>(
+  options: readonly AdminSelectOptionDefinition<TValue>[],
+  translate: (key: AppTranslationKey) => string,
+): readonly AdminSelectOptionViewModel<TValue>[] =>
+  options.map((option) => ({
+    id: option.id,
+    label: translate(option.labelKey),
+    value: option.value,
+  }));
+
 export const trackAdminItemById = (
   index: number,
   item: { id: string },

@@ -22,6 +22,7 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { ToastService } from '../../../../core/toast/toast.service';
+import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
@@ -44,6 +45,7 @@ import {
   createEmptyLinksOperationsFormValue,
   createLinkTypeOptions,
 } from './links-operations.types';
+import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-links-operations',
@@ -66,6 +68,7 @@ export class LinksOperationsComponent implements OnInit {
   private readonly technologiesService = inject(TechnologiesService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
+  private readonly translation = inject(TranslationService);
 
   private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
@@ -110,7 +113,12 @@ export class LinksOperationsComponent implements OnInit {
     buildLinkCatalogOptions(this.technologiesSignal()),
   );
   protected readonly formationOptions = computed(() => []);
-  protected readonly linkTypeOptions = createLinkTypeOptions();
+  protected readonly linkTypeOptions = computed(() =>
+    translateAdminSelectOptions(
+      createLinkTypeOptions(),
+      this.translation.instant.bind(this.translation),
+    ),
+  );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

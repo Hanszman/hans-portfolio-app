@@ -20,6 +20,7 @@ import { TechnologiesService } from '../../../../core/api/technologies/technolog
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
+import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
@@ -43,6 +44,7 @@ import {
   createEmptyTagsOperationsFormValue,
   createTagTypeOptions,
 } from './tags-operations.types';
+import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-tags-operations',
@@ -64,6 +66,7 @@ export class TagsOperationsComponent implements OnInit {
   private readonly technologiesService = inject(TechnologiesService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
+  private readonly translation = inject(TranslationService);
 
   private readonly tagsSignal = signal<readonly TagRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
@@ -100,7 +103,12 @@ export class TagsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildTagCatalogOptions(this.technologiesSignal()),
   );
-  protected readonly tagTypeOptions = createTagTypeOptions();
+  protected readonly tagTypeOptions = computed(() =>
+    translateAdminSelectOptions(
+      createTagTypeOptions(),
+      this.translation.instant.bind(this.translation),
+    ),
+  );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

@@ -8,6 +8,11 @@ import {
 } from '../../../../core/api/admin/tags/tags-operations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
+import {
+  AdminSelectOptionDefinition,
+  AdminSelectOptionViewModel,
+  createAdminSelectOptionDefinitions,
+} from '../../helpers/admin.helper';
 
 export const TAG_TYPE_VALUES = [
   'STACK',
@@ -72,11 +77,9 @@ export interface TagCatalogOptionViewModel {
   subtitle: string;
 }
 
-export interface TagTypeOptionViewModel {
-  id: TagTypeValue;
-  label: string;
-  value: TagTypeValue;
-}
+export type TagTypeOptionDefinition = AdminSelectOptionDefinition<TagTypeValue>;
+
+export type TagTypeOptionViewModel = AdminSelectOptionViewModel<TagTypeValue>;
 
 export interface TagOperationsViewModel {
   id: string;
@@ -120,12 +123,11 @@ export const createEmptyTagsOperationsFormValue = (): TagsOperationsFormValue =>
   technologyIds: [],
 });
 
-export const createTagTypeOptions = (): readonly TagTypeOptionViewModel[] =>
-  TAG_TYPE_VALUES.map((value) => ({
-    id: value,
-    label: value,
-    value,
-  }));
+export const createTagTypeOptions = (): readonly TagTypeOptionDefinition[] =>
+  createAdminSelectOptionDefinitions(
+    TAG_TYPE_VALUES,
+    (value) => `pages.admin.tags.fields.type.options.${value}` as AppTranslationKey,
+  );
 
 export const resolveTagNamePt = (tag: TagRecord): string =>
   tag.namePt ?? tag.labelPt ?? '';

@@ -2,11 +2,13 @@ import { AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   buildAdminEntityViewModels,
   buildAdminSessionFactViewModels,
+  createAdminSelectOptionDefinitions,
   createAdminFieldLabelResolver,
   formatAdminIdentity,
   resolveAdminFieldLabel,
   resolveAdminSelectValue,
   trackAdminItemById,
+  translateAdminSelectOptions,
 } from './admin.helper';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -97,6 +99,40 @@ describe('formatAdminIdentity', () => {
 
   it('should return an empty string when the select event does not expose a value', () => {
     expect(resolveAdminSelectValue({} as Event)).toBe('');
+  });
+
+  it('should create and translate reusable admin select options', () => {
+    const translate = (key: AppTranslationKey) => `translated:${key}`;
+    const definitions = createAdminSelectOptionDefinitions(
+      ['STACK', 'DOMAIN'] as const,
+      (value) => `pages.admin.tags.fields.type.options.${value}` as AppTranslationKey,
+    );
+
+    expect(definitions).toEqual([
+      {
+        id: 'STACK',
+        labelKey: 'pages.admin.tags.fields.type.options.STACK',
+        value: 'STACK',
+      },
+      {
+        id: 'DOMAIN',
+        labelKey: 'pages.admin.tags.fields.type.options.DOMAIN',
+        value: 'DOMAIN',
+      },
+    ]);
+
+    expect(translateAdminSelectOptions(definitions, translate)).toEqual([
+      {
+        id: 'STACK',
+        label: 'translated:pages.admin.tags.fields.type.options.STACK',
+        value: 'STACK',
+      },
+      {
+        id: 'DOMAIN',
+        label: 'translated:pages.admin.tags.fields.type.options.DOMAIN',
+        value: 'DOMAIN',
+      },
+    ]);
   });
 
   it('should track admin items by id', () => {

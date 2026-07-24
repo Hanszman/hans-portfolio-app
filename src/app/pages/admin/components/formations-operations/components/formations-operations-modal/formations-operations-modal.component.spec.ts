@@ -34,6 +34,7 @@ describe('FormationsOperationsModalComponent', () => {
   beforeAll(() => {
     for (const elementName of [
       'hans-button',
+      'hans-date-picker',
       'hans-input',
       'hans-loading',
       'hans-modal',
@@ -168,6 +169,9 @@ describe('FormationsOperationsModalComponent', () => {
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
     ) as (HTMLElement & { label?: string })[];
+    const datePickerElements = Array.from(
+      fixture.nativeElement.querySelectorAll('hans-date-picker'),
+    ) as (HTMLElement & { label?: string })[];
     const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
       | (HTMLElement & { label?: string })
       | null;
@@ -179,9 +183,11 @@ describe('FormationsOperationsModalComponent', () => {
       'English title *',
       'Portuguese summary *',
       'English summary *',
+      'Sort order *',
+    ]);
+    expect(datePickerElements.map((element) => element.label)).toEqual([
       'Start date *',
       'End date',
-      'Sort order *',
     ]);
     expect(selectElement?.label).toBe('Degree type *');
     expect(slugSpy).toHaveBeenCalledOnceWith('systems-analysis');
@@ -330,5 +336,6 @@ describe('FormationsOperationsModalComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
+    expect(fixture.nativeElement.querySelectorAll('hans-date-picker').length).toBe(0);
   });
 });

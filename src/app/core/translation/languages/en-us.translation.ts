@@ -594,6 +594,13 @@ export const EN_TRANSLATIONS = {
     'Select the tag type',
   'pages.admin.tags.fields.type.empty':
     'No tag type is available right now.',
+  'pages.admin.tags.fields.type.options.STACK': 'Stack',
+  'pages.admin.tags.fields.type.options.DOMAIN': 'Domain',
+  'pages.admin.tags.fields.type.options.PLATFORM': 'Platform',
+  'pages.admin.tags.fields.type.options.HIGHLIGHT': 'Highlight',
+  'pages.admin.tags.fields.type.options.METHODOLOGY': 'Methodology',
+  'pages.admin.tags.fields.type.options.INDUSTRY': 'Industry',
+  'pages.admin.tags.fields.type.options.OTHER': 'Other',
   'pages.admin.tags.fields.sortOrder.label': 'Sort order',
   'pages.admin.tags.fields.sortOrder.placeholder':
     'Enter the integer sort order',
@@ -694,6 +701,15 @@ export const EN_TRANSLATIONS = {
     'Select the link type',
   'pages.admin.links.fields.type.empty':
     'No link type is available right now.',
+  'pages.admin.links.fields.type.options.GITHUB': 'GitHub',
+  'pages.admin.links.fields.type.options.DEPLOY': 'Deploy',
+  'pages.admin.links.fields.type.options.NPM': 'npm',
+  'pages.admin.links.fields.type.options.DOCS': 'Docs',
+  'pages.admin.links.fields.type.options.LINKEDIN': 'LinkedIn',
+  'pages.admin.links.fields.type.options.WEBSITE': 'Website',
+  'pages.admin.links.fields.type.options.ARTICLE': 'Article',
+  'pages.admin.links.fields.type.options.FIGMA': 'Figma',
+  'pages.admin.links.fields.type.options.OTHER': 'Other',
   'pages.admin.links.fields.sortOrder.label': 'Sort order',
   'pages.admin.links.fields.sortOrder.placeholder':
     'Enter the integer sort order',
@@ -790,6 +806,8 @@ export const EN_TRANSLATIONS = {
     'Select the asset kind',
   'pages.admin.imageAssets.fields.kind.empty':
     'No image asset kind is available right now.',
+  'pages.admin.imageAssets.fields.kind.options.ICON': 'Icon',
+  'pages.admin.imageAssets.fields.kind.options.SCREENSHOT': 'Screenshot',
   'pages.admin.imageAssets.fields.altPt.label': 'Portuguese alt text',
   'pages.admin.imageAssets.fields.altPt.placeholder':
     'Describe the asset in Portuguese for accessibility',
@@ -905,6 +923,12 @@ export const EN_TRANSLATIONS = {
   'pages.admin.spokenLanguages.fields.proficiency.label': 'Proficiency',
   'pages.admin.spokenLanguages.fields.proficiency.empty':
     'No proficiency option is available right now.',
+  'pages.admin.spokenLanguages.fields.proficiency.options.NATIVE': 'Native',
+  'pages.admin.spokenLanguages.fields.proficiency.options.FLUENT': 'Fluent',
+  'pages.admin.spokenLanguages.fields.proficiency.options.ADVANCED': 'Advanced',
+  'pages.admin.spokenLanguages.fields.proficiency.options.INTERMEDIATE':
+    'Intermediate',
+  'pages.admin.spokenLanguages.fields.proficiency.options.BASIC': 'Basic',
   'pages.admin.spokenLanguages.fields.highlight.label': 'Highlight status',
   'pages.admin.spokenLanguages.fields.highlight.description':
     'Control whether this spoken language should stay emphasized in the public portfolio.',

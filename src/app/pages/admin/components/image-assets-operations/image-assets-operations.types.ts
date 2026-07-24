@@ -10,6 +10,11 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
+import {
+  AdminSelectOptionDefinition,
+  AdminSelectOptionViewModel,
+  createAdminSelectOptionDefinitions,
+} from '../../helpers/admin.helper';
 
 export const IMAGE_ASSET_KIND_VALUES = ['ICON', 'SCREENSHOT'] as const;
 
@@ -107,11 +112,11 @@ export interface ImageAssetCatalogOptionViewModel {
   subtitle: string;
 }
 
-export interface ImageAssetKindOptionViewModel {
-  id: ImageAssetKindValue;
-  label: string;
-  value: ImageAssetKindValue;
-}
+export type ImageAssetKindOptionDefinition =
+  AdminSelectOptionDefinition<ImageAssetKindValue>;
+
+export type ImageAssetKindOptionViewModel =
+  AdminSelectOptionViewModel<ImageAssetKindValue>;
 
 export interface ImageAssetOperationsViewModel {
   id: string;
@@ -173,12 +178,11 @@ export const createEmptyImageAssetsOperationsFormValue =
   });
 
 export const createImageAssetKindOptions =
-  (): readonly ImageAssetKindOptionViewModel[] =>
-    IMAGE_ASSET_KIND_VALUES.map((value) => ({
-      id: value,
-      label: value,
-      value,
-    }));
+  (): readonly ImageAssetKindOptionDefinition[] =>
+    createAdminSelectOptionDefinitions(
+      IMAGE_ASSET_KIND_VALUES,
+      (value) => `pages.admin.imageAssets.fields.kind.options.${value}` as AppTranslationKey,
+    );
 
 export const createImageAssetCatalogOptionViewModel = (
   item:

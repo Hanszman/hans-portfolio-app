@@ -1,10 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import {
-  createImageAssetKindOptions,
-  ImageAssetOperationsViewModel,
-} from '../../image-assets-operations.types';
+import { ImageAssetOperationsViewModel } from '../../image-assets-operations.types';
 import { ImageAssetsOperationsModalComponent } from './image-assets-operations-modal.component';
 
 const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
@@ -109,10 +106,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     fixture.componentRef.setInput('technologyOptions', [
       { id: 'technology-1', title: 'Angular', subtitle: 'angular' },
     ]);
-    fixture.componentRef.setInput(
-      'imageAssetKindOptions',
-      createImageAssetKindOptions(),
-    );
+    fixture.componentRef.setInput('imageAssetKindOptions', [
+      { id: 'ICON', label: 'Icon', value: 'ICON' },
+      { id: 'SCREENSHOT', label: 'Screenshot', value: 'SCREENSHOT' },
+    ]);
     fixture.componentRef.setInput('pagination', {
       page: 1,
       pageSize: 5,

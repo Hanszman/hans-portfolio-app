@@ -22,6 +22,7 @@ import { ProjectCollectionItemResponse } from '../../../../core/api/projects/pro
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { ToastService } from '../../../../core/toast/toast.service';
+import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
@@ -44,6 +45,7 @@ import {
   createEmptyImageAssetsOperationsFormValue,
   createImageAssetKindOptions,
 } from './image-assets-operations.types';
+import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-image-assets-operations',
@@ -66,6 +68,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
   private readonly technologiesService = inject(TechnologiesService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
+  private readonly translation = inject(TranslationService);
 
   private readonly imageAssetsSignal = signal<readonly ImageAssetRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
@@ -107,7 +110,12 @@ export class ImageAssetsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildImageAssetCatalogOptions(this.technologiesSignal()),
   );
-  protected readonly imageAssetKindOptions = createImageAssetKindOptions();
+  protected readonly imageAssetKindOptions = computed(() =>
+    translateAdminSelectOptions(
+      createImageAssetKindOptions(),
+      this.translation.instant.bind(this.translation),
+    ),
+  );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

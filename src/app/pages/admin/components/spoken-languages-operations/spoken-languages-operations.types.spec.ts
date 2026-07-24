@@ -32,7 +32,7 @@ describe('spoken languages types helpers', () => {
 
     expect(createSpokenLanguageProficiencyOptions()[0]).toEqual({
       id: 'NATIVE',
-      label: 'NATIVE',
+      labelKey: 'pages.admin.spokenLanguages.fields.proficiency.options.NATIVE',
       value: 'NATIVE',
     });
   });

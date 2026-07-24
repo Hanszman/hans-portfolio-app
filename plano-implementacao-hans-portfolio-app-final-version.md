@@ -1316,6 +1316,8 @@ Regra importante de modelagem para a F8:
 - labels repetidos do dominio admin, como o prefixo padrao de endpoint `POST/GET/PUT/DELETE`, devem ficar centralizados em `admin.types.ts`
 - cada entrega da F8 deve fechar apenas uma subetapa oficial por vez, salvo alinhamento explicito para agrupar mais de uma no mesmo incremento
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
+- sempre que o campo representar data, data e hora ou apenas hora, devemos usar `hans-date-picker` com o `pickerType` correto em vez de `input`
+- dropdowns administrativos nunca devem exibir enums crus ou chaves de traducao completas; as options devem ser traduzidas antes de chegar ao componente visual
 - quando a shell admin operar uma entidade com endpoint protegido proprio de leitura, a colecao deve priorizar `/admin/<entity>`; quando a API expuser apenas leitura publica, devemos consumir o endpoint publico e manter somente as mutacoes em `/admin/<entity>`
 - relacoes com `image-assets` devem exibir previews reais da imagem nas tags/cards de selecao das entidades atuais e futuras
 - as rotas `GET` publicas das entidades devem permanecer publicas; apos a remocao de `isPublished`, a shell admin deve consumir essa mesma leitura publica sem depender de preview autenticado dedicado no backend e sem duplicar controladores `GET` em `/admin`

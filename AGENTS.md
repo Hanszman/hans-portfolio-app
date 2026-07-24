@@ -233,6 +233,7 @@ Rules:
 - TypeScript should pass translation keys, not locale-to-text maps.
 - Use `TranslatePipe` in templates for static copy.
 - Use `TranslationService` in TypeScript when translated labels are needed in code.
+- Closed-list, enum and API-known option fields must expose translated user-facing labels through `TranslationService`; never pass raw enum values or raw translation keys directly to UI options.
 - When backend content has localized fields, use the centralized translation helpers/service instead of ad hoc `if`, `switch`, or ternary locale logic.
 - Remove translation keys that are no longer used, but keep all language files synchronized.
 
@@ -310,6 +311,13 @@ Rules:
 - build admin actions and forms with `hans-ui-design-lib` primitives first
 - each admin entity entry should expose `create`, `update` and `delete` actions
 - each action should open modal-driven flows when appropriate
+- every admin form field must declare its label through field config and use the config `required` flag to append the asterisk automatically instead of hardcoding it in templates
+- whenever a field represents a closed list, enum or API-known option set, use `hans-select-option` instead of `input`
+- whenever a field represents date, datetime or time input, use `hans-date-picker` with the correct `pickerType` instead of `hans-input`
+- read, `pick-update` and `pick-delete` flows should keep the shared operations modal pattern, including search, shared pagination and fixed footer actions
+- relation pickers for `image-assets` must show real previews in the selection cards/tags for current and future entities
+- if a public `GET` endpoint already exists for an entity, the admin shell should reuse that public read and keep only `create`, `update` and `delete` on protected routes
+- complete only one official F8 substep per delivery unless there is explicit alignment to group more than one
 - model relationship CRUD according to the API contracts:
   - `technology-contexts` is the only dedicated relationship entity with its own protected CRUD
   - the other relationship tables must be managed through relation arrays in the owning entity payloads

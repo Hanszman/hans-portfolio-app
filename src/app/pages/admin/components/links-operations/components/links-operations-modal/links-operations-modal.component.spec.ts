@@ -1,10 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import {
-  createLinkTypeOptions,
-  LinkOperationsViewModel,
-} from '../../links-operations.types';
+import { LinkOperationsViewModel } from '../../links-operations.types';
 import { LinksOperationsModalComponent } from './links-operations-modal.component';
 
 const LINKS: readonly LinkOperationsViewModel[] = [
@@ -94,7 +91,10 @@ describe('LinksOperationsModalComponent', () => {
     fixture.componentRef.setInput('technologyOptions', [
       { id: 'technology-1', title: 'Angular', subtitle: 'angular' },
     ]);
-    fixture.componentRef.setInput('linkTypeOptions', createLinkTypeOptions());
+    fixture.componentRef.setInput('linkTypeOptions', [
+      { id: 'GITHUB', label: 'GitHub', value: 'GITHUB' },
+      { id: 'DEPLOY', label: 'Deploy', value: 'DEPLOY' },
+    ]);
     fixture.componentRef.setInput('pagination', {
       page: 1,
       pageSize: 5,

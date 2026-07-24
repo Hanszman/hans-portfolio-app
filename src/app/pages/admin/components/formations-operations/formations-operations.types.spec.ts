@@ -32,12 +32,12 @@ describe('formations operations types', () => {
 
     expect(createFormationDegreeTypeOptions()[0]).toEqual({
       id: 'TECHNICAL',
-      label: 'pages.admin.formations.fields.degreeType.options.TECHNICAL',
+      labelKey: 'pages.admin.formations.fields.degreeType.options.TECHNICAL',
       value: 'TECHNICAL',
     });
     expect(createFormationDegreeTypeOptions().at(-1)).toEqual({
       id: 'OTHER',
-      label: 'pages.admin.formations.fields.degreeType.options.OTHER',
+      labelKey: 'pages.admin.formations.fields.degreeType.options.OTHER',
       value: 'OTHER',
     });
   });

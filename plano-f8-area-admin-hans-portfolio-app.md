@@ -295,6 +295,8 @@ Cada nova entidade protegida deve:
 - usar fluxos separados de `pick-update` e `pick-delete` com cards clicaveis
 - manter labels explicitas em todos os campos de formulario, sem depender apenas de placeholder
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, usar `hans-select-option` em vez de `input`
+- sempre que o campo representar data, data e hora ou apenas hora, usar `hans-date-picker` com o `pickerType` correto em vez de `input`
+- options de selects administrativos devem chegar na UI ja traduzidas; nunca exibir enums crus nem chaves de traducao completas no dropdown
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
 - preservar o mesmo page size administrativo oficial compartilhado

@@ -96,25 +96,29 @@
           (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-input
+        <hans-date-picker
           [label]="resolveFieldLabel('startDate')"
+          pickerType="date"
           inputColor="base"
           inputSize="medium"
           [value]="form().startDate"
           [placeholder]="fields.startDate.placeholderKey! | translate"
+          [allowInputTyping]="true"
           [attr.aria-label]="fields.startDate.labelKey | translate"
-          (input)="emitStartDateChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (change)="emitStartDateChange(resolveSelectValue($event))"
+        ></hans-date-picker>
 
-        <hans-input
+        <hans-date-picker
           [label]="resolveFieldLabel('endDate')"
+          pickerType="date"
           inputColor="base"
           inputSize="medium"
           [value]="form().endDate"
           [placeholder]="fields.endDate.placeholderKey! | translate"
+          [allowInputTyping]="true"
           [attr.aria-label]="fields.endDate.labelKey | translate"
-          (input)="emitEndDateChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (change)="emitEndDateChange(resolveSelectValue($event))"
+        ></hans-date-picker>
 
         <div class="formations-operations-toggle">
           <div class="formations-operations-selection-copy">

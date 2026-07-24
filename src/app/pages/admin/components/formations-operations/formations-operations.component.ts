@@ -22,6 +22,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { ToastService } from '../../../../core/toast/toast.service';
+import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
 import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
@@ -46,6 +47,7 @@ import {
   createEmptyFormationsOperationsFormValue,
   createFormationDegreeTypeOptions,
 } from './formations-operations.types';
+import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-formations-operations',
@@ -68,6 +70,7 @@ export class FormationsOperationsComponent implements OnInit {
   private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
+  private readonly translation = inject(TranslationService);
 
   private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
   private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
@@ -105,7 +108,12 @@ export class FormationsOperationsComponent implements OnInit {
   protected readonly imageAssetOptions = computed(() =>
     buildFormationImageAssetOptions(this.imageAssetsSignal()),
   );
-  protected readonly degreeTypeOptions = createFormationDegreeTypeOptions();
+  protected readonly degreeTypeOptions = computed(() =>
+    translateAdminSelectOptions(
+      createFormationDegreeTypeOptions(),
+      this.translation.instant.bind(this.translation),
+    ),
+  );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

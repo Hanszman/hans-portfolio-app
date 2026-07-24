@@ -11,6 +11,9 @@ import { AppTranslationKey } from '../../../../core/translation/translation.type
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,
+  AdminSelectOptionDefinition,
+  AdminSelectOptionViewModel,
+  createAdminSelectOptionDefinitions,
   createAdminImageAssetOptionViewModel,
   resolveAdminImageAssetLabel,
 } from '../../helpers/admin.helper';
@@ -120,11 +123,11 @@ export interface FormationLinkOptionViewModel {
 
 export type FormationImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
-export interface FormationDegreeTypeOptionViewModel {
-  id: FormationDegreeTypeValue;
-  label: AppTranslationKey;
-  value: FormationDegreeTypeValue;
-}
+export type FormationDegreeTypeOptionDefinition =
+  AdminSelectOptionDefinition<FormationDegreeTypeValue>;
+
+export type FormationDegreeTypeOptionViewModel =
+  AdminSelectOptionViewModel<FormationDegreeTypeValue>;
 
 export interface FormationOperationsViewModel {
   id: string;
@@ -180,12 +183,12 @@ export const createEmptyFormationsOperationsFormValue =
   });
 
 export const createFormationDegreeTypeOptions =
-  (): readonly FormationDegreeTypeOptionViewModel[] =>
-    FORMATION_DEGREE_TYPE_VALUES.map((value) => ({
-      id: value,
-      label: `pages.admin.formations.fields.degreeType.options.${value}` as AppTranslationKey,
-      value,
-    }));
+  (): readonly FormationDegreeTypeOptionDefinition[] =>
+    createAdminSelectOptionDefinitions(
+      FORMATION_DEGREE_TYPE_VALUES,
+      (value) =>
+        `pages.admin.formations.fields.degreeType.options.${value}` as AppTranslationKey,
+    );
 
 export const createFormationTechnologyOptionViewModel = (
   technology: TechnologyCollectionItemResponse,
