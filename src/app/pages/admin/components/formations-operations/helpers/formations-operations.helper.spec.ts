@@ -238,6 +238,22 @@ describe('formations operations helper', () => {
     });
   });
 
+  it('should normalize ISO datetime values into picker-friendly dates', () => {
+    expect(
+      buildFormationsFormValue(
+        createFormation({
+          startDate: '2020-01-01T00:00:00.000Z',
+          endDate: '2024-12-31T00:00:00.000Z',
+        }),
+      ),
+    ).toEqual(
+      jasmine.objectContaining({
+        startDate: '2020-01-01',
+        endDate: '2024-12-31',
+      }),
+    );
+  });
+
   it('should gracefully map nullish relation collections and fallback scalar fields', () => {
     expect(
       buildFormationsFormValue(
@@ -460,13 +476,52 @@ describe('formations operations helper', () => {
         degreeType: 'BACHELOR',
         summaryPt: 'Graduacao em computacao.',
         summaryEn: 'Computer science graduation.',
-        startDate: '2020-01-01',
-        endDate: '2024-12-31',
+        startDate: '2020-01-01T00:00:00.000Z',
+        endDate: '2024-12-31T00:00:00.000Z',
         highlight: true,
         sortOrder: 5,
         technologyRelations: [{ technologyId: 'technology-1' }],
         linkIds: ['link-1'],
         imageAssetIds: ['image-asset-1'],
+      },
+    });
+  });
+
+  it('should convert localized picker dates into ISO datetimes for mutation payloads', () => {
+    expect(
+      buildFormationsMutationPayload({
+        slug: 'computer-science',
+        institution: 'UFMG',
+        titlePt: 'Ciencia da Computacao',
+        titleEn: 'Computer Science',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Graduacao em computacao.',
+        summaryEn: 'Computer science graduation.',
+        startDate: '01/07/2026',
+        endDate: '03/07/2026',
+        highlight: true,
+        sortOrder: '1',
+        technologyIds: [],
+        linkIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: true,
+      payload: {
+        slug: 'computer-science',
+        institution: 'UFMG',
+        titlePt: 'Ciencia da Computacao',
+        titleEn: 'Computer Science',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Graduacao em computacao.',
+        summaryEn: 'Computer science graduation.',
+        startDate: '2026-07-01T00:00:00.000Z',
+        endDate: '2026-07-03T00:00:00.000Z',
+        highlight: true,
+        sortOrder: 1,
+        technologyRelations: [],
+        linkIds: [],
+        imageAssetIds: [],
       },
     });
   });
@@ -481,7 +536,7 @@ describe('formations operations helper', () => {
         degreeType: 'BACHELOR',
         summaryPt: 'Graduacao em computacao.',
         summaryEn: 'Computer science graduation.',
-        startDate: '2020-01-01',
+        startDate: '2020-01-01T00:00:00.000Z',
         endDate: '   ',
         highlight: true,
         sortOrder: '1',
@@ -499,7 +554,7 @@ describe('formations operations helper', () => {
         degreeType: 'BACHELOR',
         summaryPt: 'Graduacao em computacao.',
         summaryEn: 'Computer science graduation.',
-        startDate: '2020-01-01',
+        startDate: '2020-01-01T00:00:00.000Z',
         highlight: true,
         sortOrder: 1,
         technologyRelations: [],

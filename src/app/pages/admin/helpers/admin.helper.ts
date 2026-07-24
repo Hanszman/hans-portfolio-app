@@ -56,6 +56,62 @@ export const resolveAdminSelectValue = (event: Event): string => {
   return '';
 };
 
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const ISO_DATETIME_PREFIX_PATTERN = /^\d{4}-\d{2}-\d{2}T/;
+const LOCALIZED_DATE_PATTERN = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+export const normalizeAdminDateValueForPicker = (value: string | null | undefined): string => {
+  const normalizedValue = value?.trim() ?? '';
+
+  if (!normalizedValue) {
+    return '';
+  }
+
+  if (ISO_DATE_PATTERN.test(normalizedValue)) {
+    return normalizedValue;
+  }
+
+  if (ISO_DATETIME_PREFIX_PATTERN.test(normalizedValue)) {
+    return normalizedValue.slice(0, 10);
+  }
+
+  const localizedMatch = normalizedValue.match(LOCALIZED_DATE_PATTERN);
+
+  if (localizedMatch) {
+    const [, day, month, year] = localizedMatch;
+    return `${year}-${month}-${day}`;
+  }
+
+  return normalizedValue;
+};
+
+export const normalizeAdminDateValueForMutation = (
+  value: string | null | undefined,
+): string => {
+  const normalizedValue = value?.trim() ?? '';
+
+  if (!normalizedValue) {
+    return '';
+  }
+
+  if (ISO_DATE_PATTERN.test(normalizedValue)) {
+    return `${normalizedValue}T00:00:00.000Z`;
+  }
+
+  if (ISO_DATETIME_PREFIX_PATTERN.test(normalizedValue)) {
+    return normalizedValue;
+  }
+
+  const localizedMatch = normalizedValue.match(LOCALIZED_DATE_PATTERN);
+
+  if (localizedMatch) {
+    const [, day, month, year] = localizedMatch;
+    return `${year}-${month}-${day}T00:00:00.000Z`;
+  }
+
+  return normalizedValue;
+};
+
 export interface AdminSelectOptionDefinition<TValue extends string = string> {
   readonly id: TValue;
   readonly labelKey: AppTranslationKey;

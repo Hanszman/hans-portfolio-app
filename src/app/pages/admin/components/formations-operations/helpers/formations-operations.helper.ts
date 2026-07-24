@@ -3,6 +3,10 @@ import { FormationRecord } from '../../../../../core/api/admin/formations/format
 import { LinkRecord } from '../../../../../core/api/admin/links/links-operations.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
+} from '../../../helpers/admin.helper';
+import {
   FormationImageAssetOptionViewModel,
   FormationLinkOptionViewModel,
   FormationOperationsViewModel,
@@ -160,8 +164,8 @@ export const buildFormationsFormValue = (
     degreeType: formation.degreeType,
     summaryPt: formation.summaryPt,
     summaryEn: formation.summaryEn,
-    startDate: formation.startDate,
-    endDate: formation.endDate ?? '',
+    startDate: normalizeAdminDateValueForPicker(formation.startDate),
+    endDate: normalizeAdminDateValueForPicker(formation.endDate),
     highlight: formation.highlight ?? false,
     sortOrder: String(formation.sortOrder ?? 0),
     technologyIds: normalizeFormationTechnologyIds(formation),
@@ -233,8 +237,8 @@ export const buildFormationsMutationPayload = (
   const degreeType = formValue.degreeType.trim();
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
-  const startDate = formValue.startDate.trim();
-  const endDate = formValue.endDate.trim();
+  const startDate = normalizeAdminDateValueForMutation(formValue.startDate);
+  const endDate = normalizeAdminDateValueForMutation(formValue.endDate);
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
   if (!slug) {

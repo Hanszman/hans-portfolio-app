@@ -5,6 +5,8 @@ import {
   createAdminSelectOptionDefinitions,
   createAdminFieldLabelResolver,
   formatAdminIdentity,
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
   resolveAdminFieldLabel,
   resolveAdminSelectValue,
   trackAdminItemById,
@@ -99,6 +101,32 @@ describe('formatAdminIdentity', () => {
 
   it('should return an empty string when the select event does not expose a value', () => {
     expect(resolveAdminSelectValue({} as Event)).toBe('');
+  });
+
+  it('should normalize admin date values for picker usage', () => {
+    expect(normalizeAdminDateValueForPicker('2026-07-24')).toBe('2026-07-24');
+    expect(normalizeAdminDateValueForPicker('2026-07-24T00:00:00.000Z')).toBe(
+      '2026-07-24',
+    );
+    expect(normalizeAdminDateValueForPicker('24/07/2026')).toBe('2026-07-24');
+    expect(normalizeAdminDateValueForPicker('date-free-text')).toBe('date-free-text');
+    expect(normalizeAdminDateValueForPicker('   ')).toBe('');
+  });
+
+  it('should normalize admin date values for mutation payloads', () => {
+    expect(normalizeAdminDateValueForMutation('2026-07-24')).toBe(
+      '2026-07-24T00:00:00.000Z',
+    );
+    expect(normalizeAdminDateValueForMutation('2026-07-24T10:30:00.000Z')).toBe(
+      '2026-07-24T10:30:00.000Z',
+    );
+    expect(normalizeAdminDateValueForMutation('24/07/2026')).toBe(
+      '2026-07-24T00:00:00.000Z',
+    );
+    expect(normalizeAdminDateValueForMutation('date-free-text')).toBe('date-free-text');
+    expect(normalizeAdminDateValueForMutation('   ')).toBe('');
+    expect(normalizeAdminDateValueForMutation(undefined)).toBe('');
+    expect(normalizeAdminDateValueForMutation(null)).toBe('');
   });
 
   it('should create and translate reusable admin select options', () => {

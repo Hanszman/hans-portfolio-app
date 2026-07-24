@@ -416,3 +416,4 @@ Faça as correções todas e pode alterar aquilo que for necessário na lib, seg
 -Boa, ficou ótimo! Tenho só mais alguns pontos:
 A const sanitizeFormationMutationPayload poderia fica fora do formations-operations.service.ts, migrando pro types dele.
 Como vc pode ver nos prints 1 e 2, o fundo do datepicker funcionou perfeitamente nos temas light e dark no portfolio, porém no storybook ficou errado, a cor foi aplicada no fundo do input ao invés do datepicker, como vc pode ver no print 3. Corrija por favor.
+-Beleza, visualmente tudo certo! Porém, ao tentarmos concluir o formulário agora, ele da esse erro 500 como vc pode ver nos prints 1 e 2, parece que api crashou por conta do formato dos dados que estamos enviando de date. Corrija por favor.
