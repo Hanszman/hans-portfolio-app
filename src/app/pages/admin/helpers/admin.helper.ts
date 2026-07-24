@@ -112,6 +112,45 @@ export const normalizeAdminDateValueForMutation = (
   return normalizedValue;
 };
 
+const parseAdminDateValue = (
+  value: string | null | undefined,
+): number | null => {
+  const normalizedValue = normalizeAdminDateValueForMutation(value);
+
+  if (!normalizedValue) {
+    return null;
+  }
+
+  const timestamp = Date.parse(normalizedValue);
+
+  return Number.isNaN(timestamp) ? null : timestamp;
+};
+
+export const isAdminDateRangeValid = (
+  startDate: string | null | undefined,
+  endDate: string | null | undefined,
+): boolean => {
+  const startTimestamp = parseAdminDateValue(startDate);
+  const endTimestamp = parseAdminDateValue(endDate);
+
+  if (startTimestamp === null || endTimestamp === null) {
+    return true;
+  }
+
+  return endTimestamp >= startTimestamp;
+};
+
+export const validateAdminDateRange = (
+  startDate: string | null | undefined,
+  endDate: string | null | undefined,
+  errorKey: AppTranslationKey,
+):
+  | { readonly isValid: true }
+  | { readonly isValid: false; readonly errorKey: AppTranslationKey } =>
+  isAdminDateRangeValid(startDate, endDate)
+    ? { isValid: true }
+    : { isValid: false, errorKey };
+
 export interface AdminSelectOptionDefinition<TValue extends string = string> {
   readonly id: TValue;
   readonly labelKey: AppTranslationKey;

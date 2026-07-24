@@ -299,6 +299,7 @@ Cada nova entidade protegida deve:
 - options de selects administrativos devem ser recomputadas a partir do locale ativo para refletir mudancas de idioma sem reload
 - `hans-date-picker` usado como seletor de data deve manter digitacao direta desabilitada quando o fluxo for selection-only, preservando o comportamento readonly e a abertura pelo campo inteiro
 - options de selects administrativos devem chegar na UI ja traduzidas; nunca exibir enums crus nem chaves de traducao completas no dropdown
+- combinacoes de `startDate` e `endDate` devem ser validadas no frontend antes do submit, bloqueando qualquer payload em que `endDate` seja anterior a `startDate`
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
 - preservar o mesmo page size administrativo oficial compartilhado
@@ -306,6 +307,7 @@ Cada nova entidade protegida deve:
 - relacoes selecionaveis devem quebrar linha de forma sequencial e natural, evitando grids rigidas com grandes vazios laterais
 - textos secundarios longos de relacoes, como URLs, caminhos e slugs, devem ser truncados com `...` e expor o valor completo via `title`
 - centralizar no helper compartilhado do dominio admin os mapeamentos repetidos de `image-assets` e labels estruturais que se repetirem entre entidades
+- centralizar no helper compartilhado do dominio admin as validacoes combinadas de datas para qualquer entidade futura que trabalhe com `startDate` e `endDate`
 - manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
 - atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao criar uma segunda pasta paralela apenas para CUD dentro de `admin`; reaproveitar e expandir o service ja existente no dominio oficial da entidade
@@ -678,6 +680,9 @@ Cada nova entidade protegida deve:
   - fluxos reais de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete` adicionados ao shell seguindo o template visual das entidades anteriores
   - traducoes sincronizadas em `en-us`, `pt-br` e `es-es`
   - cobertura total preservada para API, helper, modal, workspace e integracao da shell administrativa
+- `F8.10` ajustada em `2026-07-24`
+  - validacao compartilhada de intervalo de datas adicionada ao helper administrativo para impedir `endDate` anterior a `startDate` antes do submit
+  - regra consolidada como padrao obrigatorio das proximas entidades administrativas que tiverem combinacao de datas
 - validacao final da iteracao em `2026-07-23`:
   - `npm run lint` verde
   - `npm run test:coverage -- --watch=false --progress=false --browsers=ChromeHeadless` com `100%` em statements, branches, functions e lines

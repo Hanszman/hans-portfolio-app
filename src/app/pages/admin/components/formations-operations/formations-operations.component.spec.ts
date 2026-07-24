@@ -437,6 +437,7 @@ describe('FormationsOperationsComponent', () => {
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
       updateStartDate(value: string): void;
+      updateEndDate(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -485,6 +486,13 @@ describe('FormationsOperationsComponent', () => {
     );
 
     component.updateStartDate('2020-01-01');
+    component.updateEndDate('2019-12-31');
+    await component.submitModal();
+    expect(component.modalFeedbackKey()).toBe(
+      'pages.admin.formations.feedback.invalidDateRange',
+    );
+
+    component.updateEndDate('2020-01-02');
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe(

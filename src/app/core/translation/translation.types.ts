@@ -979,6 +979,7 @@ export type AppTranslationKey =
   | 'pages.admin.formations.feedback.requiredSummaryPt'
   | 'pages.admin.formations.feedback.requiredSummaryEn'
   | 'pages.admin.formations.feedback.requiredStartDate'
+  | 'pages.admin.formations.feedback.invalidDateRange'
   | 'pages.admin.formations.feedback.invalidSortOrder'
   | 'pages.admin.formations.feedback.missingSession'
   | 'pages.admin.formations.feedback.selectionRequired'

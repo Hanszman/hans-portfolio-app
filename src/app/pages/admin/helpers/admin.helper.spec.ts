@@ -5,12 +5,14 @@ import {
   createAdminSelectOptionDefinitions,
   createAdminFieldLabelResolver,
   formatAdminIdentity,
+  isAdminDateRangeValid,
   normalizeAdminDateValueForMutation,
   normalizeAdminDateValueForPicker,
   resolveAdminFieldLabel,
   resolveAdminSelectValue,
   trackAdminItemById,
   translateAdminSelectOptions,
+  validateAdminDateRange,
 } from './admin.helper';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -127,6 +129,34 @@ describe('formatAdminIdentity', () => {
     expect(normalizeAdminDateValueForMutation('   ')).toBe('');
     expect(normalizeAdminDateValueForMutation(undefined)).toBe('');
     expect(normalizeAdminDateValueForMutation(null)).toBe('');
+  });
+
+  it('should validate chronological admin date ranges only when both dates are parseable', () => {
+    expect(isAdminDateRangeValid('2026-07-01', '2026-07-03')).toBeTrue();
+    expect(isAdminDateRangeValid('2026-07-03', '2026-07-01')).toBeFalse();
+    expect(isAdminDateRangeValid('2026-07-01', '')).toBeTrue();
+    expect(isAdminDateRangeValid('invalid-date', '2026-07-03')).toBeTrue();
+  });
+
+  it('should return a reusable validation result for invalid admin date ranges', () => {
+    expect(
+      validateAdminDateRange(
+        '2026-07-01',
+        '2026-07-03',
+        'pages.admin.formations.feedback.invalidDateRange',
+      ),
+    ).toEqual({ isValid: true });
+
+    expect(
+      validateAdminDateRange(
+        '2026-07-03',
+        '2026-07-01',
+        'pages.admin.formations.feedback.invalidDateRange',
+      ),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'pages.admin.formations.feedback.invalidDateRange',
+    });
   });
 
   it('should create and translate reusable admin select options', () => {

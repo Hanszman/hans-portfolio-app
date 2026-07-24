@@ -111,6 +111,7 @@ This project must follow the current Angular direction consistently:
 - when API/domain content arrives with localized fields, resolve it through the centralized translation helpers instead of ad hoc `if`/ternary checks
 - admin closed-list fields must use `hans-select-option`, and date, datetime or time fields must use `hans-date-picker` with the correct mode instead of plain text inputs
 - selection-only admin date fields must keep `allowInputTyping` disabled so the field stays readonly and opens the picker from the full input area, matching the design-library behavior
+- admin forms with combined `startDate` and `endDate` fields must reuse the shared date-range validator and block submission when `endDate` is earlier than `startDate`
 - admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support
 
 ### Testing and quality

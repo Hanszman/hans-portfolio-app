@@ -1263,6 +1263,8 @@ Regra importante de modelagem para a F8:
     - acoes reais de `create`, `read`, `update` e `delete` implementadas com leitura em modal grande e fluxos de selecao paginados
     - traducoes sincronizadas nos tres idiomas
     - cobertura total de testes para API, helper, modal, workspace e shell admin
+  - ajuste em `2026-07-24`:
+    - validacao generica de intervalo de datas consolidada no frontend administrativo e no backend para impedir persistencia quando `endDate` for anterior a `startDate`
 - `F8.11` - `technologies`
   - relacionamentos: `projectRelations`, `experienceRelations`, `formationRelations`, `technologyContexts`, `tagIds`, `linkIds`, `imageAssetIds`
 - `F8.12` - `technology-contexts`
@@ -1319,6 +1321,7 @@ Regra importante de modelagem para a F8:
 - sempre que o campo representar data, data e hora ou apenas hora, devemos usar `hans-date-picker` com o `pickerType` correto em vez de `input`
 - options administrativas dependentes de traducao devem ser recomputadas a partir do locale ativo, evitando dropdowns com chaves cruas apos troca de idioma
 - quando o `hans-date-picker` estiver atuando como seletor de data, devemos desabilitar digitacao livre no input para preservar o comportamento readonly e a abertura pelo campo inteiro
+- sempre que uma entidade administrativa tiver `startDate` e `endDate`, devemos validar em helper compartilhado no frontend e tambem no backend que `endDate` nao seja anterior a `startDate`
 - dropdowns administrativos nunca devem exibir enums crus ou chaves de traducao completas; as options devem ser traduzidas antes de chegar ao componente visual
 - seletores relacionais devem quebrar em fluxo sequencial e natural, sem grids rigidas com grandes vazios horizontais
 - textos secundarios longos de relacoes, como URLs, caminhos e slugs, devem ser truncados com reticencias e tooltip/title para preservar legibilidade

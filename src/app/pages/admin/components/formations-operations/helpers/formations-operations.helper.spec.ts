@@ -564,6 +564,30 @@ describe('formations operations helper', () => {
     });
   });
 
+  it('should reject mutation payloads when end date is earlier than start date', () => {
+    expect(
+      buildFormationsMutationPayload({
+        slug: 'computer-science',
+        institution: 'UFMG',
+        titlePt: 'Ciencia da Computacao',
+        titleEn: 'Computer Science',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Graduacao em computacao.',
+        summaryEn: 'Computer science graduation.',
+        startDate: '2026-07-03',
+        endDate: '2026-07-01',
+        highlight: true,
+        sortOrder: '1',
+        technologyIds: [],
+        linkIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'pages.admin.formations.feedback.invalidDateRange',
+    });
+  });
+
   it('should reject invalid mutation forms with the matching translation key', () => {
     expect(
       buildFormationsMutationPayload({

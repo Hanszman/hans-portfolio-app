@@ -1303,6 +1303,8 @@ export const PT_BR_TRANSLATIONS = {
     'O resumo em inglês é obrigatório antes do envio.',
   'pages.admin.formations.feedback.requiredStartDate':
     'A data de início é obrigatória antes do envio.',
+  'pages.admin.formations.feedback.invalidDateRange':
+    'A data de término não pode ser anterior à data de início.',
   'pages.admin.formations.feedback.invalidSortOrder':
     'A ordem deve ser um número inteiro válido.',
   'pages.admin.formations.feedback.missingSession':

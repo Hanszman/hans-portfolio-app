@@ -1308,6 +1308,8 @@ export const ES_ES_TRANSLATIONS = {
     'El resumen en inglés es obligatorio antes del envío.',
   'pages.admin.formations.feedback.requiredStartDate':
     'La fecha de inicio es obligatoria antes del envío.',
+  'pages.admin.formations.feedback.invalidDateRange':
+    'La fecha de término no puede ser anterior a la fecha de inicio.',
   'pages.admin.formations.feedback.invalidSortOrder':
     'El orden debe ser un número entero válido.',
   'pages.admin.formations.feedback.missingSession':

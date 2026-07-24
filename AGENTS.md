@@ -316,6 +316,7 @@ Rules:
 - whenever a field represents a closed list, enum or API-known option set, use `hans-select-option` instead of `input`
 - whenever a field represents date, datetime or time input, use `hans-date-picker` with the correct `pickerType` instead of `hans-input`
 - when an admin date field is selection-driven, keep `hans-date-picker` with `allowInputTyping` disabled so the input stays readonly and the picker opens from the whole field interaction, matching the library behavior
+- whenever an admin form contains a `startDate` and `endDate` combination, validate on the frontend before submit that `endDate` is not earlier than `startDate`, using the shared admin date-range helper instead of duplicating comparison logic per entity
 - read, `pick-update` and `pick-delete` flows should keep the shared operations modal pattern, including search, shared pagination and fixed footer actions
 - relation pickers for `image-assets` must show real previews in the selection cards/tags for current and future entities
 - relation pickers should flow sequentially with natural wrapping instead of rigid two-column layouts that leave large empty gaps

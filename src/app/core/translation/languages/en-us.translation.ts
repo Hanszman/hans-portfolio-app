@@ -1280,6 +1280,8 @@ export const EN_TRANSLATIONS = {
     'The English summary is required before submitting.',
   'pages.admin.formations.feedback.requiredStartDate':
     'The start date is required before submitting.',
+  'pages.admin.formations.feedback.invalidDateRange':
+    'The end date cannot be earlier than the start date.',
   'pages.admin.formations.feedback.invalidSortOrder':
     'The sort order must be a valid integer number.',
   'pages.admin.formations.feedback.missingSession':

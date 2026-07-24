@@ -5,6 +5,7 @@ import { TechnologyCollectionItemResponse } from '../../../../../core/api/techno
 import {
   normalizeAdminDateValueForMutation,
   normalizeAdminDateValueForPicker,
+  validateAdminDateRange,
 } from '../../../helpers/admin.helper';
 import {
   FormationImageAssetOptionViewModel,
@@ -292,6 +293,16 @@ export const buildFormationsMutationPayload = (
       isValid: false,
       errorKey: 'pages.admin.formations.feedback.requiredStartDate',
     };
+  }
+
+  const dateRangeValidationResult = validateAdminDateRange(
+    startDate,
+    endDate,
+    'pages.admin.formations.feedback.invalidDateRange',
+  );
+
+  if (!dateRangeValidationResult.isValid) {
+    return dateRangeValidationResult;
   }
 
   if (!Number.isInteger(sortOrder)) {
