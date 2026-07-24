@@ -81,3 +81,12 @@ export interface FormationMutationPayload {
 }
 
 export type FormationsCollectionResponse = PaginatedResponse<FormationRecord>;
+
+export const sanitizeFormationMutationPayload = (
+  payload: FormationMutationPayload,
+): FormationMutationPayload => ({
+  ...payload,
+  technologyRelations: payload.technologyRelations.map((relation) => ({
+    technologyId: relation.technologyId,
+  })),
+});

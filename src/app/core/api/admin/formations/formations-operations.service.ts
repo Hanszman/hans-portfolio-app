@@ -7,16 +7,8 @@ import {
   FormationMutationPayload,
   FormationRecord,
   FormationsCollectionResponse,
+  sanitizeFormationMutationPayload,
 } from './formations-operations.types';
-
-const sanitizeFormationMutationPayload = (
-  payload: FormationMutationPayload,
-): FormationMutationPayload => ({
-  ...payload,
-  technologyRelations: payload.technologyRelations.map((relation) => ({
-    technologyId: relation.technologyId,
-  })),
-});
 
 @Injectable({
   providedIn: 'root',
