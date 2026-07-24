@@ -464,7 +464,7 @@ describe('formations operations helper', () => {
         endDate: '2024-12-31',
         highlight: true,
         sortOrder: 5,
-        technologyRelations: [{ technologyId: 'technology-1', sortOrder: 0 }],
+        technologyRelations: [{ technologyId: 'technology-1' }],
         linkIds: ['link-1'],
         imageAssetIds: ['image-asset-1'],
       },

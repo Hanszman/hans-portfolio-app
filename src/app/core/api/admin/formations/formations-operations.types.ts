@@ -61,7 +61,6 @@ export interface FormationRecord {
 
 export interface FormationTechnologyRelationPayload {
   technologyId: string;
-  sortOrder: number;
 }
 
 export interface FormationMutationPayload {

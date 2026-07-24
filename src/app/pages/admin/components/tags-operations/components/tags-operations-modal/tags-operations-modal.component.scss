@@ -76,11 +76,15 @@
 }
 
 .tags-operations-selection-grid {
-  @apply grid gap-3 md:grid-cols-2;
+  @apply flex flex-wrap items-start gap-3;
 }
 
 .tags-operations-selection-option {
-  @apply flex max-w-full flex-col items-start text-left;
+  @apply flex max-w-full items-start gap-3 text-left;
+}
+
+.tags-operations-selection-option-copy {
+  @apply flex min-w-0 flex-1 flex-col;
 }
 
 .tags-operations-selection-option-title,
@@ -97,7 +101,11 @@
   word-break: keep-all;
 }
 
+:host ::ng-deep .tags-operations-selection-grid hans-button {
+  @apply inline-block max-w-full align-top;
+}
+
 :host ::ng-deep .tags-operations-selection-grid hans-button .hans-button-content,
 :host ::ng-deep .tags-operations-selection-grid hans-button .hans-button {
-  @apply items-start justify-start whitespace-normal text-left;
+  @apply inline-flex w-fit max-w-full min-w-0 items-start justify-start whitespace-normal text-left;
 }

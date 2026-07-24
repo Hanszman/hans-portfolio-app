@@ -57,7 +57,7 @@ const createFormationPayload = (): FormationMutationPayload => ({
   endDate: '2024-12-31',
   highlight: true,
   sortOrder: 1,
-  technologyRelations: [{ technologyId: 'technology-1', sortOrder: 0 }],
+  technologyRelations: [{ technologyId: 'technology-1' }],
   linkIds: ['link-1'],
   imageAssetIds: ['image-asset-1'],
 });
@@ -130,6 +130,31 @@ describe('FormationsOperationsService', () => {
     request.flush(createFormation());
   });
 
+  it('should sanitize technology relations before creating a protected formation', () => {
+    const service = TestBed.inject(FormationsOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service
+      .create({
+        ...createFormationPayload(),
+        technologyRelations: [
+          { technologyId: 'technology-1' },
+          { technologyId: 'technology-2', sortOrder: 99 } as never,
+        ],
+      })
+      .subscribe();
+
+    const request = httpTestingController.expectOne(buildApiUrl('/admin/formations'));
+
+    expect(request.request.method).toBe('POST');
+    expect(request.request.body.technologyRelations).toEqual([
+      { technologyId: 'technology-1' },
+      { technologyId: 'technology-2' },
+    ]);
+
+    request.flush(createFormation());
+  });
+
   it('should update a protected formation through PUT', () => {
     const service = TestBed.inject(FormationsOperationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
@@ -145,6 +170,29 @@ describe('FormationsOperationsService', () => {
     expect(request.request.method).toBe('PUT');
     expect(request.request.headers.has('Authorization')).toBeFalse();
     expect(request.request.body).toEqual(createFormationPayload());
+
+    request.flush(createFormation());
+  });
+
+  it('should sanitize technology relations before updating a protected formation', () => {
+    const service = TestBed.inject(FormationsOperationsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service
+      .update('formation-1', {
+        ...createFormationPayload(),
+        technologyRelations: [{ technologyId: 'technology-1', sortOrder: 10 } as never],
+      })
+      .subscribe();
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/admin/formations/formation-1'),
+    );
+
+    expect(request.request.method).toBe('PUT');
+    expect(request.request.body.technologyRelations).toEqual([
+      { technologyId: 'technology-1' },
+    ]);
 
     request.flush(createFormation());
   });

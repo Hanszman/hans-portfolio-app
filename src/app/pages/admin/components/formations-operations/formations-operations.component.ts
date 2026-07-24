@@ -108,12 +108,14 @@ export class FormationsOperationsComponent implements OnInit {
   protected readonly imageAssetOptions = computed(() =>
     buildFormationImageAssetOptions(this.imageAssetsSignal()),
   );
-  protected readonly degreeTypeOptions = computed(() =>
-    translateAdminSelectOptions(
+  protected readonly degreeTypeOptions = computed(() => {
+    this.translation.locale();
+
+    return translateAdminSelectOptions(
       createFormationDegreeTypeOptions(),
       this.translation.instant.bind(this.translation),
-    ),
-  );
+    );
+  });
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

@@ -113,12 +113,14 @@ export class LinksOperationsComponent implements OnInit {
     buildLinkCatalogOptions(this.technologiesSignal()),
   );
   protected readonly formationOptions = computed(() => []);
-  protected readonly linkTypeOptions = computed(() =>
-    translateAdminSelectOptions(
+  protected readonly linkTypeOptions = computed(() => {
+    this.translation.locale();
+
+    return translateAdminSelectOptions(
       createLinkTypeOptions(),
       this.translation.instant.bind(this.translation),
-    ),
-  );
+    );
+  });
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

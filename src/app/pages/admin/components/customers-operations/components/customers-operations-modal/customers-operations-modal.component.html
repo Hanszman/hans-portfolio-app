@@ -106,11 +106,17 @@
                   (click)="toggleExperience(experience.id)"
                 >
                   <span class="customers-operations-selection-option">
-                    <span class="customers-operations-selection-option-title">
-                      {{ experience.title }}
-                    </span>
-                    <span class="customers-operations-selection-option-subtitle">
-                      {{ experience.subtitle }}
+                    <span class="customers-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="customers-operations-selection-option-title"
+                        [text]="experience.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="customers-operations-selection-option-subtitle"
+                        [text]="experience.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -148,12 +154,16 @@
                       [alt]="imageAsset.title"
                     />
                     <span class="customers-operations-selection-option-copy">
-                      <span class="customers-operations-selection-option-title">
-                        {{ imageAsset.title }}
-                      </span>
-                      <span class="customers-operations-selection-option-subtitle">
-                        {{ imageAsset.subtitle }}
-                      </span>
+                      <app-truncated-text
+                        class="customers-operations-selection-option-title"
+                        [text]="imageAsset.title"
+                        [maxLength]="32"
+                      />
+                      <app-truncated-text
+                        class="customers-operations-selection-option-subtitle"
+                        [text]="imageAsset.subtitle"
+                        [maxLength]="48"
+                      />
                     </span>
                   </span>
                 </hans-button>

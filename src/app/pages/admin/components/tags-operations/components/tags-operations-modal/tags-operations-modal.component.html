@@ -95,11 +95,17 @@
                   (click)="toggleProject(project.id)"
                 >
                   <span class="tags-operations-selection-option">
-                    <span class="tags-operations-selection-option-title">
-                      {{ project.title }}
-                    </span>
-                    <span class="tags-operations-selection-option-subtitle">
-                      {{ project.subtitle }}
+                    <span class="tags-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="tags-operations-selection-option-title"
+                        [text]="project.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="tags-operations-selection-option-subtitle"
+                        [text]="project.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -131,11 +137,17 @@
                   (click)="toggleTechnology(technology.id)"
                 >
                   <span class="tags-operations-selection-option">
-                    <span class="tags-operations-selection-option-title">
-                      {{ technology.title }}
-                    </span>
-                    <span class="tags-operations-selection-option-subtitle">
-                      {{ technology.subtitle }}
+                    <span class="tags-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="tags-operations-selection-option-title"
+                        [text]="technology.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="tags-operations-selection-option-subtitle"
+                        [text]="technology.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>

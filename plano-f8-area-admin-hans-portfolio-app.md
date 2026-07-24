@@ -296,11 +296,15 @@ Cada nova entidade protegida deve:
 - manter labels explicitas em todos os campos de formulario, sem depender apenas de placeholder
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, usar `hans-select-option` em vez de `input`
 - sempre que o campo representar data, data e hora ou apenas hora, usar `hans-date-picker` com o `pickerType` correto em vez de `input`
+- options de selects administrativos devem ser recomputadas a partir do locale ativo para refletir mudancas de idioma sem reload
+- `hans-date-picker` usado como seletor de data deve manter digitacao direta desabilitada quando o fluxo for selection-only, preservando o comportamento readonly e a abertura pelo campo inteiro
 - options de selects administrativos devem chegar na UI ja traduzidas; nunca exibir enums crus nem chaves de traducao completas no dropdown
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real
 - preservar o mesmo page size administrativo oficial compartilhado
 - exibir preview real de `image-assets` nas tags/cards de selecao de todas as entidades que relacionarem imagens
+- relacoes selecionaveis devem quebrar linha de forma sequencial e natural, evitando grids rigidas com grandes vazios laterais
+- textos secundarios longos de relacoes, como URLs, caminhos e slugs, devem ser truncados com `...` e expor o valor completo via `title`
 - centralizar no helper compartilhado do dominio admin os mapeamentos repetidos de `image-assets` e labels estruturais que se repetirem entre entidades
 - manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
 - atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida

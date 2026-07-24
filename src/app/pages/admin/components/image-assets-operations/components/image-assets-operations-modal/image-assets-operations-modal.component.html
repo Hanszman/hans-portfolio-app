@@ -167,11 +167,17 @@
                   (click)="toggleProject(project.id)"
                 >
                   <span class="image-assets-operations-selection-option">
-                    <span class="image-assets-operations-selection-option-title">
-                      {{ project.title }}
-                    </span>
-                    <span class="image-assets-operations-selection-option-subtitle">
-                      {{ project.subtitle }}
+                    <span class="image-assets-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-title"
+                        [text]="project.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-subtitle"
+                        [text]="project.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -203,11 +209,17 @@
                   (click)="toggleExperience(experience.id)"
                 >
                   <span class="image-assets-operations-selection-option">
-                    <span class="image-assets-operations-selection-option-title">
-                      {{ experience.title }}
-                    </span>
-                    <span class="image-assets-operations-selection-option-subtitle">
-                      {{ experience.subtitle }}
+                    <span class="image-assets-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-title"
+                        [text]="experience.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-subtitle"
+                        [text]="experience.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -239,11 +251,17 @@
                   (click)="toggleTechnology(technology.id)"
                 >
                   <span class="image-assets-operations-selection-option">
-                    <span class="image-assets-operations-selection-option-title">
-                      {{ technology.title }}
-                    </span>
-                    <span class="image-assets-operations-selection-option-subtitle">
-                      {{ technology.subtitle }}
+                    <span class="image-assets-operations-selection-option-copy">
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-title"
+                        [text]="technology.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="image-assets-operations-selection-option-subtitle"
+                        [text]="technology.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>

@@ -110,12 +110,14 @@ export class ImageAssetsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildImageAssetCatalogOptions(this.technologiesSignal()),
   );
-  protected readonly imageAssetKindOptions = computed(() =>
-    translateAdminSelectOptions(
+  protected readonly imageAssetKindOptions = computed(() => {
+    this.translation.locale();
+
+    return translateAdminSelectOptions(
       createImageAssetKindOptions(),
       this.translation.instant.bind(this.translation),
-    ),
-  );
+    );
+  });
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

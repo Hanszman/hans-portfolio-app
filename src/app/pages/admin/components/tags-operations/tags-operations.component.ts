@@ -103,12 +103,14 @@ export class TagsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildTagCatalogOptions(this.technologiesSignal()),
   );
-  protected readonly tagTypeOptions = computed(() =>
-    translateAdminSelectOptions(
+  protected readonly tagTypeOptions = computed(() => {
+    this.translation.locale();
+
+    return translateAdminSelectOptions(
       createTagTypeOptions(),
       this.translation.instant.bind(this.translation),
-    ),
-  );
+    );
+  });
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

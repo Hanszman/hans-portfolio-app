@@ -103,7 +103,9 @@
           inputSize="medium"
           [value]="form().startDate"
           [placeholder]="fields.startDate.placeholderKey! | translate"
-          [allowInputTyping]="true"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
           [attr.aria-label]="fields.startDate.labelKey | translate"
           (change)="emitStartDateChange(resolveSelectValue($event))"
         ></hans-date-picker>
@@ -115,7 +117,9 @@
           inputSize="medium"
           [value]="form().endDate"
           [placeholder]="fields.endDate.placeholderKey! | translate"
-          [allowInputTyping]="true"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
           [attr.aria-label]="fields.endDate.labelKey | translate"
           (change)="emitEndDateChange(resolveSelectValue($event))"
         ></hans-date-picker>
@@ -167,12 +171,16 @@
                 >
                   <span class="formations-operations-selection-option">
                     <span class="formations-operations-selection-option-copy">
-                      <span class="formations-operations-selection-option-title">
-                        {{ technology.title }}
-                      </span>
-                      <span class="formations-operations-selection-option-subtitle">
-                        {{ technology.subtitle }}
-                      </span>
+                      <app-truncated-text
+                        class="formations-operations-selection-option-title"
+                        [text]="technology.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="formations-operations-selection-option-subtitle"
+                        [text]="technology.subtitle"
+                        [maxLength]="40"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -205,12 +213,16 @@
                 >
                   <span class="formations-operations-selection-option">
                     <span class="formations-operations-selection-option-copy">
-                      <span class="formations-operations-selection-option-title">
-                        {{ link.title }}
-                      </span>
-                      <span class="formations-operations-selection-option-subtitle">
-                        {{ link.subtitle }}
-                      </span>
+                      <app-truncated-text
+                        class="formations-operations-selection-option-title"
+                        [text]="link.title"
+                        [maxLength]="36"
+                      />
+                      <app-truncated-text
+                        class="formations-operations-selection-option-subtitle"
+                        [text]="link.subtitle"
+                        [maxLength]="52"
+                      />
                     </span>
                   </span>
                 </hans-button>
@@ -248,12 +260,16 @@
                       [alt]="imageAsset.title"
                     />
                     <span class="formations-operations-selection-option-copy">
-                      <span class="formations-operations-selection-option-title">
-                        {{ imageAsset.title }}
-                      </span>
-                      <span class="formations-operations-selection-option-subtitle">
-                        {{ imageAsset.subtitle }}
-                      </span>
+                      <app-truncated-text
+                        class="formations-operations-selection-option-title"
+                        [text]="imageAsset.title"
+                        [maxLength]="32"
+                      />
+                      <app-truncated-text
+                        class="formations-operations-selection-option-subtitle"
+                        [text]="imageAsset.subtitle"
+                        [maxLength]="48"
+                      />
                     </span>
                   </span>
                 </hans-button>

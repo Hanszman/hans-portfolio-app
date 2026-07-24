@@ -9,6 +9,15 @@ import {
   FormationsCollectionResponse,
 } from './formations-operations.types';
 
+const sanitizeFormationMutationPayload = (
+  payload: FormationMutationPayload,
+): FormationMutationPayload => ({
+  ...payload,
+  technologyRelations: payload.technologyRelations.map((relation) => ({
+    technologyId: relation.technologyId,
+  })),
+});
+
 @Injectable({
   providedIn: 'root',
 })
@@ -41,7 +50,7 @@ export class FormationsOperationsService {
   create(payload: FormationMutationPayload): Observable<FormationRecord> {
     return this.httpClient.post<FormationRecord>(
       buildApiUrl('/admin/formations'),
-      payload,
+      sanitizeFormationMutationPayload(payload),
     );
   }
 
@@ -51,7 +60,7 @@ export class FormationsOperationsService {
   ): Observable<FormationRecord> {
     return this.httpClient.put<FormationRecord>(
       buildApiUrl(`/admin/formations/${formationId}`),
-      payload,
+      sanitizeFormationMutationPayload(payload),
     );
   }
 

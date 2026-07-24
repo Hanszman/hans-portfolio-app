@@ -95,12 +95,14 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   protected readonly imageAssetOptions = computed(() =>
     buildSpokenLanguageImageAssetOptions(this.imageAssetsSignal()),
   );
-  protected readonly proficiencyOptions = computed(() =>
-    translateAdminSelectOptions(
+  protected readonly proficiencyOptions = computed(() => {
+    this.translation.locale();
+
+    return translateAdminSelectOptions(
       createSpokenLanguageProficiencyOptions(),
       this.translation.instant.bind(this.translation),
-    ),
-  );
+    );
+  });
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
   protected readonly loadErrorKey = this.loadErrorKeySignal.asReadonly();

@@ -234,6 +234,7 @@ Rules:
 - Use `TranslatePipe` in templates for static copy.
 - Use `TranslationService` in TypeScript when translated labels are needed in code.
 - Closed-list, enum and API-known option fields must expose translated user-facing labels through `TranslationService`; never pass raw enum values or raw translation keys directly to UI options.
+- Select options whose labels depend on translation keys must be recomputed from the active locale signal so the UI updates immediately after language changes.
 - When backend content has localized fields, use the centralized translation helpers/service instead of ad hoc `if`, `switch`, or ternary locale logic.
 - Remove translation keys that are no longer used, but keep all language files synchronized.
 
@@ -314,8 +315,11 @@ Rules:
 - every admin form field must declare its label through field config and use the config `required` flag to append the asterisk automatically instead of hardcoding it in templates
 - whenever a field represents a closed list, enum or API-known option set, use `hans-select-option` instead of `input`
 - whenever a field represents date, datetime or time input, use `hans-date-picker` with the correct `pickerType` instead of `hans-input`
+- when an admin date field is selection-driven, keep `hans-date-picker` with `allowInputTyping` disabled so the input stays readonly and the picker opens from the whole field interaction, matching the library behavior
 - read, `pick-update` and `pick-delete` flows should keep the shared operations modal pattern, including search, shared pagination and fixed footer actions
 - relation pickers for `image-assets` must show real previews in the selection cards/tags for current and future entities
+- relation pickers should flow sequentially with natural wrapping instead of rigid two-column layouts that leave large empty gaps
+- long secondary relation texts such as URLs, file paths and slugs must be truncated with ellipsis plus `title` tooltip support instead of overflowing the selection cards
 - if a public `GET` endpoint already exists for an entity, the admin shell should reuse that public read and keep only `create`, `update` and `delete` on protected routes
 - complete only one official F8 substep per delivery unless there is explicit alignment to group more than one
 - model relationship CRUD according to the API contracts:

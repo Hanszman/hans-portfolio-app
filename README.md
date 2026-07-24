@@ -107,7 +107,11 @@ This project must follow the current Angular direction consistently:
 - helpers should keep only helper functions and should not become a mixed file for contracts/constants
 - stylesheets must prefer Tailwind utilities through `@apply`; plain CSS/SCSS should only be used when there is no adequate Tailwind utility for that rule
 - when TypeScript needs translated labels, pass translation keys only and resolve them through `TranslationService`; do not keep locale-to-text maps in `types`, helpers, or components
+- translated select options must be recomputed from the active locale so enum and dropdown labels update immediately after language changes
 - when API/domain content arrives with localized fields, resolve it through the centralized translation helpers instead of ad hoc `if`/ternary checks
+- admin closed-list fields must use `hans-select-option`, and date, datetime or time fields must use `hans-date-picker` with the correct mode instead of plain text inputs
+- selection-only admin date fields must keep `allowInputTyping` disabled so the field stays readonly and opens the picker from the full input area, matching the design-library behavior
+- admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support
 
 ### Testing and quality
 

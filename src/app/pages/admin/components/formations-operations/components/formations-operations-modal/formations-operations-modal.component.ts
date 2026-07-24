@@ -12,6 +12,7 @@ import { FormationRecord } from '../../../../../../core/api/admin/formations/for
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
+import { TruncatedTextComponent } from '../../../../../../shared/truncated-text/truncated-text.component';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -36,7 +37,7 @@ import {
 @Component({
   selector: 'app-formations-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent],
+  imports: [TranslatePipe, OperationsModalComponent, TruncatedTextComponent],
   templateUrl: './formations-operations-modal.component.html',
   styleUrl: './formations-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -311,9 +311,8 @@ export const buildFormationsMutationPayload = (
       ...(endDate ? { endDate } : {}),
       highlight: formValue.highlight,
       sortOrder,
-      technologyRelations: [...new Set(formValue.technologyIds)].map((technologyId, index) => ({
+      technologyRelations: [...new Set(formValue.technologyIds)].map((technologyId) => ({
         technologyId,
-        sortOrder: index,
       })),
       linkIds: [...new Set(formValue.linkIds)],
       imageAssetIds: [...new Set(formValue.imageAssetIds)],
