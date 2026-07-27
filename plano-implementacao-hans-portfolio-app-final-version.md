@@ -1267,6 +1267,7 @@ Regra importante de modelagem para a F8:
     - validacao generica de intervalo de datas consolidada no frontend administrativo e no backend para impedir persistencia quando `endDate` for anterior a `startDate`
 - `F8.11` - `technologies`
   - relacionamentos: `projectRelations`, `experienceRelations`, `formationRelations`, `technologyContexts`, `tagIds`, `linkIds`, `imageAssetIds`
+- `F8.11` concluida em `2026-07-27`, com leitura publica, CUD protegido, enums traduzidos em selects, relacoes com previews de imagens, operacoes modais compartilhadas e coverage total.
 - `F8.12` - `technology-contexts`
   - campos: `technologyId`, `context`, `startedAt`, `endedAt`
   - observacao: unica entidade relacional com CRUD dedicado
@@ -1493,6 +1494,6 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.12`, expandindo a area admin para a entidade `technology-contexts` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets`, `spoken-languages`, `customers`, `jobs`, `formations` e `technologies`.
+`F8.12` foi concluida em `2026-07-27`, expandindo a area admin para `technology-contexts` com leitura publica, CUD protegido, select traduzido para `context`, date pickers para `startedAt`/`endedAt`, modal compartilhado, testes unitarios e coverage total. O proximo passo oficial e implementar a `F8.13`, `experiences`, seguindo o mesmo template consolidado.
 
 `F8.11 - technologies` foi concluida em `2026-07-27`, com leitura publica, CUD protegido, enums traduzidos em selects, relacoes com previews de imagens, operacoes modais compartilhadas e coverage total.

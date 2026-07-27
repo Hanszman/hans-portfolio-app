@@ -1,0 +1,151 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="closed.emit()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="pageSelected.emit($event)"
+>
+  @if (modalMode(); as mode) {
+    @if (mode === 'create' || mode === 'update') {
+      <div class="technology-contexts-operations-form">
+        <hans-select-option
+          [label]="resolveFieldLabel('technologyId')"
+          [value]="form().technologyId"
+          [options]="technologyOptions()"
+          inputColor="base"
+          inputSize="medium"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('technologyId', $event)"
+          (valuechange)="change('technologyId', $event)"
+          (valueChange)="change('technologyId', $event)"
+        ></hans-select-option>
+
+        <hans-select-option
+          [label]="resolveFieldLabel('context')"
+          [value]="form().context"
+          [options]="contextOptions()"
+          inputColor="base"
+          inputSize="medium"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('context', $event)"
+          (valuechange)="change('context', $event)"
+          (valueChange)="change('context', $event)"
+        ></hans-select-option>
+
+        <hans-date-picker
+          [label]="resolveFieldLabel('startedAt')"
+          pickerType="date"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().startedAt"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
+          (change)="change('startedAt', $event)"
+        ></hans-date-picker>
+
+        <hans-date-picker
+          [label]="resolveFieldLabel('endedAt')"
+          pickerType="date"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().endedAt"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
+          (change)="change('endedAt', $event)"
+        ></hans-date-picker>
+      </div>
+    } @else {
+      @switch (mode) {
+        @case ('read') {
+          <div class="technology-contexts-operations-list">
+            @for (record of records(); track trackById($index, record)) {
+              <article class="technology-contexts-operations-item">
+                <div class="technology-contexts-operations-item-header">
+                  <div>
+                    <p class="technology-contexts-operations-label">
+                      {{ 'pages.admin.technologyContexts.card.technology' | translate }}
+                    </p>
+                    <h4>{{ record.technologyName }} ({{ record.technologySlug }})</h4>
+                  </div>
+                  <div class="technology-contexts-operations-item-actions">
+                    <hans-button
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      (click)="updateSelected.emit(record.id)"
+                      >{{ 'pages.admin.operations.update' | translate }}
+                    </hans-button>
+                    <hans-button
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      (click)="deleteSelected.emit(record.id)"
+                      >{{ 'pages.admin.operations.delete' | translate }}
+                    </hans-button>
+                  </div>
+                </div>
+                <p>{{ record.contextLabel }}</p>
+                <p>{{ record.startedAt }}</p>
+                <p>{{ record.endedAt || '-' }}</p>
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="technology-contexts-operations-picker">
+            @for (record of records(); track trackById($index, record)) {
+              <button
+                type="button"
+                class="technology-contexts-operations-picker-option"
+                (click)="updateSelected.emit(record.id)"
+              >
+                <strong>{{ record.technologyName }} ({{ record.technologySlug }})</strong>
+                <span>{{ record.contextLabel }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="technology-contexts-operations-picker">
+            @for (record of records(); track trackById($index, record)) {
+              <button
+                type="button"
+                class="technology-contexts-operations-picker-option"
+                (click)="deleteSelected.emit(record.id)"
+              >
+                <strong>{{ record.technologyName }} ({{ record.technologySlug }})</strong>
+                <span>{{ record.contextLabel }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="technology-contexts-operations-delete-summary">
+            <strong
+              >{{ selectedRecord()?.technology?.name }} ({{
+                selectedRecord()?.technology?.slug
+              }})</strong
+            >
+            <p>{{ selectedRecord()?.context }}</p>
+          </div>
+        }
+      }
+    }
+  }
+</app-operations-modal>

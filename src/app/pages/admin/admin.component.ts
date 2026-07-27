@@ -13,6 +13,7 @@ import { SectionHeaderComponent } from '../../shared/section-header/section-head
 import { CustomersOperationsComponent } from './components/customers-operations/customers-operations.component';
 import { FormationsOperationsComponent } from './components/formations-operations/formations-operations.component';
 import { TechnologiesOperationsComponent } from './components/technologies-operations/technologies-operations.component';
+import { TechnologyContextsOperationsComponent } from './components/technology-contexts-operations/technology-contexts-operations.component';
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { JobsOperationsComponent } from './components/jobs-operations/jobs-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
@@ -45,6 +46,7 @@ import {
     JobsOperationsComponent,
     FormationsOperationsComponent,
     TechnologiesOperationsComponent,
+    TechnologyContextsOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -93,7 +95,8 @@ export class AdminComponent {
       entityId === 'customers' ||
       entityId === 'jobs' ||
       entityId === 'formations' ||
-      entityId === 'technologies'
+      entityId === 'technologies' ||
+      entityId === 'technology-contexts'
     );
   }
 

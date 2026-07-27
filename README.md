@@ -270,6 +270,9 @@ That step includes:
 - non-public admin routes guarded in the frontend
 - entity management UI with create, update and delete operations backed by `/admin/<resource>`
 - modal-based admin forms built primarily with `hans-ui-design-lib`
+- F8.12 (`technology-contexts`) is complete with public read reuse, protected create/update/delete flows, translated context options, themed date pickers and the shared operations modal pattern
+
+The next official F8 substep is F8.13 (`experiences`).
 
 ## 📜 History of commands used to build this project:
 

@@ -12,6 +12,7 @@ import { LinksOperationsService } from './core/api/admin/links/links-operations.
 import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import { SpokenLanguagesOperationsService } from './core/api/admin/spoken-languages/spoken-languages-operations.service';
 import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
+import { TechnologyContextsOperationsService } from './core/api/admin/technology-contexts/technology-contexts-operations.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -123,6 +124,15 @@ describe('app routes', () => {
                   },
                 }),
               ),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
+          provide: TechnologyContextsOperationsService,
+          useValue: {
+            getAll: jasmine.createSpy().and.returnValue(of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } })),
             create: jasmine.createSpy(),
             update: jasmine.createSpy(),
             delete: jasmine.createSpy(),

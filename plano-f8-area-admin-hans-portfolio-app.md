@@ -696,7 +696,15 @@ Cada nova entidade protegida deve:
   - `npm run lint` verde
   - `npm run test:coverage -- --watch=false` com `100%` em statements, branches, functions e lines
   - `npm run build` verde
-- proxima subetapa oficial: `F8.12` - Technology contexts
+- `F8.12` concluida em `2026-07-27`
+  - dominio de API `src/app/core/api/admin/technology-contexts/` criado para o CRUD dedicado da entidade relacional
+  - leitura reutiliza o endpoint publico `GET /technology-contexts`; `POST`, `PUT` e `DELETE` usam somente `/admin/technology-contexts` com autenticacao
+  - workspace `src/app/pages/admin/components/technology-contexts-operations/` criado com helper, tipos, modal e fluxos de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete`
+  - campo `context` usa `hans-select-option` com valores validos da API e labels reativos traduzidos
+  - campos `startedAt` e `endedAt` usam `hans-date-picker` no modo `date`, com entrada digitada desabilitada e superficies alinhadas ao tema
+  - selecao de technology reutiliza a leitura publica de `technologies`, mantendo contratos tipados e sem duplicar endpoint no backend
+  - testes unitarios adicionados para service, helper, modal e workspace, preservando a meta de `100%` de coverage
+- proxima subetapa oficial: `F8.13` - Experiences
 
 ## 9) Regras de implementacao por subetapa
 
