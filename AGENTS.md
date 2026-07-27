@@ -327,7 +327,8 @@ Rules:
 - complete only one official F8 substep per delivery unless there is explicit alignment to group more than one
 - `F8.11` (technologies) is complete: reuse public `GET /technologies`, keep `POST`, `PUT` and `DELETE` under protected `/admin/technologies`, translate API enum options through `TranslationService`, and use the shared operations workspace/modal/actions pattern
 - relation pickers for technologies must keep real image previews and all CRUD tests at 100% coverage; future entity CRUDs should preserve this same contract and quality bar
-- `F8.12` (technology-contexts) is complete: reuse public `GET /technology-contexts`, keep CUD under protected `/admin/technology-contexts`, use translated `hans-select-option` context values, themed `hans-date-picker` date fields and the shared operations workspace/modal/actions pattern
+- `F8.12` (technology-contexts) is complete: reuse public `GET /technology-contexts`, keep CUD under protected `/admin/technology-contexts`, flatten the public grouped response in the domain service before presenting records, use translated `hans-select-option` values, themed `hans-date-picker` date fields and the shared operations workspace/modal/actions pattern
+- Relationship CRUD records without their own slug must be identified in read and selection flows by the owning entity name plus the translated relationship value, with relevant date ranges formatted for the user instead of exposing internal IDs or translation keys
 - `F8.13` (experiences) is the next official substep; implement only that entity in the next delivery
 - model relationship CRUD according to the API contracts:
   - `technology-contexts` is the only dedicated relationship entity with its own protected CRUD

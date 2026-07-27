@@ -29,6 +29,9 @@ import {
   TechnologyContextsOperationsModalMode,
   createEmptyTechnologyContextFormValue,
 } from '../../technology-contexts-operations.types';
+import {
+  buildTechnologyContextViewModels,
+} from '../../helpers/technology-contexts-operations.helper';
 
 @Component({
   selector: 'app-technology-contexts-operations-modal',
@@ -71,6 +74,10 @@ export class TechnologyContextsOperationsModalComponent {
     this.translation.instant.bind(this.translation),
   );
   protected readonly resolveSelectValue = resolveAdminSelectValue;
+  protected readonly selectedRecordViewModel = computed(() => {
+    const record = this.selectedRecord();
+    return record ? buildTechnologyContextViewModels([record], this.translation)[0] : null;
+  });
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
       case 'read':

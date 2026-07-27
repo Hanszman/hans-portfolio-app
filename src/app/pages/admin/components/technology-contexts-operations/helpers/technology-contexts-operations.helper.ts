@@ -8,7 +8,18 @@ export const buildTechnologyContextTechnologyOptions = (
   technologies: readonly TechnologyAdminRecord[],
 ): readonly TechnologyContextTechnologyOption[] => [...technologies]
   .sort((a, b) => a.name.localeCompare(b.name))
-  .map((technology) => ({ id: technology.id, title: technology.name, subtitle: technology.slug }));
+  .map((technology) => ({
+    id: technology.id,
+    label: `${technology.name} (${technology.slug})`,
+    value: technology.id,
+  }));
+
+export const formatTechnologyContextDate = (value: string): string => {
+  if (!value) return '-';
+  if (!/^\d{4}-\d{2}-\d{2}/.test(value)) return value;
+  const [year, month, day] = value.slice(0, 10).split('-');
+  return `${day}/${month}/${year}`;
+};
 
 export const buildTechnologyContextViewModels = (
   records: readonly TechnologyContextRecord[],
@@ -20,6 +31,9 @@ export const buildTechnologyContextViewModels = (
     id: record.id,
     technologyName: record.technology?.name ?? record.technologyId,
     technologySlug: record.technology?.slug ?? record.technologyId,
-    contextLabel: translation.instant(`pages.admin.technologyContexts.options.${record.context}` as AppTranslationKey),
+    contextLabel: record.context
+      ? translation.instant(`pages.admin.technologyContexts.options.${record.context}` as AppTranslationKey)
+      : '-',
+    dateRangeLabel: `${formatTechnologyContextDate(form.startedAt)} - ${formatTechnologyContextDate(form.endedAt)}`,
   };
 });

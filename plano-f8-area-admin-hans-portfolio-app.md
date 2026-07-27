@@ -698,6 +698,8 @@ Cada nova entidade protegida deve:
   - `npm run build` verde
 - `F8.12` concluida em `2026-07-27`
   - dominio de API `src/app/core/api/admin/technology-contexts/` criado para o CRUD dedicado da entidade relacional
+  - resposta publica agrupada por tecnologia normalizada pelo service antes do consumo da UI, mantendo o contrato plano dos modais
+  - identificacao dos registros nos fluxos de leitura, selecao e exclusao feita por tecnologia, contexto traduzido e periodo formatado, sem expor IDs internos ou chaves de traducao
   - leitura reutiliza o endpoint publico `GET /technology-contexts`; `POST`, `PUT` e `DELETE` usam somente `/admin/technology-contexts` com autenticacao
   - workspace `src/app/pages/admin/components/technology-contexts-operations/` criado com helper, tipos, modal e fluxos de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete`
   - campo `context` usa `hans-select-option` com valores validos da API e labels reativos traduzidos

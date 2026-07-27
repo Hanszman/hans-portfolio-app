@@ -116,16 +116,20 @@ describe('TechnologyContextsOperationsComponent', () => {
     };
     access.openReadModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe('read');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('read.title');
     access.openUpdatePickerModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe(
       'pick-update',
     );
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('pickUpdate.title');
     access.openDeletePickerModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe(
       'pick-delete',
     );
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('pickDelete.title');
     access.openCreateModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe('create');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('create.title');
     access.closeModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBeNull();
   });

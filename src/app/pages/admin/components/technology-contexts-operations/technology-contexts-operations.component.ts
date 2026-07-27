@@ -107,8 +107,11 @@ export class TechnologyContextsOperationsComponent implements OnInit {
   );
   protected readonly isModalOpen = computed(() => this.modalMode() !== null);
   protected readonly modalTitleKey = computed<AppTranslationKey>(
-    () =>
-      `pages.admin.technologyContexts.modal.${this.modalMode() ?? 'create'}.title` as AppTranslationKey,
+    () => {
+      const mode = this.modalMode() ?? 'create';
+      const translationMode = mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode;
+      return `pages.admin.technologyContexts.modal.${translationMode}.title` as AppTranslationKey;
+    },
   );
 
   ngOnInit(): void {

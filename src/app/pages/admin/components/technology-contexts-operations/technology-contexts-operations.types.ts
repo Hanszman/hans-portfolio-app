@@ -2,6 +2,7 @@ import { TechnologyContextKey } from '../../../../core/api/technologies/technolo
 import { TechnologyContextRecord } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { AdminSelectOptionViewModel } from '../../helpers/admin.helper';
 
 export type TechnologyContextsOperationsModalMode =
   | 'create' | 'read' | 'pick-update' | 'pick-delete' | 'update' | 'delete';
@@ -17,17 +18,14 @@ export interface TechnologyContextFormValue {
   endedAt: string;
 }
 
-export interface TechnologyContextTechnologyOption {
-  id: string;
-  title: string;
-  subtitle: string;
-}
+export type TechnologyContextTechnologyOption = AdminSelectOptionViewModel<string>;
 
 export interface TechnologyContextViewModel extends TechnologyContextFormValue {
   id: string;
   technologyName: string;
   technologySlug: string;
   contextLabel: string;
+  dateRangeLabel: string;
 }
 
 export type TechnologyContextMutationBuildResult =
@@ -48,9 +46,9 @@ export const createEmptyTechnologyContextFormValue = (): TechnologyContextFormVa
 export const buildTechnologyContextFormValue = (
   record: TechnologyContextRecord | null | undefined,
 ): TechnologyContextFormValue => record ? {
-  technologyId: record.technologyId,
-  context: record.context,
-  startedAt: record.startedAt,
+  technologyId: record.technologyId ?? record.technology?.id ?? '',
+  context: record.context ?? '',
+  startedAt: record.startedAt ?? '',
   endedAt: record.endedAt ?? '',
 } : createEmptyTechnologyContextFormValue();
 

@@ -16,6 +16,22 @@ export interface TechnologyContextRecord {
   technology?: TechnologyContextTechnologyReference | null;
 }
 
+export interface TechnologyContextPublicGroup {
+  technologyId: string;
+  slug: string;
+  name: string;
+  technologyContexts: readonly TechnologyContextPublicRecord[];
+}
+
+export interface TechnologyContextPublicRecord {
+  id: string;
+  context: TechnologyContextKey;
+  startedAt: string;
+  endedAt: string | null;
+}
+
+export type TechnologyContextsPublicCollectionResponse = PaginatedResponse<TechnologyContextPublicGroup>;
+
 export interface TechnologyContextMutationPayload {
   technologyId: string;
   context: TechnologyContextKey;

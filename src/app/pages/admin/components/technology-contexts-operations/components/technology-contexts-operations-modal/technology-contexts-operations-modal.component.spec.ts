@@ -20,6 +20,7 @@ const viewModel = {
   technologyName: 'Angular',
   technologySlug: 'angular',
   contextLabel: 'Professional',
+  dateRangeLabel: '01/01/2026 - -',
 };
 
 describe('TechnologyContextsOperationsModalComponent', () => {
@@ -59,7 +60,7 @@ describe('TechnologyContextsOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.componentRef.setInput('technologyOptions', [
-      { id: 'tech-1', title: 'Angular', subtitle: 'angular' },
+      { id: 'tech-1', label: 'Angular (angular)', value: 'tech-1' },
     ]);
     fixture.componentRef.setInput('contextOptions', [
       { value: 'PROFESSIONAL', label: 'Professional' },
@@ -146,6 +147,8 @@ describe('TechnologyContextsOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.detectChanges();
+    const selectedViewModel = (component as unknown as { selectedRecordViewModel(): unknown }).selectedRecordViewModel();
+    expect(selectedViewModel).toBeNull();
     const access = component as unknown as {
       showPagination(): boolean;
       showSubmit(): boolean;

@@ -83,7 +83,7 @@
                     <p class="technology-contexts-operations-label">
                       {{ 'pages.admin.technologyContexts.card.technology' | translate }}
                     </p>
-                    <h4>{{ record.technologyName }} ({{ record.technologySlug }})</h4>
+                    <h4>{{ record.technologyName }} ({{ record.contextLabel }})</h4>
                   </div>
                   <div class="technology-contexts-operations-item-actions">
                     <hans-button
@@ -100,9 +100,7 @@
                     </hans-button>
                   </div>
                 </div>
-                <p>{{ record.contextLabel }}</p>
-                <p>{{ record.startedAt }}</p>
-                <p>{{ record.endedAt || '-' }}</p>
+                <p>{{ record.dateRangeLabel }}</p>
               </article>
             }
           </div>
@@ -115,8 +113,8 @@
                 class="technology-contexts-operations-picker-option"
                 (click)="updateSelected.emit(record.id)"
               >
-                <strong>{{ record.technologyName }} ({{ record.technologySlug }})</strong>
-                <span>{{ record.contextLabel }}</span>
+                <strong>{{ record.technologyName }} ({{ record.contextLabel }})</strong>
+                <span>{{ record.dateRangeLabel }}</span>
               </button>
             }
           </div>
@@ -129,20 +127,19 @@
                 class="technology-contexts-operations-picker-option"
                 (click)="deleteSelected.emit(record.id)"
               >
-                <strong>{{ record.technologyName }} ({{ record.technologySlug }})</strong>
-                <span>{{ record.contextLabel }}</span>
+                <strong>{{ record.technologyName }} ({{ record.contextLabel }})</strong>
+                <span>{{ record.dateRangeLabel }}</span>
               </button>
             }
           </div>
         }
         @case ('delete') {
           <div class="technology-contexts-operations-delete-summary">
-            <strong
-              >{{ selectedRecord()?.technology?.name }} ({{
-                selectedRecord()?.technology?.slug
-              }})</strong
-            >
-            <p>{{ selectedRecord()?.context }}</p>
+            <strong>
+              {{ selectedRecordViewModel()?.technologyName }}
+              ({{ selectedRecordViewModel()?.contextLabel }})
+            </strong>
+            <p>{{ selectedRecordViewModel()?.dateRangeLabel }}</p>
           </div>
         }
       }

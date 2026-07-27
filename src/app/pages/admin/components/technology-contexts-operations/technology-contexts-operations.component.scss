@@ -1,12 +1,15 @@
+:host {
+  @apply block h-full min-w-0;
+}
+
 .technology-contexts-operations {
-  @apply flex min-w-0 flex-col gap-4 rounded-[2rem] border p-6;
-  border-color: color-mix(in srgb, var(--base-default-color) 28%, transparent);
-  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
-  color: var(--text-color);
+  @apply flex h-full min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
 
 .technology-contexts-operations-copy {
-  @apply flex flex-col gap-3;
+  @apply flex min-w-0 flex-col gap-3;
 }
 
 .technology-contexts-operations-kicker {
@@ -15,16 +18,17 @@
 }
 
 .technology-contexts-operations h3 {
-  @apply m-0 text-2xl font-bold;
+  @apply m-0 text-lg font-semibold;
 }
 
 .technology-contexts-operations-copy > p:last-child {
-  @apply m-0 max-w-5xl text-base leading-7;
+  @apply text-base leading-7;
   color: var(--base-strong-color);
 }
 
 .technology-contexts-operations-endpoint {
-  @apply m-0 rounded-2xl border px-4 py-3 text-sm;
+  @apply rounded-2xl border px-4 py-3;
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
   color: var(--base-strong-color);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
