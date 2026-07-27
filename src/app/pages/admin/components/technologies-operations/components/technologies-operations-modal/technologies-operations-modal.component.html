@@ -120,8 +120,16 @@
                 <span class="technologies-operations-selection-option">
                   <img [src]="image.imageUrl" [alt]="image.title" />
                   <span class="technologies-operations-selection-option-copy">
-                    <app-truncated-text [text]="image.title" [maxLength]="32" />
-                    <app-truncated-text [text]="image.subtitle" [maxLength]="48" />
+                    <app-truncated-text
+                      class="technologies-operations-selection-option-title"
+                      [text]="image.title"
+                      [maxLength]="32"
+                    />
+                    <app-truncated-text
+                      class="technologies-operations-selection-option-subtitle"
+                      [text]="image.subtitle"
+                      [maxLength]="48"
+                    />
                   </span>
                 </span>
             </hans-button>
