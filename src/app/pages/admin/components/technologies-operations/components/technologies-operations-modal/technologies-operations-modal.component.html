@@ -35,6 +35,11 @@
         [label]="resolveFieldLabel('category')"
         [value]="form().category"
         [options]="categoryOptions()"
+        inputSize="medium"
+        inputColor="base"
+        labelColor="base"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
         (change)="change('category', $event)"
         (valuechange)="change('category', $event)"
         (valueChange)="change('category', $event)"
@@ -44,6 +49,11 @@
         [label]="resolveFieldLabel('level')"
         [value]="form().level"
         [options]="levelOptions()"
+        inputSize="medium"
+        inputColor="base"
+        labelColor="base"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
         (change)="change('level', $event)"
         (valuechange)="change('level', $event)"
         (valueChange)="change('level', $event)"
@@ -53,14 +63,28 @@
         [label]="resolveFieldLabel('frequency')"
         [value]="form().frequency"
         [options]="frequencyOptions()"
+        inputSize="medium"
+        inputColor="base"
+        labelColor="base"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
         (change)="change('frequency', $event)"
         (valuechange)="change('frequency', $event)"
         (valueChange)="change('frequency', $event)"
       ></hans-select-option>
 
       <div class="technologies-operations-toggle">
-        <span>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</span>
-        <hans-toggle [checked]="form().highlight" (change)="toggleHighlight($event)"></hans-toggle>
+        <div class="technologies-operations-selection-copy">
+          <p>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</p>
+          <span>{{ 'pages.admin.technologies.fields.highlight.description' | translate }}</span>
+        </div>
+        <hans-toggle
+          [checked]="form().highlight"
+          [toggleColor]="'primary'"
+          [toggleSize]="'small'"
+          [attr.aria-label]="'pages.admin.technologies.fields.highlight.label' | translate"
+          (change)="toggleHighlight($event)"
+        ></hans-toggle>
       </div>
 
       <hans-input
@@ -71,18 +95,25 @@
       ></hans-input>
 
       <section class="technologies-operations-selection">
-        <h4>{{ 'pages.admin.technologies.fields.imageAssets.label' | translate }}</h4>
+        <div class="technologies-operations-selection-copy">
+          <p>{{ 'pages.admin.technologies.fields.imageAssets.label' | translate }}</p>
+          <span>{{ 'pages.admin.technologies.fields.imageAssets.description' | translate }}</span>
+        </div>
         <div class="technologies-operations-image-grid">
           @for (image of imageOptions(); track image.id) {
             <hans-button
               [buttonColor]="'primary'"
               [buttonVariant]="isSelected(image.id) ? 'default' : 'outline'"
               (click)="imageAssetToggled.emit(image.id)"
-              ><img [src]="image.imageUrl" [alt]="image.title" />
-              <span>
-                <app-truncated-text [text]="image.title" [maxLength]="28" />
-                <app-truncated-text [text]="image.subtitle" [maxLength]="36" />
-              </span>
+              >
+                <span class="technologies-operations-selection-option">
+                  <img [src]="image.imageUrl" [alt]="image.title" />
+                  <span class="technologies-operations-selection-option-copy">
+                    <app-truncated-text [text]="image.title" [maxLength]="32" />
+                    <app-truncated-text [text]="image.subtitle" [maxLength]="48" />
+                  </span>
+                </span>
+              
             </hans-button>
           }
         </div>

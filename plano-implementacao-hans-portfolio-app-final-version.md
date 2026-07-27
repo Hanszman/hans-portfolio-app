@@ -1315,6 +1315,7 @@ Regra importante de modelagem para a F8:
 - feedbacks operacionais devem priorizar `hans-toast` em toda a aplicacao, inclusive autenticacao e CRUDs administrativos
 - tudo o que foi consolidado em `portfolio-settings`, `tags` e `links` passa a ser o template obrigatorio das proximas entidades administrativas
 - cada nova entidade deve nascer com `operations-modal`, leitura em modal grande, fluxos `pick-update` e `pick-delete` por cards clicaveis, labels explicitas em todos os campos, footer fixo, paginacao compartilhada da lib, mesmo padrao visual dos cards e documentacao atualizada antes de encerrar a subetapa
+- cards de entidades ja implementadas devem substituir, e nao duplicar, o card de roadmap; a composicao visual oficial e a mesma de Jobs/Formations, com kicker `//`, titulo em negrito, borda/fundo via tokens de tema, descricao, endpoint e acoes compartilhadas
 - labels repetidos do dominio admin, como o prefixo padrao de endpoint `POST/GET/PUT/DELETE`, devem ficar centralizados em `admin.types.ts`
 - cada entrega da F8 deve fechar apenas uma subetapa oficial por vez, salvo alinhamento explicito para agrupar mais de uma no mesmo incremento
 - sempre que o campo aceitar valores de lista fechada, enum ou opcoes conhecidas da API, devemos usar `hans-select-option` em vez de `input`
@@ -1323,6 +1324,7 @@ Regra importante de modelagem para a F8:
 - quando o `hans-date-picker` estiver atuando como seletor de data, devemos desabilitar digitacao livre no input para preservar o comportamento readonly e a abertura pelo campo inteiro
 - sempre que uma entidade administrativa tiver `startDate` e `endDate`, devemos validar em helper compartilhado no frontend e tambem no backend que `endDate` nao seja anterior a `startDate`
 - dropdowns administrativos nunca devem exibir enums crus ou chaves de traducao completas; as options devem ser traduzidas antes de chegar ao componente visual
+- options traduzidas devem preservar o contrato da `hans-ui-design-lib`, usando objetos com valor bruto estavel e label traduzido, nunca apenas arrays de strings
 - seletores relacionais devem quebrar em fluxo sequencial e natural, sem grids rigidas com grandes vazios horizontais
 - textos secundarios longos de relacoes, como URLs, caminhos e slugs, devem ser truncados com reticencias e tooltip/title para preservar legibilidade
 - quando a shell admin operar uma entidade com endpoint protegido proprio de leitura, a colecao deve priorizar `/admin/<entity>`; quando a API expuser apenas leitura publica, devemos consumir o endpoint publico e manter somente as mutacoes em `/admin/<entity>`

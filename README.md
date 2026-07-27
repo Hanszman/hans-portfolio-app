@@ -110,6 +110,8 @@ This project must follow the current Angular direction consistently:
 - translated select options must be recomputed from the active locale so enum and dropdown labels update immediately after language changes
 - when API/domain content arrives with localized fields, resolve it through the centralized translation helpers instead of ad hoc `if`/ternary checks
 - admin closed-list fields must use `hans-select-option`, and date, datetime or time fields must use `hans-date-picker` with the correct mode instead of plain text inputs
+- live CRUD entity cards must replace their roadmap cards and use the same visual composition as Jobs and Formations in both themes: `//` kicker, bold title, theme-token border/background, description, endpoint and shared operations actions
+- translated `hans-select-option` values must preserve the library option contract with stable raw `value` and translated `label`; do not pass plain translated string arrays
 - selection-only admin date fields must keep `allowInputTyping` disabled so the field stays readonly and opens the picker from the full input area, matching the design-library behavior
 - admin forms with combined `startDate` and `endDate` fields must reuse the shared date-range validator and block submission when `endDate` is earlier than `startDate`
 - admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support

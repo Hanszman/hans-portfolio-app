@@ -477,7 +477,7 @@ describe('AdminComponent', () => {
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(4);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(3);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {

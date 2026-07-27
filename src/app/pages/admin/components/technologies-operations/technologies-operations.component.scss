@@ -1,12 +1,25 @@
 .technologies-operations {
-  @apply rounded-3xl border border-[var(--primary-neutral-color)] bg-[var(--background-color)] p-6;
+  @apply flex h-full min-w-0 flex-col gap-4 overflow-hidden rounded-[2rem] border p-6;
+  border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
 .technologies-operations-copy {
-  @apply space-y-4;
+  @apply flex min-w-0 flex-col gap-3;
 }
 .technologies-operations-kicker {
-  @apply font-mono uppercase tracking-[0.2em] text-[var(--primary-color)];
+  @apply text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+.technologies-operations-copy h3 {
+  @apply text-lg font-semibold;
+}
+.technologies-operations-copy p:last-child,
+.technologies-operations-endpoint {
+  @apply text-base leading-7;
+  color: var(--base-strong-color);
 }
 .technologies-operations-endpoint {
-  @apply my-6 rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+  @apply rounded-2xl border px-4 py-3;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }

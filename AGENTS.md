@@ -308,12 +308,14 @@ Rules:
 - validate authenticated sessions with `GET /admin/session`
 - protect every admin route with a frontend guard
 - keep the admin area visually aligned with the current app theme
+- every live CRUD entity card in the admin grid must use the same shell composition as Jobs and Formations: `//` kicker, bold title, theme-token border/background, description, endpoint panel and shared operations actions; do not render a second roadmap card for an entity that already has a live workspace
 - do not introduce new colors; always use theme variables/tokens
 - build admin actions and forms with `hans-ui-design-lib` primitives first
 - each admin entity entry should expose `create`, `update` and `delete` actions
 - each action should open modal-driven flows when appropriate
 - every admin form field must declare its label through field config and use the config `required` flag to append the asterisk automatically instead of hardcoding it in templates
 - whenever a field represents a closed list, enum or API-known option set, use `hans-select-option` instead of `input`
+- pass select options as the library option contract with stable raw values and translated labels; never pass a plain translated string array that can leave the dropdown empty or break selection
 - whenever a field represents date, datetime or time input, use `hans-date-picker` with the correct `pickerType` instead of `hans-input`
 - when an admin date field is selection-driven, keep `hans-date-picker` with `allowInputTyping` disabled so the input stays readonly and the picker opens from the whole field interaction, matching the library behavior
 - whenever an admin form contains a `startDate` and `endDate` combination, validate on the frontend before submit that `endDate` is not earlier than `startDate`, using the shared admin date-range helper instead of duplicating comparison logic per entity

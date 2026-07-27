@@ -27,8 +27,11 @@ import {
 import { TechnologyAdminRecord } from '../../../../../../core/api/technologies/technologies.types';
 import {
   createAdminFieldLabelResolver,
+  createAdminSelectOptionDefinitions,
   resolveAdminSelectValue,
+  translateAdminSelectOptions,
 } from '../../../../helpers/admin.helper';
+import { AdminSelectOptionViewModel } from '../../../../helpers/admin.helper';
 import {
   TECHNOLOGY_CATEGORY_VALUES,
   TECHNOLOGY_FREQUENCY_VALUES,
@@ -97,10 +100,16 @@ export class TechnologiesOperationsModalComponent {
     return this.form().imageAssetIds.includes(id);
   }
 
-  private getOptions(values: readonly string[]): readonly string[] {
+  private getOptions<TValue extends string>(
+    values: readonly TValue[],
+  ): readonly AdminSelectOptionViewModel<TValue>[] {
     this.translation.locale();
-    return values.map((value) =>
-      this.translation.instant(`pages.admin.technologies.options.${value}` as AppTranslationKey),
+    return translateAdminSelectOptions(
+      createAdminSelectOptionDefinitions(
+        values,
+        (value) => `pages.admin.technologies.options.${value}` as AppTranslationKey,
+      ),
+      this.translation.instant.bind(this.translation),
     );
   }
 

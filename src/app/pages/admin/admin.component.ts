@@ -92,7 +92,8 @@ export class AdminComponent {
       entityId === 'spoken-languages' ||
       entityId === 'customers' ||
       entityId === 'jobs' ||
-      entityId === 'formations'
+      entityId === 'formations' ||
+      entityId === 'technologies'
     );
   }
 

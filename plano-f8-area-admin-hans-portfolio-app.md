@@ -309,6 +309,8 @@ Cada nova entidade protegida deve:
 - centralizar no helper compartilhado do dominio admin os mapeamentos repetidos de `image-assets` e labels estruturais que se repetirem entre entidades
 - centralizar no helper compartilhado do dominio admin as validacoes combinadas de datas para qualquer entidade futura que trabalhe com `startDate` e `endDate`
 - manter `create`, `read`, `update` e `delete` com a mesma semantica visual e de navegacao aplicada nas entidades ja concluidas
+- cards de entidades CRUD reais devem repetir a composicao visual consolidada por Jobs e Formations (`//` no kicker, titulo em negrito, borda e fundo por tokens do tema, descricao, painel de endpoint e `operations-actions`); o registro de roadmap deve ser removido quando a entidade ganhar workspace real
+- `hans-select-option` deve receber o contrato de options da lib, com `value` estavel do enum e `label` traduzido; arrays de strings traduzidas nao devem ser usados
 - atualizar a documentacao da F8 a cada interacao relevante antes de considerar a subetapa concluida
 - quando a entidade ja possuir service publico proprio por ser tela do portfolio, como `experiences`, `projects`, `technologies` e `dashboard`, nao criar uma segunda pasta paralela apenas para CUD dentro de `admin`; reaproveitar e expandir o service ja existente no dominio oficial da entidade
 

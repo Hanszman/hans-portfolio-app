@@ -1,26 +1,89 @@
-.technologies-operations-form,
+:host {
+  @apply block;
+}
+
 .technologies-operations-list {
   @apply grid gap-4;
 }
+
+.technologies-operations-item,
+.technologies-operations-picker-option,
+.technologies-operations-selection,
 .technologies-operations-toggle {
-  @apply flex items-center justify-between rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
-.technologies-operations-selection {
-  @apply rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+
+.technologies-operations-toggle {
+  @apply md:flex-row md:items-center md:justify-between;
 }
-.technologies-operations-image-grid {
+
+.technologies-operations-item-header,
+.technologies-operations-picker-option {
+  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
+}
+
+.technologies-operations-picker-option {
+  @apply w-full cursor-pointer text-left transition;
+}
+
+.technologies-operations-picker-option:hover,
+.technologies-operations-picker-option:focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.technologies-operations-item-header strong,
+.technologies-operations-picker-option strong,
+.technologies-operations-selection-copy p,
+.technologies-operations-toggle p {
+  @apply break-all font-semibold;
+  color: var(--text-color);
+}
+
+.technologies-operations-item-header span {
   @apply flex flex-wrap gap-3;
 }
-.technologies-operations-image-grid hans-button {
-  @apply max-w-full;
+
+.technologies-operations-selection-copy {
+  @apply flex flex-col gap-1;
 }
-.technologies-operations-image-grid img {
-  @apply h-10 w-10 rounded-full object-cover;
+
+.technologies-operations-selection-copy span,
+.technologies-operations-selection-option-subtitle,
+.technologies-operations-list article > p,
+.technologies-operations-picker-option span {
+  @apply text-sm leading-7;
+  color: var(--base-strong-color);
 }
-.technologies-operations-list article,
-.technologies-operations-list button {
-  @apply rounded-2xl border border-[var(--primary-neutral-color)] p-4 text-left;
+
+.technologies-operations-form {
+  @apply flex flex-col gap-4;
 }
-.technologies-operations-list header {
-  @apply flex items-center justify-between gap-4;
+
+.technologies-operations-image-grid {
+  @apply flex flex-wrap items-start gap-3;
+}
+
+.technologies-operations-selection-option {
+  @apply flex max-w-full items-start gap-3 text-left;
+}
+
+.technologies-operations-selection-option img {
+  @apply h-12 w-12 shrink-0 rounded-2xl object-cover;
+  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
+.technologies-operations-selection-option-copy {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+:host ::ng-deep .technologies-operations-image-grid hans-button {
+  @apply inline-block max-w-full align-top;
+}
+
+:host ::ng-deep .technologies-operations-image-grid hans-button .hans-button-content,
+:host ::ng-deep .technologies-operations-image-grid hans-button .hans-button {
+  @apply inline-flex w-fit max-w-full min-w-0 items-start justify-start whitespace-normal text-left;
 }
