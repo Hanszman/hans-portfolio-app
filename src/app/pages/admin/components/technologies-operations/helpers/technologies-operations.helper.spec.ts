@@ -71,6 +71,22 @@ describe('technologies operations helper', () => {
       sortOrder: '0',
       imageAssetIds: [],
     });
+    expect(
+      buildTechnologiesFormValue(
+        technology({
+          imageAssetIds: undefined,
+          imageAssets: [{ imageAsset: { id: 'image-2', filePath: '/image-2.png', kind: 'ICON', altPt: null, altEn: null } }],
+        }),
+      ).imageAssetIds,
+    ).toEqual(['image-2']);
+    expect(
+      buildTechnologiesFormValue(
+        technology({
+          imageAssetIds: undefined,
+          imageAssets: [{ imageAsset: { filePath: '/image.png', kind: 'ICON', altPt: null, altEn: null } }],
+        }),
+      ).imageAssetIds,
+    ).toEqual([]);
   });
 
   it('sorts image options and maps technology view models', () => {

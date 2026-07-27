@@ -21,6 +21,7 @@ export interface TechnologyExperienceMetricsResponse {
 }
 
 export interface TechnologyImageAssetResponse {
+  id?: string;
   filePath: string;
   kind: string;
   altPt: string | null;

@@ -1014,6 +1014,17 @@ export type AppTranslationKey =
   | 'pages.admin.technologies.fields.sortOrder.label'
   | 'pages.admin.technologies.fields.sortOrder.placeholder'
   | 'pages.admin.technologies.fields.imageAssets.label'
+  | 'pages.admin.technologies.fields.highlight.description'
+  | 'pages.admin.technologies.fields.highlight.enabled'
+  | 'pages.admin.technologies.fields.highlight.disabled'
+  | 'pages.admin.technologies.fields.imageAssets.description'
+  | 'pages.admin.technologies.card.name'
+  | 'pages.admin.technologies.card.category'
+  | 'pages.admin.technologies.card.level'
+  | 'pages.admin.technologies.card.frequency'
+  | 'pages.admin.technologies.card.highlight'
+  | 'pages.admin.technologies.card.imageAssets'
+  | 'pages.admin.technologies.card.emptyRelations'
   | 'pages.admin.technologies.options.LANGUAGE'
   | 'pages.admin.technologies.options.FRAMEWORK'
   | 'pages.admin.technologies.options.LIBRARY'
@@ -1049,7 +1060,11 @@ export type AppTranslationKey =
   | 'pages.admin.technologies.modal.pick-update.title'
   | 'pages.admin.technologies.modal.pick-delete.title'
   | 'pages.admin.technologies.modal.update.title'
-  | 'pages.admin.technologies.modal.delete.title';
+  | 'pages.admin.technologies.modal.delete.title'
+  | 'pages.admin.technologies.modal.read.description'
+  | 'pages.admin.technologies.modal.pickUpdate.description'
+  | 'pages.admin.technologies.modal.pickDelete.description'
+  | 'pages.admin.technologies.modal.delete.description';
 
 export type AppTranslationLanguage = Record<AppTranslationKey, string>;
 

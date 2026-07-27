@@ -118,7 +118,12 @@ export const buildTechnologiesFormValue = (
         sortOrder: String(
           (technology as TechnologyAdminRecord & { sortOrder?: number }).sortOrder ?? 0,
         ),
-        imageAssetIds: technology.imageAssetIds ?? [],
+        imageAssetIds:
+          technology.imageAssetIds ??
+          technology.imageAssets?.flatMap((relation) =>
+            relation.imageAsset.id ? [relation.imageAsset.id] : [],
+          ) ??
+          [],
       }
     : createEmptyTechnologiesOperationsFormValue();
 

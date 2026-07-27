@@ -6,6 +6,10 @@
   @apply grid gap-4;
 }
 
+.technologies-operations-picker {
+  @apply grid gap-4;
+}
+
 .technologies-operations-item,
 .technologies-operations-picker-option,
 .technologies-operations-selection,
@@ -40,6 +44,36 @@
 .technologies-operations-toggle p {
   @apply break-all font-semibold;
   color: var(--text-color);
+}
+
+.technologies-operations-item-header h4 {
+  @apply break-words text-base font-semibold;
+  color: var(--text-color);
+}
+
+.technologies-operations-label {
+  @apply text-xs font-semibold uppercase tracking-[0.2em];
+  color: var(--primary-default-color);
+}
+
+.technologies-operations-item-copy {
+  @apply flex flex-col gap-1;
+}
+
+.technologies-operations-item-copy p:last-child,
+.technologies-operations-delete-summary p {
+  @apply break-words text-sm leading-7;
+  color: var(--base-strong-color);
+}
+
+.technologies-operations-item-actions {
+  @apply flex flex-wrap gap-3;
+}
+
+.technologies-operations-delete-summary {
+  @apply flex flex-col gap-3 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
 }
 
 .technologies-operations-item-header span {

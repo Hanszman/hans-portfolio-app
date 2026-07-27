@@ -1,7 +1,9 @@
 <app-operations-modal
   [isOpen]="isOpen()"
   [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
   [feedbackKey]="feedbackKey()"
+  [feedbackTone]="feedbackTone()"
   [pagination]="pagination()"
   [showPagination]="showPagination()"
   [showSearch]="showPagination()"
@@ -15,10 +17,13 @@
   (submitted)="submit()"
   (pageSelected)="pageSelected.emit($event)"
 >
-  @if (modalMode() === 'create' || modalMode() === 'update') {
+  @if (modalMode(); as modalMode) {
+    @if (modalMode === 'create' || modalMode === 'update') {
     <div class="technologies-operations-form">
       <hans-input
         [label]="resolveFieldLabel('slug')"
+        inputColor="base"
+        inputSize="medium"
         [value]="form().slug"
         [placeholder]="fields.slug.placeholderKey! | translate"
         (input)="change('slug', $event)"
@@ -26,6 +31,8 @@
 
       <hans-input
         [label]="resolveFieldLabel('name')"
+        inputColor="base"
+        inputSize="medium"
         [value]="form().name"
         [placeholder]="fields.name.placeholderKey! | translate"
         (input)="change('name', $event)"
@@ -89,6 +96,8 @@
 
       <hans-input
         [label]="resolveFieldLabel('sortOrder')"
+        inputColor="base"
+        inputSize="medium"
         [value]="form().sortOrder"
         [placeholder]="fields.sortOrder.placeholderKey! | translate"
         (input)="change('sortOrder', $event)"
@@ -99,13 +108,15 @@
           <p>{{ 'pages.admin.technologies.fields.imageAssets.label' | translate }}</p>
           <span>{{ 'pages.admin.technologies.fields.imageAssets.description' | translate }}</span>
         </div>
-        <div class="technologies-operations-image-grid">
+        <div class="technologies-operations-selection-grid">
           @for (image of imageOptions(); track image.id) {
             <hans-button
               [buttonColor]="'primary'"
               [buttonVariant]="isSelected(image.id) ? 'default' : 'outline'"
               (click)="imageAssetToggled.emit(image.id)"
-              >
+              [buttonSize]="'medium'"
+              [attr.aria-pressed]="isSelected(image.id)"
+            >
                 <span class="technologies-operations-selection-option">
                   <img [src]="image.imageUrl" [alt]="image.title" />
                   <span class="technologies-operations-selection-option-copy">
@@ -113,52 +124,82 @@
                     <app-truncated-text [text]="image.subtitle" [maxLength]="48" />
                   </span>
                 </span>
-              
             </hans-button>
           }
         </div>
       </section>
     </div>
-  } @else if (modalMode() === 'read') {
-    <div class="technologies-operations-list">
-      @for (technology of technologies(); track technology.id) {
-        <article>
-          <header>
-            <strong>{{ technology.name }} ({{ technology.slug }})</strong>
-            <span>
-              <hans-button [buttonColor]="'primary'" (click)="updateSelected.emit(technology.id)"
-                >{{ 'pages.admin.operations.update' | translate }}
-              </hans-button>
-
-              <hans-button [buttonColor]="'primary'" (click)="deleteSelected.emit(technology.id)"
-                >{{ 'pages.admin.operations.delete' | translate }}
-              </hans-button>
-            </span>
-          </header>
-
-          <p>{{ technology.category }}</p>
-          <p>{{ technology.level || '-' }} · {{ technology.frequency || '-' }}</p>
-          <p>{{ technology.imageAssetLabels.join(', ') || '-' }}</p>
-        </article>
+    } @else {
+      @switch (modalMode) {
+        @case ('read') {
+          <div class="technologies-operations-list">
+            @for (technology of technologies(); track technology.id) {
+              <article class="technologies-operations-item">
+                <div class="technologies-operations-item-header">
+                  <div>
+                    <p class="technologies-operations-label">
+                      {{ 'pages.admin.technologies.card.name' | translate }}
+                    </p>
+                    <h4>{{ technology.name }} ({{ technology.slug }})</h4>
+                  </div>
+                  <div class="technologies-operations-item-actions">
+                    <hans-button
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [attr.aria-label]="'pages.admin.operations.update' | translate"
+                      (click)="updateSelected.emit(technology.id)"
+                    >{{ 'pages.admin.operations.update' | translate }}</hans-button>
+                    <hans-button
+                      [buttonColor]="'primary'"
+                      [buttonSize]="'medium'"
+                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
+                      (click)="deleteSelected.emit(technology.id)"
+                    >{{ 'pages.admin.operations.delete' | translate }}</hans-button>
+                  </div>
+                </div>
+                @for (item of [
+                  ['pages.admin.technologies.card.category', technology.category],
+                  ['pages.admin.technologies.card.level', technology.level || '-'],
+                  ['pages.admin.technologies.card.frequency', technology.frequency || '-'],
+                  ['pages.admin.technologies.card.highlight', technology.highlight ? ('pages.admin.technologies.fields.highlight.enabled' | translate) : ('pages.admin.technologies.fields.highlight.disabled' | translate)],
+                  ['pages.admin.technologies.card.imageAssets', technology.imageAssetLabels.join(', ') || ('pages.admin.technologies.card.emptyRelations' | translate)]
+                ]; track item[0]) {
+                  <div class="technologies-operations-item-copy">
+                    <p class="technologies-operations-label">{{ item[0] | translate }}</p>
+                    <p>{{ item[1] }}</p>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        }
+        @case ('pick-update') {
+          <div class="technologies-operations-picker">
+            @for (technology of technologies(); track technology.id) {
+              <button type="button" class="technologies-operations-picker-option" (click)="updateSelected.emit(technology.id)">
+                <strong>{{ technology.name }} ({{ technology.slug }})</strong>
+                <span>{{ technology.category }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('pick-delete') {
+          <div class="technologies-operations-picker">
+            @for (technology of technologies(); track technology.id) {
+              <button type="button" class="technologies-operations-picker-option" (click)="deleteSelected.emit(technology.id)">
+                <strong>{{ technology.name }} ({{ technology.slug }})</strong>
+                <span>{{ technology.category }}</span>
+              </button>
+            }
+          </div>
+        }
+        @case ('delete') {
+          <div class="technologies-operations-delete-summary">
+            <strong>{{ selectedTechnology()?.name }} ({{ selectedTechnology()?.slug }})</strong>
+            <p>{{ selectedTechnology()?.category }}</p>
+          </div>
+        }
       }
-    </div>
-  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
-    <div class="technologies-operations-list">
-      @for (technology of technologies(); track technology.id) {
-        <button
-          type="button"
-          (click)="
-            modalMode() === 'pick-update'
-              ? updateSelected.emit(technology.id)
-              : deleteSelected.emit(technology.id)
-          "
-        >
-          <strong>{{ technology.name }} ({{ technology.slug }})</strong>
-          <span>{{ technology.category }}</span>
-        </button>
-      }
-    </div>
-  } @else if (modalMode() === 'delete') {
-    <p>{{ selectedTechnology()?.name }} ({{ selectedTechnology()?.slug }})</p>
+    }
   }
 </app-operations-modal>

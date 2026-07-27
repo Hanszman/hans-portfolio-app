@@ -43,6 +43,7 @@
     [pagination]="pagination()"
     [searchValue]="searchQuery()"
     [feedbackKey]="modalFeedbackKey()"
+    [feedbackTone]="modalFeedbackKey() ? 'error' : null"
     [isLoading]="isLoading()"
     [isSubmitting]="isSubmitting()"
     (closed)="closeModal()"

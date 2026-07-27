@@ -61,6 +61,7 @@ export class TechnologiesOperationsModalComponent {
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
+  readonly feedbackTone = input<'success' | 'error' | null>(null);
   readonly isLoading = input(false);
   readonly isSubmitting = input(false);
   readonly closed = output<void>();
@@ -90,6 +91,15 @@ export class TechnologiesOperationsModalComponent {
     this.translation.instant.bind(this.translation),
   );
   protected readonly resolveSelectValue = resolveAdminSelectValue;
+  protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
+    switch (this.modalMode()) {
+      case 'read': return 'pages.admin.technologies.modal.read.description';
+      case 'pick-update': return 'pages.admin.technologies.modal.pickUpdate.description';
+      case 'pick-delete': return 'pages.admin.technologies.modal.pickDelete.description';
+      case 'delete': return 'pages.admin.technologies.modal.delete.description';
+      default: return null;
+    }
+  });
   protected readonly categoryOptions = computed(() => this.getOptions(TECHNOLOGY_CATEGORY_VALUES));
   protected readonly levelOptions = computed(() => this.getOptions(TECHNOLOGY_LEVEL_VALUES));
   protected readonly frequencyOptions = computed(() =>
