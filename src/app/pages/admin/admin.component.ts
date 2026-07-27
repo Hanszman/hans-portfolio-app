@@ -12,6 +12,7 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { CustomersOperationsComponent } from './components/customers-operations/customers-operations.component';
 import { FormationsOperationsComponent } from './components/formations-operations/formations-operations.component';
+import { TechnologiesOperationsComponent } from './components/technologies-operations/technologies-operations.component';
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { JobsOperationsComponent } from './components/jobs-operations/jobs-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
@@ -43,6 +44,7 @@ import {
     CustomersOperationsComponent,
     JobsOperationsComponent,
     FormationsOperationsComponent,
+    TechnologiesOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',

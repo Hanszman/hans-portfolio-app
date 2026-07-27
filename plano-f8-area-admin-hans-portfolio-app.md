@@ -683,11 +683,18 @@ Cada nova entidade protegida deve:
 - `F8.10` ajustada em `2026-07-24`
   - validacao compartilhada de intervalo de datas adicionada ao helper administrativo para impedir `endDate` anterior a `startDate` antes do submit
   - regra consolidada como padrao obrigatorio das proximas entidades administrativas que tiverem combinacao de datas
+- `F8.11` concluida em `2026-07-27`
+  - dominio de API de `technologies` ampliado com leitura publica em `GET /technologies` e mutacoes protegidas em `/admin/technologies`
+  - workspace `src/app/pages/admin/components/technologies-operations/` criado com helper, tipos, modal e fluxos de `create`, `read`, `pick-update`, `update`, `pick-delete` e `delete`
+  - campos `category`, `level` e `frequency` modelados com `hans-select-option`, usando os enums reais da API e labels reativos traduzidos
+  - relacao com `image-assets` integrada com previews reais e selecao reutilizavel no formulario
+  - template visual e comportamental compartilhado da F8 preservado com `operations-actions`, `operations-modal`, busca, paginacao, toasts e footer fixo
+  - testes unitarios adicionados para service, helper, modal e workspace, mantendo `100%` em statements, branches, functions e lines
 - validacao final da iteracao em `2026-07-23`:
   - `npm run lint` verde
-  - `npm run test:coverage -- --watch=false --progress=false --browsers=ChromeHeadless` com `100%` em statements, branches, functions e lines
+  - `npm run test:coverage -- --watch=false` com `100%` em statements, branches, functions e lines
   - `npm run build` verde
-- proxima subetapa oficial: `F8.11` - Technologies
+- proxima subetapa oficial: `F8.12` - Technology contexts
 
 ## 9) Regras de implementacao por subetapa
 

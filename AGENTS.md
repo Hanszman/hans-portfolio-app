@@ -323,6 +323,8 @@ Rules:
 - long secondary relation texts such as URLs, file paths and slugs must be truncated with ellipsis plus `title` tooltip support instead of overflowing the selection cards
 - if a public `GET` endpoint already exists for an entity, the admin shell should reuse that public read and keep only `create`, `update` and `delete` on protected routes
 - complete only one official F8 substep per delivery unless there is explicit alignment to group more than one
+- `F8.11` (technologies) is complete: reuse public `GET /technologies`, keep `POST`, `PUT` and `DELETE` under protected `/admin/technologies`, translate API enum options through `TranslationService`, and use the shared operations workspace/modal/actions pattern
+- relation pickers for technologies must keep real image previews and all CRUD tests at 100% coverage; future entity CRUDs should preserve this same contract and quality bar
 - model relationship CRUD according to the API contracts:
   - `technology-contexts` is the only dedicated relationship entity with its own protected CRUD
   - the other relationship tables must be managed through relation arrays in the owning entity payloads

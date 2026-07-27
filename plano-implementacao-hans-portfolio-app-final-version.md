@@ -1491,4 +1491,6 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-Implementar a `F8.11`, expandindo a area admin para a entidade `technologies` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets`, `spoken-languages`, `customers`, `jobs` e `formations`.
+Implementar a `F8.12`, expandindo a area admin para a entidade `technology-contexts` seguindo integralmente o template consolidado em `portfolio-settings`, `tags`, `links`, `image-assets`, `spoken-languages`, `customers`, `jobs`, `formations` e `technologies`.
+
+`F8.11 - technologies` foi concluida em `2026-07-27`, com leitura publica, CUD protegido, enums traduzidos em selects, relacoes com previews de imagens, operacoes modais compartilhadas e coverage total.

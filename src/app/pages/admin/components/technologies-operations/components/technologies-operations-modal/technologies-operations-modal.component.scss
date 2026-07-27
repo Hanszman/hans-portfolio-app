@@ -1,0 +1,26 @@
+.technologies-operations-form,
+.technologies-operations-list {
+  @apply grid gap-4;
+}
+.technologies-operations-toggle {
+  @apply flex items-center justify-between rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+}
+.technologies-operations-selection {
+  @apply rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+}
+.technologies-operations-image-grid {
+  @apply flex flex-wrap gap-3;
+}
+.technologies-operations-image-grid hans-button {
+  @apply max-w-full;
+}
+.technologies-operations-image-grid img {
+  @apply h-10 w-10 rounded-full object-cover;
+}
+.technologies-operations-list article,
+.technologies-operations-list button {
+  @apply rounded-2xl border border-[var(--primary-neutral-color)] p-4 text-left;
+}
+.technologies-operations-list header {
+  @apply flex items-center justify-between gap-4;
+}

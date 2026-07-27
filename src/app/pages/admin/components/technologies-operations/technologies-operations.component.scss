@@ -1,0 +1,12 @@
+.technologies-operations {
+  @apply rounded-3xl border border-[var(--primary-neutral-color)] bg-[var(--background-color)] p-6;
+}
+.technologies-operations-copy {
+  @apply space-y-4;
+}
+.technologies-operations-kicker {
+  @apply font-mono uppercase tracking-[0.2em] text-[var(--primary-color)];
+}
+.technologies-operations-endpoint {
+  @apply my-6 rounded-2xl border border-[var(--primary-neutral-color)] p-4;
+}

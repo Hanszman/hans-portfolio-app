@@ -46,10 +46,44 @@ export interface TechnologyCollectionItemResponse {
   level: string | null;
   frequency: string | null;
   highlight: boolean;
+  sortOrder?: number | null;
   technologyContexts?: TechnologyContextResponse[];
   imageAssets?: TechnologyImageAssetRelationResponse[];
   experienceMetrics?: TechnologyExperienceMetricsResponse;
+  projectRelations?: TechnologyRelationRecord[] | null;
+  experienceRelations?: TechnologyRelationRecord[] | null;
+  formationRelations?: TechnologyRelationRecord[] | null;
+  tagIds?: string[] | null;
+  linkIds?: string[] | null;
+  imageAssetIds?: string[] | null;
 }
+
+export interface TechnologyRelationRecord {
+  projectId?: string;
+  experienceId?: string;
+  formationId?: string;
+  project?: { id: string; slug?: string; titlePt?: string | null } | null;
+  experience?: { id: string; slug?: string; titlePt?: string | null } | null;
+  formation?: { id: string; slug?: string; titlePt?: string | null } | null;
+}
+
+export interface TechnologyMutationPayload {
+  slug: string;
+  name: string;
+  category: string;
+  level?: string;
+  frequency?: string;
+  highlight: boolean;
+  sortOrder: number;
+  projectRelations: { projectId: string }[];
+  experienceRelations: { experienceId: string }[];
+  formationRelations: { formationId: string }[];
+  tagIds: string[];
+  linkIds: string[];
+  imageAssetIds: string[];
+}
+
+export type TechnologyAdminRecord = TechnologyCollectionItemResponse;
 
 export type TechnologiesCollectionResponse =
   PaginatedResponse<TechnologyCollectionItemResponse>;

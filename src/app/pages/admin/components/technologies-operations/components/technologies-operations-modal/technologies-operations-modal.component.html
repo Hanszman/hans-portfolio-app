@@ -1,0 +1,133 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [feedbackKey]="feedbackKey()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="closed.emit()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submit()"
+  (pageSelected)="pageSelected.emit($event)"
+>
+  @if (modalMode() === 'create' || modalMode() === 'update') {
+    <div class="technologies-operations-form">
+      <hans-input
+        [label]="resolveFieldLabel('slug')"
+        [value]="form().slug"
+        [placeholder]="fields.slug.placeholderKey! | translate"
+        (input)="change('slug', $event)"
+      ></hans-input>
+
+      <hans-input
+        [label]="resolveFieldLabel('name')"
+        [value]="form().name"
+        [placeholder]="fields.name.placeholderKey! | translate"
+        (input)="change('name', $event)"
+      ></hans-input>
+
+      <hans-select-option
+        [label]="resolveFieldLabel('category')"
+        [value]="form().category"
+        [options]="categoryOptions()"
+        (change)="change('category', $event)"
+        (valuechange)="change('category', $event)"
+        (valueChange)="change('category', $event)"
+      ></hans-select-option>
+
+      <hans-select-option
+        [label]="resolveFieldLabel('level')"
+        [value]="form().level"
+        [options]="levelOptions()"
+        (change)="change('level', $event)"
+        (valuechange)="change('level', $event)"
+        (valueChange)="change('level', $event)"
+      ></hans-select-option>
+
+      <hans-select-option
+        [label]="resolveFieldLabel('frequency')"
+        [value]="form().frequency"
+        [options]="frequencyOptions()"
+        (change)="change('frequency', $event)"
+        (valuechange)="change('frequency', $event)"
+        (valueChange)="change('frequency', $event)"
+      ></hans-select-option>
+
+      <div class="technologies-operations-toggle">
+        <span>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</span>
+        <hans-toggle [checked]="form().highlight" (change)="toggleHighlight($event)"></hans-toggle>
+      </div>
+
+      <hans-input
+        [label]="resolveFieldLabel('sortOrder')"
+        [value]="form().sortOrder"
+        [placeholder]="fields.sortOrder.placeholderKey! | translate"
+        (input)="change('sortOrder', $event)"
+      ></hans-input>
+
+      <section class="technologies-operations-selection">
+        <h4>{{ 'pages.admin.technologies.fields.imageAssets.label' | translate }}</h4>
+        <div class="technologies-operations-image-grid">
+          @for (image of imageOptions(); track image.id) {
+            <hans-button
+              [buttonColor]="'primary'"
+              [buttonVariant]="isSelected(image.id) ? 'default' : 'outline'"
+              (click)="imageAssetToggled.emit(image.id)"
+              ><img [src]="image.imageUrl" [alt]="image.title" />
+              <span>
+                <app-truncated-text [text]="image.title" [maxLength]="28" />
+                <app-truncated-text [text]="image.subtitle" [maxLength]="36" />
+              </span>
+            </hans-button>
+          }
+        </div>
+      </section>
+    </div>
+  } @else if (modalMode() === 'read') {
+    <div class="technologies-operations-list">
+      @for (technology of technologies(); track technology.id) {
+        <article>
+          <header>
+            <strong>{{ technology.name }} ({{ technology.slug }})</strong>
+            <span>
+              <hans-button [buttonColor]="'primary'" (click)="updateSelected.emit(technology.id)"
+                >{{ 'pages.admin.operations.update' | translate }}
+              </hans-button>
+
+              <hans-button [buttonColor]="'primary'" (click)="deleteSelected.emit(technology.id)"
+                >{{ 'pages.admin.operations.delete' | translate }}
+              </hans-button>
+            </span>
+          </header>
+
+          <p>{{ technology.category }}</p>
+          <p>{{ technology.level || '-' }} · {{ technology.frequency || '-' }}</p>
+          <p>{{ technology.imageAssetLabels.join(', ') || '-' }}</p>
+        </article>
+      }
+    </div>
+  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
+    <div class="technologies-operations-list">
+      @for (technology of technologies(); track technology.id) {
+        <button
+          type="button"
+          (click)="
+            modalMode() === 'pick-update'
+              ? updateSelected.emit(technology.id)
+              : deleteSelected.emit(technology.id)
+          "
+        >
+          <strong>{{ technology.name }} ({{ technology.slug }})</strong>
+          <span>{{ technology.category }}</span>
+        </button>
+      }
+    </div>
+  } @else if (modalMode() === 'delete') {
+    <p>{{ selectedTechnology()?.name }} ({{ selectedTechnology()?.slug }})</p>
+  }
+</app-operations-modal>
