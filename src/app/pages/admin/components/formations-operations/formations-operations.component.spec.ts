@@ -407,7 +407,7 @@ describe('FormationsOperationsComponent', () => {
     await component.goToPage(2);
     await component.goToPage(99);
 
-    expect(formationsOperationsService.getAll).toHaveBeenCalledTimes(3);
+    expect(formationsOperationsService.getAll).toHaveBeenCalledTimes(6);
     expect(formationsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
     expect(formationsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'systems');
 

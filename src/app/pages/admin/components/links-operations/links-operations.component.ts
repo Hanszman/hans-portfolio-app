@@ -162,6 +162,7 @@ export class LinksOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedLinkSignal.set(null);
     this.formSignal.set(createEmptyLinksOperationsFormValue());
     this.clearModalFeedback();
@@ -178,11 +179,13 @@ export class LinksOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

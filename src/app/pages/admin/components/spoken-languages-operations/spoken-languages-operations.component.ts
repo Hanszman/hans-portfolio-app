@@ -143,6 +143,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedSpokenLanguageSignal.set(null);
     this.formSignal.set(createEmptySpokenLanguagesOperationsFormValue());
     this.clearModalFeedback();
@@ -159,11 +160,13 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

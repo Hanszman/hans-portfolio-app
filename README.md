@@ -115,6 +115,8 @@ This project must follow the current Angular direction consistently:
 - selection-only admin date fields must keep `allowInputTyping` disabled so the field stays readonly and opens the picker from the full input area, matching the design-library behavior
 - admin forms with combined `startDate` and `endDate` fields must reuse the shared date-range validator and block submission when `endDate` is earlier than `startDate`
 - date-only values from admin date pickers must be serialized as ISO datetimes before protected mutation requests
+- modal body scrolling and top/bottom content padding are provided by `hans-ui-design-lib`; app CRUD wrappers must not create nested scroll or duplicate modal padding
+- dynamic relation and select catalogs are refreshed through their public GET whenever a CRUD form or picker opens, keeping newly created records available without a full page reload
 - admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support
 
 ### Testing and quality

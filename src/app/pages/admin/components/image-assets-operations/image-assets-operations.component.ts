@@ -157,6 +157,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedImageAssetSignal.set(null);
     this.formSignal.set(createEmptyImageAssetsOperationsFormValue());
     this.clearModalFeedback();
@@ -173,11 +174,13 @@ export class ImageAssetsOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

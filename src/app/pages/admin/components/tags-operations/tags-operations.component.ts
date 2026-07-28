@@ -152,6 +152,7 @@ export class TagsOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedTagSignal.set(null);
     this.formSignal.set(createEmptyTagsOperationsFormValue());
     this.clearModalFeedback();
@@ -168,11 +169,13 @@ export class TagsOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

@@ -1316,6 +1316,8 @@ Regra importante de modelagem para a F8:
 - feedbacks operacionais devem priorizar `hans-toast` em toda a aplicacao, inclusive autenticacao e CRUDs administrativos
 - tudo o que foi consolidado em `portfolio-settings`, `tags` e `links` passa a ser o template obrigatorio das proximas entidades administrativas
 - cada nova entidade deve nascer com `operations-modal`, leitura em modal grande, fluxos `pick-update` e `pick-delete` por cards clicaveis, labels explicitas em todos os campos, footer fixo, paginacao compartilhada da lib, mesmo padrao visual dos cards e documentacao atualizada antes de encerrar a subetapa
+- o corpo rolavel e os paddings de topo e base dos modais devem ser fornecidos pela `hans-ui-design-lib`, mantendo os wrappers do app livres de scroll/padding duplicados
+- toda lista dinamica usada por selects ou relacionamentos deve ser atualizada pelo GET publico ao abrir formularios e pickers CRUD, regra obrigatoria tambem para novas entidades
 - cards de entidades ja implementadas devem substituir, e nao duplicar, o card de roadmap; a composicao visual oficial e a mesma de Jobs/Formations, com kicker `//`, titulo em negrito, borda/fundo via tokens de tema, descricao, endpoint e acoes compartilhadas
 - labels repetidos do dominio admin, como o prefixo padrao de endpoint `POST/GET/PUT/DELETE`, devem ficar centralizados em `admin.types.ts`
 - cada entrega da F8 deve fechar apenas uma subetapa oficial por vez, salvo alinhamento explicito para agrupar mais de uma no mesmo incremento
@@ -1323,6 +1325,7 @@ Regra importante de modelagem para a F8:
 - sempre que o campo representar data, data e hora ou apenas hora, devemos usar `hans-date-picker` com o `pickerType` correto em vez de `input`
 - options administrativas dependentes de traducao devem ser recomputadas a partir do locale ativo, evitando dropdowns com chaves cruas apos troca de idioma
 - quando o `hans-date-picker` estiver atuando como seletor de data, devemos desabilitar digitacao livre no input para preservar o comportamento readonly e a abertura pelo campo inteiro
+- campos somente-data devem manter `YYYY-MM-DD` no formulario e converter para ISO datetime UTC apenas ao montar o payload de mutacao; combinacoes start/end devem reutilizar o validador compartilhado
 - sempre que uma entidade administrativa tiver `startDate` e `endDate`, devemos validar em helper compartilhado no frontend e tambem no backend que `endDate` nao seja anterior a `startDate`
 - dropdowns administrativos nunca devem exibir enums crus ou chaves de traducao completas; as options devem ser traduzidas antes de chegar ao componente visual
 - options traduzidas devem preservar o contrato da `hans-ui-design-lib`, usando objetos com valor bruto estavel e label traduzido, nunca apenas arrays de strings

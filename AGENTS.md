@@ -321,6 +321,8 @@ Rules:
 - whenever an admin form contains a `startDate` and `endDate` combination, validate on the frontend before submit that `endDate` is not earlier than `startDate`, using the shared admin date-range helper instead of duplicating comparison logic per entity
 - date-only values selected by admin date pickers must be normalized to `YYYY-MM-DDT00:00:00.000Z` before mutation requests so Prisma DateTime fields never receive date-only strings
 - read, `pick-update` and `pick-delete` flows should keep the shared operations modal pattern, including search, shared pagination and fixed footer actions
+- modal scrolling and content breathing room at the top and bottom are responsibilities of `hans-ui-design-lib`; portfolio wrappers must not add a second scroll container or duplicate modal padding
+- dynamic relation/select catalogs must be refreshed through their public GET whenever a CRUD create, update or delete picker/form opens, so records created in another workflow are immediately available
 - relation pickers for `image-assets` must show real previews in the selection cards/tags for current and future entities
 - relation pickers should flow sequentially with natural wrapping instead of rigid two-column layouts that leave large empty gaps
 - long secondary relation texts such as URLs, file paths and slugs must be truncated with ellipsis plus `title` tooltip support instead of overflowing the selection cards

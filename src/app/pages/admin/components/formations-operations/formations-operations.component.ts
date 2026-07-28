@@ -155,6 +155,7 @@ export class FormationsOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedFormationSignal.set(null);
     this.formSignal.set(createEmptyFormationsOperationsFormValue());
     this.clearModalFeedback();
@@ -171,11 +172,13 @@ export class FormationsOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

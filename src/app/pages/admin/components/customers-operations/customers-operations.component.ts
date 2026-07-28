@@ -134,6 +134,7 @@ export class CustomersOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedCustomerSignal.set(null);
     this.formSignal.set(createEmptyCustomersOperationsFormValue());
     this.clearModalFeedback();
@@ -150,11 +151,13 @@ export class CustomersOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

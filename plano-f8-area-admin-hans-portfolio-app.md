@@ -300,6 +300,9 @@ Cada nova entidade protegida deve:
 - `hans-date-picker` usado como seletor de data deve manter digitacao direta desabilitada quando o fluxo for selection-only, preservando o comportamento readonly e a abertura pelo campo inteiro
 - valores de data selecionados no formulario devem ser normalizados para ISO datetime antes do payload de mutacao, evitando incompatibilidade entre `IsDateString` e campos Prisma `DateTime`
 - options de selects administrativos devem chegar na UI ja traduzidas; nunca exibir enums crus nem chaves de traducao completas no dropdown
+- catalogs dinamicos de relacionamentos e selects devem ser recarregados pelo GET publico ao abrir cada formulario ou picker CRUD, incluindo entidades futuras, para refletir registros criados sem refresh da pagina
+- o scroll e o padding superior/inferior do corpo dos modais sao responsabilidade da `hans-ui-design-lib`; wrappers do portfolio nao devem duplicar esses containers ou espacamentos
+- datas somente-data devem permanecer como `YYYY-MM-DD` no estado do formulario, usar `hans-date-picker` em modo date com digitacao desabilitada e ser convertidas para ISO datetime somente na fronteira do payload
 - combinacoes de `startDate` e `endDate` devem ser validadas no frontend antes do submit, bloqueando qualquer payload em que `endDate` seja anterior a `startDate`
 - manter os cards administrativos com a mesma altura visual consolidada na shell
 - remover o selo textual de subetapa placeholder assim que a entidade deixar de ser roadmap e passar a ser CRUD real

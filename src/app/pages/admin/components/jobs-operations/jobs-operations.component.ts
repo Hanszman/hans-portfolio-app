@@ -130,6 +130,7 @@ export class JobsOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedJobSignal.set(null);
     this.formSignal.set(createEmptyJobsOperationsFormValue());
     this.clearModalFeedback();
@@ -146,11 +147,13 @@ export class JobsOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.clearModalFeedback();
     this.modalModeSignal.set('pick-delete');
   }

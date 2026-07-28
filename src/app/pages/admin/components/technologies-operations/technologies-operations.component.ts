@@ -100,6 +100,7 @@ export class TechnologiesOperationsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    void this.loadWorkspace();
     this.selectedSignal.set(null);
     this.formSignal.set(createEmptyTechnologiesOperationsFormValue());
     this.modeSignal.set('create');
@@ -110,10 +111,12 @@ export class TechnologiesOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.loadWorkspace();
     this.modeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.loadWorkspace();
     this.modeSignal.set('pick-delete');
   }
 
