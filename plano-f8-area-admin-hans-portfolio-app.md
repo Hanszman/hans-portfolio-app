@@ -298,6 +298,7 @@ Cada nova entidade protegida deve:
 - sempre que o campo representar data, data e hora ou apenas hora, usar `hans-date-picker` com o `pickerType` correto em vez de `input`
 - options de selects administrativos devem ser recomputadas a partir do locale ativo para refletir mudancas de idioma sem reload
 - `hans-date-picker` usado como seletor de data deve manter digitacao direta desabilitada quando o fluxo for selection-only, preservando o comportamento readonly e a abertura pelo campo inteiro
+- valores de data selecionados no formulario devem ser normalizados para ISO datetime antes do payload de mutacao, evitando incompatibilidade entre `IsDateString` e campos Prisma `DateTime`
 - options de selects administrativos devem chegar na UI ja traduzidas; nunca exibir enums crus nem chaves de traducao completas no dropdown
 - combinacoes de `startDate` e `endDate` devem ser validadas no frontend antes do submit, bloqueando qualquer payload em que `endDate` seja anterior a `startDate`
 - manter os cards administrativos com a mesma altura visual consolidada na shell
@@ -738,6 +739,7 @@ Para cada subetapa:
 - lista de entidades administrativas disponivel na rota admin
 - CRUDs funcionando para todas as entidades protegidas suportadas
 - `technology-contexts` presente como entidade relacional dedicada
+- o modal shared deve usar a largura responsiva da lib por tamanho (`small`, `medium` e `large`) e preservar espaco interno no conteudo rolavel para que campos e dropdowns nao encostem na barra de scroll
 - relacionamentos restantes editaveis dentro dos formularios das entidades donas
 - uso consistente da `hans-ui-design-lib`
 - sem cores novas fora do sistema atual de tema

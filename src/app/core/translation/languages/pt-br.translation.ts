@@ -1415,6 +1415,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologyContexts.feedback.requiredTechnology': 'A tecnologia é obrigatória antes do envio.',
   'pages.admin.technologyContexts.feedback.requiredContext': 'O contexto é obrigatório antes do envio.',
   'pages.admin.technologyContexts.feedback.requiredStartDate': 'A data de início é obrigatória antes do envio.',
+  'pages.admin.technologyContexts.feedback.invalidDateRange': 'A data de término não pode ser anterior à data de início.',
   'pages.admin.technologyContexts.feedback.missingSession': 'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.technologyContexts.feedback.loadError': 'A coleção protegida de contextos de tecnologia não pode ser carregada agora.',
   'pages.admin.technologyContexts.feedback.saveError': 'O contexto de tecnologia protegido não pode ser salvo agora.',

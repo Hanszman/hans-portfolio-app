@@ -1024,6 +1024,7 @@ export type AppTranslationKey =
   | 'pages.admin.technologyContexts.feedback.requiredTechnology'
   | 'pages.admin.technologyContexts.feedback.requiredContext'
   | 'pages.admin.technologyContexts.feedback.requiredStartDate'
+  | 'pages.admin.technologyContexts.feedback.invalidDateRange'
   | 'pages.admin.technologyContexts.feedback.missingSession'
   | 'pages.admin.technologyContexts.feedback.loadError'
   | 'pages.admin.technologyContexts.feedback.saveError'

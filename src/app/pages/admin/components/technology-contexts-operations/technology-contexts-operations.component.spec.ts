@@ -238,6 +238,24 @@ describe('TechnologyContextsOperationsComponent', () => {
     expect(service.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
+  it('refreshes technology options whenever an operation picker opens', async () => {
+    const component = fixture.componentInstance as unknown as Record<string, (...args: unknown[]) => unknown>;
+    const refreshedTechnology = { ...technology, id: 'tech-2', name: 'New technology', slug: 'new-technology' };
+    technologies.getTechnologies.and.returnValue(of({
+      data: [refreshedTechnology],
+      pagination: { page: 1, pageSize: 100, totalItems: 1, totalPages: 1, hasPreviousPage: false, hasNextPage: false },
+    }));
+    component['openCreateModal']();
+    await fixture.whenStable();
+    expect((component['technologyOptions'] as () => readonly { label: string }[])().map((option) => option.label)).toContain('New technology (new-technology)');
+
+    technologies.getTechnologies.and.returnValue(throwError(() => new Error('refresh')));
+    component['openUpdatePickerModal']();
+    component['openDeletePickerModal']();
+    await fixture.whenStable();
+    expect(toast.showError).not.toHaveBeenCalledWith('pages.admin.technologyContexts.feedback.loadError');
+  });
+
   it('keeps collection actions closed when the public collection is empty', async () => {
     service.getAll.and.returnValue(of(response([], 1)));
     const emptyFixture = TestBed.createComponent(TechnologyContextsOperationsComponent);

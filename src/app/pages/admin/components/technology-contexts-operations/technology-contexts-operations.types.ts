@@ -2,6 +2,11 @@ import { TechnologyContextKey } from '../../../../core/api/technologies/technolo
 import { TechnologyContextRecord } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import {
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
+  validateAdminDateRange,
+} from '../../helpers/admin.helper';
 import { AdminSelectOptionViewModel } from '../../helpers/admin.helper';
 
 export type TechnologyContextsOperationsModalMode =
@@ -48,8 +53,8 @@ export const buildTechnologyContextFormValue = (
 ): TechnologyContextFormValue => record ? {
   technologyId: record.technologyId ?? record.technology?.id ?? '',
   context: record.context ?? '',
-  startedAt: record.startedAt ?? '',
-  endedAt: record.endedAt ?? '',
+  startedAt: normalizeAdminDateValueForPicker(record.startedAt),
+  endedAt: normalizeAdminDateValueForPicker(record.endedAt),
 } : createEmptyTechnologyContextFormValue();
 
 export const buildTechnologyContextMutationPayload = (
@@ -58,13 +63,21 @@ export const buildTechnologyContextMutationPayload = (
   if (!form.technologyId.trim()) return { isValid: false, errorKey: 'pages.admin.technologyContexts.feedback.requiredTechnology' };
   if (!TECHNOLOGY_CONTEXT_VALUES.includes(form.context as TechnologyContextKey)) return { isValid: false, errorKey: 'pages.admin.technologyContexts.feedback.requiredContext' };
   if (!form.startedAt.trim()) return { isValid: false, errorKey: 'pages.admin.technologyContexts.feedback.requiredStartDate' };
+  const startedAt = normalizeAdminDateValueForMutation(form.startedAt);
+  const endedAt = normalizeAdminDateValueForMutation(form.endedAt);
+  const dateRange = validateAdminDateRange(
+    startedAt,
+    endedAt,
+    'pages.admin.technologyContexts.feedback.invalidDateRange',
+  );
+  if (!dateRange.isValid) return dateRange;
   return {
     isValid: true,
     payload: {
       technologyId: form.technologyId,
       context: form.context as TechnologyContextKey,
-      startedAt: form.startedAt,
-      ...(form.endedAt.trim() ? { endedAt: form.endedAt } : { endedAt: null }),
+      startedAt,
+      ...(endedAt ? { endedAt } : { endedAt: null }),
     },
   };
 };

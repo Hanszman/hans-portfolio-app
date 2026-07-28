@@ -319,6 +319,7 @@ Rules:
 - whenever a field represents date, datetime or time input, use `hans-date-picker` with the correct `pickerType` instead of `hans-input`
 - when an admin date field is selection-driven, keep `hans-date-picker` with `allowInputTyping` disabled so the input stays readonly and the picker opens from the whole field interaction, matching the library behavior
 - whenever an admin form contains a `startDate` and `endDate` combination, validate on the frontend before submit that `endDate` is not earlier than `startDate`, using the shared admin date-range helper instead of duplicating comparison logic per entity
+- date-only values selected by admin date pickers must be normalized to `YYYY-MM-DDT00:00:00.000Z` before mutation requests so Prisma DateTime fields never receive date-only strings
 - read, `pick-update` and `pick-delete` flows should keep the shared operations modal pattern, including search, shared pagination and fixed footer actions
 - relation pickers for `image-assets` must show real previews in the selection cards/tags for current and future entities
 - relation pickers should flow sequentially with natural wrapping instead of rigid two-column layouts that leave large empty gaps
@@ -328,6 +329,7 @@ Rules:
 - `F8.11` (technologies) is complete: reuse public `GET /technologies`, keep `POST`, `PUT` and `DELETE` under protected `/admin/technologies`, translate API enum options through `TranslationService`, and use the shared operations workspace/modal/actions pattern
 - relation pickers for technologies must keep real image previews and all CRUD tests at 100% coverage; future entity CRUDs should preserve this same contract and quality bar
 - `F8.12` (technology-contexts) is complete: reuse public `GET /technology-contexts`, keep CUD under protected `/admin/technology-contexts`, flatten the public grouped response in the domain service before presenting records, use translated `hans-select-option` values, themed `hans-date-picker` date fields and the shared operations workspace/modal/actions pattern
+- technology context date mutations must serialize picker values to ISO datetime and refresh technology select options when the operation picker opens, so newly created technologies are available without a page reload
 - Relationship CRUD records without their own slug must be identified in read and selection flows by the owning entity name plus the translated relationship value, with relevant date ranges formatted for the user instead of exposing internal IDs or translation keys
 - `F8.13` (experiences) is the next official substep; implement only that entity in the next delivery
 - model relationship CRUD according to the API contracts:

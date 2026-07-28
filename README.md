@@ -114,6 +114,7 @@ This project must follow the current Angular direction consistently:
 - translated `hans-select-option` values must preserve the library option contract with stable raw `value` and translated `label`; do not pass plain translated string arrays
 - selection-only admin date fields must keep `allowInputTyping` disabled so the field stays readonly and opens the picker from the full input area, matching the design-library behavior
 - admin forms with combined `startDate` and `endDate` fields must reuse the shared date-range validator and block submission when `endDate` is earlier than `startDate`
+- date-only values from admin date pickers must be serialized as ISO datetimes before protected mutation requests
 - admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support
 
 ### Testing and quality

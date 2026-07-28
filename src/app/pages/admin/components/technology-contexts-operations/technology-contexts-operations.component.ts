@@ -106,18 +106,19 @@ export class TechnologyContextsOperationsComponent implements OnInit {
     () => this.pagination().totalItems > 0 && this.records().length > 0,
   );
   protected readonly isModalOpen = computed(() => this.modalMode() !== null);
-  protected readonly modalTitleKey = computed<AppTranslationKey>(
-    () => {
-      const mode = this.modalMode() ?? 'create';
-      const translationMode = mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode;
-      return `pages.admin.technologyContexts.modal.${translationMode}.title` as AppTranslationKey;
-    },
-  );
+  protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
+    const mode = this.modalMode() ?? 'create';
+    const translationMode =
+      mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode;
+    return `pages.admin.technologyContexts.modal.${translationMode}.title` as AppTranslationKey;
+  });
 
   ngOnInit(): void {
     void this.loadWorkspace();
   }
+
   openCreateModal(): void {
+    void this.refreshTechnologyOptions();
     this.selectedSignal.set(null);
     this.formSignal.set(createEmptyTechnologyContextFormValue());
     this.modeSignal.set('create');
@@ -128,10 +129,12 @@ export class TechnologyContextsOperationsComponent implements OnInit {
   }
 
   openUpdatePickerModal(): void {
+    void this.refreshTechnologyOptions();
     if (this.hasRecords()) this.modeSignal.set('pick-update');
   }
 
   openDeletePickerModal(): void {
+    void this.refreshTechnologyOptions();
     if (this.hasRecords()) this.modeSignal.set('pick-delete');
   }
 
@@ -213,6 +216,15 @@ export class TechnologyContextsOperationsComponent implements OnInit {
       this.toast.showError('pages.admin.technologyContexts.feedback.loadError');
     } finally {
       this.loadingSignal.set(false);
+    }
+  }
+
+  private async refreshTechnologyOptions(): Promise<void> {
+    try {
+      const technologies = await firstValueFrom(this.technologiesService.getTechnologies());
+      this.technologiesSignal.set(technologies.data);
+    } catch {
+      return;
     }
   }
 

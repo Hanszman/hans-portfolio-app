@@ -23,7 +23,8 @@ describe('technology contexts operations helper', () => {
   it('maps a completed record and preserves a non-empty end date in valid payloads', () => {
     const completed = context({ endedAt: '2026-12-31' });
     expect(buildTechnologyContextFormValue(completed)).toEqual({ technologyId: 'tech-1', context: 'PROFESSIONAL', startedAt: '2026-01-01', endedAt: '2026-12-31' });
-    expect(buildTechnologyContextMutationPayload({ technologyId: ' tech-1 ', context: 'PROFESSIONAL', startedAt: '2026-01-01', endedAt: '2026-12-31' })).toEqual({ isValid: true, payload: { technologyId: ' tech-1 ', context: 'PROFESSIONAL', startedAt: '2026-01-01', endedAt: '2026-12-31' } });
+    expect(buildTechnologyContextMutationPayload({ technologyId: ' tech-1 ', context: 'PROFESSIONAL', startedAt: '2026-01-01', endedAt: '2026-12-31' })).toEqual({ isValid: true, payload: { technologyId: ' tech-1 ', context: 'PROFESSIONAL', startedAt: '2026-01-01T00:00:00.000Z', endedAt: '2026-12-31T00:00:00.000Z' } });
+    expect(buildTechnologyContextMutationPayload({ technologyId: 'tech-1', context: 'PROFESSIONAL', startedAt: '2026-12-31', endedAt: '2026-01-01' })).toEqual({ isValid: false, errorKey: 'pages.admin.technologyContexts.feedback.invalidDateRange' });
     expect(buildTechnologyContextFormValue(null)).toEqual({ technologyId: '', context: '', startedAt: '', endedAt: '' });
     expect(buildTechnologyContextFormValue({ technologyId: undefined, technology: { id: 'tech-fallback', slug: 'fallback', name: 'Fallback' } } as unknown as TechnologyContextRecord)).toEqual({ technologyId: 'tech-fallback', context: '', startedAt: '', endedAt: '' });
     expect(buildTechnologyContextFormValue({ technologyId: undefined, technology: null } as unknown as TechnologyContextRecord)).toEqual({ technologyId: '', context: '', startedAt: '', endedAt: '' });

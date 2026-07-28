@@ -1393,6 +1393,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.technologyContexts.feedback.requiredTechnology': 'The technology is required before submitting.',
   'pages.admin.technologyContexts.feedback.requiredContext': 'The context is required before submitting.',
   'pages.admin.technologyContexts.feedback.requiredStartDate': 'The start date is required before submitting.',
+  'pages.admin.technologyContexts.feedback.invalidDateRange': 'The end date cannot be earlier than the start date.',
   'pages.admin.technologyContexts.feedback.missingSession': 'The authenticated admin session is unavailable. Log in again to continue.',
   'pages.admin.technologyContexts.feedback.loadError': 'The protected technology contexts collection could not be loaded right now.',
   'pages.admin.technologyContexts.feedback.saveError': 'The protected technology context could not be saved right now.',
