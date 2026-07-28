@@ -14,6 +14,8 @@ import { CustomersOperationsComponent } from './components/customers-operations/
 import { FormationsOperationsComponent } from './components/formations-operations/formations-operations.component';
 import { TechnologiesOperationsComponent } from './components/technologies-operations/technologies-operations.component';
 import { TechnologyContextsOperationsComponent } from './components/technology-contexts-operations/technology-contexts-operations.component';
+import { ExperiencesOperationsComponent } from './components/experiences-operations/experiences-operations.component';
+import { ProjectsOperationsComponent } from './components/projects-operations/projects-operations.component';
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { JobsOperationsComponent } from './components/jobs-operations/jobs-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
@@ -47,6 +49,8 @@ import {
     FormationsOperationsComponent,
     TechnologiesOperationsComponent,
     TechnologyContextsOperationsComponent,
+    ExperiencesOperationsComponent,
+    ProjectsOperationsComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -59,9 +63,7 @@ export class AdminComponent {
   private readonly translation = inject(TranslationService);
 
   protected readonly adminUser = this.adminSessionService.user;
-  protected readonly adminIdentity = computed(() =>
-    formatAdminIdentity(this.adminUser()),
-  );
+  protected readonly adminIdentity = computed(() => formatAdminIdentity(this.adminUser()));
   protected readonly adminEntities = computed(() => {
     this.translation.locale();
 
@@ -77,9 +79,8 @@ export class AdminComponent {
   protected readonly adminFacts = computed(() => {
     this.translation.locale();
 
-    return buildAdminSessionFactViewModels(
-      ADMIN_SESSION_FACT_DEFINITIONS,
-      (key) => this.translation.instant(key),
+    return buildAdminSessionFactViewModels(ADMIN_SESSION_FACT_DEFINITIONS, (key) =>
+      this.translation.instant(key),
     );
   });
   protected readonly adminEntityCount = computed(() => this.adminEntities().length);
@@ -96,7 +97,9 @@ export class AdminComponent {
       entityId === 'jobs' ||
       entityId === 'formations' ||
       entityId === 'technologies' ||
-      entityId === 'technology-contexts'
+      entityId === 'technology-contexts' ||
+      entityId === 'experiences' ||
+      entityId === 'projects'
     );
   }
 

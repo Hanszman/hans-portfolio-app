@@ -275,7 +275,7 @@ That step includes:
 - modal-based admin forms built primarily with `hans-ui-design-lib`
 - F8.12 (`technology-contexts`) is complete with public read reuse, grouped-response normalization in the domain service, protected create/update/delete flows, translated context options, themed date pickers and the shared operations modal pattern
 
-The next official F8 substep is F8.13 (`experiences`).
+F8.13 (`experiences`) and F8.14 (`projects`) are complete. The authenticated admin CRUD sequence planned for F8 is now finished, with public GET reuse, protected CUD operations, shared operations modals/actions, translated closed-list fields, dynamic relation catalogs, image previews and the established date-field behavior.
 
 ## 📜 History of commands used to build this project:
 

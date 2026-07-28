@@ -11,6 +11,8 @@ import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfol
 import { SpokenLanguagesOperationsService } from '../../core/api/admin/spoken-languages/spoken-languages-operations.service';
 import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
 import { TechnologyContextsOperationsService } from '../../core/api/admin/technology-contexts/technology-contexts-operations.service';
+import { ExperiencesOperationsService } from '../../core/api/admin/experiences/experiences-operations.service';
+import { ProjectsOperationsService } from '../../core/api/admin/projects/projects-operations.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
@@ -454,6 +456,14 @@ describe('AdminComponent', () => {
           },
         },
         {
+          provide: ExperiencesOperationsService,
+          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+        },
+        {
+          provide: ProjectsOperationsService,
+          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+        },
+        {
           provide: TechnologyContextsOperationsService,
           useValue: {
             getAll: () =>
@@ -498,7 +508,7 @@ describe('AdminComponent', () => {
     expect(
       compiled.querySelector('.app-section-header-actions hans-button'),
     ).toBeTruthy();
-    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(2);
+    expect(compiled.querySelectorAll('.admin-page-entity-card')).toHaveSize(0);
   });
 
   it('should clear the session and navigate back to the login route on logout', async () => {
@@ -745,6 +755,14 @@ describe('AdminComponent', () => {
                 },
               }),
           },
+        },
+        {
+          provide: ExperiencesOperationsService,
+          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+        },
+        {
+          provide: ProjectsOperationsService,
+          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
         },
         {
           provide: TechnologyContextsOperationsService,

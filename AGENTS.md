@@ -333,7 +333,8 @@ Rules:
 - `F8.12` (technology-contexts) is complete: reuse public `GET /technology-contexts`, keep CUD under protected `/admin/technology-contexts`, flatten the public grouped response in the domain service before presenting records, use translated `hans-select-option` values, themed `hans-date-picker` date fields and the shared operations workspace/modal/actions pattern
 - technology context date mutations must serialize picker values to ISO datetime and refresh technology select options when the operation picker opens, so newly created technologies are available without a page reload
 - Relationship CRUD records without their own slug must be identified in read and selection flows by the owning entity name plus the translated relationship value, with relevant date ranges formatted for the user instead of exposing internal IDs or translation keys
-- `F8.13` (experiences) is the next official substep; implement only that entity in the next delivery
+- `F8.13` (experiences) and `F8.14` (projects) are complete: both reuse public reads, keep protected CUD flows, use shared operations actions/modals, typed relation payloads, dynamic catalogs, translated closed-list fields, image previews and the established date-field contract
+- F8 is complete; future work in this area is maintenance or explicitly scoped follow-up, not an unplanned new F8 substep
 - model relationship CRUD according to the API contracts:
   - `technology-contexts` is the only dedicated relationship entity with its own protected CRUD
   - the other relationship tables must be managed through relation arrays in the owning entity payloads

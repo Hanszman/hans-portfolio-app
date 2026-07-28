@@ -45,10 +45,13 @@ export const translateStaticKey = (
   key: AppTranslationKey,
   params: AppTranslationParams = {},
 ): string => {
-  const template =
-    APP_TRANSLATIONS[locale]?.[key] ??
-    APP_TRANSLATIONS[DEFAULT_APP_LOCALE][key] ??
-    key;
+  const localized = APP_TRANSLATIONS[locale] as
+    | Record<string, string>
+    | undefined;
+  const fallback = APP_TRANSLATIONS[DEFAULT_APP_LOCALE] as
+    | Record<string, string>
+    | undefined;
+  const template = localized?.[key] ?? fallback?.[key] ?? key;
 
   return interpolateParams(template, params);
 };

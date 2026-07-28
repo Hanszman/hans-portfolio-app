@@ -5,6 +5,7 @@ export type AppLocalizedText = Partial<Record<AppLocale, string>>;
 export type AppTranslationParams = Record<string, string>;
 
 export type AppTranslationKey =
+  | (string & {})
   | 'header.brand.home'
   | 'header.brand.role'
   | 'header.tags.angular'
@@ -1105,10 +1106,7 @@ export type AppTranslationKey =
 
 export type AppTranslationLanguage = Record<AppTranslationKey, string>;
 
-export type AppTranslationCatalog = Record<
-  AppLocale,
-  AppTranslationLanguage
->;
+export type AppTranslationCatalog = Record<AppLocale, AppTranslationLanguage>;
 
 export interface AppNestedTranslation {
   [key: string]: string | AppNestedTranslation;

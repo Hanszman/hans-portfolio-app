@@ -1,0 +1,179 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="closed.emit()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submitted.emit()"
+  (pageSelected)="pageSelected.emit($event)"
+>
+  @if (modalMode() === 'create' || modalMode() === 'update') {
+    <div class="projects-form">
+      @for (
+        field of [
+          'slug',
+          'titlePt',
+          'titleEn',
+          'shortDescriptionPt',
+          'shortDescriptionEn',
+          'fullDescriptionPt',
+          'fullDescriptionEn',
+          'sortOrder',
+        ];
+        track field
+      ) {
+        <hans-input
+          [label]="field"
+          inputColor="base"
+          inputSize="medium"
+          [value]="$any(form())[field]"
+          (input)="emit($any(field), $event)"
+        ></hans-input>
+      }
+
+      <hans-select-option
+        label="Context *"
+        [options]="contextOptions"
+        [value]="form()?.context"
+        inputColor="base"
+        inputSize="medium"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
+        (change)="select('context', $event)"
+        (valuechange)="select('context', $event)"
+      ></hans-select-option>
+
+      <hans-select-option
+        label="Status *"
+        [options]="statusOptions"
+        [value]="form()?.status"
+        inputColor="base"
+        inputSize="medium"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
+        (change)="select('status', $event)"
+        (valuechange)="select('status', $event)"
+      ></hans-select-option>
+
+      <hans-select-option
+        label="Environment *"
+        [options]="environmentOptions"
+        [value]="form()?.environment"
+        inputColor="base"
+        inputSize="medium"
+        dropdownBackgroundColor="var(--background-color)"
+        dropdownHoverColor="var(--primary-neutral-color)"
+        (change)="select('environment', $event)"
+        (valuechange)="select('environment', $event)"
+      ></hans-select-option>
+
+      <hans-date-picker
+        label="Start date"
+        pickerType="date"
+        inputColor="base"
+        inputSize="medium"
+        [value]="form()?.startDate ?? ''"
+        [allowInputTyping]="false"
+        popupBackgroundColor="var(--background-color)"
+        panelBackgroundColor="var(--background-color)"
+        (change)="emit('startDate', $event)"
+      ></hans-date-picker>
+
+      <hans-date-picker
+        label="End date"
+        pickerType="date"
+        inputColor="base"
+        inputSize="medium"
+        [value]="form()?.endDate ?? ''"
+        [allowInputTyping]="false"
+        popupBackgroundColor="var(--background-color)"
+        panelBackgroundColor="var(--background-color)"
+        (change)="emit('endDate', $event)"
+      ></hans-date-picker>
+
+      <hans-toggle [checked]="form()?.featured" (change)="toggle('featured', $event)"></hans-toggle
+      ><hans-toggle
+        [checked]="form()?.highlight"
+        (change)="toggle('highlight', $event)"
+      ></hans-toggle>
+
+      @for (
+        group of [
+          { field: 'technologyIds', items: technologyOptions() },
+          { field: 'experienceIds', items: experienceOptions() },
+          { field: 'tagIds', items: tagOptions() },
+          { field: 'linkIds', items: linkOptions() },
+        ];
+        track group.field
+      ) {
+        <section class="relation-section">
+          <h4>{{ group.field }}</h4>
+          <div class="relation-list">
+            @for (item of group.items; track item.id) {
+              <hans-button
+                [buttonColor]="'primary'"
+                [buttonVariant]="selected($any(group.field), item.id) ? 'default' : 'outline'"
+                (click)="relation($any(group.field), item.id)"
+                >{{ item.title }} ({{ item.subtitle }})
+              </hans-button>
+            }
+          </div>
+        </section>
+      }
+      <section class="relation-section">
+        <h4>image assets</h4>
+        <div class="relation-list">
+          @for (item of imageAssetOptions(); track item.id) {
+            <hans-button
+              [buttonColor]="'primary'"
+              [buttonVariant]="selected('imageAssetIds', item.id) ? 'default' : 'outline'"
+              (click)="relation('imageAssetIds', item.id)"
+            >
+              <img [src]="item.imageUrl" [alt]="item.title" /> {{ item.title }}
+            </hans-button>
+          }
+        </div>
+      </section>
+    </div>
+  } @else if (modalMode() === 'read') {
+    @for (item of projects(); track item.id) {
+      <article class="record-card">
+        <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+        <div>
+          <hans-button [buttonColor]="'primary'" (click)="updateSelected.emit(item.id)">
+            Update
+          </hans-button>
+          <hans-button [buttonColor]="'primary'" (click)="deleteSelected.emit(item.id)">
+            Delete
+          </hans-button>
+        </div>
+      </article>
+    }
+  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
+    @for (item of projects(); track item.id) {
+      <button
+        class="pick-card"
+        (click)="
+          modalMode() === 'pick-update'
+            ? updateSelected.emit(item.id)
+            : deleteSelected.emit(item.id)
+        "
+      >
+        <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+      </button>
+    }
+  } @else if (modalMode() === 'delete' && selectedProject(); as item) {
+    <article class="record-card">
+      <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+    </article>
+  }
+</app-operations-modal>

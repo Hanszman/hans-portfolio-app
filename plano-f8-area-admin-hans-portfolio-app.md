@@ -710,7 +710,9 @@ Cada nova entidade protegida deve:
   - campos `startedAt` e `endedAt` usam `hans-date-picker` no modo `date`, com entrada digitada desabilitada e superficies alinhadas ao tema
   - selecao de technology reutiliza a leitura publica de `technologies`, mantendo contratos tipados e sem duplicar endpoint no backend
   - testes unitarios adicionados para service, helper, modal e workspace, preservando a meta de `100%` de coverage
-- proxima subetapa oficial: `F8.13` - Experiences
+- `F8.13` - Experiences concluida com leitura publica, CUD protegido, relacoes tipadas, previews de imagens, catalogs dinamicos, modal compartilhado e coverage total.
+- `F8.14` - Projects concluida com leitura publica, CUD protegido, relacoes tipadas, previews de imagens, catalogs dinamicos, modal compartilhado e coverage total.
+- F8 concluida; nao existe proxima subetapa oficial planejada neste ciclo.
 
 ## 9) Regras de implementacao por subetapa
 

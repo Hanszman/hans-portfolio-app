@@ -1497,6 +1497,8 @@ O Codex deve:
 
 ### Proximo passo oficial recomendado
 
-`F8.12` foi concluida em `2026-07-27`, expandindo a area admin para `technology-contexts` com leitura publica, CUD protegido, select traduzido para `context`, date pickers para `startedAt`/`endedAt`, modal compartilhado, testes unitarios e coverage total. O proximo passo oficial e implementar a `F8.13`, `experiences`, seguindo o mesmo template consolidado.
+`F8.12` foi concluida em `2026-07-27`, expandindo a area admin para `technology-contexts` com leitura publica, CUD protegido, select traduzido para `context`, date pickers para `startedAt`/`endedAt`, modal compartilhado, testes unitarios e coverage total.
+
+`F8.13 - experiences` e `F8.14 - projects` foram concluidas nesta entrega, seguindo o template consolidado de leitura publica, CUD protegido, relacoes tipadas, catalogos dinamicos, previews de imagens, campos fechados traduzidos, date pickers e modais compartilhados. A sequencia planejada da F8 esta concluida.
 
 `F8.11 - technologies` foi concluida em `2026-07-27`, com leitura publica, CUD protegido, enums traduzidos em selects, relacoes com previews de imagens, operacoes modais compartilhadas e coverage total.

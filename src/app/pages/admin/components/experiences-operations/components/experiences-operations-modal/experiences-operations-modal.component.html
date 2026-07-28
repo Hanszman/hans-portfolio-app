@@ -1,0 +1,144 @@
+<app-operations-modal
+  [isOpen]="isOpen()"
+  [titleKey]="modalTitleKey()"
+  [descriptionKey]="descriptionKey()"
+  [feedbackKey]="feedbackKey()"
+  [pagination]="pagination()"
+  [showPagination]="showPagination()"
+  [showSearch]="showPagination()"
+  [searchValue]="searchValue()"
+  [isLoading]="isLoading()"
+  [isSubmitting]="isSubmitting()"
+  [showSubmit]="showSubmit()"
+  [submitLabelKey]="submitLabelKey()"
+  (closed)="closed.emit()"
+  (searchChanged)="searchChanged.emit($event)"
+  (submitted)="submitted.emit()"
+  (pageSelected)="pageSelected.emit($event)"
+>
+  @if (modalMode() === 'create' || modalMode() === 'update') {
+    <div class="experiences-form">
+      @for (
+        field of [
+          'slug',
+          'companyName',
+          'titlePt',
+          'titleEn',
+          'summaryPt',
+          'summaryEn',
+          'descriptionPt',
+          'descriptionEn',
+          'sortOrder',
+        ];
+        track field
+      ) {
+        <hans-input
+          [label]="field"
+          inputColor="base"
+          inputSize="medium"
+          [value]="$any(form())[field]"
+          (input)="emit($any(field), $event)"
+        ></hans-input>
+      }
+
+      <hans-date-picker
+        label="Start date *"
+        pickerType="date"
+        inputColor="base"
+        inputSize="medium"
+        [value]="form()?.startDate ?? ''"
+        [allowInputTyping]="false"
+        popupBackgroundColor="var(--background-color)"
+        panelBackgroundColor="var(--background-color)"
+        (change)="emit('startDate', $event)"
+      ></hans-date-picker>
+
+      <hans-date-picker
+        label="End date"
+        pickerType="date"
+        inputColor="base"
+        inputSize="medium"
+        [value]="form()?.endDate ?? ''"
+        [allowInputTyping]="false"
+        popupBackgroundColor="var(--background-color)"
+        panelBackgroundColor="var(--background-color)"
+        (change)="emit('endDate', $event)"
+      ></hans-date-picker>
+
+      <hans-toggle
+        [checked]="form()?.isCurrent"
+        (change)="toggle('isCurrent', $event)"
+      ></hans-toggle>
+      <hans-toggle
+        [checked]="form()?.highlight"
+        (change)="toggle('highlight', $event)"
+      ></hans-toggle>
+      @for (
+        group of [
+          { field: 'technologyIds', items: technologyOptions() },
+          { field: 'projectIds', items: projectOptions() },
+          { field: 'customerIds', items: customerOptions() },
+          { field: 'jobIds', items: jobOptions() },
+          { field: 'linkIds', items: linkOptions() },
+        ];
+        track group.field
+      ) {
+        <section class="relation-section">
+          <h4>{{ group.field }}</h4>
+          <div class="relation-list">
+            @for (item of group.items; track item.id) {
+              <hans-button
+                [buttonColor]="'primary'"
+                [buttonVariant]="selected($any(group.field), item.id) ? 'default' : 'outline'"
+                (click)="relation($any(group.field), item.id)"
+              >
+                {{ item.title }} ({{ item.subtitle }})
+              </hans-button>
+            }
+          </div>
+        </section>
+      }
+      <section class="relation-section">
+        <h4>image assets</h4>
+        <div class="relation-list">
+          @for (item of imageAssetOptions(); track item.id) {
+            <hans-button
+              [buttonColor]="'primary'"
+              [buttonVariant]="selected('imageAssetIds', item.id) ? 'default' : 'outline'"
+              (click)="relation('imageAssetIds', item.id)"
+            >
+              <img [src]="item.imageUrl" [alt]="item.title" /> {{ item.title }}
+            </hans-button>
+          }
+        </div>
+      </section>
+    </div>
+  } @else if (modalMode() === 'read') {
+    @for (item of experiences(); track item.id) {
+      <article class="record-card">
+        <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+        <div>
+          <hans-button [buttonColor]="'primary'" (click)="optionSelected(item.id)">
+            Update
+          </hans-button>
+          <hans-button [buttonColor]="'primary'" (click)="deleteOption(item.id)">
+            Delete
+          </hans-button>
+        </div>
+      </article>
+    }
+  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
+    @for (item of experiences(); track item.id) {
+      <button
+        class="pick-card"
+        (click)="modalMode() === 'pick-update' ? optionSelected(item.id) : deleteOption(item.id)"
+      >
+        <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+      </button>
+    }
+  } @else if (modalMode() === 'delete' && selectedExperience(); as item) {
+    <article class="record-card">
+      <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
+    </article>
+  }
+</app-operations-modal>
