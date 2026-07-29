@@ -1,32 +1,24 @@
-[TODO ATUAL]:
--Partir pra próxima etapa de implementação (telas de cadastros/admin), seguindo o mesmo template consolidado em portfolio-settings, tags e links para todas as próximas entidades da F8.
+[TODO LIST]:
 -Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End.
--Entender motivo da organização dos services de consumo da api está com technologies fora de admin, ao invés de skills
--Fazer próximos TODO's (de melhoria abaixo)
-
-[PROXIMOS TODO's]:
--Criar mais features e componentes
--Criar pipeline ci/cd e configurar docker no projeto
--Criar skills
--Verificar lista de TODO's antigos:
-// TODO: Criar separação entre tempos de experiência
-// TODO: Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures
-// TODO: Colocar imagens dos prints das telas do projetos
-// TODO: Melhorar apresentação das imagens (talvez colocar animações na interação com eles) / utilizar carrossel
-// TODO: Colocar links de referência entre as entidades e atualizar modais de visualização
-// TODO: Criar listas de links de prod e git nos cards (com os ícones do git e vercel)
-// TODO: Arrumar cores da mensagem de resultados vazios dos filtros / resposta vazia da api
-// TODO: Terminar de fazer os projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio
-// TODO: Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção
-// TODO: Talvez separar em abas a tela de skills
-// TODO: Revisar gráficos comparando com projeto antigo
-// TODO: Talvez finalizar último gráfico (BarChart TechnologiesByExperience)
-// TODO: Colocar as certificações e diplomas exibidas em um carrossel
-// TODO: Adicionar o idioma espanhol
-// TODO: Talvez fazer paginação
-// TODO: Mostrar datas com dia e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês
-// TODO: Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo
-// TODO: Talvez fazer página sobre meus gostos e vida pessoal
+-Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
+-Adicionar o idioma espanhol (Front-End e Back-End).
+-Mostrar datas com dia (atualmente está somente em mês) e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
+-Criar separação entre tempos de experiência (já fiz a lógica no Back-End, melhorar apresentação disso no Front-End).
+-Colocar imagens dos prints das telas do projetos. Melhorar apresentação dessas imagens utilizando carrossel.
+-Colocar links de referência entre as entidades e atualizar modais de visualização.
+-Criar listas de links de prod e git nos cards (com os ícones do git e vercel).
+-Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
+-Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
+-Colocar as certificações e diplomas exibidas em um carrossel.
+-Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
+-Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
+-Talvez finalizar último gráfico (BarChart TechnologiesByExperience?).
+-Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
+-Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (devemos excluir os planejamentos?).
+-Criar pipeline ci/cd e configurar docker no projeto.
+-Terminar de fazer os projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
+-Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção.
+-Talvez fazer página sobre meus gostos e vida pessoal.
 
 
 [PROMPT INICIAL]:
@@ -489,3 +481,4 @@ Quero que vc renomeie o relation-picker para operations-relation-picker, o nome 
 Dentro da pasta operations, nos components shared, preciso que vc crie um operations-detailed-item e um operations-item contendo um padrão para a composição genérica dos componentes de itens dos modais dos cruds das entidades. Siga o exemplo de como está em tags, nos prints que estou enviando. Como vc pode ver nos prints de 1 a 4, temos um padrão visual que vc pode seguir de tags. O operations-detailed-item vai ser igual a esse item do print 1, que usaremos no modal de read e teremos detalhadamente os campos cadastrados daquele item, com o título do campo em roxo/primary e o conteúdo abaixo em branco, teremos também os botões de update e delete daquele item. Já nos modais de lista de update e delete, que são os prints 2 e 3, teremos esses componente genéricos de item, que será o operations-item, onde clicaremos para chamar o próximo modal de update ou delete. E no caso do modal de confirmação de delete, que é o print 4, ao invés de fazermos assim igual ao print, vamos reutilizar o operations-item também.
 Reestruture todos os modais de crud de todas as entidades para utilizarem esses novos componentes de operations, de forma que padronizemos toda essa estrutura visual.
 Além disso, navegue via chrome-devtools e perceba que nos updates de projects e experiences, como vc pode ver nos prints 5 e 6, ainda temos alguns relations que não estão vindo marcados/selecionados, mesmo tendo dados já relacionados pra aquela entidade no backend. Valide isso em tela, corrija e verifique se a correção funcionou por favor.
+-Refatorar também componentes de operations e operations-modal, pois todos estão muito parecidos, precisamos fazer componentes genéricos, passando como props/parametros apenas aquilo que for diferente, como os campos de input por exemplo.
