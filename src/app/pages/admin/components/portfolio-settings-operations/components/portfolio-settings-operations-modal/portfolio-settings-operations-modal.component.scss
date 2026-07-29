@@ -2,13 +2,6 @@
   @apply block;
 }
 
-.portfolio-settings-operations-delete-summary p,
-.portfolio-settings-operations-picker-option span,
-.portfolio-settings-operations-card-copy p:last-child {
-  @apply text-sm leading-7;
-  color: var(--base-strong-color);
-}
-
 .portfolio-settings-operations-form {
   @apply flex flex-col gap-4;
 }
@@ -17,8 +10,7 @@
   @apply flex flex-col gap-2;
 }
 
-.portfolio-settings-operations-json-field span,
-.portfolio-settings-operations-card-label {
+.portfolio-settings-operations-json-field span {
   @apply text-xs font-semibold uppercase tracking-[0.18em];
   color: var(--primary-default-color);
 }
@@ -34,71 +26,6 @@
 }
 
 .portfolio-settings-operations-json-field textarea:focus {
-  border-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 32%,
-    transparent
-  );
-  box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--primary-default-color) 12%, transparent);
-}
-
-.portfolio-settings-operations-list,
-.portfolio-settings-operations-picker {
-  @apply grid gap-4;
-}
-
-.portfolio-settings-operations-card,
-.portfolio-settings-operations-picker-option {
-  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-5;
-  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
-  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
-}
-
-.portfolio-settings-operations-picker-option {
-  @apply w-full cursor-pointer text-left transition;
-}
-
-.portfolio-settings-operations-picker-option:hover,
-.portfolio-settings-operations-picker-option:focus-visible {
-  border-color: color-mix(
-    in srgb,
-    var(--primary-default-color) 28%,
-    transparent
-  );
-  box-shadow: 0 0 0 2px
-    color-mix(in srgb, var(--primary-default-color) 10%, transparent);
-}
-
-.portfolio-settings-operations-card-header,
-.portfolio-settings-operations-picker-option {
-  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
-}
-
-.portfolio-settings-operations-card-header h3,
-.portfolio-settings-operations-picker-option strong,
-.portfolio-settings-operations-delete-summary strong {
-  @apply text-lg font-semibold;
-  color: var(--text-color);
-}
-
-.portfolio-settings-operations-card-actions {
-  @apply flex flex-wrap gap-3;
-}
-
-.portfolio-settings-operations-card-copy {
-  @apply flex min-w-0 flex-col gap-2;
-}
-
-.portfolio-settings-operations-card-copy pre {
-  @apply max-h-80 min-w-0 overflow-x-auto overflow-y-auto rounded-2xl border p-4 text-sm leading-6;
-  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
-  background: color-mix(in srgb, var(--background-color) 88%, var(--white));
-  color: var(--text-color);
-}
-
-.portfolio-settings-operations-delete-summary {
-  @apply rounded-2xl border p-4;
-  border-color: color-mix(in srgb, var(--danger-default-color) 16%, transparent);
-  background: color-mix(in srgb, var(--danger-default-color) 6%, transparent);
+  border-color: color-mix(in srgb, var(--primary-default-color) 32%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-default-color) 12%, transparent);
 }

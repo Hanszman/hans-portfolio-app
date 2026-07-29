@@ -67,10 +67,7 @@ const resolveTechnologyLabel = (
   return technology ? `${technology.name} (${technology.slug})` : technologyId;
 };
 
-const resolveLinkLabel = (
-  linkId: string,
-  linkMap: Map<string, LinkRecord>,
-): string => {
+const resolveLinkLabel = (linkId: string, linkMap: Map<string, LinkRecord>): string => {
   const link = linkMap.get(linkId);
 
   return link ? link.labelPt || link.labelEn || link.url : linkId;
@@ -88,9 +85,7 @@ const resolveImageAssetLabel = (
 export const buildFormationTechnologyOptions = (
   technologies: readonly TechnologyCollectionItemResponse[],
 ): readonly FormationTechnologyOptionViewModel[] =>
-  [...technologies]
-    .map(createFormationTechnologyOptionViewModel)
-    .sort(sortTechnologyOptions);
+  [...technologies].map(createFormationTechnologyOptionViewModel).sort(sortTechnologyOptions);
 
 export const buildFormationLinkOptions = (
   links: readonly LinkRecord[],
@@ -102,9 +97,7 @@ export const buildFormationImageAssetOptions = (
 ): readonly FormationImageAssetOptionViewModel[] =>
   [...imageAssets].map(createFormationImageAssetOptionViewModel).sort(sortImageAssetOptions);
 
-export const normalizeFormationTechnologyIds = (
-  formation: FormationRecord,
-): readonly string[] => {
+export const normalizeFormationTechnologyIds = (formation: FormationRecord): readonly string[] => {
   const technologyIds = new Set<string>();
 
   for (const relation of formation.technologyRelations ?? []) {
@@ -118,9 +111,7 @@ export const normalizeFormationTechnologyIds = (
   return [...technologyIds];
 };
 
-export const normalizeFormationLinkIds = (
-  formation: FormationRecord,
-): readonly string[] => {
+export const normalizeFormationLinkIds = (formation: FormationRecord): readonly string[] => {
   const linkIds = new Set<string>();
 
   for (const linkId of formation.linkIds ?? []) {
@@ -134,9 +125,7 @@ export const normalizeFormationLinkIds = (
   return [...linkIds];
 };
 
-export const normalizeFormationImageAssetIds = (
-  formation: FormationRecord,
-): readonly string[] => {
+export const normalizeFormationImageAssetIds = (formation: FormationRecord): readonly string[] => {
   const imageAssetIds = new Set<string>();
 
   for (const imageAssetId of formation.imageAssetIds ?? []) {

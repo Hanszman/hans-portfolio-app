@@ -45,9 +45,8 @@ const createTechnologyMap = (
 ): Map<string, TechnologyCollectionItemResponse> =>
   new Map(technologies.map((technology) => [technology.id, technology]));
 
-const resolveLinkProjectIdFromRelation = (
-  relation: LinkProjectRelationRecord,
-): string | null => relation.projectId ?? relation.project?.id ?? null;
+const resolveLinkProjectIdFromRelation = (relation: LinkProjectRelationRecord): string | null =>
+  relation.projectId ?? relation.project?.id ?? null;
 
 const resolveLinkExperienceIdFromRelation = (
   relation: LinkExperienceRelationRecord,
@@ -57,9 +56,8 @@ const resolveLinkTechnologyIdFromRelation = (
   relation: LinkTechnologyRelationRecord,
 ): string | null => relation.technologyId ?? relation.technology?.id ?? null;
 
-const resolveLinkFormationIdFromRelation = (
-  relation: LinkFormationRelationRecord,
-): string | null => relation.formationId ?? relation.formation?.id ?? null;
+const resolveLinkFormationIdFromRelation = (relation: LinkFormationRelationRecord): string | null =>
+  relation.formationId ?? relation.formation?.id ?? null;
 
 const resolveProjectIdsFromCatalog = (
   link: LinkRecord,
@@ -125,9 +123,7 @@ export const normalizeLinkProjectIds = (
   return [...projectIds];
 };
 
-export const normalizeLinkExperienceIds = (
-  link: LinkRecord,
-): readonly string[] => {
+export const normalizeLinkExperienceIds = (link: LinkRecord): readonly string[] => {
   const experienceIds = new Set<string>();
 
   for (const experienceId of link.experienceIds ?? []) {
@@ -141,9 +137,7 @@ export const normalizeLinkExperienceIds = (
   return [...experienceIds];
 };
 
-export const normalizeLinkTechnologyIds = (
-  link: LinkRecord,
-): readonly string[] => {
+export const normalizeLinkTechnologyIds = (link: LinkRecord): readonly string[] => {
   const technologyIds = new Set<string>();
 
   for (const technologyId of link.technologyIds ?? []) {
@@ -157,9 +151,7 @@ export const normalizeLinkTechnologyIds = (
   return [...technologyIds];
 };
 
-export const normalizeLinkFormationIds = (
-  link: LinkRecord,
-): readonly string[] => {
+export const normalizeLinkFormationIds = (link: LinkRecord): readonly string[] => {
   const formationIds = new Set<string>();
 
   for (const formationId of link.formationIds ?? []) {
@@ -232,9 +224,7 @@ export const buildLinksViewModels = (
         descriptionEn: link.descriptionEn ?? '',
         type: link.type ?? '',
         sortOrderLabel: String(link.sortOrder ?? 0),
-        projectLabels: projectIds.map((projectId) =>
-          resolveProjectLabel(projectId, projectMap),
-        ),
+        projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
         experienceLabels: experienceIds.map((experienceId) =>
           resolveExperienceLabel(experienceId, experienceMap),
         ),

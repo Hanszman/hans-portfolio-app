@@ -219,12 +219,7 @@ describe('customers operations helper', () => {
           ],
         }),
       ]),
-    ).toEqual([
-      'experience-2',
-      'experience-3',
-      'experience-4',
-      'experience-5',
-    ]);
+    ).toEqual(['experience-2', 'experience-3', 'experience-4', 'experience-5']);
   });
 
   it('should build an empty form when no customer is selected', () => {

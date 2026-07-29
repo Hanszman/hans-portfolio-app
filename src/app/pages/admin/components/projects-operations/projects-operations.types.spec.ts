@@ -6,8 +6,9 @@ import {
   normalizeProjectRelationIds,
   projectRelationId,
 } from './projects-operations.types';
+import { ProjectsOperationsFormValue } from './projects-operations.types';
 
-const form = () => ({
+const form = (): ProjectsOperationsFormValue => ({
   ...createEmptyProjectsOperationsFormValue(),
   slug: 'slug',
   titlePt: 'Titulo',
@@ -16,9 +17,9 @@ const form = () => ({
   shortDescriptionEn: 'Summary',
   fullDescriptionPt: 'Descricao',
   fullDescriptionEn: 'Description',
-  context: 'CLIENT',
+  context: 'PROFESSIONAL',
   status: 'COMPLETED',
-  environment: 'WEB',
+  environment: 'FRONTEND',
   startDate: '2026-01-01',
   endDate: '2026-02-01',
   sortOrder: '1',
@@ -39,9 +40,9 @@ const record = () =>
     shortDescriptionEn: 'Summary',
     fullDescriptionPt: 'Descricao',
     fullDescriptionEn: 'Description',
-    context: 'CLIENT',
+    context: 'PROFESSIONAL',
     status: 'COMPLETED',
-    environment: 'WEB',
+    environment: 'FRONTEND',
     featured: false,
     highlight: true,
     startDate: null,
@@ -68,7 +69,7 @@ describe('projects operations types', () => {
       } as never).id,
     ).toBe('image-1');
     expect(projectRelationId({ technologyId: 't-1' } as never, 'technology')).toBe('t-1');
-    expect(projectRelationId({ technologyId: { id: 't-2' } } as never, 'technology')).toBe('t-2');
+    expect(projectRelationId({ technology: { id: 't-2' } } as never, 'technology')).toBe('t-2');
     expect(projectRelationId({} as never, 'technology')).toBeNull();
     for (const key of ['technology', 'experience', 'tag', 'link', 'imageAsset'] as const)
       expect(normalizeProjectRelationIds(record(), key).length).toBe(1);
@@ -91,11 +92,47 @@ describe('projects operations types', () => {
     expect(result.isValid).toBeTrue();
     if (result.isValid) {
       expect(result.payload.experienceIds).toEqual(['e-1']);
-      expect(result.payload.technologyRelations).toEqual([
-        { technologyId: 't-1' },
-        { technologyId: 't-1' },
-      ]);
+      expect(result.payload.technologyRelations).toEqual([{ technologyId: 't-1' }]);
     }
+  });
+
+  it('normalizes all project relation response shapes', () => {
+    const publicRecord = {
+      ...(record() as object),
+      technologyIds: ['t-direct'],
+      technologyRelations: [{ technologyId: 't-relation' }],
+      technologies: ['t-string', { technology: { id: 't-nested' } }, { id: 't-public' }],
+      experienceIds: ['e-direct'],
+      experiences: [{ experienceId: 'e-relation' }, { experience: { id: 'e-nested' } }],
+      tagIds: ['tag-direct'],
+      tags: [{ tag: { id: 'tag-nested' } }],
+      linkIds: ['link-direct'],
+      links: [{ id: 'link-public' }],
+      imageAssetIds: ['image-direct'],
+      imageAssets: [{ imageAssetId: 'image-relation' }],
+    } as never;
+
+    expect(normalizeProjectRelationIds(publicRecord, 'technology')).toEqual([
+      't-direct',
+      't-relation',
+      't-string',
+      't-nested',
+      't-public',
+    ]);
+    expect(normalizeProjectRelationIds(publicRecord, 'experience')).toEqual([
+      'e-direct',
+      'e-relation',
+      'e-nested',
+    ]);
+    expect(normalizeProjectRelationIds(publicRecord, 'tag')).toEqual(['tag-direct', 'tag-nested']);
+    expect(normalizeProjectRelationIds(publicRecord, 'link')).toEqual([
+      'link-direct',
+      'link-public',
+    ]);
+    expect(normalizeProjectRelationIds(publicRecord, 'imageAsset')).toEqual([
+      'image-direct',
+      'image-relation',
+    ]);
   });
 
   it('rejects missing fields, options and invalid sort order', () => {
@@ -112,5 +149,18 @@ describe('projects operations types', () => {
     expect(buildProjectsMutationPayload({ ...form(), sortOrder: 'x' }).isValid).toBeFalse();
     for (const key of ['context', 'status', 'environment'] as const)
       expect(buildProjectsMutationPayload({ ...form(), [key]: '' }).isValid).toBeFalse();
+    expect(
+      buildProjectsMutationPayload({
+        ...form(),
+        context: 'INVALID' as never,
+      }).isValid,
+    ).toBeFalse();
+    expect(
+      buildProjectsMutationPayload({
+        ...form(),
+        startDate: '2026-03-01',
+        endDate: '2026-02-01',
+      }).isValid,
+    ).toBeFalse();
   });
 });

@@ -1,4 +1,4 @@
-export interface RelationPickerOption {
+export interface OperationsRelationPickerOption {
   readonly id: string;
   readonly title: string;
   readonly subtitle?: string;

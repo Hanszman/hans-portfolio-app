@@ -12,177 +12,112 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="closed.emit()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="pageSelected.emit($event)"
+  (updateSelected)="updateSelected.emit($event)"
+  (deleteSelected)="deleteSelected.emit($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
-    <div class="technologies-operations-form">
-      <hans-input
-        [label]="resolveFieldLabel('slug')"
-        inputColor="base"
-        inputSize="medium"
-        [value]="form().slug"
-        [placeholder]="fields.slug.placeholderKey! | translate"
-        (input)="change('slug', $event)"
-      ></hans-input>
+      <div class="technologies-operations-form">
+        <hans-input
+          [label]="resolveFieldLabel('slug')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().slug"
+          [placeholder]="fields.slug.placeholderKey! | translate"
+          (input)="change('slug', $event)"
+        ></hans-input>
 
-      <hans-input
-        [label]="resolveFieldLabel('name')"
-        inputColor="base"
-        inputSize="medium"
-        [value]="form().name"
-        [placeholder]="fields.name.placeholderKey! | translate"
-        (input)="change('name', $event)"
-      ></hans-input>
+        <hans-input
+          [label]="resolveFieldLabel('name')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().name"
+          [placeholder]="fields.name.placeholderKey! | translate"
+          (input)="change('name', $event)"
+        ></hans-input>
 
-      <hans-select-option
-        [label]="resolveFieldLabel('category')"
-        [value]="form().category"
-        [options]="categoryOptions()"
-        inputSize="medium"
-        inputColor="base"
-        labelColor="base"
-        dropdownBackgroundColor="var(--background-color)"
-        dropdownHoverColor="var(--primary-neutral-color)"
-        (change)="change('category', $event)"
-        (valuechange)="change('category', $event)"
-        (valueChange)="change('category', $event)"
-      ></hans-select-option>
+        <hans-select-option
+          [label]="resolveFieldLabel('category')"
+          [value]="form().category"
+          [options]="categoryOptions()"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('category', $event)"
+          (valuechange)="change('category', $event)"
+          (valueChange)="change('category', $event)"
+        ></hans-select-option>
 
-      <hans-select-option
-        [label]="resolveFieldLabel('level')"
-        [value]="form().level"
-        [options]="levelOptions()"
-        inputSize="medium"
-        inputColor="base"
-        labelColor="base"
-        dropdownBackgroundColor="var(--background-color)"
-        dropdownHoverColor="var(--primary-neutral-color)"
-        (change)="change('level', $event)"
-        (valuechange)="change('level', $event)"
-        (valueChange)="change('level', $event)"
-      ></hans-select-option>
+        <hans-select-option
+          [label]="resolveFieldLabel('level')"
+          [value]="form().level"
+          [options]="levelOptions()"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('level', $event)"
+          (valuechange)="change('level', $event)"
+          (valueChange)="change('level', $event)"
+        ></hans-select-option>
 
-      <hans-select-option
-        [label]="resolveFieldLabel('frequency')"
-        [value]="form().frequency"
-        [options]="frequencyOptions()"
-        inputSize="medium"
-        inputColor="base"
-        labelColor="base"
-        dropdownBackgroundColor="var(--background-color)"
-        dropdownHoverColor="var(--primary-neutral-color)"
-        (change)="change('frequency', $event)"
-        (valuechange)="change('frequency', $event)"
-        (valueChange)="change('frequency', $event)"
-      ></hans-select-option>
+        <hans-select-option
+          [label]="resolveFieldLabel('frequency')"
+          [value]="form().frequency"
+          [options]="frequencyOptions()"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('frequency', $event)"
+          (valuechange)="change('frequency', $event)"
+          (valueChange)="change('frequency', $event)"
+        ></hans-select-option>
 
-      <div class="technologies-operations-toggle">
-        <div class="technologies-operations-selection-copy">
-          <p>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</p>
-          <span>{{ 'pages.admin.technologies.fields.highlight.description' | translate }}</span>
+        <div class="technologies-operations-toggle">
+          <div class="technologies-operations-selection-copy">
+            <p>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</p>
+            <span>{{ 'pages.admin.technologies.fields.highlight.description' | translate }}</span>
+          </div>
+          <hans-toggle
+            [checked]="form().highlight"
+            [toggleColor]="'primary'"
+            [toggleSize]="'small'"
+            [attr.aria-label]="'pages.admin.technologies.fields.highlight.label' | translate"
+            (change)="toggleHighlight($event)"
+          ></hans-toggle>
         </div>
-        <hans-toggle
-          [checked]="form().highlight"
-          [toggleColor]="'primary'"
-          [toggleSize]="'small'"
-          [attr.aria-label]="'pages.admin.technologies.fields.highlight.label' | translate"
-          (change)="toggleHighlight($event)"
-        ></hans-toggle>
+
+        <hans-input
+          [label]="resolveFieldLabel('sortOrder')"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().sortOrder"
+          [placeholder]="fields.sortOrder.placeholderKey! | translate"
+          (input)="change('sortOrder', $event)"
+        ></hans-input>
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.imageAssets.label' | translate"
+          [description]="'pages.admin.technologies.fields.imageAssets.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.imageAssets.empty' | translate"
+          [options]="imageOptions()"
+          [selectedIds]="form().imageAssetIds"
+          (toggled)="imageAssetToggled.emit($event)"
+        ></app-operations-relation-picker>
       </div>
-
-      <hans-input
-        [label]="resolveFieldLabel('sortOrder')"
-        inputColor="base"
-        inputSize="medium"
-        [value]="form().sortOrder"
-        [placeholder]="fields.sortOrder.placeholderKey! | translate"
-        (input)="change('sortOrder', $event)"
-      ></hans-input>
-
-      <app-relation-picker
-        [label]="'pages.admin.technologies.fields.imageAssets.label' | translate"
-        [description]="'pages.admin.technologies.fields.imageAssets.description' | translate"
-        [emptyMessage]="'pages.admin.technologies.fields.imageAssets.empty' | translate"
-        [options]="imageOptions()"
-        [selectedIds]="form().imageAssetIds"
-        (toggled)="imageAssetToggled.emit($event)"
-      ></app-relation-picker>
-    </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="technologies-operations-list">
-            @for (technology of technologies(); track technology.id) {
-              <article class="technologies-operations-item">
-                <div class="technologies-operations-item-header">
-                  <div>
-                    <p class="technologies-operations-label">
-                      {{ 'pages.admin.technologies.card.name' | translate }}
-                    </p>
-                    <h4>{{ technology.name }} ({{ technology.slug }})</h4>
-                  </div>
-                  <div class="technologies-operations-item-actions">
-                    <hans-button
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      (click)="updateSelected.emit(technology.id)"
-                    >{{ 'pages.admin.operations.update' | translate }}</hans-button>
-                    <hans-button
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      (click)="deleteSelected.emit(technology.id)"
-                    >{{ 'pages.admin.operations.delete' | translate }}</hans-button>
-                  </div>
-                </div>
-                @for (item of [
-                  ['pages.admin.technologies.card.category', technology.category],
-                  ['pages.admin.technologies.card.level', technology.level || '-'],
-                  ['pages.admin.technologies.card.frequency', technology.frequency || '-'],
-                  ['pages.admin.technologies.card.highlight', technology.highlight ? ('pages.admin.technologies.fields.highlight.enabled' | translate) : ('pages.admin.technologies.fields.highlight.disabled' | translate)],
-                  ['pages.admin.technologies.card.imageAssets', technology.imageAssetLabels.join(', ') || ('pages.admin.technologies.card.emptyRelations' | translate)]
-                ]; track item[0]) {
-                  <div class="technologies-operations-item-copy">
-                    <p class="technologies-operations-label">{{ item[0] | translate }}</p>
-                    <p>{{ item[1] }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="technologies-operations-picker">
-            @for (technology of technologies(); track technology.id) {
-              <button type="button" class="technologies-operations-picker-option" (click)="updateSelected.emit(technology.id)">
-                <strong>{{ technology.name }} ({{ technology.slug }})</strong>
-                <span>{{ technology.category }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="technologies-operations-picker">
-            @for (technology of technologies(); track technology.id) {
-              <button type="button" class="technologies-operations-picker-option" (click)="deleteSelected.emit(technology.id)">
-                <strong>{{ technology.name }} ({{ technology.slug }})</strong>
-                <span>{{ technology.category }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="technologies-operations-delete-summary">
-            <strong>{{ selectedTechnology()?.name }} ({{ selectedTechnology()?.slug }})</strong>
-            <p>{{ selectedTechnology()?.category }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
 import {
   PortfolioSettingMutationPayload,
@@ -17,8 +16,7 @@ import {
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -40,21 +38,14 @@ import {
 @Component({
   selector: 'app-portfolio-settings-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    PortfolioSettingsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, PortfolioSettingsOperationsModalComponent],
   templateUrl: './portfolio-settings-operations.component.html',
   styleUrl: './portfolio-settings-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioSettingsOperationsComponent implements OnInit {
-  private readonly portfolioSettingsOperationsService = inject(
-    PortfolioSettingsOperationsService,
-  );
+  private readonly portfolioSettingsOperationsService = inject(PortfolioSettingsOperationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
 
@@ -69,8 +60,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   private readonly feedbackToneSignal = signal<'success' | 'error' | null>(null);
   private readonly modalFeedbackKeySignal = signal<AppTranslationKey | null>(null);
   private readonly modalFeedbackToneSignal = signal<'success' | 'error' | null>(null);
-  private readonly modalModeSignal =
-    signal<PortfolioSettingsOperationsModalMode | null>(null);
+  private readonly modalModeSignal = signal<PortfolioSettingsOperationsModalMode | null>(null);
   private readonly selectedSettingSignal = signal<PortfolioSettingRecord | null>(null);
   private readonly searchQuerySignal = signal('');
   private readonly formSignal = signal<PortfolioSettingsOperationsFormValue>(
@@ -259,11 +249,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
 
     try {
       const response = await firstValueFrom(
-        this.portfolioSettingsOperationsService.getAll(
-          page,
-          this.pagination().pageSize,
-          search,
-        ),
+        this.portfolioSettingsOperationsService.getAll(page, this.pagination().pageSize, search),
       );
       this.settingsSignal.set(response.data);
       this.paginationSignal.set(response.pagination);
@@ -297,25 +283,19 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     };
   }
 
-  private async submitUpsert(
-    payload: PortfolioSettingMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: PortfolioSettingMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(
-          this.portfolioSettingsOperationsService.create(payload),
-        );
+        await firstValueFrom(this.portfolioSettingsOperationsService.create(payload));
 
         this.setSuccessFeedback('pages.admin.portfolioSettings.feedback.created');
       } else {
         const selectedSetting = this.selectedSetting();
 
         if (!selectedSetting) {
-          this.setModalErrorFeedback(
-            'pages.admin.portfolioSettings.feedback.selectionRequired',
-          );
+          this.setModalErrorFeedback('pages.admin.portfolioSettings.feedback.selectionRequired');
           return;
         }
 
@@ -339,18 +319,14 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     const selectedSetting = this.selectedSetting();
 
     if (!selectedSetting) {
-      this.setModalErrorFeedback(
-        'pages.admin.portfolioSettings.feedback.selectionRequired',
-      );
+      this.setModalErrorFeedback('pages.admin.portfolioSettings.feedback.selectionRequired');
       return;
     }
 
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(
-        this.portfolioSettingsOperationsService.delete(selectedSetting.id),
-      );
+      await firstValueFrom(this.portfolioSettingsOperationsService.delete(selectedSetting.id));
 
       const nextPage =
         this.settings().length === 1 && this.pagination().page > 1

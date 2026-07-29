@@ -1,0 +1,41 @@
+:host {
+  @apply block min-w-0;
+}
+
+.operations-item {
+  @apply flex w-full min-w-0 items-center gap-4 rounded-3xl border px-4 py-4 text-left;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: var(--app-operations-surface-color);
+  color: var(--text-color);
+}
+
+.operations-item:not(.operations-item-static) {
+  @apply cursor-pointer;
+}
+
+.operations-item:not(.operations-item-static):hover,
+.operations-item:not(.operations-item-static):focus-visible {
+  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
+}
+
+.operations-item-static {
+  @apply cursor-default opacity-100;
+}
+
+.operations-item img {
+  @apply h-12 w-12 shrink-0 rounded-full object-contain;
+}
+
+.operations-item-copy {
+  @apply flex min-w-0 flex-1 flex-col gap-1;
+}
+
+.operations-item-copy strong,
+.operations-item-copy span {
+  @apply truncate;
+}
+
+.operations-item-copy span {
+  color: var(--secondary-text-color);
+}

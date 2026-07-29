@@ -13,9 +13,9 @@ const FORM: ProjectsOperationsFormValue = {
   shortDescriptionEn: 'Summary EN',
   fullDescriptionPt: 'Descricao PT',
   fullDescriptionEn: 'Description EN',
-  context: 'CLIENT',
+  context: 'PROFESSIONAL',
   status: 'COMPLETED',
-  environment: 'WEB',
+  environment: 'FRONTEND',
   featured: true,
   highlight: true,
   startDate: '2020-01-01',
@@ -37,9 +37,9 @@ const RECORD: ProjectRecord = {
   shortDescriptionEn: 'Summary EN',
   fullDescriptionPt: 'Descricao PT',
   fullDescriptionEn: 'Description EN',
-  context: 'CLIENT',
+  context: 'PROFESSIONAL',
   status: 'COMPLETED',
-  environment: 'WEB',
+  environment: 'FRONTEND',
   featured: true,
   highlight: true,
   startDate: '2020-01-01',
@@ -78,6 +78,7 @@ describe('ProjectsOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('form', FORM);
     fixture.componentRef.setInput('projects', [RECORD]);
+    fixture.componentRef.setInput('selectedProject', RECORD);
     fixture.detectChanges();
   });
 

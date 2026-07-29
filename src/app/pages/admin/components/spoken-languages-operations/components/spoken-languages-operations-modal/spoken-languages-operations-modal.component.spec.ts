@@ -17,6 +17,17 @@ const SPOKEN_LANGUAGES: readonly SpokenLanguageOperationsViewModel[] = [
     imageAssetLabels: ['english-flag.svg (ICON)'],
     imageAssetIds: ['image-asset-1'],
   },
+  {
+    id: 'spoken-language-2',
+    code: 'xx',
+    namePt: 'Idioma vazio',
+    nameEn: '',
+    proficiency: 'BASIC',
+    highlight: false,
+    sortOrderLabel: '2',
+    imageAssetLabels: [],
+    imageAssetIds: [],
+  },
 ];
 
 describe('SpokenLanguagesOperationsModalComponent', () => {
@@ -226,7 +237,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       id: 'spoken-language-1',
       code: 'en',
       namePt: 'Ingles',
-      nameEn: 'English',
+      nameEn: null,
       proficiency: 'FLUENT',
       highlight: true,
       sortOrder: 1,

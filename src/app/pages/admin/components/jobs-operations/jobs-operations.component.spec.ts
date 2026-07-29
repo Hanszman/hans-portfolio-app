@@ -143,10 +143,12 @@ describe('JobsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    jobsOperationsService = jasmine.createSpyObj<JobsOperationsService>(
-      'JobsOperationsService',
-      ['getAll', 'create', 'update', 'delete'],
-    );
+    jobsOperationsService = jasmine.createSpyObj<JobsOperationsService>('JobsOperationsService', [
+      'getAll',
+      'create',
+      'update',
+      'delete',
+    ]);
     experiencesService = jasmine.createSpyObj<ExperiencesService>('ExperiencesService', [
       'getExperiences',
     ]);

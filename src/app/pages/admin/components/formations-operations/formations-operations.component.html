@@ -1,38 +1,21 @@
-<section class="formations-operations">
-  <div class="formations-operations-copy">
-    <p class="formations-operations-kicker">
-      {{ 'pages.admin.formations.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.formations.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.formations.description' | translate }}
-      {{ 'pages.admin.formations.description' | translate }}
-    </p>
-  </div>
-
-  <p class="formations-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasFormations() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state
-      mode="loading"
-      [message]="'pages.admin.formations.states.loading' | translate"
-    />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasFormations()) {
-    <app-info-state mode="empty" [message]="'pages.admin.formations.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.formations.sectionLabel"
+  titleKey="pages.admin.entities.formations.title"
+  [descriptionKeys]="[
+    'pages.admin.entities.formations.description',
+    'pages.admin.formations.description',
+  ]"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasFormations()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.formations.states.loading"
+  emptyKey="pages.admin.formations.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-formations-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -71,4 +54,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

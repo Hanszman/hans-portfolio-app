@@ -164,9 +164,7 @@ describe('CustomersOperationsComponent', () => {
     customersOperationsService.create.and.returnValue(of(createCustomer()));
     customersOperationsService.update.and.returnValue(of(createCustomer()));
     customersOperationsService.delete.and.returnValue(of(void 0));
-    experiencesService.getExperiences.and.returnValue(
-      of(createExperiencesCollectionResponse()),
-    );
+    experiencesService.getExperiences.and.returnValue(of(createExperiencesCollectionResponse()));
     imageAssetsOperationsService.getAll.and.returnValue(
       of({
         data: [createImageAsset()],
@@ -217,16 +215,9 @@ describe('CustomersOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      '',
-    );
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(experiencesService.getExperiences).toHaveBeenCalledTimes(1);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      100,
-    );
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/customers'));
     expect(compiled.textContent).toContain('Create');
@@ -375,16 +366,8 @@ describe('CustomersOperationsComponent', () => {
     await component.goToPage(99);
 
     expect(customersOperationsService.getAll).toHaveBeenCalledTimes(3);
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
-      2,
-      5,
-      '',
-    );
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      'search',
-    );
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'search');
 
     component.openCreateModal();
     component.toggleExperience('experience-1');
@@ -584,11 +567,7 @@ describe('CustomersOperationsComponent', () => {
     pagedComponent.openDeleteModal('customer-1');
     await pagedComponent.submitModal();
 
-    expect(customersOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      '',
-    );
+    expect(customersOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should render empty and load error states and keep read disabled without customers', async () => {
@@ -696,5 +675,3 @@ describe('CustomersOperationsComponent', () => {
     expect(customersOperationsService.delete).not.toHaveBeenCalled();
   });
 });
-
-

@@ -12,11 +12,16 @@ import { TranslationService } from '../../../../../../core/translation/translati
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ExperienceRecord } from '../../../../../../core/api/admin/experiences/experiences-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
+import { resolveAdminSelectValue } from '../../../../helpers/admin.helper';
 import {
   ExperienceOption,
   ExperiencesOperationsFormValue,
@@ -28,7 +33,7 @@ import {
 @Component({
   selector: 'app-experiences-operations-modal',
   standalone: true,
-  imports: [OperationsModalComponent, RelationPickerComponent, TranslatePipe],
+  imports: [OperationsModalComponent, OperationsRelationPickerComponent, TranslatePipe],
   templateUrl: './experiences-operations-modal.component.html',
   styleUrl: './experiences-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -88,6 +93,45 @@ export class ExperiencesOperationsModalComponent {
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.experiences().map((experience) => this.toOperationsItem(experience)),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () =>
+      this.experiences().map((experience) => ({
+        ...this.toOperationsItem(experience),
+        fields: [
+          {
+            labelKey: 'pages.admin.experiences.fields.slug.label',
+            value: experience.slug,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.companyName.label',
+            value: experience.companyName,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.titlePt.label',
+            value: experience.titlePt,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.titleEn.label',
+            value: experience.titleEn,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.startDate.label',
+            value: experience.startDate,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.endDate.label',
+            value: experience.endDate ?? '',
+          },
+        ],
+      })),
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const experience = this.selectedExperience();
+    return experience ? this.toOperationsItem(experience) : null;
+  });
   protected resolveFieldLabel(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].labelKey);
@@ -97,7 +141,7 @@ export class ExperiencesOperationsModalComponent {
     return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].placeholderKey);
   }
   protected emit(field: keyof ExperiencesOperationsFormValue, event: Event): void {
-    this.fieldChanged.emit({ field, value: (event.target as HTMLInputElement)?.value ?? '' });
+    this.fieldChanged.emit({ field, value: resolveAdminSelectValue(event) });
   }
   protected toggle(field: 'isCurrent' | 'highlight', event: Event): void {
     this.booleanChanged.emit({
@@ -124,5 +168,13 @@ export class ExperiencesOperationsModalComponent {
     id: string,
   ): boolean {
     return this.form()?.[field].includes(id) ?? false;
+  }
+
+  private toOperationsItem(experience: ExperienceRecord): OperationsItemViewModel {
+    return {
+      id: experience.id,
+      title: `${experience.companyName} (${experience.slug})`,
+      subtitle: experience.titleEn,
+    };
   }
 }

@@ -23,6 +23,24 @@
   @apply min-h-0;
 }
 
+.operations-modal-list {
+  @apply flex flex-col gap-4;
+}
+
+.operations-modal-feedback {
+  @apply rounded-lg border px-4 py-3 text-sm;
+  border-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.operations-modal-feedback-error {
+  border-color: var(--primary-color);
+}
+
+.operations-modal-feedback-success {
+  background: var(--app-operations-surface-color);
+}
+
 :host ::ng-deep .operations-modal-search hans-input {
   @apply block;
 }

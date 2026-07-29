@@ -103,18 +103,8 @@ describe('TechnologyContextsOperationsModalComponent', () => {
     buttons[1]?.click();
     fixture.componentRef.setInput('modalMode', 'pick-update');
     fixture.detectChanges();
-    (
-      fixture.nativeElement.querySelector(
-        '.technology-contexts-operations-picker-option',
-      ) as HTMLElement
-    )?.click();
     fixture.componentRef.setInput('modalMode', 'pick-delete');
     fixture.detectChanges();
-    (
-      fixture.nativeElement.querySelector(
-        '.technology-contexts-operations-picker-option',
-      ) as HTMLElement
-    )?.click();
     expect(update).toHaveBeenCalledWith('context-1');
     expect(remove).toHaveBeenCalledWith('context-1');
   });
@@ -147,7 +137,9 @@ describe('TechnologyContextsOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.detectChanges();
-    const selectedViewModel = (component as unknown as { selectedRecordViewModel(): unknown }).selectedRecordViewModel();
+    const selectedViewModel = (
+      component as unknown as { selectedRecordViewModel(): unknown }
+    ).selectedRecordViewModel();
     expect(selectedViewModel).toBeNull();
     const access = component as unknown as {
       showPagination(): boolean;

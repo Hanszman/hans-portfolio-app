@@ -1,12 +1,12 @@
-<section class="relation-picker">
-  <div class="relation-picker-copy">
+<section class="operations-relation-picker">
+  <div class="operations-relation-picker-copy">
     <h4>{{ label() }}</h4>
     @if (description()) {
       <p>{{ description() }}</p>
     }
   </div>
   @if (options().length > 0) {
-    <div class="relation-picker-list">
+    <div class="operations-relation-picker-list">
       @for (option of options(); track option.id) {
         <hans-button
           [buttonColor]="'primary'"
@@ -14,11 +14,11 @@
           [attr.aria-pressed]="isSelected(option.id)"
           (click)="toggled.emit(option.id)"
         >
-          <span class="relation-picker-option">
+          <span class="operations-relation-picker-option">
             @if (option.imageUrl) {
               <img [src]="option.imageUrl" [alt]="option.title" />
             }
-            <span class="relation-picker-option-copy">
+            <span class="operations-relation-picker-option-copy">
               <span>{{ option.title }}</span>
               @if (option.subtitle) {
                 <small [title]="option.subtitle">{{ option.subtitle }}</small>
@@ -29,6 +29,6 @@
       }
     </div>
   } @else {
-    <p class="relation-picker-empty">{{ emptyMessage() }}</p>
+    <p class="operations-relation-picker-empty">{{ emptyMessage() }}</p>
   }
 </section>

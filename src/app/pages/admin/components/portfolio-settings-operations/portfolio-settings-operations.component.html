@@ -1,41 +1,21 @@
-<section class="portfolio-settings-operations">
-  <div class="portfolio-settings-operations-copy">
-    <p class="portfolio-settings-operations-kicker">
-      {{ 'pages.admin.portfolioSettings.sectionLabel' | translate }}
-    </p>
-    <h2>{{ 'pages.admin.portfolioSettings.title' | translate }}</h2>
-    <p>
-      {{ 'pages.admin.entities.portfolio-settings.description' | translate }}
-      {{ 'pages.admin.portfolioSettings.description' | translate }}
-    </p>
-  </div>
-
-  <p class="portfolio-settings-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasSettings() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state
-      mode="loading"
-      [message]="'pages.admin.portfolioSettings.states.loading' | translate"
-    />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasSettings()) {
-    <app-info-state
-      mode="empty"
-      [message]="'pages.admin.portfolioSettings.states.empty' | translate"
-    />
-  }
-
+<app-operations
+  kickerKey="pages.admin.portfolioSettings.sectionLabel"
+  titleKey="pages.admin.portfolioSettings.title"
+  [descriptionKeys]="[
+    'pages.admin.entities.portfolio-settings.description',
+    'pages.admin.portfolioSettings.description',
+  ]"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasSettings()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.portfolioSettings.states.loading"
+  emptyKey="pages.admin.portfolioSettings.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-portfolio-settings-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -59,4 +39,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

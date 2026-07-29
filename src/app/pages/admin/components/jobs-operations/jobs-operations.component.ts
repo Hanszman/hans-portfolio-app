@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
 import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
 import { JobsOperationsService } from '../../../../core/api/admin/jobs/jobs-operations.service';
@@ -21,8 +20,7 @@ import { ExperiencesService } from '../../../../core/api/experiences/experiences
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -46,12 +44,7 @@ import {
 @Component({
   selector: 'app-jobs-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    JobsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, JobsOperationsModalComponent],
   templateUrl: './jobs-operations.component.html',
   styleUrl: './jobs-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -378,10 +371,7 @@ export class JobsOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

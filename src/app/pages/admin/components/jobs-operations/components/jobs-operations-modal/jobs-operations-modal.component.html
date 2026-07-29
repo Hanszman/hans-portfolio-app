@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectJobForUpdate($event)"
+  (deleteSelected)="selectJobForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -97,133 +103,24 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.jobs.fields.experiences.label' | translate"
           [description]="'pages.admin.jobs.fields.experiences.description' | translate"
           [emptyMessage]="'pages.admin.jobs.fields.experiences.empty' | translate"
           [options]="experienceOptions()"
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.jobs.fields.imageAssets.label' | translate"
           [description]="'pages.admin.jobs.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.jobs.fields.imageAssets.empty' | translate"
           [options]="imageAssetOptions()"
           [selectedIds]="form().imageAssetIds"
           (toggled)="toggleImageAsset($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="jobs-operations-list">
-            @for (job of jobs(); track trackById($index, job)) {
-              <article class="jobs-operations-item">
-                <div class="jobs-operations-item-header">
-                  <div>
-                    <p class="jobs-operations-label">
-                      {{ 'pages.admin.jobs.card.slug' | translate }}
-                    </p>
-                    <h4>{{ job.slug }}</h4>
-                  </div>
-
-                  <div class="jobs-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectJobForUpdate(job.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectJobForDelete(job.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                @for (
-                  item of [
-                    ['pages.admin.jobs.card.namePt', job.namePt],
-                    ['pages.admin.jobs.card.nameEn', job.nameEn],
-                    ['pages.admin.jobs.card.summaryPt', job.summaryPt],
-                    ['pages.admin.jobs.card.summaryEn', job.summaryEn],
-                    [
-                      'pages.admin.jobs.card.highlight',
-                      job.highlight
-                        ? ('pages.admin.jobs.fields.highlight.enabled' | translate)
-                        : ('pages.admin.jobs.fields.highlight.disabled' | translate),
-                    ],
-                    ['pages.admin.jobs.card.sortOrder', job.sortOrderLabel],
-                    [
-                      'pages.admin.jobs.card.experiences',
-                      job.experienceLabels.join(', ') ||
-                        ('pages.admin.jobs.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.jobs.card.imageAssets',
-                      job.imageAssetLabels.join(', ') ||
-                        ('pages.admin.jobs.card.emptyRelations' | translate),
-                    ],
-                  ];
-                  track item[0]
-                ) {
-                  <div class="jobs-operations-item-copy">
-                    <p class="jobs-operations-label">
-                      {{ item[0] | translate }}
-                    </p>
-                    <p>{{ item[1] }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="jobs-operations-picker">
-            @for (job of jobs(); track trackById($index, job)) {
-              <button
-                type="button"
-                class="jobs-operations-picker-option"
-                (click)="selectJobForUpdate(job.id)"
-              >
-                <strong>{{ job.namePt }} ({{ job.slug }})</strong>
-                <span>{{ job.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="jobs-operations-picker">
-            @for (job of jobs(); track trackById($index, job)) {
-              <button
-                type="button"
-                class="jobs-operations-picker-option"
-                (click)="selectJobForDelete(job.id)"
-              >
-                <strong>{{ job.namePt }} ({{ job.slug }})</strong>
-                <span>{{ job.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="jobs-operations-delete-summary">
-            <strong>{{ selectedJob()?.namePt }} ({{ selectedJob()?.slug }})</strong>
-            <p>{{ selectedJob()?.nameEn }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

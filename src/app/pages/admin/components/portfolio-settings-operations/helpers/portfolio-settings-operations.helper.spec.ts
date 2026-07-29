@@ -31,10 +31,7 @@ describe('portfolio settings helper', () => {
       }),
     ]);
 
-    expect(viewModels.map((viewModel) => viewModel.key)).toEqual([
-      'alpha.setting',
-      'zeta.setting',
-    ]);
+    expect(viewModels.map((viewModel) => viewModel.key)).toEqual(['alpha.setting', 'zeta.setting']);
     expect(viewModels[0].formattedValue).toContain('"projects": 12');
   });
 

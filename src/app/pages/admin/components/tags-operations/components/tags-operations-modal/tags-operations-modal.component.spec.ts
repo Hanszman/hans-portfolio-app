@@ -153,9 +153,7 @@ describe('TagsOperationsModalComponent', () => {
       ),
     ).toBe('STACK');
     expect(
-      componentAccess.resolveSelectValue(
-        new CustomEvent('valueChange', { detail: 'DOMAIN' }),
-      ),
+      componentAccess.resolveSelectValue(new CustomEvent('valueChange', { detail: 'DOMAIN' })),
     ).toBe('DOMAIN');
     expect(componentAccess.resolveSelectValue(new Event('valueChange'))).toBe('');
     expect(
@@ -223,7 +221,7 @@ describe('TagsOperationsModalComponent', () => {
       id: 'tag-1',
       slug: 'frontend',
       namePt: 'Front-end',
-      nameEn: 'Front-end',
+      nameEn: null,
       type: 'STACK',
       sortOrder: 1,
     });
@@ -237,11 +235,20 @@ describe('TagsOperationsModalComponent', () => {
       technologyIds: ['technology-1'],
     });
     fixture.componentRef.setInput('feedbackKey', 'pages.admin.tags.feedback.saveError');
+    fixture.componentRef.setInput('tags', [
+      {
+        ...TAGS[0],
+        projectLabels: [],
+        technologyLabels: [],
+      },
+    ]);
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
       isProjectSelected(projectId: string): boolean;
       isTechnologySelected(technologyId: string): boolean;
+      detailedOperationItems(): readonly { fields: readonly { value: string }[] }[];
+      selectedOperationItem(): { subtitle?: string } | null;
     };
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
       | (HTMLElement & {
@@ -254,6 +261,9 @@ describe('TagsOperationsModalComponent', () => {
     );
     expect(component.isProjectSelected('project-1')).toBeTrue();
     expect(component.isTechnologySelected('technology-1')).toBeTrue();
+    expect(component.detailedOperationItems()[0].fields[5].value).toContain('No related records');
+    expect(component.detailedOperationItems()[0].fields[6].value).toContain('No related records');
+    expect(component.selectedOperationItem()?.subtitle).toBeUndefined();
     expect(modalElement?.confirmLabel).toBe('Delete');
   });
 

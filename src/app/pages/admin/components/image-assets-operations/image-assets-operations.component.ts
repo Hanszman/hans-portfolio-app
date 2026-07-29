@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
 import {
   ImageAssetMutationPayload,
@@ -24,8 +23,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -50,12 +48,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 @Component({
   selector: 'app-image-assets-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    ImageAssetsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, ImageAssetsOperationsModalComponent],
   templateUrl: './image-assets-operations.component.html',
   styleUrl: './image-assets-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -72,12 +65,8 @@ export class ImageAssetsOperationsComponent implements OnInit {
 
   private readonly imageAssetsSignal = signal<readonly ImageAssetRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
-  private readonly experiencesSignal = signal<
-    readonly ExperienceCollectionItemResponse[]
-  >([]);
-  private readonly technologiesSignal = signal<
-    readonly TechnologyCollectionItemResponse[]
-  >([]);
+  private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
+  private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -356,19 +345,15 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [
-        imageAssetsResponse,
-        projectsResponse,
-        experiencesResponse,
-        technologiesResponse,
-      ] = await Promise.all([
-        firstValueFrom(
-          this.imageAssetsOperationsService.getAll(page, this.pagination().pageSize, search),
-        ),
-        firstValueFrom(this.projectsService.getProjects()),
-        firstValueFrom(this.experiencesService.getExperiences()),
-        firstValueFrom(this.technologiesService.getTechnologies()),
-      ]);
+      const [imageAssetsResponse, projectsResponse, experiencesResponse, technologiesResponse] =
+        await Promise.all([
+          firstValueFrom(
+            this.imageAssetsOperationsService.getAll(page, this.pagination().pageSize, search),
+          ),
+          firstValueFrom(this.projectsService.getProjects()),
+          firstValueFrom(this.experiencesService.getExperiences()),
+          firstValueFrom(this.technologiesService.getTechnologies()),
+        ]);
 
       this.imageAssetsSignal.set(imageAssetsResponse.data);
       this.paginationSignal.set(imageAssetsResponse.pagination);
@@ -383,9 +368,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
     }
   }
 
-  private async submitUpsert(
-    payload: ImageAssetMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: ImageAssetMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
@@ -396,9 +379,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
         const selectedImageAsset = this.selectedImageAsset();
 
         if (!selectedImageAsset) {
-          this.setModalErrorFeedback(
-            'pages.admin.imageAssets.feedback.selectionRequired',
-          );
+          this.setModalErrorFeedback('pages.admin.imageAssets.feedback.selectionRequired');
           return;
         }
 
@@ -428,9 +409,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(
-        this.imageAssetsOperationsService.delete(selectedImageAsset.id),
-      );
+      await firstValueFrom(this.imageAssetsOperationsService.delete(selectedImageAsset.id));
 
       const nextPage =
         this.imageAssets().length === 1 && this.pagination().page > 1
@@ -454,10 +433,7 @@ export class ImageAssetsOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

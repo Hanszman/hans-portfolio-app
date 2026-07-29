@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
 import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
 import { SpokenLanguagesOperationsService } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.service';
@@ -20,8 +19,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -47,21 +45,14 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 @Component({
   selector: 'app-spoken-languages-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    SpokenLanguagesOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, SpokenLanguagesOperationsModalComponent],
   templateUrl: './spoken-languages-operations.component.html',
   styleUrl: './spoken-languages-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpokenLanguagesOperationsComponent implements OnInit {
-  private readonly spokenLanguagesOperationsService = inject(
-    SpokenLanguagesOperationsService,
-  );
+  private readonly spokenLanguagesOperationsService = inject(SpokenLanguagesOperationsService);
   private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
@@ -78,19 +69,14 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   private readonly modalFeedbackKeySignal = signal<AppTranslationKey | null>(null);
   private readonly modalFeedbackToneSignal = signal<'success' | 'error' | null>(null);
   readonly modalModeSignal = signal<SpokenLanguagesOperationsModalMode | null>(null);
-  private readonly selectedSpokenLanguageSignal = signal<SpokenLanguageRecord | null>(
-    null,
-  );
+  private readonly selectedSpokenLanguageSignal = signal<SpokenLanguageRecord | null>(null);
   private readonly searchQuerySignal = signal('');
   private readonly formSignal = signal<SpokenLanguagesOperationsFormValue>(
     createEmptySpokenLanguagesOperationsFormValue(),
   );
 
   protected readonly spokenLanguages = computed(() =>
-    buildSpokenLanguagesViewModels(
-      this.spokenLanguagesSignal(),
-      this.imageAssetsSignal(),
-    ),
+    buildSpokenLanguagesViewModels(this.spokenLanguagesSignal(), this.imageAssetsSignal()),
   );
   protected readonly imageAssetOptions = computed(() =>
     buildSpokenLanguageImageAssetOptions(this.imageAssetsSignal()),
@@ -110,8 +96,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   protected readonly modalFeedbackTone = this.modalFeedbackToneSignal.asReadonly();
   protected readonly modalMode = this.modalModeSignal.asReadonly();
   protected readonly endpointLabel = createAdminEntityEndpointLabel('/spoken-languages');
-  protected readonly selectedSpokenLanguage =
-    this.selectedSpokenLanguageSignal.asReadonly();
+  protected readonly selectedSpokenLanguage = this.selectedSpokenLanguageSignal.asReadonly();
   protected readonly form = this.formSignal.asReadonly();
   protected readonly pagination = this.paginationSignal.asReadonly();
   protected readonly searchQuery = this.searchQuerySignal.asReadonly();
@@ -181,9 +166,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     }
 
     this.selectedSpokenLanguageSignal.set(spokenLanguage);
-    this.formSignal.set(
-      buildSpokenLanguagesFormValue(spokenLanguage, this.imageAssetsSignal()),
-    );
+    this.formSignal.set(buildSpokenLanguagesFormValue(spokenLanguage, this.imageAssetsSignal()));
     this.clearModalFeedback();
     this.modalModeSignal.set('update');
   }
@@ -266,9 +249,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback(
-        'pages.admin.spokenLanguages.feedback.missingSession',
-      );
+      this.setModalErrorFeedback('pages.admin.spokenLanguages.feedback.missingSession');
       return;
     }
 
@@ -323,24 +304,18 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     }
   }
 
-  private async submitUpsert(
-    payload: SpokenLanguageMutationPayload,
-  ): Promise<void> {
+  private async submitUpsert(payload: SpokenLanguageMutationPayload): Promise<void> {
     this.isSubmittingSignal.set(true);
 
     try {
       if (this.modalMode() === 'create') {
-        await firstValueFrom(
-          this.spokenLanguagesOperationsService.create(payload),
-        );
+        await firstValueFrom(this.spokenLanguagesOperationsService.create(payload));
         this.toastService.showSuccess('pages.admin.spokenLanguages.feedback.created');
       } else {
         const selectedSpokenLanguage = this.selectedSpokenLanguage();
 
         if (!selectedSpokenLanguage) {
-          this.setModalErrorFeedback(
-            'pages.admin.spokenLanguages.feedback.selectionRequired',
-          );
+          this.setModalErrorFeedback('pages.admin.spokenLanguages.feedback.selectionRequired');
           return;
         }
 
@@ -363,18 +338,14 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     const selectedSpokenLanguage = this.selectedSpokenLanguage();
 
     if (!selectedSpokenLanguage) {
-      this.setModalErrorFeedback(
-        'pages.admin.spokenLanguages.feedback.selectionRequired',
-      );
+      this.setModalErrorFeedback('pages.admin.spokenLanguages.feedback.selectionRequired');
       return;
     }
 
     this.isSubmittingSignal.set(true);
 
     try {
-      await firstValueFrom(
-        this.spokenLanguagesOperationsService.delete(selectedSpokenLanguage.id),
-      );
+      await firstValueFrom(this.spokenLanguagesOperationsService.delete(selectedSpokenLanguage.id));
 
       const nextPage =
         this.spokenLanguages().length === 1 && this.pagination().page > 1
@@ -398,10 +369,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

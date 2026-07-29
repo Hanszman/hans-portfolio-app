@@ -116,20 +116,28 @@ describe('TechnologyContextsOperationsComponent', () => {
     };
     access.openReadModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe('read');
-    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('read.title');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain(
+      'read.title',
+    );
     access.openUpdatePickerModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe(
       'pick-update',
     );
-    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('pickUpdate.title');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain(
+      'pickUpdate.title',
+    );
     access.openDeletePickerModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe(
       'pick-delete',
     );
-    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('pickDelete.title');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain(
+      'pickDelete.title',
+    );
     access.openCreateModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBe('create');
-    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain('create.title');
+    expect((component as unknown as { modalTitleKey(): string }).modalTitleKey()).toContain(
+      'create.title',
+    );
     access.closeModal();
     expect((component as unknown as { modalMode(): string | null }).modalMode()).toBeNull();
   });
@@ -239,21 +247,44 @@ describe('TechnologyContextsOperationsComponent', () => {
   });
 
   it('refreshes technology options whenever an operation picker opens', async () => {
-    const component = fixture.componentInstance as unknown as Record<string, (...args: unknown[]) => unknown>;
-    const refreshedTechnology = { ...technology, id: 'tech-2', name: 'New technology', slug: 'new-technology' };
-    technologies.getTechnologies.and.returnValue(of({
-      data: [refreshedTechnology],
-      pagination: { page: 1, pageSize: 100, totalItems: 1, totalPages: 1, hasPreviousPage: false, hasNextPage: false },
-    }));
+    const component = fixture.componentInstance as unknown as Record<
+      string,
+      (...args: unknown[]) => unknown
+    >;
+    const refreshedTechnology = {
+      ...technology,
+      id: 'tech-2',
+      name: 'New technology',
+      slug: 'new-technology',
+    };
+    technologies.getTechnologies.and.returnValue(
+      of({
+        data: [refreshedTechnology],
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 1,
+          totalPages: 1,
+          hasPreviousPage: false,
+          hasNextPage: false,
+        },
+      }),
+    );
     component['openCreateModal']();
     await fixture.whenStable();
-    expect((component['technologyOptions'] as () => readonly { label: string }[])().map((option) => option.label)).toContain('New technology (new-technology)');
+    expect(
+      (component['technologyOptions'] as () => readonly { label: string }[])().map(
+        (option) => option.label,
+      ),
+    ).toContain('New technology (new-technology)');
 
     technologies.getTechnologies.and.returnValue(throwError(() => new Error('refresh')));
     component['openUpdatePickerModal']();
     component['openDeletePickerModal']();
     await fixture.whenStable();
-    expect(toast.showError).not.toHaveBeenCalledWith('pages.admin.technologyContexts.feedback.loadError');
+    expect(toast.showError).not.toHaveBeenCalledWith(
+      'pages.admin.technologyContexts.feedback.loadError',
+    );
   });
 
   it('keeps collection actions closed when the public collection is empty', async () => {

@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectImageAssetForUpdate($event)"
+  (deleteSelected)="selectImageAssetForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -148,148 +154,33 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.imageAssets.fields.projects.label' | translate"
           [description]="'pages.admin.imageAssets.fields.projects.description' | translate"
           [emptyMessage]="'pages.admin.imageAssets.fields.projects.empty' | translate"
           [options]="projectOptions()"
           [selectedIds]="form().projectIds"
           (toggled)="toggleProject($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.imageAssets.fields.experiences.label' | translate"
           [description]="'pages.admin.imageAssets.fields.experiences.description' | translate"
           [emptyMessage]="'pages.admin.imageAssets.fields.experiences.empty' | translate"
           [options]="experienceOptions()"
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.imageAssets.fields.technologies.label' | translate"
           [description]="'pages.admin.imageAssets.fields.technologies.description' | translate"
           [emptyMessage]="'pages.admin.imageAssets.fields.technologies.empty' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="image-assets-operations-list">
-            @for (imageAsset of imageAssets(); track trackById($index, imageAsset)) {
-              <article class="image-assets-operations-item">
-                <div class="image-assets-operations-item-header">
-                  <div>
-                    <p class="image-assets-operations-label">
-                      {{ 'pages.admin.imageAssets.card.fileName' | translate }}
-                    </p>
-                    <h4>{{ imageAsset.fileName }}</h4>
-                  </div>
-
-                  <div class="image-assets-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectImageAssetForUpdate(imageAsset.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectImageAssetForDelete(imageAsset.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                @for (
-                  item of [
-                    ['pages.admin.imageAssets.card.filePath', imageAsset.filePath],
-                    ['pages.admin.imageAssets.card.folder', imageAsset.folder],
-                    ['pages.admin.imageAssets.card.kind', imageAsset.kind],
-                    ['pages.admin.imageAssets.card.mimeType', imageAsset.mimeType],
-                    ['pages.admin.imageAssets.card.dimensions', imageAsset.dimensionsLabel],
-                    ['pages.admin.imageAssets.card.sortOrder', imageAsset.sortOrderLabel],
-                    ['pages.admin.imageAssets.card.altPt', imageAsset.altPt],
-                    ['pages.admin.imageAssets.card.altEn', imageAsset.altEn],
-                    ['pages.admin.imageAssets.card.captionPt', imageAsset.captionPt],
-                    ['pages.admin.imageAssets.card.captionEn', imageAsset.captionEn],
-                    [
-                      'pages.admin.imageAssets.card.projects',
-                      imageAsset.projectLabels.join(', ') ||
-                        ('pages.admin.imageAssets.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.imageAssets.card.experiences',
-                      imageAsset.experienceLabels.join(', ') ||
-                        ('pages.admin.imageAssets.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.imageAssets.card.technologies',
-                      imageAsset.technologyLabels.join(', ') ||
-                        ('pages.admin.imageAssets.card.emptyRelations' | translate),
-                    ],
-                  ];
-                  track item[0]
-                ) {
-                  <div class="image-assets-operations-item-copy">
-                    <p class="image-assets-operations-label">
-                      {{ item[0] | translate }}
-                    </p>
-                    <p>
-                      {{ item[1] || ('pages.admin.imageAssets.card.emptyText' | translate) }}
-                    </p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="image-assets-operations-picker">
-            @for (imageAsset of imageAssets(); track trackById($index, imageAsset)) {
-              <button
-                type="button"
-                class="image-assets-operations-picker-option"
-                (click)="selectImageAssetForUpdate(imageAsset.id)"
-              >
-                <strong>{{ imageAsset.fileName }} ({{ imageAsset.kind }})</strong>
-                <span>{{ imageAsset.filePath }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="image-assets-operations-picker">
-            @for (imageAsset of imageAssets(); track trackById($index, imageAsset)) {
-              <button
-                type="button"
-                class="image-assets-operations-picker-option"
-                (click)="selectImageAssetForDelete(imageAsset.id)"
-              >
-                <strong>{{ imageAsset.fileName }} ({{ imageAsset.kind }})</strong>
-                <span>{{ imageAsset.filePath }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="image-assets-operations-delete-summary">
-            <strong>{{ selectedImageAsset()?.fileName }}</strong>
-            <p>{{ selectedImageAsset()?.filePath }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

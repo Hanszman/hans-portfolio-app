@@ -1,39 +1,12 @@
-:host {
-  @apply block;
-}
 .experiences-form {
   @apply flex flex-col gap-4 p-2;
 }
+
 .toggle-field {
   @apply flex items-center justify-between gap-4 rounded-2xl p-4;
-  background: var(--background-color);
+  background: var(--app-operations-surface-color);
 }
+
 .toggle-field div {
   @apply flex flex-col gap-1;
-}
-.relation-section {
-  @apply rounded-2xl p-4;
-  background: color-mix(in srgb, var(--background-color) 88%, var(--white));
-}
-.relation-list {
-  @apply flex flex-wrap gap-3;
-}
-.relation-list hans-button {
-  @apply max-w-full;
-}
-.relation-list img {
-  @apply mr-2 h-8 w-8 rounded-full object-cover;
-  vertical-align: middle;
-}
-.record-card {
-  @apply mb-3 flex flex-col gap-3 rounded-2xl p-4;
-  background: color-mix(in srgb, var(--base-default-color) 10%, transparent);
-}
-.record-card div {
-  @apply flex flex-wrap gap-2;
-}
-.pick-card {
-  @apply mb-3 flex w-full flex-wrap items-center justify-between gap-3 rounded-2xl border-0 p-4 text-left;
-  background: color-mix(in srgb, var(--base-default-color) 10%, transparent);
-  color: var(--base-strong-color);
 }

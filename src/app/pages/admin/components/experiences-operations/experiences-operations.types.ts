@@ -8,6 +8,9 @@ import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,
   createAdminImageAssetOptionViewModel,
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
+  validateAdminDateRange,
 } from '../../helpers/admin.helper';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 
@@ -154,16 +157,36 @@ export const createExperienceImageAssetOption = (
   item: ImageAssetRecord,
 ): ExperienceImageAssetOption => createAdminImageAssetOptionViewModel(item);
 type ExperienceRelationKey = 'technology' | 'project' | 'customer' | 'job' | 'link' | 'imageAsset';
-const EXPERIENCE_RELATION_KEYS: Record<
-  ExperienceRelationKey,
-  { direct: keyof ExperienceRecord; nested: keyof ExperienceRelationRecord }
-> = {
-  technology: { direct: 'technologyRelations', nested: 'technology' },
-  project: { direct: 'projectIds', nested: 'project' },
-  customer: { direct: 'customerIds', nested: 'customer' },
-  job: { direct: 'jobIds', nested: 'job' },
-  link: { direct: 'linkIds', nested: 'link' },
-  imageAsset: { direct: 'imageAssetIds', nested: 'imageAsset' },
+
+interface ExperienceRelationConfig {
+  readonly directIds: keyof ExperienceRecord;
+  readonly collections: readonly (keyof ExperienceRecord)[];
+  readonly nested: keyof ExperienceRelationRecord;
+}
+
+const EXPERIENCE_RELATION_KEYS: Record<ExperienceRelationKey, ExperienceRelationConfig> = {
+  technology: {
+    directIds: 'technologyIds',
+    collections: ['technologyRelations', 'technologies'],
+    nested: 'technology',
+  },
+  project: {
+    directIds: 'projectIds',
+    collections: ['projects'],
+    nested: 'project',
+  },
+  customer: {
+    directIds: 'customerIds',
+    collections: ['customers'],
+    nested: 'customer',
+  },
+  job: { directIds: 'jobIds', collections: ['jobs'], nested: 'job' },
+  link: { directIds: 'linkIds', collections: ['links'], nested: 'link' },
+  imageAsset: {
+    directIds: 'imageAssetIds',
+    collections: ['imageAssets'],
+    nested: 'imageAsset',
+  },
 };
 
 export const relationId = (
@@ -176,7 +199,7 @@ export const relationId = (
     | { id?: string }
     | null
     | undefined;
-  return direct || nested?.id || null;
+  return direct || nested?.id || relation.id || null;
 };
 
 export const normalizeRelationIds = (
@@ -184,25 +207,23 @@ export const normalizeRelationIds = (
   key: 'technologyId' | 'projectId' | 'customerId' | 'jobId' | 'linkId' | 'imageAssetId',
 ): readonly string[] => {
   const relationName = key.replace('Id', '') as ExperienceRelationKey;
-  const direct = record[EXPERIENCE_RELATION_KEYS[relationName].direct];
+  const config = EXPERIENCE_RELATION_KEYS[relationName];
+  const direct = record[config.directIds];
   const values = Array.isArray(direct)
     ? direct.filter((value): value is string => typeof value === 'string')
     : [];
-  const nestedCollections: Partial<Record<ExperienceRelationKey, unknown>> = {
-    technology: record.technologyRelations,
-    project: record.projects,
-    customer: record.customers,
-    job: record.jobs,
-    link: record.links,
-    imageAsset: record.imageAssets,
-  };
-  const relations = (
-    Array.isArray(nestedCollections[relationName]) ? nestedCollections[relationName] : []
-  ) as ExperienceRelationRecord[];
+  const relations = config.collections.reduce<unknown[]>((items, collectionKey) => {
+    const collection = record[collectionKey];
+    return Array.isArray(collection) ? [...items, ...collection] : items;
+  }, []);
   return [
     ...new Set([
       ...values,
-      ...relations.map((item) => relationId(item, key)).filter((value): value is string => !!value),
+      ...relations
+        .map((item) =>
+          typeof item === 'string' ? item : relationId(item as ExperienceRelationRecord, key),
+        )
+        .filter((value): value is string => !!value),
     ]),
   ];
 };
@@ -220,8 +241,8 @@ export const buildExperiencesFormValue = (
         summaryEn: record.summaryEn,
         descriptionPt: record.descriptionPt,
         descriptionEn: record.descriptionEn,
-        startDate: record.startDate,
-        endDate: record.endDate ?? '',
+        startDate: normalizeAdminDateValueForPicker(record.startDate),
+        endDate: normalizeAdminDateValueForPicker(record.endDate),
         isCurrent: record.isCurrent ?? false,
         highlight: record.highlight ?? false,
         sortOrder: String(record.sortOrder ?? 0),
@@ -259,6 +280,17 @@ export const buildExperiencesMutationPayload = (
     return { isValid: false, errorKey: 'pages.admin.experiences.feedback.invalidSortOrder' };
   if (!form.startDate.trim())
     return { isValid: false, errorKey: 'pages.admin.experiences.feedback.requiredStartDate' };
+
+  const dateRangeResult = validateAdminDateRange(
+    form.startDate,
+    form.endDate,
+    'pages.admin.experiences.feedback.invalidDateRange',
+  );
+
+  if (!dateRangeResult.isValid) {
+    return dateRangeResult;
+  }
+
   return {
     isValid: true,
     payload: {
@@ -270,12 +302,14 @@ export const buildExperiencesMutationPayload = (
       summaryEn: form.summaryEn.trim(),
       descriptionPt: form.descriptionPt.trim(),
       descriptionEn: form.descriptionEn.trim(),
-      startDate: form.startDate,
-      endDate: form.endDate || undefined,
+      startDate: normalizeAdminDateValueForMutation(form.startDate),
+      endDate: normalizeAdminDateValueForMutation(form.endDate) || undefined,
       isCurrent: form.isCurrent,
       highlight: form.highlight,
       sortOrder,
-      technologyRelations: form.technologyIds.map((technologyId) => ({ technologyId })),
+      technologyRelations: [...new Set(form.technologyIds)].map((technologyId) => ({
+        technologyId,
+      })),
       projectIds: [...new Set(form.projectIds)],
       customerIds: [...new Set(form.customerIds)],
       jobIds: [...new Set(form.jobIds)],

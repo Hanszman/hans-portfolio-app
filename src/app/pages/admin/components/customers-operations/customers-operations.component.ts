@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { CustomersOperationsService } from '../../../../core/api/admin/customers/customers-operations.service';
 import {
   CustomerMutationPayload,
@@ -21,8 +20,7 @@ import { ExperiencesService } from '../../../../core/api/experiences/experiences
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -46,12 +44,7 @@ import {
 @Component({
   selector: 'app-customers-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    CustomersOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, CustomersOperationsModalComponent],
   templateUrl: './customers-operations.component.html',
   styleUrl: './customers-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -171,11 +164,7 @@ export class CustomersOperationsComponent implements OnInit {
 
     this.selectedCustomerSignal.set(customer);
     this.formSignal.set(
-      buildCustomersFormValue(
-        customer,
-        this.experiencesSignal(),
-        this.imageAssetsSignal(),
-      ),
+      buildCustomersFormValue(customer, this.experiencesSignal(), this.imageAssetsSignal()),
     );
     this.clearModalFeedback();
     this.modalModeSignal.set('update');
@@ -336,9 +325,7 @@ export class CustomersOperationsComponent implements OnInit {
           return;
         }
 
-        await firstValueFrom(
-          this.customersOperationsService.update(selectedCustomer.id, payload),
-        );
+        await firstValueFrom(this.customersOperationsService.update(selectedCustomer.id, payload));
         this.toastService.showSuccess('pages.admin.customers.feedback.updated');
       }
 
@@ -386,10 +373,7 @@ export class CustomersOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

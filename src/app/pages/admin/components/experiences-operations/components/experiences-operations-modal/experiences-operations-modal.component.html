@@ -11,10 +11,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="closed.emit()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submitted.emit()"
   (pageSelected)="pageSelected.emit($event)"
+  (updateSelected)="updateSelected.emit($event)"
+  (deleteSelected)="deleteSelected.emit($event)"
 >
   @if (modalMode() === 'create' || modalMode() === 'update') {
     <div class="experiences-form">
@@ -79,7 +85,7 @@
         ></hans-toggle>
       </div>
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.technologies.label' | translate"
         [description]="'pages.admin.experiences.fields.technologies.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.technologies.empty' | translate"
@@ -88,7 +94,7 @@
         (toggled)="relation('technologyIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.projects.label' | translate"
         [description]="'pages.admin.experiences.fields.projects.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.projects.empty' | translate"
@@ -97,7 +103,7 @@
         (toggled)="relation('projectIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.customers.label' | translate"
         [description]="'pages.admin.experiences.fields.customers.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.customers.empty' | translate"
@@ -106,7 +112,7 @@
         (toggled)="relation('customerIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.jobs.label' | translate"
         [description]="'pages.admin.experiences.fields.jobs.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.jobs.empty' | translate"
@@ -115,7 +121,7 @@
         (toggled)="relation('jobIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.links.label' | translate"
         [description]="'pages.admin.experiences.fields.links.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.links.empty' | translate"
@@ -124,7 +130,7 @@
         (toggled)="relation('linkIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.experiences.fields.imageAssets.label' | translate"
         [description]="'pages.admin.experiences.fields.imageAssets.description' | translate"
         [emptyMessage]="'pages.admin.experiences.fields.imageAssets.empty' | translate"
@@ -133,32 +139,5 @@
         (toggled)="relation('imageAssetIds', $event)"
       />
     </div>
-  } @else if (modalMode() === 'read') {
-    @for (item of experiences(); track item.id) {
-      <article class="record-card">
-        <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-        <div>
-          <hans-button [buttonColor]="'primary'" (click)="optionSelected(item.id)">{{
-            'pages.admin.operations.update' | translate
-          }}</hans-button
-          ><hans-button [buttonColor]="'primary'" (click)="deleteOption(item.id)">{{
-            'pages.admin.operations.delete' | translate
-          }}</hans-button>
-        </div>
-      </article>
-    }
-  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
-    @for (item of experiences(); track item.id) {
-      <button
-        class="pick-card"
-        (click)="modalMode() === 'pick-update' ? optionSelected(item.id) : deleteOption(item.id)"
-      >
-        <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-      </button>
-    }
-  } @else if (modalMode() === 'delete' && selectedExperience(); as item) {
-    <article class="record-card">
-      <b>{{ item.companyName }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-    </article>
   }
 </app-operations-modal>

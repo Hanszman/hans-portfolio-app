@@ -9,9 +9,7 @@ import {
   normalizeSpokenLanguageImageAssetIds,
 } from './spoken-languages-operations.helper';
 
-const createImageAsset = (
-  overrides: Partial<ImageAssetRecord> = {},
-): ImageAssetRecord => ({
+const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
   id: 'image-asset-1',
   fileName: 'usa.png',
   filePath: '/assets/img/skills/usa.png',
@@ -169,14 +167,8 @@ describe('spoken languages helper', () => {
       ],
     );
 
-    expect(viewModels.map((viewModel) => viewModel.code)).toEqual([
-      'pt-br',
-      'en-us',
-    ]);
-    expect(viewModels[1].imageAssetLabels).toEqual([
-      'usa.png (ICON)',
-      'english.svg (ICON)',
-    ]);
+    expect(viewModels.map((viewModel) => viewModel.code)).toEqual(['pt-br', 'en-us']);
+    expect(viewModels[1].imageAssetLabels).toEqual(['usa.png (ICON)', 'english.svg (ICON)']);
   });
 
   it('should use the code as the tie-breaker when sort orders are equal', () => {
@@ -247,10 +239,7 @@ describe('spoken languages helper', () => {
       [],
     );
 
-    expect(leftDefault.map((viewModel) => viewModel.code)).toEqual([
-      'ordered',
-      'without-order',
-    ]);
+    expect(leftDefault.map((viewModel) => viewModel.code)).toEqual(['ordered', 'without-order']);
     expect(rightDefault[1].sortOrderLabel).toBe('0');
   });
 

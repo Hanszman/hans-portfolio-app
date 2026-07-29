@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectSpokenLanguageForUpdate($event)"
+  (deleteSelected)="selectSpokenLanguageForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -93,121 +99,15 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.spokenLanguages.fields.imageAssets.label' | translate"
           [description]="'pages.admin.spokenLanguages.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.spokenLanguages.fields.imageAssets.empty' | translate"
           [options]="imageAssetOptions()"
           [selectedIds]="form().imageAssetIds"
           (toggled)="toggleImageAsset($event)"
-        ></app-relation-picker>
-
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="spoken-languages-operations-list">
-            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
-              <article class="spoken-languages-operations-item">
-                <div class="spoken-languages-operations-item-header">
-                  <div>
-                    <p class="spoken-languages-operations-label">
-                      {{ 'pages.admin.spokenLanguages.card.code' | translate }}
-                    </p>
-                    <h4>{{ spokenLanguage.code }}</h4>
-                  </div>
-
-                  <div class="spoken-languages-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectSpokenLanguageForUpdate(spokenLanguage.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectSpokenLanguageForDelete(spokenLanguage.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                @for (
-                  item of [
-                    ['pages.admin.spokenLanguages.card.namePt', spokenLanguage.namePt],
-                    ['pages.admin.spokenLanguages.card.nameEn', spokenLanguage.nameEn],
-                    ['pages.admin.spokenLanguages.card.proficiency', spokenLanguage.proficiency],
-                    [
-                      'pages.admin.spokenLanguages.card.highlight',
-                      spokenLanguage.highlight
-                        ? ('pages.admin.spokenLanguages.fields.highlight.enabled' | translate)
-                        : ('pages.admin.spokenLanguages.fields.highlight.disabled' | translate),
-                    ],
-                    ['pages.admin.spokenLanguages.card.sortOrder', spokenLanguage.sortOrderLabel],
-                    [
-                      'pages.admin.spokenLanguages.card.imageAssets',
-                      spokenLanguage.imageAssetLabels.join(', ') ||
-                        ('pages.admin.spokenLanguages.card.emptyRelations' | translate),
-                    ],
-                  ];
-                  track item[0]
-                ) {
-                  <div class="spoken-languages-operations-item-copy">
-                    <p class="spoken-languages-operations-label">
-                      {{ item[0] | translate }}
-                    </p>
-                    <p>{{ item[1] }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="spoken-languages-operations-picker">
-            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
-              <button
-                type="button"
-                class="spoken-languages-operations-picker-option"
-                (click)="selectSpokenLanguageForUpdate(spokenLanguage.id)"
-              >
-                <strong>{{ spokenLanguage.namePt }} ({{ spokenLanguage.code }})</strong>
-                <span>{{ spokenLanguage.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="spoken-languages-operations-picker">
-            @for (spokenLanguage of spokenLanguages(); track trackById($index, spokenLanguage)) {
-              <button
-                type="button"
-                class="spoken-languages-operations-picker-option"
-                (click)="selectSpokenLanguageForDelete(spokenLanguage.id)"
-              >
-                <strong>{{ spokenLanguage.namePt }} ({{ spokenLanguage.code }})</strong>
-                <span>{{ spokenLanguage.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="spoken-languages-operations-delete-summary">
-            <strong
-              >{{ selectedSpokenLanguage()?.namePt }} ({{ selectedSpokenLanguage()?.code }})</strong
-            >
-            <p>{{ selectedSpokenLanguage()?.nameEn }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

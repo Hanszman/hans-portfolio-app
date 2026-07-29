@@ -6,26 +6,63 @@ import { ExperiencesOperationsFormValue } from '../../experiences-operations.typ
 import { ExperiencesOperationsModalComponent } from './experiences-operations-modal.component';
 
 const FORM: ExperiencesOperationsFormValue = {
-  slug: 'stevanini', companyName: 'Stefanini', titlePt: 'Titulo PT', titleEn: 'Title EN',
-  summaryPt: 'Resumo PT', summaryEn: 'Summary EN', descriptionPt: 'Descricao PT', descriptionEn: 'Description EN',
-  startDate: '2020-01-01', endDate: '', isCurrent: true, highlight: true, sortOrder: '1',
-  technologyIds: ['technology-1'], projectIds: ['project-1'], customerIds: ['customer-1'],
-  jobIds: ['job-1'], linkIds: ['link-1'], imageAssetIds: ['image-1'],
+  slug: 'stevanini',
+  companyName: 'Stefanini',
+  titlePt: 'Titulo PT',
+  titleEn: 'Title EN',
+  summaryPt: 'Resumo PT',
+  summaryEn: 'Summary EN',
+  descriptionPt: 'Descricao PT',
+  descriptionEn: 'Description EN',
+  startDate: '2020-01-01',
+  endDate: '',
+  isCurrent: true,
+  highlight: true,
+  sortOrder: '1',
+  technologyIds: ['technology-1'],
+  projectIds: ['project-1'],
+  customerIds: ['customer-1'],
+  jobIds: ['job-1'],
+  linkIds: ['link-1'],
+  imageAssetIds: ['image-1'],
 };
 
 const RECORD: ExperienceRecord = {
-  id: 'experience-1', slug: 'stefanini', companyName: 'Stefanini', titlePt: 'Titulo PT', titleEn: 'Title EN',
-  summaryPt: 'Resumo PT', summaryEn: 'Summary EN', descriptionPt: 'Descricao PT', descriptionEn: 'Description EN',
-  startDate: '2020-01-01', endDate: null, isCurrent: true, highlight: true, sortOrder: 1,
-  technologyRelations: [{ technologyId: 'technology-1' }], projectIds: ['project-1'], customerIds: ['customer-1'],
-  jobIds: ['job-1'], linkIds: ['link-1'], imageAssetIds: ['image-1'],
+  id: 'experience-1',
+  slug: 'stefanini',
+  companyName: 'Stefanini',
+  titlePt: 'Titulo PT',
+  titleEn: 'Title EN',
+  summaryPt: 'Resumo PT',
+  summaryEn: 'Summary EN',
+  descriptionPt: 'Descricao PT',
+  descriptionEn: 'Description EN',
+  startDate: '2020-01-01',
+  endDate: null,
+  isCurrent: true,
+  highlight: true,
+  sortOrder: 1,
+  technologyRelations: [{ technologyId: 'technology-1' }],
+  projectIds: ['project-1'],
+  customerIds: ['customer-1'],
+  jobIds: ['job-1'],
+  linkIds: ['link-1'],
+  imageAssetIds: ['image-1'],
 };
 
 describe('ExperiencesOperationsModalComponent', () => {
   let fixture: ComponentFixture<ExperiencesOperationsModalComponent>;
 
   beforeAll(() => {
-    for (const name of ['hans-button', 'hans-date-picker', 'hans-input', 'hans-loading', 'hans-modal', 'hans-select-option', 'hans-toggle']) {
+    for (const name of [
+      'hans-button',
+      'hans-date-picker',
+      'hans-input',
+      'hans-loading',
+      'hans-modal',
+      'hans-select-option',
+      'hans-toggle',
+    ]) {
       if (!customElements.get(name)) customElements.define(name, class extends HTMLElement {});
     }
   });
@@ -39,6 +76,7 @@ describe('ExperiencesOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('form', FORM);
     fixture.componentRef.setInput('experiences', [RECORD]);
+    fixture.componentRef.setInput('selectedExperience', RECORD);
     fixture.detectChanges();
   });
 
@@ -78,10 +116,28 @@ describe('ExperiencesOperationsModalComponent', () => {
     const component = fixture.componentInstance as unknown as {
       emit(field: keyof ExperiencesOperationsFormValue, event: Event): void;
       toggle(field: 'isCurrent' | 'highlight', event: Event): void;
-      relation(field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds', id: string): void;
+      relation(
+        field:
+          | 'technologyIds'
+          | 'projectIds'
+          | 'customerIds'
+          | 'jobIds'
+          | 'linkIds'
+          | 'imageAssetIds',
+        id: string,
+      ): void;
       optionSelected(id: string): void;
       deleteOption(id: string): void;
-      selected(field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds', id: string): boolean;
+      selected(
+        field:
+          | 'technologyIds'
+          | 'projectIds'
+          | 'customerIds'
+          | 'jobIds'
+          | 'linkIds'
+          | 'imageAssetIds',
+        id: string,
+      ): boolean;
     };
     const fieldSpy = jasmine.createSpy('field');
     const booleanSpy = jasmine.createSpy('boolean');

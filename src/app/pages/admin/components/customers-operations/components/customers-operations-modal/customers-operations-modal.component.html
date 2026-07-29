@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectCustomerForUpdate($event)"
+  (deleteSelected)="selectCustomerForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -87,132 +93,24 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.customers.fields.experiences.label' | translate"
           [description]="'pages.admin.customers.fields.experiences.description' | translate"
           [emptyMessage]="'pages.admin.customers.fields.experiences.empty' | translate"
           [options]="experienceOptions()"
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.customers.fields.imageAssets.label' | translate"
           [description]="'pages.admin.customers.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.customers.fields.imageAssets.empty' | translate"
           [options]="imageAssetOptions()"
           [selectedIds]="form().imageAssetIds"
           (toggled)="toggleImageAsset($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="customers-operations-list">
-            @for (customer of customers(); track trackById($index, customer)) {
-              <article class="customers-operations-item">
-                <div class="customers-operations-item-header">
-                  <div>
-                    <p class="customers-operations-label">
-                      {{ 'pages.admin.customers.card.slug' | translate }}
-                    </p>
-                    <h4>{{ customer.slug }}</h4>
-                  </div>
-
-                  <div class="customers-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectCustomerForUpdate(customer.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectCustomerForDelete(customer.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                @for (
-                  item of [
-                    ['pages.admin.customers.card.name', customer.name],
-                    ['pages.admin.customers.card.summaryPt', customer.summaryPt],
-                    ['pages.admin.customers.card.summaryEn', customer.summaryEn],
-                    [
-                      'pages.admin.customers.card.highlight',
-                      customer.highlight
-                        ? ('pages.admin.customers.fields.highlight.enabled' | translate)
-                        : ('pages.admin.customers.fields.highlight.disabled' | translate),
-                    ],
-                    ['pages.admin.customers.card.sortOrder', customer.sortOrderLabel],
-                    [
-                      'pages.admin.customers.card.experiences',
-                      customer.experienceLabels.join(', ') ||
-                        ('pages.admin.customers.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.customers.card.imageAssets',
-                      customer.imageAssetLabels.join(', ') ||
-                        ('pages.admin.customers.card.emptyRelations' | translate),
-                    ],
-                  ];
-                  track item[0]
-                ) {
-                  <div class="customers-operations-item-copy">
-                    <p class="customers-operations-label">
-                      {{ item[0] | translate }}
-                    </p>
-                    <p>{{ item[1] }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="customers-operations-picker">
-            @for (customer of customers(); track trackById($index, customer)) {
-              <button
-                type="button"
-                class="customers-operations-picker-option"
-                (click)="selectCustomerForUpdate(customer.id)"
-              >
-                <strong>{{ customer.name }} ({{ customer.slug }})</strong>
-                <span>{{ customer.summaryEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="customers-operations-picker">
-            @for (customer of customers(); track trackById($index, customer)) {
-              <button
-                type="button"
-                class="customers-operations-picker-option"
-                (click)="selectCustomerForDelete(customer.id)"
-              >
-                <strong>{{ customer.name }} ({{ customer.slug }})</strong>
-                <span>{{ customer.summaryEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="customers-operations-delete-summary">
-            <strong>{{ selectedCustomer()?.name }} ({{ selectedCustomer()?.slug }})</strong>
-            <p>{{ selectedCustomer()?.summaryEn }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

@@ -11,18 +11,19 @@ const SETTINGS: readonly PortfolioSettingOperationsViewModel[] = [
     description: 'Branding assets.',
     formattedValue: '{\n  "logo": "vh"\n}',
   },
+  {
+    id: 'setting-2',
+    key: 'empty',
+    description: '',
+    formattedValue: '{}',
+  },
 ];
 
 describe('PortfolioSettingsOperationsModalComponent', () => {
   let fixture: ComponentFixture<PortfolioSettingsOperationsModalComponent>;
 
   beforeAll(() => {
-    for (const elementName of [
-      'hans-button',
-      'hans-input',
-      'hans-loading',
-      'hans-modal',
-    ]) {
+    for (const elementName of ['hans-button', 'hans-input', 'hans-loading', 'hans-modal']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -92,10 +93,7 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
       fixture.nativeElement.querySelectorAll('hans-input'),
     ) as (HTMLElement & { label?: string })[];
 
-    expect(inputElements.map((element) => element.label)).toEqual([
-      'Setting key *',
-      'Description',
-    ]);
+    expect(inputElements.map((element) => element.label)).toEqual(['Setting key *', 'Description']);
     expect(fixture.nativeElement.textContent).toContain('JSON value *');
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
@@ -161,7 +159,7 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     fixture.componentRef.setInput('selectedSetting', {
       id: 'setting-1',
       key: 'branding',
-      description: 'Branding assets.',
+      description: '',
       value: {
         logo: 'vh',
       },
@@ -181,7 +179,9 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     expect(fixture.nativeElement.textContent).toContain(
       'This action permanently removes the selected protected setting from the portfolio configuration.',
     );
-    expect(fixture.nativeElement.textContent).toContain('Branding assets.');
+    expect(fixture.nativeElement.textContent).toContain(
+      'No description was registered for this setting yet.',
+    );
     expect(modalElement?.confirmLabel).toBe('Delete');
   });
 

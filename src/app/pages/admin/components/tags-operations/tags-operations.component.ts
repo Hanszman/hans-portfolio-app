@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
 import {
   TagMutationPayload,
@@ -22,8 +21,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -49,12 +47,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 @Component({
   selector: 'app-tags-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    TagsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, TagsOperationsModalComponent],
   templateUrl: './tags-operations.component.html',
   styleUrl: './tags-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -70,9 +63,7 @@ export class TagsOperationsComponent implements OnInit {
 
   private readonly tagsSignal = signal<readonly TagRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
-  private readonly technologiesSignal = signal<
-    readonly TechnologyCollectionItemResponse[]
-  >([]);
+  private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -91,15 +82,9 @@ export class TagsOperationsComponent implements OnInit {
   );
 
   protected readonly tags = computed(() =>
-    buildTagsViewModels(
-      this.tagsSignal(),
-      this.projectsSignal(),
-      this.technologiesSignal(),
-    ),
+    buildTagsViewModels(this.tagsSignal(), this.projectsSignal(), this.technologiesSignal()),
   );
-  protected readonly projectOptions = computed(() =>
-    buildTagCatalogOptions(this.projectsSignal()),
-  );
+  protected readonly projectOptions = computed(() => buildTagCatalogOptions(this.projectsSignal()));
   protected readonly technologyOptions = computed(() =>
     buildTagCatalogOptions(this.technologiesSignal()),
   );
@@ -310,9 +295,7 @@ export class TagsOperationsComponent implements OnInit {
 
     try {
       const [tagsResponse, projectsResponse, technologiesResponse] = await Promise.all([
-        firstValueFrom(
-          this.tagsOperationsService.getAll(page, this.pagination().pageSize, search),
-        ),
+        firstValueFrom(this.tagsOperationsService.getAll(page, this.pagination().pageSize, search)),
         firstValueFrom(this.projectsService.getProjects()),
         firstValueFrom(this.technologiesService.getTechnologies()),
       ]);
@@ -344,9 +327,7 @@ export class TagsOperationsComponent implements OnInit {
           return;
         }
 
-        await firstValueFrom(
-          this.tagsOperationsService.update(selectedTag.id, payload),
-        );
+        await firstValueFrom(this.tagsOperationsService.update(selectedTag.id, payload));
         this.setSuccessFeedback('pages.admin.tags.feedback.updated');
       }
 
@@ -394,10 +375,7 @@ export class TagsOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

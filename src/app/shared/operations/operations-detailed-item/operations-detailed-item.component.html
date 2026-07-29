@@ -1,0 +1,48 @@
+<article class="operations-detailed-item">
+  <header>
+    <div class="operations-detailed-item-heading">
+      @if (item().imageUrl; as imageUrl) {
+        <img
+          [src]="imageUrl"
+          [alt]="item().imageAlt ?? item().title"
+          [title]="item().imageTitle ?? item().title"
+        />
+      }
+      <div>
+        <h4 [title]="item().title">{{ item().title }}</h4>
+        @if (item().subtitle; as subtitle) {
+          <p [title]="subtitle">{{ subtitle }}</p>
+        }
+      </div>
+    </div>
+    <div class="operations-detailed-item-actions">
+      <hans-button
+        buttonColor="primary"
+        buttonSize="medium"
+        buttonVariant="default"
+        [attr.aria-label]="'pages.admin.operations.update' | translate"
+        (click)="updateSelected.emit(item().id)"
+      >
+        {{ 'pages.admin.operations.update' | translate }}
+      </hans-button>
+      <hans-button
+        buttonColor="primary"
+        buttonSize="medium"
+        buttonVariant="default"
+        [attr.aria-label]="'pages.admin.operations.delete' | translate"
+        (click)="deleteSelected.emit(item().id)"
+      >
+        {{ 'pages.admin.operations.delete' | translate }}
+      </hans-button>
+    </div>
+  </header>
+
+  <div class="operations-detailed-item-fields">
+    @for (field of item().fields; track field.labelKey) {
+      <div>
+        <p>{{ field.labelKey | translate }}</p>
+        <span [title]="field.title ?? field.value">{{ field.value }}</span>
+      </div>
+    }
+  </div>
+</article>

@@ -171,47 +171,35 @@ describe('links helper', () => {
 
   it('should normalize relations from explicit ids, nested records and the public project catalog', () => {
     expect(
-      normalizeLinkProjectIds(
-        createLink(),
-        [
-          createProject({
-            id: 'project-1',
-            links: [
-              {
-                projectId: 'project-1',
-                linkId: 'another-link',
+      normalizeLinkProjectIds(createLink(), [
+        createProject({
+          id: 'project-1',
+          links: [
+            {
+              projectId: 'project-1',
+              linkId: 'another-link',
+              sortOrder: 1,
+              link: {
+                id: 'another-link',
+                url: 'https://github.com/vh/portfolio',
+                labelPt: null,
+                labelEn: null,
+                descriptionPt: null,
+                descriptionEn: null,
+                type: 'GITHUB',
                 sortOrder: 1,
-                link: {
-                  id: 'another-link',
-                  url: 'https://github.com/vh/portfolio',
-                  labelPt: null,
-                  labelEn: null,
-                  descriptionPt: null,
-                  descriptionEn: null,
-                  type: 'GITHUB',
-                  sortOrder: 1,
-                  createdAt: '2024-01-01T00:00:00.000Z',
-                  updatedAt: '2024-01-01T00:00:00.000Z',
-                },
+                createdAt: '2024-01-01T00:00:00.000Z',
+                updatedAt: '2024-01-01T00:00:00.000Z',
               },
-            ],
-          }),
-        ],
-      ),
+            },
+          ],
+        }),
+      ]),
     ).toEqual(['project-2', 'project-3', 'project-1']);
 
-    expect(normalizeLinkExperienceIds(createLink())).toEqual([
-      'experience-2',
-      'experience-3',
-    ]);
-    expect(normalizeLinkTechnologyIds(createLink())).toEqual([
-      'technology-2',
-      'technology-3',
-    ]);
-    expect(normalizeLinkFormationIds(createLink())).toEqual([
-      'formation-2',
-      'formation-3',
-    ]);
+    expect(normalizeLinkExperienceIds(createLink())).toEqual(['experience-2', 'experience-3']);
+    expect(normalizeLinkTechnologyIds(createLink())).toEqual(['technology-2', 'technology-3']);
+    expect(normalizeLinkFormationIds(createLink())).toEqual(['formation-2', 'formation-3']);
   });
 
   it('should normalize relation ids from nested records and ignore empty fallback relations', () => {
@@ -248,7 +236,10 @@ describe('links helper', () => {
       normalizeLinkTechnologyIds(
         createLink({
           technologyIds: undefined,
-          technologies: [{ technology: { id: 'technology-nested', slug: 'nested', name: 'Nested tech' } }, {}],
+          technologies: [
+            { technology: { id: 'technology-nested', slug: 'nested', name: 'Nested tech' } },
+            {},
+          ],
         }),
       ),
     ).toEqual(['technology-nested']);
@@ -257,7 +248,10 @@ describe('links helper', () => {
       normalizeLinkFormationIds(
         createLink({
           formationIds: undefined,
-          formations: [{ formation: { id: 'formation-nested', slug: 'nested', namePt: 'Nested formation' } }, {}],
+          formations: [
+            { formation: { id: 'formation-nested', slug: 'nested', namePt: 'Nested formation' } },
+            {},
+          ],
         }),
       ),
     ).toEqual(['formation-nested']);
@@ -396,10 +390,7 @@ describe('links helper', () => {
       'https://github.com/vh/portfolio',
       'https://example.com/demo',
     ]);
-    expect(viewModels[0].projectLabels).toEqual([
-      'Admin workspace',
-      'Dashboard suite',
-    ]);
+    expect(viewModels[0].projectLabels).toEqual(['Admin workspace', 'Dashboard suite']);
     expect(viewModels[0].experienceLabels).toEqual([
       'Arquiteto (Stefanini)',
       'Tech lead (Outsourcing)',

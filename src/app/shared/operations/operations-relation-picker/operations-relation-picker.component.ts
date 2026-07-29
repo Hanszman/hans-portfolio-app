@@ -5,21 +5,21 @@ import {
   input,
   output,
 } from '@angular/core';
-import { RelationPickerOption } from './relation-picker.types';
+import { OperationsRelationPickerOption } from './operations-relation-picker.types';
 
 @Component({
-  selector: 'app-relation-picker',
+  selector: 'app-operations-relation-picker',
   standalone: true,
-  templateUrl: './relation-picker.component.html',
-  styleUrl: './relation-picker.component.scss',
+  templateUrl: './operations-relation-picker.component.html',
+  styleUrl: './operations-relation-picker.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RelationPickerComponent {
+export class OperationsRelationPickerComponent {
   readonly label = input('');
   readonly description = input('');
   readonly emptyMessage = input('');
-  readonly options = input<readonly RelationPickerOption[]>([]);
+  readonly options = input<readonly OperationsRelationPickerOption[]>([]);
   readonly selectedIds = input<readonly string[]>([]);
   readonly toggled = output<string>();
 

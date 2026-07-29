@@ -151,10 +151,7 @@ describe('formations operations helper', () => {
 
     expect(normalizeFormationTechnologyIds(formation)).toEqual(['technology-2']);
     expect(normalizeFormationLinkIds(formation)).toEqual(['link-2', 'link-3']);
-    expect(normalizeFormationImageAssetIds(formation)).toEqual([
-      'image-asset-2',
-      'image-asset-3',
-    ]);
+    expect(normalizeFormationImageAssetIds(formation)).toEqual(['image-asset-2', 'image-asset-3']);
   });
 
   it('should normalize fallback ids from secondary relation collections', () => {
@@ -314,11 +311,7 @@ describe('formations operations helper', () => {
       [],
     );
 
-    expect(viewModels.map(({ id }) => id)).toEqual([
-      'formation-3',
-      'formation-4',
-      'formation-2',
-    ]);
+    expect(viewModels.map(({ id }) => id)).toEqual(['formation-3', 'formation-4', 'formation-2']);
   });
 
   it('should build sorted formation view-models with resolved labels', () => {
@@ -339,9 +332,7 @@ describe('formations operations helper', () => {
         }),
         createFormation(),
       ],
-      [
-        createTechnology({ id: 'technology-2', name: 'NestJS', slug: 'nestjs' }),
-      ],
+      [createTechnology({ id: 'technology-2', name: 'NestJS', slug: 'nestjs' })],
       [
         createLink({ id: 'link-1', labelPt: 'Portal PUC' }),
         createLink({ id: 'link-2', labelPt: 'Portal UFMG' }),

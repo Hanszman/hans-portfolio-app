@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ExperiencesOperationsService } from '../../../../core/api/admin/experiences/experiences-operations.service';
 import { ExperienceRecord } from '../../../../core/api/admin/experiences/experiences-operations.types';
 import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
@@ -26,7 +25,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -46,7 +45,7 @@ import {
 @Component({
   selector: 'app-experiences-operations',
   standalone: true,
-  imports: [TranslatePipe, OperationsActionsComponent, ExperiencesOperationsModalComponent],
+  imports: [OperationsComponent, ExperiencesOperationsModalComponent],
   templateUrl: './experiences-operations.component.html',
   styleUrl: './experiences-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -100,7 +99,11 @@ export class ExperiencesOperationsComponent implements OnInit {
   protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
     const mode = this.modalMode();
     const translationMode =
-      mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode ?? 'create';
+      mode === 'pick-update'
+        ? 'pickUpdate'
+        : mode === 'pick-delete'
+          ? 'pickDelete'
+          : (mode ?? 'create');
 
     return `pages.admin.experiences.modal.${translationMode}.title` as AppTranslationKey;
   });

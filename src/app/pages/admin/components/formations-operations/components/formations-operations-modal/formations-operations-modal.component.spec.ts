@@ -26,6 +26,26 @@ const FORMATIONS: readonly FormationOperationsViewModel[] = [
     linkIds: ['link-1'],
     imageAssetIds: ['image-asset-1'],
   },
+  {
+    id: 'formation-2',
+    slug: 'empty-formation',
+    institution: 'Empty Institution',
+    titlePt: 'Formacao vazia',
+    titleEn: 'Empty formation',
+    degreeType: 'COURSE',
+    summaryPt: '',
+    summaryEn: '',
+    startDate: '2024-01-01',
+    endDateLabel: '-',
+    highlight: false,
+    sortOrderLabel: '2',
+    technologyLabels: [],
+    linkLabels: [],
+    imageAssetLabels: [],
+    technologyIds: [],
+    linkIds: [],
+    imageAssetIds: [],
+  },
 ];
 
 describe('FormationsOperationsModalComponent', () => {
@@ -217,9 +237,7 @@ describe('FormationsOperationsModalComponent', () => {
       ),
     ).toBe('BACHELOR');
     expect(
-      componentAccess.resolveSelectValue(
-        new CustomEvent('valueChange', { detail: 'TECHNICAL' }),
-      ),
+      componentAccess.resolveSelectValue(new CustomEvent('valueChange', { detail: 'TECHNICAL' })),
     ).toBe('TECHNICAL');
     expect(componentAccess.resolveSelectValue(new Event('valueChange'))).toBe('');
     expect(
@@ -287,12 +305,12 @@ describe('FormationsOperationsModalComponent', () => {
       institution: 'PUC Minas',
       titlePt: 'ADS',
       titleEn: 'Systems Analysis',
-    degreeType: 'BACHELOR',
-    summaryPt: 'Resumo PT',
-    summaryEn: 'Summary EN',
-    startDate: '2020-01-01',
-    endDateLabel: '2023-12-01',
-    highlight: true,
+      degreeType: 'BACHELOR',
+      summaryPt: 'Resumo PT',
+      summaryEn: 'Summary EN',
+      startDate: '2020-01-01',
+      endDateLabel: '2023-12-01',
+      highlight: true,
       sortOrder: 1,
       technologyRelations: [],
       linkIds: ['link-1'],

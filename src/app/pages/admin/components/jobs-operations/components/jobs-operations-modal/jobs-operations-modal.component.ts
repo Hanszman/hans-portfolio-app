@@ -12,7 +12,11 @@ import { JobRecord } from '../../../../../../core/api/admin/jobs/jobs-operations
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   trackAdminItemById,
@@ -34,7 +38,7 @@ import {
 @Component({
   selector: 'app-jobs-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './jobs-operations-modal.component.html',
   styleUrl: './jobs-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,9 +48,7 @@ export class JobsOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.jobs.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.jobs.modal.create.title');
   readonly modalMode = input<JobsOperationsModalMode | null>(null);
   readonly jobs = input<readonly JobOperationsViewModel[]>([]);
   readonly selectedJob = input<JobRecord | null>(null);
@@ -109,10 +111,61 @@ export class JobsOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.jobs().map((job) => ({
+      id: job.id,
+      title: `${job.namePt} (${job.slug})`,
+      subtitle: job.nameEn,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.jobs.card.emptyRelations');
+
+      return this.jobs().map((job) => ({
+        id: job.id,
+        title: job.slug,
+        subtitle: job.namePt,
+        fields: [
+          { labelKey: 'pages.admin.jobs.card.slug', value: job.slug },
+          { labelKey: 'pages.admin.jobs.card.namePt', value: job.namePt },
+          { labelKey: 'pages.admin.jobs.card.nameEn', value: job.nameEn },
+          { labelKey: 'pages.admin.jobs.card.summaryPt', value: job.summaryPt },
+          { labelKey: 'pages.admin.jobs.card.summaryEn', value: job.summaryEn },
+          {
+            labelKey: 'pages.admin.jobs.card.highlight',
+            value: this.translation.instant(
+              job.highlight
+                ? 'pages.admin.jobs.fields.highlight.enabled'
+                : 'pages.admin.jobs.fields.highlight.disabled',
+            ),
+          },
+          { labelKey: 'pages.admin.jobs.card.sortOrder', value: job.sortOrderLabel },
+          {
+            labelKey: 'pages.admin.jobs.card.experiences',
+            value: job.experienceLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.jobs.card.imageAssets',
+            value: job.imageAssetLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const job = this.selectedJob();
+    return job
+      ? {
+          id: job.id,
+          title: `${job.namePt} (${job.slug})`,
+          subtitle: job.nameEn ?? undefined,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();

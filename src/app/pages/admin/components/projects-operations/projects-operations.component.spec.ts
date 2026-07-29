@@ -28,9 +28,9 @@ const response = (
       shortDescriptionEn: 'S',
       fullDescriptionPt: 'D',
       fullDescriptionEn: 'D',
-      context: 'CLIENT',
+      context: 'PROFESSIONAL',
       status: 'COMPLETED',
-      environment: 'WEB',
+      environment: 'FRONTEND',
       featured: false,
       highlight: true,
       startDate: null,
@@ -109,9 +109,9 @@ const fillRequiredProjectFields = (component: ComponentApi): void => {
   component.updateField('shortDescriptionEn', 'Summary');
   component.updateField('fullDescriptionPt', 'Descricao');
   component.updateField('fullDescriptionEn', 'Description');
-  component.updateField('context', 'CLIENT');
+  component.updateField('context', 'PROFESSIONAL');
   component.updateField('status', 'COMPLETED');
-  component.updateField('environment', 'WEB');
+  component.updateField('environment', 'FRONTEND');
 };
 
 describe('ProjectsOperationsComponent', () => {
@@ -233,7 +233,7 @@ describe('ProjectsOperationsComponent', () => {
     expect(c.modalFeedbackKey()).toBe('pages.admin.projects.feedback.requiredOptions');
     session.accessToken.and.returnValue('token');
     api.create.and.returnValue(throwError(() => new Error()));
-    c.updateField('context', 'CLIENT');
+    c.updateField('context', 'PROFESSIONAL');
     await c.submitModal();
     expect(c.modalFeedbackKey()).toBe('pages.admin.projects.feedback.saveError');
     c.openDeleteModal('p-1');

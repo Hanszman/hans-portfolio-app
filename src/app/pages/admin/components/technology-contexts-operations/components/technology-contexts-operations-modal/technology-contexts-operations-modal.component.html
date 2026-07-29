@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="closed.emit()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="pageSelected.emit($event)"
+  (updateSelected)="updateSelected.emit($event)"
+  (deleteSelected)="deleteSelected.emit($event)"
 >
   @if (modalMode(); as mode) {
     @if (mode === 'create' || mode === 'update') {
@@ -72,77 +78,6 @@
           (change)="change('endedAt', $event)"
         ></hans-date-picker>
       </div>
-    } @else {
-      @switch (mode) {
-        @case ('read') {
-          <div class="technology-contexts-operations-list">
-            @for (record of records(); track trackById($index, record)) {
-              <article class="technology-contexts-operations-item">
-                <div class="technology-contexts-operations-item-header">
-                  <div>
-                    <p class="technology-contexts-operations-label">
-                      {{ 'pages.admin.technologyContexts.card.technology' | translate }}
-                    </p>
-                    <h4>{{ record.technologyName }} ({{ record.contextLabel }})</h4>
-                  </div>
-                  <div class="technology-contexts-operations-item-actions">
-                    <hans-button
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      (click)="updateSelected.emit(record.id)"
-                      >{{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-                    <hans-button
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      (click)="deleteSelected.emit(record.id)"
-                      >{{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-                <p>{{ record.dateRangeLabel }}</p>
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="technology-contexts-operations-picker">
-            @for (record of records(); track trackById($index, record)) {
-              <button
-                type="button"
-                class="technology-contexts-operations-picker-option"
-                (click)="updateSelected.emit(record.id)"
-              >
-                <strong>{{ record.technologyName }} ({{ record.contextLabel }})</strong>
-                <span>{{ record.dateRangeLabel }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="technology-contexts-operations-picker">
-            @for (record of records(); track trackById($index, record)) {
-              <button
-                type="button"
-                class="technology-contexts-operations-picker-option"
-                (click)="deleteSelected.emit(record.id)"
-              >
-                <strong>{{ record.technologyName }} ({{ record.contextLabel }})</strong>
-                <span>{{ record.dateRangeLabel }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="technology-contexts-operations-delete-summary">
-            <strong>
-              {{ selectedRecordViewModel()?.technologyName }}
-              ({{ selectedRecordViewModel()?.contextLabel }})
-            </strong>
-            <p>{{ selectedRecordViewModel()?.dateRangeLabel }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

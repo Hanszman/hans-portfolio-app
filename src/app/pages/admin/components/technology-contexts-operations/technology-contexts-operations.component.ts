@@ -7,7 +7,6 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
 import { TechnologyContextsOperationsService } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.service';
 import { TechnologyContextRecord } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
@@ -17,8 +16,7 @@ import { AdminSessionService } from '../../../../core/admin-session/admin-sessio
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   AdminCollectionPagination,
   ADMIN_MODAL_PAGE_SIZE,
@@ -46,12 +44,7 @@ import {
 @Component({
   selector: 'app-technology-contexts-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    TechnologyContextsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, TechnologyContextsOperationsModalComponent],
   templateUrl: './technology-contexts-operations.component.html',
   styleUrl: './technology-contexts-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

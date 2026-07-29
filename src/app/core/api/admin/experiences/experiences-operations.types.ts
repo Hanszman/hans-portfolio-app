@@ -41,6 +41,7 @@ export interface ExperienceRecord {
   isCurrent?: boolean | null;
   highlight?: boolean | null;
   sortOrder?: number | null;
+  technologyIds?: string[] | null;
   technologyRelations?: ExperienceRelationRecord[] | null;
   projectIds?: string[] | null;
   customerIds?: string[] | null;

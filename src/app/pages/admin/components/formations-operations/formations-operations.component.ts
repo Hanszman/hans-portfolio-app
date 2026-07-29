@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { FormationsOperationsService } from '../../../../core/api/admin/formations/formations-operations.service';
 import {
   FormationMutationPayload,
@@ -24,8 +23,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -52,12 +50,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 @Component({
   selector: 'app-formations-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    FormationsOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, FormationsOperationsModalComponent],
   templateUrl: './formations-operations.component.html',
   styleUrl: './formations-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -102,9 +95,7 @@ export class FormationsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildFormationTechnologyOptions(this.technologiesSignal()),
   );
-  protected readonly linkOptions = computed(() =>
-    buildFormationLinkOptions(this.linksSignal()),
-  );
+  protected readonly linkOptions = computed(() => buildFormationLinkOptions(this.linksSignal()));
   protected readonly imageAssetOptions = computed(() =>
     buildFormationImageAssetOptions(this.imageAssetsSignal()),
   );
@@ -431,10 +422,7 @@ export class FormationsOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

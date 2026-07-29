@@ -47,9 +47,7 @@ const resolveProjectIdsFromCatalog = (
     .filter((project) =>
       project.tags.some(
         (relation) =>
-          relation.tagId === tag.id ||
-          relation.tag.id === tag.id ||
-          relation.tag.slug === tag.slug,
+          relation.tagId === tag.id || relation.tag.id === tag.id || relation.tag.slug === tag.slug,
       ),
     )
     .map((project) => project.id);
@@ -90,9 +88,7 @@ export const normalizeTagProjectIds = (
   return [...projectIds];
 };
 
-export const normalizeTagTechnologyIds = (
-  tag: TagRecord,
-): readonly string[] => {
+export const normalizeTagTechnologyIds = (tag: TagRecord): readonly string[] => {
   const technologyIds = new Set<string>();
 
   for (const technologyId of tag.technologyIds ?? []) {
@@ -155,9 +151,7 @@ export const buildTagsViewModels = (
         nameEn: resolveTagNameEn(tag),
         type: tag.type?.toUpperCase() ?? '',
         sortOrderLabel: String(tag.sortOrder ?? 0),
-        projectLabels: projectIds.map((projectId) =>
-          resolveProjectLabel(projectId, projectMap),
-        ),
+        projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
         technologyLabels: technologyIds.map((technologyId) =>
           resolveTechnologyLabel(technologyId, technologyMap),
         ),

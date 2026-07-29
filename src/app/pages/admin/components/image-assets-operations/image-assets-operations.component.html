@@ -1,38 +1,21 @@
-<section class="image-assets-operations">
-  <div class="image-assets-operations-copy">
-    <p class="image-assets-operations-kicker">
-      {{ 'pages.admin.imageAssets.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.image-assets.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.image-assets.description' | translate }}
-      {{ 'pages.admin.imageAssets.description' | translate }}
-    </p>
-  </div>
-
-  <p class="image-assets-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasImageAssets() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasImageAssets() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasImageAssets() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state
-      mode="loading"
-      [message]="'pages.admin.imageAssets.states.loading' | translate"
-    />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasImageAssets()) {
-    <app-info-state mode="empty" [message]="'pages.admin.imageAssets.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.imageAssets.sectionLabel"
+  titleKey="pages.admin.entities.image-assets.title"
+  [descriptionKeys]="[
+    'pages.admin.entities.image-assets.description',
+    'pages.admin.imageAssets.description',
+  ]"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasImageAssets()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.imageAssets.states.loading"
+  emptyKey="pages.admin.imageAssets.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-image-assets-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -72,4 +55,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

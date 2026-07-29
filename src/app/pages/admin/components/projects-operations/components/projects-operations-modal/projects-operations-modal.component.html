@@ -11,10 +11,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="closed.emit()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submitted.emit()"
   (pageSelected)="pageSelected.emit($event)"
+  (updateSelected)="updateSelected.emit($event)"
+  (deleteSelected)="deleteSelected.emit($event)"
 >
   @if (modalMode() === 'create' || modalMode() === 'update') {
     <div class="projects-form">
@@ -42,6 +48,7 @@
         dropdownHoverColor="var(--primary-neutral-color)"
         (change)="select('context', $event)"
         (valuechange)="select('context', $event)"
+        (valueChange)="select('context', $event)"
       ></hans-select-option>
 
       <hans-select-option
@@ -56,6 +63,7 @@
         dropdownHoverColor="var(--primary-neutral-color)"
         (change)="select('status', $event)"
         (valuechange)="select('status', $event)"
+        (valueChange)="select('status', $event)"
       ></hans-select-option>
 
       <hans-select-option
@@ -70,6 +78,7 @@
         dropdownHoverColor="var(--primary-neutral-color)"
         (change)="select('environment', $event)"
         (valuechange)="select('environment', $event)"
+        (valueChange)="select('environment', $event)"
       ></hans-select-option>
 
       <hans-date-picker
@@ -119,7 +128,7 @@
         ></hans-toggle>
       </div>
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.projects.fields.technologies.label' | translate"
         [description]="'pages.admin.projects.fields.technologies.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.technologies.empty' | translate"
@@ -128,7 +137,7 @@
         (toggled)="relation('technologyIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.projects.fields.experiences.label' | translate"
         [description]="'pages.admin.projects.fields.experiences.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.experiences.empty' | translate"
@@ -137,7 +146,7 @@
         (toggled)="relation('experienceIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.projects.fields.tags.label' | translate"
         [description]="'pages.admin.projects.fields.tags.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.tags.empty' | translate"
@@ -146,7 +155,7 @@
         (toggled)="relation('tagIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.projects.fields.links.label' | translate"
         [description]="'pages.admin.projects.fields.links.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.links.empty' | translate"
@@ -155,7 +164,7 @@
         (toggled)="relation('linkIds', $event)"
       />
 
-      <app-relation-picker
+      <app-operations-relation-picker
         [label]="'pages.admin.projects.fields.imageAssets.label' | translate"
         [description]="'pages.admin.projects.fields.imageAssets.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.imageAssets.empty' | translate"
@@ -164,36 +173,5 @@
         (toggled)="relation('imageAssetIds', $event)"
       />
     </div>
-  } @else if (modalMode() === 'read') {
-    @for (item of projects(); track item.id) {
-      <article class="record-card">
-        <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-        <div>
-          <hans-button [buttonColor]="'primary'" (click)="updateSelected.emit(item.id)">
-            {{ 'pages.admin.operations.update' | translate }}
-          </hans-button>
-          <hans-button [buttonColor]="'primary'" (click)="deleteSelected.emit(item.id)">
-            {{ 'pages.admin.operations.delete' | translate }}
-          </hans-button>
-        </div>
-      </article>
-    }
-  } @else if (modalMode() === 'pick-update' || modalMode() === 'pick-delete') {
-    @for (item of projects(); track item.id) {
-      <button
-        class="pick-card"
-        (click)="
-          modalMode() === 'pick-update'
-            ? updateSelected.emit(item.id)
-            : deleteSelected.emit(item.id)
-        "
-      >
-        <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-      </button>
-    }
-  } @else if (modalMode() === 'delete' && selectedProject(); as item) {
-    <article class="record-card">
-      <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
-    </article>
   }
 </app-operations-modal>

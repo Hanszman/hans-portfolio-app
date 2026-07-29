@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectFormationForUpdate($event)"
+  (deleteSelected)="selectFormationForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -151,153 +157,33 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.formations.fields.technologies.label' | translate"
           [description]="'pages.admin.formations.fields.technologies.description' | translate"
           [emptyMessage]="'pages.admin.formations.fields.technologies.empty' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.formations.fields.links.label' | translate"
           [description]="'pages.admin.formations.fields.links.description' | translate"
           [emptyMessage]="'pages.admin.formations.fields.links.empty' | translate"
           [options]="linkOptions()"
           [selectedIds]="form().linkIds"
           (toggled)="toggleLink($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.formations.fields.imageAssets.label' | translate"
           [description]="'pages.admin.formations.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.formations.fields.imageAssets.empty' | translate"
           [options]="imageAssetOptions()"
           [selectedIds]="form().imageAssetIds"
           (toggled)="toggleImageAsset($event)"
-        ></app-relation-picker>
-
-        
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="formations-operations-list">
-            @for (formation of formations(); track trackById($index, formation)) {
-              <article class="formations-operations-item">
-                <div class="formations-operations-item-header">
-                  <div>
-                    <p class="formations-operations-label">
-                      {{ 'pages.admin.formations.card.slug' | translate }}
-                    </p>
-                    <h4>{{ formation.slug }}</h4>
-                  </div>
-
-                  <div class="formations-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectFormationForUpdate(formation.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectFormationForDelete(formation.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                @for (
-                  item of [
-                    ['pages.admin.formations.card.institution', formation.institution],
-                    ['pages.admin.formations.card.titlePt', formation.titlePt],
-                    ['pages.admin.formations.card.titleEn', formation.titleEn],
-                    ['pages.admin.formations.card.degreeType', formation.degreeType],
-                    ['pages.admin.formations.card.summaryPt', formation.summaryPt],
-                    ['pages.admin.formations.card.summaryEn', formation.summaryEn],
-                    ['pages.admin.formations.card.startDate', formation.startDate],
-                    ['pages.admin.formations.card.endDate', formation.endDateLabel],
-                    [
-                      'pages.admin.formations.card.highlight',
-                      formation.highlight
-                        ? ('pages.admin.formations.fields.highlight.enabled' | translate)
-                        : ('pages.admin.formations.fields.highlight.disabled' | translate),
-                    ],
-                    ['pages.admin.formations.card.sortOrder', formation.sortOrderLabel],
-                    [
-                      'pages.admin.formations.card.technologies',
-                      formation.technologyLabels.join(', ') ||
-                        ('pages.admin.formations.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.formations.card.links',
-                      formation.linkLabels.join(', ') ||
-                        ('pages.admin.formations.card.emptyRelations' | translate),
-                    ],
-                    [
-                      'pages.admin.formations.card.imageAssets',
-                      formation.imageAssetLabels.join(', ') ||
-                        ('pages.admin.formations.card.emptyRelations' | translate),
-                    ],
-                  ];
-                  track item[0]
-                ) {
-                  <div class="formations-operations-item-copy">
-                    <p class="formations-operations-label">
-                      {{ item[0] | translate }}
-                    </p>
-                    <p>{{ item[1] }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="formations-operations-picker">
-            @for (formation of formations(); track trackById($index, formation)) {
-              <button
-                type="button"
-                class="formations-operations-picker-option"
-                (click)="selectFormationForUpdate(formation.id)"
-              >
-                <strong>{{ formation.titlePt }} ({{ formation.slug }})</strong>
-                <span>{{ formation.institution }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="formations-operations-picker">
-            @for (formation of formations(); track trackById($index, formation)) {
-              <button
-                type="button"
-                class="formations-operations-picker-option"
-                (click)="selectFormationForDelete(formation.id)"
-              >
-                <strong>{{ formation.titlePt }} ({{ formation.slug }})</strong>
-                <span>{{ formation.institution }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="formations-operations-delete-summary">
-            <strong>{{ selectedFormation()?.titlePt }} ({{ selectedFormation()?.slug }})</strong>
-            <p>{{ selectedFormation()?.institution }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectLinkForUpdate($event)"
+  (deleteSelected)="selectLinkForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -96,211 +102,42 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.links.fields.projects.label' | translate"
           [description]="'pages.admin.links.fields.projects.description' | translate"
           [emptyMessage]="'pages.admin.links.fields.projects.empty' | translate"
           [options]="projectOptions()"
           [selectedIds]="form().projectIds"
           (toggled)="toggleProject($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.links.fields.experiences.label' | translate"
           [description]="'pages.admin.links.fields.experiences.description' | translate"
           [emptyMessage]="'pages.admin.links.fields.experiences.empty' | translate"
           [options]="experienceOptions()"
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.links.fields.technologies.label' | translate"
           [description]="'pages.admin.links.fields.technologies.description' | translate"
           [emptyMessage]="'pages.admin.links.fields.technologies.empty' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.links.fields.formations.label' | translate"
           [description]="'pages.admin.links.fields.formations.description' | translate"
           [emptyMessage]="'pages.admin.links.fields.formations.empty' | translate"
           [options]="formationOptions()"
           [selectedIds]="form().formationIds"
           (toggled)="toggleFormation($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="links-operations-list">
-            @for (link of links(); track trackById($index, link)) {
-              <article class="links-operations-item">
-                <div class="links-operations-item-header">
-                  <div>
-                    <p class="links-operations-label">
-                      {{ 'pages.admin.links.card.url' | translate }}
-                    </p>
-                    <h4>{{ link.url }}</h4>
-                  </div>
-
-                  <div class="links-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectLinkForUpdate(link.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectLinkForDelete(link.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.labelPt' | translate }}
-                  </p>
-                  <p>{{ link.labelPt || ('pages.admin.links.card.emptyText' | translate) }}</p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.labelEn' | translate }}
-                  </p>
-                  <p>{{ link.labelEn || ('pages.admin.links.card.emptyText' | translate) }}</p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.descriptionPt' | translate }}
-                  </p>
-                  <p>
-                    {{ link.descriptionPt || ('pages.admin.links.card.emptyText' | translate) }}
-                  </p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.descriptionEn' | translate }}
-                  </p>
-                  <p>
-                    {{ link.descriptionEn || ('pages.admin.links.card.emptyText' | translate) }}
-                  </p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.type' | translate }}
-                  </p>
-                  <p>{{ link.type }}</p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.sortOrder' | translate }}
-                  </p>
-                  <p>{{ link.sortOrderLabel }}</p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.projects' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      link.projectLabels.join(', ') ||
-                        ('pages.admin.links.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.experiences' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      link.experienceLabels.join(', ') ||
-                        ('pages.admin.links.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.technologies' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      link.technologyLabels.join(', ') ||
-                        ('pages.admin.links.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-
-                <div class="links-operations-item-copy">
-                  <p class="links-operations-label">
-                    {{ 'pages.admin.links.card.formations' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      link.formationLabels.join(', ') ||
-                        ('pages.admin.links.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="links-operations-picker">
-            @for (link of links(); track trackById($index, link)) {
-              <button
-                type="button"
-                class="links-operations-picker-option"
-                (click)="selectLinkForUpdate(link.id)"
-              >
-                <strong>{{ link.labelPt || link.url }} ({{ link.type }})</strong>
-                <span>{{ link.url }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="links-operations-picker">
-            @for (link of links(); track trackById($index, link)) {
-              <button
-                type="button"
-                class="links-operations-picker-option"
-                (click)="selectLinkForDelete(link.id)"
-              >
-                <strong>{{ link.labelPt || link.url }} ({{ link.type }})</strong>
-                <span>{{ link.url }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="links-operations-delete-summary">
-            <strong>{{ selectedLink()?.labelPt || selectedLink()?.url }}</strong>
-            <p>{{ selectedLink()?.url }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

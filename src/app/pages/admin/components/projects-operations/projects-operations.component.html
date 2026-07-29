@@ -1,32 +1,18 @@
-<section class="projects-operations">
-  <div class="projects-operations-copy">
-    <p class="projects-operations-kicker">
-      {{ 'pages.admin.projects.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.projects.title' | translate }}</h3>
-    <p>{{ 'pages.admin.entities.projects.description' | translate }}</p>
-  </div>
-
-  <p class="projects-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasProjects() || isLoading()"
-    [updateDisabled]="!hasProjects() || isLoading()"
-    [deleteDisabled]="!hasProjects() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <p class="projects-operations-state">{{ 'pages.admin.projects.states.loading' | translate }}</p>
-  } @else if (loadErrorKey(); as errorKey) {
-    <p class="projects-operations-state">{{ errorKey | translate }}</p>
-  } @else if (!hasProjects()) {
-    <p class="projects-operations-state">{{ 'pages.admin.projects.states.empty' | translate }}</p>
-  }
-
+<app-operations
+  kickerKey="pages.admin.projects.sectionLabel"
+  titleKey="pages.admin.entities.projects.title"
+  [descriptionKeys]="['pages.admin.entities.projects.description']"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasProjects()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.projects.states.loading"
+  emptyKey="pages.admin.projects.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-projects-operations-modal
     [isOpen]="isModalOpen()"
     [modalMode]="modalMode()"
@@ -54,4 +40,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

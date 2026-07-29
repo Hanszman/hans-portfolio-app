@@ -1,41 +1,21 @@
-<section class="spoken-languages-operations">
-  <div class="spoken-languages-operations-copy">
-    <p class="spoken-languages-operations-kicker">
-      {{ 'pages.admin.spokenLanguages.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.spoken-languages.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.spoken-languages.description' | translate }}
-      {{ 'pages.admin.spokenLanguages.description' | translate }}
-    </p>
-  </div>
-
-  <p class="spoken-languages-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasSpokenLanguages() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state
-      mode="loading"
-      [message]="'pages.admin.spokenLanguages.states.loading' | translate"
-    />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasSpokenLanguages()) {
-    <app-info-state
-      mode="empty"
-      [message]="'pages.admin.spokenLanguages.states.empty' | translate"
-    />
-  }
-
+<app-operations
+  kickerKey="pages.admin.spokenLanguages.sectionLabel"
+  titleKey="pages.admin.entities.spoken-languages.title"
+  [descriptionKeys]="[
+    'pages.admin.entities.spoken-languages.description',
+    'pages.admin.spokenLanguages.description',
+  ]"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasSpokenLanguages()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.spokenLanguages.states.loading"
+  emptyKey="pages.admin.spokenLanguages.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-spoken-languages-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -65,4 +45,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

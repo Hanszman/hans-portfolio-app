@@ -1,0 +1,34 @@
+<section class="operations">
+  <div class="operations-copy">
+    <p class="operations-kicker">{{ kickerKey() | translate }}</p>
+    <h3>{{ titleKey() | translate }}</h3>
+    <p>
+      @for (descriptionKey of descriptionKeys(); track descriptionKey) {
+        {{ descriptionKey | translate }}
+      }
+    </p>
+  </div>
+
+  <p class="operations-endpoint">{{ endpointLabel() }}</p>
+
+  <app-operations-actions
+    [createDisabled]="createDisabled()"
+    [readDisabled]="!hasRecords() || !!errorKey() || isLoading()"
+    [updateDisabled]="!hasRecords() || !!errorKey() || isLoading()"
+    [deleteDisabled]="!hasRecords() || !!errorKey() || isLoading()"
+    (createClicked)="createClicked.emit()"
+    (readClicked)="readClicked.emit()"
+    (updateClicked)="updateClicked.emit()"
+    (deleteClicked)="deleteClicked.emit()"
+  />
+
+  @if (isLoading()) {
+    <app-info-state mode="loading" [message]="loadingKey() | translate" />
+  } @else if (errorKey(); as currentErrorKey) {
+    <app-info-state mode="error" [message]="currentErrorKey | translate" />
+  } @else if (!hasRecords()) {
+    <app-info-state mode="empty" [message]="emptyKey() | translate" />
+  }
+
+  <ng-content />
+</section>

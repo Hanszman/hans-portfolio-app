@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
@@ -38,8 +35,9 @@ describe('ProjectsService', () => {
     );
 
     expect(request.request.method).toBe('GET');
+    expect(request.request.headers.get('Cache-Control')).toBe('no-cache');
+    expect(request.request.headers.get('Pragma')).toBe('no-cache');
 
     request.flush(createProjectsCollectionResponse());
   });
-
 });

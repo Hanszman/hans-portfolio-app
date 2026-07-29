@@ -121,9 +121,7 @@ export interface LinksMutationBuildFailure {
   errorKey: AppTranslationKey;
 }
 
-export type LinksMutationBuildResult =
-  | LinksMutationBuildSuccess
-  | LinksMutationBuildFailure;
+export type LinksMutationBuildResult = LinksMutationBuildSuccess | LinksMutationBuildFailure;
 
 export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue => ({
   url: '',

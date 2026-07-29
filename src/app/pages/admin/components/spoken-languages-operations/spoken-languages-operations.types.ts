@@ -22,8 +22,7 @@ export const SPOKEN_LANGUAGE_PROFICIENCY_VALUES = [
   'BASIC',
 ] as const;
 
-export type SpokenLanguageProficiencyValue =
-  (typeof SPOKEN_LANGUAGE_PROFICIENCY_VALUES)[number];
+export type SpokenLanguageProficiencyValue = (typeof SPOKEN_LANGUAGE_PROFICIENCY_VALUES)[number];
 
 export type SpokenLanguagesOperationsModalMode =
   | 'create'
@@ -125,13 +124,11 @@ export const createSpokenLanguageProficiencyOptions =
 
 export const createSpokenLanguageImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,
-): SpokenLanguageImageAssetOptionViewModel =>
-  createAdminImageAssetOptionViewModel(imageAsset);
+): SpokenLanguageImageAssetOptionViewModel => createAdminImageAssetOptionViewModel(imageAsset);
 
 export const resolveSpokenLanguageImageAssetIdFromRelation = (
   relation: SpokenLanguageImageAssetRelationRecord,
 ): string | null => relation.imageAssetId ?? relation.imageAsset?.id ?? null;
 
-export const resolveSpokenLanguageImageAssetLabel = (
-  imageAsset: ImageAssetRecord,
-): string => resolveAdminImageAssetLabel(imageAsset);
+export const resolveSpokenLanguageImageAssetLabel = (imageAsset: ImageAssetRecord): string =>
+  resolveAdminImageAssetLabel(imageAsset);

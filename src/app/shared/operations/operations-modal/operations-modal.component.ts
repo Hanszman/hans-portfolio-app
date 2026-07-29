@@ -9,11 +9,18 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppTranslationKey } from '../../../core/translation/translation.types';
 import { createAdminCollectionPagination } from '../../../pages/admin/admin.types';
+import { OperationsDetailedItemComponent } from '../operations-detailed-item/operations-detailed-item.component';
+import { OperationsItemComponent } from '../operations-item/operations-item.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+  OperationsModalMode,
+} from '../operations.types';
 
 @Component({
   selector: 'app-operations-modal',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, OperationsDetailedItemComponent, OperationsItemComponent],
   templateUrl: './operations-modal.component.html',
   styleUrl: './operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,15 +40,25 @@ export class OperationsModalComponent {
   readonly isSubmitting = input(false);
   readonly showSubmit = input(false);
   readonly submitLabelKey = input<AppTranslationKey>('common.actions.save');
+  readonly mode = input<OperationsModalMode | null>(null);
+  readonly items = input<readonly OperationsItemViewModel[]>([]);
+  readonly detailedItems = input<readonly OperationsDetailedItemViewModel[]>([]);
+  readonly selectedItem = input<OperationsItemViewModel | null>(null);
 
   readonly closed = output<void>();
   readonly searchChanged = output<string>();
   readonly submitted = output<void>();
   readonly pageSelected = output<number>();
+  readonly updateSelected = output<string>();
+  readonly deleteSelected = output<string>();
 
   protected readonly isInteractionDisabled = computed(
     () => this.isLoading() || this.isSubmitting(),
   );
+  protected readonly rendersSharedContent = computed(() => {
+    const mode = this.mode();
+    return mode === 'read' || mode === 'pick-update' || mode === 'pick-delete' || mode === 'delete';
+  });
 
   protected requestClose(): void {
     this.closed.emit();

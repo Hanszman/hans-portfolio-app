@@ -93,12 +93,9 @@ describe('experiences operations types', () => {
     const result = buildExperiencesMutationPayload(form());
     expect(result.isValid).toBeTrue();
     if (result.isValid) {
-      expect(result.payload.technologyRelations).toEqual([
-        { technologyId: 't-1' },
-        { technologyId: 't-1' },
-      ]);
+      expect(result.payload.technologyRelations).toEqual([{ technologyId: 't-1' }]);
       expect(result.payload.projectIds).toEqual(['p-1']);
-      expect(result.payload.endDate).toBe('2026-02-01');
+      expect(result.payload.endDate).toBe('2026-02-01T00:00:00.000Z');
     }
   });
 
@@ -124,6 +121,42 @@ describe('experiences operations types', () => {
     expect(normalizeRelationIds(publicRecord, 'imageAssetId')).toEqual(['i-2']);
   });
 
+  it('normalizes every public relation shape and keeps stable unique ids', () => {
+    const publicRecord = {
+      ...(record() as object),
+      technologyIds: ['t-direct'],
+      technologyRelations: [{ technologyId: 't-relation' }, { technology: { id: 't-nested' } }],
+      technologies: ['t-string', { id: 't-public' }, { technologyId: 't-direct' }],
+      projectIds: ['p-direct'],
+      projects: [{ projectId: 'p-relation' }, { project: { id: 'p-nested' } }],
+      customerIds: ['c-direct'],
+      customers: [{ customer: { id: 'c-nested' } }],
+      jobIds: ['j-direct'],
+      jobs: [{ id: 'j-public' }],
+      linkIds: ['l-direct'],
+      links: [{ linkId: 'l-relation' }],
+      imageAssetIds: ['i-direct'],
+      imageAssets: [{ imageAsset: { id: 'i-nested' } }],
+    } as never;
+
+    expect(normalizeRelationIds(publicRecord, 'technologyId')).toEqual([
+      't-direct',
+      't-relation',
+      't-nested',
+      't-string',
+      't-public',
+    ]);
+    expect(normalizeRelationIds(publicRecord, 'projectId')).toEqual([
+      'p-direct',
+      'p-relation',
+      'p-nested',
+    ]);
+    expect(normalizeRelationIds(publicRecord, 'customerId')).toEqual(['c-direct', 'c-nested']);
+    expect(normalizeRelationIds(publicRecord, 'jobId')).toEqual(['j-direct', 'j-public']);
+    expect(normalizeRelationIds(publicRecord, 'linkId')).toEqual(['l-direct', 'l-relation']);
+    expect(normalizeRelationIds(publicRecord, 'imageAssetId')).toEqual(['i-direct', 'i-nested']);
+  });
+
   it('rejects each missing required field and invalid values', () => {
     for (const key of [
       'slug',
@@ -138,5 +171,12 @@ describe('experiences operations types', () => {
       expect(buildExperiencesMutationPayload({ ...form(), [key]: '' }).isValid).toBeFalse();
     expect(buildExperiencesMutationPayload({ ...form(), startDate: '' }).isValid).toBeFalse();
     expect(buildExperiencesMutationPayload({ ...form(), sortOrder: 'x' }).isValid).toBeFalse();
+    expect(
+      buildExperiencesMutationPayload({
+        ...form(),
+        startDate: '2026-03-01',
+        endDate: '2026-02-01',
+      }).isValid,
+    ).toBeFalse();
   });
 });

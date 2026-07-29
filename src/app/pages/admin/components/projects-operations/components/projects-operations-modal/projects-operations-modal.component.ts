@@ -12,11 +12,16 @@ import { TranslationService } from '../../../../../../core/translation/translati
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ProjectRecord } from '../../../../../../core/api/admin/projects/projects-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
+import { resolveAdminSelectValue } from '../../../../helpers/admin.helper';
 import {
   ProjectOption,
   ProjectsOperationsFormValue,
@@ -31,7 +36,7 @@ import {
 @Component({
   selector: 'app-projects-operations-modal',
   standalone: true,
-  imports: [OperationsModalComponent, RelationPickerComponent, TranslatePipe],
+  imports: [OperationsModalComponent, OperationsRelationPickerComponent, TranslatePipe],
   templateUrl: './projects-operations-modal.component.html',
   styleUrl: './projects-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -99,6 +104,42 @@ export class ProjectsOperationsModalComponent {
   protected readonly environmentOptions = computed(() =>
     this.translateOptions(PROJECT_ENVIRONMENT_VALUES, 'environment'),
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.projects().map((project) => this.toOperationsItem(project)),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () =>
+      this.projects().map((project) => ({
+        ...this.toOperationsItem(project),
+        fields: [
+          { labelKey: 'pages.admin.projects.fields.slug.label', value: project.slug },
+          {
+            labelKey: 'pages.admin.projects.fields.titlePt.label',
+            value: project.titlePt,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.titleEn.label',
+            value: project.titleEn,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.context.label',
+            value: project.context,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.status.label',
+            value: project.status,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.environment.label',
+            value: project.environment,
+          },
+        ],
+      })),
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const project = this.selectedProject();
+    return project ? this.toOperationsItem(project) : null;
+  });
   protected resolveFieldLabel(field: keyof typeof PROJECTS_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return this.translation.instant(PROJECTS_OPERATIONS_FIELDS[field].labelKey);
@@ -110,6 +151,7 @@ export class ProjectsOperationsModalComponent {
   private translateOptions(values: readonly string[], field: 'context' | 'status' | 'environment') {
     this.translation.locale();
     return values.map((value) => ({
+      id: value,
       value,
       label: this.translation.instant(
         `pages.admin.projects.fields.${field}.options.${value}` as AppTranslationKey,
@@ -119,16 +161,13 @@ export class ProjectsOperationsModalComponent {
   protected emit(field: keyof ProjectsOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,
-      value:
-        (event.target as HTMLInputElement)?.value ?? (event as CustomEvent<string>).detail ?? '',
+      value: resolveAdminSelectValue(event),
     });
   }
   protected select(field: keyof ProjectsOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,
-      value: String(
-        (event as CustomEvent<string>).detail ?? (event.target as HTMLInputElement)?.value ?? '',
-      ),
+      value: resolveAdminSelectValue(event),
     });
   }
   protected toggle(field: 'featured' | 'highlight', event: Event): void {
@@ -150,5 +189,13 @@ export class ProjectsOperationsModalComponent {
     id: string,
   ): boolean {
     return this.form()?.[field].includes(id) ?? false;
+  }
+
+  private toOperationsItem(project: ProjectRecord): OperationsItemViewModel {
+    return {
+      id: project.id,
+      title: `${project.titlePt} (${project.slug})`,
+      subtitle: project.titleEn,
+    };
   }
 }

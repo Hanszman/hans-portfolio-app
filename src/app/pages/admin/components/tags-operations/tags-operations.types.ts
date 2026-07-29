@@ -109,9 +109,7 @@ export interface TagsMutationBuildFailure {
   errorKey: AppTranslationKey;
 }
 
-export type TagsMutationBuildResult =
-  | TagsMutationBuildSuccess
-  | TagsMutationBuildFailure;
+export type TagsMutationBuildResult = TagsMutationBuildSuccess | TagsMutationBuildFailure;
 
 export const createEmptyTagsOperationsFormValue = (): TagsOperationsFormValue => ({
   slug: '',
@@ -129,11 +127,9 @@ export const createTagTypeOptions = (): readonly TagTypeOptionDefinition[] =>
     (value) => `pages.admin.tags.fields.type.options.${value}` as AppTranslationKey,
   );
 
-export const resolveTagNamePt = (tag: TagRecord): string =>
-  tag.namePt ?? tag.labelPt ?? '';
+export const resolveTagNamePt = (tag: TagRecord): string => tag.namePt ?? tag.labelPt ?? '';
 
-export const resolveTagNameEn = (tag: TagRecord): string =>
-  tag.nameEn ?? tag.labelEn ?? '';
+export const resolveTagNameEn = (tag: TagRecord): string => tag.nameEn ?? tag.labelEn ?? '';
 
 export const resolveTagProjectIdFromRelation = (
   relation: TagProjectRelationRecord,

@@ -26,6 +26,27 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     customerLabels: [],
     jobLabels: [],
   },
+  {
+    id: 'image-asset-2',
+    fileName: 'empty.svg',
+    filePath: '/assets/img/empty.svg',
+    folder: 'assets',
+    kind: 'ICON',
+    altPt: '',
+    altEn: '',
+    captionPt: '',
+    captionEn: '',
+    mimeType: '',
+    dimensionsLabel: '-',
+    sortOrderLabel: '2',
+    projectLabels: [],
+    experienceLabels: [],
+    technologyLabels: [],
+    formationLabels: [],
+    spokenLanguageLabels: [],
+    customerLabels: [],
+    jobLabels: [],
+  },
 ];
 
 describe('ImageAssetsOperationsModalComponent', () => {
@@ -220,9 +241,7 @@ describe('ImageAssetsOperationsModalComponent', () => {
         new CustomEvent('valueChange', { detail: { value: 'SCREENSHOT' } }),
       ),
     ).toBe('SCREENSHOT');
-    expect(
-      componentAccess.resolveSelectValue({ target: { value: 'ICON' } } as never),
-    ).toBe('ICON');
+    expect(componentAccess.resolveSelectValue({ target: { value: 'ICON' } } as never)).toBe('ICON');
     expect(componentAccess.resolveSelectValue({ target: null } as never)).toBe('');
   });
 

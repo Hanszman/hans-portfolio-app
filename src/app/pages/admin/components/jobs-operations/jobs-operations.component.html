@@ -1,35 +1,18 @@
-<section class="jobs-operations">
-  <div class="jobs-operations-copy">
-    <p class="jobs-operations-kicker">
-      {{ 'pages.admin.jobs.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.jobs.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.jobs.description' | translate }}
-      {{ 'pages.admin.jobs.description' | translate }}
-    </p>
-  </div>
-
-  <p class="jobs-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasJobs() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state mode="loading" [message]="'pages.admin.jobs.states.loading' | translate" />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasJobs()) {
-    <app-info-state mode="empty" [message]="'pages.admin.jobs.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.jobs.sectionLabel"
+  titleKey="pages.admin.entities.jobs.title"
+  [descriptionKeys]="['pages.admin.entities.jobs.description', 'pages.admin.jobs.description']"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasJobs()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.jobs.states.loading"
+  emptyKey="pages.admin.jobs.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-jobs-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -61,4 +44,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

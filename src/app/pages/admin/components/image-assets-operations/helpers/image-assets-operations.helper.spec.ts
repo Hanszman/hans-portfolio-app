@@ -138,94 +138,85 @@ describe('image-assets operations helper', () => {
 
   it('should normalize relation ids from explicit ids, nested relations and public catalogs', () => {
     expect(
-      normalizeImageAssetProjectIds(
-        createImageAsset(),
-        [
-          createProject({
-            id: 'project-1',
-            imageAssets: [
-              {
-                projectId: 'project-1',
-                imageAssetId: 'another-image',
+      normalizeImageAssetProjectIds(createImageAsset(), [
+        createProject({
+          id: 'project-1',
+          imageAssets: [
+            {
+              projectId: 'project-1',
+              imageAssetId: 'another-image',
+              sortOrder: 1,
+              imageAsset: {
+                id: 'another-image',
+                fileName: 'vh_logo_blue.svg',
+                filePath: '/assets/img/logo/vh_logo_blue.svg',
+                folder: 'logo',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
+                captionPt: null,
+                captionEn: null,
+                mimeType: 'image/svg+xml',
+                width: 240,
+                height: 96,
                 sortOrder: 1,
-                imageAsset: {
-                  id: 'another-image',
-                  fileName: 'vh_logo_blue.svg',
-                  filePath: '/assets/img/logo/vh_logo_blue.svg',
-                  folder: 'logo',
-                  kind: 'ICON',
-                  altPt: null,
-                  altEn: null,
-                  captionPt: null,
-                  captionEn: null,
-                  mimeType: 'image/svg+xml',
-                  width: 240,
-                  height: 96,
-                  sortOrder: 1,
-                  createdAt: '2024-01-01T00:00:00.000Z',
-                  updatedAt: '2024-01-01T00:00:00.000Z',
-                },
+                createdAt: '2024-01-01T00:00:00.000Z',
+                updatedAt: '2024-01-01T00:00:00.000Z',
               },
-            ],
-          }),
-        ],
-      ),
+            },
+          ],
+        }),
+      ]),
     ).toEqual(['project-2', 'project-3', 'project-1']);
 
     expect(
-      normalizeImageAssetExperienceIds(
-        createImageAsset(),
-        [
-          createExperience({
-            id: 'experience-1',
-            imageAssets: [
-              {
-                experienceId: 'experience-1',
-                imageAssetId: 'fallback-image',
+      normalizeImageAssetExperienceIds(createImageAsset(), [
+        createExperience({
+          id: 'experience-1',
+          imageAssets: [
+            {
+              experienceId: 'experience-1',
+              imageAssetId: 'fallback-image',
+              sortOrder: 1,
+              imageAsset: {
+                id: 'fallback-image',
+                fileName: 'vh_logo_blue.svg',
+                filePath: '/assets/img/logo/vh_logo_blue.svg',
+                folder: 'logo',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
+                captionPt: null,
+                captionEn: null,
+                mimeType: 'image/svg+xml',
+                width: 240,
+                height: 96,
                 sortOrder: 1,
-                imageAsset: {
-                  id: 'fallback-image',
-                  fileName: 'vh_logo_blue.svg',
-                  filePath: '/assets/img/logo/vh_logo_blue.svg',
-                  folder: 'logo',
-                  kind: 'ICON',
-                  altPt: null,
-                  altEn: null,
-                  captionPt: null,
-                  captionEn: null,
-                  mimeType: 'image/svg+xml',
-                  width: 240,
-                  height: 96,
-                  sortOrder: 1,
-                  createdAt: '2024-01-01T00:00:00.000Z',
-                  updatedAt: '2024-01-01T00:00:00.000Z',
-                },
+                createdAt: '2024-01-01T00:00:00.000Z',
+                updatedAt: '2024-01-01T00:00:00.000Z',
               },
-            ],
-          }),
-        ],
-      ),
+            },
+          ],
+        }),
+      ]),
     ).toEqual(['experience-2', 'experience-3', 'experience-1']);
 
     expect(
-      normalizeImageAssetTechnologyIds(
-        createImageAsset(),
-        [
-          createTechnology({
-            id: 'technology-1',
-            imageAssets: [
-              {
-                imageAsset: {
-                  filePath: '/assets/img/logo/vh_logo_blue.svg',
-                  kind: 'ICON',
-                  altPt: null,
-                  altEn: null,
-                },
+      normalizeImageAssetTechnologyIds(createImageAsset(), [
+        createTechnology({
+          id: 'technology-1',
+          imageAssets: [
+            {
+              imageAsset: {
+                filePath: '/assets/img/logo/vh_logo_blue.svg',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
               },
-            ],
-          }),
-        ],
-      ),
+            },
+          ],
+        }),
+      ]),
     ).toEqual(['technology-2', 'technology-3', 'technology-1']);
   });
 
@@ -357,7 +348,10 @@ describe('image-assets operations helper', () => {
 
   it('should build sorted view-models and resolve relation labels', () => {
     const viewModels = buildImageAssetsViewModels(
-      [createImageAsset({ sortOrder: 1 }), createImageAsset({ id: 'image-asset-2', fileName: 'zzz.png', sortOrder: 3 })],
+      [
+        createImageAsset({ sortOrder: 1 }),
+        createImageAsset({ id: 'image-asset-2', fileName: 'zzz.png', sortOrder: 3 }),
+      ],
       [
         createProject({ id: 'project-2', titlePt: 'Admin workspace' }),
         createProject({ id: 'project-3', titlePt: 'Dashboard suite' }),

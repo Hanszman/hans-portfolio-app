@@ -36,9 +36,7 @@ const resolveSpokenLanguageImageAssetIdsFromCatalog = (
   imageAssets: readonly ImageAssetRecord[],
 ): readonly string[] =>
   imageAssets
-    .filter((imageAsset) =>
-      (imageAsset.spokenLanguageIds ?? []).includes(spokenLanguage.id),
-    )
+    .filter((imageAsset) => (imageAsset.spokenLanguageIds ?? []).includes(spokenLanguage.id))
     .map((imageAsset) => imageAsset.id);
 
 const resolveImageAssetLabel = (
@@ -53,9 +51,7 @@ const resolveImageAssetLabel = (
 export const buildSpokenLanguageImageAssetOptions = (
   imageAssets: readonly ImageAssetRecord[],
 ): readonly SpokenLanguageImageAssetOptionViewModel[] =>
-  [...imageAssets]
-    .map(createSpokenLanguageImageAssetOptionViewModel)
-    .sort(sortCatalogOptions);
+  [...imageAssets].map(createSpokenLanguageImageAssetOptionViewModel).sort(sortCatalogOptions);
 
 export const normalizeSpokenLanguageImageAssetIds = (
   spokenLanguage: SpokenLanguageRecord,
@@ -120,10 +116,7 @@ export const buildSpokenLanguagesViewModels = (
       return left.code.localeCompare(right.code);
     })
     .map((spokenLanguage) => {
-      const imageAssetIds = normalizeSpokenLanguageImageAssetIds(
-        spokenLanguage,
-        imageAssets,
-      );
+      const imageAssetIds = normalizeSpokenLanguageImageAssetIds(spokenLanguage, imageAssets);
 
       return {
         id: spokenLanguage.id,

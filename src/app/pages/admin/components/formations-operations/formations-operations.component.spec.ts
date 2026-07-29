@@ -463,41 +463,29 @@ describe('FormationsOperationsComponent', () => {
 
     component.updateTitleEn('Systems Analysis');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.requiredDegreeType',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredDegreeType');
 
     component.updateDegreeType('BACHELOR');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.requiredSummaryPt',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredSummaryPt');
 
     component.updateSummaryPt('Resumo PT');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.requiredSummaryEn',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredSummaryEn');
 
     component.updateSummaryEn('Summary EN');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.requiredStartDate',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredStartDate');
 
     component.updateStartDate('2020-01-01');
     component.updateEndDate('2019-12-31');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.invalidDateRange',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.invalidDateRange');
 
     component.updateEndDate('2020-01-02');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.invalidSortOrder',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.invalidSortOrder');
 
     TestBed.resetTestingModule();
     adminSessionServiceMock.accessToken.and.returnValue(null);
@@ -592,15 +580,11 @@ describe('FormationsOperationsComponent', () => {
     component.updateStartDate('2020-01-01');
     component.updateSortOrder('1');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.selectionRequired',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.selectionRequired');
 
     component.modalModeSignal.set('delete');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.selectionRequired',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.selectionRequired');
 
     component.openCreateModal();
     component.updateSlug('software-engineering');

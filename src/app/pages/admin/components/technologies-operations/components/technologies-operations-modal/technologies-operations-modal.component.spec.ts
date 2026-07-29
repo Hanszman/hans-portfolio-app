@@ -48,7 +48,12 @@ describe('TechnologiesOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.componentRef.setInput('imageOptions', [
-      { id: 'image-1', title: 'Image', subtitle: '/assets/img/logo/vh_logo_blue.svg', imageUrl: '/assets/img/logo/vh_logo_blue.svg' },
+      {
+        id: 'image-1',
+        title: 'Image',
+        subtitle: '/assets/img/logo/vh_logo_blue.svg',
+        imageUrl: '/assets/img/logo/vh_logo_blue.svg',
+      },
     ]);
     fixture.detectChanges();
     component.change('category', new Event('change'));
@@ -82,6 +87,18 @@ describe('TechnologiesOperationsModalComponent', () => {
         highlight: true,
         sortOrder: 1,
         imageAssetLabels: [],
+      },
+      {
+        id: 'technology-2',
+        name: 'Unknown',
+        slug: 'unknown',
+        category: 'OTHER',
+        level: '',
+        frequency: '',
+        highlight: false,
+        sortOrder: '2',
+        imageAssetIds: [],
+        imageAssetLabels: ['unknown.svg'],
       },
     ]);
     fixture.detectChanges();

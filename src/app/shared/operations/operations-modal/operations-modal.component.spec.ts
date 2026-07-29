@@ -38,10 +38,7 @@ describe('OperationsModalComponent', () => {
 
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('titleKey', 'pages.admin.tags.modal.read.title');
-    fixture.componentRef.setInput(
-      'descriptionKey',
-      'pages.admin.tags.modal.read.description',
-    );
+    fixture.componentRef.setInput('descriptionKey', 'pages.admin.tags.modal.read.description');
     fixture.componentRef.setInput('showPagination', true);
     fixture.componentRef.setInput('showSearch', true);
     fixture.componentRef.setInput('searchValue', 'angular');
@@ -57,7 +54,7 @@ describe('OperationsModalComponent', () => {
     fixture.detectChanges();
 
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
-        | (HTMLElement & {
+      | (HTMLElement & {
           cancelLabel?: string;
           confirmLabel?: string;
           closeOnConfirm?: boolean;
@@ -83,20 +80,14 @@ describe('OperationsModalComponent', () => {
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.closeOnConfirm).toBeFalse();
     expect(modalElement?.paginationFirstLabel).toBe('First');
-    expect(modalElement?.paginationFirstContent).toBe(
-      'MdKeyboardDoubleArrowLeft',
-    );
+    expect(modalElement?.paginationFirstContent).toBe('MdKeyboardDoubleArrowLeft');
     expect(modalElement?.paginationCurrentPage).toBe(2);
     expect(modalElement?.paginationLastLabel).toBe('Last');
-    expect(modalElement?.paginationLastContent).toBe(
-      'MdKeyboardDoubleArrowRight',
-    );
+    expect(modalElement?.paginationLastContent).toBe('MdKeyboardDoubleArrowRight');
     expect(modalElement?.paginationNextContent).toBe('MdKeyboardArrowRight');
     expect(modalElement?.paginationTotalPages).toBe(3);
     expect(modalElement?.paginationPageLabel).toBe('Page');
-    expect(modalElement?.paginationPreviousContent).toBe(
-      'MdKeyboardArrowLeft',
-    );
+    expect(modalElement?.paginationPreviousContent).toBe('MdKeyboardArrowLeft');
     expect(searchElement?.label).toBe('Search');
     expect(searchElement?.value).toBe('angular');
 
@@ -146,13 +137,11 @@ describe('OperationsModalComponent', () => {
         submit(): void;
         selectPage(event: Event | number): void;
       }
-    ).selectPage(
-      {
-        target: {
-          page: 5,
-        },
-      } as unknown as Event,
-    );
+    ).selectPage({
+      target: {
+        page: 5,
+      },
+    } as unknown as Event);
     (
       component as unknown as {
         requestClose(): void;
@@ -230,5 +219,48 @@ describe('OperationsModalComponent', () => {
     expect(modalElement?.dismissible).toBeFalse();
     expect(modalElement?.cancelDisabled).toBeTrue();
     expect(modalElement?.confirmDisabled).toBeTrue();
+  });
+
+  it('renders shared read, picker and delete compositions with visible feedback', () => {
+    const updateSpy = jasmine.createSpy('update');
+    const deleteSpy = jasmine.createSpy('delete');
+    component.updateSelected.subscribe(updateSpy);
+    component.deleteSelected.subscribe(deleteSpy);
+    const item = { id: 'item-1', title: 'Item', subtitle: 'Details' };
+    const detailedItem = {
+      ...item,
+      fields: [
+        {
+          labelKey: 'pages.admin.tags.card.slug' as const,
+          value: 'item',
+        },
+      ],
+    };
+
+    fixture.componentRef.setInput('feedbackKey', 'pages.admin.tags.feedback.loadError');
+    fixture.componentRef.setInput('feedbackTone', 'error');
+    fixture.componentRef.setInput('items', [item]);
+    fixture.componentRef.setInput('detailedItems', [detailedItem]);
+    fixture.componentRef.setInput('selectedItem', item);
+    fixture.componentRef.setInput('mode', 'read');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('app-operations-detailed-item')).toBeTruthy();
+    fixture.nativeElement.querySelectorAll('hans-button')[0].click();
+
+    fixture.componentRef.setInput('mode', 'pick-update');
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('app-operations-item button').click();
+
+    fixture.componentRef.setInput('mode', 'pick-delete');
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('app-operations-item button').click();
+
+    fixture.componentRef.setInput('mode', 'delete');
+    fixture.componentRef.setInput('feedbackTone', 'success');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('app-operations-item button').disabled).toBeTrue();
+    expect(fixture.nativeElement.querySelector('[role="status"]')).toBeTruthy();
+    expect(updateSpy).toHaveBeenCalledTimes(2);
+    expect(deleteSpy).toHaveBeenCalledTimes(1);
   });
 });

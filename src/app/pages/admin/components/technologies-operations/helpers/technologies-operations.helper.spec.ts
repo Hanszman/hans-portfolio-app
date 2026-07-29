@@ -75,7 +75,17 @@ describe('technologies operations helper', () => {
       buildTechnologiesFormValue(
         technology({
           imageAssetIds: undefined,
-          imageAssets: [{ imageAsset: { id: 'image-2', filePath: '/image-2.png', kind: 'ICON', altPt: null, altEn: null } }],
+          imageAssets: [
+            {
+              imageAsset: {
+                id: 'image-2',
+                filePath: '/image-2.png',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
+              },
+            },
+          ],
         }),
       ).imageAssetIds,
     ).toEqual(['image-2']);
@@ -83,7 +93,16 @@ describe('technologies operations helper', () => {
       buildTechnologiesFormValue(
         technology({
           imageAssetIds: undefined,
-          imageAssets: [{ imageAsset: { filePath: '/assets/img/logo/vh_logo_blue.svg', kind: 'ICON', altPt: null, altEn: null } }],
+          imageAssets: [
+            {
+              imageAsset: {
+                filePath: '/assets/img/logo/vh_logo_blue.svg',
+                kind: 'ICON',
+                altPt: null,
+                altEn: null,
+              },
+            },
+          ],
         }),
       ).imageAssetIds,
     ).toEqual([]);

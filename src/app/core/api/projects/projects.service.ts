@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { buildApiUrl } from '../api.config';
@@ -20,6 +20,12 @@ export class ProjectsService {
 
     return this.httpClient.get<ProjectsCollectionResponse>(
       buildApiUrl(`/projects?${searchParams.toString()}`),
+      {
+        headers: new HttpHeaders({
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+        }),
+      },
     );
   }
 }

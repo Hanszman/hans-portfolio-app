@@ -55,8 +55,54 @@
         </div>
       }
 
+      @if (feedbackKey(); as currentFeedbackKey) {
+        <p
+          class="operations-modal-feedback"
+          [class.operations-modal-feedback-error]="feedbackTone() === 'error'"
+          [class.operations-modal-feedback-success]="feedbackTone() === 'success'"
+          role="status"
+        >
+          {{ currentFeedbackKey | translate }}
+        </p>
+      }
+
       <div class="operations-modal-body">
-        <ng-content />
+        @if (rendersSharedContent()) {
+          @switch (mode()) {
+            @case ('read') {
+              <div class="operations-modal-list">
+                @for (item of detailedItems(); track item.id) {
+                  <app-operations-detailed-item
+                    [item]="item"
+                    (updateSelected)="updateSelected.emit($event)"
+                    (deleteSelected)="deleteSelected.emit($event)"
+                  />
+                }
+              </div>
+            }
+            @case ('pick-update') {
+              <div class="operations-modal-list">
+                @for (item of items(); track item.id) {
+                  <app-operations-item [item]="item" (selected)="updateSelected.emit($event)" />
+                }
+              </div>
+            }
+            @case ('pick-delete') {
+              <div class="operations-modal-list">
+                @for (item of items(); track item.id) {
+                  <app-operations-item [item]="item" (selected)="deleteSelected.emit($event)" />
+                }
+              </div>
+            }
+            @case ('delete') {
+              @if (selectedItem(); as item) {
+                <app-operations-item [item]="item" [interactive]="false" />
+              }
+            }
+          }
+        } @else {
+          <ng-content />
+        }
       </div>
     </div>
   </div>

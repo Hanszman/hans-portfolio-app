@@ -154,10 +154,7 @@ export const normalizeImageAssetExperienceIds = (
     appendUnique(experienceIds, resolveImageAssetExperienceIdFromRelation(relation));
   }
 
-  for (const experienceId of resolveImageAssetIdsFromExperienceCatalog(
-    imageAsset,
-    experiences,
-  )) {
+  for (const experienceId of resolveImageAssetIdsFromExperienceCatalog(imageAsset, experiences)) {
     appendUnique(experienceIds, experienceId);
   }
 
@@ -178,10 +175,7 @@ export const normalizeImageAssetTechnologyIds = (
     appendUnique(technologyIds, resolveImageAssetTechnologyIdFromRelation(relation));
   }
 
-  for (const technologyId of resolveImageAssetIdsFromTechnologyCatalog(
-    imageAsset,
-    technologies,
-  )) {
+  for (const technologyId of resolveImageAssetIdsFromTechnologyCatalog(imageAsset, technologies)) {
     appendUnique(technologyIds, technologyId);
   }
 
@@ -208,7 +202,8 @@ export const buildImageAssetsFormValue = (
     captionPt: resolveImageAssetCaptionPt(imageAsset),
     captionEn: resolveImageAssetCaptionEn(imageAsset),
     mimeType: imageAsset.mimeType,
-    width: imageAsset.width === null || imageAsset.width === undefined ? '' : String(imageAsset.width),
+    width:
+      imageAsset.width === null || imageAsset.width === undefined ? '' : String(imageAsset.width),
     height:
       imageAsset.height === null || imageAsset.height === undefined
         ? ''

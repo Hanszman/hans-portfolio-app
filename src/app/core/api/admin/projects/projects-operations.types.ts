@@ -1,10 +1,16 @@
 import { PaginatedResponse } from '../../experiences/experiences.types';
 
-export type ProjectContext = 'CLIENT' | 'PERSONAL' | 'ACADEMIC' | 'OPEN_SOURCE' | 'OTHER';
+export type ProjectContext = 'PROFESSIONAL' | 'PERSONAL' | 'ACADEMIC' | 'STUDY';
 
 export type ProjectStatus = 'COMPLETED' | 'IN_PROGRESS' | 'ARCHIVED' | 'PLANNED';
 
-export type ProjectEnvironment = 'WEB' | 'MOBILE' | 'DESKTOP' | 'API' | 'OTHER';
+export type ProjectEnvironment =
+  | 'FRONTEND'
+  | 'BACKEND'
+  | 'FULLSTACK'
+  | 'MOBILE'
+  | 'LIBRARY'
+  | 'DASHBOARD';
 
 export interface ProjectRelationReference {
   id: string;
@@ -48,6 +54,7 @@ export interface ProjectRecord {
   startDate?: string | null;
   endDate?: string | null;
   sortOrder?: number | null;
+  technologyIds?: string[] | null;
   technologyRelations?: ProjectRelationRecord[] | null;
   experienceIds?: string[] | null;
   tagIds?: string[] | null;

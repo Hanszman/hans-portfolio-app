@@ -1,0 +1,66 @@
+:host {
+  @apply block min-w-0;
+}
+
+.operations-detailed-item {
+  @apply flex min-w-0 flex-col gap-5 rounded-3xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
+  background: var(--app-operations-surface-color);
+}
+
+.operations-detailed-item header,
+.operations-detailed-item-heading,
+.operations-detailed-item-actions {
+  @apply flex items-start gap-3;
+}
+
+.operations-detailed-item header {
+  @apply justify-between;
+}
+
+.operations-detailed-item-heading {
+  @apply min-w-0;
+}
+
+.operations-detailed-item-heading img {
+  @apply h-12 w-12 shrink-0 rounded-full object-contain;
+}
+
+.operations-detailed-item-heading div {
+  @apply min-w-0;
+}
+
+.operations-detailed-item h4,
+.operations-detailed-item p {
+  @apply m-0;
+}
+
+.operations-detailed-item h4,
+.operations-detailed-item-heading p {
+  @apply truncate;
+}
+
+.operations-detailed-item-heading p {
+  color: var(--secondary-text-color);
+}
+
+.operations-detailed-item-actions {
+  @apply shrink-0 flex-wrap justify-end;
+}
+
+.operations-detailed-item-fields {
+  @apply grid gap-4;
+}
+
+.operations-detailed-item-fields div {
+  @apply min-w-0;
+}
+
+.operations-detailed-item-fields p {
+  @apply mb-1 text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary-default-color);
+}
+
+.operations-detailed-item-fields span {
+  @apply block min-w-0 break-words;
+}

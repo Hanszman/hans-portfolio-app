@@ -1,35 +1,18 @@
-<section class="links-operations">
-  <div class="links-operations-copy">
-    <p class="links-operations-kicker">
-      {{ 'pages.admin.links.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.links.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.links.description' | translate }}
-      {{ 'pages.admin.links.description' | translate }}
-    </p>
-  </div>
-
-  <p class="links-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasLinks() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasLinks() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasLinks() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state mode="loading" [message]="'pages.admin.links.states.loading' | translate" />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasLinks()) {
-    <app-info-state mode="empty" [message]="'pages.admin.links.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.links.sectionLabel"
+  titleKey="pages.admin.entities.links.title"
+  [descriptionKeys]="['pages.admin.entities.links.description', 'pages.admin.links.description']"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasLinks()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.links.states.loading"
+  emptyKey="pages.admin.links.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-links-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -66,4 +49,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

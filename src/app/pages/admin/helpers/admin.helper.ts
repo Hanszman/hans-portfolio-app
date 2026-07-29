@@ -10,9 +10,8 @@ import {
   asAdminTranslationKey,
 } from '../admin.types';
 
-export const formatAdminIdentity = (
-  user: AdminAuthenticatedUser | null,
-): string => (user ? `${user.name} · ${user.role}` : '');
+export const formatAdminIdentity = (user: AdminAuthenticatedUser | null): string =>
+  user ? `${user.name} · ${user.role}` : '';
 
 export const resolveAdminFieldLabel = (
   field: AdminFormFieldConfig,
@@ -23,13 +22,13 @@ export const resolveAdminFieldLabel = (
   return field.required ? `${label} *` : label;
 };
 
-export const createAdminFieldLabelResolver = <
-  TFields extends Record<string, AdminFormFieldConfig>,
->(
-  fields: TFields,
-  translate: (key: AppTranslationKey) => string,
-) => (fieldKey: keyof TFields): string =>
-  resolveAdminFieldLabel(fields[fieldKey], translate);
+export const createAdminFieldLabelResolver =
+  <TFields extends Record<string, AdminFormFieldConfig>>(
+    fields: TFields,
+    translate: (key: AppTranslationKey) => string,
+  ) =>
+  (fieldKey: keyof TFields): string =>
+    resolveAdminFieldLabel(fields[fieldKey], translate);
 
 export const resolveAdminSelectValue = (event: Event): string => {
   const customEvent = event as Event & {
@@ -85,9 +84,7 @@ export const normalizeAdminDateValueForPicker = (value: string | null | undefine
   return normalizedValue;
 };
 
-export const normalizeAdminDateValueForMutation = (
-  value: string | null | undefined,
-): string => {
+export const normalizeAdminDateValueForMutation = (value: string | null | undefined): string => {
   const normalizedValue = value?.trim() ?? '';
 
   if (!normalizedValue) {
@@ -112,9 +109,7 @@ export const normalizeAdminDateValueForMutation = (
   return normalizedValue;
 };
 
-const parseAdminDateValue = (
-  value: string | null | undefined,
-): number | null => {
+const parseAdminDateValue = (value: string | null | undefined): number | null => {
   const normalizedValue = normalizeAdminDateValueForMutation(value);
 
   if (!normalizedValue) {
@@ -147,9 +142,7 @@ export const validateAdminDateRange = (
 ):
   | { readonly isValid: true }
   | { readonly isValid: false; readonly errorKey: AppTranslationKey } =>
-  isAdminDateRangeValid(startDate, endDate)
-    ? { isValid: true }
-    : { isValid: false, errorKey };
+  isAdminDateRangeValid(startDate, endDate) ? { isValid: true } : { isValid: false, errorKey };
 
 export interface AdminSelectOptionDefinition<TValue extends string = string> {
   readonly id: TValue;
@@ -183,10 +176,7 @@ export const translateAdminSelectOptions = <TValue extends string>(
     value: option.value,
   }));
 
-export const trackAdminItemById = (
-  index: number,
-  item: { id: string },
-): string => item.id;
+export const trackAdminItemById = (index: number, item: { id: string }): string => item.id;
 
 export interface AdminImageAssetOptionViewModel {
   readonly id: string;
@@ -240,17 +230,11 @@ export const buildAdminEntityViewModels = (
     relationModeLabel: translate(
       asAdminTranslationKey(`pages.admin.relationMode.${entity.relationMode}`),
     ),
-    title: translate(
-      asAdminTranslationKey(`pages.admin.entities.${entity.id}.title`),
-    ),
-    description: translate(
-      asAdminTranslationKey(`pages.admin.entities.${entity.id}.description`),
-    ),
+    title: translate(asAdminTranslationKey(`pages.admin.entities.${entity.id}.title`)),
+    description: translate(asAdminTranslationKey(`pages.admin.entities.${entity.id}.description`)),
     operations: operations.map((operation) => ({
       id: operation,
-      label: translate(
-        asAdminTranslationKey(`pages.admin.operations.${operation}`),
-      ),
+      label: translate(asAdminTranslationKey(`pages.admin.operations.${operation}`)),
     })),
   }));
 
@@ -261,7 +245,5 @@ export const buildAdminSessionFactViewModels = (
   facts.map((fact) => ({
     id: fact.id,
     title: translate(asAdminTranslationKey(`pages.admin.facts.${fact.id}.title`)),
-    description: translate(
-      asAdminTranslationKey(`pages.admin.facts.${fact.id}.description`),
-    ),
+    description: translate(asAdminTranslationKey(`pages.admin.facts.${fact.id}.description`)),
   }));

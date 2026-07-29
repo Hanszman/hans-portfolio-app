@@ -19,6 +19,34 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     technologyLabels: ['Angular'],
     formationLabels: ['formation-1'],
   },
+  {
+    id: 'link-2',
+    url: 'https://example.com/english',
+    labelPt: '',
+    labelEn: 'English fallback',
+    descriptionPt: '',
+    descriptionEn: '',
+    type: 'DEPLOY',
+    sortOrderLabel: '2',
+    projectLabels: [],
+    experienceLabels: [],
+    technologyLabels: [],
+    formationLabels: [],
+  },
+  {
+    id: 'link-3',
+    url: 'https://example.com/empty',
+    labelPt: '',
+    labelEn: '',
+    descriptionPt: '',
+    descriptionEn: '',
+    type: 'OTHER',
+    sortOrderLabel: '3',
+    projectLabels: [],
+    experienceLabels: [],
+    technologyLabels: [],
+    formationLabels: [],
+  },
 ];
 
 describe('LinksOperationsModalComponent', () => {
@@ -191,9 +219,7 @@ describe('LinksOperationsModalComponent', () => {
     };
 
     expect(
-      componentAccess.resolveSelectValue(
-        new CustomEvent('valueChange', { detail: 'DEPLOY' }),
-      ),
+      componentAccess.resolveSelectValue(new CustomEvent('valueChange', { detail: 'DEPLOY' })),
     ).toBe('DEPLOY');
     expect(
       componentAccess.resolveSelectValue(
@@ -261,8 +287,8 @@ describe('LinksOperationsModalComponent', () => {
     fixture.componentRef.setInput('selectedLink', {
       id: 'link-1',
       url: 'https://github.com/vh/portfolio',
-      labelPt: 'Repositorio',
-      labelEn: 'Repository',
+      labelPt: null,
+      labelEn: null,
       descriptionPt: 'Codigo fonte',
       descriptionEn: 'Source code',
       type: 'GITHUB',

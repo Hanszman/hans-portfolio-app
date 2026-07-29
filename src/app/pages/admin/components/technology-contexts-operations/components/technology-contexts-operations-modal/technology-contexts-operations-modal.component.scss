@@ -1,47 +1,7 @@
 :host {
   @apply block;
 }
-.technology-contexts-operations-form,
-.technology-contexts-operations-list,
-.technology-contexts-operations-picker {
+
+.technology-contexts-operations-form {
   @apply grid gap-4;
-}
-.technology-contexts-operations-item,
-.technology-contexts-operations-picker-option,
-.technology-contexts-operations-delete-summary {
-  @apply flex min-w-0 flex-col gap-4 rounded-3xl border p-4;
-  border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
-  background: color-mix(in srgb, var(--background-color) 94%, var(--white));
-}
-.technology-contexts-operations-item-header,
-.technology-contexts-operations-picker-option {
-  @apply flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between;
-}
-.technology-contexts-operations-item-header h4,
-.technology-contexts-operations-picker-option strong,
-.technology-contexts-operations-delete-summary strong {
-  @apply break-words font-semibold;
-  color: var(--text-color);
-}
-.technology-contexts-operations-item-header p,
-.technology-contexts-operations-item > p,
-.technology-contexts-operations-picker-option span,
-.technology-contexts-operations-delete-summary p {
-  @apply text-sm leading-7;
-  color: var(--base-strong-color);
-}
-.technology-contexts-operations-label {
-  @apply text-xs font-semibold uppercase tracking-[0.18em];
-  color: var(--primary-default-color);
-}
-.technology-contexts-operations-item-actions {
-  @apply flex flex-wrap gap-3;
-}
-.technology-contexts-operations-picker-option {
-  @apply w-full cursor-pointer text-left transition;
-}
-.technology-contexts-operations-picker-option:hover,
-.technology-contexts-operations-picker-option:focus-visible {
-  border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-default-color) 10%, transparent);
 }

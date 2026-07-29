@@ -12,7 +12,11 @@ import { CustomerRecord } from '../../../../../../core/api/admin/customers/custo
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   trackAdminItemById,
@@ -34,7 +38,7 @@ import {
 @Component({
   selector: 'app-customers-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './customers-operations-modal.component.html',
   styleUrl: './customers-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,20 +48,14 @@ export class CustomersOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.customers.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.customers.modal.create.title');
   readonly modalMode = input<CustomersOperationsModalMode | null>(null);
   readonly customers = input<readonly CustomerOperationsViewModel[]>([]);
   readonly selectedCustomer = input<CustomerRecord | null>(null);
-  readonly form = input<CustomersOperationsFormValue>(
-    createEmptyCustomersOperationsFormValue(),
-  );
+  readonly form = input<CustomersOperationsFormValue>(createEmptyCustomersOperationsFormValue());
   readonly experienceOptions = input<readonly CustomerExperienceOptionViewModel[]>([]);
   readonly imageAssetOptions = input<readonly CustomerImageAssetOptionViewModel[]>([]);
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -112,10 +110,60 @@ export class CustomersOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.customers().map((customer) => ({
+      id: customer.id,
+      title: `${customer.name} (${customer.slug})`,
+      subtitle: customer.summaryEn,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.customers.card.emptyRelations');
+
+      return this.customers().map((customer) => ({
+        id: customer.id,
+        title: customer.slug,
+        subtitle: customer.name,
+        fields: [
+          { labelKey: 'pages.admin.customers.card.slug', value: customer.slug },
+          { labelKey: 'pages.admin.customers.card.name', value: customer.name },
+          { labelKey: 'pages.admin.customers.card.summaryPt', value: customer.summaryPt },
+          { labelKey: 'pages.admin.customers.card.summaryEn', value: customer.summaryEn },
+          {
+            labelKey: 'pages.admin.customers.card.highlight',
+            value: this.translation.instant(
+              customer.highlight
+                ? 'pages.admin.customers.fields.highlight.enabled'
+                : 'pages.admin.customers.fields.highlight.disabled',
+            ),
+          },
+          { labelKey: 'pages.admin.customers.card.sortOrder', value: customer.sortOrderLabel },
+          {
+            labelKey: 'pages.admin.customers.card.experiences',
+            value: customer.experienceLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.customers.card.imageAssets',
+            value: customer.imageAssetLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const customer = this.selectedCustomer();
+    return customer
+      ? {
+          id: customer.id,
+          title: `${customer.name} (${customer.slug})`,
+          subtitle: customer.summaryEn ?? undefined,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();

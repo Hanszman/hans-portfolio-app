@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectsOperationsService } from '../../../../core/api/admin/projects/projects-operations.service';
 import { ProjectRecord } from '../../../../core/api/admin/projects/projects-operations.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -19,7 +18,7 @@ import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-a
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   AdminCollectionPagination,
   ADMIN_MODAL_PAGE_SIZE,
@@ -39,7 +38,7 @@ import {
 @Component({
   selector: 'app-projects-operations',
   standalone: true,
-  imports: [TranslatePipe, OperationsActionsComponent, ProjectsOperationsModalComponent],
+  imports: [OperationsComponent, ProjectsOperationsModalComponent],
   templateUrl: './projects-operations.component.html',
   styleUrl: './projects-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -84,7 +83,11 @@ export class ProjectsOperationsComponent implements OnInit {
   protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
     const mode = this.modalMode();
     const translationMode =
-      mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode ?? 'create';
+      mode === 'pick-update'
+        ? 'pickUpdate'
+        : mode === 'pick-delete'
+          ? 'pickDelete'
+          : (mode ?? 'create');
 
     return `pages.admin.projects.modal.${translationMode}.title` as AppTranslationKey;
   });

@@ -19,6 +19,19 @@ const CUSTOMERS: readonly CustomerOperationsViewModel[] = [
     experienceIds: ['experience-1'],
     imageAssetIds: ['image-asset-1'],
   },
+  {
+    id: 'customer-2',
+    slug: 'empty-client',
+    name: 'Empty Client',
+    summaryPt: '',
+    summaryEn: '',
+    highlight: false,
+    sortOrderLabel: '2',
+    experienceLabels: [],
+    imageAssetLabels: [],
+    experienceIds: [],
+    imageAssetIds: [],
+  },
 ];
 
 describe('CustomersOperationsModalComponent', () => {
@@ -220,7 +233,7 @@ describe('CustomersOperationsModalComponent', () => {
       slug: 'enterprise-client',
       name: 'Enterprise Client',
       summaryPt: 'Cliente corporativo',
-      summaryEn: 'Corporate client',
+      summaryEn: null,
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],

@@ -1,11 +1,15 @@
 import { Component, Input, provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RelationPickerComponent } from './relation-picker.component';
+import { OperationsRelationPickerComponent } from './operations-relation-picker.component';
 
 @Component({
   standalone: true,
-  imports: [RelationPickerComponent],
-  template: `<app-relation-picker [options]="options" [selectedIds]="selected" (toggled)="toggle($event)" />`,
+  imports: [OperationsRelationPickerComponent],
+  template: `<app-operations-relation-picker
+    [options]="options"
+    [selectedIds]="selected"
+    (toggled)="toggle($event)"
+  />`,
 })
 class HostComponent {
   @Input() options = [{ id: 'one', title: 'One', subtitle: 'First' }];
@@ -15,7 +19,7 @@ class HostComponent {
   }
 }
 
-describe('RelationPickerComponent', () => {
+describe('OperationsRelationPickerComponent', () => {
   let fixture: ComponentFixture<HostComponent>;
 
   beforeEach(async () => {
@@ -28,7 +32,8 @@ describe('RelationPickerComponent', () => {
   });
 
   it('renders selected options and emits toggles', () => {
-    const component = fixture.debugElement.children[0].componentInstance as RelationPickerComponent;
+    const component = fixture.debugElement.children[0]
+      .componentInstance as OperationsRelationPickerComponent;
     const emit = spyOn(component.toggled, 'emit');
     expect(component['isSelected']('one')).toBeTrue();
     component.toggled.emit('one');

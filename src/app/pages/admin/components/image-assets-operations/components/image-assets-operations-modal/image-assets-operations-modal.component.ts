@@ -12,7 +12,11 @@ import { ImageAssetRecord } from '../../../../../../core/api/admin/image-assets/
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -35,11 +39,7 @@ import {
 @Component({
   selector: 'app-image-assets-operations-modal',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    OperationsModalComponent,
-    RelationPickerComponent,
-  ],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './image-assets-operations-modal.component.html',
   styleUrl: './image-assets-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,9 +49,7 @@ export class ImageAssetsOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.imageAssets.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.imageAssets.modal.create.title');
   readonly modalMode = input<ImageAssetsOperationsModalMode | null>(null);
   readonly imageAssets = input<readonly ImageAssetOperationsViewModel[]>([]);
   readonly selectedImageAsset = input<ImageAssetRecord | null>(null);
@@ -62,9 +60,7 @@ export class ImageAssetsOperationsModalComponent {
   readonly experienceOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly technologyOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly imageAssetKindOptions = input<readonly ImageAssetKindOptionViewModel[]>([]);
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -127,10 +123,120 @@ export class ImageAssetsOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.imageAssets().map((imageAsset) => ({
+      id: imageAsset.id,
+      title: `${imageAsset.fileName} (${imageAsset.kind})`,
+      subtitle: imageAsset.filePath,
+      image: {
+        url: imageAsset.filePath,
+        alt: imageAsset.altEn || imageAsset.fileName,
+        title: imageAsset.filePath,
+      },
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyText = this.translation.instant('pages.admin.imageAssets.card.emptyText');
+      const emptyRelations = this.translation.instant(
+        'pages.admin.imageAssets.card.emptyRelations',
+      );
+
+      return this.imageAssets().map((imageAsset) => ({
+        id: imageAsset.id,
+        title: imageAsset.fileName,
+        subtitle: imageAsset.kind,
+        image: {
+          url: imageAsset.filePath,
+          alt: imageAsset.altEn || imageAsset.fileName,
+          title: imageAsset.filePath,
+        },
+        fields: [
+          {
+            labelKey: 'pages.admin.imageAssets.card.filePath',
+            value: imageAsset.filePath,
+            title: imageAsset.filePath,
+          },
+          { labelKey: 'pages.admin.imageAssets.card.folder', value: imageAsset.folder },
+          { labelKey: 'pages.admin.imageAssets.card.kind', value: imageAsset.kind },
+          {
+            labelKey: 'pages.admin.imageAssets.card.mimeType',
+            value: imageAsset.mimeType || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.dimensions',
+            value: imageAsset.dimensionsLabel,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.sortOrder',
+            value: imageAsset.sortOrderLabel,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.altPt',
+            value: imageAsset.altPt || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.altEn',
+            value: imageAsset.altEn || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.captionPt',
+            value: imageAsset.captionPt || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.captionEn',
+            value: imageAsset.captionEn || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.projects',
+            value: imageAsset.projectLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.experiences',
+            value: imageAsset.experienceLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.technologies',
+            value: imageAsset.technologyLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.formations',
+            value: imageAsset.formationLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.spokenLanguages',
+            value: imageAsset.spokenLanguageLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.customers',
+            value: imageAsset.customerLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.imageAssets.card.jobs',
+            value: imageAsset.jobLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const imageAsset = this.selectedImageAsset();
+    return imageAsset
+      ? {
+          id: imageAsset.id,
+          title: `${imageAsset.fileName} (${imageAsset.kind})`,
+          subtitle: imageAsset.filePath,
+          image: {
+            url: imageAsset.filePath,
+            alt: imageAsset.altEn ?? imageAsset.fileName,
+            title: imageAsset.filePath,
+          },
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();
@@ -223,5 +329,4 @@ export class ImageAssetsOperationsModalComponent {
   protected isTechnologySelected(technologyId: string): boolean {
     return this.form().technologyIds.includes(technologyId);
   }
-
 }

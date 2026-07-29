@@ -12,7 +12,11 @@ import { LinkRecord } from '../../../../../../core/api/admin/links/links-operati
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -34,11 +38,7 @@ import {
 @Component({
   selector: 'app-links-operations-modal',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    OperationsModalComponent,
-    RelationPickerComponent,
-  ],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './links-operations-modal.component.html',
   styleUrl: './links-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,9 +48,7 @@ export class LinksOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.links.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.links.modal.create.title');
   readonly modalMode = input<LinksOperationsModalMode | null>(null);
   readonly links = input<readonly LinkOperationsViewModel[]>([]);
   readonly selectedLink = input<LinkRecord | null>(null);
@@ -72,9 +70,7 @@ export class LinksOperationsModalComponent {
   readonly technologyOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
   readonly formationOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
   readonly linkTypeOptions = input<readonly LinkTypeOptionViewModel[]>([]);
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -133,10 +129,76 @@ export class LinksOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() => {
+    this.translation.locale();
+    const emptyText = this.translation.instant('pages.admin.links.card.emptyText');
+
+    return this.links().map((link) => ({
+      id: link.id,
+      title: link.labelPt || link.labelEn || emptyText,
+      subtitle: link.url,
+    }));
+  });
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyText = this.translation.instant('pages.admin.links.card.emptyText');
+      const emptyRelations = this.translation.instant('pages.admin.links.card.emptyRelations');
+
+      return this.links().map((link) => ({
+        id: link.id,
+        title: link.url,
+        subtitle: link.labelPt || link.labelEn || emptyText,
+        fields: [
+          { labelKey: 'pages.admin.links.card.url', value: link.url, title: link.url },
+          { labelKey: 'pages.admin.links.card.labelPt', value: link.labelPt || emptyText },
+          { labelKey: 'pages.admin.links.card.labelEn', value: link.labelEn || emptyText },
+          {
+            labelKey: 'pages.admin.links.card.descriptionPt',
+            value: link.descriptionPt || emptyText,
+          },
+          {
+            labelKey: 'pages.admin.links.card.descriptionEn',
+            value: link.descriptionEn || emptyText,
+          },
+          { labelKey: 'pages.admin.links.card.type', value: link.type },
+          { labelKey: 'pages.admin.links.card.sortOrder', value: link.sortOrderLabel },
+          {
+            labelKey: 'pages.admin.links.card.projects',
+            value: link.projectLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.links.card.experiences',
+            value: link.experienceLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.links.card.technologies',
+            value: link.technologyLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.links.card.formations',
+            value: link.formationLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    this.translation.locale();
+    const link = this.selectedLink();
+    return link
+      ? {
+          id: link.id,
+          title:
+            link.labelPt ||
+            link.labelEn ||
+            this.translation.instant('pages.admin.links.card.emptyText'),
+          subtitle: link.url,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();
@@ -217,5 +279,4 @@ export class LinksOperationsModalComponent {
   protected isFormationSelected(formationId: string): boolean {
     return this.form().formationIds.includes(formationId);
   }
-
 }

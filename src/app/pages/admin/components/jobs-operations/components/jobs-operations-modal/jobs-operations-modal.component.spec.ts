@@ -20,6 +20,20 @@ const JOBS: readonly JobOperationsViewModel[] = [
     experienceIds: ['experience-1'],
     imageAssetIds: ['image-asset-1'],
   },
+  {
+    id: 'job-2',
+    slug: 'empty-job',
+    namePt: 'Cargo vazio',
+    nameEn: '',
+    summaryPt: '',
+    summaryEn: '',
+    highlight: false,
+    sortOrderLabel: '2',
+    experienceLabels: [],
+    imageAssetLabels: [],
+    experienceIds: [],
+    imageAssetIds: [],
+  },
 ];
 
 describe('JobsOperationsModalComponent', () => {
@@ -226,7 +240,7 @@ describe('JobsOperationsModalComponent', () => {
       id: 'job-1',
       slug: 'frontend-engineer',
       namePt: 'Engenheiro Front-End',
-      nameEn: 'Front-End Engineer',
+      nameEn: null,
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       highlight: true,

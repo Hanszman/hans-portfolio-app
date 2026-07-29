@@ -1,35 +1,21 @@
-<section class="technology-contexts-operations">
-  <div class="technology-contexts-operations-copy">
-    <p class="technology-contexts-operations-kicker">
-      {{ 'pages.admin.technologyContexts.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.technology-contexts.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.technology-contexts.description' | translate }}
-      {{ 'pages.admin.technologyContexts.description' | translate }}
-    </p>
-  </div>
-
-  <p class="technology-contexts-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasRecords() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasRecords() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasRecords() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state mode="loading" [message]="'pages.admin.technologyContexts.states.loading' | translate" />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasRecords()) {
-    <app-info-state mode="empty" [message]="'pages.admin.technologyContexts.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.technologyContexts.sectionLabel"
+  titleKey="pages.admin.entities.technology-contexts.title"
+  [descriptionKeys]="[
+    'pages.admin.entities.technology-contexts.description',
+    'pages.admin.technologyContexts.description',
+  ]"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasRecords()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.technologyContexts.states.loading"
+  emptyKey="pages.admin.technologyContexts.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-technology-contexts-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -53,4 +39,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

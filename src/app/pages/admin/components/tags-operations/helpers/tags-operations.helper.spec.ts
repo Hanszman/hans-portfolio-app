@@ -52,9 +52,7 @@ const createTechnology = (
   ...overrides,
 });
 
-const createTag = (
-  overrides: Partial<TagRecord> = {},
-): TagRecord => ({
+const createTag = (overrides: Partial<TagRecord> = {}): TagRecord => ({
   id: 'tag-1',
   slug: 'frontend',
   namePt: 'Front-end',
@@ -159,10 +157,7 @@ describe('tags helper', () => {
   });
 
   it('should normalize technology relations from explicit ids and nested relations', () => {
-    expect(normalizeTagTechnologyIds(createTag())).toEqual([
-      'technology-2',
-      'technology-3',
-    ]);
+    expect(normalizeTagTechnologyIds(createTag())).toEqual(['technology-2', 'technology-3']);
   });
 
   it('should build an empty form when no tag is selected', () => {
@@ -258,14 +253,8 @@ describe('tags helper', () => {
       ],
     );
 
-    expect(viewModels.map((viewModel) => viewModel.slug)).toEqual([
-      'frontend',
-      'backend',
-    ]);
-    expect(viewModels[0].projectLabels).toEqual([
-      'Admin workspace',
-      'Dashboard suite',
-    ]);
+    expect(viewModels.map((viewModel) => viewModel.slug)).toEqual(['frontend', 'backend']);
+    expect(viewModels[0].projectLabels).toEqual(['Admin workspace', 'Dashboard suite']);
     expect(viewModels[0].technologyLabels).toEqual(['React', 'NestJS']);
   });
 
@@ -296,10 +285,7 @@ describe('tags helper', () => {
       [],
     );
 
-    expect(viewModels.map((viewModel) => viewModel.slug)).toEqual([
-      'alpha',
-      'zeta',
-    ]);
+    expect(viewModels.map((viewModel) => viewModel.slug)).toEqual(['alpha', 'zeta']);
     expect(viewModels[0].type).toBe('');
     expect(viewModels[0].projectLabels).toEqual([]);
     expect(viewModels[0].technologyLabels).toEqual([]);
@@ -356,10 +342,7 @@ describe('tags helper', () => {
       [],
     );
 
-    expect(leftDefault.map((viewModel) => viewModel.slug)).toEqual([
-      'ordered',
-      'without-order',
-    ]);
+    expect(leftDefault.map((viewModel) => viewModel.slug)).toEqual(['ordered', 'without-order']);
     expect(rightDefault[1].sortOrderLabel).toBe('0');
   });
 

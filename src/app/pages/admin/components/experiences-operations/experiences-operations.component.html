@@ -1,36 +1,18 @@
-<section class="experiences-operations">
-  <div class="experiences-operations-copy">
-    <p class="experiences-operations-kicker">
-      {{ 'pages.admin.experiences.sectionLabel' | translate }}
-    </p>
-    <h3>{{ 'pages.admin.entities.experiences.title' | translate }}</h3>
-    <p>{{ 'pages.admin.entities.experiences.description' | translate }}</p>
-  </div>
-
-  <p class="experiences-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasExperiences() || isLoading()"
-    [updateDisabled]="!hasExperiences() || isLoading()"
-    [deleteDisabled]="!hasExperiences() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <p class="experiences-operations-state">
-      {{ 'pages.admin.experiences.states.loading' | translate }}
-    </p>
-  } @else if (loadErrorKey(); as errorKey) {
-    <p class="experiences-operations-state">{{ errorKey | translate }}</p>
-  } @else if (!hasExperiences()) {
-    <p class="experiences-operations-state">
-      {{ 'pages.admin.experiences.states.empty' | translate }}
-    </p>
-  }
-
+<app-operations
+  kickerKey="pages.admin.experiences.sectionLabel"
+  titleKey="pages.admin.entities.experiences.title"
+  [descriptionKeys]="['pages.admin.entities.experiences.description']"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasExperiences()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.experiences.states.loading"
+  emptyKey="pages.admin.experiences.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-experiences-operations-modal
     [isOpen]="isModalOpen()"
     [modalMode]="modalMode()"
@@ -59,4 +41,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

@@ -99,9 +99,7 @@ export interface JobsMutationBuildFailure {
   errorKey: AppTranslationKey;
 }
 
-export type JobsMutationBuildResult =
-  | JobsMutationBuildSuccess
-  | JobsMutationBuildFailure;
+export type JobsMutationBuildResult = JobsMutationBuildSuccess | JobsMutationBuildFailure;
 
 export const createEmptyJobsOperationsFormValue = (): JobsOperationsFormValue => ({
   slug: '',

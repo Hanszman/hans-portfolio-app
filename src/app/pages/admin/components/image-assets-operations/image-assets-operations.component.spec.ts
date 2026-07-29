@@ -109,10 +109,7 @@ const createTechnology = (
   ...overrides,
 });
 
-const createCollectionResponse = (
-  data: ImageAssetRecord[] = [createImageAsset()],
-  page = 1,
-) => ({
+const createCollectionResponse = (data: ImageAssetRecord[] = [createImageAsset()], page = 1) => ({
   data,
   pagination: {
     page,
@@ -172,9 +169,9 @@ describe('ImageAssetsOperationsComponent', () => {
     ]);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     adminSessionServiceMock = {
-      accessToken: jasmine.createSpy<() => string | null>('accessToken').and.returnValue(
-        'token-123',
-      ),
+      accessToken: jasmine
+        .createSpy<() => string | null>('accessToken')
+        .and.returnValue('token-123'),
     };
 
     imageAssetsOperationsService.getAll.and.returnValue(of(createCollectionResponse()));
@@ -243,15 +240,9 @@ describe('ImageAssetsOperationsComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      '',
-    );
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(compiled.textContent).toContain('Image assets');
-    expect(compiled.textContent).toContain(
-      createAdminEntityEndpointLabel('/image-assets'),
-    );
+    expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/image-assets'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
     expect(compiled.textContent).not.toContain('vh_logo_blue.svg');
@@ -337,9 +328,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.openDeleteModal('image-asset-1');
     await component.submitModal();
 
-    expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith(
-      'image-asset-1',
-    );
+    expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith('image-asset-1');
   });
 
   it('should validate modal input and block unavailable sessions', async () => {
@@ -359,46 +348,32 @@ describe('ImageAssetsOperationsComponent', () => {
 
     component.openCreateModal();
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.requiredFileName',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredFileName');
 
     component.updateFileName('vh_logo_blue.svg');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.requiredFilePath',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredFilePath');
 
     component.updateFilePath('/assets/img/logo/vh_logo_blue.svg');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.requiredFolder',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredFolder');
 
     component.updateFolder('logo');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.requiredKind',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredKind');
 
     component.updateKind('INVALID');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.invalidKind',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.invalidKind');
 
     component.updateKind('ICON');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.requiredMimeType',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredMimeType');
 
     component.updateMimeType('image/svg+xml');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.invalidSortOrder',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.invalidSortOrder');
   });
 
   it('should expose load, save and delete failures', async () => {
@@ -427,9 +402,7 @@ describe('ImageAssetsOperationsComponent', () => {
 
     component.modalModeSignal.set('delete');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.selectionRequired',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.selectionRequired');
 
     component.openCreateModal();
     component.updateFileName('brand-light.svg');
@@ -439,15 +412,11 @@ describe('ImageAssetsOperationsComponent', () => {
     component.updateMimeType('image/svg+xml');
     component.updateSortOrder('2');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.saveError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.saveError');
 
     component.openDeleteModal('image-asset-1');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.deleteError',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.deleteError');
   });
 
   it('should navigate between modal flows, refresh pages and reset the selection state', async () => {
@@ -492,15 +461,11 @@ describe('ImageAssetsOperationsComponent', () => {
 
     component.openUpdatePickerModal();
     expect(component.modalMode()).toBe('pick-update');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.imageAssets.modal.pickUpdate.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.imageAssets.modal.pickUpdate.title');
 
     component.openDeletePickerModal();
     expect(component.modalMode()).toBe('pick-delete');
-    expect(component.modalTitleKey()).toBe(
-      'pages.admin.imageAssets.modal.pickDelete.title',
-    );
+    expect(component.modalTitleKey()).toBe('pages.admin.imageAssets.modal.pickDelete.title');
 
     component.openUpdateModal('image-asset-1');
     expect(component.modalMode()).toBe('update');
@@ -519,36 +484,24 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(component.selectedImageAsset()).toBeNull();
 
     await component.goToPage(2);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
-      2,
-      5,
-      '',
-    );
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
 
     await component.updateSearchQuery('logo');
     await component.updateSearchQuery('logo');
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      'logo',
-    );
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'logo');
 
     await component.goToPage(2);
     const callsAfterValidPageChange = imageAssetsOperationsService.getAll.calls.count();
     await component.goToPage(0);
     await component.goToPage(99);
 
-    expect(imageAssetsOperationsService.getAll.calls.count()).toBe(
-      callsAfterValidPageChange,
-    );
+    expect(imageAssetsOperationsService.getAll.calls.count()).toBe(callsAfterValidPageChange);
     expect(component.trackById(0, { id: 'image-asset-1' })).toBe('image-asset-1');
   });
 
   it('should ignore unavailable records and read requests when no protected image asset exists', async () => {
     imageAssetsOperationsService.getAll.and.returnValue(
-      of(
-        createCollectionResponse([], 1) as ReturnType<typeof createCollectionResponse>,
-      ),
+      of(createCollectionResponse([], 1) as ReturnType<typeof createCollectionResponse>),
     );
 
     const emptyFixture = TestBed.createComponent(ImageAssetsOperationsComponent);
@@ -601,9 +554,7 @@ describe('ImageAssetsOperationsComponent', () => {
     adminSessionServiceMock.accessToken.and.returnValue(null);
     component.openCreateModal();
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.missingSession',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.missingSession');
 
     adminSessionServiceMock.accessToken.and.returnValue('token-123');
     component.openCreateModal();
@@ -615,9 +566,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.updateSortOrder('1');
     component.modalModeSignal.set('update');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.imageAssets.feedback.selectionRequired',
-    );
+    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.selectionRequired');
 
     component.openUpdateModal('image-asset-1');
     component.toggleProject('project-1');
@@ -639,9 +588,7 @@ describe('ImageAssetsOperationsComponent', () => {
       isLoading(): boolean;
     };
 
-    expect(errorComponent.loadErrorKey()).toBe(
-      'pages.admin.imageAssets.feedback.loadError',
-    );
+    expect(errorComponent.loadErrorKey()).toBe('pages.admin.imageAssets.feedback.loadError');
     expect(errorComponent.isLoading()).toBeFalse();
     expect(toastService.showError).toHaveBeenCalledWith(
       'pages.admin.imageAssets.feedback.loadError',
@@ -666,14 +613,8 @@ describe('ImageAssetsOperationsComponent', () => {
     component.openDeleteModal('image-asset-1');
     await component.submitModal();
 
-    expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith(
-      'image-asset-1',
-    );
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(
-      1,
-      5,
-      '',
-    );
+    expect(imageAssetsOperationsService.delete).toHaveBeenCalledWith('image-asset-1');
+    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
   });
 
   it('should ignore submit requests when no modal mode is active', async () => {
@@ -693,5 +634,3 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(imageAssetsOperationsService.delete).not.toHaveBeenCalled();
   });
 });
-
-

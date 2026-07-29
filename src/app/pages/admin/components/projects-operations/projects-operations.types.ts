@@ -11,6 +11,9 @@ import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,
   createAdminImageAssetOptionViewModel,
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
+  validateAdminDateRange,
 } from '../../helpers/admin.helper';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 
@@ -30,9 +33,9 @@ export interface ProjectsOperationsFormValue {
   shortDescriptionEn: string;
   fullDescriptionPt: string;
   fullDescriptionEn: string;
-  context: ProjectContext | string;
-  status: ProjectStatus | string;
-  environment: ProjectEnvironment | string;
+  context: ProjectContext | '';
+  status: ProjectStatus | '';
+  environment: ProjectEnvironment | '';
   featured: boolean;
   highlight: boolean;
   startDate: string;
@@ -119,18 +122,14 @@ export const PROJECTS_OPERATIONS_FORM_FIELDS = [
   'shortDescriptionEn',
   'fullDescriptionPt',
   'fullDescriptionEn',
-  'context',
-  'status',
-  'environment',
   'sortOrder',
 ] as const;
 
 export const PROJECT_CONTEXT_VALUES: ProjectContext[] = [
-  'CLIENT',
+  'PROFESSIONAL',
   'PERSONAL',
   'ACADEMIC',
-  'OPEN_SOURCE',
-  'OTHER',
+  'STUDY',
 ];
 
 export const PROJECT_STATUS_VALUES: ProjectStatus[] = [
@@ -141,11 +140,12 @@ export const PROJECT_STATUS_VALUES: ProjectStatus[] = [
 ];
 
 export const PROJECT_ENVIRONMENT_VALUES: ProjectEnvironment[] = [
-  'WEB',
+  'FRONTEND',
+  'BACKEND',
+  'FULLSTACK',
   'MOBILE',
-  'DESKTOP',
-  'API',
-  'OTHER',
+  'LIBRARY',
+  'DASHBOARD',
 ];
 
 export interface ProjectOption {
@@ -193,23 +193,60 @@ export const createEmptyProjectsOperationsFormValue = (): ProjectsOperationsForm
 export const createProjectImageAssetOption = (item: ImageAssetRecord): ProjectImageAssetOption =>
   createAdminImageAssetOptionViewModel(item);
 type ProjectRelationKey = 'technology' | 'experience' | 'tag' | 'link' | 'imageAsset';
-const PROJECT_RELATION_KEYS: Record<
-  ProjectRelationKey,
-  { ids: string; relations: keyof ProjectRecord; id: keyof ProjectRelationRecord }
-> = {
-  technology: { ids: 'technologyIds', relations: 'technologyRelations', id: 'technologyId' },
-  experience: { ids: 'experienceIds', relations: 'experiences', id: 'experienceId' },
-  tag: { ids: 'tagIds', relations: 'tags', id: 'tagId' },
-  link: { ids: 'linkIds', relations: 'links', id: 'linkId' },
-  imageAsset: { ids: 'imageAssetIds', relations: 'imageAssets', id: 'imageAssetId' },
+interface ProjectRelationConfig {
+  readonly directIds: keyof ProjectRecord;
+  readonly collections: readonly (keyof ProjectRecord)[];
+  readonly relationId: keyof ProjectRelationRecord;
+  readonly nested: keyof ProjectRelationRecord;
+}
+
+const PROJECT_RELATION_KEYS: Record<ProjectRelationKey, ProjectRelationConfig> = {
+  technology: {
+    directIds: 'technologyIds',
+    collections: ['technologyRelations', 'technologies'],
+    relationId: 'technologyId',
+    nested: 'technology',
+  },
+  experience: {
+    directIds: 'experienceIds',
+    collections: ['experiences'],
+    relationId: 'experienceId',
+    nested: 'experience',
+  },
+  tag: {
+    directIds: 'tagIds',
+    collections: ['tags'],
+    relationId: 'tagId',
+    nested: 'tag',
+  },
+  link: {
+    directIds: 'linkIds',
+    collections: ['links'],
+    relationId: 'linkId',
+    nested: 'link',
+  },
+  imageAsset: {
+    directIds: 'imageAssetIds',
+    collections: ['imageAssets'],
+    relationId: 'imageAssetId',
+    nested: 'imageAsset',
+  },
 };
 
 export const projectRelationId = (
   relation: ProjectRelationRecord,
   key: ProjectRelationKey,
 ): string | null => {
-  const value = relation[PROJECT_RELATION_KEYS[key].id];
-  return typeof value === 'string' ? value : (value?.id ?? null);
+  const config = PROJECT_RELATION_KEYS[key];
+  const direct = relation[config.relationId];
+  const nested = relation[config.nested];
+
+  return (
+    (typeof direct === 'string' ? direct : null) ||
+    (typeof nested === 'object' && nested ? nested.id : null) ||
+    relation.id ||
+    null
+  );
 };
 
 export const normalizeProjectRelationIds = (
@@ -217,16 +254,21 @@ export const normalizeProjectRelationIds = (
   key: ProjectRelationKey,
 ): readonly string[] => {
   const config = PROJECT_RELATION_KEYS[key];
-  const direct = (record as unknown as Record<string, unknown>)[config.ids];
-  const relations = record[config.relations];
+  const direct = record[config.directIds];
+  const relations = config.collections.reduce<unknown[]>((items, collectionKey) => {
+    const collection = record[collectionKey];
+    return Array.isArray(collection) ? [...items, ...collection] : items;
+  }, []);
   return [
     ...new Set([
       ...(Array.isArray(direct) ? direct.filter((v): v is string => typeof v === 'string') : []),
-      ...(Array.isArray(relations)
-        ? (relations as ProjectRelationRecord[])
-            .map((r) => projectRelationId(r, key))
-            .filter((v): v is string => !!v)
-        : []),
+      ...relations
+        .map((relation) =>
+          typeof relation === 'string'
+            ? relation
+            : projectRelationId(relation as ProjectRelationRecord, key),
+        )
+        .filter((value): value is string => !!value),
     ]),
   ];
 };
@@ -248,8 +290,8 @@ export const buildProjectsFormValue = (
         environment: record.environment,
         featured: record.featured ?? false,
         highlight: record.highlight ?? false,
-        startDate: record.startDate ?? '',
-        endDate: record.endDate ?? '',
+        startDate: normalizeAdminDateValueForPicker(record.startDate),
+        endDate: normalizeAdminDateValueForPicker(record.endDate),
         sortOrder: String(record.sortOrder ?? 0),
         technologyIds: normalizeProjectRelationIds(record, 'technology'),
         experienceIds: normalizeProjectRelationIds(record, 'experience'),
@@ -282,6 +324,25 @@ export const buildProjectsMutationPayload = (
     return { isValid: false, errorKey: 'pages.admin.projects.feedback.invalidSortOrder' };
   if (!form.context || !form.status || !form.environment)
     return { isValid: false, errorKey: 'pages.admin.projects.feedback.requiredOptions' };
+
+  if (
+    !PROJECT_CONTEXT_VALUES.includes(form.context) ||
+    !PROJECT_STATUS_VALUES.includes(form.status) ||
+    !PROJECT_ENVIRONMENT_VALUES.includes(form.environment)
+  ) {
+    return { isValid: false, errorKey: 'pages.admin.projects.feedback.requiredOptions' };
+  }
+
+  const dateRangeResult = validateAdminDateRange(
+    form.startDate,
+    form.endDate,
+    'pages.admin.projects.feedback.invalidDateRange',
+  );
+
+  if (!dateRangeResult.isValid) {
+    return dateRangeResult;
+  }
+
   return {
     isValid: true,
     payload: {
@@ -292,15 +353,17 @@ export const buildProjectsMutationPayload = (
       shortDescriptionEn: form.shortDescriptionEn.trim(),
       fullDescriptionPt: form.fullDescriptionPt.trim(),
       fullDescriptionEn: form.fullDescriptionEn.trim(),
-      context: form.context as ProjectContext,
-      status: form.status as ProjectStatus,
-      environment: form.environment as ProjectEnvironment,
+      context: form.context,
+      status: form.status,
+      environment: form.environment,
       featured: form.featured,
       highlight: form.highlight,
-      startDate: form.startDate || undefined,
-      endDate: form.endDate || undefined,
+      startDate: normalizeAdminDateValueForMutation(form.startDate) || undefined,
+      endDate: normalizeAdminDateValueForMutation(form.endDate) || undefined,
       sortOrder,
-      technologyRelations: form.technologyIds.map((technologyId) => ({ technologyId })),
+      technologyRelations: [...new Set(form.technologyIds)].map((technologyId) => ({
+        technologyId,
+      })),
       experienceIds: [...new Set(form.experienceIds)],
       tagIds: [...new Set(form.tagIds)],
       linkIds: [...new Set(form.linkIds)],

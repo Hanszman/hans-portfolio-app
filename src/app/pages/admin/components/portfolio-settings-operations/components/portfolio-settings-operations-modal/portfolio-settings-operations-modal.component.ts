@@ -13,6 +13,10 @@ import { AppTranslationKey } from '../../../../../../core/translation/translatio
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
+import {
   createAdminFieldLabelResolver,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -51,9 +55,7 @@ export class PortfolioSettingsOperationsModalComponent {
     description: '',
     valueText: '',
   });
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -103,10 +105,58 @@ export class PortfolioSettingsOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() => {
+    this.translation.locale();
+    const emptyDescription = this.translation.instant(
+      'pages.admin.portfolioSettings.card.emptyDescription',
+    );
+
+    return this.settings().map((setting) => ({
+      id: setting.id,
+      title: setting.key,
+      subtitle: setting.description || emptyDescription,
+    }));
+  });
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyDescription = this.translation.instant(
+        'pages.admin.portfolioSettings.card.emptyDescription',
+      );
+
+      return this.settings().map((setting) => ({
+        id: setting.id,
+        title: setting.key,
+        fields: [
+          { labelKey: 'pages.admin.portfolioSettings.card.key', value: setting.key },
+          {
+            labelKey: 'pages.admin.portfolioSettings.card.description',
+            value: setting.description || emptyDescription,
+          },
+          {
+            labelKey: 'pages.admin.portfolioSettings.card.value',
+            value: setting.formattedValue,
+            title: setting.formattedValue,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    this.translation.locale();
+    const setting = this.selectedSetting();
+    return setting
+      ? {
+          id: setting.id,
+          title: setting.key,
+          subtitle:
+            setting.description ||
+            this.translation.instant('pages.admin.portfolioSettings.card.emptyDescription'),
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();
@@ -139,5 +189,4 @@ export class PortfolioSettingsOperationsModalComponent {
   protected selectPage(page: number): void {
     this.pageSelected.emit(page);
   }
-
 }

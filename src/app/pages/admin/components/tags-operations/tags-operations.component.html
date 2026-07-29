@@ -1,33 +1,18 @@
-<section class="tags-operations">
-  <div class="tags-operations-copy">
-    <p class="tags-operations-kicker">{{ 'pages.admin.tags.sectionLabel' | translate }}</p>
-    <h3>{{ 'pages.admin.entities.tags.title' | translate }}</h3>
-    <p>
-      {{ 'pages.admin.entities.tags.description' | translate }}
-      {{ 'pages.admin.tags.description' | translate }}
-    </p>
-  </div>
-
-  <p class="tags-operations-endpoint">{{ endpointLabel }}</p>
-
-  <app-operations-actions
-    [readDisabled]="!hasTags() || !!loadErrorKey() || isLoading()"
-    [updateDisabled]="!hasTags() || !!loadErrorKey() || isLoading()"
-    [deleteDisabled]="!hasTags() || !!loadErrorKey() || isLoading()"
-    (createClicked)="openCreateModal()"
-    (readClicked)="openReadModal()"
-    (updateClicked)="openUpdatePickerModal()"
-    (deleteClicked)="openDeletePickerModal()"
-  />
-
-  @if (isLoading()) {
-    <app-info-state mode="loading" [message]="'pages.admin.tags.states.loading' | translate" />
-  } @else if (loadErrorKey(); as loadErrorKey) {
-    <app-info-state mode="error" [message]="loadErrorKey | translate" />
-  } @else if (!hasTags()) {
-    <app-info-state mode="empty" [message]="'pages.admin.tags.states.empty' | translate" />
-  }
-
+<app-operations
+  kickerKey="pages.admin.tags.sectionLabel"
+  titleKey="pages.admin.entities.tags.title"
+  [descriptionKeys]="['pages.admin.entities.tags.description', 'pages.admin.tags.description']"
+  [endpointLabel]="endpointLabel"
+  [hasRecords]="hasTags()"
+  [isLoading]="isLoading()"
+  [errorKey]="loadErrorKey()"
+  loadingKey="pages.admin.tags.states.loading"
+  emptyKey="pages.admin.tags.states.empty"
+  (createClicked)="openCreateModal()"
+  (readClicked)="openReadModal()"
+  (updateClicked)="openUpdatePickerModal()"
+  (deleteClicked)="openDeletePickerModal()"
+>
   <app-tags-operations-modal
     [isOpen]="isModalOpen()"
     [modalTitleKey]="modalTitleKey()"
@@ -58,4 +43,4 @@
     (pageSelected)="goToPage($event)"
     (searchChanged)="updateSearchQuery($event)"
   />
-</section>
+</app-operations>

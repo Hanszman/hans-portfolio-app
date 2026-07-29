@@ -12,10 +12,16 @@
   [isSubmitting]="isSubmitting()"
   [showSubmit]="showSubmit()"
   [submitLabelKey]="submitLabelKey()"
+  [mode]="modalMode()"
+  [items]="operationItems()"
+  [detailedItems]="detailedOperationItems()"
+  [selectedItem]="selectedOperationItem()"
   (closed)="requestClose()"
   (searchChanged)="searchChanged.emit($event)"
   (submitted)="submit()"
   (pageSelected)="selectPage($event)"
+  (updateSelected)="selectTagForUpdate($event)"
+  (deleteSelected)="selectTagForDelete($event)"
 >
   @if (modalMode(); as modalMode) {
     @if (modalMode === 'create' || modalMode === 'update') {
@@ -76,151 +82,24 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.tags.fields.projects.label' | translate"
           [description]="'pages.admin.tags.fields.projects.description' | translate"
           [emptyMessage]="'pages.admin.tags.fields.projects.empty' | translate"
           [options]="projectOptions()"
           [selectedIds]="form().projectIds"
           (toggled)="toggleProject($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
 
-        <app-relation-picker
+        <app-operations-relation-picker
           [label]="'pages.admin.tags.fields.technologies.label' | translate"
           [description]="'pages.admin.tags.fields.technologies.description' | translate"
           [emptyMessage]="'pages.admin.tags.fields.technologies.empty' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
-        ></app-relation-picker>
+        ></app-operations-relation-picker>
       </div>
-    } @else {
-      @switch (modalMode) {
-        @case ('read') {
-          <div class="tags-operations-list">
-            @for (tag of tags(); track trackById($index, tag)) {
-              <article class="tags-operations-item">
-                <div class="tags-operations-item-header">
-                  <div>
-                    <p class="tags-operations-label">
-                      {{ 'pages.admin.tags.card.slug' | translate }}
-                    </p>
-                    <h4>{{ tag.slug }}</h4>
-                  </div>
-
-                  <div class="tags-operations-item-actions">
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.update' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectTagForUpdate(tag.id)"
-                    >
-                      {{ 'pages.admin.operations.update' | translate }}
-                    </hans-button>
-
-                    <hans-button
-                      [attr.aria-label]="'pages.admin.operations.delete' | translate"
-                      [buttonColor]="'primary'"
-                      [buttonSize]="'medium'"
-                      [buttonVariant]="'default'"
-                      (click)="selectTagForDelete(tag.id)"
-                    >
-                      {{ 'pages.admin.operations.delete' | translate }}
-                    </hans-button>
-                  </div>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.namePt' | translate }}
-                  </p>
-                  <p>{{ tag.namePt }}</p>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.nameEn' | translate }}
-                  </p>
-                  <p>{{ tag.nameEn }}</p>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.type' | translate }}
-                  </p>
-                  <p>{{ tag.type }}</p>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.sortOrder' | translate }}
-                  </p>
-                  <p>{{ tag.sortOrderLabel }}</p>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.projects' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      tag.projectLabels.join(', ') ||
-                        ('pages.admin.tags.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-
-                <div class="tags-operations-item-copy">
-                  <p class="tags-operations-label">
-                    {{ 'pages.admin.tags.card.technologies' | translate }}
-                  </p>
-                  <p>
-                    {{
-                      tag.technologyLabels.join(', ') ||
-                        ('pages.admin.tags.card.emptyRelations' | translate)
-                    }}
-                  </p>
-                </div>
-              </article>
-            }
-          </div>
-        }
-        @case ('pick-update') {
-          <div class="tags-operations-picker">
-            @for (tag of tags(); track trackById($index, tag)) {
-              <button
-                type="button"
-                class="tags-operations-picker-option"
-                (click)="selectTagForUpdate(tag.id)"
-              >
-                <strong>{{ tag.namePt }} ({{ tag.slug }})</strong>
-                <span>{{ tag.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('pick-delete') {
-          <div class="tags-operations-picker">
-            @for (tag of tags(); track trackById($index, tag)) {
-              <button
-                type="button"
-                class="tags-operations-picker-option"
-                (click)="selectTagForDelete(tag.id)"
-              >
-                <strong>{{ tag.namePt }} ({{ tag.slug }})</strong>
-                <span>{{ tag.nameEn }}</span>
-              </button>
-            }
-          </div>
-        }
-        @case ('delete') {
-          <div class="tags-operations-delete-summary">
-            <strong>{{ selectedTag()?.namePt }} ({{ selectedTag()?.slug }})</strong>
-            <p>{{ selectedTag()?.nameEn }}</p>
-          </div>
-        }
-      }
     }
   }
 </app-operations-modal>

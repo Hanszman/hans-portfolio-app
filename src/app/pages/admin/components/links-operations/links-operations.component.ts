@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
 import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
 import {
   LinkMutationPayload,
@@ -24,8 +23,7 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -50,12 +48,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
 @Component({
   selector: 'app-links-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    LinksOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, LinksOperationsModalComponent],
   templateUrl: './links-operations.component.html',
   styleUrl: './links-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -72,12 +65,8 @@ export class LinksOperationsComponent implements OnInit {
 
   private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
-  private readonly experiencesSignal = signal<
-    readonly ExperienceCollectionItemResponse[]
-  >([]);
-  private readonly technologiesSignal = signal<
-    readonly TechnologyCollectionItemResponse[]
-  >([]);
+  private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
+  private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -379,9 +368,7 @@ export class LinksOperationsComponent implements OnInit {
           return;
         }
 
-        await firstValueFrom(
-          this.linksOperationsService.update(selectedLink.id, payload),
-        );
+        await firstValueFrom(this.linksOperationsService.update(selectedLink.id, payload));
         this.setSuccessFeedback('pages.admin.links.feedback.updated');
       }
 
@@ -429,10 +416,7 @@ export class LinksOperationsComponent implements OnInit {
     }));
   }
 
-  private toggleSelection(
-    selectedIds: readonly string[],
-    targetId: string,
-  ): readonly string[] {
+  private toggleSelection(selectedIds: readonly string[], targetId: string): readonly string[] {
     return selectedIds.includes(targetId)
       ? selectedIds.filter((selectedId) => selectedId !== targetId)
       : [...selectedIds, targetId];

@@ -119,6 +119,23 @@ This project must follow the current Angular direction consistently:
 - dynamic relation and select catalogs are refreshed through their public GET whenever a CRUD form or picker opens, keeping newly created records available without a full page reload
 - admin relation selectors should wrap sequentially instead of staying in rigid two-column tracks, and long secondary texts such as URLs, paths and slugs must be truncated with ellipsis plus tooltip support
 
+### Shared admin operations composition
+
+The twelve authenticated CRUD workspaces share the same composition under
+`src/app/shared/operations/`:
+
+- `app-operations` owns the entity shell, operation actions and loading, error and empty states
+- `app-operations-modal` owns modal chrome, search, pagination, feedback and the shared read, selection and delete-confirmation modes
+- `app-operations-item` renders update/delete picker rows and the static delete summary
+- `app-operations-detailed-item` renders read cards and emits direct update/delete actions
+- `app-operations-relation-picker` renders relation catalogs, including optional image previews
+
+Entity components remain responsible for API calls, signals, form controls and
+domain-specific view-model mapping. The semantic
+`--app-operations-surface-color` theme token is the common background for
+operation items, relation pickers and admin toggle wrappers in light and dark
+themes.
+
 ### Testing and quality
 
 Every component, page, service, helper, facade, mapper, or any other file with relevant behavior must be implemented together with its unit test.

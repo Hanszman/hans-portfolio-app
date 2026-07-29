@@ -7,10 +7,13 @@ import {
   input,
   output,
 } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -29,14 +32,12 @@ import {
   TechnologyContextsOperationsModalMode,
   createEmptyTechnologyContextFormValue,
 } from '../../technology-contexts-operations.types';
-import {
-  buildTechnologyContextViewModels,
-} from '../../helpers/technology-contexts-operations.helper';
+import { buildTechnologyContextViewModels } from '../../helpers/technology-contexts-operations.helper';
 
 @Component({
   selector: 'app-technology-contexts-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent],
+  imports: [OperationsModalComponent],
   templateUrl: './technology-contexts-operations-modal.component.html',
   styleUrl: './technology-contexts-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -101,6 +102,45 @@ export class TechnologyContextsOperationsModalComponent {
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.records().map((record) => ({
+      id: record.id,
+      title: `${record.technologyName} (${record.contextLabel})`,
+      subtitle: record.dateRangeLabel,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () =>
+      this.records().map((record) => ({
+        id: record.id,
+        title: record.technologyName,
+        subtitle: record.contextLabel,
+        fields: [
+          {
+            labelKey: 'pages.admin.technologyContexts.card.technology',
+            value: record.technologyName,
+          },
+          {
+            labelKey: 'pages.admin.technologyContexts.fields.context.label',
+            value: record.contextLabel,
+          },
+          {
+            labelKey: 'pages.admin.technologyContexts.fields.startedAt.label',
+            value: record.dateRangeLabel,
+          },
+        ],
+      })),
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const record = this.selectedRecordViewModel();
+    return record
+      ? {
+          id: record.id,
+          title: `${record.technologyName} (${record.contextLabel})`,
+          subtitle: record.dateRangeLabel,
+        }
+      : null;
+  });
   protected change(field: keyof TechnologyContextFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,

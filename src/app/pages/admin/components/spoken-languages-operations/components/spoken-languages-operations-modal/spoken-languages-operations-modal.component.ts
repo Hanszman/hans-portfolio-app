@@ -12,7 +12,11 @@ import { SpokenLanguageRecord } from '../../../../../../core/api/admin/spoken-la
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -34,7 +38,7 @@ import {
 @Component({
   selector: 'app-spoken-languages-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './spoken-languages-operations-modal.component.html',
   styleUrl: './spoken-languages-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -59,15 +63,9 @@ export class SpokenLanguagesOperationsModalComponent {
     sortOrder: '0',
     imageAssetIds: [],
   });
-  readonly imageAssetOptions = input<readonly SpokenLanguageImageAssetOptionViewModel[]>(
-    [],
-  );
-  readonly proficiencyOptions = input<
-    readonly SpokenLanguageProficiencyOptionViewModel[]
-  >([]);
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly imageAssetOptions = input<readonly SpokenLanguageImageAssetOptionViewModel[]>([]);
+  readonly proficiencyOptions = input<readonly SpokenLanguageProficiencyOptionViewModel[]>([]);
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -122,10 +120,64 @@ export class SpokenLanguagesOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.spokenLanguages().map((language) => ({
+      id: language.id,
+      title: `${language.namePt} (${language.code})`,
+      subtitle: language.nameEn,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant(
+        'pages.admin.spokenLanguages.card.emptyRelations',
+      );
+
+      return this.spokenLanguages().map((language) => ({
+        id: language.id,
+        title: language.code,
+        subtitle: language.namePt,
+        fields: [
+          { labelKey: 'pages.admin.spokenLanguages.card.code', value: language.code },
+          { labelKey: 'pages.admin.spokenLanguages.card.namePt', value: language.namePt },
+          { labelKey: 'pages.admin.spokenLanguages.card.nameEn', value: language.nameEn },
+          {
+            labelKey: 'pages.admin.spokenLanguages.card.proficiency',
+            value: language.proficiency,
+          },
+          {
+            labelKey: 'pages.admin.spokenLanguages.card.highlight',
+            value: this.translation.instant(
+              language.highlight
+                ? 'pages.admin.spokenLanguages.fields.highlight.enabled'
+                : 'pages.admin.spokenLanguages.fields.highlight.disabled',
+            ),
+          },
+          {
+            labelKey: 'pages.admin.spokenLanguages.card.sortOrder',
+            value: language.sortOrderLabel,
+          },
+          {
+            labelKey: 'pages.admin.spokenLanguages.card.imageAssets',
+            value: language.imageAssetLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const language = this.selectedSpokenLanguage();
+    return language
+      ? {
+          id: language.id,
+          title: `${language.namePt} (${language.code})`,
+          subtitle: language.nameEn ?? undefined,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();

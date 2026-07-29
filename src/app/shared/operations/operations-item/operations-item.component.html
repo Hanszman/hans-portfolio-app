@@ -1,0 +1,21 @@
+<button
+  class="operations-item"
+  type="button"
+  [class.operations-item-static]="!interactive()"
+  [disabled]="!interactive()"
+  (click)="selectItem()"
+>
+  @if (item().imageUrl; as imageUrl) {
+    <img
+      [src]="imageUrl"
+      [alt]="item().imageAlt ?? item().title"
+      [title]="item().imageTitle ?? item().title"
+    />
+  }
+  <span class="operations-item-copy">
+    <strong [title]="item().title">{{ item().title }}</strong>
+    @if (item().subtitle; as subtitle) {
+      <span [title]="subtitle">{{ subtitle }}</span>
+    }
+  </span>
+</button>

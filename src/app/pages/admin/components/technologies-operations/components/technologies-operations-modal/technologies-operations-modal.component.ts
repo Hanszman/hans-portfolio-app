@@ -10,7 +10,11 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -41,7 +45,7 @@ import {
 @Component({
   selector: 'app-technologies-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './technologies-operations-modal.component.html',
   styleUrl: './technologies-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -86,6 +90,62 @@ export class TechnologiesOperationsModalComponent {
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.technologies().map((technology) => ({
+      id: technology.id,
+      title: `${technology.name} (${technology.slug})`,
+      subtitle: technology.category,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant(
+        'pages.admin.technologies.card.emptyRelations',
+      );
+
+      return this.technologies().map((technology) => ({
+        id: technology.id,
+        title: technology.slug,
+        subtitle: technology.name,
+        fields: [
+          { labelKey: 'pages.admin.technologies.card.slug', value: technology.slug },
+          { labelKey: 'pages.admin.technologies.card.name', value: technology.name },
+          {
+            labelKey: 'pages.admin.technologies.card.category',
+            value: technology.category,
+          },
+          { labelKey: 'pages.admin.technologies.card.level', value: technology.level || '-' },
+          {
+            labelKey: 'pages.admin.technologies.card.frequency',
+            value: technology.frequency || '-',
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.highlight',
+            value: this.translation.instant(
+              technology.highlight
+                ? 'pages.admin.technologies.fields.highlight.enabled'
+                : 'pages.admin.technologies.fields.highlight.disabled',
+            ),
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.imageAssets',
+            value: technology.imageAssetLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const technology = this.selectedTechnology();
+    return technology
+      ? {
+          id: technology.id,
+          title: `${technology.name} (${technology.slug})`,
+          subtitle: technology.category,
+        }
+      : null;
+  });
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
     this.fields,
     this.translation.instant.bind(this.translation),
@@ -93,11 +153,16 @@ export class TechnologiesOperationsModalComponent {
   protected readonly resolveSelectValue = resolveAdminSelectValue;
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     switch (this.modalMode()) {
-      case 'read': return 'pages.admin.technologies.modal.read.description';
-      case 'pick-update': return 'pages.admin.technologies.modal.pickUpdate.description';
-      case 'pick-delete': return 'pages.admin.technologies.modal.pickDelete.description';
-      case 'delete': return 'pages.admin.technologies.modal.delete.description';
-      default: return null;
+      case 'read':
+        return 'pages.admin.technologies.modal.read.description';
+      case 'pick-update':
+        return 'pages.admin.technologies.modal.pickUpdate.description';
+      case 'pick-delete':
+        return 'pages.admin.technologies.modal.pickDelete.description';
+      case 'delete':
+        return 'pages.admin.technologies.modal.delete.description';
+      default:
+        return null;
     }
   });
   protected readonly categoryOptions = computed(() => this.getOptions(TECHNOLOGY_CATEGORY_VALUES));

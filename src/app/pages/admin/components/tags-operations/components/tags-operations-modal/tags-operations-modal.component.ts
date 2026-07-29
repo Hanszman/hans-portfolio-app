@@ -12,7 +12,11 @@ import { TagRecord } from '../../../../../../core/api/admin/tags/tags-operations
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -34,7 +38,7 @@ import {
 @Component({
   selector: 'app-tags-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './tags-operations-modal.component.html',
   styleUrl: './tags-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,9 +48,7 @@ export class TagsOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.tags.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.tags.modal.create.title');
   readonly modalMode = input<TagsOperationsModalMode | null>(null);
   readonly tags = input<readonly TagOperationsViewModel[]>([]);
   readonly selectedTag = input<TagRecord | null>(null);
@@ -62,9 +64,7 @@ export class TagsOperationsModalComponent {
   readonly projectOptions = input<readonly TagCatalogOptionViewModel[]>([]);
   readonly technologyOptions = input<readonly TagCatalogOptionViewModel[]>([]);
   readonly tagTypeOptions = input<readonly TagTypeOptionViewModel[]>([]);
-  readonly pagination = input<AdminCollectionPagination>(
-    createAdminCollectionPagination(),
-  );
+  readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
   readonly feedbackTone = input<'success' | 'error' | null>(null);
@@ -119,10 +119,55 @@ export class TagsOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.tags().map((tag) => ({
+      id: tag.id,
+      title: `${tag.namePt} (${tag.slug})`,
+      subtitle: tag.nameEn,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.tags.card.emptyRelations');
+
+      return this.tags().map((tag) => ({
+        id: tag.id,
+        title: tag.slug,
+        subtitle: tag.namePt,
+        fields: [
+          { labelKey: 'pages.admin.tags.card.slug', value: tag.slug },
+          { labelKey: 'pages.admin.tags.card.namePt', value: tag.namePt },
+          { labelKey: 'pages.admin.tags.card.nameEn', value: tag.nameEn },
+          { labelKey: 'pages.admin.tags.card.type', value: tag.type },
+          {
+            labelKey: 'pages.admin.tags.card.sortOrder',
+            value: tag.sortOrderLabel,
+          },
+          {
+            labelKey: 'pages.admin.tags.card.projects',
+            value: tag.projectLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.tags.card.technologies',
+            value: tag.technologyLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const tag = this.selectedTag();
+    return tag
+      ? {
+          id: tag.id,
+          title: `${tag.namePt} (${tag.slug})`,
+          subtitle: tag.nameEn ?? undefined,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();
@@ -179,5 +224,4 @@ export class TagsOperationsModalComponent {
   protected isTechnologySelected(technologyId: string): boolean {
     return this.form().technologyIds.includes(technologyId);
   }
-
 }

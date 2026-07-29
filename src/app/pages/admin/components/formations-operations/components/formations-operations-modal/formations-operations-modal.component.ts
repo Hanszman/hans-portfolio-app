@@ -12,7 +12,11 @@ import { FormationRecord } from '../../../../../../core/api/admin/formations/for
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
+import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
+import {
+  OperationsDetailedItemViewModel,
+  OperationsItemViewModel,
+} from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -37,7 +41,7 @@ import {
 @Component({
   selector: 'app-formations-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
+  imports: [TranslatePipe, OperationsModalComponent, OperationsRelationPickerComponent],
   templateUrl: './formations-operations-modal.component.html',
   styleUrl: './formations-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -47,15 +51,11 @@ export class FormationsOperationsModalComponent {
   private readonly translation = inject(TranslationService);
 
   readonly isOpen = input(false);
-  readonly modalTitleKey = input<AppTranslationKey>(
-    'pages.admin.formations.modal.create.title',
-  );
+  readonly modalTitleKey = input<AppTranslationKey>('pages.admin.formations.modal.create.title');
   readonly modalMode = input<FormationsOperationsModalMode | null>(null);
   readonly formations = input<readonly FormationOperationsViewModel[]>([]);
   readonly selectedFormation = input<FormationRecord | null>(null);
-  readonly form = input<FormationsOperationsFormValue>(
-    createEmptyFormationsOperationsFormValue(),
-  );
+  readonly form = input<FormationsOperationsFormValue>(createEmptyFormationsOperationsFormValue());
   readonly technologyOptions = input<readonly FormationTechnologyOptionViewModel[]>([]);
   readonly linkOptions = input<readonly FormationLinkOptionViewModel[]>([]);
   readonly imageAssetOptions = input<readonly FormationImageAssetOptionViewModel[]>([]);
@@ -122,10 +122,81 @@ export class FormationsOperationsModalComponent {
   });
 
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
-    this.modalMode() === 'delete'
-      ? 'pages.admin.operations.delete'
-      : 'common.actions.save',
+    this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
+    this.formations().map((formation) => ({
+      id: formation.id,
+      title: `${formation.titlePt} (${formation.slug})`,
+      subtitle: formation.institution,
+    })),
+  );
+  protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.formations.card.emptyRelations');
+
+      return this.formations().map((formation) => ({
+        id: formation.id,
+        title: formation.slug,
+        subtitle: formation.titlePt,
+        fields: [
+          { labelKey: 'pages.admin.formations.card.slug', value: formation.slug },
+          {
+            labelKey: 'pages.admin.formations.card.institution',
+            value: formation.institution,
+          },
+          { labelKey: 'pages.admin.formations.card.titlePt', value: formation.titlePt },
+          { labelKey: 'pages.admin.formations.card.titleEn', value: formation.titleEn },
+          {
+            labelKey: 'pages.admin.formations.card.degreeType',
+            value: formation.degreeType,
+          },
+          { labelKey: 'pages.admin.formations.card.summaryPt', value: formation.summaryPt },
+          { labelKey: 'pages.admin.formations.card.summaryEn', value: formation.summaryEn },
+          { labelKey: 'pages.admin.formations.card.startDate', value: formation.startDate },
+          {
+            labelKey: 'pages.admin.formations.card.endDate',
+            value: formation.endDateLabel,
+          },
+          {
+            labelKey: 'pages.admin.formations.card.highlight',
+            value: this.translation.instant(
+              formation.highlight
+                ? 'pages.admin.formations.fields.highlight.enabled'
+                : 'pages.admin.formations.fields.highlight.disabled',
+            ),
+          },
+          {
+            labelKey: 'pages.admin.formations.card.sortOrder',
+            value: formation.sortOrderLabel,
+          },
+          {
+            labelKey: 'pages.admin.formations.card.technologies',
+            value: formation.technologyLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.formations.card.links',
+            value: formation.linkLabels.join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.formations.card.imageAssets',
+            value: formation.imageAssetLabels.join(', ') || emptyRelations,
+          },
+        ],
+      }));
+    },
+  );
+  protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
+    const formation = this.selectedFormation();
+    return formation
+      ? {
+          id: formation.id,
+          title: `${formation.titlePt} (${formation.slug})`,
+          subtitle: formation.institution,
+        }
+      : null;
+  });
 
   protected requestClose(): void {
     this.closed.emit();

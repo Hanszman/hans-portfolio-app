@@ -14,6 +14,7 @@ body {
 }
 
 body[data-app-theme='light'] {
+  --app-operations-surface-color: color-mix(in srgb, var(--background-color) 88%, var(--white));
   --app-shell-surface-color: var(--text-color);
   --app-shell-foreground-color: var(--background-color);
   --app-shell-accent-color: var(--primary-default-color);
@@ -27,6 +28,7 @@ body[data-app-theme='light'] {
 }
 
 body[data-app-theme='dark'] {
+  --app-operations-surface-color: color-mix(in srgb, var(--background-color) 88%, var(--white));
   --app-shell-surface-color: color-mix(
     in srgb,
     var(--background-color) 94%,

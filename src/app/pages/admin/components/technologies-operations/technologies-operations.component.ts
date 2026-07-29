@@ -7,7 +7,6 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyAdminRecord } from '../../../../core/api/technologies/technologies.types';
@@ -16,8 +15,7 @@ import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { InfoStateComponent } from '../../../../shared/info-state/info-state.component';
-import { OperationsActionsComponent } from '../../../../shared/operations/operations-actions/operations-actions.component';
+import { OperationsComponent } from '../../../../shared/operations/operations/operations.component';
 import {
   ADMIN_MODAL_PAGE_SIZE,
   AdminCollectionPagination,
@@ -40,12 +38,7 @@ import { TechnologiesOperationsModalComponent } from './components/technologies-
 @Component({
   selector: 'app-technologies-operations',
   standalone: true,
-  imports: [
-    TranslatePipe,
-    InfoStateComponent,
-    OperationsActionsComponent,
-    TechnologiesOperationsModalComponent,
-  ],
+  imports: [OperationsComponent, TechnologiesOperationsModalComponent],
   templateUrl: './technologies-operations.component.html',
   styleUrl: './technologies-operations.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
