@@ -4,6 +4,13 @@
 .experiences-form {
   @apply flex flex-col gap-4 p-2;
 }
+.toggle-field {
+  @apply flex items-center justify-between gap-4 rounded-2xl p-4;
+  background: var(--background-color);
+}
+.toggle-field div {
+  @apply flex flex-col gap-1;
+}
 .relation-section {
   @apply rounded-2xl p-4;
   background: color-mix(in srgb, var(--background-color) 88%, var(--white));

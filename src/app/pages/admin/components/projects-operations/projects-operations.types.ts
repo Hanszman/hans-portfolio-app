@@ -81,6 +81,21 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionEn.placeholder',
     required: true,
   },
+  context: {
+    labelKey: 'pages.admin.projects.fields.context.label',
+    placeholderKey: 'pages.admin.projects.fields.context.placeholder',
+    required: true,
+  },
+  status: {
+    labelKey: 'pages.admin.projects.fields.status.label',
+    placeholderKey: 'pages.admin.projects.fields.status.placeholder',
+    required: true,
+  },
+  environment: {
+    labelKey: 'pages.admin.projects.fields.environment.label',
+    placeholderKey: 'pages.admin.projects.fields.environment.placeholder',
+    required: true,
+  },
   startDate: {
     labelKey: 'pages.admin.projects.fields.startDate.label',
     placeholderKey: 'pages.admin.projects.fields.startDate.placeholder',
@@ -95,6 +110,20 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
+
+export const PROJECTS_OPERATIONS_FORM_FIELDS = [
+  'slug',
+  'titlePt',
+  'titleEn',
+  'shortDescriptionPt',
+  'shortDescriptionEn',
+  'fullDescriptionPt',
+  'fullDescriptionEn',
+  'context',
+  'status',
+  'environment',
+  'sortOrder',
+] as const;
 
 export const PROJECT_CONTEXT_VALUES: ProjectContext[] = [
   'CLIENT',

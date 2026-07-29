@@ -18,21 +18,11 @@
 >
   @if (modalMode() === 'create' || modalMode() === 'update') {
     <div class="projects-form">
-      @for (
-        field of [
-          'slug',
-          'titlePt',
-          'titleEn',
-          'shortDescriptionPt',
-          'shortDescriptionEn',
-          'fullDescriptionPt',
-          'fullDescriptionEn',
-          'sortOrder',
-        ];
-        track field
-      ) {
+      @for (field of formFields; track field) {
         <hans-input
-          [label]="field"
+          [label]="resolveFieldLabel(field)"
+          [placeholder]="resolveFieldPlaceholder(field)"
+          [required]="fieldDefinitions[field].required"
           inputColor="base"
           inputSize="medium"
           [value]="$any(form())[field]"
@@ -41,8 +31,10 @@
       }
 
       <hans-select-option
-        label="Context *"
-        [options]="contextOptions"
+        [label]="resolveFieldLabel('context')"
+        [placeholder]="resolveFieldPlaceholder('context')"
+        [required]="fieldDefinitions.context.required"
+        [options]="contextOptions()"
         [value]="form()?.context"
         inputColor="base"
         inputSize="medium"
@@ -53,8 +45,10 @@
       ></hans-select-option>
 
       <hans-select-option
-        label="Status *"
-        [options]="statusOptions"
+        [label]="resolveFieldLabel('status')"
+        [placeholder]="resolveFieldPlaceholder('status')"
+        [required]="fieldDefinitions.status.required"
+        [options]="statusOptions()"
         [value]="form()?.status"
         inputColor="base"
         inputSize="medium"
@@ -65,8 +59,10 @@
       ></hans-select-option>
 
       <hans-select-option
-        label="Environment *"
-        [options]="environmentOptions"
+        [label]="resolveFieldLabel('environment')"
+        [placeholder]="resolveFieldPlaceholder('environment')"
+        [required]="fieldDefinitions.environment.required"
+        [options]="environmentOptions()"
         [value]="form()?.environment"
         inputColor="base"
         inputSize="medium"
@@ -77,7 +73,8 @@
       ></hans-select-option>
 
       <hans-date-picker
-        label="Start date"
+        [label]="resolveFieldLabel('startDate')"
+        [placeholder]="resolveFieldPlaceholder('startDate')"
         pickerType="date"
         inputColor="base"
         inputSize="medium"
@@ -89,7 +86,8 @@
       ></hans-date-picker>
 
       <hans-date-picker
-        label="End date"
+        [label]="resolveFieldLabel('endDate')"
+        [placeholder]="resolveFieldPlaceholder('endDate')"
         pickerType="date"
         inputColor="base"
         inputSize="medium"
@@ -100,49 +98,71 @@
         (change)="emit('endDate', $event)"
       ></hans-date-picker>
 
-      <hans-toggle [checked]="form()?.featured" (change)="toggle('featured', $event)"></hans-toggle
-      ><hans-toggle
-        [checked]="form()?.highlight"
-        (change)="toggle('highlight', $event)"
-      ></hans-toggle>
-
-      @for (
-        group of [
-          { field: 'technologyIds', items: technologyOptions() },
-          { field: 'experienceIds', items: experienceOptions() },
-          { field: 'tagIds', items: tagOptions() },
-          { field: 'linkIds', items: linkOptions() },
-        ];
-        track group.field
-      ) {
-        <section class="relation-section">
-          <h4>{{ group.field }}</h4>
-          <div class="relation-list">
-            @for (item of group.items; track item.id) {
-              <hans-button
-                [buttonColor]="'primary'"
-                [buttonVariant]="selected($any(group.field), item.id) ? 'default' : 'outline'"
-                (click)="relation($any(group.field), item.id)"
-                >{{ item.title }} ({{ item.subtitle }})
-              </hans-button>
-            }
-          </div>
-        </section>
-      }
-      <section class="relation-section">
-        <h4>image assets</h4>
-        <div class="relation-list">
-          @for (item of imageAssetOptions(); track item.id) {
-            <hans-button
-              [buttonColor]="'primary'"
-              [buttonVariant]="selected('imageAssetIds', item.id) ? 'default' : 'outline'"
-              (click)="relation('imageAssetIds', item.id)"
-            >
-              <img [src]="item.imageUrl" [alt]="item.title" /> {{ item.title }}
-            </hans-button>
-          }
+      <div class="toggle-field">
+        <div>
+          <strong>{{ 'pages.admin.projects.fields.featured.label' | translate }}</strong>
+          <span>{{ 'pages.admin.projects.fields.featured.description' | translate }}</span>
         </div>
-      </section>
+        <hans-toggle
+          [checked]="form()?.featured"
+          (change)="toggle('featured', $event)"
+        ></hans-toggle>
+      </div>
+      <div class="toggle-field">
+        <div>
+          <strong>{{ 'pages.admin.projects.fields.highlight.label' | translate }}</strong>
+          <span>{{ 'pages.admin.projects.fields.highlight.description' | translate }}</span>
+        </div>
+        <hans-toggle
+          [checked]="form()?.highlight"
+          (change)="toggle('highlight', $event)"
+        ></hans-toggle>
+      </div>
+
+      <app-relation-picker
+        [label]="'pages.admin.projects.fields.technologies.label' | translate"
+        [description]="'pages.admin.projects.fields.technologies.description' | translate"
+        [emptyMessage]="'pages.admin.projects.fields.technologies.empty' | translate"
+        [options]="technologyOptions()"
+        [selectedIds]="form()?.technologyIds ?? []"
+        (toggled)="relation('technologyIds', $event)"
+      />
+
+      <app-relation-picker
+        [label]="'pages.admin.projects.fields.experiences.label' | translate"
+        [description]="'pages.admin.projects.fields.experiences.description' | translate"
+        [emptyMessage]="'pages.admin.projects.fields.experiences.empty' | translate"
+        [options]="experienceOptions()"
+        [selectedIds]="form()?.experienceIds ?? []"
+        (toggled)="relation('experienceIds', $event)"
+      />
+
+      <app-relation-picker
+        [label]="'pages.admin.projects.fields.tags.label' | translate"
+        [description]="'pages.admin.projects.fields.tags.description' | translate"
+        [emptyMessage]="'pages.admin.projects.fields.tags.empty' | translate"
+        [options]="tagOptions()"
+        [selectedIds]="form()?.tagIds ?? []"
+        (toggled)="relation('tagIds', $event)"
+      />
+
+      <app-relation-picker
+        [label]="'pages.admin.projects.fields.links.label' | translate"
+        [description]="'pages.admin.projects.fields.links.description' | translate"
+        [emptyMessage]="'pages.admin.projects.fields.links.empty' | translate"
+        [options]="linkOptions()"
+        [selectedIds]="form()?.linkIds ?? []"
+        (toggled)="relation('linkIds', $event)"
+      />
+
+      <app-relation-picker
+        [label]="'pages.admin.projects.fields.imageAssets.label' | translate"
+        [description]="'pages.admin.projects.fields.imageAssets.description' | translate"
+        [emptyMessage]="'pages.admin.projects.fields.imageAssets.empty' | translate"
+        [options]="imageAssetOptions()"
+        [selectedIds]="form()?.imageAssetIds ?? []"
+        (toggled)="relation('imageAssetIds', $event)"
+      />
     </div>
   } @else if (modalMode() === 'read') {
     @for (item of projects(); track item.id) {
@@ -150,10 +170,10 @@
         <b>{{ item.titlePt }} ({{ item.slug }})</b><span>{{ item.titleEn }}</span>
         <div>
           <hans-button [buttonColor]="'primary'" (click)="updateSelected.emit(item.id)">
-            Update
+            {{ 'pages.admin.operations.update' | translate }}
           </hans-button>
           <hans-button [buttonColor]="'primary'" (click)="deleteSelected.emit(item.id)">
-            Delete
+            {{ 'pages.admin.operations.delete' | translate }}
           </hans-button>
         </div>
       </article>

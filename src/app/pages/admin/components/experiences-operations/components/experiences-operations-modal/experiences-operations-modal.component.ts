@@ -3,12 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ExperienceRecord } from '../../../../../../core/api/admin/experiences/experiences-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
+import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -17,18 +21,21 @@ import {
   ExperienceOption,
   ExperiencesOperationsFormValue,
   ExperiencesOperationsModalMode,
+  EXPERIENCES_OPERATIONS_FIELDS,
+  EXPERIENCES_OPERATIONS_FORM_FIELDS,
 } from '../../experiences-operations.types';
 
 @Component({
   selector: 'app-experiences-operations-modal',
   standalone: true,
-  imports: [OperationsModalComponent],
+  imports: [OperationsModalComponent, RelationPickerComponent, TranslatePipe],
   templateUrl: './experiences-operations-modal.component.html',
   styleUrl: './experiences-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExperiencesOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
   readonly isOpen = input(false);
   readonly modalMode = input<ExperiencesOperationsModalMode | null>(null);
   readonly modalTitleKey = input<AppTranslationKey>('pages.admin.experiences.modal.create.title');
@@ -58,6 +65,8 @@ export class ExperiencesOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+  protected readonly formFields = EXPERIENCES_OPERATIONS_FORM_FIELDS;
+  protected readonly fieldDefinitions = EXPERIENCES_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
   );
@@ -79,6 +88,14 @@ export class ExperiencesOperationsModalComponent {
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+  protected resolveFieldLabel(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
+    this.translation.locale();
+    return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].labelKey);
+  }
+  protected resolveFieldPlaceholder(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
+    this.translation.locale();
+    return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].placeholderKey);
+  }
   protected emit(field: keyof ExperiencesOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({ field, value: (event.target as HTMLInputElement)?.value ?? '' });
   }

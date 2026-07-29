@@ -192,7 +192,8 @@ export class ProjectsOperationsComponent implements OnInit {
         this.toast.showSuccess('pages.admin.projects.feedback.deleted');
         this.closeModal();
         await this.loadWorkspace();
-      } catch {
+      } catch (error) {
+        console.error('Failed to refresh project relation catalogs after deletion.', error);
         this.feedback.set('pages.admin.projects.feedback.deleteError');
       } finally {
         this.submitting.set(false);
@@ -220,7 +221,8 @@ export class ProjectsOperationsComponent implements OnInit {
       }
       this.closeModal();
       await this.loadWorkspace();
-    } catch {
+    } catch (error) {
+      console.error('Failed to save the protected project.', error);
       this.feedback.set('pages.admin.projects.feedback.saveError');
     } finally {
       this.submitting.set(false);
@@ -240,7 +242,8 @@ export class ProjectsOperationsComponent implements OnInit {
       this.records.set(response.data);
       this.pageSignal.set(response.pagination);
       await this.refreshCatalogs();
-    } catch {
+    } catch (error) {
+      console.error('Failed to load protected projects.', error);
       this.error.set('pages.admin.projects.feedback.loadError');
       this.toast.showError('pages.admin.projects.feedback.loadError');
     } finally {
@@ -285,8 +288,8 @@ export class ProjectsOperationsComponent implements OnInit {
           imageUrl: x.filePath,
         })),
       );
-    } catch {
-      /* relation catalogs are optional until a modal needs them */
+    } catch (error) {
+      console.error('Failed to refresh project relation catalogs.', error);
     }
   }
 }

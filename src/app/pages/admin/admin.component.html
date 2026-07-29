@@ -80,36 +80,6 @@
         <app-experiences-operations #experiencesWorkspace />
 
         <app-projects-operations #projectsWorkspace />
-
-        @for (entity of secondaryAdminEntities(); track entity.id) {
-          <article class="admin-page-card admin-page-entity-card">
-            <div class="admin-page-entity-meta">
-              <span class="admin-page-substep">{{ entity.substep }}</span>
-              <span class="admin-page-relation-chip">{{ entity.relationModeLabel }}</span>
-            </div>
-
-            <div class="admin-page-entity-copy">
-              <h3>{{ entity.title }}</h3>
-              <p>{{ entity.description }}</p>
-            </div>
-
-            <p class="admin-page-endpoint">{{ entity.endpoint }}</p>
-
-            <div class="admin-page-entity-actions">
-              @for (operation of entity.operations; track operation.id) {
-                <hans-button
-                  [attr.aria-label]="operation.label"
-                  [buttonColor]="'base'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="'outline'"
-                  [disabled]="true"
-                >
-                  {{ operation.label }}
-                </hans-button>
-              }
-            </div>
-          </article>
-        }
       </div>
     </div>
   </div>

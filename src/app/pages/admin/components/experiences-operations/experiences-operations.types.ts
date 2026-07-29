@@ -98,6 +98,18 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
 
+export const EXPERIENCES_OPERATIONS_FORM_FIELDS = [
+  'slug',
+  'companyName',
+  'titlePt',
+  'titleEn',
+  'summaryPt',
+  'summaryEn',
+  'descriptionPt',
+  'descriptionEn',
+  'sortOrder',
+] as const;
+
 export interface ExperienceOption {
   id: string;
   title: string;

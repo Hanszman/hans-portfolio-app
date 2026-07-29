@@ -3,12 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ProjectRecord } from '../../../../../../core/api/admin/projects/projects-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
+import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -20,18 +24,21 @@ import {
   PROJECT_CONTEXT_VALUES,
   PROJECT_ENVIRONMENT_VALUES,
   PROJECT_STATUS_VALUES,
+  PROJECTS_OPERATIONS_FIELDS,
+  PROJECTS_OPERATIONS_FORM_FIELDS,
 } from '../../projects-operations.types';
 
 @Component({
   selector: 'app-projects-operations-modal',
   standalone: true,
-  imports: [OperationsModalComponent],
+  imports: [OperationsModalComponent, RelationPickerComponent, TranslatePipe],
   templateUrl: './projects-operations-modal.component.html',
   styleUrl: './projects-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsOperationsModalComponent {
+  private readonly translation = inject(TranslationService);
   readonly isOpen = input(false);
   readonly modalMode = input<ProjectsOperationsModalMode | null>(null);
   readonly modalTitleKey = input<AppTranslationKey>('pages.admin.projects.modal.create.title');
@@ -60,6 +67,8 @@ export class ProjectsOperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
+  protected readonly formFields = PROJECTS_OPERATIONS_FORM_FIELDS;
+  protected readonly fieldDefinitions = PROJECTS_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
   );
@@ -81,18 +90,32 @@ export class ProjectsOperationsModalComponent {
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
-  protected readonly contextOptions = PROJECT_CONTEXT_VALUES.map((value) => ({
-    value,
-    label: value,
-  }));
-  protected readonly statusOptions = PROJECT_STATUS_VALUES.map((value) => ({
-    value,
-    label: value,
-  }));
-  protected readonly environmentOptions = PROJECT_ENVIRONMENT_VALUES.map((value) => ({
-    value,
-    label: value,
-  }));
+  protected readonly contextOptions = computed(() =>
+    this.translateOptions(PROJECT_CONTEXT_VALUES, 'context'),
+  );
+  protected readonly statusOptions = computed(() =>
+    this.translateOptions(PROJECT_STATUS_VALUES, 'status'),
+  );
+  protected readonly environmentOptions = computed(() =>
+    this.translateOptions(PROJECT_ENVIRONMENT_VALUES, 'environment'),
+  );
+  protected resolveFieldLabel(field: keyof typeof PROJECTS_OPERATIONS_FIELDS): string {
+    this.translation.locale();
+    return this.translation.instant(PROJECTS_OPERATIONS_FIELDS[field].labelKey);
+  }
+  protected resolveFieldPlaceholder(field: keyof typeof PROJECTS_OPERATIONS_FIELDS): string {
+    this.translation.locale();
+    return this.translation.instant(PROJECTS_OPERATIONS_FIELDS[field].placeholderKey);
+  }
+  private translateOptions(values: readonly string[], field: 'context' | 'status' | 'environment') {
+    this.translation.locale();
+    return values.map((value) => ({
+      value,
+      label: this.translation.instant(
+        `pages.admin.projects.fields.${field}.options.${value}` as AppTranslationKey,
+      ),
+    }));
+  }
   protected emit(field: keyof ProjectsOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,

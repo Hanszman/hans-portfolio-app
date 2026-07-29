@@ -73,9 +73,7 @@ export class AdminComponent {
       ADMIN_ENTITY_OPERATIONS,
     );
   });
-  protected readonly secondaryAdminEntities = computed(() =>
-    this.adminEntities().filter((entity) => !this.isWorkspaceEntity(entity.id)),
-  );
+
   protected readonly adminFacts = computed(() => {
     this.translation.locale();
 
@@ -83,25 +81,9 @@ export class AdminComponent {
       this.translation.instant(key),
     );
   });
+
   protected readonly adminEntityCount = computed(() => this.adminEntities().length);
   protected readonly adminUserEmail = computed(() => this.adminUser()?.email ?? '');
-
-  protected isWorkspaceEntity(entityId: string): boolean {
-    return (
-      entityId === 'portfolio-settings' ||
-      entityId === 'tags' ||
-      entityId === 'links' ||
-      entityId === 'image-assets' ||
-      entityId === 'spoken-languages' ||
-      entityId === 'customers' ||
-      entityId === 'jobs' ||
-      entityId === 'formations' ||
-      entityId === 'technologies' ||
-      entityId === 'technology-contexts' ||
-      entityId === 'experiences' ||
-      entityId === 'projects'
-    );
-  }
 
   protected async logout(): Promise<void> {
     this.adminSessionService.logout();

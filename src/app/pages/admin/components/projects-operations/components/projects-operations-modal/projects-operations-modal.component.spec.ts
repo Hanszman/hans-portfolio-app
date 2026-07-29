@@ -87,9 +87,9 @@ describe('ProjectsOperationsModalComponent', () => {
       showSubmit(): boolean;
       descriptionKey(): string | null;
       submitLabelKey(): string;
-      contextOptions: readonly { value: string; label: string }[];
-      statusOptions: readonly { value: string; label: string }[];
-      environmentOptions: readonly { value: string; label: string }[];
+      contextOptions: () => readonly { value: string; label: string }[];
+      statusOptions: () => readonly { value: string; label: string }[];
+      environmentOptions: () => readonly { value: string; label: string }[];
     };
     for (const mode of ['read', 'pick-update', 'pick-delete'] as const) {
       fixture.componentRef.setInput('modalMode', mode);
@@ -104,9 +104,9 @@ describe('ProjectsOperationsModalComponent', () => {
     fixture.detectChanges();
     expect(component.showSubmit()).toBeTrue();
     expect(component.submitLabelKey()).toBe('pages.admin.operations.delete');
-    expect(component.contextOptions.length).toBeGreaterThan(0);
-    expect(component.statusOptions.length).toBeGreaterThan(0);
-    expect(component.environmentOptions.length).toBeGreaterThan(0);
+    expect(component.contextOptions().length).toBeGreaterThan(0);
+    expect(component.statusOptions().length).toBeGreaterThan(0);
+    expect(component.environmentOptions().length).toBeGreaterThan(0);
     fixture.componentRef.setInput('modalMode', null);
     fixture.detectChanges();
     expect(component.showPagination()).toBeFalse();

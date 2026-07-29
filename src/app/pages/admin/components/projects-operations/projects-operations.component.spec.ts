@@ -287,6 +287,7 @@ describe('ProjectsOperationsComponent', () => {
     );
     c.openCreateModal();
     await fixture.whenStable();
+    expect(c.hasProjects()).toBeTrue();
     internal.tags.getAll.and.returnValue(
       of(catalog([{ id: 'tag-1', namePt: null, labelPt: null, slug: 'tag' }]) as never),
     );

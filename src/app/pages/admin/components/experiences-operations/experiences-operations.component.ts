@@ -216,7 +216,8 @@ export class ExperiencesOperationsComponent implements OnInit {
       }
       this.closeModal();
       await this.loadWorkspace();
-    } catch {
+    } catch (error) {
+      console.error('Failed to save the protected experience.', error);
       this.feedback.set('pages.admin.experiences.feedback.saveError');
     } finally {
       this.submitting.set(false);
@@ -232,7 +233,8 @@ export class ExperiencesOperationsComponent implements OnInit {
       this.toast.showSuccess('pages.admin.experiences.feedback.deleted');
       this.closeModal();
       await this.loadWorkspace();
-    } catch {
+    } catch (error) {
+      console.error('Failed to delete the protected experience.', error);
       this.feedback.set('pages.admin.experiences.feedback.deleteError');
     } finally {
       this.submitting.set(false);
@@ -252,7 +254,8 @@ export class ExperiencesOperationsComponent implements OnInit {
       this.records.set(response.data);
       this.paginationSignal.set(response.pagination);
       await this.refreshCatalogs();
-    } catch {
+    } catch (error) {
+      console.error('Failed to load protected experiences.', error);
       this.error.set('pages.admin.experiences.feedback.loadError');
       this.toast.showError('pages.admin.experiences.feedback.loadError');
     } finally {
@@ -305,8 +308,8 @@ export class ExperiencesOperationsComponent implements OnInit {
           imageUrl: x.filePath,
         })),
       );
-    } catch {
-      /* catalog failures are surfaced when the protected collection fails */
+    } catch (error) {
+      console.error('Failed to refresh experience relation catalogs.', error);
     }
   }
 }

@@ -6,6 +6,11 @@
   border-color: color-mix(in srgb, var(--primary-default-color) 18%, transparent);
   background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
+.experiences-operations-state {
+  @apply rounded-2xl p-4 text-center;
+  background: var(--background-color);
+  border: 1px solid var(--danger-color);
+}
 .experiences-operations-copy {
   @apply flex min-w-0 flex-col gap-3;
 }
