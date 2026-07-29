@@ -12,7 +12,7 @@ import { CustomerRecord } from '../../../../../../core/api/admin/customers/custo
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { TruncatedTextComponent } from '../../../../../../shared/truncated-text/truncated-text.component';
+import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
 import {
   createAdminFieldLabelResolver,
   trackAdminItemById,
@@ -34,7 +34,7 @@ import {
 @Component({
   selector: 'app-customers-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, TruncatedTextComponent],
+  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
   templateUrl: './customers-operations-modal.component.html',
   styleUrl: './customers-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

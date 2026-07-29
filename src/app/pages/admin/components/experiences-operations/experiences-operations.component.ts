@@ -97,10 +97,13 @@ export class ExperiencesOperationsComponent implements OnInit {
     readonly { id: string; title: string; subtitle: string; imageUrl: string }[]
   >([]);
   protected readonly hasExperiences = computed(() => this.records().length > 0 && !this.error());
-  protected readonly modalTitleKey = computed<AppTranslationKey>(
-    () =>
-      `pages.admin.experiences.modal.${this.modalMode() ?? 'create'}.title` as AppTranslationKey,
-  );
+  protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
+    const mode = this.modalMode();
+    const translationMode =
+      mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode ?? 'create';
+
+    return `pages.admin.experiences.modal.${translationMode}.title` as AppTranslationKey;
+  });
 
   ngOnInit(): void {
     void this.loadWorkspace();

@@ -65,8 +65,8 @@ const catalog = (
       namePt: 'X',
       labelPt: 'X',
       url: 'https://x.test',
-      fileName: 'x.png',
-      filePath: '/x.png',
+      fileName: 'vh_logo_blue.svg',
+      filePath: '/assets/img/logo/vh_logo_blue.svg',
     },
   ],
 ) => ({
@@ -98,6 +98,7 @@ interface ComponentApi {
   submitModal(): Promise<void>;
   modalFeedbackKey(): string | null;
   loadErrorKey(): string | null;
+  modalTitleKey(): string;
 }
 
 const fillRequiredExperienceFields = (component: ComponentApi): void => {
@@ -133,6 +134,7 @@ describe('ExperiencesOperationsComponent', () => {
   });
 
   beforeEach(async () => {
+    spyOn(console, 'error').and.stub();
     api = jasmine.createSpyObj('ExperiencesOperationsService', [
       'getAll',
       'create',
@@ -186,9 +188,13 @@ describe('ExperiencesOperationsComponent', () => {
     const component = fixture.componentInstance as unknown as ComponentApi;
     expect(component['hasExperiences']()).toBeTrue();
     component['openReadModal']();
+    expect(component['modalTitleKey']()).toBe('pages.admin.experiences.modal.read.title');
     component['openUpdatePickerModal']();
+    expect(component['modalTitleKey']()).toBe('pages.admin.experiences.modal.pickUpdate.title');
     component['openDeletePickerModal']();
+    expect(component['modalTitleKey']()).toBe('pages.admin.experiences.modal.pickDelete.title');
     component['openCreateModal']();
+    expect(component['modalTitleKey']()).toBe('pages.admin.experiences.modal.create.title');
     component['updateField']('slug', 'new-slug');
     component['updateField']('technologyIds', 'ignored');
     component['updateBoolean']('highlight', false);

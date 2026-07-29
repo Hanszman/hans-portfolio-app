@@ -97,94 +97,23 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="jobs-operations-selection-section">
-          <div class="jobs-operations-selection-copy">
-            <p>{{ 'pages.admin.jobs.fields.experiences.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.jobs.fields.experiences.description' | translate }}
-            </span>
-          </div>
+        <app-relation-picker
+          [label]="'pages.admin.jobs.fields.experiences.label' | translate"
+          [description]="'pages.admin.jobs.fields.experiences.description' | translate"
+          [emptyMessage]="'pages.admin.jobs.fields.experiences.empty' | translate"
+          [options]="experienceOptions()"
+          [selectedIds]="form().experienceIds"
+          (toggled)="toggleExperience($event)"
+        ></app-relation-picker>
 
-          @if (experienceOptions().length > 0) {
-            <div class="jobs-operations-selection-grid">
-              @for (experience of experienceOptions(); track trackById($index, experience)) {
-                <hans-button
-                  [attr.aria-pressed]="isExperienceSelected(experience.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isExperienceSelected(experience.id) ? 'default' : 'outline'"
-                  (click)="toggleExperience(experience.id)"
-                >
-                  <span class="jobs-operations-selection-option">
-                    <span class="jobs-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="jobs-operations-selection-option-title"
-                        [text]="experience.title"
-                        [maxLength]="36"
-                      />
-                      <app-truncated-text
-                        class="jobs-operations-selection-option-subtitle"
-                        [text]="experience.subtitle"
-                        [maxLength]="40"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="jobs-operations-selection-empty">
-              {{ 'pages.admin.jobs.fields.experiences.empty' | translate }}
-            </p>
-          }
-        </div>
-
-        <div class="jobs-operations-selection-section">
-          <div class="jobs-operations-selection-copy">
-            <p>{{ 'pages.admin.jobs.fields.imageAssets.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.jobs.fields.imageAssets.description' | translate }}
-            </span>
-          </div>
-
-          @if (imageAssetOptions().length > 0) {
-            <div class="jobs-operations-selection-grid">
-              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
-                <hans-button
-                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
-                  (click)="toggleImageAsset(imageAsset.id)"
-                >
-                  <span class="jobs-operations-selection-option">
-                    <img
-                      class="jobs-operations-selection-option-image"
-                      [src]="imageAsset.imageUrl"
-                      [alt]="imageAsset.title"
-                    />
-                    <span class="jobs-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="jobs-operations-selection-option-title"
-                        [text]="imageAsset.title"
-                        [maxLength]="32"
-                      />
-                      <app-truncated-text
-                        class="jobs-operations-selection-option-subtitle"
-                        [text]="imageAsset.subtitle"
-                        [maxLength]="48"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="jobs-operations-selection-empty">
-              {{ 'pages.admin.jobs.fields.imageAssets.empty' | translate }}
-            </p>
-          }
-        </div>
+        <app-relation-picker
+          [label]="'pages.admin.jobs.fields.imageAssets.label' | translate"
+          [description]="'pages.admin.jobs.fields.imageAssets.description' | translate"
+          [emptyMessage]="'pages.admin.jobs.fields.imageAssets.empty' | translate"
+          [options]="imageAssetOptions()"
+          [selectedIds]="form().imageAssetIds"
+          (toggled)="toggleImageAsset($event)"
+        ></app-relation-picker>
       </div>
     } @else {
       @switch (modalMode) {

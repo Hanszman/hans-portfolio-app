@@ -12,7 +12,7 @@ import { LinkRecord } from '../../../../../../core/api/admin/links/links-operati
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { TruncatedTextComponent } from '../../../../../../shared/truncated-text/truncated-text.component';
+import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
 import {
   createAdminFieldLabelResolver,
   resolveAdminSelectValue,
@@ -34,7 +34,11 @@ import {
 @Component({
   selector: 'app-links-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, TruncatedTextComponent],
+  imports: [
+    TranslatePipe,
+    OperationsModalComponent,
+    RelationPickerComponent,
+  ],
   templateUrl: './links-operations-modal.component.html',
   styleUrl: './links-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

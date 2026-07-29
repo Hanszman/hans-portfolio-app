@@ -10,7 +10,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
-import { TruncatedTextComponent } from '../../../../../../shared/truncated-text/truncated-text.component';
+import { RelationPickerComponent } from '../../../../../../shared/operations/relation-picker/relation-picker.component';
 import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
@@ -41,7 +41,7 @@ import {
 @Component({
   selector: 'app-technologies-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsModalComponent, TruncatedTextComponent],
+  imports: [TranslatePipe, OperationsModalComponent, RelationPickerComponent],
   templateUrl: './technologies-operations-modal.component.html',
   styleUrl: './technologies-operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -105,10 +105,6 @@ export class TechnologiesOperationsModalComponent {
   protected readonly frequencyOptions = computed(() =>
     this.getOptions(TECHNOLOGY_FREQUENCY_VALUES),
   );
-
-  protected isSelected(id: string): boolean {
-    return this.form().imageAssetIds.includes(id);
-  }
 
   private getOptions<TValue extends string>(
     values: readonly TValue[],

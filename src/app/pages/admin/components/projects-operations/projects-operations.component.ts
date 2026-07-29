@@ -81,9 +81,13 @@ export class ProjectsOperationsComponent implements OnInit {
   protected readonly searchQuery = this.search.asReadonly();
   protected readonly endpointLabel = createAdminEntityEndpointLabel('/projects');
   protected readonly hasProjects = computed(() => this.records().length > 0 && !this.error());
-  protected readonly modalTitleKey = computed<AppTranslationKey>(
-    () => `pages.admin.projects.modal.${this.modalMode() ?? 'create'}.title` as AppTranslationKey,
-  );
+  protected readonly modalTitleKey = computed<AppTranslationKey>(() => {
+    const mode = this.modalMode();
+    const translationMode =
+      mode === 'pick-update' ? 'pickUpdate' : mode === 'pick-delete' ? 'pickDelete' : mode ?? 'create';
+
+    return `pages.admin.projects.modal.${translationMode}.title` as AppTranslationKey;
+  });
   protected readonly technologyOptions = signal<readonly ProjectOption[]>([]);
   protected readonly experienceOptions = signal<readonly ProjectOption[]>([]);
   protected readonly tagOptions = signal<readonly ProjectOption[]>([]);

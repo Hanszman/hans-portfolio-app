@@ -65,8 +65,8 @@ const catalog = (
       namePt: 'X',
       labelPt: 'X',
       url: 'https://x.test',
-      fileName: 'x.png',
-      filePath: '/x.png',
+      fileName: 'vh_logo_blue.svg',
+      filePath: '/assets/img/logo/vh_logo_blue.svg',
     },
   ],
 ) => ({
@@ -98,6 +98,7 @@ interface ComponentApi {
   submitModal(): Promise<void>;
   modalFeedbackKey(): string | null;
   loadErrorKey(): string | null;
+  modalTitleKey(): string;
 }
 
 const fillRequiredProjectFields = (component: ComponentApi): void => {
@@ -134,6 +135,7 @@ describe('ProjectsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
+    spyOn(console, 'error').and.stub();
     api = jasmine.createSpyObj('ProjectsOperationsService', [
       'getAll',
       'create',
@@ -184,9 +186,13 @@ describe('ProjectsOperationsComponent', () => {
     const c = fixture.componentInstance as unknown as ComponentApi;
     expect(c.hasProjects()).toBeTrue();
     c.openReadModal();
+    expect(c['modalTitleKey']()).toBe('pages.admin.projects.modal.read.title');
     c.openUpdatePickerModal();
+    expect(c['modalTitleKey']()).toBe('pages.admin.projects.modal.pickUpdate.title');
     c.openDeletePickerModal();
+    expect(c['modalTitleKey']()).toBe('pages.admin.projects.modal.pickDelete.title');
     c.openCreateModal();
+    expect(c['modalTitleKey']()).toBe('pages.admin.projects.modal.create.title');
     c.updateField('slug', 'new');
     c.updateField('technologyIds', 'ignored');
     c.updateBoolean('highlight', false);

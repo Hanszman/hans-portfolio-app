@@ -151,136 +151,34 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="formations-operations-selection-section">
-          <div class="formations-operations-selection-copy">
-            <p>{{ 'pages.admin.formations.fields.technologies.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.formations.fields.technologies.description' | translate }}
-            </span>
-          </div>
+        <app-relation-picker
+          [label]="'pages.admin.formations.fields.technologies.label' | translate"
+          [description]="'pages.admin.formations.fields.technologies.description' | translate"
+          [emptyMessage]="'pages.admin.formations.fields.technologies.empty' | translate"
+          [options]="technologyOptions()"
+          [selectedIds]="form().technologyIds"
+          (toggled)="toggleTechnology($event)"
+        ></app-relation-picker>
 
-          @if (technologyOptions().length > 0) {
-            <div class="formations-operations-selection-grid">
-              @for (technology of technologyOptions(); track trackById($index, technology)) {
-                <hans-button
-                  [attr.aria-pressed]="isTechnologySelected(technology.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isTechnologySelected(technology.id) ? 'default' : 'outline'"
-                  (click)="toggleTechnology(technology.id)"
-                >
-                  <span class="formations-operations-selection-option">
-                    <span class="formations-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="formations-operations-selection-option-title"
-                        [text]="technology.title"
-                        [maxLength]="36"
-                      />
-                      <app-truncated-text
-                        class="formations-operations-selection-option-subtitle"
-                        [text]="technology.subtitle"
-                        [maxLength]="40"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="formations-operations-selection-empty">
-              {{ 'pages.admin.formations.fields.technologies.empty' | translate }}
-            </p>
-          }
-        </div>
+        <app-relation-picker
+          [label]="'pages.admin.formations.fields.links.label' | translate"
+          [description]="'pages.admin.formations.fields.links.description' | translate"
+          [emptyMessage]="'pages.admin.formations.fields.links.empty' | translate"
+          [options]="linkOptions()"
+          [selectedIds]="form().linkIds"
+          (toggled)="toggleLink($event)"
+        ></app-relation-picker>
 
-        <div class="formations-operations-selection-section">
-          <div class="formations-operations-selection-copy">
-            <p>{{ 'pages.admin.formations.fields.links.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.formations.fields.links.description' | translate }}
-            </span>
-          </div>
+        <app-relation-picker
+          [label]="'pages.admin.formations.fields.imageAssets.label' | translate"
+          [description]="'pages.admin.formations.fields.imageAssets.description' | translate"
+          [emptyMessage]="'pages.admin.formations.fields.imageAssets.empty' | translate"
+          [options]="imageAssetOptions()"
+          [selectedIds]="form().imageAssetIds"
+          (toggled)="toggleImageAsset($event)"
+        ></app-relation-picker>
 
-          @if (linkOptions().length > 0) {
-            <div class="formations-operations-selection-grid">
-              @for (link of linkOptions(); track trackById($index, link)) {
-                <hans-button
-                  [attr.aria-pressed]="isLinkSelected(link.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isLinkSelected(link.id) ? 'default' : 'outline'"
-                  (click)="toggleLink(link.id)"
-                >
-                  <span class="formations-operations-selection-option">
-                    <span class="formations-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="formations-operations-selection-option-title"
-                        [text]="link.title"
-                        [maxLength]="36"
-                      />
-                      <app-truncated-text
-                        class="formations-operations-selection-option-subtitle"
-                        [text]="link.subtitle"
-                        [maxLength]="52"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="formations-operations-selection-empty">
-              {{ 'pages.admin.formations.fields.links.empty' | translate }}
-            </p>
-          }
-        </div>
-
-        <div class="formations-operations-selection-section">
-          <div class="formations-operations-selection-copy">
-            <p>{{ 'pages.admin.formations.fields.imageAssets.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.formations.fields.imageAssets.description' | translate }}
-            </span>
-          </div>
-
-          @if (imageAssetOptions().length > 0) {
-            <div class="formations-operations-selection-grid">
-              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
-                <hans-button
-                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
-                  (click)="toggleImageAsset(imageAsset.id)"
-                >
-                  <span class="formations-operations-selection-option">
-                    <img
-                      class="formations-operations-selection-option-image"
-                      [src]="imageAsset.imageUrl"
-                      [alt]="imageAsset.title"
-                    />
-                    <span class="formations-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="formations-operations-selection-option-title"
-                        [text]="imageAsset.title"
-                        [maxLength]="32"
-                      />
-                      <app-truncated-text
-                        class="formations-operations-selection-option-subtitle"
-                        [text]="imageAsset.subtitle"
-                        [maxLength]="48"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="formations-operations-selection-empty">
-              {{ 'pages.admin.formations.fields.imageAssets.empty' | translate }}
-            </p>
-          }
-        </div>
+        
       </div>
     } @else {
       @switch (modalMode) {

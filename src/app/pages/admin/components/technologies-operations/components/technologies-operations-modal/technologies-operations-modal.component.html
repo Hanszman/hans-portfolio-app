@@ -103,39 +103,14 @@
         (input)="change('sortOrder', $event)"
       ></hans-input>
 
-      <section class="technologies-operations-selection">
-        <div class="technologies-operations-selection-copy">
-          <p>{{ 'pages.admin.technologies.fields.imageAssets.label' | translate }}</p>
-          <span>{{ 'pages.admin.technologies.fields.imageAssets.description' | translate }}</span>
-        </div>
-        <div class="technologies-operations-selection-grid">
-          @for (image of imageOptions(); track image.id) {
-            <hans-button
-              [buttonColor]="'primary'"
-              [buttonVariant]="isSelected(image.id) ? 'default' : 'outline'"
-              (click)="imageAssetToggled.emit(image.id)"
-              [buttonSize]="'medium'"
-              [attr.aria-pressed]="isSelected(image.id)"
-            >
-                <span class="technologies-operations-selection-option">
-                  <img [src]="image.imageUrl" [alt]="image.title" />
-                  <span class="technologies-operations-selection-option-copy">
-                    <app-truncated-text
-                      class="technologies-operations-selection-option-title"
-                      [text]="image.title"
-                      [maxLength]="32"
-                    />
-                    <app-truncated-text
-                      class="technologies-operations-selection-option-subtitle"
-                      [text]="image.subtitle"
-                      [maxLength]="48"
-                    />
-                  </span>
-                </span>
-            </hans-button>
-          }
-        </div>
-      </section>
+      <app-relation-picker
+        [label]="'pages.admin.technologies.fields.imageAssets.label' | translate"
+        [description]="'pages.admin.technologies.fields.imageAssets.description' | translate"
+        [emptyMessage]="'pages.admin.technologies.fields.imageAssets.empty' | translate"
+        [options]="imageOptions()"
+        [selectedIds]="form().imageAssetIds"
+        (toggled)="imageAssetToggled.emit($event)"
+      ></app-relation-picker>
     </div>
     } @else {
       @switch (modalMode) {

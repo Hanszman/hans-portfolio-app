@@ -48,7 +48,7 @@ describe('TechnologiesOperationsModalComponent', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.componentRef.setInput('imageOptions', [
-      { id: 'image-1', title: 'Image', subtitle: '/image.png', imageUrl: '/image.png' },
+      { id: 'image-1', title: 'Image', subtitle: '/assets/img/logo/vh_logo_blue.svg', imageUrl: '/assets/img/logo/vh_logo_blue.svg' },
     ]);
     fixture.detectChanges();
     component.change('category', new Event('change'));

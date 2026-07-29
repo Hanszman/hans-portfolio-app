@@ -83,7 +83,7 @@ describe('technologies operations helper', () => {
       buildTechnologiesFormValue(
         technology({
           imageAssetIds: undefined,
-          imageAssets: [{ imageAsset: { filePath: '/image.png', kind: 'ICON', altPt: null, altEn: null } }],
+          imageAssets: [{ imageAsset: { filePath: '/assets/img/logo/vh_logo_blue.svg', kind: 'ICON', altPt: null, altEn: null } }],
         }),
       ).imageAssetIds,
     ).toEqual([]);

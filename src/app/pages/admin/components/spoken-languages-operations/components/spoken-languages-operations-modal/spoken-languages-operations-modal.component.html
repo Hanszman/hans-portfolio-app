@@ -93,52 +93,15 @@
           (input)="emitSortOrderChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <div class="spoken-languages-operations-selection-section">
-          <div class="spoken-languages-operations-selection-copy">
-            <p>{{ 'pages.admin.spokenLanguages.fields.imageAssets.label' | translate }}</p>
-            <span>
-              {{ 'pages.admin.spokenLanguages.fields.imageAssets.description' | translate }}
-            </span>
-          </div>
+        <app-relation-picker
+          [label]="'pages.admin.spokenLanguages.fields.imageAssets.label' | translate"
+          [description]="'pages.admin.spokenLanguages.fields.imageAssets.description' | translate"
+          [emptyMessage]="'pages.admin.spokenLanguages.fields.imageAssets.empty' | translate"
+          [options]="imageAssetOptions()"
+          [selectedIds]="form().imageAssetIds"
+          (toggled)="toggleImageAsset($event)"
+        ></app-relation-picker>
 
-          @if (imageAssetOptions().length > 0) {
-            <div class="spoken-languages-operations-selection-grid">
-              @for (imageAsset of imageAssetOptions(); track trackById($index, imageAsset)) {
-                <hans-button
-                  [attr.aria-pressed]="isImageAssetSelected(imageAsset.id)"
-                  [buttonColor]="'primary'"
-                  [buttonSize]="'medium'"
-                  [buttonVariant]="isImageAssetSelected(imageAsset.id) ? 'default' : 'outline'"
-                  (click)="toggleImageAsset(imageAsset.id)"
-                >
-                  <span class="spoken-languages-operations-selection-option">
-                    <img
-                      class="spoken-languages-operations-selection-option-image"
-                      [src]="imageAsset.imageUrl"
-                      [alt]="imageAsset.title"
-                    />
-                    <span class="spoken-languages-operations-selection-option-copy">
-                      <app-truncated-text
-                        class="spoken-languages-operations-selection-option-title"
-                        [text]="imageAsset.title"
-                        [maxLength]="32"
-                      />
-                      <app-truncated-text
-                        class="spoken-languages-operations-selection-option-subtitle"
-                        [text]="imageAsset.subtitle"
-                        [maxLength]="48"
-                      />
-                    </span>
-                  </span>
-                </hans-button>
-              }
-            </div>
-          } @else {
-            <p class="spoken-languages-operations-selection-empty">
-              {{ 'pages.admin.spokenLanguages.fields.imageAssets.empty' | translate }}
-            </p>
-          }
-        </div>
       </div>
     } @else {
       @switch (modalMode) {
