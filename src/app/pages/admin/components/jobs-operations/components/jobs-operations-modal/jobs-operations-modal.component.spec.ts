@@ -159,12 +159,12 @@ describe('JobsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Slug *',
-      'Portuguese name *',
-      'English name *',
-      'Portuguese summary *',
-      'English summary *',
-      'Sort order *',
+      'Slug',
+      'Portuguese name',
+      'English name',
+      'Portuguese summary',
+      'English summary',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
       true,

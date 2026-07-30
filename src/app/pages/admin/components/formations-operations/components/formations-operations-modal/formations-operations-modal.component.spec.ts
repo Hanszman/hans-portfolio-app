@@ -197,13 +197,13 @@ describe('FormationsOperationsModalComponent', () => {
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Slug *',
-      'Institution *',
-      'Portuguese title *',
-      'English title *',
-      'Portuguese summary *',
-      'English summary *',
-      'Sort order *',
+      'Slug',
+      'Institution',
+      'Portuguese title',
+      'English title',
+      'Portuguese summary',
+      'English summary',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
       true,
@@ -215,11 +215,11 @@ describe('FormationsOperationsModalComponent', () => {
       true,
     ]);
     expect(datePickerElements.map((element) => element.label)).toEqual([
-      'Start date *',
+      'Start date',
       'End date',
     ]);
     expect(datePickerElements.map((element) => element.required)).toEqual([true, false]);
-    expect(selectElement?.label).toBe('Degree type *');
+    expect(selectElement?.label).toBe('Degree type');
     expect(selectElement?.required).toBeTrue();
     expect(slugSpy).toHaveBeenCalledOnceWith('systems-analysis');
     expect(institutionSpy).toHaveBeenCalledOnceWith('PUC Minas');

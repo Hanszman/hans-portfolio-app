@@ -183,12 +183,12 @@ describe('LinksOperationsModalComponent', () => {
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'URL *',
+      'URL',
       'Portuguese label',
       'English label',
       'Portuguese description',
       'English description',
-      'Sort order *',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
       true,
@@ -198,7 +198,7 @@ describe('LinksOperationsModalComponent', () => {
       false,
       true,
     ]);
-    expect(selectElement?.label).toBe('Type *');
+    expect(selectElement?.label).toBe('Type');
     expect(selectElement?.required).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);

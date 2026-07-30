@@ -94,11 +94,11 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Setting key *',
+      'Setting key',
       'Description',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([true, false]);
-    expect(fixture.nativeElement.textContent).toContain('JSON value *');
+    expect(fixture.nativeElement.textContent).toContain('JSON value');
     expect(
       (fixture.nativeElement.querySelector('textarea') as HTMLTextAreaElement | null)?.required,
     ).toBeTrue();

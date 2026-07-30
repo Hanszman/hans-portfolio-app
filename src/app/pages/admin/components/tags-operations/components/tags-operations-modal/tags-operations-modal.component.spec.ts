@@ -128,10 +128,10 @@ describe('TagsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Tag slug *',
-      'Portuguese name *',
-      'English name *',
-      'Sort order *',
+      'Tag slug',
+      'Portuguese name',
+      'English name',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
     expect(modalElement?.confirmLabel).toBe('Save');

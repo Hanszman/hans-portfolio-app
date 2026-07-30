@@ -41,7 +41,7 @@ describe('formatAdminIdentity', () => {
     expect(formatAdminIdentity(null)).toBe('');
   });
 
-  it('should derive required markers from the shared field configuration', () => {
+  it('should resolve plain labels while required presentation stays in the design lib', () => {
     const translate = (key: AppTranslationKey) => key;
 
     expect(
@@ -52,7 +52,7 @@ describe('formatAdminIdentity', () => {
         },
         translate,
       ),
-    ).toBe('pages.admin.tags.fields.slug.label *');
+    ).toBe('pages.admin.tags.fields.slug.label');
 
     expect(
       resolveAdminFieldLabel(
@@ -79,7 +79,7 @@ describe('formatAdminIdentity', () => {
       translate,
     );
 
-    expect(resolveFieldLabel('slug')).toBe('pages.admin.tags.fields.slug.label *');
+    expect(resolveFieldLabel('slug')).toBe('pages.admin.tags.fields.slug.label');
     expect(resolveFieldLabel('namePt')).toBe('pages.admin.tags.fields.namePt.label');
   });
 

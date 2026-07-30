@@ -145,13 +145,13 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Code *',
-      'Portuguese name *',
-      'English name *',
-      'Sort order *',
+      'Code',
+      'Portuguese name',
+      'English name',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
-    expect(selectElement?.label).toBe('Proficiency *');
+    expect(selectElement?.label).toBe('Proficiency');
     expect(selectElement?.required).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);

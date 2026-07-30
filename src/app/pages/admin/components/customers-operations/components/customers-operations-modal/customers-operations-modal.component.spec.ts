@@ -153,11 +153,11 @@ describe('CustomersOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Slug *',
-      'Name *',
-      'Portuguese summary *',
-      'English summary *',
-      'Sort order *',
+      'Slug',
+      'Name',
+      'Portuguese summary',
+      'English summary',
+      'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true, true]);
     expect(modalElement?.confirmLabel).toBe('Save');
