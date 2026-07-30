@@ -2,8 +2,8 @@ import {
   ExperienceMutationPayload,
   ExperienceRecord,
   ExperienceRelationRecord,
-} from '../../../../core/api/admin/experiences/experiences-operations.types';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+} from '../../../../core/api/experiences/experiences-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,

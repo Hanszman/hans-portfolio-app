@@ -10,8 +10,8 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyAdminRecord } from '../../../../core/api/technologies/technologies.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -100,7 +100,10 @@ export class TechnologiesOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (this.hasTechnologies()) this.modeSignal.set('read');
+    if (this.hasTechnologies()) {
+      this.modeSignal.set('read');
+      void this.loadWorkspace();
+    }
   }
 
   openUpdatePickerModal(): void {

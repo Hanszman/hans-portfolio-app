@@ -1,7 +1,8 @@
-import { TechnologyContextRecord } from '../../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts-operations.types';
 import { AppTranslationKey } from '../../../../../core/translation/translation.types';
 import { TechnologyAdminRecord } from '../../../../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../../../../core/translation/translation.service';
+import { formatAdminDateForDisplay } from '../../../helpers/admin.helper';
 import {
   TechnologyContextTechnologyOption,
   TechnologyContextViewModel,
@@ -20,10 +21,7 @@ export const buildTechnologyContextTechnologyOptions = (
     }));
 
 export const formatTechnologyContextDate = (value: string): string => {
-  if (!value) return '-';
-  if (!/^\d{4}-\d{2}-\d{2}/.test(value)) return value;
-  const [year, month, day] = value.slice(0, 10).split('-');
-  return `${day}/${month}/${year}`;
+  return formatAdminDateForDisplay(value);
 };
 
 export const buildTechnologyContextViewModels = (

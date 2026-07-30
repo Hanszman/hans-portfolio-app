@@ -55,17 +55,6 @@
         </div>
       }
 
-      @if (feedbackKey(); as currentFeedbackKey) {
-        <p
-          class="operations-modal-feedback"
-          [class.operations-modal-feedback-error]="feedbackTone() === 'error'"
-          [class.operations-modal-feedback-success]="feedbackTone() === 'success'"
-          role="status"
-        >
-          {{ currentFeedbackKey | translate }}
-        </p>
-      }
-
       <div class="operations-modal-body">
         @if (rendersSharedContent()) {
           @switch (mode()) {

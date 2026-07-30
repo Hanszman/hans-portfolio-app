@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/admin/links/links-operations.types';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { LinkRecord } from '../../../../core/api/links/links-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';

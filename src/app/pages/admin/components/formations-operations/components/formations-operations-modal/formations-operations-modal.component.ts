@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { FormationRecord } from '../../../../../../core/api/admin/formations/formations-operations.types';
+import { FormationRecord } from '../../../../../../core/api/formations/formations-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  formatAdminDateRangeForDisplay,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -154,10 +155,9 @@ export class FormationsOperationsModalComponent {
           },
           { labelKey: 'pages.admin.formations.card.summaryPt', value: formation.summaryPt },
           { labelKey: 'pages.admin.formations.card.summaryEn', value: formation.summaryEn },
-          { labelKey: 'pages.admin.formations.card.startDate', value: formation.startDate },
           {
-            labelKey: 'pages.admin.formations.card.endDate',
-            value: formation.endDateLabel,
+            labelKey: 'pages.admin.operations.date',
+            value: formatAdminDateRangeForDisplay(formation.startDate, formation.endDateLabel),
           },
           {
             labelKey: 'pages.admin.formations.card.highlight',

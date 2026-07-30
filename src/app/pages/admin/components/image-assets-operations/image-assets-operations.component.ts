@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
 import {
   ImageAssetMutationPayload,
   ImageAssetRecord,
-} from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+} from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -154,12 +154,11 @@ export class ImageAssetsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasImageAssets()) {
-      return;
+    if (this.hasImageAssets()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

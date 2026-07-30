@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { SpokenLanguagesOperationsService } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.service';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { SpokenLanguagesOperationsService } from '../../../../core/api/spoken-languages/spoken-languages-operations.service';
 import {
   SpokenLanguageMutationPayload,
   SpokenLanguageRecord,
-} from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
+} from '../../../../core/api/spoken-languages/spoken-languages-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
@@ -136,12 +136,11 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasSpokenLanguages()) {
-      return;
+    if (this.hasSpokenLanguages()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

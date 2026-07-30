@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
+import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
 import {
   TagMutationPayload,
   TagRecord,
-} from '../../../../core/api/admin/tags/tags-operations.types';
+} from '../../../../core/api/tags/tags-operations.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -145,12 +145,11 @@ export class TagsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasTags()) {
-      return;
+    if (this.hasTags()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

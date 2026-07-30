@@ -1,11 +1,11 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { AdminAuthenticationService } from '../api/admin/admin-auth/admin-auth.service';
+import { AdminAuthenticationService } from '../api/admin-auth/admin-auth.service';
 import {
   AdminLoginResult,
   AdminSessionSnapshot,
-} from '../api/admin/admin-auth/admin-auth.types';
+} from '../api/admin-auth/admin-auth.types';
 import {
   AdminSessionService,
 } from './admin-session.service';

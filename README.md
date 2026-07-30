@@ -125,7 +125,7 @@ The twelve authenticated CRUD workspaces share the same composition under
 `src/app/shared/operations/`:
 
 - `app-operations` owns the entity shell, operation actions and loading, error and empty states
-- `app-operations-modal` owns modal chrome, search, pagination, feedback and the shared read, selection and delete-confirmation modes
+- `app-operations-modal` owns modal chrome, search, pagination and the shared read, selection and delete-confirmation modes; operation feedback is emitted exclusively through the global toast service
 - `app-operations-item` renders update/delete picker rows and the static delete summary
 - `app-operations-detailed-item` renders read cards and emits direct update/delete actions
 - `app-operations-relation-picker` renders relation catalogs, including optional image previews
@@ -135,6 +135,18 @@ domain-specific view-model mapping. The semantic
 `--app-operations-surface-color` theme token is the common background for
 operation items, relation pickers and admin toggle wrappers in light and dark
 themes.
+
+Admin reads refresh their public collection whenever the read modal opens, so
+inverse relation lists reflect mutations made from either owning side. Detailed
+cards render identity fields through the same labeled field composition as every
+other value, format date ranges as a single translated `Date` field and expose
+all returned relations as comma-separated labels.
+
+API services are organized directly by domain under `src/app/core/api/<domain>/`.
+Authentication lives in `core/api/admin-auth`, while Experiences and Projects
+each use one merged domain service for their public GET and protected create,
+update and delete requests. The obsolete `core/api/admin/` intermediate folder
+is intentionally absent.
 
 ### Testing and quality
 

@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { TechnologyContextsOperationsService } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.service';
-import { TechnologyContextRecord } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextsOperationsService } from '../../../../core/api/technology-contexts/technology-contexts-operations.service';
+import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts-operations.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';

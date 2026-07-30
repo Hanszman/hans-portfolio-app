@@ -1,10 +1,10 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { SpokenLanguagesOperationsService } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.service';
-import { SpokenLanguageRecord } from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { SpokenLanguagesOperationsService } from '../../../../core/api/spoken-languages/spoken-languages-operations.service';
+import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';

@@ -10,7 +10,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
-import { ExperienceRecord } from '../../../../../../core/api/admin/experiences/experiences-operations.types';
+import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
@@ -21,7 +21,11 @@ import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
-import { resolveAdminSelectValue } from '../../../../helpers/admin.helper';
+import {
+  formatAdminDateRangeForDisplay,
+  resolveAdminRelationLabels,
+  resolveAdminSelectValue,
+} from '../../../../helpers/admin.helper';
 import {
   ExperienceOption,
   ExperiencesOperationsFormValue,
@@ -97,8 +101,19 @@ export class ExperiencesOperationsModalComponent {
     this.experiences().map((experience) => this.toOperationsItem(experience)),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
-    () =>
-      this.experiences().map((experience) => ({
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.operations.emptyRelations');
+      const booleanLabel = (value: boolean | null | undefined): string =>
+        this.translation.instant(
+          value ? 'pages.admin.operations.yes' : 'pages.admin.operations.no',
+        );
+      const relationValue = (
+        relations: readonly unknown[] | null | undefined,
+        nestedKey: string,
+      ): string => resolveAdminRelationLabels(relations, nestedKey).join(', ') || emptyRelations;
+
+      return this.experiences().map((experience) => ({
         ...this.toOperationsItem(experience),
         fields: [
           {
@@ -118,15 +133,64 @@ export class ExperiencesOperationsModalComponent {
             value: experience.titleEn,
           },
           {
-            labelKey: 'pages.admin.experiences.fields.startDate.label',
-            value: experience.startDate,
+            labelKey: 'pages.admin.experiences.fields.summaryPt.label',
+            value: experience.summaryPt,
           },
           {
-            labelKey: 'pages.admin.experiences.fields.endDate.label',
-            value: experience.endDate ?? '',
+            labelKey: 'pages.admin.experiences.fields.summaryEn.label',
+            value: experience.summaryEn,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.descriptionPt.label',
+            value: experience.descriptionPt,
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.descriptionEn.label',
+            value: experience.descriptionEn,
+          },
+          {
+            labelKey: 'pages.admin.operations.date',
+            value: formatAdminDateRangeForDisplay(experience.startDate, experience.endDate),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.isCurrent.label',
+            value: booleanLabel(experience.isCurrent),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.highlight.label',
+            value: booleanLabel(experience.highlight),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.sortOrder.label',
+            value: String(experience.sortOrder ?? 0),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.technologies.label',
+            value: relationValue(experience.technologies, 'technology'),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.projects.label',
+            value: relationValue(experience.projects, 'project'),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.customers.label',
+            value: relationValue(experience.customers, 'customer'),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.jobs.label',
+            value: relationValue(experience.jobs, 'job'),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.links.label',
+            value: relationValue(experience.links, 'link'),
+          },
+          {
+            labelKey: 'pages.admin.experiences.fields.imageAssets.label',
+            value: relationValue(experience.imageAssets, 'imageAsset'),
           },
         ],
-      })),
+      }));
+    },
   );
   protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
     const experience = this.selectedExperience();

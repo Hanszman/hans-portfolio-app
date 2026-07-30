@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
-import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
+import { PortfolioSettingsOperationsService } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.service';
+import { PortfolioSettingRecord } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';

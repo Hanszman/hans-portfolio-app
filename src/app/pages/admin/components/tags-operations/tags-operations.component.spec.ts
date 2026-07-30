@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
-import { TagRecord } from '../../../../core/api/admin/tags/tags-operations.types';
+import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
+import { TagRecord } from '../../../../core/api/tags/tags-operations.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';

@@ -1,6 +1,7 @@
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import {
   TechnologyAdminRecord,
+  TechnologyContextResponse,
   TechnologyMutationPayload,
 } from '../../../../core/api/technologies/technologies.types';
 import { AdminFormFieldConfig } from '../../admin.types';
@@ -83,6 +84,12 @@ export type TechnologyImageAssetOptionViewModel = AdminImageAssetOptionViewModel
 export interface TechnologyOperationsViewModel extends TechnologiesOperationsFormValue {
   id: string;
   imageAssetLabels: readonly string[];
+  projectLabels: readonly string[];
+  experienceLabels: readonly string[];
+  formationLabels: readonly string[];
+  tagLabels: readonly string[];
+  linkLabels: readonly string[];
+  technologyContexts: readonly TechnologyContextResponse[];
 }
 
 export type TechnologiesMutationBuildResult =

@@ -1,8 +1,8 @@
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import {
   SpokenLanguageImageAssetRelationRecord,
   SpokenLanguageMutationPayload,
-} from '../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
+} from '../../../../core/api/spoken-languages/spoken-languages-operations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {

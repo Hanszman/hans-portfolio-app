@@ -4,11 +4,15 @@ import {
   buildAdminSessionFactViewModels,
   createAdminSelectOptionDefinitions,
   createAdminFieldLabelResolver,
+  formatAdminDateForDisplay,
+  formatAdminDateRangeForDisplay,
   formatAdminIdentity,
+  formatAdminRelationLabel,
   isAdminDateRangeValid,
   normalizeAdminDateValueForMutation,
   normalizeAdminDateValueForPicker,
   resolveAdminFieldLabel,
+  resolveAdminRelationLabels,
   resolveAdminSelectValue,
   trackAdminItemById,
   translateAdminSelectOptions,
@@ -109,6 +113,55 @@ describe('formatAdminIdentity', () => {
     expect(normalizeAdminDateValueForPicker('24/07/2026')).toBe('2026-07-24');
     expect(normalizeAdminDateValueForPicker('date-free-text')).toBe('date-free-text');
     expect(normalizeAdminDateValueForPicker('   ')).toBe('');
+  });
+
+  it('should format admin dates and ranges for read views', () => {
+    expect(formatAdminDateForDisplay('2026-07-24T00:00:00.000Z')).toBe('24/07/2026');
+    expect(formatAdminDateForDisplay('24/07/2026')).toBe('24/07/2026');
+    expect(formatAdminDateForDisplay(undefined)).toBe('-');
+    expect(formatAdminDateForDisplay(null, 'Not informed')).toBe('Not informed');
+    expect(
+      formatAdminDateRangeForDisplay('2026-07-24T00:00:00.000Z', '2026-08-01'),
+    ).toBe('24/07/2026 - 01/08/2026');
+  });
+
+  it('should format every supported relation identity without duplicate secondary text', () => {
+    const labelCases = [
+      [{ name: 'Angular', slug: 'angular' }, 'Angular (angular)'],
+      [{ namePt: 'Projeto', kind: 'PROJECT' }, 'Projeto (PROJECT)'],
+      [{ titlePt: 'Experiência' }, 'Experiência'],
+      [{ labelPt: 'Português' }, 'Português'],
+      [{ labelEn: 'English' }, 'English'],
+      [{ companyName: 'Hans' }, 'Hans'],
+      [{ fileName: 'logo.svg', kind: 'ICON' }, 'logo.svg (ICON)'],
+      [{ code: 'pt-BR' }, 'pt-BR'],
+      [{ url: 'https://example.com' }, 'https://example.com'],
+      [{ filePath: '/assets/logo.svg' }, '/assets/logo.svg'],
+      [{ id: 'relation-1' }, 'relation-1'],
+      [{ name: 'Angular', slug: 'Angular' }, 'Angular'],
+      [{}, ''],
+    ] as const;
+
+    labelCases.forEach(([source, expected]) => {
+      expect(formatAdminRelationLabel(source)).toBe(expected);
+    });
+  });
+
+  it('should resolve nested and direct relation labels with stable deduplication', () => {
+    expect(
+      resolveAdminRelationLabels(
+        [
+          { technology: { name: 'Angular', slug: 'angular' } },
+          { name: 'TypeScript', slug: 'typescript' },
+          { technology: { name: 'Angular', slug: 'angular' } },
+          null,
+          'invalid',
+        ],
+        'technology',
+      ),
+    ).toEqual(['Angular (angular)', 'TypeScript (typescript)']);
+    expect(resolveAdminRelationLabels(null, 'technology')).toEqual([]);
+    expect(resolveAdminRelationLabels(undefined, 'technology')).toEqual([]);
   });
 
   it('should normalize admin date values for mutation payloads', () => {

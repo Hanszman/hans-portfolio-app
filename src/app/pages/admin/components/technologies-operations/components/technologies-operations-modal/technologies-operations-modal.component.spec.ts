@@ -86,7 +86,19 @@ describe('TechnologiesOperationsModalComponent', () => {
         frequency: 'FREQUENT',
         highlight: true,
         sortOrder: 1,
-        imageAssetLabels: [],
+        technologyContexts: [
+          {
+            context: 'PROFESSIONAL',
+            startedAt: '2020-01-01T00:00:00.000Z',
+            endedAt: '2021-01-01T00:00:00.000Z',
+          },
+        ],
+        projectLabels: ['Portfolio'],
+        experienceLabels: ['Company'],
+        formationLabels: ['Course'],
+        tagLabels: ['Framework'],
+        linkLabels: ['Documentation'],
+        imageAssetLabels: ['angular.svg'],
       },
       {
         id: 'technology-2',

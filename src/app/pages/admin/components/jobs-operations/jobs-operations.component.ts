@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { JobsOperationsService } from '../../../../core/api/admin/jobs/jobs-operations.service';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
 import {
   JobMutationPayload,
   JobRecord,
-} from '../../../../core/api/admin/jobs/jobs-operations.types';
+} from '../../../../core/api/jobs/jobs-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -131,12 +131,11 @@ export class JobsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasJobs()) {
-      return;
+    if (this.hasJobs()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

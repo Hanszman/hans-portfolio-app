@@ -494,3 +494,8 @@ E como vc pode ver no print 6, alguns títulos no read ainda estão sem traduç�
 Reparei uma coisa na organização do código que poderiamos melhorar também: na pasta app/core/api temos a pasta admin onde temos varios services de várias entidades. Mas alguns deles estão repetidos, como experiences e projects. E parando pra pensar bem, na verdade eles nem deveriam estar todos ali dentro de admin, já que todas as entidades tem get sem precisar ser admin, mas todas as outras operations precisam ser admin e não compensaria deixar só os services com get fora da pasta. Vamos fazer o seguinte então: mova todas as pastas de services que estão dentro de admin para fora dela, deixando na raiz de api mesmo e, aquelas que forem ficar repetidas, como experiences e projects, mescle por favor, deixando todas as operações daquelas entidades no mesmo arquivo de services. Atenção: faça isso apenas nos services, ou seja, dentro da pasta api, pois em outros lugares do código, como nas pages, já ta organizado o suficiente.
 Em todas as suas correções, abra o mcp do chrome-devtools para testar os comportamentos, corrigi-los e validá-los por favor.
 Gostaria também que vc me esclarecesse uma dúvida: quando excluimos uma entidade no sistema, todas as relações que ela tinha são excluidas no banco de dados via backend por cascading também? pois se não estão sendo removidas, deveriam. Investigue por favor no backend se esse é o comportamento padrão pra todas as exclusões de todas as entidades e me responda por favor.
+-...
+mensagens de erro/warning nos testes
+o * nas labels não está sendo exibido, ou seja, não estamos usando o required onde necessário nos inputs
+espaço no detailed item do read
+renomear services-operations

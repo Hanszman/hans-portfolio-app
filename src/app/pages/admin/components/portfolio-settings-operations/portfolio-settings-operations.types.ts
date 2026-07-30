@@ -1,5 +1,5 @@
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
-import { PortfolioSettingRecord } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
+import { PortfolioSettingRecord } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 
 export type PortfolioSettingsOperationsModalMode =

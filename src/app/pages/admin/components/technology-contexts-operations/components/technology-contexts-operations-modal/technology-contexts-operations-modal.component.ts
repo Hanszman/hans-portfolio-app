@@ -23,7 +23,7 @@ import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
-import { TechnologyContextRecord } from '../../../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../../../core/api/technology-contexts/technology-contexts-operations.types';
 import {
   TECHNOLOGY_CONTEXT_FIELDS,
   TechnologyContextFormValue,
@@ -125,7 +125,7 @@ export class TechnologyContextsOperationsModalComponent {
             value: record.contextLabel,
           },
           {
-            labelKey: 'pages.admin.technologyContexts.fields.startedAt.label',
+            labelKey: 'pages.admin.operations.date',
             value: record.dateRangeLabel,
           },
         ],

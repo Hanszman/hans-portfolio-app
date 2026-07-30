@@ -8,15 +8,15 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { FormationsOperationsService } from '../../../../core/api/admin/formations/formations-operations.service';
+import { FormationsOperationsService } from '../../../../core/api/formations/formations-operations.service';
 import {
   FormationMutationPayload,
   FormationRecord,
-} from '../../../../core/api/admin/formations/formations-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/admin/links/links-operations.types';
+} from '../../../../core/api/formations/formations-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { LinkRecord } from '../../../../core/api/links/links-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
@@ -154,12 +154,11 @@ export class FormationsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasFormations()) {
-      return;
+    if (this.hasFormations()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

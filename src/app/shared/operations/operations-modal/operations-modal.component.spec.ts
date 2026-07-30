@@ -221,7 +221,7 @@ describe('OperationsModalComponent', () => {
     expect(modalElement?.confirmDisabled).toBeTrue();
   });
 
-  it('renders shared read, picker and delete compositions with visible feedback', () => {
+  it('renders shared read, picker and delete compositions without inline feedback', () => {
     const updateSpy = jasmine.createSpy('update');
     const deleteSpy = jasmine.createSpy('delete');
     component.updateSelected.subscribe(updateSpy);
@@ -259,7 +259,7 @@ describe('OperationsModalComponent', () => {
     fixture.componentRef.setInput('feedbackTone', 'success');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('app-operations-item button').disabled).toBeTrue();
-    expect(fixture.nativeElement.querySelector('[role="status"]')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('[role="status"]')).toBeNull();
     expect(updateSpy).toHaveBeenCalledTimes(2);
     expect(deleteSpy).toHaveBeenCalledTimes(1);
   });

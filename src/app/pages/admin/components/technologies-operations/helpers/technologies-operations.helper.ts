@@ -1,6 +1,9 @@
-import { ImageAssetRecord } from '../../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
 import { TechnologyAdminRecord } from '../../../../../core/api/technologies/technologies.types';
-import { resolveAdminImageAssetLabel } from '../../../helpers/admin.helper';
+import {
+  resolveAdminImageAssetLabel,
+  resolveAdminRelationLabels,
+} from '../../../helpers/admin.helper';
 import {
   TechnologyImageAssetOptionViewModel,
   TechnologyOperationsViewModel,
@@ -36,6 +39,21 @@ export const buildTechnologiesViewModels = (
         imageAssetLabels: form.imageAssetIds.map((id) =>
           imageMap.has(id) ? resolveAdminImageAssetLabel(imageMap.get(id)!) : id,
         ),
+        projectLabels: resolveAdminRelationLabels(
+          item.projectUsages ?? item.projectRelations,
+          'project',
+        ),
+        experienceLabels: resolveAdminRelationLabels(
+          item.experienceUses ?? item.experienceRelations,
+          'experience',
+        ),
+        formationLabels: resolveAdminRelationLabels(
+          item.formationUses ?? item.formationRelations,
+          'formation',
+        ),
+        tagLabels: resolveAdminRelationLabels(item.tags, 'tag'),
+        linkLabels: resolveAdminRelationLabels(item.links, 'link'),
+        technologyContexts: item.technologyContexts ?? [],
       };
     });
 };

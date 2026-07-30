@@ -32,6 +32,7 @@ import { TechnologyAdminRecord } from '../../../../../../core/api/technologies/t
 import {
   createAdminFieldLabelResolver,
   createAdminSelectOptionDefinitions,
+  formatAdminDateRangeForDisplay,
   resolveAdminSelectValue,
   translateAdminSelectOptions,
 } from '../../../../helpers/admin.helper';
@@ -103,6 +104,8 @@ export class TechnologiesOperationsModalComponent {
       const emptyRelations = this.translation.instant(
         'pages.admin.technologies.card.emptyRelations',
       );
+      const relationValue = (labels?: readonly string[]): string =>
+        labels?.join(', ') || emptyRelations;
 
       return this.technologies().map((technology) => ({
         id: technology.id,
@@ -129,8 +132,40 @@ export class TechnologiesOperationsModalComponent {
             ),
           },
           {
+            labelKey: 'pages.admin.technologies.card.technologyContexts',
+            value:
+              (technology.technologyContexts ?? [])
+                .map(
+                  (context) =>
+                    `${this.translation.instant(
+                      `pages.admin.technologyContexts.options.${context.context}` as AppTranslationKey,
+                    )}: ${formatAdminDateRangeForDisplay(context.startedAt, context.endedAt)}`,
+                )
+                .join(', ') || emptyRelations,
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.projects',
+            value: relationValue(technology.projectLabels),
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.experiences',
+            value: relationValue(technology.experienceLabels),
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.formations',
+            value: relationValue(technology.formationLabels),
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.tags',
+            value: relationValue(technology.tagLabels),
+          },
+          {
+            labelKey: 'pages.admin.technologies.card.links',
+            value: relationValue(technology.linkLabels),
+          },
+          {
             labelKey: 'pages.admin.technologies.card.imageAssets',
-            value: technology.imageAssetLabels.join(', ') || emptyRelations,
+            value: relationValue(technology.imageAssetLabels),
           },
         ],
       }));

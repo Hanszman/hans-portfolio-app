@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ProjectsOperationsService } from '../../../../core/api/admin/projects/projects-operations.service';
-import { ProjectRecord } from '../../../../core/api/admin/projects/projects-operations.types';
+import { ProjectsService } from '../../../../core/api/projects/projects.service';
+import { ProjectRecord } from '../../../../core/api/projects/projects-operations.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { TagsOperationsService } from '../../../../core/api/admin/tags/tags-operations.service';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
+import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -45,7 +45,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsOperationsComponent implements OnInit {
-  private readonly api = inject(ProjectsOperationsService);
+  private readonly api = inject(ProjectsService);
   private readonly technologies = inject(TechnologiesService);
   private readonly experiences = inject(ExperiencesService);
   private readonly tags = inject(TagsOperationsService);
@@ -111,7 +111,10 @@ export class ProjectsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (this.hasProjects()) this.modeSignal.set('read');
+    if (this.hasProjects()) {
+      this.modeSignal.set('read');
+      void this.loadWorkspace();
+    }
   }
 
   openUpdatePickerModal(): void {
@@ -188,6 +191,7 @@ export class ProjectsOperationsComponent implements OnInit {
   async submitModal(): Promise<void> {
     if (!this.session.accessToken()) {
       this.feedback.set('pages.admin.projects.feedback.missingSession');
+      this.toast.showError('pages.admin.projects.feedback.missingSession');
       return;
     }
     if (this.modalMode() === 'delete') {
@@ -202,6 +206,7 @@ export class ProjectsOperationsComponent implements OnInit {
       } catch (error) {
         console.error('Failed to refresh project relation catalogs after deletion.', error);
         this.feedback.set('pages.admin.projects.feedback.deleteError');
+        this.toast.showError('pages.admin.projects.feedback.deleteError');
       } finally {
         this.submitting.set(false);
       }
@@ -213,6 +218,7 @@ export class ProjectsOperationsComponent implements OnInit {
 
     if (!result.isValid) {
       this.feedback.set(result.errorKey);
+      this.toast.showError(result.errorKey);
       return;
     }
     this.submitting.set(true);
@@ -231,6 +237,7 @@ export class ProjectsOperationsComponent implements OnInit {
     } catch (error) {
       console.error('Failed to save the protected project.', error);
       this.feedback.set('pages.admin.projects.feedback.saveError');
+      this.toast.showError('pages.admin.projects.feedback.saveError');
     } finally {
       this.submitting.set(false);
     }

@@ -10,7 +10,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
-import { ProjectRecord } from '../../../../../../core/api/admin/projects/projects-operations.types';
+import { ProjectRecord } from '../../../../../../core/api/projects/projects-operations.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
@@ -21,7 +21,11 @@ import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
-import { resolveAdminSelectValue } from '../../../../helpers/admin.helper';
+import {
+  formatAdminDateRangeForDisplay,
+  resolveAdminRelationLabels,
+  resolveAdminSelectValue,
+} from '../../../../helpers/admin.helper';
 import {
   ProjectOption,
   ProjectsOperationsFormValue,
@@ -108,8 +112,19 @@ export class ProjectsOperationsModalComponent {
     this.projects().map((project) => this.toOperationsItem(project)),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
-    () =>
-      this.projects().map((project) => ({
+    () => {
+      this.translation.locale();
+      const emptyRelations = this.translation.instant('pages.admin.operations.emptyRelations');
+      const booleanLabel = (value: boolean | null | undefined): string =>
+        this.translation.instant(
+          value ? 'pages.admin.operations.yes' : 'pages.admin.operations.no',
+        );
+      const relationValue = (
+        relations: readonly unknown[] | null | undefined,
+        nestedKey: string,
+      ): string => resolveAdminRelationLabels(relations, nestedKey).join(', ') || emptyRelations;
+
+      return this.projects().map((project) => ({
         ...this.toOperationsItem(project),
         fields: [
           { labelKey: 'pages.admin.projects.fields.slug.label', value: project.slug },
@@ -122,19 +137,78 @@ export class ProjectsOperationsModalComponent {
             value: project.titleEn,
           },
           {
+            labelKey: 'pages.admin.projects.fields.shortDescriptionPt.label',
+            value: project.shortDescriptionPt,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.shortDescriptionEn.label',
+            value: project.shortDescriptionEn,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.fullDescriptionPt.label',
+            value: project.fullDescriptionPt,
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.fullDescriptionEn.label',
+            value: project.fullDescriptionEn,
+          },
+          {
             labelKey: 'pages.admin.projects.fields.context.label',
-            value: project.context,
+            value: this.translation.instant(
+              `pages.admin.projects.fields.context.options.${project.context}` as AppTranslationKey,
+            ),
           },
           {
             labelKey: 'pages.admin.projects.fields.status.label',
-            value: project.status,
+            value: this.translation.instant(
+              `pages.admin.projects.fields.status.options.${project.status}` as AppTranslationKey,
+            ),
           },
           {
             labelKey: 'pages.admin.projects.fields.environment.label',
-            value: project.environment,
+            value: this.translation.instant(
+              `pages.admin.projects.fields.environment.options.${project.environment}` as AppTranslationKey,
+            ),
+          },
+          {
+            labelKey: 'pages.admin.operations.date',
+            value: formatAdminDateRangeForDisplay(project.startDate, project.endDate),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.featured.label',
+            value: booleanLabel(project.featured),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.highlight.label',
+            value: booleanLabel(project.highlight),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.sortOrder.label',
+            value: String(project.sortOrder ?? 0),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.technologies.label',
+            value: relationValue(project.technologies, 'technology'),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.experiences.label',
+            value: relationValue(project.experiences, 'experience'),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.tags.label',
+            value: relationValue(project.tags, 'tag'),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.links.label',
+            value: relationValue(project.links, 'link'),
+          },
+          {
+            labelKey: 'pages.admin.projects.fields.imageAssets.label',
+            value: relationValue(project.imageAssets, 'imageAsset'),
           },
         ],
-      })),
+      }));
+    },
   );
   protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
     const project = this.selectedProject();

@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
 import {
   LinkMutationPayload,
   LinkRecord,
-} from '../../../../core/api/admin/links/links-operations.types';
+} from '../../../../core/api/links/links-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -159,12 +159,11 @@ export class LinksOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasLinks()) {
-      return;
+    if (this.hasLinks()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

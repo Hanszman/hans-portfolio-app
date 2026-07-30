@@ -1,12 +1,12 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { FormationsOperationsService } from '../../../../core/api/admin/formations/formations-operations.service';
-import { FormationRecord } from '../../../../core/api/admin/formations/formations-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/admin/links/links-operations.types';
+import { FormationsOperationsService } from '../../../../core/api/formations/formations-operations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { LinkRecord } from '../../../../core/api/links/links-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import {
@@ -407,7 +407,7 @@ describe('FormationsOperationsComponent', () => {
     await component.goToPage(2);
     await component.goToPage(99);
 
-    expect(formationsOperationsService.getAll).toHaveBeenCalledTimes(6);
+    expect(formationsOperationsService.getAll).toHaveBeenCalledTimes(7);
     expect(formationsOperationsService.getAll).toHaveBeenCalledWith(2, 5, '');
     expect(formationsOperationsService.getAll).toHaveBeenCalledWith(1, 5, 'systems');
 

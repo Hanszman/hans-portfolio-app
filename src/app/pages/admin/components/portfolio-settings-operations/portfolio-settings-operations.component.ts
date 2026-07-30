@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { PortfolioSettingsOperationsService } from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
+import { PortfolioSettingsOperationsService } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.service';
 import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
-} from '../../../../core/api/admin/portfolio-settings/portfolio-settings-operations.types';
+} from '../../../../core/api/portfolio-settings/portfolio-settings-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -118,12 +118,11 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasSettings()) {
-      return;
+    if (this.hasSettings()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadSettings();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {

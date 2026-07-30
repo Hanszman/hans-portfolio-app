@@ -1,6 +1,6 @@
 import { appConfig } from '../../../../../core/api/api.config';
-import { ImageAssetRecord } from '../../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { SpokenLanguageRecord } from '../../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
+import { SpokenLanguageRecord } from '../../../../../core/api/spoken-languages/spoken-languages-operations.types';
 import {
   buildSpokenLanguageImageAssetOptions,
   buildSpokenLanguagesFormValue,

@@ -1,10 +1,10 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { JobsOperationsService } from '../../../../core/api/admin/jobs/jobs-operations.service';
-import { JobRecord } from '../../../../core/api/admin/jobs/jobs-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
+import { JobRecord } from '../../../../core/api/jobs/jobs-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import {

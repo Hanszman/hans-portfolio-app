@@ -3,18 +3,18 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { AdminAuthenticationService } from './core/api/admin/admin-auth/admin-auth.service';
-import { CustomersOperationsService } from './core/api/admin/customers/customers-operations.service';
-import { FormationsOperationsService } from './core/api/admin/formations/formations-operations.service';
-import { ImageAssetsOperationsService } from './core/api/admin/image-assets/image-assets-operations.service';
-import { JobsOperationsService } from './core/api/admin/jobs/jobs-operations.service';
-import { LinksOperationsService } from './core/api/admin/links/links-operations.service';
-import { PortfolioSettingsOperationsService } from './core/api/admin/portfolio-settings/portfolio-settings-operations.service';
-import { SpokenLanguagesOperationsService } from './core/api/admin/spoken-languages/spoken-languages-operations.service';
-import { TagsOperationsService } from './core/api/admin/tags/tags-operations.service';
-import { TechnologyContextsOperationsService } from './core/api/admin/technology-contexts/technology-contexts-operations.service';
-import { ExperiencesOperationsService } from './core/api/admin/experiences/experiences-operations.service';
-import { ProjectsOperationsService } from './core/api/admin/projects/projects-operations.service';
+import { AdminAuthenticationService } from './core/api/admin-auth/admin-auth.service';
+import { CustomersOperationsService } from './core/api/customers/customers-operations.service';
+import { FormationsOperationsService } from './core/api/formations/formations-operations.service';
+import { ImageAssetsOperationsService } from './core/api/image-assets/image-assets-operations.service';
+import { JobsOperationsService } from './core/api/jobs/jobs-operations.service';
+import { LinksOperationsService } from './core/api/links/links-operations.service';
+import { PortfolioSettingsOperationsService } from './core/api/portfolio-settings/portfolio-settings-operations.service';
+import { SpokenLanguagesOperationsService } from './core/api/spoken-languages/spoken-languages-operations.service';
+import { TagsOperationsService } from './core/api/tags/tags-operations.service';
+import { TechnologyContextsOperationsService } from './core/api/technology-contexts/technology-contexts-operations.service';
+import { ExperiencesService } from './core/api/experiences/experiences.service';
+import { ProjectsService } from './core/api/projects/projects.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
 import { createDashboardServiceMock } from './core/api/mocks/dashboard.mocks';
 import { createExperiencesServiceMock } from './core/api/mocks/experiences.mocks';
@@ -22,8 +22,6 @@ import { createProjectsServiceMock } from './core/api/mocks/projects.mocks';
 import { createSystemServiceMock } from './core/api/mocks/system.mocks';
 import { createTechnologiesServiceMock } from './core/api/mocks/technologies.mocks';
 import { DashboardService } from './core/api/dashboard/dashboard.service';
-import { ExperiencesService } from './core/api/experiences/experiences.service';
-import { ProjectsService } from './core/api/projects/projects.service';
 import { SystemService } from './core/api/system/system.service';
 import { TechnologiesService } from './core/api/technologies/technologies.service';
 import { provideAppTranslations } from './core/translation/translation.providers';
@@ -72,24 +70,50 @@ describe('app routes', () => {
           useValue: createDashboardServiceMock(),
         },
         {
-          provide: ExperiencesService,
-          useValue: createExperiencesServiceMock(),
-        },
-        {
           provide: TechnologiesService,
           useValue: createTechnologiesServiceMock(),
         },
         {
+          provide: ExperiencesService,
+          useValue: {
+            ...createExperiencesServiceMock(),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
+        },
+        {
           provide: ProjectsService,
-          useValue: createProjectsServiceMock(),
-        },
-        {
-          provide: ExperiencesOperationsService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
-        },
-        {
-          provide: ProjectsOperationsService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+          useValue: {
+            ...createProjectsServiceMock(),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
         },
         {
           provide: AdminAuthenticationService,

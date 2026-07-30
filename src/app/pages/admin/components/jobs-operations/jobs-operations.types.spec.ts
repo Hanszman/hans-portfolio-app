@@ -1,4 +1,4 @@
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import {
   createEmptyJobsOperationsFormValue,
   createJobExperienceOptionViewModel,

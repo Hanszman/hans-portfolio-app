@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import { ExperienceRecord } from '../../../../../../core/api/admin/experiences/experiences-operations.types';
+import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences-operations.types';
 import { ExperiencesOperationsFormValue } from '../../experiences-operations.types';
 import { ExperiencesOperationsModalComponent } from './experiences-operations-modal.component';
 
@@ -75,7 +75,10 @@ describe('ExperiencesOperationsModalComponent', () => {
     fixture = TestBed.createComponent(ExperiencesOperationsModalComponent);
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('form', FORM);
-    fixture.componentRef.setInput('experiences', [RECORD]);
+    fixture.componentRef.setInput('experiences', [
+      RECORD,
+      { ...RECORD, id: 'experience-with-default-order', sortOrder: undefined },
+    ]);
     fixture.componentRef.setInput('selectedExperience', RECORD);
     fixture.detectChanges();
   });

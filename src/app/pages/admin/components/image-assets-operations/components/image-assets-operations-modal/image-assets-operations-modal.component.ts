@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ImageAssetRecord } from '../../../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../../core/api/image-assets/image-assets-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
@@ -155,6 +155,10 @@ export class ImageAssetsOperationsModalComponent {
           title: imageAsset.filePath,
         },
         fields: [
+          {
+            labelKey: 'pages.admin.imageAssets.card.fileName',
+            value: imageAsset.fileName,
+          },
           {
             labelKey: 'pages.admin.imageAssets.card.filePath',
             value: imageAsset.filePath,

@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { SpokenLanguageRecord } from '../../../../../../core/api/admin/spoken-languages/spoken-languages-operations.types';
+import { SpokenLanguageRecord } from '../../../../../../core/api/spoken-languages/spoken-languages-operations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';

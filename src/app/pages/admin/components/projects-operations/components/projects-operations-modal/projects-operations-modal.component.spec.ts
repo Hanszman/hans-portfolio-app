@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import { ProjectRecord } from '../../../../../../core/api/admin/projects/projects-operations.types';
+import { ProjectRecord } from '../../../../../../core/api/projects/projects-operations.types';
 import { ProjectsOperationsFormValue } from '../../projects-operations.types';
 import { ProjectsOperationsModalComponent } from './projects-operations-modal.component';
 
@@ -77,7 +77,10 @@ describe('ProjectsOperationsModalComponent', () => {
     fixture = TestBed.createComponent(ProjectsOperationsModalComponent);
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('form', FORM);
-    fixture.componentRef.setInput('projects', [RECORD]);
+    fixture.componentRef.setInput('projects', [
+      RECORD,
+      { ...RECORD, id: 'project-with-default-order', sortOrder: undefined },
+    ]);
     fixture.componentRef.setInput('selectedProject', RECORD);
     fixture.detectChanges();
   });

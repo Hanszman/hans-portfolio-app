@@ -1,11 +1,11 @@
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import {
   FormationImageAssetRelationRecord,
   FormationLinkRelationRecord,
   FormationMutationPayload,
   FormationTechnologyRelationRecord,
-} from '../../../../core/api/admin/formations/formations-operations.types';
-import { LinkRecord } from '../../../../core/api/admin/links/links-operations.types';
+} from '../../../../core/api/formations/formations-operations.types';
+import { LinkRecord } from '../../../../core/api/links/links-operations.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';

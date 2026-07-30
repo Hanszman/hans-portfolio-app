@@ -3,7 +3,7 @@ import { TechnologyCollectionItemResponse } from '../../../../../core/api/techno
 import {
   TagMutationPayload,
   TagRecord,
-} from '../../../../../core/api/admin/tags/tags-operations.types';
+} from '../../../../../core/api/tags/tags-operations.types';
 import {
   TAG_TYPE_VALUES,
   TagCatalogOptionViewModel,

@@ -51,6 +51,11 @@ export interface TechnologyCollectionItemResponse {
   technologyContexts?: TechnologyContextResponse[];
   imageAssets?: TechnologyImageAssetRelationResponse[];
   experienceMetrics?: TechnologyExperienceMetricsResponse;
+  projectUsages?: TechnologyRelationRecord[] | null;
+  experienceUses?: TechnologyRelationRecord[] | null;
+  formationUses?: TechnologyRelationRecord[] | null;
+  tags?: TechnologyRelationRecord[] | null;
+  links?: TechnologyRelationRecord[] | null;
   projectRelations?: TechnologyRelationRecord[] | null;
   experienceRelations?: TechnologyRelationRecord[] | null;
   formationRelations?: TechnologyRelationRecord[] | null;
@@ -63,9 +68,23 @@ export interface TechnologyRelationRecord {
   projectId?: string;
   experienceId?: string;
   formationId?: string;
+  tagId?: string;
+  linkId?: string;
   project?: { id: string; slug?: string; titlePt?: string | null } | null;
-  experience?: { id: string; slug?: string; titlePt?: string | null } | null;
+  experience?: {
+    id: string;
+    slug?: string;
+    titlePt?: string | null;
+    companyName?: string | null;
+  } | null;
   formation?: { id: string; slug?: string; titlePt?: string | null } | null;
+  tag?: { id: string; slug?: string; namePt?: string | null } | null;
+  link?: {
+    id: string;
+    url?: string | null;
+    labelPt?: string | null;
+    labelEn?: string | null;
+  } | null;
 }
 
 export interface TechnologyMutationPayload {

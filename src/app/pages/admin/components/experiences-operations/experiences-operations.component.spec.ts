@@ -1,18 +1,18 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ExperiencesOperationsService } from '../../../../core/api/admin/experiences/experiences-operations.service';
+import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import {
   ExperienceRecord,
   ExperiencesCollectionResponse,
-} from '../../../../core/api/admin/experiences/experiences-operations.types';
+} from '../../../../core/api/experiences/experiences-operations.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologiesCollectionResponse } from '../../../../core/api/technologies/technologies.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
-import { CustomersOperationsService } from '../../../../core/api/admin/customers/customers-operations.service';
-import { JobsOperationsService } from '../../../../core/api/admin/jobs/jobs-operations.service';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
+import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
+import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -115,7 +115,7 @@ const fillRequiredExperienceFields = (component: ComponentApi): void => {
 
 describe('ExperiencesOperationsComponent', () => {
   let fixture: ComponentFixture<ExperiencesOperationsComponent>;
-  let api: jasmine.SpyObj<ExperiencesOperationsService>;
+  let api: jasmine.SpyObj<ExperiencesService>;
   let techService: jasmine.SpyObj<TechnologiesService>;
   let session: { accessToken: jasmine.Spy<() => string | null> };
   let toast: jasmine.SpyObj<ToastService>;
@@ -135,7 +135,7 @@ describe('ExperiencesOperationsComponent', () => {
 
   beforeEach(async () => {
     spyOn(console, 'error').and.stub();
-    api = jasmine.createSpyObj('ExperiencesOperationsService', [
+    api = jasmine.createSpyObj('ExperiencesService', [
       'getAll',
       'create',
       'update',
@@ -167,7 +167,7 @@ describe('ExperiencesOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: ExperiencesOperationsService, useValue: api },
+        { provide: ExperiencesService, useValue: api },
         { provide: TechnologiesService, useValue: tech },
         { provide: ProjectsService, useValue: projects },
         { provide: CustomersOperationsService, useValue: customers },

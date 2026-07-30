@@ -1,20 +1,12 @@
 <article class="operations-detailed-item">
   <header>
-    <div class="operations-detailed-item-heading">
-      @if (item().imageUrl; as imageUrl) {
-        <img
-          [src]="imageUrl"
-          [alt]="item().imageAlt ?? item().title"
-          [title]="item().imageTitle ?? item().title"
-        />
-      }
-      <div>
-        <h4 [title]="item().title">{{ item().title }}</h4>
-        @if (item().subtitle; as subtitle) {
-          <p [title]="subtitle">{{ subtitle }}</p>
-        }
-      </div>
-    </div>
+    @if (item().imageUrl; as imageUrl) {
+      <img
+        [src]="imageUrl"
+        [alt]="item().imageAlt ?? item().title"
+        [title]="item().imageTitle ?? item().title"
+      />
+    }
     <div class="operations-detailed-item-actions">
       <hans-button
         buttonColor="primary"

@@ -8,8 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TechnologyContextsOperationsService } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.service';
-import { TechnologyContextRecord } from '../../../../core/api/admin/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextsOperationsService } from '../../../../core/api/technology-contexts/technology-contexts-operations.service';
+import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts-operations.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -118,7 +118,10 @@ export class TechnologyContextsOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (this.hasRecords()) this.modeSignal.set('read');
+    if (this.hasRecords()) {
+      this.modeSignal.set('read');
+      void this.loadWorkspace();
+    }
   }
 
   openUpdatePickerModal(): void {

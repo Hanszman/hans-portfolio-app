@@ -1,5 +1,5 @@
-import { AdminAuthenticatedUser } from '../../../core/api/admin/admin-auth/admin-auth.types';
-import { ImageAssetRecord } from '../../../core/api/admin/image-assets/image-assets-operations.types';
+import { AdminAuthenticatedUser } from '../../../core/api/admin-auth/admin-auth.types';
+import { ImageAssetRecord } from '../../../core/api/image-assets/image-assets-operations.types';
 import { buildAssetUrl } from '../../../core/api/api.config';
 import { AppTranslationKey } from '../../../core/translation/translation.types';
 import {
@@ -58,6 +58,90 @@ export const resolveAdminSelectValue = (event: Event): string => {
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const ISO_DATETIME_PREFIX_PATTERN = /^\d{4}-\d{2}-\d{2}T/;
 const LOCALIZED_DATE_PATTERN = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+export const formatAdminDateForDisplay = (
+  value: string | null | undefined,
+  emptyValue = '-',
+): string => {
+  const normalizedValue = normalizeAdminDateValueForPicker(value);
+
+  if (!normalizedValue) {
+    return emptyValue;
+  }
+
+  const isoDate = normalizedValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+  if (!isoDate) {
+    return normalizedValue;
+  }
+
+  const [, year, month, day] = isoDate;
+  return `${day}/${month}/${year}`;
+};
+
+export const formatAdminDateRangeForDisplay = (
+  startDate: string | null | undefined,
+  endDate: string | null | undefined,
+): string => `${formatAdminDateForDisplay(startDate)} - ${formatAdminDateForDisplay(endDate)}`;
+
+export interface AdminRelationLabelSource {
+  readonly id?: string | null;
+  readonly slug?: string | null;
+  readonly name?: string | null;
+  readonly namePt?: string | null;
+  readonly titlePt?: string | null;
+  readonly labelPt?: string | null;
+  readonly labelEn?: string | null;
+  readonly companyName?: string | null;
+  readonly fileName?: string | null;
+  readonly filePath?: string | null;
+  readonly url?: string | null;
+  readonly kind?: string | null;
+  readonly code?: string | null;
+}
+
+export const formatAdminRelationLabel = (relation: AdminRelationLabelSource): string => {
+  const primary =
+    relation.name ??
+    relation.namePt ??
+    relation.titlePt ??
+    relation.labelPt ??
+    relation.labelEn ??
+    relation.companyName ??
+    relation.fileName ??
+    relation.code ??
+    relation.url ??
+    relation.filePath ??
+    relation.id ??
+    '';
+  const secondary = relation.slug ?? relation.kind;
+
+  return secondary && secondary !== primary ? `${primary} (${secondary})` : primary;
+};
+
+export const resolveAdminRelationLabels = (
+  relations: readonly unknown[] | null | undefined,
+  nestedKey: string,
+): readonly string[] => [
+  ...new Set(
+    (relations ?? [])
+      .map((relation) => {
+        if (!relation || typeof relation !== 'object') {
+          return '';
+        }
+
+        const record = relation as Record<string, unknown>;
+        const nested = record[nestedKey];
+        const labelSource =
+          nested && typeof nested === 'object'
+            ? (nested as AdminRelationLabelSource)
+            : (record as AdminRelationLabelSource);
+
+        return formatAdminRelationLabel(labelSource);
+      })
+      .filter(Boolean),
+  ),
+];
 
 export const normalizeAdminDateValueForPicker = (value: string | null | undefined): string => {
   const normalizedValue = value?.trim() ?? '';

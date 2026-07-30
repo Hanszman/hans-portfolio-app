@@ -2,20 +2,18 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { CustomersOperationsService } from '../../core/api/admin/customers/customers-operations.service';
-import { FormationsOperationsService } from '../../core/api/admin/formations/formations-operations.service';
-import { ImageAssetsOperationsService } from '../../core/api/admin/image-assets/image-assets-operations.service';
-import { JobsOperationsService } from '../../core/api/admin/jobs/jobs-operations.service';
-import { LinksOperationsService } from '../../core/api/admin/links/links-operations.service';
-import { PortfolioSettingsOperationsService } from '../../core/api/admin/portfolio-settings/portfolio-settings-operations.service';
-import { SpokenLanguagesOperationsService } from '../../core/api/admin/spoken-languages/spoken-languages-operations.service';
-import { TagsOperationsService } from '../../core/api/admin/tags/tags-operations.service';
-import { TechnologyContextsOperationsService } from '../../core/api/admin/technology-contexts/technology-contexts-operations.service';
-import { ExperiencesOperationsService } from '../../core/api/admin/experiences/experiences-operations.service';
-import { ProjectsOperationsService } from '../../core/api/admin/projects/projects-operations.service';
-import { AdminSessionService } from '../../core/admin-session/admin-session.service';
+import { CustomersOperationsService } from '../../core/api/customers/customers-operations.service';
+import { FormationsOperationsService } from '../../core/api/formations/formations-operations.service';
+import { ImageAssetsOperationsService } from '../../core/api/image-assets/image-assets-operations.service';
+import { JobsOperationsService } from '../../core/api/jobs/jobs-operations.service';
+import { LinksOperationsService } from '../../core/api/links/links-operations.service';
+import { PortfolioSettingsOperationsService } from '../../core/api/portfolio-settings/portfolio-settings-operations.service';
+import { SpokenLanguagesOperationsService } from '../../core/api/spoken-languages/spoken-languages-operations.service';
+import { TagsOperationsService } from '../../core/api/tags/tags-operations.service';
+import { TechnologyContextsOperationsService } from '../../core/api/technology-contexts/technology-contexts-operations.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
+import { AdminSessionService } from '../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../core/api/technologies/technologies.service';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { AdminComponent } from './admin.component';
@@ -456,11 +454,11 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: ExperiencesOperationsService,
+          provide: ExperiencesService,
           useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
         },
         {
-          provide: ProjectsOperationsService,
+          provide: ProjectsService,
           useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
         },
         {
@@ -757,11 +755,11 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: ExperiencesOperationsService,
+          provide: ExperiencesService,
           useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
         },
         {
-          provide: ProjectsOperationsService,
+          provide: ProjectsService,
           useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
         },
         {

@@ -8,16 +8,16 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ExperiencesOperationsService } from '../../../../core/api/admin/experiences/experiences-operations.service';
-import { ExperienceRecord } from '../../../../core/api/admin/experiences/experiences-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
-import { JobsOperationsService } from '../../../../core/api/admin/jobs/jobs-operations.service';
-import { JobRecord } from '../../../../core/api/admin/jobs/jobs-operations.types';
-import { LinksOperationsService } from '../../../../core/api/admin/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/admin/links/links-operations.types';
-import { CustomersOperationsService } from '../../../../core/api/admin/customers/customers-operations.service';
-import { CustomerRecord } from '../../../../core/api/admin/customers/customers-operations.types';
+import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
+import { ExperienceRecord } from '../../../../core/api/experiences/experiences-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
+import { JobRecord } from '../../../../core/api/jobs/jobs-operations.types';
+import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { LinkRecord } from '../../../../core/api/links/links-operations.types';
+import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
+import { CustomerRecord } from '../../../../core/api/customers/customers-operations.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -52,7 +52,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExperiencesOperationsComponent implements OnInit {
-  private readonly api = inject(ExperiencesOperationsService);
+  private readonly api = inject(ExperiencesService);
   private readonly technologies = inject(TechnologiesService);
   private readonly projects = inject(ProjectsService);
   private readonly customers = inject(CustomersOperationsService);
@@ -120,7 +120,10 @@ export class ExperiencesOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (this.hasExperiences()) this.modeSignal.set('read');
+    if (this.hasExperiences()) {
+      this.modeSignal.set('read');
+      void this.loadWorkspace();
+    }
   }
 
   openUpdatePickerModal(): void {
@@ -197,6 +200,7 @@ export class ExperiencesOperationsComponent implements OnInit {
   async submitModal(): Promise<void> {
     if (!this.session.accessToken()) {
       this.feedback.set('pages.admin.experiences.feedback.missingSession');
+      this.toast.showError('pages.admin.experiences.feedback.missingSession');
       return;
     }
     if (this.modalMode() === 'delete') {
@@ -207,6 +211,7 @@ export class ExperiencesOperationsComponent implements OnInit {
     const result = buildExperiencesMutationPayload(this.form());
     if (!result.isValid) {
       this.feedback.set(result.errorKey);
+      this.toast.showError(result.errorKey);
       return;
     }
     this.submitting.set(true);
@@ -225,6 +230,7 @@ export class ExperiencesOperationsComponent implements OnInit {
     } catch (error) {
       console.error('Failed to save the protected experience.', error);
       this.feedback.set('pages.admin.experiences.feedback.saveError');
+      this.toast.showError('pages.admin.experiences.feedback.saveError');
     } finally {
       this.submitting.set(false);
     }
@@ -242,6 +248,7 @@ export class ExperiencesOperationsComponent implements OnInit {
     } catch (error) {
       console.error('Failed to delete the protected experience.', error);
       this.feedback.set('pages.admin.experiences.feedback.deleteError');
+      this.toast.showError('pages.admin.experiences.feedback.deleteError');
     } finally {
       this.submitting.set(false);
     }

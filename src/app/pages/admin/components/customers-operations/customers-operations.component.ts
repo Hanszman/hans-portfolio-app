@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { CustomersOperationsService } from '../../../../core/api/admin/customers/customers-operations.service';
+import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
 import {
   CustomerMutationPayload,
   CustomerRecord,
-} from '../../../../core/api/admin/customers/customers-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/admin/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/admin/image-assets/image-assets-operations.types';
+} from '../../../../core/api/customers/customers-operations.types';
+import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -135,12 +135,11 @@ export class CustomersOperationsComponent implements OnInit {
   }
 
   openReadModal(): void {
-    if (!this.hasCustomers()) {
-      return;
+    if (this.hasCustomers()) {
+      this.clearModalFeedback();
+      this.modalModeSignal.set('read');
+      void this.loadWorkspace();
     }
-
-    this.clearModalFeedback();
-    this.modalModeSignal.set('read');
   }
 
   openUpdatePickerModal(): void {
