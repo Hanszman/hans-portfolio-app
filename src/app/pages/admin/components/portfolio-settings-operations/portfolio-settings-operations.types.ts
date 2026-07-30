@@ -25,6 +25,7 @@ export const PORTFOLIO_SETTINGS_OPERATIONS_FIELDS = {
   description: {
     labelKey: 'pages.admin.portfolioSettings.fields.description.label',
     placeholderKey: 'pages.admin.portfolioSettings.fields.description.placeholder',
+    required: false,
   },
   valueText: {
     labelKey: 'pages.admin.portfolioSettings.fields.value.label',

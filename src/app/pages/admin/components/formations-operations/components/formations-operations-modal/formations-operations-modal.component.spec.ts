@@ -188,12 +188,12 @@ describe('FormationsOperationsModalComponent', () => {
 
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
-    ) as (HTMLElement & { label?: string })[];
+    ) as (HTMLElement & { label?: string; required?: boolean })[];
     const datePickerElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-date-picker'),
-    ) as (HTMLElement & { label?: string })[];
+    ) as (HTMLElement & { label?: string; required?: boolean })[];
     const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
-      | (HTMLElement & { label?: string })
+      | (HTMLElement & { label?: string; required?: boolean })
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
@@ -205,11 +205,22 @@ describe('FormationsOperationsModalComponent', () => {
       'English summary *',
       'Sort order *',
     ]);
+    expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(datePickerElements.map((element) => element.label)).toEqual([
       'Start date *',
       'End date',
     ]);
+    expect(datePickerElements.map((element) => element.required)).toEqual([true, false]);
     expect(selectElement?.label).toBe('Degree type *');
+    expect(selectElement?.required).toBeTrue();
     expect(slugSpy).toHaveBeenCalledOnceWith('systems-analysis');
     expect(institutionSpy).toHaveBeenCalledOnceWith('PUC Minas');
     expect(titlePtSpy).toHaveBeenCalledOnceWith('ADS');

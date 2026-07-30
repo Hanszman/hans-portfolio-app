@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
-import { ProjectRecord } from '../../../../core/api/projects/projects-operations.types';
+import { ProjectRecord } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';

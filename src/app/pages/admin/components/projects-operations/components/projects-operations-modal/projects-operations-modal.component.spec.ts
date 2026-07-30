@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import { ProjectRecord } from '../../../../../../core/api/projects/projects-operations.types';
+import { ProjectRecord } from '../../../../../../core/api/projects/projects.types';
 import { ProjectsOperationsFormValue } from '../../projects-operations.types';
 import { ProjectsOperationsModalComponent } from './projects-operations-modal.component';
 

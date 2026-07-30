@@ -28,6 +28,7 @@
       <div class="customers-operations-form">
         <hans-input
           [label]="resolveFieldLabel('slug')"
+          [required]="fields.slug.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().slug"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('name')"
+          [required]="fields.name.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().name"
@@ -48,6 +50,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('summaryPt')"
+          [required]="fields.summaryPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().summaryPt"
@@ -58,6 +61,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('summaryEn')"
+          [required]="fields.summaryEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().summaryEn"
@@ -85,6 +89,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

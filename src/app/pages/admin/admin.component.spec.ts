@@ -455,11 +455,67 @@ describe('AdminComponent', () => {
         },
         {
           provide: ExperiencesService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+          useValue: {
+            getExperiences: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 20,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
         },
         {
           provide: ProjectsService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+          useValue: {
+            getProjects: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
         },
         {
           provide: TechnologyContextsOperationsService,
@@ -756,11 +812,67 @@ describe('AdminComponent', () => {
         },
         {
           provide: ExperiencesService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+          useValue: {
+            getExperiences: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 20,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
         },
         {
           provide: ProjectsService,
-          useValue: { getAll: () => of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } }), create: jasmine.createSpy(), update: jasmine.createSpy(), delete: jasmine.createSpy() },
+          useValue: {
+            getProjects: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 100,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            getAll: () =>
+              of({
+                data: [],
+                pagination: {
+                  page: 1,
+                  pageSize: 5,
+                  totalItems: 0,
+                  totalPages: 0,
+                  hasPreviousPage: false,
+                  hasNextPage: false,
+                },
+              }),
+            create: jasmine.createSpy(),
+            update: jasmine.createSpy(),
+            delete: jasmine.createSpy(),
+          },
         },
         {
           provide: TechnologyContextsOperationsService,

@@ -5,7 +5,7 @@ import {
   ProjectRecord,
   ProjectRelationRecord,
   ProjectStatus,
-} from '../../../../core/api/projects/projects-operations.types';
+} from '../../../../core/api/projects/projects.types';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -102,10 +102,12 @@ export const PROJECTS_OPERATIONS_FIELDS = {
   startDate: {
     labelKey: 'pages.admin.projects.fields.startDate.label',
     placeholderKey: 'pages.admin.projects.fields.startDate.placeholder',
+    required: false,
   },
   endDate: {
     labelKey: 'pages.admin.projects.fields.endDate.label',
     placeholderKey: 'pages.admin.projects.fields.endDate.placeholder',
+    required: false,
   },
   sortOrder: {
     labelKey: 'pages.admin.projects.fields.sortOrder.label',

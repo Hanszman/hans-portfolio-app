@@ -125,7 +125,7 @@ describe('TagsOperationsModalComponent', () => {
       | null;
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
-    ) as (HTMLElement & { label?: string })[];
+    ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
       'Tag slug *',
@@ -133,6 +133,7 @@ describe('TagsOperationsModalComponent', () => {
       'English name *',
       'Sort order *',
     ]);
+    expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(slugSpy).toHaveBeenCalledOnceWith('backend');

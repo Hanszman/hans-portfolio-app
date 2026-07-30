@@ -28,6 +28,7 @@
       <div class="technology-contexts-operations-form">
         <hans-select-option
           [label]="resolveFieldLabel('technologyId')"
+          [required]="fields.technologyId.required"
           [value]="form().technologyId"
           [options]="technologyOptions()"
           inputColor="base"
@@ -42,6 +43,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('context')"
+          [required]="fields.context.required"
           [value]="form().context"
           [options]="contextOptions()"
           inputColor="base"
@@ -56,6 +58,7 @@
 
         <hans-date-picker
           [label]="resolveFieldLabel('startedAt')"
+          [required]="fields.startedAt.required"
           pickerType="date"
           inputColor="base"
           inputSize="medium"
@@ -68,6 +71,7 @@
 
         <hans-date-picker
           [label]="resolveFieldLabel('endedAt')"
+          [required]="fields.endedAt.required"
           pickerType="date"
           inputColor="base"
           inputSize="medium"

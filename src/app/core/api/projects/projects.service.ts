@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { buildApiUrl } from '../api.config';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../api.types';
 import {
+  AdminProjectsCollectionResponse,
   ProjectMutationPayload,
   ProjectRecord,
-  ProjectsCollectionResponse as AdminProjectsCollectionResponse,
-} from './projects-operations.types';
-import { ProjectsCollectionResponse } from './projects.types';
+  ProjectsCollectionResponse,
+} from './projects.types';
 
 @Injectable({
   providedIn: 'root',

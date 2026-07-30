@@ -28,6 +28,7 @@
       <div class="formations-operations-form">
         <hans-input
           [label]="resolveFieldLabel('slug')"
+          [required]="fields.slug.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().slug"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('institution')"
+          [required]="fields.institution.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().institution"
@@ -48,6 +50,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('titlePt')"
+          [required]="fields.titlePt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().titlePt"
@@ -58,6 +61,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('titleEn')"
+          [required]="fields.titleEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().titleEn"
@@ -68,6 +72,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('degreeType')"
+          [required]="fields.degreeType.required"
           [options]="degreeTypeOptions()"
           [value]="form().degreeType"
           [enableAutocomplete]="false"
@@ -84,6 +89,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('summaryPt')"
+          [required]="fields.summaryPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().summaryPt"
@@ -94,6 +100,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('summaryEn')"
+          [required]="fields.summaryEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().summaryEn"
@@ -104,6 +111,7 @@
 
         <hans-date-picker
           [label]="resolveFieldLabel('startDate')"
+          [required]="fields.startDate.required"
           pickerType="date"
           inputColor="base"
           inputSize="medium"
@@ -118,6 +126,7 @@
 
         <hans-date-picker
           [label]="resolveFieldLabel('endDate')"
+          [required]="fields.endDate.required"
           pickerType="date"
           inputColor="base"
           inputSize="medium"
@@ -149,6 +158,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

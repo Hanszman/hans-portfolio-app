@@ -28,6 +28,7 @@
       <div class="image-assets-operations-form">
         <hans-input
           [label]="resolveFieldLabel('fileName')"
+          [required]="fields.fileName.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().fileName"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('filePath')"
+          [required]="fields.filePath.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().filePath"
@@ -48,6 +50,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('folder')"
+          [required]="fields.folder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().folder"
@@ -58,6 +61,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('kind')"
+          [required]="fields.kind.required"
           [options]="imageAssetKindOptions()"
           [value]="form().kind"
           [enableAutocomplete]="false"
@@ -74,6 +78,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('altPt')"
+          [required]="fields.altPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().altPt"
@@ -84,6 +89,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('altEn')"
+          [required]="fields.altEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().altEn"
@@ -94,6 +100,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('captionPt')"
+          [required]="fields.captionPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().captionPt"
@@ -104,6 +111,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('captionEn')"
+          [required]="fields.captionEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().captionEn"
@@ -114,6 +122,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('mimeType')"
+          [required]="fields.mimeType.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().mimeType"
@@ -125,6 +134,7 @@
         <div class="image-assets-operations-dimensions">
           <hans-input
             [label]="resolveFieldLabel('width')"
+            [required]="fields.width.required"
             inputColor="base"
             inputSize="medium"
             [value]="form().width"
@@ -135,6 +145,7 @@
 
           <hans-input
             [label]="resolveFieldLabel('height')"
+            [required]="fields.height.required"
             inputColor="base"
             inputSize="medium"
             [value]="form().height"
@@ -146,6 +157,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

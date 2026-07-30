@@ -28,6 +28,7 @@
       <div class="links-operations-form">
         <hans-input
           [label]="resolveFieldLabel('url')"
+          [required]="fields.url.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().url"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('labelPt')"
+          [required]="fields.labelPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().labelPt"
@@ -48,6 +50,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('labelEn')"
+          [required]="fields.labelEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().labelEn"
@@ -58,6 +61,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('descriptionPt')"
+          [required]="fields.descriptionPt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().descriptionPt"
@@ -68,6 +72,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('descriptionEn')"
+          [required]="fields.descriptionEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().descriptionEn"
@@ -78,6 +83,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('type')"
+          [required]="fields.type.required"
           [options]="linkTypeOptions()"
           [value]="form().type"
           [enableAutocomplete]="false"
@@ -94,6 +100,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

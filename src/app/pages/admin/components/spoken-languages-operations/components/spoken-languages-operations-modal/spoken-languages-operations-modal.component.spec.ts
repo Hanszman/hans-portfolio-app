@@ -139,9 +139,9 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       | null;
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
-    ) as (HTMLElement & { label?: string })[];
+    ) as (HTMLElement & { label?: string; required?: boolean })[];
     const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
-      | (HTMLElement & { label?: string })
+      | (HTMLElement & { label?: string; required?: boolean })
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
@@ -150,7 +150,9 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       'English name *',
       'Sort order *',
     ]);
+    expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
     expect(selectElement?.label).toBe('Proficiency *');
+    expect(selectElement?.required).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(codeSpy).toHaveBeenCalledOnceWith('pt');

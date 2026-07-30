@@ -70,8 +70,8 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
     required: true,
   },
   category: { labelKey: 'pages.admin.technologies.fields.category.label', required: true },
-  level: { labelKey: 'pages.admin.technologies.fields.level.label' },
-  frequency: { labelKey: 'pages.admin.technologies.fields.frequency.label' },
+  level: { labelKey: 'pages.admin.technologies.fields.level.label', required: false },
+  frequency: { labelKey: 'pages.admin.technologies.fields.frequency.label', required: false },
   sortOrder: {
     labelKey: 'pages.admin.technologies.fields.sortOrder.label',
     placeholderKey: 'pages.admin.technologies.fields.sortOrder.placeholder',

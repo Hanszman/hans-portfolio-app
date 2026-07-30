@@ -38,7 +38,7 @@
 
       <hans-date-picker
         [label]="resolveFieldLabel('startDate')"
-        [required]="true"
+        [required]="fieldDefinitions.startDate.required"
         [placeholder]="resolveFieldPlaceholder('startDate')"
         pickerType="date"
         inputColor="base"
@@ -52,6 +52,7 @@
 
       <hans-date-picker
         [label]="resolveFieldLabel('endDate')"
+        [required]="fieldDefinitions.endDate.required"
         [placeholder]="resolveFieldPlaceholder('endDate')"
         pickerType="date"
         inputColor="base"

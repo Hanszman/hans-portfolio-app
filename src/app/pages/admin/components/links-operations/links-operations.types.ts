@@ -55,18 +55,22 @@ export const LINKS_OPERATIONS_FIELDS = {
   labelPt: {
     labelKey: 'pages.admin.links.fields.labelPt.label',
     placeholderKey: 'pages.admin.links.fields.labelPt.placeholder',
+    required: false,
   },
   labelEn: {
     labelKey: 'pages.admin.links.fields.labelEn.label',
     placeholderKey: 'pages.admin.links.fields.labelEn.placeholder',
+    required: false,
   },
   descriptionPt: {
     labelKey: 'pages.admin.links.fields.descriptionPt.label',
     placeholderKey: 'pages.admin.links.fields.descriptionPt.placeholder',
+    required: false,
   },
   descriptionEn: {
     labelKey: 'pages.admin.links.fields.descriptionEn.label',
     placeholderKey: 'pages.admin.links.fields.descriptionEn.placeholder',
+    required: false,
   },
   type: {
     labelKey: 'pages.admin.links.fields.type.label',

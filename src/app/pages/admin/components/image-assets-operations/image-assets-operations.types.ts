@@ -73,18 +73,22 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
   altPt: {
     labelKey: 'pages.admin.imageAssets.fields.altPt.label',
     placeholderKey: 'pages.admin.imageAssets.fields.altPt.placeholder',
+    required: false,
   },
   altEn: {
     labelKey: 'pages.admin.imageAssets.fields.altEn.label',
     placeholderKey: 'pages.admin.imageAssets.fields.altEn.placeholder',
+    required: false,
   },
   captionPt: {
     labelKey: 'pages.admin.imageAssets.fields.captionPt.label',
     placeholderKey: 'pages.admin.imageAssets.fields.captionPt.placeholder',
+    required: false,
   },
   captionEn: {
     labelKey: 'pages.admin.imageAssets.fields.captionEn.label',
     placeholderKey: 'pages.admin.imageAssets.fields.captionEn.placeholder',
+    required: false,
   },
   mimeType: {
     labelKey: 'pages.admin.imageAssets.fields.mimeType.label',
@@ -94,10 +98,12 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
   width: {
     labelKey: 'pages.admin.imageAssets.fields.width.label',
     placeholderKey: 'pages.admin.imageAssets.fields.width.placeholder',
+    required: false,
   },
   height: {
     labelKey: 'pages.admin.imageAssets.fields.height.label',
     placeholderKey: 'pages.admin.imageAssets.fields.height.placeholder',
+    required: false,
   },
   sortOrder: {
     labelKey: 'pages.admin.imageAssets.fields.sortOrder.label',

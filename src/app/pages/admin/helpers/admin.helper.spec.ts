@@ -41,7 +41,7 @@ describe('formatAdminIdentity', () => {
     expect(formatAdminIdentity(null)).toBe('');
   });
 
-  it('should append the required suffix only when the field is mandatory', () => {
+  it('should derive required markers from the shared field configuration', () => {
     const translate = (key: AppTranslationKey) => key;
 
     expect(

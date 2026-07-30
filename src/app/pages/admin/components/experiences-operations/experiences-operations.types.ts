@@ -2,7 +2,7 @@ import {
   ExperienceMutationPayload,
   ExperienceRecord,
   ExperienceRelationRecord,
-} from '../../../../core/api/experiences/experiences-operations.types';
+} from '../../../../core/api/experiences/experiences.types';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -93,6 +93,7 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
   endDate: {
     labelKey: 'pages.admin.experiences.fields.endDate.label',
     placeholderKey: 'pages.admin.experiences.fields.endDate.placeholder',
+    required: false,
   },
   sortOrder: {
     labelKey: 'pages.admin.experiences.fields.sortOrder.label',

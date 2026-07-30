@@ -45,4 +45,45 @@ describe('ExperiencesService', () => {
 
     expect(response).toEqual(createExperiencesCollectionResponse());
   });
+
+  it('should load paged experiences with an optional search', () => {
+    const service = TestBed.inject(ExperiencesService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    service.getAll().subscribe();
+    let request = httpTestingController.expectOne(
+      buildApiUrl('/experiences?page=1&pageSize=5&sortBy=startDate&sortDirection=desc'),
+    );
+    expect(request.request.method).toBe('GET');
+    request.flush({ data: [], pagination: {} });
+
+    service.getAll(2, 10, ' work ').subscribe();
+    request = httpTestingController.expectOne(
+      buildApiUrl(
+        '/experiences?page=2&pageSize=10&sortBy=startDate&sortDirection=desc&search=work',
+      ),
+    );
+    request.flush({ data: [], pagination: {} });
+  });
+
+  it('should create, update and delete protected experiences', () => {
+    const service = TestBed.inject(ExperiencesService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const payload = { slug: 'experience' } as never;
+
+    service.create(payload).subscribe();
+    let request = httpTestingController.expectOne(buildApiUrl('/admin/experiences'));
+    expect(request.request.method).toBe('POST');
+    request.flush({});
+
+    service.update('experience-1', payload).subscribe();
+    request = httpTestingController.expectOne(buildApiUrl('/admin/experiences/experience-1'));
+    expect(request.request.method).toBe('PUT');
+    request.flush({});
+
+    service.delete('experience-1').subscribe();
+    request = httpTestingController.expectOne(buildApiUrl('/admin/experiences/experience-1'));
+    expect(request.request.method).toBe('DELETE');
+    request.flush(null);
+  });
 });

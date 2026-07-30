@@ -60,7 +60,10 @@ export const TECHNOLOGY_CONTEXT_FIELDS = {
   },
   context: { labelKey: 'pages.admin.technologyContexts.fields.context.label', required: true },
   startedAt: { labelKey: 'pages.admin.technologyContexts.fields.startedAt.label', required: true },
-  endedAt: { labelKey: 'pages.admin.technologyContexts.fields.endedAt.label' },
+  endedAt: {
+    labelKey: 'pages.admin.technologyContexts.fields.endedAt.label',
+    required: false,
+  },
 } as const satisfies Record<string, AdminFormFieldConfig>;
 
 export const createEmptyTechnologyContextFormValue = (): TechnologyContextFormValue => ({

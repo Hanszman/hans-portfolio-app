@@ -4,8 +4,8 @@ import { of, throwError } from 'rxjs';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import {
   ProjectRecord,
-  ProjectsCollectionResponse,
-} from '../../../../core/api/projects/projects-operations.types';
+  AdminProjectsCollectionResponse,
+} from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologiesCollectionResponse } from '../../../../core/api/technologies/technologies.types';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
@@ -150,7 +150,7 @@ describe('ProjectsOperationsComponent', () => {
     const images = jasmine.createSpyObj('ImageAssetsOperationsService', ['getAll']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     toast = jasmine.createSpyObj('ToastService', ['showSuccess', 'showError']);
-    api.getAll.and.returnValue(of(response() as unknown as ProjectsCollectionResponse));
+    api.getAll.and.returnValue(of(response() as unknown as AdminProjectsCollectionResponse));
     api.create.and.returnValue(of({} as unknown as ProjectRecord));
     api.update.and.returnValue(of({} as unknown as ProjectRecord));
     api.delete.and.returnValue(of(void 0));

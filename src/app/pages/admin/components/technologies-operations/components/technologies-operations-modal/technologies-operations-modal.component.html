@@ -28,6 +28,7 @@
       <div class="technologies-operations-form">
         <hans-input
           [label]="resolveFieldLabel('slug')"
+          [required]="fields.slug.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().slug"
@@ -37,6 +38,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('name')"
+          [required]="fields.name.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().name"
@@ -46,6 +48,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('category')"
+          [required]="fields.category.required"
           [value]="form().category"
           [options]="categoryOptions()"
           inputSize="medium"
@@ -60,6 +63,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('level')"
+          [required]="fields.level.required"
           [value]="form().level"
           [options]="levelOptions()"
           inputSize="medium"
@@ -74,6 +78,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('frequency')"
+          [required]="fields.frequency.required"
           [value]="form().frequency"
           [options]="frequencyOptions()"
           inputSize="medium"
@@ -102,6 +107,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

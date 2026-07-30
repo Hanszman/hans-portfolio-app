@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
-import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences-operations.types';
+import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences.types';
 import { ExperiencesOperationsFormValue } from '../../experiences-operations.types';
 import { ExperiencesOperationsModalComponent } from './experiences-operations-modal.component';
 

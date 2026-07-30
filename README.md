@@ -145,8 +145,9 @@ all returned relations as comma-separated labels.
 API services are organized directly by domain under `src/app/core/api/<domain>/`.
 Authentication lives in `core/api/admin-auth`, while Experiences and Projects
 each use one merged domain service for their public GET and protected create,
-update and delete requests. The obsolete `core/api/admin/` intermediate folder
-is intentionally absent.
+update and delete requests. Each of those domains now keeps only its canonical
+service, types and service-spec files; the obsolete `*-operations` API variants
+and the `core/api/admin/` intermediate folder are intentionally absent.
 
 ### Testing and quality
 

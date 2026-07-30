@@ -3,21 +3,22 @@
 }
 
 .operations-detailed-item {
-  @apply flex min-w-0 flex-col gap-5 rounded-3xl border p-4;
+  @apply grid min-w-0 items-start gap-5 rounded-3xl border p-4;
+  grid-template-columns: minmax(0, 1fr) auto;
   border-color: color-mix(in srgb, var(--base-default-color) 16%, transparent);
   background: var(--app-operations-surface-color);
 }
 
-.operations-detailed-item header,
+.operations-detailed-item-content,
 .operations-detailed-item-actions {
   @apply flex items-start gap-3;
 }
 
-.operations-detailed-item header {
-  @apply justify-between;
+.operations-detailed-item-content {
+  @apply min-w-0;
 }
 
-.operations-detailed-item header > img {
+.operations-detailed-item-content > img {
   @apply h-12 w-12 shrink-0 rounded-full object-contain;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .operations-detailed-item-fields {
-  @apply grid gap-4;
+  @apply grid min-w-0 flex-1 gap-4;
 }
 
 .operations-detailed-item-fields div {
@@ -44,4 +45,14 @@
 
 .operations-detailed-item-fields span {
   @apply block min-w-0 break-words;
+}
+
+@media (max-width: 640px) {
+  .operations-detailed-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .operations-detailed-item-actions {
+    @apply ml-0 justify-start;
+  }
 }

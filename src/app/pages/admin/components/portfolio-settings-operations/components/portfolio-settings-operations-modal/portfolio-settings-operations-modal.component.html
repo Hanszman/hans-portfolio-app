@@ -28,6 +28,7 @@
       <div class="portfolio-settings-operations-form">
         <hans-input
           [label]="resolveFieldLabel('key')"
+          [required]="fields.key.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().key"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('description')"
+          [required]="fields.description.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().description"
@@ -49,6 +51,8 @@
         <label class="portfolio-settings-operations-json-field">
           <span>{{ resolveFieldLabel('valueText') }}</span>
           <textarea
+            [required]="fields.valueText.required"
+            [attr.aria-required]="fields.valueText.required"
             [value]="form().valueText"
             [placeholder]="fields.valueText.placeholderKey! | translate"
             (input)="emitValueTextChange($any($event).target?.value ?? '')"

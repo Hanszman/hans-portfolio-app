@@ -101,6 +101,7 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
   endDate: {
     labelKey: 'pages.admin.formations.fields.endDate.label',
     placeholderKey: 'pages.admin.formations.fields.endDate.placeholder',
+    required: false,
   },
   sortOrder: {
     labelKey: 'pages.admin.formations.fields.sortOrder.label',

@@ -28,6 +28,7 @@
       <div class="spoken-languages-operations-form">
         <hans-input
           [label]="resolveFieldLabel('code')"
+          [required]="fields.code.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().code"
@@ -38,6 +39,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('namePt')"
+          [required]="fields.namePt.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().namePt"
@@ -48,6 +50,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('nameEn')"
+          [required]="fields.nameEn.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().nameEn"
@@ -58,6 +61,7 @@
 
         <hans-select-option
           [label]="resolveFieldLabel('proficiency')"
+          [required]="fields.proficiency.required"
           [options]="proficiencyOptions()"
           [value]="form().proficiency"
           [enableAutocomplete]="false"
@@ -91,6 +95,7 @@
 
         <hans-input
           [label]="resolveFieldLabel('sortOrder')"
+          [required]="fields.sortOrder.required"
           inputColor="base"
           inputSize="medium"
           [value]="form().sortOrder"

@@ -16,11 +16,7 @@ export const formatAdminIdentity = (user: AdminAuthenticatedUser | null): string
 export const resolveAdminFieldLabel = (
   field: AdminFormFieldConfig,
   translate: (key: AppTranslationKey) => string,
-): string => {
-  const label = translate(field.labelKey);
-
-  return field.required ? `${label} *` : label;
-};
+): string => `${translate(field.labelKey)}${field.required ? ' *' : ''}`;
 
 export const createAdminFieldLabelResolver =
   <TFields extends Record<string, AdminFormFieldConfig>>(

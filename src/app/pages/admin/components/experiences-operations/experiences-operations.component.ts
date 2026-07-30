@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { ExperienceRecord } from '../../../../core/api/experiences/experiences-operations.types';
+import { ExperienceRecord } from '../../../../core/api/experiences/experiences.types';
 import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
 import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';

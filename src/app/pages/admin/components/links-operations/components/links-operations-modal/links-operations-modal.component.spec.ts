@@ -177,9 +177,9 @@ describe('LinksOperationsModalComponent', () => {
       | null;
     const inputElements = Array.from(
       fixture.nativeElement.querySelectorAll('hans-input'),
-    ) as (HTMLElement & { label?: string })[];
+    ) as (HTMLElement & { label?: string; required?: boolean })[];
     const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
-      | (HTMLElement & { label?: string })
+      | (HTMLElement & { label?: string; required?: boolean })
       | null;
 
     expect(inputElements.map((element) => element.label)).toEqual([
@@ -190,7 +190,16 @@ describe('LinksOperationsModalComponent', () => {
       'English description',
       'Sort order *',
     ]);
+    expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+    ]);
     expect(selectElement?.label).toBe('Type *');
+    expect(selectElement?.required).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(urlSpy).toHaveBeenCalledOnceWith('https://example.com');

@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { buildApiUrl } from '../api.config';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../api.types';
 import {
+  AdminExperiencesCollectionResponse,
   ExperienceMutationPayload,
   ExperienceRecord,
-  ExperiencesCollectionResponse as AdminExperiencesCollectionResponse,
-} from './experiences-operations.types';
-import { ExperiencesCollectionResponse } from './experiences.types';
+  ExperiencesCollectionResponse,
+} from './experiences.types';
 
 @Injectable({
   providedIn: 'root',

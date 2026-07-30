@@ -10,7 +10,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
-import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences-operations.types';
+import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
@@ -23,6 +23,7 @@ import {
 } from '../../../../admin.types';
 import {
   formatAdminDateRangeForDisplay,
+  resolveAdminFieldLabel,
   resolveAdminRelationLabels,
   resolveAdminSelectValue,
 } from '../../../../helpers/admin.helper';
@@ -198,7 +199,9 @@ export class ExperiencesOperationsModalComponent {
   });
   protected resolveFieldLabel(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
     this.translation.locale();
-    return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].labelKey);
+    return resolveAdminFieldLabel(EXPERIENCES_OPERATIONS_FIELDS[field], (key) =>
+      this.translation.instant(key),
+    );
   }
   protected resolveFieldPlaceholder(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
     this.translation.locale();
