@@ -1,9 +1,11 @@
 [TODO LIST]:
+-Adicionar o idioma espanhol (Front-End e Back-End).
 -Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End.
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
--Adicionar o idioma espanhol (Front-End e Back-End).
--Mostrar datas com dia (atualmente está somente em mês) e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Criar separação entre tempos de experiência (já fiz a lógica no Back-End, melhorar apresentação disso no Front-End).
+-Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
+-Talvez finalizar último gráfico (BarChart TechnologiesByExperience?).
+-Mostrar datas com dia (atualmente está somente em mês) e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Colocar imagens dos prints das telas do projetos. Melhorar apresentação dessas imagens utilizando carrossel.
 -Colocar links de referência entre as entidades e atualizar modais de visualização.
 -Criar listas de links de prod e git nos cards (com os ícones do git e vercel).
@@ -11,8 +13,6 @@
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
 -Colocar as certificações e diplomas exibidas em um carrossel.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
--Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
--Talvez finalizar último gráfico (BarChart TechnologiesByExperience?).
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
 -Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (devemos excluir os planejamentos?).
 -Criar pipeline ci/cd e configurar docker no projeto.
