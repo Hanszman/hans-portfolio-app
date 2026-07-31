@@ -21,6 +21,8 @@
 -Talvez fazer página sobre meus gostos e vida pessoal.
 
 
+[RASCUNHOS]:
+
 [PROMPT INICIAL]:
 Olá Codex, bom dia! Tudo bem?
 Vamos continuar o plano de implementação do remake do meu portfolio! Vc pode pegar contexto principalmente nos arquivos:
@@ -502,3 +504,5 @@ Reparei também que na sua refatoração dos services, nos casos do experiences 
 -Beleza, resolvido, obrigado! Tenho só mais alguns questionamentos:
 Engraçado, eu jurava que essa propriedade de required existia diretamente na lib nos campos de input e que usam input. Não lembrava que ela era feita no portfolio. Mas acredito que a melhor forma seria incluirmos uma prop de required e incluir o * na label dos campos da lib, criando stories/mdx pra isso em todos esses componentes baseados no input, ai o portfolio só consome isso ao invés de fazer essa lógica, aplicando a prop required como true para aqueles campos que forem obrigatórios nos formulários. Faça mais essa refatoração por favor, te dou acesso ao workspace da lib: hans-ui-design-lib.
 Além disso, reparei que o vs code ta alertando erro (marcando de vermelho) nesse arquivo Dropdown.helper.test.ts da lib, como vc pode ver no print 1. Corrija esse caso e investigue onde mais o vs code pode estar alertando erros, dê uma olhada em todos os arquivos da lib e do portfolio, procurando esses casos e corrigindo os que forem necessários por favor.
+-Beleza! Ficou ótimo, obrigado!
+Agora quero que vc leia toda a documentação (AGENTS.md, README.md, plano-{nome-do-plano}.md) do Front-End (hans-portfolio-app) e do Back-End (hans-portfolio-api) pra pegar um contexto de todo o projeto, faça um planejamento para adicionar o idioma espanhol (Front-End e Back-End).
