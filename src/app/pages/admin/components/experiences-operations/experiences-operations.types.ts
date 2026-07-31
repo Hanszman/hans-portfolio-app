@@ -3,7 +3,7 @@ import {
   ExperienceRecord,
   ExperienceRelationRecord,
 } from '../../../../core/api/experiences/experiences.types';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
   AdminImageAssetOptionViewModel,

@@ -4,15 +4,15 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AdminAuthenticationService } from './core/api/admin-auth/admin-auth.service';
-import { CustomersOperationsService } from './core/api/customers/customers-operations.service';
-import { FormationsOperationsService } from './core/api/formations/formations-operations.service';
-import { ImageAssetsOperationsService } from './core/api/image-assets/image-assets-operations.service';
-import { JobsOperationsService } from './core/api/jobs/jobs-operations.service';
-import { LinksOperationsService } from './core/api/links/links-operations.service';
-import { PortfolioSettingsOperationsService } from './core/api/portfolio-settings/portfolio-settings-operations.service';
-import { SpokenLanguagesOperationsService } from './core/api/spoken-languages/spoken-languages-operations.service';
-import { TagsOperationsService } from './core/api/tags/tags-operations.service';
-import { TechnologyContextsOperationsService } from './core/api/technology-contexts/technology-contexts-operations.service';
+import { CustomersService } from './core/api/customers/customers.service';
+import { FormationsService } from './core/api/formations/formations.service';
+import { ImageAssetsService } from './core/api/image-assets/image-assets.service';
+import { JobsService } from './core/api/jobs/jobs.service';
+import { LinksService } from './core/api/links/links.service';
+import { PortfolioSettingsService } from './core/api/portfolio-settings/portfolio-settings.service';
+import { SpokenLanguagesService } from './core/api/spoken-languages/spoken-languages.service';
+import { TagsService } from './core/api/tags/tags.service';
+import { TechnologyContextsService } from './core/api/technology-contexts/technology-contexts.service';
 import { ExperiencesService } from './core/api/experiences/experiences.service';
 import { ProjectsService } from './core/api/projects/projects.service';
 import { ADMIN_SESSION_STORAGE_KEY } from './core/admin-session/admin-session.types';
@@ -123,7 +123,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -166,7 +166,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: TechnologyContextsOperationsService,
+          provide: TechnologyContextsService,
           useValue: {
             getAll: jasmine.createSpy().and.returnValue(of({ data: [], pagination: { page: 1, pageSize: 5, totalItems: 0, totalPages: 0, hasPreviousPage: false, hasNextPage: false } })),
             create: jasmine.createSpy(),
@@ -175,7 +175,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -211,7 +211,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: JobsOperationsService,
+          provide: JobsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -249,7 +249,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -289,7 +289,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -337,7 +337,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: PortfolioSettingsOperationsService,
+          provide: PortfolioSettingsService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -369,7 +369,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: {
             getAll: jasmine
               .createSpy()
@@ -405,7 +405,7 @@ describe('app routes', () => {
           },
         },
         {
-          provide: TagsOperationsService,
+          provide: TagsService,
           useValue: {
             getAll: jasmine
               .createSpy()

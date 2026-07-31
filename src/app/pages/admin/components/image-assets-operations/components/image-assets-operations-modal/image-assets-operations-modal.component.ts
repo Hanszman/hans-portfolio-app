@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ImageAssetRecord } from '../../../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../../core/api/image-assets/image-assets.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';

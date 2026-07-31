@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { PortfolioSettingsOperationsService } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.service';
-import { PortfolioSettingRecord } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.types';
+import { PortfolioSettingsService } from '../../../../core/api/portfolio-settings/portfolio-settings.service';
+import { PortfolioSettingRecord } from '../../../../core/api/portfolio-settings/portfolio-settings.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -38,7 +38,7 @@ const createCollectionResponse = (
 
 describe('PortfolioSettingsOperationsComponent', () => {
   let fixture: ComponentFixture<PortfolioSettingsOperationsComponent>;
-  let operationsService: jasmine.SpyObj<PortfolioSettingsOperationsService>;
+  let operationsService: jasmine.SpyObj<PortfolioSettingsService>;
   let toastService: jasmine.SpyObj<ToastService>;
 
   const settleWorkspace = async (
@@ -64,8 +64,8 @@ describe('PortfolioSettingsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    operationsService = jasmine.createSpyObj<PortfolioSettingsOperationsService>(
-      'PortfolioSettingsOperationsService',
+    operationsService = jasmine.createSpyObj<PortfolioSettingsService>(
+      'PortfolioSettingsService',
       ['getAll', 'create', 'update', 'delete'],
     );
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
@@ -80,7 +80,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: PortfolioSettingsOperationsService,
+          provide: PortfolioSettingsService,
           useValue: operationsService,
         },
         {
@@ -270,7 +270,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: PortfolioSettingsService, useValue: operationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -358,7 +358,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: PortfolioSettingsService, useValue: operationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -395,7 +395,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: PortfolioSettingsService, useValue: operationsService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -429,7 +429,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: PortfolioSettingsOperationsService, useValue: operationsService },
+        { provide: PortfolioSettingsService, useValue: operationsService },
         {
           provide: AdminSessionService,
           useValue: {

@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { FormationsOperationsService } from './formations-operations.service';
+import { FormationsService } from './formations.service';
 import {
   FormationMutationPayload,
   FormationRecord,
   FormationsCollectionResponse,
-} from './formations-operations.types';
+} from './formations.types';
 
 const createFormation = (): FormationRecord => ({
   id: 'formation-1',
@@ -66,11 +66,11 @@ const createFormationPayload = (): FormationMutationPayload => ({
   imageAssetIds: ['image-asset-1'],
 });
 
-describe('FormationsOperationsService', () => {
+describe('FormationsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        FormationsOperationsService,
+        FormationsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -83,7 +83,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should load the formations collection through the public read endpoint', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -101,7 +101,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should allow custom paging and searching when loading the collection', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4, ' comp ').subscribe();
@@ -118,7 +118,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should create a protected formation', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createFormationPayload()).subscribe((response) => {
@@ -135,7 +135,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should sanitize technology relations before creating a protected formation', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -160,7 +160,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should update a protected formation through PUT', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.update('formation-1', createFormationPayload()).subscribe((response) => {
@@ -179,7 +179,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should sanitize technology relations before updating a protected formation', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -202,7 +202,7 @@ describe('FormationsOperationsService', () => {
   });
 
   it('should delete a protected formation', () => {
-    const service = TestBed.inject(FormationsOperationsService);
+    const service = TestBed.inject(FormationsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('formation-1').subscribe((response) => {

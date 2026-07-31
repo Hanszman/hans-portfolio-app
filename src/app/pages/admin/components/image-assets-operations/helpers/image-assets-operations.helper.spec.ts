@@ -1,4 +1,4 @@
-import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';

@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { ImageAssetsOperationsService } from './image-assets-operations.service';
+import { ImageAssetsService } from './image-assets.service';
 import {
   ImageAssetMutationPayload,
   ImageAssetRecord,
   ImageAssetsCollectionResponse,
-} from './image-assets-operations.types';
+} from './image-assets.types';
 
 const createImageAsset = (): ImageAssetRecord => ({
   id: 'image-asset-1',
@@ -76,11 +76,11 @@ const createImageAssetPayload = (): ImageAssetMutationPayload => ({
   jobIds: [],
 });
 
-describe('ImageAssetsOperationsService', () => {
+describe('ImageAssetsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ImageAssetsOperationsService,
+        ImageAssetsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -93,7 +93,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should load the image-assets collection through the public read endpoint', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -111,7 +111,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should allow custom paging when loading the collection', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4).subscribe();
@@ -126,7 +126,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should append the search term when loading the collection', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(1, 5, 'logo').subscribe();
@@ -141,7 +141,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should create a protected image asset', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createImageAssetPayload()).subscribe((response) => {
@@ -160,7 +160,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should update a protected image asset through PUT', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -181,7 +181,7 @@ describe('ImageAssetsOperationsService', () => {
   });
 
   it('should delete a protected image asset', () => {
-    const service = TestBed.inject(ImageAssetsOperationsService);
+    const service = TestBed.inject(ImageAssetsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('image-asset-1').subscribe((response) => {

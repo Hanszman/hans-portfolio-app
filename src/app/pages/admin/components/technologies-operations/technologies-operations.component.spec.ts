@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -88,7 +88,7 @@ interface TechnologiesTestApi {
 describe('TechnologiesOperationsComponent', () => {
   let fixture: ComponentFixture<TechnologiesOperationsComponent>;
   let service: jasmine.SpyObj<TechnologiesService>;
-  let images: jasmine.SpyObj<ImageAssetsOperationsService>;
+  let images: jasmine.SpyObj<ImageAssetsService>;
   let toast: jasmine.SpyObj<ToastService>;
   let session: { accessToken: jasmine.Spy<() => string | null> };
   const settle = async () => {
@@ -116,7 +116,7 @@ describe('TechnologiesOperationsComponent', () => {
       'update',
       'delete',
     ]);
-    images = jasmine.createSpyObj<ImageAssetsOperationsService>('ImageAssetsOperationsService', [
+    images = jasmine.createSpyObj<ImageAssetsService>('ImageAssetsService', [
       'getAll',
     ]);
     toast = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
@@ -132,7 +132,7 @@ describe('TechnologiesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         { provide: TechnologiesService, useValue: service },
-        { provide: ImageAssetsOperationsService, useValue: images },
+        { provide: ImageAssetsService, useValue: images },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],

@@ -1,12 +1,12 @@
-﻿import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { FormationsOperationsService } from '../../../../core/api/formations/formations-operations.service';
-import { FormationRecord } from '../../../../core/api/formations/formations-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/links/links-operations.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import {
@@ -122,10 +122,10 @@ const createTechnologiesCollectionResponse = (
 
 describe('FormationsOperationsComponent', () => {
   let fixture: ComponentFixture<FormationsOperationsComponent>;
-  let formationsOperationsService: jasmine.SpyObj<FormationsOperationsService>;
+  let formationsOperationsService: jasmine.SpyObj<FormationsService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
-  let linksOperationsService: jasmine.SpyObj<LinksOperationsService>;
-  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsOperationsService>;
+  let linksOperationsService: jasmine.SpyObj<LinksService>;
+  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -155,19 +155,19 @@ describe('FormationsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    formationsOperationsService = jasmine.createSpyObj<FormationsOperationsService>(
-      'FormationsOperationsService',
+    formationsOperationsService = jasmine.createSpyObj<FormationsService>(
+      'FormationsService',
       ['getAll', 'create', 'update', 'delete'],
     );
     technologiesService = jasmine.createSpyObj<TechnologiesService>('TechnologiesService', [
       'getTechnologies',
     ]);
-    linksOperationsService = jasmine.createSpyObj<LinksOperationsService>(
-      'LinksOperationsService',
+    linksOperationsService = jasmine.createSpyObj<LinksService>(
+      'LinksService',
       ['getAll'],
     );
-    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsOperationsService>(
-      'ImageAssetsOperationsService',
+    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
+      'ImageAssetsService',
       ['getAll'],
     );
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
@@ -215,7 +215,7 @@ describe('FormationsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: formationsOperationsService,
         },
         {
@@ -223,11 +223,11 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: linksOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -515,7 +515,7 @@ describe('FormationsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: formationsOperationsService,
         },
         {
@@ -523,11 +523,11 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: linksOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -642,7 +642,7 @@ describe('FormationsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: formationsOperationsService,
         },
         {
@@ -650,11 +650,11 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: linksOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -695,7 +695,7 @@ describe('FormationsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: formationsOperationsService,
         },
         {
@@ -703,11 +703,11 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: linksOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -747,7 +747,7 @@ describe('FormationsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: formationsOperationsService,
         },
         {
@@ -755,11 +755,11 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: linksOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {

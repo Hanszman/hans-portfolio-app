@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
+import { LinksService } from '../../../../core/api/links/links.service';
 import {
   LinkMutationPayload,
   LinkRecord,
-} from '../../../../core/api/links/links-operations.types';
+} from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -55,7 +55,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinksOperationsComponent implements OnInit {
-  private readonly linksOperationsService = inject(LinksOperationsService);
+  private readonly linksOperationsService = inject(LinksService);
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly technologiesService = inject(TechnologiesService);

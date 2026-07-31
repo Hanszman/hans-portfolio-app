@@ -8,12 +8,12 @@ import {
   FormationRecord,
   FormationsCollectionResponse,
   sanitizeFormationMutationPayload,
-} from './formations-operations.types';
+} from './formations.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FormationsOperationsService {
+export class FormationsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

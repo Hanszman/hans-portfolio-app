@@ -1,8 +1,8 @@
-﻿import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
-import { TagRecord } from '../../../../core/api/tags/tags-operations.types';
+import { TagsService } from '../../../../core/api/tags/tags.service';
+import { TagRecord } from '../../../../core/api/tags/tags.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -84,7 +84,7 @@ const createCollectionResponse = (data: TagRecord[] = [createTag()], page = 1) =
 
 describe('TagsOperationsComponent', () => {
   let fixture: ComponentFixture<TagsOperationsComponent>;
-  let tagsOperationsService: jasmine.SpyObj<TagsOperationsService>;
+  let tagsOperationsService: jasmine.SpyObj<TagsService>;
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
   let toastService: jasmine.SpyObj<ToastService>;
@@ -113,7 +113,7 @@ describe('TagsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    tagsOperationsService = jasmine.createSpyObj<TagsOperationsService>('TagsOperationsService', [
+    tagsOperationsService = jasmine.createSpyObj<TagsService>('TagsService', [
       'getAll',
       'create',
       'update',
@@ -162,7 +162,7 @@ describe('TagsOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: TagsOperationsService,
+          provide: TagsService,
           useValue: tagsOperationsService,
         },
         {
@@ -401,7 +401,7 @@ describe('TagsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: TagsOperationsService, useValue: tagsOperationsService },
+        { provide: TagsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
         { provide: ToastService, useValue: toastService },
@@ -499,7 +499,7 @@ describe('TagsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: TagsOperationsService, useValue: tagsOperationsService },
+        { provide: TagsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
         { provide: ToastService, useValue: toastService },
@@ -538,7 +538,7 @@ describe('TagsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: TagsOperationsService, useValue: tagsOperationsService },
+        { provide: TagsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
         {
@@ -576,7 +576,7 @@ describe('TagsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: TagsOperationsService, useValue: tagsOperationsService },
+        { provide: TagsService, useValue: tagsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: TechnologiesService, useValue: technologiesService },
         {

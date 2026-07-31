@@ -4,22 +4,22 @@ import { Observable } from 'rxjs';
 import { buildApiUrl } from '../api.config';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../api.types';
 import {
-  JobMutationPayload,
-  JobRecord,
-  JobsCollectionResponse,
-} from './jobs-operations.types';
+  TagMutationPayload,
+  TagRecord,
+  TagsCollectionResponse,
+} from './tags.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class JobsOperationsService {
+export class TagsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(
     page = DEFAULT_PAGE,
     pageSize = DEFAULT_PAGE_SIZE,
     search = '',
-  ): Observable<JobsCollectionResponse> {
+  ): Observable<TagsCollectionResponse> {
     const searchParams = new URLSearchParams({
       page: String(page),
       pageSize: String(pageSize),
@@ -33,23 +33,20 @@ export class JobsOperationsService {
       searchParams.set('search', normalizedSearch);
     }
 
-    return this.httpClient.get<JobsCollectionResponse>(
-      buildApiUrl(`/jobs?${searchParams.toString()}`),
+    return this.httpClient.get<TagsCollectionResponse>(
+      buildApiUrl(`/tags?${searchParams.toString()}`),
     );
   }
 
-  create(payload: JobMutationPayload): Observable<JobRecord> {
-    return this.httpClient.post<JobRecord>(buildApiUrl('/admin/jobs'), payload);
+  create(payload: TagMutationPayload): Observable<TagRecord> {
+    return this.httpClient.post<TagRecord>(buildApiUrl('/admin/tags'), payload);
   }
 
-  update(jobId: string, payload: JobMutationPayload): Observable<JobRecord> {
-    return this.httpClient.put<JobRecord>(
-      buildApiUrl(`/admin/jobs/${jobId}`),
-      payload,
-    );
+  update(tagId: string, payload: TagMutationPayload): Observable<TagRecord> {
+    return this.httpClient.put<TagRecord>(buildApiUrl(`/admin/tags/${tagId}`), payload);
   }
 
-  delete(jobId: string): Observable<void> {
-    return this.httpClient.delete<void>(buildApiUrl(`/admin/jobs/${jobId}`));
+  delete(tagId: string): Observable<void> {
+    return this.httpClient.delete<void>(buildApiUrl(`/admin/tags/${tagId}`));
   }
 }

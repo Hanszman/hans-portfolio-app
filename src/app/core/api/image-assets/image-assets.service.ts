@@ -7,12 +7,12 @@ import {
   ImageAssetMutationPayload,
   ImageAssetRecord,
   ImageAssetsCollectionResponse,
-} from './image-assets-operations.types';
+} from './image-assets.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImageAssetsOperationsService {
+export class ImageAssetsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

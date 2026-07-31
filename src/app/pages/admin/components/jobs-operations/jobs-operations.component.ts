@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
-import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import {
   JobMutationPayload,
   JobRecord,
-} from '../../../../core/api/jobs/jobs-operations.types';
+} from '../../../../core/api/jobs/jobs.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -51,9 +51,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JobsOperationsComponent implements OnInit {
-  private readonly jobsOperationsService = inject(JobsOperationsService);
+  private readonly jobsOperationsService = inject(JobsService);
   private readonly experiencesService = inject(ExperiencesService);
-  private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
+  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
 

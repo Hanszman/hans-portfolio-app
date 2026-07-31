@@ -8,15 +8,15 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { FormationsOperationsService } from '../../../../core/api/formations/formations-operations.service';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
 import {
   FormationMutationPayload,
   FormationRecord,
-} from '../../../../core/api/formations/formations-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/links/links-operations.types';
+} from '../../../../core/api/formations/formations.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
@@ -57,10 +57,10 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormationsOperationsComponent implements OnInit {
-  private readonly formationsOperationsService = inject(FormationsOperationsService);
+  private readonly formationsOperationsService = inject(FormationsService);
   private readonly technologiesService = inject(TechnologiesService);
-  private readonly linksOperationsService = inject(LinksOperationsService);
-  private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
+  private readonly linksOperationsService = inject(LinksService);
+  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);

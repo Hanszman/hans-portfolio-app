@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
+import { CustomersService } from '../../../../core/api/customers/customers.service';
 import {
   CustomerMutationPayload,
   CustomerRecord,
-} from '../../../../core/api/customers/customers-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+} from '../../../../core/api/customers/customers.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -51,9 +51,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomersOperationsComponent implements OnInit {
-  private readonly customersOperationsService = inject(CustomersOperationsService);
+  private readonly customersOperationsService = inject(CustomersService);
   private readonly experiencesService = inject(ExperiencesService);
-  private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
+  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
 

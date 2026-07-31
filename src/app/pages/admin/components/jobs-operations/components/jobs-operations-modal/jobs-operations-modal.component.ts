@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { JobRecord } from '../../../../../../core/api/jobs/jobs-operations.types';
+import { JobRecord } from '../../../../../../core/api/jobs/jobs.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';

@@ -7,12 +7,12 @@ import {
   CustomerMutationPayload,
   CustomerRecord,
   CustomersCollectionResponse,
-} from './customers-operations.types';
+} from './customers.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CustomersOperationsService {
+export class CustomersService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

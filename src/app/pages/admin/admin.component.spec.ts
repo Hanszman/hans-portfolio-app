@@ -2,15 +2,15 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { CustomersOperationsService } from '../../core/api/customers/customers-operations.service';
-import { FormationsOperationsService } from '../../core/api/formations/formations-operations.service';
-import { ImageAssetsOperationsService } from '../../core/api/image-assets/image-assets-operations.service';
-import { JobsOperationsService } from '../../core/api/jobs/jobs-operations.service';
-import { LinksOperationsService } from '../../core/api/links/links-operations.service';
-import { PortfolioSettingsOperationsService } from '../../core/api/portfolio-settings/portfolio-settings-operations.service';
-import { SpokenLanguagesOperationsService } from '../../core/api/spoken-languages/spoken-languages-operations.service';
-import { TagsOperationsService } from '../../core/api/tags/tags-operations.service';
-import { TechnologyContextsOperationsService } from '../../core/api/technology-contexts/technology-contexts-operations.service';
+import { CustomersService } from '../../core/api/customers/customers.service';
+import { FormationsService } from '../../core/api/formations/formations.service';
+import { ImageAssetsService } from '../../core/api/image-assets/image-assets.service';
+import { JobsService } from '../../core/api/jobs/jobs.service';
+import { LinksService } from '../../core/api/links/links.service';
+import { PortfolioSettingsService } from '../../core/api/portfolio-settings/portfolio-settings.service';
+import { SpokenLanguagesService } from '../../core/api/spoken-languages/spoken-languages.service';
+import { TagsService } from '../../core/api/tags/tags.service';
+import { TechnologyContextsService } from '../../core/api/technology-contexts/technology-contexts.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
 import { AdminSessionService } from '../../core/admin-session/admin-session.service';
@@ -63,7 +63,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: {
             getAll: () =>
               of({
@@ -105,7 +105,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: {
             getAll: () =>
               of({
@@ -140,7 +140,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: PortfolioSettingsOperationsService,
+          provide: PortfolioSettingsService,
           useValue: {
             getAll: () =>
               of({
@@ -169,7 +169,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: {
             getAll: () =>
               of({
@@ -214,7 +214,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: {
             getAll: () =>
               of({
@@ -247,7 +247,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: {
             getAll: () =>
               of({
@@ -284,7 +284,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TagsOperationsService,
+          provide: TagsService,
           useValue: {
             getAll: () =>
               of({
@@ -316,7 +316,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: JobsOperationsService,
+          provide: JobsService,
           useValue: {
             getAll: () =>
               of({
@@ -535,7 +535,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TechnologyContextsOperationsService,
+          provide: TechnologyContextsService,
           useValue: {
             getAll: () =>
               of({
@@ -617,7 +617,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: FormationsOperationsService,
+          provide: FormationsService,
           useValue: {
             getAll: () =>
               of({
@@ -637,7 +637,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: {
             getAll: () =>
               of({
@@ -657,7 +657,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: PortfolioSettingsOperationsService,
+          provide: PortfolioSettingsService,
           useValue: {
             getAll: () =>
               of({
@@ -677,7 +677,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: {
             getAll: () =>
               of({
@@ -697,7 +697,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: {
             getAll: () =>
               of({
@@ -717,7 +717,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: LinksOperationsService,
+          provide: LinksService,
           useValue: {
             getAll: () =>
               of({
@@ -737,7 +737,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TagsOperationsService,
+          provide: TagsService,
           useValue: {
             getAll: () =>
               of({
@@ -757,7 +757,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: JobsOperationsService,
+          provide: JobsService,
           useValue: {
             getAll: () =>
               of({
@@ -892,7 +892,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TechnologyContextsOperationsService,
+          provide: TechnologyContextsService,
           useValue: {
             getAll: () =>
               of({

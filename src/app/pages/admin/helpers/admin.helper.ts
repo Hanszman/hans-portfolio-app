@@ -1,5 +1,5 @@
 import { AdminAuthenticatedUser } from '../../../core/api/admin-auth/admin-auth.types';
-import { ImageAssetRecord } from '../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../core/api/image-assets/image-assets.types';
 import { buildAssetUrl } from '../../../core/api/api.config';
 import { resolveLocalizedText } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';

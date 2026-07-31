@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
+import { TagsService } from '../../../../core/api/tags/tags.service';
 import {
   TagMutationPayload,
   TagRecord,
-} from '../../../../core/api/tags/tags-operations.types';
+} from '../../../../core/api/tags/tags.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
@@ -54,7 +54,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagsOperationsComponent implements OnInit {
-  private readonly tagsOperationsService = inject(TagsOperationsService);
+  private readonly tagsOperationsService = inject(TagsService);
   private readonly projectsService = inject(ProjectsService);
   private readonly technologiesService = inject(TechnologiesService);
   private readonly adminSessionService = inject(AdminSessionService);

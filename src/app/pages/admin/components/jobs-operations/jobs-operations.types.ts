@@ -1,9 +1,9 @@
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import {
   JobExperienceRelationRecord,
   JobImageAssetRelationRecord,
   JobMutationPayload,
-} from '../../../../core/api/jobs/jobs-operations.types';
+} from '../../../../core/api/jobs/jobs.types';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';

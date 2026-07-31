@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { PortfolioSettingsOperationsService } from './portfolio-settings-operations.service';
+import { PortfolioSettingsService } from './portfolio-settings.service';
 import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
   PortfolioSettingsCollectionResponse,
-} from './portfolio-settings-operations.types';
+} from './portfolio-settings.types';
 
 const createPortfolioSetting = (): PortfolioSettingRecord => ({
   id: 'setting-1',
@@ -41,11 +41,11 @@ const createPortfolioSettingPayload = (): PortfolioSettingMutationPayload => ({
   value: { titleEn: 'Hans Portfolio' },
 });
 
-describe('PortfolioSettingsOperationsService', () => {
+describe('PortfolioSettingsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        PortfolioSettingsOperationsService,
+        PortfolioSettingsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -58,7 +58,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should load the portfolio-settings collection', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -76,7 +76,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should allow custom paging when loading the collection', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(3, 4).subscribe();
@@ -91,7 +91,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should append the search term when loading the collection', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(1, 5, 'hero').subscribe();
@@ -106,7 +106,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should create a protected portfolio setting', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createPortfolioSettingPayload()).subscribe((response) => {
@@ -125,7 +125,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should update a protected portfolio setting through PUT', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -146,7 +146,7 @@ describe('PortfolioSettingsOperationsService', () => {
   });
 
   it('should delete a protected portfolio setting', () => {
-    const service = TestBed.inject(PortfolioSettingsOperationsService);
+    const service = TestBed.inject(PortfolioSettingsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('setting-1').subscribe((response) => {

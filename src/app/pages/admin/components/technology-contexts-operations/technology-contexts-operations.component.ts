@@ -8,8 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { TechnologyContextsOperationsService } from '../../../../core/api/technology-contexts/technology-contexts-operations.service';
-import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextsService } from '../../../../core/api/technology-contexts/technology-contexts.service';
+import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -51,7 +51,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TechnologyContextsOperationsComponent implements OnInit {
-  private readonly service = inject(TechnologyContextsOperationsService);
+  private readonly service = inject(TechnologyContextsService);
   private readonly technologiesService = inject(TechnologiesService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
@@ -225,7 +225,7 @@ export class TechnologyContextsOperationsComponent implements OnInit {
   }
 
   private async submitUpsert(
-    payload: Parameters<TechnologyContextsOperationsService['create']>[0],
+    payload: Parameters<TechnologyContextsService['create']>[0],
   ): Promise<void> {
     this.submittingSignal.set(true);
     try {

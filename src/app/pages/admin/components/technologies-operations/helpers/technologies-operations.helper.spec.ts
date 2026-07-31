@@ -1,5 +1,5 @@
 import { appConfig } from '../../../../../core/api/api.config';
-import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 import { TechnologyAdminRecord } from '../../../../../core/api/technologies/technologies.types';
 import {
   buildTechnologiesFormValue,

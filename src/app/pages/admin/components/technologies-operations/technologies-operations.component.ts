@@ -10,8 +10,8 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyAdminRecord } from '../../../../core/api/technologies/technologies.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -46,7 +46,7 @@ import { TechnologiesOperationsModalComponent } from './components/technologies-
 })
 export class TechnologiesOperationsComponent implements OnInit {
   private readonly service = inject(TechnologiesService);
-  private readonly imagesService = inject(ImageAssetsOperationsService);
+  private readonly imagesService = inject(ImageAssetsService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
   private readonly recordsSignal = signal<readonly TechnologyAdminRecord[]>([]);

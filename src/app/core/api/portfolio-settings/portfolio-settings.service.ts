@@ -7,12 +7,12 @@ import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
   PortfolioSettingsCollectionResponse,
-} from './portfolio-settings-operations.types';
+} from './portfolio-settings.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PortfolioSettingsOperationsService {
+export class PortfolioSettingsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

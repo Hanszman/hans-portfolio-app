@@ -19,7 +19,7 @@ import {
   resolveImageAssetProjectIdFromRelation,
   resolveImageAssetTechnologyIdFromRelation,
 } from '../image-assets-operations.types';
-import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 
 const sortCatalogOptions = (
   left: ImageAssetCatalogOptionViewModel,

@@ -1,4 +1,4 @@
-import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts.types';
 import { AppTranslationKey } from '../../../../../core/translation/translation.types';
 import { TechnologyAdminRecord } from '../../../../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../../../../core/translation/translation.service';

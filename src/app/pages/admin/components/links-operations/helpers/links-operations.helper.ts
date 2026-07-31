@@ -5,7 +5,7 @@ import {
   LinkProjectRelationRecord,
   LinkRecord,
   LinkTechnologyRelationRecord,
-} from '../../../../../core/api/links/links-operations.types';
+} from '../../../../../core/api/links/links.types';
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';

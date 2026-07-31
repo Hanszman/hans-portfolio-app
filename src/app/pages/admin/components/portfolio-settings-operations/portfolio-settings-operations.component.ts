@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { PortfolioSettingsOperationsService } from '../../../../core/api/portfolio-settings/portfolio-settings-operations.service';
+import { PortfolioSettingsService } from '../../../../core/api/portfolio-settings/portfolio-settings.service';
 import {
   PortfolioSettingMutationPayload,
   PortfolioSettingRecord,
-} from '../../../../core/api/portfolio-settings/portfolio-settings-operations.types';
+} from '../../../../core/api/portfolio-settings/portfolio-settings.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -45,7 +45,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioSettingsOperationsComponent implements OnInit {
-  private readonly portfolioSettingsOperationsService = inject(PortfolioSettingsOperationsService);
+  private readonly portfolioSettingsOperationsService = inject(PortfolioSettingsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
 

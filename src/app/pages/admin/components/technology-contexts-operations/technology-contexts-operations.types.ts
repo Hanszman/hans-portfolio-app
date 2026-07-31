@@ -1,5 +1,5 @@
 import { TechnologyContextKey } from '../../../../core/api/technologies/technologies.types';
-import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import {

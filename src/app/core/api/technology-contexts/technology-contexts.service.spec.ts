@@ -3,13 +3,13 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { TechnologyContextsOperationsService } from './technology-contexts-operations.service';
+import { TechnologyContextsService } from './technology-contexts.service';
 import {
   TechnologyContextMutationPayload,
   TechnologyContextRecord,
   TechnologyContextsCollectionResponse,
   TechnologyContextsPublicCollectionResponse,
-} from './technology-contexts-operations.types';
+} from './technology-contexts.types';
 
 const record: TechnologyContextRecord = {
   id: 'context-1',
@@ -50,11 +50,11 @@ const publicCollection: TechnologyContextsPublicCollectionResponse = {
   pagination: collection.pagination,
 };
 
-describe('TechnologyContextsOperationsService', () => {
+describe('TechnologyContextsService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [
-        TechnologyContextsOperationsService,
+        TechnologyContextsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -65,7 +65,7 @@ describe('TechnologyContextsOperationsService', () => {
   afterEach(() => TestBed.inject(HttpTestingController).verify());
 
   it('loads public contexts with defaults and search', () => {
-    const service = TestBed.inject(TechnologyContextsOperationsService);
+    const service = TestBed.inject(TechnologyContextsService);
     const http = TestBed.inject(HttpTestingController);
     service.getAll(2, 4, ' angular ').subscribe((response) => expect(response).toEqual(collection));
     const request = http.expectOne(
@@ -79,7 +79,7 @@ describe('TechnologyContextsOperationsService', () => {
   });
 
   it('uses the public read endpoint without a search query when search is blank', () => {
-    const service = TestBed.inject(TechnologyContextsOperationsService);
+    const service = TestBed.inject(TechnologyContextsService);
     const http = TestBed.inject(HttpTestingController);
     service.getAll().subscribe((response) => expect(response).toEqual(collection));
     const request = http.expectOne(
@@ -89,7 +89,7 @@ describe('TechnologyContextsOperationsService', () => {
   });
 
   it('creates, updates and deletes protected contexts', () => {
-    const service = TestBed.inject(TechnologyContextsOperationsService);
+    const service = TestBed.inject(TechnologyContextsService);
     const http = TestBed.inject(HttpTestingController);
     service.create(payload).subscribe((response) => expect(response).toEqual(record));
     let request = http.expectOne(buildApiUrl('/admin/technology-contexts'));

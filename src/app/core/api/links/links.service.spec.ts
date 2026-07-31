@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { LinksOperationsService } from './links-operations.service';
+import { LinksService } from './links.service';
 import {
   LinkMutationPayload,
   LinkRecord,
   LinksCollectionResponse,
-} from './links-operations.types';
+} from './links.types';
 
 const createLink = (): LinkRecord => ({
   id: 'link-1',
@@ -60,11 +60,11 @@ const createLinkPayload = (): LinkMutationPayload => ({
   formationIds: ['formation-1'],
 });
 
-describe('LinksOperationsService', () => {
+describe('LinksService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        LinksOperationsService,
+        LinksService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -77,7 +77,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should load the links collection', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -95,7 +95,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should allow custom paging when loading the collection', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4).subscribe();
@@ -110,7 +110,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should append the search term when loading the collection', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(1, 5, 'github').subscribe();
@@ -125,7 +125,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should create a protected link', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createLinkPayload()).subscribe((response) => {
@@ -142,7 +142,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should update a protected link through PUT', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.update('link-1', createLinkPayload()).subscribe((response) => {
@@ -159,7 +159,7 @@ describe('LinksOperationsService', () => {
   });
 
   it('should delete a protected link', () => {
-    const service = TestBed.inject(LinksOperationsService);
+    const service = TestBed.inject(LinksService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('link-1').subscribe((response) => {

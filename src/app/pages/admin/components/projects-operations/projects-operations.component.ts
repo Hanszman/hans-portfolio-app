@@ -12,9 +12,9 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectRecord } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { TagsService } from '../../../../core/api/tags/tags.service';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -48,9 +48,9 @@ export class ProjectsOperationsComponent implements OnInit {
   private readonly api = inject(ProjectsService);
   private readonly technologies = inject(TechnologiesService);
   private readonly experiences = inject(ExperiencesService);
-  private readonly tags = inject(TagsOperationsService);
-  private readonly links = inject(LinksOperationsService);
-  private readonly images = inject(ImageAssetsOperationsService);
+  private readonly tags = inject(TagsService);
+  private readonly links = inject(LinksService);
+  private readonly images = inject(ImageAssetsService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
   private readonly records = signal<readonly ProjectRecord[]>([]);

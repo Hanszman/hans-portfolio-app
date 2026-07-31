@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -131,7 +131,7 @@ const createCollectionResponse = (data: ImageAssetRecord[] = [createImageAsset()
 
 describe('ImageAssetsOperationsComponent', () => {
   let fixture: ComponentFixture<ImageAssetsOperationsComponent>;
-  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsOperationsService>;
+  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
@@ -164,8 +164,8 @@ describe('ImageAssetsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsOperationsService>(
-      'ImageAssetsOperationsService',
+    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
+      'ImageAssetsService',
       ['getAll', 'create', 'update', 'delete'],
     );
     projectsService = jasmine.createSpyObj<ProjectsService>('ProjectsService', ['getProjects']);
@@ -231,7 +231,7 @@ describe('ImageAssetsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: ImageAssetsOperationsService, useValue: imageAssetsOperationsService },
+        { provide: ImageAssetsService, useValue: imageAssetsOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },

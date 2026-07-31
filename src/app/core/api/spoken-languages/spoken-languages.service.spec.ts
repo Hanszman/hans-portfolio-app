@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { SpokenLanguagesOperationsService } from './spoken-languages-operations.service';
+import { SpokenLanguagesService } from './spoken-languages.service';
 import {
   SpokenLanguageMutationPayload,
   SpokenLanguageRecord,
   SpokenLanguagesCollectionResponse,
-} from './spoken-languages-operations.types';
+} from './spoken-languages.types';
 
 const createSpokenLanguage = (): SpokenLanguageRecord => ({
   id: 'spoken-language-1',
@@ -51,11 +51,11 @@ const createSpokenLanguagePayload = (): SpokenLanguageMutationPayload => ({
   imageAssetIds: ['image-asset-1'],
 });
 
-describe('SpokenLanguagesOperationsService', () => {
+describe('SpokenLanguagesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        SpokenLanguagesOperationsService,
+        SpokenLanguagesService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -68,7 +68,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should load the spoken-languages collection', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -86,7 +86,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should allow custom paging when loading the collection', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4).subscribe();
@@ -101,7 +101,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should append the search term when loading the collection', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(1, 5, 'english').subscribe();
@@ -118,7 +118,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should create a protected spoken language', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createSpokenLanguagePayload()).subscribe((response) => {
@@ -137,7 +137,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should update a protected spoken language through PUT', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service
@@ -158,7 +158,7 @@ describe('SpokenLanguagesOperationsService', () => {
   });
 
   it('should delete a protected spoken language', () => {
-    const service = TestBed.inject(SpokenLanguagesOperationsService);
+    const service = TestBed.inject(SpokenLanguagesService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('spoken-language-1').subscribe((response) => {

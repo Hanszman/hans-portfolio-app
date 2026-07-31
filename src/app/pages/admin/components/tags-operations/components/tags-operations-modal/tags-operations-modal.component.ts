@@ -8,7 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { TagRecord } from '../../../../../../core/api/tags/tags-operations.types';
+import { TagRecord } from '../../../../../../core/api/tags/tags.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';

@@ -1,7 +1,7 @@
 import { appConfig } from '../../../../../core/api/api.config';
-import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets-operations.types';
-import { FormationRecord } from '../../../../../core/api/formations/formations-operations.types';
-import { LinkRecord } from '../../../../../core/api/links/links-operations.types';
+import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
+import { FormationRecord } from '../../../../../core/api/formations/formations.types';
+import { LinkRecord } from '../../../../../core/api/links/links.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   buildFormationImageAssetOptions,

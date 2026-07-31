@@ -1,10 +1,10 @@
-﻿import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
-import { SpokenLanguagesOperationsService } from '../../../../core/api/spoken-languages/spoken-languages-operations.service';
-import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages-operations.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/spoken-languages.service';
+import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -69,8 +69,8 @@ const createCollectionResponse = (
 
 describe('SpokenLanguagesOperationsComponent', () => {
   let fixture: ComponentFixture<SpokenLanguagesOperationsComponent>;
-  let spokenLanguagesOperationsService: jasmine.SpyObj<SpokenLanguagesOperationsService>;
-  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsOperationsService>;
+  let spokenLanguagesOperationsService: jasmine.SpyObj<SpokenLanguagesService>;
+  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -100,12 +100,12 @@ describe('SpokenLanguagesOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    spokenLanguagesOperationsService = jasmine.createSpyObj<SpokenLanguagesOperationsService>(
-      'SpokenLanguagesOperationsService',
+    spokenLanguagesOperationsService = jasmine.createSpyObj<SpokenLanguagesService>(
+      'SpokenLanguagesService',
       ['getAll', 'create', 'update', 'delete'],
     );
-    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsOperationsService>(
-      'ImageAssetsOperationsService',
+    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
+      'ImageAssetsService',
       ['getAll'],
     );
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
@@ -139,11 +139,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: spokenLanguagesOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -388,11 +388,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: spokenLanguagesOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -498,11 +498,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: spokenLanguagesOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -545,11 +545,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: spokenLanguagesOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -588,11 +588,11 @@ describe('SpokenLanguagesOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: SpokenLanguagesOperationsService,
+          provide: SpokenLanguagesService,
           useValue: spokenLanguagesOperationsService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {

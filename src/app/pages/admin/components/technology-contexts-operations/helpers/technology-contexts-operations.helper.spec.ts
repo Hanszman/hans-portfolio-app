@@ -1,5 +1,5 @@
 import { TranslationService } from '../../../../../core/translation/translation.service';
-import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   buildTechnologyContextFormValue,

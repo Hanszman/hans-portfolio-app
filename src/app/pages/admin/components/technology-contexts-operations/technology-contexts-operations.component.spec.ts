@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { TechnologyContextsOperationsService } from '../../../../core/api/technology-contexts/technology-contexts-operations.service';
-import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextsService } from '../../../../core/api/technology-contexts/technology-contexts.service';
+import { TechnologyContextRecord } from '../../../../core/api/technology-contexts/technology-contexts.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -42,7 +42,7 @@ const response = (data: TechnologyContextRecord[] = [record()], page = 1) => ({
 
 describe('TechnologyContextsOperationsComponent', () => {
   let fixture: ComponentFixture<TechnologyContextsOperationsComponent>;
-  let service: jasmine.SpyObj<TechnologyContextsOperationsService>;
+  let service: jasmine.SpyObj<TechnologyContextsService>;
   let technologies: jasmine.SpyObj<TechnologiesService>;
   let toast: jasmine.SpyObj<ToastService>;
   let accessToken: jasmine.Spy<() => string | null>;
@@ -60,7 +60,7 @@ describe('TechnologyContextsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    service = jasmine.createSpyObj('TechnologyContextsOperationsService', [
+    service = jasmine.createSpyObj('TechnologyContextsService', [
       'getAll',
       'create',
       'update',
@@ -91,7 +91,7 @@ describe('TechnologyContextsOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: TechnologyContextsOperationsService, useValue: service },
+        { provide: TechnologyContextsService, useValue: service },
         { provide: TechnologiesService, useValue: technologies },
         { provide: ToastService, useValue: toast },
         { provide: AdminSessionService, useValue: { accessToken } },

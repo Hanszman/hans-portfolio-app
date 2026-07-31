@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { CustomersOperationsService } from './customers-operations.service';
+import { CustomersService } from './customers.service';
 import {
   CustomerMutationPayload,
   CustomerRecord,
   CustomersCollectionResponse,
-} from './customers-operations.types';
+} from './customers.types';
 
 const createCustomer = (): CustomerRecord => ({
   id: 'customer-1',
@@ -52,11 +52,11 @@ const createCustomerPayload = (): CustomerMutationPayload => ({
   imageAssetIds: ['image-asset-1'],
 });
 
-describe('CustomersOperationsService', () => {
+describe('CustomersService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        CustomersOperationsService,
+        CustomersService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -69,7 +69,7 @@ describe('CustomersOperationsService', () => {
   });
 
   it('should load the customers collection through the public read endpoint', () => {
-    const service = TestBed.inject(CustomersOperationsService);
+    const service = TestBed.inject(CustomersService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -87,7 +87,7 @@ describe('CustomersOperationsService', () => {
   });
 
   it('should allow custom paging and searching when loading the collection', () => {
-    const service = TestBed.inject(CustomersOperationsService);
+    const service = TestBed.inject(CustomersService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4, ' enterprise ').subscribe();
@@ -102,7 +102,7 @@ describe('CustomersOperationsService', () => {
   });
 
   it('should create a protected customer', () => {
-    const service = TestBed.inject(CustomersOperationsService);
+    const service = TestBed.inject(CustomersService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createCustomerPayload()).subscribe((response) => {
@@ -119,7 +119,7 @@ describe('CustomersOperationsService', () => {
   });
 
   it('should update a protected customer through PUT', () => {
-    const service = TestBed.inject(CustomersOperationsService);
+    const service = TestBed.inject(CustomersService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.update('customer-1', createCustomerPayload()).subscribe((response) => {
@@ -138,7 +138,7 @@ describe('CustomersOperationsService', () => {
   });
 
   it('should delete a protected customer', () => {
-    const service = TestBed.inject(CustomersOperationsService);
+    const service = TestBed.inject(CustomersService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('customer-1').subscribe((response) => {

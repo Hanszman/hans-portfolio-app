@@ -1,10 +1,10 @@
-﻿import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
-import { CustomerRecord } from '../../../../core/api/customers/customers-operations.types';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { CustomersService } from '../../../../core/api/customers/customers.service';
+import { CustomerRecord } from '../../../../core/api/customers/customers.types';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import {
@@ -116,9 +116,9 @@ const createExperiencesCollectionResponse = (
 
 describe('CustomersOperationsComponent', () => {
   let fixture: ComponentFixture<CustomersOperationsComponent>;
-  let customersOperationsService: jasmine.SpyObj<CustomersOperationsService>;
+  let customersOperationsService: jasmine.SpyObj<CustomersService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
-  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsOperationsService>;
+  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -147,15 +147,15 @@ describe('CustomersOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    customersOperationsService = jasmine.createSpyObj<CustomersOperationsService>(
-      'CustomersOperationsService',
+    customersOperationsService = jasmine.createSpyObj<CustomersService>(
+      'CustomersService',
       ['getAll', 'create', 'update', 'delete'],
     );
     experiencesService = jasmine.createSpyObj<ExperiencesService>('ExperiencesService', [
       'getExperiences',
     ]);
-    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsOperationsService>(
-      'ImageAssetsOperationsService',
+    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
+      'ImageAssetsService',
       ['getAll'],
     );
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
@@ -190,7 +190,7 @@ describe('CustomersOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: customersOperationsService,
         },
         {
@@ -198,7 +198,7 @@ describe('CustomersOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -434,7 +434,7 @@ describe('CustomersOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: customersOperationsService,
         },
         {
@@ -442,7 +442,7 @@ describe('CustomersOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -544,7 +544,7 @@ describe('CustomersOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: customersOperationsService,
         },
         {
@@ -552,7 +552,7 @@ describe('CustomersOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -595,7 +595,7 @@ describe('CustomersOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: customersOperationsService,
         },
         {
@@ -603,7 +603,7 @@ describe('CustomersOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {
@@ -642,7 +642,7 @@ describe('CustomersOperationsComponent', () => {
         provideZonelessChangeDetection(),
         provideAppTranslations(),
         {
-          provide: CustomersOperationsService,
+          provide: CustomersService,
           useValue: customersOperationsService,
         },
         {
@@ -650,7 +650,7 @@ describe('CustomersOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsOperationsService,
+          provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
         {

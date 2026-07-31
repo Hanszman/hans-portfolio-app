@@ -1,8 +1,8 @@
-﻿import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { LinkRecord } from '../../../../core/api/links/links-operations.types';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -122,7 +122,7 @@ const createCollectionResponse = (data: LinkRecord[] = [createLink()], page = 1)
 
 describe('LinksOperationsComponent', () => {
   let fixture: ComponentFixture<LinksOperationsComponent>;
-  let linksOperationsService: jasmine.SpyObj<LinksOperationsService>;
+  let linksOperationsService: jasmine.SpyObj<LinksService>;
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
@@ -152,8 +152,8 @@ describe('LinksOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    linksOperationsService = jasmine.createSpyObj<LinksOperationsService>(
-      'LinksOperationsService',
+    linksOperationsService = jasmine.createSpyObj<LinksService>(
+      'LinksService',
       ['getAll', 'create', 'update', 'delete'],
     );
     projectsService = jasmine.createSpyObj<ProjectsService>('ProjectsService', ['getProjects']);
@@ -214,7 +214,7 @@ describe('LinksOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: LinksOperationsService, useValue: linksOperationsService },
+        { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
@@ -474,7 +474,7 @@ describe('LinksOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: LinksOperationsService, useValue: linksOperationsService },
+        { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
@@ -573,7 +573,7 @@ describe('LinksOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: LinksOperationsService, useValue: linksOperationsService },
+        { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
@@ -613,7 +613,7 @@ describe('LinksOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: LinksOperationsService, useValue: linksOperationsService },
+        { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
@@ -652,7 +652,7 @@ describe('LinksOperationsComponent', () => {
       providers: [
         provideZonelessChangeDetection(),
         provideAppTranslations(),
-        { provide: LinksOperationsService, useValue: linksOperationsService },
+        { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },

@@ -23,7 +23,7 @@ import {
   AdminCollectionPagination,
   createAdminCollectionPagination,
 } from '../../../../admin.types';
-import { TechnologyContextRecord } from '../../../../../../core/api/technology-contexts/technology-contexts-operations.types';
+import { TechnologyContextRecord } from '../../../../../../core/api/technology-contexts/technology-contexts.types';
 import {
   TECHNOLOGY_CONTEXT_FIELDS,
   TechnologyContextFormValue,

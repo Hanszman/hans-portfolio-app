@@ -7,12 +7,12 @@ import {
   LinkMutationPayload,
   LinkRecord,
   LinksCollectionResponse,
-} from './links-operations.types';
+} from './links.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LinksOperationsService {
+export class LinksService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

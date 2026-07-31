@@ -8,11 +8,11 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import {
   ImageAssetMutationPayload,
   ImageAssetRecord,
-} from '../../../../core/api/image-assets/image-assets-operations.types';
+} from '../../../../core/api/image-assets/image-assets.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
@@ -55,7 +55,7 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageAssetsOperationsComponent implements OnInit {
-  private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
+  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly technologiesService = inject(TechnologiesService);

@@ -9,10 +9,10 @@ import {
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologiesCollectionResponse } from '../../../../core/api/technologies/technologies.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
-import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
-import { JobsOperationsService } from '../../../../core/api/jobs/jobs-operations.service';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { CustomersService } from '../../../../core/api/customers/customers.service';
+import { JobsService } from '../../../../core/api/jobs/jobs.service';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -150,10 +150,10 @@ describe('ExperiencesOperationsComponent', () => {
     techService = jasmine.createSpyObj('TechnologiesService', ['getTechnologies']);
     const tech = techService;
     const projects = jasmine.createSpyObj('ProjectsService', ['getProjects']);
-    const customers = jasmine.createSpyObj('CustomersOperationsService', ['getAll']);
-    const jobs = jasmine.createSpyObj('JobsOperationsService', ['getAll']);
-    const links = jasmine.createSpyObj('LinksOperationsService', ['getAll']);
-    const images = jasmine.createSpyObj('ImageAssetsOperationsService', ['getAll']);
+    const customers = jasmine.createSpyObj('CustomersService', ['getAll']);
+    const jobs = jasmine.createSpyObj('JobsService', ['getAll']);
+    const links = jasmine.createSpyObj('LinksService', ['getAll']);
+    const images = jasmine.createSpyObj('ImageAssetsService', ['getAll']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     toast = jasmine.createSpyObj('ToastService', ['showSuccess', 'showError']);
     api.getAll.and.returnValue(of(response() as unknown as AdminExperiencesCollectionResponse));
@@ -176,10 +176,10 @@ describe('ExperiencesOperationsComponent', () => {
         { provide: ExperiencesService, useValue: api },
         { provide: TechnologiesService, useValue: tech },
         { provide: ProjectsService, useValue: projects },
-        { provide: CustomersOperationsService, useValue: customers },
-        { provide: JobsOperationsService, useValue: jobs },
-        { provide: LinksOperationsService, useValue: links },
-        { provide: ImageAssetsOperationsService, useValue: images },
+        { provide: CustomersService, useValue: customers },
+        { provide: JobsService, useValue: jobs },
+        { provide: LinksService, useValue: links },
+        { provide: ImageAssetsService, useValue: images },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],

@@ -8,13 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
-import { SpokenLanguagesOperationsService } from '../../../../core/api/spoken-languages/spoken-languages-operations.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/spoken-languages.service';
 import {
   SpokenLanguageMutationPayload,
   SpokenLanguageRecord,
-} from '../../../../core/api/spoken-languages/spoken-languages-operations.types';
+} from '../../../../core/api/spoken-languages/spoken-languages.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
@@ -52,8 +52,8 @@ import { translateAdminSelectOptions } from '../../helpers/admin.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpokenLanguagesOperationsComponent implements OnInit {
-  private readonly spokenLanguagesOperationsService = inject(SpokenLanguagesOperationsService);
-  private readonly imageAssetsOperationsService = inject(ImageAssetsOperationsService);
+  private readonly spokenLanguagesOperationsService = inject(SpokenLanguagesService);
+  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);

@@ -8,10 +8,10 @@ import {
   TechnologyContextRecord,
   TechnologyContextsCollectionResponse,
   TechnologyContextsPublicCollectionResponse,
-} from './technology-contexts-operations.types';
+} from './technology-contexts.types';
 
 @Injectable({ providedIn: 'root' })
-export class TechnologyContextsOperationsService {
+export class TechnologyContextsService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

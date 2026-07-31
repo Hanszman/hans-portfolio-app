@@ -1,9 +1,9 @@
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets-operations.types';
+import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import {
   CustomerExperienceRelationRecord,
   CustomerImageAssetRelationRecord,
   CustomerMutationPayload,
-} from '../../../../core/api/customers/customers-operations.types';
+} from '../../../../core/api/customers/customers.types';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';

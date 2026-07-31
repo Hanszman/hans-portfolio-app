@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { JobsOperationsService } from './jobs-operations.service';
+import { JobsService } from './jobs.service';
 import {
   JobMutationPayload,
   JobRecord,
   JobsCollectionResponse,
-} from './jobs-operations.types';
+} from './jobs.types';
 
 const createJob = (): JobRecord => ({
   id: 'job-1',
@@ -56,11 +56,11 @@ const createJobPayload = (): JobMutationPayload => ({
   imageAssetIds: ['image-asset-1'],
 });
 
-describe('JobsOperationsService', () => {
+describe('JobsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        JobsOperationsService,
+        JobsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -73,7 +73,7 @@ describe('JobsOperationsService', () => {
   });
 
   it('should load the jobs collection through the public read endpoint', () => {
-    const service = TestBed.inject(JobsOperationsService);
+    const service = TestBed.inject(JobsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -91,7 +91,7 @@ describe('JobsOperationsService', () => {
   });
 
   it('should allow custom paging and searching when loading the collection', () => {
-    const service = TestBed.inject(JobsOperationsService);
+    const service = TestBed.inject(JobsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4, ' front ').subscribe();
@@ -106,7 +106,7 @@ describe('JobsOperationsService', () => {
   });
 
   it('should create a protected job', () => {
-    const service = TestBed.inject(JobsOperationsService);
+    const service = TestBed.inject(JobsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createJobPayload()).subscribe((response) => {
@@ -123,7 +123,7 @@ describe('JobsOperationsService', () => {
   });
 
   it('should update a protected job through PUT', () => {
-    const service = TestBed.inject(JobsOperationsService);
+    const service = TestBed.inject(JobsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.update('job-1', createJobPayload()).subscribe((response) => {
@@ -140,7 +140,7 @@ describe('JobsOperationsService', () => {
   });
 
   it('should delete a protected job', () => {
-    const service = TestBed.inject(JobsOperationsService);
+    const service = TestBed.inject(JobsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('job-1').subscribe((response) => {

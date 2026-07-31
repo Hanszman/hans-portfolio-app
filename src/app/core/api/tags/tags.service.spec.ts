@@ -6,12 +6,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../api.config';
-import { TagsOperationsService } from './tags-operations.service';
+import { TagsService } from './tags.service';
 import {
   TagMutationPayload,
   TagRecord,
   TagsCollectionResponse,
-} from './tags-operations.types';
+} from './tags.types';
 
 const createTag = (): TagRecord => ({
   id: 'tag-1',
@@ -50,11 +50,11 @@ const createTagPayload = (): TagMutationPayload => ({
   technologyIds: ['technology-1'],
 });
 
-describe('TagsOperationsService', () => {
+describe('TagsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TagsOperationsService,
+        TagsService,
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -67,7 +67,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should load the tags collection', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll().subscribe((response) => {
@@ -85,7 +85,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should allow custom paging when loading the collection', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(2, 4).subscribe();
@@ -100,7 +100,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should append the search term when loading the collection', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.getAll(1, 5, 'angular').subscribe();
@@ -115,7 +115,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should create a protected tag', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.create(createTagPayload()).subscribe((response) => {
@@ -132,7 +132,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should update a protected tag through PUT', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.update('tag-1', createTagPayload()).subscribe((response) => {
@@ -149,7 +149,7 @@ describe('TagsOperationsService', () => {
   });
 
   it('should delete a protected tag', () => {
-    const service = TestBed.inject(TagsOperationsService);
+    const service = TestBed.inject(TagsService);
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     service.delete('tag-1').subscribe((response) => {

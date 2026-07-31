@@ -7,12 +7,12 @@ import {
   SpokenLanguageMutationPayload,
   SpokenLanguageRecord,
   SpokenLanguagesCollectionResponse,
-} from './spoken-languages-operations.types';
+} from './spoken-languages.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SpokenLanguagesOperationsService {
+export class SpokenLanguagesService {
   private readonly httpClient = inject(HttpClient);
 
   getAll(

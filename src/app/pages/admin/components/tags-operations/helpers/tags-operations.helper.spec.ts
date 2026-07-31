@@ -1,6 +1,6 @@
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
-import { TagRecord } from '../../../../../core/api/tags/tags-operations.types';
+import { TagRecord } from '../../../../../core/api/tags/tags.types';
 import {
   buildTagCatalogOptions,
   buildTagsFormValue,

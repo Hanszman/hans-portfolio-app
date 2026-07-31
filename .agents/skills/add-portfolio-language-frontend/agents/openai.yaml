@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Portfolio Language Front-End"
+  short_description: "Extend portfolio UI localization safely"
+  default_prompt: "Use $add-portfolio-language-frontend to add a new locale to the portfolio Front-End."

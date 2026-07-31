@@ -5,7 +5,7 @@ import {
   TagProjectRelationRecord,
   TagRecord,
   TagTechnologyRelationRecord,
-} from '../../../../core/api/tags/tags-operations.types';
+} from '../../../../core/api/tags/tags.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {

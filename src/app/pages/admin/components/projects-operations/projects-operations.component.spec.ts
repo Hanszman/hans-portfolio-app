@@ -9,9 +9,9 @@ import {
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologiesCollectionResponse } from '../../../../core/api/technologies/technologies.types';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
-import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
-import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
+import { TagsService } from '../../../../core/api/tags/tags.service';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
@@ -151,9 +151,9 @@ describe('ProjectsOperationsComponent', () => {
     techService = jasmine.createSpyObj('TechnologiesService', ['getTechnologies']);
     const tech = techService;
     const exp = jasmine.createSpyObj('ExperiencesService', ['getExperiences']);
-    const tags = jasmine.createSpyObj('TagsOperationsService', ['getAll']);
-    const links = jasmine.createSpyObj('LinksOperationsService', ['getAll']);
-    const images = jasmine.createSpyObj('ImageAssetsOperationsService', ['getAll']);
+    const tags = jasmine.createSpyObj('TagsService', ['getAll']);
+    const links = jasmine.createSpyObj('LinksService', ['getAll']);
+    const images = jasmine.createSpyObj('ImageAssetsService', ['getAll']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     toast = jasmine.createSpyObj('ToastService', ['showSuccess', 'showError']);
     api.getAll.and.returnValue(of(response() as unknown as AdminProjectsCollectionResponse));
@@ -175,9 +175,9 @@ describe('ProjectsOperationsComponent', () => {
         { provide: ProjectsService, useValue: api },
         { provide: TechnologiesService, useValue: tech },
         { provide: ExperiencesService, useValue: exp },
-        { provide: TagsOperationsService, useValue: tags },
-        { provide: LinksOperationsService, useValue: links },
-        { provide: ImageAssetsOperationsService, useValue: images },
+        { provide: TagsService, useValue: tags },
+        { provide: LinksService, useValue: links },
+        { provide: ImageAssetsService, useValue: images },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],

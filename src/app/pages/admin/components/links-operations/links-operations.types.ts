@@ -1,5 +1,5 @@
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
-import { LinkMutationPayload } from '../../../../core/api/links/links-operations.types';
+import { LinkMutationPayload } from '../../../../core/api/links/links.types';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
