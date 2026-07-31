@@ -1,6 +1,7 @@
 [TODO LIST]:
 -Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
+-Criar componente de message na lib pra padronizar mensagens em containers para caso filtros vazios ou erros de api, etc. Aplicar esse novo componente padronizado aqui no portfolio em todos os locais possíveis/necessários.
 -Criar separação entre tempos de experiência (já fiz a lógica no Back-End, melhorar apresentação disso no Front-End).
 -Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
 -Talvez finalizar último gráfico (BarChart TechnologiesByExperience?).
