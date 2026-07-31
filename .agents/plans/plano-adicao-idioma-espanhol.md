@@ -278,35 +278,120 @@ Criar, se necessário, helpers tipados pequenos para montar os mapas de `title`,
 
 ### 8.3. Admin
 
-Adicionar um input espanhol ao lado lógico de cada grupo Pt/En nos creates e updates das 9 entidades localizadas:
+Os formulários de create e update são superfícies editoriais e devem continuar exibindo simultaneamente os três idiomas. O input espanhol deve ficar depois de Pt e En dentro de cada grupo semântico, seguindo em toda entidade a ordem português, inglês e espanhol.
 
-- labels, placeholders, validações required/opcionais e mensagens em todos os três idiomas;
-- estado inicial, preenchimento no update, reset de formulário e payload de mutation;
-- exibição dos valores Es no read detalhado;
-- busca administrativa capaz de localizar espanhol;
-- layout responsivo para três variantes sem duplicar regras por entidade.
+Matriz explícita dos inputs novos:
 
-O registro `portfolio-settings.profile` continuará no editor JSON, mas sua documentação/validação deve exigir `introEs` nesse objeto conhecido.
+| CRUD | Inputs espanhóis no create/update | Obrigatoriedade final | Observações |
+| --- | --- | --- | --- |
+| Projects | `titleEs`, `shortDescriptionEs`, `fullDescriptionEs` | todos required | agrupar cada campo com seus equivalentes Pt/En |
+| Experiences | `titleEs`, `summaryEs`, `descriptionEs` | todos required | manter textos longos com o mesmo componente das variantes atuais |
+| Formations | `titleEs`, `summaryEs` | todos required | institution e degree type continuam invariantes/fechados |
+| Spoken Languages | `nameEs` | required | `code` e `proficiency` não ganham variantes no payload |
+| Customers | `summaryEs` | required | `name` é nome próprio e continua único |
+| Jobs | `nameEs`, `summaryEs` | todos required | manter a ordem name Pt/En/Es e summary Pt/En/Es |
+| Links | `labelEs`, `descriptionEs` | `labelEs` required; `descriptionEs` opcional | URL e type continuam únicos |
+| Image Assets | `altEs`, `captionEs` | ambos opcionais | aplicar as mesmas regras de acessibilidade dos equivalentes Pt/En |
+| Tags | `nameEs` | required | slug e type continuam invariantes |
 
-### 8.4. Copy estática e catálogos
+Checklist obrigatório para cada input novo:
+
+- adicionar propriedade no tipo do formulário e no payload HTTP;
+- adicionar valor inicial no create;
+- hidratar corretamente no update;
+- limpar no reset e ao trocar de registro;
+- adicionar label e placeholder próprios nos catálogos `en-us`, `pt-br` e `es-es`;
+- usar a propriedade `required` da design library quando o campo for obrigatório;
+- manter validação e limites equivalentes aos campos Pt/En;
+- apresentar toast de validação no padrão administrativo existente;
+- enviar exatamente uma propriedade `Es`, sem aliases;
+- preservar o valor digitado quando a mutation falhar;
+- cobrir create e update em testes, incluindo caracteres espanhóis;
+- garantir layout responsivo com três variantes sem duplicar SCSS por entidade.
+
+Entidades sem novos inputs localizados:
+
+- Technologies e Technology Contexts não possuem pares Pt/En persistidos; enums continuam traduzidos por copy estática;
+- Portfolio Settings mantém o editor JSON genérico, mas o setting conhecido `profile` deve documentar e validar `value.introEs` ao lado de `introPt` e `introEn`;
+- slugs, nomes próprios, datas, URLs, paths, enums, booleans, números e relações não devem ser triplicados.
+
+### 8.4. Refatoração dos Reads administrativos por locale ativo
+
+Os modais de read não são superfícies de edição. Eles não devem listar as três variantes do mesmo conteúdo. Cada grupo localizado será convertido em um único campo visual, resolvido conforme o idioma selecionado no dropdown global.
+
+Exemplo para uma Experience:
+
+- locale `en-us`: exibir label `Title` e valor de `titleEn`;
+- locale `pt-br`: exibir label `Título` e valor de `titlePt`;
+- locale `es-es`: exibir label `Título` e valor de `titleEs`;
+- aplicar a mesma regra a `Summary`, `Description` e às demais propriedades localizadas;
+- nunca exibir labels como `Portuguese title`, `English title` ou `Spanish title` no modo read.
+
+Comportamento obrigatório:
+
+- create e update continuam mostrando os três idiomas para permitir edição completa;
+- read mostra somente a variante do locale ativo;
+- trocar o idioma com o modal aberto atualiza imediatamente labels, valores, relações e conteúdo derivado, sem fechar o modal e sem novo request desnecessário;
+- campos invariantes continuam aparecendo uma única vez;
+- campos opcionais sem tradução usam exclusivamente o fallback central de `resolveLocalizedText`; após o backfill, campos obrigatórios não podem depender de fallback;
+- relações aninhadas também usam o locale ativo: títulos de projects/experiences/formations, nomes de jobs/spoken languages/tags e labels de links;
+- alt texts e captions usam a variante ativa mesmo quando o asset aparece como relação de outra entidade;
+- enums continuam sendo traduzidos pelos catálogos estáticos;
+- datas, números e durações continuam formatados pelo locale ativo;
+- busca e paginação permanecem inalteradas.
+
+Estratégia de implementação:
+
+1. Criar um contrato/helper compartilhado e tipado no domínio administrativo para transformar um trio Pt/En/Es em um único `OperationsDetailedField`.
+2. O helper recebe `AppLocale`, os valores localizados, uma label sem qualificador de idioma e fallback opcional.
+3. Reutilizar `resolveLocalizedText`; não implementar `if`, `switch` ou ternários por locale nos 12 adaptadores.
+4. Fazer os `computed` ou mapeadores de detailed items dependerem do signal de locale, garantindo atualização reativa do read aberto.
+5. Migrar os reads das 12 entidades e remover campos duplicados por idioma.
+6. Manter nos adaptadores específicos apenas a declaração dos campos e a formatação própria do domínio.
+
+Matriz de consolidação no read:
+
+| Entidade | Antes | Depois no locale ativo |
+| --- | --- | --- |
+| Projects | title, short description e full description por idioma | `Title`, `Short description`, `Full description` |
+| Experiences | title, summary e description por idioma | `Title`, `Summary`, `Description` |
+| Formations | title e summary por idioma | `Title`, `Summary` |
+| Spoken Languages | name por idioma | `Name` |
+| Customers | summary por idioma | `Summary` |
+| Jobs | name e summary por idioma | `Name`, `Summary` |
+| Links | label e description por idioma | `Label`, `Description` |
+| Image Assets | alt e caption por idioma | `Alt text`, `Caption` |
+| Tags | name por idioma | `Name` |
+| Portfolio Settings | JSON arbitrário | manter JSON; em visualização estruturada de `profile`, resolver somente o `intro` ativo |
+| Technologies | sem trio persistido | traduzir somente enums e relações |
+| Technology Contexts | sem trio persistido | traduzir context e conteúdo relacionado |
+
+As labels neutras do read devem existir nos três catálogos. As labels qualificadas por idioma permanecem apenas nos formulários create/update.
+
+### 8.5. Copy estática e catálogos
 
 - auditar paridade exata das chaves `en-us`, `pt-br` e `es-es`;
 - adicionar labels/placeholders administrativos para os novos campos;
-- manter enums e listas fechadas nos catálogos estáticos existentes, pois não precisam virar colunas de banco;
+- adicionar labels neutras para o read e manter labels qualificadas nos formulários;
+- manter enums e listas fechadas nos catálogos estáticos existentes;
 - localizar duração usando pluralização/formatador centralizado, nunca o label inglês da API;
 - manter formatação de datas com `Intl.DateTimeFormat` usando o locale ativo.
 
-### 8.5. Testes do frontend
+### 8.6. Testes do frontend
 
 - `resolveLocalizedText` retornando Es sem fallback quando o valor existe;
 - fallback controlado para conteúdo opcional ausente;
 - mapeadores públicos de todas as páginas com fixtures trilingues;
 - dashboard e relações aninhadas em espanhol;
-- create/update/read dos CRUDs com inputs Es;
+- create e update dos CRUDs com inputs Es;
 - required e payload correto dos campos obrigatórios;
 - troca reativa de idioma sem reload;
+- read exibindo exatamente uma variante de cada campo localizado;
+- read aberto reagindo à troca entre `en-us`, `pt-br` e `es-es`;
+- ausência de labels qualificadas por idioma no read e permanência delas no create/update;
+- relações, alt texts, captions, enums, datas e durações do read acompanhando o locale ativo;
 - busca por texto espanhol;
-- alt/caption e conteúdo de acessibilidade em espanhol;
+- conteúdo de acessibilidade em espanhol;
 - garantia de que nenhum texto de API em inglês apareça com locale `es-es` quando há tradução.
 
 ## 9. Ordem de implementação e rollout
@@ -322,10 +407,11 @@ O registro `portfolio-settings.profile` continuará no editor JSON, mas sua docu
 9. Exportar e versionar o novo snapshot integral.
 10. Atualizar contratos, mapeadores e mocks do frontend.
 11. Adicionar inputs Es em todos os CRUDs e completar as copies estáticas.
-12. Executar testes automatizados dos dois repositórios.
-13. Validar visualmente o portfolio público e todos os CRUDs em espanhol.
-14. Fazer deploy backend-first: migration A + backend compatível, backfill, migration B, depois frontend.
-15. Repetir consultas de integridade e smoke tests em produção.
+12. Criar o helper compartilhado de campos localizados e migrar os reads dos 12 CRUDs para uma única variante reativa ao locale.
+13. Executar testes automatizados dos dois repositórios.
+14. Validar visualmente o portfolio público e todos os CRUDs nos três idiomas.
+15. Fazer deploy backend-first: migration A + backend compatível, backfill, migration B, depois frontend.
+16. Repetir consultas de integridade e smoke tests em produção.
 
 ## 10. Validação manual integrada
 
@@ -334,11 +420,13 @@ No ambiente local:
 1. selecionar espanhol e navegar por home, experiences, skills, projects e dashboard;
 2. conferir títulos, resumos, descrições, relações, tags, links, alt texts, captions e métricas;
 3. abrir os modos create/read/update/delete das entidades localizadas;
-4. criar registros temporários contendo caracteres espanhóis (`á`, `é`, `í`, `ó`, `ú`, `ü`, `ñ`, `¿`, `¡`);
-5. reabrir os registros e confirmar persistência, busca e ordenação;
-6. conferir Swagger e responses diretos da API;
-7. excluir somente os registros temporários;
-8. verificar console do navegador, network, logs da API e ausência de erros Prisma.
+4. em cada read, alternar `en-us`, `pt-br` e `es-es` com o modal aberto e confirmar que existe apenas um Title/Name/Summary/Description com o valor correspondente;
+5. confirmar que create/update continuam exibindo os três inputs localizados;
+6. criar registros temporários contendo caracteres espanhóis (`á`, `é`, `í`, `ó`, `ú`, `ü`, `ñ`, `¿`, `¡`);
+7. reabrir os registros e confirmar persistência, busca e ordenação;
+8. conferir Swagger e responses diretos da API;
+9. excluir somente os registros temporários;
+10. verificar console do navegador, network, logs da API e ausência de erros Prisma.
 
 ## 11. Comandos obrigatórios
 
@@ -376,6 +464,9 @@ Também executar os novos validadores de tradução/backfill e testar `prisma:se
 - dashboard e métricas não devolvem copy visível somente em inglês;
 - frontend público usa Es real em todas as entidades e relações;
 - admin permite criar, ler e atualizar todos os campos Es;
+- create/update exibem Pt, En e Es, enquanto read exibe exatamente a variante correspondente ao locale ativo;
+- a troca de idioma atualiza imediatamente um read já aberto, inclusive relações e conteúdo derivado;
+- o read usa labels neutras traduzidas e não exibe qualificadores Portuguese/English/Spanish;
 - não existem ternários/switches locais por idioma fora da camada central;
 - migrations funcionam em banco com dados existentes sem reset;
 - snapshot exportado consegue recriar integralmente o conteúdo em banco descartável;
