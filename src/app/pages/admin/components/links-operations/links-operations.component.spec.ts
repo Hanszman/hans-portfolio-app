@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { LinksOperationsService } from '../../../../core/api/links/links-operations.service';
@@ -20,8 +20,10 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   url: 'https://github.com/vh/portfolio',
   labelPt: 'Repositorio',
   labelEn: 'Repository',
+  labelEs: 'Repository',
   descriptionPt: 'Codigo fonte',
   descriptionEn: 'Source code',
+  descriptionEs: 'Source code',
   type: 'GITHUB',
   sortOrder: 1,
   projectIds: ['project-1'],
@@ -30,7 +32,6 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   formationIds: ['formation-1'],
   ...overrides,
 });
-
 const createProject = (
   overrides: Partial<ProjectCollectionItemResponse> = {},
 ): ProjectCollectionItemResponse => ({
@@ -38,10 +39,13 @@ const createProject = (
   slug: 'portfolio-remake',
   titlePt: 'Portfolio remake',
   titleEn: 'Portfolio remake',
+  titleEs: 'Portfolio remake',
   shortDescriptionPt: 'Resumo',
   shortDescriptionEn: 'Summary',
+  shortDescriptionEs: 'Summary',
   fullDescriptionPt: 'Descricao',
   fullDescriptionEn: 'Description',
+  fullDescriptionEs: 'Description',
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
@@ -68,10 +72,13 @@ const createExperience = (
   companyName: 'Stefanini Ford',
   titlePt: 'Analista',
   titleEn: 'Analyst',
+  titleEs: 'Analyst',
   summaryPt: 'Resumo',
   summaryEn: 'Summary',
+  summaryEs: 'Summary',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   startDate: '2024-01-01',
   endDate: null,
   isCurrent: true,
@@ -252,8 +259,10 @@ describe('LinksOperationsComponent', () => {
       updateUrl(value: string): void;
       updateLabelPt(value: string): void;
       updateLabelEn(value: string): void;
+      updateLabelEs(value: string): void;
       updateDescriptionPt(value: string): void;
       updateDescriptionEn(value: string): void;
+      updateDescriptionEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       toggleProject(projectId: string): void;
@@ -267,8 +276,10 @@ describe('LinksOperationsComponent', () => {
     component.updateUrl('https://example.com/demo');
     component.updateLabelPt('Demo');
     component.updateLabelEn('Demo');
+    component.updateLabelEs('Demo');
     component.updateDescriptionPt('Descricao');
     component.updateDescriptionEn('Description');
+    component.updateDescriptionEs('Description');
     component.updateType('deploy');
     component.updateSortOrder('3');
     component.toggleProject('project-1');
@@ -281,8 +292,10 @@ describe('LinksOperationsComponent', () => {
       url: 'https://example.com/demo',
       labelPt: 'Demo',
       labelEn: 'Demo',
+      labelEs: 'Demo',
       descriptionPt: 'Descricao',
       descriptionEn: 'Description',
+      descriptionEs: 'Description',
       type: 'DEPLOY',
       sortOrder: 3,
       projectIds: ['project-1'],
@@ -299,8 +312,10 @@ describe('LinksOperationsComponent', () => {
       url: 'https://github.com/vh/portfolio',
       labelPt: 'Repositorio atualizado',
       labelEn: 'Repository',
+      labelEs: 'Repository',
       descriptionPt: 'Codigo fonte',
       descriptionEn: 'Source code',
+      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
       projectIds: ['project-1'],
@@ -423,6 +438,9 @@ describe('LinksOperationsComponent', () => {
     const component = fixture.componentInstance as unknown as {
       openCreateModal(): void;
       updateUrl(value: string): void;
+      updateLabelPt(value: string): void;
+      updateLabelEn(value: string): void;
+      updateLabelEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -434,6 +452,9 @@ describe('LinksOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.links.feedback.requiredUrl');
 
     component.updateUrl('https://github.com/vh/portfolio');
+    component.updateLabelPt('Portfolio');
+    component.updateLabelEn('Portfolio');
+    component.updateLabelEs('Portfolio');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.links.feedback.requiredType');
 
@@ -501,6 +522,9 @@ describe('LinksOperationsComponent', () => {
       openCreateModal(): void;
       openDeleteModal(linkId: string): void;
       updateUrl(value: string): void;
+      updateLabelPt(value: string): void;
+      updateLabelEn(value: string): void;
+      updateLabelEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -510,6 +534,9 @@ describe('LinksOperationsComponent', () => {
 
     component.modalModeSignal.set('update');
     component.updateUrl('https://github.com/vh/portfolio');
+    component.updateLabelPt('Portfolio');
+    component.updateLabelEn('Portfolio');
+    component.updateLabelEs('Portfolio');
     component.updateType('GITHUB');
     component.updateSortOrder('1');
     await component.submitModal();
@@ -521,6 +548,9 @@ describe('LinksOperationsComponent', () => {
 
     component.openCreateModal();
     component.updateUrl('https://example.com');
+    component.updateLabelPt('Demo');
+    component.updateLabelEn('Demo');
+    component.updateLabelEs('Demo');
     component.updateType('DEPLOY');
     component.updateSortOrder('2');
     await component.submitModal();

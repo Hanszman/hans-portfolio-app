@@ -225,6 +225,10 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     this.patchForm({ nameEn: value });
   }
 
+  updateNameEs(value: string): void {
+    this.patchForm({ nameEs: value });
+  }
+
   updateProficiency(value: string): void {
     this.patchForm({ proficiency: value as SpokenLanguageProficiencyValue | '' });
   }

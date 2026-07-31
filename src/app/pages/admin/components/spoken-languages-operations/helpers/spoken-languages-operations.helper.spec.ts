@@ -27,6 +27,7 @@ const createSpokenLanguage = (
   code: 'en-us',
   namePt: 'Ingles',
   nameEn: 'English',
+  nameEs: 'English',
   proficiency: 'FLUENT',
   highlight: true,
   sortOrder: 2,
@@ -84,6 +85,7 @@ describe('spoken languages helper', () => {
       code: '',
       namePt: '',
       nameEn: '',
+      nameEs: '',
       proficiency: '',
       highlight: true,
       sortOrder: '0',
@@ -103,6 +105,7 @@ describe('spoken languages helper', () => {
       code: 'en-us',
       namePt: 'Ingles',
       nameEn: 'English',
+      nameEs: 'English',
       proficiency: 'FLUENT',
       highlight: true,
       sortOrder: '2',
@@ -114,6 +117,7 @@ describe('spoken languages helper', () => {
     expect(
       buildSpokenLanguagesFormValue(
         createSpokenLanguage({
+          nameEs: undefined,
           imageAssetIds: undefined,
           imageAssets: undefined,
           proficiency: null as never,
@@ -126,11 +130,19 @@ describe('spoken languages helper', () => {
       code: 'en-us',
       namePt: 'Ingles',
       nameEn: 'English',
+      nameEs: '',
       proficiency: '',
       highlight: false,
       sortOrder: '0',
       imageAssetIds: [],
     });
+
+    expect(
+      buildSpokenLanguagesViewModels(
+        [createSpokenLanguage({ nameEs: undefined })],
+        [],
+      )[0].nameEs,
+    ).toBe('');
   });
 
   it('should build sorted spoken language view-models with resolved labels', () => {
@@ -141,6 +153,7 @@ describe('spoken languages helper', () => {
           code: 'pt-br',
           namePt: 'Portugues',
           nameEn: 'Portuguese',
+          nameEs: 'Portuguese',
           proficiency: 'NATIVE',
           sortOrder: 1,
           imageAssetIds: ['image-asset-1'],
@@ -280,6 +293,7 @@ describe('spoken languages helper', () => {
       code: 'en-us',
       namePt: 'Ingles',
       nameEn: 'English',
+      nameEs: 'English',
       proficiency: 'FLUENT',
       highlight: true,
       sortOrderLabel: '2',
@@ -305,6 +319,7 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: 'Ingles',
         nameEn: 'English',
+        nameEs: 'English',
         proficiency: 'FLUENT',
         highlight: true,
         sortOrder: 5,
@@ -319,6 +334,7 @@ describe('spoken languages helper', () => {
         code: '',
         namePt: '',
         nameEn: '',
+        nameEs: '',
         proficiency: '',
         highlight: true,
         sortOrder: 'abc',
@@ -334,6 +350,7 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: '',
         nameEn: '',
+        nameEs: '',
         proficiency: '',
         highlight: true,
         sortOrder: 'abc',
@@ -349,6 +366,7 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: 'Ingles',
         nameEn: '',
+        nameEs: '',
         proficiency: '',
         highlight: true,
         sortOrder: 'abc',
@@ -364,6 +382,23 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: 'Ingles',
         nameEn: 'English',
+        nameEs: '',
+        proficiency: 'FLUENT',
+        highlight: true,
+        sortOrder: '1',
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'pages.admin.spokenLanguages.feedback.requiredNameEs',
+    });
+
+    expect(
+      buildSpokenLanguagesMutationPayload({
+        code: 'en-us',
+        namePt: 'Ingles',
+        nameEn: 'English',
+        nameEs: 'English',
         proficiency: '',
         highlight: true,
         sortOrder: 'abc',
@@ -379,6 +414,7 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: 'Ingles',
         nameEn: 'English',
+        nameEs: 'English',
         proficiency: 'INVALID' as never,
         highlight: true,
         sortOrder: '1',
@@ -394,6 +430,7 @@ describe('spoken languages helper', () => {
         code: 'en-us',
         namePt: 'Ingles',
         nameEn: 'English',
+        nameEs: 'English',
         proficiency: 'FLUENT',
         highlight: true,
         sortOrder: 'abc',

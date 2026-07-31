@@ -17,6 +17,7 @@ export interface SpokenLanguageRecord {
   code: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   proficiency: string;
   highlight?: boolean | null;
   sortOrder?: number | null;
@@ -30,6 +31,7 @@ export interface SpokenLanguageMutationPayload {
   code: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   proficiency: string;
   highlight: boolean;
   sortOrder: number;

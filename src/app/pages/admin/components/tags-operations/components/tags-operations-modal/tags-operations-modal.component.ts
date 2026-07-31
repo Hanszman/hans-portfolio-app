@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -56,6 +57,7 @@ export class TagsOperationsModalComponent {
     slug: '',
     namePt: '',
     nameEn: '',
+    nameEs: '',
     type: '',
     sortOrder: '0',
     projectIds: [],
@@ -76,6 +78,7 @@ export class TagsOperationsModalComponent {
   readonly slugChanged = output<string>();
   readonly namePtChanged = output<string>();
   readonly nameEnChanged = output<string>();
+  readonly nameEsChanged = output<string>();
   readonly typeChanged = output<string>();
   readonly sortOrderChanged = output<string>();
   readonly projectToggled = output<string>();
@@ -124,8 +127,10 @@ export class TagsOperationsModalComponent {
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
     this.tags().map((tag) => ({
       id: tag.id,
-      title: `${tag.namePt} (${tag.slug})`,
-      subtitle: tag.nameEn,
+      title: `${resolveAdminLocalizedValue(
+        this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
+      )} (${tag.slug})`,
+      subtitle: tag.slug,
     })),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
@@ -136,11 +141,17 @@ export class TagsOperationsModalComponent {
       return this.tags().map((tag) => ({
         id: tag.id,
         title: tag.slug,
-        subtitle: tag.namePt,
+        subtitle: resolveAdminLocalizedValue(
+          this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
+        ),
         fields: [
           { labelKey: 'pages.admin.tags.card.slug', value: tag.slug },
-          { labelKey: 'pages.admin.tags.card.namePt', value: tag.namePt },
-          { labelKey: 'pages.admin.tags.card.nameEn', value: tag.nameEn },
+          {
+            labelKey: 'pages.admin.operations.localized.name',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
+            ),
+          },
           { labelKey: 'pages.admin.tags.card.type', value: tag.type },
           {
             labelKey: 'pages.admin.tags.card.sortOrder',
@@ -163,8 +174,10 @@ export class TagsOperationsModalComponent {
     return tag
       ? {
           id: tag.id,
-          title: `${tag.namePt} (${tag.slug})`,
-          subtitle: tag.nameEn ?? undefined,
+          title: `${resolveAdminLocalizedValue(
+            this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
+          )} (${tag.slug})`,
+          subtitle: tag.slug,
         }
       : null;
   });
@@ -187,6 +200,10 @@ export class TagsOperationsModalComponent {
 
   protected emitNameEnChange(value: string): void {
     this.nameEnChanged.emit(value);
+  }
+
+  protected emitNameEsChange(value: string): void {
+    this.nameEsChanged.emit(value);
   }
 
   protected emitTypeChange(value: string): void {

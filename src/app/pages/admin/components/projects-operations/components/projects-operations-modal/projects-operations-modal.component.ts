@@ -24,6 +24,7 @@ import {
 import {
   formatAdminDateRangeForDisplay,
   resolveAdminFieldLabel,
+  resolveAdminLocalizedValue,
   resolveAdminRelationLabels,
   resolveAdminSelectValue,
 } from '../../../../helpers/admin.helper';
@@ -123,35 +124,33 @@ export class ProjectsOperationsModalComponent {
       const relationValue = (
         relations: readonly unknown[] | null | undefined,
         nestedKey: string,
-      ): string => resolveAdminRelationLabels(relations, nestedKey).join(', ') || emptyRelations;
+      ): string =>
+        resolveAdminRelationLabels(relations, nestedKey, this.translation.locale()).join(', ') ||
+        emptyRelations;
 
       return this.projects().map((project) => ({
         ...this.toOperationsItem(project),
         fields: [
           { labelKey: 'pages.admin.projects.fields.slug.label', value: project.slug },
           {
-            labelKey: 'pages.admin.projects.fields.titlePt.label',
-            value: project.titlePt,
+            labelKey: 'pages.admin.operations.localized.title',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), project.titlePt, project.titleEn, project.titleEs,
+            ),
           },
           {
-            labelKey: 'pages.admin.projects.fields.titleEn.label',
-            value: project.titleEn,
+            labelKey: 'pages.admin.operations.localized.shortDescription',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), project.shortDescriptionPt,
+              project.shortDescriptionEn, project.shortDescriptionEs,
+            ),
           },
           {
-            labelKey: 'pages.admin.projects.fields.shortDescriptionPt.label',
-            value: project.shortDescriptionPt,
-          },
-          {
-            labelKey: 'pages.admin.projects.fields.shortDescriptionEn.label',
-            value: project.shortDescriptionEn,
-          },
-          {
-            labelKey: 'pages.admin.projects.fields.fullDescriptionPt.label',
-            value: project.fullDescriptionPt,
-          },
-          {
-            labelKey: 'pages.admin.projects.fields.fullDescriptionEn.label',
-            value: project.fullDescriptionEn,
+            labelKey: 'pages.admin.operations.localized.fullDescription',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), project.fullDescriptionPt,
+              project.fullDescriptionEn, project.fullDescriptionEs,
+            ),
           },
           {
             labelKey: 'pages.admin.projects.fields.context.label',
@@ -271,8 +270,10 @@ export class ProjectsOperationsModalComponent {
   private toOperationsItem(project: ProjectRecord): OperationsItemViewModel {
     return {
       id: project.id,
-      title: `${project.titlePt} (${project.slug})`,
-      subtitle: project.titleEn,
+      title: `${resolveAdminLocalizedValue(
+        this.translation.locale(), project.titlePt, project.titleEn, project.titleEs,
+      )} (${project.slug})`,
+      subtitle: project.slug,
     };
   }
 }

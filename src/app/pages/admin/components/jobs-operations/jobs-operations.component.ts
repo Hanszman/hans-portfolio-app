@@ -218,12 +218,20 @@ export class JobsOperationsComponent implements OnInit {
     this.patchForm({ nameEn: value });
   }
 
+  updateNameEs(value: string): void {
+    this.patchForm({ nameEs: value });
+  }
+
   updateSummaryPt(value: string): void {
     this.patchForm({ summaryPt: value });
   }
 
   updateSummaryEn(value: string): void {
     this.patchForm({ summaryEn: value });
+  }
+
+  updateSummaryEs(value: string): void {
+    this.patchForm({ summaryEs: value });
   }
 
   updateHighlight(value: boolean): void {

@@ -42,6 +42,7 @@ describe('dashboard helper', () => {
             slug: 'custom-stack',
             namePt: 'Stack custom',
             nameEn: 'Custom stack',
+            nameEs: 'Custom stack',
             projectCount: 1,
             technologyCount: 1,
           },
@@ -315,10 +316,13 @@ describe('dashboard helper', () => {
           slug: 'alpha',
           titlePt: 'Alpha',
           titleEn: 'Alpha',
+          titleEs: 'Alpha',
           shortDescriptionPt: 'Alpha',
           shortDescriptionEn: 'Alpha',
+          shortDescriptionEs: 'Alpha',
           fullDescriptionPt: 'Alpha',
           fullDescriptionEn: 'Alpha',
+          fullDescriptionEs: 'Alpha',
           context: 'PERSONAL',
           status: 'IN_PROGRESS',
           environment: 'FULLSTACK',
@@ -373,10 +377,13 @@ describe('dashboard helper', () => {
           slug: 'beta',
           titlePt: 'Beta',
           titleEn: 'Beta',
+          titleEs: 'Beta',
           shortDescriptionPt: 'Beta',
           shortDescriptionEn: 'Beta',
+          shortDescriptionEs: 'Beta',
           fullDescriptionPt: 'Beta',
           fullDescriptionEn: 'Beta',
+          fullDescriptionEs: 'Beta',
           context: 'PERSONAL',
           status: 'IN_PROGRESS',
           environment: 'FRONTEND',
@@ -460,10 +467,13 @@ describe('dashboard helper', () => {
             slug: 'only-languages',
             titlePt: 'Only languages',
             titleEn: 'Only languages',
+            titleEs: 'Only languages',
             shortDescriptionPt: 'Only languages',
             shortDescriptionEn: 'Only languages',
+            shortDescriptionEs: 'Only languages',
             fullDescriptionPt: 'Only languages',
             fullDescriptionEn: 'Only languages',
+            fullDescriptionEs: 'Only languages',
             context: 'PERSONAL',
             status: 'IN_PROGRESS',
             environment: 'FULLSTACK',
@@ -529,6 +539,7 @@ describe('dashboard helper', () => {
             companyName: 'Older Experience',
             titlePt: 'Capitulo anterior',
             titleEn: 'Previous chapter',
+            titleEs: 'Previous chapter',
             isCurrent: false,
             highlight: false,
             startDate: '2018-01-01',
@@ -543,6 +554,25 @@ describe('dashboard helper', () => {
     expect(cards[0].companyName).toBe('Stefanini Group');
     expect(cards[0].periodLabel).toContain('Atual');
     expect(cards[1].imageUrl).toBe('');
+
+    const legacyItem = createDashboardOverviewResponse().professionalTimeline.items[0];
+    const mapLegacyJobs = (locale: 'pt-br' | 'es-es') =>
+      mapDashboardTimelineCards(
+        {
+          ...createDashboardOverviewResponse().professionalTimeline,
+          items: [
+            {
+              ...legacyItem,
+              jobsPt: undefined,
+              jobsEs: undefined,
+            },
+          ],
+        },
+        locale,
+      )[0].jobs;
+
+    expect(mapLegacyJobs('pt-br')).toEqual(legacyItem.jobs);
+    expect(mapLegacyJobs('es-es')).toEqual(legacyItem.jobs);
   });
 
   it('should break stack and timeline ties with slug and recent start date', () => {
@@ -554,6 +584,7 @@ describe('dashboard helper', () => {
             slug: 'zeta',
             namePt: 'Zeta',
             nameEn: 'Zeta',
+            nameEs: 'Zeta',
             projectCount: 1,
             technologyCount: 1,
           },
@@ -561,6 +592,7 @@ describe('dashboard helper', () => {
             slug: 'alpha',
             namePt: 'Alpha',
             nameEn: 'Alpha',
+            nameEs: 'Alpha',
             projectCount: 1,
             technologyCount: 1,
           },
@@ -615,6 +647,7 @@ describe('dashboard helper', () => {
             slug: 'fallback-highlight',
             titlePt: 'Fallback highlight',
             titleEn: 'Fallback highlight',
+            titleEs: 'Fallback highlight',
             subtitlePt: undefined,
             subtitleEn: undefined,
             featured: false,

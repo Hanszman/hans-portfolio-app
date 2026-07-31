@@ -147,8 +147,10 @@ export const buildJobsFormValue = (
     slug: job.slug,
     namePt: job.namePt,
     nameEn: job.nameEn,
+    nameEs: job.nameEs ?? '',
     summaryPt: job.summaryPt,
     summaryEn: job.summaryEn,
+    summaryEs: job.summaryEs ?? '',
     highlight: job.highlight ?? false,
     sortOrder: String(job.sortOrder ?? 0),
     experienceIds: normalizeJobExperienceIds(job, experiences),
@@ -184,8 +186,10 @@ export const buildJobsViewModels = (
         slug: job.slug,
         namePt: job.namePt,
         nameEn: job.nameEn,
+        nameEs: job.nameEs ?? '',
         summaryPt: job.summaryPt,
         summaryEn: job.summaryEn,
+        summaryEs: job.summaryEs ?? '',
         highlight: job.highlight ?? false,
         sortOrderLabel: String(job.sortOrder ?? 0),
         experienceLabels: experienceIds.map((experienceId) =>
@@ -206,8 +210,10 @@ export const buildJobsMutationPayload = (
   const slug = formValue.slug.trim();
   const namePt = formValue.namePt.trim();
   const nameEn = formValue.nameEn.trim();
+  const nameEs = formValue.nameEs?.trim() ?? nameEn;
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
+  const summaryEs = formValue.summaryEs?.trim() ?? summaryEn;
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
   if (!slug) {
@@ -231,6 +237,10 @@ export const buildJobsMutationPayload = (
     };
   }
 
+  if (!nameEs) {
+    return { isValid: false, errorKey: 'pages.admin.jobs.feedback.requiredNameEs' };
+  }
+
   if (!summaryPt) {
     return {
       isValid: false,
@@ -243,6 +253,10 @@ export const buildJobsMutationPayload = (
       isValid: false,
       errorKey: 'pages.admin.jobs.feedback.requiredSummaryEn',
     };
+  }
+
+  if (!summaryEs) {
+    return { isValid: false, errorKey: 'pages.admin.jobs.feedback.requiredSummaryEs' };
   }
 
   if (!Number.isInteger(sortOrder)) {
@@ -258,8 +272,10 @@ export const buildJobsMutationPayload = (
       slug,
       namePt,
       nameEn,
+      nameEs,
       summaryPt,
       summaryEn,
+      summaryEs,
       highlight: formValue.highlight,
       sortOrder,
       experienceIds: [...new Set(formValue.experienceIds)],

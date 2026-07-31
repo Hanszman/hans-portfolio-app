@@ -36,8 +36,10 @@ export interface LinksOperationsFormValue {
   url: string;
   labelPt: string;
   labelEn: string;
+  labelEs?: string;
   descriptionPt: string;
   descriptionEn: string;
+  descriptionEs?: string;
   type: string;
   sortOrder: string;
   projectIds: readonly string[];
@@ -55,12 +57,17 @@ export const LINKS_OPERATIONS_FIELDS = {
   labelPt: {
     labelKey: 'pages.admin.links.fields.labelPt.label',
     placeholderKey: 'pages.admin.links.fields.labelPt.placeholder',
-    required: false,
+    required: true,
   },
   labelEn: {
     labelKey: 'pages.admin.links.fields.labelEn.label',
     placeholderKey: 'pages.admin.links.fields.labelEn.placeholder',
-    required: false,
+    required: true,
+  },
+  labelEs: {
+    labelKey: 'pages.admin.links.fields.labelEs.label',
+    placeholderKey: 'pages.admin.links.fields.labelEs.placeholder',
+    required: true,
   },
   descriptionPt: {
     labelKey: 'pages.admin.links.fields.descriptionPt.label',
@@ -70,6 +77,11 @@ export const LINKS_OPERATIONS_FIELDS = {
   descriptionEn: {
     labelKey: 'pages.admin.links.fields.descriptionEn.label',
     placeholderKey: 'pages.admin.links.fields.descriptionEn.placeholder',
+    required: false,
+  },
+  descriptionEs: {
+    labelKey: 'pages.admin.links.fields.descriptionEs.label',
+    placeholderKey: 'pages.admin.links.fields.descriptionEs.placeholder',
     required: false,
   },
   type: {
@@ -98,8 +110,10 @@ export interface LinkOperationsViewModel {
   url: string;
   labelPt: string;
   labelEn: string;
+  labelEs?: string;
   descriptionPt: string;
   descriptionEn: string;
+  descriptionEs?: string;
   type: string;
   sortOrderLabel: string;
   projectLabels: readonly string[];
@@ -131,8 +145,10 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   url: '',
   labelPt: '',
   labelEn: '',
+  labelEs: '',
   descriptionPt: '',
   descriptionEn: '',
+  descriptionEs: '',
   type: '',
   sortOrder: '0',
   projectIds: [],

@@ -24,6 +24,7 @@ import {
 import {
   formatAdminDateRangeForDisplay,
   resolveAdminFieldLabel,
+  resolveAdminLocalizedValue,
   resolveAdminRelationLabels,
   resolveAdminSelectValue,
 } from '../../../../helpers/admin.helper';
@@ -112,7 +113,9 @@ export class ExperiencesOperationsModalComponent {
       const relationValue = (
         relations: readonly unknown[] | null | undefined,
         nestedKey: string,
-      ): string => resolveAdminRelationLabels(relations, nestedKey).join(', ') || emptyRelations;
+      ): string =>
+        resolveAdminRelationLabels(relations, nestedKey, this.translation.locale()).join(', ') ||
+        emptyRelations;
 
       return this.experiences().map((experience) => ({
         ...this.toOperationsItem(experience),
@@ -126,28 +129,22 @@ export class ExperiencesOperationsModalComponent {
             value: experience.companyName,
           },
           {
-            labelKey: 'pages.admin.experiences.fields.titlePt.label',
-            value: experience.titlePt,
+            labelKey: 'pages.admin.operations.localized.title',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), experience.titlePt, experience.titleEn, experience.titleEs,
+            ),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.titleEn.label',
-            value: experience.titleEn,
+            labelKey: 'pages.admin.operations.localized.summary',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), experience.summaryPt, experience.summaryEn, experience.summaryEs,
+            ),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.summaryPt.label',
-            value: experience.summaryPt,
-          },
-          {
-            labelKey: 'pages.admin.experiences.fields.summaryEn.label',
-            value: experience.summaryEn,
-          },
-          {
-            labelKey: 'pages.admin.experiences.fields.descriptionPt.label',
-            value: experience.descriptionPt,
-          },
-          {
-            labelKey: 'pages.admin.experiences.fields.descriptionEn.label',
-            value: experience.descriptionEn,
+            labelKey: 'pages.admin.operations.localized.description',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), experience.descriptionPt, experience.descriptionEn, experience.descriptionEs,
+            ),
           },
           {
             labelKey: 'pages.admin.operations.date',
@@ -241,7 +238,9 @@ export class ExperiencesOperationsModalComponent {
     return {
       id: experience.id,
       title: `${experience.companyName} (${experience.slug})`,
-      subtitle: experience.titleEn,
+      subtitle: resolveAdminLocalizedValue(
+        this.translation.locale(), experience.titlePt, experience.titleEn, experience.titleEs,
+      ),
     };
   }
 }

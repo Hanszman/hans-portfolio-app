@@ -5,6 +5,7 @@ export interface ImageAssetProjectReference {
   slug?: string;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface ImageAssetExperienceReference {
@@ -13,6 +14,7 @@ export interface ImageAssetExperienceReference {
   companyName?: string | null;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface ImageAssetTechnologyReference {
@@ -44,8 +46,10 @@ export interface ImageAssetRecord {
   kind: string;
   altPt?: string | null;
   altEn?: string | null;
+  altEs?: string | null;
   captionPt?: string | null;
   captionEn?: string | null;
+  captionEs?: string | null;
   mimeType: string;
   width?: number | null;
   height?: number | null;
@@ -71,8 +75,10 @@ export interface ImageAssetMutationPayload {
   kind: string;
   altPt: string;
   altEn: string;
+  altEs?: string;
   captionPt: string;
   captionEn: string;
+  captionEs?: string;
   mimeType: string;
   width: number | null;
   height: number | null;

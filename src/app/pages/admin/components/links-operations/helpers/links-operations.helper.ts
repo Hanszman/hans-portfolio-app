@@ -177,8 +177,10 @@ export const buildLinksFormValue = (
     url: link.url,
     labelPt: link.labelPt ?? '',
     labelEn: link.labelEn ?? '',
+    labelEs: link.labelEs ?? '',
     descriptionPt: link.descriptionPt ?? '',
     descriptionEn: link.descriptionEn ?? '',
+    descriptionEs: link.descriptionEs ?? '',
     type: link.type ?? '',
     sortOrder: String(link.sortOrder ?? 0),
     projectIds: normalizeLinkProjectIds(link, projects),
@@ -220,8 +222,10 @@ export const buildLinksViewModels = (
         url: link.url,
         labelPt: link.labelPt ?? '',
         labelEn: link.labelEn ?? '',
+        labelEs: link.labelEs ?? '',
         descriptionPt: link.descriptionPt ?? '',
         descriptionEn: link.descriptionEn ?? '',
+        descriptionEs: link.descriptionEs ?? '',
         type: link.type ?? '',
         sortOrderLabel: String(link.sortOrder ?? 0),
         projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
@@ -240,6 +244,9 @@ export const buildLinksMutationPayload = (
   formValue: LinksOperationsFormValue,
 ): LinksMutationBuildResult => {
   const url = formValue.url.trim();
+  const labelPt = formValue.labelPt.trim();
+  const labelEn = formValue.labelEn.trim();
+  const labelEs = formValue.labelEs?.trim() ?? labelEn;
   const type = formValue.type.trim().toUpperCase();
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
@@ -248,6 +255,18 @@ export const buildLinksMutationPayload = (
       isValid: false,
       errorKey: 'pages.admin.links.feedback.requiredUrl',
     };
+  }
+
+  if (!labelPt) {
+    return { isValid: false, errorKey: 'pages.admin.links.feedback.requiredLabelPt' };
+  }
+
+  if (!labelEn) {
+    return { isValid: false, errorKey: 'pages.admin.links.feedback.requiredLabelEn' };
+  }
+
+  if (!labelEs) {
+    return { isValid: false, errorKey: 'pages.admin.links.feedback.requiredLabelEs' };
   }
 
   if (!type) {
@@ -275,10 +294,12 @@ export const buildLinksMutationPayload = (
     isValid: true,
     payload: {
       url,
-      labelPt: formValue.labelPt.trim(),
-      labelEn: formValue.labelEn.trim(),
+      labelPt,
+      labelEn,
+      labelEs,
       descriptionPt: formValue.descriptionPt.trim(),
       descriptionEn: formValue.descriptionEn.trim(),
+      descriptionEs: formValue.descriptionEs?.trim() ?? '',
       type,
       sortOrder,
       projectIds: [...new Set(formValue.projectIds)],

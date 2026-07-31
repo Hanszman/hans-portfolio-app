@@ -46,9 +46,11 @@ export interface FormationsOperationsFormValue {
   institution: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   degreeType: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   startDate: string;
   endDate: string;
   highlight: boolean;
@@ -79,6 +81,11 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.formations.fields.titleEn.placeholder',
     required: true,
   },
+  titleEs: {
+    labelKey: 'pages.admin.formations.fields.titleEs.label',
+    placeholderKey: 'pages.admin.formations.fields.titleEs.placeholder',
+    required: true,
+  },
   degreeType: {
     labelKey: 'pages.admin.formations.fields.degreeType.label',
     required: true,
@@ -91,6 +98,11 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
   summaryEn: {
     labelKey: 'pages.admin.formations.fields.summaryEn.label',
     placeholderKey: 'pages.admin.formations.fields.summaryEn.placeholder',
+    required: true,
+  },
+  summaryEs: {
+    labelKey: 'pages.admin.formations.fields.summaryEs.label',
+    placeholderKey: 'pages.admin.formations.fields.summaryEs.placeholder',
     required: true,
   },
   startDate: {
@@ -136,9 +148,11 @@ export interface FormationOperationsViewModel {
   institution: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   degreeType: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   startDate: string;
   endDateLabel: string;
   highlight: boolean;
@@ -171,9 +185,11 @@ export const createEmptyFormationsOperationsFormValue =
     institution: '',
     titlePt: '',
     titleEn: '',
+    titleEs: '',
     degreeType: '',
     summaryPt: '',
     summaryEn: '',
+    summaryEs: '',
     startDate: '',
     endDate: '',
     highlight: true,

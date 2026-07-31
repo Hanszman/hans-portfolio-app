@@ -60,6 +60,17 @@
         ></hans-input>
 
         <hans-input
+          [label]="resolveFieldLabel('labelEs')"
+          [required]="fields.labelEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().labelEs"
+          [placeholder]="fields.labelEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.labelEs.labelKey | translate"
+          (input)="emitLabelEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
           [label]="resolveFieldLabel('descriptionPt')"
           [required]="fields.descriptionPt.required"
           inputColor="base"
@@ -79,6 +90,17 @@
           [placeholder]="fields.descriptionEn.placeholderKey! | translate"
           [attr.aria-label]="fields.descriptionEn.labelKey | translate"
           (input)="emitDescriptionEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('descriptionEs')"
+          [required]="fields.descriptionEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().descriptionEs"
+          [placeholder]="fields.descriptionEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.descriptionEs.labelKey | translate"
+          (input)="emitDescriptionEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-select-option

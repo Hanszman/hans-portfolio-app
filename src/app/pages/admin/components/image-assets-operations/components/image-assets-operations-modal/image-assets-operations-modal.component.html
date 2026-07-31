@@ -99,6 +99,17 @@
         ></hans-input>
 
         <hans-input
+          [label]="resolveFieldLabel('altEs')"
+          [required]="fields.altEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().altEs"
+          [placeholder]="fields.altEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.altEs.labelKey | translate"
+          (input)="emitAltEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
           [label]="resolveFieldLabel('captionPt')"
           [required]="fields.captionPt.required"
           inputColor="base"
@@ -118,6 +129,17 @@
           [placeholder]="fields.captionEn.placeholderKey! | translate"
           [attr.aria-label]="fields.captionEn.labelKey | translate"
           (input)="emitCaptionEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('captionEs')"
+          [required]="fields.captionEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().captionEs"
+          [placeholder]="fields.captionEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.captionEs.labelKey | translate"
+          (input)="emitCaptionEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-input

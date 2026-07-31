@@ -12,6 +12,7 @@ const CUSTOMERS: readonly CustomerOperationsViewModel[] = [
     name: 'Enterprise Client',
     summaryPt: 'Cliente corporativo',
     summaryEn: 'Corporate client',
+    summaryEs: 'Corporate client',
     highlight: true,
     sortOrderLabel: '1',
     experienceLabels: ['Analista (Ford)'],
@@ -25,6 +26,7 @@ const CUSTOMERS: readonly CustomerOperationsViewModel[] = [
     name: 'Empty Client',
     summaryPt: '',
     summaryEn: '',
+    summaryEs: '',
     highlight: false,
     sortOrderLabel: '2',
     experienceLabels: [],
@@ -66,6 +68,7 @@ describe('CustomersOperationsModalComponent', () => {
     const nameSpy = jasmine.createSpy('nameChanged');
     const summaryPtSpy = jasmine.createSpy('summaryPtChanged');
     const summaryEnSpy = jasmine.createSpy('summaryEnChanged');
+    const summaryEsSpy = jasmine.createSpy('summaryEsChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const experienceSpy = jasmine.createSpy('experienceToggled');
@@ -78,6 +81,7 @@ describe('CustomersOperationsModalComponent', () => {
     component.nameChanged.subscribe(nameSpy);
     component.summaryPtChanged.subscribe(summaryPtSpy);
     component.summaryEnChanged.subscribe(summaryEnSpy);
+    component.summaryEsChanged.subscribe(summaryEsSpy);
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.experienceToggled.subscribe(experienceSpy);
@@ -118,6 +122,7 @@ describe('CustomersOperationsModalComponent', () => {
       emitNameChange(value: string): void;
       emitSummaryPtChange(value: string): void;
       emitSummaryEnChange(value: string): void;
+      emitSummaryEsChange(value: string): void;
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -133,6 +138,7 @@ describe('CustomersOperationsModalComponent', () => {
     componentAccess.emitNameChange('Enterprise Client');
     componentAccess.emitSummaryPtChange('Cliente corporativo');
     componentAccess.emitSummaryEnChange('Corporate client');
+    componentAccess.emitSummaryEsChange('Cliente corporativo');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
@@ -157,15 +163,24 @@ describe('CustomersOperationsModalComponent', () => {
       'Name',
       'Portuguese summary',
       'English summary',
+      'Spanish summary',
       'Sort order',
     ]);
-    expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true, true]);
+    expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(slugSpy).toHaveBeenCalledOnceWith('enterprise-client');
     expect(nameSpy).toHaveBeenCalledOnceWith('Enterprise Client');
     expect(summaryPtSpy).toHaveBeenCalledOnceWith('Cliente corporativo');
     expect(summaryEnSpy).toHaveBeenCalledOnceWith('Corporate client');
+    expect(summaryEsSpy).toHaveBeenCalledOnceWith('Cliente corporativo');
     expect(highlightSpy).toHaveBeenCalledWith(true);
     expect(highlightSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
@@ -235,6 +250,7 @@ describe('CustomersOperationsModalComponent', () => {
       name: 'Enterprise Client',
       summaryPt: 'Cliente corporativo',
       summaryEn: null,
+      summaryEs: null,
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -245,6 +261,7 @@ describe('CustomersOperationsModalComponent', () => {
       name: 'Enterprise Client',
       summaryPt: 'Cliente corporativo',
       summaryEn: 'Corporate client',
+      summaryEs: 'Corporate client',
       highlight: true,
       sortOrder: '1',
       experienceIds: ['experience-1'],

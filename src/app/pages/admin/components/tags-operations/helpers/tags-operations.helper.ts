@@ -13,6 +13,7 @@ import {
   createEmptyTagsOperationsFormValue,
   createTagCatalogOptionViewModel,
   resolveTagNameEn,
+  resolveTagNameEs,
   resolveTagNamePt,
   resolveTagProjectIdFromRelation,
   resolveTagTechnologyIdFromRelation,
@@ -114,6 +115,7 @@ export const buildTagsFormValue = (
     slug: tag.slug,
     namePt: resolveTagNamePt(tag),
     nameEn: resolveTagNameEn(tag),
+    nameEs: resolveTagNameEs(tag),
     type: (tag.type?.toUpperCase() as TagsOperationsFormValue['type']) ?? '',
     sortOrder: String(tag.sortOrder ?? 0),
     projectIds: normalizeTagProjectIds(tag, projects),
@@ -149,6 +151,7 @@ export const buildTagsViewModels = (
         slug: tag.slug,
         namePt: resolveTagNamePt(tag),
         nameEn: resolveTagNameEn(tag),
+        nameEs: resolveTagNameEs(tag),
         type: tag.type?.toUpperCase() ?? '',
         sortOrderLabel: String(tag.sortOrder ?? 0),
         projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
@@ -167,6 +170,7 @@ export const buildTagsMutationPayload = (
   const slug = formValue.slug.trim();
   const namePt = formValue.namePt.trim();
   const nameEn = formValue.nameEn.trim();
+  const nameEs = formValue.nameEs?.trim() ?? nameEn;
   const type = formValue.type.trim().toUpperCase();
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
@@ -189,6 +193,10 @@ export const buildTagsMutationPayload = (
       isValid: false,
       errorKey: 'pages.admin.tags.feedback.requiredNameEn',
     };
+  }
+
+  if (!nameEs) {
+    return { isValid: false, errorKey: 'pages.admin.tags.feedback.requiredNameEs' };
   }
 
   if (!type) {
@@ -218,6 +226,7 @@ export const buildTagsMutationPayload = (
       slug,
       namePt,
       nameEn,
+      nameEs,
       type,
       sortOrder,
       projectIds: [...new Set(formValue.projectIds)],

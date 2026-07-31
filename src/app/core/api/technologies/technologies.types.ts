@@ -11,6 +11,9 @@ export interface TechnologyExperienceDurationResponse {
   years: number;
   months: number;
   label: string;
+  labelPt?: string;
+  labelEn?: string;
+  labelEs?: string;
   startedAt: string | null;
   endedAt: string | null;
 }
@@ -26,6 +29,7 @@ export interface TechnologyImageAssetResponse {
   kind: string;
   altPt: string | null;
   altEn: string | null;
+  altEs?: string | null;
 }
 
 export interface TechnologyImageAssetRelationResponse {
@@ -70,20 +74,41 @@ export interface TechnologyRelationRecord {
   formationId?: string;
   tagId?: string;
   linkId?: string;
-  project?: { id: string; slug?: string; titlePt?: string | null } | null;
+  project?: {
+    id: string;
+    slug?: string;
+    titlePt?: string | null;
+    titleEn?: string | null;
+    titleEs?: string | null;
+  } | null;
   experience?: {
     id: string;
     slug?: string;
     titlePt?: string | null;
+    titleEn?: string | null;
+    titleEs?: string | null;
     companyName?: string | null;
   } | null;
-  formation?: { id: string; slug?: string; titlePt?: string | null } | null;
-  tag?: { id: string; slug?: string; namePt?: string | null } | null;
+  formation?: {
+    id: string;
+    slug?: string;
+    titlePt?: string | null;
+    titleEn?: string | null;
+    titleEs?: string | null;
+  } | null;
+  tag?: {
+    id: string;
+    slug?: string;
+    namePt?: string | null;
+    nameEn?: string | null;
+    nameEs?: string | null;
+  } | null;
   link?: {
     id: string;
     url?: string | null;
     labelPt?: string | null;
     labelEn?: string | null;
+    labelEs?: string | null;
   } | null;
 }
 

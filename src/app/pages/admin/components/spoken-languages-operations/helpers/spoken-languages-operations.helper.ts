@@ -89,6 +89,7 @@ export const buildSpokenLanguagesFormValue = (
     code: spokenLanguage.code,
     namePt: spokenLanguage.namePt,
     nameEn: spokenLanguage.nameEn,
+    nameEs: spokenLanguage.nameEs ?? '',
     proficiency:
       (spokenLanguage.proficiency?.toUpperCase() as SpokenLanguagesOperationsFormValue['proficiency']) ??
       '',
@@ -123,6 +124,7 @@ export const buildSpokenLanguagesViewModels = (
         code: spokenLanguage.code,
         namePt: spokenLanguage.namePt,
         nameEn: spokenLanguage.nameEn,
+        nameEs: spokenLanguage.nameEs ?? '',
         proficiency: spokenLanguage.proficiency?.toUpperCase() ?? '',
         highlight: spokenLanguage.highlight ?? false,
         sortOrderLabel: String(spokenLanguage.sortOrder ?? 0),
@@ -140,6 +142,7 @@ export const buildSpokenLanguagesMutationPayload = (
   const code = formValue.code.trim();
   const namePt = formValue.namePt.trim();
   const nameEn = formValue.nameEn.trim();
+  const nameEs = formValue.nameEs?.trim() ?? nameEn;
   const proficiency = formValue.proficiency.trim().toUpperCase();
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
@@ -161,6 +164,13 @@ export const buildSpokenLanguagesMutationPayload = (
     return {
       isValid: false,
       errorKey: 'pages.admin.spokenLanguages.feedback.requiredNameEn',
+    };
+  }
+
+  if (!nameEs) {
+    return {
+      isValid: false,
+      errorKey: 'pages.admin.spokenLanguages.feedback.requiredNameEs',
     };
   }
 
@@ -195,6 +205,7 @@ export const buildSpokenLanguagesMutationPayload = (
       code,
       namePt,
       nameEn,
+      nameEs,
       proficiency,
       highlight: formValue.highlight,
       sortOrder,

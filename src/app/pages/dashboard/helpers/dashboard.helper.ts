@@ -325,6 +325,7 @@ export const mapDashboardStackRows = (
         {
           'pt-br': stack.namePt,
           'en-us': stack.nameEn,
+          'es-es': stack.nameEs,
         },
         stack.nameEn,
       ),
@@ -415,6 +416,7 @@ const mapDashboardHighlightCard = (
     {
       'pt-br': highlight.titlePt,
       'en-us': highlight.titleEn,
+      'es-es': highlight.titleEs,
     },
     highlight.titleEn,
   ),
@@ -423,6 +425,7 @@ const mapDashboardHighlightCard = (
     {
       'pt-br': highlight.subtitlePt ?? undefined,
       'en-us': highlight.subtitleEn ?? undefined,
+      'es-es': highlight.subtitleEs ?? undefined,
     },
     highlight.subtitleEn ?? '',
   ),
@@ -453,13 +456,19 @@ export const mapDashboardTimelineCards = (
         {
           'pt-br': item.titlePt,
           'en-us': item.titleEn,
+          'es-es': item.titleEs,
         },
         item.titleEn,
       ),
       periodLabel: formatTimelinePeriod(item.startDate, item.endDate, locale),
       isCurrent: item.isCurrent,
       isHighlight: item.highlight,
-      jobs: item.jobs,
+      jobs:
+        locale === 'pt-br'
+          ? (item.jobsPt ?? item.jobs)
+          : locale === 'es-es'
+            ? (item.jobsEs ?? item.jobs)
+            : (item.jobsEn ?? item.jobs),
       customers: item.customers,
       projects: item.projects,
       technologies: item.technologies,

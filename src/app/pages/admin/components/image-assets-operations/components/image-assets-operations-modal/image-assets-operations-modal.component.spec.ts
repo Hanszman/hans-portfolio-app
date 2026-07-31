@@ -13,8 +13,10 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     kind: 'ICON',
     altPt: 'Logo azul da Hans',
     altEn: 'Hans blue logo',
+    altEs: 'Hans blue logo',
     captionPt: 'Versao azul da marca.',
     captionEn: 'Blue brand version.',
+    captionEs: 'Blue brand version.',
     mimeType: 'image/svg+xml',
     dimensionsLabel: '240 x 96',
     sortOrderLabel: '1',
@@ -34,8 +36,10 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     kind: 'ICON',
     altPt: '',
     altEn: '',
+    altEs: '',
     captionPt: '',
     captionEn: '',
+    captionEs: '',
     mimeType: '',
     dimensionsLabel: '-',
     sortOrderLabel: '2',
@@ -84,8 +88,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const kindSpy = jasmine.createSpy('kindChanged');
     const altPtSpy = jasmine.createSpy('altPtChanged');
     const altEnSpy = jasmine.createSpy('altEnChanged');
+    const altEsSpy = jasmine.createSpy('altEsChanged');
     const captionPtSpy = jasmine.createSpy('captionPtChanged');
     const captionEnSpy = jasmine.createSpy('captionEnChanged');
+    const captionEsSpy = jasmine.createSpy('captionEsChanged');
     const mimeTypeSpy = jasmine.createSpy('mimeTypeChanged');
     const widthSpy = jasmine.createSpy('widthChanged');
     const heightSpy = jasmine.createSpy('heightChanged');
@@ -103,8 +109,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     component.kindChanged.subscribe(kindSpy);
     component.altPtChanged.subscribe(altPtSpy);
     component.altEnChanged.subscribe(altEnSpy);
+    component.altEsChanged.subscribe(altEsSpy);
     component.captionPtChanged.subscribe(captionPtSpy);
     component.captionEnChanged.subscribe(captionEnSpy);
+    component.captionEsChanged.subscribe(captionEsSpy);
     component.mimeTypeChanged.subscribe(mimeTypeSpy);
     component.widthChanged.subscribe(widthSpy);
     component.heightChanged.subscribe(heightSpy);
@@ -148,8 +156,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
       emitKindChange(value: string): void;
       emitAltPtChange(value: string): void;
       emitAltEnChange(value: string): void;
+      emitAltEsChange(value: string): void;
       emitCaptionPtChange(value: string): void;
       emitCaptionEnChange(value: string): void;
+      emitCaptionEsChange(value: string): void;
       emitMimeTypeChange(value: string): void;
       emitWidthChange(value: string): void;
       emitHeightChange(value: string): void;
@@ -171,8 +181,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     componentAccess.emitKindChange('ICON');
     componentAccess.emitAltPtChange('Logo');
     componentAccess.emitAltEnChange('Logo');
+    componentAccess.emitAltEsChange('Logotipo');
     componentAccess.emitCaptionPtChange('Legenda');
     componentAccess.emitCaptionEnChange('Caption');
+    componentAccess.emitCaptionEsChange('Leyenda');
     componentAccess.emitMimeTypeChange('image/svg+xml');
     componentAccess.emitWidthChange('240');
     componentAccess.emitHeightChange('96');
@@ -197,8 +209,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
       'Folder',
       'Portuguese alt text',
       'English alt text',
+      'Spanish alternative text',
       'Portuguese caption',
       'English caption',
+      'Spanish caption',
       'MIME type',
       'Width',
       'Height',
@@ -208,6 +222,8 @@ describe('ImageAssetsOperationsModalComponent', () => {
       true,
       true,
       true,
+      false,
+      false,
       false,
       false,
       false,
@@ -225,8 +241,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(kindSpy).toHaveBeenCalledOnceWith('ICON');
     expect(altPtSpy).toHaveBeenCalledOnceWith('Logo');
     expect(altEnSpy).toHaveBeenCalledOnceWith('Logo');
+    expect(altEsSpy).toHaveBeenCalledOnceWith('Logotipo');
     expect(captionPtSpy).toHaveBeenCalledOnceWith('Legenda');
     expect(captionEnSpy).toHaveBeenCalledOnceWith('Caption');
+    expect(captionEsSpy).toHaveBeenCalledOnceWith('Leyenda');
     expect(mimeTypeSpy).toHaveBeenCalledOnceWith('image/svg+xml');
     expect(widthSpy).toHaveBeenCalledOnceWith('240');
     expect(heightSpy).toHaveBeenCalledOnceWith('96');
@@ -323,8 +341,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
       kind: 'ICON',
       altPt: '',
       altEn: '',
+      altEs: '',
       captionPt: '',
       captionEn: '',
+      captionEs: '',
       mimeType: 'image/svg+xml',
       width: '240',
       height: '96',

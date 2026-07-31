@@ -60,6 +60,17 @@
         ></hans-input>
 
         <hans-input
+          [label]="resolveFieldLabel('nameEs')"
+          [required]="fields.nameEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().nameEs"
+          [placeholder]="fields.nameEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.nameEs.labelKey | translate"
+          (input)="emitNameEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
           [label]="resolveFieldLabel('summaryPt')"
           [required]="fields.summaryPt.required"
           inputColor="base"
@@ -79,6 +90,17 @@
           [placeholder]="fields.summaryEn.placeholderKey! | translate"
           [attr.aria-label]="fields.summaryEn.labelKey | translate"
           (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryEs')"
+          [required]="fields.summaryEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEs"
+          [placeholder]="fields.summaryEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEs.labelKey | translate"
+          (input)="emitSummaryEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <div class="jobs-operations-toggle">

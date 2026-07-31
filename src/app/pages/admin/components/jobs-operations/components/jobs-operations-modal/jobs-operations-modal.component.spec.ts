@@ -11,8 +11,10 @@ const JOBS: readonly JobOperationsViewModel[] = [
     slug: 'frontend-engineer',
     namePt: 'Engenheiro Front-End',
     nameEn: 'Front-End Engineer',
+    nameEs: 'Front-End Engineer',
     summaryPt: 'Interfaces publicas e privadas.',
     summaryEn: 'Public and private interfaces.',
+    summaryEs: 'Public and private interfaces.',
     highlight: true,
     sortOrderLabel: '1',
     experienceLabels: ['Analista (Ford)'],
@@ -25,8 +27,10 @@ const JOBS: readonly JobOperationsViewModel[] = [
     slug: 'empty-job',
     namePt: 'Cargo vazio',
     nameEn: '',
+    nameEs: '',
     summaryPt: '',
     summaryEn: '',
+    summaryEs: '',
     highlight: false,
     sortOrderLabel: '2',
     experienceLabels: [],
@@ -67,8 +71,10 @@ describe('JobsOperationsModalComponent', () => {
     const slugSpy = jasmine.createSpy('slugChanged');
     const namePtSpy = jasmine.createSpy('namePtChanged');
     const nameEnSpy = jasmine.createSpy('nameEnChanged');
+    const nameEsSpy = jasmine.createSpy('nameEsChanged');
     const summaryPtSpy = jasmine.createSpy('summaryPtChanged');
     const summaryEnSpy = jasmine.createSpy('summaryEnChanged');
+    const summaryEsSpy = jasmine.createSpy('summaryEsChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const experienceSpy = jasmine.createSpy('experienceToggled');
@@ -80,8 +86,10 @@ describe('JobsOperationsModalComponent', () => {
     component.slugChanged.subscribe(slugSpy);
     component.namePtChanged.subscribe(namePtSpy);
     component.nameEnChanged.subscribe(nameEnSpy);
+    component.nameEsChanged.subscribe(nameEsSpy);
     component.summaryPtChanged.subscribe(summaryPtSpy);
     component.summaryEnChanged.subscribe(summaryEnSpy);
+    component.summaryEsChanged.subscribe(summaryEsSpy);
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.experienceToggled.subscribe(experienceSpy);
@@ -121,8 +129,10 @@ describe('JobsOperationsModalComponent', () => {
       emitSlugChange(value: string): void;
       emitNamePtChange(value: string): void;
       emitNameEnChange(value: string): void;
+      emitNameEsChange(value: string): void;
       emitSummaryPtChange(value: string): void;
       emitSummaryEnChange(value: string): void;
+      emitSummaryEsChange(value: string): void;
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -137,8 +147,10 @@ describe('JobsOperationsModalComponent', () => {
     componentAccess.emitSlugChange('frontend-engineer');
     componentAccess.emitNamePtChange('Engenheiro Front-End');
     componentAccess.emitNameEnChange('Front-End Engineer');
+    componentAccess.emitNameEsChange('Ingeniero Front-End');
     componentAccess.emitSummaryPtChange('Interfaces publicas e privadas.');
     componentAccess.emitSummaryEnChange('Public and private interfaces.');
+    componentAccess.emitSummaryEsChange('Interfaces públicas y privadas.');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
@@ -162,11 +174,15 @@ describe('JobsOperationsModalComponent', () => {
       'Slug',
       'Portuguese name',
       'English name',
+      'Spanish name',
       'Portuguese summary',
       'English summary',
+      'Spanish summary',
       'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
       true,
       true,
       true,
@@ -179,8 +195,10 @@ describe('JobsOperationsModalComponent', () => {
     expect(slugSpy).toHaveBeenCalledOnceWith('frontend-engineer');
     expect(namePtSpy).toHaveBeenCalledOnceWith('Engenheiro Front-End');
     expect(nameEnSpy).toHaveBeenCalledOnceWith('Front-End Engineer');
+    expect(nameEsSpy).toHaveBeenCalledOnceWith('Ingeniero Front-End');
     expect(summaryPtSpy).toHaveBeenCalledOnceWith('Interfaces publicas e privadas.');
     expect(summaryEnSpy).toHaveBeenCalledOnceWith('Public and private interfaces.');
+    expect(summaryEsSpy).toHaveBeenCalledOnceWith('Interfaces públicas y privadas.');
     expect(highlightSpy).toHaveBeenCalledWith(true);
     expect(highlightSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
@@ -206,7 +224,7 @@ describe('JobsOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', 'read');
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.textContent).toContain('Engenheiro Front-End');
+    expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
     expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
     expect(fixture.nativeElement.textContent).toContain('ford.svg (ICON)');
 
@@ -249,8 +267,10 @@ describe('JobsOperationsModalComponent', () => {
       slug: 'frontend-engineer',
       namePt: 'Engenheiro Front-End',
       nameEn: null,
+      nameEs: null,
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
+      summaryEs: 'Public and private interfaces.',
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -260,8 +280,10 @@ describe('JobsOperationsModalComponent', () => {
       slug: 'frontend-engineer',
       namePt: 'Engenheiro Front-End',
       nameEn: 'Front-End Engineer',
+      nameEs: 'Front-End Engineer',
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
+      summaryEs: 'Public and private interfaces.',
       highlight: true,
       sortOrder: '1',
       experienceIds: ['experience-1'],

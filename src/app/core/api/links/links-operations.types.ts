@@ -5,6 +5,7 @@ export interface LinkProjectReference {
   slug?: string;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface LinkExperienceReference {
@@ -13,6 +14,7 @@ export interface LinkExperienceReference {
   companyName?: string | null;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface LinkTechnologyReference {
@@ -26,6 +28,7 @@ export interface LinkFormationReference {
   slug?: string;
   namePt?: string | null;
   nameEn?: string | null;
+  nameEs?: string | null;
 }
 
 export interface LinkProjectRelationRecord {
@@ -53,8 +56,10 @@ export interface LinkRecord {
   url: string;
   labelPt?: string | null;
   labelEn?: string | null;
+  labelEs?: string | null;
   descriptionPt?: string | null;
   descriptionEn?: string | null;
+  descriptionEs?: string | null;
   type?: string | null;
   sortOrder?: number | null;
   projectIds?: string[] | null;
@@ -73,8 +78,10 @@ export interface LinkMutationPayload {
   url: string;
   labelPt: string;
   labelEn: string;
+  labelEs?: string;
   descriptionPt: string;
   descriptionEn: string;
+  descriptionEs?: string;
   type: string;
   sortOrder: number;
   projectIds: string[];

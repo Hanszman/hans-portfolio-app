@@ -36,6 +36,7 @@ export interface SpokenLanguagesOperationsFormValue {
   code: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   proficiency: SpokenLanguageProficiencyValue | '';
   highlight: boolean;
   sortOrder: string;
@@ -56,6 +57,11 @@ export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
   nameEn: {
     labelKey: 'pages.admin.spokenLanguages.fields.nameEn.label',
     placeholderKey: 'pages.admin.spokenLanguages.fields.nameEn.placeholder',
+    required: true,
+  },
+  nameEs: {
+    labelKey: 'pages.admin.spokenLanguages.fields.nameEs.label',
+    placeholderKey: 'pages.admin.spokenLanguages.fields.nameEs.placeholder',
     required: true,
   },
   proficiency: {
@@ -82,6 +88,7 @@ export interface SpokenLanguageOperationsViewModel {
   code: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   proficiency: string;
   highlight: boolean;
   sortOrderLabel: string;
@@ -108,6 +115,7 @@ export const createEmptySpokenLanguagesOperationsFormValue =
     code: '',
     namePt: '',
     nameEn: '',
+    nameEs: '',
     proficiency: '',
     highlight: true,
     sortOrder: '0',

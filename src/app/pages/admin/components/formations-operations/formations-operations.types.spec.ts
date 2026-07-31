@@ -18,9 +18,11 @@ describe('formations operations types', () => {
       institution: '',
       titlePt: '',
       titleEn: '',
+      titleEs: '',
       degreeType: '',
       summaryPt: '',
       summaryEn: '',
+      summaryEs: '',
       startDate: '',
       endDate: '',
       highlight: true,
@@ -77,6 +79,7 @@ describe('formations operations types', () => {
         url: 'https://example.com/en',
         labelPt: '',
         labelEn: 'Portal EN',
+        labelEs: 'Portal EN',
       }),
     ).toEqual({
       id: 'link-2',
@@ -90,6 +93,7 @@ describe('formations operations types', () => {
         url: 'https://example.com/url',
         labelPt: '',
         labelEn: '',
+        labelEs: '',
       }),
     ).toEqual({
       id: 'link-3',

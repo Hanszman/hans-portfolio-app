@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
 import {
@@ -67,8 +68,10 @@ export class JobsOperationsModalComponent {
   readonly slugChanged = output<string>();
   readonly namePtChanged = output<string>();
   readonly nameEnChanged = output<string>();
+  readonly nameEsChanged = output<string>();
   readonly summaryPtChanged = output<string>();
   readonly summaryEnChanged = output<string>();
+  readonly summaryEsChanged = output<string>();
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
   readonly experienceToggled = output<string>();
@@ -117,7 +120,9 @@ export class JobsOperationsModalComponent {
     this.jobs().map((job) => ({
       id: job.id,
       title: `${job.namePt} (${job.slug})`,
-      subtitle: job.nameEn,
+      subtitle: resolveAdminLocalizedValue(
+        this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
+      ),
     })),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
@@ -128,13 +133,23 @@ export class JobsOperationsModalComponent {
       return this.jobs().map((job) => ({
         id: job.id,
         title: job.slug,
-        subtitle: job.namePt,
+        subtitle: resolveAdminLocalizedValue(
+          this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
+        ),
         fields: [
           { labelKey: 'pages.admin.jobs.card.slug', value: job.slug },
-          { labelKey: 'pages.admin.jobs.card.namePt', value: job.namePt },
-          { labelKey: 'pages.admin.jobs.card.nameEn', value: job.nameEn },
-          { labelKey: 'pages.admin.jobs.card.summaryPt', value: job.summaryPt },
-          { labelKey: 'pages.admin.jobs.card.summaryEn', value: job.summaryEn },
+          {
+            labelKey: 'pages.admin.operations.localized.name',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
+            ),
+          },
+          {
+            labelKey: 'pages.admin.operations.localized.summary',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), job.summaryPt, job.summaryEn, job.summaryEs,
+            ),
+          },
           {
             labelKey: 'pages.admin.jobs.card.highlight',
             value: this.translation.instant(
@@ -162,7 +177,9 @@ export class JobsOperationsModalComponent {
       ? {
           id: job.id,
           title: `${job.namePt} (${job.slug})`,
-          subtitle: job.nameEn ?? undefined,
+          subtitle: resolveAdminLocalizedValue(
+            this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
+          ),
         }
       : null;
   });
@@ -187,12 +204,20 @@ export class JobsOperationsModalComponent {
     this.nameEnChanged.emit(value);
   }
 
+  protected emitNameEsChange(value: string): void {
+    this.nameEsChanged.emit(value);
+  }
+
   protected emitSummaryPtChange(value: string): void {
     this.summaryPtChanged.emit(value);
   }
 
   protected emitSummaryEnChange(value: string): void {
     this.summaryEnChanged.emit(value);
+  }
+
+  protected emitSummaryEsChange(value: string): void {
+    this.summaryEsChanged.emit(value);
   }
 
   protected emitSortOrderChange(value: string): void {

@@ -29,10 +29,13 @@ export interface ProjectsOperationsFormValue {
   slug: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   shortDescriptionPt: string;
   shortDescriptionEn: string;
+  shortDescriptionEs?: string;
   fullDescriptionPt: string;
   fullDescriptionEn: string;
+  fullDescriptionEs?: string;
   context: ProjectContext | '';
   status: ProjectStatus | '';
   environment: ProjectEnvironment | '';
@@ -64,6 +67,11 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.projects.fields.titleEn.placeholder',
     required: true,
   },
+  titleEs: {
+    labelKey: 'pages.admin.projects.fields.titleEs.label',
+    placeholderKey: 'pages.admin.projects.fields.titleEs.placeholder',
+    required: true,
+  },
   shortDescriptionPt: {
     labelKey: 'pages.admin.projects.fields.shortDescriptionPt.label',
     placeholderKey: 'pages.admin.projects.fields.shortDescriptionPt.placeholder',
@@ -74,6 +82,11 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.projects.fields.shortDescriptionEn.placeholder',
     required: true,
   },
+  shortDescriptionEs: {
+    labelKey: 'pages.admin.projects.fields.shortDescriptionEs.label',
+    placeholderKey: 'pages.admin.projects.fields.shortDescriptionEs.placeholder',
+    required: true,
+  },
   fullDescriptionPt: {
     labelKey: 'pages.admin.projects.fields.fullDescriptionPt.label',
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionPt.placeholder',
@@ -82,6 +95,11 @@ export const PROJECTS_OPERATIONS_FIELDS = {
   fullDescriptionEn: {
     labelKey: 'pages.admin.projects.fields.fullDescriptionEn.label',
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionEn.placeholder',
+    required: true,
+  },
+  fullDescriptionEs: {
+    labelKey: 'pages.admin.projects.fields.fullDescriptionEs.label',
+    placeholderKey: 'pages.admin.projects.fields.fullDescriptionEs.placeholder',
     required: true,
   },
   context: {
@@ -120,10 +138,13 @@ export const PROJECTS_OPERATIONS_FORM_FIELDS = [
   'slug',
   'titlePt',
   'titleEn',
+  'titleEs',
   'shortDescriptionPt',
   'shortDescriptionEn',
+  'shortDescriptionEs',
   'fullDescriptionPt',
   'fullDescriptionEn',
+  'fullDescriptionEs',
   'sortOrder',
 ] as const;
 
@@ -173,10 +194,13 @@ export const createEmptyProjectsOperationsFormValue = (): ProjectsOperationsForm
   slug: '',
   titlePt: '',
   titleEn: '',
+  titleEs: '',
   shortDescriptionPt: '',
   shortDescriptionEn: '',
+  shortDescriptionEs: '',
   fullDescriptionPt: '',
   fullDescriptionEn: '',
+  fullDescriptionEs: '',
   context: '',
   status: '',
   environment: '',
@@ -283,10 +307,13 @@ export const buildProjectsFormValue = (
         slug: record.slug,
         titlePt: record.titlePt,
         titleEn: record.titleEn,
+        titleEs: record.titleEs ?? '',
         shortDescriptionPt: record.shortDescriptionPt,
         shortDescriptionEn: record.shortDescriptionEn,
+        shortDescriptionEs: record.shortDescriptionEs ?? '',
         fullDescriptionPt: record.fullDescriptionPt,
         fullDescriptionEn: record.fullDescriptionEn,
+        fullDescriptionEs: record.fullDescriptionEs ?? '',
         context: record.context,
         status: record.status,
         environment: record.environment,
@@ -310,12 +337,15 @@ export const buildProjectsMutationPayload = (
     'slug',
     'titlePt',
     'titleEn',
+    'titleEs',
     'shortDescriptionPt',
     'shortDescriptionEn',
+    'shortDescriptionEs',
     'fullDescriptionPt',
     'fullDescriptionEn',
+    'fullDescriptionEs',
   ] as const)
-    if (!form[key].trim())
+    if (!form[key]?.trim())
       return {
         isValid: false,
         errorKey:
@@ -351,10 +381,13 @@ export const buildProjectsMutationPayload = (
       slug: form.slug.trim(),
       titlePt: form.titlePt.trim(),
       titleEn: form.titleEn.trim(),
+      titleEs: form.titleEs!.trim(),
       shortDescriptionPt: form.shortDescriptionPt.trim(),
       shortDescriptionEn: form.shortDescriptionEn.trim(),
+      shortDescriptionEs: form.shortDescriptionEs!.trim(),
       fullDescriptionPt: form.fullDescriptionPt.trim(),
       fullDescriptionEn: form.fullDescriptionEn.trim(),
+      fullDescriptionEs: form.fullDescriptionEs!.trim(),
       context: form.context,
       status: form.status,
       environment: form.environment,

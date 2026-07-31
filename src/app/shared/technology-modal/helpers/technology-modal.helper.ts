@@ -173,6 +173,7 @@ const resolveTechnologyImage = (
       {
         'pt-br': imageAsset.imageAsset.altPt ?? undefined,
         'en-us': imageAsset.imageAsset.altEn ?? undefined,
+        'es-es': imageAsset.imageAsset.altEs ?? undefined,
       },
       `${technology.name} icon`,
     ),
@@ -275,7 +276,17 @@ export const resolveTechnologyModalItem = (
         TECHNOLOGY_FREQUENCY_LABEL_KEYS,
         technology.frequency,
       ) ?? reference.frequency,
-    experience: technology.experienceMetrics?.total.label ?? reference.experience,
+    experience: technology.experienceMetrics
+      ? resolveLocalizedText(
+          locale,
+          {
+            'pt-br': technology.experienceMetrics.total.labelPt,
+            'en-us': technology.experienceMetrics.total.labelEn,
+            'es-es': technology.experienceMetrics.total.labelEs,
+          },
+          technology.experienceMetrics.total.label,
+        )
+      : reference.experience,
     projectCount,
     image: resolveTechnologyImage(technology, locale, reference),
   };

@@ -14,6 +14,7 @@ describe('spoken languages types helpers', () => {
       code: '',
       namePt: '',
       nameEn: '',
+      nameEs: '',
       proficiency: '',
       highlight: true,
       sortOrder: '0',

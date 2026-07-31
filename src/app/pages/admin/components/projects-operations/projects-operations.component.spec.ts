@@ -24,10 +24,13 @@ const response = (
       slug: 'p',
       titlePt: 'PT',
       titleEn: 'EN',
+      titleEs: 'EN',
       shortDescriptionPt: 'S',
       shortDescriptionEn: 'S',
+      shortDescriptionEs: 'S',
       fullDescriptionPt: 'D',
       fullDescriptionEn: 'D',
+      fullDescriptionEs: 'D',
       context: 'PROFESSIONAL',
       status: 'COMPLETED',
       environment: 'FRONTEND',
@@ -105,10 +108,13 @@ const fillRequiredProjectFields = (component: ComponentApi): void => {
   component.updateField('slug', 'project-slug');
   component.updateField('titlePt', 'Projeto');
   component.updateField('titleEn', 'Project');
+  component.updateField('titleEs', 'Proyecto');
   component.updateField('shortDescriptionPt', 'Resumo');
   component.updateField('shortDescriptionEn', 'Summary');
+  component.updateField('shortDescriptionEs', 'Resumen');
   component.updateField('fullDescriptionPt', 'Descricao');
   component.updateField('fullDescriptionEn', 'Description');
+  component.updateField('fullDescriptionEs', 'Descripción');
   component.updateField('context', 'PROFESSIONAL');
   component.updateField('status', 'COMPLETED');
   component.updateField('environment', 'FRONTEND');

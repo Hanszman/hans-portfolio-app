@@ -17,6 +17,7 @@ export interface DashboardStackDistributionEntryResponse {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   projectCount: number;
   technologyCount: number;
 }
@@ -57,11 +58,15 @@ export interface DashboardTimelineItemResponse {
   companyName: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   startDate: string;
   endDate: string | null;
   isCurrent: boolean;
   highlight: boolean;
   jobs: string[];
+  jobsPt?: string[];
+  jobsEn?: string[];
+  jobsEs?: string[];
   customers: string[];
   projects: string[];
   technologies: string[];
@@ -79,8 +84,10 @@ export interface DashboardHighlightItemResponse {
   slug: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   subtitlePt?: string;
   subtitleEn?: string;
+  subtitleEs?: string;
   icon?: string | null;
   imagePath?: string | null;
   featured?: boolean;

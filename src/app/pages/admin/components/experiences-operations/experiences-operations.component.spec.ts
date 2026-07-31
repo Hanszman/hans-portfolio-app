@@ -26,10 +26,13 @@ const response = (
       companyName: 'Company',
       titlePt: 'PT',
       titleEn: 'EN',
+      titleEs: 'EN',
       summaryPt: 'S',
       summaryEn: 'S',
+      summaryEs: 'S',
       descriptionPt: 'D',
       descriptionEn: 'D',
+      descriptionEs: 'D',
       startDate: '2026-01-01',
       endDate: null,
       isCurrent: false,
@@ -106,10 +109,13 @@ const fillRequiredExperienceFields = (component: ComponentApi): void => {
   component.updateField('companyName', 'Company');
   component.updateField('titlePt', 'Titulo');
   component.updateField('titleEn', 'Title');
+  component.updateField('titleEs', 'Título');
   component.updateField('summaryPt', 'Resumo');
   component.updateField('summaryEn', 'Summary');
+  component.updateField('summaryEs', 'Resumen');
   component.updateField('descriptionPt', 'Descricao');
   component.updateField('descriptionEn', 'Description');
+  component.updateField('descriptionEs', 'Descripción');
   component.updateField('startDate', '2026-01-01');
 };
 

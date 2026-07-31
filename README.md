@@ -149,6 +149,30 @@ update and delete requests. Each of those domains now keeps only its canonical
 service, types and service-spec files; the obsolete `*-operations` API variants
 and the `core/api/admin/` intermediate folder are intentionally absent.
 
+### Localized portfolio content
+
+Static interface copy and API-backed portfolio content support `pt-br`, `en-us`
+and `es-es`. Public mappers always provide all three variants to the centralized
+localization resolver. Admin create/update forms intentionally show Pt, En and Es
+together, while admin read cards show only the active locale under neutral labels
+such as `Title`, `Summary` and `Description`. Changing the global language updates
+an open read modal reactively without fetching the same record again.
+
+When adding another language:
+
+1. Add the locale to the translation types/configuration, language catalog and
+   selector options.
+2. Add the corresponding API properties to domain, nested-relation, dashboard,
+   mutation, mock and fixture types.
+3. Extend every `resolveLocalizedText` map and the shared admin localized-value
+   helper; do not add locale conditionals in components.
+4. Add create/update inputs after the existing localized group, including
+   library `required`, hydration, reset, validation, payload and toast copy.
+5. Keep read mode to one neutral field per localized concept and verify that the
+   open modal reacts to locale changes, including nested relations and media text.
+6. Cover public mapping, CRUD payloads, fallback behavior and locale switching,
+   then run lint, coverage and build together with the backend contract checks.
+
 ### Testing and quality
 
 Every component, page, service, helper, facade, mapper, or any other file with relevant behavior must be implemented together with its unit test.

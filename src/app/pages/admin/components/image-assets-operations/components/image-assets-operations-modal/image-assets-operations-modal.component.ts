@@ -19,6 +19,7 @@ import {
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -75,8 +76,10 @@ export class ImageAssetsOperationsModalComponent {
   readonly kindChanged = output<string>();
   readonly altPtChanged = output<string>();
   readonly altEnChanged = output<string>();
+  readonly altEsChanged = output<string>();
   readonly captionPtChanged = output<string>();
   readonly captionEnChanged = output<string>();
+  readonly captionEsChanged = output<string>();
   readonly mimeTypeChanged = output<string>();
   readonly widthChanged = output<string>();
   readonly heightChanged = output<string>();
@@ -132,7 +135,10 @@ export class ImageAssetsOperationsModalComponent {
       subtitle: imageAsset.filePath,
       image: {
         url: imageAsset.filePath,
-        alt: imageAsset.altEn || imageAsset.fileName,
+        alt:
+          resolveAdminLocalizedValue(
+            this.translation.locale(), imageAsset.altPt, imageAsset.altEn, imageAsset.altEs,
+          ) || imageAsset.fileName,
         title: imageAsset.filePath,
       },
     })),
@@ -151,7 +157,10 @@ export class ImageAssetsOperationsModalComponent {
         subtitle: imageAsset.kind,
         image: {
           url: imageAsset.filePath,
-          alt: imageAsset.altEn || imageAsset.fileName,
+          alt:
+            resolveAdminLocalizedValue(
+              this.translation.locale(), imageAsset.altPt, imageAsset.altEn, imageAsset.altEs,
+            ) || imageAsset.fileName,
           title: imageAsset.filePath,
         },
         fields: [
@@ -179,20 +188,19 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.sortOrderLabel,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.altPt',
-            value: imageAsset.altPt || emptyText,
+            labelKey: 'pages.admin.operations.localized.alt',
+            value:
+              resolveAdminLocalizedValue(
+                this.translation.locale(), imageAsset.altPt, imageAsset.altEn, imageAsset.altEs,
+              ) || emptyText,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.altEn',
-            value: imageAsset.altEn || emptyText,
-          },
-          {
-            labelKey: 'pages.admin.imageAssets.card.captionPt',
-            value: imageAsset.captionPt || emptyText,
-          },
-          {
-            labelKey: 'pages.admin.imageAssets.card.captionEn',
-            value: imageAsset.captionEn || emptyText,
+            labelKey: 'pages.admin.operations.localized.caption',
+            value:
+              resolveAdminLocalizedValue(
+                this.translation.locale(), imageAsset.captionPt, imageAsset.captionEn,
+                imageAsset.captionEs,
+              ) || emptyText,
           },
           {
             labelKey: 'pages.admin.imageAssets.card.projects',
@@ -235,7 +243,10 @@ export class ImageAssetsOperationsModalComponent {
           subtitle: imageAsset.filePath,
           image: {
             url: imageAsset.filePath,
-            alt: imageAsset.altEn ?? imageAsset.fileName,
+            alt:
+              resolveAdminLocalizedValue(
+                this.translation.locale(), imageAsset.altPt, imageAsset.altEn, imageAsset.altEs,
+              ) || imageAsset.fileName,
             title: imageAsset.filePath,
           },
         }
@@ -274,12 +285,20 @@ export class ImageAssetsOperationsModalComponent {
     this.altEnChanged.emit(value);
   }
 
+  protected emitAltEsChange(value: string): void {
+    this.altEsChanged.emit(value);
+  }
+
   protected emitCaptionPtChange(value: string): void {
     this.captionPtChanged.emit(value);
   }
 
   protected emitCaptionEnChange(value: string): void {
     this.captionEnChanged.emit(value);
+  }
+
+  protected emitCaptionEsChange(value: string): void {
+    this.captionEsChanged.emit(value);
   }
 
   protected emitMimeTypeChange(value: string): void {

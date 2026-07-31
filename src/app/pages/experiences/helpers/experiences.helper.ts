@@ -62,6 +62,7 @@ const resolveCompanyImage = (
       {
         'pt-br': imageAsset?.altPt ?? undefined,
         'en-us': imageAsset?.altEn ?? undefined,
+        'es-es': imageAsset?.altEs ?? undefined,
       },
       `${experience.companyName} logo`,
     ),
@@ -111,6 +112,7 @@ const mapProject = (
     {
       'pt-br': project.titlePt,
       'en-us': project.titleEn,
+      'es-es': project.titleEs,
     },
     project.titleEn,
   ),
@@ -119,6 +121,7 @@ const mapProject = (
     {
       'pt-br': project.shortDescriptionPt,
       'en-us': project.shortDescriptionEn,
+      'es-es': project.shortDescriptionEs,
     },
     project.shortDescriptionEn,
   ),
@@ -201,6 +204,7 @@ export const mapExperienceToTimelineItem = (
         {
           'pt-br': job.namePt,
           'en-us': job.nameEn,
+          'es-es': job.nameEs,
         },
         job.nameEn,
       ),
@@ -211,6 +215,7 @@ export const mapExperienceToTimelineItem = (
     {
       'pt-br': experience.titlePt,
       'en-us': experience.titleEn,
+      'es-es': experience.titleEs,
     },
     experience.titleEn,
   );
@@ -225,6 +230,7 @@ export const mapExperienceToTimelineItem = (
       {
         'pt-br': experience.summaryPt,
         'en-us': experience.summaryEn,
+        'es-es': experience.summaryEs,
       },
       experience.summaryEn,
     ),
@@ -233,6 +239,7 @@ export const mapExperienceToTimelineItem = (
       {
         'pt-br': experience.descriptionPt,
         'en-us': experience.descriptionEn,
+        'es-es': experience.descriptionEs,
       },
       experience.descriptionEn,
     ),

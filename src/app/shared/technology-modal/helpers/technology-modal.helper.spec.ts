@@ -205,6 +205,7 @@ describe('technology modal helper', () => {
                 kind: 'ICON',
                 altPt: null,
                 altEn: null,
+                altEs: null,
               },
             },
           ],

@@ -230,6 +230,10 @@ export class TagsOperationsComponent implements OnInit {
     this.patchForm({ nameEn: value });
   }
 
+  updateNameEs(value: string): void {
+    this.patchForm({ nameEs: value });
+  }
+
   updateType(value: string): void {
     this.patchForm({ type: value as TagTypeValue | '' });
   }

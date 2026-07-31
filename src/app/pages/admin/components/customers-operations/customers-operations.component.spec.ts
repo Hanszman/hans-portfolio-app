@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { CustomersOperationsService } from '../../../../core/api/customers/customers-operations.service';
@@ -22,6 +22,7 @@ const createCustomer = (overrides: Partial<CustomerRecord> = {}): CustomerRecord
   name: 'Enterprise Client',
   summaryPt: 'Cliente corporativo',
   summaryEn: 'Corporate client',
+  summaryEs: 'Corporate client',
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
@@ -30,7 +31,6 @@ const createCustomer = (overrides: Partial<CustomerRecord> = {}): CustomerRecord
   imageAssets: [],
   ...overrides,
 });
-
 const createExperience = (
   overrides: Partial<ExperienceCollectionItemResponse> = {},
 ): ExperienceCollectionItemResponse => ({
@@ -39,10 +39,13 @@ const createExperience = (
   companyName: 'Ford',
   titlePt: 'Analista',
   titleEn: 'Analyst',
+  titleEs: 'Analyst',
   summaryPt: 'Resumo',
   summaryEn: 'Summary',
+  summaryEs: 'Summary',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   startDate: '2024-01-01',
   endDate: null,
   isCurrent: true,
@@ -67,8 +70,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   kind: 'ICON',
   altPt: 'Logo da Ford',
   altEn: 'Ford logo',
+  altEs: 'Ford logo',
   captionPt: 'Cliente Ford',
   captionEn: 'Ford customer',
+  captionEs: 'Ford customer',
   mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
@@ -238,6 +243,7 @@ describe('CustomersOperationsComponent', () => {
       updateName(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -250,6 +256,7 @@ describe('CustomersOperationsComponent', () => {
     component.updateName('Startup Client');
     component.updateSummaryPt('Cliente startup');
     component.updateSummaryEn('Startup client');
+    component.updateSummaryEs('Startup client');
     component.updateHighlight(false);
     component.updateSortOrder('2');
     component.toggleExperience('experience-1');
@@ -261,6 +268,7 @@ describe('CustomersOperationsComponent', () => {
       name: 'Startup Client',
       summaryPt: 'Cliente startup',
       summaryEn: 'Startup client',
+      summaryEs: 'Startup client',
       highlight: false,
       sortOrder: 2,
       experienceIds: ['experience-1'],
@@ -276,6 +284,7 @@ describe('CustomersOperationsComponent', () => {
       name: 'Enterprise Client Updated',
       summaryPt: 'Cliente corporativo',
       summaryEn: 'Corporate client',
+      summaryEs: 'Corporate client',
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -388,6 +397,7 @@ describe('CustomersOperationsComponent', () => {
       updateName(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -410,6 +420,8 @@ describe('CustomersOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.requiredSummaryEn');
 
     component.updateSummaryEn('Corporate client');
+
+    component.updateSummaryEs('Corporate client');
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.invalidSortOrder');
@@ -483,6 +495,7 @@ describe('CustomersOperationsComponent', () => {
       updateName(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -494,6 +507,7 @@ describe('CustomersOperationsComponent', () => {
     component.updateName('Enterprise Client');
     component.updateSummaryPt('Cliente corporativo');
     component.updateSummaryEn('Corporate client');
+    component.updateSummaryEs('Corporate client');
     component.updateSortOrder('1');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.selectionRequired');
@@ -507,6 +521,7 @@ describe('CustomersOperationsComponent', () => {
     component.updateName('Startup Client');
     component.updateSummaryPt('Cliente startup');
     component.updateSummaryEn('Startup client');
+    component.updateSummaryEs('Startup client');
     component.updateSortOrder('2');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.saveError');

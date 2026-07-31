@@ -5,6 +5,7 @@ export interface TagProjectReference {
   slug?: string;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface TagTechnologyReference {
@@ -28,8 +29,10 @@ export interface TagRecord {
   slug: string;
   namePt?: string | null;
   nameEn?: string | null;
+  nameEs?: string | null;
   labelPt?: string | null;
   labelEn?: string | null;
+  labelEs?: string | null;
   type?: string | null;
   color?: string | null;
   sortOrder?: number | null;
@@ -45,6 +48,7 @@ export interface TagMutationPayload {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   type: string;
   sortOrder: number;
   projectIds: string[];

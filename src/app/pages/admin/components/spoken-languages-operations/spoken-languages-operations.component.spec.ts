@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
@@ -18,6 +18,7 @@ const createSpokenLanguage = (
   code: 'en',
   namePt: 'Ingles',
   nameEn: 'English',
+  nameEs: 'English',
   proficiency: 'FLUENT',
   highlight: true,
   sortOrder: 1,
@@ -25,7 +26,6 @@ const createSpokenLanguage = (
   imageAssets: [],
   ...overrides,
 });
-
 const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
   id: 'image-asset-1',
   fileName: 'english-flag.svg',
@@ -34,8 +34,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   kind: 'ICON',
   altPt: 'Bandeira da Inglaterra',
   altEn: 'English flag',
+  altEs: 'English flag',
   captionPt: 'Bandeira do idioma ingles.',
   captionEn: 'English language flag.',
+  captionEs: 'English language flag.',
   mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
@@ -184,6 +186,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       updateCode(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateProficiency(value: string): void;
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
@@ -195,6 +198,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.updateCode('pt');
     component.updateNamePt('Portugues');
     component.updateNameEn('Portuguese');
+    component.updateNameEs('Portuguese');
     component.updateProficiency('NATIVE');
     component.updateHighlight(false);
     component.updateSortOrder('2');
@@ -205,6 +209,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       code: 'pt',
       namePt: 'Portugues',
       nameEn: 'Portuguese',
+      nameEs: 'Portuguese',
       proficiency: 'NATIVE',
       highlight: false,
       sortOrder: 2,
@@ -219,6 +224,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       code: 'en',
       namePt: 'Ingles atualizado',
       nameEn: 'English',
+      nameEs: 'English',
       proficiency: 'FLUENT',
       highlight: true,
       sortOrder: 1,
@@ -330,6 +336,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       updateCode(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateProficiency(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -353,6 +360,8 @@ describe('SpokenLanguagesOperationsComponent', () => {
     );
 
     component.updateNameEn('English');
+
+    component.updateNameEs('English');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe(
       'pages.admin.spokenLanguages.feedback.requiredProficiency',
@@ -435,6 +444,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
       updateCode(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateProficiency(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -446,6 +456,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.updateCode('en');
     component.updateNamePt('Ingles');
     component.updateNameEn('English');
+    component.updateNameEs('English');
     component.updateProficiency('FLUENT');
     component.updateSortOrder('1');
     await component.submitModal();
@@ -463,6 +474,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.updateCode('pt');
     component.updateNamePt('Portugues');
     component.updateNameEn('Portuguese');
+    component.updateNameEs('Portuguese');
     component.updateProficiency('NATIVE');
     component.updateSortOrder('2');
     await component.submitModal();

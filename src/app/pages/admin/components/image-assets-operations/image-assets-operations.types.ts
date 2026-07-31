@@ -35,8 +35,10 @@ export interface ImageAssetsOperationsFormValue {
   kind: string;
   altPt: string;
   altEn: string;
+  altEs?: string;
   captionPt: string;
   captionEn: string;
+  captionEs?: string;
   mimeType: string;
   width: string;
   height: string;
@@ -80,6 +82,11 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.imageAssets.fields.altEn.placeholder',
     required: false,
   },
+  altEs: {
+    labelKey: 'pages.admin.imageAssets.fields.altEs.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.altEs.placeholder',
+    required: false,
+  },
   captionPt: {
     labelKey: 'pages.admin.imageAssets.fields.captionPt.label',
     placeholderKey: 'pages.admin.imageAssets.fields.captionPt.placeholder',
@@ -88,6 +95,11 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
   captionEn: {
     labelKey: 'pages.admin.imageAssets.fields.captionEn.label',
     placeholderKey: 'pages.admin.imageAssets.fields.captionEn.placeholder',
+    required: false,
+  },
+  captionEs: {
+    labelKey: 'pages.admin.imageAssets.fields.captionEs.label',
+    placeholderKey: 'pages.admin.imageAssets.fields.captionEs.placeholder',
     required: false,
   },
   mimeType: {
@@ -132,8 +144,10 @@ export interface ImageAssetOperationsViewModel {
   kind: string;
   altPt: string;
   altEn: string;
+  altEs?: string;
   captionPt: string;
   captionEn: string;
+  captionEs?: string;
   mimeType: string;
   dimensionsLabel: string;
   sortOrderLabel: string;
@@ -168,8 +182,10 @@ export const createEmptyImageAssetsOperationsFormValue =
     kind: '',
     altPt: '',
     altEn: '',
+    altEs: '',
     captionPt: '',
     captionEn: '',
+    captionEs: '',
     mimeType: '',
     width: '',
     height: '',
@@ -236,9 +252,13 @@ export const resolveImageAssetAltPt = (imageAsset: ImageAssetRecord): string =>
 
 export const resolveImageAssetAltEn = (imageAsset: ImageAssetRecord): string =>
   imageAsset.altEn ?? '';
+export const resolveImageAssetAltEs = (imageAsset: ImageAssetRecord): string =>
+  imageAsset.altEs ?? '';
 
 export const resolveImageAssetCaptionPt = (imageAsset: ImageAssetRecord): string =>
   imageAsset.captionPt ?? '';
 
 export const resolveImageAssetCaptionEn = (imageAsset: ImageAssetRecord): string =>
   imageAsset.captionEn ?? '';
+export const resolveImageAssetCaptionEs = (imageAsset: ImageAssetRecord): string =>
+  imageAsset.captionEs ?? '';

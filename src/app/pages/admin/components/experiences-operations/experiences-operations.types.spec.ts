@@ -13,10 +13,13 @@ const form = () => ({
   companyName: 'Company',
   titlePt: 'Titulo',
   titleEn: 'Title',
+  titleEs: 'Title',
   summaryPt: 'Resumo',
   summaryEn: 'Summary',
+  summaryEs: 'Summary',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   startDate: '2026-01-01',
   endDate: '2026-02-01',
   sortOrder: '1',
@@ -35,10 +38,13 @@ const record = () =>
     companyName: 'Company',
     titlePt: 'Titulo',
     titleEn: 'Title',
+    titleEs: 'Title',
     summaryPt: 'Resumo',
     summaryEn: 'Summary',
+    summaryEs: 'Summary',
     descriptionPt: 'Descricao',
     descriptionEn: 'Description',
+    descriptionEs: 'Description',
     startDate: '2026-01-01',
     endDate: null,
     isCurrent: false,
@@ -81,6 +87,16 @@ describe('experiences operations types', () => {
   it('builds form values and a deduplicated payload', () => {
     expect(buildExperiencesFormValue(null).slug).toBe('');
     expect(buildExperiencesFormValue(record()).endDate).toBe('');
+    expect(
+      buildExperiencesFormValue({
+        ...(record() as object),
+        titleEs: undefined,
+        summaryEs: undefined,
+        descriptionEs: undefined,
+      } as never),
+    ).toEqual(
+      jasmine.objectContaining({ titleEs: '', summaryEs: '', descriptionEs: '' }),
+    );
     expect(
       buildExperiencesFormValue({
         ...(record() as object),

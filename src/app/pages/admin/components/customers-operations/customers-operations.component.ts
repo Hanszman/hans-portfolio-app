@@ -226,6 +226,10 @@ export class CustomersOperationsComponent implements OnInit {
     this.patchForm({ summaryEn: value });
   }
 
+  updateSummaryEs(value: string): void {
+    this.patchForm({ summaryEs: value });
+  }
+
   updateHighlight(value: boolean): void {
     this.patchForm({ highlight: value });
   }

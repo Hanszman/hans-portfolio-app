@@ -12,9 +12,11 @@ const FORMATIONS: readonly FormationOperationsViewModel[] = [
     institution: 'PUC Minas',
     titlePt: 'Analise e Desenvolvimento de Sistemas',
     titleEn: 'Systems Analysis and Development',
+    titleEs: 'Systems Analysis and Development',
     degreeType: 'BACHELOR',
     summaryPt: 'Resumo PT',
     summaryEn: 'Summary EN',
+    summaryEs: 'Summary EN',
     startDate: '2020-01-01',
     endDateLabel: '2023-12-01',
     highlight: true,
@@ -32,9 +34,11 @@ const FORMATIONS: readonly FormationOperationsViewModel[] = [
     institution: 'Empty Institution',
     titlePt: 'Formacao vazia',
     titleEn: 'Empty formation',
+    titleEs: 'Empty formation',
     degreeType: 'COURSE',
     summaryPt: '',
     summaryEn: '',
+    summaryEs: '',
     startDate: '2024-01-01',
     endDateLabel: '-',
     highlight: false,
@@ -82,9 +86,11 @@ describe('FormationsOperationsModalComponent', () => {
     const institutionSpy = jasmine.createSpy('institutionChanged');
     const titlePtSpy = jasmine.createSpy('titlePtChanged');
     const titleEnSpy = jasmine.createSpy('titleEnChanged');
+    const titleEsSpy = jasmine.createSpy('titleEsChanged');
     const degreeTypeSpy = jasmine.createSpy('degreeTypeChanged');
     const summaryPtSpy = jasmine.createSpy('summaryPtChanged');
     const summaryEnSpy = jasmine.createSpy('summaryEnChanged');
+    const summaryEsSpy = jasmine.createSpy('summaryEsChanged');
     const startDateSpy = jasmine.createSpy('startDateChanged');
     const endDateSpy = jasmine.createSpy('endDateChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
@@ -100,9 +106,11 @@ describe('FormationsOperationsModalComponent', () => {
     component.institutionChanged.subscribe(institutionSpy);
     component.titlePtChanged.subscribe(titlePtSpy);
     component.titleEnChanged.subscribe(titleEnSpy);
+    component.titleEsChanged.subscribe(titleEsSpy);
     component.degreeTypeChanged.subscribe(degreeTypeSpy);
     component.summaryPtChanged.subscribe(summaryPtSpy);
     component.summaryEnChanged.subscribe(summaryEnSpy);
+    component.summaryEsChanged.subscribe(summaryEsSpy);
     component.startDateChanged.subscribe(startDateSpy);
     component.endDateChanged.subscribe(endDateSpy);
     component.highlightChanged.subscribe(highlightSpy);
@@ -148,9 +156,11 @@ describe('FormationsOperationsModalComponent', () => {
       emitInstitutionChange(value: string): void;
       emitTitlePtChange(value: string): void;
       emitTitleEnChange(value: string): void;
+      emitTitleEsChange(value: string): void;
       emitDegreeTypeChange(value: string): void;
       emitSummaryPtChange(value: string): void;
       emitSummaryEnChange(value: string): void;
+      emitSummaryEsChange(value: string): void;
       emitStartDateChange(value: string): void;
       emitEndDateChange(value: string): void;
       emitHighlightChange(event: Event): void;
@@ -171,9 +181,11 @@ describe('FormationsOperationsModalComponent', () => {
     componentAccess.emitInstitutionChange('PUC Minas');
     componentAccess.emitTitlePtChange('ADS');
     componentAccess.emitTitleEnChange('Systems Analysis');
+    componentAccess.emitTitleEsChange('Análisis de Sistemas');
     componentAccess.emitDegreeTypeChange('BACHELOR');
     componentAccess.emitSummaryPtChange('Resumo PT');
     componentAccess.emitSummaryEnChange('Summary EN');
+    componentAccess.emitSummaryEsChange('Resumen ES');
     componentAccess.emitStartDateChange('2020-01-01');
     componentAccess.emitEndDateChange('2023-12-01');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
@@ -201,11 +213,15 @@ describe('FormationsOperationsModalComponent', () => {
       'Institution',
       'Portuguese title',
       'English title',
+      'Spanish title',
       'Portuguese summary',
       'English summary',
+      'Spanish summary',
       'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
       true,
       true,
       true,
@@ -225,9 +241,11 @@ describe('FormationsOperationsModalComponent', () => {
     expect(institutionSpy).toHaveBeenCalledOnceWith('PUC Minas');
     expect(titlePtSpy).toHaveBeenCalledOnceWith('ADS');
     expect(titleEnSpy).toHaveBeenCalledOnceWith('Systems Analysis');
+    expect(titleEsSpy).toHaveBeenCalledOnceWith('Análisis de Sistemas');
     expect(degreeTypeSpy).toHaveBeenCalledOnceWith('BACHELOR');
     expect(summaryPtSpy).toHaveBeenCalledOnceWith('Resumo PT');
     expect(summaryEnSpy).toHaveBeenCalledOnceWith('Summary EN');
+    expect(summaryEsSpy).toHaveBeenCalledOnceWith('Resumen ES');
     expect(startDateSpy).toHaveBeenCalledOnceWith('2020-01-01');
     expect(endDateSpy).toHaveBeenCalledOnceWith('2023-12-01');
     expect(highlightSpy).toHaveBeenCalledWith(true);
@@ -316,9 +334,11 @@ describe('FormationsOperationsModalComponent', () => {
       institution: 'PUC Minas',
       titlePt: 'ADS',
       titleEn: 'Systems Analysis',
+      titleEs: 'Systems Analysis',
       degreeType: 'BACHELOR',
       summaryPt: 'Resumo PT',
       summaryEn: 'Summary EN',
+      summaryEs: 'Summary EN',
       startDate: '2020-01-01',
       endDateLabel: '2023-12-01',
       highlight: true,
@@ -332,9 +352,11 @@ describe('FormationsOperationsModalComponent', () => {
       institution: 'PUC Minas',
       titlePt: 'ADS',
       titleEn: 'Systems Analysis',
+      titleEs: 'Systems Analysis',
       degreeType: 'BACHELOR',
       summaryPt: 'Resumo PT',
       summaryEn: 'Summary EN',
+      summaryEs: 'Summary EN',
       startDate: '2020-01-01',
       endDate: '2023-12-01',
       highlight: true,

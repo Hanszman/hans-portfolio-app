@@ -11,6 +11,7 @@ const SPOKEN_LANGUAGES: readonly SpokenLanguageOperationsViewModel[] = [
     code: 'en',
     namePt: 'Ingles',
     nameEn: 'English',
+    nameEs: 'English',
     proficiency: 'FLUENT',
     highlight: true,
     sortOrderLabel: '1',
@@ -22,6 +23,7 @@ const SPOKEN_LANGUAGES: readonly SpokenLanguageOperationsViewModel[] = [
     code: 'xx',
     namePt: 'Idioma vazio',
     nameEn: '',
+    nameEs: '',
     proficiency: 'BASIC',
     highlight: false,
     sortOrderLabel: '2',
@@ -62,6 +64,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     const codeSpy = jasmine.createSpy('codeChanged');
     const namePtSpy = jasmine.createSpy('namePtChanged');
     const nameEnSpy = jasmine.createSpy('nameEnChanged');
+    const nameEsSpy = jasmine.createSpy('nameEsChanged');
     const proficiencySpy = jasmine.createSpy('proficiencyChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
@@ -73,6 +76,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     component.codeChanged.subscribe(codeSpy);
     component.namePtChanged.subscribe(namePtSpy);
     component.nameEnChanged.subscribe(nameEnSpy);
+    component.nameEsChanged.subscribe(nameEsSpy);
     component.proficiencyChanged.subscribe(proficiencySpy);
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
@@ -108,6 +112,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       emitCodeChange(value: string): void;
       emitNamePtChange(value: string): void;
       emitNameEnChange(value: string): void;
+      emitNameEsChange(value: string): void;
       emitProficiencyChange(value: string): void;
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
@@ -122,6 +127,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     componentAccess.emitCodeChange('pt');
     componentAccess.emitNamePtChange('Portugues');
     componentAccess.emitNameEnChange('Portuguese');
+    componentAccess.emitNameEsChange('Portugués');
     componentAccess.emitProficiencyChange('NATIVE');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
@@ -148,9 +154,16 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       'Code',
       'Portuguese name',
       'English name',
+      'Spanish name',
       'Sort order',
     ]);
-    expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
+    expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(selectElement?.label).toBe('Proficiency');
     expect(selectElement?.required).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Save');
@@ -158,6 +171,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     expect(codeSpy).toHaveBeenCalledOnceWith('pt');
     expect(namePtSpy).toHaveBeenCalledOnceWith('Portugues');
     expect(nameEnSpy).toHaveBeenCalledOnceWith('Portuguese');
+    expect(nameEsSpy).toHaveBeenCalledOnceWith('Portugués');
     expect(proficiencySpy).toHaveBeenCalledOnceWith('NATIVE');
     expect(highlightSpy).toHaveBeenCalledWith(true);
     expect(highlightSpy).toHaveBeenCalledWith(false);
@@ -198,7 +212,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', 'read');
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.textContent).toContain('Ingles');
+    expect(fixture.nativeElement.textContent).toContain('English');
     expect(fixture.nativeElement.textContent).toContain('english-flag.svg (ICON)');
 
     fixture.componentRef.setInput('modalMode', 'pick-update');
@@ -240,6 +254,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       code: 'en',
       namePt: 'Ingles',
       nameEn: null,
+      nameEs: null,
       proficiency: 'FLUENT',
       highlight: true,
       sortOrder: 1,
@@ -249,6 +264,7 @@ describe('SpokenLanguagesOperationsModalComponent', () => {
       code: 'en',
       namePt: 'Ingles',
       nameEn: 'English',
+      nameEs: 'English',
       proficiency: 'FLUENT',
       highlight: true,
       sortOrder: '1',

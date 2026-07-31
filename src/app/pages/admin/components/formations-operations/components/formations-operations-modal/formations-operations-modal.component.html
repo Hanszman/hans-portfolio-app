@@ -70,6 +70,17 @@
           (input)="emitTitleEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
+        <hans-input
+          [label]="resolveFieldLabel('titleEs')"
+          [required]="fields.titleEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().titleEs"
+          [placeholder]="fields.titleEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.titleEs.labelKey | translate"
+          (input)="emitTitleEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
         <hans-select-option
           [label]="resolveFieldLabel('degreeType')"
           [required]="fields.degreeType.required"
@@ -107,6 +118,17 @@
           [placeholder]="fields.summaryEn.placeholderKey! | translate"
           [attr.aria-label]="fields.summaryEn.labelKey | translate"
           (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
+        <hans-input
+          [label]="resolveFieldLabel('summaryEs')"
+          [required]="fields.summaryEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEs"
+          [placeholder]="fields.summaryEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEs.labelKey | translate"
+          (input)="emitSummaryEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <hans-date-picker

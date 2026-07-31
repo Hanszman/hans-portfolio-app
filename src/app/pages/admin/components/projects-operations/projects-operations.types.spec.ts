@@ -13,10 +13,13 @@ const form = (): ProjectsOperationsFormValue => ({
   slug: 'slug',
   titlePt: 'Titulo',
   titleEn: 'Title',
+  titleEs: 'Title',
   shortDescriptionPt: 'Resumo',
   shortDescriptionEn: 'Summary',
+  shortDescriptionEs: 'Summary',
   fullDescriptionPt: 'Descricao',
   fullDescriptionEn: 'Description',
+  fullDescriptionEs: 'Description',
   context: 'PROFESSIONAL',
   status: 'COMPLETED',
   environment: 'FRONTEND',
@@ -36,10 +39,13 @@ const record = () =>
     slug: 'slug',
     titlePt: 'Titulo',
     titleEn: 'Title',
+    titleEs: 'Title',
     shortDescriptionPt: 'Resumo',
     shortDescriptionEn: 'Summary',
+    shortDescriptionEs: 'Summary',
     fullDescriptionPt: 'Descricao',
     fullDescriptionEn: 'Description',
+    fullDescriptionEs: 'Description',
     context: 'PROFESSIONAL',
     status: 'COMPLETED',
     environment: 'FRONTEND',
@@ -75,6 +81,20 @@ describe('projects operations types', () => {
       expect(normalizeProjectRelationIds(record(), key).length).toBe(1);
     expect(buildProjectsFormValue(null).slug).toBe('');
     expect(buildProjectsFormValue(record()).startDate).toBe('');
+    expect(
+      buildProjectsFormValue({
+        ...(record() as object),
+        titleEs: undefined,
+        shortDescriptionEs: undefined,
+        fullDescriptionEs: undefined,
+      } as never),
+    ).toEqual(
+      jasmine.objectContaining({
+        titleEs: '',
+        shortDescriptionEs: '',
+        fullDescriptionEs: '',
+      }),
+    );
     expect(
       buildProjectsFormValue({
         ...(record() as object),

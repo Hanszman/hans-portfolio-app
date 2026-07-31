@@ -10,6 +10,7 @@ const TAGS: readonly TagOperationsViewModel[] = [
     slug: 'frontend',
     namePt: 'Front-end',
     nameEn: 'Front-end',
+    nameEs: 'Front-end',
     type: 'STACK',
     sortOrderLabel: '1',
     projectLabels: ['Portfolio remake'],
@@ -50,6 +51,7 @@ describe('TagsOperationsModalComponent', () => {
     const slugSpy = jasmine.createSpy('slugChanged');
     const namePtSpy = jasmine.createSpy('namePtChanged');
     const nameEnSpy = jasmine.createSpy('nameEnChanged');
+    const nameEsSpy = jasmine.createSpy('nameEsChanged');
     const typeSpy = jasmine.createSpy('typeChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
@@ -61,6 +63,7 @@ describe('TagsOperationsModalComponent', () => {
     component.slugChanged.subscribe(slugSpy);
     component.namePtChanged.subscribe(namePtSpy);
     component.nameEnChanged.subscribe(nameEnSpy);
+    component.nameEsChanged.subscribe(nameEsSpy);
     component.typeChanged.subscribe(typeSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.projectToggled.subscribe(projectSpy);
@@ -94,6 +97,7 @@ describe('TagsOperationsModalComponent', () => {
       emitSlugChange(value: string): void;
       emitNamePtChange(value: string): void;
       emitNameEnChange(value: string): void;
+      emitNameEsChange(value: string): void;
       emitTypeChange(value: string): void;
       emitSortOrderChange(value: string): void;
       toggleProject(projectId: string): void;
@@ -109,6 +113,7 @@ describe('TagsOperationsModalComponent', () => {
     componentAccess.emitSlugChange('backend');
     componentAccess.emitNamePtChange('Back-end');
     componentAccess.emitNameEnChange('Back-end');
+    componentAccess.emitNameEsChange('Back-end');
     componentAccess.emitTypeChange('STACK');
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleProject('project-1');
@@ -131,14 +136,22 @@ describe('TagsOperationsModalComponent', () => {
       'Tag slug',
       'Portuguese name',
       'English name',
+      'Spanish name',
       'Sort order',
     ]);
-    expect(inputElements.map((element) => element.required)).toEqual([true, true, true, true]);
+    expect(inputElements.map((element) => element.required)).toEqual([
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(modalElement?.confirmLabel).toBe('Save');
     expect(modalElement?.paginationCurrentPage).toBe(0);
     expect(slugSpy).toHaveBeenCalledOnceWith('backend');
     expect(namePtSpy).toHaveBeenCalledOnceWith('Back-end');
     expect(nameEnSpy).toHaveBeenCalledOnceWith('Back-end');
+    expect(nameEsSpy).toHaveBeenCalledOnceWith('Back-end');
     expect(typeSpy).toHaveBeenCalledOnceWith('STACK');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
@@ -223,6 +236,7 @@ describe('TagsOperationsModalComponent', () => {
       slug: 'frontend',
       namePt: 'Front-end',
       nameEn: null,
+      nameEs: null,
       type: 'STACK',
       sortOrder: 1,
     });
@@ -230,6 +244,7 @@ describe('TagsOperationsModalComponent', () => {
       slug: 'frontend',
       namePt: 'Front-end',
       nameEn: 'Front-end',
+      nameEs: 'Front-end',
       type: 'STACK',
       sortOrder: '1',
       projectIds: ['project-1'],
@@ -248,7 +263,9 @@ describe('TagsOperationsModalComponent', () => {
     const component = fixture.componentInstance as unknown as {
       isProjectSelected(projectId: string): boolean;
       isTechnologySelected(technologyId: string): boolean;
-      detailedOperationItems(): readonly { fields: readonly { value: string }[] }[];
+      detailedOperationItems(): readonly {
+        fields: readonly { labelKey: string; value: string }[];
+      }[];
       selectedOperationItem(): { subtitle?: string } | null;
     };
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
@@ -262,9 +279,14 @@ describe('TagsOperationsModalComponent', () => {
     );
     expect(component.isProjectSelected('project-1')).toBeTrue();
     expect(component.isTechnologySelected('technology-1')).toBeTrue();
-    expect(component.detailedOperationItems()[0].fields[5].value).toContain('No related records');
-    expect(component.detailedOperationItems()[0].fields[6].value).toContain('No related records');
-    expect(component.selectedOperationItem()?.subtitle).toBeUndefined();
+    const fields = component.detailedOperationItems()[0].fields;
+    expect(fields.find((field) => field.labelKey.endsWith('.projects'))?.value).toContain(
+      'No related records',
+    );
+    expect(fields.find((field) => field.labelKey.endsWith('.technologies'))?.value).toContain(
+      'No related records',
+    );
+    expect(component.selectedOperationItem()?.subtitle).toBe('frontend');
     expect(modalElement?.confirmLabel).toBe('Delete');
   });
 

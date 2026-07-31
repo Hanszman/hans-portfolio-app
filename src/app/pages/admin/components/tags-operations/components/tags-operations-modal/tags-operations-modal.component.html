@@ -59,6 +59,17 @@
           (input)="emitNameEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
+        <hans-input
+          [label]="resolveFieldLabel('nameEs')"
+          [required]="fields.nameEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().nameEs"
+          [placeholder]="fields.nameEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.nameEs.labelKey | translate"
+          (input)="emitNameEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
         <hans-select-option
           [label]="resolveFieldLabel('type')"
           [required]="fields.type.required"

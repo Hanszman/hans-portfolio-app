@@ -23,8 +23,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   kind: 'ICON',
   altPt: 'Logo azul da Hans',
   altEn: 'Hans blue logo',
+  altEs: 'Hans blue logo',
   captionPt: 'Versao azul da marca.',
   captionEn: 'Blue brand version.',
+  captionEs: 'Blue brand version.',
   mimeType: 'image/svg+xml',
   width: 240,
   height: 96,
@@ -46,10 +48,13 @@ const createProject = (
   slug: 'portfolio-remake',
   titlePt: 'Portfolio remake',
   titleEn: 'Portfolio remake',
+  titleEs: 'Portfolio remake',
   shortDescriptionPt: 'Resumo',
   shortDescriptionEn: 'Summary',
+  shortDescriptionEs: 'Summary',
   fullDescriptionPt: 'Descricao',
   fullDescriptionEn: 'Description',
+  fullDescriptionEs: 'Description',
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
@@ -76,10 +81,13 @@ const createExperience = (
   companyName: 'Stefanini Ford',
   titlePt: 'Analista',
   titleEn: 'Analyst',
+  titleEs: 'Analyst',
   summaryPt: 'Resumo',
   summaryEn: 'Summary',
+  summaryEs: 'Summary',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   startDate: '2024-01-01',
   endDate: null,
   isCurrent: true,
@@ -261,8 +269,10 @@ describe('ImageAssetsOperationsComponent', () => {
       updateKind(value: string): void;
       updateAltPt(value: string): void;
       updateAltEn(value: string): void;
+      updateAltEs(value: string): void;
       updateCaptionPt(value: string): void;
       updateCaptionEn(value: string): void;
+      updateCaptionEs(value: string): void;
       updateMimeType(value: string): void;
       updateWidth(value: string): void;
       updateHeight(value: string): void;
@@ -280,8 +290,10 @@ describe('ImageAssetsOperationsComponent', () => {
     component.updateKind('icon');
     component.updateAltPt('Logo claro');
     component.updateAltEn('Light logo');
+    component.updateAltEs('Logo claro');
     component.updateCaptionPt('Marca clara');
     component.updateCaptionEn('Light brand');
+    component.updateCaptionEs('Marca clara');
     component.updateMimeType('image/svg+xml');
     component.updateWidth('180');
     component.updateHeight('72');
@@ -298,8 +310,10 @@ describe('ImageAssetsOperationsComponent', () => {
       kind: 'ICON',
       altPt: 'Logo claro',
       altEn: 'Light logo',
+      altEs: 'Logo claro',
       captionPt: 'Marca clara',
       captionEn: 'Light brand',
+      captionEs: 'Marca clara',
       mimeType: 'image/svg+xml',
       width: 180,
       height: 72,

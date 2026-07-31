@@ -11,6 +11,7 @@ export interface FormationLinkReference {
   url?: string | null;
   labelPt?: string | null;
   labelEn?: string | null;
+  labelEs?: string | null;
 }
 
 export interface FormationImageAssetReference {
@@ -42,9 +43,11 @@ export interface FormationRecord {
   institution: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   degreeType: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   startDate: string;
   endDate?: string | null;
   highlight?: boolean | null;
@@ -68,9 +71,11 @@ export interface FormationMutationPayload {
   institution: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   degreeType: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   startDate: string;
   endDate?: string;
   highlight: boolean;

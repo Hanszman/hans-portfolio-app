@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { ImageAssetsOperationsService } from '../../../../core/api/image-assets/image-assets-operations.service';
@@ -21,8 +21,10 @@ const createJob = (overrides: Partial<JobRecord> = {}): JobRecord => ({
   slug: 'frontend-engineer',
   namePt: 'Engenheiro Front-End',
   nameEn: 'Front-End Engineer',
+  nameEs: 'Front-End Engineer',
   summaryPt: 'Interfaces publicas e privadas.',
   summaryEn: 'Public and private interfaces.',
+  summaryEs: 'Public and private interfaces.',
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
@@ -31,7 +33,6 @@ const createJob = (overrides: Partial<JobRecord> = {}): JobRecord => ({
   imageAssets: [],
   ...overrides,
 });
-
 const createExperience = (
   overrides: Partial<ExperienceCollectionItemResponse> = {},
 ): ExperienceCollectionItemResponse => ({
@@ -40,10 +41,13 @@ const createExperience = (
   companyName: 'Ford',
   titlePt: 'Analista',
   titleEn: 'Analyst',
+  titleEs: 'Analyst',
   summaryPt: 'Resumo',
   summaryEn: 'Summary',
+  summaryEs: 'Summary',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   startDate: '2024-01-01',
   endDate: null,
   isCurrent: true,
@@ -68,8 +72,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   kind: 'ICON',
   altPt: 'Logo da Ford',
   altEn: 'Ford logo',
+  altEs: 'Ford logo',
   captionPt: 'Cargo Ford',
   captionEn: 'Ford role',
+  captionEs: 'Ford role',
   mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
@@ -240,8 +246,10 @@ describe('JobsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -253,8 +261,10 @@ describe('JobsOperationsComponent', () => {
     component.updateSlug('backend-engineer');
     component.updateNamePt('Engenheiro Back-End');
     component.updateNameEn('Back-End Engineer');
+    component.updateNameEs('Back-End Engineer');
     component.updateSummaryPt('APIs publicas e privadas.');
     component.updateSummaryEn('Public and private APIs.');
+    component.updateSummaryEs('Public and private APIs.');
     component.updateHighlight(false);
     component.updateSortOrder('2');
     component.toggleExperience('experience-1');
@@ -265,8 +275,10 @@ describe('JobsOperationsComponent', () => {
       slug: 'backend-engineer',
       namePt: 'Engenheiro Back-End',
       nameEn: 'Back-End Engineer',
+      nameEs: 'Back-End Engineer',
       summaryPt: 'APIs publicas e privadas.',
       summaryEn: 'Public and private APIs.',
+      summaryEs: 'Public and private APIs.',
       highlight: false,
       sortOrder: 2,
       experienceIds: ['experience-1'],
@@ -281,8 +293,10 @@ describe('JobsOperationsComponent', () => {
       slug: 'frontend-engineer',
       namePt: 'Engenheiro Front-End Senior',
       nameEn: 'Front-End Engineer',
+      nameEs: 'Front-End Engineer',
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
+      summaryEs: 'Public and private interfaces.',
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -316,7 +330,7 @@ describe('JobsOperationsComponent', () => {
     component.openReadModal();
     fixture.detectChanges();
     expect(component.modalTitleKey()).toBe('pages.admin.jobs.modal.read.title');
-    expect(fixture.nativeElement.textContent).toContain('Engenheiro Front-End');
+    expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
     expect(fixture.nativeElement.textContent).toContain('Public and private interfaces.');
     expect(fixture.nativeElement.textContent).toContain('ford.svg (ICON)');
 
@@ -389,8 +403,10 @@ describe('JobsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -409,6 +425,8 @@ describe('JobsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.requiredNameEn');
 
     component.updateNameEn('Front-End Engineer');
+
+    component.updateNameEs('Front-End Engineer');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.requiredSummaryPt');
 
@@ -417,6 +435,8 @@ describe('JobsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.requiredSummaryEn');
 
     component.updateSummaryEn('Public and private interfaces.');
+
+    component.updateSummaryEs('Public and private interfaces.');
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.invalidSortOrder');
@@ -489,8 +509,10 @@ describe('JobsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -501,8 +523,10 @@ describe('JobsOperationsComponent', () => {
     component.updateSlug('frontend-engineer');
     component.updateNamePt('Engenheiro Front-End');
     component.updateNameEn('Front-End Engineer');
+    component.updateNameEs('Front-End Engineer');
     component.updateSummaryPt('Interfaces publicas e privadas.');
     component.updateSummaryEn('Public and private interfaces.');
+    component.updateSummaryEs('Public and private interfaces.');
     component.updateSortOrder('1');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.selectionRequired');
@@ -515,8 +539,10 @@ describe('JobsOperationsComponent', () => {
     component.updateSlug('backend-engineer');
     component.updateNamePt('Engenheiro Back-End');
     component.updateNameEn('Back-End Engineer');
+    component.updateNameEs('Back-End Engineer');
     component.updateSummaryPt('APIs publicas e privadas.');
     component.updateSummaryEn('Public and private APIs.');
+    component.updateSummaryEs('Public and private APIs.');
     component.updateSortOrder('2');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.saveError');

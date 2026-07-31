@@ -6,6 +6,7 @@ export interface CustomerExperienceReference {
   companyName?: string | null;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface CustomerImageAssetReference {
@@ -31,6 +32,7 @@ export interface CustomerRecord {
   name: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight?: boolean | null;
   sortOrder?: number | null;
   experienceIds?: string[] | null;
@@ -46,6 +48,7 @@ export interface CustomerMutationPayload {
   name: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrder: number;
   experienceIds: string[];

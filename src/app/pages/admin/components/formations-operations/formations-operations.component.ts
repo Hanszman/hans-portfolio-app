@@ -243,6 +243,10 @@ export class FormationsOperationsComponent implements OnInit {
     this.patchForm({ titleEn: value });
   }
 
+  updateTitleEs(value: string): void {
+    this.patchForm({ titleEs: value });
+  }
+
   updateDegreeType(value: string): void {
     this.patchForm({ degreeType: value });
   }
@@ -253,6 +257,10 @@ export class FormationsOperationsComponent implements OnInit {
 
   updateSummaryEn(value: string): void {
     this.patchForm({ summaryEn: value });
+  }
+
+  updateSummaryEs(value: string): void {
+    this.patchForm({ summaryEs: value });
   }
 
   updateStartDate(value: string): void {

@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { FormationsOperationsService } from '../../../../core/api/formations/formations-operations.service';
@@ -24,9 +24,11 @@ const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRec
   institution: 'PUC Minas',
   titlePt: 'Analise e Desenvolvimento de Sistemas',
   titleEn: 'Systems Analysis and Development',
+  titleEs: 'Systems Analysis and Development',
   degreeType: 'BACHELOR',
   summaryPt: 'Resumo PT',
   summaryEn: 'Summary EN',
+  summaryEs: 'Summary EN',
   startDate: '2020-01-01',
   endDate: '2023-12-01',
   highlight: true,
@@ -38,7 +40,6 @@ const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRec
   imageAssets: [],
   ...overrides,
 });
-
 const createTechnology = (
   overrides: Partial<TechnologyCollectionItemResponse> = {},
 ): TechnologyCollectionItemResponse => ({
@@ -57,8 +58,10 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   url: 'https://example.com/formation',
   labelPt: 'Detalhes',
   labelEn: 'Details',
+  labelEs: 'Details',
   descriptionPt: 'Descricao',
   descriptionEn: 'Description',
+  descriptionEs: 'Description',
   type: 'DOCS',
   sortOrder: 1,
   formationIds: ['formation-1'],
@@ -73,8 +76,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   kind: 'ICON',
   altPt: 'Campus',
   altEn: 'Campus',
+  altEs: 'Campus',
   captionPt: 'Campus',
   captionEn: 'Campus',
+  captionEs: 'Campus',
   mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
@@ -268,9 +273,11 @@ describe('FormationsOperationsComponent', () => {
       updateInstitution(value: string): void;
       updateTitlePt(value: string): void;
       updateTitleEn(value: string): void;
+      updateTitleEs(value: string): void;
       updateDegreeType(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateStartDate(value: string): void;
       updateEndDate(value: string): void;
       updateHighlight(value: boolean): void;
@@ -286,9 +293,11 @@ describe('FormationsOperationsComponent', () => {
     component.updateInstitution('UFMG');
     component.updateTitlePt('Engenharia de Software');
     component.updateTitleEn('Software Engineering');
+    component.updateTitleEs('Software Engineering');
     component.updateDegreeType('MBA');
     component.updateSummaryPt('Resumo PT');
     component.updateSummaryEn('Summary EN');
+    component.updateSummaryEs('Summary EN');
     component.updateStartDate('2024-01-01');
     component.updateEndDate('2025-01-01');
     component.updateHighlight(false);
@@ -303,9 +312,11 @@ describe('FormationsOperationsComponent', () => {
       institution: 'UFMG',
       titlePt: 'Engenharia de Software',
       titleEn: 'Software Engineering',
+      titleEs: 'Software Engineering',
       degreeType: 'MBA',
       summaryPt: 'Resumo PT',
       summaryEn: 'Summary EN',
+      summaryEs: 'Summary EN',
       startDate: '2024-01-01T00:00:00.000Z',
       endDate: '2025-01-01T00:00:00.000Z',
       highlight: false,
@@ -324,9 +335,11 @@ describe('FormationsOperationsComponent', () => {
       institution: 'PUC Minas',
       titlePt: 'ADS Atualizado',
       titleEn: 'Systems Analysis and Development',
+      titleEs: 'Systems Analysis and Development',
       degreeType: 'BACHELOR',
       summaryPt: 'Resumo PT',
       summaryEn: 'Summary EN',
+      summaryEs: 'Summary EN',
       startDate: '2020-01-01T00:00:00.000Z',
       endDate: '2023-12-01T00:00:00.000Z',
       highlight: true,
@@ -433,9 +446,11 @@ describe('FormationsOperationsComponent', () => {
       updateInstitution(value: string): void;
       updateTitlePt(value: string): void;
       updateTitleEn(value: string): void;
+      updateTitleEs(value: string): void;
       updateDegreeType(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateStartDate(value: string): void;
       updateEndDate(value: string): void;
       updateSortOrder(value: string): void;
@@ -462,6 +477,8 @@ describe('FormationsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredTitleEn');
 
     component.updateTitleEn('Systems Analysis');
+
+    component.updateTitleEs('Systems Analysis');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredDegreeType');
 
@@ -474,6 +491,8 @@ describe('FormationsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredSummaryEn');
 
     component.updateSummaryEn('Summary EN');
+
+    component.updateSummaryEs('Summary EN');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredStartDate');
 
@@ -559,9 +578,11 @@ describe('FormationsOperationsComponent', () => {
       updateInstitution(value: string): void;
       updateTitlePt(value: string): void;
       updateTitleEn(value: string): void;
+      updateTitleEs(value: string): void;
       updateDegreeType(value: string): void;
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
+      updateSummaryEs(value: string): void;
       updateStartDate(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -574,9 +595,11 @@ describe('FormationsOperationsComponent', () => {
     component.updateInstitution('PUC Minas');
     component.updateTitlePt('ADS');
     component.updateTitleEn('Systems Analysis');
+    component.updateTitleEs('Systems Analysis');
     component.updateDegreeType('BACHELOR');
     component.updateSummaryPt('Resumo PT');
     component.updateSummaryEn('Summary EN');
+    component.updateSummaryEs('Summary EN');
     component.updateStartDate('2020-01-01');
     component.updateSortOrder('1');
     await component.submitModal();
@@ -591,9 +614,11 @@ describe('FormationsOperationsComponent', () => {
     component.updateInstitution('UFMG');
     component.updateTitlePt('Engenharia de Software');
     component.updateTitleEn('Software Engineering');
+    component.updateTitleEs('Software Engineering');
     component.updateDegreeType('MBA');
     component.updateSummaryPt('Resumo PT');
     component.updateSummaryEn('Summary EN');
+    component.updateSummaryEs('Summary EN');
     component.updateStartDate('2024-01-01');
     component.updateSortOrder('2');
     await component.submitModal();

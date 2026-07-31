@@ -244,12 +244,20 @@ export class LinksOperationsComponent implements OnInit {
     this.patchForm({ labelEn: value });
   }
 
+  updateLabelEs(value: string): void {
+    this.patchForm({ labelEs: value });
+  }
+
   updateDescriptionPt(value: string): void {
     this.patchForm({ descriptionPt: value });
   }
 
   updateDescriptionEn(value: string): void {
     this.patchForm({ descriptionEn: value });
+  }
+
+  updateDescriptionEs(value: string): void {
+    this.patchForm({ descriptionEs: value });
   }
 
   updateType(value: string): void {

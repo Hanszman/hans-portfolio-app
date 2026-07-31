@@ -6,6 +6,7 @@ export interface JobExperienceReference {
   companyName?: string | null;
   titlePt?: string | null;
   titleEn?: string | null;
+  titleEs?: string | null;
 }
 
 export interface JobImageAssetReference {
@@ -30,8 +31,10 @@ export interface JobRecord {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight?: boolean | null;
   sortOrder?: number | null;
   experienceIds?: string[] | null;
@@ -46,8 +49,10 @@ export interface JobMutationPayload {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrder: number;
   experienceIds: string[];

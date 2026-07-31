@@ -26,6 +26,7 @@ export interface CustomersOperationsFormValue {
   name: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrder: string;
   experienceIds: readonly string[];
@@ -53,6 +54,11 @@ export const CUSTOMERS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.customers.fields.summaryEn.placeholder',
     required: true,
   },
+  summaryEs: {
+    labelKey: 'pages.admin.customers.fields.summaryEs.label',
+    placeholderKey: 'pages.admin.customers.fields.summaryEs.placeholder',
+    required: true,
+  },
   sortOrder: {
     labelKey: 'pages.admin.customers.fields.sortOrder.label',
     placeholderKey: 'pages.admin.customers.fields.sortOrder.placeholder',
@@ -74,6 +80,7 @@ export interface CustomerOperationsViewModel {
   name: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrderLabel: string;
   experienceLabels: readonly string[];
@@ -102,6 +109,7 @@ export const createEmptyCustomersOperationsFormValue =
     name: '',
     summaryPt: '',
     summaryEn: '',
+    summaryEs: '',
     highlight: true,
     sortOrder: '0',
     experienceIds: [],

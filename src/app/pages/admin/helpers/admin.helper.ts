@@ -1,7 +1,8 @@
 import { AdminAuthenticatedUser } from '../../../core/api/admin-auth/admin-auth.types';
 import { ImageAssetRecord } from '../../../core/api/image-assets/image-assets-operations.types';
 import { buildAssetUrl } from '../../../core/api/api.config';
-import { AppTranslationKey } from '../../../core/translation/translation.types';
+import { resolveLocalizedText } from '../../../core/translation/translation.service';
+import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   AdminFormFieldConfig,
   AdminEntityDefinition,
@@ -25,6 +26,23 @@ export const createAdminFieldLabelResolver =
   ) =>
   (fieldKey: keyof TFields): string =>
     resolveAdminFieldLabel(fields[fieldKey], translate);
+
+export const resolveAdminLocalizedValue = (
+  locale: AppLocale,
+  pt: string | null | undefined,
+  en: string | null | undefined,
+  es: string | null | undefined,
+  fallback = '',
+): string =>
+  resolveLocalizedText(
+    locale,
+    {
+      'pt-br': pt ?? undefined,
+      'en-us': en ?? undefined,
+      'es-es': es ?? undefined,
+    },
+    fallback,
+  );
 
 export const resolveAdminSelectValue = (event: Event): string => {
   const customEvent = event as Event & {
@@ -85,9 +103,14 @@ export interface AdminRelationLabelSource {
   readonly slug?: string | null;
   readonly name?: string | null;
   readonly namePt?: string | null;
+  readonly nameEn?: string | null;
+  readonly nameEs?: string | null;
   readonly titlePt?: string | null;
+  readonly titleEn?: string | null;
+  readonly titleEs?: string | null;
   readonly labelPt?: string | null;
   readonly labelEn?: string | null;
+  readonly labelEs?: string | null;
   readonly companyName?: string | null;
   readonly fileName?: string | null;
   readonly filePath?: string | null;
@@ -96,19 +119,23 @@ export interface AdminRelationLabelSource {
   readonly code?: string | null;
 }
 
-export const formatAdminRelationLabel = (relation: AdminRelationLabelSource): string => {
+export const formatAdminRelationLabel = (
+  relation: AdminRelationLabelSource,
+  locale: AppLocale = 'pt-br',
+): string => {
+  const localized =
+    resolveAdminLocalizedValue(locale, relation.namePt, relation.nameEn, relation.nameEs) ||
+    resolveAdminLocalizedValue(locale, relation.titlePt, relation.titleEn, relation.titleEs) ||
+    resolveAdminLocalizedValue(locale, relation.labelPt, relation.labelEn, relation.labelEs);
   const primary =
-    relation.name ??
-    relation.namePt ??
-    relation.titlePt ??
-    relation.labelPt ??
-    relation.labelEn ??
-    relation.companyName ??
-    relation.fileName ??
-    relation.code ??
-    relation.url ??
-    relation.filePath ??
-    relation.id ??
+    relation.name ||
+    localized ||
+    relation.companyName ||
+    relation.fileName ||
+    relation.code ||
+    relation.url ||
+    relation.filePath ||
+    relation.id ||
     '';
   const secondary = relation.slug ?? relation.kind;
 
@@ -118,6 +145,7 @@ export const formatAdminRelationLabel = (relation: AdminRelationLabelSource): st
 export const resolveAdminRelationLabels = (
   relations: readonly unknown[] | null | undefined,
   nestedKey: string,
+  locale: AppLocale = 'pt-br',
 ): readonly string[] => [
   ...new Set(
     (relations ?? [])
@@ -133,7 +161,7 @@ export const resolveAdminRelationLabels = (
             ? (nested as AdminRelationLabelSource)
             : (record as AdminRelationLabelSource);
 
-        return formatAdminRelationLabel(labelSource);
+        return formatAdminRelationLabel(labelSource, locale);
       })
       .filter(Boolean),
   ),

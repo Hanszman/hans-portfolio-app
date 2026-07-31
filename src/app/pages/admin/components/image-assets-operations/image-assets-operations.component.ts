@@ -258,12 +258,20 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.patchForm({ altEn: value });
   }
 
+  updateAltEs(value: string): void {
+    this.patchForm({ altEs: value });
+  }
+
   updateCaptionPt(value: string): void {
     this.patchForm({ captionPt: value });
   }
 
   updateCaptionEn(value: string): void {
     this.patchForm({ captionEn: value });
+  }
+
+  updateCaptionEs(value: string): void {
+    this.patchForm({ captionEs: value });
   }
 
   updateMimeType(value: string): void {

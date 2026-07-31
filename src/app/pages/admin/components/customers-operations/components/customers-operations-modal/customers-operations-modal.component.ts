@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
 import {
@@ -68,6 +69,7 @@ export class CustomersOperationsModalComponent {
   readonly nameChanged = output<string>();
   readonly summaryPtChanged = output<string>();
   readonly summaryEnChanged = output<string>();
+  readonly summaryEsChanged = output<string>();
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
   readonly experienceToggled = output<string>();
@@ -116,7 +118,9 @@ export class CustomersOperationsModalComponent {
     this.customers().map((customer) => ({
       id: customer.id,
       title: `${customer.name} (${customer.slug})`,
-      subtitle: customer.summaryEn,
+      subtitle: resolveAdminLocalizedValue(
+        this.translation.locale(), customer.summaryPt, customer.summaryEn, customer.summaryEs,
+      ),
     })),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
@@ -131,8 +135,12 @@ export class CustomersOperationsModalComponent {
         fields: [
           { labelKey: 'pages.admin.customers.card.slug', value: customer.slug },
           { labelKey: 'pages.admin.customers.card.name', value: customer.name },
-          { labelKey: 'pages.admin.customers.card.summaryPt', value: customer.summaryPt },
-          { labelKey: 'pages.admin.customers.card.summaryEn', value: customer.summaryEn },
+          {
+            labelKey: 'pages.admin.operations.localized.summary',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), customer.summaryPt, customer.summaryEn, customer.summaryEs,
+            ),
+          },
           {
             labelKey: 'pages.admin.customers.card.highlight',
             value: this.translation.instant(
@@ -160,7 +168,9 @@ export class CustomersOperationsModalComponent {
       ? {
           id: customer.id,
           title: `${customer.name} (${customer.slug})`,
-          subtitle: customer.summaryEn ?? undefined,
+          subtitle: resolveAdminLocalizedValue(
+            this.translation.locale(), customer.summaryPt, customer.summaryEn, customer.summaryEs,
+          ),
         }
       : null;
   });
@@ -187,6 +197,10 @@ export class CustomersOperationsModalComponent {
 
   protected emitSummaryEnChange(value: string): void {
     this.summaryEnChanged.emit(value);
+  }
+
+  protected emitSummaryEsChange(value: string): void {
+    this.summaryEsChanged.emit(value);
   }
 
   protected emitSortOrderChange(value: string): void {

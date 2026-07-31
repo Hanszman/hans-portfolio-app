@@ -70,6 +70,17 @@
           (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
         ></hans-input>
 
+        <hans-input
+          [label]="resolveFieldLabel('summaryEs')"
+          [required]="fields.summaryEs.required"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().summaryEs"
+          [placeholder]="fields.summaryEs.placeholderKey! | translate"
+          [attr.aria-label]="fields.summaryEs.labelKey | translate"
+          (input)="emitSummaryEsChange($any($event).target?.value ?? '')"
+        ></hans-input>
+
         <div class="customers-operations-toggle">
           <div class="customers-operations-selection-copy">
             <p>{{ 'pages.admin.customers.fields.highlight.label' | translate }}</p>

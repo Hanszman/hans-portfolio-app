@@ -98,6 +98,7 @@ const mapProjectLink = (
       {
         'pt-br': relation.link.labelPt ?? undefined,
         'en-us': relation.link.labelEn ?? undefined,
+        'es-es': relation.link.labelEs ?? undefined,
       },
       '',
     ) ||
@@ -228,6 +229,7 @@ export const mapProjectToCaseCard = (
         {
           'pt-br': experience.titlePt,
           'en-us': experience.titleEn,
+          'es-es': experience.titleEs,
         },
         experience.titleEn,
       ),
@@ -238,6 +240,7 @@ export const mapProjectToCaseCard = (
     {
       'pt-br': project.titlePt,
       'en-us': project.titleEn,
+      'es-es': project.titleEs,
     },
     project.titleEn,
   );
@@ -251,6 +254,7 @@ export const mapProjectToCaseCard = (
       {
         'pt-br': project.shortDescriptionPt,
         'en-us': project.shortDescriptionEn,
+        'es-es': project.shortDescriptionEs,
       },
       project.shortDescriptionEn,
     ),
@@ -259,6 +263,7 @@ export const mapProjectToCaseCard = (
       {
         'pt-br': project.fullDescriptionPt,
         'en-us': project.fullDescriptionEn,
+        'es-es': project.fullDescriptionEs,
       },
       project.fullDescriptionEn,
     ),
@@ -288,6 +293,7 @@ export const mapProjectToCaseCard = (
         {
           'pt-br': projectImage?.imageAsset.altPt ?? undefined,
           'en-us': projectImage?.imageAsset.altEn ?? undefined,
+          'es-es': projectImage?.imageAsset.altEs ?? undefined,
         },
         localizedTitle,
       ) || localizedTitle,
@@ -300,6 +306,7 @@ export const mapProjectToCaseCard = (
           {
             'pt-br': tag.labelPt,
             'en-us': tag.labelEn,
+            'es-es': tag.labelEs,
           },
           tag.labelEn,
         ),
@@ -316,6 +323,7 @@ export const mapProjectToCaseCard = (
             {
               'pt-br': imageAsset.altPt ?? undefined,
               'en-us': imageAsset.altEn ?? undefined,
+              'es-es': imageAsset.altEs ?? undefined,
             },
             localizedTitle,
           ) || localizedTitle,
@@ -326,6 +334,7 @@ export const mapProjectToCaseCard = (
             {
               'pt-br': imageAsset.captionPt ?? undefined,
               'en-us': imageAsset.captionEn ?? undefined,
+              'es-es': imageAsset.captionEs ?? undefined,
             },
             '',
           ) || undefined,
@@ -376,6 +385,7 @@ export const buildProjectsSummaryMetrics = (
             {
               'pt-br': richestStackProject.titlePt,
               'en-us': richestStackProject.titleEn,
+              'es-es': richestStackProject.titleEs,
             },
             richestStackProject.titleEn,
           )

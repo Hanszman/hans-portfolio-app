@@ -38,6 +38,7 @@ export interface TagsOperationsFormValue {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   type: TagTypeValue | '';
   sortOrder: string;
   projectIds: readonly string[];
@@ -58,6 +59,11 @@ export const TAGS_OPERATIONS_FIELDS = {
   nameEn: {
     labelKey: 'pages.admin.tags.fields.nameEn.label',
     placeholderKey: 'pages.admin.tags.fields.nameEn.placeholder',
+    required: true,
+  },
+  nameEs: {
+    labelKey: 'pages.admin.tags.fields.nameEs.label',
+    placeholderKey: 'pages.admin.tags.fields.nameEs.placeholder',
     required: true,
   },
   type: {
@@ -86,6 +92,7 @@ export interface TagOperationsViewModel {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   type: string;
   sortOrderLabel: string;
   projectLabels: readonly string[];
@@ -115,6 +122,7 @@ export const createEmptyTagsOperationsFormValue = (): TagsOperationsFormValue =>
   slug: '',
   namePt: '',
   nameEn: '',
+  nameEs: '',
   type: '',
   sortOrder: '0',
   projectIds: [],
@@ -130,6 +138,7 @@ export const createTagTypeOptions = (): readonly TagTypeOptionDefinition[] =>
 export const resolveTagNamePt = (tag: TagRecord): string => tag.namePt ?? tag.labelPt ?? '';
 
 export const resolveTagNameEn = (tag: TagRecord): string => tag.nameEn ?? tag.labelEn ?? '';
+export const resolveTagNameEs = (tag: TagRecord): string => tag.nameEs ?? tag.labelEs ?? '';
 
 export const resolveTagProjectIdFromRelation = (
   relation: TagProjectRelationRecord,

@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -56,8 +57,10 @@ export class LinksOperationsModalComponent {
     url: '',
     labelPt: '',
     labelEn: '',
+    labelEs: '',
     descriptionPt: '',
     descriptionEn: '',
+    descriptionEs: '',
     type: '',
     sortOrder: '0',
     projectIds: [],
@@ -82,8 +85,10 @@ export class LinksOperationsModalComponent {
   readonly urlChanged = output<string>();
   readonly labelPtChanged = output<string>();
   readonly labelEnChanged = output<string>();
+  readonly labelEsChanged = output<string>();
   readonly descriptionPtChanged = output<string>();
   readonly descriptionEnChanged = output<string>();
+  readonly descriptionEsChanged = output<string>();
   readonly typeChanged = output<string>();
   readonly sortOrderChanged = output<string>();
   readonly projectToggled = output<string>();
@@ -137,7 +142,10 @@ export class LinksOperationsModalComponent {
 
     return this.links().map((link) => ({
       id: link.id,
-      title: link.labelPt || link.labelEn || emptyText,
+      title:
+        resolveAdminLocalizedValue(
+          this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
+        ) || emptyText,
       subtitle: link.url,
     }));
   });
@@ -150,18 +158,26 @@ export class LinksOperationsModalComponent {
       return this.links().map((link) => ({
         id: link.id,
         title: link.url,
-        subtitle: link.labelPt || link.labelEn || emptyText,
+        subtitle:
+          resolveAdminLocalizedValue(
+            this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
+          ) || emptyText,
         fields: [
           { labelKey: 'pages.admin.links.card.url', value: link.url, title: link.url },
-          { labelKey: 'pages.admin.links.card.labelPt', value: link.labelPt || emptyText },
-          { labelKey: 'pages.admin.links.card.labelEn', value: link.labelEn || emptyText },
           {
-            labelKey: 'pages.admin.links.card.descriptionPt',
-            value: link.descriptionPt || emptyText,
+            labelKey: 'pages.admin.operations.localized.label',
+            value:
+              resolveAdminLocalizedValue(
+                this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
+              ) || emptyText,
           },
           {
-            labelKey: 'pages.admin.links.card.descriptionEn',
-            value: link.descriptionEn || emptyText,
+            labelKey: 'pages.admin.operations.localized.description',
+            value:
+              resolveAdminLocalizedValue(
+                this.translation.locale(), link.descriptionPt, link.descriptionEn,
+                link.descriptionEs,
+              ) || emptyText,
           },
           { labelKey: 'pages.admin.links.card.type', value: link.type },
           { labelKey: 'pages.admin.links.card.sortOrder', value: link.sortOrderLabel },
@@ -192,9 +208,9 @@ export class LinksOperationsModalComponent {
       ? {
           id: link.id,
           title:
-            link.labelPt ||
-            link.labelEn ||
-            this.translation.instant('pages.admin.links.card.emptyText'),
+            resolveAdminLocalizedValue(
+              this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
+            ) || this.translation.instant('pages.admin.links.card.emptyText'),
           subtitle: link.url,
         }
       : null;
@@ -220,12 +236,20 @@ export class LinksOperationsModalComponent {
     this.labelEnChanged.emit(value);
   }
 
+  protected emitLabelEsChange(value: string): void {
+    this.labelEsChanged.emit(value);
+  }
+
   protected emitDescriptionPtChange(value: string): void {
     this.descriptionPtChanged.emit(value);
   }
 
   protected emitDescriptionEnChange(value: string): void {
     this.descriptionEnChanged.emit(value);
+  }
+
+  protected emitDescriptionEsChange(value: string): void {
+    this.descriptionEsChanged.emit(value);
   }
 
   protected emitTypeChange(value: string): void {

@@ -151,9 +151,11 @@ export const buildFormationsFormValue = (
     institution: formation.institution,
     titlePt: formation.titlePt,
     titleEn: formation.titleEn,
+    titleEs: formation.titleEs ?? '',
     degreeType: formation.degreeType,
     summaryPt: formation.summaryPt,
     summaryEn: formation.summaryEn,
+    summaryEs: formation.summaryEs ?? '',
     startDate: normalizeAdminDateValueForPicker(formation.startDate),
     endDate: normalizeAdminDateValueForPicker(formation.endDate),
     highlight: formation.highlight ?? false,
@@ -196,9 +198,11 @@ export const buildFormationsViewModels = (
         institution: formation.institution,
         titlePt: formation.titlePt,
         titleEn: formation.titleEn,
+        titleEs: formation.titleEs ?? '',
         degreeType: formation.degreeType,
         summaryPt: formation.summaryPt,
         summaryEn: formation.summaryEn,
+        summaryEs: formation.summaryEs ?? '',
         startDate: formation.startDate,
         endDateLabel: formation.endDate ?? '-',
         highlight: formation.highlight ?? false,
@@ -224,9 +228,11 @@ export const buildFormationsMutationPayload = (
   const institution = formValue.institution.trim();
   const titlePt = formValue.titlePt.trim();
   const titleEn = formValue.titleEn.trim();
+  const titleEs = formValue.titleEs?.trim() ?? titleEn;
   const degreeType = formValue.degreeType.trim();
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
+  const summaryEs = formValue.summaryEs?.trim() ?? summaryEn;
   const startDate = normalizeAdminDateValueForMutation(formValue.startDate);
   const endDate = normalizeAdminDateValueForMutation(formValue.endDate);
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
@@ -256,6 +262,10 @@ export const buildFormationsMutationPayload = (
     };
   }
 
+  if (!titleEs) {
+    return { isValid: false, errorKey: 'pages.admin.formations.feedback.requiredTitleEs' };
+  }
+
   if (!degreeType) {
     return {
       isValid: false,
@@ -275,6 +285,10 @@ export const buildFormationsMutationPayload = (
       isValid: false,
       errorKey: 'pages.admin.formations.feedback.requiredSummaryEn',
     };
+  }
+
+  if (!summaryEs) {
+    return { isValid: false, errorKey: 'pages.admin.formations.feedback.requiredSummaryEs' };
   }
 
   if (!startDate) {
@@ -308,9 +322,11 @@ export const buildFormationsMutationPayload = (
       institution,
       titlePt,
       titleEn,
+      titleEs,
       degreeType,
       summaryPt,
       summaryEn,
+      summaryEs,
       startDate,
       ...(endDate ? { endDate } : {}),
       highlight: formValue.highlight,

@@ -25,8 +25,10 @@ export interface JobsOperationsFormValue {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrder: string;
   experienceIds: readonly string[];
@@ -49,6 +51,11 @@ export const JOBS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.jobs.fields.nameEn.placeholder',
     required: true,
   },
+  nameEs: {
+    labelKey: 'pages.admin.jobs.fields.nameEs.label',
+    placeholderKey: 'pages.admin.jobs.fields.nameEs.placeholder',
+    required: true,
+  },
   summaryPt: {
     labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.jobs.fields.summaryPt.placeholder',
@@ -57,6 +64,11 @@ export const JOBS_OPERATIONS_FIELDS = {
   summaryEn: {
     labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.jobs.fields.summaryEn.placeholder',
+    required: true,
+  },
+  summaryEs: {
+    labelKey: 'pages.admin.jobs.fields.summaryEs.label',
+    placeholderKey: 'pages.admin.jobs.fields.summaryEs.placeholder',
     required: true,
   },
   sortOrder: {
@@ -79,8 +91,10 @@ export interface JobOperationsViewModel {
   slug: string;
   namePt: string;
   nameEn: string;
+  nameEs?: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   highlight: boolean;
   sortOrderLabel: string;
   experienceLabels: readonly string[];
@@ -105,8 +119,10 @@ export const createEmptyJobsOperationsFormValue = (): JobsOperationsFormValue =>
   slug: '',
   namePt: '',
   nameEn: '',
+  nameEs: '',
   summaryPt: '',
   summaryEn: '',
+  summaryEs: '',
   highlight: true,
   sortOrder: '0',
   experienceIds: [],

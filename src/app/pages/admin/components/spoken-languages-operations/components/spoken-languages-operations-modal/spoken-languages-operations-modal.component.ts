@@ -19,6 +19,7 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  resolveAdminLocalizedValue,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -58,6 +59,7 @@ export class SpokenLanguagesOperationsModalComponent {
     code: '',
     namePt: '',
     nameEn: '',
+    nameEs: '',
     proficiency: '',
     highlight: true,
     sortOrder: '0',
@@ -77,6 +79,7 @@ export class SpokenLanguagesOperationsModalComponent {
   readonly codeChanged = output<string>();
   readonly namePtChanged = output<string>();
   readonly nameEnChanged = output<string>();
+  readonly nameEsChanged = output<string>();
   readonly proficiencyChanged = output<string>();
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
@@ -125,8 +128,10 @@ export class SpokenLanguagesOperationsModalComponent {
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
     this.spokenLanguages().map((language) => ({
       id: language.id,
-      title: `${language.namePt} (${language.code})`,
-      subtitle: language.nameEn,
+      title: `${resolveAdminLocalizedValue(
+        this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
+      )} (${language.code})`,
+      subtitle: language.code,
     })),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
@@ -139,11 +144,17 @@ export class SpokenLanguagesOperationsModalComponent {
       return this.spokenLanguages().map((language) => ({
         id: language.id,
         title: language.code,
-        subtitle: language.namePt,
+        subtitle: resolveAdminLocalizedValue(
+          this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
+        ),
         fields: [
           { labelKey: 'pages.admin.spokenLanguages.card.code', value: language.code },
-          { labelKey: 'pages.admin.spokenLanguages.card.namePt', value: language.namePt },
-          { labelKey: 'pages.admin.spokenLanguages.card.nameEn', value: language.nameEn },
+          {
+            labelKey: 'pages.admin.operations.localized.name',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
+            ),
+          },
           {
             labelKey: 'pages.admin.spokenLanguages.card.proficiency',
             value: language.proficiency,
@@ -173,8 +184,10 @@ export class SpokenLanguagesOperationsModalComponent {
     return language
       ? {
           id: language.id,
-          title: `${language.namePt} (${language.code})`,
-          subtitle: language.nameEn ?? undefined,
+          title: `${resolveAdminLocalizedValue(
+            this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
+          )} (${language.code})`,
+          subtitle: language.code,
         }
       : null;
   });
@@ -197,6 +210,10 @@ export class SpokenLanguagesOperationsModalComponent {
 
   protected emitNameEnChange(value: string): void {
     this.nameEnChanged.emit(value);
+  }
+
+  protected emitNameEsChange(value: string): void {
+    this.nameEsChanged.emit(value);
   }
 
   protected emitProficiencyChange(value: string): void {

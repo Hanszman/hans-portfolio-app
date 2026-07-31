@@ -27,10 +27,13 @@ export interface ExperiencesOperationsFormValue {
   companyName: string;
   titlePt: string;
   titleEn: string;
+  titleEs?: string;
   summaryPt: string;
   summaryEn: string;
+  summaryEs?: string;
   descriptionPt: string;
   descriptionEn: string;
+  descriptionEs?: string;
   startDate: string;
   endDate: string;
   isCurrent: boolean;
@@ -65,6 +68,11 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.experiences.fields.titleEn.placeholder',
     required: true,
   },
+  titleEs: {
+    labelKey: 'pages.admin.experiences.fields.titleEs.label',
+    placeholderKey: 'pages.admin.experiences.fields.titleEs.placeholder',
+    required: true,
+  },
   summaryPt: {
     labelKey: 'pages.admin.experiences.fields.summaryPt.label',
     placeholderKey: 'pages.admin.experiences.fields.summaryPt.placeholder',
@@ -75,6 +83,11 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.experiences.fields.summaryEn.placeholder',
     required: true,
   },
+  summaryEs: {
+    labelKey: 'pages.admin.experiences.fields.summaryEs.label',
+    placeholderKey: 'pages.admin.experiences.fields.summaryEs.placeholder',
+    required: true,
+  },
   descriptionPt: {
     labelKey: 'pages.admin.experiences.fields.descriptionPt.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionPt.placeholder',
@@ -83,6 +96,11 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
   descriptionEn: {
     labelKey: 'pages.admin.experiences.fields.descriptionEn.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionEn.placeholder',
+    required: true,
+  },
+  descriptionEs: {
+    labelKey: 'pages.admin.experiences.fields.descriptionEs.label',
+    placeholderKey: 'pages.admin.experiences.fields.descriptionEs.placeholder',
     required: true,
   },
   startDate: {
@@ -107,10 +125,13 @@ export const EXPERIENCES_OPERATIONS_FORM_FIELDS = [
   'companyName',
   'titlePt',
   'titleEn',
+  'titleEs',
   'summaryPt',
   'summaryEn',
+  'summaryEs',
   'descriptionPt',
   'descriptionEn',
+  'descriptionEs',
   'sortOrder',
 ] as const;
 
@@ -137,10 +158,13 @@ export const createEmptyExperiencesOperationsFormValue = (): ExperiencesOperatio
   companyName: '',
   titlePt: '',
   titleEn: '',
+  titleEs: '',
   summaryPt: '',
   summaryEn: '',
+  summaryEs: '',
   descriptionPt: '',
   descriptionEn: '',
+  descriptionEs: '',
   startDate: '',
   endDate: '',
   isCurrent: false,
@@ -238,10 +262,13 @@ export const buildExperiencesFormValue = (
         companyName: record.companyName,
         titlePt: record.titlePt,
         titleEn: record.titleEn,
+        titleEs: record.titleEs ?? '',
         summaryPt: record.summaryPt,
         summaryEn: record.summaryEn,
+        summaryEs: record.summaryEs ?? '',
         descriptionPt: record.descriptionPt,
         descriptionEn: record.descriptionEn,
+        descriptionEs: record.descriptionEs ?? '',
         startDate: normalizeAdminDateValueForPicker(record.startDate),
         endDate: normalizeAdminDateValueForPicker(record.endDate),
         isCurrent: record.isCurrent ?? false,
@@ -264,13 +291,16 @@ export const buildExperiencesMutationPayload = (
     'companyName',
     'titlePt',
     'titleEn',
+    'titleEs',
     'summaryPt',
     'summaryEn',
+    'summaryEs',
     'descriptionPt',
     'descriptionEn',
+    'descriptionEs',
   ] as const;
   for (const key of required)
-    if (!form[key].trim())
+    if (!form[key]?.trim())
       return {
         isValid: false,
         errorKey:
@@ -299,10 +329,13 @@ export const buildExperiencesMutationPayload = (
       companyName: form.companyName.trim(),
       titlePt: form.titlePt.trim(),
       titleEn: form.titleEn.trim(),
+      titleEs: form.titleEs!.trim(),
       summaryPt: form.summaryPt.trim(),
       summaryEn: form.summaryEn.trim(),
+      summaryEs: form.summaryEs!.trim(),
       descriptionPt: form.descriptionPt.trim(),
       descriptionEn: form.descriptionEn.trim(),
+      descriptionEs: form.descriptionEs!.trim(),
       startDate: normalizeAdminDateValueForMutation(form.startDate),
       endDate: normalizeAdminDateValueForMutation(form.endDate) || undefined,
       isCurrent: form.isCurrent,

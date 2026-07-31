@@ -151,6 +151,7 @@ export const buildCustomersFormValue = (
     name: customer.name,
     summaryPt: customer.summaryPt,
     summaryEn: customer.summaryEn,
+    summaryEs: customer.summaryEs ?? '',
     highlight: customer.highlight ?? false,
     sortOrder: String(customer.sortOrder ?? 0),
     experienceIds: normalizeCustomerExperienceIds(customer, experiences),
@@ -187,6 +188,7 @@ export const buildCustomersViewModels = (
         name: customer.name,
         summaryPt: customer.summaryPt,
         summaryEn: customer.summaryEn,
+        summaryEs: customer.summaryEs ?? '',
         highlight: customer.highlight ?? false,
         sortOrderLabel: String(customer.sortOrder ?? 0),
         experienceLabels: experienceIds.map((experienceId) =>
@@ -208,6 +210,7 @@ export const buildCustomersMutationPayload = (
   const name = formValue.name.trim();
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
+  const summaryEs = formValue.summaryEs?.trim() ?? summaryEn;
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
   if (!slug) {
@@ -238,6 +241,13 @@ export const buildCustomersMutationPayload = (
     };
   }
 
+  if (!summaryEs) {
+    return {
+      isValid: false,
+      errorKey: 'pages.admin.customers.feedback.requiredSummaryEs',
+    };
+  }
+
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
@@ -252,6 +262,7 @@ export const buildCustomersMutationPayload = (
       name,
       summaryPt,
       summaryEn,
+      summaryEs,
       highlight: formValue.highlight,
       sortOrder,
       experienceIds: [...new Set(formValue.experienceIds)],

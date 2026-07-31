@@ -10,8 +10,10 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     url: 'https://github.com/vh/portfolio',
     labelPt: 'Repositorio',
     labelEn: 'Repository',
+    labelEs: 'Repository',
     descriptionPt: 'Codigo fonte',
     descriptionEn: 'Source code',
+    descriptionEs: 'Source code',
     type: 'GITHUB',
     sortOrderLabel: '1',
     projectLabels: ['Portfolio remake'],
@@ -24,8 +26,10 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     url: 'https://example.com/english',
     labelPt: '',
     labelEn: 'English fallback',
+    labelEs: 'English fallback',
     descriptionPt: '',
     descriptionEn: '',
+    descriptionEs: '',
     type: 'DEPLOY',
     sortOrderLabel: '2',
     projectLabels: [],
@@ -38,8 +42,10 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     url: 'https://example.com/empty',
     labelPt: '',
     labelEn: '',
+    labelEs: '',
     descriptionPt: '',
     descriptionEn: '',
+    descriptionEs: '',
     type: 'OTHER',
     sortOrderLabel: '3',
     projectLabels: [],
@@ -81,8 +87,10 @@ describe('LinksOperationsModalComponent', () => {
     const urlSpy = jasmine.createSpy('urlChanged');
     const labelPtSpy = jasmine.createSpy('labelPtChanged');
     const labelEnSpy = jasmine.createSpy('labelEnChanged');
+    const labelEsSpy = jasmine.createSpy('labelEsChanged');
     const descriptionPtSpy = jasmine.createSpy('descriptionPtChanged');
     const descriptionEnSpy = jasmine.createSpy('descriptionEnChanged');
+    const descriptionEsSpy = jasmine.createSpy('descriptionEsChanged');
     const typeSpy = jasmine.createSpy('typeChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
@@ -96,8 +104,10 @@ describe('LinksOperationsModalComponent', () => {
     component.urlChanged.subscribe(urlSpy);
     component.labelPtChanged.subscribe(labelPtSpy);
     component.labelEnChanged.subscribe(labelEnSpy);
+    component.labelEsChanged.subscribe(labelEsSpy);
     component.descriptionPtChanged.subscribe(descriptionPtSpy);
     component.descriptionEnChanged.subscribe(descriptionEnSpy);
+    component.descriptionEsChanged.subscribe(descriptionEsSpy);
     component.typeChanged.subscribe(typeSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.projectToggled.subscribe(projectSpy);
@@ -137,8 +147,10 @@ describe('LinksOperationsModalComponent', () => {
       emitUrlChange(value: string): void;
       emitLabelPtChange(value: string): void;
       emitLabelEnChange(value: string): void;
+      emitLabelEsChange(value: string): void;
       emitDescriptionPtChange(value: string): void;
       emitDescriptionEnChange(value: string): void;
+      emitDescriptionEsChange(value: string): void;
       emitTypeChange(value: string): void;
       emitSortOrderChange(value: string): void;
       toggleProject(projectId: string): void;
@@ -157,8 +169,10 @@ describe('LinksOperationsModalComponent', () => {
     componentAccess.emitUrlChange('https://example.com');
     componentAccess.emitLabelPtChange('Demo');
     componentAccess.emitLabelEnChange('Demo');
+    componentAccess.emitLabelEsChange('Demostración');
     componentAccess.emitDescriptionPtChange('Descricao');
     componentAccess.emitDescriptionEnChange('Description');
+    componentAccess.emitDescriptionEsChange('Descripción');
     componentAccess.emitTypeChange('DEPLOY');
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleProject('project-1');
@@ -186,13 +200,17 @@ describe('LinksOperationsModalComponent', () => {
       'URL',
       'Portuguese label',
       'English label',
+      'Spanish label',
       'Portuguese description',
       'English description',
+      'Spanish description',
       'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
       true,
-      false,
+      true,
+      true,
+      true,
       false,
       false,
       false,
@@ -205,8 +223,10 @@ describe('LinksOperationsModalComponent', () => {
     expect(urlSpy).toHaveBeenCalledOnceWith('https://example.com');
     expect(labelPtSpy).toHaveBeenCalledOnceWith('Demo');
     expect(labelEnSpy).toHaveBeenCalledOnceWith('Demo');
+    expect(labelEsSpy).toHaveBeenCalledOnceWith('Demostración');
     expect(descriptionPtSpy).toHaveBeenCalledOnceWith('Descricao');
     expect(descriptionEnSpy).toHaveBeenCalledOnceWith('Description');
+    expect(descriptionEsSpy).toHaveBeenCalledOnceWith('Descripción');
     expect(typeSpy).toHaveBeenCalledOnceWith('DEPLOY');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
@@ -298,8 +318,10 @@ describe('LinksOperationsModalComponent', () => {
       url: 'https://github.com/vh/portfolio',
       labelPt: null,
       labelEn: null,
+      labelEs: null,
       descriptionPt: 'Codigo fonte',
       descriptionEn: 'Source code',
+      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
     });
@@ -307,8 +329,10 @@ describe('LinksOperationsModalComponent', () => {
       url: 'https://github.com/vh/portfolio',
       labelPt: 'Repositorio',
       labelEn: 'Repository',
+      labelEs: 'Repository',
       descriptionPt: 'Codigo fonte',
       descriptionEn: 'Source code',
+      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: '1',
       projectIds: ['project-1'],

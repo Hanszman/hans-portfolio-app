@@ -297,7 +297,13 @@ export const mapTechnologyToSkillCard = (
     key,
     label: translateStaticKey(locale, SKILL_CONTEXT_LABEL_KEYS[key]),
     value:
-      technology.experienceMetrics?.byContext[key].label ??
+      (technology.experienceMetrics
+        ? resolveLocalizedText(locale, {
+            'pt-br': technology.experienceMetrics.byContext[key].labelPt,
+            'en-us': technology.experienceMetrics.byContext[key].labelEn,
+            'es-es': technology.experienceMetrics.byContext[key].labelEs,
+          }, technology.experienceMetrics.byContext[key].label)
+        : '') ||
       translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.zeroMonths),
     totalMonths: technology.experienceMetrics?.byContext[key].totalMonths ?? 0,
   })).filter((context) => context.totalMonths > 0);
@@ -326,7 +332,13 @@ export const mapTechnologyToSkillCard = (
     levelLabel,
     frequencyLabel,
     totalExperienceLabel:
-      technology.experienceMetrics?.total.label ??
+      (technology.experienceMetrics
+        ? resolveLocalizedText(locale, {
+            'pt-br': technology.experienceMetrics.total.labelPt,
+            'en-us': technology.experienceMetrics.total.labelEn,
+            'es-es': technology.experienceMetrics.total.labelEs,
+          }, technology.experienceMetrics.total.label)
+        : '') ||
       translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
     isHighlight: technology.highlight,
     iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
@@ -351,7 +363,13 @@ export const mapTechnologyToSkillCard = (
       level: shouldShowLevelBadge ? levelLabel : undefined,
       frequency: frequencyLabel,
       experience:
-        technology.experienceMetrics?.total.label ??
+        (technology.experienceMetrics
+          ? resolveLocalizedText(locale, {
+              'pt-br': technology.experienceMetrics.total.labelPt,
+              'en-us': technology.experienceMetrics.total.labelEn,
+              'es-es': technology.experienceMetrics.total.labelEs,
+            }, technology.experienceMetrics.total.label)
+          : '') ||
         translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
       image: {
         src: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
@@ -360,6 +378,7 @@ export const mapTechnologyToSkillCard = (
           {
             'pt-br': imageAsset?.imageAsset.altPt ?? undefined,
             'en-us': imageAsset?.imageAsset.altEn ?? undefined,
+            'es-es': imageAsset?.imageAsset.altEs ?? undefined,
           },
           `${technology.name} icon`,
         ),
@@ -456,7 +475,13 @@ export const buildSkillsSummaryMetrics = (
     {
       label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryLongest),
       value: strongestTechnology?.name ?? '-',
-      supportingText: strongestTechnology?.experienceMetrics?.total.label ?? '',
+      supportingText: strongestTechnology?.experienceMetrics
+        ? resolveLocalizedText(locale, {
+            'pt-br': strongestTechnology.experienceMetrics.total.labelPt,
+            'en-us': strongestTechnology.experienceMetrics.total.labelEn,
+            'es-es': strongestTechnology.experienceMetrics.total.labelEs,
+          }, strongestTechnology.experienceMetrics.total.label)
+        : '',
     },
   ];
 };

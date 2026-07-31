@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+﻿import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { TagsOperationsService } from '../../../../core/api/tags/tags-operations.service';
@@ -18,13 +18,13 @@ const createTag = (overrides: Partial<TagRecord> = {}): TagRecord => ({
   slug: 'frontend',
   namePt: 'Front-end',
   nameEn: 'Front-end',
+  nameEs: 'Front-end',
   type: 'STACK',
   sortOrder: 1,
   projectIds: ['project-1'],
   technologyIds: ['technology-1'],
   ...overrides,
 });
-
 const createProject = (
   overrides: Partial<ProjectCollectionItemResponse> = {},
 ): ProjectCollectionItemResponse => ({
@@ -32,10 +32,13 @@ const createProject = (
   slug: 'portfolio-remake',
   titlePt: 'Portfolio remake',
   titleEn: 'Portfolio remake',
+  titleEs: 'Portfolio remake',
   shortDescriptionPt: 'Resumo',
   shortDescriptionEn: 'Summary',
+  shortDescriptionEs: 'Summary',
   fullDescriptionPt: 'Descricao',
   fullDescriptionEn: 'Description',
+  fullDescriptionEs: 'Description',
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
@@ -213,6 +216,7 @@ describe('TagsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       toggleProject(projectId: string): void;
@@ -224,6 +228,7 @@ describe('TagsOperationsComponent', () => {
     component.updateSlug('backend');
     component.updateNamePt('Back-end');
     component.updateNameEn('Back-end');
+    component.updateNameEs('Back-end');
     component.updateType('STACK');
     component.updateSortOrder('3');
     component.toggleProject('project-1');
@@ -234,6 +239,7 @@ describe('TagsOperationsComponent', () => {
       slug: 'backend',
       namePt: 'Back-end',
       nameEn: 'Back-end',
+      nameEs: 'Back-end',
       type: 'STACK',
       sortOrder: 3,
       projectIds: ['project-1'],
@@ -248,6 +254,7 @@ describe('TagsOperationsComponent', () => {
       slug: 'frontend',
       namePt: 'Front-end atualizado',
       nameEn: 'Front-end',
+      nameEs: 'Front-end',
       type: 'STACK',
       sortOrder: 1,
       projectIds: ['project-1'],
@@ -353,6 +360,7 @@ describe('TagsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -372,6 +380,8 @@ describe('TagsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.tags.feedback.requiredNameEn');
 
     component.updateNameEn('Front-end');
+
+    component.updateNameEs('Front-end');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.tags.feedback.requiredType');
 
@@ -440,6 +450,7 @@ describe('TagsOperationsComponent', () => {
       updateSlug(value: string): void;
       updateNamePt(value: string): void;
       updateNameEn(value: string): void;
+      updateNameEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
@@ -451,6 +462,7 @@ describe('TagsOperationsComponent', () => {
     component.updateSlug('frontend');
     component.updateNamePt('Front-end');
     component.updateNameEn('Front-end');
+    component.updateNameEs('Front-end');
     component.updateType('STACK');
     component.updateSortOrder('1');
     await component.submitModal();
@@ -464,6 +476,7 @@ describe('TagsOperationsComponent', () => {
     component.updateSlug('backend');
     component.updateNamePt('Back-end');
     component.updateNameEn('Back-end');
+    component.updateNameEs('Back-end');
     component.updateType('STACK');
     component.updateSortOrder('2');
     await component.submitModal();

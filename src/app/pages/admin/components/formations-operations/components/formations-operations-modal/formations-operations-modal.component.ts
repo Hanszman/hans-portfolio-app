@@ -20,6 +20,7 @@ import {
 import {
   createAdminFieldLabelResolver,
   formatAdminDateRangeForDisplay,
+  resolveAdminLocalizedValue,
   resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
@@ -74,9 +75,11 @@ export class FormationsOperationsModalComponent {
   readonly institutionChanged = output<string>();
   readonly titlePtChanged = output<string>();
   readonly titleEnChanged = output<string>();
+  readonly titleEsChanged = output<string>();
   readonly degreeTypeChanged = output<string>();
   readonly summaryPtChanged = output<string>();
   readonly summaryEnChanged = output<string>();
+  readonly summaryEsChanged = output<string>();
   readonly startDateChanged = output<string>();
   readonly endDateChanged = output<string>();
   readonly highlightChanged = output<boolean>();
@@ -128,7 +131,9 @@ export class FormationsOperationsModalComponent {
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
     this.formations().map((formation) => ({
       id: formation.id,
-      title: `${formation.titlePt} (${formation.slug})`,
+      title: `${resolveAdminLocalizedValue(
+        this.translation.locale(), formation.titlePt, formation.titleEn, formation.titleEs,
+      )} (${formation.slug})`,
       subtitle: formation.institution,
     })),
   );
@@ -140,21 +145,32 @@ export class FormationsOperationsModalComponent {
       return this.formations().map((formation) => ({
         id: formation.id,
         title: formation.slug,
-        subtitle: formation.titlePt,
+        subtitle: resolveAdminLocalizedValue(
+          this.translation.locale(), formation.titlePt, formation.titleEn, formation.titleEs,
+        ),
         fields: [
           { labelKey: 'pages.admin.formations.card.slug', value: formation.slug },
           {
             labelKey: 'pages.admin.formations.card.institution',
             value: formation.institution,
           },
-          { labelKey: 'pages.admin.formations.card.titlePt', value: formation.titlePt },
-          { labelKey: 'pages.admin.formations.card.titleEn', value: formation.titleEn },
+          {
+            labelKey: 'pages.admin.operations.localized.title',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), formation.titlePt, formation.titleEn, formation.titleEs,
+            ),
+          },
           {
             labelKey: 'pages.admin.formations.card.degreeType',
             value: formation.degreeType,
           },
-          { labelKey: 'pages.admin.formations.card.summaryPt', value: formation.summaryPt },
-          { labelKey: 'pages.admin.formations.card.summaryEn', value: formation.summaryEn },
+          {
+            labelKey: 'pages.admin.operations.localized.summary',
+            value: resolveAdminLocalizedValue(
+              this.translation.locale(), formation.summaryPt, formation.summaryEn,
+              formation.summaryEs,
+            ),
+          },
           {
             labelKey: 'pages.admin.operations.date',
             value: formatAdminDateRangeForDisplay(formation.startDate, formation.endDateLabel),
@@ -192,7 +208,9 @@ export class FormationsOperationsModalComponent {
     return formation
       ? {
           id: formation.id,
-          title: `${formation.titlePt} (${formation.slug})`,
+          title: `${resolveAdminLocalizedValue(
+            this.translation.locale(), formation.titlePt, formation.titleEn, formation.titleEs,
+          )} (${formation.slug})`,
           subtitle: formation.institution,
         }
       : null;
@@ -222,6 +240,10 @@ export class FormationsOperationsModalComponent {
     this.titleEnChanged.emit(value);
   }
 
+  protected emitTitleEsChange(value: string): void {
+    this.titleEsChanged.emit(value);
+  }
+
   protected emitDegreeTypeChange(value: string): void {
     this.degreeTypeChanged.emit(value);
   }
@@ -232,6 +254,10 @@ export class FormationsOperationsModalComponent {
 
   protected emitSummaryEnChange(value: string): void {
     this.summaryEnChanged.emit(value);
+  }
+
+  protected emitSummaryEsChange(value: string): void {
+    this.summaryEsChanged.emit(value);
   }
 
   protected emitStartDateChange(value: string): void {

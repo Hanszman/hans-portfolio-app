@@ -11,6 +11,7 @@ import {
   isAdminDateRangeValid,
   normalizeAdminDateValueForMutation,
   normalizeAdminDateValueForPicker,
+  resolveAdminLocalizedValue,
   resolveAdminFieldLabel,
   resolveAdminRelationLabels,
   resolveAdminSelectValue,
@@ -145,6 +146,26 @@ describe('formatAdminIdentity', () => {
     labelCases.forEach(([source, expected]) => {
       expect(formatAdminRelationLabel(source)).toBe(expected);
     });
+  });
+
+  it('should resolve Spanish admin values and localized relation labels from the active locale', () => {
+    expect(resolveAdminLocalizedValue('es-es', 'Título PT', 'English title', 'Título ES')).toBe(
+      'Título ES',
+    );
+    expect(resolveAdminLocalizedValue('es-es', 'Título PT', 'English title', null)).toBe(
+      'English title',
+    );
+    expect(
+      formatAdminRelationLabel(
+        {
+          titlePt: 'Projeto',
+          titleEn: 'Project',
+          titleEs: 'Proyecto',
+          slug: 'portfolio',
+        },
+        'es-es',
+      ),
+    ).toBe('Proyecto (portfolio)');
   });
 
   it('should resolve nested and direct relation labels with stable deduplication', () => {
