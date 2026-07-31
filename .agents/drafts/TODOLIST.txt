@@ -1,5 +1,5 @@
 [TODO LIST]:
--Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End.
+-Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 -Criar separação entre tempos de experiência (já fiz a lógica no Back-End, melhorar apresentação disso no Front-End).
 -Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
@@ -10,7 +10,7 @@
 -Criar listas de links de prod e git nos cards (com os ícones do git e vercel).
 -Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
--Colocar as certificações e diplomas exibidas em um carrossel.
+-Colocar as certificações e diplomas exibidas em um carrossel. Verificar se teria como adicionar mais de uma foto nas certificações.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
 -Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (devemos excluir os planejamentos?).
