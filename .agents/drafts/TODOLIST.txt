@@ -1,23 +1,23 @@
 [TODO LIST]:
+DADOS:
 -Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
--Criar componente de message na lib pra padronizar mensagens em containers para caso filtros vazios ou erros de api, etc. Aplicar esse novo componente padronizado aqui no portfolio em todos os locais possíveis/necessários.
--Criar separação entre tempos de experiência (já fiz a lógica no Back-End, melhorar apresentação disso no Front-End).
--Revisar gráficos comparando com projeto antigo e acrescentar novos gráficos, por exemplo, nos modais de tecnologia/skill.
--Talvez finalizar último gráfico (BarChart TechnologiesByExperience?).
--Alterar ícone de navegador do Front e do Back.
--Mostrar datas com dia (atualmente está somente em mês) e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
--Colocar imagens dos prints das telas do projetos. Melhorar apresentação dessas imagens utilizando carrossel.
--Colocar links de referência entre as entidades e atualizar modais de visualização.
--Criar listas de links de prod e git nos cards (com os ícones do git e vercel).
--Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
--Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
+-Cadastrar os links de referência entre as entidades e atualizar modais de visualização (Criar listas de links de prod e git nos modais, com os ícones do git e vercel).
+-Cadastrar imagens dos prints nos modais do projetos utilizando carrossel que implementamos.
 -Colocar as certificações e diplomas exibidas em um carrossel. Verificar se teria como adicionar mais de uma foto nas certificações.
+IMPLEMENTAÇÕES:
+-Alterar ícone de navegador do Front e do Back.
+-Criar componente de message na lib pra padronizar mensagens em containers para caso filtros vazios ou erros de api, etc. Aplicar esse novo componente padronizado aqui no portfolio em todos os locais possíveis/necessários. Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
+-Criar uma coluna para projeto inacabado/concluído. Verificar também como está sendo utilizado o campo highlighted (esses devem ser os que mostramos na home page).
+-Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
+-Mostrar datas com dia (atualmente está somente em mês) e talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
+-Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
+AUTOMATIZAÇÕES:
 -Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (criação da components e services).
 -Criar pipeline ci/cd e configurar docker no projeto.
--Criar uma coluna para projeto inacabado/concluído.
+DEPOIS:
 -Terminar de fazer alguns projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
 -Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção.
 -Talvez fazer página sobre meus gostos e vida pessoal.
@@ -37,35 +37,26 @@ hans-portfolio-app:
 hans-portfolio-api:
 -README.md
 Mas pode ficar a vontade para pegar contexto de todos os arquivos desses 4 repos: hans-portfolio-app, hans-portfolio-api, victor_hanszman_portfolio-old e hans-ui-design-lib
-
 Já desenvolvemos a api, agora vamos refazer o front do victor_hanszman_portfolio no hans-portfolio-app...
 O plano-implementacao-hans-portfolio-app-final-version.md é a versão final atual de todas as modificações que fizemos ao longo da conversa com o GPT no histórico e também ao longo do desenvolvimento da api... pode atualizar esse arquivo com o que for necessário para essas próximas etapas.
-
 Quero deixar claro que vamos usar o Angular com suas ferramentas mais recentes, usando: signals, effects, computed (usando rxjs somente quando extremamente necessário), standalone components (não usar modules), usando a nova sintaxe do angular (usando @if e @for no html, ou seja, não usar ng-if nem ng-for) (usando também input(), output() e inject() ao invés da sintaxe antiga)... atualize a documentação com essas informações se ainda não tiver atualizado.
-
 Ao longo do processo de desenvolvimento do Front novo, sempre que formos implementar algum componente, pagina, service, etc, vamos criar também já diretamente seu test unitário e vamos garantir 100% de coverage nele... a ideia é cobrir o sistema todo com 100% de coverage em todos os arquivos e todas as linhas... ignorando do coverage claro aqueles aqueles arquivos de configuração que não precisam ser testados... sempre garantir que o código vai passar no lint/prettier também... ou seja, então em todas as etapas, vamos rodar os scripts de test, test:coverage, lint, build, etc.
-
 Repare que estamos usando a lib que criamos: hans-ui-design-lib. Ou seja, deixe claro na documentação também que SEMPRE temos que usá-la se for necessário qualquer componente no projeto que já exista nela... por exemplo, se no remake do portfolio precisarmos de um button, confira na lib pois la ja tem um button, então use ele. Se precisar fazer qualquer alteração ou inclusão de componente novo (somente reutilizavel em outros projetos/cenários) me avise antes por favor. Mas lembrando que nem todo componente vai ser reutilizavel em varios projetos/contextos, alguns muito provavelmente vão servir apenas para o portfolio mesmo, ai nesse caso, crie esses componentes apenas no hans-portfolio-app.
-
 Enfim! Atualize todo o plano de implementação plano-implementacao-hans-portfolio-app-final-version.md para incluir essas informações (se já não estiverem no plano) que te falei nessa mensagem de forma detalhada por favor! Por enquanto somente atualize o plano (e o readme do app se necessário), não comece a implementar nada ainda.
 
 [PROMPT CONTINUAÇÃO]:
 Continue o plano-implementacao-hans-portfolio-app-final-version.md da etapa em que paramos. Como vc pode ver ja fizemos ate a etapa FX e a proxima é a FY. Lembre-se de usar nossa lib de hans design sempre que precisar de algum componente que ela já tenha. Lembre-se de sempre que necessário atualizar as documentações E lembre-se de sempre (no final de toda etapa/implementação que vc fizer) rodar os scripts de lint, build, test, etc para verificar se tudo passou corretamente.
 
 [CONTINUAÇÃO PARA A ETAPA 7]:
-
 Continue o plano-implementacao-hans-portfolio-app-final-version.md da etapa em que paramos. Leia o documento todo antes de começar, para que vc possa pegar o contexto. Como vc pode ver ja fizemos ate a etapa F6 e a proxima é a F7. Lembre-se de usar nossa lib de hans design sempre que precisar de algum componente que ela já tenha. Lembre-se de sempre que necessário atualizar as documentações E lembre-se de sempre (no final de toda etapa/implementação que vc fizer) rodar os scripts de lint, build, test, etc para verificar se tudo passou corretamente.
-
 Para essa próxima etapa, primeiramente, atualize a documentação e depois faça as alterações, com os seguintes pontos:
 -Faça também uma refatoração em todas as pages, usando clean code, solid, etc... porque atualmente todas estão com os componentes muito enormes, fazendo várias coisas... quebre em componentes menores... se o componente menor for usado apenas naquela page, crie uma pasta pra ele dentro da pasta da page, com os devidos arquivos html, scss, spec, ts, types e se necessário a pasta helpers (com ts e spec)... se o componente for reaproveitavel em outras pages, crie uma pasta shared (irmã de layout e de pages), contendo esses componentes reaproveitaveis (cada um dentro de sua pasta com os arquivos devidos, esses que mencionei acima)... lembre-se sempre também que se houver algum componente da nossa lib de design que resolva o problema, dê preferencia pra usar ele e não criar um componente novo
 -Repare também nos prints de 1 a 9 que as telas estão com espaços muitos vazios e a responsividade das informações não está legal, vários textos e informações estão saindo muito de dentro dos seus respectivos espaços... algumas coisas estão encavalando muito em cima das outras quando tem espaço disponível em outras regiões... quando for refinar a UX e a responsividade, lembre-se de tudo isso
 -Observe também que não estamos puxando todas as informações possíveis do back de cada tela no front, com todas as tabelas, filtros, informações, gráficos (quando for fazer gráficos, tabelas, filtros, etc, lembre-se de usar a lib de design) etc... preciso que vc se baseie mais na organização das informações que desenvolvemos no projeto victor_hanszman_portfolio-old, que é justamente o portfolio que estamos refazendo, estamos dando uma cara nova pra ele, esse projeto atual é um remake desse outro... tente deixar mais parecido com ele em organização de informações, em menu, em header, etc
 -Sobre as informações das tecnologias, projetos, experiencias, etc, podemos deixar mais resumidas nas telas, e ai, quando o usario clicar no card delas, vamos abrir um modal com mais detalhes, informações, conexões (relações com outras entidades), gráficos... ai lembre-se de usar também os componentes da hans lib, por exemplo: modais, graficos, cards, carrossel para mostrar imagens maiores, etc
-
 Enfim! Dê uma repaginada visual e de código, faça o melhor possível e sempre pense bem em tudo, principalmente boas práticas.
 
 [PRÓXIMOS PASSOS PARA REFATORAÇÃO]:
-
 Dê uma olhada no plano-implementacao-hans-portfolio-app-final-version.md e no README.md desse projeto, para pegar contexto. Analise também o README.md da hans-ui-design-lib e analise o código/telas do victor_hanszman_portfolio-old, que é o portfolio antigo, que estamos fazendo o remake (ambos estão na pasta C:\VictorLocal\Projects\Personal irmã desse projeto).
 Preciso que vc refaça os componentes de header e footer, bem como os subcomponentes deles, para deixar o mais próximo possível visualmente do portfolio antigo.
 Lembre-se de sempre usar os componentes da nossa lib por favor, por exemplo, quando precisar de dropdown, button, icon e de outros componentes que a lib ja tem, utilize o componente da lib.
@@ -252,7 +243,7 @@ Cara como vc pode ver no print 3, o gap 1 continua sem ser aplicado entre o titu
 Como vc pode ver no print 5, a partir dessa resolução 1279px de largura, a imagem quebra a linha pra baixo, o que está correto. Porém, a sessão dos textos do titulo/subtitulo continuam ocupando aquela mesma area limitada, deixando um espaço muito vazio à direita. Faça essa sessão ocupar o espaço todo quando a imagem quebrar alinha pra baixo. Além disso, como pode ver no print 6, a partir da resolução 944px de largura, não só o texto fica limitado à esquerda, com espaço sobrando a direita, mas a imagem também, pq por algum motivo, ela deixa de ficar centralizada na div dela, quando deveria estar centralizada o tempo todo dentro de sua propria div, em todas as resoluções. Faça esses ajustes de responsividade por favor.
 -Esse section header que vc criou não precisa ser um componente da lib. É pra vc fazê-lo como um componente reutilizável do próprio portfolio app, crie esse componente na pasta shared ou na pasta layour, onde fizer mais sentido. Nessa migração do componente sectionheader, lembre de seguir os padrões de componente do portfolio, pra onde ele será migrado, não os padrões da lib, de onde ele ta saindo
 
-[ADMIN]:
+ADMIN:
 -Estamos fazendo nesse projeto um remake do projeto victor_hanszman_portfolio-old.
 Para pegar contexto, preciso que vc leia toda a documentação desse projeto antes de começarmos, nos arquivos: plano-implementacao-hans-portfolio-app-final-version.md desse portfolio app e nos README.md e AGENTS.md dos 3 projetos: hans-portfolio-app, hans-portfolio-api e hans-ui-design-lib. Atualmente já implementamos tudo até a etapa F7 e a próxima etapa agora é a F8, a final (inclusive pode atualizar no plano-implementacao-hans-portfolio-app-final-version.md pois lá fala que ainda estamos nela em "proxima etapa oficial dentro da `F7`: refatoracao da pagina `skills`", mas já finalizamos home, experiences, skills, projects e dashboard).
 A ideia agora não é implementar nada ainda da etapa F8, vamos primeiro criar um novo plano de implementação pra ela e a atualizar o plano-implementacao-hans-portfolio-app-final-version.md com as novas informações necessárias. Precisamos detalhar melhor a etapa F8, planejando tudo que faremos nela. Preciso que vc investigue na API, na documentação, no swagger, etc, todos os endpoints relacionados às telas de admin, ou seja, os create/update/delete das entidades.
@@ -479,6 +470,8 @@ Apesar de termos passado com 100% ce coverage e com todos os testes verdes, ao r
 Vi aqui que vc fez a refatoração com o relation-picker, porém o visual dele ainda não ficou do jeito certo. Como vc pode ver, eu havia pedido pra esse componente de relation-picker ficar com o fundo cinza igual do print 1, mas agora está com fundo escurto, igual do print 2. Vc nem mexeu em nenhum arquivo scss/css, por isso o estilo disso ainda deve estar em cada entidade que vc refatorou. Padronize para que esse componente tenha esse estilo visual.
 E por falar em estilo visual, como vc pode ver dos prints 3 ao 6, os fundos dos itens nos modais de update, read, delete do projects ainda não está padronizado igual ao das outras entidades. Veja os prints 7 ao 10 por exemplo de technologies e se baseie nele pra fazer o ajuste visual de projects, com esse fundo cinza ao invés de escuro. Aproveite também para padronizar esses estilos, criando classes globais de operations pra eles, ou melhor ainda, se possível, criando componentes shared para essa abstração desses itens visuais, assim como vc fez e substituiu no caso dos relation-picker. Faça a abstração e substitua em TODOS os casos de TODAS as entidades, para que possamos ter tudo padronizado e para que, no futuro, se precisar alterar alguma coisa nesse estilos, precisemos alterar em um lugar só ao invés de em todas as entidades.
 Pense bem pra fazer essas correções e não deixe nada despadronizado por favor.
+
+[REFATORAÇÔES E TODOLIST]:
 -Vamos criar um planejamento pra refatorar as operations dos cruds desse portfolio e além disso vamos resolver outros pontos que estão errados:
 Primeiro quero que vc renomeie o relation-picker para operations-relation-picker, o nome do componente, dos arquivos, de todos os imports e locais que chamam/usam ele. E quero que no scss desse operations-relation-picker vc coloque essa cor de fundo cinza que haviamos definido anteriormente, ou seja, igual a do print 1. Essa cor também vai ser aplicada ao fundo de toggle-buttons, como esse do highlight que mandei no print 2 no modo dark e no modo light vai ser igual ao print 3. Use essas cores como padrão do light e dark para tudo que formos fazer nessa refatoração, usando nossas variaveis de cores, sem sair dos padrões do projeto.
 Dentro da pasta operations, nos components shared, preciso que vc crie um operations-detailed-item e um operations-item contendo um padrão para a composição genérica dos componentes de itens dos modais dos cruds das entidades. Siga o exemplo de como está em tags, nos prints que estou enviando. Como vc pode ver nos prints de 4 a 7, temos um padrão visual que vc pode seguir de tags. O operations-detailed-item vai ser igual a esse item do print 4, que usaremos no modal de read e teremos detalhadamente os campos cadastrados daquele item, com o título do campo em roxo/primary e o conteúdo abaixo em branco, teremos também os botões de update e delete daquele item. Já nos modais de lista de update e delete, que são os prints 5 e 6, teremos esses componente genéricos de item, que será o operations-item, onde clicaremos para chamar o próximo modal de update ou delete. E no caso do modal de confirmação de delete, que é o print 7, ao invés de fazermos assim igual ao print, vamos reutilizar o operations-item também.
