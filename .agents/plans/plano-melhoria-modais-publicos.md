@@ -40,15 +40,15 @@ O escopo é exclusivamente a experiência pública. Os modais administrativos e 
 
 ### Progressos dos enums
 
-| Domínio | Valor | Percentual | Cor semântica |
-| --- | --- | ---: | --- |
-| Knowledge level | `BASIC` | 33% | `danger` |
-| Knowledge level | `INTERMEDIATE` | 66% | `warning` |
-| Knowledge level | `ADVANCED` | 100% | `success` |
-| Usage frequency | `STUDYING` | 25% | `danger` |
-| Usage frequency | `PREVIOUSLY_USED` | 50% | `warning` |
-| Usage frequency | `OCCASIONAL` | 75% | `warning` |
-| Usage frequency | `FREQUENT` | 100% | `success` |
+| Domínio         | Valor             | Percentual | Cor semântica |
+| --------------- | ----------------- | ---------: | ------------- |
+| Knowledge level | `BASIC`           |        33% | `danger`      |
+| Knowledge level | `INTERMEDIATE`    |        66% | `warning`     |
+| Knowledge level | `ADVANCED`        |       100% | `success`     |
+| Usage frequency | `STUDYING`        |        25% | `danger`      |
+| Usage frequency | `PREVIOUSLY_USED` |        50% | `warning`     |
+| Usage frequency | `OCCASIONAL`      |        75% | `warning`     |
+| Usage frequency | `FREQUENT`        |       100% | `success`     |
 
 Os percentuais são uma representação ordinal de domínio, não uma métrica calculada. As cores virão dos tokens `--danger-*`, `--warning-*` e `--success-*` da lib, sem hexadecimal no Portfolio.
 

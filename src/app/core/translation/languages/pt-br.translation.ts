@@ -72,27 +72,30 @@ export const PT_BR_TRANSLATIONS = {
   'common.pagination.pageLabel': 'Pagina',
   'common.pagination.page': 'Ir para a pagina {{ page }}',
   'pages.home.hero.availability': 'Disponível para trabalho',
-  'pages.home.hero.greeting': 'Oi, eu sou',
-  'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack',
+  'pages.home.hero.greeting': 'Olá, sou',
+  'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack Sênior',
   'pages.home.hero.description':
-    'Engenheiro de Software Full Stack especializado em Front-End e Back-End. Baseado em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
+    'Engenheiro de Software Sênior com experiência de desenvolvimento tanto em Front-End como em Back-End. Moro em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
   'pages.home.hero.location': 'Belo Horizonte, Brasil',
   'pages.home.hero.cta.projects': 'Ver projetos',
   'pages.home.hero.cta.experiences': 'Minha experiência',
   'pages.home.hero.social.navigation': 'Links sociais',
   'pages.home.metrics.years.label': 'Anos de experiência',
-  'pages.home.metrics.years.description': 'Anos construindo produtos web',
+  'pages.home.metrics.years.description':
+    'Há muitos anos construindo produtos web de alta qualidade no mercado',
   'pages.home.metrics.projects.label': 'Projetos entregues',
-  'pages.home.metrics.projects.description': 'Cases publicados no portfolio',
+  'pages.home.metrics.projects.description':
+    'Experiência com muitos projetos profissionais, pessoais e academicos, sempre entregando valor',
   'pages.home.metrics.technologies.label': 'Tecnologias',
-  'pages.home.metrics.technologies.description': 'Sinais de stack mapeados',
+  'pages.home.metrics.technologies.description':
+    'Grande quantidade de tecnologias já utilizadas para desenvolvimento e estudos',
   'pages.home.metrics.ariaLabel': 'Métricas do portfolio',
   'pages.home.loading': 'Conectando dados reais do portfolio...',
   'pages.home.error': 'Os dados reais da home estão indisponíveis no momento.',
   'pages.home.stack.label': '// CORE_STACK',
-  'pages.home.stack.title': 'Tecnologias principais',
+  'pages.home.stack.title': 'Tecnologias Principais',
   'pages.home.stack.description':
-    'Os sinais de stack mais visíveis coletados do agregado ao vivo do dashboard.',
+    'Atualmente essas são as principais stacks que tenho mais domínio e que tive mais prática ao longo da minha carreira no desenvolvimento de software.',
   'pages.home.stack.projects': 'projetos',
   'pages.home.stack.technologies': 'tecnologias',
   'pages.home.stack.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
@@ -524,40 +527,30 @@ export const PT_BR_TRANSLATIONS = {
     'Nenhuma descrição foi registrada para este setting ainda.',
   'pages.admin.portfolioSettings.card.value': 'Valor JSON',
   'pages.admin.portfolioSettings.fields.key.label': 'Chave do setting',
-  'pages.admin.portfolioSettings.fields.key.placeholder':
-    'Digite a chave única do setting',
+  'pages.admin.portfolioSettings.fields.key.placeholder': 'Digite a chave única do setting',
   'pages.admin.portfolioSettings.fields.description.label': 'Descrição',
   'pages.admin.portfolioSettings.fields.description.placeholder':
     'Descreva a responsabilidade deste setting',
   'pages.admin.portfolioSettings.fields.value.label': 'Valor JSON',
   'pages.admin.portfolioSettings.fields.value.placeholder':
     'Digite um objeto, array ou valor escalar JSON válido',
-  'pages.admin.portfolioSettings.modal.create.title':
-    'Criar portfolio setting',
-  'pages.admin.portfolioSettings.modal.read.title':
-    'Ler configuracoes do portfolio',
+  'pages.admin.portfolioSettings.modal.create.title': 'Criar portfolio setting',
+  'pages.admin.portfolioSettings.modal.read.title': 'Ler configuracoes do portfolio',
   'pages.admin.portfolioSettings.modal.read.description':
     'Revise as configuracoes JSON protegidas atuais e acesse diretamente os fluxos de edicao ou exclusao de cada registro.',
-  'pages.admin.portfolioSettings.modal.pickUpdate.title':
-    'Selecione um setting para editar',
+  'pages.admin.portfolioSettings.modal.pickUpdate.title': 'Selecione um setting para editar',
   'pages.admin.portfolioSettings.modal.pickUpdate.description':
     'Escolha um dos settings protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.portfolioSettings.modal.pickDelete.title':
-    'Selecione um setting para excluir',
+  'pages.admin.portfolioSettings.modal.pickDelete.title': 'Selecione um setting para excluir',
   'pages.admin.portfolioSettings.modal.pickDelete.description':
     'Escolha um dos settings protegidos atuais para confirmar sua remoção.',
-  'pages.admin.portfolioSettings.modal.update.title':
-    'Editar portfolio setting',
-  'pages.admin.portfolioSettings.modal.delete.title':
-    'Excluir portfolio setting',
+  'pages.admin.portfolioSettings.modal.update.title': 'Editar portfolio setting',
+  'pages.admin.portfolioSettings.modal.delete.title': 'Excluir portfolio setting',
   'pages.admin.portfolioSettings.modal.delete.description':
     'Esta ação remove permanentemente o setting protegido selecionado da configuração do portfolio.',
-  'pages.admin.portfolioSettings.feedback.created':
-    'Portfolio setting criado com sucesso.',
-  'pages.admin.portfolioSettings.feedback.updated':
-    'Portfolio setting atualizado com sucesso.',
-  'pages.admin.portfolioSettings.feedback.deleted':
-    'Portfolio setting excluído com sucesso.',
+  'pages.admin.portfolioSettings.feedback.created': 'Portfolio setting criado com sucesso.',
+  'pages.admin.portfolioSettings.feedback.updated': 'Portfolio setting atualizado com sucesso.',
+  'pages.admin.portfolioSettings.feedback.deleted': 'Portfolio setting excluído com sucesso.',
   'pages.admin.portfolioSettings.feedback.requiredKey':
     'A chave do setting é obrigatória antes do envio.',
   'pages.admin.portfolioSettings.feedback.invalidJson':
@@ -579,10 +572,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.description':
     'CRUD protegido para rótulos reutilizáveis que classificam projetos e tecnologias por meio de arrays relacionais mantidos pela própria tag.',
   'pages.admin.tags.actions.submit': 'Salvar',
-  'pages.admin.tags.states.loading':
-    'Carregando a coleção protegida de tags...',
-  'pages.admin.tags.states.empty':
-    'Nenhuma tag protegida foi cadastrada ainda.',
+  'pages.admin.tags.states.loading': 'Carregando a coleção protegida de tags...',
+  'pages.admin.tags.states.empty': 'Nenhuma tag protegida foi cadastrada ainda.',
   'pages.admin.tags.card.slug': 'Slug da tag',
   'pages.admin.tags.card.namePt': 'Nome em português',
   'pages.admin.tags.card.nameEn': 'Nome em inglês',
@@ -593,19 +584,14 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a esta tag no momento.',
   'pages.admin.tags.fields.slug.label': 'Slug da tag',
-  'pages.admin.tags.fields.slug.placeholder':
-    'Digite o slug único da tag',
+  'pages.admin.tags.fields.slug.placeholder': 'Digite o slug único da tag',
   'pages.admin.tags.fields.namePt.label': 'Nome em português',
-  'pages.admin.tags.fields.namePt.placeholder':
-    'Digite o nome da tag em português',
+  'pages.admin.tags.fields.namePt.placeholder': 'Digite o nome da tag em português',
   'pages.admin.tags.fields.nameEn.label': 'Nome em inglês',
-  'pages.admin.tags.fields.nameEn.placeholder':
-    'Digite o nome da tag em inglês',
+  'pages.admin.tags.fields.nameEn.placeholder': 'Digite o nome da tag em inglês',
   'pages.admin.tags.fields.type.label': 'Tipo',
-  'pages.admin.tags.fields.type.placeholder':
-    'Selecione o tipo da tag',
-  'pages.admin.tags.fields.type.empty':
-    'Nenhum tipo de tag esta disponivel no momento.',
+  'pages.admin.tags.fields.type.placeholder': 'Selecione o tipo da tag',
+  'pages.admin.tags.fields.type.empty': 'Nenhum tipo de tag esta disponivel no momento.',
   'pages.admin.tags.fields.type.options.STACK': 'Stack',
   'pages.admin.tags.fields.type.options.DOMAIN': 'Dominio',
   'pages.admin.tags.fields.type.options.PLATFORM': 'Plataforma',
@@ -614,8 +600,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.fields.type.options.INDUSTRY': 'Industria',
   'pages.admin.tags.fields.type.options.OTHER': 'Outro',
   'pages.admin.tags.fields.sortOrder.label': 'Ordem',
-  'pages.admin.tags.fields.sortOrder.placeholder':
-    'Digite a ordem inteira da tag',
+  'pages.admin.tags.fields.sortOrder.placeholder': 'Digite a ordem inteira da tag',
   'pages.admin.tags.fields.projects.label': 'Projetos relacionados',
   'pages.admin.tags.fields.projects.description':
     'Selecione todos os projetos que devem expor esta tag em seus relacionamentos públicos.',
@@ -630,46 +615,36 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.modal.read.title': 'Ler tags',
   'pages.admin.tags.modal.read.description':
     'Revise as tags protegidas atuais e abra os fluxos de edicao ou exclusao diretamente de cada registro.',
-  'pages.admin.tags.modal.pickUpdate.title':
-    'Selecione uma tag para editar',
+  'pages.admin.tags.modal.pickUpdate.title': 'Selecione uma tag para editar',
   'pages.admin.tags.modal.pickUpdate.description':
     'Escolha uma das tags protegidas atuais para abrir seu formulário de edição.',
-  'pages.admin.tags.modal.pickDelete.title':
-    'Selecione uma tag para excluir',
+  'pages.admin.tags.modal.pickDelete.title': 'Selecione uma tag para excluir',
   'pages.admin.tags.modal.pickDelete.description':
     'Escolha uma das tags protegidas atuais para confirmar sua remoção.',
   'pages.admin.tags.modal.update.title': 'Editar tag',
   'pages.admin.tags.modal.delete.title': 'Excluir tag',
   'pages.admin.tags.modal.delete.description':
     'Esta ação remove permanentemente a tag protegida selecionada e seus relacionamentos atuais do portfolio.',
-  'pages.admin.tags.feedback.created':
-    'Tag protegida criada com sucesso.',
-  'pages.admin.tags.feedback.updated':
-    'Tag protegida atualizada com sucesso.',
-  'pages.admin.tags.feedback.deleted':
-    'Tag protegida excluída com sucesso.',
-  'pages.admin.tags.feedback.requiredSlug':
-    'O slug da tag é obrigatório antes do envio.',
+  'pages.admin.tags.feedback.created': 'Tag protegida criada com sucesso.',
+  'pages.admin.tags.feedback.updated': 'Tag protegida atualizada com sucesso.',
+  'pages.admin.tags.feedback.deleted': 'Tag protegida excluída com sucesso.',
+  'pages.admin.tags.feedback.requiredSlug': 'O slug da tag é obrigatório antes do envio.',
   'pages.admin.tags.feedback.requiredNamePt':
     'O nome da tag em português é obrigatório antes do envio.',
   'pages.admin.tags.feedback.requiredNameEn':
     'O nome da tag em inglês é obrigatório antes do envio.',
-  'pages.admin.tags.feedback.requiredType':
-    'O tipo da tag é obrigatório antes do envio.',
+  'pages.admin.tags.feedback.requiredType': 'O tipo da tag é obrigatório antes do envio.',
   'pages.admin.tags.feedback.invalidType':
     'Selecione um dos tipos de tag suportados antes de enviar.',
-  'pages.admin.tags.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.tags.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.tags.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.tags.feedback.selectionRequired':
     'Selecione uma tag protegida antes de continuar com esta ação.',
   'pages.admin.tags.feedback.loadError':
     'A coleção protegida de tags não pode ser carregada agora.',
-  'pages.admin.tags.feedback.saveError':
-    'A tag protegida não pode ser salva agora.',
-  'pages.admin.tags.feedback.deleteError':
-    'A tag protegida não pode ser excluída agora.',
+  'pages.admin.tags.feedback.saveError': 'A tag protegida não pode ser salva agora.',
+  'pages.admin.tags.feedback.deleteError': 'A tag protegida não pode ser excluída agora.',
   'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
@@ -677,10 +652,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.description':
     'CRUD protegido para referências externas reutilizáveis conectadas a projetos, experiências, tecnologias e futuros registros de formação por meio de arrays relacionais próprios.',
   'pages.admin.links.actions.submit': 'Salvar',
-  'pages.admin.links.states.loading':
-    'Carregando a coleção protegida de links...',
-  'pages.admin.links.states.empty':
-    'Nenhum link protegido foi cadastrado ainda.',
+  'pages.admin.links.states.loading': 'Carregando a coleção protegida de links...',
+  'pages.admin.links.states.empty': 'Nenhum link protegido foi cadastrado ainda.',
   'pages.admin.links.card.url': 'URL',
   'pages.admin.links.card.labelPt': 'Rótulo em português',
   'pages.admin.links.card.labelEn': 'Rótulo em inglês',
@@ -694,28 +667,21 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.card.formations': 'Formações',
   'pages.admin.links.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a este link no momento.',
-  'pages.admin.links.card.emptyText':
-    'Nenhum texto foi registrado ainda.',
+  'pages.admin.links.card.emptyText': 'Nenhum texto foi registrado ainda.',
   'pages.admin.links.fields.url.label': 'URL',
-  'pages.admin.links.fields.url.placeholder':
-    'Digite a URL pública do link',
+  'pages.admin.links.fields.url.placeholder': 'Digite a URL pública do link',
   'pages.admin.links.fields.labelPt.label': 'Rótulo em português',
   'pages.admin.links.fields.labelPt.placeholder':
     'Digite o rótulo em português exibido ao visitante',
   'pages.admin.links.fields.labelEn.label': 'Rótulo em inglês',
-  'pages.admin.links.fields.labelEn.placeholder':
-    'Digite o rótulo em inglês exibido ao visitante',
+  'pages.admin.links.fields.labelEn.placeholder': 'Digite o rótulo em inglês exibido ao visitante',
   'pages.admin.links.fields.descriptionPt.label': 'Descrição em português',
-  'pages.admin.links.fields.descriptionPt.placeholder':
-    'Descreva este link em português',
+  'pages.admin.links.fields.descriptionPt.placeholder': 'Descreva este link em português',
   'pages.admin.links.fields.descriptionEn.label': 'Descrição em inglês',
-  'pages.admin.links.fields.descriptionEn.placeholder':
-    'Descreva este link em inglês',
+  'pages.admin.links.fields.descriptionEn.placeholder': 'Descreva este link em inglês',
   'pages.admin.links.fields.type.label': 'Tipo',
-  'pages.admin.links.fields.type.placeholder':
-    'Selecione o tipo do link',
-  'pages.admin.links.fields.type.empty':
-    'Nenhum tipo de link esta disponivel no momento.',
+  'pages.admin.links.fields.type.placeholder': 'Selecione o tipo do link',
+  'pages.admin.links.fields.type.empty': 'Nenhum tipo de link esta disponivel no momento.',
   'pages.admin.links.fields.type.options.GITHUB': 'GitHub',
   'pages.admin.links.fields.type.options.DEPLOY': 'Deploy',
   'pages.admin.links.fields.type.options.NPM': 'npm',
@@ -726,8 +692,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.type.options.FIGMA': 'Figma',
   'pages.admin.links.fields.type.options.OTHER': 'Outro',
   'pages.admin.links.fields.sortOrder.label': 'Ordem',
-  'pages.admin.links.fields.sortOrder.placeholder':
-    'Digite a ordem inteira do link',
+  'pages.admin.links.fields.sortOrder.placeholder': 'Digite a ordem inteira do link',
   'pages.admin.links.fields.projects.label': 'Projetos relacionados',
   'pages.admin.links.fields.projects.description':
     'Selecione todos os projetos que devem expor este link em suas referências públicas.',
@@ -752,49 +717,37 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.modal.read.title': 'Ler links',
   'pages.admin.links.modal.read.description':
     'Revise os links protegidos atuais e abra os fluxos de edição ou exclusão diretamente de cada registro.',
-  'pages.admin.links.modal.pickUpdate.title':
-    'Selecione um link para editar',
+  'pages.admin.links.modal.pickUpdate.title': 'Selecione um link para editar',
   'pages.admin.links.modal.pickUpdate.description':
     'Escolha um dos links protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.links.modal.pickDelete.title':
-    'Selecione um link para excluir',
+  'pages.admin.links.modal.pickDelete.title': 'Selecione um link para excluir',
   'pages.admin.links.modal.pickDelete.description':
     'Escolha um dos links protegidos atuais para confirmar sua remoção.',
   'pages.admin.links.modal.update.title': 'Editar link',
   'pages.admin.links.modal.delete.title': 'Excluir link',
   'pages.admin.links.modal.delete.description':
     'Esta ação remove permanentemente o link protegido selecionado do portfolio.',
-  'pages.admin.links.feedback.created':
-    'Link protegido criado com sucesso.',
-  'pages.admin.links.feedback.updated':
-    'Link protegido atualizado com sucesso.',
-  'pages.admin.links.feedback.deleted':
-    'Link protegido excluído com sucesso.',
-  'pages.admin.links.feedback.requiredUrl':
-    'A URL do link é obrigatória antes do envio.',
-  'pages.admin.links.feedback.requiredType':
-    'O tipo do link é obrigatório antes do envio.',
+  'pages.admin.links.feedback.created': 'Link protegido criado com sucesso.',
+  'pages.admin.links.feedback.updated': 'Link protegido atualizado com sucesso.',
+  'pages.admin.links.feedback.deleted': 'Link protegido excluído com sucesso.',
+  'pages.admin.links.feedback.requiredUrl': 'A URL do link é obrigatória antes do envio.',
+  'pages.admin.links.feedback.requiredType': 'O tipo do link é obrigatório antes do envio.',
   'pages.admin.links.feedback.invalidType':
     'Selecione um dos tipos de link suportados antes de enviar.',
-  'pages.admin.links.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.links.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.links.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.links.feedback.selectionRequired':
     'Selecione um link protegido antes de continuar com esta ação.',
   'pages.admin.links.feedback.loadError':
     'A coleção protegida de links não pode ser carregada agora.',
-  'pages.admin.links.feedback.saveError':
-    'O link protegido não pode ser salvo agora.',
-  'pages.admin.links.feedback.deleteError':
-    'O link protegido não pode ser excluído agora.',
+  'pages.admin.links.feedback.saveError': 'O link protegido não pode ser salvo agora.',
+  'pages.admin.links.feedback.deleteError': 'O link protegido não pode ser excluído agora.',
   'pages.admin.imageAssets.sectionLabel': '// IMAGE_ASSETS',
   'pages.admin.imageAssets.description':
     'CRUD protegido para arquivos de mídia normalizados conectados a projetos, experiências e tecnologias por meio de arrays relacionais proprietários.',
-  'pages.admin.imageAssets.states.loading':
-    'Carregando a coleção protegida de image assets...',
-  'pages.admin.imageAssets.states.empty':
-    'Nenhum image asset protegido foi cadastrado ainda.',
+  'pages.admin.imageAssets.states.loading': 'Carregando a coleção protegida de image assets...',
+  'pages.admin.imageAssets.states.empty': 'Nenhum image asset protegido foi cadastrado ainda.',
   'pages.admin.imageAssets.card.fileName': 'Nome do arquivo',
   'pages.admin.imageAssets.card.filePath': 'Caminho do arquivo',
   'pages.admin.imageAssets.card.folder': 'Pasta',
@@ -815,22 +768,17 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.card.jobs': 'Cargos',
   'pages.admin.imageAssets.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a este image asset no momento.',
-  'pages.admin.imageAssets.card.emptyText':
-    'Nenhum texto foi registrado ainda.',
+  'pages.admin.imageAssets.card.emptyText': 'Nenhum texto foi registrado ainda.',
   'pages.admin.imageAssets.fields.fileName.label': 'Nome do arquivo',
-  'pages.admin.imageAssets.fields.fileName.placeholder':
-    'Digite o nome único do arquivo do asset',
+  'pages.admin.imageAssets.fields.fileName.placeholder': 'Digite o nome único do arquivo do asset',
   'pages.admin.imageAssets.fields.filePath.label': 'Caminho do arquivo',
   'pages.admin.imageAssets.fields.filePath.placeholder':
     'Digite o caminho público do arquivo usado pelo portfolio',
   'pages.admin.imageAssets.fields.folder.label': 'Pasta',
-  'pages.admin.imageAssets.fields.folder.placeholder':
-    'Digite a pasta do asset',
+  'pages.admin.imageAssets.fields.folder.placeholder': 'Digite a pasta do asset',
   'pages.admin.imageAssets.fields.kind.label': 'Tipo',
-  'pages.admin.imageAssets.fields.kind.placeholder':
-    'Selecione o tipo do asset',
-  'pages.admin.imageAssets.fields.kind.empty':
-    'Nenhum tipo de image asset está disponível agora.',
+  'pages.admin.imageAssets.fields.kind.placeholder': 'Selecione o tipo do asset',
+  'pages.admin.imageAssets.fields.kind.empty': 'Nenhum tipo de image asset está disponível agora.',
   'pages.admin.imageAssets.fields.kind.options.ICON': 'Icone',
   'pages.admin.imageAssets.fields.kind.options.SCREENSHOT': 'Captura de tela',
   'pages.admin.imageAssets.fields.altPt.label': 'Alt em português',
@@ -846,17 +794,13 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.captionEn.placeholder':
     'Digite a legenda em inglês exibida com este asset',
   'pages.admin.imageAssets.fields.mimeType.label': 'MIME type',
-  'pages.admin.imageAssets.fields.mimeType.placeholder':
-    'Digite o MIME type do asset',
+  'pages.admin.imageAssets.fields.mimeType.placeholder': 'Digite o MIME type do asset',
   'pages.admin.imageAssets.fields.width.label': 'Largura',
-  'pages.admin.imageAssets.fields.width.placeholder':
-    'Digite a largura do asset em pixels',
+  'pages.admin.imageAssets.fields.width.placeholder': 'Digite a largura do asset em pixels',
   'pages.admin.imageAssets.fields.height.label': 'Altura',
-  'pages.admin.imageAssets.fields.height.placeholder':
-    'Digite a altura do asset em pixels',
+  'pages.admin.imageAssets.fields.height.placeholder': 'Digite a altura do asset em pixels',
   'pages.admin.imageAssets.fields.sortOrder.label': 'Ordem',
-  'pages.admin.imageAssets.fields.sortOrder.placeholder':
-    'Digite a ordem inteira de exibição',
+  'pages.admin.imageAssets.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
   'pages.admin.imageAssets.fields.projects.label': 'Projetos relacionados',
   'pages.admin.imageAssets.fields.projects.description':
     'Selecione todos os projetos que devem expor este arquivo de mídia em sua galeria pública.',
@@ -876,38 +820,30 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.modal.read.title': 'Ler image assets',
   'pages.admin.imageAssets.modal.read.description':
     'Revise os image assets protegidos atuais e abra fluxos de edição ou exclusão diretamente de cada registro.',
-  'pages.admin.imageAssets.modal.pickUpdate.title':
-    'Selecione um image asset para editar',
+  'pages.admin.imageAssets.modal.pickUpdate.title': 'Selecione um image asset para editar',
   'pages.admin.imageAssets.modal.pickUpdate.description':
     'Escolha um dos image assets protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.imageAssets.modal.pickDelete.title':
-    'Selecione um image asset para excluir',
+  'pages.admin.imageAssets.modal.pickDelete.title': 'Selecione um image asset para excluir',
   'pages.admin.imageAssets.modal.pickDelete.description':
     'Escolha um dos image assets protegidos atuais para confirmar sua remoção.',
   'pages.admin.imageAssets.modal.update.title': 'Editar image asset',
   'pages.admin.imageAssets.modal.delete.title': 'Excluir image asset',
   'pages.admin.imageAssets.modal.delete.description':
     'Esta ação remove permanentemente o image asset protegido selecionado do portfolio.',
-  'pages.admin.imageAssets.feedback.created':
-    'Image asset protegido criado com sucesso.',
-  'pages.admin.imageAssets.feedback.updated':
-    'Image asset protegido atualizado com sucesso.',
-  'pages.admin.imageAssets.feedback.deleted':
-    'Image asset protegido excluído com sucesso.',
+  'pages.admin.imageAssets.feedback.created': 'Image asset protegido criado com sucesso.',
+  'pages.admin.imageAssets.feedback.updated': 'Image asset protegido atualizado com sucesso.',
+  'pages.admin.imageAssets.feedback.deleted': 'Image asset protegido excluído com sucesso.',
   'pages.admin.imageAssets.feedback.requiredFileName':
     'O nome do arquivo é obrigatório antes do envio.',
   'pages.admin.imageAssets.feedback.requiredFilePath':
     'O caminho do arquivo é obrigatório antes do envio.',
-  'pages.admin.imageAssets.feedback.requiredFolder':
-    'A pasta é obrigatória antes do envio.',
+  'pages.admin.imageAssets.feedback.requiredFolder': 'A pasta é obrigatória antes do envio.',
   'pages.admin.imageAssets.feedback.requiredKind':
     'O tipo do image asset é obrigatório antes do envio.',
   'pages.admin.imageAssets.feedback.invalidKind':
     'Selecione um dos tipos de image asset suportados antes do envio.',
-  'pages.admin.imageAssets.feedback.requiredMimeType':
-    'O MIME type é obrigatório antes do envio.',
-  'pages.admin.imageAssets.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.imageAssets.feedback.requiredMimeType': 'O MIME type é obrigatório antes do envio.',
+  'pages.admin.imageAssets.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.imageAssets.feedback.invalidDimensions':
     'Largura e altura devem ser números inteiros válidos quando informados.',
   'pages.admin.imageAssets.feedback.missingSession':
@@ -916,17 +852,14 @@ export const PT_BR_TRANSLATIONS = {
     'Selecione um image asset protegido antes de continuar com esta ação.',
   'pages.admin.imageAssets.feedback.loadError':
     'A coleção protegida de image assets não pode ser carregada agora.',
-  'pages.admin.imageAssets.feedback.saveError':
-    'O image asset protegido não pode ser salvo agora.',
+  'pages.admin.imageAssets.feedback.saveError': 'O image asset protegido não pode ser salvo agora.',
   'pages.admin.imageAssets.feedback.deleteError':
     'O image asset protegido não pode ser excluído agora.',
   'pages.admin.spokenLanguages.sectionLabel': '// SPOKEN_LANGUAGES',
   'pages.admin.spokenLanguages.description':
     'CRUD protegido para os registros de proficiência em idiomas exibidos ao longo do perfil e dos fluxos de skills do portfolio.',
-  'pages.admin.spokenLanguages.states.loading':
-    'Carregando a coleção protegida de idiomas...',
-  'pages.admin.spokenLanguages.states.empty':
-    'Nenhum idioma protegido foi cadastrado ainda.',
+  'pages.admin.spokenLanguages.states.loading': 'Carregando a coleção protegida de idiomas...',
+  'pages.admin.spokenLanguages.states.empty': 'Nenhum idioma protegido foi cadastrado ainda.',
   'pages.admin.spokenLanguages.card.code': 'Código',
   'pages.admin.spokenLanguages.card.namePt': 'Nome em português',
   'pages.admin.spokenLanguages.card.nameEn': 'Nome em inglês',
@@ -937,22 +870,18 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.spokenLanguages.card.emptyRelations':
     'Nenhum image asset relacionado está vinculado a este idioma.',
   'pages.admin.spokenLanguages.fields.code.label': 'Código',
-  'pages.admin.spokenLanguages.fields.code.placeholder':
-    'Digite o código do idioma',
+  'pages.admin.spokenLanguages.fields.code.placeholder': 'Digite o código do idioma',
   'pages.admin.spokenLanguages.fields.namePt.label': 'Nome em português',
-  'pages.admin.spokenLanguages.fields.namePt.placeholder':
-    'Digite o nome do idioma em português',
+  'pages.admin.spokenLanguages.fields.namePt.placeholder': 'Digite o nome do idioma em português',
   'pages.admin.spokenLanguages.fields.nameEn.label': 'Nome em inglês',
-  'pages.admin.spokenLanguages.fields.nameEn.placeholder':
-    'Digite o nome do idioma em inglês',
+  'pages.admin.spokenLanguages.fields.nameEn.placeholder': 'Digite o nome do idioma em inglês',
   'pages.admin.spokenLanguages.fields.proficiency.label': 'Proficiência',
   'pages.admin.spokenLanguages.fields.proficiency.empty':
     'Nenhuma opção de proficiência está disponível neste momento.',
   'pages.admin.spokenLanguages.fields.proficiency.options.NATIVE': 'Nativo',
   'pages.admin.spokenLanguages.fields.proficiency.options.FLUENT': 'Fluente',
   'pages.admin.spokenLanguages.fields.proficiency.options.ADVANCED': 'Avancado',
-  'pages.admin.spokenLanguages.fields.proficiency.options.INTERMEDIATE':
-    'Intermediario',
+  'pages.admin.spokenLanguages.fields.proficiency.options.INTERMEDIATE': 'Intermediario',
   'pages.admin.spokenLanguages.fields.proficiency.options.BASIC': 'Basico',
   'pages.admin.spokenLanguages.fields.highlight.label': 'Status de destaque',
   'pages.admin.spokenLanguages.fields.highlight.description':
@@ -960,10 +889,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.spokenLanguages.fields.highlight.enabled': 'Em destaque',
   'pages.admin.spokenLanguages.fields.highlight.disabled': 'Sem destaque',
   'pages.admin.spokenLanguages.fields.sortOrder.label': 'Ordem',
-  'pages.admin.spokenLanguages.fields.sortOrder.placeholder':
-    'Digite a ordem inteira de exibição',
-  'pages.admin.spokenLanguages.fields.imageAssets.label':
-    'Image assets relacionados',
+  'pages.admin.spokenLanguages.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
+  'pages.admin.spokenLanguages.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.spokenLanguages.fields.imageAssets.description':
     'Selecione todos os image assets que devem representar visualmente este idioma no portfolio público.',
   'pages.admin.spokenLanguages.fields.imageAssets.empty':
@@ -972,24 +899,20 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.spokenLanguages.modal.read.title': 'Ler spoken languages',
   'pages.admin.spokenLanguages.modal.read.description':
     'Revise os spoken languages protegidos atuais e abra fluxos de edição ou exclusão diretamente de cada registro.',
-  'pages.admin.spokenLanguages.modal.pickUpdate.title':
-    'Selecione um spoken language para editar',
+  'pages.admin.spokenLanguages.modal.pickUpdate.title': 'Selecione um spoken language para editar',
   'pages.admin.spokenLanguages.modal.pickUpdate.description':
     'Escolha um dos spoken languages protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.spokenLanguages.modal.pickDelete.title':
-    'Selecione um spoken language para excluir',
+  'pages.admin.spokenLanguages.modal.pickDelete.title': 'Selecione um spoken language para excluir',
   'pages.admin.spokenLanguages.modal.pickDelete.description':
     'Escolha um dos spoken languages protegidos atuais para confirmar sua remoção.',
   'pages.admin.spokenLanguages.modal.update.title': 'Editar spoken language',
   'pages.admin.spokenLanguages.modal.delete.title': 'Excluir spoken language',
   'pages.admin.spokenLanguages.modal.delete.description':
     'Esta ação remove permanentemente o registro de idioma protegido selecionado do portfolio.',
-  'pages.admin.spokenLanguages.feedback.created':
-    'Spoken language protegido criado com sucesso.',
+  'pages.admin.spokenLanguages.feedback.created': 'Spoken language protegido criado com sucesso.',
   'pages.admin.spokenLanguages.feedback.updated':
     'Spoken language protegido atualizado com sucesso.',
-  'pages.admin.spokenLanguages.feedback.deleted':
-    'Spoken language protegido excluído com sucesso.',
+  'pages.admin.spokenLanguages.feedback.deleted': 'Spoken language protegido excluído com sucesso.',
   'pages.admin.spokenLanguages.feedback.requiredCode':
     'O código do idioma é obrigatório antes do envio.',
   'pages.admin.spokenLanguages.feedback.requiredNamePt':
@@ -1015,10 +938,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.customers.sectionLabel': '// CUSTOMERS',
   'pages.admin.customers.description':
     'CRUD protegido para os registros de clientes conectados a experiências e relacionamentos de mídia do portfolio.',
-  'pages.admin.customers.states.loading':
-    'Carregando a coleção protegida de customers...',
-  'pages.admin.customers.states.empty':
-    'Nenhum customer protegido foi cadastrado ainda.',
+  'pages.admin.customers.states.loading': 'Carregando a coleção protegida de customers...',
+  'pages.admin.customers.states.empty': 'Nenhum customer protegido foi cadastrado ainda.',
   'pages.admin.customers.card.slug': 'Slug',
   'pages.admin.customers.card.name': 'Nome',
   'pages.admin.customers.card.summaryPt': 'Resumo em português',
@@ -1030,31 +951,26 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.customers.card.emptyRelations':
     'Nenhum registro relacionado está conectado a este customer.',
   'pages.admin.customers.fields.slug.label': 'Slug',
-  'pages.admin.customers.fields.slug.placeholder':
-    'Digite o slug único do customer',
+  'pages.admin.customers.fields.slug.placeholder': 'Digite o slug único do customer',
   'pages.admin.customers.fields.name.label': 'Nome',
   'pages.admin.customers.fields.name.placeholder': 'Digite o nome do customer',
   'pages.admin.customers.fields.summaryPt.label': 'Resumo em português',
-  'pages.admin.customers.fields.summaryPt.placeholder':
-    'Digite o resumo em português do customer',
+  'pages.admin.customers.fields.summaryPt.placeholder': 'Digite o resumo em português do customer',
   'pages.admin.customers.fields.summaryEn.label': 'Resumo em inglês',
-  'pages.admin.customers.fields.summaryEn.placeholder':
-    'Digite o resumo em inglês do customer',
+  'pages.admin.customers.fields.summaryEn.placeholder': 'Digite o resumo em inglês do customer',
   'pages.admin.customers.fields.highlight.label': 'Status de destaque',
   'pages.admin.customers.fields.highlight.description':
     'Controle se este customer deve permanecer em destaque nas seções públicas do portfolio.',
   'pages.admin.customers.fields.highlight.enabled': 'Em destaque',
   'pages.admin.customers.fields.highlight.disabled': 'Sem destaque',
   'pages.admin.customers.fields.sortOrder.label': 'Ordem',
-  'pages.admin.customers.fields.sortOrder.placeholder':
-    'Digite a ordem inteira de exibição',
+  'pages.admin.customers.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
   'pages.admin.customers.fields.experiences.label': 'Experiences relacionadas',
   'pages.admin.customers.fields.experiences.description':
     'Selecione todas as experiences que devem expor este customer no storytelling público.',
   'pages.admin.customers.fields.experiences.empty':
     'Nenhuma experience está disponível para relacionamento agora.',
-  'pages.admin.customers.fields.imageAssets.label':
-    'Image assets relacionados',
+  'pages.admin.customers.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.customers.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a este customer.',
   'pages.admin.customers.fields.imageAssets.empty':
@@ -1063,51 +979,39 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.customers.modal.read.title': 'Ler customers',
   'pages.admin.customers.modal.read.description':
     'Revise os customers protegidos atuais e abra fluxos de edição ou exclusão diretamente de cada registro.',
-  'pages.admin.customers.modal.pickUpdate.title':
-    'Selecione um customer para editar',
+  'pages.admin.customers.modal.pickUpdate.title': 'Selecione um customer para editar',
   'pages.admin.customers.modal.pickUpdate.description':
     'Escolha um dos customers protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.customers.modal.pickDelete.title':
-    'Selecione um customer para excluir',
+  'pages.admin.customers.modal.pickDelete.title': 'Selecione um customer para excluir',
   'pages.admin.customers.modal.pickDelete.description':
     'Escolha um dos customers protegidos atuais para confirmar sua remoção.',
   'pages.admin.customers.modal.update.title': 'Editar customer',
   'pages.admin.customers.modal.delete.title': 'Excluir customer',
   'pages.admin.customers.modal.delete.description':
     'Esta ação remove permanentemente o customer protegido selecionado do portfolio.',
-  'pages.admin.customers.feedback.created':
-    'Customer protegido criado com sucesso.',
-  'pages.admin.customers.feedback.updated':
-    'Customer protegido atualizado com sucesso.',
-  'pages.admin.customers.feedback.deleted':
-    'Customer protegido excluído com sucesso.',
-  'pages.admin.customers.feedback.requiredSlug':
-    'O slug do customer é obrigatório antes do envio.',
-  'pages.admin.customers.feedback.requiredName':
-    'O nome do customer é obrigatório antes do envio.',
+  'pages.admin.customers.feedback.created': 'Customer protegido criado com sucesso.',
+  'pages.admin.customers.feedback.updated': 'Customer protegido atualizado com sucesso.',
+  'pages.admin.customers.feedback.deleted': 'Customer protegido excluído com sucesso.',
+  'pages.admin.customers.feedback.requiredSlug': 'O slug do customer é obrigatório antes do envio.',
+  'pages.admin.customers.feedback.requiredName': 'O nome do customer é obrigatório antes do envio.',
   'pages.admin.customers.feedback.requiredSummaryPt':
     'O resumo em português é obrigatório antes do envio.',
   'pages.admin.customers.feedback.requiredSummaryEn':
     'O resumo em inglês é obrigatório antes do envio.',
-  'pages.admin.customers.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.customers.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.customers.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.customers.feedback.selectionRequired':
     'Selecione um customer protegido antes de continuar com esta ação.',
   'pages.admin.customers.feedback.loadError':
     'A coleção protegida de customers não pode ser carregada agora.',
-  'pages.admin.customers.feedback.saveError':
-    'O customer protegido não pode ser salvo agora.',
-  'pages.admin.customers.feedback.deleteError':
-    'O customer protegido não pode ser excluído agora.',
+  'pages.admin.customers.feedback.saveError': 'O customer protegido não pode ser salvo agora.',
+  'pages.admin.customers.feedback.deleteError': 'O customer protegido não pode ser excluído agora.',
   'pages.admin.jobs.sectionLabel': '// JOBS',
   'pages.admin.jobs.description':
     'CRUD protegido para registros de cargos usados para normalizar posições de experiences e relacionamentos com mídias.',
-  'pages.admin.jobs.states.loading':
-    'Carregando a coleção protegida de jobs...',
-  'pages.admin.jobs.states.empty':
-    'Nenhum job protegido foi cadastrado ainda.',
+  'pages.admin.jobs.states.loading': 'Carregando a coleção protegida de jobs...',
+  'pages.admin.jobs.states.empty': 'Nenhum job protegido foi cadastrado ainda.',
   'pages.admin.jobs.card.slug': 'Slug',
   'pages.admin.jobs.card.namePt': 'Nome em português',
   'pages.admin.jobs.card.nameEn': 'Nome em inglês',
@@ -1122,24 +1026,20 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.jobs.fields.slug.label': 'Slug',
   'pages.admin.jobs.fields.slug.placeholder': 'Digite o slug único do job',
   'pages.admin.jobs.fields.namePt.label': 'Nome em português',
-  'pages.admin.jobs.fields.namePt.placeholder':
-    'Digite o nome do job em português',
+  'pages.admin.jobs.fields.namePt.placeholder': 'Digite o nome do job em português',
   'pages.admin.jobs.fields.nameEn.label': 'Nome em inglês',
   'pages.admin.jobs.fields.nameEn.placeholder': 'Digite o nome do job em inglês',
   'pages.admin.jobs.fields.summaryPt.label': 'Resumo em português',
-  'pages.admin.jobs.fields.summaryPt.placeholder':
-    'Digite o resumo do job em português',
+  'pages.admin.jobs.fields.summaryPt.placeholder': 'Digite o resumo do job em português',
   'pages.admin.jobs.fields.summaryEn.label': 'Resumo em inglês',
-  'pages.admin.jobs.fields.summaryEn.placeholder':
-    'Digite o resumo do job em inglês',
+  'pages.admin.jobs.fields.summaryEn.placeholder': 'Digite o resumo do job em inglês',
   'pages.admin.jobs.fields.highlight.label': 'Status de destaque',
   'pages.admin.jobs.fields.highlight.description':
     'Controla se este job deve permanecer em destaque nas seções públicas do portfolio.',
   'pages.admin.jobs.fields.highlight.enabled': 'Em destaque',
   'pages.admin.jobs.fields.highlight.disabled': 'Sem destaque',
   'pages.admin.jobs.fields.sortOrder.label': 'Ordem',
-  'pages.admin.jobs.fields.sortOrder.placeholder':
-    'Digite a ordem inteira de exibição',
+  'pages.admin.jobs.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
   'pages.admin.jobs.fields.experiences.label': 'Experiences relacionadas',
   'pages.admin.jobs.fields.experiences.description':
     'Selecione todas as experiences que devem expor este job na narrativa pública.',
@@ -1154,8 +1054,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.jobs.modal.read.title': 'Ler jobs',
   'pages.admin.jobs.modal.read.description':
     'Revise os jobs protegidos atuais e abra fluxos de update ou delete diretamente de cada registro.',
-  'pages.admin.jobs.modal.pickUpdate.title':
-    'Selecione um job para atualizar',
+  'pages.admin.jobs.modal.pickUpdate.title': 'Selecione um job para atualizar',
   'pages.admin.jobs.modal.pickUpdate.description':
     'Escolha um dos jobs protegidos atuais para abrir seu formulário de update.',
   'pages.admin.jobs.modal.pickDelete.title': 'Selecione um job para excluir',
@@ -1168,30 +1067,26 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.jobs.feedback.created': 'Job protegido criado com sucesso.',
   'pages.admin.jobs.feedback.updated': 'Job protegido atualizado com sucesso.',
   'pages.admin.jobs.feedback.deleted': 'Job protegido excluído com sucesso.',
-  'pages.admin.jobs.feedback.requiredSlug':
-    'O slug do job é obrigatório antes do envio.',
+  'pages.admin.jobs.feedback.requiredSlug': 'O slug do job é obrigatório antes do envio.',
   'pages.admin.jobs.feedback.requiredNamePt':
     'O nome do job em português é obrigatório antes do envio.',
   'pages.admin.jobs.feedback.requiredNameEn':
     'O nome do job em inglês é obrigatório antes do envio.',
   'pages.admin.jobs.feedback.requiredSummaryPt':
     'O resumo em português é obrigatório antes do envio.',
-  'pages.admin.jobs.feedback.requiredSummaryEn':
-    'O resumo em inglês é obrigatório antes do envio.',
-  'pages.admin.jobs.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.jobs.feedback.requiredSummaryEn': 'O resumo em inglês é obrigatório antes do envio.',
+  'pages.admin.jobs.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.jobs.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.jobs.feedback.selectionRequired':
     'Selecione um job protegido antes de continuar com esta ação.',
   'pages.admin.jobs.feedback.loadError':
     'A coleção protegida de jobs não pode ser carregada agora.',
-  'pages.admin.jobs.feedback.saveError':
-    'O job protegido não pode ser salvo agora.',
-  'pages.admin.jobs.feedback.deleteError':
-    'O job protegido não pode ser excluído agora.',
+  'pages.admin.jobs.feedback.saveError': 'O job protegido não pode ser salvo agora.',
+  'pages.admin.jobs.feedback.deleteError': 'O job protegido não pode ser excluído agora.',
   'pages.admin.technologies.sectionLabel': '// TECNOLOGIES',
-  'pages.admin.technologies.description': 'CRUD protegido do catalogo de tecnologias usado pela experiencia publica de skills.',
+  'pages.admin.technologies.description':
+    'CRUD protegido do catalogo de tecnologias usado pela experiencia publica de skills.',
   'pages.admin.technologies.states.loading': 'Carregando a colecao protegida de technologies...',
   'pages.admin.technologies.states.empty': 'Nenhuma technology protegida foi cadastrada ainda.',
   'pages.admin.technologies.fields.slug.label': 'Slug',
@@ -1205,10 +1100,12 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.fields.sortOrder.label': 'Ordem',
   'pages.admin.technologies.fields.sortOrder.placeholder': 'Digite a ordem de exibicao',
   'pages.admin.technologies.fields.imageAssets.label': 'Imagens relacionadas',
-  'pages.admin.technologies.fields.highlight.description': 'Controle se esta technology deve permanecer destacada no catalogo publico de skills.',
+  'pages.admin.technologies.fields.highlight.description':
+    'Controle se esta technology deve permanecer destacada no catalogo publico de skills.',
   'pages.admin.technologies.fields.highlight.enabled': 'Destacada',
   'pages.admin.technologies.fields.highlight.disabled': 'Nao destacada',
-  'pages.admin.technologies.fields.imageAssets.description': 'Selecione cada imagem que deve representar visualmente esta technology no portfolio publico.',
+  'pages.admin.technologies.fields.imageAssets.description':
+    'Selecione cada imagem que deve representar visualmente esta technology no portfolio publico.',
   'pages.admin.technologies.card.name': 'Nome',
   'pages.admin.technologies.card.category': 'Categoria',
   'pages.admin.technologies.card.level': 'Nivel',
@@ -1223,16 +1120,20 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.card.links': 'Links',
   'pages.admin.technologies.card.imageAssets': 'Imagens',
   'pages.admin.technologies.fields.imageAssets.empty': 'Nenhuma imagem está disponível.',
-  'pages.admin.technologies.card.emptyRelations': 'Nenhum registro relacionado esta conectado a esta technology.',
+  'pages.admin.technologies.card.emptyRelations':
+    'Nenhum registro relacionado esta conectado a esta technology.',
   'pages.admin.technologies.feedback.requiredSlug': 'O slug da technology e obrigatorio.',
   'pages.admin.technologies.feedback.requiredName': 'O nome da technology e obrigatorio.',
   'pages.admin.technologies.feedback.requiredCategory': 'A categoria da technology e obrigatoria.',
   'pages.admin.technologies.feedback.invalidSortOrder': 'A ordem deve ser um numero valido.',
-  'pages.admin.technologies.feedback.missingSession': 'A sessao administrativa nao esta disponivel.',
+  'pages.admin.technologies.feedback.missingSession':
+    'A sessao administrativa nao esta disponivel.',
   'pages.admin.technologies.feedback.selectionRequired': 'Selecione uma technology primeiro.',
-  'pages.admin.technologies.feedback.loadError': 'A colecao protegida de technologies nao pode ser carregada agora.',
+  'pages.admin.technologies.feedback.loadError':
+    'A colecao protegida de technologies nao pode ser carregada agora.',
   'pages.admin.technologies.feedback.saveError': 'A technology protegida nao pode ser salva agora.',
-  'pages.admin.technologies.feedback.deleteError': 'A technology protegida nao pode ser excluida agora.',
+  'pages.admin.technologies.feedback.deleteError':
+    'A technology protegida nao pode ser excluida agora.',
   'pages.admin.technologies.feedback.created': 'Technology protegida criada com sucesso.',
   'pages.admin.technologies.feedback.updated': 'Technology protegida atualizada com sucesso.',
   'pages.admin.technologies.feedback.deleted': 'Technology protegida excluida com sucesso.',
@@ -1242,17 +1143,19 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.modal.pick-delete.title': 'Selecione uma technology para excluir',
   'pages.admin.technologies.modal.update.title': 'Editar technology',
   'pages.admin.technologies.modal.delete.title': 'Excluir technology',
-  'pages.admin.technologies.modal.read.description': 'Revise as technologies protegidas atuais e abra os fluxos de edicao ou exclusao diretamente em cada registro.',
-  'pages.admin.technologies.modal.pickUpdate.description': 'Escolha uma das technologies protegidas atuais para abrir o formulario de edicao.',
-  'pages.admin.technologies.modal.pickDelete.description': 'Escolha uma das technologies protegidas atuais para confirmar a exclusao.',
-  'pages.admin.technologies.modal.delete.description': 'Esta acao remove permanentemente a technology protegida selecionada do portfolio.',
+  'pages.admin.technologies.modal.read.description':
+    'Revise as technologies protegidas atuais e abra os fluxos de edicao ou exclusao diretamente em cada registro.',
+  'pages.admin.technologies.modal.pickUpdate.description':
+    'Escolha uma das technologies protegidas atuais para abrir o formulario de edicao.',
+  'pages.admin.technologies.modal.pickDelete.description':
+    'Escolha uma das technologies protegidas atuais para confirmar a exclusao.',
+  'pages.admin.technologies.modal.delete.description':
+    'Esta acao remove permanentemente a technology protegida selecionada do portfolio.',
   'pages.admin.formations.sectionLabel': '// FORMATIONS',
   'pages.admin.formations.description':
     'CRUD protegido para registros acadêmicos e de formação profissional, incluindo relações de stack, links de apoio e image assets.',
-  'pages.admin.formations.states.loading':
-    'Carregando a coleção protegida de formations...',
-  'pages.admin.formations.states.empty':
-    'Nenhuma formation protegida foi cadastrada ainda.',
+  'pages.admin.formations.states.loading': 'Carregando a coleção protegida de formations...',
+  'pages.admin.formations.states.empty': 'Nenhuma formation protegida foi cadastrada ainda.',
   'pages.admin.formations.card.slug': 'Slug',
   'pages.admin.formations.card.institution': 'Instituição',
   'pages.admin.formations.card.titlePt': 'Título em português',
@@ -1270,17 +1173,13 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.card.emptyRelations':
     'Nenhum registro relacionado está conectado a esta formation no momento.',
   'pages.admin.formations.fields.slug.label': 'Slug',
-  'pages.admin.formations.fields.slug.placeholder':
-    'Digite o slug único da formation',
+  'pages.admin.formations.fields.slug.placeholder': 'Digite o slug único da formation',
   'pages.admin.formations.fields.institution.label': 'Instituição',
-  'pages.admin.formations.fields.institution.placeholder':
-    'Digite o nome da instituição',
+  'pages.admin.formations.fields.institution.placeholder': 'Digite o nome da instituição',
   'pages.admin.formations.fields.titlePt.label': 'Título em português',
-  'pages.admin.formations.fields.titlePt.placeholder':
-    'Digite o título da formation em português',
+  'pages.admin.formations.fields.titlePt.placeholder': 'Digite o título da formation em português',
   'pages.admin.formations.fields.titleEn.label': 'Título em inglês',
-  'pages.admin.formations.fields.titleEn.placeholder':
-    'Digite o título da formation em inglês',
+  'pages.admin.formations.fields.titleEn.placeholder': 'Digite o título da formation em inglês',
   'pages.admin.formations.fields.degreeType.label': 'Tipo de formação',
   'pages.admin.formations.fields.degreeType.empty':
     'Nenhum tipo de formação está disponível agora.',
@@ -1316,11 +1215,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.fields.summaryPt.placeholder':
     'Digite o resumo da formation em português',
   'pages.admin.formations.fields.summaryEn.label': 'Resumo em inglês',
-  'pages.admin.formations.fields.summaryEn.placeholder':
-    'Digite o resumo da formation em inglês',
+  'pages.admin.formations.fields.summaryEn.placeholder': 'Digite o resumo da formation em inglês',
   'pages.admin.formations.fields.startDate.label': 'Data de início',
-  'pages.admin.formations.fields.startDate.placeholder':
-    'Digite a data inicial em ISO',
+  'pages.admin.formations.fields.startDate.placeholder': 'Digite a data inicial em ISO',
   'pages.admin.formations.fields.endDate.label': 'Data de término',
   'pages.admin.formations.fields.endDate.placeholder':
     'Digite a data final em ISO quando aplicável',
@@ -1330,8 +1227,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.fields.highlight.enabled': 'Em destaque',
   'pages.admin.formations.fields.highlight.disabled': 'Sem destaque',
   'pages.admin.formations.fields.sortOrder.label': 'Ordem',
-  'pages.admin.formations.fields.sortOrder.placeholder':
-    'Digite a ordem inteira de exibição',
+  'pages.admin.formations.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
   'pages.admin.formations.fields.technologies.label': 'Technologies relacionadas',
   'pages.admin.formations.fields.technologies.description':
     'Selecione todas as technologies que devem permanecer relacionadas a esta formation.',
@@ -1340,8 +1236,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.fields.links.label': 'Links relacionados',
   'pages.admin.formations.fields.links.description':
     'Selecione todos os links de apoio conectados a esta formation.',
-  'pages.admin.formations.fields.links.empty':
-    'Nenhum link está disponível para relacionar agora.',
+  'pages.admin.formations.fields.links.empty': 'Nenhum link está disponível para relacionar agora.',
   'pages.admin.formations.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.formations.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a esta formation.',
@@ -1351,24 +1246,19 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.modal.read.title': 'Ler formations',
   'pages.admin.formations.modal.read.description':
     'Revise as formations protegidas atuais e abra fluxos de update ou delete diretamente de cada registro.',
-  'pages.admin.formations.modal.pickUpdate.title':
-    'Selecione uma formation para atualizar',
+  'pages.admin.formations.modal.pickUpdate.title': 'Selecione uma formation para atualizar',
   'pages.admin.formations.modal.pickUpdate.description':
     'Escolha uma das formations protegidas atuais para abrir seu formulário de update.',
-  'pages.admin.formations.modal.pickDelete.title':
-    'Selecione uma formation para excluir',
+  'pages.admin.formations.modal.pickDelete.title': 'Selecione uma formation para excluir',
   'pages.admin.formations.modal.pickDelete.description':
     'Escolha uma das formations protegidas atuais para confirmar sua remoção.',
   'pages.admin.formations.modal.update.title': 'Atualizar formation',
   'pages.admin.formations.modal.delete.title': 'Excluir formation',
   'pages.admin.formations.modal.delete.description':
     'Esta ação remove permanentemente a formation protegida selecionada do portfolio.',
-  'pages.admin.formations.feedback.created':
-    'Formation protegida criada com sucesso.',
-  'pages.admin.formations.feedback.updated':
-    'Formation protegida atualizada com sucesso.',
-  'pages.admin.formations.feedback.deleted':
-    'Formation protegida excluída com sucesso.',
+  'pages.admin.formations.feedback.created': 'Formation protegida criada com sucesso.',
+  'pages.admin.formations.feedback.updated': 'Formation protegida atualizada com sucesso.',
+  'pages.admin.formations.feedback.deleted': 'Formation protegida excluída com sucesso.',
   'pages.admin.formations.feedback.requiredSlug':
     'O slug da formation é obrigatório antes do envio.',
   'pages.admin.formations.feedback.requiredInstitution':
@@ -1387,22 +1277,22 @@ export const PT_BR_TRANSLATIONS = {
     'A data de início é obrigatória antes do envio.',
   'pages.admin.formations.feedback.invalidDateRange':
     'A data de término não pode ser anterior à data de início.',
-  'pages.admin.formations.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
+  'pages.admin.formations.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.formations.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.formations.feedback.selectionRequired':
     'Selecione uma formation protegida antes de continuar com esta ação.',
   'pages.admin.formations.feedback.loadError':
     'A coleção protegida de formations não pode ser carregada agora.',
-  'pages.admin.formations.feedback.saveError':
-    'A formation protegida não pode ser salva agora.',
+  'pages.admin.formations.feedback.saveError': 'A formation protegida não pode ser salva agora.',
   'pages.admin.formations.feedback.deleteError':
     'A formation protegida não pode ser excluída agora.',
   'pages.admin.technologyContexts.sectionLabel': '// CONTEXTOS_DE_TECNOLOGIA',
-  'pages.admin.technologyContexts.description': 'Janelas contextuais que descrevem como cada tecnologia é usada no portfólio.',
+  'pages.admin.technologyContexts.description':
+    'Janelas contextuais que descrevem como cada tecnologia é usada no portfólio.',
   'pages.admin.technologyContexts.states.loading': 'Carregando contextos de tecnologia...',
-  'pages.admin.technologyContexts.states.empty': 'Nenhum contexto de tecnologia protegido foi registrado ainda.',
+  'pages.admin.technologyContexts.states.empty':
+    'Nenhum contexto de tecnologia protegido foi registrado ainda.',
   'pages.admin.technologyContexts.fields.technology.label': 'Tecnologia',
   'pages.admin.technologyContexts.fields.context.label': 'Contexto',
   'pages.admin.technologyContexts.fields.startedAt.label': 'Data de início',
@@ -1417,25 +1307,42 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologyContexts.card.endedAt': 'Data de término',
   'pages.admin.technologyContexts.modal.create.title': 'Criar contexto de tecnologia',
   'pages.admin.technologyContexts.modal.read.title': 'Ler contextos de tecnologia',
-  'pages.admin.technologyContexts.modal.read.description': 'Revise os contextos protegidos atuais e abra os fluxos de edição ou exclusão diretamente em cada registro.',
-  'pages.admin.technologyContexts.modal.pickUpdate.title': 'Selecione um contexto de tecnologia para editar',
-  'pages.admin.technologyContexts.modal.pickUpdate.description': 'Escolha um contexto protegido atual para abrir seu formulário de edição.',
-  'pages.admin.technologyContexts.modal.pickDelete.title': 'Selecione um contexto de tecnologia para excluir',
-  'pages.admin.technologyContexts.modal.pickDelete.description': 'Escolha um contexto protegido atual para confirmar sua remoção.',
+  'pages.admin.technologyContexts.modal.read.description':
+    'Revise os contextos protegidos atuais e abra os fluxos de edição ou exclusão diretamente em cada registro.',
+  'pages.admin.technologyContexts.modal.pickUpdate.title':
+    'Selecione um contexto de tecnologia para editar',
+  'pages.admin.technologyContexts.modal.pickUpdate.description':
+    'Escolha um contexto protegido atual para abrir seu formulário de edição.',
+  'pages.admin.technologyContexts.modal.pickDelete.title':
+    'Selecione um contexto de tecnologia para excluir',
+  'pages.admin.technologyContexts.modal.pickDelete.description':
+    'Escolha um contexto protegido atual para confirmar sua remoção.',
   'pages.admin.technologyContexts.modal.update.title': 'Editar contexto de tecnologia',
   'pages.admin.technologyContexts.modal.delete.title': 'Excluir contexto de tecnologia',
-  'pages.admin.technologyContexts.modal.delete.description': 'Esta ação remove permanentemente o contexto de tecnologia protegido selecionado.',
-  'pages.admin.technologyContexts.feedback.created': 'Contexto de tecnologia protegido criado com sucesso.',
-  'pages.admin.technologyContexts.feedback.updated': 'Contexto de tecnologia protegido atualizado com sucesso.',
-  'pages.admin.technologyContexts.feedback.deleted': 'Contexto de tecnologia protegido excluído com sucesso.',
-  'pages.admin.technologyContexts.feedback.requiredTechnology': 'A tecnologia é obrigatória antes do envio.',
-  'pages.admin.technologyContexts.feedback.requiredContext': 'O contexto é obrigatório antes do envio.',
-  'pages.admin.technologyContexts.feedback.requiredStartDate': 'A data de início é obrigatória antes do envio.',
-  'pages.admin.technologyContexts.feedback.invalidDateRange': 'A data de término não pode ser anterior à data de início.',
-  'pages.admin.technologyContexts.feedback.missingSession': 'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
-  'pages.admin.technologyContexts.feedback.loadError': 'A coleção protegida de contextos de tecnologia não pode ser carregada agora.',
-  'pages.admin.technologyContexts.feedback.saveError': 'O contexto de tecnologia protegido não pode ser salvo agora.',
-  'pages.admin.technologyContexts.feedback.deleteError': 'O contexto de tecnologia protegido não pode ser excluído agora.',
+  'pages.admin.technologyContexts.modal.delete.description':
+    'Esta ação remove permanentemente o contexto de tecnologia protegido selecionado.',
+  'pages.admin.technologyContexts.feedback.created':
+    'Contexto de tecnologia protegido criado com sucesso.',
+  'pages.admin.technologyContexts.feedback.updated':
+    'Contexto de tecnologia protegido atualizado com sucesso.',
+  'pages.admin.technologyContexts.feedback.deleted':
+    'Contexto de tecnologia protegido excluído com sucesso.',
+  'pages.admin.technologyContexts.feedback.requiredTechnology':
+    'A tecnologia é obrigatória antes do envio.',
+  'pages.admin.technologyContexts.feedback.requiredContext':
+    'O contexto é obrigatório antes do envio.',
+  'pages.admin.technologyContexts.feedback.requiredStartDate':
+    'A data de início é obrigatória antes do envio.',
+  'pages.admin.technologyContexts.feedback.invalidDateRange':
+    'A data de término não pode ser anterior à data de início.',
+  'pages.admin.technologyContexts.feedback.missingSession':
+    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+  'pages.admin.technologyContexts.feedback.loadError':
+    'A coleção protegida de contextos de tecnologia não pode ser carregada agora.',
+  'pages.admin.technologyContexts.feedback.saveError':
+    'O contexto de tecnologia protegido não pode ser salvo agora.',
+  'pages.admin.technologyContexts.feedback.deleteError':
+    'O contexto de tecnologia protegido não pode ser excluído agora.',
   'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de mídia usados pelo portfolio por meio de relacionamentos de image assets.',
@@ -1463,25 +1370,207 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.entities.projects.title': 'Projects',
   'pages.admin.entities.projects.description':
     'Entradas de projeto em formato de case, com ambiente, status, período e arrays relacionais próprios.',
-  'pages.admin.experiences.sectionLabel': '// EXPERIÊNCIAS', 'pages.admin.experiences.states.loading': 'Carregando experiências protegidas...', 'pages.admin.experiences.states.empty': 'Nenhuma experiência protegida foi cadastrada.',
-  'pages.admin.experiences.modal.create.title': 'Criar experiência', 'pages.admin.experiences.modal.read.title': 'Ler experiências', 'pages.admin.experiences.modal.pickUpdate.title': 'Selecionar experiência para editar', 'pages.admin.experiences.modal.pickDelete.title': 'Selecionar experiência para excluir', 'pages.admin.experiences.modal.update.title': 'Editar experiência', 'pages.admin.experiences.modal.delete.title': 'Excluir experiência', 'pages.admin.experiences.modal.read.description': 'Revise as experiências protegidas e abra os fluxos de edição ou exclusão.', 'pages.admin.experiences.modal.pickUpdate.description': 'Escolha uma experiência protegida para abrir o formulário.', 'pages.admin.experiences.modal.pickDelete.description': 'Escolha uma experiência protegida para confirmar a exclusão.', 'pages.admin.experiences.modal.delete.description': 'Esta ação remove permanentemente a experiência selecionada.',
-  'pages.admin.experiences.feedback.missingSession': 'A sessão administrativa autenticada não está disponível.', 'pages.admin.experiences.feedback.loadError': 'Não foi possível carregar as experiências protegidas.', 'pages.admin.experiences.feedback.saveError': 'Não foi possível salvar a experiência protegida.', 'pages.admin.experiences.feedback.deleteError': 'Não foi possível excluir a experiência protegida.', 'pages.admin.experiences.feedback.created': 'Experiência protegida criada com sucesso.', 'pages.admin.experiences.feedback.updated': 'Experiência protegida atualizada com sucesso.', 'pages.admin.experiences.feedback.deleted': 'Experiência protegida excluída com sucesso.',
-  'pages.admin.experiences.fields.slug.label': 'Slug', 'pages.admin.experiences.fields.slug.placeholder': 'Digite o slug único da experiência', 'pages.admin.experiences.fields.companyName.label': 'Nome da empresa', 'pages.admin.experiences.fields.companyName.placeholder': 'Digite o nome da empresa', 'pages.admin.experiences.fields.titlePt.label': 'Título em português', 'pages.admin.experiences.fields.titlePt.placeholder': 'Digite o cargo em português', 'pages.admin.experiences.fields.titleEn.label': 'Título em inglês', 'pages.admin.experiences.fields.titleEn.placeholder': 'Digite o cargo em inglês', 'pages.admin.experiences.fields.summaryPt.label': 'Resumo em português', 'pages.admin.experiences.fields.summaryPt.placeholder': 'Digite o resumo em português', 'pages.admin.experiences.fields.summaryEn.label': 'Resumo em inglês', 'pages.admin.experiences.fields.summaryEn.placeholder': 'Digite o resumo em inglês', 'pages.admin.experiences.fields.descriptionPt.label': 'Descrição em português', 'pages.admin.experiences.fields.descriptionPt.placeholder': 'Digite a descrição em português', 'pages.admin.experiences.fields.descriptionEn.label': 'Descrição em inglês', 'pages.admin.experiences.fields.descriptionEn.placeholder': 'Digite a descrição em inglês', 'pages.admin.experiences.fields.sortOrder.label': 'Ordem', 'pages.admin.experiences.fields.sortOrder.placeholder': 'Digite a ordem de exibição', 'pages.admin.experiences.fields.startDate.label': 'Data inicial', 'pages.admin.experiences.fields.startDate.placeholder': 'Selecione a data inicial', 'pages.admin.experiences.fields.endDate.label': 'Data final', 'pages.admin.experiences.fields.endDate.placeholder': 'Selecione a data final, se aplicável', 'pages.admin.experiences.fields.isCurrent.label': 'Cargo atual', 'pages.admin.experiences.fields.isCurrent.description': 'Marque esta experiência como atual.', 'pages.admin.experiences.fields.highlight.label': 'Destaque', 'pages.admin.experiences.fields.highlight.description': 'Mantenha esta experiência destacada no portfólio público.',
-  'pages.admin.experiences.feedback.requiredStartDate': 'A data inicial é obrigatória.', 'pages.admin.experiences.feedback.invalidSortOrder': 'A ordem deve ser um número válido.', 'pages.admin.experiences.feedback.invalidDateRange': 'A data de término não pode ser anterior à data de início.',
+  'pages.admin.experiences.sectionLabel': '// EXPERIÊNCIAS',
+  'pages.admin.experiences.states.loading': 'Carregando experiências protegidas...',
+  'pages.admin.experiences.states.empty': 'Nenhuma experiência protegida foi cadastrada.',
+  'pages.admin.experiences.modal.create.title': 'Criar experiência',
+  'pages.admin.experiences.modal.read.title': 'Ler experiências',
+  'pages.admin.experiences.modal.pickUpdate.title': 'Selecionar experiência para editar',
+  'pages.admin.experiences.modal.pickDelete.title': 'Selecionar experiência para excluir',
+  'pages.admin.experiences.modal.update.title': 'Editar experiência',
+  'pages.admin.experiences.modal.delete.title': 'Excluir experiência',
+  'pages.admin.experiences.modal.read.description':
+    'Revise as experiências protegidas e abra os fluxos de edição ou exclusão.',
+  'pages.admin.experiences.modal.pickUpdate.description':
+    'Escolha uma experiência protegida para abrir o formulário.',
+  'pages.admin.experiences.modal.pickDelete.description':
+    'Escolha uma experiência protegida para confirmar a exclusão.',
+  'pages.admin.experiences.modal.delete.description':
+    'Esta ação remove permanentemente a experiência selecionada.',
+  'pages.admin.experiences.feedback.missingSession':
+    'A sessão administrativa autenticada não está disponível.',
+  'pages.admin.experiences.feedback.loadError':
+    'Não foi possível carregar as experiências protegidas.',
+  'pages.admin.experiences.feedback.saveError': 'Não foi possível salvar a experiência protegida.',
+  'pages.admin.experiences.feedback.deleteError':
+    'Não foi possível excluir a experiência protegida.',
+  'pages.admin.experiences.feedback.created': 'Experiência protegida criada com sucesso.',
+  'pages.admin.experiences.feedback.updated': 'Experiência protegida atualizada com sucesso.',
+  'pages.admin.experiences.feedback.deleted': 'Experiência protegida excluída com sucesso.',
+  'pages.admin.experiences.fields.slug.label': 'Slug',
+  'pages.admin.experiences.fields.slug.placeholder': 'Digite o slug único da experiência',
+  'pages.admin.experiences.fields.companyName.label': 'Nome da empresa',
+  'pages.admin.experiences.fields.companyName.placeholder': 'Digite o nome da empresa',
+  'pages.admin.experiences.fields.titlePt.label': 'Título em português',
+  'pages.admin.experiences.fields.titlePt.placeholder': 'Digite o cargo em português',
+  'pages.admin.experiences.fields.titleEn.label': 'Título em inglês',
+  'pages.admin.experiences.fields.titleEn.placeholder': 'Digite o cargo em inglês',
+  'pages.admin.experiences.fields.summaryPt.label': 'Resumo em português',
+  'pages.admin.experiences.fields.summaryPt.placeholder': 'Digite o resumo em português',
+  'pages.admin.experiences.fields.summaryEn.label': 'Resumo em inglês',
+  'pages.admin.experiences.fields.summaryEn.placeholder': 'Digite o resumo em inglês',
+  'pages.admin.experiences.fields.descriptionPt.label': 'Descrição em português',
+  'pages.admin.experiences.fields.descriptionPt.placeholder': 'Digite a descrição em português',
+  'pages.admin.experiences.fields.descriptionEn.label': 'Descrição em inglês',
+  'pages.admin.experiences.fields.descriptionEn.placeholder': 'Digite a descrição em inglês',
+  'pages.admin.experiences.fields.sortOrder.label': 'Ordem',
+  'pages.admin.experiences.fields.sortOrder.placeholder': 'Digite a ordem de exibição',
+  'pages.admin.experiences.fields.startDate.label': 'Data inicial',
+  'pages.admin.experiences.fields.startDate.placeholder': 'Selecione a data inicial',
+  'pages.admin.experiences.fields.endDate.label': 'Data final',
+  'pages.admin.experiences.fields.endDate.placeholder': 'Selecione a data final, se aplicável',
+  'pages.admin.experiences.fields.isCurrent.label': 'Cargo atual',
+  'pages.admin.experiences.fields.isCurrent.description': 'Marque esta experiência como atual.',
+  'pages.admin.experiences.fields.highlight.label': 'Destaque',
+  'pages.admin.experiences.fields.highlight.description':
+    'Mantenha esta experiência destacada no portfólio público.',
+  'pages.admin.experiences.feedback.requiredStartDate': 'A data inicial é obrigatória.',
+  'pages.admin.experiences.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
+  'pages.admin.experiences.feedback.invalidDateRange':
+    'A data de término não pode ser anterior à data de início.',
   'pages.admin.experiences.feedback.requiredSlug': 'O slug é obrigatório.',
   'pages.admin.experiences.feedback.requiredCompanyName': 'O nome da empresa é obrigatório.',
   'pages.admin.experiences.feedback.requiredTitlePt': 'O título em português é obrigatório.',
   'pages.admin.experiences.feedback.requiredTitleEn': 'O título em inglês é obrigatório.',
   'pages.admin.experiences.feedback.requiredSummaryPt': 'O resumo em português é obrigatório.',
   'pages.admin.experiences.feedback.requiredSummaryEn': 'O resumo em inglês é obrigatório.',
-  'pages.admin.experiences.feedback.requiredDescriptionPt': 'A descrição em português é obrigatória.',
+  'pages.admin.experiences.feedback.requiredDescriptionPt':
+    'A descrição em português é obrigatória.',
   'pages.admin.experiences.feedback.requiredDescriptionEn': 'A descrição em inglês é obrigatória.',
-  'pages.admin.experiences.fields.technologies.label': 'Tecnologias relacionadas', 'pages.admin.experiences.fields.technologies.description': 'Selecione todas as tecnologias usadas nesta experiência.', 'pages.admin.experiences.fields.technologies.empty': 'Nenhuma tecnologia disponível.', 'pages.admin.experiences.fields.projects.label': 'Projetos relacionados', 'pages.admin.experiences.fields.projects.description': 'Selecione todos os projetos conectados a esta experiência.', 'pages.admin.experiences.fields.projects.empty': 'Nenhum projeto disponível.', 'pages.admin.experiences.fields.customers.label': 'Clientes relacionados', 'pages.admin.experiences.fields.customers.description': 'Selecione todos os clientes conectados a esta experiência.', 'pages.admin.experiences.fields.customers.empty': 'Nenhum cliente disponível.', 'pages.admin.experiences.fields.jobs.label': 'Cargos relacionados', 'pages.admin.experiences.fields.jobs.description': 'Selecione todos os cargos conectados a esta experiência.', 'pages.admin.experiences.fields.jobs.empty': 'Nenhum cargo disponível.', 'pages.admin.experiences.fields.links.label': 'Links relacionados', 'pages.admin.experiences.fields.links.description': 'Selecione todos os links de apoio conectados a esta experiência.', 'pages.admin.experiences.fields.links.empty': 'Nenhum link disponível.', 'pages.admin.experiences.fields.imageAssets.label': 'Imagens relacionadas', 'pages.admin.experiences.fields.imageAssets.description': 'Selecione todos os recursos de imagem conectados a esta experiência.', 'pages.admin.experiences.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
-  'pages.admin.projects.sectionLabel': '// PROJETOS', 'pages.admin.projects.states.loading': 'Carregando projetos protegidos...', 'pages.admin.projects.states.empty': 'Nenhum projeto protegido foi cadastrado.', 'pages.admin.projects.modal.create.title': 'Criar projeto', 'pages.admin.projects.modal.read.title': 'Ler projetos', 'pages.admin.projects.modal.pickUpdate.title': 'Selecionar projeto para editar', 'pages.admin.projects.modal.pickDelete.title': 'Selecionar projeto para excluir', 'pages.admin.projects.modal.update.title': 'Editar projeto', 'pages.admin.projects.modal.delete.title': 'Excluir projeto', 'pages.admin.projects.modal.read.description': 'Revise os projetos protegidos e abra os fluxos de edição ou exclusão.', 'pages.admin.projects.modal.pickUpdate.description': 'Escolha um projeto protegido para abrir o formulário.', 'pages.admin.projects.modal.pickDelete.description': 'Escolha um projeto protegido para confirmar a exclusão.', 'pages.admin.projects.modal.delete.description': 'Esta ação remove permanentemente o projeto selecionado.', 'pages.admin.projects.feedback.missingSession': 'A sessão administrativa autenticada não está disponível.', 'pages.admin.projects.feedback.loadError': 'Não foi possível carregar os projetos protegidos.', 'pages.admin.projects.feedback.saveError': 'Não foi possível salvar o projeto protegido.', 'pages.admin.projects.feedback.deleteError': 'Não foi possível excluir o projeto protegido.', 'pages.admin.projects.feedback.created': 'Projeto protegido criado com sucesso.', 'pages.admin.projects.feedback.updated': 'Projeto protegido atualizado com sucesso.', 'pages.admin.projects.feedback.deleted': 'Projeto protegido excluído com sucesso.',
-  'pages.admin.projects.fields.slug.label': 'Slug', 'pages.admin.projects.fields.slug.placeholder': 'Digite o slug único do projeto', 'pages.admin.projects.fields.titlePt.label': 'Título em português', 'pages.admin.projects.fields.titlePt.placeholder': 'Digite o título em português', 'pages.admin.projects.fields.titleEn.label': 'Título em inglês', 'pages.admin.projects.fields.titleEn.placeholder': 'Digite o título em inglês', 'pages.admin.projects.fields.shortDescriptionPt.label': 'Resumo curto em português', 'pages.admin.projects.fields.shortDescriptionPt.placeholder': 'Digite o resumo curto em português', 'pages.admin.projects.fields.shortDescriptionEn.label': 'Resumo curto em inglês', 'pages.admin.projects.fields.shortDescriptionEn.placeholder': 'Digite o resumo curto em inglês', 'pages.admin.projects.fields.fullDescriptionPt.label': 'Descrição completa em português', 'pages.admin.projects.fields.fullDescriptionPt.placeholder': 'Digite a descrição completa em português', 'pages.admin.projects.fields.fullDescriptionEn.label': 'Descrição completa em inglês', 'pages.admin.projects.fields.fullDescriptionEn.placeholder': 'Digite a descrição completa em inglês', 'pages.admin.projects.fields.context.label': 'Contexto', 'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto', 'pages.admin.projects.fields.status.label': 'Status', 'pages.admin.projects.fields.status.placeholder': 'Selecione o status', 'pages.admin.projects.fields.environment.label': 'Ambiente', 'pages.admin.projects.fields.environment.placeholder': 'Selecione o ambiente', 'pages.admin.projects.fields.startDate.label': 'Data inicial', 'pages.admin.projects.fields.startDate.placeholder': 'Selecione a data inicial', 'pages.admin.projects.fields.endDate.label': 'Data final', 'pages.admin.projects.fields.endDate.placeholder': 'Selecione a data final, se aplicável', 'pages.admin.projects.fields.sortOrder.label': 'Ordem', 'pages.admin.projects.fields.sortOrder.placeholder': 'Digite a ordem de exibição', 'pages.admin.projects.fields.featured.label': 'Destaque principal', 'pages.admin.projects.fields.featured.description': 'Mantenha o projeto em destaque no portfólio.', 'pages.admin.projects.fields.highlight.label': 'Destaque', 'pages.admin.projects.fields.highlight.description': 'Mantenha o projeto enfatizado no portfólio.',
-  'pages.admin.projects.feedback.requiredSlug': 'O slug é obrigatório.', 'pages.admin.projects.feedback.requiredTitlePt': 'O título em português é obrigatório.', 'pages.admin.projects.feedback.requiredTitleEn': 'O título em inglês é obrigatório.', 'pages.admin.projects.feedback.requiredShortDescriptionPt': 'O resumo curto em português é obrigatório.', 'pages.admin.projects.feedback.requiredShortDescriptionEn': 'O resumo curto em inglês é obrigatório.', 'pages.admin.projects.feedback.requiredFullDescriptionPt': 'A descrição completa em português é obrigatória.', 'pages.admin.projects.feedback.requiredFullDescriptionEn': 'A descrição completa em inglês é obrigatória.', 'pages.admin.projects.feedback.invalidSortOrder': 'A ordem deve ser um número válido.', 'pages.admin.projects.feedback.requiredOptions': 'Selecione todas as opções obrigatórias do projeto.', 'pages.admin.projects.feedback.invalidDateRange': 'A data de término não pode ser anterior à data de início.',
-  'pages.admin.projects.fields.experiences.label': 'Experiências relacionadas', 'pages.admin.projects.fields.experiences.description': 'Selecione todas as experiências conectadas a este projeto.', 'pages.admin.projects.fields.experiences.empty': 'Nenhuma experiência disponível.', 'pages.admin.projects.fields.technologies.label': 'Tecnologias relacionadas', 'pages.admin.projects.fields.technologies.description': 'Selecione todas as tecnologias usadas neste projeto.', 'pages.admin.projects.fields.technologies.empty': 'Nenhuma tecnologia disponível.', 'pages.admin.projects.fields.tags.label': 'Tags relacionadas', 'pages.admin.projects.fields.tags.description': 'Selecione todas as tags conectadas a este projeto.', 'pages.admin.projects.fields.tags.empty': 'Nenhuma tag disponível.', 'pages.admin.projects.fields.links.label': 'Links relacionados', 'pages.admin.projects.fields.links.description': 'Selecione todos os links de apoio conectados a este projeto.', 'pages.admin.projects.fields.links.empty': 'Nenhum link disponível.', 'pages.admin.projects.fields.imageAssets.label': 'Imagens relacionadas', 'pages.admin.projects.fields.imageAssets.description': 'Selecione todos os recursos de imagem conectados a este projeto.', 'pages.admin.projects.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
-  'pages.admin.projects.fields.context.options.PROFESSIONAL': 'Profissional', 'pages.admin.projects.fields.context.options.PERSONAL': 'Pessoal', 'pages.admin.projects.fields.context.options.ACADEMIC': 'Acadêmico', 'pages.admin.projects.fields.context.options.STUDY': 'Estudo', 'pages.admin.projects.fields.status.options.COMPLETED': 'Concluído', 'pages.admin.projects.fields.status.options.IN_PROGRESS': 'Em andamento', 'pages.admin.projects.fields.status.options.ARCHIVED': 'Arquivado', 'pages.admin.projects.fields.status.options.PLANNED': 'Planejado', 'pages.admin.projects.fields.environment.options.FRONTEND': 'Frontend', 'pages.admin.projects.fields.environment.options.BACKEND': 'Backend', 'pages.admin.projects.fields.environment.options.FULLSTACK': 'Full stack', 'pages.admin.projects.fields.environment.options.MOBILE': 'Mobile', 'pages.admin.projects.fields.environment.options.LIBRARY': 'Biblioteca', 'pages.admin.projects.fields.environment.options.DASHBOARD': 'Dashboard',
+  'pages.admin.experiences.fields.technologies.label': 'Tecnologias relacionadas',
+  'pages.admin.experiences.fields.technologies.description':
+    'Selecione todas as tecnologias usadas nesta experiência.',
+  'pages.admin.experiences.fields.technologies.empty': 'Nenhuma tecnologia disponível.',
+  'pages.admin.experiences.fields.projects.label': 'Projetos relacionados',
+  'pages.admin.experiences.fields.projects.description':
+    'Selecione todos os projetos conectados a esta experiência.',
+  'pages.admin.experiences.fields.projects.empty': 'Nenhum projeto disponível.',
+  'pages.admin.experiences.fields.customers.label': 'Clientes relacionados',
+  'pages.admin.experiences.fields.customers.description':
+    'Selecione todos os clientes conectados a esta experiência.',
+  'pages.admin.experiences.fields.customers.empty': 'Nenhum cliente disponível.',
+  'pages.admin.experiences.fields.jobs.label': 'Cargos relacionados',
+  'pages.admin.experiences.fields.jobs.description':
+    'Selecione todos os cargos conectados a esta experiência.',
+  'pages.admin.experiences.fields.jobs.empty': 'Nenhum cargo disponível.',
+  'pages.admin.experiences.fields.links.label': 'Links relacionados',
+  'pages.admin.experiences.fields.links.description':
+    'Selecione todos os links de apoio conectados a esta experiência.',
+  'pages.admin.experiences.fields.links.empty': 'Nenhum link disponível.',
+  'pages.admin.experiences.fields.imageAssets.label': 'Imagens relacionadas',
+  'pages.admin.experiences.fields.imageAssets.description':
+    'Selecione todos os recursos de imagem conectados a esta experiência.',
+  'pages.admin.experiences.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
+  'pages.admin.projects.sectionLabel': '// PROJETOS',
+  'pages.admin.projects.states.loading': 'Carregando projetos protegidos...',
+  'pages.admin.projects.states.empty': 'Nenhum projeto protegido foi cadastrado.',
+  'pages.admin.projects.modal.create.title': 'Criar projeto',
+  'pages.admin.projects.modal.read.title': 'Ler projetos',
+  'pages.admin.projects.modal.pickUpdate.title': 'Selecionar projeto para editar',
+  'pages.admin.projects.modal.pickDelete.title': 'Selecionar projeto para excluir',
+  'pages.admin.projects.modal.update.title': 'Editar projeto',
+  'pages.admin.projects.modal.delete.title': 'Excluir projeto',
+  'pages.admin.projects.modal.read.description':
+    'Revise os projetos protegidos e abra os fluxos de edição ou exclusão.',
+  'pages.admin.projects.modal.pickUpdate.description':
+    'Escolha um projeto protegido para abrir o formulário.',
+  'pages.admin.projects.modal.pickDelete.description':
+    'Escolha um projeto protegido para confirmar a exclusão.',
+  'pages.admin.projects.modal.delete.description':
+    'Esta ação remove permanentemente o projeto selecionado.',
+  'pages.admin.projects.feedback.missingSession':
+    'A sessão administrativa autenticada não está disponível.',
+  'pages.admin.projects.feedback.loadError': 'Não foi possível carregar os projetos protegidos.',
+  'pages.admin.projects.feedback.saveError': 'Não foi possível salvar o projeto protegido.',
+  'pages.admin.projects.feedback.deleteError': 'Não foi possível excluir o projeto protegido.',
+  'pages.admin.projects.feedback.created': 'Projeto protegido criado com sucesso.',
+  'pages.admin.projects.feedback.updated': 'Projeto protegido atualizado com sucesso.',
+  'pages.admin.projects.feedback.deleted': 'Projeto protegido excluído com sucesso.',
+  'pages.admin.projects.fields.slug.label': 'Slug',
+  'pages.admin.projects.fields.slug.placeholder': 'Digite o slug único do projeto',
+  'pages.admin.projects.fields.titlePt.label': 'Título em português',
+  'pages.admin.projects.fields.titlePt.placeholder': 'Digite o título em português',
+  'pages.admin.projects.fields.titleEn.label': 'Título em inglês',
+  'pages.admin.projects.fields.titleEn.placeholder': 'Digite o título em inglês',
+  'pages.admin.projects.fields.shortDescriptionPt.label': 'Resumo curto em português',
+  'pages.admin.projects.fields.shortDescriptionPt.placeholder':
+    'Digite o resumo curto em português',
+  'pages.admin.projects.fields.shortDescriptionEn.label': 'Resumo curto em inglês',
+  'pages.admin.projects.fields.shortDescriptionEn.placeholder': 'Digite o resumo curto em inglês',
+  'pages.admin.projects.fields.fullDescriptionPt.label': 'Descrição completa em português',
+  'pages.admin.projects.fields.fullDescriptionPt.placeholder':
+    'Digite a descrição completa em português',
+  'pages.admin.projects.fields.fullDescriptionEn.label': 'Descrição completa em inglês',
+  'pages.admin.projects.fields.fullDescriptionEn.placeholder':
+    'Digite a descrição completa em inglês',
+  'pages.admin.projects.fields.context.label': 'Contexto',
+  'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto',
+  'pages.admin.projects.fields.status.label': 'Status',
+  'pages.admin.projects.fields.status.placeholder': 'Selecione o status',
+  'pages.admin.projects.fields.environment.label': 'Ambiente',
+  'pages.admin.projects.fields.environment.placeholder': 'Selecione o ambiente',
+  'pages.admin.projects.fields.startDate.label': 'Data inicial',
+  'pages.admin.projects.fields.startDate.placeholder': 'Selecione a data inicial',
+  'pages.admin.projects.fields.endDate.label': 'Data final',
+  'pages.admin.projects.fields.endDate.placeholder': 'Selecione a data final, se aplicável',
+  'pages.admin.projects.fields.sortOrder.label': 'Ordem',
+  'pages.admin.projects.fields.sortOrder.placeholder': 'Digite a ordem de exibição',
+  'pages.admin.projects.fields.featured.label': 'Destaque principal',
+  'pages.admin.projects.fields.featured.description':
+    'Mantenha o projeto em destaque no portfólio.',
+  'pages.admin.projects.fields.highlight.label': 'Destaque',
+  'pages.admin.projects.fields.highlight.description':
+    'Mantenha o projeto enfatizado no portfólio.',
+  'pages.admin.projects.feedback.requiredSlug': 'O slug é obrigatório.',
+  'pages.admin.projects.feedback.requiredTitlePt': 'O título em português é obrigatório.',
+  'pages.admin.projects.feedback.requiredTitleEn': 'O título em inglês é obrigatório.',
+  'pages.admin.projects.feedback.requiredShortDescriptionPt':
+    'O resumo curto em português é obrigatório.',
+  'pages.admin.projects.feedback.requiredShortDescriptionEn':
+    'O resumo curto em inglês é obrigatório.',
+  'pages.admin.projects.feedback.requiredFullDescriptionPt':
+    'A descrição completa em português é obrigatória.',
+  'pages.admin.projects.feedback.requiredFullDescriptionEn':
+    'A descrição completa em inglês é obrigatória.',
+  'pages.admin.projects.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
+  'pages.admin.projects.feedback.requiredOptions':
+    'Selecione todas as opções obrigatórias do projeto.',
+  'pages.admin.projects.feedback.invalidDateRange':
+    'A data de término não pode ser anterior à data de início.',
+  'pages.admin.projects.fields.experiences.label': 'Experiências relacionadas',
+  'pages.admin.projects.fields.experiences.description':
+    'Selecione todas as experiências conectadas a este projeto.',
+  'pages.admin.projects.fields.experiences.empty': 'Nenhuma experiência disponível.',
+  'pages.admin.projects.fields.technologies.label': 'Tecnologias relacionadas',
+  'pages.admin.projects.fields.technologies.description':
+    'Selecione todas as tecnologias usadas neste projeto.',
+  'pages.admin.projects.fields.technologies.empty': 'Nenhuma tecnologia disponível.',
+  'pages.admin.projects.fields.tags.label': 'Tags relacionadas',
+  'pages.admin.projects.fields.tags.description':
+    'Selecione todas as tags conectadas a este projeto.',
+  'pages.admin.projects.fields.tags.empty': 'Nenhuma tag disponível.',
+  'pages.admin.projects.fields.links.label': 'Links relacionados',
+  'pages.admin.projects.fields.links.description':
+    'Selecione todos os links de apoio conectados a este projeto.',
+  'pages.admin.projects.fields.links.empty': 'Nenhum link disponível.',
+  'pages.admin.projects.fields.imageAssets.label': 'Imagens relacionadas',
+  'pages.admin.projects.fields.imageAssets.description':
+    'Selecione todos os recursos de imagem conectados a este projeto.',
+  'pages.admin.projects.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
+  'pages.admin.projects.fields.context.options.PROFESSIONAL': 'Profissional',
+  'pages.admin.projects.fields.context.options.PERSONAL': 'Pessoal',
+  'pages.admin.projects.fields.context.options.ACADEMIC': 'Acadêmico',
+  'pages.admin.projects.fields.context.options.STUDY': 'Estudo',
+  'pages.admin.projects.fields.status.options.COMPLETED': 'Concluído',
+  'pages.admin.projects.fields.status.options.IN_PROGRESS': 'Em andamento',
+  'pages.admin.projects.fields.status.options.ARCHIVED': 'Arquivado',
+  'pages.admin.projects.fields.status.options.PLANNED': 'Planejado',
+  'pages.admin.projects.fields.environment.options.FRONTEND': 'Frontend',
+  'pages.admin.projects.fields.environment.options.BACKEND': 'Backend',
+  'pages.admin.projects.fields.environment.options.FULLSTACK': 'Full stack',
+  'pages.admin.projects.fields.environment.options.MOBILE': 'Mobile',
+  'pages.admin.projects.fields.environment.options.LIBRARY': 'Biblioteca',
+  'pages.admin.projects.fields.environment.options.DASHBOARD': 'Dashboard',
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
   'taxonomy.dashboard.source.formation': 'Formação',
@@ -1502,16 +1591,20 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.fields.descriptionEs.placeholder': 'Digite a descrição em espanhol',
   'pages.admin.experiences.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
   'pages.admin.experiences.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
-  'pages.admin.experiences.feedback.requiredDescriptionEs': 'A descrição em espanhol é obrigatória.',
+  'pages.admin.experiences.feedback.requiredDescriptionEs':
+    'A descrição em espanhol é obrigatória.',
   'pages.admin.projects.fields.titleEs.label': 'Título em espanhol',
   'pages.admin.projects.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.projects.fields.shortDescriptionEs.label': 'Resumo curto em espanhol',
   'pages.admin.projects.fields.shortDescriptionEs.placeholder': 'Digite o resumo curto em espanhol',
   'pages.admin.projects.fields.fullDescriptionEs.label': 'Descrição completa em espanhol',
-  'pages.admin.projects.fields.fullDescriptionEs.placeholder': 'Digite a descrição completa em espanhol',
+  'pages.admin.projects.fields.fullDescriptionEs.placeholder':
+    'Digite a descrição completa em espanhol',
   'pages.admin.projects.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
-  'pages.admin.projects.feedback.requiredShortDescriptionEs': 'O resumo curto em espanhol é obrigatório.',
-  'pages.admin.projects.feedback.requiredFullDescriptionEs': 'A descrição completa em espanhol é obrigatória.',
+  'pages.admin.projects.feedback.requiredShortDescriptionEs':
+    'O resumo curto em espanhol é obrigatório.',
+  'pages.admin.projects.feedback.requiredFullDescriptionEs':
+    'A descrição completa em espanhol é obrigatória.',
   'pages.admin.formations.fields.titleEs.label': 'Título em espanhol',
   'pages.admin.formations.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.formations.fields.summaryEs.label': 'Resumo em espanhol',
@@ -1538,7 +1631,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.feedback.requiredLabelEn': 'O rótulo em inglês é obrigatório.',
   'pages.admin.links.feedback.requiredLabelEs': 'O rótulo em espanhol é obrigatório.',
   'pages.admin.imageAssets.fields.altEs.label': 'Texto alternativo em espanhol',
-  'pages.admin.imageAssets.fields.altEs.placeholder': 'Descreva a imagem em espanhol para acessibilidade',
+  'pages.admin.imageAssets.fields.altEs.placeholder':
+    'Descreva a imagem em espanhol para acessibilidade',
   'pages.admin.imageAssets.fields.captionEs.label': 'Legenda em espanhol',
   'pages.admin.imageAssets.fields.captionEs.placeholder': 'Digite a legenda em espanhol',
   'pages.admin.tags.fields.nameEs.label': 'Nome em espanhol',

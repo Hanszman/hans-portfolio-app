@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -19,10 +16,7 @@ interface HomeComponentTestHook {
     set(value: DashboardOverviewResponse | null): void;
   };
   topTechnologyChips(): readonly unknown[];
-  openTechnologyDetails(technology: {
-    slug: string;
-    name: string;
-  }): void;
+  openTechnologyDetails(technology: { slug: string; name: string }): void;
   closeTechnologyDetails(): void;
   selectedTechnology(): { slug: string; name: string } | null;
   isTechnologyModalOpen(): boolean;
@@ -122,7 +116,7 @@ describe('HomeComponent', () => {
     request.flush(createDashboardOverviewResponse());
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Oi, eu sou');
+    expect(compiled.textContent).toContain('Olá, sou');
     expect(compiled.textContent).toContain('Tecnologias principais');
     expect(compiled.textContent).toContain('Experiências');
   });
@@ -168,9 +162,7 @@ describe('HomeComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain(
-      'No stack distribution was returned yet.',
-    );
+    expect(compiled.textContent).toContain('No stack distribution was returned yet.');
   });
 
   it('should render an API error state when the dashboard request fails', () => {
@@ -187,9 +179,7 @@ describe('HomeComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain(
-      'The live home data is unavailable right now',
-    );
+    expect(compiled.textContent).toContain('The live home data is unavailable right now');
   });
 
   it('should calculate career years around the anniversary boundary', () => {
@@ -200,12 +190,8 @@ describe('HomeComponent', () => {
     const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
     request.flush(createDashboardOverviewResponse());
 
-    expect(
-      component.calculateCareerYears(new Date('2026-09-03T00:00:00.000Z')),
-    ).toBe(8);
-    expect(
-      component.calculateCareerYears(new Date('2026-09-02T00:00:00.000Z')),
-    ).toBe(7);
+    expect(component.calculateCareerYears(new Date('2026-09-03T00:00:00.000Z'))).toBe(8);
+    expect(component.calculateCareerYears(new Date('2026-09-02T00:00:00.000Z'))).toBe(7);
   });
 
   it('should use fallback values when dashboard data is absent', () => {
