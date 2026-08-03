@@ -2,68 +2,84 @@
   @apply block;
 }
 
-.project-detail-modal,
-.project-detail-modal-section,
-.project-detail-modal-stack,
-.project-detail-modal-stack-group,
-.project-detail-modal-links {
+.project-modal,
+.project-modal-content,
+.project-modal-section,
+.project-modal-stack,
+.project-modal-stack-group,
+.project-modal-links {
   @apply grid gap-4;
 }
 
-.project-detail-modal-meta,
-.project-detail-modal-tags,
-.project-detail-modal-chip-list {
+.project-modal-with-gallery {
+  @apply grid-cols-2 gap-6;
+}
+
+.project-modal-meta,
+.project-modal-tags,
+.project-modal-chip-list {
   @apply flex flex-wrap items-center gap-2;
 }
 
-.project-detail-modal-meta > span {
+.project-modal-meta > span {
   @apply font-mono text-sm;
   color: color-mix(in srgb, var(--text-color) 66%, transparent);
 }
 
-.project-detail-modal-description,
-.project-detail-modal-inline-text {
+.project-modal-description,
+.project-modal-inline-text {
   @apply m-0 text-base leading-7;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
 }
 
-.project-detail-modal-section h3 {
+.project-modal-section h3,
+.project-modal-gallery h2 {
   @apply m-0 font-mono text-sm font-bold lowercase tracking-[0.05em];
   color: var(--text-color);
 }
 
-.project-detail-modal-stack-group > span {
+.project-modal-stack-group > span {
   @apply text-xs font-medium uppercase tracking-[0.08em];
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
-.project-detail-modal-chip {
+.project-modal-chip {
   @apply inline-flex items-center rounded-xl border px-4 py-2 text-sm font-semibold;
   border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
   background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
   color: var(--text-color);
 }
 
-.project-detail-modal-links {
+.project-modal-links {
   @apply sm:grid-cols-2;
 }
 
-.project-detail-modal-links a {
+.project-modal-links a {
   @apply grid gap-1 rounded-xl border px-4 py-3 no-underline transition;
   border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
   background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
 
-.project-detail-modal-links a:hover {
+.project-modal-links a:hover {
   border-color: var(--primary-default-color);
 }
 
-.project-detail-modal-links strong {
+.project-modal-links strong {
   @apply text-sm font-semibold;
   color: var(--text-color);
 }
 
-.project-detail-modal-links span {
+.project-modal-links span {
   @apply text-xs;
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
+}
+
+.project-modal-gallery {
+  @apply min-w-0 self-start;
+}
+
+@media (max-width: 48rem) {
+  .project-modal-with-gallery {
+    @apply grid-cols-1;
+  }
 }

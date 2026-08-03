@@ -1,0 +1,43 @@
+<hans-modal
+  [isOpen]="isOpen()"
+  [title]="item()?.title ?? ''"
+  [attr.modalSize]="modalSize()"
+  placement="center"
+  [renderBody]="true"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
+  @if (item(); as education) {
+    <article
+      class="education-modal"
+      [class.education-modal-with-gallery]="education.galleryItems.length > 0"
+    >
+      <section class="education-modal-information">
+        @if (education.image; as image) {
+          <img class="education-modal-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
+        }
+        <p class="education-modal-subtitle">{{ education.subtitle }}</p>
+        <dl class="education-modal-details">
+          @for (detail of education.details; track detail.labelKey) {
+            <div>
+              <dt>{{ detail.labelKey | translate }}</dt>
+              <dd>{{ detail.value }}</dd>
+            </div>
+          }
+        </dl>
+      </section>
+      @if (education.galleryItems.length > 0) {
+        <section class="education-modal-gallery">
+          <h2>{{ 'pages.skills.education.detail.gallery' | translate }}</h2>
+          <hans-carousel
+            [items]="education.galleryItems"
+            [visibleItemsCount]="1"
+            [infiniteLoop]="education.galleryItems.length > 1"
+            carouselId="education-detail-gallery"
+            carouselColor="primary"
+          ></hans-carousel>
+        </section>
+      }
+    </article>
+  }
+</hans-modal>

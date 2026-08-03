@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -32,7 +29,9 @@ describe('TechnologyModalComponent', () => {
       category: 'Framework',
       stack: 'Front-End',
       level: 'Advanced',
+      levelKey: 'ADVANCED',
       frequency: 'Frequent',
+      frequencyKey: 'FREQUENT',
       projectCount: 4,
       image: {
         src: '/assets/img/skills/angular.png',
@@ -45,14 +44,20 @@ describe('TechnologyModalComponent', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
-  it('should pass technology details to tag modal', () => {
+  it('should render technology details, progress bars and radar', () => {
     fixture.detectChanges();
 
-    const modal = fixture.nativeElement.querySelector('app-tag-modal');
+    const modal = fixture.nativeElement.querySelector('hans-modal');
     expect(modal).toBeTruthy();
     expect(fixture.nativeElement.textContent).toContain('Front-End');
-    expect(fixture.nativeElement.textContent).toContain('Advanced');
     expect(fixture.nativeElement.textContent).toContain('4');
+    const progressBars = fixture.nativeElement.querySelectorAll('hans-progress-bar');
+    expect(progressBars.length).toBe(2);
+    expect(progressBars[0].label).toBe('Knowledge level');
+    expect(progressBars[0].valueLabel).toBe('Advanced');
+    expect(progressBars[1].label).toBe('Usage frequency');
+    expect(progressBars[1].valueLabel).toBe('Frequent');
+    expect(fixture.nativeElement.querySelector('hans-chart')).toBeTruthy();
   });
 
   it('should enrich the selected technology with backend catalog data when opened', () => {
@@ -86,18 +91,14 @@ describe('TechnologyModalComponent', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
     httpTestingController
       .expectOne(
-        buildApiUrl(
-          '/technologies?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
-        ),
+        buildApiUrl('/technologies?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
       )
       .flush(null, {
         status: 500,
         statusText: 'Server Error',
       });
     httpTestingController
-      .expectOne(
-        buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
-      )
+      .expectOne(buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'))
       .flush(null, {
         status: 500,
         statusText: 'Server Error',
@@ -134,13 +135,29 @@ describe('TechnologyModalComponent', () => {
     expect(component.details()).toEqual([]);
   });
 
+  it('should expose empty derived state without a selected technology and localize singular months', () => {
+    fixture.componentRef.setInput('technology', null);
+    fixture.detectChanges();
+    const component = fixture.componentInstance as unknown as {
+      details: () => readonly unknown[];
+      levelProgress: () => unknown;
+      frequencyProgress: () => unknown;
+      radarSeries: () => readonly unknown[];
+      formatRadarValue: (value: number) => string;
+    };
+
+    expect(component.details()).toEqual([]);
+    expect(component.levelProgress()).toBeNull();
+    expect(component.frequencyProgress()).toBeNull();
+    expect(component.radarSeries()).toEqual([]);
+    expect(component.formatRadarValue(1)).toBe('1 month');
+  });
+
   it('should emit close request', () => {
     spyOn(fixture.componentInstance.closed, 'emit');
     fixture.detectChanges();
 
-    fixture.nativeElement
-      .querySelector('app-tag-modal')
-      .dispatchEvent(new Event('closed'));
+    fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
 
     expect(fixture.componentInstance.closed.emit).toHaveBeenCalledTimes(1);
   });

@@ -8,10 +8,7 @@ import {
   resolveLocalizedText,
   translateStaticKey,
 } from '../../../core/translation/translation.service';
-import {
-  AppLocale,
-  AppTranslationKey,
-} from '../../../core/translation/translation.types';
+import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   resolveSkillStackKey,
   resolveSkillTypeKey,
@@ -152,12 +149,8 @@ const buildProjectStackGroups = (
     .filter((group) => group.technologies.length > 0);
 };
 
-const resolveProjectFilterContext = (
-  context: string,
-): ProjectCaseViewModel['filterContext'] =>
-  context === 'PROFESSIONAL' || context === 'ACADEMIC' || context === 'PERSONAL'
-    ? context
-    : 'ALL';
+const resolveProjectFilterContext = (context: string): ProjectCaseViewModel['filterContext'] =>
+  context === 'PROFESSIONAL' || context === 'ACADEMIC' || context === 'PERSONAL' ? context : 'ALL';
 
 const resolveNullableCatalogLabel = (
   locale: AppLocale,
@@ -213,15 +206,13 @@ export const mapProjectToCaseCard = (
   project: ProjectCollectionItemResponse,
   locale: AppLocale,
 ): ProjectCaseViewModel => {
-  const projectImage = [...project.imageAssets].sort((left, right) => left.sortOrder - right.sortOrder)[0];
+  const projectImage = [...project.imageAssets].sort(
+    (left, right) => left.sortOrder - right.sortOrder,
+  )[0];
   const technologies = dedupeProjectTechnologies(
-    project.technologies.map(({ technology }) =>
-      mapProjectTechnologyTag(technology, locale),
-    ),
+    project.technologies.map(({ technology }) => mapProjectTechnologyTag(technology, locale)),
   );
-  const companyNames = dedupe(
-    project.experiences.map(({ experience }) => experience.companyName),
-  );
+  const companyNames = dedupe(project.experiences.map(({ experience }) => experience.companyName));
   const experienceTitles = dedupe(
     project.experiences.map(({ experience }) =>
       resolveLocalizedText(
@@ -281,10 +272,7 @@ export const mapProjectToCaseCard = (
     isHighlight: project.highlight,
     companyNames,
     technologies,
-    extraTechnologyCount: Math.max(
-      technologies.length - PROJECT_VISIBLE_TECHNOLOGY_COUNT,
-      0,
-    ),
+    extraTechnologyCount: Math.max(technologies.length - PROJECT_VISIBLE_TECHNOLOGY_COUNT, 0),
     links: project.links.map((relation) => mapProjectLink(relation, locale)),
     imageUrl: buildAssetUrl(projectImage?.imageAsset.filePath),
     imageAlt:
@@ -314,6 +302,15 @@ export const mapProjectToCaseCard = (
     ),
     galleryItems: [...project.imageAssets]
       .sort((left, right) => left.sortOrder - right.sortOrder)
+      .filter(({ imageAsset }, index, relations) => {
+        if (!imageAsset.filePath) return false;
+        return (
+          relations.findIndex(
+            ({ imageAsset: candidate }) =>
+              candidate.id === imageAsset.id || candidate.filePath === imageAsset.filePath,
+          ) === index
+        );
+      })
       .map(({ imageAsset }) => ({
         id: imageAsset.id,
         imageSrc: buildAssetUrl(imageAsset.filePath),
@@ -347,9 +344,7 @@ export const buildProjectsSummaryMetrics = (
   locale: AppLocale,
 ): readonly ProjectSummaryMetricViewModel[] => {
   const featuredCount = projects.filter((project) => project.featured).length;
-  const inProgressCount = projects.filter(
-    (project) => project.status === 'IN_PROGRESS',
-  ).length;
+  const inProgressCount = projects.filter((project) => project.status === 'IN_PROGRESS').length;
   const linkedAssetsCount = projects.reduce(
     (total, project) => total + project.links.length + project.imageAssets.length,
     0,

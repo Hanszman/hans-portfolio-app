@@ -229,6 +229,25 @@ describe('projects helper', () => {
               altEs: '',
             },
           },
+          {
+            ...createProjectsCollectionResponse().data[0].imageAssets[0],
+            imageAssetId: 'duplicate-path',
+            sortOrder: 2,
+            imageAsset: {
+              ...createProjectsCollectionResponse().data[0].imageAssets[0].imageAsset,
+              id: 'duplicate-path',
+            },
+          },
+          {
+            ...createProjectsCollectionResponse().data[0].imageAssets[0],
+            imageAssetId: 'invalid-path',
+            sortOrder: 3,
+            imageAsset: {
+              ...createProjectsCollectionResponse().data[0].imageAssets[0].imageAsset,
+              id: 'invalid-path',
+              filePath: '',
+            },
+          },
         ],
         links: [
           {
@@ -280,6 +299,7 @@ describe('projects helper', () => {
 
     expect(card.galleryItems[0].imageAlt).toBe("Github's API Consumer");
     expect(card.galleryItems[0].description).toBeUndefined();
+    expect(card.galleryItems).toHaveSize(1);
   });
 
   it('should summarize featured density, in-progress work, linked assets and richest stack', () => {

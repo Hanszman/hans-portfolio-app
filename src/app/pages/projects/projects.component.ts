@@ -14,10 +14,10 @@ import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
+import { ProjectModalComponent } from '../../shared/project-modal/project-modal.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { ProjectCaseCardComponent } from './components/project-case-card/project-case-card.component';
-import { ProjectDetailModalComponent } from './components/project-detail-modal/project-detail-modal.component';
 import { mapProjectToCaseCard } from './helpers/projects.helper';
 import {
   PROJECT_CONTEXT_FILTERS,
@@ -31,7 +31,7 @@ import {
     WrapperComponent,
     InfoStateComponent,
     ProjectCaseCardComponent,
-    ProjectDetailModalComponent,
+    ProjectModalComponent,
     SectionHeaderComponent,
     TechnologyModalComponent,
     TranslatePipe,
@@ -70,17 +70,14 @@ export class ProjectsComponent {
     const searchTerm = this.searchTerm().trim().toLowerCase();
 
     return this.projectCases().filter((project) => {
-      const matchesContext =
-        selectedContext === 'ALL' || project.filterContext === selectedContext;
+      const matchesContext = selectedContext === 'ALL' || project.filterContext === selectedContext;
       const matchesSearch =
         !searchTerm ||
         project.title.toLowerCase().includes(searchTerm) ||
         project.summary.toLowerCase().includes(searchTerm) ||
         project.description.toLowerCase().includes(searchTerm) ||
         project.contextLabel.toLowerCase().includes(searchTerm) ||
-        project.companyNames.some((company) =>
-          company.toLowerCase().includes(searchTerm),
-        ) ||
+        project.companyNames.some((company) => company.toLowerCase().includes(searchTerm)) ||
         project.technologies.some((technology) =>
           technology.label.toLowerCase().includes(searchTerm),
         );
@@ -89,14 +86,10 @@ export class ProjectsComponent {
     });
   });
 
-  protected readonly filteredCountLabel = computed(() =>
-    String(this.visibleProjectCases().length),
-  );
+  protected readonly filteredCountLabel = computed(() => String(this.visibleProjectCases().length));
 
   protected readonly isDetailOpen = computed(() => this.selectedProject() !== null);
-  protected readonly isTechnologyModalOpen = computed(
-    () => this.selectedTechnology() !== null,
-  );
+  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
 
   constructor() {
     this.projectsService
@@ -113,7 +106,7 @@ export class ProjectsComponent {
           this.hasError.set(true);
           this.isLoading.set(false);
         },
-    });
+      });
   }
 
   protected updateSearchTerm(searchTerm: string): void {
@@ -133,6 +126,7 @@ export class ProjectsComponent {
   }
 
   protected openTechnologyDetails(technology: TechnologyModalItem): void {
+    this.selectedProjectSignal.set(null);
     this.selectedTechnologySignal.set(technology);
   }
 

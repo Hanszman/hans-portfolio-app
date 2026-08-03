@@ -74,12 +74,12 @@
     }
   </section>
 
-  <app-project-detail-modal
+  <app-project-modal
     [isOpen]="isDetailOpen()"
     [project]="selectedProject()"
     (openTechnology)="openTechnologyDetails($event)"
     (closed)="closeProjectDetails()"
-  ></app-project-detail-modal>
+  ></app-project-modal>
 
   <app-technology-modal
     [isOpen]="isTechnologyModalOpen()"

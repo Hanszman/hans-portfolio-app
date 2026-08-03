@@ -8,15 +8,14 @@ DADOS:
 IMPLEMENTAÇÕES:
 -Alterar ícone de navegador do Front e do Back.
 -Criar componente de message na lib pra padronizar mensagens em containers para caso filtros vazios ou erros de api, etc. Aplicar esse novo componente padronizado aqui no portfolio em todos os locais possíveis/necessários. Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
--Mostrar todas as datas com dia (atualmente está somente em mês).
+-Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Na tela de Home, os Cards de heroMetrics de technologies e projects também deveriam ser uma conta, assim como years of experience, não hardcoded.
 -Navigation Cards na tela de Home deveriam estar mais bonitos, compactos, estão meio vazios e grandes demais.
--Criar uma coluna para projeto inacabado/concluído. Verificar também como está sendo utilizado o campo highlighted (esses devem ser os que mostramos na home page, não só technologies, mas projects também).
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
--Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
--Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
+-Criar uma coluna para projeto inacabado/concluído. Verificar também como está sendo utilizado o campo highlighted (esses devem ser os que mostramos na home page, não só technologies, mas projects também).
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
+-Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
 AUTOMATIZAÇÕES:
 -Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (criação da components e services).

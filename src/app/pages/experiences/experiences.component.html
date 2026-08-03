@@ -8,20 +8,11 @@
 
   <section page-content class="experiences-section">
     @if (isLoading()) {
-      <app-info-state
-        mode="loading"
-        [message]="'pages.experiences.timeline.loading' | translate"
-      />
+      <app-info-state mode="loading" [message]="'pages.experiences.timeline.loading' | translate" />
     } @else if (hasError()) {
-      <app-info-state
-        mode="error"
-        [message]="'pages.experiences.timeline.error' | translate"
-      />
+      <app-info-state mode="error" [message]="'pages.experiences.timeline.error' | translate" />
     } @else if (timelineItems().length === 0) {
-      <app-info-state
-        mode="empty"
-        [message]="'pages.experiences.timeline.empty' | translate"
-      />
+      <app-info-state mode="empty" [message]="'pages.experiences.timeline.empty' | translate" />
     } @else {
       <div class="experiences-timeline">
         @for (item of timelineItems(); track item.id) {
@@ -38,10 +29,11 @@
     }
   </section>
 
-  <app-experience-detail-modal
+  <app-experience-modal
     [isOpen]="isDetailOpen()"
     [item]="selectedExperience()"
     (closed)="closeExperienceDetails()"
+    (openTechnology)="openTechnologyDetails($event)"
   />
 
   <app-technology-modal

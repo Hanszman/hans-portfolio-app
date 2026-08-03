@@ -11,6 +11,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TechnologiesService } from '../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
+import { FormationsService } from '../../core/api/formations/formations.service';
+import { FormationRecord } from '../../core/api/formations/formations.types';
+import { SpokenLanguagesService } from '../../core/api/spoken-languages/spoken-languages.service';
+import { SpokenLanguageRecord } from '../../core/api/spoken-languages/spoken-languages.types';
+import { EducationModalComponent } from '../../shared/education-modal/education-modal.component';
+import { EducationModalItem } from '../../shared/education-modal/education-modal.types';
+import { SpokenLanguageModalComponent } from '../../shared/spoken-language-modal/spoken-language-modal.component';
+import { SpokenLanguageModalItem } from '../../shared/spoken-language-modal/spoken-language-modal.types';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
@@ -21,6 +29,8 @@ import {
   buildEducationSkillCards,
   buildLanguageSkillCards,
   mapTechnologyToSkillCard,
+  mapFormationToEducationModal,
+  mapSpokenLanguageToModal,
 } from './helpers/skills.helper';
 import {
   SKILL_LEVEL_FILTERS,
@@ -42,6 +52,8 @@ import {
     SkillCardComponent,
     SectionHeaderComponent,
     TechnologyModalComponent,
+    EducationModalComponent,
+    SpokenLanguageModalComponent,
     TranslatePipe,
   ],
   templateUrl: './skills.component.html',
@@ -51,9 +63,15 @@ import {
 })
 export class SkillsComponent {
   private readonly technologiesService = inject(TechnologiesService);
+  private readonly formationsService = inject(FormationsService);
+  private readonly spokenLanguagesService = inject(SpokenLanguagesService);
   private readonly translationService = inject(TranslationService);
   private readonly technologiesSignal = signal<TechnologyCollectionItemResponse[]>([]);
-  private readonly selectedSkillSignal = signal<TechnologyModalItem | null>(null);
+  private readonly formationsSignal = signal<FormationRecord[]>([]);
+  private readonly spokenLanguagesSignal = signal<SpokenLanguageRecord[]>([]);
+  private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
+  private readonly selectedEducationSignal = signal<EducationModalItem | null>(null);
+  private readonly selectedLanguageSignal = signal<SpokenLanguageModalItem | null>(null);
   private readonly searchTermSignal = signal('');
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
@@ -61,7 +79,9 @@ export class SkillsComponent {
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
-  protected readonly selectedSkill = this.selectedSkillSignal.asReadonly();
+  protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
+  protected readonly selectedEducation = this.selectedEducationSignal.asReadonly();
+  protected readonly selectedLanguage = this.selectedLanguageSignal.asReadonly();
   protected readonly searchTerm = this.searchTermSignal.asReadonly();
   protected readonly selectedStack = this.selectedStackSignal.asReadonly();
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
@@ -75,9 +95,7 @@ export class SkillsComponent {
   protected readonly levelFilterOptions = computed(() =>
     this.buildFilterOptions(this.levelFilters),
   );
-  protected readonly typeFilterOptions = computed(() =>
-    this.buildFilterOptions(this.typeFilters),
-  );
+  protected readonly typeFilterOptions = computed(() => this.buildFilterOptions(this.typeFilters));
 
   protected readonly educationCards = computed(() =>
     buildEducationSkillCards(this.translationService.locale()),
@@ -89,9 +107,7 @@ export class SkillsComponent {
 
   protected readonly technologyCards = computed(() =>
     this.technologiesSignal()
-      .map((technology) =>
-        mapTechnologyToSkillCard(technology, this.translationService.locale()),
-      )
+      .map((technology) => mapTechnologyToSkillCard(technology, this.translationService.locale()))
       .sort((left, right) => left.name.localeCompare(right.name)),
   );
 
@@ -116,11 +132,11 @@ export class SkillsComponent {
     });
   });
 
-  protected readonly technologyCount = computed(() =>
-    String(this.technologyCards().length),
-  );
+  protected readonly technologyCount = computed(() => String(this.technologyCards().length));
 
-  protected readonly isSkillModalOpen = computed(() => this.selectedSkill() !== null);
+  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
+  protected readonly isEducationModalOpen = computed(() => this.selectedEducation() !== null);
+  protected readonly isLanguageModalOpen = computed(() => this.selectedLanguage() !== null);
 
   constructor() {
     this.technologiesService
@@ -137,7 +153,23 @@ export class SkillsComponent {
           this.hasError.set(true);
           this.isLoading.set(false);
         },
-    });
+      });
+
+    this.formationsService
+      .getAll(1, 100)
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (response) => this.formationsSignal.set(response.data),
+        error: () => this.formationsSignal.set([]),
+      });
+
+    this.spokenLanguagesService
+      .getAll(1, 100)
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (response) => this.spokenLanguagesSignal.set(response.data),
+        error: () => this.spokenLanguagesSignal.set([]),
+      });
   }
 
   protected updateSearchTerm(searchTerm: string): void {
@@ -169,11 +201,35 @@ export class SkillsComponent {
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {
-    this.selectedSkillSignal.set(skill.modal);
+    this.closeSkillDetails();
+
+    if (skill.kind === 'technology') {
+      this.selectedTechnologySignal.set(skill.modal);
+      return;
+    }
+
+    if (skill.kind === 'education') {
+      const formation = this.formationsSignal().find(({ slug }) => slug === skill.slug);
+      this.selectedEducationSignal.set(
+        mapFormationToEducationModal(formation, skill, this.translationService.locale()),
+      );
+      return;
+    }
+
+    const language = this.spokenLanguagesSignal().find(
+      ({ code, nameEn }) =>
+        code.toLowerCase() === skill.slug.toLowerCase() ||
+        nameEn.toLowerCase() === skill.name.toLowerCase(),
+    );
+    this.selectedLanguageSignal.set(
+      mapSpokenLanguageToModal(language, skill, this.translationService.locale()),
+    );
   }
 
   protected closeSkillDetails(): void {
-    this.selectedSkillSignal.set(null);
+    this.selectedTechnologySignal.set(null);
+    this.selectedEducationSignal.set(null);
+    this.selectedLanguageSignal.set(null);
   }
 
   private buildFilterOptions(

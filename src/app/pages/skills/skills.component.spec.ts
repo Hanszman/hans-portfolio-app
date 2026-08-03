@@ -13,6 +13,23 @@ import { SkillsComponent } from './skills.component';
 const TECHNOLOGIES_REQUEST_URL = buildApiUrl(
   '/technologies?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
 );
+const FORMATIONS_REQUEST_URL = buildApiUrl(
+  '/formations?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
+);
+const LANGUAGES_REQUEST_URL = buildApiUrl(
+  '/spoken-languages?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
+);
+const emptyCollection = {
+  data: [],
+  meta: {
+    page: 1,
+    pageSize: 100,
+    totalItems: 0,
+    totalPages: 0,
+    hasNextPage: false,
+    hasPreviousPage: false,
+  },
+};
 
 const flushTechnologiesRequest = (
   httpTestingController: HttpTestingController,
@@ -54,7 +71,14 @@ describe('SkillsComponent', () => {
   });
 
   afterEach(() => {
-    TestBed.inject(HttpTestingController).verify();
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    for (const url of [FORMATIONS_REQUEST_URL, LANGUAGES_REQUEST_URL]) {
+      httpTestingController
+        .match(url)
+        .filter((request) => !request.cancelled)
+        .forEach((request) => request.flush(emptyCollection));
+    }
+    httpTestingController.verify();
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
@@ -469,7 +493,7 @@ describe('SkillsComponent', () => {
     expect(fixture.nativeElement.textContent).toContain('Beta');
   });
 
-  it('should open and close the shared technology modal for any skill card', () => {
+  it('should open and close the shared education modal for an education card', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
@@ -479,21 +503,101 @@ describe('SkillsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       educationCards: () => readonly [{ name: string; modal: { name: string } }];
-      openSkillDetails: (skill: { modal: { name: string } }) => void;
+      openSkillDetails: (skill: unknown) => void;
       closeSkillDetails: () => void;
-      selectedSkill: () => { name: string } | null;
-      isSkillModalOpen: () => boolean;
+      selectedEducation: () => { title: string } | null;
+      isEducationModalOpen: () => boolean;
     };
 
     const skill = component.educationCards()[0];
     component.openSkillDetails(skill);
 
-    expect(component.selectedSkill()?.name).toBe('Information Systems');
-    expect(component.isSkillModalOpen()).toBeTrue();
+    expect(component.selectedEducation()?.title).toBe('Information Systems');
+    expect(component.isEducationModalOpen()).toBeTrue();
 
     component.closeSkillDetails();
 
-    expect(component.selectedSkill()).toBeNull();
-    expect(component.isSkillModalOpen()).toBeFalse();
+    expect(component.selectedEducation()).toBeNull();
+    expect(component.isEducationModalOpen()).toBeFalse();
+  });
+
+  it('should open the correct modal with public formation and language records', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+    const http = TestBed.inject(HttpTestingController);
+    flushTechnologiesRequest(http);
+    http.expectOne(FORMATIONS_REQUEST_URL).flush({
+      ...emptyCollection,
+      data: [
+        {
+          id: 'formation',
+          slug: 'information-systems',
+          institution: 'PUC Minas',
+          titlePt: 'Sistemas de Informação',
+          titleEn: 'Information Systems',
+          titleEs: 'Sistemas de Información',
+          degreeType: 'BACHELOR',
+          summaryPt: 'Resumo',
+          summaryEn: 'Summary',
+          summaryEs: 'Resumen',
+          startDate: '2015-02-01T00:00:00.000Z',
+          endDate: '2018-12-15T00:00:00.000Z',
+          imageAssets: [],
+        },
+      ],
+    });
+    http.expectOne(LANGUAGES_REQUEST_URL).flush({
+      ...emptyCollection,
+      data: [
+        {
+          id: 'language',
+          code: 'pt-br',
+          namePt: 'Português',
+          nameEn: 'Portuguese',
+          nameEs: 'Portugués',
+          proficiency: 'NATIVE',
+        },
+      ],
+    });
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      technologyCards: () => readonly unknown[];
+      educationCards: () => readonly unknown[];
+      languageCards: () => readonly unknown[];
+      openSkillDetails: (skill: unknown) => void;
+      selectedTechnology: () => unknown;
+      selectedEducation: () => { title: string } | null;
+      selectedLanguage: () => { title: string } | null;
+    };
+    component.openSkillDetails(component.technologyCards()[0]);
+    expect(component.selectedTechnology()).toBeTruthy();
+    component.openSkillDetails(component.educationCards()[0]);
+    expect(component.selectedEducation()?.title).toBe('Information Systems');
+    component.openSkillDetails(component.languageCards()[0]);
+    expect(component.selectedLanguage()?.title).toBe('Portuguese');
+  });
+
+  it('should preserve static modal fallbacks when formation and language catalogs fail', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+    const http = TestBed.inject(HttpTestingController);
+    flushTechnologiesRequest(http);
+    for (const url of [FORMATIONS_REQUEST_URL, LANGUAGES_REQUEST_URL]) {
+      http.expectOne(url).flush(null, { status: 500, statusText: 'Server Error' });
+    }
+    fixture.detectChanges();
+
+    const component = fixture.componentInstance as unknown as {
+      educationCards: () => readonly unknown[];
+      languageCards: () => readonly unknown[];
+      openSkillDetails: (skill: unknown) => void;
+      selectedEducation: () => unknown;
+      selectedLanguage: () => unknown;
+    };
+    component.openSkillDetails(component.educationCards()[0]);
+    expect(component.selectedEducation()).toBeTruthy();
+    component.openSkillDetails(component.languageCards()[0]);
+    expect(component.selectedLanguage()).toBeTruthy();
   });
 });

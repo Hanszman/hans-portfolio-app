@@ -269,6 +269,17 @@ The recommended production strategy is to inject the same release identifier int
 
 That automation belongs to the consuming app deployment, because the consuming app decides which library build it wants to pin.
 
+### Shared public detail modals
+
+Public details use shared modal adapters instead of page-local shells:
+
+- `app-technology-modal` uses a large responsive two-column layout, ordinal `hans-progress-bar` fields and a `hans-chart` radar whose tooltip reports each context in months.
+- `app-experience-modal` renders customers and technologies through `app-tag-button`; customer tags are static and technology tags keep navigation behavior.
+- `app-project-modal` and `app-education-modal` render `hans-carousel` only when valid linked images exist and increase the modal size only in that case.
+- `app-spoken-language-modal` preserves the established small language modal presentation.
+
+Gallery mapping must sort by relation order, ignore missing paths and deduplicate repeated assets by ID or path. When a modal can open another modal, close the current overlay first so focus trapping and scrolling remain owned by a single dialog.
+
 ## 🔀 API Integration Notes
 
 The backend already exposes the public content and dashboard routes that this frontend will consume in the integration phase.

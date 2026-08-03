@@ -1,0 +1,46 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAppTranslations } from '../../core/translation/translation.providers';
+import { EducationModalComponent } from './education-modal.component';
+
+describe('EducationModalComponent', () => {
+  let fixture: ComponentFixture<EducationModalComponent>;
+  const item = {
+    title: 'Information Systems',
+    subtitle: 'University',
+    image: null,
+    details: [{ labelKey: 'pages.skills.education.detail.summary' as const, value: 'Degree' }],
+    galleryItems: [{ id: 'image', imageSrc: '/degree.png', imageAlt: 'Degree' }],
+  };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [EducationModalComponent],
+      providers: [provideZonelessChangeDetection(), provideAppTranslations()],
+    }).compileComponents();
+    fixture = TestBed.createComponent(EducationModalComponent);
+  });
+
+  it('changes size and carousel presence according to linked images', () => {
+    fixture.componentRef.setInput('item', item);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
+      'large',
+    );
+    expect(fixture.nativeElement.querySelector('hans-carousel')).toBeTruthy();
+    fixture.componentRef.setInput('item', { ...item, galleryItems: [] });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
+      'small',
+    );
+    expect(fixture.nativeElement.querySelector('hans-carousel')).toBeNull();
+  });
+
+  it('emits close requests', () => {
+    fixture.componentRef.setInput('item', item);
+    fixture.detectChanges();
+    spyOn(fixture.componentInstance.closed, 'emit');
+    fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
+    expect(fixture.componentInstance.closed.emit).toHaveBeenCalled();
+  });
+});

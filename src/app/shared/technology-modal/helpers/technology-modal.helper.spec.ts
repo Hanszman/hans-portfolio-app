@@ -54,8 +54,6 @@ describe('technology modal helper', () => {
       { labelKey: 'pages.skills.detail.totalExperience', value: '6 years' },
       { labelKey: 'pages.experiences.technology.type', value: 'Frameworks' },
       { labelKey: 'pages.experiences.technology.stack', value: 'Front-End' },
-      { labelKey: 'pages.experiences.technology.level', value: 'Advanced' },
-      { labelKey: 'pages.experiences.technology.frequency', value: 'Frequent' },
       { labelKey: 'pages.experiences.technology.projects', value: 2 },
     ]);
   });

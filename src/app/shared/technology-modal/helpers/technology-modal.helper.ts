@@ -6,11 +6,13 @@ import {
   resolveLocalizedText,
   translateStaticKey,
 } from '../../../core/translation/translation.service';
+import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import {
-  AppLocale,
-  AppTranslationKey,
-} from '../../../core/translation/translation.types';
-import { TechnologyModalItem } from '../technology-modal.types';
+  TechnologyFrequencyKey,
+  TechnologyLevelKey,
+  TechnologyModalItem,
+  TechnologyProgressViewModel,
+} from '../technology-modal.types';
 
 const TECHNOLOGY_FRONT_END_SLUGS = new Set([
   'angular',
@@ -43,7 +45,9 @@ const TECHNOLOGY_BACK_END_SLUGS = new Set([
 ]);
 
 const TECHNOLOGY_MOBILE_SLUGS = new Set(['react-native', 'expo']);
+
 const TECHNOLOGY_GAME_SLUGS = new Set(['unity']);
+
 const TECHNOLOGY_DATABASE_CATEGORIES = new Set(['DATABASE', 'ORM']);
 
 const TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY: Record<string, AppTranslationKey> = {
@@ -83,8 +87,77 @@ const TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY: Record<string, AppTranslationKey> 
 const TECHNOLOGY_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
+  BASIC: 'taxonomy.skills.level.beginner',
   BEGINNER: 'taxonomy.skills.level.beginner',
   STUDYING: 'taxonomy.skills.level.studying',
+};
+
+const TECHNOLOGY_CONTEXT_ORDER = ['PROFESSIONAL', 'PERSONAL', 'ACADEMIC', 'STUDY'] as const;
+
+const TECHNOLOGY_CONTEXT_LABEL_KEYS: Record<
+  (typeof TECHNOLOGY_CONTEXT_ORDER)[number],
+  AppTranslationKey
+> = {
+  PROFESSIONAL: 'taxonomy.skills.context.professional',
+  PERSONAL: 'taxonomy.skills.context.personal',
+  ACADEMIC: 'taxonomy.skills.context.academic',
+  STUDY: 'taxonomy.skills.context.study',
+};
+
+const LEVEL_PROGRESS: Record<
+  TechnologyLevelKey,
+  Pick<TechnologyProgressViewModel, 'value' | 'color'>
+> = {
+  BASIC: { value: 33, color: 'danger' },
+  INTERMEDIATE: { value: 66, color: 'warning' },
+  ADVANCED: { value: 100, color: 'success' },
+};
+
+const FREQUENCY_PROGRESS: Record<
+  TechnologyFrequencyKey,
+  Pick<TechnologyProgressViewModel, 'value' | 'color'>
+> = {
+  STUDYING: { value: 25, color: 'danger' },
+  PREVIOUSLY_USED: { value: 50, color: 'warning' },
+  OCCASIONAL: { value: 75, color: 'warning' },
+  FREQUENT: { value: 100, color: 'success' },
+};
+
+export const buildTechnologyProgress = (
+  label: string,
+  valueLabel: string | undefined,
+  key: string | undefined,
+  map: Record<string, Pick<TechnologyProgressViewModel, 'value' | 'color'>>,
+): TechnologyProgressViewModel | null => {
+  if (!valueLabel || !key || !map[key]) return null;
+  return { label, valueLabel, ...map[key] };
+};
+
+export const buildTechnologyLevelProgress = (
+  technology: TechnologyModalItem,
+  locale: AppLocale,
+): TechnologyProgressViewModel | null =>
+  buildTechnologyProgress(
+    translateStaticKey(locale, 'pages.experiences.technology.level'),
+    technology.level,
+    technology.levelKey,
+    LEVEL_PROGRESS,
+  );
+
+export const buildTechnologyFrequencyProgress = (
+  technology: TechnologyModalItem,
+  locale: AppLocale,
+): TechnologyProgressViewModel | null =>
+  buildTechnologyProgress(
+    translateStaticKey(locale, 'pages.experiences.technology.frequency'),
+    technology.frequency,
+    technology.frequencyKey,
+    FREQUENCY_PROGRESS,
+  );
+
+export const resolveRadarMaximum = (metrics: readonly { totalMonths: number }[]): number => {
+  const largest = Math.max(0, ...metrics.map(({ totalMonths }) => totalMonths));
+  return Math.max(12, Math.ceil(largest / 12) * 12);
 };
 
 const TECHNOLOGY_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
@@ -141,10 +214,7 @@ const resolveStackLabel = (
     stackKey = 'MOBILE';
   } else if (TECHNOLOGY_DATABASE_CATEGORIES.has(technology.category)) {
     stackKey = 'DATABASES';
-  } else if (
-    TECHNOLOGY_FRONT_END_SLUGS.has(slug) ||
-    technology.category === 'FRAMEWORK'
-  ) {
+  } else if (TECHNOLOGY_FRONT_END_SLUGS.has(slug) || technology.category === 'FRAMEWORK') {
     stackKey = 'FRONT_END';
   } else if (TECHNOLOGY_BACK_END_SLUGS.has(slug)) {
     stackKey = 'BACK_END';
@@ -185,9 +255,7 @@ const findTechnology = (
   technologies: readonly TechnologyCollectionItemResponse[],
 ): TechnologyCollectionItemResponse | undefined =>
   technologies.find((technology) => technology.slug === reference.slug) ??
-  technologies.find(
-    (technology) => technology.name.toLowerCase() === reference.name.toLowerCase(),
-  );
+  technologies.find((technology) => technology.name.toLowerCase() === reference.name.toLowerCase());
 
 const countProjectsUsingTechnology = (
   slug: string,
@@ -198,29 +266,22 @@ const countProjectsUsingTechnology = (
     ? fallback
     : projects.filter((project) =>
         project.technologies.some(
-          ({ technology }) =>
-            technology.slug.toLowerCase() === slug.toLowerCase(),
+          ({ technology }) => technology.slug.toLowerCase() === slug.toLowerCase(),
         ),
       ).length;
 
 export const buildTechnologyModalDetail = (
   labelKey: TagModalDetail['labelKey'],
   value: string | number | undefined,
-): TagModalDetail | null =>
-  value === undefined || value === '' ? null : { labelKey, value };
+): TagModalDetail | null => (value === undefined || value === '' ? null : { labelKey, value });
 
 export const buildTechnologyModalDetails = (
   technology: TechnologyModalItem,
 ): readonly TagModalDetail[] => {
   const details = [
-    buildTechnologyModalDetail(
-      'pages.skills.detail.totalExperience',
-      technology.experience,
-    ),
+    buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
     buildTechnologyModalDetail('pages.experiences.technology.type', technology.category),
     buildTechnologyModalDetail('pages.experiences.technology.stack', technology.stack),
-    buildTechnologyModalDetail('pages.experiences.technology.level', technology.level),
-    buildTechnologyModalDetail('pages.experiences.technology.frequency', technology.frequency),
     buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),
   ] satisfies readonly (TagModalDetail | null)[];
 
@@ -242,11 +303,7 @@ export const resolveTechnologyModalItem = (
   if (!technology) {
     return {
       ...reference,
-      projectCount: countProjectsUsingTechnology(
-        reference.slug,
-        projects,
-        reference.projectCount,
-      ),
+      projectCount: countProjectsUsingTechnology(reference.slug, projects, reference.projectCount),
     };
   }
 
@@ -261,21 +318,16 @@ export const resolveTechnologyModalItem = (
     slug: technology.slug,
     name: technology.name,
     category:
-      resolveCatalogLabel(
-        locale,
-        TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY,
-        technology.category,
-      ) ?? reference.category,
+      resolveCatalogLabel(locale, TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY, technology.category) ??
+      reference.category,
     stack: resolveStackLabel(technology, locale),
     level:
-      resolveCatalogLabel(locale, TECHNOLOGY_LEVEL_LABEL_KEYS, technology.level) ??
-      reference.level,
+      resolveCatalogLabel(locale, TECHNOLOGY_LEVEL_LABEL_KEYS, technology.level) ?? reference.level,
     frequency:
-      resolveCatalogLabel(
-        locale,
-        TECHNOLOGY_FREQUENCY_LABEL_KEYS,
-        technology.frequency,
-      ) ?? reference.frequency,
+      resolveCatalogLabel(locale, TECHNOLOGY_FREQUENCY_LABEL_KEYS, technology.frequency) ??
+      reference.frequency,
+    levelKey: (technology.level as TechnologyLevelKey | null) ?? reference.levelKey,
+    frequencyKey: (technology.frequency as TechnologyFrequencyKey | null) ?? reference.frequencyKey,
     experience: technology.experienceMetrics
       ? resolveLocalizedText(
           locale,
@@ -289,5 +341,10 @@ export const resolveTechnologyModalItem = (
       : reference.experience,
     projectCount,
     image: resolveTechnologyImage(technology, locale, reference),
+    contextMetrics: TECHNOLOGY_CONTEXT_ORDER.map((key) => ({
+      key,
+      label: translateStaticKey(locale, TECHNOLOGY_CONTEXT_LABEL_KEYS[key]),
+      totalMonths: technology.experienceMetrics?.byContext[key]?.totalMonths ?? 0,
+    })),
   };
 };

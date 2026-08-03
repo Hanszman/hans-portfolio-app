@@ -19,6 +19,9 @@ export interface FormationImageAssetReference {
   fileName?: string | null;
   filePath?: string | null;
   kind?: string | null;
+  altPt?: string | null;
+  altEn?: string | null;
+  altEs?: string | null;
 }
 
 export interface FormationTechnologyRelationRecord {
@@ -35,6 +38,7 @@ export interface FormationLinkRelationRecord {
 export interface FormationImageAssetRelationRecord {
   imageAssetId?: string;
   imageAsset?: FormationImageAssetReference | null;
+  sortOrder?: number | null;
 }
 
 export interface FormationRecord {

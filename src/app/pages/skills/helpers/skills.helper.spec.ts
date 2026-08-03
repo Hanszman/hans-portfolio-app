@@ -8,6 +8,8 @@ import {
   buildSkillsSummaryMetrics,
   extractSkillFilterValues,
   mapTechnologyToSkillCard,
+  mapFormationToEducationModal,
+  mapSpokenLanguageToModal,
   resolveSkillStackKey,
   resolveSkillTypeKey,
   resolveSkillVisualUrl,
@@ -132,6 +134,174 @@ describe('skills helper', () => {
         }),
       }),
     );
+  });
+
+  it('should map formation content and ordered linked images into the education modal', () => {
+    const fallback = buildEducationSkillCards('es-es')[0];
+    const modal = mapFormationToEducationModal(
+      {
+        id: 'formation',
+        slug: fallback.slug,
+        institution: 'PUC Minas',
+        titlePt: 'Sistemas de Informação',
+        titleEn: 'Information Systems',
+        titleEs: 'Sistemas de Información',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Resumo',
+        summaryEn: 'Summary',
+        summaryEs: 'Resumen',
+        startDate: '2015-02-01T00:00:00.000Z',
+        endDate: '2018-12-15T00:00:00.000Z',
+        imageAssets: [
+          {
+            sortOrder: 2,
+            imageAsset: { id: 'second', fileName: 'second.png', filePath: '/second.png' },
+          },
+          {
+            sortOrder: 3,
+            imageAsset: { id: 'second-copy', fileName: 'second.png', filePath: '/second.png' },
+          },
+          {
+            sortOrder: 1,
+            imageAsset: {
+              id: 'first',
+              fileName: 'first.png',
+              filePath: '/first.png',
+              altEs: 'Primera imagen',
+            },
+          },
+          { sortOrder: 0, imageAsset: null },
+        ],
+      },
+      fallback,
+      'es-es',
+    );
+
+    expect(modal.title).toBe('Sistemas de Información');
+    expect(modal.subtitle).toBe('PUC Minas');
+    expect(modal.galleryItems.map(({ id }) => id)).toEqual(['first', 'second']);
+    expect(modal.galleryItems[0].imageAlt).toBe('Primera imagen');
+    expect(modal.galleryItems[1].description).toBe('Resumen');
+    expect(modal.image?.src).toContain('/first.png');
+    expect(modal.details.map(({ value }) => value)).toContain('BACHELOR');
+  });
+
+  it('should use education and language fallbacks when API records or assets are absent', () => {
+    const education = buildEducationSkillCards('en-us')[0];
+    const language = buildLanguageSkillCards('en-us')[0];
+    expect(mapFormationToEducationModal(undefined, education, 'en-us')).toEqual(
+      jasmine.objectContaining({ title: education.name, galleryItems: [] }),
+    );
+
+    const languageFallback = mapSpokenLanguageToModal(undefined, language, 'en-us');
+    expect(languageFallback.image?.src).toBe(language.visualUrl);
+    expect(languageFallback.details.map(({ value }) => value)).toEqual([
+      language.badgeLabel,
+      language.slug,
+    ]);
+
+    const educationWithoutGallery = mapFormationToEducationModal(
+      {
+        id: 'formation-without-gallery',
+        slug: education.slug,
+        institution: education.subtitle,
+        titlePt: education.name,
+        titleEn: education.name,
+        degreeType: education.badgeLabel,
+        summaryPt: '',
+        summaryEn: '',
+        startDate: 'invalid-date',
+        endDate: null,
+        imageAssets: null,
+      },
+      education,
+      'en-us',
+    );
+    expect(educationWithoutGallery.galleryItems).toEqual([]);
+    expect(educationWithoutGallery.image?.src).toBe(education.visualUrl);
+    expect(educationWithoutGallery.details.map(({ value }) => value)).toContain('invalid-date');
+  });
+
+  it('should normalize sparse valid formation assets', () => {
+    const fallback = buildEducationSkillCards('en-us')[0];
+    const modal = mapFormationToEducationModal(
+      {
+        id: 'formation-sparse-asset',
+        slug: fallback.slug,
+        institution: fallback.subtitle,
+        titlePt: fallback.name,
+        titleEn: fallback.name,
+        degreeType: fallback.badgeLabel,
+        summaryPt: '',
+        summaryEn: '',
+        startDate: '2020-01-01',
+        imageAssets: [
+          {
+            sortOrder: null,
+            imageAsset: {
+              id: 'sparse-asset',
+              fileName: null,
+              filePath: '/sparse.png',
+              altPt: null,
+              altEn: null,
+              altEs: null,
+            },
+          },
+        ],
+      },
+      fallback,
+      'en-us',
+    );
+
+    expect(modal.galleryItems[0].imageAlt).toBe(`${fallback.name} - 1`);
+    expect(modal.galleryItems[0].description).toBeUndefined();
+  });
+
+  it('should map localized spoken-language data and its linked image', () => {
+    const fallback = buildLanguageSkillCards('pt-br')[0];
+    const modal = mapSpokenLanguageToModal(
+      {
+        id: 'language',
+        code: 'pt-BR',
+        namePt: 'Português',
+        nameEn: 'Portuguese',
+        nameEs: 'Portugués',
+        proficiency: 'NATIVE',
+        imageAssets: [
+          { imageAsset: { id: 'flag', filePath: '/br.svg', altPt: 'Bandeira do Brasil' } },
+        ],
+      },
+      fallback,
+      'pt-br',
+    );
+
+    expect(modal.title).toBe('Português');
+    expect(modal.image).toEqual(jasmine.objectContaining({ alt: 'Bandeira do Brasil' }));
+    expect(modal.details.map(({ value }) => value)).toEqual(['NATIVE', 'pt-BR']);
+
+    const fallbackAlt = mapSpokenLanguageToModal(
+      {
+        id: 'language-fallback-alt',
+        code: 'pt-BR',
+        namePt: 'Português',
+        nameEn: 'Portuguese',
+        proficiency: 'NATIVE',
+        imageAssets: [
+          {
+            imageAsset: {
+              id: 'flag-without-alt',
+              filePath: '/br.svg',
+              altPt: null,
+              altEn: null,
+              altEs: null,
+            },
+          },
+        ],
+      },
+      fallback,
+      'pt-br',
+    );
+    expect(fallbackAlt.image?.alt).toBe('Português');
   });
 
   it('should use fallback duration labels when experience labels are missing', () => {

@@ -5,6 +5,9 @@ export interface SpokenLanguageImageAssetReference {
   fileName?: string | null;
   filePath?: string | null;
   kind?: string | null;
+  altPt?: string | null;
+  altEn?: string | null;
+  altEs?: string | null;
 }
 
 export interface SpokenLanguageImageAssetRelationRecord {

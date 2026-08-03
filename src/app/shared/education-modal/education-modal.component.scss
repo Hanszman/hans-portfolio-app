@@ -1,0 +1,59 @@
+:host {
+  @apply block;
+}
+
+.education-modal {
+  @apply grid gap-5;
+}
+
+.education-modal-with-gallery {
+  @apply grid-cols-2 gap-6;
+}
+
+.education-modal-information {
+  @apply grid content-start gap-5;
+}
+
+.education-modal-image {
+  @apply h-24 w-24 justify-self-center rounded-3xl object-contain p-3;
+  background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
+}
+
+.education-modal-subtitle {
+  @apply m-0 text-center text-base;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.education-modal-details {
+  @apply m-0 grid gap-3;
+}
+
+.education-modal-details > div {
+  @apply grid gap-1 rounded-2xl border px-4 py-3;
+  background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.education-modal-details dt {
+  @apply text-xs font-semibold uppercase tracking-[0.08em];
+  color: var(--primary-default-color);
+}
+
+.education-modal-details dd {
+  @apply m-0 text-base font-semibold;
+  color: var(--text-color);
+}
+
+.education-modal-gallery {
+  @apply min-w-0;
+}
+
+.education-modal-gallery h2 {
+  @apply m-0 mb-4 text-lg;
+}
+
+@media (max-width: 48rem) {
+  .education-modal-with-gallery {
+    @apply grid-cols-1;
+  }
+}

@@ -1,8 +1,62 @@
-<app-tag-modal
+<hans-modal
   [isOpen]="isOpen()"
   [title]="resolvedTechnology()?.name ?? ''"
-  [subtitle]="resolvedTechnology()?.category ?? ''"
-  [image]="resolvedTechnology()?.image ?? null"
-  [details]="details()"
-  (closed)="requestClose()"
-/>
+  modalSize="large"
+  placement="center"
+  [renderBody]="true"
+  [closeButtonLabel]="'common.actions.close' | translate"
+  (close)="requestClose()"
+>
+  @if (resolvedTechnology(); as technology) {
+    <article class="technology-modal">
+      <section class="technology-modal-information">
+        @if (technology.image; as image) {
+          <img class="technology-modal-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
+        }
+        @if (technology.category) {
+          <p class="technology-modal-subtitle">{{ technology.category }}</p>
+        }
+
+        <dl class="technology-modal-details">
+          @for (detail of details(); track detail.labelKey) {
+            <div class="technology-modal-detail">
+              <dt>{{ detail.labelKey | translate }}</dt>
+              <dd>{{ detail.value }}</dd>
+            </div>
+          }
+        </dl>
+
+        @if (levelProgress(); as progress) {
+          <hans-progress-bar
+            [value]="progress.value"
+            [label]="progress.label"
+            [valueLabel]="progress.valueLabel"
+            [attr.progressColor]="progress.color"
+          ></hans-progress-bar>
+        }
+        @if (frequencyProgress(); as progress) {
+          <hans-progress-bar
+            [value]="progress.value"
+            [label]="progress.label"
+            [valueLabel]="progress.valueLabel"
+            [attr.progressColor]="progress.color"
+          ></hans-progress-bar>
+        }
+      </section>
+
+      <section class="technology-modal-radar" [attr.aria-label]="radarSummary()">
+        <h2>{{ 'pages.skills.detail.contextExperience' | translate }}</h2>
+        <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
+        <hans-chart
+          chartType="radar"
+          [series]="radarSeries()"
+          [radarIndicators]="radarIndicators()"
+          [radarValueFormatter]="formatRadarValue"
+          [showLegend]="false"
+          [height]="380"
+          [title]="'pages.skills.detail.contextExperience' | translate"
+        ></hans-chart>
+      </section>
+    </article>
+  }
+</hans-modal>

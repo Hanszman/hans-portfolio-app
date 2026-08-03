@@ -18,7 +18,7 @@ import { TagModalComponent } from '../../shared/tag/tag-modal/tag-modal.componen
 import { TagModalDetail } from '../../shared/tag/tag-modal/tag-modal.types';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
-import { ExperienceDetailModalComponent } from './components/experience-detail-modal/experience-detail-modal.component';
+import { ExperienceModalComponent } from '../../shared/experience-modal/experience-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
 import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
 import { ExperienceCustomerViewModel } from './experiences.types';
@@ -29,7 +29,7 @@ import { ExperienceCustomerViewModel } from './experiences.types';
     WrapperComponent,
     InfoStateComponent,
     ExperienceTimelineCardComponent,
-    ExperienceDetailModalComponent,
+    ExperienceModalComponent,
     SectionHeaderComponent,
     TechnologyModalComponent,
     TagModalComponent,
@@ -44,11 +44,11 @@ export class ExperiencesComponent {
   private readonly experiencesService = inject(ExperiencesService);
   private readonly translationService = inject(TranslationService);
   private readonly experiencesSignal = signal<ExperienceCollectionItemResponse[]>([]);
-  private readonly selectedExperienceSignal =
-    signal<ReturnType<typeof mapExperienceToTimelineItem> | null>(null);
+  private readonly selectedExperienceSignal = signal<ReturnType<
+    typeof mapExperienceToTimelineItem
+  > | null>(null);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
-  private readonly selectedCustomerSignal =
-    signal<ExperienceCustomerViewModel | null>(null);
+  private readonly selectedCustomerSignal = signal<ExperienceCustomerViewModel | null>(null);
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -63,15 +63,9 @@ export class ExperiencesComponent {
     ),
   );
 
-  protected readonly isDetailOpen = computed(
-    () => this.selectedExperience() !== null,
-  );
-  protected readonly isTechnologyModalOpen = computed(
-    () => this.selectedTechnology() !== null,
-  );
-  protected readonly isCustomerDetailOpen = computed(
-    () => this.selectedCustomer() !== null,
-  );
+  protected readonly isDetailOpen = computed(() => this.selectedExperience() !== null);
+  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
+  protected readonly isCustomerDetailOpen = computed(() => this.selectedCustomer() !== null);
   protected readonly selectedCustomerDetails = computed<readonly TagModalDetail[]>(() => {
     const customer = this.selectedCustomer();
 
@@ -109,9 +103,7 @@ export class ExperiencesComponent {
       });
   }
 
-  protected openExperienceDetails(
-    item: ReturnType<typeof mapExperienceToTimelineItem>,
-  ): void {
+  protected openExperienceDetails(item: ReturnType<typeof mapExperienceToTimelineItem>): void {
     this.selectedExperienceSignal.set(item);
   }
 
@@ -124,6 +116,7 @@ export class ExperiencesComponent {
   }
 
   protected openTechnologyDetails(technology: TechnologyModalItem): void {
+    this.selectedExperienceSignal.set(null);
     this.selectedTechnologySignal.set(technology);
   }
 

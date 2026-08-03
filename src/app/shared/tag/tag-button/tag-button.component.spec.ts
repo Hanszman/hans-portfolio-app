@@ -47,4 +47,12 @@ describe('TagButtonComponent', () => {
     expect(event.stopPropagation).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith('angular');
   });
+
+  it('renders the shared tag without an interactive button when requested', () => {
+    fixture.componentRef.setInput('interactive', false);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('button')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.tag-button-static hans-tag')).toBeTruthy();
+  });
 });

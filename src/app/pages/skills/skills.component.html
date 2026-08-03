@@ -118,20 +118,11 @@
       </div>
 
       @if (isLoading()) {
-        <app-info-state
-          mode="loading"
-          [message]="'pages.skills.catalog.loading' | translate"
-        />
+        <app-info-state mode="loading" [message]="'pages.skills.catalog.loading' | translate" />
       } @else if (hasError()) {
-        <app-info-state
-          mode="error"
-          [message]="'pages.skills.catalog.error' | translate"
-        />
+        <app-info-state mode="error" [message]="'pages.skills.catalog.error' | translate" />
       } @else if (filteredTechnologyCards().length === 0) {
-        <app-info-state
-          mode="empty"
-          [message]="'pages.skills.catalog.empty' | translate"
-        />
+        <app-info-state mode="empty" [message]="'pages.skills.catalog.empty' | translate" />
       } @else {
         <div class="skills-card-grid">
           @for (card of filteredTechnologyCards(); track card.id) {
@@ -143,8 +134,20 @@
   </section>
 
   <app-technology-modal
-    [isOpen]="isSkillModalOpen()"
-    [technology]="selectedSkill()"
+    [isOpen]="isTechnologyModalOpen()"
+    [technology]="selectedTechnology()"
+    (closed)="closeSkillDetails()"
+  />
+
+  <app-education-modal
+    [isOpen]="isEducationModalOpen()"
+    [item]="selectedEducation()"
+    (closed)="closeSkillDetails()"
+  />
+
+  <app-spoken-language-modal
+    [isOpen]="isLanguageModalOpen()"
+    [item]="selectedLanguage()"
     (closed)="closeSkillDetails()"
   />
 </app-wrapper>

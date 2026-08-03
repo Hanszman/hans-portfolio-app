@@ -18,12 +18,7 @@ export type SkillStackFilterValue =
   | 'MOBILE'
   | 'OTHERS';
 
-export type SkillLevelFilterValue =
-  | 'ALL'
-  | 'ADVANCED'
-  | 'INTERMEDIATE'
-  | 'BEGINNER'
-  | 'STUDYING';
+export type SkillLevelFilterValue = 'ALL' | 'ADVANCED' | 'INTERMEDIATE' | 'BEGINNER' | 'STUDYING';
 
 export type SkillTypeFilterValue =
   | 'ALL'
@@ -127,70 +122,67 @@ export const SKILL_FILTER_ALL_LABEL_KEYS = {
   contexts: 'taxonomy.skills.filters.allContexts',
 } as const satisfies Record<string, AppTranslationKey>;
 
-export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFilterValue>[] =
-  [
-    { labelKey: 'taxonomy.skills.stack.all', value: 'ALL' },
-    { labelKey: 'taxonomy.skills.stack.frontEnd', value: 'FRONT_END' },
-    { labelKey: 'taxonomy.skills.stack.backEnd', value: 'BACK_END' },
-    { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
-    { labelKey: 'taxonomy.skills.stack.games', value: 'GAMES' },
-    { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
-    { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
-  ];
+export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFilterValue>[] = [
+  { labelKey: 'taxonomy.skills.stack.all', value: 'ALL' },
+  { labelKey: 'taxonomy.skills.stack.frontEnd', value: 'FRONT_END' },
+  { labelKey: 'taxonomy.skills.stack.backEnd', value: 'BACK_END' },
+  { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
+  { labelKey: 'taxonomy.skills.stack.games', value: 'GAMES' },
+  { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
+  { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
+];
 
-export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFilterValue>[] =
-  [
-    { labelKey: 'taxonomy.skills.level.all', value: 'ALL' },
-    { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
-    { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
-    { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
-    { labelKey: 'taxonomy.skills.level.studying', value: 'STUDYING' },
-  ];
+export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFilterValue>[] = [
+  { labelKey: 'taxonomy.skills.level.all', value: 'ALL' },
+  { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
+  { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
+  { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
+  { labelKey: 'taxonomy.skills.level.studying', value: 'STUDYING' },
+];
 
-export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilterValue>[] =
-  [
-    { labelKey: 'taxonomy.skills.type.all', value: 'ALL' },
-    {
-      labelKey: 'taxonomy.skills.type.programmingLanguages',
-      value: 'PROGRAMMING_LANGUAGES',
-    },
-    { labelKey: 'taxonomy.skills.type.webLanguages', value: 'WEB_LANGUAGES' },
-    { labelKey: 'taxonomy.skills.type.libraries', value: 'LIBRARIES' },
-    { labelKey: 'taxonomy.skills.type.frameworks', value: 'FRAMEWORKS' },
-    {
-      labelKey: 'taxonomy.skills.type.relationalDataBases',
-      value: 'RELATIONAL_DATA_BASES',
-    },
-    {
-      labelKey: 'taxonomy.skills.type.nonRelationalDataBases',
-      value: 'NON_RELATIONAL_DATA_BASES',
-    },
-    {
-      labelKey: 'taxonomy.skills.type.databasesManagementSystems',
-      value: 'DATABASES_MANAGEMENT_SYSTEMS',
-    },
-    { labelKey: 'taxonomy.skills.type.codeEditors', value: 'CODE_EDITORS' },
-    { labelKey: 'taxonomy.skills.type.techniques', value: 'TECHNIQUES' },
-    { labelKey: 'taxonomy.skills.type.methodologies', value: 'METHODOLOGIES' },
-    { labelKey: 'taxonomy.skills.type.objectNotations', value: 'OBJECT_NOTATIONS' },
-    { labelKey: 'taxonomy.skills.type.packageManagers', value: 'PACKAGE_MANAGERS' },
-    { labelKey: 'taxonomy.skills.type.packages', value: 'PACKAGES' },
-    {
-      labelKey: 'taxonomy.skills.type.versioningPlatforms',
-      value: 'VERSIONING_PLATFORMS',
-    },
-    {
-      labelKey: 'taxonomy.skills.type.cloudHostingPlatforms',
-      value: 'CLOUD_HOSTING_PLATFORMS',
-    },
-    { labelKey: 'taxonomy.skills.type.deploymentTools', value: 'DEPLOYMENT_TOOLS' },
-    {
-      labelKey: 'taxonomy.skills.type.developmentPlatforms',
-      value: 'DEVELOPMENT_PLATFORMS',
-    },
-    { labelKey: 'taxonomy.skills.type.protocols', value: 'PROTOCOLS' },
-    { labelKey: 'taxonomy.skills.type.others', value: 'OTHERS' },
-  ];
+export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilterValue>[] = [
+  { labelKey: 'taxonomy.skills.type.all', value: 'ALL' },
+  {
+    labelKey: 'taxonomy.skills.type.programmingLanguages',
+    value: 'PROGRAMMING_LANGUAGES',
+  },
+  { labelKey: 'taxonomy.skills.type.webLanguages', value: 'WEB_LANGUAGES' },
+  { labelKey: 'taxonomy.skills.type.libraries', value: 'LIBRARIES' },
+  { labelKey: 'taxonomy.skills.type.frameworks', value: 'FRAMEWORKS' },
+  {
+    labelKey: 'taxonomy.skills.type.relationalDataBases',
+    value: 'RELATIONAL_DATA_BASES',
+  },
+  {
+    labelKey: 'taxonomy.skills.type.nonRelationalDataBases',
+    value: 'NON_RELATIONAL_DATA_BASES',
+  },
+  {
+    labelKey: 'taxonomy.skills.type.databasesManagementSystems',
+    value: 'DATABASES_MANAGEMENT_SYSTEMS',
+  },
+  { labelKey: 'taxonomy.skills.type.codeEditors', value: 'CODE_EDITORS' },
+  { labelKey: 'taxonomy.skills.type.techniques', value: 'TECHNIQUES' },
+  { labelKey: 'taxonomy.skills.type.methodologies', value: 'METHODOLOGIES' },
+  { labelKey: 'taxonomy.skills.type.objectNotations', value: 'OBJECT_NOTATIONS' },
+  { labelKey: 'taxonomy.skills.type.packageManagers', value: 'PACKAGE_MANAGERS' },
+  { labelKey: 'taxonomy.skills.type.packages', value: 'PACKAGES' },
+  {
+    labelKey: 'taxonomy.skills.type.versioningPlatforms',
+    value: 'VERSIONING_PLATFORMS',
+  },
+  {
+    labelKey: 'taxonomy.skills.type.cloudHostingPlatforms',
+    value: 'CLOUD_HOSTING_PLATFORMS',
+  },
+  { labelKey: 'taxonomy.skills.type.deploymentTools', value: 'DEPLOYMENT_TOOLS' },
+  {
+    labelKey: 'taxonomy.skills.type.developmentPlatforms',
+    value: 'DEVELOPMENT_PLATFORMS',
+  },
+  { labelKey: 'taxonomy.skills.type.protocols', value: 'PROTOCOLS' },
+  { labelKey: 'taxonomy.skills.type.others', value: 'OTHERS' },
+];
 
 export const SKILL_FALLBACK_LABEL_KEYS = {
   uncategorized: 'taxonomy.skills.fallback.uncategorized',
@@ -263,13 +255,12 @@ export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   STUDYING: 'taxonomy.skills.frequency.studying',
 };
 
-export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> =
-  {
-    PROFESSIONAL: 'taxonomy.skills.context.professional',
-    PERSONAL: 'taxonomy.skills.context.personal',
-    ACADEMIC: 'taxonomy.skills.context.academic',
-    STUDY: 'taxonomy.skills.context.study',
-  };
+export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> = {
+  PROFESSIONAL: 'taxonomy.skills.context.professional',
+  PERSONAL: 'taxonomy.skills.context.personal',
+  ACADEMIC: 'taxonomy.skills.context.academic',
+  STUDY: 'taxonomy.skills.context.study',
+};
 
 export const SKILL_GROUP_TONES: Record<string, ContainerTone> = {
   FRAMEWORK: 'primary',
@@ -393,7 +384,7 @@ export interface StaticSkillCardConfig {
 export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
   {
     id: 'education-information-systems',
-    slug: 'information-systems',
+    slug: 'puc-graduation',
     kind: 'education',
     nameKey: 'pages.skills.education.informationSystems.title',
     subtitleKey: 'pages.skills.education.informationSystems.institution',
@@ -406,7 +397,7 @@ export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
   },
   {
     id: 'education-fullstack-web-development',
-    slug: 'fullstack-web-development',
+    slug: 'puc-post-graduation',
     kind: 'education',
     nameKey: 'pages.skills.education.fullStackWeb.title',
     subtitleKey: 'pages.skills.education.fullStackWeb.institution',
@@ -419,7 +410,7 @@ export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
   },
   {
     id: 'education-angular-node',
-    slug: 'angular-node-programmer',
+    slug: 'course-angular-node',
     kind: 'education',
     nameKey: 'pages.skills.education.angularNode.title',
     subtitleKey: 'pages.skills.education.angularNode.institution',

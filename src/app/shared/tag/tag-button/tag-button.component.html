@@ -1,4 +1,14 @@
-<button type="button" class="tag-button" (click)="requestSelection($event)">
+@if (interactive()) {
+  <button type="button" class="tag-button" (click)="requestSelection($event)">
+    <ng-container *ngTemplateOutlet="tagContent" />
+  </button>
+} @else {
+  <span class="tag-button-static">
+    <ng-container *ngTemplateOutlet="tagContent" />
+  </span>
+}
+
+<ng-template #tagContent>
   <hans-tag
     [attr.label]="tag().label"
     [attr.image-src]="tag().image?.src ?? null"
@@ -7,4 +17,4 @@
     [attr.tagColor]="tagColor()"
     [attr.tagSize]="'sm'"
   ></hans-tag>
-</button>
+</ng-template>
