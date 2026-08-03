@@ -7,6 +7,7 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 IMPLEMENTAÇÕES:
 -Criar componente de message na lib pra padronizar mensagens em containers para caso filtros vazios ou erros de api, etc. Aplicar esse novo componente padronizado aqui no portfolio em todos os locais possíveis/necessários. Arrumar cores da mensagem de resultados vazios/carregando/erro dos filtros e operações.
+-Ajustar os loadings dos elementos dos modais (charts, progress bar, informations) e os loadings das mensagens também.
 -Colocar scroll nas sessões de education e languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
 -Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Na tela de Home, os Cards de heroMetrics de technologies e projects também deveriam ser uma conta, assim como years of experience, não hardcoded.
