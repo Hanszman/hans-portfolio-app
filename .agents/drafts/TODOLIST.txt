@@ -526,3 +526,4 @@ No modal de experiences, como vc pode ver no print 3, deixe como já está a org
 Nos modais de education e de projects, também aumente o tamanho dos modais para large e acrescente o component de carroussel da hans-lib contendo as imagens vinculadas àquela entidade. Faça isso apenas se houverem imagens vinculadas a essa entidade desse modal, dinamicamente. Então, se não houverem imagens naquele item/modal, os modais devem ficar ambos (education e projects) com o tamanho que estão atualmente.
 Para cada tipo de modal, crie um component de abstração em shared, igual já fizemos anteriormente pro technology modal.
 Lembrando que devemos sempre manter os padrões que já temos documentados no projeto do portfolio e da lib (no agents.md, readme.md, planejamentos, skills, etc). Te dou acesso ao workspace da lib para alterá-lo (hans-ui-design-lib).
+Crie esse planejamento em formato md na pasta .agents/plans por favor.
