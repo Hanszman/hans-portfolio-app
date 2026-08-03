@@ -523,3 +523,11 @@ Nos modais de education e de projects, também aumente o tamanho dos modais para
 Para cada tipo de modal, crie um component de abstração em shared, igual já fizemos anteriormente pro technology modal.
 Lembrando que devemos sempre manter os padrões que já temos documentados no projeto do portfolio e da lib (no agents.md, readme.md, planejamentos, skills, etc). Te dou acesso ao workspace da lib para alterá-lo (hans-ui-design-lib).
 Crie esse planejamento em formato md na pasta .agents/plans por favor.
+-Beleza, ficou ótimo, Obrigado! Porém ainda temos algumas correções a fazer:
+No modal de technology, como vc pode ver no print 1, o título do chart no modal está duplicado, deixe apenas um por favor.
+Como vc pode ver no print 2, também no modal de technology, ficou muito espaço em branco abaixo do radar chart, nesse caso, talvez seja melhor colocar o usage frequency abaixo do radar chart, mantendo ele lado a lado com o Knowledge level, pra aproveitarmos o espaço do modal de technology.
+Em todos os modais, como vc pode ver no print 3, temos um bugzinho que exibe sempre o modal que abrimos anteriormente, ao abrirmos um novo. Então se não atualizamos a tela, ele fica sempre acumulando os modais que abrimos anteriormente. Como vc pode ver, abri o modal de angular duas vezes e ele agora está com conteúdo duplicado. E se eu abrisse um modal do React, de algum project ou formation, ele iria acumular todos esses conteúdos. Por isso, sempre que fecharmos um modal ou abrirmos outro, o conteúdo anterior deve ser limpado.
+No modal de project, como vc pode ver no print 4, podemos passar a sessão de links e referencias para o lado direito, abaixo do carroussel, pois acredito que o conteúdo vai ficar melhor distribuído assim.
+Reparei também que no modal de formations por exemplo, como pode ver no print 5, o carroussel foi exibido, mas com uma imagem do tipo icon. Todos esses carroussels só podem exibir imagem do tipo screenshoot. Se houver algum screeshoot, exibe o carroussel, se não, oculta ele e ativa o modo menor do modal.
+Coloque o estado de loading na lib com mdx/stories no progress bar também, assim como fizemos pros outros componentes.
+Faça essas correções todas por favor, respeitando nossos padrões dos dois projetos (portfolio e lib).
