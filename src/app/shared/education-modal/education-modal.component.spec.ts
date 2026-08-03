@@ -36,6 +36,14 @@ describe('EducationModalComponent', () => {
     expect(fixture.nativeElement.querySelector('hans-carousel')).toBeNull();
   });
 
+  it('uses the compact size before an education item is provided', () => {
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
+      'small',
+    );
+  });
+
   it('emits close requests', () => {
     fixture.componentRef.setInput('item', item);
     fixture.detectChanges();

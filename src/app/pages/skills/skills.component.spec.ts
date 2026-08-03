@@ -506,19 +506,20 @@ describe('SkillsComponent', () => {
       openSkillDetails: (skill: unknown) => void;
       closeSkillDetails: () => void;
       selectedEducation: () => { title: string } | null;
-      isEducationModalOpen: () => boolean;
     };
 
     const skill = component.educationCards()[0];
     component.openSkillDetails(skill);
+    fixture.detectChanges();
 
     expect(component.selectedEducation()?.title).toBe('Information Systems');
-    expect(component.isEducationModalOpen()).toBeTrue();
+    expect(fixture.nativeElement.querySelectorAll('app-education-modal').length).toBe(1);
 
     component.closeSkillDetails();
+    fixture.detectChanges();
 
     expect(component.selectedEducation()).toBeNull();
-    expect(component.isEducationModalOpen()).toBeFalse();
+    expect(fixture.nativeElement.querySelector('app-education-modal')).toBeNull();
   });
 
   it('should open the correct modal with public formation and language records', () => {

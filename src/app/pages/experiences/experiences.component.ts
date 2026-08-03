@@ -63,9 +63,6 @@ export class ExperiencesComponent {
     ),
   );
 
-  protected readonly isDetailOpen = computed(() => this.selectedExperience() !== null);
-  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
-  protected readonly isCustomerDetailOpen = computed(() => this.selectedCustomer() !== null);
   protected readonly selectedCustomerDetails = computed<readonly TagModalDetail[]>(() => {
     const customer = this.selectedCustomer();
 

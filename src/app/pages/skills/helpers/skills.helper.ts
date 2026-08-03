@@ -506,7 +506,7 @@ export const mapFormationToEducationModal = (
   const galleryItems = (formation.imageAssets ?? [])
     .flatMap(({ imageAsset, sortOrder }) => {
       const filePath = imageAsset?.filePath;
-      return filePath
+      return imageAsset?.kind === 'SCREENSHOT' && filePath
         ? [{ imageAsset: { ...imageAsset, filePath }, sortOrder: sortOrder ?? 0 }]
         : [];
     })

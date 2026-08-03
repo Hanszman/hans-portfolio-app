@@ -134,10 +134,6 @@ export class SkillsComponent {
 
   protected readonly technologyCount = computed(() => String(this.technologyCards().length));
 
-  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
-  protected readonly isEducationModalOpen = computed(() => this.selectedEducation() !== null);
-  protected readonly isLanguageModalOpen = computed(() => this.selectedLanguage() !== null);
-
   constructor() {
     this.technologiesService
       .getTechnologies()

@@ -133,21 +133,20 @@
     </section>
   </section>
 
-  <app-technology-modal
-    [isOpen]="isTechnologyModalOpen()"
-    [technology]="selectedTechnology()"
-    (closed)="closeSkillDetails()"
-  />
-
-  <app-education-modal
-    [isOpen]="isEducationModalOpen()"
-    [item]="selectedEducation()"
-    (closed)="closeSkillDetails()"
-  />
-
-  <app-spoken-language-modal
-    [isOpen]="isLanguageModalOpen()"
-    [item]="selectedLanguage()"
-    (closed)="closeSkillDetails()"
-  />
 </app-wrapper>
+
+@if (selectedTechnology(); as technology) {
+  <app-technology-modal
+    [isOpen]="true"
+    [technology]="technology"
+    (closed)="closeSkillDetails()"
+  />
+}
+
+@if (selectedEducation(); as education) {
+  <app-education-modal [isOpen]="true" [item]="education" (closed)="closeSkillDetails()" />
+}
+
+@if (selectedLanguage(); as language) {
+  <app-spoken-language-modal [isOpen]="true" [item]="language" (closed)="closeSkillDetails()" />
+}

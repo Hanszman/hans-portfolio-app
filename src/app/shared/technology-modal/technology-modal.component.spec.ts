@@ -57,7 +57,11 @@ describe('TechnologyModalComponent', () => {
     expect(progressBars[0].valueLabel).toBe('Advanced');
     expect(progressBars[1].label).toBe('Usage frequency');
     expect(progressBars[1].valueLabel).toBe('Frequent');
-    expect(fixture.nativeElement.querySelector('hans-chart')).toBeTruthy();
+    const chart = fixture.nativeElement.querySelector('hans-chart');
+    expect(chart).toBeTruthy();
+    expect(chart.getAttribute('title')).toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('.technology-modal-radar > h2')).toHaveSize(1);
+    expect(fixture.nativeElement.querySelector('.technology-modal-progress')).toBeTruthy();
   });
 
   it('should enrich the selected technology with backend catalog data when opened', () => {

@@ -88,9 +88,6 @@ export class ProjectsComponent {
 
   protected readonly filteredCountLabel = computed(() => String(this.visibleProjectCases().length));
 
-  protected readonly isDetailOpen = computed(() => this.selectedProject() !== null);
-  protected readonly isTechnologyModalOpen = computed(() => this.selectedTechnology() !== null);
-
   constructor() {
     this.projectsService
       .getProjects()

@@ -25,7 +25,22 @@
             </div>
           }
         </dl>
+      </section>
 
+      <section class="technology-modal-radar" [attr.aria-label]="radarSummary()">
+        <h2>{{ 'pages.skills.detail.contextExperience' | translate }}</h2>
+        <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
+        <hans-chart
+          chartType="radar"
+          [series]="radarSeries()"
+          [radarIndicators]="radarIndicators()"
+          [radarValueFormatter]="formatRadarValue"
+          [showLegend]="false"
+          [height]="380"
+        ></hans-chart>
+      </section>
+
+      <section class="technology-modal-progress">
         @if (levelProgress(); as progress) {
           <hans-progress-bar
             [value]="progress.value"
@@ -42,20 +57,6 @@
             [attr.progressColor]="progress.color"
           ></hans-progress-bar>
         }
-      </section>
-
-      <section class="technology-modal-radar" [attr.aria-label]="radarSummary()">
-        <h2>{{ 'pages.skills.detail.contextExperience' | translate }}</h2>
-        <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
-        <hans-chart
-          chartType="radar"
-          [series]="radarSeries()"
-          [radarIndicators]="radarIndicators()"
-          [radarValueFormatter]="formatRadarValue"
-          [showLegend]="false"
-          [height]="380"
-          [title]="'pages.skills.detail.contextExperience' | translate"
-        ></hans-chart>
       </section>
     </article>
   }

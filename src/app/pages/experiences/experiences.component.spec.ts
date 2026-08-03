@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -14,12 +11,7 @@ import { ExperiencesComponent } from './experiences.component';
 
 describe('ExperiencesComponent', () => {
   beforeAll(() => {
-    const elementNames = [
-      'hans-icon',
-      'hans-tag',
-      'hans-button',
-      'hans-modal',
-    ];
+    const elementNames = ['hans-icon', 'hans-tag', 'hans-button', 'hans-modal'];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -75,7 +67,6 @@ describe('ExperiencesComponent', () => {
       timelineItems: () => readonly [{ id: string }];
       openExperienceDetails: (item: { id: string }) => void;
       selectedExperience: () => { projects: readonly [{ title: string }] } | null;
-      isDetailOpen: () => boolean;
     };
 
     component.openExperienceDetails(component.timelineItems()[0]);
@@ -84,7 +75,6 @@ describe('ExperiencesComponent', () => {
     expect(component.selectedExperience()?.projects[0]?.title).toBe(
       'Customer & Dealer Transformation App',
     );
-    expect(component.isDetailOpen()).toBeTrue();
   });
 
   it('should render localized experience labels in Portuguese', () => {
@@ -134,9 +124,7 @@ describe('ExperiencesComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain(
-      'No published experience chapters were returned yet.',
-    );
+    expect(compiled.textContent).toContain('No published experience chapters were returned yet.');
 
     fixture.destroy();
 
@@ -174,12 +162,10 @@ describe('ExperiencesComponent', () => {
       openExperienceDetails: (item: { id: string }) => void;
       closeExperienceDetails: () => void;
       selectedExperience: () => { id: string } | null;
-      isDetailOpen: () => boolean;
       isSelectedExperience: (experienceId: string) => boolean;
       openTechnologyDetails: (technology: { slug: string; name: string }) => void;
       closeTechnologyDetails: () => void;
       selectedTechnology: () => { slug: string } | null;
-      isTechnologyModalOpen: () => boolean;
       openCustomerDetails: (customer: {
         name: string;
         companyName: string;
@@ -188,31 +174,30 @@ describe('ExperiencesComponent', () => {
       closeCustomerDetails: () => void;
       selectedCustomer: () => { name: string } | null;
       selectedCustomerDetails: () => readonly [{ value: string | number }];
-      isCustomerDetailOpen: () => boolean;
     };
 
     const item = component.timelineItems()[0];
     component.openExperienceDetails(item);
+    fixture.detectChanges();
 
     expect(component.selectedExperience()).toEqual(item);
-    expect(component.isDetailOpen()).toBeTrue();
     expect(component.isSelectedExperience(item.id)).toBeTrue();
+    expect(fixture.nativeElement.querySelectorAll('app-experience-modal').length).toBe(1);
 
     component.closeExperienceDetails();
+    fixture.detectChanges();
 
     expect(component.selectedExperience()).toBeNull();
-    expect(component.isDetailOpen()).toBeFalse();
     expect(component.isSelectedExperience(item.id)).toBeFalse();
+    expect(fixture.nativeElement.querySelector('app-experience-modal')).toBeNull();
 
     component.openTechnologyDetails({ slug: 'angular', name: 'Angular' });
 
     expect(component.selectedTechnology()?.slug).toBe('angular');
-    expect(component.isTechnologyModalOpen()).toBeTrue();
 
     component.closeTechnologyDetails();
 
     expect(component.selectedTechnology()).toBeNull();
-    expect(component.isTechnologyModalOpen()).toBeFalse();
 
     component.openCustomerDetails({
       name: 'Ford',
@@ -222,11 +207,10 @@ describe('ExperiencesComponent', () => {
 
     expect(component.selectedCustomer()?.name).toBe('Ford');
     expect(component.selectedCustomerDetails()[0].value).toBe('Stefanini Group');
-    expect(component.isCustomerDetailOpen()).toBeTrue();
 
     component.closeCustomerDetails();
 
     expect(component.selectedCustomer()).toBeNull();
-    expect(component.isCustomerDetailOpen()).toBeFalse();
+    expect(component.selectedCustomerDetails()).toEqual([]);
   });
 });

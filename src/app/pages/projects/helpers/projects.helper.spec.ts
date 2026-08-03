@@ -248,6 +248,17 @@ describe('projects helper', () => {
               filePath: '',
             },
           },
+          {
+            ...createProjectsCollectionResponse().data[0].imageAssets[0],
+            imageAssetId: 'project-icon',
+            sortOrder: 4,
+            imageAsset: {
+              ...createProjectsCollectionResponse().data[0].imageAssets[0].imageAsset,
+              id: 'project-icon',
+              filePath: '/assets/img/projects/icon.png',
+              kind: 'ICON',
+            },
+          },
         ],
         links: [
           {
@@ -273,6 +284,7 @@ describe('projects helper', () => {
     });
     expect(card.imageUrl).toContain('/assets/img/projects/first-image.png');
     expect(card.imageAlt).toBe("Github's API Consumer");
+    expect(card.galleryItems.some(({ id }) => id === 'project-icon')).toBeFalse();
   });
 
   it('should fallback gallery alt text and keep descriptions undefined when captions are not available', () => {

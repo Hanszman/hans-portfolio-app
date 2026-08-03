@@ -155,11 +155,21 @@ describe('skills helper', () => {
         imageAssets: [
           {
             sortOrder: 2,
-            imageAsset: { id: 'second', fileName: 'second.png', filePath: '/second.png' },
+            imageAsset: {
+              id: 'second',
+              fileName: 'second.png',
+              filePath: '/second.png',
+              kind: 'SCREENSHOT',
+            },
           },
           {
             sortOrder: 3,
-            imageAsset: { id: 'second-copy', fileName: 'second.png', filePath: '/second.png' },
+            imageAsset: {
+              id: 'second-copy',
+              fileName: 'second.png',
+              filePath: '/second.png',
+              kind: 'SCREENSHOT',
+            },
           },
           {
             sortOrder: 1,
@@ -167,7 +177,17 @@ describe('skills helper', () => {
               id: 'first',
               fileName: 'first.png',
               filePath: '/first.png',
+              kind: 'SCREENSHOT',
               altEs: 'Primera imagen',
+            },
+          },
+          {
+            sortOrder: 0,
+            imageAsset: {
+              id: 'icon',
+              fileName: 'icon.png',
+              filePath: '/icon.png',
+              kind: 'ICON',
             },
           },
           { sortOrder: 0, imageAsset: null },
@@ -242,6 +262,7 @@ describe('skills helper', () => {
               id: 'sparse-asset',
               fileName: null,
               filePath: '/sparse.png',
+              kind: 'SCREENSHOT',
               altPt: null,
               altEn: null,
               altEs: null,

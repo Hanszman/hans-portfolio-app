@@ -45,9 +45,7 @@ import { HomeStackChipsComponent } from './components/home-stack-chips/home-stac
 export class HomeComponent {
   private readonly dashboardService = inject(DashboardService);
   private readonly translationService = inject(TranslationService);
-  private readonly dashboardSignal = signal<DashboardOverviewResponse | null>(
-    null,
-  );
+  private readonly dashboardSignal = signal<DashboardOverviewResponse | null>(null);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
 
   protected readonly hero = HOME_HERO;
@@ -56,72 +54,62 @@ export class HomeComponent {
   protected readonly hasError = signal(false);
   protected readonly dashboard = this.dashboardSignal.asReadonly();
   protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
-  protected readonly isTechnologyModalOpen = computed(
-    () => this.selectedTechnology() !== null,
-  );
+  protected readonly heroMetrics = computed<readonly HomeMetricViewModel[]>(() => {
+    const summary = this.dashboard()?.summary;
 
-  protected readonly heroMetrics = computed<readonly HomeMetricViewModel[]>(
-    () => {
-      const summary = this.dashboard()?.summary;
+    return [
+      {
+        value: `${this.calculateCareerYears()}+`,
+        labelKey: 'pages.home.metrics.years.label',
+        descriptionKey: 'pages.home.metrics.years.description',
+        iconName: 'LuBadgeCheck',
+      },
+      {
+        value: this.formatCount(summary?.technologies, '60+'),
+        labelKey: 'pages.home.metrics.technologies.label',
+        descriptionKey: 'pages.home.metrics.technologies.description',
+        iconName: 'LuCpu',
+      },
+      {
+        value: this.formatCount(summary?.projects, '13+'),
+        labelKey: 'pages.home.metrics.projects.label',
+        descriptionKey: 'pages.home.metrics.projects.description',
+        iconName: 'LuFolderKanban',
+      },
+    ];
+  });
 
-      return [
-        {
-          value: `${this.calculateCareerYears()}+`,
-          labelKey: 'pages.home.metrics.years.label',
-          descriptionKey: 'pages.home.metrics.years.description',
-          iconName: 'LuBadgeCheck',
-        },
-        {
-          value: this.formatCount(summary?.technologies, '60+'),
-          labelKey: 'pages.home.metrics.technologies.label',
-          descriptionKey: 'pages.home.metrics.technologies.description',
-          iconName: 'LuCpu',
-        },
-        {
-          value: this.formatCount(summary?.projects, '13+'),
-          labelKey: 'pages.home.metrics.projects.label',
-          descriptionKey: 'pages.home.metrics.projects.description',
-          iconName: 'LuFolderKanban',
-        },
-      ];
-    },
-  );
+  protected readonly topTechnologyChips = computed<readonly HomeStackChipViewModel[]>(() =>
+    (this.dashboard()?.technologyUsage.topTechnologies ?? []).slice(0, 8).map((technology) => {
+      const imageSrc = resolveSkillVisualUrl(technology.slug);
+      const stackKey = resolveSkillStackKey(technology);
+      const typeKey = resolveSkillTypeKey(technology);
+      const locale = this.translationService.locale();
 
-  protected readonly topTechnologyChips = computed<
-    readonly HomeStackChipViewModel[]
-  >(() =>
-    (this.dashboard()?.technologyUsage.topTechnologies ?? [])
-      .slice(0, 8)
-      .map((technology) => {
-        const imageSrc = resolveSkillVisualUrl(technology.slug);
-        const stackKey = resolveSkillStackKey(technology);
-        const typeKey = resolveSkillTypeKey(technology);
-        const locale = this.translationService.locale();
-
-        return {
+      return {
+        slug: technology.slug,
+        label: technology.name,
+        image: imageSrc
+          ? {
+              src: imageSrc,
+              alt: `${technology.name} icon`,
+            }
+          : null,
+        value: {
           slug: technology.slug,
-          label: technology.name,
+          name: technology.name,
+          category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
+          stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
+          projectCount: technology.usageCount,
           image: imageSrc
             ? {
                 src: imageSrc,
                 alt: `${technology.name} icon`,
               }
             : null,
-          value: {
-            slug: technology.slug,
-            name: technology.name,
-            category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
-            stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
-            projectCount: technology.usageCount,
-            image: imageSrc
-              ? {
-                  src: imageSrc,
-                  alt: `${technology.name} icon`,
-                }
-              : null,
-          },
-        };
-      }),
+        },
+      };
+    }),
   );
 
   constructor() {
@@ -147,10 +135,8 @@ export class HomeComponent {
   }
 
   private calculateCareerYears(referenceDate = new Date()): number {
-    const yearDiff =
-      referenceDate.getUTCFullYear() - CAREER_START_DATE.getUTCFullYear();
-    const monthDiff =
-      referenceDate.getUTCMonth() - CAREER_START_DATE.getUTCMonth();
+    const yearDiff = referenceDate.getUTCFullYear() - CAREER_START_DATE.getUTCFullYear();
+    const monthDiff = referenceDate.getUTCMonth() - CAREER_START_DATE.getUTCMonth();
     const dayDiff = referenceDate.getUTCDate() - CAREER_START_DATE.getUTCDate();
 
     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {

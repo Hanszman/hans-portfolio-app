@@ -7,7 +7,8 @@
 .project-modal-section,
 .project-modal-stack,
 .project-modal-stack-group,
-.project-modal-links {
+.project-modal-links,
+.project-modal-aside {
   @apply grid gap-4;
 }
 
@@ -74,6 +75,7 @@
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
+.project-modal-aside,
 .project-modal-gallery {
   @apply min-w-0 self-start;
 }

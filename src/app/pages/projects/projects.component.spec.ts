@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -143,9 +140,7 @@ describe('ProjectsComponent', () => {
     component.updateSearchTerm('portfolio');
     fixture.detectChanges();
 
-    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
-      'Portfolio',
-    ]);
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual(['Portfolio']);
   });
 
   it('should render empty and error states from the projects request', () => {
@@ -187,9 +182,7 @@ describe('ProjectsComponent', () => {
     });
     errorFixture.detectChanges();
 
-    expect(errorCompiled.textContent).toContain(
-      'The projects endpoint is unavailable right now.',
-    );
+    expect(errorCompiled.textContent).toContain('The projects endpoint is unavailable right now.');
   });
 
   it('should open and close the project detail modal state', () => {
@@ -208,30 +201,28 @@ describe('ProjectsComponent', () => {
       closeTechnologyDetails: () => void;
       selectedProject: () => ProjectCaseViewModel | null;
       selectedTechnology: () => { slug: string; name: string } | null;
-      isDetailOpen: () => boolean;
-      isTechnologyModalOpen: () => boolean;
     };
 
     const project = component.projectCases()[0];
     component.openProjectDetails(project);
+    fixture.detectChanges();
 
     expect(component.selectedProject()).toEqual(project);
-    expect(component.isDetailOpen()).toBeTrue();
+    expect(fixture.nativeElement.querySelectorAll('app-project-modal').length).toBe(1);
 
     component.closeProjectDetails();
+    fixture.detectChanges();
 
     expect(component.selectedProject()).toBeNull();
-    expect(component.isDetailOpen()).toBeFalse();
+    expect(fixture.nativeElement.querySelector('app-project-modal')).toBeNull();
 
     component.openTechnologyDetails({ slug: 'angular', name: 'Angular' });
 
     expect(component.selectedTechnology()?.name).toBe('Angular');
-    expect(component.isTechnologyModalOpen()).toBeTrue();
 
     component.closeTechnologyDetails();
 
     expect(component.selectedTechnology()).toBeNull();
-    expect(component.isTechnologyModalOpen()).toBeFalse();
   });
 
   it('should update project search from hans-input value events', () => {
@@ -261,9 +252,7 @@ describe('ProjectsComponent', () => {
 
     component.updateSearchTerm('hard');
 
-    expect(component.visibleProjectCases().map((project) => project.title)).toEqual([
-      'HardWorker',
-    ]);
+    expect(component.visibleProjectCases().map((project) => project.title)).toEqual(['HardWorker']);
 
     component.updateSearchTerm('');
 
@@ -294,5 +283,4 @@ describe('ProjectsComponent', () => {
       "Github's API Consumer",
     ]);
   });
-
 });

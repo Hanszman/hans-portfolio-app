@@ -53,8 +53,16 @@
   @apply sr-only;
 }
 
+.technology-modal-progress {
+  @apply col-span-2 grid grid-cols-2 gap-6;
+}
+
 @media (max-width: 48rem) {
   .technology-modal {
     @apply grid-cols-1;
+  }
+
+  .technology-modal-progress {
+    @apply col-span-1 grid-cols-1;
   }
 }

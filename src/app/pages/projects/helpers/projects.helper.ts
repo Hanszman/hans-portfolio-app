@@ -303,7 +303,7 @@ export const mapProjectToCaseCard = (
     galleryItems: [...project.imageAssets]
       .sort((left, right) => left.sortOrder - right.sortOrder)
       .filter(({ imageAsset }, index, relations) => {
-        if (!imageAsset.filePath) return false;
+        if (imageAsset.kind !== 'SCREENSHOT' || !imageAsset.filePath) return false;
         return (
           relations.findIndex(
             ({ imageAsset: candidate }) =>

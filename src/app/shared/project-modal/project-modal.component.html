@@ -58,7 +58,7 @@
           </div>
         </section>
 
-        @if (currentProject.links.length > 0) {
+        @if (currentProject.galleryItems.length === 0 && currentProject.links.length > 0) {
           <section class="project-modal-section">
             <h3>{{ 'pages.projects.card.links' | translate }}</h3>
             <div class="project-modal-links">
@@ -74,17 +74,33 @@
       </div>
 
       @if (currentProject.galleryItems.length > 0) {
-        <section class="project-modal-gallery">
-          <h2>{{ 'pages.projects.detail.gallery' | translate }}</h2>
-          <hans-carousel
-            [items]="currentProject.galleryItems"
-            [visibleItemsCount]="1"
-            [infiniteLoop]="currentProject.galleryItems.length > 1"
-            carouselId="project-detail-gallery"
-            carouselColor="primary"
-            [emptyText]="'pages.projects.detail.emptyGallery' | translate"
-          ></hans-carousel>
-        </section>
+        <aside class="project-modal-aside">
+          <section class="project-modal-gallery">
+            <h2>{{ 'pages.projects.detail.gallery' | translate }}</h2>
+            <hans-carousel
+              [items]="currentProject.galleryItems"
+              [visibleItemsCount]="1"
+              [infiniteLoop]="currentProject.galleryItems.length > 1"
+              carouselId="project-detail-gallery"
+              carouselColor="primary"
+              [emptyText]="'pages.projects.detail.emptyGallery' | translate"
+            ></hans-carousel>
+          </section>
+
+          @if (currentProject.links.length > 0) {
+            <section class="project-modal-section">
+              <h3>{{ 'pages.projects.card.links' | translate }}</h3>
+              <div class="project-modal-links">
+                @for (link of currentProject.links; track link.id) {
+                  <a [href]="link.url" target="_blank" rel="noreferrer">
+                    <strong>{{ link.label }}</strong>
+                    <span>{{ link.typeLabel }}</span>
+                  </a>
+                }
+              </div>
+            </section>
+          }
+        </aside>
       }
     </div>
   }

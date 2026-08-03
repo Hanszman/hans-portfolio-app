@@ -28,26 +28,32 @@
       </div>
     }
   </section>
+</app-wrapper>
 
+@if (selectedExperience(); as experience) {
   <app-experience-modal
-    [isOpen]="isDetailOpen()"
-    [item]="selectedExperience()"
+    [isOpen]="true"
+    [item]="experience"
     (closed)="closeExperienceDetails()"
     (openTechnology)="openTechnologyDetails($event)"
   />
+}
 
+@if (selectedTechnology(); as technology) {
   <app-technology-modal
-    [isOpen]="isTechnologyModalOpen()"
-    [technology]="selectedTechnology()"
+    [isOpen]="true"
+    [technology]="technology"
     (closed)="closeTechnologyDetails()"
   />
+}
 
+@if (selectedCustomer(); as customer) {
   <app-tag-modal
-    [isOpen]="isCustomerDetailOpen()"
-    [title]="selectedCustomer()?.name ?? ''"
-    [subtitle]="selectedCustomer()?.companyName ?? ''"
-    [image]="selectedCustomer()?.image ?? null"
+    [isOpen]="true"
+    [title]="customer.name"
+    [subtitle]="customer.companyName"
+    [image]="customer.image"
     [details]="selectedCustomerDetails()"
     (closed)="closeCustomerDetails()"
   />
-</app-wrapper>
+}

@@ -19,7 +19,6 @@ interface HomeComponentTestHook {
   openTechnologyDetails(technology: { slug: string; name: string }): void;
   closeTechnologyDetails(): void;
   selectedTechnology(): { slug: string; name: string } | null;
-  isTechnologyModalOpen(): boolean;
   formatCount(value: number | undefined, fallback: string): string;
   calculateCareerYears(referenceDate?: Date): number;
 }
@@ -258,7 +257,6 @@ describe('HomeComponent', () => {
     component.openTechnologyDetails(chip.value);
 
     expect(component.selectedTechnology()?.name).toBe(chip.value.name);
-    expect(component.isTechnologyModalOpen()).toBeTrue();
 
     component.closeTechnologyDetails();
 

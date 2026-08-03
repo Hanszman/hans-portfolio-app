@@ -44,6 +44,12 @@ describe('ProjectModalComponent', () => {
       'large',
     );
     expect(fixture.nativeElement.querySelector('hans-carousel')).toBeTruthy();
+    expect(
+      fixture.nativeElement.querySelector('.project-modal-aside .project-modal-links'),
+    ).toBeTruthy();
+    expect(
+      fixture.nativeElement.querySelector('.project-modal-content .project-modal-links'),
+    ).toBeNull();
 
     fixture.componentRef.setInput('project', { ...project, galleryItems: [] });
     fixture.detectChanges();
@@ -51,6 +57,17 @@ describe('ProjectModalComponent', () => {
       'medium',
     );
     expect(fixture.nativeElement.querySelector('hans-carousel')).toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('.project-modal-content .project-modal-links'),
+    ).toBeTruthy();
+  });
+
+  it('uses the compact size before a project is provided', () => {
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
+      'medium',
+    );
   });
 
   it('emits close and technology requests', () => {

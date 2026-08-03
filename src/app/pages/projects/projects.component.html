@@ -73,17 +73,21 @@
       </div>
     }
   </section>
+</app-wrapper>
 
+@if (selectedProject(); as project) {
   <app-project-modal
-    [isOpen]="isDetailOpen()"
-    [project]="selectedProject()"
+    [isOpen]="true"
+    [project]="project"
     (openTechnology)="openTechnologyDetails($event)"
     (closed)="closeProjectDetails()"
   ></app-project-modal>
+}
 
+@if (selectedTechnology(); as technology) {
   <app-technology-modal
-    [isOpen]="isTechnologyModalOpen()"
-    [technology]="selectedTechnology()"
+    [isOpen]="true"
+    [technology]="technology"
     (closed)="closeTechnologyDetails()"
   />
-</app-wrapper>
+}
