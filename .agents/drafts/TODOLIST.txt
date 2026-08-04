@@ -534,3 +534,4 @@ Faça essas correções todas por favor, respeitando nossos padrões dos dois pr
 -Beleza, ficou ótimo! Obrigado!
 Agora preciso que vc crie skills de criação de component e service pro hans-ui-design-lib;  skills de criação de component (diferenciando se é shared ou layout), page e service pro hans-portfolio-app; e skills de criação de controllers, services, contracts, etc pro hans-portfolio-api. Em todos eles, siga todos os padrões que descrevemos nos AGENTS.md de cada um por favor
 -Veja que ao rodar o npm run test:coverage do backend tivemos esses erros, corrija-os por favor.
+-Então por debaixo dos panos ele continua executando a criptografia de senha com o argon2 certo? outra duvida: preciso rodar o script prisma:admin:bootstrap novamente pra gerar outra senha criptografada no banco de dados a partir das minha variaveis do env? ou não tem necessidade?
