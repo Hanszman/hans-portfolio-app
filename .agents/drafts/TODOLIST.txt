@@ -7,7 +7,7 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 IMPLEMENTAÇÕES:
 -Na tela de Home, os Cards de heroMetrics de technologies e projects também deveriam ser uma conta, assim como years of experience, não hardcoded.
--Navigation Cards na tela de Home deveriam estar mais bonitos, compactos, estão meio vazios e grandes demais.
+-Navigation Cards na tela de Home deveriam estar mais bonitos, compactos, estão meio vazios e grandes demais. Ou então vamos removê-los e colocar um botão apenas pra "view more skills". Ou Vamos colocar um highlighted projects também.
 -Colocar scroll nas sessões de education e languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
 -Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
