@@ -19,7 +19,6 @@ IMPLEMENTAÇÕES:
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
 AUTOMATIZAÇÕES:
--Avaliar quais skills podemos criar pra esse projeto e o que podemos manter documentado (criação da components e services).
 -Criar pipeline ci/cd e configurar docker no projeto.
 DEPOIS:
 -Terminar de fazer alguns projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
@@ -532,3 +531,5 @@ No modal de project, como vc pode ver no print 4, podemos passar a sessão de li
 Reparei também que no modal de formations por exemplo, como pode ver no print 5, o carroussel foi exibido, mas com uma imagem do tipo icon. Todos esses carroussels só podem exibir imagem do tipo screenshoot. Se houver algum screeshoot, exibe o carroussel, se não, oculta ele e ativa o modo menor do modal.
 Coloque o estado de loading na lib com mdx/stories no progress bar também, assim como fizemos pros outros componentes.
 Faça essas correções todas por favor, respeitando nossos padrões dos dois projetos (portfolio e lib).
+-Beleza, ficou ótimo! Obrigado!
+Agora preciso que vc crie skills de criação de component e service pro hans-ui-design-lib;  skills de criação de component (diferenciando se é shared ou layout), page e service pro hans-portfolio-app; e skills de criação de controllers, services, contracts, etc pro hans-portfolio-api. Em todos eles, siga todos os padrões que descrevemos nos AGENTS.md de cada um por favor

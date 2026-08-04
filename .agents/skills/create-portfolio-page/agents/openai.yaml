@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Create Portfolio Page'
+  short_description: 'Create an Angular portfolio route page'
+  default_prompt: 'Use $create-portfolio-page to create a complete routed portfolio page.'

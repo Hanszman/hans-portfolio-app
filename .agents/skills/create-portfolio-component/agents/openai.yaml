@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Create Portfolio Component'
+  short_description: 'Create shared or layout Angular components'
+  default_prompt: 'Use $create-portfolio-component to create a standards-compliant shared or layout component.'

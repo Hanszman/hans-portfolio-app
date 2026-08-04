@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Create Portfolio Service'
+  short_description: 'Create a typed Angular domain service'
+  default_prompt: 'Use $create-portfolio-service to create a tested portfolio service and its contracts.'
