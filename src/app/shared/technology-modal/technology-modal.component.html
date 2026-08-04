@@ -10,26 +10,60 @@
   @if (resolvedTechnology(); as technology) {
     <article class="technology-modal">
       <section class="technology-modal-information">
-        @if (technology.image; as image) {
-          <img class="technology-modal-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
-        }
-        @if (technology.category) {
-          <p class="technology-modal-subtitle">{{ technology.category }}</p>
-        }
-
-        <dl class="technology-modal-details">
-          @for (detail of details(); track detail.labelKey) {
-            <div class="technology-modal-detail">
-              <dt>{{ detail.labelKey | translate }}</dt>
-              <dd>{{ detail.value }}</dd>
-            </div>
+        @if (isContentLoading()) {
+          <hans-loading
+            class="technology-modal-image-skeleton"
+            loadingType="skeleton"
+            skeletonWidth="6rem"
+            skeletonHeight="6rem"
+            ariaLabel="Loading technology image"
+          ></hans-loading>
+          <hans-loading
+            class="technology-modal-subtitle-skeleton"
+            loadingType="skeleton"
+            skeletonWidth="45%"
+            skeletonHeight="1.5rem"
+            ariaLabel="Loading technology category"
+          ></hans-loading>
+          <div class="technology-modal-details" aria-label="Loading technology information">
+            @for (placeholder of [0, 1, 2, 3]; track placeholder) {
+              <hans-loading
+                loadingType="skeleton"
+                skeletonWidth="100%"
+                skeletonHeight="5.25rem"
+                [ariaLabel]="'Loading technology information ' + (placeholder + 1)"
+              ></hans-loading>
+            }
+          </div>
+        } @else {
+          @if (technology.image; as image) {
+            <img
+              class="technology-modal-image"
+              [src]="image.src"
+              [alt]="image.alt"
+              loading="lazy"
+            />
           }
-        </dl>
+          @if (technology.category) {
+            <p class="technology-modal-subtitle">{{ technology.category }}</p>
+          }
+
+          <dl class="technology-modal-details">
+            @for (detail of details(); track detail.labelKey) {
+              <div class="technology-modal-detail">
+                <dt>{{ detail.labelKey | translate }}</dt>
+                <dd>{{ detail.value }}</dd>
+              </div>
+            }
+          </dl>
+        }
       </section>
 
       <section class="technology-modal-radar" [attr.aria-label]="radarSummary()">
         <h2>{{ 'pages.skills.detail.contextExperience' | translate }}</h2>
-        <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
+        @if (!isContentLoading()) {
+          <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
+        }
         <hans-chart
           chartType="radar"
           [series]="radarSeries()"
@@ -37,25 +71,38 @@
           [radarValueFormatter]="formatRadarValue"
           [showLegend]="false"
           [height]="380"
+          [isLoading]="isContentLoading()"
+          loadingType="skeleton"
         ></hans-chart>
       </section>
 
       <section class="technology-modal-progress">
-        @if (levelProgress(); as progress) {
+        @if (isContentLoading()) {
           <hans-progress-bar
-            [value]="progress.value"
-            [label]="progress.label"
-            [valueLabel]="progress.valueLabel"
-            [attr.progressColor]="progress.color"
+            [label]="'pages.experiences.technology.level' | translate"
+            [loading]="true"
           ></hans-progress-bar>
-        }
-        @if (frequencyProgress(); as progress) {
           <hans-progress-bar
-            [value]="progress.value"
-            [label]="progress.label"
-            [valueLabel]="progress.valueLabel"
-            [attr.progressColor]="progress.color"
+            [label]="'pages.experiences.technology.frequency' | translate"
+            [loading]="true"
           ></hans-progress-bar>
+        } @else {
+          @if (levelProgress(); as progress) {
+            <hans-progress-bar
+              [value]="progress.value"
+              [label]="progress.label"
+              [valueLabel]="progress.valueLabel"
+              [attr.progressColor]="progress.color"
+            ></hans-progress-bar>
+          }
+          @if (frequencyProgress(); as progress) {
+            <hans-progress-bar
+              [value]="progress.value"
+              [label]="progress.label"
+              [valueLabel]="progress.valueLabel"
+              [attr.progressColor]="progress.color"
+            ></hans-progress-bar>
+          }
         }
       </section>
     </article>

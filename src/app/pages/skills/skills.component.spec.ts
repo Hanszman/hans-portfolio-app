@@ -92,7 +92,8 @@ describe('SkillsComponent', () => {
     expect(compiled.textContent).toContain('Skills & Technologies');
     expect(compiled.textContent).toContain('Education');
     expect(compiled.textContent).toContain('Languages');
-    expect(compiled.textContent).toContain('Building technology groups...');
+    expect(compiled.querySelector('hans-loading')).toBeTruthy();
+    expect(compiled.textContent).not.toContain('Building technology groups...');
 
     flushTechnologiesRequest(httpTestingController);
     fixture.detectChanges();
@@ -431,9 +432,10 @@ describe('SkillsComponent', () => {
     );
     emptyFixture.detectChanges();
 
-    expect(emptyFixture.nativeElement.textContent).toContain(
-      'No published technologies matched the current filters.',
-    );
+    const emptyMessage = emptyFixture.nativeElement.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(emptyMessage.message).toBe('No published technologies matched the current filters.');
     emptyFixture.destroy();
 
     const errorFixture = TestBed.createComponent(SkillsComponent);
@@ -445,9 +447,10 @@ describe('SkillsComponent', () => {
     });
     errorFixture.detectChanges();
 
-    expect(errorFixture.nativeElement.textContent).toContain(
-      'The technologies endpoint is unavailable right now.',
-    );
+    const errorMessage = errorFixture.nativeElement.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(errorMessage.message).toBe('The technologies endpoint is unavailable right now.');
   });
 
   it('should render technologies without context metrics using the fallback ordering', () => {

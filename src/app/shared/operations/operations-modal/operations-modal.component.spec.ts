@@ -192,7 +192,6 @@ describe('OperationsModalComponent', () => {
         }
       ).isInteractionDisabled(),
     ).toBeTrue();
-
     fixture.componentRef.setInput('isLoading', false);
     fixture.componentRef.setInput('isSubmitting', true);
     fixture.detectChanges();

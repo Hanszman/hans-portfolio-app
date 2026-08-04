@@ -75,9 +75,22 @@ describe('TechnologyModalComponent', () => {
     const projectsRequest = httpTestingController.expectOne(
       buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
     );
+    const loadingChart = fixture.nativeElement.querySelector('hans-chart') as HTMLElement & {
+      isLoading: boolean;
+    };
+    const loadingProgressBars = fixture.nativeElement.querySelectorAll(
+      'hans-progress-bar',
+    ) as NodeListOf<HTMLElement & { loading: boolean }>;
+    expect(loadingChart.isLoading).toBeTrue();
+    expect(Array.from(loadingProgressBars).every((progress) => progress.loading)).toBeTrue();
     request.flush(createTechnologiesCollectionResponse());
     projectsRequest.flush(createProjectsCollectionResponse());
     fixture.detectChanges();
+
+    expect(
+      (fixture.nativeElement.querySelector('hans-chart') as HTMLElement & { isLoading: boolean })
+        .isLoading,
+    ).toBeFalse();
 
     const component = fixture.componentInstance as unknown as {
       details: () => readonly { value: string | number }[];

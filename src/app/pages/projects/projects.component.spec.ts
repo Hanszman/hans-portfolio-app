@@ -66,7 +66,8 @@ describe('ProjectsComponent', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     expect(compiled.textContent).toContain('Projects');
-    expect(compiled.textContent).toContain('Building project case studies...');
+    expect(compiled.querySelector('hans-loading')).toBeTruthy();
+    expect(compiled.textContent).not.toContain('Building project case studies...');
 
     flushProjectsRequest(httpTestingController);
     fixture.detectChanges();
@@ -166,9 +167,10 @@ describe('ProjectsComponent', () => {
     );
     emptyFixture.detectChanges();
 
-    expect(emptyCompiled.textContent).toContain(
-      'No published projects matched the current filters.',
-    );
+    const emptyMessage = emptyCompiled.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(emptyMessage.message).toBe('No published projects matched the current filters.');
 
     emptyFixture.destroy();
 
@@ -182,7 +184,10 @@ describe('ProjectsComponent', () => {
     });
     errorFixture.detectChanges();
 
-    expect(errorCompiled.textContent).toContain('The projects endpoint is unavailable right now.');
+    const errorMessage = errorCompiled.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(errorMessage.message).toBe('The projects endpoint is unavailable right now.');
   });
 
   it('should open and close the project detail modal state', () => {

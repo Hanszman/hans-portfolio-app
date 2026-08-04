@@ -1,8 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  HttpTestingController,
-  provideHttpClientTesting,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
@@ -15,9 +12,7 @@ import { DashboardComponent } from './dashboard.component';
 
 const DASHBOARD_REQUEST_URLS = {
   overview: buildApiUrl('/dashboard'),
-  projects: buildApiUrl(
-    '/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc',
-  ),
+  projects: buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
 } as const;
 
 const flushDashboardRequests = (
@@ -31,11 +26,7 @@ const flushDashboardRequests = (
 
 describe('DashboardComponent', () => {
   beforeAll(() => {
-    const elementNames = [
-      'hans-chart',
-      'hans-icon',
-      'hans-select-option',
-    ];
+    const elementNames = ['hans-chart', 'hans-icon', 'hans-select-option'];
 
     for (const elementName of elementNames) {
       if (!customElements.get(elementName)) {
@@ -116,9 +107,7 @@ describe('DashboardComponent', () => {
     ptFixture.detectChanges();
 
     expect(ptFixture.nativeElement.textContent).toContain('Dashboard analítico');
-    expect(ptFixture.nativeElement.textContent).toContain(
-      'Projetos por tipo de tecnologia',
-    );
+    expect(ptFixture.nativeElement.textContent).toContain('Projetos por tipo de tecnologia');
     ptFixture.destroy();
 
     translationService.setLocale('es-es');
@@ -128,9 +117,7 @@ describe('DashboardComponent', () => {
     esFixture.detectChanges();
 
     expect(esFixture.nativeElement.textContent).toContain('Dashboard analítico');
-    expect(esFixture.nativeElement.textContent).toContain(
-      'Proyectos por tipo de tecnología',
-    );
+    expect(esFixture.nativeElement.textContent).toContain('Proyectos por tipo de tecnología');
   });
 
   it('should render an API error state when the dashboard overview request fails', () => {
@@ -145,17 +132,14 @@ describe('DashboardComponent', () => {
       statusText: 'Server Error',
     });
 
-    const cancelledProjectsRequest = httpTestingController.match(
-      DASHBOARD_REQUEST_URLS.projects,
-    );
+    const cancelledProjectsRequest = httpTestingController.match(DASHBOARD_REQUEST_URLS.projects);
 
     fixture.detectChanges();
 
     expect(cancelledProjectsRequest.length).toBe(1);
     expect(cancelledProjectsRequest[0].cancelled).toBeTrue();
-    expect(compiled.textContent).toContain(
-      'The dashboard aggregate endpoints are unavailable right now.',
-    );
+    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
+    expect(message.message).toBe('The dashboard aggregate endpoints are unavailable right now.');
   });
 
   it('should update the project technology chart when the selected type changes', () => {
@@ -182,10 +166,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
 
     expect(component.selectedTechnologyType()).toBe('LIBRARIES');
-    expect(component.projectTechnologyChart()?.categories).toEqual([
-      'React',
-      'Tailwind CSS',
-    ]);
+    expect(component.projectTechnologyChart()?.categories).toEqual(['React', 'Tailwind CSS']);
 
     component.selectTechnologyType('PROGRAMMING_LANGUAGES');
     fixture.detectChanges();

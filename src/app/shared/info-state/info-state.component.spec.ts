@@ -9,6 +9,9 @@ describe('InfoStateComponent', () => {
     if (!customElements.get('hans-loading')) {
       customElements.define('hans-loading', class extends HTMLElement {});
     }
+    if (!customElements.get('hans-message')) {
+      customElements.define('hans-message', class extends HTMLElement {});
+    }
   });
 
   beforeEach(async () => {
@@ -28,7 +31,11 @@ describe('InfoStateComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('hans-loading')).toBeTruthy();
-    expect(compiled.textContent).toContain('Loading...');
+    expect(compiled.textContent).not.toContain('Loading...');
+    expect(
+      (compiled.querySelector('hans-loading') as HTMLElement & { spinnerThickness: number })
+        .spinnerThickness,
+    ).toBe(4);
   });
 
   it('renders non-loading states without spinner', () => {
@@ -38,8 +45,22 @@ describe('InfoStateComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
+    const message = compiled.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
     expect(compiled.querySelector('hans-loading')).toBeFalsy();
-    expect(compiled.textContent).toContain('Something went wrong.');
+    expect(message.message).toBe('Something went wrong.');
+    expect(message.getAttribute('messageColor')).toBe('danger');
     expect(compiled.querySelector('[data-mode="error"]')).toBeTruthy();
+  });
+
+  it('renders empty states as warning messages', () => {
+    fixture.componentRef.setInput('mode', 'empty');
+    fixture.componentRef.setInput('message', 'Nothing here.');
+    fixture.detectChanges();
+
+    const message = fixture.nativeElement.querySelector('hans-message');
+    expect(message.message).toBe('Nothing here.');
+    expect(message.getAttribute('messageColor')).toBe('warning');
   });
 });

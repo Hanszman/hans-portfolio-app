@@ -64,10 +64,12 @@ describe('PortfolioSettingsOperationsComponent', () => {
   });
 
   beforeEach(async () => {
-    operationsService = jasmine.createSpyObj<PortfolioSettingsService>(
-      'PortfolioSettingsService',
-      ['getAll', 'create', 'update', 'delete'],
-    );
+    operationsService = jasmine.createSpyObj<PortfolioSettingsService>('PortfolioSettingsService', [
+      'getAll',
+      'create',
+      'update',
+      'delete',
+    ]);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     operationsService.getAll.and.returnValue(of(createCollectionResponse()));
     operationsService.create.and.returnValue(of(createSetting()));
@@ -407,9 +409,10 @@ describe('PortfolioSettingsOperationsComponent', () => {
 
     const emptyFixture = TestBed.createComponent(PortfolioSettingsOperationsComponent);
     await settleWorkspace(emptyFixture);
-    expect(emptyFixture.nativeElement.textContent).toContain(
-      'No protected portfolio setting has been registered yet.',
-    );
+    const emptyMessage = emptyFixture.nativeElement.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(emptyMessage.message).toBe('No protected portfolio setting has been registered yet.');
 
     const emptyComponent = emptyFixture.componentInstance as unknown as {
       openReadModal(): void;
@@ -442,7 +445,10 @@ describe('PortfolioSettingsOperationsComponent', () => {
     const errorFixture = TestBed.createComponent(PortfolioSettingsOperationsComponent);
     await settleWorkspace(errorFixture);
 
-    expect(errorFixture.nativeElement.textContent).toContain(
+    const errorMessage = errorFixture.nativeElement.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(errorMessage.message).toBe(
       'The protected portfolio settings collection could not be loaded right now.',
     );
   });

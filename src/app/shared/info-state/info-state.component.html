@@ -1,12 +1,29 @@
-<div class="info-state" [attr.data-mode]="mode()">
-  @if (mode() === 'loading') {
+@if (mode() === 'loading') {
+  <div class="info-state-loading" data-mode="loading">
     <hans-loading
       ariaLabel="Loading content"
       loadingColor="primary"
       loadingSize="medium"
       loadingType="spinner"
+      [spinnerThickness]="4"
     ></hans-loading>
-  }
-
-  <p>{{ message() }}</p>
-</div>
+  </div>
+} @else if (mode() === 'error') {
+  <hans-message
+    data-mode="error"
+    [message]="message()"
+    messageColor="danger"
+    messageVariant="neutral"
+    messageSize="medium"
+    iconName="IoIosAlert"
+  ></hans-message>
+} @else {
+  <hans-message
+    data-mode="empty"
+    [message]="message()"
+    messageColor="warning"
+    messageVariant="neutral"
+    messageSize="medium"
+    iconName="IoIosInformationCircle"
+  ></hans-message>
+}

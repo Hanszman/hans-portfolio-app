@@ -46,7 +46,8 @@
           [rightIconAriaLabel]="
             (isPasswordVisible()
               ? 'pages.login.form.passwordVisibility.hide'
-              : 'pages.login.form.passwordVisibility.show') | translate
+              : 'pages.login.form.passwordVisibility.show'
+            ) | translate
           "
           [value]="password()"
           [placeholder]="'pages.login.form.passwordPlaceholder' | translate"
@@ -70,6 +71,7 @@
             [attr.aria-label]="'pages.login.form.submit' | translate"
             loadingColor="base"
             loadingSize="small"
+            [spinnerThickness]="4"
             loadingType="spinner"
           ></hans-loading>
         } @else {

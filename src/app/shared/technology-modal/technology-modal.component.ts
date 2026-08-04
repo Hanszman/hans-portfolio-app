@@ -45,10 +45,19 @@ export class TechnologyModalComponent {
   private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
   private readonly hasRequestedTechnologiesSignal = signal(false);
   private readonly hasRequestedProjectsSignal = signal(false);
+  private readonly technologiesLoadingSignal = signal(false);
+  private readonly projectsLoadingSignal = signal(false);
 
   readonly technology = input<TechnologyModalItem | null>(null);
   readonly isOpen = input(false);
   readonly closed = output<void>();
+
+  protected readonly isContentLoading = computed(
+    () =>
+      this.isOpen() &&
+      !!this.technology() &&
+      (this.technologiesLoadingSignal() || this.projectsLoadingSignal()),
+  );
 
   protected readonly resolvedTechnology = computed(() =>
     resolveTechnologyModalItem(
@@ -139,15 +148,18 @@ export class TechnologyModalComponent {
     }
 
     this.hasRequestedTechnologiesSignal.set(true);
+    this.technologiesLoadingSignal.set(true);
     this.technologiesService
       .getTechnologies()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
           this.technologiesSignal.set(response.data);
+          this.technologiesLoadingSignal.set(false);
         },
         error: () => {
           this.technologiesSignal.set([]);
+          this.technologiesLoadingSignal.set(false);
         },
       });
   }
@@ -158,15 +170,18 @@ export class TechnologyModalComponent {
     }
 
     this.hasRequestedProjectsSignal.set(true);
+    this.projectsLoadingSignal.set(true);
     this.projectsService
       .getProjects()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
           this.projectsSignal.set(response.data);
+          this.projectsLoadingSignal.set(false);
         },
         error: () => {
           this.projectsSignal.set([]);
+          this.projectsLoadingSignal.set(false);
         },
       });
   }

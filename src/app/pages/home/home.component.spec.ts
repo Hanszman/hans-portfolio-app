@@ -72,7 +72,8 @@ describe('HomeComponent', () => {
 
     expect(compiled.textContent).toContain("Hi, I'm");
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('Connecting live portfolio data');
+    expect(compiled.querySelector('hans-loading')).toBeTruthy();
+    expect(compiled.textContent).not.toContain('Connecting live portfolio data');
     expect(compiled.querySelectorAll('hans-button')).toHaveSize(6);
     expect(compiled.querySelectorAll('hans-button.social-links-button')).toHaveSize(4);
 
@@ -161,7 +162,8 @@ describe('HomeComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('No stack distribution was returned yet.');
+    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
+    expect(message.message).toBe('No stack distribution was returned yet.');
   });
 
   it('should render an API error state when the dashboard request fails', () => {
@@ -178,7 +180,8 @@ describe('HomeComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('The live home data is unavailable right now');
+    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
+    expect(message.message).toContain('The live home data is unavailable right now');
   });
 
   it('should calculate career years around the anniversary boundary', () => {

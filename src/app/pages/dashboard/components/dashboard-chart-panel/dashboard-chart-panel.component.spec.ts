@@ -55,7 +55,8 @@ describe('DashboardChartPanelComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain('No stack distribution was returned yet.');
+    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
+    expect(message.message).toBe('No stack distribution was returned yet.');
     expect(compiled.querySelector('app-info-state')).toBeTruthy();
   });
 });

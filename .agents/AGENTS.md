@@ -85,6 +85,7 @@ Common library components include:
 - `hans-accordion`
 - `hans-icon`
 - `hans-loading`
+- `hans-message`
 - `hans-kanban`
 - `hans-popup`
 - `hans-toast`

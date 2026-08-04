@@ -50,7 +50,8 @@ describe('ExperiencesComponent', () => {
     expect(compiled.textContent).toContain(
       'A chronological journey through my career building impactful software solutions.',
     );
-    expect(compiled.textContent).toContain('Loading live experience relationships...');
+    expect(compiled.querySelector('hans-loading')).toBeTruthy();
+    expect(compiled.textContent).not.toContain('Loading live experience relationships...');
 
     const request = httpTestingController.expectOne(
       buildApiUrl('/experiences?page=1&pageSize=20&sortBy=startDate&sortDirection=desc'),
@@ -124,7 +125,10 @@ describe('ExperiencesComponent', () => {
     );
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('No published experience chapters were returned yet.');
+    const emptyMessage = compiled.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(emptyMessage.message).toBe('No published experience chapters were returned yet.');
 
     fixture.destroy();
 
@@ -141,9 +145,10 @@ describe('ExperiencesComponent', () => {
     });
     errorFixture.detectChanges();
 
-    expect(errorCompiled.textContent).toContain(
-      'The experiences endpoint is unavailable right now.',
-    );
+    const errorMessage = errorCompiled.querySelector('hans-message') as HTMLElement & {
+      message: string;
+    };
+    expect(errorMessage.message).toBe('The experiences endpoint is unavailable right now.');
   });
 
   it('should open and close the experience detail drawer state', () => {

@@ -10,7 +10,7 @@ describe('OperationsComponent', () => {
   let component: OperationsComponent;
 
   beforeAll(() => {
-    for (const elementName of ['hans-button', 'hans-loading']) {
+    for (const elementName of ['hans-button', 'hans-loading', 'hans-message']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -61,16 +61,17 @@ describe('OperationsComponent', () => {
   it('renders loading, error and empty states', () => {
     fixture.componentRef.setInput('isLoading', true);
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain('Loading');
+    expect(fixture.nativeElement.querySelector('hans-loading')).toBeTruthy();
+    expect(fixture.nativeElement.textContent).not.toContain('Loading');
 
     fixture.componentRef.setInput('isLoading', false);
     fixture.componentRef.setInput('errorKey', 'pages.admin.tags.feedback.loadError');
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain('could not');
+    expect(fixture.nativeElement.querySelector('hans-message').message).toContain('could not');
 
     fixture.componentRef.setInput('errorKey', null);
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain(
+    expect(fixture.nativeElement.querySelector('hans-message').message).toBe(
       'No protected tag has been registered yet.',
     );
   });

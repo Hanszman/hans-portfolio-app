@@ -15,6 +15,11 @@
   background-color: color-mix(in srgb, var(--background-color) 84%, var(--base-strong-color));
 }
 
+.technology-modal-image-skeleton,
+.technology-modal-subtitle-skeleton {
+  @apply justify-self-center;
+}
+
 .technology-modal-subtitle {
   @apply m-0 text-center text-base;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);

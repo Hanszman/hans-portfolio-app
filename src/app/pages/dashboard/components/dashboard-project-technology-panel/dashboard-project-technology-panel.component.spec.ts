@@ -73,9 +73,7 @@ describe('DashboardProjectTechnologyPanelComponent', () => {
     );
     expect(
       component.resolveSelectValue({ detail: { value: 'FRAMEWORKS' } } as unknown as Event),
-    ).toBe(
-      'FRAMEWORKS',
-    );
+    ).toBe('FRAMEWORKS');
     expect(
       component.resolveSelectValue({
         target: { value: 'PROGRAMMING_LANGUAGES' },
@@ -85,7 +83,8 @@ describe('DashboardProjectTechnologyPanelComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain('No project technology breakdown was returned yet.');
+    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
+    expect(message.message).toBe('No project technology breakdown was returned yet.');
     expect(compiled.querySelector('app-info-state')).toBeTruthy();
   });
 });
