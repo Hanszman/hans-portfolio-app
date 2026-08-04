@@ -54,13 +54,13 @@ describe('InfoStateComponent', () => {
     expect(compiled.querySelector('[data-mode="error"]')).toBeTruthy();
   });
 
-  it('renders empty states as warning messages', () => {
+  it('renders empty states as neutral messages', () => {
     fixture.componentRef.setInput('mode', 'empty');
     fixture.componentRef.setInput('message', 'Nothing here.');
     fixture.detectChanges();
 
     const message = fixture.nativeElement.querySelector('hans-message');
     expect(message.message).toBe('Nothing here.');
-    expect(message.getAttribute('messageColor')).toBe('warning');
+    expect(message.getAttribute('messageColor')).toBe('base');
   });
 });
