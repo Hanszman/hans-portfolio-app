@@ -252,7 +252,7 @@ API rules:
 - Mocks are for tests and temporary isolated cases, not the main implementation path.
 - Use environment config for API base URLs.
 - Local API: `http://localhost:3000`.
-- Production API: `https://hans-portfolio-api.vercel.app`.
+- Production API: `https://victor-hanszman-portfolio-api.vercel.app`.
 
 Important public routes include:
 

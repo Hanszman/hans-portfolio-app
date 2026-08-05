@@ -12,7 +12,7 @@ An **Angular + TypeScript Front-End App** to show all the projects I've already 
 - ✅ **Karma + Jasmine** for unit and integration testing
 - 📊 **Test Coverage** with HTML reports
 - 🧹 **ESLint + Prettier** for code quality and formatting
-- ♾️ Deployed by **Vercel** at https://hans-portfolio-app.vercel.app/
+- ♾️ Deployed by **Vercel** at https://victor-hanszman-portfolio.vercel.app/
 - **Node Version to build this project: 24.14.1 and npm 11.11.0**
 
 ## 🧑‍💻 Development

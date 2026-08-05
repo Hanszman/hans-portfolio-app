@@ -115,8 +115,8 @@ O remake nao deve ser apenas uma migracao visual do portfolio antigo. A nova ver
 - a configuracao de producao deve usar `src/environments/environment.production.ts`
 - a base local do app deve apontar para `http://localhost:4200`
 - a base local da API deve apontar para `http://localhost:3000`
-- a base produtiva do app deve apontar para `https://hans-portfolio-app.vercel.app`
-- a base produtiva da API deve apontar para `https://hans-portfolio-api.vercel.app`
+- a base produtiva do app deve apontar para `https://victor-hanszman-portfolio.vercel.app`
+- a base produtiva da API deve apontar para `https://victor-hanszman-portfolio-api.vercel.app`
 - a estrategia de ambiente do app deve continuar simples, publica e sem segredos no bundle
 
 Mapa alvo:
@@ -125,14 +125,14 @@ Mapa alvo:
   `appBaseUrl=http://localhost:4200`
   `apiBaseUrl=http://localhost:3000`
 - producao:
-  `appBaseUrl=https://hans-portfolio-app.vercel.app`
-  `apiBaseUrl=https://hans-portfolio-api.vercel.app`
+  `appBaseUrl=https://victor-hanszman-portfolio.vercel.app`
+  `apiBaseUrl=https://victor-hanszman-portfolio-api.vercel.app`
 
 ### 3.6. Estrategia oficial de ambiente do backend para URLs publicas e CORS
 
 - o backend deve manter `PORTFOLIO_APP_BASE_URL` e `PORTFOLIO_API_BASE_URL` no ambiente
 - em ambiente local, essas variaveis devem apontar para `http://localhost:4200` e `http://localhost:3000`
-- em producao, essas variaveis devem apontar para `https://hans-portfolio-app.vercel.app` e `https://hans-portfolio-api.vercel.app`
+- em producao, essas variaveis devem apontar para `https://victor-hanszman-portfolio.vercel.app` e `https://victor-hanszman-portfolio-api.vercel.app`
 - a lista de origins liberadas para CORS deve ser derivada de uma configuracao central do backend, e nao hardcoded diretamente no `main.ts`
 - `CORS_ALLOWED_ORIGINS` pode existir apenas como complemento opcional para previews, staging ou acessos extras
 
@@ -740,7 +740,7 @@ Conectar o frontend ao backend desde cedo e preparar a base de ambiente do proje
 - `environment.ts` com configuracao local do app e da API
 - `environment.production.ts` com configuracao produtiva do app e da API
 - configuracao de desenvolvimento apontando para `http://localhost:4200` e `http://localhost:3000`
-- configuracao de producao apontando para `https://hans-portfolio-app.vercel.app` e `https://hans-portfolio-api.vercel.app`
+- configuracao de producao apontando para `https://victor-hanszman-portfolio.vercel.app` e `https://victor-hanszman-portfolio-api.vercel.app`
 - camada inicial de configuracao centralizada da API no front
 - configuracao centralizada da API em um unico arquivo de dominio no front
 - configuracao centralizada de URLs publicas e CORS no backend via env
@@ -1385,7 +1385,7 @@ Escopo continuo da integracao:
 - manter testes unitarios completos dos adapters, mappers e services
 - manter a configuracao de ambiente do frontend simples e explicita
 - manter a base local apontando para `http://localhost:3000`
-- manter a base produtiva apontando para `https://hans-portfolio-api.vercel.app`
+- manter a base produtiva apontando para `https://victor-hanszman-portfolio-api.vercel.app`
 
 ---
 
