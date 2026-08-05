@@ -28,6 +28,6 @@ export class ModalSkeletonComponent {
   readonly ariaLabel = input('Loading content');
 
   protected readonly loadingColor = computed(() =>
-    this.themeService.mode() === 'dark' ? 'neutral' : 'primary',
+    this.themeService.mode() === 'dark' ? 'base' : 'primary',
   );
 }

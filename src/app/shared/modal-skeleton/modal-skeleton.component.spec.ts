@@ -43,6 +43,6 @@ describe('ModalSkeletonComponent', () => {
 
     themeService.setMode('dark');
     fixture.detectChanges();
-    expect(loading.loadingColor).toBe('neutral');
+    expect(loading.loadingColor).toBe('base');
   });
 });
