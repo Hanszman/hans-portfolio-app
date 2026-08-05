@@ -80,6 +80,14 @@
   @apply min-w-0 self-start;
 }
 
+.project-modal-skeleton-column {
+  @apply grid content-start gap-4;
+}
+
+.modal-media-preloader {
+  @apply pointer-events-none fixed h-px w-px overflow-hidden opacity-0;
+}
+
 @media (max-width: 48rem) {
   .project-modal-with-gallery {
     @apply grid-cols-1;

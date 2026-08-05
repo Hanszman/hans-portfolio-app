@@ -62,3 +62,11 @@
 .experience-modal-chip-list {
   @apply flex flex-wrap gap-2;
 }
+
+.experience-modal-skeleton-head {
+  @apply flex items-center gap-4;
+}
+
+.modal-media-preloader {
+  @apply pointer-events-none fixed h-px w-px overflow-hidden opacity-0;
+}

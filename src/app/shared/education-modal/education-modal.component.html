@@ -8,10 +8,29 @@
   (close)="requestClose()"
 >
   @if (item(); as education) {
-    <article
-      class="education-modal"
-      [class.education-modal-with-gallery]="education.galleryItems.length > 0"
-    >
+    @if (mediaLoading()) {
+      <div class="modal-media-preloader" aria-hidden="true">
+        @for (source of mediaSources(); track source) {
+          <img [src]="source" alt="" (load)="settleMedia(source)" (error)="settleMedia(source)" />
+        }
+      </div>
+      <article class="education-modal education-modal-with-gallery">
+        <section class="education-modal-skeleton-column">
+          <app-modal-skeleton width="6rem" height="6rem" ariaLabel="Loading education image" />
+          <app-modal-skeleton width="55%" height="1.5rem" ariaLabel="Loading institution" />
+          @for (placeholder of [0, 1, 2]; track placeholder) {
+            <app-modal-skeleton height="5rem" [ariaLabel]="'Loading education detail ' + (placeholder + 1)" />
+          }
+        </section>
+        <section class="education-modal-skeleton-column">
+          <app-modal-skeleton height="19rem" ariaLabel="Loading education gallery" />
+        </section>
+      </article>
+    } @else {
+      <article
+        class="education-modal"
+        [class.education-modal-with-gallery]="education.galleryItems.length > 0"
+      >
       <section class="education-modal-information">
         @if (education.image; as image) {
           <img class="education-modal-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
@@ -38,6 +57,7 @@
           ></hans-carousel>
         </section>
       }
-    </article>
+      </article>
+    }
   }
 </hans-modal>

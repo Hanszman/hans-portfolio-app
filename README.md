@@ -277,6 +277,7 @@ Public details use shared modal adapters instead of page-local shells:
 - `app-experience-modal` renders customers and technologies through `app-tag-button`; customer tags are static and technology tags keep navigation behavior.
 - `app-project-modal` and `app-education-modal` render `hans-carousel` only when valid linked images exist and increase the modal size only in that case.
 - `app-spoken-language-modal` preserves the established small language modal presentation.
+- Public detail modals use `app-modal-skeleton` while their visual media settles. The adapter delegates to `hans-loading`, uses `primary` in the light theme and `neutral` in the dark theme, and releases the content on both media load and error.
 
 Gallery mapping must sort by relation order, ignore missing paths and deduplicate repeated assets by ID or path. When a modal can open another modal, close the current overlay first so focus trapping and scrolling remain owned by a single dialog.
 

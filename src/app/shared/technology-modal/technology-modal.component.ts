@@ -18,6 +18,7 @@ import { TechnologiesService } from '../../core/api/technologies/technologies.se
 import { TechnologyCollectionItemResponse } from '../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../core/translation/translation.service';
 import { TagModalDetail } from '../tag/tag-modal/tag-modal.types';
+import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.component';
 import {
   buildTechnologyModalDetails,
   buildTechnologyFrequencyProgress,
@@ -30,7 +31,7 @@ import { TechnologyModalItem } from './technology-modal.types';
 @Component({
   selector: 'app-technology-modal',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [ModalSkeletonComponent, TranslatePipe],
   templateUrl: './technology-modal.component.html',
   styleUrl: './technology-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

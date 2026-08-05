@@ -9,7 +9,24 @@
   (close)="requestClose()"
 >
   @if (item(); as currentItem) {
-    <div class="experience-modal">
+    @if (mediaLoading()) {
+      <div class="modal-media-preloader" aria-hidden="true">
+        @for (source of mediaSources(); track source) {
+          <img [src]="source" alt="" (load)="settleMedia(source)" (error)="settleMedia(source)" />
+        }
+      </div>
+      <div class="experience-modal experience-modal-skeleton-layout">
+        <div class="experience-modal-skeleton-head">
+          <app-modal-skeleton width="4rem" height="4rem" ariaLabel="Loading company image" />
+          <app-modal-skeleton width="45%" height="3.5rem" ariaLabel="Loading experience heading" />
+        </div>
+        <app-modal-skeleton height="7rem" ariaLabel="Loading experience description" />
+        <app-modal-skeleton height="11rem" ariaLabel="Loading related projects" />
+        <app-modal-skeleton height="5rem" ariaLabel="Loading related clients" />
+        <app-modal-skeleton height="12rem" ariaLabel="Loading technology stack" />
+      </div>
+    } @else {
+      <div class="experience-modal">
       <header class="experience-modal-head">
         <img
           class="experience-modal-logo"
@@ -77,6 +94,7 @@
           }
         </div>
       </section>
-    </div>
+      </div>
+    }
   }
 </hans-modal>

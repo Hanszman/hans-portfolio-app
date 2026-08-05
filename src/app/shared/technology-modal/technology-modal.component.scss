@@ -22,14 +22,6 @@
 
 .technology-modal-skeleton {
   @apply block overflow-hidden rounded-2xl;
-  background: linear-gradient(
-    100deg,
-    color-mix(in srgb, var(--base-default-color) 10%, transparent) 20%,
-    color-mix(in srgb, var(--base-default-color) 22%, transparent) 42%,
-    color-mix(in srgb, var(--base-default-color) 10%, transparent) 64%
-  );
-  background-size: 240% 100%;
-  animation: technology-modal-skeleton-wave 1.35s ease-in-out infinite;
 }
 
 .technology-modal-image-skeleton {
@@ -107,21 +99,5 @@
 
   .technology-modal-progress {
     @apply col-span-1 grid-cols-1;
-  }
-}
-
-@keyframes technology-modal-skeleton-wave {
-  from {
-    background-position: 100% 0;
-  }
-
-  to {
-    background-position: -100% 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .technology-modal-skeleton {
-    animation: none;
   }
 }

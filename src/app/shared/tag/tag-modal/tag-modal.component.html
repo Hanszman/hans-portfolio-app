@@ -7,7 +7,21 @@
   [closeButtonLabel]="'common.actions.close' | translate"
   (close)="requestClose()"
 >
-  <article class="tag-modal">
+  @if (mediaLoading()) {
+    <div class="modal-media-preloader" aria-hidden="true">
+      @for (source of mediaSources(); track source) {
+        <img [src]="source" alt="" (load)="settleMedia(source)" (error)="settleMedia(source)" />
+      }
+    </div>
+    <article class="tag-modal tag-modal-skeleton-layout">
+      <app-modal-skeleton class="tag-modal-skeleton-image" width="6rem" height="6rem" ariaLabel="Loading image" />
+      <app-modal-skeleton class="tag-modal-skeleton-subtitle" width="55%" height="1.5rem" ariaLabel="Loading subtitle" />
+      @for (placeholder of [0, 1, 2]; track placeholder) {
+        <app-modal-skeleton height="5rem" [ariaLabel]="'Loading detail ' + (placeholder + 1)" />
+      }
+    </article>
+  } @else {
+    <article class="tag-modal">
     @if (image(); as modalImage) {
       <img
         class="tag-modal-image"
@@ -33,5 +47,6 @@
     }
 
     <ng-content />
-  </article>
+    </article>
+  }
 </hans-modal>

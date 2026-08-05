@@ -5,6 +5,8 @@ import { ProjectModalComponent } from './project-modal.component';
 
 describe('ProjectModalComponent', () => {
   let fixture: ComponentFixture<ProjectModalComponent>;
+  const imageSource =
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/%3E';
   const project = {
     id: 'project',
     title: 'Portfolio',
@@ -26,7 +28,7 @@ describe('ProjectModalComponent', () => {
       },
     ],
     links: [{ id: 'link', url: 'https://example.com', label: 'Website', typeLabel: 'Web' }],
-    galleryItems: [{ id: 'image', imageSrc: '/image.png', imageAlt: 'Project' }],
+    galleryItems: [{ id: 'image', imageSrc: imageSource, imageAlt: 'Project' }],
   };
 
   beforeEach(async () => {
@@ -68,6 +70,22 @@ describe('ProjectModalComponent', () => {
     expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
       'medium',
     );
+  });
+
+  it('renders skeletons until gallery media settles', () => {
+    fixture.componentRef.setInput('project', project);
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('app-modal-skeleton').length).toBeGreaterThan(0);
+
+    fixture.nativeElement
+      .querySelector('.modal-media-preloader img')
+      .dispatchEvent(new Event('error'));
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('app-modal-skeleton')).toBeNull();
+    expect(fixture.nativeElement.querySelector('hans-carousel')).toBeTruthy();
   });
 
   it('emits close and technology requests', () => {

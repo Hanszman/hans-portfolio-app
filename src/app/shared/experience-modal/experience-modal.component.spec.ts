@@ -5,6 +5,15 @@ import { ExperienceModalComponent } from './experience-modal.component';
 
 describe('ExperienceModalComponent', () => {
   let fixture: ComponentFixture<ExperienceModalComponent>;
+  const imageSource =
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/%3E';
+
+  const settleMedia = (): void => {
+    fixture.nativeElement
+      .querySelectorAll('.modal-media-preloader img')
+      .forEach((image: HTMLImageElement) => image.dispatchEvent(new Event('load')));
+    fixture.detectChanges();
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,9 +27,15 @@ describe('ExperienceModalComponent', () => {
       roleTitle: 'Developer',
       description: 'Built products.',
       dateRangeLabel: '2024 - 2026',
-      companyImage: { src: '/logo.png', alt: 'Hans' },
+      companyImage: { src: `${imageSource}#company`, alt: 'Hans' },
       projects: [{ slug: 'portfolio', title: 'Portfolio', summary: 'Website' }],
-      customers: [{ slug: 'client', name: 'Client', image: { src: '/client.png', alt: 'Client' } }],
+      customers: [
+        {
+          slug: 'client',
+          name: 'Client',
+          image: { src: `${imageSource}#client`, alt: 'Client' },
+        },
+      ],
       technologyGroups: [
         {
           labelKey: 'pages.experiences.detail.techStack',
@@ -31,12 +46,17 @@ describe('ExperienceModalComponent', () => {
     fixture.detectChanges();
   });
 
-  it('renders customers and technologies with the shared tag component', () => {
+  it('renders skeletons until the modal media settles', () => {
+    expect(fixture.nativeElement.querySelectorAll('app-modal-skeleton').length).toBeGreaterThan(0);
+
+    settleMedia();
+
     expect(fixture.nativeElement.textContent).toContain('Built products.');
     expect(fixture.nativeElement.querySelectorAll('app-tag-button').length).toBe(2);
   });
 
   it('emits close and technology requests', () => {
+    settleMedia();
     spyOn(fixture.componentInstance.closed, 'emit');
     spyOn(fixture.componentInstance.openTechnology, 'emit');
     fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
@@ -45,5 +65,12 @@ describe('ExperienceModalComponent', () => {
       .dispatchEvent(new CustomEvent('selected', { detail: { slug: 'angular', name: 'Angular' } }));
     expect(fixture.componentInstance.closed.emit).toHaveBeenCalled();
     expect(fixture.componentInstance.openTechnology.emit).toHaveBeenCalled();
+  });
+
+  it('stays ready when the selected experience is cleared', () => {
+    fixture.componentRef.setInput('item', null);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('app-modal-skeleton')).toBeNull();
   });
 });

@@ -20,6 +20,8 @@ class TranslatePipeStub implements PipeTransform {
 
 describe('TagModalComponent', () => {
   let fixture: ComponentFixture<TagModalComponent>;
+  const imageSource =
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/%3E';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -65,5 +67,21 @@ describe('TagModalComponent', () => {
     fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
 
     expect(fixture.componentInstance.closed.emit).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render skeletons until its image settles', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('image', { src: imageSource, alt: 'Technology' });
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('app-modal-skeleton').length).toBeGreaterThan(0);
+
+    fixture.nativeElement
+      .querySelector('.modal-media-preloader img')
+      .dispatchEvent(new Event('error'));
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('app-modal-skeleton')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.tag-modal-image')).toBeTruthy();
   });
 });

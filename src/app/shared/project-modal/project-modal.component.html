@@ -8,10 +8,29 @@
   (close)="requestClose()"
 >
   @if (project(); as currentProject) {
-    <div
-      class="project-modal"
-      [class.project-modal-with-gallery]="currentProject.galleryItems.length > 0"
-    >
+    @if (mediaLoading()) {
+      <div class="modal-media-preloader" aria-hidden="true">
+        @for (source of mediaSources(); track source) {
+          <img [src]="source" alt="" (load)="settleMedia(source)" (error)="settleMedia(source)" />
+        }
+      </div>
+      <div class="project-modal project-modal-with-gallery project-modal-skeleton-layout">
+        <section class="project-modal-skeleton-column">
+          <app-modal-skeleton width="35%" height="2rem" ariaLabel="Loading project metadata" />
+          <app-modal-skeleton height="5rem" ariaLabel="Loading project description" />
+          <app-modal-skeleton height="8rem" ariaLabel="Loading project clients" />
+          <app-modal-skeleton height="12rem" ariaLabel="Loading project technologies" />
+        </section>
+        <aside class="project-modal-skeleton-column">
+          <app-modal-skeleton height="19rem" ariaLabel="Loading project gallery" />
+          <app-modal-skeleton height="8rem" ariaLabel="Loading project links" />
+        </aside>
+      </div>
+    } @else {
+      <div
+        class="project-modal"
+        [class.project-modal-with-gallery]="currentProject.galleryItems.length > 0"
+      >
       <div class="project-modal-content">
         <div class="project-modal-meta">
           <hans-tag
@@ -102,6 +121,7 @@
           }
         </aside>
       }
-    </div>
+      </div>
+    }
   }
 </hans-modal>

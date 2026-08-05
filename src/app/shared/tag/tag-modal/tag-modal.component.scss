@@ -36,3 +36,12 @@
   @apply m-0 text-base font-semibold;
   color: var(--text-color);
 }
+
+.tag-modal-skeleton-image,
+.tag-modal-skeleton-subtitle {
+  @apply justify-self-center;
+}
+
+.modal-media-preloader {
+  @apply pointer-events-none fixed h-px w-px overflow-hidden opacity-0;
+}

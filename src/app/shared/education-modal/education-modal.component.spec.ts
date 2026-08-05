@@ -5,12 +5,14 @@ import { EducationModalComponent } from './education-modal.component';
 
 describe('EducationModalComponent', () => {
   let fixture: ComponentFixture<EducationModalComponent>;
+  const imageSource =
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/%3E';
   const item = {
     title: 'Information Systems',
     subtitle: 'University',
     image: null,
     details: [{ labelKey: 'pages.skills.education.detail.summary' as const, value: 'Degree' }],
-    galleryItems: [{ id: 'image', imageSrc: '/degree.png', imageAlt: 'Degree' }],
+    galleryItems: [{ id: 'image', imageSrc: imageSource, imageAlt: 'Degree' }],
   };
 
   beforeEach(async () => {
@@ -42,6 +44,25 @@ describe('EducationModalComponent', () => {
     expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
       'small',
     );
+  });
+
+  it('renders skeletons until linked media settles', () => {
+    fixture.componentRef.setInput('item', {
+      ...item,
+      image: { src: `${imageSource}#logo`, alt: 'University' },
+    });
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('app-modal-skeleton').length).toBeGreaterThan(0);
+
+    fixture.nativeElement
+      .querySelectorAll('.modal-media-preloader img')
+      .forEach((image: HTMLImageElement) => image.dispatchEvent(new Event('load')));
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('app-modal-skeleton')).toBeNull();
+    expect(fixture.nativeElement.querySelector('hans-carousel')).toBeTruthy();
   });
 
   it('emits close requests', () => {
