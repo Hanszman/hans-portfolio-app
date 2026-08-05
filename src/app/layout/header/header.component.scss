@@ -1,5 +1,5 @@
 .header {
-  @apply sticky top-0 z-40 w-full;
+  @apply fixed inset-x-0 top-0 z-40 w-full;
   background-color: var(--app-shell-surface-color);
   box-shadow: 0 10px 28px color-mix(in srgb, var(--base-strong-color) 18%, transparent);
   color: var(--app-shell-foreground-color);

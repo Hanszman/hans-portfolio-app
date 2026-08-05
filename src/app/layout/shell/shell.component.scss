@@ -1,5 +1,6 @@
 .shell {
   @apply flex min-h-screen flex-col;
+  padding-top: 4.25rem;
 }
 
 .shell-content {
@@ -8,4 +9,10 @@
 
 .shell-stage {
   @apply flex-1 px-4 pt-8;
+}
+
+@media (max-width: 1023px) {
+  .shell {
+    padding-top: 4rem;
+  }
 }

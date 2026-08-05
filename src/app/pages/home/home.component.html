@@ -24,16 +24,54 @@
           [chips]="topTechnologyChips()"
           (openTechnology)="openTechnologyDetails($event)"
         />
+        <div class="home-page-action">
+          <hans-button
+            routerLink="/skills"
+            [label]="'pages.home.stack.moreSkills' | translate"
+            [buttonStyle]="'solid'"
+          ></hans-button>
+        </div>
       } @else {
         <div class="home-page-state">
           <app-info-state mode="empty" [message]="'pages.home.stack.empty' | translate" />
         </div>
       }
-    }
 
-    <app-home-navigation-cards [cards]="navigationCards" />
+
+      @if (highlightedProjects().length > 0) {
+        <section class="home-highlighted-projects">
+          <app-section-header
+            [sectionLabel]="'pages.home.highlightedProjects.label' | translate"
+            [title]="'pages.home.highlightedProjects.title' | translate"
+            [description]="'pages.home.highlightedProjects.description' | translate"
+          />
+
+          <app-home-navigation-cards
+            [cards]="highlightedProjects()"
+            (openProject)="openProjectDetails($event)"
+          />
+
+          <div class="home-page-action">
+            <hans-button
+              routerLink="/projects"
+              [label]="'pages.home.highlightedProjects.moreProjects' | translate"
+              [buttonStyle]="'solid'"
+            ></hans-button>
+          </div>
+        </section>
+      }
+    }
   </div>
 </app-wrapper>
+
+@if (selectedProject(); as project) {
+  <app-project-modal
+    [isOpen]="true"
+    [project]="project"
+    (closed)="closeProjectDetails()"
+    (openTechnology)="openTechnologyDetails($event)"
+  />
+}
 
 @if (selectedTechnology(); as technology) {
   <app-technology-modal

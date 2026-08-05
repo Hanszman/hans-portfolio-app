@@ -98,6 +98,12 @@ export const EN_TRANSLATIONS = {
   'pages.home.stack.projects': 'projects',
   'pages.home.stack.technologies': 'technologies',
   'pages.home.stack.empty': 'No stack distribution was returned yet.',
+  'pages.home.stack.moreSkills': 'Check out more skills',
+  'pages.home.highlightedProjects.label': '// HIGHLIGHTED_PROJECTS',
+  'pages.home.highlightedProjects.title': 'Highlighted Projects',
+  'pages.home.highlightedProjects.description':
+    'A selection of projects that represent my most relevant work and technical challenges.',
+  'pages.home.highlightedProjects.moreProjects': 'Check out more projects',
   'pages.home.navigation.experiences.eyebrow': '// career',
   'pages.home.navigation.experiences.title': 'Experiences',
   'pages.home.navigation.experiences.description': 'Professional journey and career timeline.',

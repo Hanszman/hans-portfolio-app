@@ -99,6 +99,12 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.stack.projects': 'projetos',
   'pages.home.stack.technologies': 'tecnologias',
   'pages.home.stack.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
+  'pages.home.stack.moreSkills': 'Veja mais habilidades',
+  'pages.home.highlightedProjects.label': '// PROJETOS_EM_DESTAQUE',
+  'pages.home.highlightedProjects.title': 'Projetos em destaque',
+  'pages.home.highlightedProjects.description':
+    'Uma seleção de projetos que representam meus trabalhos e desafios técnicos mais relevantes.',
+  'pages.home.highlightedProjects.moreProjects': 'Veja mais projetos',
   'pages.home.navigation.experiences.eyebrow': '// carreira',
   'pages.home.navigation.experiences.title': 'Experiências',
   'pages.home.navigation.experiences.description':

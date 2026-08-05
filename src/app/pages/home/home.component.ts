@@ -1,10 +1,25 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { forkJoin } from 'rxjs';
 import { DashboardService } from '../../core/api/dashboard/dashboard.service';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
+import { ProjectsService } from '../../core/api/projects/projects.service';
+import { ProjectCollectionItemResponse } from '../../core/api/projects/projects.types';
+import { TechnologiesService } from '../../core/api/technologies/technologies.service';
 import { TranslationService, translateStaticKey } from '../../core/translation/translation.service';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
+import { ProjectModalComponent } from '../../shared/project-modal/project-modal.component';
+import { ProjectModalItem } from '../../shared/project-modal/project-modal.types';
+import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
@@ -17,10 +32,10 @@ import { SKILL_STACK_LABEL_KEYS, SKILL_TYPE_LABEL_KEYS } from '../skills/skills.
 import {
   CAREER_START_DATE,
   HOME_HERO,
-  HOME_NAVIGATION_CARDS,
   HomeMetricViewModel,
   HomeStackChipViewModel,
 } from './home.types';
+import { formatCountInFiveStep, mapHighlightedProjects } from './helpers/home.helper';
 import { HomeHeroSectionComponent } from './components/home-hero-section/home-hero-section.component';
 import { HomeMetricsStripComponent } from './components/home-metrics-strip/home-metrics-strip.component';
 import { HomeNavigationCardsComponent } from './components/home-navigation-cards/home-navigation-cards.component';
@@ -33,6 +48,9 @@ import { HomeStackChipsComponent } from './components/home-stack-chips/home-stac
     HomeMetricsStripComponent,
     HomeNavigationCardsComponent,
     HomeStackChipsComponent,
+    ProjectModalComponent,
+    RouterLink,
+    SectionHeaderComponent,
     TechnologyModalComponent,
     WrapperComponent,
     InfoStateComponent,
@@ -40,23 +58,31 @@ import { HomeStackChipsComponent } from './components/home-stack-chips/home-stac
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   private readonly dashboardService = inject(DashboardService);
+  private readonly projectsService = inject(ProjectsService);
+  private readonly technologiesService = inject(TechnologiesService);
   private readonly translationService = inject(TranslationService);
   private readonly dashboardSignal = signal<DashboardOverviewResponse | null>(null);
+  private readonly projectsSignal = signal<ProjectCollectionItemResponse[]>([]);
+  private readonly projectCountSignal = signal(0);
+  private readonly technologyCountSignal = signal(0);
+  private readonly selectedProjectSignal = signal<ProjectModalItem | null>(null);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
 
   protected readonly hero = HOME_HERO;
-  protected readonly navigationCards = HOME_NAVIGATION_CARDS;
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
   protected readonly dashboard = this.dashboardSignal.asReadonly();
   protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
+  protected readonly selectedProject = this.selectedProjectSignal.asReadonly();
+  protected readonly highlightedProjects = computed(() =>
+    mapHighlightedProjects(this.projectsSignal(), this.translationService.locale()),
+  );
   protected readonly heroMetrics = computed<readonly HomeMetricViewModel[]>(() => {
-    const summary = this.dashboard()?.summary;
-
     return [
       {
         value: `${this.calculateCareerYears()}+`,
@@ -65,13 +91,13 @@ export class HomeComponent {
         iconName: 'LuBadgeCheck',
       },
       {
-        value: this.formatCount(summary?.technologies, '60+'),
+        value: formatCountInFiveStep(this.technologyCountSignal()),
         labelKey: 'pages.home.metrics.technologies.label',
         descriptionKey: 'pages.home.metrics.technologies.description',
         iconName: 'LuCpu',
       },
       {
-        value: this.formatCount(summary?.projects, '13+'),
+        value: formatCountInFiveStep(this.projectCountSignal()),
         labelKey: 'pages.home.metrics.projects.label',
         descriptionKey: 'pages.home.metrics.projects.description',
         iconName: 'LuFolderKanban',
@@ -113,25 +139,30 @@ export class HomeComponent {
   );
 
   constructor() {
-    this.dashboardService
-      .getOverview()
+    forkJoin({
+      dashboard: this.dashboardService.getOverview(),
+      projects: this.projectsService.getProjects(),
+      technologies: this.technologiesService.getTechnologies(),
+    })
       .pipe(takeUntilDestroyed())
       .subscribe({
-        next: (dashboard) => {
+        next: ({ dashboard, projects, technologies }) => {
           this.dashboardSignal.set(dashboard);
+          this.projectsSignal.set(projects.data);
+          this.projectCountSignal.set(projects.pagination.totalItems);
+          this.technologyCountSignal.set(technologies.pagination.totalItems);
           this.hasError.set(false);
           this.isLoading.set(false);
         },
         error: () => {
           this.dashboardSignal.set(null);
+          this.projectsSignal.set([]);
+          this.projectCountSignal.set(0);
+          this.technologyCountSignal.set(0);
           this.hasError.set(true);
           this.isLoading.set(false);
         },
       });
-  }
-
-  private formatCount(value: number | undefined, fallback: string): string {
-    return typeof value === 'number' ? `${value}+` : fallback;
   }
 
   private calculateCareerYears(referenceDate = new Date()): number {
@@ -147,10 +178,20 @@ export class HomeComponent {
   }
 
   protected openTechnologyDetails(technology: TechnologyModalItem): void {
+    this.selectedProjectSignal.set(null);
     this.selectedTechnologySignal.set(technology);
   }
 
   protected closeTechnologyDetails(): void {
     this.selectedTechnologySignal.set(null);
+  }
+
+  protected openProjectDetails(project: ProjectModalItem): void {
+    this.selectedTechnologySignal.set(null);
+    this.selectedProjectSignal.set(project);
+  }
+
+  protected closeProjectDetails(): void {
+    this.selectedProjectSignal.set(null);
   }
 }

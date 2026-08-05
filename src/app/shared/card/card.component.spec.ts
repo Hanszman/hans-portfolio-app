@@ -81,4 +81,33 @@ describe('CardComponent', () => {
     expect(compiled.querySelector('.card-label')).toBeNull();
     expect(compiled.querySelector('.card-description')).toBeNull();
   });
+
+  it('should render localized project content and emit keyboard and pointer selections', () => {
+    const fixture = TestBed.createComponent(CardComponent);
+    const selectedSpy = jasmine.createSpy('selected');
+    fixture.componentInstance.selected.subscribe(selectedSpy);
+
+    fixture.componentRef.setInput('card', {
+      alignment: 'start',
+      eyebrow: 'Professional',
+      title: 'Portfolio',
+      description: 'A highlighted project.',
+      interactive: true,
+    });
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const card = compiled.querySelector('hans-card') as HTMLElement;
+
+    expect(compiled.textContent).toContain('// Professional');
+    expect(compiled.textContent).toContain('Portfolio');
+    expect(compiled.textContent).toContain('A highlighted project.');
+    expect(card.getAttribute('role')).toBe('button');
+
+    card.click();
+    card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    card.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+
+    expect(selectedSpy).toHaveBeenCalledTimes(3);
+  });
 });

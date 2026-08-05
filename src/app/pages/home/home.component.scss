@@ -9,3 +9,11 @@
 .home-page-state {
   @apply py-2;
 }
+
+.home-page-action {
+  @apply flex justify-center pt-2;
+}
+
+.home-highlighted-projects {
+  @apply grid gap-8;
+}

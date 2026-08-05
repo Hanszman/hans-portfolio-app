@@ -18,37 +18,43 @@ describe('HomeNavigationCardsComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the navigation cards as links', () => {
+  it('should render highlighted projects and emit the selected modal item', () => {
     const fixture = TestBed.createComponent(HomeNavigationCardsComponent);
+    const openProjectSpy = jasmine.createSpy('openProject');
+    fixture.componentInstance.openProject.subscribe(openProjectSpy);
+    const project = {
+      id: 'project-1',
+      title: 'Portfolio',
+      summary: 'Summary',
+      description: 'Description',
+      contextLabel: 'Professional',
+      dateRangeLabel: 'Jan 2025 - Present',
+      companyNames: [],
+      stackGroups: [],
+      links: [],
+      galleryItems: [],
+    };
 
     fixture.componentRef.setInput('cards', [
       {
-        eyebrowKey: 'pages.home.navigation.experiences.eyebrow',
-        titleKey: 'pages.home.navigation.experiences.title',
-        descriptionKey: 'pages.home.navigation.experiences.description',
-        route: '/experiences',
-      },
-      {
-        eyebrowKey: 'pages.home.navigation.skills.eyebrow',
-        titleKey: 'pages.home.navigation.skills.title',
-        descriptionKey: 'pages.home.navigation.skills.description',
-        route: '/skills',
-      },
-      {
-        eyebrowKey: 'pages.home.navigation.projects.eyebrow',
-        titleKey: 'pages.home.navigation.projects.title',
-        descriptionKey: 'pages.home.navigation.projects.description',
-        route: '/projects',
+        id: project.id,
+        eyebrow: project.contextLabel,
+        title: project.title,
+        description: project.description,
+        project,
       },
     ]);
 
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Experiences');
-    expect(compiled.textContent).toContain('Skills');
-    expect(compiled.textContent).toContain('Projects');
-    expect(compiled.querySelectorAll('a')).toHaveSize(3);
-    expect(compiled.querySelectorAll('hans-card')).toHaveSize(3);
+    expect(compiled.textContent).toContain('Professional');
+    expect(compiled.textContent).toContain('Portfolio');
+    expect(compiled.querySelectorAll('a')).toHaveSize(0);
+    expect(compiled.querySelectorAll('hans-card')).toHaveSize(1);
+
+    compiled.querySelector('hans-card')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+    expect(openProjectSpy).toHaveBeenCalledWith(project);
   });
 });

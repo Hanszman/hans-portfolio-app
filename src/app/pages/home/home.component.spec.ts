@@ -6,26 +6,70 @@ import { provideRouter } from '@angular/router';
 import { buildApiUrl } from '../../core/api/api.config';
 import { DashboardOverviewResponse } from '../../core/api/dashboard/dashboard.types';
 import { createDashboardOverviewResponse } from '../../core/api/mocks/dashboard.mocks';
+import { createProjectsCollectionResponse } from '../../core/api/mocks/projects.mocks';
+import { createTechnologiesCollectionResponse } from '../../core/api/mocks/technologies.mocks';
+import { ProjectsCollectionResponse } from '../../core/api/projects/projects.types';
+import { TechnologiesCollectionResponse } from '../../core/api/technologies/technologies.types';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
 import { HomeComponent } from './home.component';
 
 interface HomeComponentTestHook {
-  dashboardSignal: {
-    set(value: DashboardOverviewResponse | null): void;
-  };
+  dashboardSignal: { set(value: DashboardOverviewResponse | null): void };
   topTechnologyChips(): readonly unknown[];
+  highlightedProjects(): readonly { project: { id: string; title: string } }[];
   openTechnologyDetails(technology: { slug: string; name: string }): void;
   closeTechnologyDetails(): void;
   selectedTechnology(): { slug: string; name: string } | null;
-  formatCount(value: number | undefined, fallback: string): string;
+  openProjectDetails(project: { id: string; title: string }): void;
+  closeProjectDetails(): void;
+  selectedProject(): { id: string; title: string } | null;
   calculateCareerYears(referenceDate?: Date): number;
 }
 
+const defaultProjects = (): ProjectsCollectionResponse =>
+  createProjectsCollectionResponse({
+    pagination: {
+      page: 1,
+      pageSize: 100,
+      totalItems: 28,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
+
+const defaultTechnologies = (): TechnologiesCollectionResponse =>
+  createTechnologiesCollectionResponse({
+    pagination: {
+      page: 1,
+      pageSize: 100,
+      totalItems: 64,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
+
+const flushHomeRequests = (
+  httpTestingController: HttpTestingController,
+  dashboard = createDashboardOverviewResponse(),
+  projects = defaultProjects(),
+  technologies = defaultTechnologies(),
+): void => {
+  httpTestingController.expectOne(buildApiUrl('/dashboard')).flush(dashboard);
+  httpTestingController
+    .expectOne((request) => request.url.startsWith(buildApiUrl('/projects?')))
+    .flush(projects);
+  httpTestingController
+    .expectOne((request) => request.url.startsWith(buildApiUrl('/technologies?')))
+    .flush(technologies);
+};
+
 describe('HomeComponent', () => {
   beforeAll(() => {
-    const elementNames = [
+    for (const elementName of [
       'hans-button',
       'hans-tag',
       'hans-avatar',
@@ -33,9 +77,10 @@ describe('HomeComponent', () => {
       'hans-card',
       'hans-loading',
       'hans-modal',
-    ];
-
-    for (const elementName of elementNames) {
+      'hans-carousel',
+      'hans-chart',
+      'hans-progress-bar',
+    ]) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -44,7 +89,6 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
-
     await TestBed.configureTestingModule({
       imports: [HomeComponent],
       providers: [
@@ -62,92 +106,63 @@ describe('HomeComponent', () => {
     localStorage.removeItem(APP_LOCALE_STORAGE_KEY);
   });
 
-  it('should render the hero and loading state before the dashboard response arrives', () => {
+  it('should render the hero and loading state while all home resources load', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
-
     const compiled = fixture.nativeElement as HTMLElement;
     const httpTestingController = TestBed.inject(HttpTestingController);
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
 
     expect(compiled.textContent).toContain("Hi, I'm");
     expect(compiled.textContent).toContain('Victor Hanszman');
     expect(compiled.querySelector('hans-loading')).toBeTruthy();
-    expect(compiled.textContent).not.toContain('Connecting live portfolio data');
-    expect(compiled.querySelectorAll('hans-button')).toHaveSize(6);
     expect(compiled.querySelectorAll('hans-button.social-links-button')).toHaveSize(4);
 
-    request.flush(createDashboardOverviewResponse());
-    fixture.detectChanges();
+    flushHomeRequests(httpTestingController);
   });
 
-  it('should render the redesigned home with live dashboard data', () => {
+  it('should render rounded API totals, skill CTA and highlighted project cards', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
+    flushHomeRequests(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.textContent).toContain('7+');
-    expect(compiled.textContent).toContain('35+');
-    expect(compiled.textContent).toContain('12+');
+    expect(compiled.textContent).toContain('60+');
+    expect(compiled.textContent).toContain('25+');
     expect(compiled.textContent).toContain('Main Technologies');
-    expect(compiled.textContent).toContain('Experiences');
-    expect(compiled.textContent).toContain('Skills');
-    expect(compiled.textContent).toContain('Projects');
+    expect(compiled.textContent).toContain('Highlighted Projects');
+    expect(
+      Array.from(compiled.querySelectorAll('.home-page-action hans-button')).map(
+        (button) => (button as HTMLElement & { label: string }).label,
+      ),
+    ).toEqual(['Check out more skills', 'Check out more projects']);
     expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(3);
-    expect(compiled.querySelectorAll('a')).toHaveSize(3);
+    expect(compiled.querySelectorAll('app-home-navigation-cards hans-card').length).toBeGreaterThan(0);
+    expect(compiled.querySelectorAll('.card-action')).toHaveSize(0);
   });
 
-  it('should render localized dashboard fields in Portuguese', () => {
-    TestBed.inject(TranslationService).setLocale('pt-br');
-
+  it('should reactively localize highlighted project content in Portuguese and Spanish', () => {
     const fixture = TestBed.createComponent(HomeComponent);
+    const translation = TestBed.inject(TranslationService);
+    translation.setLocale('pt-br');
+    fixture.detectChanges();
+    flushHomeRequests(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Projetos em destaque');
 
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
+    translation.setLocale('es-es');
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Olá, sou');
-    expect(compiled.textContent).toContain('Tecnologias principais');
-    expect(compiled.textContent).toContain('Experiências');
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Proyectos destacados');
   });
 
-  it('should render localized dashboard fields in Spanish', () => {
-    TestBed.inject(TranslationService).setLocale('es-es');
-
+  it('should render an empty technology state when dashboard stack data is absent', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
-    fixture.detectChanges();
-
-    expect(compiled.textContent).toContain('Hola, soy');
-    expect(compiled.textContent).toContain('Tecnologías principales');
-    expect(compiled.textContent).toContain('Experiencias');
-  });
-
-  it('should render empty states when the technology list is empty', () => {
-    const fixture = TestBed.createComponent(HomeComponent);
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const httpTestingController = TestBed.inject(HttpTestingController);
-
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(
+    flushHomeRequests(
+      TestBed.inject(HttpTestingController),
       createDashboardOverviewResponse({
         technologyUsage: {
           generatedAtUtc: '2026-04-18T12:00:00.000Z',
@@ -162,61 +177,74 @@ describe('HomeComponent', () => {
     );
     fixture.detectChanges();
 
-    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
-    expect(message.message).toBe('No stack distribution was returned yet.');
+    const message = (fixture.nativeElement as HTMLElement).querySelector('hans-message') as
+      | (HTMLElement & { message: string })
+      | null;
+    expect(message?.message).toBe('No stack distribution was returned yet.');
   });
 
-  it('should render an API error state when the dashboard request fails', () => {
+  it('should render an API error when one of the required home resources fails', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
     const httpTestingController = TestBed.inject(HttpTestingController);
 
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(null, {
+    httpTestingController
+      .expectOne((request) => request.url.startsWith(buildApiUrl('/projects?')))
+      .flush(defaultProjects());
+    httpTestingController
+      .expectOne((request) => request.url.startsWith(buildApiUrl('/technologies?')))
+      .flush(defaultTechnologies());
+    httpTestingController.expectOne(buildApiUrl('/dashboard')).flush(null, {
       status: 500,
       statusText: 'Server Error',
     });
     fixture.detectChanges();
 
-    const message = compiled.querySelector('hans-message') as HTMLElement & { message: string };
-    expect(message.message).toContain('The live home data is unavailable right now');
+    const message = (fixture.nativeElement as HTMLElement).querySelector('hans-message') as
+      | (HTMLElement & { message: string })
+      | null;
+    expect(message?.message).toContain('The live home data is unavailable right now');
   });
 
   it('should calculate career years around the anniversary boundary', () => {
     const fixture = TestBed.createComponent(HomeComponent);
-    const httpTestingController = TestBed.inject(HttpTestingController);
     const component = fixture.componentInstance as unknown as HomeComponentTestHook;
-
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
+    flushHomeRequests(TestBed.inject(HttpTestingController));
 
     expect(component.calculateCareerYears(new Date('2026-09-03T00:00:00.000Z'))).toBe(8);
     expect(component.calculateCareerYears(new Date('2026-09-02T00:00:00.000Z'))).toBe(7);
   });
 
-  it('should use fallback values when dashboard data is absent', () => {
+  it('should expose empty derived collections when dashboard and projects are absent', () => {
     const fixture = TestBed.createComponent(HomeComponent);
-    const httpTestingController = TestBed.inject(HttpTestingController);
     const component = fixture.componentInstance as unknown as HomeComponentTestHook;
+    flushHomeRequests(
+      TestBed.inject(HttpTestingController),
+      createDashboardOverviewResponse(),
+      createProjectsCollectionResponse({
+        data: [],
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 0,
+          totalPages: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+        },
+      }),
+    );
 
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
-
-    component['dashboardSignal'].set(null);
+    component.dashboardSignal.set(null);
 
     expect(component.topTechnologyChips()).toEqual([]);
-    expect(component.formatCount(undefined, 'fallback')).toBe('fallback');
+    expect(component.highlightedProjects()).toEqual([]);
   });
 
-  it('should keep technology modal image empty when the dashboard slug has no asset fallback', () => {
+  it('should keep technology modal image empty when a dashboard slug has no visual', () => {
     const fixture = TestBed.createComponent(HomeComponent);
-    const httpTestingController = TestBed.inject(HttpTestingController);
     const component = fixture.componentInstance as unknown as HomeComponentTestHook;
-
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(
+    flushHomeRequests(
+      TestBed.inject(HttpTestingController),
       createDashboardOverviewResponse({
         technologyUsage: {
           generatedAtUtc: '2026-04-18T12:00:00.000Z',
@@ -226,43 +254,38 @@ describe('HomeComponent', () => {
           contexts: [],
           sources: [],
           topTechnologies: [
-            {
-              slug: 'unknown-stack',
-              name: 'Unknown Stack',
-              category: 'CUSTOM',
-              usageCount: 1,
-            },
+            { slug: 'unknown-stack', name: 'Unknown Stack', category: 'CUSTOM', usageCount: 1 },
           ],
         },
       }),
     );
 
     const [chip] = component.topTechnologyChips() as readonly {
-      value: { slug: string; image: unknown };
+      value: { image: unknown };
     }[];
-
     expect(chip.value.image).toBeNull();
   });
 
-  it('should open and close technology details from the stack chips', () => {
+  it('should open and close technology and highlighted project details without stale modals', () => {
     const fixture = TestBed.createComponent(HomeComponent);
-    const httpTestingController = TestBed.inject(HttpTestingController);
     const component = fixture.componentInstance as unknown as HomeComponentTestHook;
+    flushHomeRequests(TestBed.inject(HttpTestingController));
 
-    const request = httpTestingController.expectOne(buildApiUrl('/dashboard'));
-    request.flush(createDashboardOverviewResponse());
-    fixture.detectChanges();
+    const chip = component.topTechnologyChips()[0] as { value: { slug: string; name: string } };
+    component.openTechnologyDetails(chip.value);
+    expect(component.selectedTechnology()?.name).toBe(chip.value.name);
+    component.closeTechnologyDetails();
+    expect(component.selectedTechnology()).toBeNull();
 
-    const chip = component.topTechnologyChips()[0] as {
-      value: { slug: string; name: string };
-    };
+    const project = component.highlightedProjects()[0].project;
+    component.openProjectDetails(project);
+    expect(component.selectedProject()?.id).toBe(project.id);
 
     component.openTechnologyDetails(chip.value);
-
+    expect(component.selectedProject()).toBeNull();
     expect(component.selectedTechnology()?.name).toBe(chip.value.name);
 
-    component.closeTechnologyDetails();
-
-    expect(component.selectedTechnology()).toBeNull();
+    component.closeProjectDetails();
+    expect(component.selectedProject()).toBeNull();
   });
 });
