@@ -13,6 +13,18 @@
   @apply block h-full;
 }
 
+.card-interactive {
+  @apply cursor-pointer rounded-2xl outline-none transition-transform duration-200;
+}
+
+.card-interactive:hover {
+  transform: translateY(-0.2rem);
+}
+
+.card-interactive:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-default-color) 36%, transparent);
+}
+
 :host-context(html[data-app-theme='light']) {
   --card-background-color: linear-gradient(
     180deg,

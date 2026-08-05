@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  output,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -18,4 +19,11 @@ import { CardViewModel } from './card.types';
 })
 export class CardComponent {
   readonly card = input.required<CardViewModel>();
+  readonly selected = output<void>();
+
+  protected selectCard(): void {
+    if (this.card().interactive) {
+      this.selected.emit();
+    }
+  }
 }

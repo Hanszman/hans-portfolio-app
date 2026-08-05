@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  output,
 } from '@angular/core';
-import { HomeNavigationCardViewModel } from '../../home.types';
+import { HomeHighlightedProjectViewModel } from '../../home.types';
 import { CardComponent } from '../../../../shared/card/card.component';
 import { CardViewModel } from '../../../../shared/card/card.types';
+import { ProjectModalItem } from '../../../../shared/project-modal/project-modal.types';
 
 @Component({
   selector: 'app-home-navigation-cards',
@@ -15,15 +17,16 @@ import { CardViewModel } from '../../../../shared/card/card.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeNavigationCardsComponent {
-  readonly cards = input<readonly HomeNavigationCardViewModel[]>([]);
+  readonly cards = input<readonly HomeHighlightedProjectViewModel[]>([]);
+  readonly openProject = output<ProjectModalItem>();
 
-  protected toCard(card: HomeNavigationCardViewModel): CardViewModel {
+  protected toCard(card: HomeHighlightedProjectViewModel): CardViewModel {
     return {
       alignment: 'start',
-      eyebrowKey: card.eyebrowKey,
-      titleKey: card.titleKey,
-      descriptionKey: card.descriptionKey,
-      route: card.route,
+      eyebrow: card.eyebrow,
+      title: card.title,
+      description: card.description,
+      interactive: true,
     };
   }
 }

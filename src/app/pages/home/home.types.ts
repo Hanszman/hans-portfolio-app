@@ -3,6 +3,7 @@ import { AppTranslationKey } from '../../core/translation/translation.types';
 import { PortfolioSocialLink, PORTFOLIO_SOCIAL_LINKS } from '../../shared/social-links/social-links.types';
 import { TagButtonViewModel } from '../../shared/tag/tag-button/tag-button.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+import { ProjectModalItem } from '../../shared/project-modal/project-modal.types';
 
 export const HOME_PROFILE_IMAGE_SRC = buildRelativeImageAssetPath('profile/vh_profile.png');
 export const CAREER_START_DATE = new Date('2018-09-03T00:00:00.000Z');
@@ -33,11 +34,12 @@ export interface HomeStackChipViewModel extends TagButtonViewModel<TechnologyMod
   slug: string;
 }
 
-export interface HomeNavigationCardViewModel {
-  eyebrowKey: AppTranslationKey;
-  titleKey: AppTranslationKey;
-  descriptionKey: AppTranslationKey;
-  route: string;
+export interface HomeHighlightedProjectViewModel {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  project: ProjectModalItem;
 }
 
 export const HOME_HERO: HomeHeroViewModel = {
@@ -55,23 +57,3 @@ export const HOME_HERO: HomeHeroViewModel = {
   imageSrc: HOME_PROFILE_IMAGE_SRC,
 } as const;
 
-export const HOME_NAVIGATION_CARDS = [
-  {
-    eyebrowKey: 'pages.home.navigation.experiences.eyebrow',
-    titleKey: 'pages.home.navigation.experiences.title',
-    descriptionKey: 'pages.home.navigation.experiences.description',
-    route: '/experiences',
-  },
-  {
-    eyebrowKey: 'pages.home.navigation.skills.eyebrow',
-    titleKey: 'pages.home.navigation.skills.title',
-    descriptionKey: 'pages.home.navigation.skills.description',
-    route: '/skills',
-  },
-  {
-    eyebrowKey: 'pages.home.navigation.projects.eyebrow',
-    titleKey: 'pages.home.navigation.projects.title',
-    descriptionKey: 'pages.home.navigation.projects.description',
-    route: '/projects',
-  },
-] as const satisfies readonly HomeNavigationCardViewModel[];

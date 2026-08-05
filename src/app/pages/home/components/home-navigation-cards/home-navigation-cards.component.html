@@ -1,7 +1,7 @@
 <section class="home-navigation">
   <div class="home-navigation-grid">
-    @for (card of cards(); track card.route) {
-      <app-card [card]="toCard(card)" />
+    @for (card of cards(); track card.id) {
+      <app-card [card]="toCard(card)" (selected)="openProject.emit(card.project)" />
     }
   </div>
 </section>

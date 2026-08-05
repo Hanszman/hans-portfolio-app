@@ -1,11 +1,17 @@
 <hans-card
   class="card"
+  [class.card-interactive]="card().interactive"
+  [attr.role]="card().interactive ? 'button' : null"
+  [attr.tabindex]="card().interactive ? 0 : null"
   [cardLayout]="'custom'"
   [cardSize]="'large'"
   [cardBackgroundColor]="'var(--card-background-color)'"
   [cardBorderColor]="'var(--card-border-color)'"
   [cardMutedColor]="'var(--card-muted-color)'"
   [cardTextColor]="'var(--text-color)'"
+  (click)="selectCard()"
+  (keydown.enter)="selectCard()"
+  (keydown.space)="selectCard(); $event.preventDefault()"
 >
   <div class="card-content" [attr.data-alignment]="card().alignment ?? 'start'">
     @if (card().iconName) {
@@ -16,11 +22,17 @@
     @if (card().eyebrowKey) {
       <span class="card-eyebrow">{{ card().eyebrowKey! | translate }}</span>
     }
+    @if (card().eyebrow) {
+      <span class="card-eyebrow">// {{ card().eyebrow }}</span>
+    }
     @if (card().value) {
       <strong class="card-value">{{ card().value }}</strong>
     }
     @if (card().titleKey) {
       <strong class="card-title">{{ card().titleKey! | translate }}</strong>
+    }
+    @if (card().title) {
+      <strong class="card-title">{{ card().title }}</strong>
     }
     @if (card().labelKey) {
       <span class="card-label">{{ card().labelKey! | translate }}</span>
@@ -29,6 +41,9 @@
       <p class="card-description">
         {{ card().descriptionKey! | translate }}
       </p>
+    }
+    @if (card().description) {
+      <p class="card-description">{{ card().description }}</p>
     }
     @if (card().route) {
       <a
