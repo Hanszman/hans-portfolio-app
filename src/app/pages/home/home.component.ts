@@ -106,7 +106,7 @@ export class HomeComponent {
   });
 
   protected readonly topTechnologyChips = computed<readonly HomeStackChipViewModel[]>(() =>
-    (this.dashboard()?.technologyUsage.topTechnologies ?? []).slice(0, 8).map((technology) => {
+    (this.dashboard()?.technologyUsage.topTechnologies ?? []).map((technology) => {
       const imageSrc = resolveSkillVisualUrl(technology.slug);
       const stackKey = resolveSkillStackKey(technology);
       const typeKey = resolveSkillTypeKey(technology);
