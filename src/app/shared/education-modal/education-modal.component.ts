@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   ModalMediaLoadingTracker,
   uniqueModalMediaSources,
-} from '../modal-skeleton/modal-media-loading.helper';
+} from '../modal-skeleton/helpers/modal-media-loading.helper';
 import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.component';
 import { EducationModalItem } from './education-modal.types';
 

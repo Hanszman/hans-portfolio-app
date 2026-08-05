@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   ModalMediaLoadingTracker,
   uniqueModalMediaSources,
-} from '../modal-skeleton/modal-media-loading.helper';
+} from '../modal-skeleton/helpers/modal-media-loading.helper';
 import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.component';
 import { TagButtonComponent } from '../tag/tag-button/tag-button.component';
 import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
@@ -37,9 +37,7 @@ export class ProjectModalComponent {
   );
   protected readonly mediaLoading = this.mediaTracker.isLoading;
   protected readonly mediaSources = computed(() =>
-    uniqueModalMediaSources(
-      (this.project()?.galleryItems ?? []).map(({ imageSrc }) => imageSrc),
-    ),
+    uniqueModalMediaSources((this.project()?.galleryItems ?? []).map(({ imageSrc }) => imageSrc)),
   );
 
   constructor() {

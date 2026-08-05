@@ -6,6 +6,7 @@ DADOS:
 -Colocar as certificações e diplomas exibidas em um carrossel. Verificar se teria como adicionar mais de uma foto nas certificações.
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 IMPLEMENTAÇÕES:
+-Arrumar loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
 -Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Colocar scroll nas sessões de education e languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
