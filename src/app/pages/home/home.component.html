@@ -11,9 +11,9 @@
         <app-info-state mode="error" [message]="'pages.home.error' | translate" />
       </div>
     } @else {
-      <app-home-metrics-strip
+      <app-home-primary-cards
         [ariaLabelKey]="'pages.home.metrics.ariaLabel'"
-        [metrics]="heroMetrics()"
+        [cards]="primaryCards()"
       />
 
       @if (topTechnologyChips().length > 0) {
@@ -41,12 +41,13 @@
       @if (highlightedProjects().length > 0) {
         <section class="home-highlighted-projects">
           <app-section-header
+            presentation="compact-centered"
             [sectionLabel]="'pages.home.highlightedProjects.label' | translate"
             [title]="'pages.home.highlightedProjects.title' | translate"
             [description]="'pages.home.highlightedProjects.description' | translate"
           />
 
-          <app-home-navigation-cards
+          <app-home-secondary-cards
             [cards]="highlightedProjects()"
             (openProject)="openProjectDetails($event)"
           />

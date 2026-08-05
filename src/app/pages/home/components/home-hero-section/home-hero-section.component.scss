@@ -3,7 +3,7 @@
 }
 
 .home-hero {
-  @apply grid items-center gap-12 py-8 xl:min-h-[calc(100vh-12rem)] xl:grid-cols-[minmax(0,34rem)_minmax(28rem,1fr)] xl:py-12;
+  @apply grid items-center gap-12 pb-8 xl:min-h-[calc(100vh-12rem)] xl:grid-cols-[minmax(0,34rem)_minmax(28rem,1fr)] xl:pb-12;
 }
 
 .home-hero-copy {
@@ -91,7 +91,7 @@
 
 @media (max-width: 1024px) {
   .home-hero {
-    @apply gap-8 py-4;
+    @apply gap-8 pb-4;
   }
 
   .home-hero-copy {

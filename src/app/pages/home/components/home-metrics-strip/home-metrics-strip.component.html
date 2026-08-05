@@ -1,5 +1,0 @@
-<section class="home-metrics" [attr.aria-label]="ariaLabelKey() | translate">
-  @for (metric of metrics(); track metric.labelKey) {
-    <app-card [card]="toCard(metric)" />
-  }
-</section>

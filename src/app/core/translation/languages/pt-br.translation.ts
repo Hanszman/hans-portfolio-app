@@ -85,10 +85,10 @@ export const PT_BR_TRANSLATIONS = {
     'Há muitos anos construindo produtos web de alta qualidade no mercado',
   'pages.home.metrics.projects.label': 'Projetos entregues',
   'pages.home.metrics.projects.description':
-    'Experiência com muitos projetos profissionais, pessoais e academicos, sempre entregando valor',
+    'Experiência com muitos projetos profissionais, pessoais e academicos.',
   'pages.home.metrics.technologies.label': 'Tecnologias',
   'pages.home.metrics.technologies.description':
-    'Grande quantidade de tecnologias já utilizadas para desenvolvimento e estudos',
+    'Grande quantidade de tecnologias já utilizadas para desenvolvimento e estudos.',
   'pages.home.metrics.ariaLabel': 'Métricas do portfolio',
   'pages.home.loading': 'Conectando dados reais do portfolio...',
   'pages.home.error': 'Os dados reais da home estão indisponíveis no momento.',
@@ -105,16 +105,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.highlightedProjects.description':
     'Uma seleção de projetos que representam meus trabalhos e desafios técnicos mais relevantes.',
   'pages.home.highlightedProjects.moreProjects': 'Veja mais projetos',
-  'pages.home.navigation.experiences.eyebrow': '// carreira',
-  'pages.home.navigation.experiences.title': 'Experiências',
-  'pages.home.navigation.experiences.description':
-    'Jornada profissional e linha do tempo de carreira.',
-  'pages.home.navigation.skills.eyebrow': '// arsenal',
-  'pages.home.navigation.skills.title': 'Habilidades',
-  'pages.home.navigation.skills.description': 'Tecnologias, formações e idiomas.',
-  'pages.home.navigation.projects.eyebrow': '// entregas',
-  'pages.home.navigation.projects.title': 'Projetos',
-  'pages.home.navigation.projects.description': 'Aplicações reais e estudos de caso.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
   'pages.experiences.title': 'Experiência Profissional',
   'pages.experiences.description':

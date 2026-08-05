@@ -2,9 +2,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
-import { HomeNavigationCardsComponent } from './home-navigation-cards.component';
+import { HomeSecondaryCardsComponent } from './home-secondary-cards.component';
 
-describe('HomeNavigationCardsComponent', () => {
+describe('HomeSecondaryCardsComponent', () => {
   beforeAll(() => {
     if (!customElements.get('hans-card')) {
       customElements.define('hans-card', class extends HTMLElement {});
@@ -13,13 +13,13 @@ describe('HomeNavigationCardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeNavigationCardsComponent],
+      imports: [HomeSecondaryCardsComponent],
       providers: [provideZonelessChangeDetection(), provideAppTranslations(), provideRouter([])],
     }).compileComponents();
   });
 
-  it('should render highlighted projects and emit the selected modal item', () => {
-    const fixture = TestBed.createComponent(HomeNavigationCardsComponent);
+  it('should render secondary project cards and emit the selected modal item', () => {
+    const fixture = TestBed.createComponent(HomeSecondaryCardsComponent);
     const openProjectSpy = jasmine.createSpy('openProject');
     fixture.componentInstance.openProject.subscribe(openProjectSpy);
     const project = {
@@ -34,7 +34,6 @@ describe('HomeNavigationCardsComponent', () => {
       links: [],
       galleryItems: [],
     };
-
     fixture.componentRef.setInput('cards', [
       {
         id: project.id,
@@ -44,17 +43,14 @@ describe('HomeNavigationCardsComponent', () => {
         project,
       },
     ]);
-
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Professional');
     expect(compiled.textContent).toContain('Portfolio');
-    expect(compiled.querySelectorAll('a')).toHaveSize(0);
-    expect(compiled.querySelectorAll('hans-card')).toHaveSize(1);
+    expect(compiled.querySelector('app-truncated-text')).not.toBeNull();
 
     compiled.querySelector('hans-card')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-
-    expect(openProjectSpy).toHaveBeenCalledWith(project);
+    expect(openProjectSpy).toHaveBeenCalledOnceWith(project);
   });
 });

@@ -28,3 +28,19 @@
   @apply m-0 w-full max-w-none text-lg leading-8;
   color: color-mix(in srgb, var(--text-color) 66%, transparent);
 }
+
+.app-section-header-compact-centered {
+  @apply justify-items-center text-center;
+}
+
+.app-section-header-compact-centered .app-section-header-top-row {
+  @apply justify-center;
+}
+
+.app-section-header-compact-centered .app-section-header-title {
+  @apply text-3xl leading-tight md:text-4xl;
+}
+
+.app-section-header-compact-centered .app-section-header-description {
+  @apply max-w-3xl text-base leading-7;
+}

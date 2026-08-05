@@ -85,7 +85,7 @@ export const ES_ES_TRANSLATIONS = {
     'Durante muchos años, hemos estado desarrollando productos web de alta calidad para el mercado.',
   'pages.home.metrics.projects.label': 'Proyectos entregados',
   'pages.home.metrics.projects.description':
-    'Experiencia en numerosos proyectos profesionales, personales y académicos, aportando siempre valor.',
+    'Experiencia en numerosos proyectos profesionales, personales y académicos.',
   'pages.home.metrics.technologies.label': 'Tecnologías',
   'pages.home.metrics.technologies.description':
     'Ya se han utilizado numerosas tecnologías para el desarrollo y los estudios.',
@@ -105,16 +105,6 @@ export const ES_ES_TRANSLATIONS = {
   'pages.home.highlightedProjects.description':
     'Una selección de proyectos que representan mis trabajos y desafíos técnicos más relevantes.',
   'pages.home.highlightedProjects.moreProjects': 'Ver más proyectos',
-  'pages.home.navigation.experiences.eyebrow': '// carrera',
-  'pages.home.navigation.experiences.title': 'Experiencias',
-  'pages.home.navigation.experiences.description':
-    'Trayectoria profesional y línea de tiempo de carrera.',
-  'pages.home.navigation.skills.eyebrow': '// arsenal',
-  'pages.home.navigation.skills.title': 'Habilidades',
-  'pages.home.navigation.skills.description': 'Tecnologías, formaciones e idiomas.',
-  'pages.home.navigation.projects.eyebrow': '// entregas',
-  'pages.home.navigation.projects.title': 'Proyectos',
-  'pages.home.navigation.projects.description': 'Aplicaciones reales y estudios de caso.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
   'pages.experiences.title': 'Experiencia Profesional',
   'pages.experiences.description':

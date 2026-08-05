@@ -1,0 +1,5 @@
+<section class="home-primary-cards" [attr.aria-label]="ariaLabelKey() | translate">
+  @for (card of cards(); track card.labelKey) {
+    <app-card [card]="toCard(card)" />
+  }
+</section>

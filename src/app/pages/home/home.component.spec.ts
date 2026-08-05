@@ -138,7 +138,7 @@ describe('HomeComponent', () => {
       ),
     ).toEqual(['Check out more skills', 'Check out more projects']);
     expect(compiled.querySelectorAll('hans-tag').length).toBeGreaterThan(3);
-    expect(compiled.querySelectorAll('app-home-navigation-cards hans-card').length).toBeGreaterThan(0);
+    expect(compiled.querySelectorAll('app-home-secondary-cards hans-card').length).toBeGreaterThan(0);
     expect(compiled.querySelectorAll('.card-action')).toHaveSize(0);
   });
 

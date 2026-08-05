@@ -75,22 +75,18 @@ describe('TechnologyModalComponent', () => {
     const projectsRequest = httpTestingController.expectOne(
       buildApiUrl('/projects?page=1&pageSize=100&sortBy=sortOrder&sortDirection=asc'),
     );
-    const loadingChart = fixture.nativeElement.querySelector('hans-chart') as HTMLElement & {
-      isLoading: boolean;
-    };
-    const loadingProgressBars = fixture.nativeElement.querySelectorAll(
-      'hans-progress-bar',
-    ) as NodeListOf<HTMLElement & { loading: boolean }>;
-    expect(loadingChart.isLoading).toBeTrue();
-    expect(Array.from(loadingProgressBars).every((progress) => progress.loading)).toBeTrue();
+    expect(fixture.nativeElement.querySelector('hans-chart')).toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('hans-progress-bar')).toHaveSize(0);
+    expect(
+      fixture.nativeElement.querySelectorAll('.technology-modal-skeleton'),
+    ).toHaveSize(9);
     request.flush(createTechnologiesCollectionResponse());
     projectsRequest.flush(createProjectsCollectionResponse());
     fixture.detectChanges();
 
-    expect(
-      (fixture.nativeElement.querySelector('hans-chart') as HTMLElement & { isLoading: boolean })
-        .isLoading,
-    ).toBeFalse();
+    expect(fixture.nativeElement.querySelector('hans-chart')).not.toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('hans-progress-bar')).toHaveSize(2);
+    expect(fixture.nativeElement.querySelector('.technology-modal-skeleton')).toBeNull();
 
     const component = fixture.componentInstance as unknown as {
       details: () => readonly { value: string | number }[];

@@ -32,21 +32,21 @@ import { SKILL_STACK_LABEL_KEYS, SKILL_TYPE_LABEL_KEYS } from '../skills/skills.
 import {
   CAREER_START_DATE,
   HOME_HERO,
-  HomeMetricViewModel,
+  HomePrimaryCardViewModel,
   HomeStackChipViewModel,
 } from './home.types';
 import { formatCountInFiveStep, mapHighlightedProjects } from './helpers/home.helper';
 import { HomeHeroSectionComponent } from './components/home-hero-section/home-hero-section.component';
-import { HomeMetricsStripComponent } from './components/home-metrics-strip/home-metrics-strip.component';
-import { HomeNavigationCardsComponent } from './components/home-navigation-cards/home-navigation-cards.component';
+import { HomePrimaryCardsComponent } from './components/home-primary-cards/home-primary-cards.component';
+import { HomeSecondaryCardsComponent } from './components/home-secondary-cards/home-secondary-cards.component';
 import { HomeStackChipsComponent } from './components/home-stack-chips/home-stack-chips.component';
 
 @Component({
   selector: 'app-home',
   imports: [
     HomeHeroSectionComponent,
-    HomeMetricsStripComponent,
-    HomeNavigationCardsComponent,
+    HomePrimaryCardsComponent,
+    HomeSecondaryCardsComponent,
     HomeStackChipsComponent,
     ProjectModalComponent,
     RouterLink,
@@ -82,7 +82,7 @@ export class HomeComponent {
   protected readonly highlightedProjects = computed(() =>
     mapHighlightedProjects(this.projectsSignal(), this.translationService.locale()),
   );
-  protected readonly heroMetrics = computed<readonly HomeMetricViewModel[]>(() => {
+  protected readonly primaryCards = computed<readonly HomePrimaryCardViewModel[]>(() => {
     return [
       {
         value: `${this.calculateCareerYears()}+`,

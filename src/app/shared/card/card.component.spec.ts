@@ -20,15 +20,16 @@ describe('CardComponent', () => {
     }).compileComponents();
   });
 
-  it('should render a navigation card', () => {
+  it('should render a routed secondary card', () => {
     const fixture = TestBed.createComponent(CardComponent);
 
     fixture.componentRef.setInput('card', {
       alignment: 'start',
+      variant: 'secondary',
       route: '/projects',
-      eyebrowKey: 'pages.home.navigation.projects.eyebrow',
-      titleKey: 'pages.home.navigation.projects.title',
-      descriptionKey: 'pages.home.navigation.projects.description',
+      eyebrowKey: 'pages.home.highlightedProjects.label',
+      titleKey: 'pages.home.highlightedProjects.title',
+      descriptionKey: 'pages.home.highlightedProjects.description',
     });
     fixture.detectChanges();
 
@@ -102,6 +103,7 @@ describe('CardComponent', () => {
     expect(compiled.textContent).toContain('// Professional');
     expect(compiled.textContent).toContain('Portfolio');
     expect(compiled.textContent).toContain('A highlighted project.');
+    expect(compiled.querySelector('app-truncated-text')).not.toBeNull();
     expect(card.getAttribute('role')).toBe('button');
 
     card.click();

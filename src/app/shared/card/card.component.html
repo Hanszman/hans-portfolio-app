@@ -1,6 +1,8 @@
 <hans-card
   class="card"
   [class.card-interactive]="card().interactive"
+  [class.card-primary]="(card().variant ?? 'primary') === 'primary'"
+  [class.card-secondary]="card().variant === 'secondary'"
   [attr.role]="card().interactive ? 'button' : null"
   [attr.tabindex]="card().interactive ? 0 : null"
   [cardLayout]="'custom'"
@@ -39,11 +41,19 @@
     }
     @if (card().descriptionKey) {
       <p class="card-description">
-        {{ card().descriptionKey! | translate }}
+        <app-truncated-text
+          [text]="card().descriptionKey! | translate"
+          [maxLength]="card().descriptionMaxLength ?? 120"
+        />
       </p>
     }
     @if (card().description) {
-      <p class="card-description">{{ card().description }}</p>
+      <p class="card-description">
+        <app-truncated-text
+          [text]="card().description!"
+          [maxLength]="card().descriptionMaxLength ?? 120"
+        />
+      </p>
     }
     @if (card().route) {
       <a

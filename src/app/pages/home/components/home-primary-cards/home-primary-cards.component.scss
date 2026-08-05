@@ -1,0 +1,7 @@
+:host {
+  @apply block;
+}
+
+.home-primary-cards {
+  @apply grid auto-rows-fr gap-4 xl:grid-cols-3;
+}

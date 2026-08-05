@@ -11,4 +11,5 @@ export class SectionHeaderComponent {
   readonly sectionLabel = input.required<string>();
   readonly title = input.required<string>();
   readonly description = input.required<string>();
+  readonly presentation = input<'default' | 'compact-centered'>('default');
 }

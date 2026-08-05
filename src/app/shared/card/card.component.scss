@@ -13,6 +13,15 @@
   @apply block h-full;
 }
 
+.card-primary .card-content {
+  min-height: 13rem;
+}
+
+.card-secondary .card-content {
+  @apply overflow-hidden;
+  height: 13rem;
+}
+
 .card-interactive {
   @apply cursor-pointer rounded-2xl outline-none transition-transform duration-200;
 }
@@ -47,18 +56,17 @@
   text-align: start;
 }
 
-.card-content:has(.card-action) {
-  min-height: 14rem;
-}
-
 .card-eyebrow {
   @apply text-xs font-bold uppercase tracking-[0.24em];
   color: color-mix(in srgb, var(--primary-default-color) 84%, transparent);
 }
 
 .card-title {
-  @apply text-2xl font-semibold leading-tight;
+  @apply text-2xl font-semibold leading-tight overflow-hidden;
   color: var(--text-color);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .card-description {

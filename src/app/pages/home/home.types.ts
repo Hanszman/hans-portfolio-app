@@ -23,7 +23,7 @@ export interface HomeHeroViewModel {
   imageSrc: string;
 }
 
-export interface HomeMetricViewModel {
+export interface HomePrimaryCardViewModel {
   value: string;
   labelKey: AppTranslationKey;
   descriptionKey: AppTranslationKey;
@@ -34,7 +34,7 @@ export interface HomeStackChipViewModel extends TagButtonViewModel<TechnologyMod
   slug: string;
 }
 
-export interface HomeHighlightedProjectViewModel {
+export interface HomeSecondaryCardViewModel {
   id: string;
   eyebrow: string;
   title: string;

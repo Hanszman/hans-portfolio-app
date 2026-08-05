@@ -1,30 +1,28 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
-import { HomeMetricsStripComponent } from './home-metrics-strip.component';
+import { HomePrimaryCardsComponent } from './home-primary-cards.component';
 
-describe('HomeMetricsStripComponent', () => {
+describe('HomePrimaryCardsComponent', () => {
   beforeAll(() => {
-    if (!customElements.get('hans-icon')) {
-      customElements.define('hans-icon', class extends HTMLElement {});
-    }
-    if (!customElements.get('hans-card')) {
-      customElements.define('hans-card', class extends HTMLElement {});
+    for (const elementName of ['hans-icon', 'hans-card']) {
+      if (!customElements.get(elementName)) {
+        customElements.define(elementName, class extends HTMLElement {});
+      }
     }
   });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeMetricsStripComponent],
+      imports: [HomePrimaryCardsComponent],
       providers: [provideZonelessChangeDetection(), provideAppTranslations()],
     }).compileComponents();
   });
 
-  it('should render the provided metrics cards', () => {
-    const fixture = TestBed.createComponent(HomeMetricsStripComponent);
-
+  it('should render the provided primary cards', () => {
+    const fixture = TestBed.createComponent(HomePrimaryCardsComponent);
     fixture.componentRef.setInput('ariaLabelKey', 'pages.home.metrics.ariaLabel');
-    fixture.componentRef.setInput('metrics', [
+    fixture.componentRef.setInput('cards', [
       {
         value: '7+',
         labelKey: 'pages.home.metrics.years.label',
@@ -37,20 +35,12 @@ describe('HomeMetricsStripComponent', () => {
         descriptionKey: 'pages.home.metrics.technologies.description',
         iconName: 'LuCpu',
       },
-      {
-        value: '13+',
-        labelKey: 'pages.home.metrics.projects.label',
-        descriptionKey: 'pages.home.metrics.projects.description',
-        iconName: 'LuFolderKanban',
-      },
     ]);
-
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('7+');
     expect(compiled.textContent).toContain('60+');
-    expect(compiled.textContent).toContain('13+');
-    expect(compiled.querySelectorAll('hans-card')).toHaveSize(3);
+    expect(compiled.querySelectorAll('hans-card')).toHaveSize(2);
   });
 });

@@ -84,10 +84,10 @@ export const EN_TRANSLATIONS = {
     'Building high-quality web products for the market for many years.',
   'pages.home.metrics.projects.label': 'Projects Delivered',
   'pages.home.metrics.projects.description':
-    'Experience with many professional, personal, and academic projects, consistently delivering value',
+    'Experience with many professional, personal, and academic projects.',
   'pages.home.metrics.technologies.label': 'Technologies',
   'pages.home.metrics.technologies.description':
-    'A wide range of technologies already used for development and studies',
+    'A wide range of technologies already used for development and studies.',
   'pages.home.metrics.ariaLabel': 'Portfolio metrics',
   'pages.home.loading': 'Connecting live portfolio data...',
   'pages.home.error': 'The live home data is unavailable right now.',
@@ -104,15 +104,6 @@ export const EN_TRANSLATIONS = {
   'pages.home.highlightedProjects.description':
     'A selection of projects that represent my most relevant work and technical challenges.',
   'pages.home.highlightedProjects.moreProjects': 'Check out more projects',
-  'pages.home.navigation.experiences.eyebrow': '// career',
-  'pages.home.navigation.experiences.title': 'Experiences',
-  'pages.home.navigation.experiences.description': 'Professional journey and career timeline.',
-  'pages.home.navigation.skills.eyebrow': '// arsenal',
-  'pages.home.navigation.skills.title': 'Skills',
-  'pages.home.navigation.skills.description': 'Technologies, formations and languages.',
-  'pages.home.navigation.projects.eyebrow': '// builds',
-  'pages.home.navigation.projects.title': 'Projects',
-  'pages.home.navigation.projects.description': 'Real-world applications and case studies.',
   'pages.experiences.sectionLabel': '// CAREER_TIMELINE',
   'pages.experiences.title': 'Professional Experience',
   'pages.experiences.description':

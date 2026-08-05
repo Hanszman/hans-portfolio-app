@@ -12,15 +12,17 @@
       <section class="technology-modal-information">
         @if (isContentLoading()) {
           <hans-loading
-            class="technology-modal-image-skeleton"
+            class="technology-modal-skeleton technology-modal-image-skeleton"
             loadingType="skeleton"
+            loadingColor="neutral"
             skeletonWidth="6rem"
             skeletonHeight="6rem"
             ariaLabel="Loading technology image"
           ></hans-loading>
           <hans-loading
-            class="technology-modal-subtitle-skeleton"
+            class="technology-modal-skeleton technology-modal-subtitle-skeleton"
             loadingType="skeleton"
+            loadingColor="neutral"
             skeletonWidth="45%"
             skeletonHeight="1.5rem"
             ariaLabel="Loading technology category"
@@ -28,7 +30,9 @@
           <div class="technology-modal-details" aria-label="Loading technology information">
             @for (placeholder of [0, 1, 2, 3]; track placeholder) {
               <hans-loading
+                class="technology-modal-skeleton technology-modal-detail-skeleton"
                 loadingType="skeleton"
+                loadingColor="neutral"
                 skeletonWidth="100%"
                 skeletonHeight="5.25rem"
                 [ariaLabel]="'Loading technology information ' + (placeholder + 1)"
@@ -64,28 +68,45 @@
         @if (!isContentLoading()) {
           <p class="technology-modal-radar-summary">{{ radarSummary() }}</p>
         }
-        <hans-chart
-          chartType="radar"
-          [series]="radarSeries()"
-          [radarIndicators]="radarIndicators()"
-          [radarValueFormatter]="formatRadarValue"
-          [showLegend]="false"
-          [height]="380"
-          [isLoading]="isContentLoading()"
-          loadingType="skeleton"
-        ></hans-chart>
+        @if (isContentLoading()) {
+          <hans-loading
+            class="technology-modal-skeleton technology-modal-radar-skeleton"
+            loadingType="skeleton"
+            loadingColor="neutral"
+            skeletonWidth="100%"
+            skeletonHeight="23.75rem"
+            ariaLabel="Loading experience chart"
+          ></hans-loading>
+        } @else {
+          <hans-chart
+            chartType="radar"
+            [series]="radarSeries()"
+            [radarIndicators]="radarIndicators()"
+            [radarValueFormatter]="formatRadarValue"
+            [showLegend]="false"
+            [height]="380"
+          ></hans-chart>
+        }
       </section>
 
       <section class="technology-modal-progress">
         @if (isContentLoading()) {
-          <hans-progress-bar
-            [label]="'pages.experiences.technology.level' | translate"
-            [loading]="true"
-          ></hans-progress-bar>
-          <hans-progress-bar
-            [label]="'pages.experiences.technology.frequency' | translate"
-            [loading]="true"
-          ></hans-progress-bar>
+          <hans-loading
+            class="technology-modal-skeleton technology-modal-progress-skeleton"
+            loadingType="skeleton"
+            loadingColor="neutral"
+            skeletonWidth="100%"
+            skeletonHeight="3.75rem"
+            ariaLabel="Loading knowledge level"
+          ></hans-loading>
+          <hans-loading
+            class="technology-modal-skeleton technology-modal-progress-skeleton"
+            loadingType="skeleton"
+            loadingColor="neutral"
+            skeletonWidth="100%"
+            skeletonHeight="3.75rem"
+            ariaLabel="Loading usage frequency"
+          ></hans-loading>
         } @else {
           @if (levelProgress(); as progress) {
             <hans-progress-bar

@@ -1,0 +1,7 @@
+:host {
+  @apply block;
+}
+
+.home-secondary-cards-grid {
+  @apply grid auto-rows-fr gap-4 lg:grid-cols-3;
+}

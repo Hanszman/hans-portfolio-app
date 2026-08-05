@@ -1,7 +1,7 @@
 import { ProjectCollectionItemResponse } from '../../../core/api/projects/projects.types';
 import { AppLocale } from '../../../core/translation/translation.types';
 import { mapProjectToCaseCard } from '../../projects/helpers/projects.helper';
-import { HomeHighlightedProjectViewModel } from '../home.types';
+import { HomeSecondaryCardViewModel } from '../home.types';
 
 export const formatCountInFiveStep = (value: number): string =>
   `${Math.floor(Math.max(0, value) / 5) * 5}+`;
@@ -9,7 +9,7 @@ export const formatCountInFiveStep = (value: number): string =>
 export const mapHighlightedProjects = (
   projects: readonly ProjectCollectionItemResponse[],
   locale: AppLocale,
-): readonly HomeHighlightedProjectViewModel[] =>
+): readonly HomeSecondaryCardViewModel[] =>
   projects
     .filter((project) => project.highlight)
     .map((project) => {

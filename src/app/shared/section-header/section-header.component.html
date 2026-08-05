@@ -1,4 +1,7 @@
-<div class="app-section-header">
+<div
+  class="app-section-header"
+  [class.app-section-header-compact-centered]="presentation() === 'compact-centered'"
+>
   <div class="app-section-header-top-row">
     <span class="app-section-header-label">{{ sectionLabel() }}</span>
 
