@@ -75,10 +75,10 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.hero.greeting': 'Olá, sou',
   'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack Sênior',
   'pages.home.hero.description':
-    'Engenheiro de Software Sênior com experiência de desenvolvimento tanto em Front-End como em Back-End. Moro em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e aberto a novas oportunidades em desenvolvimento de software.',
+    'Engenheiro de Software Sênior com experiência de desenvolvimento tanto em Front-End como em Back-End. Moro em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e estou aberto a novas oportunidades em desenvolvimento de software.',
   'pages.home.hero.location': 'Belo Horizonte, Brasil',
-  'pages.home.hero.cta.projects': 'Ver projetos',
-  'pages.home.hero.cta.experiences': 'Minha experiência',
+  'pages.home.hero.cta.projects': 'Ver Projetos',
+  'pages.home.hero.cta.experiences': 'Minha Experiência',
   'pages.home.hero.social.navigation': 'Links sociais',
   'pages.home.metrics.years.label': 'Anos de experiência',
   'pages.home.metrics.years.description':
@@ -88,20 +88,20 @@ export const PT_BR_TRANSLATIONS = {
     'Experiência com muitos projetos profissionais, pessoais e academicos.',
   'pages.home.metrics.technologies.label': 'Tecnologias',
   'pages.home.metrics.technologies.description':
-    'Grande quantidade de tecnologias já utilizadas para desenvolvimento e estudos.',
+    'Grande quantidade de ferramentas já utilizadas para desenvolvimento e estudos.',
   'pages.home.metrics.ariaLabel': 'Métricas do portfolio',
   'pages.home.loading': 'Conectando dados reais do portfolio...',
   'pages.home.error': 'Os dados reais da home estão indisponíveis no momento.',
   'pages.home.stack.label': '// CORE_STACK',
-  'pages.home.stack.title': 'Tecnologias principais',
+  'pages.home.stack.title': 'Tecnologias Principais',
   'pages.home.stack.description':
     'Atualmente essas são as principais stacks que tenho mais domínio e que tive mais prática ao longo da minha carreira no desenvolvimento de software.',
   'pages.home.stack.projects': 'projetos',
   'pages.home.stack.technologies': 'tecnologias',
   'pages.home.stack.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
   'pages.home.stack.moreSkills': 'Veja mais habilidades',
-  'pages.home.highlightedProjects.label': '// PROJETOS_EM_DESTAQUE',
-  'pages.home.highlightedProjects.title': 'Projetos em destaque',
+  'pages.home.highlightedProjects.label': '// PRINCIPAIS_CONQUISTAS',
+  'pages.home.highlightedProjects.title': 'Projetos em Destaque',
   'pages.home.highlightedProjects.description':
     'Uma seleção de projetos que representam meus trabalhos e desafios técnicos mais relevantes.',
   'pages.home.highlightedProjects.moreProjects': 'Veja mais projetos',
@@ -305,7 +305,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.projects.sectionLabel': '// PROJECTS_SHOWCASE',
   'pages.projects.title': 'Projetos',
   'pages.projects.description':
-    'Uma coleção de aplicações reais, trabalhos acadêmicos e experimentos pessoais.',
+    'Uma coleção de aplicações reais, profissionais, trabalhos acadêmicos e experimentos pessoais.',
   'pages.projects.snapshot.label': 'Panorama dos cases',
   'pages.projects.snapshot.title': 'Trabalhos publicados com assets reais vinculados',
   'pages.projects.snapshot.description':
@@ -373,10 +373,10 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.projects.fallback.noLinks': 'Nenhum link publicado foi vinculado ainda.',
   'taxonomy.projects.fallback.noCompanies': 'Nenhuma empresa vinculada ainda.',
   'taxonomy.projects.fallback.untitledLink': 'Link sem título',
-  'pages.dashboard.sectionLabel': 'Fundação',
-  'pages.dashboard.title': 'Dashboard analítico',
+  'pages.dashboard.sectionLabel': '// FOUNDATION',
+  'pages.dashboard.title': 'Dashboard Analítico',
   'pages.dashboard.description':
-    'Sinais agregados entre projetos, stack e carreira agora vivem em uma rota própria, alimentada pelos endpoints públicos de dashboard.',
+    'Análises agregadas entre stacks, ferramentas e projetos da carreira em um painel com gráficos informativos.',
   'pages.dashboard.snapshot.label': 'Snapshot',
   'pages.dashboard.snapshot.title': 'Pegada publicada em uma leitura só',
   'pages.dashboard.snapshot.description':

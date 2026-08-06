@@ -74,9 +74,9 @@ export const EN_TRANSLATIONS = {
   'pages.home.hero.greeting': "Hi, I'm",
   'pages.home.hero.subtitle': 'Senior Full Stack Software Engineer',
   'pages.home.hero.description':
-    'Senior Software Engineer with experience in both Front-End and Back-End development. I am based in Belo Horizonte, Minas Gerais, Brazil. Currently working remotely and open to new opportunities in software development.',
+    'Senior Software Engineer with experience in both Front-End and Back-End development. Based in Belo Horizonte, Minas Gerais, Brazil. I am currently working remotely and open to new opportunities in software development.',
   'pages.home.hero.location': 'Belo Horizonte, Brazil',
-  'pages.home.hero.cta.projects': 'View projects',
+  'pages.home.hero.cta.projects': 'View Projects',
   'pages.home.hero.cta.experiences': 'My Experience',
   'pages.home.hero.social.navigation': 'Social links',
   'pages.home.metrics.years.label': 'Years of Experience',
@@ -87,7 +87,7 @@ export const EN_TRANSLATIONS = {
     'Experience with many professional, personal, and academic projects.',
   'pages.home.metrics.technologies.label': 'Technologies',
   'pages.home.metrics.technologies.description':
-    'A wide range of technologies already used for development and studies.',
+    'A wide range of tools already used for development and studies.',
   'pages.home.metrics.ariaLabel': 'Portfolio metrics',
   'pages.home.loading': 'Connecting live portfolio data...',
   'pages.home.error': 'The live home data is unavailable right now.',
@@ -99,7 +99,7 @@ export const EN_TRANSLATIONS = {
   'pages.home.stack.technologies': 'technologies',
   'pages.home.stack.empty': 'No stack distribution was returned yet.',
   'pages.home.stack.moreSkills': 'Check out more skills',
-  'pages.home.highlightedProjects.label': '// HIGHLIGHTED_PROJECTS',
+  'pages.home.highlightedProjects.label': '// MAIN_ACHIEVEMENTS',
   'pages.home.highlightedProjects.title': 'Highlighted Projects',
   'pages.home.highlightedProjects.description':
     'A selection of projects that represent my most relevant work and technical challenges.',
@@ -162,7 +162,7 @@ export const EN_TRANSLATIONS = {
   'pages.skills.sectionLabel': '// SKILLS_ARSENAL',
   'pages.skills.title': 'Skills & Technologies',
   'pages.skills.description':
-    'A comprehensive view of my technical arsenal, education and language proficiencies.',
+    'A comprehensive overview of my technical arsenal, education and language proficiencies.',
   'pages.skills.snapshot.label': 'Portfolio snapshot',
   'pages.skills.snapshot.title': 'Technology clarity from live API metrics',
   'pages.skills.snapshot.description':
@@ -302,7 +302,7 @@ export const EN_TRANSLATIONS = {
   'pages.projects.sectionLabel': '// PROJECTS_SHOWCASE',
   'pages.projects.title': 'Projects',
   'pages.projects.description':
-    'A collection of real-world applications, academic works and personal experiments.',
+    'A collection of real-world applications, professional, academic works and personal experiments.',
   'pages.projects.snapshot.label': 'Cases snapshot',
   'pages.projects.snapshot.title': 'Published work with real linked assets',
   'pages.projects.snapshot.description':
@@ -370,10 +370,10 @@ export const EN_TRANSLATIONS = {
   'taxonomy.projects.fallback.noLinks': 'No published links were attached yet.',
   'taxonomy.projects.fallback.noCompanies': 'No linked companies yet.',
   'taxonomy.projects.fallback.untitledLink': 'Untitled link',
-  'pages.dashboard.sectionLabel': 'Foundation',
-  'pages.dashboard.title': 'Portfolio analytics dashboard',
+  'pages.dashboard.sectionLabel': '// FOUNDATION',
+  'pages.dashboard.title': 'Analytics Dashboard',
   'pages.dashboard.description':
-    'Aggregate signals across projects, stack and career now live in their own route, fed by the public dashboard endpoints.',
+    'Aggregated analysis of career stacks, tools and projects, presented on a dashboard with informative charts.',
   'pages.dashboard.snapshot.label': 'Snapshot',
   'pages.dashboard.snapshot.title': 'Published footprint in one glance',
   'pages.dashboard.snapshot.description':

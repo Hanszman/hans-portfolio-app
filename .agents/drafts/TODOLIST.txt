@@ -11,11 +11,17 @@ IMPLEMENTAÇÕES:
 -Arrumar loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
 -Colocar loading no read dos operations-modais de todas as entidades também e colocar um botão de search para ativar a busca, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
 -Sessão de main technologies também deveria usar app-section-header assim como highlighted projects usou.
+-Os cards de Education e Languages parecem não estar vindo com dados do banco como título, descrição, período, nível, etc. Temos que automatizar isso para vir dados dinâmicos. Nas languages, não precisamos desse texto de "meta", pode remover isso.
+-Colocar scroll nas sessões de Education e Languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
+-Padronize as traduções nos 3 idiomas, reparei que tem muito texto igual com várias chaves diferentes pra ele.
+-Mostrar todas as datas com dia (atualmente está somente em mês), por exemplo: vi vários "set. de 2020" ou "09/2020", mude para a data correta, como: 09/09/2020. Arrume também todas as exibições/inputs/date-pickers de data para mm/dd/yyyy quando estiver no idioma em inglês, crie essa prop na lib para mudar a exibição da data e envie esse parametro para o component no portfolio quando o idioma usar inglês, faça isso pra todo lugar que tivermos datas no sistema.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
--Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
--Colocar scroll nas sessões de education e languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
--Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
+-Os cards das technologies não estão do mesmo tamanho, padronize para que todos ocupem o mesmo espaço, com a mesma altura.
+-No tooltip do gráfico de technologies podemos converter os "meses" pra "anos e meses", por exemplo: mude "76 meses" para "6 anos e 4 meses".
+-Os textos "Ambiente:" e "x projetos" estão muito pequenos na tela de projetos, padronize para usar o mesmo tamanho de fonte padrão das telas.
+-Criar um filtro de highlighted/destaques em technologies e projects.
 -Talvez criar uma coluna para projeto inacabado/concluído.
+-Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).

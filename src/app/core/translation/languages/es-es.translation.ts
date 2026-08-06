@@ -77,8 +77,8 @@ export const ES_ES_TRANSLATIONS = {
   'pages.home.hero.description':
     'Ingeniero de software sénior con experiencia en desarrollo Front-End y Back-End. Resido en Belo Horizonte, Minas Gerais, Brasil. Actualmente trabajo de forma remota y estoy abierto a nuevas oportunidades en el desarrollo de software.',
   'pages.home.hero.location': 'Belo Horizonte, Brasil',
-  'pages.home.hero.cta.projects': 'Ver proyectos',
-  'pages.home.hero.cta.experiences': 'Mi experiencia',
+  'pages.home.hero.cta.projects': 'Ver Proyectos',
+  'pages.home.hero.cta.experiences': 'Mi Experiencia',
   'pages.home.hero.social.navigation': 'Enlaces sociales',
   'pages.home.metrics.years.label': 'Años de experiencia',
   'pages.home.metrics.years.description':
@@ -88,20 +88,20 @@ export const ES_ES_TRANSLATIONS = {
     'Experiencia en numerosos proyectos profesionales, personales y académicos.',
   'pages.home.metrics.technologies.label': 'Tecnologías',
   'pages.home.metrics.technologies.description':
-    'Ya se han utilizado numerosas tecnologías para el desarrollo y los estudios.',
+    'Ya se han utilizado numerosas herramientas para el desarrollo y los estudios.',
   'pages.home.metrics.ariaLabel': 'Métricas del portfolio',
   'pages.home.loading': 'Conectando datos reales del portfolio...',
   'pages.home.error': 'Los datos reales de la home no están disponibles por ahora.',
   'pages.home.stack.label': '// CORE_STACK',
-  'pages.home.stack.title': 'Tecnologías principales',
+  'pages.home.stack.title': 'Tecnologías Principales',
   'pages.home.stack.description':
     'Actualmente, estas son las principales tecnologías en las que tengo mayor experiencia y con las que he tenido más práctica a lo largo de mi carrera en el desarrollo de software.',
   'pages.home.stack.projects': 'proyectos',
   'pages.home.stack.technologies': 'tecnologías',
   'pages.home.stack.empty': 'Todavía no se devolvió ninguna distribución de stack.',
   'pages.home.stack.moreSkills': 'Ver más habilidades',
-  'pages.home.highlightedProjects.label': '// PROYECTOS_DESTACADOS',
-  'pages.home.highlightedProjects.title': 'Proyectos destacados',
+  'pages.home.highlightedProjects.label': '// PRINCIPALES_LOGROS',
+  'pages.home.highlightedProjects.title': 'Proyectos Destacados',
   'pages.home.highlightedProjects.description':
     'Una selección de proyectos que representan mis trabajos y desafíos técnicos más relevantes.',
   'pages.home.highlightedProjects.moreProjects': 'Ver más proyectos',
@@ -305,7 +305,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.projects.sectionLabel': '// PROJECTS_SHOWCASE',
   'pages.projects.title': 'Proyectos',
   'pages.projects.description':
-    'Una colección de aplicaciones reales, trabajos académicos y experimentos personales.',
+    'Una colección de aplicaciones reales, profesionales, trabajos académicos y experimentos personales.',
   'pages.projects.snapshot.label': 'Panorama de casos',
   'pages.projects.snapshot.title': 'Trabajo publicado con assets reales vinculados',
   'pages.projects.snapshot.description':
@@ -373,10 +373,10 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.projects.fallback.noLinks': 'Todavía no se vinculó ningún link publicado.',
   'taxonomy.projects.fallback.noCompanies': 'Todavía no hay empresas vinculadas.',
   'taxonomy.projects.fallback.untitledLink': 'Link sin título',
-  'pages.dashboard.sectionLabel': 'Fundación',
-  'pages.dashboard.title': 'Dashboard analítico',
+  'pages.dashboard.sectionLabel': '// FOUNDATION',
+  'pages.dashboard.title': 'Dashboard Analítico',
   'pages.dashboard.description':
-    'Señales agregadas entre proyectos, stack y carrera ahora viven en una ruta propia, alimentada por los endpoints públicos de dashboard.',
+    'Análisis agregado de todas las áreas profesionales, herramientas y proyectos, presentado en un panel de control con gráficos informativos.',
   'pages.dashboard.snapshot.label': 'Snapshot',
   'pages.dashboard.snapshot.title': 'Huella publicada en una sola lectura',
   'pages.dashboard.snapshot.description':
