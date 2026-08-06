@@ -24,9 +24,9 @@ IMPLEMENTAÇÕES:
 -Talvez criar uma coluna para projeto inacabado/concluído.
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
+-Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.
 -Os textos com os valores dos gráficos no tema dark estão escuros demais pra visualizar, mudar a cor desses textos para uma cor clara, assim como nos textos normais na tela dark.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
--Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles.
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
 
 AUTOMATIZAÇÕES:
