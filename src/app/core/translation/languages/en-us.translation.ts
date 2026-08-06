@@ -370,7 +370,7 @@ export const EN_TRANSLATIONS = {
   'taxonomy.projects.fallback.noLinks': 'No published links were attached yet.',
   'taxonomy.projects.fallback.noCompanies': 'No linked companies yet.',
   'taxonomy.projects.fallback.untitledLink': 'Untitled link',
-  'pages.dashboard.sectionLabel': '// FOUNDATION',
+  'pages.dashboard.sectionLabel': '// DASHBOARD',
   'pages.dashboard.title': 'Analytics Dashboard',
   'pages.dashboard.description':
     'Aggregated analysis of career stacks, tools and projects, presented on a dashboard with informative charts.',

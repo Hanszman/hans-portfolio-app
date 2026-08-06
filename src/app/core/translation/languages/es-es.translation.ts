@@ -373,8 +373,8 @@ export const ES_ES_TRANSLATIONS = {
   'taxonomy.projects.fallback.noLinks': 'Todavía no se vinculó ningún link publicado.',
   'taxonomy.projects.fallback.noCompanies': 'Todavía no hay empresas vinculadas.',
   'taxonomy.projects.fallback.untitledLink': 'Link sin título',
-  'pages.dashboard.sectionLabel': '// FOUNDATION',
-  'pages.dashboard.title': 'Dashboard Analítico',
+  'pages.dashboard.sectionLabel': '// DASHBOARD',
+  'pages.dashboard.title': 'Panel Analítico',
   'pages.dashboard.description':
     'Análisis agregado de todas las áreas profesionales, herramientas y proyectos, presentado en un panel de control con gráficos informativos.',
   'pages.dashboard.snapshot.label': 'Snapshot',
