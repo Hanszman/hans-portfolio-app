@@ -5,6 +5,7 @@ DADOS:
 -Cadastrar imagens dos prints nos modais do projetos utilizando carrossel que implementamos.
 -Colocar as certificações e diplomas exibidas em um carrossel. Verificar se teria como adicionar mais de uma foto nas certificações.
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
+
 IMPLEMENTAÇÕES:
 -Informação de topTechnologies que estamos exibindo no main technologies não está refletindo as highlighted technologies e deveria. Precisamos arrumar essa conta em buildTopTechnologies no backend.
 -Arrumar loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
@@ -17,8 +18,10 @@ IMPLEMENTAÇÕES:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Entender o motivo da organização dos services de consumo da api estar com technologies fora de admin, ao invés de skills (já vi que está assim no Back-End também, será que compensa fazermos essa mudança lá e depois aqui?).
+
 AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.
+
 DEPOIS:
 -Terminar de fazer alguns projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
 -Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção.
