@@ -8,11 +8,11 @@ DADOS:
 IMPLEMENTAÇÕES:
 -Informação de topTechnologies que estamos exibindo no main technologies não está refletindo as highlighted technologies e deveria. Precisamos arrumar essa conta em buildTopTechnologies no backend.
 -Arrumar loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
--Colocar loading no read dos operations-modais de todas as entidades também e colocar um botão de search, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
+-Colocar loading no read dos operations-modais de todas as entidades também e colocar um botão de search para ativar a busca, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
+-Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
 -Mostrar todas as datas com dia (atualmente está somente em mês). Talvez arrumar inputs de data para mm/dd/yyyy quando estiver no idioma em inglês.
 -Colocar scroll nas sessões de education e languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
 -Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
--Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
 -Talvez criar uma coluna para projeto inacabado/concluído.
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
