@@ -11,6 +11,10 @@ import {
   resolveImageAssetCaptionEn,
   resolveImageAssetCaptionPt,
   resolveImageAssetExperienceIdFromRelation,
+  resolveImageAssetFormationIdFromRelation,
+  resolveImageAssetSpokenLanguageIdFromRelation,
+  resolveImageAssetCustomerIdFromRelation,
+  resolveImageAssetJobIdFromRelation,
   resolveImageAssetProjectIdFromRelation,
   resolveImageAssetTechnologyIdFromRelation,
 } from './image-assets-operations.types';
@@ -90,6 +94,34 @@ describe('image-assets operations types', () => {
       title: 'Angular',
       subtitle: 'angular',
     });
+    expect(
+      createImageAssetCatalogOptionViewModel({
+        id: 'formation-1',
+        titlePt: 'Sistemas de Informação',
+        institution: 'PUC Minas',
+      } as never),
+    ).toEqual({ id: 'formation-1', title: 'Sistemas de Informação', subtitle: 'PUC Minas' });
+    expect(
+      createImageAssetCatalogOptionViewModel({
+        id: 'language-1',
+        code: 'en',
+        namePt: 'Inglês',
+      } as never),
+    ).toEqual({ id: 'language-1', title: 'Inglês', subtitle: 'en' });
+    expect(
+      createImageAssetCatalogOptionViewModel({
+        id: 'customer-1',
+        name: 'Ford',
+        slug: 'ford',
+      } as never),
+    ).toEqual({ id: 'customer-1', title: 'Ford', subtitle: 'ford' });
+    expect(
+      createImageAssetCatalogOptionViewModel({
+        id: 'job-1',
+        namePt: 'Desenvolvedor',
+        slug: 'developer',
+      } as never),
+    ).toEqual({ id: 'job-1', title: 'Desenvolvedor', subtitle: 'developer' });
   });
 
   it('should resolve optional text fallbacks and relation ids', () => {
@@ -116,6 +148,25 @@ describe('image-assets operations types', () => {
       'technology-2',
     );
     expect(resolveImageAssetTechnologyIdFromRelation({})).toBeNull();
+    expect(resolveImageAssetFormationIdFromRelation({ formationId: 'formation-1' })).toBe(
+      'formation-1',
+    );
+    expect(resolveImageAssetFormationIdFromRelation({ formation: { id: 'formation-2' } })).toBe(
+      'formation-2',
+    );
+    expect(resolveImageAssetFormationIdFromRelation({})).toBeNull();
+    expect(
+      resolveImageAssetSpokenLanguageIdFromRelation({
+        spokenLanguage: { id: 'language-1' },
+      }),
+    ).toBe('language-1');
+    expect(resolveImageAssetSpokenLanguageIdFromRelation({})).toBeNull();
+    expect(resolveImageAssetCustomerIdFromRelation({ customer: { id: 'customer-1' } })).toBe(
+      'customer-1',
+    );
+    expect(resolveImageAssetCustomerIdFromRelation({})).toBeNull();
+    expect(resolveImageAssetJobIdFromRelation({ job: { id: 'job-1' } })).toBe('job-1');
+    expect(resolveImageAssetJobIdFromRelation({})).toBeNull();
 
     expect(resolveImageAssetAltPt({ altPt: null } as never)).toBe('');
     expect(resolveImageAssetAltPt({ altPt: 'Logo PT' } as never)).toBe('Logo PT');

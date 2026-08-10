@@ -63,6 +63,9 @@ export interface TechnologyCollectionItemResponse {
   projectRelations?: TechnologyRelationRecord[] | null;
   experienceRelations?: TechnologyRelationRecord[] | null;
   formationRelations?: TechnologyRelationRecord[] | null;
+  projectIds?: string[] | null;
+  experienceIds?: string[] | null;
+  formationIds?: string[] | null;
   tagIds?: string[] | null;
   linkIds?: string[] | null;
   imageAssetIds?: string[] | null;

@@ -20,10 +20,10 @@ describe('DashboardHeroComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain('Foundation');
-    expect(compiled.textContent).toContain('Portfolio analytics dashboard');
+    expect(compiled.textContent).toContain('// DASHBOARD');
+    expect(compiled.textContent).toContain('Analytics Dashboard');
     expect(compiled.textContent).toContain(
-      'Aggregate signals across projects, stack and career now live in their own route, fed by the public dashboard endpoints.',
+      'Aggregated analysis of career stacks, tools and projects, presented on a dashboard with informative charts.',
     );
   });
 });

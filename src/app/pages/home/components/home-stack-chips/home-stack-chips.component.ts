@@ -3,10 +3,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
 import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
 import { HomeStackChipViewModel } from '../../home.types';
+import { SectionHeaderComponent } from '../../../../shared/section-header/section-header.component';
 
 @Component({
   selector: 'app-home-stack-chips',
-  imports: [TagButtonComponent, TranslatePipe],
+  imports: [TagButtonComponent, TranslatePipe, SectionHeaderComponent],
   templateUrl: './home-stack-chips.component.html',
   styleUrl: './home-stack-chips.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

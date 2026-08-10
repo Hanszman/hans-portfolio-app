@@ -20,6 +20,14 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
+import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/spoken-languages.service';
+import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages.types';
+import { CustomersService } from '../../../../core/api/customers/customers.service';
+import { CustomerRecord } from '../../../../core/api/customers/customers.types';
+import { JobsService } from '../../../../core/api/jobs/jobs.service';
+import { JobRecord } from '../../../../core/api/jobs/jobs.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -59,6 +67,10 @@ export class ImageAssetsOperationsComponent implements OnInit {
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly technologiesService = inject(TechnologiesService);
+  private readonly formationsService = inject(FormationsService);
+  private readonly spokenLanguagesService = inject(SpokenLanguagesService);
+  private readonly customersService = inject(CustomersService);
+  private readonly jobsService = inject(JobsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);
@@ -67,6 +79,10 @@ export class ImageAssetsOperationsComponent implements OnInit {
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
   private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
   private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
+  private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
+  private readonly spokenLanguagesSignal = signal<readonly SpokenLanguageRecord[]>([]);
+  private readonly customersSignal = signal<readonly CustomerRecord[]>([]);
+  private readonly jobsSignal = signal<readonly JobRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -99,6 +115,16 @@ export class ImageAssetsOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildImageAssetCatalogOptions(this.technologiesSignal()),
   );
+  protected readonly formationOptions = computed(() =>
+    buildImageAssetCatalogOptions(this.formationsSignal()),
+  );
+  protected readonly spokenLanguageOptions = computed(() =>
+    buildImageAssetCatalogOptions(this.spokenLanguagesSignal()),
+  );
+  protected readonly customerOptions = computed(() =>
+    buildImageAssetCatalogOptions(this.customersSignal()),
+  );
+  protected readonly jobOptions = computed(() => buildImageAssetCatalogOptions(this.jobsSignal()));
   protected readonly imageAssetKindOptions = computed(() => {
     this.translation.locale();
 
@@ -311,6 +337,24 @@ export class ImageAssetsOperationsComponent implements OnInit {
     }));
   }
 
+  toggleFormation(formationId: string): void {
+    this.patchForm({ formationIds: this.toggleSelection(this.form().formationIds, formationId) });
+  }
+
+  toggleSpokenLanguage(spokenLanguageId: string): void {
+    this.patchForm({
+      spokenLanguageIds: this.toggleSelection(this.form().spokenLanguageIds, spokenLanguageId),
+    });
+  }
+
+  toggleCustomer(customerId: string): void {
+    this.patchForm({ customerIds: this.toggleSelection(this.form().customerIds, customerId) });
+  }
+
+  toggleJob(jobId: string): void {
+    this.patchForm({ jobIds: this.toggleSelection(this.form().jobIds, jobId) });
+  }
+
   async submitModal(): Promise<void> {
     const accessToken = this.adminSessionService.accessToken();
 
@@ -352,14 +396,26 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [imageAssetsResponse, projectsResponse, experiencesResponse, technologiesResponse] =
-        await Promise.all([
+      const [
+        imageAssetsResponse,
+        projectsResponse,
+        experiencesResponse,
+        technologiesResponse,
+        formationsResponse,
+        spokenLanguagesResponse,
+        customersResponse,
+        jobsResponse,
+      ] = await Promise.all([
           firstValueFrom(
             this.imageAssetsOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
           firstValueFrom(this.projectsService.getProjects()),
           firstValueFrom(this.experiencesService.getExperiences()),
           firstValueFrom(this.technologiesService.getTechnologies()),
+          firstValueFrom(this.formationsService.getAll(1, 100)),
+          firstValueFrom(this.spokenLanguagesService.getAll(1, 100)),
+          firstValueFrom(this.customersService.getAll(1, 100)),
+          firstValueFrom(this.jobsService.getAll(1, 100)),
         ]);
 
       this.imageAssetsSignal.set(imageAssetsResponse.data);
@@ -367,6 +423,10 @@ export class ImageAssetsOperationsComponent implements OnInit {
       this.projectsSignal.set(projectsResponse.data);
       this.experiencesSignal.set(experiencesResponse.data);
       this.technologiesSignal.set(technologiesResponse.data);
+      this.formationsSignal.set(formationsResponse.data);
+      this.spokenLanguagesSignal.set(spokenLanguagesResponse.data);
+      this.customersSignal.set(customersResponse.data);
+      this.jobsSignal.set(jobsResponse.data);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.imageAssets.feedback.loadError');
       this.toastService.showError('pages.admin.imageAssets.feedback.loadError');

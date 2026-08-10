@@ -214,6 +214,42 @@
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
         ></app-operations-relation-picker>
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.imageAssets.fields.formations.label' | translate"
+          [description]="'pages.admin.imageAssets.fields.formations.description' | translate"
+          [emptyMessage]="'pages.admin.imageAssets.fields.formations.empty' | translate"
+          [options]="formationOptions()"
+          [selectedIds]="form().formationIds"
+          (toggled)="toggleFormation($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.imageAssets.fields.spokenLanguages.label' | translate"
+          [description]="'pages.admin.imageAssets.fields.spokenLanguages.description' | translate"
+          [emptyMessage]="'pages.admin.imageAssets.fields.spokenLanguages.empty' | translate"
+          [options]="spokenLanguageOptions()"
+          [selectedIds]="form().spokenLanguageIds"
+          (toggled)="toggleSpokenLanguage($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.imageAssets.fields.customers.label' | translate"
+          [description]="'pages.admin.imageAssets.fields.customers.description' | translate"
+          [emptyMessage]="'pages.admin.imageAssets.fields.customers.empty' | translate"
+          [options]="customerOptions()"
+          [selectedIds]="form().customerIds"
+          (toggled)="toggleCustomer($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.imageAssets.fields.jobs.label' | translate"
+          [description]="'pages.admin.imageAssets.fields.jobs.description' | translate"
+          [emptyMessage]="'pages.admin.imageAssets.fields.jobs.empty' | translate"
+          [options]="jobOptions()"
+          [selectedIds]="form().jobIds"
+          (toggled)="toggleJob($event)"
+        />
       </div>
     }
   }

@@ -12,6 +12,16 @@ import { TechnologiesService } from '../../../../core/api/technologies/technolog
 import { TechnologyAdminRecord } from '../../../../core/api/technologies/technologies.types';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
+import { ProjectsService } from '../../../../core/api/projects/projects.service';
+import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
+import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
+import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
+import { TagsService } from '../../../../core/api/tags/tags.service';
+import { TagRecord } from '../../../../core/api/tags/tags.types';
+import { LinksService } from '../../../../core/api/links/links.service';
+import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -47,10 +57,20 @@ import { TechnologiesOperationsModalComponent } from './components/technologies-
 export class TechnologiesOperationsComponent implements OnInit {
   private readonly service = inject(TechnologiesService);
   private readonly imagesService = inject(ImageAssetsService);
+  private readonly projectsService = inject(ProjectsService);
+  private readonly experiencesService = inject(ExperiencesService);
+  private readonly formationsService = inject(FormationsService);
+  private readonly tagsService = inject(TagsService);
+  private readonly linksService = inject(LinksService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
   private readonly recordsSignal = signal<readonly TechnologyAdminRecord[]>([]);
   private readonly imagesSignal = signal<readonly ImageAssetRecord[]>([]);
+  private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
+  private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
+  private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
+  private readonly tagsSignal = signal<readonly TagRecord[]>([]);
+  private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -68,6 +88,37 @@ export class TechnologiesOperationsComponent implements OnInit {
   );
   protected readonly imageOptions = computed(() =>
     buildTechnologyImageAssetOptions(this.imagesSignal()),
+  );
+  protected readonly projectOptions = computed(() =>
+    this.projectsSignal().map((item) => ({ id: item.id, title: item.titlePt, subtitle: item.slug })),
+  );
+  protected readonly experienceOptions = computed(() =>
+    this.experiencesSignal().map((item) => ({
+      id: item.id,
+      title: item.titlePt,
+      subtitle: item.companyName,
+    })),
+  );
+  protected readonly formationOptions = computed(() =>
+    this.formationsSignal().map((item) => ({
+      id: item.id,
+      title: item.titlePt,
+      subtitle: item.institution,
+    })),
+  );
+  protected readonly tagOptions = computed(() =>
+    this.tagsSignal().map((item) => ({
+      id: item.id,
+      title: item.namePt ?? item.slug,
+      subtitle: item.slug,
+    })),
+  );
+  protected readonly linkOptions = computed(() =>
+    this.linksSignal().map((item) => ({
+      id: item.id,
+      title: item.labelPt ?? item.url,
+      subtitle: item.url,
+    })),
   );
   protected readonly pagination = this.paginationSignal.asReadonly();
   protected readonly isLoading = this.loadingSignal.asReadonly();
@@ -161,11 +212,38 @@ export class TechnologiesOperationsComponent implements OnInit {
   }
 
   toggleImageAsset(id: string): void {
+    this.toggleRelation('imageAssetIds', id);
+  }
+
+  toggleProject(id: string): void {
+    this.toggleRelation('projectIds', id);
+  }
+
+  toggleExperience(id: string): void {
+    this.toggleRelation('experienceIds', id);
+  }
+
+  toggleFormation(id: string): void {
+    this.toggleRelation('formationIds', id);
+  }
+
+  toggleTag(id: string): void {
+    this.toggleRelation('tagIds', id);
+  }
+
+  toggleLink(id: string): void {
+    this.toggleRelation('linkIds', id);
+  }
+
+  private toggleRelation(
+    field: 'projectIds' | 'experienceIds' | 'formationIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+    id: string,
+  ): void {
     this.formSignal.update((form) => ({
       ...form,
-      imageAssetIds: form.imageAssetIds.includes(id)
-        ? form.imageAssetIds.filter((value) => value !== id)
-        : [...form.imageAssetIds, id],
+      [field]: form[field].includes(id)
+        ? form[field].filter((value) => value !== id)
+        : [...form[field], id],
     }));
   }
 
@@ -192,13 +270,23 @@ export class TechnologiesOperationsComponent implements OnInit {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     try {
-      const [response, images] = await Promise.all([
+      const [response, images, projects, experiences, formations, tags, links] = await Promise.all([
         firstValueFrom(this.service.getAll(page, this.pagination().pageSize, search)),
         firstValueFrom(this.imagesService.getAll(1, 100)),
+        firstValueFrom(this.projectsService.getProjects()),
+        firstValueFrom(this.experiencesService.getExperiences()),
+        firstValueFrom(this.formationsService.getAll(1, 100)),
+        firstValueFrom(this.tagsService.getAll(1, 100)),
+        firstValueFrom(this.linksService.getAll(1, 100)),
       ]);
       this.recordsSignal.set(response.data);
       this.paginationSignal.set(response.pagination);
       this.imagesSignal.set(images.data);
+      this.projectsSignal.set(projects.data);
+      this.experiencesSignal.set(experiences.data);
+      this.formationsSignal.set(formations.data);
+      this.tagsSignal.set(tags.data);
+      this.linksSignal.set(links.data);
     } catch {
       this.errorSignal.set('pages.admin.technologies.feedback.loadError');
       this.toast.showError('pages.admin.technologies.feedback.loadError');

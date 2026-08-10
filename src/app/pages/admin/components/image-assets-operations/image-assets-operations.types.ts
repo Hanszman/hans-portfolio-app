@@ -4,10 +4,18 @@ import {
   ImageAssetProjectRelationRecord,
   ImageAssetRecord,
   ImageAssetTechnologyRelationRecord,
+  ImageAssetFormationRelationRecord,
+  ImageAssetSpokenLanguageRelationRecord,
+  ImageAssetCustomerRelationRecord,
+  ImageAssetJobRelationRecord,
 } from '../../../../core/api/image-assets/image-assets.types';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
+import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages.types';
+import { CustomerRecord } from '../../../../core/api/customers/customers.types';
+import { JobRecord } from '../../../../core/api/jobs/jobs.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -210,7 +218,11 @@ export const createImageAssetCatalogOptionViewModel = (
   item:
     | ProjectCollectionItemResponse
     | ExperienceCollectionItemResponse
-    | TechnologyCollectionItemResponse,
+    | TechnologyCollectionItemResponse
+    | FormationRecord
+    | SpokenLanguageRecord
+    | CustomerRecord
+    | JobRecord,
 ): ImageAssetCatalogOptionViewModel => {
   if ('companyName' in item) {
     return {
@@ -220,12 +232,33 @@ export const createImageAssetCatalogOptionViewModel = (
     };
   }
 
+  if (
+    'institution' in item &&
+    typeof item.institution === 'string' &&
+    'titlePt' in item &&
+    typeof item.titlePt === 'string'
+  ) {
+    return { id: item.id, title: item.titlePt, subtitle: item.institution };
+  }
+
   if ('titlePt' in item) {
     return {
       id: item.id,
       title: item.titlePt,
       subtitle: item.slug,
     };
+  }
+
+  if ('code' in item) {
+    return { id: item.id, title: item.namePt, subtitle: item.code };
+  }
+
+  if ('name' in item && typeof item.name === 'string') {
+    return { id: item.id, title: item.name, subtitle: item.slug };
+  }
+
+  if ('namePt' in item) {
+    return { id: item.id, title: item.namePt, subtitle: item.slug };
   }
 
   return {
@@ -246,6 +279,22 @@ export const resolveImageAssetExperienceIdFromRelation = (
 export const resolveImageAssetTechnologyIdFromRelation = (
   relation: ImageAssetTechnologyRelationRecord,
 ): string | null => relation.technologyId ?? relation.technology?.id ?? null;
+
+export const resolveImageAssetFormationIdFromRelation = (
+  relation: ImageAssetFormationRelationRecord,
+): string | null => relation.formationId ?? relation.formation?.id ?? null;
+
+export const resolveImageAssetSpokenLanguageIdFromRelation = (
+  relation: ImageAssetSpokenLanguageRelationRecord,
+): string | null => relation.spokenLanguageId ?? relation.spokenLanguage?.id ?? null;
+
+export const resolveImageAssetCustomerIdFromRelation = (
+  relation: ImageAssetCustomerRelationRecord,
+): string | null => relation.customerId ?? relation.customer?.id ?? null;
+
+export const resolveImageAssetJobIdFromRelation = (
+  relation: ImageAssetJobRelationRecord,
+): string | null => relation.jobId ?? relation.job?.id ?? null;
 
 export const resolveImageAssetAltPt = (imageAsset: ImageAssetRecord): string =>
   imageAsset.altPt ?? '';

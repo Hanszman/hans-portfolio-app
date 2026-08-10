@@ -40,6 +40,11 @@ describe('technologies operations helper', () => {
       frequency: '',
       highlight: true,
       sortOrder: '0',
+      projectIds: [],
+      experienceIds: [],
+      formationIds: [],
+      tagIds: [],
+      linkIds: [],
       imageAssetIds: [],
     });
     expect(buildTechnologiesFormValue(technology())).toEqual({
@@ -50,6 +55,11 @@ describe('technologies operations helper', () => {
       frequency: 'FREQUENT',
       highlight: true,
       sortOrder: '2',
+      projectIds: [],
+      experienceIds: [],
+      formationIds: [],
+      tagIds: [],
+      linkIds: [],
       imageAssetIds: ['image-1'],
     });
     expect(
@@ -69,6 +79,11 @@ describe('technologies operations helper', () => {
       frequency: '',
       highlight: true,
       sortOrder: '0',
+      projectIds: [],
+      experienceIds: [],
+      formationIds: [],
+      tagIds: [],
+      linkIds: [],
       imageAssetIds: [],
     });
     expect(
@@ -108,6 +123,36 @@ describe('technologies operations helper', () => {
         }),
       ).imageAssetIds,
     ).toEqual([]);
+
+    expect(
+      buildTechnologiesFormValue(
+        technology({
+          projectIds: ['project-direct'],
+          projectUsages: [
+            { projectId: 'project-direct' },
+            { project: { id: 'project-nested' } },
+          ],
+          experienceUses: [
+            { experienceId: 'experience-direct' },
+            { experience: { id: 'experience-nested' } },
+          ],
+          formationUses: [
+            { formationId: 'formation-direct' },
+            { formation: { id: 'formation-nested' } },
+          ],
+          tags: [{ tagId: 'tag-direct' }, { tag: { id: 'tag-nested' } }],
+          links: [{ linkId: 'link-direct' }, { link: { id: 'link-nested' } }],
+        }),
+      ),
+    ).toEqual(
+      jasmine.objectContaining({
+        projectIds: ['project-direct', 'project-nested'],
+        experienceIds: ['experience-direct', 'experience-nested'],
+        formationIds: ['formation-direct', 'formation-nested'],
+        tagIds: ['tag-direct', 'tag-nested'],
+        linkIds: ['link-direct', 'link-nested'],
+      }),
+    );
   });
 
   it('sorts image options and maps technology view models', () => {
@@ -155,6 +200,11 @@ describe('technologies operations helper', () => {
       frequency: 'FREQUENT',
       highlight: false,
       sortOrder: '3',
+      projectIds: ['project-1', 'project-1'],
+      experienceIds: ['experience-1'],
+      formationIds: ['formation-1'],
+      tagIds: ['tag-1'],
+      linkIds: ['link-1'],
       imageAssetIds: ['image-1', 'image-1'],
     };
     expect(buildTechnologiesMutationPayload(form)).toEqual({
@@ -167,11 +217,11 @@ describe('technologies operations helper', () => {
         frequency: 'FREQUENT',
         highlight: false,
         sortOrder: 3,
-        projectRelations: [],
-        experienceRelations: [],
-        formationRelations: [],
-        tagIds: [],
-        linkIds: [],
+        projectRelations: [{ projectId: 'project-1' }],
+        experienceRelations: [{ experienceId: 'experience-1' }],
+        formationRelations: [{ formationId: 'formation-1' }],
+        tagIds: ['tag-1'],
+        linkIds: ['link-1'],
         imageAssetIds: ['image-1'],
       },
     });

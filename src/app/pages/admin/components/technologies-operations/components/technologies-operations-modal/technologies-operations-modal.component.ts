@@ -23,6 +23,7 @@ import { AppTranslationKey } from '../../../../../../core/translation/translatio
 import {
   TECHNOLOGIES_OPERATIONS_FIELDS,
   TechnologyImageAssetOptionViewModel,
+  TechnologyRelationOptionViewModel,
   TechnologyOperationsViewModel,
   TechnologiesOperationsFormValue,
   TechnologiesOperationsModalMode,
@@ -63,6 +64,11 @@ export class TechnologiesOperationsModalComponent {
     createEmptyTechnologiesOperationsFormValue(),
   );
   readonly imageOptions = input<readonly TechnologyImageAssetOptionViewModel[]>([]);
+  readonly projectOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
+  readonly experienceOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
+  readonly formationOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
+  readonly tagOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
+  readonly linkOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
@@ -76,6 +82,11 @@ export class TechnologiesOperationsModalComponent {
     value: string | boolean;
   }>();
   readonly imageAssetToggled = output<string>();
+  readonly projectToggled = output<string>();
+  readonly experienceToggled = output<string>();
+  readonly formationToggled = output<string>();
+  readonly tagToggled = output<string>();
+  readonly linkToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();

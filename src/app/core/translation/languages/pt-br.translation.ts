@@ -597,7 +597,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.fields.nameEn.placeholder': 'Digite o nome da tag em inglês',
   'pages.admin.tags.fields.type.label': 'Tipo',
   'pages.admin.tags.fields.type.placeholder': 'Selecione o tipo da tag',
-  'pages.admin.tags.fields.type.empty': 'Nenhum tipo de tag esta disponivel no momento.',
+  'pages.admin.tags.fields.type.empty': 'Nenhum tipo de tag esta disponível no momento.',
   'pages.admin.tags.fields.type.options.STACK': 'Stack',
   'pages.admin.tags.fields.type.options.DOMAIN': 'Dominio',
   'pages.admin.tags.fields.type.options.PLATFORM': 'Plataforma',
@@ -687,7 +687,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.descriptionEn.placeholder': 'Descreva este link em inglês',
   'pages.admin.links.fields.type.label': 'Tipo',
   'pages.admin.links.fields.type.placeholder': 'Selecione o tipo do link',
-  'pages.admin.links.fields.type.empty': 'Nenhum tipo de link esta disponivel no momento.',
+  'pages.admin.links.fields.type.empty': 'Nenhum tipo de link esta disponível no momento.',
   'pages.admin.links.fields.type.options.GITHUB': 'GitHub',
   'pages.admin.links.fields.type.options.DEPLOY': 'Deploy',
   'pages.admin.links.fields.type.options.NPM': 'npm',
@@ -822,6 +822,22 @@ export const PT_BR_TRANSLATIONS = {
     'Selecione todas as tecnologias que devem expor este arquivo de mídia em suas referências públicas.',
   'pages.admin.imageAssets.fields.technologies.empty':
     'Nenhuma tecnologia pública está disponível para relacionamento agora.',
+  'pages.admin.imageAssets.fields.formations.label': 'Formações relacionadas',
+  'pages.admin.imageAssets.fields.formations.description':
+    'Selecione todas as Formações vinculadas a esta imagem.',
+  'pages.admin.imageAssets.fields.formations.empty': 'Nenhuma formação esta disponível.',
+  'pages.admin.imageAssets.fields.spokenLanguages.label': 'Idiomas relacionados',
+  'pages.admin.imageAssets.fields.spokenLanguages.description':
+    'Selecione todos os idiomas vinculados a esta imagem.',
+  'pages.admin.imageAssets.fields.spokenLanguages.empty': 'Nenhum idioma esta disponível.',
+  'pages.admin.imageAssets.fields.customers.label': 'Clientes relacionados',
+  'pages.admin.imageAssets.fields.customers.description':
+    'Selecione todos os clientes vinculados a esta imagem.',
+  'pages.admin.imageAssets.fields.customers.empty': 'Nenhum cliente esta disponível.',
+  'pages.admin.imageAssets.fields.jobs.label': 'Cargos relacionados',
+  'pages.admin.imageAssets.fields.jobs.description':
+    'Selecione todos os cargos vinculados a esta imagem.',
+  'pages.admin.imageAssets.fields.jobs.empty': 'Nenhum cargo esta disponível.',
   'pages.admin.imageAssets.modal.create.title': 'Criar image asset',
   'pages.admin.imageAssets.modal.read.title': 'Ler image assets',
   'pages.admin.imageAssets.modal.read.description':
@@ -1106,6 +1122,26 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.fields.sortOrder.label': 'Ordem',
   'pages.admin.technologies.fields.sortOrder.placeholder': 'Digite a ordem de exibicao',
   'pages.admin.technologies.fields.imageAssets.label': 'Imagens relacionadas',
+  'pages.admin.technologies.fields.projects.label': 'Projetos relacionados',
+  'pages.admin.technologies.fields.projects.description':
+    'Selecione todos os projetos que usam esta tecnologia.',
+  'pages.admin.technologies.fields.projects.empty': 'Nenhum projeto esta disponível.',
+  'pages.admin.technologies.fields.experiences.label': 'Experiencias relacionadas',
+  'pages.admin.technologies.fields.experiences.description':
+    'Selecione todas as experiencias que usam esta tecnologia.',
+  'pages.admin.technologies.fields.experiences.empty': 'Nenhuma experiencia esta disponível.',
+  'pages.admin.technologies.fields.formations.label': 'Formações relacionadas',
+  'pages.admin.technologies.fields.formations.description':
+    'Selecione todas as Formações que usam esta tecnologia.',
+  'pages.admin.technologies.fields.formations.empty': 'Nenhuma formação esta disponível.',
+  'pages.admin.technologies.fields.tags.label': 'Tags relacionadas',
+  'pages.admin.technologies.fields.tags.description':
+    'Selecione todas as tags vinculadas a esta tecnologia.',
+  'pages.admin.technologies.fields.tags.empty': 'Nenhuma tag esta disponível.',
+  'pages.admin.technologies.fields.links.label': 'Links relacionados',
+  'pages.admin.technologies.fields.links.description':
+    'Selecione todos os links conectados a esta tecnologia.',
+  'pages.admin.technologies.fields.links.empty': 'Nenhum link esta disponível.',
   'pages.admin.technologies.fields.highlight.description':
     'Controle se esta technology deve permanecer destacada no catalogo publico de skills.',
   'pages.admin.technologies.fields.highlight.enabled': 'Destacada',
@@ -1133,7 +1169,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.feedback.requiredCategory': 'A categoria da technology e obrigatoria.',
   'pages.admin.technologies.feedback.invalidSortOrder': 'A ordem deve ser um numero valido.',
   'pages.admin.technologies.feedback.missingSession':
-    'A sessao administrativa nao esta disponivel.',
+    'A sessao administrativa nao esta disponível.',
   'pages.admin.technologies.feedback.selectionRequired': 'Selecione uma technology primeiro.',
   'pages.admin.technologies.feedback.loadError':
     'A colecao protegida de technologies nao pode ser carregada agora.',

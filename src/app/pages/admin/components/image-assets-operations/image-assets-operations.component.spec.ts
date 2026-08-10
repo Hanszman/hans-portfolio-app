@@ -10,6 +10,10 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/spoken-languages.service';
+import { CustomersService } from '../../../../core/api/customers/customers.service';
+import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
@@ -135,6 +139,10 @@ describe('ImageAssetsOperationsComponent', () => {
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
+  let formationsService: jasmine.SpyObj<FormationsService>;
+  let spokenLanguagesService: jasmine.SpyObj<SpokenLanguagesService>;
+  let customersService: jasmine.SpyObj<CustomersService>;
+  let jobsService: jasmine.SpyObj<JobsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -175,6 +183,13 @@ describe('ImageAssetsOperationsComponent', () => {
     technologiesService = jasmine.createSpyObj<TechnologiesService>('TechnologiesService', [
       'getTechnologies',
     ]);
+    formationsService = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
+    spokenLanguagesService = jasmine.createSpyObj<SpokenLanguagesService>(
+      'SpokenLanguagesService',
+      ['getAll'],
+    );
+    customersService = jasmine.createSpyObj<CustomersService>('CustomersService', ['getAll']);
+    jobsService = jasmine.createSpyObj<JobsService>('JobsService', ['getAll']);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     adminSessionServiceMock = {
       accessToken: jasmine
@@ -225,6 +240,21 @@ describe('ImageAssetsOperationsComponent', () => {
         },
       }),
     );
+    const emptyCatalogResponse = {
+      data: [],
+      pagination: {
+        page: 1,
+        pageSize: 100,
+        totalItems: 0,
+        totalPages: 0,
+        hasPreviousPage: false,
+        hasNextPage: false,
+      },
+    };
+    formationsService.getAll.and.returnValue(of(emptyCatalogResponse));
+    spokenLanguagesService.getAll.and.returnValue(of(emptyCatalogResponse));
+    customersService.getAll.and.returnValue(of(emptyCatalogResponse));
+    jobsService.getAll.and.returnValue(of(emptyCatalogResponse));
 
     await TestBed.configureTestingModule({
       imports: [ImageAssetsOperationsComponent],
@@ -235,6 +265,10 @@ describe('ImageAssetsOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
+        { provide: SpokenLanguagesService, useValue: spokenLanguagesService },
+        { provide: CustomersService, useValue: customersService },
+        { provide: JobsService, useValue: jobsService },
         { provide: AdminSessionService, useValue: adminSessionServiceMock },
         { provide: ToastService, useValue: toastService },
       ],

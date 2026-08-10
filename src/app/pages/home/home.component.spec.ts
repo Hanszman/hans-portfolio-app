@@ -150,12 +150,12 @@ describe('HomeComponent', () => {
     flushHomeRequests(TestBed.inject(HttpTestingController));
     fixture.detectChanges();
 
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Projetos em destaque');
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Projetos em Destaque');
 
     translation.setLocale('es-es');
     fixture.detectChanges();
 
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Proyectos destacados');
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Proyectos Destacados');
   });
 
   it('should render an empty technology state when dashboard stack data is absent', () => {

@@ -91,7 +91,7 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(httpTestingController);
     fixture.detectChanges();
 
-    expect(compiled.textContent).toContain('Portfolio analytics dashboard');
+    expect(compiled.textContent).toContain('Analytics Dashboard');
     expect(compiled.querySelectorAll('app-dashboard-summary-strip').length).toBe(1);
     expect(compiled.querySelectorAll('app-dashboard-analytics-grid').length).toBe(1);
     expect(compiled.querySelectorAll('app-dashboard-project-technology-panel').length).toBe(1);
@@ -106,7 +106,7 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(TestBed.inject(HttpTestingController));
     ptFixture.detectChanges();
 
-    expect(ptFixture.nativeElement.textContent).toContain('Dashboard analítico');
+    expect(ptFixture.nativeElement.textContent).toContain('Painel Analítico');
     expect(ptFixture.nativeElement.textContent).toContain('Projetos por tipo de tecnologia');
     ptFixture.destroy();
 
@@ -116,7 +116,7 @@ describe('DashboardComponent', () => {
     flushDashboardRequests(TestBed.inject(HttpTestingController));
     esFixture.detectChanges();
 
-    expect(esFixture.nativeElement.textContent).toContain('Dashboard analítico');
+    expect(esFixture.nativeElement.textContent).toContain('Panel Analítico');
     expect(esFixture.nativeElement.textContent).toContain('Proyectos por tipo de tecnología');
   });
 

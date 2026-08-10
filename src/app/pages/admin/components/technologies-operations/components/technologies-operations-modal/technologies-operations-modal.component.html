@@ -116,6 +116,51 @@
         ></hans-input>
 
         <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.projects.label' | translate"
+          [description]="'pages.admin.technologies.fields.projects.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.projects.empty' | translate"
+          [options]="projectOptions()"
+          [selectedIds]="form().projectIds"
+          (toggled)="projectToggled.emit($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.experiences.label' | translate"
+          [description]="'pages.admin.technologies.fields.experiences.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.experiences.empty' | translate"
+          [options]="experienceOptions()"
+          [selectedIds]="form().experienceIds"
+          (toggled)="experienceToggled.emit($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.formations.label' | translate"
+          [description]="'pages.admin.technologies.fields.formations.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.formations.empty' | translate"
+          [options]="formationOptions()"
+          [selectedIds]="form().formationIds"
+          (toggled)="formationToggled.emit($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.tags.label' | translate"
+          [description]="'pages.admin.technologies.fields.tags.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.tags.empty' | translate"
+          [options]="tagOptions()"
+          [selectedIds]="form().tagIds"
+          (toggled)="tagToggled.emit($event)"
+        />
+
+        <app-operations-relation-picker
+          [label]="'pages.admin.technologies.fields.links.label' | translate"
+          [description]="'pages.admin.technologies.fields.links.description' | translate"
+          [emptyMessage]="'pages.admin.technologies.fields.links.empty' | translate"
+          [options]="linkOptions()"
+          [selectedIds]="form().linkIds"
+          (toggled)="linkToggled.emit($event)"
+        />
+
+        <app-operations-relation-picker
           [label]="'pages.admin.technologies.fields.imageAssets.label' | translate"
           [description]="'pages.admin.technologies.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.technologies.fields.imageAssets.empty' | translate"

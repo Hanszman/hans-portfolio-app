@@ -38,6 +38,36 @@ export interface ImageAssetTechnologyRelationRecord {
   technology?: ImageAssetTechnologyReference | null;
 }
 
+export interface ImageAssetNamedReference {
+  id: string;
+  slug?: string | null;
+  name?: string | null;
+  namePt?: string | null;
+  titlePt?: string | null;
+  institution?: string | null;
+  companyName?: string | null;
+}
+
+export interface ImageAssetFormationRelationRecord {
+  formationId?: string;
+  formation?: ImageAssetNamedReference | null;
+}
+
+export interface ImageAssetSpokenLanguageRelationRecord {
+  spokenLanguageId?: string;
+  spokenLanguage?: ImageAssetNamedReference | null;
+}
+
+export interface ImageAssetCustomerRelationRecord {
+  customerId?: string;
+  customer?: ImageAssetNamedReference | null;
+}
+
+export interface ImageAssetJobRelationRecord {
+  jobId?: string;
+  job?: ImageAssetNamedReference | null;
+}
+
 export interface ImageAssetRecord {
   id: string;
   fileName: string;
@@ -64,6 +94,10 @@ export interface ImageAssetRecord {
   projects?: ImageAssetProjectRelationRecord[] | null;
   experiences?: ImageAssetExperienceRelationRecord[] | null;
   technologies?: ImageAssetTechnologyRelationRecord[] | null;
+  formations?: ImageAssetFormationRelationRecord[] | null;
+  spokenLanguages?: ImageAssetSpokenLanguageRelationRecord[] | null;
+  customers?: ImageAssetCustomerRelationRecord[] | null;
+  jobs?: ImageAssetJobRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
 }

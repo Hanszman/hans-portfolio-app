@@ -10,6 +10,7 @@ import {
   createAdminImageAssetOptionViewModel,
 } from '../../helpers/admin.helper';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
+import { OperationsRelationPickerOption } from '../../../../shared/operations/operations-relation-picker/operations-relation-picker.types';
 
 export type TechnologiesOperationsModalMode =
   | 'create'
@@ -55,6 +56,11 @@ export interface TechnologiesOperationsFormValue {
   frequency: string;
   highlight: boolean;
   sortOrder: string;
+  projectIds: readonly string[];
+  experienceIds: readonly string[];
+  formationIds: readonly string[];
+  tagIds: readonly string[];
+  linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
 
@@ -81,6 +87,8 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
 
 export type TechnologyImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
+export type TechnologyRelationOptionViewModel = OperationsRelationPickerOption;
+
 export interface TechnologyOperationsViewModel extends TechnologiesOperationsFormValue {
   id: string;
   imageAssetLabels: readonly string[];
@@ -104,8 +112,30 @@ export const createEmptyTechnologiesOperationsFormValue = (): TechnologiesOperat
   frequency: '',
   highlight: true,
   sortOrder: '0',
+  projectIds: [],
+  experienceIds: [],
+  formationIds: [],
+  tagIds: [],
+  linkIds: [],
   imageAssetIds: [],
 });
+
+const normalizeTechnologyRelationIds = (
+  directIds: readonly string[] | null | undefined,
+  relations:
+    | readonly import('../../../../core/api/technologies/technologies.types').TechnologyRelationRecord[]
+    | null
+    | undefined,
+  idKey: 'projectId' | 'experienceId' | 'formationId' | 'tagId' | 'linkId',
+  nestedKey: 'project' | 'experience' | 'formation' | 'tag' | 'link',
+): readonly string[] => [
+  ...new Set([
+    ...(directIds ?? []),
+    ...(relations ?? [])
+      .map((relation) => relation[idKey] ?? relation[nestedKey]?.id)
+      .filter((id): id is string => typeof id === 'string' && id.length > 0),
+  ]),
+];
 
 export const createTechnologyImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,
@@ -124,6 +154,31 @@ export const buildTechnologiesFormValue = (
         highlight: technology.highlight,
         sortOrder: String(
           (technology as TechnologyAdminRecord & { sortOrder?: number }).sortOrder ?? 0,
+        ),
+        projectIds: normalizeTechnologyRelationIds(
+          technology.projectIds,
+          technology.projectUsages ?? technology.projectRelations,
+          'projectId',
+          'project',
+        ),
+        experienceIds: normalizeTechnologyRelationIds(
+          technology.experienceIds,
+          technology.experienceUses ?? technology.experienceRelations,
+          'experienceId',
+          'experience',
+        ),
+        formationIds: normalizeTechnologyRelationIds(
+          technology.formationIds,
+          technology.formationUses ?? technology.formationRelations,
+          'formationId',
+          'formation',
+        ),
+        tagIds: normalizeTechnologyRelationIds(technology.tagIds, technology.tags, 'tagId', 'tag'),
+        linkIds: normalizeTechnologyRelationIds(
+          technology.linkIds,
+          technology.links,
+          'linkId',
+          'link',
         ),
         imageAssetIds:
           technology.imageAssetIds ??
@@ -157,11 +212,15 @@ export const buildTechnologiesMutationPayload = (
       ...(form.frequency.trim() ? { frequency: form.frequency.trim() } : {}),
       highlight: form.highlight,
       sortOrder,
-      projectRelations: [],
-      experienceRelations: [],
-      formationRelations: [],
-      tagIds: [],
-      linkIds: [],
+      projectRelations: [...new Set(form.projectIds)].map((projectId) => ({ projectId })),
+      experienceRelations: [...new Set(form.experienceIds)].map((experienceId) => ({
+        experienceId,
+      })),
+      formationRelations: [...new Set(form.formationIds)].map((formationId) => ({
+        formationId,
+      })),
+      tagIds: [...new Set(form.tagIds)],
+      linkIds: [...new Set(form.linkIds)],
       imageAssetIds: [...new Set(form.imageAssetIds)],
     },
   };

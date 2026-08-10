@@ -250,6 +250,13 @@ describe('image-assets operations helper', () => {
           spokenLanguageIds: undefined,
           customerIds: undefined,
           jobIds: undefined,
+          formations: [
+            { formationId: 'formation-nested' },
+            { formation: { id: 'formation-object' } },
+          ],
+          spokenLanguages: [{ spokenLanguage: { id: 'spoken-language-nested' } }],
+          customers: [{ customer: { id: 'customer-nested' } }],
+          jobs: [{ job: { id: 'job-nested' } }],
         }),
         [],
         [],
@@ -273,10 +280,10 @@ describe('image-assets operations helper', () => {
       projectIds: ['project-2', 'project-3'],
       experienceIds: ['experience-2', 'experience-3'],
       technologyIds: ['technology-2', 'technology-3'],
-      formationIds: [],
-      spokenLanguageIds: [],
-      customerIds: [],
-      jobIds: [],
+      formationIds: ['formation-nested', 'formation-object'],
+      spokenLanguageIds: ['spoken-language-nested'],
+      customerIds: ['customer-nested'],
+      jobIds: ['job-nested'],
     });
   });
 

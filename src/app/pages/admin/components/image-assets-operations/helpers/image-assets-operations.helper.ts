@@ -1,6 +1,10 @@
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
+import { FormationRecord } from '../../../../../core/api/formations/formations.types';
+import { SpokenLanguageRecord } from '../../../../../core/api/spoken-languages/spoken-languages.types';
+import { CustomerRecord } from '../../../../../core/api/customers/customers.types';
+import { JobRecord } from '../../../../../core/api/jobs/jobs.types';
 import {
   ImageAssetCatalogOptionViewModel,
   IMAGE_ASSET_KIND_VALUES,
@@ -16,6 +20,10 @@ import {
   resolveImageAssetCaptionEs,
   resolveImageAssetCaptionPt,
   resolveImageAssetExperienceIdFromRelation,
+  resolveImageAssetFormationIdFromRelation,
+  resolveImageAssetSpokenLanguageIdFromRelation,
+  resolveImageAssetCustomerIdFromRelation,
+  resolveImageAssetJobIdFromRelation,
   resolveImageAssetProjectIdFromRelation,
   resolveImageAssetTechnologyIdFromRelation,
 } from '../image-assets-operations.types';
@@ -117,6 +125,10 @@ export const buildImageAssetCatalogOptions = (
     | ProjectCollectionItemResponse
     | ExperienceCollectionItemResponse
     | TechnologyCollectionItemResponse
+    | FormationRecord
+    | SpokenLanguageRecord
+    | CustomerRecord
+    | JobRecord
   )[],
 ): readonly ImageAssetCatalogOptionViewModel[] =>
   [...items].map(createImageAssetCatalogOptionViewModel).sort(sortCatalogOptions);
@@ -216,10 +228,22 @@ export const buildImageAssetsFormValue = (
     projectIds: normalizeImageAssetProjectIds(imageAsset, projects),
     experienceIds: normalizeImageAssetExperienceIds(imageAsset, experiences),
     technologyIds: normalizeImageAssetTechnologyIds(imageAsset, technologies),
-    formationIds: normalizeOptionalRelationIds(imageAsset.formationIds),
-    spokenLanguageIds: normalizeOptionalRelationIds(imageAsset.spokenLanguageIds),
-    customerIds: normalizeOptionalRelationIds(imageAsset.customerIds),
-    jobIds: normalizeOptionalRelationIds(imageAsset.jobIds),
+    formationIds: normalizeOptionalRelationIds([
+      ...(imageAsset.formationIds ?? []),
+      ...(imageAsset.formations ?? []).map(resolveImageAssetFormationIdFromRelation).filter((id): id is string => !!id),
+    ]),
+    spokenLanguageIds: normalizeOptionalRelationIds([
+      ...(imageAsset.spokenLanguageIds ?? []),
+      ...(imageAsset.spokenLanguages ?? []).map(resolveImageAssetSpokenLanguageIdFromRelation).filter((id): id is string => !!id),
+    ]),
+    customerIds: normalizeOptionalRelationIds([
+      ...(imageAsset.customerIds ?? []),
+      ...(imageAsset.customers ?? []).map(resolveImageAssetCustomerIdFromRelation).filter((id): id is string => !!id),
+    ]),
+    jobIds: normalizeOptionalRelationIds([
+      ...(imageAsset.jobIds ?? []),
+      ...(imageAsset.jobs ?? []).map(resolveImageAssetJobIdFromRelation).filter((id): id is string => !!id),
+    ]),
   };
 };
 

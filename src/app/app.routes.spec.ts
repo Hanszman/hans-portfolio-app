@@ -460,9 +460,7 @@ describe('app routes', () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/dashboard');
 
-    expect(harness.routeNativeElement?.textContent).toContain(
-      'Portfolio analytics dashboard',
-    );
+    expect(harness.routeNativeElement?.textContent).toContain('Analytics Dashboard');
   });
 
   it('should load the professional experiences route', async () => {

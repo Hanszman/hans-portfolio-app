@@ -1,7 +1,10 @@
 <section class="home-stack">
-  <span class="home-stack-eyebrow">{{ labelKey() | translate }}</span>
-  <h2 class="home-stack-title">{{ titleKey() | translate }}</h2>
-  <p class="home-stack-description">{{ descriptionKey() | translate }}</p>
+  <app-section-header
+    presentation="compact-centered"
+    [sectionLabel]="labelKey() | translate"
+    [title]="titleKey() | translate"
+    [description]="descriptionKey() | translate"
+  />
 
   <div class="home-stack-tags" [attr.aria-label]="labelKey() | translate">
     @for (chip of chips(); track chip.slug) {

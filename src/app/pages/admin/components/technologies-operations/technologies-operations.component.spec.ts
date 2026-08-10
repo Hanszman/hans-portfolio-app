@@ -7,6 +7,11 @@ import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyAdminRecord } from '../../../../core/api/technologies/technologies.types';
+import { ProjectsService } from '../../../../core/api/projects/projects.service';
+import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { TagsService } from '../../../../core/api/tags/tags.service';
+import { LinksService } from '../../../../core/api/links/links.service';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { TechnologiesOperationsComponent } from './technologies-operations.component';
 
@@ -89,6 +94,11 @@ describe('TechnologiesOperationsComponent', () => {
   let fixture: ComponentFixture<TechnologiesOperationsComponent>;
   let service: jasmine.SpyObj<TechnologiesService>;
   let images: jasmine.SpyObj<ImageAssetsService>;
+  let projects: jasmine.SpyObj<ProjectsService>;
+  let experiences: jasmine.SpyObj<ExperiencesService>;
+  let formations: jasmine.SpyObj<FormationsService>;
+  let tags: jasmine.SpyObj<TagsService>;
+  let links: jasmine.SpyObj<LinksService>;
   let toast: jasmine.SpyObj<ToastService>;
   let session: { accessToken: jasmine.Spy<() => string | null> };
   const settle = async () => {
@@ -119,6 +129,13 @@ describe('TechnologiesOperationsComponent', () => {
     images = jasmine.createSpyObj<ImageAssetsService>('ImageAssetsService', [
       'getAll',
     ]);
+    projects = jasmine.createSpyObj<ProjectsService>('ProjectsService', ['getProjects']);
+    experiences = jasmine.createSpyObj<ExperiencesService>('ExperiencesService', [
+      'getExperiences',
+    ]);
+    formations = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
+    tags = jasmine.createSpyObj<TagsService>('TagsService', ['getAll']);
+    links = jasmine.createSpyObj<LinksService>('LinksService', ['getAll']);
     toast = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     service.getAll.and.returnValue(of(response()));
@@ -126,6 +143,13 @@ describe('TechnologiesOperationsComponent', () => {
     service.update.and.returnValue(of(record()));
     service.delete.and.returnValue(of(void 0));
     images.getAll.and.returnValue(of(imageResponse()));
+    projects.getProjects.and.returnValue(of({ data: [], pagination: response().pagination }));
+    experiences.getExperiences.and.returnValue(
+      of({ data: [], pagination: response().pagination }),
+    );
+    formations.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
+    tags.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
+    links.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
     await TestBed.configureTestingModule({
       imports: [TechnologiesOperationsComponent],
       providers: [
@@ -133,6 +157,11 @@ describe('TechnologiesOperationsComponent', () => {
         provideAppTranslations(),
         { provide: TechnologiesService, useValue: service },
         { provide: ImageAssetsService, useValue: images },
+        { provide: ProjectsService, useValue: projects },
+        { provide: ExperiencesService, useValue: experiences },
+        { provide: FormationsService, useValue: formations },
+        { provide: TagsService, useValue: tags },
+        { provide: LinksService, useValue: links },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],

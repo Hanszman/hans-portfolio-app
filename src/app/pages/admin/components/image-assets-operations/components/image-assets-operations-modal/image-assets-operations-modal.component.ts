@@ -60,6 +60,10 @@ export class ImageAssetsOperationsModalComponent {
   readonly projectOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly experienceOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly technologyOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
+  readonly formationOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
+  readonly spokenLanguageOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
+  readonly customerOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
+  readonly jobOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly imageAssetKindOptions = input<readonly ImageAssetKindOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
@@ -87,6 +91,10 @@ export class ImageAssetsOperationsModalComponent {
   readonly projectToggled = output<string>();
   readonly experienceToggled = output<string>();
   readonly technologyToggled = output<string>();
+  readonly formationToggled = output<string>();
+  readonly spokenLanguageToggled = output<string>();
+  readonly customerToggled = output<string>();
+  readonly jobToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
@@ -327,6 +335,22 @@ export class ImageAssetsOperationsModalComponent {
 
   protected toggleTechnology(technologyId: string): void {
     this.technologyToggled.emit(technologyId);
+  }
+
+  protected toggleFormation(formationId: string): void {
+    this.formationToggled.emit(formationId);
+  }
+
+  protected toggleSpokenLanguage(spokenLanguageId: string): void {
+    this.spokenLanguageToggled.emit(spokenLanguageId);
+  }
+
+  protected toggleCustomer(customerId: string): void {
+    this.customerToggled.emit(customerId);
+  }
+
+  protected toggleJob(jobId: string): void {
+    this.jobToggled.emit(jobId);
   }
 
   protected selectImageAssetForUpdate(imageAssetId: string): void {
