@@ -719,9 +719,9 @@ export const ES_ES_TRANSLATIONS = {
     'Ninguna tecnología pública está disponible para relacionar ahora.',
   'pages.admin.links.fields.formations.label': 'Formaciones relacionadas',
   'pages.admin.links.fields.formations.description':
-    'Las relaciones de formaciones ya están soportadas en el payload y serán seleccionables en cuanto el catálogo público dedicado esté disponible.',
+    'Selecciona todas las formaciones que deben exponer este enlace.',
   'pages.admin.links.fields.formations.empty':
-    'Aún no existe un catálogo público de formaciones disponible para selección relacional.',
+    'No hay ninguna formación disponible para relacionar en este momento.',
   'pages.admin.links.modal.create.title': 'Crear link',
   'pages.admin.links.modal.read.title': 'Leer links',
   'pages.admin.links.modal.read.description':

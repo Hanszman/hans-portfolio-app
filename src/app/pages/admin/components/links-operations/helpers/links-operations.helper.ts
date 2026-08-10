@@ -9,6 +9,7 @@ import {
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
+import { FormationRecord } from '../../../../../core/api/formations/formations.types';
 import {
   LinkCatalogOptionViewModel,
   LINK_TYPE_VALUES,
@@ -44,6 +45,11 @@ const createTechnologyMap = (
   technologies: readonly TechnologyCollectionItemResponse[],
 ): Map<string, TechnologyCollectionItemResponse> =>
   new Map(technologies.map((technology) => [technology.id, technology]));
+
+const createFormationMap = (
+  formations: readonly FormationRecord[],
+): Map<string, FormationRecord> =>
+  new Map(formations.map((formation) => [formation.id, formation]));
 
 const resolveLinkProjectIdFromRelation = (relation: LinkProjectRelationRecord): string | null =>
   relation.projectId ?? relation.project?.id ?? null;
@@ -93,11 +99,17 @@ const resolveTechnologyLabel = (
   technologyMap: Map<string, TechnologyCollectionItemResponse>,
 ): string => technologyMap.get(technologyId)?.name ?? technologyId;
 
+const resolveFormationLabel = (
+  formationId: string,
+  formationMap: Map<string, FormationRecord>,
+): string => formationMap.get(formationId)?.titlePt ?? formationId;
+
 export const buildLinkCatalogOptions = (
   items: readonly (
     | ProjectCollectionItemResponse
     | ExperienceCollectionItemResponse
     | TechnologyCollectionItemResponse
+    | FormationRecord
   )[],
 ): readonly LinkCatalogOptionViewModel[] =>
   [...items].map(createLinkCatalogOptionViewModel).sort(sortCatalogOptions);
@@ -195,10 +207,12 @@ export const buildLinksViewModels = (
   projects: readonly ProjectCollectionItemResponse[],
   experiences: readonly ExperienceCollectionItemResponse[],
   technologies: readonly TechnologyCollectionItemResponse[],
+  formations: readonly FormationRecord[] = [],
 ): readonly LinkOperationsViewModel[] => {
   const projectMap = createProjectMap(projects);
   const experienceMap = createExperienceMap(experiences);
   const technologyMap = createTechnologyMap(technologies);
+  const formationMap = createFormationMap(formations);
 
   return [...links]
     .sort((left, right) => {
@@ -235,7 +249,9 @@ export const buildLinksViewModels = (
         technologyLabels: technologyIds.map((technologyId) =>
           resolveTechnologyLabel(technologyId, technologyMap),
         ),
-        formationLabels: formationIds,
+        formationLabels: formationIds.map((formationId) =>
+          resolveFormationLabel(formationId, formationMap),
+        ),
       };
     });
 };

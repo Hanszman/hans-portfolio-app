@@ -23,7 +23,7 @@ describe('links types helpers', () => {
     });
   });
 
-  it('should build project, experience and technology catalog options', () => {
+  it('should build project, experience, technology and formation catalog options', () => {
     expect(
       createLinkCatalogOptionViewModel({
         id: 'project-1',
@@ -107,6 +107,26 @@ describe('links types helpers', () => {
       id: 'technology-1',
       title: 'Angular',
       subtitle: 'angular',
+    });
+
+    expect(
+      createLinkCatalogOptionViewModel({
+        id: 'formation-1',
+        slug: 'information-systems',
+        institution: 'PUC Minas',
+        titlePt: 'Sistemas de Informação',
+        titleEn: 'Information Systems',
+        titleEs: 'Sistemas de Información',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Graduação',
+        summaryEn: 'Graduation',
+        summaryEs: 'Graduación',
+        startDate: '2015-02-01T00:00:00.000Z',
+      }),
+    ).toEqual({
+      id: 'formation-1',
+      title: 'Sistemas de Informação',
+      subtitle: 'PUC Minas',
     });
   });
 

@@ -10,6 +10,8 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
@@ -108,6 +110,22 @@ const createTechnology = (
   ...overrides,
 });
 
+const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRecord => ({
+  id: 'formation-1',
+  slug: 'information-systems',
+  institution: 'PUC Minas',
+  titlePt: 'Sistemas de Informação',
+  titleEn: 'Information Systems',
+  titleEs: 'Sistemas de Información',
+  degreeType: 'BACHELOR',
+  summaryPt: 'Graduação',
+  summaryEn: 'Graduation',
+  summaryEs: 'Graduación',
+  startDate: '2015-02-01T00:00:00.000Z',
+  endDate: '2018-12-01T00:00:00.000Z',
+  ...overrides,
+});
+
 const createCollectionResponse = (data: LinkRecord[] = [createLink()], page = 1) => ({
   data,
   pagination: {
@@ -126,6 +144,7 @@ describe('LinksOperationsComponent', () => {
   let projectsService: jasmine.SpyObj<ProjectsService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
+  let formationsService: jasmine.SpyObj<FormationsService>;
   let toastService: jasmine.SpyObj<ToastService>;
 
   const settleWorkspace = async (
@@ -163,6 +182,7 @@ describe('LinksOperationsComponent', () => {
     technologiesService = jasmine.createSpyObj<TechnologiesService>('TechnologiesService', [
       'getTechnologies',
     ]);
+    formationsService = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
 
     linksOperationsService.getAll.and.returnValue(of(createCollectionResponse()));
@@ -208,6 +228,19 @@ describe('LinksOperationsComponent', () => {
         },
       }),
     );
+    formationsService.getAll.and.returnValue(
+      of({
+        data: [createFormation()],
+        pagination: {
+          page: 1,
+          pageSize: 100,
+          totalItems: 1,
+          totalPages: 1,
+          hasPreviousPage: false,
+          hasNextPage: false,
+        },
+      }),
+    );
 
     await TestBed.configureTestingModule({
       imports: [LinksOperationsComponent],
@@ -218,6 +251,7 @@ describe('LinksOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -240,6 +274,7 @@ describe('LinksOperationsComponent', () => {
     expect(projectsService.getProjects).toHaveBeenCalled();
     expect(experiencesService.getExperiences).toHaveBeenCalled();
     expect(technologiesService.getTechnologies).toHaveBeenCalled();
+    expect(formationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/links'));
     expect(compiled.textContent).toContain('Create');
@@ -355,6 +390,7 @@ describe('LinksOperationsComponent', () => {
     expect(fixture.nativeElement.textContent).toContain('Portfolio remake');
     expect(fixture.nativeElement.textContent).toContain('Analista');
     expect(fixture.nativeElement.textContent).toContain('Angular');
+    expect(fixture.nativeElement.textContent).toContain('Sistemas de Informação');
 
     component.openUpdatePickerModal();
     expect(component.modalTitleKey()).toBe('pages.admin.links.modal.pickUpdate.title');
@@ -478,6 +514,7 @@ describe('LinksOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -577,6 +614,7 @@ describe('LinksOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -617,6 +655,7 @@ describe('LinksOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -656,6 +695,7 @@ describe('LinksOperationsComponent', () => {
         { provide: ProjectsService, useValue: projectsService },
         { provide: ExperiencesService, useValue: experiencesService },
         { provide: TechnologiesService, useValue: technologiesService },
+        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {

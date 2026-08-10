@@ -314,6 +314,10 @@ describe('ImageAssetsOperationsComponent', () => {
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
+      toggleFormation(formationId: string): void;
+      toggleSpokenLanguage(spokenLanguageId: string): void;
+      toggleCustomer(customerId: string): void;
+      toggleJob(jobId: string): void;
       submitModal(): Promise<void>;
     };
 
@@ -335,6 +339,10 @@ describe('ImageAssetsOperationsComponent', () => {
     component.toggleProject('project-1');
     component.toggleExperience('experience-1');
     component.toggleTechnology('technology-1');
+    component.toggleFormation('formation-1');
+    component.toggleSpokenLanguage('spoken-language-1');
+    component.toggleCustomer('customer-1');
+    component.toggleJob('job-1');
     await component.submitModal();
 
     expect(imageAssetsOperationsService.create).toHaveBeenCalledWith({
@@ -355,10 +363,10 @@ describe('ImageAssetsOperationsComponent', () => {
       projectIds: ['project-1'],
       experienceIds: ['experience-1'],
       technologyIds: ['technology-1'],
-      formationIds: [],
-      spokenLanguageIds: [],
-      customerIds: [],
-      jobIds: [],
+      formationIds: ['formation-1'],
+      spokenLanguageIds: ['spoken-language-1'],
+      customerIds: ['customer-1'],
+      jobIds: ['job-1'],
     });
 
     component.openUpdateModal('image-asset-1');

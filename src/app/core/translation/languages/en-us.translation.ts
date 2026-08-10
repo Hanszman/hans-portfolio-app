@@ -703,9 +703,9 @@ export const EN_TRANSLATIONS = {
     'No public technology is available to relate right now.',
   'pages.admin.links.fields.formations.label': 'Related formations',
   'pages.admin.links.fields.formations.description':
-    'Formation relationships are already supported in the payload and will become selectable as soon as the dedicated public catalog is available.',
+    'Select every formation that should expose this link.',
   'pages.admin.links.fields.formations.empty':
-    'No public formation catalog is available yet for relationship selection.',
+    'No formation is available to relate right now.',
   'pages.admin.links.modal.create.title': 'Create link',
   'pages.admin.links.modal.read.title': 'Read links',
   'pages.admin.links.modal.read.description':

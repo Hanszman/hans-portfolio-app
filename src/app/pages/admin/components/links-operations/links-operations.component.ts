@@ -20,6 +20,8 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationsService } from '../../../../core/api/formations/formations.service';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -59,6 +61,7 @@ export class LinksOperationsComponent implements OnInit {
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly technologiesService = inject(TechnologiesService);
+  private readonly formationsService = inject(FormationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);
@@ -67,6 +70,7 @@ export class LinksOperationsComponent implements OnInit {
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
   private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
   private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
+  private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -90,6 +94,7 @@ export class LinksOperationsComponent implements OnInit {
       this.projectsSignal(),
       this.experiencesSignal(),
       this.technologiesSignal(),
+      this.formationsSignal(),
     ),
   );
   protected readonly projectOptions = computed(() =>
@@ -101,7 +106,9 @@ export class LinksOperationsComponent implements OnInit {
   protected readonly technologyOptions = computed(() =>
     buildLinkCatalogOptions(this.technologiesSignal()),
   );
-  protected readonly formationOptions = computed(() => []);
+  protected readonly formationOptions = computed(() =>
+    buildLinkCatalogOptions(this.formationsSignal()),
+  );
   protected readonly linkTypeOptions = computed(() => {
     this.translation.locale();
 
@@ -337,7 +344,13 @@ export class LinksOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [linksResponse, projectsResponse, experiencesResponse, technologiesResponse] =
+      const [
+        linksResponse,
+        projectsResponse,
+        experiencesResponse,
+        technologiesResponse,
+        formationsResponse,
+      ] =
         await Promise.all([
           firstValueFrom(
             this.linksOperationsService.getAll(page, this.pagination().pageSize, search),
@@ -345,6 +358,7 @@ export class LinksOperationsComponent implements OnInit {
           firstValueFrom(this.projectsService.getProjects()),
           firstValueFrom(this.experiencesService.getExperiences()),
           firstValueFrom(this.technologiesService.getTechnologies()),
+          firstValueFrom(this.formationsService.getAll(1, 100)),
         ]);
 
       this.linksSignal.set(linksResponse.data);
@@ -352,6 +366,7 @@ export class LinksOperationsComponent implements OnInit {
       this.projectsSignal.set(projectsResponse.data);
       this.experiencesSignal.set(experiencesResponse.data);
       this.technologiesSignal.set(technologiesResponse.data);
+      this.formationsSignal.set(formationsResponse.data);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.links.feedback.loadError');
       this.toastService.showError('pages.admin.links.feedback.loadError');

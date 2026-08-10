@@ -118,7 +118,13 @@ const resolveTechnologyLabel = (
 
 const normalizeOptionalRelationIds = (
   relationIds: readonly string[] | null | undefined,
-): readonly string[] => [...new Set(relationIds ?? [])];
+): readonly string[] => {
+  if (!relationIds) {
+    return [];
+  }
+
+  return [...new Set(relationIds)];
+};
 
 export const buildImageAssetCatalogOptions = (
   items: readonly (

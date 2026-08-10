@@ -122,6 +122,14 @@ describe('image-assets operations types', () => {
         slug: 'developer',
       } as never),
     ).toEqual({ id: 'job-1', title: 'Desenvolvedor', subtitle: 'developer' });
+    const malformedFallback = createImageAssetCatalogOptionViewModel({
+      id: 'fallback-1',
+      name: null,
+      slug: 'fallback',
+    } as never);
+    expect(malformedFallback.id).toBe('fallback-1');
+    expect(malformedFallback.title as string | null).toBeNull();
+    expect(malformedFallback.subtitle).toBe('fallback');
   });
 
   it('should resolve optional text fallbacks and relation ids', () => {

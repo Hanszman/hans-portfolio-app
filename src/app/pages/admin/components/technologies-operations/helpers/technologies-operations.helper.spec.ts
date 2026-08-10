@@ -131,6 +131,7 @@ describe('technologies operations helper', () => {
           projectUsages: [
             { projectId: 'project-direct' },
             { project: { id: 'project-nested' } },
+            {},
           ],
           experienceUses: [
             { experienceId: 'experience-direct' },

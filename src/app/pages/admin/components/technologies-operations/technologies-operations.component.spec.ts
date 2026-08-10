@@ -68,6 +68,11 @@ interface TechnologiesTestApi {
   closeModal(): void;
   updateField(field: string, value: string | boolean): void;
   toggleImageAsset(id: string): void;
+  toggleProject(id: string): void;
+  toggleExperience(id: string): void;
+  toggleFormation(id: string): void;
+  toggleTag(id: string): void;
+  toggleLink(id: string): void;
   submitModal(): Promise<void>;
   goToPage(page: number): Promise<void>;
   updateSearchQuery(value: string): Promise<void>;
@@ -189,6 +194,16 @@ describe('TechnologiesOperationsComponent', () => {
     component.updateField('sortOrder', '2');
     component.toggleImageAsset('image-1');
     component.toggleImageAsset('image-1');
+    component.toggleProject('project-1');
+    component.toggleProject('project-1');
+    component.toggleExperience('experience-1');
+    component.toggleExperience('experience-1');
+    component.toggleFormation('formation-1');
+    component.toggleFormation('formation-1');
+    component.toggleTag('tag-1');
+    component.toggleTag('tag-1');
+    component.toggleLink('link-1');
+    component.toggleLink('link-1');
     await component.submitModal();
     expect(service.create).toHaveBeenCalled();
     component.openUpdateModal('technology-1');
@@ -213,6 +228,52 @@ describe('TechnologiesOperationsComponent', () => {
     });
     component.openDeleteModal('technology-1');
     await component.submitModal();
+  });
+
+  it('maps every relation catalog and applies readable fallbacks', async () => {
+    await settle();
+    const component = fixture.componentInstance as unknown as {
+      projectsSignal: { set(value: readonly unknown[]): void };
+      experiencesSignal: { set(value: readonly unknown[]): void };
+      formationsSignal: { set(value: readonly unknown[]): void };
+      tagsSignal: { set(value: readonly unknown[]): void };
+      linksSignal: { set(value: readonly unknown[]): void };
+      projectOptions(): readonly { id: string; title: string; subtitle: string }[];
+      experienceOptions(): readonly { id: string; title: string; subtitle: string }[];
+      formationOptions(): readonly { id: string; title: string; subtitle: string }[];
+      tagOptions(): readonly { id: string; title: string; subtitle: string }[];
+      linkOptions(): readonly { id: string; title: string; subtitle: string }[];
+    };
+
+    component.projectsSignal.set([
+      { id: 'project-1', titlePt: 'Portfolio', slug: 'portfolio' },
+    ]);
+    component.experiencesSignal.set([
+      { id: 'experience-1', titlePt: 'Developer', companyName: 'Acme' },
+    ]);
+    component.formationsSignal.set([
+      { id: 'formation-1', titlePt: 'Information Systems', institution: 'PUC Minas' },
+    ]);
+    component.tagsSignal.set([
+      { id: 'tag-1', namePt: 'Front-End', slug: 'front-end' },
+      { id: 'tag-2', namePt: null, slug: 'fallback-tag' },
+    ]);
+    component.linksSignal.set([
+      { id: 'link-1', labelPt: 'Repository', url: 'https://github.com/example' },
+      { id: 'link-2', labelPt: null, url: 'https://example.com' },
+    ]);
+
+    expect(component.projectOptions()[0].title).toBe('Portfolio');
+    expect(component.experienceOptions()[0].subtitle).toBe('Acme');
+    expect(component.formationOptions()[0].subtitle).toBe('PUC Minas');
+    expect(component.tagOptions().map((option) => option.title)).toEqual([
+      'Front-End',
+      'fallback-tag',
+    ]);
+    expect(component.linkOptions().map((option) => option.title)).toEqual([
+      'Repository',
+      'https://example.com',
+    ]);
   });
 
   it('supports read, pickers, paging and empty selections', async () => {

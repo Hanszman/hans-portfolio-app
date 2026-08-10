@@ -2,6 +2,7 @@ import { ExperienceCollectionItemResponse } from '../../../../core/api/experienc
 import { LinkMutationPayload } from '../../../../core/api/links/links.types';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
+import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -167,7 +168,8 @@ export const createLinkCatalogOptionViewModel = (
   item:
     | ProjectCollectionItemResponse
     | ExperienceCollectionItemResponse
-    | TechnologyCollectionItemResponse,
+    | TechnologyCollectionItemResponse
+    | FormationRecord,
 ): LinkCatalogOptionViewModel => {
   if ('companyName' in item) {
     return {
@@ -181,7 +183,7 @@ export const createLinkCatalogOptionViewModel = (
     return {
       id: item.id,
       title: item.titlePt,
-      subtitle: item.slug,
+      subtitle: 'institution' in item ? item.institution : item.slug,
     };
   }
 

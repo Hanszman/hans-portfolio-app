@@ -403,6 +403,30 @@ describe('links helper', () => {
           slug: 'nestjs',
         }),
       ],
+      [
+        {
+          id: 'formation-2',
+          slug: 'web-development',
+          institution: 'PUC Minas',
+          titlePt: 'Desenvolvimento Web',
+          titleEn: 'Web Development',
+          degreeType: 'POST_GRADUATE',
+          summaryPt: 'Pós-graduação',
+          summaryEn: 'Postgraduate course',
+          startDate: '2019-01-01T00:00:00.000Z',
+        },
+        {
+          id: 'formation-3',
+          slug: 'fullstack-course',
+          institution: 'Udemy',
+          titlePt: 'Programador FullStack',
+          titleEn: 'FullStack Programmer',
+          degreeType: 'COURSE',
+          summaryPt: 'Curso',
+          summaryEn: 'Course',
+          startDate: '2020-01-01T00:00:00.000Z',
+        },
+      ],
     );
 
     expect(viewModels.map((viewModel) => viewModel.url)).toEqual([
@@ -415,7 +439,10 @@ describe('links helper', () => {
       'Tech lead (Outsourcing)',
     ]);
     expect(viewModels[0].technologyLabels).toEqual(['React', 'NestJS']);
-    expect(viewModels[0].formationLabels).toEqual(['formation-2', 'formation-3']);
+    expect(viewModels[0].formationLabels).toEqual([
+      'Desenvolvimento Web',
+      'Programador FullStack',
+    ]);
   });
 
   it('should fallback to raw ids and default values when linked catalogs or optional fields are missing', () => {

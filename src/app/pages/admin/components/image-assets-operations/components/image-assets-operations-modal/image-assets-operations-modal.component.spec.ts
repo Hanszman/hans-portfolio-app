@@ -99,6 +99,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const projectSpy = jasmine.createSpy('projectToggled');
     const experienceSpy = jasmine.createSpy('experienceToggled');
     const technologySpy = jasmine.createSpy('technologyToggled');
+    const formationSpy = jasmine.createSpy('formationToggled');
+    const spokenLanguageSpy = jasmine.createSpy('spokenLanguageToggled');
+    const customerSpy = jasmine.createSpy('customerToggled');
+    const jobSpy = jasmine.createSpy('jobToggled');
     const pageSpy = jasmine.createSpy('pageSelected');
     const submitSpy = jasmine.createSpy('submitted');
     const closeSpy = jasmine.createSpy('closed');
@@ -120,6 +124,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     component.projectToggled.subscribe(projectSpy);
     component.experienceToggled.subscribe(experienceSpy);
     component.technologyToggled.subscribe(technologySpy);
+    component.formationToggled.subscribe(formationSpy);
+    component.spokenLanguageToggled.subscribe(spokenLanguageSpy);
+    component.customerToggled.subscribe(customerSpy);
+    component.jobToggled.subscribe(jobSpy);
     component.pageSelected.subscribe(pageSpy);
     component.submitted.subscribe(submitSpy);
     component.closed.subscribe(closeSpy);
@@ -167,6 +175,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
       toggleProject(projectId: string): void;
       toggleExperience(experienceId: string): void;
       toggleTechnology(technologyId: string): void;
+      toggleFormation(formationId: string): void;
+      toggleSpokenLanguage(spokenLanguageId: string): void;
+      toggleCustomer(customerId: string): void;
+      toggleJob(jobId: string): void;
       submit(): void;
       requestClose(): void;
       isProjectSelected(projectId: string): boolean;
@@ -192,6 +204,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     componentAccess.toggleProject('project-1');
     componentAccess.toggleExperience('experience-1');
     componentAccess.toggleTechnology('technology-1');
+    componentAccess.toggleFormation('formation-1');
+    componentAccess.toggleSpokenLanguage('spoken-language-1');
+    componentAccess.toggleCustomer('customer-1');
+    componentAccess.toggleJob('job-1');
     componentAccess.selectPage(2);
     componentAccess.submit();
     componentAccess.requestClose();
@@ -252,6 +268,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
     expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
     expect(technologySpy).toHaveBeenCalledOnceWith('technology-1');
+    expect(formationSpy).toHaveBeenCalledOnceWith('formation-1');
+    expect(spokenLanguageSpy).toHaveBeenCalledOnceWith('spoken-language-1');
+    expect(customerSpy).toHaveBeenCalledOnceWith('customer-1');
+    expect(jobSpy).toHaveBeenCalledOnceWith('job-1');
     expect(pageSpy).toHaveBeenCalledOnceWith(2);
     expect(submitSpy).toHaveBeenCalledTimes(1);
     expect(closeSpy).toHaveBeenCalledTimes(1);
