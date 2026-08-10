@@ -229,6 +229,8 @@ export const ES_ES_TRANSLATIONS = {
   'pages.projects.detail.emptyGallery': 'No hay imágenes vinculadas',
   'common.time.month': '{{count}} mes',
   'common.time.months': '{{count}} meses',
+  'common.time.year': '{{count}} año',
+  'common.time.years': '{{count}} años',
   'pages.skills.detail.contextChart': 'Distribución por contexto',
   'pages.skills.detail.chartSeries': 'Meses',
   'pages.skills.detail.coverage': 'Cobertura detallada',

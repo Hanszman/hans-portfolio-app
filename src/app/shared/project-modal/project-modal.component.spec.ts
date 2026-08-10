@@ -67,6 +67,7 @@ describe('ProjectModalComponent', () => {
   it('uses the compact size before a project is provided', () => {
     fixture.detectChanges();
 
+    expect(fixture.componentInstance['mediaSources']()).toEqual([]);
     expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
       'medium',
     );

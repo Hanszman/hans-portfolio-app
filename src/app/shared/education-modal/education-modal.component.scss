@@ -45,7 +45,15 @@
 }
 
 .education-modal-gallery {
-  @apply min-w-0;
+  @apply min-w-0 overflow-hidden;
+
+  contain: layout paint;
+}
+
+:host ::ng-deep .education-modal-gallery hans-carousel {
+  @apply block w-full max-w-full overflow-hidden;
+
+  contain: layout paint;
 }
 
 .education-modal-gallery h2 {

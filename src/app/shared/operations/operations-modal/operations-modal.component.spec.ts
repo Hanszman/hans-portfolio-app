@@ -8,7 +8,7 @@ describe('OperationsModalComponent', () => {
   let component: OperationsModalComponent;
 
   beforeAll(() => {
-    for (const elementName of ['hans-input', 'hans-modal']) {
+    for (const elementName of ['hans-button', 'hans-input', 'hans-modal']) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -94,11 +94,18 @@ describe('OperationsModalComponent', () => {
     (
       component as unknown as {
         requestClose(): void;
-        emitSearchChange(value: string): void;
+        updateSearchDraft(value: string): void;
+        submitSearch(): void;
         submit(): void;
         selectPage(event: Event | number): void;
       }
-    ).emitSearchChange('react');
+    ).updateSearchDraft(' react ');
+    expect(searchSpy).not.toHaveBeenCalled();
+    (
+      component as unknown as {
+        submitSearch(): void;
+      }
+    ).submitSearch();
     (
       component as unknown as {
         requestClose(): void;
@@ -174,6 +181,25 @@ describe('OperationsModalComponent', () => {
     expect(closedSpy).toHaveBeenCalledTimes(1);
   });
 
+  it('should submit searches with Enter and ignore other keys', () => {
+    const searchSpy = jasmine.createSpy('searchChanged');
+    const preventDefault = jasmine.createSpy('preventDefault');
+    component.searchChanged.subscribe(searchSpy);
+
+    const searchableComponent = component as unknown as {
+      updateSearchDraft(value: string): void;
+      handleSearchKeydown(event: KeyboardEvent): void;
+    };
+    searchableComponent.updateSearchDraft('typescript');
+    searchableComponent.handleSearchKeydown({ key: 'Escape', preventDefault } as unknown as KeyboardEvent);
+    expect(searchSpy).not.toHaveBeenCalled();
+    expect(preventDefault).not.toHaveBeenCalled();
+
+    searchableComponent.handleSearchKeydown({ key: 'Enter', preventDefault } as unknown as KeyboardEvent);
+    expect(preventDefault).toHaveBeenCalledTimes(1);
+    expect(searchSpy).toHaveBeenCalledOnceWith('typescript');
+  });
+
   it('should expose disabled interactions while loading or submitting and hide optional areas by default', () => {
     expect(
       (
@@ -242,6 +268,12 @@ describe('OperationsModalComponent', () => {
     fixture.componentRef.setInput('detailedItems', [detailedItem]);
     fixture.componentRef.setInput('selectedItem', item);
     fixture.componentRef.setInput('mode', 'read');
+    fixture.componentRef.setInput('isLoading', true);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelectorAll('app-modal-skeleton')).toHaveSize(3);
+    expect(fixture.nativeElement.querySelector('.operations-modal-list-hidden')).toBeTruthy();
+
+    fixture.componentRef.setInput('isLoading', false);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('app-operations-detailed-item')).toBeTruthy();
     fixture.nativeElement.querySelectorAll('hans-button')[0].click();

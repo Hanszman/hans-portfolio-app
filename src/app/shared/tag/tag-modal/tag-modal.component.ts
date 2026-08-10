@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
   output,
 } from '@angular/core';
@@ -29,12 +28,10 @@ export class TagModalComponent {
   readonly image = input<TagModalImage | null>(null);
   readonly details = input<readonly TagModalDetail[]>([]);
   readonly closed = output<void>();
-  protected readonly mediaLoading = this.mediaTracker.isLoading;
   protected readonly mediaSources = computed(() => (this.image()?.src ? [this.image()!.src] : []));
-
-  constructor() {
-    effect(() => this.mediaTracker.reset(this.mediaSources(), this.isOpen()));
-  }
+  protected readonly mediaLoading = computed(() =>
+    this.mediaTracker.isLoading(this.mediaSources(), this.isOpen()),
+  );
 
   protected requestClose(): void {
     this.closed.emit();

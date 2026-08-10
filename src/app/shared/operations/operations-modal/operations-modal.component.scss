@@ -16,7 +16,7 @@
 }
 
 .operations-modal-search {
-  @apply min-h-0 flex-none pb-2;
+  @apply grid min-h-0 flex-none items-end gap-3 pb-2 sm:grid-cols-[minmax(0,1fr)_auto];
 }
 
 .operations-modal-body {
@@ -27,6 +27,18 @@
   @apply flex flex-col gap-4;
 }
 
+.operations-modal-list-hidden {
+  @apply hidden;
+}
+
 :host ::ng-deep .operations-modal-search hans-input {
+  @apply block;
+}
+
+:host ::ng-deep .operations-modal-search hans-button {
+  @apply w-full sm:w-auto;
+}
+
+.operations-modal-read-skeleton {
   @apply block;
 }

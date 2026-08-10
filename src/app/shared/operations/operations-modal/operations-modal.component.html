@@ -47,11 +47,22 @@
             [label]="'common.search.label' | translate"
             inputColor="base"
             inputSize="medium"
-            [value]="searchValue()"
+            [value]="searchDraft()"
             [placeholder]="'common.search.placeholder' | translate"
             [attr.aria-label]="'common.search.label' | translate"
-            (input)="emitSearchChange($any($event).target?.value ?? '')"
+            (input)="updateSearchDraft($any($event).target?.value ?? '')"
+            (keydown)="handleSearchKeydown($event)"
           ></hans-input>
+          <hans-button
+            [attr.aria-label]="'common.search.label' | translate"
+            [buttonColor]="'primary'"
+            [buttonSize]="'medium'"
+            [buttonVariant]="'default'"
+            [disabled]="isInteractionDisabled()"
+            (click)="submitSearch()"
+          >
+            {{ 'common.search.label' | translate }}
+          </hans-button>
         </div>
       }
 
@@ -59,7 +70,21 @@
         @if (rendersSharedContent()) {
           @switch (mode()) {
             @case ('read') {
-              <div class="operations-modal-list">
+              @if (isLoading()) {
+                <div class="operations-modal-list" aria-label="Loading records">
+                  @for (placeholder of [0, 1, 2]; track placeholder) {
+                    <app-modal-skeleton
+                      class="operations-modal-read-skeleton"
+                      height="13rem"
+                      [ariaLabel]="'Loading record ' + (placeholder + 1)"
+                    />
+                  }
+                </div>
+              }
+              <div
+                class="operations-modal-list"
+                [class.operations-modal-list-hidden]="isLoading()"
+              >
                 @for (item of detailedItems(); track item.id) {
                   <app-operations-detailed-item
                     [item]="item"

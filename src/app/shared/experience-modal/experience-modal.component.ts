@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
   output,
 } from '@angular/core';
@@ -33,7 +32,6 @@ export class ExperienceModalComponent {
   readonly isOpen = input(false);
   readonly closed = output<void>();
   readonly openTechnology = output<TechnologyModalItem>();
-  protected readonly mediaLoading = this.mediaTracker.isLoading;
   protected readonly mediaSources = computed(() => {
     const item = this.item();
     if (!item) return [];
@@ -46,10 +44,9 @@ export class ExperienceModalComponent {
       ),
     ]);
   });
-
-  constructor() {
-    effect(() => this.mediaTracker.reset(this.mediaSources(), this.isOpen()));
-  }
+  protected readonly mediaLoading = computed(() =>
+    this.mediaTracker.isLoading(this.mediaSources(), this.isOpen()),
+  );
 
   protected customerTag(customer: ExperienceModalItem['customers'][number]): TagButtonViewModel {
     return { label: customer.name, image: customer.image, value: customer.slug };

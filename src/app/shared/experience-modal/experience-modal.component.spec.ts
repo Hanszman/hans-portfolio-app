@@ -71,6 +71,7 @@ describe('ExperienceModalComponent', () => {
     fixture.componentRef.setInput('item', null);
     fixture.detectChanges();
 
+    expect(fixture.componentInstance['mediaSources']()).toEqual([]);
     expect(fixture.nativeElement.querySelector('app-modal-skeleton')).toBeNull();
   });
 });

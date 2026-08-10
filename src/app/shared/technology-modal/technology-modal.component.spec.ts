@@ -59,6 +59,7 @@ describe('TechnologyModalComponent', () => {
     expect(progressBars[1].valueLabel).toBe('Frequent');
     const chart = fixture.nativeElement.querySelector('hans-chart');
     expect(chart).toBeTruthy();
+    expect(chart.colors).toEqual(['primary']);
     expect(chart.getAttribute('title')).toBeNull();
     expect(fixture.nativeElement.querySelectorAll('.technology-modal-radar > h2')).toHaveSize(1);
     expect(fixture.nativeElement.querySelector('.technology-modal-progress')).toBeTruthy();
@@ -148,7 +149,7 @@ describe('TechnologyModalComponent', () => {
     expect(component.details()).toEqual([]);
   });
 
-  it('should expose empty derived state without a selected technology and localize singular months', () => {
+  it('should expose empty derived state and format radar durations in years and months', () => {
     fixture.componentRef.setInput('technology', null);
     fixture.detectChanges();
     const component = fixture.componentInstance as unknown as {
@@ -164,6 +165,9 @@ describe('TechnologyModalComponent', () => {
     expect(component.frequencyProgress()).toBeNull();
     expect(component.radarSeries()).toEqual([]);
     expect(component.formatRadarValue(1)).toBe('1 month');
+    expect(component.formatRadarValue(12)).toBe('1 year');
+    expect(component.formatRadarValue(76)).toBe('6 years 4 months');
+    expect(component.formatRadarValue(0)).toBe('0 months');
   });
 
   it('should emit close request', () => {

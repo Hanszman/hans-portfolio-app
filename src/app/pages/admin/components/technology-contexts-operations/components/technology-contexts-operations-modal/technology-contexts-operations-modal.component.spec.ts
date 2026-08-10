@@ -97,7 +97,7 @@ describe('TechnologyContextsOperationsModalComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Angular');
     const buttons = fixture.nativeElement.querySelectorAll(
-      'hans-button',
+      'app-operations-detailed-item hans-button',
     ) as NodeListOf<HTMLElement>;
     buttons[0]?.click();
     buttons[1]?.click();

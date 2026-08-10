@@ -41,6 +41,7 @@ describe('EducationModalComponent', () => {
   it('uses the compact size before an education item is provided', () => {
     fixture.detectChanges();
 
+    expect(fixture.componentInstance['mediaSources']()).toEqual([]);
     expect(fixture.nativeElement.querySelector('hans-modal').getAttribute('modalSize')).toBe(
       'small',
     );

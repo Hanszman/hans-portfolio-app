@@ -4,11 +4,13 @@ import {
   Component,
   computed,
   input,
+  linkedSignal,
   output,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppTranslationKey } from '../../../core/translation/translation.types';
 import { createAdminCollectionPagination } from '../../../pages/admin/admin.types';
+import { ModalSkeletonComponent } from '../../modal-skeleton/modal-skeleton.component';
 import { OperationsDetailedItemComponent } from '../operations-detailed-item/operations-detailed-item.component';
 import { OperationsItemComponent } from '../operations-item/operations-item.component';
 import {
@@ -20,7 +22,12 @@ import {
 @Component({
   selector: 'app-operations-modal',
   standalone: true,
-  imports: [TranslatePipe, OperationsDetailedItemComponent, OperationsItemComponent],
+  imports: [
+    TranslatePipe,
+    ModalSkeletonComponent,
+    OperationsDetailedItemComponent,
+    OperationsItemComponent,
+  ],
   templateUrl: './operations-modal.component.html',
   styleUrl: './operations-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -52,6 +59,8 @@ export class OperationsModalComponent {
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
 
+  protected readonly searchDraft = linkedSignal(() => this.searchValue());
+
   protected readonly isInteractionDisabled = computed(
     () => this.isLoading() || this.isSubmitting(),
   );
@@ -64,8 +73,19 @@ export class OperationsModalComponent {
     this.closed.emit();
   }
 
-  protected emitSearchChange(value: string): void {
-    this.searchChanged.emit(value);
+  protected updateSearchDraft(value: string): void {
+    this.searchDraft.set(value);
+  }
+
+  protected submitSearch(): void {
+    this.searchChanged.emit(this.searchDraft().trim());
+  }
+
+  protected handleSearchKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter') return;
+
+    event.preventDefault();
+    this.submitSearch();
   }
 
   protected submit(): void {

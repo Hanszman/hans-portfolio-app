@@ -5,24 +5,19 @@ export function uniqueModalMediaSources(sources: readonly string[]): string[] {
 }
 
 export class ModalMediaLoadingTracker {
-  private expectedSources = new Set<string>();
-  private settledSources = new Set<string>();
-  readonly isLoading = signal(false);
+  private readonly settledSources = signal<ReadonlySet<string>>(new Set());
 
-  reset(sources: readonly string[], isOpen: boolean): void {
-    this.expectedSources = new Set(uniqueModalMediaSources(sources));
-    this.settledSources.clear();
-    this.isLoading.set(isOpen && this.expectedSources.size > 0);
+  isLoading(sources: readonly string[], isOpen: boolean): boolean {
+    if (!isOpen) return false;
+
+    const expectedSources = uniqueModalMediaSources(sources);
+    const settledSources = this.settledSources();
+    return expectedSources.some((source) => !settledSources.has(source));
   }
 
   settle(source: string): void {
-    if (!this.expectedSources.has(source)) {
-      return;
-    }
+    if (!source || this.settledSources().has(source)) return;
 
-    this.settledSources.add(source);
-    if (this.settledSources.size === this.expectedSources.size) {
-      this.isLoading.set(false);
-    }
+    this.settledSources.update((sources) => new Set([...sources, source]));
   }
 }

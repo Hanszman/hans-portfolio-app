@@ -226,6 +226,8 @@ export const EN_TRANSLATIONS = {
   'pages.projects.detail.emptyGallery': 'No linked images',
   'common.time.month': '{{count}} month',
   'common.time.months': '{{count}} months',
+  'common.time.year': '{{count}} year',
+  'common.time.years': '{{count}} years',
   'pages.skills.detail.contextChart': 'Context distribution',
   'pages.skills.detail.chartSeries': 'Months',
   'pages.skills.detail.coverage': 'Detailed coverage',

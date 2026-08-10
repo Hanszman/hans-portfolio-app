@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
   output,
 } from '@angular/core';
@@ -35,14 +34,12 @@ export class ProjectModalComponent {
   protected readonly modalSize = computed(() =>
     (this.project()?.galleryItems.length ?? 0) > 0 ? 'large' : 'medium',
   );
-  protected readonly mediaLoading = this.mediaTracker.isLoading;
   protected readonly mediaSources = computed(() =>
     uniqueModalMediaSources((this.project()?.galleryItems ?? []).map(({ imageSrc }) => imageSrc)),
   );
-
-  constructor() {
-    effect(() => this.mediaTracker.reset(this.mediaSources(), this.isOpen()));
-  }
+  protected readonly mediaLoading = computed(() =>
+    this.mediaTracker.isLoading(this.mediaSources(), this.isOpen()),
+  );
 
   protected requestClose(): void {
     this.closed.emit();

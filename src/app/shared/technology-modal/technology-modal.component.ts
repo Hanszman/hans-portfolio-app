@@ -112,6 +112,7 @@ export class TechnologyModalComponent {
         ]
       : [];
   });
+  protected readonly radarColors = ['primary'] as const;
 
   protected readonly radarSummary = computed(() =>
     (this.resolvedTechnology()?.contextMetrics ?? [])
@@ -137,10 +138,27 @@ export class TechnologyModalComponent {
   }
 
   private formatMonths(value: number): string {
-    return this.translationService.instant(
-      value === 1 ? 'common.time.month' : 'common.time.months',
-      { count: String(value) },
-    );
+    const years = Math.floor(value / 12);
+    const months = value % 12;
+    const parts: string[] = [];
+
+    if (years > 0) {
+      parts.push(
+        this.translationService.instant(years === 1 ? 'common.time.year' : 'common.time.years', {
+          count: String(years),
+        }),
+      );
+    }
+
+    if (months > 0 || parts.length === 0) {
+      parts.push(
+        this.translationService.instant(months === 1 ? 'common.time.month' : 'common.time.months', {
+          count: String(months),
+        }),
+      );
+    }
+
+    return parts.join(' ');
   }
 
   private requestTechnologyCatalog(): void {
