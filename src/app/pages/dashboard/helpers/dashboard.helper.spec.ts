@@ -21,7 +21,7 @@ describe('dashboard helper', () => {
     const cards = buildDashboardSummaryCards(createDashboardOverviewResponse().summary);
 
     expect(cards[0]).toEqual({
-      labelKey: 'pages.dashboard.snapshot.metrics.projects',
+      labelKey: 'common.entities.projects',
       value: '12',
       iconName: 'LuFolderKanban',
     });

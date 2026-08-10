@@ -92,7 +92,7 @@ export class HomeComponent {
       },
       {
         value: formatCountInFiveStep(this.technologyCountSignal()),
-        labelKey: 'pages.home.metrics.technologies.label',
+        labelKey: 'common.entities.technologies',
         descriptionKey: 'pages.home.metrics.technologies.description',
         iconName: 'LuCpu',
       },

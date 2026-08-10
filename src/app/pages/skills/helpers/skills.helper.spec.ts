@@ -1,6 +1,8 @@
 import { TechnologyCollectionItemResponse } from '../../../core/api/technologies/technologies.types';
 import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/technologies.mocks';
 import { translateStaticKey } from '../../../core/translation/translation.service';
+import { FormationRecord } from '../../../core/api/formations/formations.types';
+import { SpokenLanguageRecord } from '../../../core/api/spoken-languages/spoken-languages.types';
 import {
   buildEducationSkillCards,
   buildLanguageSkillCards,
@@ -14,6 +16,50 @@ import {
   resolveSkillTypeKey,
   resolveSkillVisualUrl,
 } from './skills.helper';
+
+const formationFixture: FormationRecord = {
+  id: 'formation-information-systems',
+  slug: 'information-systems',
+  institution: 'PUC Minas',
+  titlePt: 'Sistemas de Informação',
+  titleEn: 'Information Systems',
+  titleEs: 'Sistemas de Información',
+  degreeType: 'BACHELOR',
+  summaryPt: 'Resumo',
+  summaryEn: 'Summary',
+  summaryEs: 'Resumen',
+  startDate: '2015-02-01',
+  endDate: '2018-12-15',
+  sortOrder: 1,
+  imageAssets: [
+    {
+      imageAsset: {
+        id: 'formation-icon',
+        filePath: '/assets/img/skills/puc.png',
+        kind: 'ICON',
+      },
+    },
+  ],
+};
+
+const languageFixture: SpokenLanguageRecord = {
+  id: 'language-portuguese',
+  code: 'pt-BR',
+  namePt: 'Português',
+  nameEn: 'Portuguese',
+  nameEs: 'Portugués',
+  proficiency: 'NATIVE',
+  sortOrder: 1,
+  imageAssets: [
+    {
+      imageAsset: {
+        id: 'language-icon',
+        filePath: '/assets/vendor/flag-icons/4x3/br.svg',
+        kind: 'ICON',
+      },
+    },
+  ],
+};
 
 describe('skills helper', () => {
   it('should map a technology into a localized skills card', () => {
@@ -106,9 +152,9 @@ describe('skills helper', () => {
     );
   });
 
-  it('should build static education and language cards for the shared modal', () => {
-    const educationCards = buildEducationSkillCards('en-us');
-    const languageCards = buildLanguageSkillCards('en-us');
+  it('should build dynamic education and language cards for the shared modal', () => {
+    const educationCards = buildEducationSkillCards([formationFixture], 'en-us');
+    const languageCards = buildLanguageSkillCards([languageFixture], 'en-us');
 
     expect(educationCards[0]).toEqual(
       jasmine.objectContaining({
@@ -126,6 +172,7 @@ describe('skills helper', () => {
       jasmine.objectContaining({
         kind: 'language',
         name: 'Portuguese',
+        totalExperienceLabel: '',
         modal: jasmine.objectContaining({
           category: 'Languages',
           image: jasmine.objectContaining({
@@ -136,8 +183,48 @@ describe('skills helper', () => {
     );
   });
 
+  it('should order sparse catalogs and normalize custom enum values', () => {
+    const educationCards = buildEducationSkillCards(
+      [
+        { ...formationFixture, id: 'z', titleEn: 'Zulu', sortOrder: null },
+        {
+          ...formationFixture,
+          id: 'a',
+          titleEn: 'Alpha',
+          degreeType: 'CUSTOM_DEGREE' as FormationRecord['degreeType'],
+          sortOrder: null,
+        },
+        formationFixture,
+      ],
+      'en-us',
+    );
+    const languageCards = buildLanguageSkillCards(
+      [
+        { ...languageFixture, id: 'z', nameEn: 'Zulu', sortOrder: null },
+        {
+          ...languageFixture,
+          id: 'a',
+          nameEn: 'Alpha',
+          proficiency: 'BASIC',
+          sortOrder: null,
+        },
+        languageFixture,
+      ],
+      'en-us',
+    );
+
+    expect(educationCards.map(({ name }) => name)).toEqual([
+      'Information Systems',
+      'Alpha',
+      'Zulu',
+    ]);
+    expect(educationCards[1].badgeLabel).toBe('Custom Degree');
+    expect(languageCards.map(({ name }) => name)).toEqual(['Portuguese', 'Alpha', 'Zulu']);
+    expect(languageCards[1].levelKey).toBe('BASIC');
+  });
+
   it('should map formation content and ordered linked images into the education modal', () => {
-    const fallback = buildEducationSkillCards('es-es')[0];
+    const fallback = buildEducationSkillCards([formationFixture], 'es-es')[0];
     const modal = mapFormationToEducationModal(
       {
         id: 'formation',
@@ -207,8 +294,8 @@ describe('skills helper', () => {
   });
 
   it('should use education and language fallbacks when API records or assets are absent', () => {
-    const education = buildEducationSkillCards('en-us')[0];
-    const language = buildLanguageSkillCards('en-us')[0];
+    const education = buildEducationSkillCards([formationFixture], 'en-us')[0];
+    const language = buildLanguageSkillCards([languageFixture], 'en-us')[0];
     expect(mapFormationToEducationModal(undefined, education, 'en-us')).toEqual(
       jasmine.objectContaining({ title: education.name, galleryItems: [] }),
     );
@@ -243,7 +330,7 @@ describe('skills helper', () => {
   });
 
   it('should normalize sparse valid formation assets', () => {
-    const fallback = buildEducationSkillCards('en-us')[0];
+    const fallback = buildEducationSkillCards([formationFixture], 'en-us')[0];
     const modal = mapFormationToEducationModal(
       {
         id: 'formation-sparse-asset',
@@ -279,7 +366,7 @@ describe('skills helper', () => {
   });
 
   it('should map localized spoken-language data and its linked image', () => {
-    const fallback = buildLanguageSkillCards('pt-br')[0];
+    const fallback = buildLanguageSkillCards([languageFixture], 'pt-br')[0];
     const modal = mapSpokenLanguageToModal(
       {
         id: 'language',

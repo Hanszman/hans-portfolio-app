@@ -145,7 +145,7 @@ export class TagsOperationsModalComponent {
           this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
         ),
         fields: [
-          { labelKey: 'pages.admin.tags.card.slug', value: tag.slug },
+          { labelKey: 'common.fields.slug', value: tag.slug },
           {
             labelKey: 'pages.admin.operations.localized.name',
             value: resolveAdminLocalizedValue(
@@ -154,15 +154,15 @@ export class TagsOperationsModalComponent {
           },
           { labelKey: 'pages.admin.tags.card.type', value: tag.type },
           {
-            labelKey: 'pages.admin.tags.card.sortOrder',
+            labelKey: 'common.fields.sortOrder',
             value: tag.sortOrderLabel,
           },
           {
-            labelKey: 'pages.admin.tags.card.projects',
+            labelKey: 'common.entities.projects',
             value: tag.projectLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.tags.card.technologies',
+            labelKey: 'common.entities.technologies',
             value: tag.technologyLabels.join(', ') || emptyRelations,
           },
         ],

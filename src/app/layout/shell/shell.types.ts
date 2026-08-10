@@ -4,6 +4,6 @@ export const NAVIGATION_LABEL_KEY_BY_PATH: Record<string, AppTranslationKey> = {
   '/home': 'header.navigation.home',
   '/experiences': 'header.navigation.experiences',
   '/skills': 'header.navigation.skills',
-  '/projects': 'header.navigation.projects',
+  '/projects': 'common.entities.projects',
   '/dashboard': 'header.navigation.dashboard',
 };

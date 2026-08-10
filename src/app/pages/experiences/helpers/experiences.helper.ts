@@ -7,6 +7,7 @@ import {
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import { AppLocale } from '../../../core/translation/translation.types';
+import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import { TechnologyModalItem } from '../../../shared/technology-modal/technology-modal.types';
 import {
   EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS,
@@ -26,12 +27,6 @@ import {
 } from '../experiences.types';
 
 const dedupe = (values: string[]): string[] => [...new Set(values)];
-
-const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
-  new Intl.DateTimeFormat(locale, {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(dateIso));
 
 const normalizeAssetName = (value: string): string =>
   value
@@ -181,12 +176,12 @@ export const formatExperienceDateRange = (
   endDate: string | null,
   locale: AppLocale,
 ): string => {
-  const startLabel = formatMonthYear(startDate, locale);
-  const endLabel = endDate
-    ? formatMonthYear(endDate, locale)
-    : translateStaticKey(locale, EXPERIENCE_PRESENT_LABEL_KEY);
-
-  return `${startLabel} - ${endLabel}`;
+  return formatAppDateRange(
+    startDate,
+    endDate,
+    locale,
+    translateStaticKey(locale, EXPERIENCE_PRESENT_LABEL_KEY),
+  );
 };
 
 export const mapExperienceToTimelineItem = (

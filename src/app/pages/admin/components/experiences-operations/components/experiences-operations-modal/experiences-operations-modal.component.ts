@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
+import { resolveDatePickerFormat } from '../../../../../../core/date/app-date.helper';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ExperienceRecord } from '../../../../../../core/api/experiences/experiences.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
@@ -77,6 +78,9 @@ export class ExperiencesOperationsModalComponent {
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
   protected readonly formFields = EXPERIENCES_OPERATIONS_FORM_FIELDS;
+  protected readonly datePickerFormat = computed(() =>
+    resolveDatePickerFormat(this.translation.locale()),
+  );
   protected readonly fieldDefinitions = EXPERIENCES_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
@@ -121,7 +125,7 @@ export class ExperiencesOperationsModalComponent {
         ...this.toOperationsItem(experience),
         fields: [
           {
-            labelKey: 'pages.admin.experiences.fields.slug.label',
+            labelKey: 'common.fields.slug',
             value: experience.slug,
           },
           {
@@ -148,7 +152,11 @@ export class ExperiencesOperationsModalComponent {
           },
           {
             labelKey: 'pages.admin.operations.date',
-            value: formatAdminDateRangeForDisplay(experience.startDate, experience.endDate),
+            value: formatAdminDateRangeForDisplay(
+              experience.startDate,
+              experience.endDate,
+              this.translation.locale(),
+            ),
           },
           {
             labelKey: 'pages.admin.experiences.fields.isCurrent.label',
@@ -159,7 +167,7 @@ export class ExperiencesOperationsModalComponent {
             value: booleanLabel(experience.highlight),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.sortOrder.label',
+            labelKey: 'common.fields.sortOrder',
             value: String(experience.sortOrder ?? 0),
           },
           {

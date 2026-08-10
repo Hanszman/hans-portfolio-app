@@ -7,6 +7,22 @@ body {
   min-height: 100%;
 }
 
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-normal-case {
+  text-transform: none;
+}
+
 body {
   margin: 0;
   background-color: var(--background-color);

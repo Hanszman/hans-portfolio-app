@@ -10,6 +10,7 @@ import {
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
+import { formatAppDate } from '../../../core/date/app-date.helper';
 import {
   TechnologyFrequencyKey,
   TechnologyContextPeriodViewModel,
@@ -193,16 +194,7 @@ export const mapTechnologyContextPeriods = (
 };
 
 export const formatTechnologyContextDate = (value: string, locale: AppLocale): string => {
-  const date = new Date(value);
-
-  return Number.isNaN(date.getTime())
-    ? value
-    : new Intl.DateTimeFormat(locale, {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        timeZone: 'UTC',
-      }).format(date);
+  return formatAppDate(value, locale);
 };
 
 export const formatTechnologyContextPeriod = (

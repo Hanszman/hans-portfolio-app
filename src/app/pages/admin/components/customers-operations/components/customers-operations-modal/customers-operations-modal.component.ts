@@ -133,7 +133,7 @@ export class CustomersOperationsModalComponent {
         title: customer.slug,
         subtitle: customer.name,
         fields: [
-          { labelKey: 'pages.admin.customers.card.slug', value: customer.slug },
+          { labelKey: 'common.fields.slug', value: customer.slug },
           { labelKey: 'pages.admin.customers.card.name', value: customer.name },
           {
             labelKey: 'pages.admin.operations.localized.summary',
@@ -149,7 +149,7 @@ export class CustomersOperationsModalComponent {
                 : 'pages.admin.customers.fields.highlight.disabled',
             ),
           },
-          { labelKey: 'pages.admin.customers.card.sortOrder', value: customer.sortOrderLabel },
+          { labelKey: 'common.fields.sortOrder', value: customer.sortOrderLabel },
           {
             labelKey: 'pages.admin.customers.card.experiences',
             value: customer.experienceLabels.join(', ') || emptyRelations,

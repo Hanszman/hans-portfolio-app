@@ -53,7 +53,7 @@ export interface ProjectsOperationsFormValue {
 
 export const PROJECTS_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.projects.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.projects.fields.slug.placeholder',
     required: true,
   },
@@ -128,7 +128,7 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     required: false,
   },
   sortOrder: {
-    labelKey: 'pages.admin.projects.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.projects.fields.sortOrder.placeholder',
     required: true,
   },

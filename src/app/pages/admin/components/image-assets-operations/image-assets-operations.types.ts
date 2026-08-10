@@ -126,7 +126,7 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
     required: false,
   },
   sortOrder: {
-    labelKey: 'pages.admin.imageAssets.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.imageAssets.fields.sortOrder.placeholder',
     required: true,
   },

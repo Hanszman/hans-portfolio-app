@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
+import { resolveDatePickerFormat } from '../../../../../../core/date/app-date.helper';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import {
   OperationsDetailedItemViewModel,
@@ -69,6 +70,9 @@ export class TechnologyContextsOperationsModalComponent {
   readonly deleteSelected = output<string>();
   readonly fieldChanged = output<{ field: keyof TechnologyContextFormValue; value: string }>();
   protected readonly fields = TECHNOLOGY_CONTEXT_FIELDS;
+  protected readonly datePickerFormat = computed(() =>
+    resolveDatePickerFormat(this.translation.locale()),
+  );
   protected readonly trackById = trackAdminItemById;
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
     this.fields,

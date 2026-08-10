@@ -1,9 +1,5 @@
 import { TechnologyContextKey } from '../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../core/translation/translation.types';
-import {
-  buildRelativeAssetPath,
-  buildRelativeSkillImageAssetPath,
-} from '../../core/api/api.config';
 import { ContainerTone } from '../../layout/container/container.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 
@@ -367,87 +363,3 @@ export const SKILL_VISUAL_FILE_NAMES: Record<string, string> = {
   xml: 'xml.png',
 };
 
-export interface StaticSkillCardConfig {
-  id: string;
-  slug: string;
-  kind: Exclude<SkillCardKind, 'technology'>;
-  nameKey: AppTranslationKey;
-  subtitleKey: AppTranslationKey;
-  metaKey: AppTranslationKey;
-  badgeKey: AppTranslationKey;
-  badgeColor: string;
-  iconName: string;
-  visualUrl: string;
-  levelKey: SkillLevelFilterValue;
-}
-
-export const SKILL_EDUCATION_CARDS: readonly StaticSkillCardConfig[] = [
-  {
-    id: 'education-information-systems',
-    slug: 'puc-graduation',
-    kind: 'education',
-    nameKey: 'pages.skills.education.informationSystems.title',
-    subtitleKey: 'pages.skills.education.informationSystems.institution',
-    metaKey: 'pages.skills.education.informationSystems.period',
-    badgeKey: 'pages.skills.education.informationSystems.badge',
-    badgeColor: 'info',
-    iconName: 'LuGraduationCap',
-    visualUrl: buildRelativeSkillImageAssetPath('puc.png'),
-    levelKey: 'ADVANCED',
-  },
-  {
-    id: 'education-fullstack-web-development',
-    slug: 'puc-post-graduation',
-    kind: 'education',
-    nameKey: 'pages.skills.education.fullStackWeb.title',
-    subtitleKey: 'pages.skills.education.fullStackWeb.institution',
-    metaKey: 'pages.skills.education.fullStackWeb.period',
-    badgeKey: 'pages.skills.education.fullStackWeb.badge',
-    badgeColor: 'info',
-    iconName: 'LuCode2',
-    visualUrl: buildRelativeSkillImageAssetPath('puc.png'),
-    levelKey: 'ADVANCED',
-  },
-  {
-    id: 'education-angular-node',
-    slug: 'course-angular-node',
-    kind: 'education',
-    nameKey: 'pages.skills.education.angularNode.title',
-    subtitleKey: 'pages.skills.education.angularNode.institution',
-    metaKey: 'pages.skills.education.angularNode.period',
-    badgeKey: 'pages.skills.education.angularNode.badge',
-    badgeColor: 'info',
-    iconName: 'LuBadgeCheck',
-    visualUrl: buildRelativeSkillImageAssetPath('udemy.png'),
-    levelKey: 'INTERMEDIATE',
-  },
-];
-
-export const SKILL_LANGUAGE_CARDS: readonly StaticSkillCardConfig[] = [
-  {
-    id: 'language-portuguese',
-    slug: 'portuguese',
-    kind: 'language',
-    nameKey: 'pages.skills.languages.portuguese.title',
-    subtitleKey: 'pages.skills.languages.portuguese.subtitle',
-    metaKey: 'pages.skills.languages.portuguese.meta',
-    badgeKey: 'pages.skills.languages.portuguese.badge',
-    badgeColor: 'info',
-    iconName: 'LuLanguages',
-    visualUrl: buildRelativeAssetPath('vendor/flag-icons/4x3/br.svg'),
-    levelKey: 'ADVANCED',
-  },
-  {
-    id: 'language-english',
-    slug: 'english',
-    kind: 'language',
-    nameKey: 'pages.skills.languages.english.title',
-    subtitleKey: 'pages.skills.languages.english.subtitle',
-    metaKey: 'pages.skills.languages.english.meta',
-    badgeKey: 'pages.skills.languages.english.badge',
-    badgeColor: 'info',
-    iconName: 'LuLanguages',
-    visualUrl: buildRelativeAssetPath('vendor/flag-icons/4x3/us.svg'),
-    levelKey: 'ADVANCED',
-  },
-];

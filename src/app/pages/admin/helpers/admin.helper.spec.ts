@@ -48,12 +48,12 @@ describe('formatAdminIdentity', () => {
     expect(
       resolveAdminFieldLabel(
         {
-          labelKey: 'pages.admin.tags.fields.slug.label',
+          labelKey: 'common.fields.slug',
           required: true,
         },
         translate,
       ),
-    ).toBe('pages.admin.tags.fields.slug.label');
+    ).toBe('common.fields.slug');
 
     expect(
       resolveAdminFieldLabel(
@@ -70,7 +70,7 @@ describe('formatAdminIdentity', () => {
     const resolveFieldLabel = createAdminFieldLabelResolver(
       {
         slug: {
-          labelKey: 'pages.admin.tags.fields.slug.label',
+          labelKey: 'common.fields.slug',
           required: true,
         },
         namePt: {
@@ -80,7 +80,7 @@ describe('formatAdminIdentity', () => {
       translate,
     );
 
-    expect(resolveFieldLabel('slug')).toBe('pages.admin.tags.fields.slug.label');
+    expect(resolveFieldLabel('slug')).toBe('common.fields.slug');
     expect(resolveFieldLabel('namePt')).toBe('pages.admin.tags.fields.namePt.label');
   });
 

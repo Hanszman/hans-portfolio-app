@@ -325,7 +325,7 @@ describe('projects helper', () => {
       {
         label: 'Stack mais ampla',
         value: 'Portfolio',
-        supportingText: '3 Tecnologias',
+        supportingText: '3 tecnologias',
       },
     ]);
   });

@@ -133,7 +133,7 @@ describe('TagsOperationsModalComponent', () => {
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
-      'Tag slug',
+      'Slug',
       'Portuguese name',
       'English name',
       'Spanish name',

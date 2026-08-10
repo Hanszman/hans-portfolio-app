@@ -37,7 +37,7 @@ export interface JobsOperationsFormValue {
 
 export const JOBS_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.jobs.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.jobs.fields.slug.placeholder',
     required: true,
   },
@@ -72,7 +72,7 @@ export const JOBS_OPERATIONS_FIELDS = {
     required: true,
   },
   sortOrder: {
-    labelKey: 'pages.admin.jobs.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.jobs.fields.sortOrder.placeholder',
     required: true,
   },

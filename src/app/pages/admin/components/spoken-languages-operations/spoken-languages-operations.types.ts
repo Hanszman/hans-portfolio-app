@@ -69,7 +69,7 @@ export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
     required: true,
   },
   sortOrder: {
-    labelKey: 'pages.admin.spokenLanguages.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.spokenLanguages.fields.sortOrder.placeholder',
     required: true,
   },

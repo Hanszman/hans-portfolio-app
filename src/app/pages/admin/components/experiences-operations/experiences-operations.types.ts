@@ -49,7 +49,7 @@ export interface ExperiencesOperationsFormValue {
 
 export const EXPERIENCES_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.experiences.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.experiences.fields.slug.placeholder',
     required: true,
   },
@@ -114,7 +114,7 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
     required: false,
   },
   sortOrder: {
-    labelKey: 'pages.admin.experiences.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.experiences.fields.sortOrder.placeholder',
     required: true,
   },

@@ -20,8 +20,14 @@ export const buildTechnologyContextTechnologyOptions = (
       value: technology.id,
     }));
 
-export const formatTechnologyContextDate = (value: string): string => {
-  return formatAdminDateForDisplay(value);
+export const formatTechnologyContextDate = (
+  value: string,
+  translation?: TranslationService,
+): string => {
+  const locale =
+    translation && typeof translation.locale === 'function' ? translation.locale() : 'pt-br';
+
+  return formatAdminDateForDisplay(value, '-', locale);
 };
 
 export const buildTechnologyContextViewModels = (
@@ -40,6 +46,6 @@ export const buildTechnologyContextViewModels = (
             `pages.admin.technologyContexts.options.${record.context}` as AppTranslationKey,
           )
         : '-',
-      dateRangeLabel: `${formatTechnologyContextDate(form.startedAt)} - ${formatTechnologyContextDate(form.endedAt)}`,
+      dateRangeLabel: `${formatTechnologyContextDate(form.startedAt, translation)} - ${formatTechnologyContextDate(form.endedAt, translation)}`,
     };
   });

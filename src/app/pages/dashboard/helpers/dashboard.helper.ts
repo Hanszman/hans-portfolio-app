@@ -18,6 +18,7 @@ import {
   AppLocale,
   AppTranslationKey,
 } from '../../../core/translation/translation.types';
+import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import {
   SKILL_TYPE_FILTERS,
   SKILL_TYPE_LABEL_KEYS,
@@ -92,23 +93,17 @@ const mapDistributionEntries = (
       count: entry.count,
     }));
 
-const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
-  new Intl.DateTimeFormat(locale, {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(dateIso));
-
 const formatTimelinePeriod = (
   startDate: string,
   endDate: string | null,
   locale: AppLocale,
 ): string => {
-  const startLabel = formatMonthYear(startDate, locale);
-  const endLabel = endDate
-    ? formatMonthYear(endDate, locale)
-    : translateStaticKey(locale, 'taxonomy.experiences.present');
-
-  return `${startLabel} - ${endLabel}`;
+  return formatAppDateRange(
+    startDate,
+    endDate,
+    locale,
+    translateStaticKey(locale, 'taxonomy.experiences.present'),
+  );
 };
 
 const buildDashboardChartModel = (

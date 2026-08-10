@@ -62,7 +62,7 @@ export interface FormationsOperationsFormValue {
 
 export const FORMATIONS_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.formations.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.formations.fields.slug.placeholder',
     required: true,
   },
@@ -116,7 +116,7 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
     required: false,
   },
   sortOrder: {
-    labelKey: 'pages.admin.formations.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.formations.fields.sortOrder.placeholder',
     required: true,
   },

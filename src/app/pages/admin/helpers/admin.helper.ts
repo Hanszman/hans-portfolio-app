@@ -3,6 +3,7 @@ import { ImageAssetRecord } from '../../../core/api/image-assets/image-assets.ty
 import { buildAssetUrl } from '../../../core/api/api.config';
 import { resolveLocalizedText } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
+import { formatAppDate } from '../../../core/date/app-date.helper';
 import {
   AdminFormFieldConfig,
   AdminEntityDefinition,
@@ -76,6 +77,7 @@ const LOCALIZED_DATE_PATTERN = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 export const formatAdminDateForDisplay = (
   value: string | null | undefined,
   emptyValue = '-',
+  locale: AppLocale = 'pt-br',
 ): string => {
   const normalizedValue = normalizeAdminDateValueForPicker(value);
 
@@ -83,20 +85,15 @@ export const formatAdminDateForDisplay = (
     return emptyValue;
   }
 
-  const isoDate = normalizedValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-
-  if (!isoDate) {
-    return normalizedValue;
-  }
-
-  const [, year, month, day] = isoDate;
-  return `${day}/${month}/${year}`;
+  return formatAppDate(normalizedValue, locale, emptyValue);
 };
 
 export const formatAdminDateRangeForDisplay = (
   startDate: string | null | undefined,
   endDate: string | null | undefined,
-): string => `${formatAdminDateForDisplay(startDate)} - ${formatAdminDateForDisplay(endDate)}`;
+  locale: AppLocale = 'pt-br',
+): string =>
+  `${formatAdminDateForDisplay(startDate, '-', locale)} - ${formatAdminDateForDisplay(endDate, '-', locale)}`;
 
 export interface AdminRelationLabelSource {
   readonly id?: string | null;

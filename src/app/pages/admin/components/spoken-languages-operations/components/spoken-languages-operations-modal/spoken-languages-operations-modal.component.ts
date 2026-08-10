@@ -168,7 +168,7 @@ export class SpokenLanguagesOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.spokenLanguages.card.sortOrder',
+            labelKey: 'common.fields.sortOrder',
             value: language.sortOrderLabel,
           },
           {

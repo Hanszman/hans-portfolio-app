@@ -192,7 +192,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.dimensionsLabel,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.sortOrder',
+            labelKey: 'common.fields.sortOrder',
             value: imageAsset.sortOrderLabel,
           },
           {
@@ -211,7 +211,7 @@ export class ImageAssetsOperationsModalComponent {
               ) || emptyText,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.projects',
+            labelKey: 'common.entities.projects',
             value: imageAsset.projectLabels.join(', ') || emptyRelations,
           },
           {
@@ -219,7 +219,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.experienceLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.technologies',
+            labelKey: 'common.entities.technologies',
             value: imageAsset.technologyLabels.join(', ') || emptyRelations,
           },
           {

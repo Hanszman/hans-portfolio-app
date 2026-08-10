@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
+import { resolveDatePickerFormat } from '../../../../../../core/date/app-date.helper';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { ProjectRecord } from '../../../../../../core/api/projects/projects.types';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
@@ -79,6 +80,9 @@ export class ProjectsOperationsModalComponent {
   readonly deleteSelected = output<string>();
   readonly pageSelected = output<number>();
   protected readonly formFields = PROJECTS_OPERATIONS_FORM_FIELDS;
+  protected readonly datePickerFormat = computed(() =>
+    resolveDatePickerFormat(this.translation.locale()),
+  );
   protected readonly fieldDefinitions = PROJECTS_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
@@ -131,7 +135,7 @@ export class ProjectsOperationsModalComponent {
       return this.projects().map((project) => ({
         ...this.toOperationsItem(project),
         fields: [
-          { labelKey: 'pages.admin.projects.fields.slug.label', value: project.slug },
+          { labelKey: 'common.fields.slug', value: project.slug },
           {
             labelKey: 'pages.admin.operations.localized.title',
             value: resolveAdminLocalizedValue(
@@ -172,7 +176,11 @@ export class ProjectsOperationsModalComponent {
           },
           {
             labelKey: 'pages.admin.operations.date',
-            value: formatAdminDateRangeForDisplay(project.startDate, project.endDate),
+            value: formatAdminDateRangeForDisplay(
+              project.startDate,
+              project.endDate,
+              this.translation.locale(),
+            ),
           },
           {
             labelKey: 'pages.admin.projects.fields.featured.label',
@@ -183,7 +191,7 @@ export class ProjectsOperationsModalComponent {
             value: booleanLabel(project.highlight),
           },
           {
-            labelKey: 'pages.admin.projects.fields.sortOrder.label',
+            labelKey: 'common.fields.sortOrder',
             value: String(project.sortOrder ?? 0),
           },
           {

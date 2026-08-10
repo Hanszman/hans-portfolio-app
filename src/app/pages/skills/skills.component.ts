@@ -98,11 +98,11 @@ export class SkillsComponent {
   protected readonly typeFilterOptions = computed(() => this.buildFilterOptions(this.typeFilters));
 
   protected readonly educationCards = computed(() =>
-    buildEducationSkillCards(this.translationService.locale()),
+    buildEducationSkillCards(this.formationsSignal(), this.translationService.locale()),
   );
 
   protected readonly languageCards = computed(() =>
-    buildLanguageSkillCards(this.translationService.locale()),
+    buildLanguageSkillCards(this.spokenLanguagesSignal(), this.translationService.locale()),
   );
 
   protected readonly technologyCards = computed(() =>

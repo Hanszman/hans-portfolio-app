@@ -90,7 +90,7 @@ export const LINKS_OPERATIONS_FIELDS = {
     required: true,
   },
   sortOrder: {
-    labelKey: 'pages.admin.links.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.links.fields.sortOrder.placeholder',
     required: true,
   },

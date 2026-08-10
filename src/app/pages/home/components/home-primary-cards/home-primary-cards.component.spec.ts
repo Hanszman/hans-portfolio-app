@@ -31,7 +31,7 @@ describe('HomePrimaryCardsComponent', () => {
       },
       {
         value: '60+',
-        labelKey: 'pages.home.metrics.technologies.label',
+        labelKey: 'common.entities.technologies',
         descriptionKey: 'pages.home.metrics.technologies.description',
         iconName: 'LuCpu',
       },

@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { FormationRecord } from '../../../../../../core/api/formations/formations.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
+import { resolveDatePickerFormat } from '../../../../../../core/date/app-date.helper';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
@@ -93,6 +94,9 @@ export class FormationsOperationsModalComponent {
   readonly pageSelected = output<number>();
 
   protected readonly fields = FORMATIONS_OPERATIONS_FIELDS;
+  protected readonly datePickerFormat = computed(() =>
+    resolveDatePickerFormat(this.translation.locale()),
+  );
   protected readonly trackById = trackAdminItemById;
   protected readonly resolveSelectValue = resolveAdminSelectValue;
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
@@ -149,7 +153,7 @@ export class FormationsOperationsModalComponent {
           this.translation.locale(), formation.titlePt, formation.titleEn, formation.titleEs,
         ),
         fields: [
-          { labelKey: 'pages.admin.formations.card.slug', value: formation.slug },
+          { labelKey: 'common.fields.slug', value: formation.slug },
           {
             labelKey: 'pages.admin.formations.card.institution',
             value: formation.institution,
@@ -173,7 +177,11 @@ export class FormationsOperationsModalComponent {
           },
           {
             labelKey: 'pages.admin.operations.date',
-            value: formatAdminDateRangeForDisplay(formation.startDate, formation.endDateLabel),
+            value: formatAdminDateRangeForDisplay(
+              formation.startDate,
+              formation.endDateLabel,
+              this.translation.locale(),
+            ),
           },
           {
             labelKey: 'pages.admin.formations.card.highlight',
@@ -184,11 +192,11 @@ export class FormationsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.formations.card.sortOrder',
+            labelKey: 'common.fields.sortOrder',
             value: formation.sortOrderLabel,
           },
           {
-            labelKey: 'pages.admin.formations.card.technologies',
+            labelKey: 'common.entities.technologies',
             value: formation.technologyLabels.join(', ') || emptyRelations,
           },
           {

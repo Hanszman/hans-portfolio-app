@@ -137,7 +137,7 @@ export class JobsOperationsModalComponent {
           this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
         ),
         fields: [
-          { labelKey: 'pages.admin.jobs.card.slug', value: job.slug },
+          { labelKey: 'common.fields.slug', value: job.slug },
           {
             labelKey: 'pages.admin.operations.localized.name',
             value: resolveAdminLocalizedValue(
@@ -158,7 +158,7 @@ export class JobsOperationsModalComponent {
                 : 'pages.admin.jobs.fields.highlight.disabled',
             ),
           },
-          { labelKey: 'pages.admin.jobs.card.sortOrder', value: job.sortOrderLabel },
+          { labelKey: 'common.fields.sortOrder', value: job.sortOrderLabel },
           {
             labelKey: 'pages.admin.jobs.card.experiences',
             value: job.experienceLabels.join(', ') || emptyRelations,

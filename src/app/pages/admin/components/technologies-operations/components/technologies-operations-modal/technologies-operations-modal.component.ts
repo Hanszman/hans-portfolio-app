@@ -123,7 +123,7 @@ export class TechnologiesOperationsModalComponent {
         title: technology.slug,
         subtitle: technology.name,
         fields: [
-          { labelKey: 'pages.admin.technologies.card.slug', value: technology.slug },
+          { labelKey: 'common.fields.slug', value: technology.slug },
           { labelKey: 'pages.admin.technologies.card.name', value: technology.name },
           {
             labelKey: 'pages.admin.technologies.card.category',
@@ -150,12 +150,16 @@ export class TechnologiesOperationsModalComponent {
                   (context) =>
                     `${this.translation.instant(
                       `pages.admin.technologyContexts.options.${context.context}` as AppTranslationKey,
-                    )}: ${formatAdminDateRangeForDisplay(context.startedAt, context.endedAt)}`,
+                    )}: ${formatAdminDateRangeForDisplay(
+                      context.startedAt,
+                      context.endedAt,
+                      this.translation.locale(),
+                    )}`,
                 )
                 .join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.technologies.card.projects',
+            labelKey: 'common.entities.projects',
             value: relationValue(technology.projectLabels),
           },
           {

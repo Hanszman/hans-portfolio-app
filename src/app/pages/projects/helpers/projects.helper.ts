@@ -9,6 +9,7 @@ import {
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
+import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import {
   resolveSkillStackKey,
   resolveSkillTypeKey,
@@ -54,12 +55,6 @@ const dedupeProjectTechnologies = (
   ...new Map(technologies.map((technology) => [technology.slug, technology])).values(),
 ];
 
-const formatMonthYear = (dateIso: string, locale: AppLocale): string =>
-  new Intl.DateTimeFormat(locale, {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(dateIso));
-
 const resolveCatalogLabel = (
   locale: AppLocale,
   value: string,
@@ -75,12 +70,12 @@ const formatProjectDateRange = (
   endDate: string | null,
   locale: AppLocale,
 ): string => {
-  const startLabel = formatMonthYear(startDate, locale);
-  const endLabel = endDate
-    ? formatMonthYear(endDate, locale)
-    : translateStaticKey(locale, 'taxonomy.experiences.present');
-
-  return `${startLabel} - ${endLabel}`;
+  return formatAppDateRange(
+    startDate,
+    endDate,
+    locale,
+    translateStaticKey(locale, 'taxonomy.experiences.present'),
+  );
 };
 
 const mapProjectLink = (
@@ -386,7 +381,7 @@ export const buildProjectsSummaryMetrics = (
           )
         : '',
       supportingText: richestStackProject
-        ? `${richestStackProject.technologies.length} ${translateStaticKey(locale, 'pages.projects.card.technologies')}`
+        ? `${richestStackProject.technologies.length} ${translateStaticKey(locale, 'common.entities.technologies').toLocaleLowerCase(locale)}`
         : '',
     },
   ];

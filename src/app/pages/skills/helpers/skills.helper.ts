@@ -13,16 +13,15 @@ import {
   translateStaticKey,
 } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
+import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import {
   SKILL_CATEGORY_LABEL_KEYS,
   SKILL_CONTEXT_ORDER,
   SKILL_CONTEXT_LABEL_KEYS,
-  SKILL_EDUCATION_CARDS,
   SKILL_FALLBACK_LABEL_KEYS,
   SKILL_FREQUENCY_LABEL_KEYS,
   SKILL_GROUP_ICON_NAMES,
   SKILL_GROUP_TONES,
-  SKILL_LANGUAGE_CARDS,
   SKILL_LEVEL_LABEL_KEYS,
   SKILL_STACK_LABEL_KEYS,
   SKILL_TYPE_LABEL_KEYS,
@@ -34,7 +33,6 @@ import {
   SkillTypeFilterValue,
   SkillsGroupViewModel,
   SkillsSummaryMetricViewModel,
-  StaticSkillCardConfig,
 } from '../skills.types';
 
 const normalizeLabel = (value: string): string =>
@@ -406,62 +404,154 @@ export const mapTechnologyToSkillCard = (
   };
 };
 
-const mapStaticSkillCard = (
-  config: StaticSkillCardConfig,
+const resolveEnumTranslation = (
   locale: AppLocale,
-): SkillCardViewModel => {
-  const name = translateStaticKey(locale, config.nameKey);
-  const subtitle = translateStaticKey(locale, config.subtitleKey);
-  const meta = translateStaticKey(locale, config.metaKey);
-  const badgeLabel = translateStaticKey(locale, config.badgeKey);
+  namespace: string,
+  value: string,
+): string => {
+  const key = `${namespace}.${value}` as AppTranslationKey;
+  const translated = translateStaticKey(locale, key);
 
-  return {
-    id: config.id,
-    slug: config.slug,
-    kind: config.kind,
-    name,
-    subtitle,
-    categoryLabel: subtitle,
-    levelLabel: badgeLabel,
-    frequencyLabel: meta,
-    totalExperienceLabel: meta,
-    isHighlight: false,
-    iconName: config.iconName,
-    visualUrl: config.visualUrl,
-    badgeLabel,
-    badgeColor: config.badgeColor,
-    stackKey: 'OTHERS',
-    levelKey: config.levelKey,
-    typeKey: 'OTHERS',
-    contexts: [],
-    timelineEntries: [],
-    modal: {
-      slug: config.slug,
-      name,
-      category:
-        config.kind === 'education'
-          ? translateStaticKey(locale, 'pages.skills.education.title')
-          : translateStaticKey(locale, 'pages.skills.languages.title'),
-      level: badgeLabel,
-      frequency: meta,
-      image: { src: config.visualUrl, alt: name },
-    },
-  };
+  return translated === key ? normalizeLabel(value) : translated;
 };
 
-export const buildEducationSkillCards = (locale: AppLocale): readonly SkillCardViewModel[] =>
-  SKILL_EDUCATION_CARDS.map((config) => mapStaticSkillCard(config, locale));
+const resolveRelatedIcon = (
+  imageAssets:
+    | readonly { imageAsset?: { filePath?: string | null; kind?: string | null } | null }[]
+    | null
+    | undefined,
+): string => {
+  const icon = imageAssets?.find(
+    ({ imageAsset }) => imageAsset?.kind === 'ICON' && imageAsset.filePath,
+  )?.imageAsset?.filePath;
 
-export const buildLanguageSkillCards = (locale: AppLocale): readonly SkillCardViewModel[] =>
-  SKILL_LANGUAGE_CARDS.map((config) => mapStaticSkillCard(config, locale));
-
-const formatSkillDate = (value: string | null | undefined, locale: AppLocale): string => {
-  if (!value) return '';
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? value
-    : new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(date);
+  return icon ? buildAssetUrl(icon) : '';
 };
+
+export const buildEducationSkillCards = (
+  formations: readonly FormationRecord[],
+  locale: AppLocale,
+): readonly SkillCardViewModel[] =>
+  [...formations]
+    .sort(
+      (left, right) =>
+        (left.sortOrder ?? Number.MAX_SAFE_INTEGER) -
+          (right.sortOrder ?? Number.MAX_SAFE_INTEGER) ||
+        left.titleEn.localeCompare(right.titleEn),
+    )
+    .map((formation) => {
+      const name = resolveLocalizedText(
+        locale,
+        {
+          'pt-br': formation.titlePt,
+          'en-us': formation.titleEn,
+          'es-es': formation.titleEs,
+        },
+        formation.titleEn,
+      );
+      const badgeLabel = resolveEnumTranslation(
+        locale,
+        'pages.admin.formations.fields.degreeType.options',
+        formation.degreeType,
+      );
+      const period = formatAppDateRange(formation.startDate, formation.endDate, locale);
+      const visualUrl = resolveRelatedIcon(formation.imageAssets);
+
+      return {
+        id: formation.id,
+        slug: formation.slug,
+        kind: 'education',
+        name,
+        subtitle: formation.institution,
+        categoryLabel: formation.institution,
+        levelLabel: badgeLabel,
+        frequencyLabel: period,
+        totalExperienceLabel: period,
+        isHighlight: Boolean(formation.highlight),
+        iconName: 'LuGraduationCap',
+        visualUrl,
+        badgeLabel,
+        badgeColor: 'info',
+        stackKey: 'OTHERS',
+        levelKey: 'ADVANCED',
+        typeKey: 'OTHERS',
+        contexts: [],
+        timelineEntries: [],
+        modal: {
+          slug: formation.slug,
+          name,
+          category: translateStaticKey(locale, 'pages.skills.education.title'),
+          level: badgeLabel,
+          frequency: period,
+          image: { src: visualUrl, alt: name },
+        },
+      } satisfies SkillCardViewModel;
+    });
+
+export const buildLanguageSkillCards = (
+  languages: readonly SpokenLanguageRecord[],
+  locale: AppLocale,
+): readonly SkillCardViewModel[] =>
+  [...languages]
+    .sort(
+      (left, right) =>
+        (left.sortOrder ?? Number.MAX_SAFE_INTEGER) -
+          (right.sortOrder ?? Number.MAX_SAFE_INTEGER) ||
+        left.nameEn.localeCompare(right.nameEn),
+    )
+    .map((language) => {
+      const name = resolveLocalizedText(
+        locale,
+        {
+          'pt-br': language.namePt,
+          'en-us': language.nameEn,
+          'es-es': language.nameEs,
+        },
+        language.nameEn,
+      );
+      const badgeLabel = resolveEnumTranslation(
+        locale,
+        'pages.admin.spokenLanguages.fields.proficiency.options',
+        language.proficiency,
+      );
+      const visualUrl = resolveRelatedIcon(language.imageAssets);
+      const normalizedLevel = language.proficiency.toUpperCase();
+      const levelKey: SkillLevelFilterValue = ['BASIC', 'INTERMEDIATE', 'ADVANCED'].includes(
+        normalizedLevel,
+      )
+        ? (normalizedLevel as SkillLevelFilterValue)
+        : 'ADVANCED';
+
+      return {
+        id: language.id,
+        slug: language.code,
+        kind: 'language',
+        name,
+        subtitle: '',
+        categoryLabel: translateStaticKey(locale, 'pages.skills.languages.title'),
+        levelLabel: badgeLabel,
+        frequencyLabel: '',
+        totalExperienceLabel: '',
+        isHighlight: Boolean(language.highlight),
+        iconName: 'LuLanguages',
+        visualUrl,
+        badgeLabel,
+        badgeColor: 'info',
+        stackKey: 'OTHERS',
+        levelKey,
+        typeKey: 'OTHERS',
+        contexts: [],
+        timelineEntries: [],
+        modal: {
+          slug: language.code,
+          name,
+          category: translateStaticKey(locale, 'pages.skills.languages.title'),
+          level: badgeLabel,
+          frequency: '',
+          image: { src: visualUrl, alt: name },
+        },
+      } satisfies SkillCardViewModel;
+    });
 
 export const mapFormationToEducationModal = (
   formation: FormationRecord | undefined,
@@ -531,12 +621,7 @@ export const mapFormationToEducationModal = (
       title,
       description: summary || undefined,
     }));
-  const dateRange = [
-    formatSkillDate(formation.startDate, locale),
-    formatSkillDate(formation.endDate, locale),
-  ]
-    .filter(Boolean)
-    .join(' - ');
+  const dateRange = formatAppDateRange(formation.startDate, formation.endDate, locale);
 
   return {
     title,

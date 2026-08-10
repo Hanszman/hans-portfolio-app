@@ -38,6 +38,41 @@ const flushTechnologiesRequest = (
   httpTestingController.expectOne(TECHNOLOGIES_REQUEST_URL).flush(response);
 };
 
+const flushSkillCatalogRequests = (httpTestingController: HttpTestingController): void => {
+  httpTestingController.expectOne(FORMATIONS_REQUEST_URL).flush({
+    ...emptyCollection,
+    data: [
+      {
+        id: 'formation',
+        slug: 'information-systems',
+        institution: 'PUC Minas',
+        titlePt: 'Sistemas de Informação',
+        titleEn: 'Information Systems',
+        titleEs: 'Sistemas de Información',
+        degreeType: 'BACHELOR',
+        summaryPt: 'Resumo',
+        summaryEn: 'Summary',
+        summaryEs: 'Resumen',
+        startDate: '2015-02-01',
+        endDate: '2018-12-15',
+      },
+    ],
+  });
+  httpTestingController.expectOne(LANGUAGES_REQUEST_URL).flush({
+    ...emptyCollection,
+    data: [
+      {
+        id: 'language',
+        code: 'pt-br',
+        namePt: 'Português',
+        nameEn: 'Portuguese',
+        nameEs: 'Portugués',
+        proficiency: 'NATIVE',
+      },
+    ],
+  });
+};
+
 describe('SkillsComponent', () => {
   beforeAll(() => {
     const elementNames = [
@@ -96,6 +131,7 @@ describe('SkillsComponent', () => {
     expect(compiled.textContent).not.toContain('Building technology groups...');
 
     flushTechnologiesRequest(httpTestingController);
+    flushSkillCatalogRequests(httpTestingController);
     fixture.detectChanges();
 
     expect(compiled.textContent).toContain('Information Systems');
@@ -139,6 +175,7 @@ describe('SkillsComponent', () => {
       compiled.querySelector('.skills-technologies')?.textContent ?? '';
     const httpTestingController = TestBed.inject(HttpTestingController);
     flushTechnologiesRequest(httpTestingController);
+    flushSkillCatalogRequests(httpTestingController);
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
@@ -502,6 +539,7 @@ describe('SkillsComponent', () => {
 
     const httpTestingController = TestBed.inject(HttpTestingController);
     flushTechnologiesRequest(httpTestingController);
+    flushSkillCatalogRequests(httpTestingController);
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
@@ -580,9 +618,14 @@ describe('SkillsComponent', () => {
     expect(component.selectedEducation()?.title).toBe('Information Systems');
     component.openSkillDetails(component.languageCards()[0]);
     expect(component.selectedLanguage()?.title).toBe('Portuguese');
+    component.openSkillDetails({
+      ...(component.languageCards()[0] as object),
+      slug: 'language-name-fallback',
+    });
+    expect(component.selectedLanguage()?.title).toBe('Portuguese');
   });
 
-  it('should preserve static modal fallbacks when formation and language catalogs fail', () => {
+  it('should clear dynamic formation and language cards when their catalogs fail', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
     const http = TestBed.inject(HttpTestingController);
@@ -595,13 +638,8 @@ describe('SkillsComponent', () => {
     const component = fixture.componentInstance as unknown as {
       educationCards: () => readonly unknown[];
       languageCards: () => readonly unknown[];
-      openSkillDetails: (skill: unknown) => void;
-      selectedEducation: () => unknown;
-      selectedLanguage: () => unknown;
     };
-    component.openSkillDetails(component.educationCards()[0]);
-    expect(component.selectedEducation()).toBeTruthy();
-    component.openSkillDetails(component.languageCards()[0]);
-    expect(component.selectedLanguage()).toBeTruthy();
+    expect(component.educationCards()).toEqual([]);
+    expect(component.languageCards()).toEqual([]);
   });
 });

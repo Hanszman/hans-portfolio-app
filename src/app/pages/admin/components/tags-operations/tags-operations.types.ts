@@ -47,7 +47,7 @@ export interface TagsOperationsFormValue {
 
 export const TAGS_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.tags.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.tags.fields.slug.placeholder',
     required: true,
   },
@@ -71,7 +71,7 @@ export const TAGS_OPERATIONS_FIELDS = {
     required: true,
   },
   sortOrder: {
-    labelKey: 'pages.admin.tags.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.tags.fields.sortOrder.placeholder',
     required: true,
   },

@@ -66,7 +66,7 @@ export interface TechnologiesOperationsFormValue {
 
 export const TECHNOLOGIES_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.technologies.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.technologies.fields.slug.placeholder',
     required: true,
   },
@@ -79,7 +79,7 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
   level: { labelKey: 'pages.admin.technologies.fields.level.label', required: false },
   frequency: { labelKey: 'pages.admin.technologies.fields.frequency.label', required: false },
   sortOrder: {
-    labelKey: 'pages.admin.technologies.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.technologies.fields.sortOrder.placeholder',
     required: true,
   },

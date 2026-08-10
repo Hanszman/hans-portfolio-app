@@ -103,9 +103,9 @@ export interface DashboardChartViewModel {
 }
 
 export const DASHBOARD_SUMMARY_LABEL_KEYS = {
-  projects: 'pages.dashboard.snapshot.metrics.projects',
+  projects: 'common.entities.projects',
   experiences: 'pages.dashboard.snapshot.metrics.experiences',
-  technologies: 'pages.dashboard.snapshot.metrics.technologies',
+  technologies: 'common.entities.technologies',
   formations: 'pages.dashboard.snapshot.metrics.formations',
   customers: 'pages.dashboard.snapshot.metrics.customers',
   jobs: 'pages.dashboard.snapshot.metrics.jobs',

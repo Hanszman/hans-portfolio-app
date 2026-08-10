@@ -35,7 +35,7 @@ export interface CustomersOperationsFormValue {
 
 export const CUSTOMERS_OPERATIONS_FIELDS = {
   slug: {
-    labelKey: 'pages.admin.customers.fields.slug.label',
+    labelKey: 'common.fields.slug',
     placeholderKey: 'pages.admin.customers.fields.slug.placeholder',
     required: true,
   },
@@ -60,7 +60,7 @@ export const CUSTOMERS_OPERATIONS_FIELDS = {
     required: true,
   },
   sortOrder: {
-    labelKey: 'pages.admin.customers.fields.sortOrder.label',
+    labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.customers.fields.sortOrder.placeholder',
     required: true,
   },

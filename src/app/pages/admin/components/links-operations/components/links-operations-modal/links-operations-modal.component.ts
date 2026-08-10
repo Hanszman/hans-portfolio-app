@@ -180,9 +180,9 @@ export class LinksOperationsModalComponent {
               ) || emptyText,
           },
           { labelKey: 'pages.admin.links.card.type', value: link.type },
-          { labelKey: 'pages.admin.links.card.sortOrder', value: link.sortOrderLabel },
+          { labelKey: 'common.fields.sortOrder', value: link.sortOrderLabel },
           {
-            labelKey: 'pages.admin.links.card.projects',
+            labelKey: 'common.entities.projects',
             value: link.projectLabels.join(', ') || emptyRelations,
           },
           {
@@ -190,7 +190,7 @@ export class LinksOperationsModalComponent {
             value: link.experienceLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.links.card.technologies',
+            labelKey: 'common.entities.technologies',
             value: link.technologyLabels.join(', ') || emptyRelations,
           },
           {
