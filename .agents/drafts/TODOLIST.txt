@@ -7,6 +7,7 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
+-Algumas vezes a cor das linhas do gráfico de radar das technologies no modal acaba vindo preta. Mas por causa do fundo, como vc pode ver no print 1, acaba ficando difícil de ver. Parametrize para que a cor preta nunca seja uma opção de cores das linhas desse gráfico no portfolio.
 -Arrumar loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
 -Colocar loading no read dos operations-modais de todas as entidades também e colocar um botão de search para ativar a busca, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
 -Os cards de Education e Languages parecem não estar vindo com dados do banco como título, descrição, período, nível, etc. Temos que automatizar isso para vir dados dinâmicos. Nas languages, não precisamos desse texto de "meta", pode remover isso.
