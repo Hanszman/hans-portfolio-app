@@ -38,6 +38,8 @@
               class="technology-modal-image"
               [src]="image.src"
               [alt]="image.alt"
+              width="96"
+              height="96"
               loading="lazy"
             />
           }
@@ -79,6 +81,32 @@
           ></hans-chart>
         }
       </section>
+
+      @if (isContentLoading() || contextPeriods().length > 0) {
+        <section class="technology-modal-contexts">
+          <h2>{{ 'pages.skills.detail.technologyContexts' | translate }}</h2>
+          <ul>
+            @if (isContentLoading()) {
+              @for (placeholder of [0, 1]; track placeholder) {
+                <li class="technology-modal-context-skeleton-item">
+                  <app-modal-skeleton
+                    class="technology-modal-skeleton technology-modal-context-skeleton"
+                    height="3rem"
+                    [ariaLabel]="'Loading technology context ' + (placeholder + 1)"
+                  />
+                </li>
+              }
+            } @else {
+              @for (period of contextPeriods(); track period.id) {
+                <li>
+                  <strong>{{ period.label }}:</strong>
+                  <span>{{ period.dateRange }}</span>
+                </li>
+              }
+            }
+          </ul>
+        </section>
+      }
 
       <section class="technology-modal-progress">
         @if (isContentLoading()) {

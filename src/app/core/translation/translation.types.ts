@@ -201,6 +201,7 @@ export type AppTranslationKey =
   | 'pages.skills.card.totalExperience'
   | 'pages.skills.card.contexts'
   | 'pages.skills.detail.totalExperience'
+  | 'pages.skills.detail.technologyContexts'
   | 'pages.skills.detail.contextChart'
   | 'pages.skills.detail.chartSeries'
   | 'pages.skills.detail.coverage'

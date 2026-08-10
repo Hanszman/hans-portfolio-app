@@ -78,13 +78,11 @@
 .project-modal-aside,
 .project-modal-gallery {
   @apply min-w-0 overflow-hidden self-start;
-
   contain: layout paint;
 }
 
 :host ::ng-deep .project-modal-gallery hans-carousel {
   @apply block w-full max-w-full overflow-hidden;
-
   contain: layout paint;
 }
 

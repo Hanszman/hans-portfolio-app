@@ -216,6 +216,7 @@ export const EN_TRANSLATIONS = {
   'pages.skills.card.totalExperience': 'Total experience',
   'pages.skills.card.contexts': 'Context coverage',
   'pages.skills.detail.totalExperience': 'Consolidated experience',
+  'pages.skills.detail.technologyContexts': 'Technology Contexts',
   'pages.skills.detail.contextExperience': 'Experience by context',
   'pages.skills.education.detail.degree': 'Degree',
   'pages.skills.education.detail.date': 'Date',

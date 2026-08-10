@@ -1,7 +1,10 @@
 import { TagModalDetail } from '../../tag/tag-modal/tag-modal.types';
 import { buildAssetUrl } from '../../../core/api/api.config';
 import { ProjectCollectionItemResponse } from '../../../core/api/projects/projects.types';
-import { TechnologyCollectionItemResponse } from '../../../core/api/technologies/technologies.types';
+import {
+  TechnologyCollectionItemResponse,
+  TechnologyContextResponse,
+} from '../../../core/api/technologies/technologies.types';
 import {
   resolveLocalizedText,
   translateStaticKey,
@@ -9,6 +12,7 @@ import {
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import {
   TechnologyFrequencyKey,
+  TechnologyContextPeriodViewModel,
   TechnologyLevelKey,
   TechnologyModalItem,
   TechnologyProgressViewModel,
@@ -159,6 +163,57 @@ export const resolveRadarMaximum = (metrics: readonly { totalMonths: number }[])
   const largest = Math.max(0, ...metrics.map(({ totalMonths }) => totalMonths));
   return Math.max(12, Math.ceil(largest / 12) * 12);
 };
+
+export const mapTechnologyContextPeriods = (
+  contexts: readonly TechnologyContextResponse[],
+  locale: AppLocale,
+): readonly TechnologyContextPeriodViewModel[] => {
+  const periods = contexts
+    .filter(({ startedAt }) => Boolean(startedAt))
+    .map(({ id, context, startedAt, endedAt }) => ({
+      id,
+      key: context,
+      label: translateStaticKey(locale, TECHNOLOGY_CONTEXT_LABEL_KEYS[context]),
+      startedAt,
+      endedAt,
+    }))
+    .sort((left, right) => left.startedAt.localeCompare(right.startedAt));
+  const seenPeriods = new Set<string>();
+
+  return periods.filter(({ key, startedAt, endedAt }) => {
+    const periodKey = `${key}:${startedAt}:${endedAt ?? ''}`;
+
+    if (seenPeriods.has(periodKey)) {
+      return false;
+    }
+
+    seenPeriods.add(periodKey);
+    return true;
+  });
+};
+
+export const formatTechnologyContextDate = (value: string, locale: AppLocale): string => {
+  const date = new Date(value);
+
+  return Number.isNaN(date.getTime())
+    ? value
+    : new Intl.DateTimeFormat(locale, {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        timeZone: 'UTC',
+      }).format(date);
+};
+
+export const formatTechnologyContextPeriod = (
+  period: TechnologyContextPeriodViewModel,
+  locale: AppLocale,
+): string =>
+  `${formatTechnologyContextDate(period.startedAt, locale)} - ${
+    period.endedAt
+      ? formatTechnologyContextDate(period.endedAt, locale)
+      : translateStaticKey(locale, 'taxonomy.experiences.present')
+  }`;
 
 const TECHNOLOGY_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   FREQUENT: 'taxonomy.skills.frequency.frequent',
@@ -346,5 +401,6 @@ export const resolveTechnologyModalItem = (
       label: translateStaticKey(locale, TECHNOLOGY_CONTEXT_LABEL_KEYS[key]),
       totalMonths: technology.experienceMetrics?.byContext[key]?.totalMonths ?? 0,
     })),
+    contextPeriods: mapTechnologyContextPeriods(technology.technologyContexts ?? [], locale),
   };
 };

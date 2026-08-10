@@ -50,6 +50,11 @@
   min-height: 3.75rem;
 }
 
+.technology-modal-context-skeleton {
+  width: 100%;
+  min-height: 3rem;
+}
+
 .technology-modal-subtitle {
   @apply m-0 text-center text-base;
   color: color-mix(in srgb, var(--text-color) 72%, transparent);
@@ -84,6 +89,32 @@
   @apply m-0 text-lg;
 }
 
+.technology-modal-contexts {
+  @apply col-span-2 grid gap-4 rounded-2xl border p-4;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.technology-modal-contexts h2 {
+  @apply m-0 text-lg;
+}
+
+.technology-modal-contexts ul {
+  @apply m-0 grid list-inside list-disc grid-cols-2 gap-x-6 gap-y-3 p-0;
+}
+
+.technology-modal-contexts li {
+  @apply min-w-0 leading-7;
+  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+}
+
+.technology-modal-contexts li strong {
+  color: var(--text-color);
+}
+
+.technology-modal-context-skeleton-item {
+  @apply list-none;
+}
+
 .technology-modal-radar-summary {
   @apply sr-only;
 }
@@ -99,5 +130,13 @@
 
   .technology-modal-progress {
     @apply col-span-1 grid-cols-1;
+  }
+
+  .technology-modal-contexts {
+    @apply col-span-1;
+  }
+
+  .technology-modal-contexts ul {
+    @apply grid-cols-1;
   }
 }

@@ -5,6 +5,9 @@ import { TechnologyCollectionItemResponse } from '../../../core/api/technologies
 import {
   buildTechnologyModalDetail,
   buildTechnologyModalDetails,
+  formatTechnologyContextDate,
+  formatTechnologyContextPeriod,
+  mapTechnologyContextPeriods,
   resolveTechnologyModalItem,
 } from './technology-modal.helper';
 
@@ -21,6 +24,7 @@ const buildTechnology = (
     highlight: overrides.highlight ?? false,
     imageAssets: overrides.imageAssets,
     experienceMetrics: overrides.experienceMetrics,
+    technologyContexts: overrides.technologyContexts,
   }) as TechnologyCollectionItemResponse;
 
 describe('technology modal helper', () => {
@@ -84,6 +88,59 @@ describe('technology modal helper', () => {
       }),
     );
     expect(technology?.image?.src).toContain('/assets/img/skills/angular.png');
+    expect(technology?.contextPeriods?.map(({ key }) => key)).toEqual(['STUDY', 'PROFESSIONAL']);
+  });
+
+  it('should preserve repeated contexts, omit missing start dates and sort periods by start date', () => {
+    const periods = mapTechnologyContextPeriods(
+      [
+        {
+          id: 'professional-new',
+          context: 'PROFESSIONAL',
+          startedAt: '2022-04-09',
+          endedAt: null,
+        },
+        {
+          id: 'professional-old',
+          context: 'PROFESSIONAL',
+          startedAt: '2018-11-09',
+          endedAt: '2020-11-09',
+        },
+        {
+          id: 'professional-old-duplicate',
+          context: 'PROFESSIONAL',
+          startedAt: '2018-11-09',
+          endedAt: '2020-11-09',
+        },
+        {
+          id: 'missing-date',
+          context: 'STUDY',
+          startedAt: '',
+          endedAt: null,
+        },
+      ],
+      'pt-br',
+    );
+
+    expect(periods.map(({ id }) => id)).toEqual(['professional-old', 'professional-new']);
+    expect(periods.map(({ label }) => label)).toEqual(['Profissional', 'Profissional']);
+  });
+
+  it('should format context dates and active periods for each locale', () => {
+    expect(formatTechnologyContextDate('2018-11-09', 'pt-br')).toBe('09/11/2018');
+    expect(formatTechnologyContextDate('invalid', 'en-us')).toBe('invalid');
+    expect(
+      formatTechnologyContextPeriod(
+        {
+          id: 'professional',
+          key: 'PROFESSIONAL',
+          label: 'Professional',
+          startedAt: '2018-11-09',
+          endedAt: null,
+        },
+        'es-es',
+      ),
+    ).toBe('09/11/2018 - Actual');
   });
 
   it('should keep fallback values when catalog and projects are not loaded yet', () => {

@@ -80,7 +80,7 @@ describe('TechnologyModalComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('hans-progress-bar')).toHaveSize(0);
     expect(
       fixture.nativeElement.querySelectorAll('.technology-modal-skeleton'),
-    ).toHaveSize(9);
+    ).toHaveSize(11);
     request.flush(createTechnologiesCollectionResponse());
     projectsRequest.flush(createProjectsCollectionResponse());
     fixture.detectChanges();
@@ -96,6 +96,12 @@ describe('TechnologyModalComponent', () => {
     expect(component.details().map((detail) => detail.value)).toContain('Frameworks');
     expect(component.details().map((detail) => detail.value)).toContain('Front-End');
     expect(component.details().map((detail) => detail.value)).toContain(2);
+    const contextItems = fixture.nativeElement.querySelectorAll('.technology-modal-contexts li');
+    expect(contextItems).toHaveSize(2);
+    expect(contextItems[0].textContent).toContain('Study');
+    expect(contextItems[0].textContent).toContain('01/01/2019 - 12/01/2019');
+    expect(contextItems[1].textContent).toContain('Professional');
+    expect(contextItems[1].textContent).toContain('01/01/2020 - Present');
   });
 
   it('should keep fallback details and avoid duplicate requests when catalog requests fail', () => {
@@ -147,6 +153,7 @@ describe('TechnologyModalComponent', () => {
     };
 
     expect(component.details()).toEqual([]);
+    expect(fixture.nativeElement.querySelector('.technology-modal-contexts')).toBeNull();
   });
 
   it('should expose empty derived state and format radar durations in years and months', () => {

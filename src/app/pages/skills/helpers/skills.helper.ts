@@ -7,6 +7,7 @@ import { FormationRecord } from '../../../core/api/formations/formations.types';
 import { SpokenLanguageRecord } from '../../../core/api/spoken-languages/spoken-languages.types';
 import { EducationModalItem } from '../../../shared/education-modal/education-modal.types';
 import { SpokenLanguageModalItem } from '../../../shared/spoken-language-modal/spoken-language-modal.types';
+import { mapTechnologyContextPeriods } from '../../../shared/technology-modal/helpers/technology-modal.helper';
 import {
   resolveLocalizedText,
   translateStaticKey,
@@ -285,6 +286,7 @@ export const mapTechnologyToSkillCard = (
   const imageAsset =
     technology.imageAssets?.find(({ imageAsset }) => imageAsset.kind === 'ICON') ??
     technology.imageAssets?.[0];
+  const contextPeriods = mapTechnologyContextPeriods(technology.technologyContexts ?? [], locale);
   const allContexts: SkillContextMetricViewModel[] = SKILL_CONTEXT_ORDER.map((key) => ({
     key,
     label: translateStaticKey(locale, SKILL_CONTEXT_LABEL_KEYS[key]),
@@ -349,12 +351,7 @@ export const mapTechnologyToSkillCard = (
     levelKey: resolveSkillLevelKey(technology.level, technology.frequency),
     typeKey,
     contexts,
-    timelineEntries: (technology.technologyContexts ?? []).map((context) => ({
-      key: context.context,
-      label: translateStaticKey(locale, SKILL_CONTEXT_LABEL_KEYS[context.context]),
-      startedAt: context.startedAt,
-      endedAt: context.endedAt,
-    })),
+    timelineEntries: contextPeriods,
     modal: {
       slug: technology.slug,
       name: technology.name,
@@ -380,6 +377,7 @@ export const mapTechnologyToSkillCard = (
         label,
         totalMonths,
       })),
+      contextPeriods,
       experience:
         (technology.experienceMetrics
           ? resolveLocalizedText(

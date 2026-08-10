@@ -19,6 +19,14 @@ export interface TechnologyContextMetricViewModel {
   totalMonths: number;
 }
 
+export interface TechnologyContextPeriodViewModel {
+  id: string;
+  key: TechnologyContextMetricViewModel['key'];
+  label: string;
+  startedAt: string;
+  endedAt: string | null;
+}
+
 export interface TechnologyModalItem {
   slug: string;
   name: string;
@@ -32,4 +40,5 @@ export interface TechnologyModalItem {
   experience?: string;
   image?: TagModalImage | null;
   contextMetrics?: readonly TechnologyContextMetricViewModel[];
+  contextPeriods?: readonly TechnologyContextPeriodViewModel[];
 }

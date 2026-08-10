@@ -1,13 +1,20 @@
 :host {
-  @apply inline-flex;
+  @apply inline-flex h-8 max-w-full overflow-hidden rounded-full;
+  contain: layout paint;
 }
 
 .tag-button {
-  @apply cursor-pointer border-0 bg-transparent p-0;
+  @apply inline-flex h-8 max-w-full min-w-0 cursor-pointer overflow-hidden rounded-full border-0 bg-transparent p-0;
 }
 
 .tag-button-static {
-  @apply inline-flex;
+  @apply inline-flex h-8 max-w-full min-w-0 overflow-hidden rounded-full;
+}
+
+.tag-button hans-tag,
+.tag-button-static hans-tag {
+  @apply block h-8 max-w-full overflow-hidden rounded-full;
+  contain: layout paint;
 }
 
 .tag-button:hover {

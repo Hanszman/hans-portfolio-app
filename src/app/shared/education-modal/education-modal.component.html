@@ -33,7 +33,14 @@
       >
       <section class="education-modal-information">
         @if (education.image; as image) {
-          <img class="education-modal-image" [src]="image.src" [alt]="image.alt" loading="lazy" />
+          <img
+            class="education-modal-image"
+            [src]="image.src"
+            [alt]="image.alt"
+            width="96"
+            height="96"
+            loading="lazy"
+          />
         }
         <p class="education-modal-subtitle">{{ education.subtitle }}</p>
         <dl class="education-modal-details">

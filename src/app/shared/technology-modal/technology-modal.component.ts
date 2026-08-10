@@ -23,6 +23,7 @@ import {
   buildTechnologyModalDetails,
   buildTechnologyFrequencyProgress,
   buildTechnologyLevelProgress,
+  formatTechnologyContextPeriod,
   resolveRadarMaximum,
   resolveTechnologyModalItem,
 } from './helpers/technology-modal.helper';
@@ -94,6 +95,13 @@ export class TechnologyModalComponent {
     const max = resolveRadarMaximum(metrics);
     return metrics.map(({ label }) => ({ name: label, max }));
   });
+
+  protected readonly contextPeriods = computed(() =>
+    (this.resolvedTechnology()?.contextPeriods ?? []).map((period) => ({
+      ...period,
+      dateRange: formatTechnologyContextPeriod(period, this.translationService.locale()),
+    })),
+  );
 
   protected readonly radarSeries = computed(() => {
     const technology = this.resolvedTechnology();
