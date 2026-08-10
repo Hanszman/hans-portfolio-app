@@ -8,12 +8,12 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Gráficos/Modais:
--Algumas vezes a cor das linhas do gráfico de radar das technologies no modal acabam vindo na cor preta. Mas por causa do fundo no modo dark, como vc pode ver no print 1, acaba ficando difícil de ver. Parametrize para que a cor preta nunca seja uma opção de cores das linhas desse gráfico no portfolio.
--No tooltip do gráfico de technologies podemos converter os "meses" pra "anos e meses", por exemplo: mude "76 meses" para "6 anos e 4 meses".
+-Algumas vezes a cor das linhas do gráfico de radar das technologies no modal acabam vindo na cor preta. Mas por causa do fundo no modo dark, como vc pode ver no print 1, acaba ficando difícil de ver. Parametrize para que a cor preta nunca seja uma opção de cores das linhas desses gráficos no portfolio.
+-Como pode ver no print 2, no tooltip do gráfico de technologies podemos converter os "meses" pra "anos e meses", por exemplo: mude "76 meses" para "6 anos e 4 meses".
 
 *Loadings:
--Arrume o loading dos modais que ainda não ta 100% em todos eles, pois alguns ainda não estão mostrando bem o hans-loading skeleton e outros ficam exibindo as imagens-assets enormes antes de redimensionar.
--Coloque loading no read dos operations-modais de todas as entidades também e colocar um botão de search para ativar a busca, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
+-Arrume o loading dos modais que ainda não ta 100% em todos eles, pois alguns (como de projects, experiences e formations) ainda não estão mostrando bem o hans-loading skeleton como deveriam (siga o exemplo que temos no modal de technologies, pois lá funciona bem). Além disso, em alguns casos, ao abrirmos os modais, eles exibem as imagens-assets enormes antes de redimensionar, principalmente em internets mais lentas (usando o slow 4g no network por exemplo), como vc pode ver no print 3. Abra o chrome-devtools e navegue vc mesmo para ver o problema, corrigir e validar a correção.
+-Nos modais da tela de admin, coloque loading no read dos operations-modais de todas as entidades e coloque também um botão de search para ativar a busca, pra evitar de ficar repesquisando toda hora a cada digitada do search input.
 
 *Idiomas:
 -Os cards de Education e Languages parecem não estar vindo com dados do banco como título, descrição, período, nível, etc. Temos que automatizar isso para vir dados dinâmicos. Nas languages, não precisamos desse texto de "meta", pode remover isso dele e manter apenas nos outros, como nos formations.
