@@ -279,6 +279,12 @@ Public details use shared modal adapters instead of page-local shells:
 - `app-spoken-language-modal` preserves the established small language modal presentation.
 - Public detail modals use `app-modal-skeleton` while their visual media settles. The adapter delegates to `hans-loading`, uses `primary` in the light theme and `neutral` in the dark theme, and releases the content on both media load and error.
 
+### Deferred media inside web components
+
+Web components whose image dimensions depend on a stylesheet linked inside their Shadow DOM must not receive their media source before that stylesheet is ready. Otherwise, slow connections can briefly paint the intrinsic image at full size.
+
+Use the standalone `appDeferredImageSource` directive for those integrations. It reserves a constrained frame immediately and assigns `src` or another configured source attribute only after the component's internal stylesheets finish loading. `app-tag-button` owns this behavior centrally for every `hans-tag`, so page and modal consumers must continue to provide image data through the shared tag component instead of binding `image-src` directly.
+
 Gallery mapping must sort by relation order, ignore missing paths and deduplicate repeated assets by ID or path. When a modal can open another modal, close the current overlay first so focus trapping and scrolling remain owned by a single dialog.
 
 ## 🔀 API Integration Notes

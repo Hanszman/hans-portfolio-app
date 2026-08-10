@@ -28,7 +28,8 @@ describe('TagButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('renders the tag label and image attributes', () => {
+  it('renders the tag label and image attributes', async () => {
+    await fixture.whenStable();
     const tag = (fixture.nativeElement as HTMLElement).querySelector('hans-tag');
 
     expect(tag?.getAttribute('label')).toBe('Angular');

@@ -10,8 +10,11 @@
 
 <ng-template #tagContent>
   <hans-tag
+    appDeferredImageSource
+    [appDeferredImageSource]="tag().image?.src ?? null"
+    deferredImageSourceAttribute="image-src"
+    deferredImageFrameHeight="2rem"
     [attr.label]="tag().label"
-    [attr.image-src]="tag().image?.src ?? null"
     [attr.image-alt]="tag().image?.alt ?? null"
     [attr.mediaPosition]="'left'"
     [attr.tagColor]="tagColor()"

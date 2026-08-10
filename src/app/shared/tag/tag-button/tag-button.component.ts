@@ -6,12 +6,13 @@ import {
   output,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { DeferredImageSourceDirective } from '../../../core/design-lib/deferred-image-source.directive';
 import { TagButtonViewModel } from './tag-button.types';
 
 @Component({
   selector: 'app-tag-button',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [DeferredImageSourceDirective, NgTemplateOutlet],
   templateUrl: './tag-button.component.html',
   styleUrl: './tag-button.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

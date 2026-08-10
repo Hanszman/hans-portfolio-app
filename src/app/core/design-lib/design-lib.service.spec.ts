@@ -50,4 +50,66 @@ describe('DesignLibService', () => {
 
     expect(status.themeApiAvailable).toBeTrue();
   });
+
+  it('should resolve immediately when an element has no shadow stylesheets', async () => {
+    const service = TestBed.inject(DesignLibService);
+
+    await expectAsync(service.waitForElementStyles(document.createElement('img'))).toBeResolvedTo(
+      true,
+    );
+  });
+
+  it('should resolve loaded shadow stylesheets without waiting for another event', async () => {
+    const service = TestBed.inject(DesignLibService);
+    const element = document.createElement('div');
+    const root = element.attachShadow({ mode: 'open' });
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    root.append(stylesheet);
+    spyOnProperty(stylesheet, 'sheet', 'get').and.returnValue({} as CSSStyleSheet);
+
+    await expectAsync(service.waitForElementStyles(element)).toBeResolvedTo(true);
+  });
+
+  it('should wait for pending shadow stylesheets and report load failures', async () => {
+    const service = TestBed.inject(DesignLibService);
+    const loadedElement = document.createElement('div');
+    const loadedRoot = loadedElement.attachShadow({ mode: 'open' });
+    const loadedStylesheet = document.createElement('link');
+    loadedStylesheet.rel = 'stylesheet';
+    loadedRoot.append(loadedStylesheet);
+    const loadedResult = service.waitForElementStyles(loadedElement);
+    loadedStylesheet.dispatchEvent(new Event('load'));
+    await expectAsync(loadedResult).toBeResolvedTo(true);
+
+    const failedElement = document.createElement('div');
+    const failedRoot = failedElement.attachShadow({ mode: 'open' });
+    const failedStylesheet = document.createElement('link');
+    failedStylesheet.rel = 'stylesheet';
+    failedRoot.append(failedStylesheet);
+    const failedResult = service.waitForElementStyles(failedElement);
+    failedStylesheet.dispatchEvent(new Event('error'));
+    await expectAsync(failedResult).toBeResolvedTo(false);
+  });
+
+  it('should wait for an undefined custom element before reading its styles', async () => {
+    const service = TestBed.inject(DesignLibService);
+    const elementName = 'design-lib-pending-styles-test';
+    const element = document.createElement(elementName);
+    const result = service.waitForElementStyles(element);
+
+    if (!customElements.get(elementName)) {
+      customElements.define(
+        elementName,
+        class extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+          }
+        },
+      );
+    }
+
+    await expectAsync(result).toBeResolvedTo(true);
+  });
 });
