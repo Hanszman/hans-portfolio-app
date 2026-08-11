@@ -33,8 +33,12 @@
 }
 
 .experience-card-date {
-  @apply text-sm font-semibold tracking-[0.08em];
+  @apply text-sm font-semibold leading-none tracking-[0.08em];
   color: var(--primary-default-color);
+}
+
+.experience-card-date hans-icon {
+  @apply inline-flex shrink-0 items-center self-center leading-none;
 }
 
 .experience-card-summary {

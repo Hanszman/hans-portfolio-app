@@ -4,6 +4,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { buildApiUrl } from '../../core/api/api.config';
 import { createExperiencesCollectionResponse } from '../../core/api/mocks/experiences.mocks';
+import { createProjectsCollectionResponse } from '../../core/api/mocks/projects.mocks';
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
@@ -151,7 +152,7 @@ describe('ExperiencesComponent', () => {
     expect(errorMessage.message).toBe('The experiences endpoint is unavailable right now.');
   });
 
-  it('should open and close the experience detail drawer state', () => {
+  it('should open and close the experience detail drawer state', async () => {
     const fixture = TestBed.createComponent(ExperiencesComponent);
     fixture.detectChanges();
 
@@ -179,6 +180,9 @@ describe('ExperiencesComponent', () => {
       closeCustomerDetails: () => void;
       selectedCustomer: () => { name: string } | null;
       selectedCustomerDetails: () => readonly [{ value: string | number }];
+      openProjectDetails: (projectSlug: string) => Promise<void>;
+      closeProjectDetails: () => void;
+      selectedProject: () => { slug: string } | null;
     };
 
     const item = component.timelineItems()[0];
@@ -217,5 +221,21 @@ describe('ExperiencesComponent', () => {
 
     expect(component.selectedCustomer()).toBeNull();
     expect(component.selectedCustomerDetails()).toEqual([]);
+
+    component.openExperienceDetails(item);
+    const projectPromise = component.openProjectDetails('github-consumer');
+    const projectRequest = httpTestingController.expectOne(
+      buildApiUrl('/projects/github-consumer'),
+    );
+    projectRequest.flush(createProjectsCollectionResponse().data[0]);
+    await projectPromise;
+    fixture.detectChanges();
+
+    expect(component.selectedExperience()).toBeNull();
+    expect(component.selectedProject()?.slug).toBe('github-consumer');
+    expect(fixture.nativeElement.querySelector('app-project-modal')).toBeTruthy();
+
+    component.closeProjectDetails();
+    expect(component.selectedProject()).toBeNull();
   });
 });

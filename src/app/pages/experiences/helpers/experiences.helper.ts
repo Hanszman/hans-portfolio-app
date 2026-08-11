@@ -20,13 +20,12 @@ import {
   INITIAL_VISIBLE_TECHNOLOGY_COUNT,
   ExperienceCustomerViewModel,
   ExperienceImageViewModel,
+  ExperienceJobViewModel,
   ExperienceProjectViewModel,
   ExperienceTechnologyGroupKey,
   ExperienceTechnologyGroupViewModel,
   ExperienceTimelineItemViewModel,
 } from '../experiences.types';
-
-const dedupe = (values: string[]): string[] => [...new Set(values)];
 
 const normalizeAssetName = (value: string): string =>
   value
@@ -122,6 +121,36 @@ const mapProject = (
   ),
 });
 
+const mapJob = (
+  job: ExperienceCollectionItemResponse['jobs'][number]['job'],
+  locale: AppLocale,
+): ExperienceJobViewModel => ({
+  id: job.id,
+  title: resolveLocalizedText(
+    locale,
+    { 'pt-br': job.namePt, 'en-us': job.nameEn, 'es-es': job.nameEs },
+    job.nameEn,
+  ),
+  summary: resolveLocalizedText(
+    locale,
+    { 'pt-br': job.summaryPt, 'en-us': job.summaryEn, 'es-es': job.summaryEs },
+    job.summaryEn,
+  ),
+  startDate: job.startDate,
+  endDate: job.endDate,
+  dateRangeLabel: formatExperienceDateRange(job.startDate, job.endDate, locale),
+});
+
+const sortJobsByMostRecentEndDate = (
+  left: ExperienceJobViewModel,
+  right: ExperienceJobViewModel,
+): number => {
+  const leftEnd = left.endDate ? Date.parse(left.endDate) : Number.POSITIVE_INFINITY;
+  const rightEnd = right.endDate ? Date.parse(right.endDate) : Number.POSITIVE_INFINITY;
+
+  return rightEnd - leftEnd || Date.parse(right.startDate) - Date.parse(left.startDate);
+};
+
 const resolveTechnologyGroupKey = (
   technology: Pick<TechnologyModalItem, 'slug' | 'category'>,
 ): ExperienceTechnologyGroupKey => {
@@ -192,19 +221,9 @@ export const mapExperienceToTimelineItem = (
   const technologies = experience.technologies.map(({ technology }) =>
     mapTechnology(technology, projects.length),
   );
-  const jobs = dedupe(
-    experience.jobs.map(({ job }) =>
-      resolveLocalizedText(
-        locale,
-        {
-          'pt-br': job.namePt,
-          'en-us': job.nameEn,
-          'es-es': job.nameEs,
-        },
-        job.nameEn,
-      ),
-    ),
-  );
+  const jobs = experience.jobs
+    .map(({ job }) => mapJob(job, locale))
+    .sort(sortJobsByMostRecentEndDate);
   const fallbackRoleTitle = resolveLocalizedText(
     locale,
     {
@@ -219,7 +238,7 @@ export const mapExperienceToTimelineItem = (
     id: experience.id,
     slug: experience.slug,
     companyName: experience.companyName,
-    roleTitle: jobs[0] ?? fallbackRoleTitle,
+    roleTitle: jobs[0]?.title ?? fallbackRoleTitle,
     summary: resolveLocalizedText(
       locale,
       {

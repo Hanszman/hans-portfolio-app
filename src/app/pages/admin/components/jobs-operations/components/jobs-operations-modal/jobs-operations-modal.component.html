@@ -103,6 +103,40 @@
           (input)="emitSummaryEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
+        <hans-date-picker
+          [label]="resolveFieldLabel('startDate')"
+          [required]="fields.startDate.required"
+          pickerType="date"
+          [dateFormat]="datePickerFormat()"
+          [locale]="datePickerLocale()"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().startDate"
+          [placeholder]="'common.placeholders.startDate' | translate"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
+          [attr.aria-label]="fields.startDate.labelKey | translate"
+          (change)="emitStartDateChange(resolveSelectValue($event))"
+        ></hans-date-picker>
+
+        <hans-date-picker
+          [label]="resolveFieldLabel('endDate')"
+          [required]="fields.endDate.required"
+          pickerType="date"
+          [dateFormat]="datePickerFormat()"
+          [locale]="datePickerLocale()"
+          inputColor="base"
+          inputSize="medium"
+          [value]="form().endDate"
+          [placeholder]="'common.placeholders.endDate' | translate"
+          [allowInputTyping]="false"
+          popupBackgroundColor="var(--background-color)"
+          panelBackgroundColor="var(--background-color)"
+          [attr.aria-label]="fields.endDate.labelKey | translate"
+          (change)="emitEndDateChange(resolveSelectValue($event))"
+        ></hans-date-picker>
+
         <div class="jobs-operations-toggle">
           <div class="jobs-operations-selection-copy">
             <p>{{ 'common.fields.highlightStatus' | translate }}</p>

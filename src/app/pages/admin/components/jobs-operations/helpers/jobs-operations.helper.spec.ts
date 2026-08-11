@@ -11,6 +11,17 @@ import {
   normalizeJobExperienceIds,
   normalizeJobImageAssetIds,
 } from './jobs-operations.helper';
+import { JobsOperationsFormValue } from '../jobs-operations.types';
+
+const buildJobMutation = (
+  form: Omit<JobsOperationsFormValue, 'startDate' | 'endDate'> &
+    Partial<Pick<JobsOperationsFormValue, 'startDate' | 'endDate'>>,
+) =>
+  buildJobsMutationPayload({
+    startDate: '2021-09-23',
+    endDate: '',
+    ...form,
+  });
 
 const createExperience = (
   overrides: Partial<ExperienceCollectionItemResponse> = {},
@@ -63,6 +74,8 @@ const createJob = (overrides: Partial<JobRecord> = {}): JobRecord => ({
   summaryPt: 'Interfaces publicas e privadas.',
   summaryEn: 'Public and private interfaces.',
   summaryEs: 'Public and private interfaces.',
+  startDate: '2021-09-23',
+  endDate: null,
   highlight: true,
   sortOrder: 2,
   experienceIds: ['experience-2'],
@@ -156,6 +169,8 @@ describe('jobs operations helper', () => {
                 summaryPt: 'Interfaces publicas e privadas.',
                 summaryEn: 'Public and private interfaces.',
                 summaryEs: 'Public and private interfaces.',
+                startDate: '2021-09-23',
+                endDate: null,
                 highlight: true,
                 sortOrder: 2,
                 createdAt: '2024-01-01T00:00:00.000Z',
@@ -202,6 +217,8 @@ describe('jobs operations helper', () => {
                 summaryPt: 'Interfaces publicas e privadas.',
                 summaryEn: 'Public and private interfaces.',
                 summaryEs: 'Public and private interfaces.',
+                startDate: '2021-09-23',
+                endDate: null,
                 highlight: true,
                 sortOrder: 2,
                 createdAt: '2024-01-01T00:00:00.000Z',
@@ -226,6 +243,8 @@ describe('jobs operations helper', () => {
                 summaryPt: 'Interfaces publicas e privadas.',
                 summaryEn: 'Public and private interfaces.',
                 summaryEs: 'Public and private interfaces.',
+                startDate: '2021-09-23',
+                endDate: null,
                 highlight: true,
                 sortOrder: 2,
                 createdAt: '2024-01-01T00:00:00.000Z',
@@ -247,6 +266,8 @@ describe('jobs operations helper', () => {
       summaryPt: '',
       summaryEn: '',
       summaryEs: '',
+      startDate: '',
+      endDate: '',
       highlight: true,
       sortOrder: '0',
       experienceIds: [],
@@ -275,6 +296,8 @@ describe('jobs operations helper', () => {
                   summaryPt: 'Interfaces publicas e privadas.',
                   summaryEn: 'Public and private interfaces.',
                   summaryEs: 'Public and private interfaces.',
+                  startDate: '2021-09-23',
+                  endDate: null,
                   highlight: true,
                   sortOrder: 2,
                   createdAt: '2024-01-01T00:00:00.000Z',
@@ -299,6 +322,8 @@ describe('jobs operations helper', () => {
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       summaryEs: 'Public and private interfaces.',
+      startDate: '2021-09-23',
+      endDate: '',
       highlight: true,
       sortOrder: '2',
       experienceIds: ['experience-2', 'experience-3', 'experience-1'],
@@ -330,6 +355,8 @@ describe('jobs operations helper', () => {
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       summaryEs: '',
+      startDate: '2021-09-23',
+      endDate: '',
       highlight: false,
       sortOrder: '0',
       experienceIds: [],
@@ -471,7 +498,7 @@ describe('jobs operations helper', () => {
 
   it('should build a valid mutation payload with deduplicated relations', () => {
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: ' frontend-engineer ',
         namePt: ' Engenheiro Front-End ',
         nameEn: ' Front-End Engineer ',
@@ -492,6 +519,7 @@ describe('jobs operations helper', () => {
         summaryPt: 'Interfaces publicas e privadas.',
         summaryEn: 'Public and private interfaces.',
         summaryEs: 'Public and private interfaces.',
+        startDate: '2021-09-23T00:00:00.000Z',
         highlight: true,
         sortOrder: 5,
         experienceIds: ['experience-1'],
@@ -502,7 +530,7 @@ describe('jobs operations helper', () => {
 
   it('should reject invalid mutation forms with the matching translation key', () => {
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: '',
         namePt: '',
         nameEn: '',
@@ -521,7 +549,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: '',
         nameEn: '',
@@ -540,7 +568,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: '',
@@ -559,7 +587,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',
@@ -578,7 +606,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',
@@ -597,7 +625,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',
@@ -616,7 +644,7 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',
@@ -635,7 +663,48 @@ describe('jobs operations helper', () => {
     });
 
     expect(
-      buildJobsMutationPayload({
+      buildJobMutation({
+        slug: 'frontend-engineer',
+        namePt: 'Engenheiro Front-End',
+        nameEn: 'Front-End Engineer',
+        nameEs: 'Ingeniero Front-End',
+        summaryPt: 'Interfaces publicas e privadas.',
+        summaryEn: 'Public and private interfaces.',
+        summaryEs: 'Interfaces publicas y privadas.',
+        startDate: '',
+        sortOrder: '1',
+        highlight: true,
+        experienceIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'common.feedback.requiredStartDate',
+    });
+
+    expect(
+      buildJobMutation({
+        slug: 'frontend-engineer',
+        namePt: 'Engenheiro Front-End',
+        nameEn: 'Front-End Engineer',
+        nameEs: 'Ingeniero Front-End',
+        summaryPt: 'Interfaces publicas e privadas.',
+        summaryEn: 'Public and private interfaces.',
+        summaryEs: 'Interfaces publicas y privadas.',
+        startDate: '2021-09-23',
+        endDate: '2021-09-22',
+        sortOrder: '1',
+        highlight: true,
+        experienceIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: false,
+      errorKey: 'common.feedback.invalidDateRange',
+    });
+
+    expect(
+      buildJobMutation({
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',

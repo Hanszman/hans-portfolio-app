@@ -59,6 +59,24 @@ describe('ProjectsService', () => {
     request.flush({ data: [], pagination: {} });
   });
 
+  it('should load a public project by its encoded slug', () => {
+    const service = TestBed.inject(ProjectsService);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    const project = createProjectsCollectionResponse().data[0];
+
+    service.getBySlug('portfolio app').subscribe((response) => {
+      expect(response).toEqual(project);
+    });
+
+    const request = httpTestingController.expectOne(
+      buildApiUrl('/projects/portfolio%20app'),
+    );
+
+    expect(request.request.method).toBe('GET');
+    expect(request.request.headers.get('Cache-Control')).toBe('no-cache');
+    request.flush(project);
+  });
+
   it('should create, update and delete protected projects', () => {
     const service = TestBed.inject(ProjectsService);
     const httpTestingController = TestBed.inject(HttpTestingController);

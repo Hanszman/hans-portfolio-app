@@ -7,6 +7,15 @@ export interface ExperienceProjectViewModel {
   summary: string;
 }
 
+export interface ExperienceJobViewModel {
+  id: string;
+  title: string;
+  summary: string;
+  startDate: string;
+  endDate: string | null;
+  dateRangeLabel: string;
+}
+
 export interface ExperienceImageViewModel {
   src: string;
   alt: string;
@@ -35,7 +44,7 @@ export interface ExperienceTimelineItemViewModel {
   dateRangeLabel: string;
   isCurrent: boolean;
   isHighlight: boolean;
-  jobs: string[];
+  jobs: ExperienceJobViewModel[];
   companyImage: ExperienceImageViewModel;
   customers: ExperienceCustomerViewModel[];
   projects: ExperienceProjectViewModel[];

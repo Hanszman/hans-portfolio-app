@@ -37,11 +37,36 @@
           loading="lazy"
         />
         <div class="experience-modal-heading">
-          <p class="experience-modal-role">{{ currentItem.roleTitle }}</p>
+          <strong class="experience-modal-period-label">
+            {{ 'common.fields.totalCompanyPeriod' | translate }}
+          </strong>
           <span class="experience-modal-date">{{ currentItem.dateRangeLabel }}</span>
         </div>
       </header>
-      <p class="experience-modal-description">{{ currentItem.description }}</p>
+
+      <section class="experience-modal-section">
+        <span class="experience-modal-section-label">
+          {{ 'common.sections.rolesHeld' | translate }}
+        </span>
+        <div class="experience-modal-jobs">
+          @for (job of currentItem.jobs; track job.id) {
+            <article class="experience-modal-job-card">
+              <strong>{{ job.title }}</strong>
+              <span class="experience-modal-job-date">{{ job.dateRangeLabel }}</span>
+              @if (job.summary) {
+                <p>{{ job.summary }}</p>
+              }
+            </article>
+          }
+        </div>
+      </section>
+
+      <section class="experience-modal-section">
+        <span class="experience-modal-section-label">
+          {{ 'common.sections.description' | translate }}
+        </span>
+        <p class="experience-modal-description">{{ currentItem.description }}</p>
+      </section>
 
       <section class="experience-modal-section">
         <span class="experience-modal-section-label">{{
@@ -49,10 +74,14 @@
         }}</span>
         <div class="experience-modal-projects">
           @for (project of currentItem.projects; track project.slug) {
-            <article class="experience-modal-project-card">
+            <button
+              type="button"
+              class="experience-modal-project-card"
+              (click)="requestProjectDetails(project.slug)"
+            >
               <strong>{{ project.title }}</strong>
               <p>{{ project.summary }}</p>
-            </article>
+            </button>
           } @empty {
             <p class="experience-modal-inline-copy">
               {{ 'pages.experiences.timeline.emptyProjects' | translate }}
@@ -67,7 +96,10 @@
         }}</span>
         <div class="experience-modal-chip-list">
           @for (customer of currentItem.customers; track customer.slug) {
-            <app-tag-button [tag]="customerTag(customer)" [interactive]="false" />
+            <app-tag-button
+              [tag]="customerTag(customer)"
+              (selected)="requestCustomerDetails($event)"
+            />
           } @empty {
             <p class="experience-modal-inline-copy">
               {{ 'pages.experiences.timeline.emptyCustomers' | translate }}

@@ -29,6 +29,8 @@ export interface JobsOperationsFormValue {
   summaryPt: string;
   summaryEn: string;
   summaryEs?: string;
+  startDate: string;
+  endDate: string;
   highlight: boolean;
   sortOrder: string;
   experienceIds: readonly string[];
@@ -71,6 +73,16 @@ export const JOBS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.jobs.fields.summaryEs.placeholder',
     required: true,
   },
+  startDate: {
+    labelKey: 'common.fields.startDate',
+    placeholderKey: 'common.fields.startDate',
+    required: true,
+  },
+  endDate: {
+    labelKey: 'common.fields.endDate',
+    placeholderKey: 'common.fields.endDate',
+    required: false,
+  },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
     placeholderKey: 'common.placeholders.integerSortOrder',
@@ -95,6 +107,8 @@ export interface JobOperationsViewModel {
   summaryPt: string;
   summaryEn: string;
   summaryEs?: string;
+  startDate: string;
+  endDateLabel: string;
   highlight: boolean;
   sortOrderLabel: string;
   experienceLabels: readonly string[];
@@ -123,6 +137,8 @@ export const createEmptyJobsOperationsFormValue = (): JobsOperationsFormValue =>
   summaryPt: '',
   summaryEn: '',
   summaryEs: '',
+  startDate: '',
+  endDate: '',
   highlight: true,
   sortOrder: '0',
   experienceIds: [],

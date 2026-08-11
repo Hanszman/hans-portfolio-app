@@ -15,6 +15,8 @@ const JOBS: readonly JobOperationsViewModel[] = [
     summaryPt: 'Interfaces publicas e privadas.',
     summaryEn: 'Public and private interfaces.',
     summaryEs: 'Public and private interfaces.',
+    startDate: '2021-09-23',
+    endDateLabel: '09/23/2021 - Present',
     highlight: true,
     sortOrderLabel: '1',
     experienceLabels: ['Analista (Ford)'],
@@ -31,6 +33,8 @@ const JOBS: readonly JobOperationsViewModel[] = [
     summaryPt: '',
     summaryEn: '',
     summaryEs: '',
+    startDate: '2020-04-01',
+    endDateLabel: '04/01/2020 - 09/23/2021',
     highlight: false,
     sortOrderLabel: '2',
     experienceLabels: [],
@@ -75,6 +79,8 @@ describe('JobsOperationsModalComponent', () => {
     const summaryPtSpy = jasmine.createSpy('summaryPtChanged');
     const summaryEnSpy = jasmine.createSpy('summaryEnChanged');
     const summaryEsSpy = jasmine.createSpy('summaryEsChanged');
+    const startDateSpy = jasmine.createSpy('startDateChanged');
+    const endDateSpy = jasmine.createSpy('endDateChanged');
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const experienceSpy = jasmine.createSpy('experienceToggled');
@@ -90,6 +96,8 @@ describe('JobsOperationsModalComponent', () => {
     component.summaryPtChanged.subscribe(summaryPtSpy);
     component.summaryEnChanged.subscribe(summaryEnSpy);
     component.summaryEsChanged.subscribe(summaryEsSpy);
+    component.startDateChanged.subscribe(startDateSpy);
+    component.endDateChanged.subscribe(endDateSpy);
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.experienceToggled.subscribe(experienceSpy);
@@ -133,6 +141,8 @@ describe('JobsOperationsModalComponent', () => {
       emitSummaryPtChange(value: string): void;
       emitSummaryEnChange(value: string): void;
       emitSummaryEsChange(value: string): void;
+      emitStartDateChange(value: string): void;
+      emitEndDateChange(value: string): void;
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -151,6 +161,8 @@ describe('JobsOperationsModalComponent', () => {
     componentAccess.emitSummaryPtChange('Interfaces publicas e privadas.');
     componentAccess.emitSummaryEnChange('Public and private interfaces.');
     componentAccess.emitSummaryEsChange('Interfaces públicas y privadas.');
+    componentAccess.emitStartDateChange('2021-09-23');
+    componentAccess.emitEndDateChange('2024-12-31');
     componentAccess.emitHighlightChange(new CustomEvent('change', { detail: true }));
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
@@ -199,6 +211,8 @@ describe('JobsOperationsModalComponent', () => {
     expect(summaryPtSpy).toHaveBeenCalledOnceWith('Interfaces publicas e privadas.');
     expect(summaryEnSpy).toHaveBeenCalledOnceWith('Public and private interfaces.');
     expect(summaryEsSpy).toHaveBeenCalledOnceWith('Interfaces públicas y privadas.');
+    expect(startDateSpy).toHaveBeenCalledOnceWith('2021-09-23');
+    expect(endDateSpy).toHaveBeenCalledOnceWith('2024-12-31');
     expect(highlightSpy).toHaveBeenCalledWith(true);
     expect(highlightSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
@@ -271,6 +285,8 @@ describe('JobsOperationsModalComponent', () => {
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       summaryEs: 'Public and private interfaces.',
+      startDate: '2021-09-23',
+      endDate: null,
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -284,6 +300,8 @@ describe('JobsOperationsModalComponent', () => {
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       summaryEs: 'Public and private interfaces.',
+      startDate: '09/23/2021',
+      endDate: '',
       highlight: true,
       sortOrder: '1',
       experienceIds: ['experience-1'],

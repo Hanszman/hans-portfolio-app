@@ -25,6 +25,8 @@ const createJob = (overrides: Partial<JobRecord> = {}): JobRecord => ({
   summaryPt: 'Interfaces publicas e privadas.',
   summaryEn: 'Public and private interfaces.',
   summaryEs: 'Public and private interfaces.',
+  startDate: '2021-09-23',
+  endDate: null,
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
@@ -250,6 +252,8 @@ describe('JobsOperationsComponent', () => {
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
       updateSummaryEs(value: string): void;
+      updateStartDate(value: string): void;
+      updateEndDate(value: string): void;
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
       toggleExperience(experienceId: string): void;
@@ -265,6 +269,8 @@ describe('JobsOperationsComponent', () => {
     component.updateSummaryPt('APIs publicas e privadas.');
     component.updateSummaryEn('Public and private APIs.');
     component.updateSummaryEs('Public and private APIs.');
+    component.updateStartDate('2024-01-01');
+    component.updateEndDate('2024-12-31');
     component.updateHighlight(false);
     component.updateSortOrder('2');
     component.toggleExperience('experience-1');
@@ -279,6 +285,8 @@ describe('JobsOperationsComponent', () => {
       summaryPt: 'APIs publicas e privadas.',
       summaryEn: 'Public and private APIs.',
       summaryEs: 'Public and private APIs.',
+      startDate: '2024-01-01T00:00:00.000Z',
+      endDate: '2024-12-31T00:00:00.000Z',
       highlight: false,
       sortOrder: 2,
       experienceIds: ['experience-1'],
@@ -297,6 +305,7 @@ describe('JobsOperationsComponent', () => {
       summaryPt: 'Interfaces publicas e privadas.',
       summaryEn: 'Public and private interfaces.',
       summaryEs: 'Public and private interfaces.',
+      startDate: '2021-09-23T00:00:00.000Z',
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
@@ -407,6 +416,7 @@ describe('JobsOperationsComponent', () => {
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
       updateSummaryEs(value: string): void;
+      updateStartDate(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -437,6 +447,7 @@ describe('JobsOperationsComponent', () => {
     component.updateSummaryEn('Public and private interfaces.');
 
     component.updateSummaryEs('Public and private interfaces.');
+    component.updateStartDate('2021-09-23');
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
@@ -513,6 +524,7 @@ describe('JobsOperationsComponent', () => {
       updateSummaryPt(value: string): void;
       updateSummaryEn(value: string): void;
       updateSummaryEs(value: string): void;
+      updateStartDate(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -527,6 +539,7 @@ describe('JobsOperationsComponent', () => {
     component.updateSummaryPt('Interfaces publicas e privadas.');
     component.updateSummaryEn('Public and private interfaces.');
     component.updateSummaryEs('Public and private interfaces.');
+    component.updateStartDate('2021-09-23');
     component.updateSortOrder('1');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.selectionRequired');
@@ -543,6 +556,7 @@ describe('JobsOperationsComponent', () => {
     component.updateSummaryPt('APIs publicas e privadas.');
     component.updateSummaryEn('Public and private APIs.');
     component.updateSummaryEs('Public and private APIs.');
+    component.updateStartDate('2024-01-01');
     component.updateSortOrder('2');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.saveError');

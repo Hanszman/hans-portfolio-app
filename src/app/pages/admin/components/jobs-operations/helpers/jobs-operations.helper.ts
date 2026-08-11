@@ -2,6 +2,11 @@ import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-ass
 import { JobRecord } from '../../../../../core/api/jobs/jobs.types';
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import {
+  normalizeAdminDateValueForMutation,
+  normalizeAdminDateValueForPicker,
+  validateAdminDateRange,
+} from '../../../helpers/admin.helper';
+import {
   JobExperienceOptionViewModel,
   JobImageAssetOptionViewModel,
   JobOperationsViewModel,
@@ -151,6 +156,8 @@ export const buildJobsFormValue = (
     summaryPt: job.summaryPt,
     summaryEn: job.summaryEn,
     summaryEs: job.summaryEs ?? '',
+    startDate: normalizeAdminDateValueForPicker(job.startDate),
+    endDate: normalizeAdminDateValueForPicker(job.endDate),
     highlight: job.highlight ?? false,
     sortOrder: String(job.sortOrder ?? 0),
     experienceIds: normalizeJobExperienceIds(job, experiences),
@@ -190,6 +197,8 @@ export const buildJobsViewModels = (
         summaryPt: job.summaryPt,
         summaryEn: job.summaryEn,
         summaryEs: job.summaryEs ?? '',
+        startDate: job.startDate,
+        endDateLabel: job.endDate ?? '-',
         highlight: job.highlight ?? false,
         sortOrderLabel: String(job.sortOrder ?? 0),
         experienceLabels: experienceIds.map((experienceId) =>
@@ -214,6 +223,8 @@ export const buildJobsMutationPayload = (
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
   const summaryEs = formValue.summaryEs?.trim() ?? summaryEn;
+  const startDate = normalizeAdminDateValueForMutation(formValue.startDate);
+  const endDate = normalizeAdminDateValueForMutation(formValue.endDate);
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
   if (!slug) {
@@ -259,6 +270,20 @@ export const buildJobsMutationPayload = (
     return { isValid: false, errorKey: 'common.feedback.requiredSummaryEs' };
   }
 
+  if (!startDate) {
+    return { isValid: false, errorKey: 'common.feedback.requiredStartDate' };
+  }
+
+  const dateRangeValidation = validateAdminDateRange(
+    startDate,
+    endDate,
+    'common.feedback.invalidDateRange',
+  );
+
+  if (!dateRangeValidation.isValid) {
+    return dateRangeValidation;
+  }
+
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
@@ -276,6 +301,8 @@ export const buildJobsMutationPayload = (
       summaryPt,
       summaryEn,
       summaryEs,
+      startDate,
+      ...(endDate ? { endDate } : {}),
       highlight: formValue.highlight,
       sortOrder,
       experienceIds: [...new Set(formValue.experienceIds)],

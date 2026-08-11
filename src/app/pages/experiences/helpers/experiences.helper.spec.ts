@@ -104,6 +104,89 @@ describe('experiences helper', () => {
     expect(timelineItem.roleTitle).toBe('Experience at Stefanini Group');
   });
 
+  it('should use the job with the most recent end date as the experience subtitle', () => {
+    const baseExperience = createExperiencesCollectionResponse().data[0];
+    const baseRelation = baseExperience.jobs[0];
+    const experience = {
+      ...baseExperience,
+      jobs: [
+        {
+          ...baseRelation,
+          jobId: 'recent-job',
+          job: {
+            ...baseRelation.job,
+            id: 'recent-job',
+            nameEn: 'Senior Software Engineer',
+            startDate: '2020-01-02',
+            endDate: null,
+          },
+        },
+        {
+          ...baseRelation,
+          jobId: 'older-job',
+          job: {
+            ...baseRelation.job,
+            id: 'older-job',
+            nameEn: 'Software Engineer',
+            startDate: '2019-01-01',
+            endDate: '2020-01-01',
+          },
+        },
+      ],
+    };
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(timelineItem.roleTitle).toBe('Senior Software Engineer');
+    expect(timelineItem.jobs.map(({ id }) => id)).toEqual(['recent-job', 'older-job']);
+
+    const reverseInputTimelineItem = mapExperienceToTimelineItem(
+      { ...experience, jobs: [...experience.jobs].reverse() },
+      'en-us',
+    );
+    expect(reverseInputTimelineItem.jobs.map(({ id }) => id)).toEqual([
+      'recent-job',
+      'older-job',
+    ]);
+  });
+
+  it('should break equal job end-date ties with the most recent start date', () => {
+    const baseExperience = createExperiencesCollectionResponse().data[0];
+    const baseRelation = baseExperience.jobs[0];
+    const experience = {
+      ...baseExperience,
+      jobs: [
+        {
+          ...baseRelation,
+          jobId: 'earlier-start',
+          job: {
+            ...baseRelation.job,
+            id: 'earlier-start',
+            startDate: '2019-01-01',
+            endDate: null,
+          },
+        },
+        {
+          ...baseRelation,
+          jobId: 'later-start',
+          job: {
+            ...baseRelation.job,
+            id: 'later-start',
+            startDate: '2020-01-01',
+            endDate: null,
+          },
+        },
+      ],
+    };
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(timelineItem.jobs.map(({ id }) => id)).toEqual([
+      'later-start',
+      'earlier-start',
+    ]);
+  });
+
   it('should fallback to a normalized company image path when no asset is available', () => {
     const experience = {
       ...createExperiencesCollectionResponse().data[0],

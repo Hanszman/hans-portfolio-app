@@ -35,6 +35,8 @@ export interface JobRecord {
   summaryPt: string;
   summaryEn: string;
   summaryEs?: string;
+  startDate: string;
+  endDate?: string | null;
   highlight?: boolean | null;
   sortOrder?: number | null;
   experienceIds?: string[] | null;
@@ -53,6 +55,8 @@ export interface JobMutationPayload {
   summaryPt: string;
   summaryEn: string;
   summaryEs?: string;
+  startDate: string;
+  endDate?: string;
   highlight: boolean;
   sortOrder: number;
   experienceIds: string[];

@@ -27,6 +27,16 @@ describe('ExperienceModalComponent', () => {
       roleTitle: 'Developer',
       description: 'Built products.',
       dateRangeLabel: '2024 - 2026',
+      jobs: [
+        {
+          id: 'job-1',
+          title: 'Developer',
+          summary: 'Built products.',
+          startDate: '2024-01-01',
+          endDate: '2026-01-01',
+          dateRangeLabel: '01/01/2024 - 01/01/2026',
+        },
+      ],
       companyImage: { src: `${imageSource}#company`, alt: 'Hans' },
       projects: [{ slug: 'portfolio', title: 'Portfolio', summary: 'Website' }],
       customers: [
@@ -34,6 +44,8 @@ describe('ExperienceModalComponent', () => {
           slug: 'client',
           name: 'Client',
           image: { src: `${imageSource}#client`, alt: 'Client' },
+          companyName: 'Hans',
+          projectCount: 1,
         },
       ],
       technologyGroups: [
@@ -55,16 +67,25 @@ describe('ExperienceModalComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('app-tag-button').length).toBe(2);
   });
 
-  it('emits close and technology requests', () => {
+  it('emits close and related entity requests', () => {
     settleMedia();
     spyOn(fixture.componentInstance.closed, 'emit');
     spyOn(fixture.componentInstance.openTechnology, 'emit');
+    spyOn(fixture.componentInstance.openCustomer, 'emit');
+    spyOn(fixture.componentInstance.openProject, 'emit');
     fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
+    const tagButtons = fixture.nativeElement.querySelectorAll('app-tag-button');
+    tagButtons[0].dispatchEvent(
+      new CustomEvent('selected', { detail: fixture.componentInstance.item()?.customers[0] }),
+    );
     fixture.nativeElement
       .querySelectorAll('app-tag-button')[1]
       .dispatchEvent(new CustomEvent('selected', { detail: { slug: 'angular', name: 'Angular' } }));
+    fixture.nativeElement.querySelector('.experience-modal-project-card').click();
     expect(fixture.componentInstance.closed.emit).toHaveBeenCalled();
     expect(fixture.componentInstance.openTechnology.emit).toHaveBeenCalled();
+    expect(fixture.componentInstance.openCustomer.emit).toHaveBeenCalled();
+    expect(fixture.componentInstance.openProject.emit).toHaveBeenCalledOnceWith('portfolio');
   });
 
   it('stays ready when the selected experience is cleared', () => {

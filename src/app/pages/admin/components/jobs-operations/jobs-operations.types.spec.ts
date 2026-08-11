@@ -18,6 +18,8 @@ describe('jobs operations types', () => {
       summaryPt: '',
       summaryEn: '',
       summaryEs: '',
+      startDate: '',
+      endDate: '',
       highlight: true,
       sortOrder: '0',
       experienceIds: [],

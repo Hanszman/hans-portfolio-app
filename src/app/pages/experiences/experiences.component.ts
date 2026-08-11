@@ -7,9 +7,11 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ExperienceCollectionItemResponse } from '../../core/api/experiences/experiences.types';
+import { ProjectsService } from '../../core/api/projects/projects.service';
 import { TranslationService } from '../../core/translation/translation.service';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
@@ -19,8 +21,11 @@ import { TagModalDetail } from '../../shared/tag/tag-modal/tag-modal.types';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
 import { ExperienceModalComponent } from '../../shared/experience-modal/experience-modal.component';
+import { ProjectModalComponent } from '../../shared/project-modal/project-modal.component';
 import { ExperienceTimelineCardComponent } from './components/experience-timeline-card/experience-timeline-card.component';
 import { mapExperienceToTimelineItem } from './helpers/experiences.helper';
+import { mapProjectToCaseCard } from '../projects/helpers/projects.helper';
+import { ProjectCaseViewModel } from '../projects/projects.types';
 import { ExperienceCustomerViewModel } from './experiences.types';
 
 @Component({
@@ -30,6 +35,7 @@ import { ExperienceCustomerViewModel } from './experiences.types';
     InfoStateComponent,
     ExperienceTimelineCardComponent,
     ExperienceModalComponent,
+    ProjectModalComponent,
     SectionHeaderComponent,
     TechnologyModalComponent,
     TagModalComponent,
@@ -43,12 +49,14 @@ import { ExperienceCustomerViewModel } from './experiences.types';
 export class ExperiencesComponent {
   private readonly experiencesService = inject(ExperiencesService);
   private readonly translationService = inject(TranslationService);
+  private readonly projectsService = inject(ProjectsService);
   private readonly experiencesSignal = signal<ExperienceCollectionItemResponse[]>([]);
   private readonly selectedExperienceSignal = signal<ReturnType<
     typeof mapExperienceToTimelineItem
   > | null>(null);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
   private readonly selectedCustomerSignal = signal<ExperienceCustomerViewModel | null>(null);
+  private readonly selectedProjectSignal = signal<ProjectCaseViewModel | null>(null);
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -56,6 +64,7 @@ export class ExperiencesComponent {
   protected readonly selectedExperience = this.selectedExperienceSignal.asReadonly();
   protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
   protected readonly selectedCustomer = this.selectedCustomerSignal.asReadonly();
+  protected readonly selectedProject = this.selectedProjectSignal.asReadonly();
 
   protected readonly timelineItems = computed(() =>
     this.experiences().map((experience) =>
@@ -122,10 +131,24 @@ export class ExperiencesComponent {
   }
 
   protected openCustomerDetails(customer: ExperienceCustomerViewModel): void {
+    this.selectedExperienceSignal.set(null);
     this.selectedCustomerSignal.set(customer);
   }
 
   protected closeCustomerDetails(): void {
     this.selectedCustomerSignal.set(null);
+  }
+
+  protected async openProjectDetails(projectSlug: string): Promise<void> {
+    const project = await firstValueFrom(this.projectsService.getBySlug(projectSlug));
+
+    this.selectedExperienceSignal.set(null);
+    this.selectedProjectSignal.set(
+      mapProjectToCaseCard(project, this.translationService.locale()),
+    );
+  }
+
+  protected closeProjectDetails(): void {
+    this.selectedProjectSignal.set(null);
   }
 }

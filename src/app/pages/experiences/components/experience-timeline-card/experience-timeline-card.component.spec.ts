@@ -30,7 +30,16 @@ describe('ExperienceTimelineCardComponent', () => {
     dateRangeLabel: 'Sep 2021 - Present',
     isCurrent: true,
     isHighlight: true,
-    jobs: ['Full Stack Developer'],
+    jobs: [
+      {
+        id: 'job-1',
+        title: 'Full Stack Developer',
+        summary: 'Built products.',
+        startDate: '2021-09-23',
+        endDate: null,
+        dateRangeLabel: '09/23/2021 - Present',
+      },
+    ],
     companyImage: {
       src: '/assets/img/experiences/stefanini.jpg',
       alt: 'Stefanini logo',

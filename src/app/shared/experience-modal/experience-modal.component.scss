@@ -6,6 +6,7 @@
 .experience-modal-heading,
 .experience-modal-section,
 .experience-modal-projects,
+.experience-modal-jobs,
 .experience-modal-stack-groups,
 .experience-modal-stack-group {
   @apply grid gap-4;
@@ -25,9 +26,9 @@
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-default-color) 24%, transparent);
 }
 
-.experience-modal-role {
-  @apply m-0 text-[1.15rem];
-  color: color-mix(in srgb, var(--text-color) 76%, transparent);
+.experience-modal-period-label {
+  @apply text-sm font-bold;
+  color: var(--text-color);
 }
 
 .experience-modal-date,
@@ -41,6 +42,7 @@
 }
 
 .experience-modal-description,
+.experience-modal-job-card p,
 .experience-modal-project-card p,
 .experience-modal-inline-copy {
   @apply m-0 text-[1rem] leading-8;
@@ -54,9 +56,28 @@
 }
 
 .experience-modal-project-card {
+  @apply grid w-full cursor-pointer gap-2 rounded-2xl border px-4 py-3 text-left;
+  background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.experience-modal-project-card:hover {
+  border-color: var(--primary-default-color);
+}
+
+.experience-modal-jobs {
+  @apply md:grid-cols-2;
+}
+
+.experience-modal-job-card {
   @apply grid gap-2 rounded-2xl border px-4 py-3;
   background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));
   border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+}
+
+.experience-modal-job-date {
+  @apply text-sm font-semibold tracking-[0.06em];
+  color: var(--primary-default-color);
 }
 
 .experience-modal-chip-list {

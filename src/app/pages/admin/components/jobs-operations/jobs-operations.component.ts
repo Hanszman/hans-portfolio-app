@@ -234,6 +234,14 @@ export class JobsOperationsComponent implements OnInit {
     this.patchForm({ summaryEs: value });
   }
 
+  updateStartDate(value: string): void {
+    this.patchForm({ startDate: value });
+  }
+
+  updateEndDate(value: string): void {
+    this.patchForm({ endDate: value });
+  }
+
   updateHighlight(value: boolean): void {
     this.patchForm({ highlight: value });
   }

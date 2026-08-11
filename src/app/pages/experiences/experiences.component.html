@@ -36,6 +36,17 @@
     [item]="experience"
     (closed)="closeExperienceDetails()"
     (openTechnology)="openTechnologyDetails($event)"
+    (openCustomer)="openCustomerDetails($event)"
+    (openProject)="openProjectDetails($event)"
+  />
+}
+
+@if (selectedProject(); as project) {
+  <app-project-modal
+    [isOpen]="true"
+    [project]="project"
+    (closed)="closeProjectDetails()"
+    (openTechnology)="openTechnologyDetails($event)"
   />
 }
 

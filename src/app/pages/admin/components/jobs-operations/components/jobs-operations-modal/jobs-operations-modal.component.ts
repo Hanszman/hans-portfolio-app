@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { JobRecord } from '../../../../../../core/api/jobs/jobs.types';
 import { AppTranslationKey } from '../../../../../../core/translation/translation.types';
 import { TranslationService } from '../../../../../../core/translation/translation.service';
+import { resolveDatePickerFormat } from '../../../../../../core/date/app-date.helper';
 import { OperationsModalComponent } from '../../../../../../shared/operations/operations-modal/operations-modal.component';
 import { OperationsRelationPickerComponent } from '../../../../../../shared/operations/operations-relation-picker/operations-relation-picker.component';
 import {
@@ -19,7 +20,9 @@ import {
 } from '../../../../../../shared/operations/operations.types';
 import {
   createAdminFieldLabelResolver,
+  formatAdminDateRangeForDisplay,
   resolveAdminLocalizedValue,
+  resolveAdminSelectValue,
   trackAdminItemById,
 } from '../../../../helpers/admin.helper';
 import {
@@ -72,6 +75,8 @@ export class JobsOperationsModalComponent {
   readonly summaryPtChanged = output<string>();
   readonly summaryEnChanged = output<string>();
   readonly summaryEsChanged = output<string>();
+  readonly startDateChanged = output<string>();
+  readonly endDateChanged = output<string>();
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
   readonly experienceToggled = output<string>();
@@ -82,6 +87,11 @@ export class JobsOperationsModalComponent {
   readonly pageSelected = output<number>();
 
   protected readonly fields = JOBS_OPERATIONS_FIELDS;
+  protected readonly datePickerFormat = computed(() =>
+    resolveDatePickerFormat(this.translation.locale()),
+  );
+  protected readonly datePickerLocale = computed(() => this.translation.locale());
+  protected readonly resolveSelectValue = resolveAdminSelectValue;
   protected readonly trackById = trackAdminItemById;
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
     this.fields,
@@ -148,6 +158,14 @@ export class JobsOperationsModalComponent {
             labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), job.summaryPt, job.summaryEn, job.summaryEs,
+            ),
+          },
+          {
+            labelKey: 'common.fields.date',
+            value: formatAdminDateRangeForDisplay(
+              job.startDate,
+              job.endDateLabel,
+              this.translation.locale(),
             ),
           },
           {
@@ -218,6 +236,14 @@ export class JobsOperationsModalComponent {
 
   protected emitSummaryEsChange(value: string): void {
     this.summaryEsChanged.emit(value);
+  }
+
+  protected emitStartDateChange(value: string): void {
+    this.startDateChanged.emit(value);
+  }
+
+  protected emitEndDateChange(value: string): void {
+    this.endDateChanged.emit(value);
   }
 
   protected emitSortOrderChange(value: string): void {

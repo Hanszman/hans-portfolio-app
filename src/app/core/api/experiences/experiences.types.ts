@@ -69,6 +69,8 @@ export interface ExperienceJobResponse {
   summaryPt: string;
   summaryEn: string;
   summaryEs?: string;
+  startDate: string;
+  endDate: string | null;
   highlight: boolean;
   sortOrder: number;
   createdAt: string;

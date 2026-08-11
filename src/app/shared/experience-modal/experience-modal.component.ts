@@ -32,6 +32,8 @@ export class ExperienceModalComponent {
   readonly isOpen = input(false);
   readonly closed = output<void>();
   readonly openTechnology = output<TechnologyModalItem>();
+  readonly openCustomer = output<ExperienceModalItem['customers'][number]>();
+  readonly openProject = output<string>();
   protected readonly mediaSources = computed(() => {
     const item = this.item();
     if (!item) return [];
@@ -48,8 +50,10 @@ export class ExperienceModalComponent {
     this.mediaTracker.isLoading(this.mediaSources(), this.isOpen()),
   );
 
-  protected customerTag(customer: ExperienceModalItem['customers'][number]): TagButtonViewModel {
-    return { label: customer.name, image: customer.image, value: customer.slug };
+  protected customerTag(
+    customer: ExperienceModalItem['customers'][number],
+  ): TagButtonViewModel<ExperienceModalItem['customers'][number]> {
+    return { label: customer.name, image: customer.image, value: customer };
   }
 
   protected technologyTag(technology: TechnologyModalItem): ExperienceTechnologyTag {
@@ -62,6 +66,14 @@ export class ExperienceModalComponent {
 
   protected requestTechnologyDetails(technology: TechnologyModalItem): void {
     this.openTechnology.emit(technology);
+  }
+
+  protected requestCustomerDetails(customer: ExperienceModalItem['customers'][number]): void {
+    this.openCustomer.emit(customer);
+  }
+
+  protected requestProjectDetails(projectSlug: string): void {
+    this.openProject.emit(projectSlug);
   }
 
   protected settleMedia(source: string): void {

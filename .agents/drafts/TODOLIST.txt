@@ -7,31 +7,23 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
-*Experiences:
--Como vc pode ver no print 1, o ícone de calendário está levemente desalinhado com relação ao texto das datas, preciso que vc alinhe ambos verticalmente por favor.
--Crie campos de data (startDate e endDate) na tabela (no banco e também no crud (front, back)) de job. Depois insira nesses campos os mesmos dados das datas respectivas das experiences relacionadas (não sempre pra toda experience, ou seja, não faça disso uma regra, mas insira apenas como valor inicial agora pra essas que já existem).
--Como subtítulo da experiência (na tela e no modal, ou seja, esses que marquei de vermelho no print 2), coloque o cargo/job relacionado mais recente, ou seja, com data de fim mais recente.
--Como vc pode ver no print 3, marquei de vermelho essa parte do modal de experience onde temos a image asset da empresa, o título do cargo e o tempo (range de data). Preciso que, ao invés do título do cargo repetido, vc coloque um título padrão como "Período Total na Empresa:" ou algo do tipo, com um texto em uma fonte menor do que está agora, em negrito e logo abaixo dele coloque esse range de data. Logo abaixo desse div (contendo image, título padrão de período e o período), crie uma nova sessão, com o título "Cargos Ocupados" (ou algo do tipo) listando os Cargos/Jobs específicos, com o título deles, o range de data de cada um e, se houver, o summary de cada um logo abaixo disso.
--Na tela de experiences coloque o campo de resumo de experiência ao invés da descrição nos cards e no modal coloque a descrição detalhada (esse campo de descrição mesmo que já está sendo utilizado) da experiência. Deixe essa sessão de descrição logo abaixo da nova sessão de cargos e coloque um título pra ela como "Descrição".
--Todos os títulos dessas novas sessões devem ter esse padrão uppercase com esse "//" na frente, como no caso de "// PROJECTS", "// CLIENTS" e "// TECH_STACK" por exemplo.
--No modal de detalhes de experiences faça a tag de customer ficar clicável (abrindo o modal de customer respectivo), igual as outras de technologias nesse mesmo modal e igual também às tags de customer da tela de experiences.
--No modal de detalhes de experiences deixe os projetos clicáveis também (abrindo o modal de projeto respectivo), assim como eles são na tela de projects e home, chamando o mesmo modal respectivo.
-
-*Skills:
--Colocar scroll nas sessões de Education e Languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
--Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.
--Os cards das technologies não estão do mesmo tamanho, padronize para que todos ocupem o mesmo espaço, com a mesma altura.
--Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
-
-*Projects:
+*Skills/Projects:
+-Na tela de Skills, coloque um scroll nas sessões de Education e Languages, pra que eles não quebrem formatação da tela quando houverem mais dados neles. Crie um estilo próprio para todos os scrolls do portfolio, substituíndo o padrão do navegador, deixe as cores dele parametrizadas com os temas dark/light do portfolio.
+-Coloque uma paginação na sessão de Technologies na tela de skills. Faça o mesmo na tela de projects, colocando uma paginação.
+-Crie um filtro de highlighted/destaques (faça ele assim como o filtro de "Ambiente" do projects e faça ele ter as opções "All", "Highlighted", "Others") em technologies e projects.
 -Os textos "Ambiente:" e "x projetos" estão muito pequenos na tela de projetos, padronize para usar o mesmo tamanho de fonte padrão das telas.
--Criar um filtro de highlighted/destaques em technologies e projects.
--Talvez criar uma coluna para projeto inacabado/concluído.
+-Os cards das technologies não estão do mesmo tamanho, padronize para que todos ocupem o mesmo espaço, com a mesma altura.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.
 -Os textos com os valores dos gráficos no tema dark estão escuros demais pra visualizar, mudar a cor desses textos para uma cor clara, assim como nos textos normais na tela dark.
+
+*Skills:
+-Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
+
+*Projects:
+-Talvez criar uma coluna para projeto inacabado/concluído.
 
 *Outros:
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).

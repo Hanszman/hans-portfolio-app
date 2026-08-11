@@ -5,6 +5,7 @@ import { buildApiUrl } from '../api.config';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../api.types';
 import {
   AdminProjectsCollectionResponse,
+  ProjectCollectionItemResponse,
   ProjectMutationPayload,
   ProjectRecord,
   ProjectsCollectionResponse,
@@ -30,6 +31,13 @@ export class ProjectsService {
 
     return this.httpClient.get<ProjectsCollectionResponse>(
       buildApiUrl(`/projects?${searchParams.toString()}`),
+      { headers: this.noCacheHeaders },
+    );
+  }
+
+  getBySlug(slug: string): Observable<ProjectCollectionItemResponse> {
+    return this.httpClient.get<ProjectCollectionItemResponse>(
+      buildApiUrl(`/projects/${encodeURIComponent(slug)}`),
       { headers: this.noCacheHeaders },
     );
   }
