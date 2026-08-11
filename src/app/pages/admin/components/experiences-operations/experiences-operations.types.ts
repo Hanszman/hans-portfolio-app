@@ -105,12 +105,12 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
   },
   startDate: {
     labelKey: 'common.fields.startDate',
-    placeholderKey: 'common.placeholders.startDate',
+    placeholderKey: 'common.fields.startDate',
     required: true,
   },
   endDate: {
     labelKey: 'common.fields.endDate',
-    placeholderKey: 'common.placeholders.endDate',
+    placeholderKey: 'common.fields.endDate',
     required: false,
   },
   sortOrder: {

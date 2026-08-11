@@ -39,6 +39,7 @@
 
 .experience-card-date hans-icon {
   @apply inline-flex shrink-0 items-center self-center leading-none;
+  transform: translateY(-1px);
 }
 
 .experience-card-summary {
@@ -47,13 +48,20 @@
 }
 
 .experience-card-customers {
-  @apply flex-wrap;
+  @apply flex w-full flex-wrap;
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
-.experience-card-chip-list,
+.experience-card-customers > hans-icon {
+  @apply shrink-0;
+}
+
 .experience-card-stack {
   @apply flex flex-wrap gap-2;
+}
+
+.experience-card-chip-list {
+  @apply flex min-w-0 flex-1 flex-wrap items-center gap-2;
 }
 
 .experience-card-tag-button {

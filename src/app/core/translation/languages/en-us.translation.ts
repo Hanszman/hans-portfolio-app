@@ -48,8 +48,6 @@ export const EN_TRANSLATIONS = {
     'The Portuguese summary is required before submitting.',
   'common.feedback.invalidSortOrder': 'The sort order must be a valid number.',
   'common.feedback.missingAdminSessionShort': 'The authenticated admin session is unavailable.',
-  'common.placeholders.endDate': 'Select the end date when applicable',
-  'common.placeholders.startDate': 'Select the start date',
   'common.placeholders.displayOrder': 'Enter the display order',
   'common.placeholders.spanishSummary': 'Enter the Spanish summary',
   'common.empty.imageAssets': 'No image assets are available.',
@@ -883,9 +881,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.formations.fields.summaryPt.placeholder': 'Enter the Portuguese formation summary',
   'pages.admin.formations.fields.summaryEn.placeholder': 'Enter the English formation summary',
   'pages.admin.formations.fields.startDate.label': 'Start date',
-  'pages.admin.formations.fields.startDate.placeholder': 'Enter the ISO start date',
   'pages.admin.formations.fields.endDate.label': 'End date',
-  'pages.admin.formations.fields.endDate.placeholder': 'Enter the ISO end date when applicable',
   'pages.admin.formations.fields.highlight.description':
     'Control whether this formation should stay highlighted in public portfolio sections.',
   'pages.admin.formations.fields.technologies.label': 'Related technologies',

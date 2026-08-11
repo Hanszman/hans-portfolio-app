@@ -49,8 +49,6 @@ export const PT_BR_TRANSLATIONS = {
   'common.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
   'common.feedback.missingAdminSessionShort':
     'A sessão administrativa autenticada não está disponível.',
-  'common.placeholders.endDate': 'Selecione a data final, se aplicável',
-  'common.placeholders.startDate': 'Selecione a data inicial',
   'common.placeholders.displayOrder': 'Digite a ordem de exibição',
   'common.placeholders.spanishSummary': 'Digite o resumo em espanhol',
   'common.empty.imageAssets': 'Nenhum recurso de imagem disponível.',
@@ -900,10 +898,7 @@ export const PT_BR_TRANSLATIONS = {
     'Digite o resumo da formation em português',
   'pages.admin.formations.fields.summaryEn.placeholder': 'Digite o resumo da formation em inglês',
   'pages.admin.formations.fields.startDate.label': 'Data de início',
-  'pages.admin.formations.fields.startDate.placeholder': 'Digite a data inicial em ISO',
   'pages.admin.formations.fields.endDate.label': 'Data de término',
-  'pages.admin.formations.fields.endDate.placeholder':
-    'Digite a data final em ISO quando aplicável',
   'pages.admin.formations.fields.highlight.description':
     'Controla se esta formation deve permanecer em destaque nas seções públicas do portfolio.',
   'pages.admin.formations.fields.technologies.label': 'Technologies relacionadas',

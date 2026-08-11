@@ -84,7 +84,7 @@
       <hans-date-picker
         [label]="resolveFieldLabel('startDate')"
         [required]="fieldDefinitions.startDate.required"
-        [placeholder]="resolveFieldPlaceholder('startDate')"
+        [placeholder]="datePickerFormat()"
         pickerType="date"
         [dateFormat]="datePickerFormat()"
         [locale]="datePickerLocale()"
@@ -100,7 +100,7 @@
       <hans-date-picker
         [label]="resolveFieldLabel('endDate')"
         [required]="fieldDefinitions.endDate.required"
-        [placeholder]="resolveFieldPlaceholder('endDate')"
+        [placeholder]="datePickerFormat()"
         pickerType="date"
         [dateFormat]="datePickerFormat()"
         [locale]="datePickerLocale()"
