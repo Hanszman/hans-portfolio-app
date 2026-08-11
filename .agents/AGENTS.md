@@ -225,19 +225,99 @@ Do not leave global or feature-level constants, types, interfaces, or helper fun
 
 ## Translation conventions
 
-The app supports `en-us`, `pt-br` and `es-es`.
+The supported interface locales are `en-us`, `pt-br` and `es-es`. Their catalogs live in
+`src/app/core/translation/languages/`, and `AppTranslationKey` in
+`src/app/core/translation/translation.types.ts` is the canonical key contract.
 
-Rules:
+### Translation domains
 
-- Keep the same translation keys in all three languages.
-- Static UI copy belongs only in language files under `src/app/core/translation/languages/`.
-- TypeScript should pass translation keys, not locale-to-text maps.
-- Use `TranslatePipe` in templates for static copy.
-- Use `TranslationService` in TypeScript when translated labels are needed in code.
-- Closed-list, enum and API-known option fields must expose translated user-facing labels through `TranslationService`; never pass raw enum values or raw translation keys directly to UI options.
-- Select options whose labels depend on translation keys must be recomputed from the active locale signal so the UI updates immediately after language changes.
-- When backend content has localized fields, use the centralized translation helpers/service instead of ad hoc `if`, `switch`, or ternary locale logic.
-- Remove translation keys that are no longer used, but keep all language files synchronized.
+Choose the smallest reusable semantic namespace:
+
+- `common.actions.*` - actions reused across pages, such as save, close and search
+- `common.entities.*` - canonical entity names used by navigation, metrics, filters and admin
+- `common.fields.*` - reusable field labels such as title, summary, date and sort order
+- `common.feedback.*` - reusable validation and operation feedback
+- `common.placeholders.*`, `common.empty.*`, `common.filters.*`, `common.states.*`,
+  `common.sections.*`, `common.relations.*`, `common.languages.*` and `common.values.*` -
+  shared copy for their respective semantic roles
+- `taxonomy.<domain>.*` - labels for reusable enums, closed lists and domain taxonomies
+- `header.*` and `footer.*` - shell-only copy
+- `pages.<page>.*` - copy that is genuinely specific to a single page or workflow
+
+Do not create a page-scoped key for an entity name, field, action, enum value or feedback that
+already has a reusable `common.*` or `taxonomy.*` meaning.
+
+### One semantic message, one key
+
+Before adding a key, search the three catalogs by both candidate key and translated values.
+Reuse an existing key when the English, Portuguese and Spanish triplet represents the same
+message. Do not create aliases with different names for identical copy.
+
+Capitalization is presentation, not translation identity. When the only difference is case, use
+the same key and Tailwind utilities such as `uppercase`, `lowercase`, `capitalize` or
+`normal-case` at the consumer. Do not add global text-transform helpers to `styles.scss` and do
+not create uppercase/lowercase translation variants.
+
+Different concepts may use separate keys only when their wording is expected to evolve
+independently. Document that exception close to the contract if the current visible triplet is
+identical, so an automatic duplicate audit is not silently weakened.
+
+### Catalog synchronization
+
+Every static UI key must be added, renamed or removed atomically in:
+
+1. `AppTranslationKey`;
+2. `en-us.translation.ts`;
+3. `pt-br.translation.ts`;
+4. `es-es.translation.ts`;
+5. every consumer and affected spec.
+
+The three catalogs must contain exactly the same key set. Never use one locale as an implicit
+fallback for a missing UI key. Do not leave obsolete keys after replacing consumers, and do not
+keep unused keys for hypothetical future screens.
+
+Translations must be natural for each locale and preserve the same intent, variables and
+interpolation parameters. Parameter names must be identical in all catalogs. Do not translate
+IDs, enum raw values, API properties or interpolation variable names.
+
+### Consumption rules
+
+- Static template copy uses `TranslatePipe`.
+- TypeScript passes `AppTranslationKey` and resolves it through `TranslationService` only when a
+  concrete label is required in code.
+- Never keep locale-to-text maps in components, helpers or `*.types.ts` files.
+- Never expose a raw enum, raw API value or untranslated key as a user-facing label.
+- Closed-list and API-known options keep a stable raw `value` and a translated `label`.
+- Any computed view-model or select-option list that calls `instant()` must read the active locale
+  signal so open views update immediately when the language changes.
+- Components with their own locale-aware UI, such as `hans-date-picker`, receive the active
+  application locale explicitly.
+- Accessibility labels, titles, placeholders, empty states, loading copy, validation, toast and
+  modal text follow the same catalog rules as visible body copy.
+- API-backed localized content remains separate from static UI translation keys. Resolve fields
+  such as `titlePt`, `titleEn` and `titleEs` through the centralized localized-content helpers;
+  never copy persisted content into the UI catalogs.
+
+### Adding or refactoring a key
+
+1. Inventory every consumer and decide whether the message is shared, taxonomic, shell-specific
+   or page-specific.
+2. Search existing keys and all three translated values. Prefer reuse over creation.
+3. Select the canonical namespace and add one descriptive camel-case key without embedding a
+   locale or presentation-only capitalization.
+4. Add the key and equivalent translations to the type contract and all three catalogs in the
+   same change.
+5. Update templates, TypeScript maps, option definitions, accessibility attributes and specs.
+6. If replacing a key, migrate all consumers before removing the old key from all four contracts.
+7. Search again for the old key, missing keys, raw translation-key output, unused entries and
+   duplicate translation triplets.
+8. Verify runtime switching through all three locales, including an already open modal or select
+   when the affected view is reactive.
+9. Run `npm run lint`, `npm run test:coverage -- --watch=false` and `npm run build`.
+
+Use `.agents/skills/add-portfolio-translation-key/SKILL.md` for this workflow. Adding a new locale
+or a new persisted localized field is a larger contract change and must instead use
+`.agents/skills/add-portfolio-language-frontend/SKILL.md` together with its Back-End counterpart.
 
 ## Backend communication
 

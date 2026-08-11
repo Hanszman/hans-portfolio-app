@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Portfolio Translation Key"
+  short_description: "Add synchronized, reusable portfolio translations"
+  default_prompt: "Use $add-portfolio-translation-key to add or refactor a translated UI message in all supported portfolio locales."

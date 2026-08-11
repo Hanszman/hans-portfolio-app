@@ -7,17 +7,14 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
-*Idiomas:
--Documentar padrão dos idiomas.
-
 *Experiences:
--Alinhar verticalmente ícone de calendário com as datas.
--Criar campos de data (startDate e endDate) na tabela de job e inserir os mesmos dados das datas respectivas das experiences relacionadas (não sempre pra toda experience, mas pra essas que já existem faça assim).
--Como subtítulo da experiência, colocar o cargo/job (mais recente) relacionado ao invés de repetir o título da experiência/company (tanto na tela como no modal).
--Listar Cargos/Jobs no modal também, com o range de data de cada um.
--Na tela colocar o campo de resumo de experiência e no modal colocar a descrição detalhada da experiência.
--No modal de detalhes de experiences fazer a tag de customer ficar clicável (abrindo o modal de customer respectivo), igual as outras de technologias nesse mesmo modal e igual também às tags de customer da tela de experiences.
--No modal de experiêncies deixar os projetos clicáveis também (abrindo o modal de projeto respectivo).
+-Como vc pode ver, o ícone de calendário está desalinhado com relação ao texto das datas, preciso que vc alinhe ambos verticalmente.
+-Crie campos de data (startDate e endDate) na tabela (no banco e também no crud (front, back)) de job. Depois insira nesses campos os mesmos dados das datas respectivas das experiences relacionadas (não sempre pra toda experience, ou seja, não faça disso uma regra, mas insira apenas como valor inicial agora pra essas que já existem).
+-Como subtítulo da experiência, coloque o cargo/job (mais recente) relacionado ao invés de repetir o título da experiência/company (tanto na tela como no modal).
+-Crie uma nova sessão no modal de experiences, logo acima da descrição, e liste os Cargos/Jobs também, com o título e o range de data de cada um.
+-Na tela de experiences coloque o campo de resumo de experiência ao invés da descrição nos cards e no modal coloque a descrição detalhada (esse campo de descrição mesmo que já está sendo utilizado) da experiência.
+-No modal de detalhes de experiences faça a tag de customer ficar clicável (abrindo o modal de customer respectivo), igual as outras de technologias nesse mesmo modal e igual também às tags de customer da tela de experiences.
+-No modal de detalhes de experiêncies deixe também os projetos clicáveis também (abrindo o modal de projeto respectivo), assim como eles são na tela de projects e home, chamando o mesmo modal respectivo.
 
 *Skills:
 -Colocar scroll nas sessões de Education e Languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.

@@ -158,6 +158,27 @@ together, while admin read cards show only the active locale under neutral label
 such as `Title`, `Summary` and `Description`. Changing the global language updates
 an open read modal reactively without fetching the same record again.
 
+Translation keys use one canonical semantic namespace: reusable copy belongs under
+`common.*`, enum and closed-list labels under `taxonomy.*`, shell copy under
+`header.*` or `footer.*`, and only truly local copy under `pages.<page>.*`. Before
+creating a key, search all catalogs and reuse an existing key when the same English,
+Portuguese and Spanish message already exists. Case-only differences use Tailwind
+text-transform utilities rather than duplicate keys.
+
+Every key change must update `AppTranslationKey`, the `en-us`, `pt-br` and `es-es`
+catalogs, all consumers and their tests atomically. The catalogs must keep identical
+key sets, interpolation parameters and intent, with no unused keys or duplicate
+translation triplets. Templates use `TranslatePipe`; TypeScript uses
+`TranslationService`; locale-reactive options and view-models must recompute when the
+selected language changes. API-backed fields such as `titlePt`, `titleEn` and
+`titleEs` remain localized content and are resolved by shared content helpers instead
+of being copied into UI catalogs.
+
+The operational checklist for adding, renaming or removing UI keys is available in
+`.agents/skills/add-portfolio-translation-key/SKILL.md`. New locales or persisted
+localized fields continue to follow the broader language skills for Front-End and
+Back-End.
+
 When adding another language:
 
 1. Add the locale to the translation types/configuration, language catalog and
