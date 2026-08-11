@@ -7,6 +7,8 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
+*Correções:
+-Verifique se os filtros de highlight e de ambiente nas telas/sessões de technologies e projects estão usando o hans-button da hans-lib, se não, aplique-o por favor. Verifique outros lugares no código que podem estar criando manualmente componentes que a lib já exporta e substitua nesses lugares também, para utilizarmos a lib sempre que possível.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
