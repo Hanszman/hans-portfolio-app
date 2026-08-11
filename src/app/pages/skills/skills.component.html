@@ -117,6 +117,23 @@
         ></hans-select-option>
       </div>
 
+      <div class="skills-highlight-filter">
+        <span>{{ 'common.fields.highlight' | translate }}:</span>
+
+        <div class="skills-highlight-filter-list">
+          @for (filter of highlightFilters; track filter.value) {
+            <button
+              type="button"
+              class="skills-highlight-filter-chip"
+              [class.skills-highlight-filter-chip-active]="selectedHighlight() === filter.value"
+              (click)="selectHighlightFilter(filter.value)"
+            >
+              {{ filter.labelKey | translate }}
+            </button>
+          }
+        </div>
+      </div>
+
       @if (isLoading()) {
         <app-info-state mode="loading" [message]="'pages.skills.catalog.loading' | translate" />
       } @else if (hasError()) {
@@ -125,10 +142,28 @@
         <app-info-state mode="empty" [message]="'pages.skills.catalog.empty' | translate" />
       } @else {
         <div class="skills-card-grid">
-          @for (card of filteredTechnologyCards(); track card.id) {
+          @for (card of paginatedTechnologyCards(); track card.id) {
             <app-skill-card [item]="card" (openDetails)="openSkillDetails($event)" />
           }
         </div>
+
+        <hans-pagination
+          class="skills-pagination"
+          [currentPage]="technologyPage()"
+          [totalPages]="technologyTotalPages()"
+          [ariaLabel]="'common.pagination.navigation' | translate"
+          [firstLabel]="'common.pagination.first' | translate"
+          [previousLabel]="'common.pagination.previous' | translate"
+          [nextLabel]="'common.pagination.next' | translate"
+          [lastLabel]="'common.pagination.last' | translate"
+          [pageLabel]="'common.pagination.pageLabel' | translate"
+          firstContent="LuChevronsLeft"
+          previousContent="LuChevronLeft"
+          nextContent="LuChevronRight"
+          lastContent="LuChevronsRight"
+          (pagechange)="selectTechnologyPage($event)"
+          (pageChange)="selectTechnologyPage($event)"
+        ></hans-pagination>
       }
     </section>
   </section>

@@ -59,6 +59,7 @@ export const EN_TRANSLATIONS = {
   'common.empty.unregisteredText': 'No text was registered yet.',
   'common.empty.stackDistribution': 'No stack distribution was returned yet.',
   'common.filters.all': 'All',
+  'common.filters.others': 'Others',
   'common.states.highlighted': 'Highlighted',
   'common.states.notHighlighted': 'Not highlighted',
   'common.location.beloHorizonteBrazil': 'Belo Horizonte, Brazil',

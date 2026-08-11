@@ -25,6 +25,17 @@ body[data-app-theme='light'] {
   );
   --app-tag-border-color: color-mix(in srgb, var(--primary-default-color) 28%, transparent);
   --app-tag-text-color: var(--text-color);
+  --app-scrollbar-track-color: color-mix(
+    in srgb,
+    var(--background-color) 92%,
+    var(--base-neutral-color)
+  );
+  --app-scrollbar-thumb-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 54%,
+    var(--base-default-color)
+  );
+  --app-scrollbar-thumb-hover-color: var(--primary-default-color);
 }
 
 body[data-app-theme='dark'] {
@@ -43,6 +54,41 @@ body[data-app-theme='dark'] {
   );
   --app-tag-border-color: color-mix(in srgb, var(--base-default-color) 20%, transparent);
   --app-tag-text-color: var(--text-color);
+  --app-scrollbar-track-color: color-mix(
+    in srgb,
+    var(--background-color) 90%,
+    var(--base-neutral-color)
+  );
+  --app-scrollbar-thumb-color: color-mix(
+    in srgb,
+    var(--primary-default-color) 64%,
+    var(--base-strong-color)
+  );
+  --app-scrollbar-thumb-hover-color: var(--primary-default-color);
+}
+
+* {
+  scrollbar-color: var(--app-scrollbar-thumb-color) var(--app-scrollbar-track-color);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--app-scrollbar-track-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 0.125rem solid var(--app-scrollbar-track-color);
+  border-radius: 9999px;
+  background-color: var(--app-scrollbar-thumb-color);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--app-scrollbar-thumb-hover-color);
 }
 
 app-root {

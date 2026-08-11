@@ -24,6 +24,15 @@ import { InfoStateComponent } from '../../shared/info-state/info-state.component
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+import {
+  HIGHLIGHT_FILTERS,
+  HighlightFilterValue,
+} from '../../shared/filters/highlight-filter.types';
+import {
+  calculateTotalPages,
+  paginateItems,
+  resolvePaginationPage,
+} from '../../shared/pagination/pagination.helper';
 import { SkillCardComponent } from './components/skill-card/skill-card.component';
 import {
   buildEducationSkillCards,
@@ -62,6 +71,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkillsComponent {
+  private static readonly TECHNOLOGIES_PAGE_SIZE = 15;
   private readonly technologiesService = inject(TechnologiesService);
   private readonly formationsService = inject(FormationsService);
   private readonly spokenLanguagesService = inject(SpokenLanguagesService);
@@ -76,6 +86,8 @@ export class SkillsComponent {
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
   private readonly selectedTypeSignal = signal<SkillTypeFilterValue>('ALL');
+  private readonly selectedHighlightSignal = signal<HighlightFilterValue>('ALL');
+  private readonly technologyPageSignal = signal(1);
 
   protected readonly isLoading = signal(true);
   protected readonly hasError = signal(false);
@@ -86,9 +98,12 @@ export class SkillsComponent {
   protected readonly selectedStack = this.selectedStackSignal.asReadonly();
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
   protected readonly selectedType = this.selectedTypeSignal.asReadonly();
+  protected readonly selectedHighlight = this.selectedHighlightSignal.asReadonly();
+  protected readonly technologyPage = this.technologyPageSignal.asReadonly();
   protected readonly stackFilters = SKILL_STACK_FILTERS;
   protected readonly levelFilters = SKILL_LEVEL_FILTERS;
   protected readonly typeFilters = SKILL_TYPE_FILTERS;
+  protected readonly highlightFilters = HIGHLIGHT_FILTERS;
   protected readonly stackFilterOptions = computed(() =>
     this.buildFilterOptions(this.stackFilters),
   );
@@ -116,6 +131,7 @@ export class SkillsComponent {
     const selectedStack = this.selectedStack();
     const selectedLevel = this.selectedLevel();
     const selectedType = this.selectedType();
+    const selectedHighlight = this.selectedHighlight();
 
     return this.technologyCards().filter((card) => {
       const matchesSearch =
@@ -127,12 +143,28 @@ export class SkillsComponent {
       const matchesStack = selectedStack === 'ALL' || card.stackKey === selectedStack;
       const matchesLevel = selectedLevel === 'ALL' || card.levelKey === selectedLevel;
       const matchesType = selectedType === 'ALL' || card.typeKey === selectedType;
+      const matchesHighlight =
+        selectedHighlight === 'ALL' ||
+        (selectedHighlight === 'HIGHLIGHTED' ? card.isHighlight : !card.isHighlight);
 
-      return matchesSearch && matchesStack && matchesLevel && matchesType;
+      return matchesSearch && matchesStack && matchesLevel && matchesType && matchesHighlight;
     });
   });
 
   protected readonly technologyCount = computed(() => String(this.technologyCards().length));
+  protected readonly technologyTotalPages = computed(() =>
+    calculateTotalPages(
+      this.filteredTechnologyCards().length,
+      SkillsComponent.TECHNOLOGIES_PAGE_SIZE,
+    ),
+  );
+  protected readonly paginatedTechnologyCards = computed(() =>
+    paginateItems(
+      this.filteredTechnologyCards(),
+      this.technologyPage(),
+      SkillsComponent.TECHNOLOGIES_PAGE_SIZE,
+    ),
+  );
 
   constructor() {
     this.technologiesService
@@ -170,10 +202,12 @@ export class SkillsComponent {
 
   protected updateSearchTerm(searchTerm: string): void {
     this.searchTermSignal.set(searchTerm);
+    this.resetTechnologyPage();
   }
 
   protected selectStackFilter(value: SkillStackFilterValue): void {
     this.selectedStackSignal.set(value);
+    this.resetTechnologyPage();
   }
 
   protected selectStackFilterFromEvent(event: Event): void {
@@ -182,6 +216,7 @@ export class SkillsComponent {
 
   protected selectLevelFilter(value: SkillLevelFilterValue): void {
     this.selectedLevelSignal.set(value);
+    this.resetTechnologyPage();
   }
 
   protected selectLevelFilterFromEvent(event: Event): void {
@@ -190,10 +225,24 @@ export class SkillsComponent {
 
   protected selectTypeFilter(value: SkillTypeFilterValue): void {
     this.selectedTypeSignal.set(value);
+    this.resetTechnologyPage();
   }
 
   protected selectTypeFilterFromEvent(event: Event): void {
     this.selectTypeFilter(this.resolveSelectValue(event) as SkillTypeFilterValue);
+  }
+
+  protected selectHighlightFilter(value: HighlightFilterValue): void {
+    this.selectedHighlightSignal.set(value);
+    this.resetTechnologyPage();
+  }
+
+  protected selectTechnologyPage(event: Event | number): void {
+    const page = resolvePaginationPage(event);
+
+    if (page !== null) {
+      this.technologyPageSignal.set(page);
+    }
   }
 
   protected openSkillDetails(skill: SkillCardViewModel): void {
@@ -238,6 +287,10 @@ export class SkillsComponent {
       label: this.translationService.instant(filter.labelKey),
       value: filter.value,
     }));
+  }
+
+  private resetTechnologyPage(): void {
+    this.technologyPageSignal.set(1);
   }
 
   private resolveSelectValue(event: Event): string {

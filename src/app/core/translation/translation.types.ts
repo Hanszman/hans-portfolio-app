@@ -63,6 +63,7 @@ export type AppTranslationKey =
   | 'common.empty.unregisteredText'
   | 'common.empty.stackDistribution'
   | 'common.filters.all'
+  | 'common.filters.others'
   | 'common.states.highlighted'
   | 'common.states.notHighlighted'
   | 'common.location.beloHorizonteBrazil'

@@ -38,7 +38,8 @@
 }
 
 .skills-panel-list {
-  @apply content-start gap-4;
+  @apply content-start gap-4 overflow-y-auto pr-2;
+  max-height: 24rem;
 }
 
 .skills-search {
@@ -54,5 +55,38 @@
 }
 
 .skills-card-grid {
-  @apply gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
+  @apply auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
+}
+
+.skills-highlight-filter,
+.skills-highlight-filter-list {
+  @apply flex flex-wrap items-center gap-3;
+}
+
+.skills-highlight-filter > span {
+  @apply text-base font-medium;
+  color: color-mix(in srgb, var(--text-color) 64%, transparent);
+}
+
+.skills-highlight-filter-list {
+  @apply gap-2;
+}
+
+.skills-highlight-filter-chip {
+  @apply rounded-full border px-4 py-2 text-sm font-medium transition;
+  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
+  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+}
+
+.skills-highlight-filter-chip:hover,
+.skills-highlight-filter-chip-active {
+  border-color: var(--primary-default-color);
+  background-color: var(--primary-default-color);
+  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--primary-default-color) 22%, transparent);
+  color: var(--white);
+}
+
+.skills-pagination {
+  @apply mt-4 block justify-self-center;
 }

@@ -62,6 +62,7 @@ export const PT_BR_TRANSLATIONS = {
   'common.empty.unregisteredText': 'Nenhum texto foi registrado ainda.',
   'common.empty.stackDistribution': 'Nenhuma distribuição de stack foi retornada ainda.',
   'common.filters.all': 'Todos',
+  'common.filters.others': 'Outros',
   'common.states.highlighted': 'Em destaque',
   'common.states.notHighlighted': 'Sem destaque',
   'common.location.beloHorizonteBrazil': 'Belo Horizonte, Brasil',

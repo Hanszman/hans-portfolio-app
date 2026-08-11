@@ -37,19 +37,23 @@
     </div>
 
     <div class="experience-card-stack">
-      @for (technologyTag of visibleTechnologyTags(); track technologyTag.value.slug) {
-        <app-tag-button
-          class="experience-card-tag-button"
-          [tag]="technologyTag"
-          (selected)="requestTechnologyDetails($event)"
-        />
-      }
+      <hans-icon name="LuCpu" iconSize="small"></hans-icon>
 
-      <app-expandable-list-toggle
-        [isExpanded]="isTechnologyListExpanded()"
-        [hiddenCount]="hiddenTechnologyCount()"
-        (toggled)="toggleTechnologyList()"
-      />
+      <div class="experience-card-chip-list">
+        @for (technologyTag of visibleTechnologyTags(); track technologyTag.value.slug) {
+          <app-tag-button
+            class="experience-card-tag-button"
+            [tag]="technologyTag"
+            (selected)="requestTechnologyDetails($event)"
+          />
+        }
+
+        <app-expandable-list-toggle
+          [isExpanded]="isTechnologyListExpanded()"
+          [hiddenCount]="hiddenTechnologyCount()"
+          (toggled)="toggleTechnologyList()"
+        />
+      </div>
     </div>
 
     <button

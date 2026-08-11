@@ -7,13 +7,6 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
-*Skills/Projects/Experiences:
--Na tela de Skills, coloque um scroll nas sessões de Education e Languages, pra que eles não quebrem formatação da tela quando houverem mais dados neles. Crie um estilo próprio para todos os scrolls do portfolio, substituíndo o padrão do navegador, deixe as cores dele parametrizadas com os temas dark/light do portfolio.
--Coloque uma paginação na sessão de Technologies na tela de skills (utilize nosso componente de hans-pagination da hans-lib, assim como fizemos nos modais dos cruds). Faça o mesmo na tela de projects, colocando uma paginação.
--Crie um filtro de highlighted/destaques (faça ele assim como o filtro de "Ambiente" do projects e faça ele ter as opções "All", "Highlighted", "Others") em technologies e projects.
--Como vc pode ver no print 1, os textos "Ambiente:" e "x projetos" estão muito pequenos na tela de projetos, padronize para usar o mesmo tamanho de fonte padrão das telas.
--Os cards das technologies não estão do mesmo tamanho, como vc pode ver no print 2. Padronize para que todos ocupem o mesmo espaço, com a mesma altura.
--Na tela de experiences, no card de experience, como vc pode ver no print 3, temos o ícone de clientes para listar as tags dos customers, mas não temos um ícone de tecnologias pra listar as tags das technologies, elas ficam espalhadas diretamente. Coloque um ícone pra elas ali no card também, pode ser o mesmo que colocamos no card de tecnologias da homepage, ou seja, o LuCpu.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.

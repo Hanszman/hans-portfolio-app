@@ -23,20 +23,39 @@
         (input)="updateSearchTerm($any($event).target?.value ?? '')"
       ></hans-input>
 
-      <div class="projects-filter-row">
-        <span>{{ 'common.fields.environment' | translate }}:</span>
+      <div class="projects-filter-groups">
+        <div class="projects-filter-row">
+          <span>{{ 'common.fields.environment' | translate }}:</span>
 
-        <div class="projects-filter-list">
-          @for (filter of contextFilters; track filter.value) {
-            <button
-              type="button"
-              class="projects-filter-chip"
-              [class.projects-filter-chip-active]="selectedContext() === filter.value"
-              (click)="selectContext(filter.value)"
-            >
-              {{ filter.labelKey | translate }}
-            </button>
-          }
+          <div class="projects-filter-list">
+            @for (filter of contextFilters; track filter.value) {
+              <button
+                type="button"
+                class="projects-filter-chip"
+                [class.projects-filter-chip-active]="selectedContext() === filter.value"
+                (click)="selectContext(filter.value)"
+              >
+                {{ filter.labelKey | translate }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="projects-filter-row">
+          <span>{{ 'common.fields.highlight' | translate }}:</span>
+
+          <div class="projects-filter-list">
+            @for (filter of highlightFilters; track filter.value) {
+              <button
+                type="button"
+                class="projects-filter-chip"
+                [class.projects-filter-chip-active]="selectedHighlight() === filter.value"
+                (click)="selectHighlightFilter(filter.value)"
+              >
+                {{ filter.labelKey | translate }}
+              </button>
+            }
+          </div>
         </div>
       </div>
 
@@ -63,7 +82,7 @@
       ></app-info-state>
     } @else {
       <div class="projects-grid">
-        @for (project of visibleProjectCases(); track project.id) {
+        @for (project of paginatedProjectCases(); track project.id) {
           <app-project-case-card
             [project]="project"
             (openDetails)="openProjectDetails($event)"
@@ -71,6 +90,24 @@
           ></app-project-case-card>
         }
       </div>
+
+      <hans-pagination
+        class="projects-pagination"
+        [currentPage]="projectPage()"
+        [totalPages]="projectTotalPages()"
+        [ariaLabel]="'common.pagination.navigation' | translate"
+        [firstLabel]="'common.pagination.first' | translate"
+        [previousLabel]="'common.pagination.previous' | translate"
+        [nextLabel]="'common.pagination.next' | translate"
+        [lastLabel]="'common.pagination.last' | translate"
+        [pageLabel]="'common.pagination.pageLabel' | translate"
+        firstContent="LuChevronsLeft"
+        previousContent="LuChevronLeft"
+        nextContent="LuChevronRight"
+        lastContent="LuChevronsRight"
+        (pagechange)="selectProjectPage($event)"
+        (pageChange)="selectProjectPage($event)"
+      ></hans-pagination>
     }
   </section>
 </app-wrapper>

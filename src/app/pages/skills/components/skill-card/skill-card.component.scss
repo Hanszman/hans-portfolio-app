@@ -1,5 +1,5 @@
 :host {
-  @apply block;
+  @apply block h-full;
 }
 
 .skill-card-button {
@@ -87,7 +87,7 @@
 }
 
 .skill-card-button[data-kind='technology'] .skill-card-content {
-  @apply min-h-28 content-between;
+  @apply h-56 content-between;
 }
 
 .skill-card-button[data-kind='education'] .skill-card-content,

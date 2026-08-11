@@ -7,6 +7,7 @@ import { createProjectsCollectionResponse } from '../../core/api/mocks/projects.
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
+import { HighlightFilterValue } from '../../shared/filters/highlight-filter.types';
 import { ProjectCaseViewModel, ProjectContextFilterValue } from './projects.types';
 import { ProjectsComponent } from './projects.component';
 
@@ -126,9 +127,24 @@ describe('ProjectsComponent', () => {
 
     const component = fixture.componentInstance as unknown as {
       selectContext: (value: ProjectContextFilterValue) => void;
+      selectHighlightFilter: (value: HighlightFilterValue) => void;
+      selectProjectPage: (event: Event | number) => void;
       updateSearchTerm: (searchTerm: string) => void;
       visibleProjectCases: () => readonly ProjectCaseViewModel[];
+      projectPage: () => number;
     };
+
+    component.selectHighlightFilter('HIGHLIGHTED');
+    expect(component.visibleProjectCases().every(({ isHighlight }) => isHighlight)).toBeTrue();
+
+    component.selectHighlightFilter('OTHERS');
+    expect(component.visibleProjectCases().every(({ isHighlight }) => !isHighlight)).toBeTrue();
+
+    component.selectHighlightFilter('ALL');
+    component.selectProjectPage(2);
+    expect(component.projectPage()).toBe(2);
+    component.selectProjectPage(new Event('pagechange'));
+    expect(component.projectPage()).toBe(2);
 
     component.selectContext('PERSONAL');
     fixture.detectChanges();

@@ -7,6 +7,7 @@ import { createTechnologiesCollectionResponse } from '../../core/api/mocks/techn
 import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.config';
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
+import { HighlightFilterValue } from '../../shared/filters/highlight-filter.types';
 import { SkillLevelFilterValue, SkillStackFilterValue, SkillTypeFilterValue } from './skills.types';
 import { SkillsComponent } from './skills.component';
 
@@ -186,8 +187,24 @@ describe('SkillsComponent', () => {
       selectLevelFilterFromEvent: (event: Event) => void;
       selectTypeFilterFromEvent: (event: Event) => void;
       updateSearchTerm: (searchTerm: string) => void;
+      selectHighlightFilter: (value: HighlightFilterValue) => void;
+      selectTechnologyPage: (event: Event | number) => void;
       searchTerm: () => string;
+      technologyPage: () => number;
+      filteredTechnologyCards: () => readonly { isHighlight: boolean }[];
     };
+
+    component.selectHighlightFilter('HIGHLIGHTED');
+    expect(component.filteredTechnologyCards().every(({ isHighlight }) => isHighlight)).toBeTrue();
+
+    component.selectHighlightFilter('OTHERS');
+    expect(component.filteredTechnologyCards().every(({ isHighlight }) => !isHighlight)).toBeTrue();
+
+    component.selectHighlightFilter('ALL');
+    component.selectTechnologyPage(2);
+    expect(component.technologyPage()).toBe(2);
+    component.selectTechnologyPage(new Event('pagechange'));
+    expect(component.technologyPage()).toBe(2);
 
     component.selectStackFilter('DATABASES');
     fixture.detectChanges();

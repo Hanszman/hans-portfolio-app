@@ -28,6 +28,7 @@
 
 .experience-card-date,
 .experience-card-customers,
+.experience-card-stack,
 .experience-card-action {
   @apply inline-flex items-center gap-2;
 }
@@ -47,17 +48,15 @@
   color: color-mix(in srgb, var(--text-color) 70%, transparent);
 }
 
-.experience-card-customers {
+.experience-card-customers,
+.experience-card-stack {
   @apply flex w-full flex-wrap;
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
 }
 
-.experience-card-customers > hans-icon {
+.experience-card-customers > hans-icon,
+.experience-card-stack > hans-icon {
   @apply shrink-0;
-}
-
-.experience-card-stack {
-  @apply flex flex-wrap gap-2;
 }
 
 .experience-card-chip-list {
