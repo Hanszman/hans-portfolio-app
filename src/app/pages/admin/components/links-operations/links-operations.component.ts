@@ -307,7 +307,7 @@ export class LinksOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback('pages.admin.links.feedback.missingSession');
+      this.setModalErrorFeedback('common.feedback.missingAdminSession');
       return;
     }
 

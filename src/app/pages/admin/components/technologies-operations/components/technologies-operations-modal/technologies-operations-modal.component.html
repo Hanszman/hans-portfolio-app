@@ -93,14 +93,14 @@
 
         <div class="technologies-operations-toggle">
           <div class="technologies-operations-selection-copy">
-            <p>{{ 'pages.admin.technologies.fields.highlight.label' | translate }}</p>
+            <p>{{ 'common.fields.highlightStatus' | translate }}</p>
             <span>{{ 'pages.admin.technologies.fields.highlight.description' | translate }}</span>
           </div>
           <hans-toggle
             [checked]="form().highlight"
             [toggleColor]="'primary'"
             [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.technologies.fields.highlight.label' | translate"
+            [attr.aria-label]="'common.fields.highlightStatus' | translate"
             (change)="toggleHighlight($event)"
           ></hans-toggle>
         </div>
@@ -116,7 +116,7 @@
         ></hans-input>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.technologies.fields.projects.label' | translate"
+          [label]="'pages.experiences.customer.projects' | translate"
           [description]="'pages.admin.technologies.fields.projects.description' | translate"
           [emptyMessage]="'pages.admin.technologies.fields.projects.empty' | translate"
           [options]="projectOptions()"
@@ -134,9 +134,9 @@
         />
 
         <app-operations-relation-picker
-          [label]="'pages.admin.technologies.fields.formations.label' | translate"
+          [label]="'common.relations.formations' | translate"
           [description]="'pages.admin.technologies.fields.formations.description' | translate"
-          [emptyMessage]="'pages.admin.technologies.fields.formations.empty' | translate"
+          [emptyMessage]="'common.empty.formations' | translate"
           [options]="formationOptions()"
           [selectedIds]="form().formationIds"
           (toggled)="formationToggled.emit($event)"

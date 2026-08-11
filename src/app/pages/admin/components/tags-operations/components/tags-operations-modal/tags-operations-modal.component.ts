@@ -147,12 +147,12 @@ export class TagsOperationsModalComponent {
         fields: [
           { labelKey: 'common.fields.slug', value: tag.slug },
           {
-            labelKey: 'pages.admin.operations.localized.name',
+            labelKey: 'common.fields.name',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), tag.namePt, tag.nameEn, tag.nameEs,
             ),
           },
-          { labelKey: 'pages.admin.tags.card.type', value: tag.type },
+          { labelKey: 'common.fields.type', value: tag.type },
           {
             labelKey: 'common.fields.sortOrder',
             value: tag.sortOrderLabel,

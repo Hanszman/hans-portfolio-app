@@ -64,7 +64,7 @@ describe('ExperienceTimelineCardComponent', () => {
     extraTechnologyCount: 2,
     technologyGroups: [
       {
-        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        labelKey: 'taxonomy.skills.stack.frontEnd',
         technologies: [
           {
             slug: 'tech-1',

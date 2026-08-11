@@ -136,6 +136,7 @@
           [required]="fields.startDate.required"
           pickerType="date"
           [dateFormat]="datePickerFormat()"
+          [locale]="datePickerLocale()"
           inputColor="base"
           inputSize="medium"
           [value]="form().startDate"
@@ -152,6 +153,7 @@
           [required]="fields.endDate.required"
           pickerType="date"
           [dateFormat]="datePickerFormat()"
+          [locale]="datePickerLocale()"
           inputColor="base"
           inputSize="medium"
           [value]="form().endDate"
@@ -165,7 +167,7 @@
 
         <div class="formations-operations-toggle">
           <div class="formations-operations-selection-copy">
-            <p>{{ 'pages.admin.formations.fields.highlight.label' | translate }}</p>
+            <p>{{ 'common.fields.highlightStatus' | translate }}</p>
             <span>
               {{ 'pages.admin.formations.fields.highlight.description' | translate }}
             </span>
@@ -175,7 +177,7 @@
             [checked]="form().highlight"
             [toggleColor]="'primary'"
             [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.formations.fields.highlight.label' | translate"
+            [attr.aria-label]="'common.fields.highlightStatus' | translate"
             (change)="emitHighlightChange($event)"
           ></hans-toggle>
         </div>
@@ -201,7 +203,7 @@
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.formations.fields.links.label' | translate"
+          [label]="'common.relations.links' | translate"
           [description]="'pages.admin.formations.fields.links.description' | translate"
           [emptyMessage]="'pages.admin.formations.fields.links.empty' | translate"
           [options]="linkOptions()"
@@ -210,9 +212,9 @@
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.formations.fields.imageAssets.label' | translate"
+          [label]="'common.relations.imageAssets' | translate"
           [description]="'pages.admin.formations.fields.imageAssets.description' | translate"
-          [emptyMessage]="'pages.admin.formations.fields.imageAssets.empty' | translate"
+          [emptyMessage]="'common.empty.imageAssetsForRelation' | translate"
           [options]="imageAssetOptions()"
           [selectedIds]="form().imageAssetIds"
           (toggled)="toggleImageAsset($event)"

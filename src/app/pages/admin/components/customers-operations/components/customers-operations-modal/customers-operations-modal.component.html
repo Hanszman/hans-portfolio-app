@@ -83,7 +83,7 @@
 
         <div class="customers-operations-toggle">
           <div class="customers-operations-selection-copy">
-            <p>{{ 'pages.admin.customers.fields.highlight.label' | translate }}</p>
+            <p>{{ 'common.fields.highlightStatus' | translate }}</p>
             <span>
               {{ 'pages.admin.customers.fields.highlight.description' | translate }}
             </span>
@@ -93,7 +93,7 @@
             [checked]="form().highlight"
             [toggleColor]="'primary'"
             [toggleSize]="'small'"
-            [attr.aria-label]="'pages.admin.customers.fields.highlight.label' | translate"
+            [attr.aria-label]="'common.fields.highlightStatus' | translate"
             (change)="emitHighlightChange($event)"
           ></hans-toggle>
         </div>
@@ -110,7 +110,7 @@
         ></hans-input>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.customers.fields.experiences.label' | translate"
+          [label]="'common.relations.experiences' | translate"
           [description]="'pages.admin.customers.fields.experiences.description' | translate"
           [emptyMessage]="'pages.admin.customers.fields.experiences.empty' | translate"
           [options]="experienceOptions()"
@@ -119,7 +119,7 @@
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.customers.fields.imageAssets.label' | translate"
+          [label]="'common.relations.imageAssets' | translate"
           [description]="'pages.admin.customers.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.customers.fields.imageAssets.empty' | translate"
           [options]="imageAssetOptions()"

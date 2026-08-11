@@ -148,23 +148,23 @@ export class SpokenLanguagesOperationsModalComponent {
           this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
         ),
         fields: [
-          { labelKey: 'pages.admin.spokenLanguages.card.code', value: language.code },
+          { labelKey: 'common.fields.code', value: language.code },
           {
-            labelKey: 'pages.admin.operations.localized.name',
+            labelKey: 'common.fields.name',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), language.namePt, language.nameEn, language.nameEs,
             ),
           },
           {
-            labelKey: 'pages.admin.spokenLanguages.card.proficiency',
+            labelKey: 'common.fields.proficiency',
             value: language.proficiency,
           },
           {
-            labelKey: 'pages.admin.spokenLanguages.card.highlight',
+            labelKey: 'common.fields.highlight',
             value: this.translation.instant(
               language.highlight
-                ? 'pages.admin.spokenLanguages.fields.highlight.enabled'
-                : 'pages.admin.spokenLanguages.fields.highlight.disabled',
+                ? 'common.states.highlighted'
+                : 'common.states.notHighlighted',
             ),
           },
           {
@@ -172,7 +172,7 @@ export class SpokenLanguagesOperationsModalComponent {
             value: language.sortOrderLabel,
           },
           {
-            labelKey: 'pages.admin.spokenLanguages.card.imageAssets',
+            labelKey: 'common.entities.imageAssets',
             value: language.imageAssetLabels.join(', ') || emptyRelations,
           },
         ],

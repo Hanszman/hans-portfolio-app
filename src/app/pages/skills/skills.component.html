@@ -27,7 +27,7 @@
         <header class="skills-panel-header">
           <h2>
             <hans-icon name="LuLanguages" iconSize="small"></hans-icon>
-            {{ 'pages.skills.languages.title' | translate }}
+            {{ 'common.entities.languages' | translate }}
           </h2>
         </header>
 
@@ -65,7 +65,7 @@
         <hans-select-option
           #stackSelect
           class="skills-filter-select"
-          [label]="'pages.skills.filters.stack' | translate"
+          [label]="'common.fields.stack' | translate"
           [options]="stackFilterOptions()"
           [value]="selectedStack()"
           [enableAutocomplete]="false"
@@ -83,7 +83,7 @@
         <hans-select-option
           #typeSelect
           class="skills-filter-select"
-          [label]="'pages.skills.filters.type' | translate"
+          [label]="'common.fields.type' | translate"
           [options]="typeFilterOptions()"
           [value]="selectedType()"
           [enableAutocomplete]="false"

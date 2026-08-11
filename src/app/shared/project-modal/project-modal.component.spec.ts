@@ -17,7 +17,7 @@ describe('ProjectModalComponent', () => {
     companyNames: ['Hans'],
     stackGroups: [
       {
-        labelKey: 'pages.projects.detail.techStack' as const,
+        labelKey: 'common.sections.techStack' as const,
         technologies: [
           {
             slug: 'angular',

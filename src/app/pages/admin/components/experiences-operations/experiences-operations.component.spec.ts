@@ -249,7 +249,7 @@ describe('ExperiencesOperationsComponent', () => {
     session.accessToken.and.returnValue(null);
     component['openCreateModal']();
     await component['submitModal']();
-    expect(component['modalFeedbackKey']()).toBe('pages.admin.experiences.feedback.missingSession');
+    expect(component['modalFeedbackKey']()).toBe('common.feedback.missingAdminSessionShort');
   });
 
   it('surfaces validation, load and mutation errors', async () => {

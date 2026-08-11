@@ -598,7 +598,7 @@ describe('image-assets operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.imageAssets.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
 
     expect(

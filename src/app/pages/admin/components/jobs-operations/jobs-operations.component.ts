@@ -260,7 +260,7 @@ export class JobsOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback('pages.admin.jobs.feedback.missingSession');
+      this.setModalErrorFeedback('common.feedback.missingAdminSession');
       return;
     }
 

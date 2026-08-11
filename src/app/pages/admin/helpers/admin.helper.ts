@@ -323,6 +323,21 @@ export interface AdminSessionFactViewModel {
   readonly description: string;
 }
 
+const ADMIN_ENTITY_TITLE_KEYS: Record<AdminEntityDefinition['id'], AppTranslationKey> = {
+  'portfolio-settings': 'common.entities.portfolioSettings',
+  tags: 'common.entities.tags',
+  links: 'common.entities.links',
+  'image-assets': 'common.entities.imageAssets',
+  'spoken-languages': 'common.entities.languages',
+  customers: 'common.entities.customers',
+  jobs: 'common.entities.jobs',
+  formations: 'common.entities.formations',
+  technologies: 'common.entities.technologies',
+  'technology-contexts': 'common.entities.technologyContexts',
+  experiences: 'common.entities.experiences',
+  projects: 'common.entities.projects',
+};
+
 export const buildAdminEntityViewModels = (
   entities: readonly AdminEntityDefinition[],
   translate: (key: AppTranslationKey) => string,
@@ -335,7 +350,7 @@ export const buildAdminEntityViewModels = (
     relationModeLabel: translate(
       asAdminTranslationKey(`pages.admin.relationMode.${entity.relationMode}`),
     ),
-    title: translate(asAdminTranslationKey(`pages.admin.entities.${entity.id}.title`)),
+    title: translate(ADMIN_ENTITY_TITLE_KEYS[entity.id]),
     description: translate(asAdminTranslationKey(`pages.admin.entities.${entity.id}.description`)),
     operations: operations.map((operation) => ({
       id: operation,

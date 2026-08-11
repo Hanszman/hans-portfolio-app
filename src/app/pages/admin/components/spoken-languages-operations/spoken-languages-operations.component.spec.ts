@@ -167,7 +167,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
 
     expect(spokenLanguagesOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
-    expect(compiled.textContent).toContain('Spoken languages');
+    expect(compiled.textContent).toContain('Languages');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/spoken-languages'));
     expect(compiled.textContent).toContain('Create');
     expect(compiled.textContent).toContain('Read');
@@ -377,7 +377,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.invalidSortOrder',
+      'common.feedback.invalidIntegerSortOrder',
     );
 
     TestBed.resetTestingModule();
@@ -421,7 +421,7 @@ describe('SpokenLanguagesOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.spokenLanguages.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

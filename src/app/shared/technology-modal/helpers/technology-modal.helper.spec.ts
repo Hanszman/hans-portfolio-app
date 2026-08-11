@@ -56,8 +56,8 @@ describe('technology modal helper', () => {
       }),
     ).toEqual([
       { labelKey: 'pages.skills.detail.totalExperience', value: '6 years' },
-      { labelKey: 'pages.experiences.technology.type', value: 'Frameworks' },
-      { labelKey: 'pages.experiences.technology.stack', value: 'Front-End' },
+      { labelKey: 'common.fields.type', value: 'Frameworks' },
+      { labelKey: 'common.fields.stack', value: 'Front-End' },
       { labelKey: 'pages.experiences.technology.projects', value: 2 },
     ]);
   });

@@ -139,32 +139,32 @@ export class JobsOperationsModalComponent {
         fields: [
           { labelKey: 'common.fields.slug', value: job.slug },
           {
-            labelKey: 'pages.admin.operations.localized.name',
+            labelKey: 'common.fields.name',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), job.namePt, job.nameEn, job.nameEs,
             ),
           },
           {
-            labelKey: 'pages.admin.operations.localized.summary',
+            labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), job.summaryPt, job.summaryEn, job.summaryEs,
             ),
           },
           {
-            labelKey: 'pages.admin.jobs.card.highlight',
+            labelKey: 'common.fields.highlight',
             value: this.translation.instant(
               job.highlight
-                ? 'pages.admin.jobs.fields.highlight.enabled'
-                : 'pages.admin.jobs.fields.highlight.disabled',
+                ? 'common.states.highlighted'
+                : 'common.states.notHighlighted',
             ),
           },
           { labelKey: 'common.fields.sortOrder', value: job.sortOrderLabel },
           {
-            labelKey: 'pages.admin.jobs.card.experiences',
+            labelKey: 'common.entities.experiences',
             value: job.experienceLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.jobs.card.imageAssets',
+            labelKey: 'common.entities.imageAssets',
             value: job.imageAssetLabels.join(', ') || emptyRelations,
           },
         ],

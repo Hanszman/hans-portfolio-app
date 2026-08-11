@@ -87,6 +87,7 @@
         [placeholder]="resolveFieldPlaceholder('startDate')"
         pickerType="date"
         [dateFormat]="datePickerFormat()"
+        [locale]="datePickerLocale()"
         inputColor="base"
         inputSize="medium"
         [value]="form()?.startDate ?? ''"
@@ -102,6 +103,7 @@
         [placeholder]="resolveFieldPlaceholder('endDate')"
         pickerType="date"
         [dateFormat]="datePickerFormat()"
+        [locale]="datePickerLocale()"
         inputColor="base"
         inputSize="medium"
         [value]="form()?.endDate ?? ''"
@@ -123,7 +125,7 @@
       </div>
       <div class="toggle-field">
         <div>
-          <strong>{{ 'pages.admin.projects.fields.highlight.label' | translate }}</strong>
+          <strong>{{ 'common.fields.highlightStatus' | translate }}</strong>
           <span>{{ 'pages.admin.projects.fields.highlight.description' | translate }}</span>
         </div>
         <hans-toggle
@@ -133,16 +135,16 @@
       </div>
 
       <app-operations-relation-picker
-        [label]="'pages.admin.projects.fields.technologies.label' | translate"
+        [label]="'common.relations.technologies' | translate"
         [description]="'pages.admin.projects.fields.technologies.description' | translate"
-        [emptyMessage]="'pages.admin.projects.fields.technologies.empty' | translate"
+        [emptyMessage]="'common.empty.technologies' | translate"
         [options]="technologyOptions()"
         [selectedIds]="form()?.technologyIds ?? []"
         (toggled)="relation('technologyIds', $event)"
       />
 
       <app-operations-relation-picker
-        [label]="'pages.admin.projects.fields.experiences.label' | translate"
+        [label]="'pages.admin.links.fields.experiences.label' | translate"
         [description]="'pages.admin.projects.fields.experiences.description' | translate"
         [emptyMessage]="'pages.admin.projects.fields.experiences.empty' | translate"
         [options]="experienceOptions()"
@@ -160,18 +162,18 @@
       />
 
       <app-operations-relation-picker
-        [label]="'pages.admin.projects.fields.links.label' | translate"
+        [label]="'common.relations.links' | translate"
         [description]="'pages.admin.projects.fields.links.description' | translate"
-        [emptyMessage]="'pages.admin.projects.fields.links.empty' | translate"
+        [emptyMessage]="'common.empty.links' | translate"
         [options]="linkOptions()"
         [selectedIds]="form()?.linkIds ?? []"
         (toggled)="relation('linkIds', $event)"
       />
 
       <app-operations-relation-picker
-        [label]="'pages.admin.projects.fields.imageAssets.label' | translate"
+        [label]="'common.relations.imageAssets' | translate"
         [description]="'pages.admin.projects.fields.imageAssets.description' | translate"
-        [emptyMessage]="'pages.admin.projects.fields.imageAssets.empty' | translate"
+        [emptyMessage]="'common.empty.imageAssets' | translate"
         [options]="imageAssetOptions()"
         [selectedIds]="form()?.imageAssetIds ?? []"
         (toggled)="relation('imageAssetIds', $event)"

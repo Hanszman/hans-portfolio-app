@@ -528,7 +528,7 @@ export const buildLanguageSkillCards = (
         kind: 'language',
         name,
         subtitle: '',
-        categoryLabel: translateStaticKey(locale, 'pages.skills.languages.title'),
+        categoryLabel: translateStaticKey(locale, 'common.entities.languages'),
         levelLabel: badgeLabel,
         frequencyLabel: '',
         totalExperienceLabel: '',
@@ -545,7 +545,7 @@ export const buildLanguageSkillCards = (
         modal: {
           slug: language.code,
           name,
-          category: translateStaticKey(locale, 'pages.skills.languages.title'),
+          category: translateStaticKey(locale, 'common.entities.languages'),
           level: badgeLabel,
           frequency: '',
           image: { src: visualUrl, alt: name },
@@ -565,7 +565,7 @@ export const mapFormationToEducationModal = (
       image: { src: fallback.visualUrl, alt: fallback.name },
       details: [
         { labelKey: 'pages.skills.education.detail.degree', value: fallback.badgeLabel },
-        { labelKey: 'pages.skills.education.detail.date', value: fallback.totalExperienceLabel },
+        { labelKey: 'common.fields.date', value: fallback.totalExperienceLabel },
       ],
       galleryItems: [],
     };
@@ -631,8 +631,8 @@ export const mapFormationToEducationModal = (
       : { src: fallback.visualUrl, alt: title },
     details: [
       { labelKey: 'pages.skills.education.detail.degree', value: formation.degreeType },
-      { labelKey: 'pages.skills.education.detail.date', value: dateRange },
-      { labelKey: 'pages.skills.education.detail.summary', value: summary },
+      { labelKey: 'common.fields.date', value: dateRange },
+      { labelKey: 'common.fields.summary', value: summary },
     ].filter(({ value }) => Boolean(value)),
     galleryItems,
   };
@@ -679,7 +679,7 @@ export const mapSpokenLanguageToModal = (
         value: language?.proficiency ?? fallback.badgeLabel,
       },
       {
-        labelKey: 'pages.skills.languages.detail.code',
+        labelKey: 'common.fields.code',
         value: language?.code ?? fallback.slug,
       },
     ],

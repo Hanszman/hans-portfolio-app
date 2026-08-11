@@ -25,7 +25,7 @@ describe('ProjectCaseCardComponent', () => {
     filterContext: 'PROFESSIONAL',
     stackGroups: [
       {
-        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        labelKey: 'taxonomy.skills.stack.frontEnd',
         technologies: [
           buildTechnologyTag('angular', 'Angular'),
           buildTechnologyTag('typescript', 'TypeScript'),

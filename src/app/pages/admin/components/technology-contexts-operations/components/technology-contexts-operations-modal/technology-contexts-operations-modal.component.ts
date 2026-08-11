@@ -73,6 +73,7 @@ export class TechnologyContextsOperationsModalComponent {
   protected readonly datePickerFormat = computed(() =>
     resolveDatePickerFormat(this.translation.locale()),
   );
+  protected readonly datePickerLocale = computed(() => this.translation.locale());
   protected readonly trackById = trackAdminItemById;
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
     this.fields,
@@ -121,15 +122,15 @@ export class TechnologyContextsOperationsModalComponent {
         subtitle: record.contextLabel,
         fields: [
           {
-            labelKey: 'pages.admin.technologyContexts.card.technology',
+            labelKey: 'common.fields.technology',
             value: record.technologyName,
           },
           {
-            labelKey: 'pages.admin.technologyContexts.fields.context.label',
+            labelKey: 'pages.admin.projects.fields.context.label',
             value: record.contextLabel,
           },
           {
-            labelKey: 'pages.admin.operations.date',
+            labelKey: 'common.fields.date',
             value: record.dateRangeLabel,
           },
         ],

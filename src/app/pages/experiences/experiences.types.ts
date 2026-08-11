@@ -55,18 +55,18 @@ export const EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS: Record<
   string,
   AppTranslationKey
 > = {
-  FRONTEND: 'taxonomy.experiences.projectEnvironment.frontend',
-  BACKEND: 'taxonomy.experiences.projectEnvironment.backend',
+  FRONTEND: 'taxonomy.skills.stack.frontEnd',
+  BACKEND: 'taxonomy.skills.stack.backEnd',
   FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
 };
 
 export const EXPERIENCE_PRESENT_LABEL_KEY = 'taxonomy.experiences.present';
 
 export const EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS = {
-  frontend: 'pages.experiences.detail.stackGroups.frontend',
-  backend: 'pages.experiences.detail.stackGroups.backend',
-  databases: 'pages.experiences.detail.stackGroups.databases',
-  others: 'pages.experiences.detail.stackGroups.others',
+  frontend: 'taxonomy.skills.stack.frontEnd',
+  backend: 'taxonomy.skills.stack.backEnd',
+  databases: 'taxonomy.skills.stack.databases',
+  others: 'taxonomy.skills.stack.others',
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS = new Set([

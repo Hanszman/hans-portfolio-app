@@ -278,7 +278,7 @@ describe('formatAdminIdentity', () => {
         endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
         substep: 'F8.3',
         relationModeLabel: 'pages.admin.relationMode.owner',
-        title: 'pages.admin.entities.portfolio-settings.title',
+        title: 'common.entities.portfolioSettings',
         description: 'pages.admin.entities.portfolio-settings.description',
         operations: [
           {

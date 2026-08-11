@@ -38,10 +38,13 @@ import {
   translateAdminSelectOptions,
 } from '../../../../helpers/admin.helper';
 import { AdminSelectOptionViewModel } from '../../../../helpers/admin.helper';
+import { TECHNOLOGY_CONTEXT_LABEL_KEYS } from '../../../technology-contexts-operations/technology-contexts-operations.types';
 import {
   TECHNOLOGY_CATEGORY_VALUES,
   TECHNOLOGY_FREQUENCY_VALUES,
   TECHNOLOGY_LEVEL_VALUES,
+  TECHNOLOGY_OPTION_LABEL_KEYS,
+  TechnologyOptionValue,
 } from '../../technologies-operations.types';
 
 @Component({
@@ -124,14 +127,14 @@ export class TechnologiesOperationsModalComponent {
         subtitle: technology.name,
         fields: [
           { labelKey: 'common.fields.slug', value: technology.slug },
-          { labelKey: 'pages.admin.technologies.card.name', value: technology.name },
+          { labelKey: 'common.fields.name', value: technology.name },
           {
-            labelKey: 'pages.admin.technologies.card.category',
+            labelKey: 'common.fields.category',
             value: technology.category,
           },
-          { labelKey: 'pages.admin.technologies.card.level', value: technology.level || '-' },
+          { labelKey: 'common.fields.level', value: technology.level || '-' },
           {
-            labelKey: 'pages.admin.technologies.card.frequency',
+            labelKey: 'common.fields.frequency',
             value: technology.frequency || '-',
           },
           {
@@ -149,7 +152,7 @@ export class TechnologiesOperationsModalComponent {
                 .map(
                   (context) =>
                     `${this.translation.instant(
-                      `pages.admin.technologyContexts.options.${context.context}` as AppTranslationKey,
+                      TECHNOLOGY_CONTEXT_LABEL_KEYS[context.context],
                     )}: ${formatAdminDateRangeForDisplay(
                       context.startedAt,
                       context.endedAt,
@@ -163,11 +166,11 @@ export class TechnologiesOperationsModalComponent {
             value: relationValue(technology.projectLabels),
           },
           {
-            labelKey: 'pages.admin.technologies.card.experiences',
+            labelKey: 'common.entities.experiences',
             value: relationValue(technology.experienceLabels),
           },
           {
-            labelKey: 'pages.admin.technologies.card.formations',
+            labelKey: 'common.entities.formations',
             value: relationValue(technology.formationLabels),
           },
           {
@@ -175,11 +178,11 @@ export class TechnologiesOperationsModalComponent {
             value: relationValue(technology.tagLabels),
           },
           {
-            labelKey: 'pages.admin.technologies.card.links',
+            labelKey: 'common.entities.links',
             value: relationValue(technology.linkLabels),
           },
           {
-            labelKey: 'pages.admin.technologies.card.imageAssets',
+            labelKey: 'common.entities.imageAssets',
             value: relationValue(technology.imageAssetLabels),
           },
         ],
@@ -221,14 +224,14 @@ export class TechnologiesOperationsModalComponent {
     this.getOptions(TECHNOLOGY_FREQUENCY_VALUES),
   );
 
-  private getOptions<TValue extends string>(
+  private getOptions<TValue extends TechnologyOptionValue>(
     values: readonly TValue[],
   ): readonly AdminSelectOptionViewModel<TValue>[] {
     this.translation.locale();
     return translateAdminSelectOptions(
       createAdminSelectOptionDefinitions(
         values,
-        (value) => `pages.admin.technologies.options.${value}` as AppTranslationKey,
+        (value) => TECHNOLOGY_OPTION_LABEL_KEYS[value],
       ),
       this.translation.instant.bind(this.translation),
     );

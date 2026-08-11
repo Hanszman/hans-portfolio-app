@@ -1,9 +1,9 @@
 import { TechnologyContextRecord } from '../../../../../core/api/technology-contexts/technology-contexts.types';
-import { AppTranslationKey } from '../../../../../core/translation/translation.types';
 import { TechnologyAdminRecord } from '../../../../../core/api/technologies/technologies.types';
 import { TranslationService } from '../../../../../core/translation/translation.service';
 import { formatAdminDateForDisplay } from '../../../helpers/admin.helper';
 import {
+  TECHNOLOGY_CONTEXT_LABEL_KEYS,
   TechnologyContextTechnologyOption,
   TechnologyContextViewModel,
   buildTechnologyContextFormValue,
@@ -42,9 +42,7 @@ export const buildTechnologyContextViewModels = (
       technologyName: record.technology?.name ?? record.technologyId,
       technologySlug: record.technology?.slug ?? record.technologyId,
       contextLabel: record.context
-        ? translation.instant(
-            `pages.admin.technologyContexts.options.${record.context}` as AppTranslationKey,
-          )
+        ? translation.instant(TECHNOLOGY_CONTEXT_LABEL_KEYS[record.context])
         : '-',
       dateRangeLabel: `${formatTechnologyContextDate(form.startedAt, translation)} - ${formatTechnologyContextDate(form.endedAt, translation)}`,
     };

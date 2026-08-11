@@ -8,13 +8,13 @@ class TestRouteComponent {}
 
 describe('shellNavigationHelper', () => {
   const navigationLabelKeyByPath = {
-    '/home': 'header.navigation.home',
+    '/home': 'common.entities.home',
     '/projects': 'common.entities.projects',
   } satisfies Record<string, AppTranslationKey>;
 
   it('should build translated shell navigation items from supported routes only', () => {
     const translate = (key: AppTranslationKey): string => {
-      if (key === 'header.navigation.home') {
+      if (key === 'common.entities.home') {
         return 'Home';
       }
 

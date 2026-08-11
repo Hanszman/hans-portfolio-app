@@ -2,63 +2,22 @@ import { AppTranslationLanguage } from '../translation.types';
 
 export const PT_BR_TRANSLATIONS = {
   'header.brand.home': 'Ir para a home',
-  'header.brand.role': 'Full Stack Engineer | Especialista Front-End',
-  'header.tags.angular': 'Angular 20',
-  'header.tags.signals': 'Signals first',
-  'header.tags.api': 'API ativa',
   'header.controls.theme': 'Tema',
-  'header.controls.darkMode': 'Modo escuro',
   'header.controls.darkTheme': 'Tema escuro',
   'header.controls.lightTheme': 'Tema claro',
   'header.controls.language': 'Idioma',
   'header.controls.navigation': 'Menu de navegação',
   'header.controls.noLanguages': 'Nenhum idioma disponível',
-  'header.controls.portuguese': 'Português',
-  'header.controls.english': 'Inglês',
-  'header.controls.spanish': 'Espanhol',
-  'header.navigation.home': 'Home',
-  'header.navigation.experiences': 'Experiências',
-  'header.navigation.skills': 'Habilidades',
-  'header.navigation.dashboard': 'Painel',
-  'header.statusLabel': 'Status da fundação',
-  'header.eyebrow': 'Fundação do portfolio',
-  'header.title': 'Uma shell específica do portfolio, já conectada a dados reais do backend.',
-  'header.description':
-    'Esta primeira camada de layout estabelece a estrutura do portfolio, mantém o app alinhado com a design lib e prepara as próximas iterações visuais sobre uma shell Angular responsiva.',
-  'header.highlight.layout.label': 'Layout',
-  'header.highlight.layout.title': 'Header, footer, nav e page wrappers',
-  'header.highlight.layout.description':
-    'Composição específica do portfolio organizada dentro da camada de layout do app.',
-  'header.highlight.integration.label': 'Integração',
-  'header.highlight.integration.title': 'API real desde o início',
-  'header.highlight.integration.description':
-    'A shell permanece conectada ao backend para que cada próxima página evolua com dados reais.',
-  'header.highlight.direction.label': 'Direção',
-  'header.highlight.direction.title':
-    'Design-lib primeiro, estrutura específica do portfolio depois',
-  'header.highlight.direction.description':
-    'Componentes reutilizáveis da lib continuam como base enquanto o layout único do portfolio vive aqui.',
-  'footer.eyebrow': 'Shell do portfolio',
-  'footer.title': 'Fundação de layout pronta para as próximas páginas',
-  'footer.description':
-    'A shell específica do portfolio agora separa layout de pages, mantém a navegação centralizada pela config de rotas e segue alinhada com a design lib.',
-  'footer.navigationLabel': 'Navegação do footer',
-  'footer.principlesLabel': 'Princípios de implementação',
-  'footer.tags.standalone': 'Somente standalone',
-  'footer.tags.tailwind': 'Tailwind @apply',
-  'footer.tags.coverage': '100% coverage',
   'footer.social.navigation': 'Links sociais',
   'footer.social.github': 'Abrir perfil do GitHub',
   'footer.social.linkedin': 'Abrir perfil do LinkedIn',
   'footer.social.whatsapp': 'Abrir contato no WhatsApp',
   'footer.social.email': 'Enviar um e-mail',
-  'footer.location': 'Belo Horizonte, Brasil',
   'footer.copyright.name': 'Victor Hanszman',
   'footer.copyright.year': '© {{ year }}',
   'common.actions.viewDetails': 'Ver detalhes',
   'common.actions.close': 'Fechar',
   'common.actions.save': 'Salvar',
-  'common.actions.applyFilters': 'Aplicar filtros',
   'common.actions.showMore': 'Mostrar mais',
   'common.actions.showLess': 'Mostrar menos',
   'common.search.label': 'Busca',
@@ -74,12 +33,110 @@ export const PT_BR_TRANSLATIONS = {
   'common.entities.technologies': 'Tecnologias',
   'common.fields.slug': 'Slug',
   'common.fields.sortOrder': 'Ordem de exibição',
+  'common.empty.linkedCompanies': 'Nenhuma empresa vinculada ainda.',
+  'common.entities.portfolioSettings': 'Portfolio settings',
+  'common.entities.links': 'Links',
+  'common.entities.formation': 'Formação',
+  'common.fields.startDate': 'Data inicial',
+  'common.fields.endDate': 'Data final',
+  'common.fields.stack': 'Stack',
+  'common.relations.imageAssets': 'Image assets relacionados',
+  'common.relations.experiences': 'Experiences relacionadas',
+  'common.relations.customers': 'Clientes relacionados',
+  'common.feedback.requiredEnglishSummary': 'O resumo em inglês é obrigatório antes do envio.',
+  'common.feedback.requiredPortugueseSummary':
+    'O resumo em português é obrigatório antes do envio.',
+  'common.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
+  'common.feedback.missingAdminSessionShort':
+    'A sessão administrativa autenticada não está disponível.',
+  'common.placeholders.endDate': 'Selecione a data final, se aplicável',
+  'common.placeholders.startDate': 'Selecione a data inicial',
+  'common.placeholders.displayOrder': 'Digite a ordem de exibição',
+  'common.placeholders.spanishSummary': 'Digite o resumo em espanhol',
+  'common.empty.imageAssets': 'Nenhum recurso de imagem disponível.',
+  'common.empty.links': 'Nenhum link disponível.',
+  'common.empty.technologies': 'Nenhuma tecnologia disponível.',
+  'common.empty.formations': 'Nenhuma formação esta disponível.',
+  'common.empty.imageAssetsForRelation':
+    'Nenhum image asset está disponível para relacionar agora.',
+  'common.empty.experiencesForRelation':
+    'Nenhuma experiência pública está disponível para relacionamento agora.',
+  'common.empty.unregisteredText': 'Nenhum texto foi registrado ainda.',
+  'common.empty.stackDistribution': 'Nenhuma distribuição de stack foi retornada ainda.',
+  'common.filters.all': 'Todos',
+  'common.states.highlighted': 'Em destaque',
+  'common.states.notHighlighted': 'Sem destaque',
+  'common.location.beloHorizonteBrazil': 'Belo Horizonte, Brasil',
+  'common.sections.clients': '// clientes',
+  'common.sections.projects': '// projetos',
+  'common.sections.techStack': '// stack_tecnica',
+  'common.states.studying': 'Estudando',
+  'common.entities.home': 'Home',
+  'common.entities.skills': 'Habilidades',
+  'common.entities.dashboard': 'Painel',
+  'common.entities.experiences': 'Experiências',
+  'common.entities.formations': 'Formações',
+  'common.entities.customers': 'Clientes',
+  'common.entities.languages': 'Idiomas',
+  'common.entities.tags': 'Tags',
+  'common.entities.jobs': 'Jobs',
+  'common.entities.technologyContexts': 'Technology contexts',
+  'common.languages.english': 'Inglês',
+  'common.languages.portuguese': 'Português',
+  'common.languages.spanish': 'Espanhol',
+  'common.values.other': 'Outro',
+  'common.entities.imageAssets': 'Imagens',
+  'common.fields.type': 'Tipo',
+  'common.fields.name': 'Nome',
+  'common.fields.description': 'Descrição',
+  'common.fields.summary': 'Resumo',
+  'common.fields.date': 'Data',
+  'common.fields.code': 'Código',
+  'common.fields.url': 'URL',
+  'common.fields.category': 'Categoria',
+  'common.fields.frequency': 'Frequencia',
+  'common.fields.level': 'Nivel',
+  'common.fields.technology': 'Tecnologia',
+  'common.fields.environment': 'Ambiente',
+  'common.fields.spanishName': 'Nome em espanhol',
+  'common.fields.spanishTitle': 'Título em espanhol',
+  'common.fields.spanishSummary': 'Resumo em espanhol',
+  'common.fields.spanishDescription': 'Descrição em espanhol',
+  'common.fields.fileName': 'Nome do arquivo',
+  'common.fields.filePath': 'Caminho do arquivo',
+  'common.fields.folder': 'Pasta',
+  'common.fields.kind': 'Tipo',
+  'common.fields.mimeType': 'MIME type',
+  'common.fields.degreeType': 'Tipo de formação',
+  'common.fields.institution': 'Instituição',
+  'common.fields.settingKey': 'Chave do setting',
+  'common.fields.jsonValue': 'Valor JSON',
+  'common.fields.proficiency': 'Proficiência',
+  'common.fields.highlightStatus': 'Status de destaque',
+  'common.fields.highlight': 'Destaque',
+  'common.relations.technologies': 'Tecnologias relacionadas',
+  'common.relations.formations': 'Formações relacionadas',
+  'common.relations.links': 'Links relacionados',
+  'common.feedback.missingAdminSession':
+    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+  'common.feedback.invalidIntegerSortOrder': 'A ordem deve ser um número inteiro válido.',
+  'common.feedback.invalidDateRange': 'A data de término não pode ser anterior à data de início.',
+  'common.feedback.requiredSpanishName': 'O nome em espanhol é obrigatório.',
+  'common.feedback.requiredSlug': 'O slug é obrigatório.',
+  'common.feedback.requiredTitlePt': 'O título em português é obrigatório.',
+  'common.feedback.requiredTitleEn': 'O título em inglês é obrigatório.',
+  'common.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
+  'common.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
+  'common.placeholders.integerSortOrder': 'Digite a ordem inteira de exibição',
+  'common.empty.projectsForRelation':
+    'Nenhum projeto público está disponível para relacionamento agora.',
+  'common.empty.technologiesForRelation':
+    'Nenhuma tecnologia pública está disponível para relacionamento agora.',
   'pages.home.hero.availability': 'Disponível para trabalho',
   'pages.home.hero.greeting': 'Olá, sou',
   'pages.home.hero.subtitle': 'Engenheiro de Software Full Stack Sênior',
   'pages.home.hero.description':
     'Engenheiro de Software Sênior com experiência de desenvolvimento tanto em Front-End como em Back-End. Moro em Belo Horizonte, Minas Gerais, Brasil. Atualmente trabalhando remotamente e estou aberto a novas oportunidades em desenvolvimento de software.',
-  'pages.home.hero.location': 'Belo Horizonte, Brasil',
   'pages.home.hero.cta.projects': 'Ver Projetos',
   'pages.home.hero.cta.experiences': 'Minha Experiência',
   'pages.home.hero.social.navigation': 'Links sociais',
@@ -98,9 +155,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.stack.title': 'Tecnologias Principais',
   'pages.home.stack.description':
     'Atualmente essas são as principais stacks que tenho mais domínio e que tive mais prática ao longo da minha carreira no desenvolvimento de software.',
-  'pages.home.stack.projects': 'projetos',
-  'pages.home.stack.technologies': 'tecnologias',
-  'pages.home.stack.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
   'pages.home.stack.moreSkills': 'Veja mais habilidades',
   'pages.home.highlightedProjects.label': '// PRINCIPAIS_CONQUISTAS',
   'pages.home.highlightedProjects.title': 'Projetos em Destaque',
@@ -111,50 +165,15 @@ export const PT_BR_TRANSLATIONS = {
   'pages.experiences.title': 'Experiência Profissional',
   'pages.experiences.description':
     'Uma jornada cronológica pela minha carreira construindo soluções de software de impacto.',
-  'pages.experiences.snapshot.label': 'Panorama',
-  'pages.experiences.snapshot.title': 'Cobertura da trajetória vinda da API real',
-  'pages.experiences.snapshot.description':
-    'Contagens, sinal do papel atual e amplitude de relacionamentos saem diretamente da coleção publicada de experiences.',
-  'pages.experiences.snapshot.loading': 'Carregando relacionamentos reais de experiences...',
-  'pages.experiences.snapshot.error': 'O endpoint de experiences está indisponível agora.',
-  'pages.experiences.snapshot.metrics.currentRole': 'Papel atual',
-  'pages.experiences.snapshot.metrics.experiences': 'Capítulos',
-  'pages.experiences.snapshot.metrics.customers': 'Clientes',
-  'pages.experiences.snapshot.metrics.highlights': 'Destaques',
-  'pages.experiences.timeline.label': 'Narrativa de carreira',
-  'pages.experiences.timeline.title': 'Timeline, contexto e impacto no mesmo fluxo de leitura',
-  'pages.experiences.timeline.description':
-    'Cada capítulo conecta empresa, papel, clientes, projetos e stack para que a história profissional seja lida como sistema e não como lista solta.',
   'pages.experiences.timeline.loading': 'Carregando relacionamentos reais de experiences...',
   'pages.experiences.timeline.error': 'O endpoint de experiences está indisponível agora.',
   'pages.experiences.timeline.empty':
     'Nenhum capítulo publicado de experiência foi retornado ainda.',
-  'pages.experiences.timeline.current': 'Atual',
-  'pages.experiences.timeline.highlight': 'Destaque',
-  'pages.experiences.timeline.roles': 'Papéis',
-  'pages.experiences.timeline.customers': 'Clientes',
   'pages.experiences.timeline.emptyCustomers': 'Nenhum cliente vinculado ainda.',
-  'pages.experiences.timeline.technologyStack': 'Stack de tecnologia',
-  'pages.experiences.timeline.relatedProjects': 'Projetos relacionados',
-  'pages.experiences.timeline.moreTechnologies': 'a mais',
   'pages.experiences.timeline.emptyProjects':
     'Nenhum projeto relacionado foi retornado para este capítulo.',
-  'pages.experiences.detail.projectsCount': 'projetos',
-  'pages.experiences.detail.analytics': 'Analíticos da experiência',
-  'pages.experiences.detail.gallery': 'Galeria vinculada',
-  'pages.experiences.detail.chart.jobs': 'Papéis',
-  'pages.experiences.detail.chart.customers': 'Clientes',
-  'pages.experiences.detail.chart.series': 'Conexões',
-  'pages.experiences.detail.projects': '// projetos',
-  'pages.experiences.detail.clients': '// clientes',
-  'pages.experiences.detail.techStack': '// stack_tecnica',
-  'pages.experiences.detail.stackGroups.frontend': 'Front-end',
-  'pages.experiences.detail.stackGroups.backend': 'Back-end',
-  'pages.experiences.detail.stackGroups.databases': 'Bancos de dados',
-  'pages.experiences.detail.stackGroups.others': 'Outros',
+
   'pages.experiences.technology.category': 'Categoria',
-  'pages.experiences.technology.type': 'Tipo',
-  'pages.experiences.technology.stack': 'Stack',
   'pages.experiences.technology.level': 'Nível de conhecimento',
   'pages.experiences.technology.frequency': 'Frequência de uso',
   'pages.experiences.technology.projects': 'Projetos utilizados',
@@ -164,54 +183,24 @@ export const PT_BR_TRANSLATIONS = {
   'pages.skills.title': 'Habilidades & Tecnologias',
   'pages.skills.description':
     'Uma visão completa do meu arsenal técnico, formação e proficiência em idiomas.',
-  'pages.skills.snapshot.label': 'Retrato do portfolio',
-  'pages.skills.snapshot.title': 'Tecnologias com medição real por contexto',
-  'pages.skills.snapshot.description':
-    'A lateral resume cobertura por categoria, densidade de destaques e o sinal de maior duração já publicado pela API.',
-  'pages.skills.snapshot.loading': 'Carregando métricas de experiência das tecnologias...',
-  'pages.skills.snapshot.error': 'O endpoint de technologies está indisponível agora.',
-  'pages.skills.filters.label': 'Filtros do catálogo',
-  'pages.skills.filters.title': 'Recorte a stack por categoria, nível e contexto',
-  'pages.skills.filters.description':
-    'Os filtros ficam leves na UI enquanto as durações reais das tecnologias continuam vindo do contrato do backend.',
-  'pages.skills.filters.category': 'Categoria',
-  'pages.skills.filters.type': 'Tipo',
-  'pages.skills.filters.stack': 'Stack',
   'pages.skills.filters.level': 'Nível',
-  'pages.skills.filters.context': 'Contexto',
-  'pages.skills.filters.total': 'Tecnologias filtradas',
   'pages.skills.education.title': 'Formação',
-  'pages.skills.languages.title': 'Idiomas',
   'pages.skills.search.placeholder': 'Buscar tecnologia...',
-  'pages.skills.catalog.label': 'Grupos de tecnologia',
-  'pages.skills.catalog.title': 'Leitura agrupada para o recorte atual',
-  'pages.skills.catalog.description':
-    'Cada card destaca tempo total de experiência e os contextos onde essa stack já apareceu.',
   'pages.skills.catalog.loading': 'Montando grupos de tecnologia...',
   'pages.skills.catalog.error': 'O endpoint de technologies está indisponível agora.',
   'pages.skills.catalog.empty': 'Nenhuma tecnologia publicada corresponde aos filtros atuais.',
-  'pages.skills.card.highlight': 'Destaque',
-  'pages.skills.card.totalExperience': 'Experiência total',
-  'pages.skills.card.contexts': 'Cobertura por contexto',
   'pages.skills.detail.totalExperience': 'Experiência consolidada',
   'pages.skills.detail.technologyContexts': 'Contextos da tecnologia',
   'pages.skills.detail.contextExperience': 'Experiência por contexto',
   'pages.skills.education.detail.degree': 'Formação',
-  'pages.skills.education.detail.date': 'Data',
-  'pages.skills.education.detail.summary': 'Resumo',
+
   'pages.skills.education.detail.gallery': 'Imagens',
   'pages.skills.languages.detail.proficiency': 'Proficiência',
-  'pages.skills.languages.detail.code': 'Código',
   'pages.projects.detail.emptyGallery': 'Nenhuma imagem vinculada',
   'common.time.month': '{{count}} mês',
   'common.time.months': '{{count}} meses',
   'common.time.year': '{{count}} ano',
   'common.time.years': '{{count}} anos',
-  'pages.skills.detail.contextChart': 'Distribuição por contexto',
-  'pages.skills.detail.chartSeries': 'Meses',
-  'pages.skills.detail.coverage': 'Cobertura detalhada',
-  'pages.skills.detail.timeline': 'Linha do tempo de contexto',
-  'pages.skills.detail.noTimeline': 'Nenhum intervalo publicado foi retornado.',
   'taxonomy.skills.filters.allCategories': 'Todas as categorias',
   'taxonomy.skills.filters.allLevels': 'Todos os níveis',
   'taxonomy.skills.filters.allContexts': 'Todos os contextos',
@@ -236,16 +225,14 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.skills.level.advanced': 'Avançado',
   'taxonomy.skills.level.intermediate': 'Intermediário',
   'taxonomy.skills.level.beginner': 'Iniciante',
-  'taxonomy.skills.level.studying': 'Estudando',
-  'taxonomy.skills.level.all': 'Todos',
-  'taxonomy.skills.stack.all': 'Todos',
+  'taxonomy.skills.level.basic': 'Basico',
+
   'taxonomy.skills.stack.frontEnd': 'Front-End',
   'taxonomy.skills.stack.backEnd': 'Back-End',
   'taxonomy.skills.stack.databases': 'Bancos de dados',
   'taxonomy.skills.stack.games': 'Games',
   'taxonomy.skills.stack.mobile': 'Mobile',
   'taxonomy.skills.stack.others': 'Outros',
-  'taxonomy.skills.type.all': 'Todos',
   'taxonomy.skills.type.programmingLanguages': 'Linguagens de programação',
   'taxonomy.skills.type.webLanguages': 'Linguagens web',
   'taxonomy.skills.type.libraries': 'Bibliotecas',
@@ -264,74 +251,32 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.skills.type.deploymentTools': 'Ferramentas de deploy',
   'taxonomy.skills.type.developmentPlatforms': 'Plataformas de desenvolvimento',
   'taxonomy.skills.type.protocols': 'Protocolos',
-  'taxonomy.skills.type.others': 'Outros',
   'taxonomy.skills.frequency.frequent': 'Frequente',
   'taxonomy.skills.frequency.occasional': 'Ocasional',
   'taxonomy.skills.frequency.rare': 'Rara',
   'taxonomy.skills.frequency.previouslyUsed': 'Usado anteriormente',
-  'taxonomy.skills.frequency.studying': 'Estudando',
   'taxonomy.skills.context.professional': 'Profissional',
   'taxonomy.skills.context.personal': 'Pessoal',
   'taxonomy.skills.context.academic': 'Acadêmico',
   'taxonomy.skills.context.study': 'Estudo',
   'taxonomy.experiences.projectStatus.completed': 'Concluído',
   'taxonomy.experiences.projectStatus.inProgress': 'Em andamento',
-  'taxonomy.experiences.projectEnvironment.frontend': 'Front-end',
-  'taxonomy.experiences.projectEnvironment.backend': 'Back-end',
+
   'taxonomy.experiences.projectEnvironment.fullstack': 'Full stack',
   'taxonomy.experiences.present': 'Atual',
   'pages.projects.sectionLabel': '// PROJECTS_SHOWCASE',
   'pages.projects.description':
     'Uma coleção de aplicações reais, profissionais, trabalhos acadêmicos e experimentos pessoais.',
-  'pages.projects.snapshot.label': 'Panorama dos cases',
-  'pages.projects.snapshot.title': 'Trabalhos publicados com assets reais vinculados',
-  'pages.projects.snapshot.description':
-    'A lateral resume densidade de featured, referências vinculadas e o sinal de stack mais ampla já exposto pelo endpoint público de projetos.',
-  'pages.projects.snapshot.loading': 'Carregando cases reais de projeto...',
-  'pages.projects.snapshot.error': 'O endpoint de projects está indisponível agora.',
   'pages.projects.filters.label': 'Filtros dos cases',
-  'pages.projects.filters.title':
-    'Recorte o portfolio por contexto, ambiente, status e ordem de leitura',
-  'pages.projects.filters.description':
-    'A UI continua leve enquanto os relacionamentos de projeto, experiência, imagem e links chegam direto do backend.',
-  'pages.projects.filters.context': 'Contexto',
-  'pages.projects.filters.environment': 'Ambiente',
-  'pages.projects.filters.status': 'Status',
-  'pages.projects.filters.sort': 'Ordenar por',
-  'pages.projects.filters.total': 'projetos',
   'pages.projects.search.placeholder': 'Buscar projetos...',
-  'pages.projects.catalog.label': 'Cases',
-  'pages.projects.catalog.title': 'Projetos como cases, não apenas listagens',
-  'pages.projects.catalog.description':
-    'Cada case conecta período, stack, contexto de entrega, empresas, deploys, repositórios e screenshots no mesmo bloco de leitura.',
   'pages.projects.catalog.loading': 'Montando os case studies de projetos...',
   'pages.projects.catalog.error': 'O endpoint de projects está indisponível agora.',
   'pages.projects.catalog.empty': 'Nenhum projeto publicado corresponde aos filtros atuais.',
-  'pages.projects.card.featured': 'Em destaque',
-  'pages.projects.card.highlight': 'Destaque',
-  'pages.projects.card.companies': 'Empresas',
-  'pages.projects.card.emptyCompanies': 'Nenhuma empresa vinculada ainda.',
+
   'pages.projects.card.links': 'Links e referências',
-  'pages.projects.card.emptyLinks': 'Nenhum link publicado foi vinculado a este case ainda.',
-  'pages.projects.card.assets': 'Assets vinculados',
-  'pages.projects.detail.linksCount': 'links',
-  'pages.projects.detail.imagesCount': 'imagens',
-  'pages.projects.detail.relatedExperiences': 'Experiências relacionadas',
-  'pages.projects.detail.noExperiences': 'Nenhuma experiência relacionada foi publicada ainda.',
-  'pages.projects.detail.tags': 'Tags do case',
-  'pages.projects.detail.noTags': 'Nenhuma tag publicada foi vinculada.',
-  'pages.projects.detail.clients': '// clientes',
-  'pages.projects.detail.techStack': '// stack_tecnica',
-  'pages.projects.detail.analytics': 'Analíticos do case',
   'pages.projects.detail.gallery': 'Galeria ampliada',
-  'pages.projects.detail.chart.series': 'Densidade',
-  'pages.projects.detail.chart.companies': 'Empresas',
-  'pages.projects.detail.chart.links': 'Links',
-  'pages.projects.detail.chart.images': 'Imagens',
-  'taxonomy.projects.filters.allContexts': 'Todos',
   'taxonomy.projects.filters.allEnvironments': 'Todos os ambientes',
   'taxonomy.projects.filters.allStatuses': 'Todos os status',
-  'taxonomy.projects.context.formation': 'Formação',
   'taxonomy.projects.sort.featured': 'Em destaque primeiro',
   'taxonomy.projects.sort.recent': 'Início mais recente',
   'taxonomy.projects.sort.stack': 'Maior stack',
@@ -341,57 +286,35 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.projects.linkType.sourceCode': 'Código-fonte',
   'taxonomy.projects.summary.total': 'Cases publicados',
   'taxonomy.projects.summary.featured': 'Em destaque',
-  'taxonomy.projects.summary.inProgress': 'Em andamento',
   'taxonomy.projects.summary.linkedAssets': 'Assets vinculados',
   'taxonomy.projects.summary.richestStack': 'Stack mais ampla',
   'taxonomy.projects.fallback.noAssets': 'Nenhum asset visual vinculado ainda.',
   'taxonomy.projects.fallback.noLinks': 'Nenhum link publicado foi vinculado ainda.',
-  'taxonomy.projects.fallback.noCompanies': 'Nenhuma empresa vinculada ainda.',
   'taxonomy.projects.fallback.untitledLink': 'Link sem título',
   'pages.dashboard.sectionLabel': '// DASHBOARD',
   'pages.dashboard.title': 'Painel Analítico',
   'pages.dashboard.description':
     'Análises agregadas entre stacks, ferramentas e projetos da carreira em um painel com gráficos informativos.',
-  'pages.dashboard.snapshot.label': 'Snapshot',
-  'pages.dashboard.snapshot.title': 'Pegada publicada em uma leitura só',
-  'pages.dashboard.snapshot.description':
-    'A sidebar concentra os contadores principais vindos da API para resumir rapidamente o dataset público atual.',
   'pages.dashboard.snapshot.loading': 'Carregando agregados do dashboard...',
   'pages.dashboard.snapshot.error':
     'Os endpoints agregados do dashboard estão indisponíveis agora.',
-  'pages.dashboard.snapshot.metrics.experiences': 'Experiências',
   'pages.dashboard.snapshot.metrics.formations': 'Formações / idiomas',
-  'pages.dashboard.snapshot.metrics.customers': 'Clientes',
   'pages.dashboard.snapshot.metrics.jobs': 'Cargos',
-  'pages.dashboard.snapshot.metrics.languages': 'Idiomas',
   'pages.dashboard.stacks.label': 'Distribuição de stack',
   'pages.dashboard.stacks.title': 'Onde o portfolio carrega mais peso técnico hoje',
   'pages.dashboard.stacks.description':
     'Cada área combina projetos relacionados e tecnologias mapeadas para deixar as zonas mais fortes evidentes de imediato.',
-  'pages.dashboard.stacks.loading': 'Carregando distribuição de stack...',
-  'pages.dashboard.stacks.error': 'Os endpoints agregados do dashboard estão indisponíveis agora.',
-  'pages.dashboard.stacks.empty': 'Nenhuma distribuição de stack foi retornada ainda.',
   'pages.dashboard.distribution.label': 'Pegada de projetos',
   'pages.dashboard.distribution.title': 'Contexto de entrega, ambientes e densidade de destaque',
   'pages.dashboard.distribution.description':
     'Este bloco separa volume destacado, contexto e ambiente para o catálogo de projetos ficar mais legível.',
-  'pages.dashboard.distribution.loading': 'Carregando agregados de distribuição de projetos...',
-  'pages.dashboard.distribution.error':
-    'Os endpoints agregados do dashboard estão indisponíveis agora.',
   'pages.dashboard.distribution.empty':
     'Nenhum dado de distribuição de projetos foi retornado ainda.',
-  'pages.dashboard.distribution.featured': 'Em destaque',
-  'pages.dashboard.distribution.highlighted': 'Highlights',
-  'pages.dashboard.distribution.total': 'Total de projetos',
-  'pages.dashboard.distribution.contexts': 'Contextos',
   'pages.dashboard.distribution.environments': 'Ambientes',
   'pages.dashboard.technology.label': 'Uso de tecnologia',
   'pages.dashboard.technology.title': 'Sinais de uso da stack',
   'pages.dashboard.technology.description':
     'Top tecnologias e seus padrões de frequência, contexto e origem saem direto das relações agregadas da API.',
-  'pages.dashboard.technology.loading': 'Carregando agregados de uso de tecnologia...',
-  'pages.dashboard.technology.error':
-    'Os endpoints agregados do dashboard estão indisponíveis agora.',
   'pages.dashboard.technology.empty': 'Nenhum agregado de uso de tecnologia foi retornado ainda.',
   'pages.dashboard.technology.levels': 'Níveis',
   'pages.dashboard.technology.frequencies': 'Frequências',
@@ -402,35 +325,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.dashboard.projectsByType.title': 'Projetos por tipo de tecnologias',
   'pages.dashboard.projectsByType.description':
     'O gráfico final mantém vivo o padrão do dashboard antigo ao agrupar os projetos publicados pela família de tecnologia que eles realmente usam.',
-  'pages.dashboard.projectsByType.loading':
-    'Carregando a distribuição de tecnologias por projeto...',
-  'pages.dashboard.projectsByType.error':
-    'A distribuição de tecnologias por projeto está indisponível agora.',
   'pages.dashboard.projectsByType.empty':
     'Nenhuma distribuição de tecnologias por projeto foi retornada ainda.',
   'pages.dashboard.projectsByType.selectLabel': 'Tipo de tecnologia',
-  'pages.dashboard.timeline.label': 'Carreira',
-  'pages.dashboard.timeline.title': 'Timeline de foco profissional',
-  'pages.dashboard.timeline.description':
-    'A timeline pública vira uma camada analítica para mostrar capítulos ativos, densidade de highlight e espalhamento entre projetos e clientes.',
-  'pages.dashboard.timeline.loading': 'Carregando agregados da timeline profissional...',
-  'pages.dashboard.timeline.error':
-    'Os endpoints agregados do dashboard estão indisponíveis agora.',
-  'pages.dashboard.timeline.empty': 'Nenhum item da timeline profissional foi retornado ainda.',
-  'pages.dashboard.timeline.current': 'Atual',
-  'pages.dashboard.timeline.highlight': 'Highlight',
-  'pages.dashboard.timeline.customers': 'Clientes',
-  'pages.dashboard.timeline.emptyCustomers': 'Nenhum cliente vinculado ainda.',
-  'pages.dashboard.timeline.emptyProjects': 'Nenhum projeto vinculado ainda.',
-  'pages.dashboard.highlights.label': 'Highlights',
-  'pages.dashboard.highlights.title': 'Destaques do portfolio',
-  'pages.dashboard.highlights.description':
-    'Entidades marcadas no backend continuam visíveis aqui como prova de repertório entre projetos, experiência e tecnologia.',
-  'pages.dashboard.highlights.loading': 'Carregando entidades destacadas do portfolio...',
-  'pages.dashboard.highlights.error':
-    'Os endpoints agregados do dashboard estão indisponíveis agora.',
-  'pages.dashboard.highlights.empty': 'Nenhum item destacado do portfolio foi retornado ainda.',
-  'pages.dashboard.highlights.featured': 'Em destaque',
   'pages.login.sectionLabel': '// ACESSO_ADMIN',
   'pages.login.title': 'Acesso administrativo',
   'pages.login.description':
@@ -477,36 +374,27 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.operations.read': 'Ler',
   'pages.admin.operations.update': 'Editar',
   'pages.admin.operations.delete': 'Excluir',
-  'pages.admin.operations.date': 'Data',
   'pages.admin.operations.yes': 'Sim',
   'pages.admin.operations.no': 'Não',
   'pages.admin.operations.emptyRelations': 'Nenhum registro relacionado está vinculado.',
   'pages.admin.relationMode.owner': 'Relacionamentos da entidade dona',
   'pages.admin.relationMode.dedicated': 'Entidade relacional dedicada',
-  'pages.admin.entities.portfolio-settings.title': 'Portfolio settings',
   'pages.admin.entities.portfolio-settings.description':
     'Configuração global, destaques e ajustes estruturados que dirigem a shell do portfolio.',
   'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
-  'pages.admin.portfolioSettings.title': 'Portfolio settings',
   'pages.admin.portfolioSettings.description':
     'CRUD protegido e real para os ajustes em JSON que moldam a shell, os destaques e os conteúdos estruturados.',
-  'pages.admin.portfolioSettings.actions.create': 'Criar',
-  'pages.admin.portfolioSettings.actions.submit': 'Salvar',
   'pages.admin.portfolioSettings.states.loading':
     'Carregando a coleção protegida de portfolio settings...',
   'pages.admin.portfolioSettings.states.empty':
     'Nenhum portfolio setting protegido foi cadastrado ainda.',
-  'pages.admin.portfolioSettings.card.key': 'Chave do setting',
-  'pages.admin.portfolioSettings.card.description': 'Descrição',
+
   'pages.admin.portfolioSettings.card.emptyDescription':
     'Nenhuma descrição foi registrada para este setting ainda.',
-  'pages.admin.portfolioSettings.card.value': 'Valor JSON',
-  'pages.admin.portfolioSettings.fields.key.label': 'Chave do setting',
+
   'pages.admin.portfolioSettings.fields.key.placeholder': 'Digite a chave única do setting',
-  'pages.admin.portfolioSettings.fields.description.label': 'Descrição',
   'pages.admin.portfolioSettings.fields.description.placeholder':
     'Descreva a responsabilidade deste setting',
-  'pages.admin.portfolioSettings.fields.value.label': 'Valor JSON',
   'pages.admin.portfolioSettings.fields.value.placeholder':
     'Digite um objeto, array ou valor escalar JSON válido',
   'pages.admin.portfolioSettings.modal.create.title': 'Criar portfolio setting',
@@ -530,8 +418,6 @@ export const PT_BR_TRANSLATIONS = {
     'A chave do setting é obrigatória antes do envio.',
   'pages.admin.portfolioSettings.feedback.invalidJson':
     'O valor JSON está inválido. Revise a estrutura antes de enviar.',
-  'pages.admin.portfolioSettings.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.portfolioSettings.feedback.selectionRequired':
     'Selecione um portfolio setting antes de continuar com esta ação.',
   'pages.admin.portfolioSettings.feedback.loadError':
@@ -540,18 +426,13 @@ export const PT_BR_TRANSLATIONS = {
     'O portfolio setting não pode ser salvo agora.',
   'pages.admin.portfolioSettings.feedback.deleteError':
     'O portfolio setting não pode ser excluído agora.',
-  'pages.admin.entities.tags.title': 'Tags',
   'pages.admin.entities.tags.description':
     'Rótulos reutilizáveis de classificação compartilhados entre projetos, tecnologias e fluxos editoriais futuros.',
   'pages.admin.tags.sectionLabel': '// TAGS',
   'pages.admin.tags.description':
     'CRUD protegido para rótulos reutilizáveis que classificam projetos e tecnologias por meio de arrays relacionais mantidos pela própria tag.',
-  'pages.admin.tags.actions.submit': 'Salvar',
   'pages.admin.tags.states.loading': 'Carregando a coleção protegida de tags...',
   'pages.admin.tags.states.empty': 'Nenhuma tag protegida foi cadastrada ainda.',
-  'pages.admin.tags.card.namePt': 'Nome em português',
-  'pages.admin.tags.card.nameEn': 'Nome em inglês',
-  'pages.admin.tags.card.type': 'Tipo',
   'pages.admin.tags.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a esta tag no momento.',
   'pages.admin.tags.fields.slug.placeholder': 'Digite o slug único da tag',
@@ -559,27 +440,16 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.fields.namePt.placeholder': 'Digite o nome da tag em português',
   'pages.admin.tags.fields.nameEn.label': 'Nome em inglês',
   'pages.admin.tags.fields.nameEn.placeholder': 'Digite o nome da tag em inglês',
-  'pages.admin.tags.fields.type.label': 'Tipo',
-  'pages.admin.tags.fields.type.placeholder': 'Selecione o tipo da tag',
   'pages.admin.tags.fields.type.empty': 'Nenhum tipo de tag esta disponível no momento.',
-  'pages.admin.tags.fields.type.options.STACK': 'Stack',
   'pages.admin.tags.fields.type.options.DOMAIN': 'Dominio',
   'pages.admin.tags.fields.type.options.PLATFORM': 'Plataforma',
-  'pages.admin.tags.fields.type.options.HIGHLIGHT': 'Destaque',
   'pages.admin.tags.fields.type.options.METHODOLOGY': 'Metodologia',
   'pages.admin.tags.fields.type.options.INDUSTRY': 'Industria',
-  'pages.admin.tags.fields.type.options.OTHER': 'Outro',
   'pages.admin.tags.fields.sortOrder.placeholder': 'Digite a ordem inteira da tag',
-  'pages.admin.tags.fields.projects.label': 'Projetos relacionados',
   'pages.admin.tags.fields.projects.description':
     'Selecione todos os projetos que devem expor esta tag em seus relacionamentos públicos.',
-  'pages.admin.tags.fields.projects.empty':
-    'Nenhum projeto público está disponível para relacionamento agora.',
-  'pages.admin.tags.fields.technologies.label': 'Tecnologias relacionadas',
   'pages.admin.tags.fields.technologies.description':
     'Selecione todas as tecnologias que devem manter esta tag em seus arrays relacionais.',
-  'pages.admin.tags.fields.technologies.empty':
-    'Nenhuma tecnologia pública está disponível para relacionamento agora.',
   'pages.admin.tags.modal.create.title': 'Criar tag',
   'pages.admin.tags.modal.read.title': 'Ler tags',
   'pages.admin.tags.modal.read.description':
@@ -605,36 +475,23 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.tags.feedback.requiredType': 'O tipo da tag é obrigatório antes do envio.',
   'pages.admin.tags.feedback.invalidType':
     'Selecione um dos tipos de tag suportados antes de enviar.',
-  'pages.admin.tags.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
-  'pages.admin.tags.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+
   'pages.admin.tags.feedback.selectionRequired':
     'Selecione uma tag protegida antes de continuar com esta ação.',
   'pages.admin.tags.feedback.loadError':
     'A coleção protegida de tags não pode ser carregada agora.',
   'pages.admin.tags.feedback.saveError': 'A tag protegida não pode ser salva agora.',
   'pages.admin.tags.feedback.deleteError': 'A tag protegida não pode ser excluída agora.',
-  'pages.admin.entities.links.title': 'Links',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
   'pages.admin.links.sectionLabel': '// LINKS',
   'pages.admin.links.description':
     'CRUD protegido para referências externas reutilizáveis conectadas a projetos, experiências, tecnologias e futuros registros de formação por meio de arrays relacionais próprios.',
-  'pages.admin.links.actions.submit': 'Salvar',
   'pages.admin.links.states.loading': 'Carregando a coleção protegida de links...',
   'pages.admin.links.states.empty': 'Nenhum link protegido foi cadastrado ainda.',
-  'pages.admin.links.card.url': 'URL',
-  'pages.admin.links.card.labelPt': 'Rótulo em português',
-  'pages.admin.links.card.labelEn': 'Rótulo em inglês',
-  'pages.admin.links.card.descriptionPt': 'Descrição em português',
-  'pages.admin.links.card.descriptionEn': 'Descrição em inglês',
-  'pages.admin.links.card.type': 'Tipo',
-  'pages.admin.links.card.experiences': 'Experiências',
-  'pages.admin.links.card.formations': 'Formações',
+
   'pages.admin.links.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a este link no momento.',
-  'pages.admin.links.card.emptyText': 'Nenhum texto foi registrado ainda.',
-  'pages.admin.links.fields.url.label': 'URL',
   'pages.admin.links.fields.url.placeholder': 'Digite a URL pública do link',
   'pages.admin.links.fields.labelPt.label': 'Rótulo em português',
   'pages.admin.links.fields.labelPt.placeholder':
@@ -645,35 +502,22 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.descriptionPt.placeholder': 'Descreva este link em português',
   'pages.admin.links.fields.descriptionEn.label': 'Descrição em inglês',
   'pages.admin.links.fields.descriptionEn.placeholder': 'Descreva este link em inglês',
-  'pages.admin.links.fields.type.label': 'Tipo',
-  'pages.admin.links.fields.type.placeholder': 'Selecione o tipo do link',
   'pages.admin.links.fields.type.empty': 'Nenhum tipo de link esta disponível no momento.',
-  'pages.admin.links.fields.type.options.GITHUB': 'GitHub',
-  'pages.admin.links.fields.type.options.DEPLOY': 'Deploy',
+
   'pages.admin.links.fields.type.options.NPM': 'npm',
   'pages.admin.links.fields.type.options.DOCS': 'Documentacao',
   'pages.admin.links.fields.type.options.LINKEDIN': 'LinkedIn',
   'pages.admin.links.fields.type.options.WEBSITE': 'Site',
   'pages.admin.links.fields.type.options.ARTICLE': 'Artigo',
   'pages.admin.links.fields.type.options.FIGMA': 'Figma',
-  'pages.admin.links.fields.type.options.OTHER': 'Outro',
   'pages.admin.links.fields.sortOrder.placeholder': 'Digite a ordem inteira do link',
-  'pages.admin.links.fields.projects.label': 'Projetos relacionados',
   'pages.admin.links.fields.projects.description':
     'Selecione todos os projetos que devem expor este link em suas referências públicas.',
-  'pages.admin.links.fields.projects.empty':
-    'Nenhum projeto público está disponível para relacionamento agora.',
   'pages.admin.links.fields.experiences.label': 'Experiências relacionadas',
   'pages.admin.links.fields.experiences.description':
     'Selecione todas as experiências que devem manter este link em seus arrays relacionais.',
-  'pages.admin.links.fields.experiences.empty':
-    'Nenhuma experiência pública está disponível para relacionamento agora.',
-  'pages.admin.links.fields.technologies.label': 'Tecnologias relacionadas',
   'pages.admin.links.fields.technologies.description':
     'Selecione todas as tecnologias que devem expor este link em futuros contextos públicos.',
-  'pages.admin.links.fields.technologies.empty':
-    'Nenhuma tecnologia pública está disponível para relacionamento agora.',
-  'pages.admin.links.fields.formations.label': 'Formações relacionadas',
   'pages.admin.links.fields.formations.description':
     'Selecione todas as formações que devem expor este link.',
   'pages.admin.links.fields.formations.empty':
@@ -699,9 +543,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.feedback.requiredType': 'O tipo do link é obrigatório antes do envio.',
   'pages.admin.links.feedback.invalidType':
     'Selecione um dos tipos de link suportados antes de enviar.',
-  'pages.admin.links.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
-  'pages.admin.links.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+
   'pages.admin.links.feedback.selectionRequired':
     'Selecione um link protegido antes de continuar com esta ação.',
   'pages.admin.links.feedback.loadError':
@@ -713,33 +555,15 @@ export const PT_BR_TRANSLATIONS = {
     'CRUD protegido para arquivos de mídia normalizados conectados a projetos, experiências e tecnologias por meio de arrays relacionais proprietários.',
   'pages.admin.imageAssets.states.loading': 'Carregando a coleção protegida de image assets...',
   'pages.admin.imageAssets.states.empty': 'Nenhum image asset protegido foi cadastrado ainda.',
-  'pages.admin.imageAssets.card.fileName': 'Nome do arquivo',
-  'pages.admin.imageAssets.card.filePath': 'Caminho do arquivo',
-  'pages.admin.imageAssets.card.folder': 'Pasta',
-  'pages.admin.imageAssets.card.kind': 'Tipo',
-  'pages.admin.imageAssets.card.mimeType': 'MIME type',
   'pages.admin.imageAssets.card.dimensions': 'Dimensões',
-  'pages.admin.imageAssets.card.altPt': 'Alt em português',
-  'pages.admin.imageAssets.card.altEn': 'Alt em inglês',
-  'pages.admin.imageAssets.card.captionPt': 'Legenda em português',
-  'pages.admin.imageAssets.card.captionEn': 'Legenda em inglês',
-  'pages.admin.imageAssets.card.experiences': 'Experiências',
-  'pages.admin.imageAssets.card.formations': 'Formações',
   'pages.admin.imageAssets.card.spokenLanguages': 'Idiomas',
-  'pages.admin.imageAssets.card.customers': 'Clientes',
   'pages.admin.imageAssets.card.jobs': 'Cargos',
   'pages.admin.imageAssets.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a este image asset no momento.',
-  'pages.admin.imageAssets.card.emptyText': 'Nenhum texto foi registrado ainda.',
-  'pages.admin.imageAssets.fields.fileName.label': 'Nome do arquivo',
   'pages.admin.imageAssets.fields.fileName.placeholder': 'Digite o nome único do arquivo do asset',
-  'pages.admin.imageAssets.fields.filePath.label': 'Caminho do arquivo',
   'pages.admin.imageAssets.fields.filePath.placeholder':
     'Digite o caminho público do arquivo usado pelo portfolio',
-  'pages.admin.imageAssets.fields.folder.label': 'Pasta',
   'pages.admin.imageAssets.fields.folder.placeholder': 'Digite a pasta do asset',
-  'pages.admin.imageAssets.fields.kind.label': 'Tipo',
-  'pages.admin.imageAssets.fields.kind.placeholder': 'Selecione o tipo do asset',
   'pages.admin.imageAssets.fields.kind.empty': 'Nenhum tipo de image asset está disponível agora.',
   'pages.admin.imageAssets.fields.kind.options.ICON': 'Icone',
   'pages.admin.imageAssets.fields.kind.options.SCREENSHOT': 'Captura de tela',
@@ -755,37 +579,23 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.captionEn.label': 'Legenda em inglês',
   'pages.admin.imageAssets.fields.captionEn.placeholder':
     'Digite a legenda em inglês exibida com este asset',
-  'pages.admin.imageAssets.fields.mimeType.label': 'MIME type',
   'pages.admin.imageAssets.fields.mimeType.placeholder': 'Digite o MIME type do asset',
   'pages.admin.imageAssets.fields.width.label': 'Largura',
   'pages.admin.imageAssets.fields.width.placeholder': 'Digite a largura do asset em pixels',
   'pages.admin.imageAssets.fields.height.label': 'Altura',
   'pages.admin.imageAssets.fields.height.placeholder': 'Digite a altura do asset em pixels',
-  'pages.admin.imageAssets.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
-  'pages.admin.imageAssets.fields.projects.label': 'Projetos relacionados',
   'pages.admin.imageAssets.fields.projects.description':
     'Selecione todos os projetos que devem expor este arquivo de mídia em sua galeria pública.',
-  'pages.admin.imageAssets.fields.projects.empty':
-    'Nenhum projeto público está disponível para relacionamento agora.',
-  'pages.admin.imageAssets.fields.experiences.label': 'Experiências relacionadas',
   'pages.admin.imageAssets.fields.experiences.description':
     'Selecione todas as experiências que devem manter este arquivo de mídia em seus arrays de relacionamento.',
-  'pages.admin.imageAssets.fields.experiences.empty':
-    'Nenhuma experiência pública está disponível para relacionamento agora.',
-  'pages.admin.imageAssets.fields.technologies.label': 'Tecnologias relacionadas',
   'pages.admin.imageAssets.fields.technologies.description':
     'Selecione todas as tecnologias que devem expor este arquivo de mídia em suas referências públicas.',
-  'pages.admin.imageAssets.fields.technologies.empty':
-    'Nenhuma tecnologia pública está disponível para relacionamento agora.',
-  'pages.admin.imageAssets.fields.formations.label': 'Formações relacionadas',
   'pages.admin.imageAssets.fields.formations.description':
     'Selecione todas as Formações vinculadas a esta imagem.',
-  'pages.admin.imageAssets.fields.formations.empty': 'Nenhuma formação esta disponível.',
   'pages.admin.imageAssets.fields.spokenLanguages.label': 'Idiomas relacionados',
   'pages.admin.imageAssets.fields.spokenLanguages.description':
     'Selecione todos os idiomas vinculados a esta imagem.',
   'pages.admin.imageAssets.fields.spokenLanguages.empty': 'Nenhum idioma esta disponível.',
-  'pages.admin.imageAssets.fields.customers.label': 'Clientes relacionados',
   'pages.admin.imageAssets.fields.customers.description':
     'Selecione todos os clientes vinculados a esta imagem.',
   'pages.admin.imageAssets.fields.customers.empty': 'Nenhum cliente esta disponível.',
@@ -820,11 +630,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.feedback.invalidKind':
     'Selecione um dos tipos de image asset suportados antes do envio.',
   'pages.admin.imageAssets.feedback.requiredMimeType': 'O MIME type é obrigatório antes do envio.',
-  'pages.admin.imageAssets.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
   'pages.admin.imageAssets.feedback.invalidDimensions':
     'Largura e altura devem ser números inteiros válidos quando informados.',
-  'pages.admin.imageAssets.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.imageAssets.feedback.selectionRequired':
     'Selecione um image asset protegido antes de continuar com esta ação.',
   'pages.admin.imageAssets.feedback.loadError':
@@ -837,35 +644,18 @@ export const PT_BR_TRANSLATIONS = {
     'CRUD protegido para os registros de proficiência em idiomas exibidos ao longo do perfil e dos fluxos de skills do portfolio.',
   'pages.admin.spokenLanguages.states.loading': 'Carregando a coleção protegida de idiomas...',
   'pages.admin.spokenLanguages.states.empty': 'Nenhum idioma protegido foi cadastrado ainda.',
-  'pages.admin.spokenLanguages.card.code': 'Código',
-  'pages.admin.spokenLanguages.card.namePt': 'Nome em português',
-  'pages.admin.spokenLanguages.card.nameEn': 'Nome em inglês',
-  'pages.admin.spokenLanguages.card.proficiency': 'Proficiência',
-  'pages.admin.spokenLanguages.card.highlight': 'Destaque',
-  'pages.admin.spokenLanguages.card.imageAssets': 'Imagens',
   'pages.admin.spokenLanguages.card.emptyRelations':
     'Nenhum image asset relacionado está vinculado a este idioma.',
-  'pages.admin.spokenLanguages.fields.code.label': 'Código',
   'pages.admin.spokenLanguages.fields.code.placeholder': 'Digite o código do idioma',
-  'pages.admin.spokenLanguages.fields.namePt.label': 'Nome em português',
   'pages.admin.spokenLanguages.fields.namePt.placeholder': 'Digite o nome do idioma em português',
-  'pages.admin.spokenLanguages.fields.nameEn.label': 'Nome em inglês',
   'pages.admin.spokenLanguages.fields.nameEn.placeholder': 'Digite o nome do idioma em inglês',
-  'pages.admin.spokenLanguages.fields.proficiency.label': 'Proficiência',
   'pages.admin.spokenLanguages.fields.proficiency.empty':
     'Nenhuma opção de proficiência está disponível neste momento.',
   'pages.admin.spokenLanguages.fields.proficiency.options.NATIVE': 'Nativo',
   'pages.admin.spokenLanguages.fields.proficiency.options.FLUENT': 'Fluente',
-  'pages.admin.spokenLanguages.fields.proficiency.options.ADVANCED': 'Avancado',
-  'pages.admin.spokenLanguages.fields.proficiency.options.INTERMEDIATE': 'Intermediario',
-  'pages.admin.spokenLanguages.fields.proficiency.options.BASIC': 'Basico',
-  'pages.admin.spokenLanguages.fields.highlight.label': 'Status de destaque',
   'pages.admin.spokenLanguages.fields.highlight.description':
     'Controle se este idioma deve permanecer em destaque no portfolio público.',
-  'pages.admin.spokenLanguages.fields.highlight.enabled': 'Em destaque',
-  'pages.admin.spokenLanguages.fields.highlight.disabled': 'Sem destaque',
-  'pages.admin.spokenLanguages.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
-  'pages.admin.spokenLanguages.fields.imageAssets.label': 'Image assets relacionados',
+
   'pages.admin.spokenLanguages.fields.imageAssets.description':
     'Selecione todos os image assets que devem representar visualmente este idioma no portfolio público.',
   'pages.admin.spokenLanguages.fields.imageAssets.empty':
@@ -898,10 +688,6 @@ export const PT_BR_TRANSLATIONS = {
     'A proficiência do idioma é obrigatória antes do envio.',
   'pages.admin.spokenLanguages.feedback.invalidProficiency':
     'Selecione um dos níveis de proficiência suportados antes do envio.',
-  'pages.admin.spokenLanguages.feedback.invalidSortOrder':
-    'A ordem deve ser um número inteiro válido.',
-  'pages.admin.spokenLanguages.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.spokenLanguages.feedback.selectionRequired':
     'Selecione um spoken language protegido antes de continuar com esta ação.',
   'pages.admin.spokenLanguages.feedback.loadError':
@@ -915,33 +701,19 @@ export const PT_BR_TRANSLATIONS = {
     'CRUD protegido para os registros de clientes conectados a experiências e relacionamentos de mídia do portfolio.',
   'pages.admin.customers.states.loading': 'Carregando a coleção protegida de customers...',
   'pages.admin.customers.states.empty': 'Nenhum customer protegido foi cadastrado ainda.',
-  'pages.admin.customers.card.name': 'Nome',
-  'pages.admin.customers.card.summaryPt': 'Resumo em português',
-  'pages.admin.customers.card.summaryEn': 'Resumo em inglês',
-  'pages.admin.customers.card.highlight': 'Destaque',
-  'pages.admin.customers.card.experiences': 'Experiências',
-  'pages.admin.customers.card.imageAssets': 'Imagens',
   'pages.admin.customers.card.emptyRelations':
     'Nenhum registro relacionado está conectado a este customer.',
   'pages.admin.customers.fields.slug.placeholder': 'Digite o slug único do customer',
-  'pages.admin.customers.fields.name.label': 'Nome',
   'pages.admin.customers.fields.name.placeholder': 'Digite o nome do customer',
-  'pages.admin.customers.fields.summaryPt.label': 'Resumo em português',
   'pages.admin.customers.fields.summaryPt.placeholder': 'Digite o resumo em português do customer',
-  'pages.admin.customers.fields.summaryEn.label': 'Resumo em inglês',
   'pages.admin.customers.fields.summaryEn.placeholder': 'Digite o resumo em inglês do customer',
-  'pages.admin.customers.fields.highlight.label': 'Status de destaque',
   'pages.admin.customers.fields.highlight.description':
     'Controle se este customer deve permanecer em destaque nas seções públicas do portfolio.',
-  'pages.admin.customers.fields.highlight.enabled': 'Em destaque',
-  'pages.admin.customers.fields.highlight.disabled': 'Sem destaque',
-  'pages.admin.customers.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
-  'pages.admin.customers.fields.experiences.label': 'Experiences relacionadas',
+
   'pages.admin.customers.fields.experiences.description':
     'Selecione todas as experiences que devem expor este customer no storytelling público.',
   'pages.admin.customers.fields.experiences.empty':
     'Nenhuma experience está disponível para relacionamento agora.',
-  'pages.admin.customers.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.customers.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a este customer.',
   'pages.admin.customers.fields.imageAssets.empty':
@@ -965,13 +737,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.customers.feedback.deleted': 'Customer protegido excluído com sucesso.',
   'pages.admin.customers.feedback.requiredSlug': 'O slug do customer é obrigatório antes do envio.',
   'pages.admin.customers.feedback.requiredName': 'O nome do customer é obrigatório antes do envio.',
-  'pages.admin.customers.feedback.requiredSummaryPt':
-    'O resumo em português é obrigatório antes do envio.',
-  'pages.admin.customers.feedback.requiredSummaryEn':
-    'O resumo em inglês é obrigatório antes do envio.',
-  'pages.admin.customers.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
-  'pages.admin.customers.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+
   'pages.admin.customers.feedback.selectionRequired':
     'Selecione um customer protegido antes de continuar com esta ação.',
   'pages.admin.customers.feedback.loadError':
@@ -983,40 +749,24 @@ export const PT_BR_TRANSLATIONS = {
     'CRUD protegido para registros de cargos usados para normalizar posições de experiences e relacionamentos com mídias.',
   'pages.admin.jobs.states.loading': 'Carregando a coleção protegida de jobs...',
   'pages.admin.jobs.states.empty': 'Nenhum job protegido foi cadastrado ainda.',
-  'pages.admin.jobs.card.namePt': 'Nome em português',
-  'pages.admin.jobs.card.nameEn': 'Nome em inglês',
-  'pages.admin.jobs.card.summaryPt': 'Resumo em português',
-  'pages.admin.jobs.card.summaryEn': 'Resumo em inglês',
-  'pages.admin.jobs.card.highlight': 'Destaque',
-  'pages.admin.jobs.card.experiences': 'Experiências',
-  'pages.admin.jobs.card.imageAssets': 'Imagens',
   'pages.admin.jobs.card.emptyRelations':
     'Nenhum registro relacionado está conectado a este job no momento.',
   'pages.admin.jobs.fields.slug.placeholder': 'Digite o slug único do job',
-  'pages.admin.jobs.fields.namePt.label': 'Nome em português',
   'pages.admin.jobs.fields.namePt.placeholder': 'Digite o nome do job em português',
-  'pages.admin.jobs.fields.nameEn.label': 'Nome em inglês',
   'pages.admin.jobs.fields.nameEn.placeholder': 'Digite o nome do job em inglês',
   'pages.admin.jobs.fields.summaryPt.label': 'Resumo em português',
   'pages.admin.jobs.fields.summaryPt.placeholder': 'Digite o resumo do job em português',
   'pages.admin.jobs.fields.summaryEn.label': 'Resumo em inglês',
   'pages.admin.jobs.fields.summaryEn.placeholder': 'Digite o resumo do job em inglês',
-  'pages.admin.jobs.fields.highlight.label': 'Status de destaque',
   'pages.admin.jobs.fields.highlight.description':
     'Controla se este job deve permanecer em destaque nas seções públicas do portfolio.',
-  'pages.admin.jobs.fields.highlight.enabled': 'Em destaque',
-  'pages.admin.jobs.fields.highlight.disabled': 'Sem destaque',
-  'pages.admin.jobs.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
-  'pages.admin.jobs.fields.experiences.label': 'Experiences relacionadas',
+
   'pages.admin.jobs.fields.experiences.description':
     'Selecione todas as experiences que devem expor este job na narrativa pública.',
   'pages.admin.jobs.fields.experiences.empty':
     'Nenhuma experience está disponível para relacionar agora.',
-  'pages.admin.jobs.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.jobs.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a este job.',
-  'pages.admin.jobs.fields.imageAssets.empty':
-    'Nenhum image asset está disponível para relacionar agora.',
   'pages.admin.jobs.modal.create.title': 'Criar job',
   'pages.admin.jobs.modal.read.title': 'Ler jobs',
   'pages.admin.jobs.modal.read.description':
@@ -1039,12 +789,7 @@ export const PT_BR_TRANSLATIONS = {
     'O nome do job em português é obrigatório antes do envio.',
   'pages.admin.jobs.feedback.requiredNameEn':
     'O nome do job em inglês é obrigatório antes do envio.',
-  'pages.admin.jobs.feedback.requiredSummaryPt':
-    'O resumo em português é obrigatório antes do envio.',
-  'pages.admin.jobs.feedback.requiredSummaryEn': 'O resumo em inglês é obrigatório antes do envio.',
-  'pages.admin.jobs.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
-  'pages.admin.jobs.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+
   'pages.admin.jobs.feedback.selectionRequired':
     'Selecione um job protegido antes de continuar com esta ação.',
   'pages.admin.jobs.feedback.loadError':
@@ -1057,15 +802,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.states.loading': 'Carregando a colecao protegida de technologies...',
   'pages.admin.technologies.states.empty': 'Nenhuma technology protegida foi cadastrada ainda.',
   'pages.admin.technologies.fields.slug.placeholder': 'Digite o slug unico da technology',
-  'pages.admin.technologies.fields.name.label': 'Nome',
   'pages.admin.technologies.fields.name.placeholder': 'Digite o nome da technology',
-  'pages.admin.technologies.fields.category.label': 'Categoria',
-  'pages.admin.technologies.fields.level.label': 'Nivel',
-  'pages.admin.technologies.fields.frequency.label': 'Frequencia',
-  'pages.admin.technologies.fields.highlight.label': 'Status de destaque',
   'pages.admin.technologies.fields.sortOrder.placeholder': 'Digite a ordem de exibicao',
   'pages.admin.technologies.fields.imageAssets.label': 'Imagens relacionadas',
-  'pages.admin.technologies.fields.projects.label': 'Projetos relacionados',
   'pages.admin.technologies.fields.projects.description':
     'Selecione todos os projetos que usam esta tecnologia.',
   'pages.admin.technologies.fields.projects.empty': 'Nenhum projeto esta disponível.',
@@ -1073,10 +812,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.fields.experiences.description':
     'Selecione todas as experiencias que usam esta tecnologia.',
   'pages.admin.technologies.fields.experiences.empty': 'Nenhuma experiencia esta disponível.',
-  'pages.admin.technologies.fields.formations.label': 'Formações relacionadas',
   'pages.admin.technologies.fields.formations.description':
     'Selecione todas as Formações que usam esta tecnologia.',
-  'pages.admin.technologies.fields.formations.empty': 'Nenhuma formação esta disponível.',
   'pages.admin.technologies.fields.tags.label': 'Tags relacionadas',
   'pages.admin.technologies.fields.tags.description':
     'Selecione todas as tags vinculadas a esta tecnologia.',
@@ -1091,17 +828,10 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.fields.highlight.disabled': 'Nao destacada',
   'pages.admin.technologies.fields.imageAssets.description':
     'Selecione cada imagem que deve representar visualmente esta technology no portfolio publico.',
-  'pages.admin.technologies.card.name': 'Nome',
-  'pages.admin.technologies.card.category': 'Categoria',
-  'pages.admin.technologies.card.level': 'Nivel',
-  'pages.admin.technologies.card.frequency': 'Frequencia',
+
   'pages.admin.technologies.card.highlight': 'Destaque',
   'pages.admin.technologies.card.technologyContexts': 'Contextos de tecnologia',
-  'pages.admin.technologies.card.experiences': 'Experiências',
-  'pages.admin.technologies.card.formations': 'Formações',
   'pages.admin.technologies.card.tags': 'Etiquetas',
-  'pages.admin.technologies.card.links': 'Links',
-  'pages.admin.technologies.card.imageAssets': 'Imagens',
   'pages.admin.technologies.fields.imageAssets.empty': 'Nenhuma imagem está disponível.',
   'pages.admin.technologies.card.emptyRelations':
     'Nenhum registro relacionado esta conectado a esta technology.',
@@ -1139,27 +869,12 @@ export const PT_BR_TRANSLATIONS = {
     'CRUD protegido para registros acadêmicos e de formação profissional, incluindo relações de stack, links de apoio e image assets.',
   'pages.admin.formations.states.loading': 'Carregando a coleção protegida de formations...',
   'pages.admin.formations.states.empty': 'Nenhuma formation protegida foi cadastrada ainda.',
-  'pages.admin.formations.card.institution': 'Instituição',
-  'pages.admin.formations.card.titlePt': 'Título em português',
-  'pages.admin.formations.card.titleEn': 'Título em inglês',
-  'pages.admin.formations.card.degreeType': 'Tipo de formação',
-  'pages.admin.formations.card.summaryPt': 'Resumo em português',
-  'pages.admin.formations.card.summaryEn': 'Resumo em inglês',
-  'pages.admin.formations.card.startDate': 'Data de início',
-  'pages.admin.formations.card.endDate': 'Data de término',
-  'pages.admin.formations.card.highlight': 'Destaque',
-  'pages.admin.formations.card.links': 'Links',
-  'pages.admin.formations.card.imageAssets': 'Imagens',
   'pages.admin.formations.card.emptyRelations':
     'Nenhum registro relacionado está conectado a esta formation no momento.',
   'pages.admin.formations.fields.slug.placeholder': 'Digite o slug único da formation',
-  'pages.admin.formations.fields.institution.label': 'Instituição',
   'pages.admin.formations.fields.institution.placeholder': 'Digite o nome da instituição',
-  'pages.admin.formations.fields.titlePt.label': 'Título em português',
   'pages.admin.formations.fields.titlePt.placeholder': 'Digite o título da formation em português',
-  'pages.admin.formations.fields.titleEn.label': 'Título em inglês',
   'pages.admin.formations.fields.titleEn.placeholder': 'Digite o título da formation em inglês',
-  'pages.admin.formations.fields.degreeType.label': 'Tipo de formação',
   'pages.admin.formations.fields.degreeType.empty':
     'Nenhum tipo de formação está disponível agora.',
   'pages.admin.formations.fields.degreeType.options.TECHNICAL': 'Técnico',
@@ -1171,55 +886,32 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.formations.fields.degreeType.options.BOOTCAMP': 'Bootcamp',
   'pages.admin.formations.fields.degreeType.options.CERTIFICATION': 'Certificação',
   'pages.admin.formations.fields.degreeType.options.COURSE': 'Curso',
-  'pages.admin.formations.fields.degreeType.options.OTHER': 'Outro',
-  'pages.admin.technologies.options.LANGUAGE': 'Linguagem',
-  'pages.admin.technologies.options.FRAMEWORK': 'Framework',
-  'pages.admin.technologies.options.LIBRARY': 'Biblioteca',
   'pages.admin.technologies.options.TOOL': 'Ferramenta',
-  'pages.admin.technologies.options.DATABASE': 'Banco de dados',
   'pages.admin.technologies.options.CLOUD': 'Nuvem',
   'pages.admin.technologies.options.TESTING': 'Testes',
-  'pages.admin.technologies.options.DEVOPS': 'DevOps',
   'pages.admin.technologies.options.STYLING': 'Estilizacao',
   'pages.admin.technologies.options.ARCHITECTURE': 'Arquitetura',
-  'pages.admin.technologies.options.OTHER': 'Outro',
-  'pages.admin.technologies.options.BASIC': 'Basico',
-  'pages.admin.technologies.options.INTERMEDIATE': 'Intermediario',
-  'pages.admin.technologies.options.ADVANCED': 'Avancado',
-  'pages.admin.technologies.options.FREQUENT': 'Frequente',
-  'pages.admin.technologies.options.OCCASIONAL': 'Ocasional',
-  'pages.admin.technologies.options.PREVIOUSLY_USED': 'Usado anteriormente',
   'pages.admin.technologies.options.STUDYING': 'Em estudo',
-  'pages.admin.formations.fields.summaryPt.label': 'Resumo em português',
   'pages.admin.formations.fields.summaryPt.placeholder':
     'Digite o resumo da formation em português',
-  'pages.admin.formations.fields.summaryEn.label': 'Resumo em inglês',
   'pages.admin.formations.fields.summaryEn.placeholder': 'Digite o resumo da formation em inglês',
   'pages.admin.formations.fields.startDate.label': 'Data de início',
   'pages.admin.formations.fields.startDate.placeholder': 'Digite a data inicial em ISO',
   'pages.admin.formations.fields.endDate.label': 'Data de término',
   'pages.admin.formations.fields.endDate.placeholder':
     'Digite a data final em ISO quando aplicável',
-  'pages.admin.formations.fields.highlight.label': 'Status de destaque',
   'pages.admin.formations.fields.highlight.description':
     'Controla se esta formation deve permanecer em destaque nas seções públicas do portfolio.',
-  'pages.admin.formations.fields.highlight.enabled': 'Em destaque',
-  'pages.admin.formations.fields.highlight.disabled': 'Sem destaque',
-  'pages.admin.formations.fields.sortOrder.placeholder': 'Digite a ordem inteira de exibição',
   'pages.admin.formations.fields.technologies.label': 'Technologies relacionadas',
   'pages.admin.formations.fields.technologies.description':
     'Selecione todas as technologies que devem permanecer relacionadas a esta formation.',
   'pages.admin.formations.fields.technologies.empty':
     'Nenhuma technology está disponível para relacionar agora.',
-  'pages.admin.formations.fields.links.label': 'Links relacionados',
   'pages.admin.formations.fields.links.description':
     'Selecione todos os links de apoio conectados a esta formation.',
   'pages.admin.formations.fields.links.empty': 'Nenhum link está disponível para relacionar agora.',
-  'pages.admin.formations.fields.imageAssets.label': 'Image assets relacionados',
   'pages.admin.formations.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a esta formation.',
-  'pages.admin.formations.fields.imageAssets.empty':
-    'Nenhum image asset está disponível para relacionar agora.',
   'pages.admin.formations.modal.create.title': 'Criar formation',
   'pages.admin.formations.modal.read.title': 'Ler formations',
   'pages.admin.formations.modal.read.description':
@@ -1247,17 +939,11 @@ export const PT_BR_TRANSLATIONS = {
     'O título da formation em inglês é obrigatório antes do envio.',
   'pages.admin.formations.feedback.requiredDegreeType':
     'O tipo de formação é obrigatório antes do envio.',
-  'pages.admin.formations.feedback.requiredSummaryPt':
-    'O resumo em português é obrigatório antes do envio.',
-  'pages.admin.formations.feedback.requiredSummaryEn':
-    'O resumo em inglês é obrigatório antes do envio.',
   'pages.admin.formations.feedback.requiredStartDate':
     'A data de início é obrigatória antes do envio.',
   'pages.admin.formations.feedback.invalidDateRange':
     'A data de término não pode ser anterior à data de início.',
-  'pages.admin.formations.feedback.invalidSortOrder': 'A ordem deve ser um número inteiro válido.',
-  'pages.admin.formations.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
+
   'pages.admin.formations.feedback.selectionRequired':
     'Selecione uma formation protegida antes de continuar com esta ação.',
   'pages.admin.formations.feedback.loadError':
@@ -1271,18 +957,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologyContexts.states.loading': 'Carregando contextos de tecnologia...',
   'pages.admin.technologyContexts.states.empty':
     'Nenhum contexto de tecnologia protegido foi registrado ainda.',
-  'pages.admin.technologyContexts.fields.technology.label': 'Tecnologia',
-  'pages.admin.technologyContexts.fields.context.label': 'Contexto',
-  'pages.admin.technologyContexts.fields.startedAt.label': 'Data de início',
   'pages.admin.technologyContexts.fields.endedAt.label': 'Data de término',
-  'pages.admin.technologyContexts.options.PROFESSIONAL': 'Profissional',
-  'pages.admin.technologyContexts.options.PERSONAL': 'Pessoal',
-  'pages.admin.technologyContexts.options.ACADEMIC': 'Acadêmico',
-  'pages.admin.technologyContexts.options.STUDY': 'Estudo',
-  'pages.admin.technologyContexts.card.technology': 'Tecnologia',
-  'pages.admin.technologyContexts.card.context': 'Contexto',
-  'pages.admin.technologyContexts.card.startedAt': 'Data de início',
-  'pages.admin.technologyContexts.card.endedAt': 'Data de término',
   'pages.admin.technologyContexts.modal.create.title': 'Criar contexto de tecnologia',
   'pages.admin.technologyContexts.modal.read.title': 'Ler contextos de tecnologia',
   'pages.admin.technologyContexts.modal.read.description':
@@ -1311,8 +986,6 @@ export const PT_BR_TRANSLATIONS = {
     'O contexto é obrigatório antes do envio.',
   'pages.admin.technologyContexts.feedback.requiredStartDate':
     'A data de início é obrigatória antes do envio.',
-  'pages.admin.technologyContexts.feedback.invalidDateRange':
-    'A data de término não pode ser anterior à data de início.',
   'pages.admin.technologyContexts.feedback.missingSession':
     'A sessão administrativa autenticada não está disponível. Faça login novamente para continuar.',
   'pages.admin.technologyContexts.feedback.loadError':
@@ -1321,27 +994,20 @@ export const PT_BR_TRANSLATIONS = {
     'O contexto de tecnologia protegido não pode ser salvo agora.',
   'pages.admin.technologyContexts.feedback.deleteError':
     'O contexto de tecnologia protegido não pode ser excluído agora.',
-  'pages.admin.entities.image-assets.title': 'Image assets',
   'pages.admin.entities.image-assets.description':
     'Registros normalizados de mídia usados pelo portfolio por meio de relacionamentos de image assets.',
-  'pages.admin.entities.spoken-languages.title': 'Spoken languages',
   'pages.admin.entities.spoken-languages.description':
     'Controle administrativo das entradas de proficiência linguística exibidas no perfil e nos contextos de skills.',
-  'pages.admin.entities.customers.title': 'Customers',
   'pages.admin.entities.customers.description':
     'Organizações clientes referenciadas pelo histórico de experiências e pela narrativa baseada em relacionamentos.',
-  'pages.admin.entities.jobs.title': 'Jobs',
   'pages.admin.entities.jobs.description':
     'Catálogo de cargos para manter nomeação consistente de papéis e mapeamento relacional nas experiências.',
-  'pages.admin.entities.formations.title': 'Formations',
   'pages.admin.entities.formations.description':
     'Registros acadêmicos e de formação profissional, incluindo links, imagens e relacionamentos de stack.',
   'pages.admin.entities.technologies.description':
     'Catálogo principal de stack com destaques, métricas, tags e arrays relacionais geridos pela entidade.',
-  'pages.admin.entities.technology-contexts.title': 'Technology contexts',
   'pages.admin.entities.technology-contexts.description':
     'A única entidade relacional dedicada, usada para registrar janelas contextuais de uso por tecnologia.',
-  'pages.admin.entities.experiences.title': 'Experiences',
   'pages.admin.entities.experiences.description':
     'Registros do histórico profissional com empresa, papel, cronologia, clientes, projetos e relacionamentos de stack.',
   'pages.admin.entities.projects.description':
@@ -1363,8 +1029,6 @@ export const PT_BR_TRANSLATIONS = {
     'Escolha uma experiência protegida para confirmar a exclusão.',
   'pages.admin.experiences.modal.delete.description':
     'Esta ação remove permanentemente a experiência selecionada.',
-  'pages.admin.experiences.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível.',
   'pages.admin.experiences.feedback.loadError':
     'Não foi possível carregar as experiências protegidas.',
   'pages.admin.experiences.feedback.saveError': 'Não foi possível salvar a experiência protegida.',
@@ -1376,50 +1040,29 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.fields.slug.placeholder': 'Digite o slug único da experiência',
   'pages.admin.experiences.fields.companyName.label': 'Nome da empresa',
   'pages.admin.experiences.fields.companyName.placeholder': 'Digite o nome da empresa',
-  'pages.admin.experiences.fields.titlePt.label': 'Título em português',
   'pages.admin.experiences.fields.titlePt.placeholder': 'Digite o cargo em português',
-  'pages.admin.experiences.fields.titleEn.label': 'Título em inglês',
   'pages.admin.experiences.fields.titleEn.placeholder': 'Digite o cargo em inglês',
-  'pages.admin.experiences.fields.summaryPt.label': 'Resumo em português',
   'pages.admin.experiences.fields.summaryPt.placeholder': 'Digite o resumo em português',
-  'pages.admin.experiences.fields.summaryEn.label': 'Resumo em inglês',
   'pages.admin.experiences.fields.summaryEn.placeholder': 'Digite o resumo em inglês',
-  'pages.admin.experiences.fields.descriptionPt.label': 'Descrição em português',
   'pages.admin.experiences.fields.descriptionPt.placeholder': 'Digite a descrição em português',
-  'pages.admin.experiences.fields.descriptionEn.label': 'Descrição em inglês',
   'pages.admin.experiences.fields.descriptionEn.placeholder': 'Digite a descrição em inglês',
-  'pages.admin.experiences.fields.sortOrder.placeholder': 'Digite a ordem de exibição',
-  'pages.admin.experiences.fields.startDate.label': 'Data inicial',
-  'pages.admin.experiences.fields.startDate.placeholder': 'Selecione a data inicial',
-  'pages.admin.experiences.fields.endDate.label': 'Data final',
-  'pages.admin.experiences.fields.endDate.placeholder': 'Selecione a data final, se aplicável',
+
   'pages.admin.experiences.fields.isCurrent.label': 'Cargo atual',
   'pages.admin.experiences.fields.isCurrent.description': 'Marque esta experiência como atual.',
-  'pages.admin.experiences.fields.highlight.label': 'Destaque',
   'pages.admin.experiences.fields.highlight.description':
     'Mantenha esta experiência destacada no portfólio público.',
   'pages.admin.experiences.feedback.requiredStartDate': 'A data inicial é obrigatória.',
-  'pages.admin.experiences.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
-  'pages.admin.experiences.feedback.invalidDateRange':
-    'A data de término não pode ser anterior à data de início.',
-  'pages.admin.experiences.feedback.requiredSlug': 'O slug é obrigatório.',
   'pages.admin.experiences.feedback.requiredCompanyName': 'O nome da empresa é obrigatório.',
-  'pages.admin.experiences.feedback.requiredTitlePt': 'O título em português é obrigatório.',
-  'pages.admin.experiences.feedback.requiredTitleEn': 'O título em inglês é obrigatório.',
   'pages.admin.experiences.feedback.requiredSummaryPt': 'O resumo em português é obrigatório.',
   'pages.admin.experiences.feedback.requiredSummaryEn': 'O resumo em inglês é obrigatório.',
   'pages.admin.experiences.feedback.requiredDescriptionPt':
     'A descrição em português é obrigatória.',
   'pages.admin.experiences.feedback.requiredDescriptionEn': 'A descrição em inglês é obrigatória.',
-  'pages.admin.experiences.fields.technologies.label': 'Tecnologias relacionadas',
   'pages.admin.experiences.fields.technologies.description':
     'Selecione todas as tecnologias usadas nesta experiência.',
-  'pages.admin.experiences.fields.technologies.empty': 'Nenhuma tecnologia disponível.',
-  'pages.admin.experiences.fields.projects.label': 'Projetos relacionados',
   'pages.admin.experiences.fields.projects.description':
     'Selecione todos os projetos conectados a esta experiência.',
   'pages.admin.experiences.fields.projects.empty': 'Nenhum projeto disponível.',
-  'pages.admin.experiences.fields.customers.label': 'Clientes relacionados',
   'pages.admin.experiences.fields.customers.description':
     'Selecione todos os clientes conectados a esta experiência.',
   'pages.admin.experiences.fields.customers.empty': 'Nenhum cliente disponível.',
@@ -1427,15 +1070,11 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.fields.jobs.description':
     'Selecione todos os cargos conectados a esta experiência.',
   'pages.admin.experiences.fields.jobs.empty': 'Nenhum cargo disponível.',
-  'pages.admin.experiences.fields.links.label': 'Links relacionados',
   'pages.admin.experiences.fields.links.description':
     'Selecione todos os links de apoio conectados a esta experiência.',
-  'pages.admin.experiences.fields.links.empty': 'Nenhum link disponível.',
-  'pages.admin.experiences.fields.imageAssets.label': 'Imagens relacionadas',
+
   'pages.admin.experiences.fields.imageAssets.description':
     'Selecione todos os recursos de imagem conectados a esta experiência.',
-  'pages.admin.experiences.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
-  'pages.admin.projects.sectionLabel': '// PROJETOS',
   'pages.admin.projects.states.loading': 'Carregando projetos protegidos...',
   'pages.admin.projects.states.empty': 'Nenhum projeto protegido foi cadastrado.',
   'pages.admin.projects.modal.create.title': 'Criar projeto',
@@ -1452,8 +1091,6 @@ export const PT_BR_TRANSLATIONS = {
     'Escolha um projeto protegido para confirmar a exclusão.',
   'pages.admin.projects.modal.delete.description':
     'Esta ação remove permanentemente o projeto selecionado.',
-  'pages.admin.projects.feedback.missingSession':
-    'A sessão administrativa autenticada não está disponível.',
   'pages.admin.projects.feedback.loadError': 'Não foi possível carregar os projetos protegidos.',
   'pages.admin.projects.feedback.saveError': 'Não foi possível salvar o projeto protegido.',
   'pages.admin.projects.feedback.deleteError': 'Não foi possível excluir o projeto protegido.',
@@ -1480,22 +1117,12 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto',
   'pages.admin.projects.fields.status.label': 'Status',
   'pages.admin.projects.fields.status.placeholder': 'Selecione o status',
-  'pages.admin.projects.fields.environment.label': 'Ambiente',
   'pages.admin.projects.fields.environment.placeholder': 'Selecione o ambiente',
-  'pages.admin.projects.fields.startDate.label': 'Data inicial',
-  'pages.admin.projects.fields.startDate.placeholder': 'Selecione a data inicial',
-  'pages.admin.projects.fields.endDate.label': 'Data final',
-  'pages.admin.projects.fields.endDate.placeholder': 'Selecione a data final, se aplicável',
-  'pages.admin.projects.fields.sortOrder.placeholder': 'Digite a ordem de exibição',
   'pages.admin.projects.fields.featured.label': 'Destaque principal',
   'pages.admin.projects.fields.featured.description':
     'Mantenha o projeto em destaque no portfólio.',
-  'pages.admin.projects.fields.highlight.label': 'Destaque',
   'pages.admin.projects.fields.highlight.description':
     'Mantenha o projeto enfatizado no portfólio.',
-  'pages.admin.projects.feedback.requiredSlug': 'O slug é obrigatório.',
-  'pages.admin.projects.feedback.requiredTitlePt': 'O título em português é obrigatório.',
-  'pages.admin.projects.feedback.requiredTitleEn': 'O título em inglês é obrigatório.',
   'pages.admin.projects.feedback.requiredShortDescriptionPt':
     'O resumo curto em português é obrigatório.',
   'pages.admin.projects.feedback.requiredShortDescriptionEn':
@@ -1504,100 +1131,59 @@ export const PT_BR_TRANSLATIONS = {
     'A descrição completa em português é obrigatória.',
   'pages.admin.projects.feedback.requiredFullDescriptionEn':
     'A descrição completa em inglês é obrigatória.',
-  'pages.admin.projects.feedback.invalidSortOrder': 'A ordem deve ser um número válido.',
   'pages.admin.projects.feedback.requiredOptions':
     'Selecione todas as opções obrigatórias do projeto.',
-  'pages.admin.projects.feedback.invalidDateRange':
-    'A data de término não pode ser anterior à data de início.',
-  'pages.admin.projects.fields.experiences.label': 'Experiências relacionadas',
   'pages.admin.projects.fields.experiences.description':
     'Selecione todas as experiências conectadas a este projeto.',
   'pages.admin.projects.fields.experiences.empty': 'Nenhuma experiência disponível.',
-  'pages.admin.projects.fields.technologies.label': 'Tecnologias relacionadas',
   'pages.admin.projects.fields.technologies.description':
     'Selecione todas as tecnologias usadas neste projeto.',
-  'pages.admin.projects.fields.technologies.empty': 'Nenhuma tecnologia disponível.',
   'pages.admin.projects.fields.tags.label': 'Tags relacionadas',
   'pages.admin.projects.fields.tags.description':
     'Selecione todas as tags conectadas a este projeto.',
   'pages.admin.projects.fields.tags.empty': 'Nenhuma tag disponível.',
-  'pages.admin.projects.fields.links.label': 'Links relacionados',
   'pages.admin.projects.fields.links.description':
     'Selecione todos os links de apoio conectados a este projeto.',
-  'pages.admin.projects.fields.links.empty': 'Nenhum link disponível.',
-  'pages.admin.projects.fields.imageAssets.label': 'Imagens relacionadas',
+
   'pages.admin.projects.fields.imageAssets.description':
     'Selecione todos os recursos de imagem conectados a este projeto.',
-  'pages.admin.projects.fields.imageAssets.empty': 'Nenhum recurso de imagem disponível.',
-  'pages.admin.projects.fields.context.options.PROFESSIONAL': 'Profissional',
-  'pages.admin.projects.fields.context.options.PERSONAL': 'Pessoal',
-  'pages.admin.projects.fields.context.options.ACADEMIC': 'Acadêmico',
-  'pages.admin.projects.fields.context.options.STUDY': 'Estudo',
-  'pages.admin.projects.fields.status.options.COMPLETED': 'Concluído',
-  'pages.admin.projects.fields.status.options.IN_PROGRESS': 'Em andamento',
   'pages.admin.projects.fields.status.options.ARCHIVED': 'Arquivado',
   'pages.admin.projects.fields.status.options.PLANNED': 'Planejado',
   'pages.admin.projects.fields.environment.options.FRONTEND': 'Frontend',
   'pages.admin.projects.fields.environment.options.BACKEND': 'Backend',
-  'pages.admin.projects.fields.environment.options.FULLSTACK': 'Full stack',
   'pages.admin.projects.fields.environment.options.MOBILE': 'Mobile',
-  'pages.admin.projects.fields.environment.options.LIBRARY': 'Biblioteca',
   'pages.admin.projects.fields.environment.options.DASHBOARD': 'Dashboard',
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
-  'taxonomy.dashboard.source.formation': 'Formação',
   'pages.admin.operations.localized.title': 'Título',
-  'pages.admin.operations.localized.name': 'Nome',
-  'pages.admin.operations.localized.summary': 'Resumo',
-  'pages.admin.operations.localized.description': 'Descrição',
+
   'pages.admin.operations.localized.shortDescription': 'Resumo curto',
   'pages.admin.operations.localized.fullDescription': 'Descrição completa',
   'pages.admin.operations.localized.label': 'Rótulo',
   'pages.admin.operations.localized.alt': 'Texto alternativo',
   'pages.admin.operations.localized.caption': 'Legenda',
-  'pages.admin.experiences.fields.titleEs.label': 'Título em espanhol',
   'pages.admin.experiences.fields.titleEs.placeholder': 'Digite o cargo em espanhol',
-  'pages.admin.experiences.fields.summaryEs.label': 'Resumo em espanhol',
-  'pages.admin.experiences.fields.summaryEs.placeholder': 'Digite o resumo em espanhol',
-  'pages.admin.experiences.fields.descriptionEs.label': 'Descrição em espanhol',
   'pages.admin.experiences.fields.descriptionEs.placeholder': 'Digite a descrição em espanhol',
-  'pages.admin.experiences.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
-  'pages.admin.experiences.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
   'pages.admin.experiences.feedback.requiredDescriptionEs':
     'A descrição em espanhol é obrigatória.',
-  'pages.admin.projects.fields.titleEs.label': 'Título em espanhol',
   'pages.admin.projects.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.projects.fields.shortDescriptionEs.label': 'Resumo curto em espanhol',
   'pages.admin.projects.fields.shortDescriptionEs.placeholder': 'Digite o resumo curto em espanhol',
   'pages.admin.projects.fields.fullDescriptionEs.label': 'Descrição completa em espanhol',
   'pages.admin.projects.fields.fullDescriptionEs.placeholder':
     'Digite a descrição completa em espanhol',
-  'pages.admin.projects.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
   'pages.admin.projects.feedback.requiredShortDescriptionEs':
     'O resumo curto em espanhol é obrigatório.',
   'pages.admin.projects.feedback.requiredFullDescriptionEs':
     'A descrição completa em espanhol é obrigatória.',
-  'pages.admin.formations.fields.titleEs.label': 'Título em espanhol',
   'pages.admin.formations.fields.titleEs.placeholder': 'Digite o título em espanhol',
-  'pages.admin.formations.fields.summaryEs.label': 'Resumo em espanhol',
-  'pages.admin.formations.fields.summaryEs.placeholder': 'Digite o resumo em espanhol',
-  'pages.admin.formations.feedback.requiredTitleEs': 'O título em espanhol é obrigatório.',
-  'pages.admin.formations.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
-  'pages.admin.spokenLanguages.fields.nameEs.label': 'Nome em espanhol',
   'pages.admin.spokenLanguages.fields.nameEs.placeholder': 'Digite o nome do idioma em espanhol',
-  'pages.admin.spokenLanguages.feedback.requiredNameEs': 'O nome em espanhol é obrigatório.',
-  'pages.admin.customers.fields.summaryEs.label': 'Resumo em espanhol',
+
   'pages.admin.customers.fields.summaryEs.placeholder': 'Digite o resumo do cliente em espanhol',
-  'pages.admin.customers.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
-  'pages.admin.jobs.fields.nameEs.label': 'Nome em espanhol',
   'pages.admin.jobs.fields.nameEs.placeholder': 'Digite o nome do cargo em espanhol',
-  'pages.admin.jobs.fields.summaryEs.label': 'Resumo em espanhol',
   'pages.admin.jobs.fields.summaryEs.placeholder': 'Digite o resumo do cargo em espanhol',
-  'pages.admin.jobs.feedback.requiredNameEs': 'O nome em espanhol é obrigatório.',
-  'pages.admin.jobs.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
   'pages.admin.links.fields.labelEs.label': 'Rótulo em espanhol',
   'pages.admin.links.fields.labelEs.placeholder': 'Digite o rótulo do link em espanhol',
-  'pages.admin.links.fields.descriptionEs.label': 'Descrição em espanhol',
   'pages.admin.links.fields.descriptionEs.placeholder': 'Digite a descrição do link em espanhol',
   'pages.admin.links.feedback.requiredLabelPt': 'O rótulo em português é obrigatório.',
   'pages.admin.links.feedback.requiredLabelEn': 'O rótulo em inglês é obrigatório.',
@@ -1607,7 +1193,5 @@ export const PT_BR_TRANSLATIONS = {
     'Descreva a imagem em espanhol para acessibilidade',
   'pages.admin.imageAssets.fields.captionEs.label': 'Legenda em espanhol',
   'pages.admin.imageAssets.fields.captionEs.placeholder': 'Digite a legenda em espanhol',
-  'pages.admin.tags.fields.nameEs.label': 'Nome em espanhol',
   'pages.admin.tags.fields.nameEs.placeholder': 'Digite o nome da tag em espanhol',
-  'pages.admin.tags.feedback.requiredNameEs': 'O nome em espanhol é obrigatório.',
 } as const satisfies AppTranslationLanguage;

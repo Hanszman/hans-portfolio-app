@@ -99,18 +99,18 @@
         ></hans-input>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.tags.fields.projects.label' | translate"
+          [label]="'pages.experiences.customer.projects' | translate"
           [description]="'pages.admin.tags.fields.projects.description' | translate"
-          [emptyMessage]="'pages.admin.tags.fields.projects.empty' | translate"
+          [emptyMessage]="'common.empty.projectsForRelation' | translate"
           [options]="projectOptions()"
           [selectedIds]="form().projectIds"
           (toggled)="toggleProject($event)"
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.tags.fields.technologies.label' | translate"
+          [label]="'common.relations.technologies' | translate"
           [description]="'pages.admin.tags.fields.technologies.description' | translate"
-          [emptyMessage]="'pages.admin.tags.fields.technologies.empty' | translate"
+          [emptyMessage]="'common.empty.technologiesForRelation' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"

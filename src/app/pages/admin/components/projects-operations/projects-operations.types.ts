@@ -68,7 +68,7 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     required: true,
   },
   titleEs: {
-    labelKey: 'pages.admin.projects.fields.titleEs.label',
+    labelKey: 'common.fields.spanishTitle',
     placeholderKey: 'pages.admin.projects.fields.titleEs.placeholder',
     required: true,
   },
@@ -113,23 +113,23 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     required: true,
   },
   environment: {
-    labelKey: 'pages.admin.projects.fields.environment.label',
+    labelKey: 'common.fields.environment',
     placeholderKey: 'pages.admin.projects.fields.environment.placeholder',
     required: true,
   },
   startDate: {
-    labelKey: 'pages.admin.projects.fields.startDate.label',
-    placeholderKey: 'pages.admin.projects.fields.startDate.placeholder',
+    labelKey: 'common.fields.startDate',
+    placeholderKey: 'common.placeholders.startDate',
     required: false,
   },
   endDate: {
-    labelKey: 'pages.admin.projects.fields.endDate.label',
-    placeholderKey: 'pages.admin.projects.fields.endDate.placeholder',
+    labelKey: 'common.fields.endDate',
+    placeholderKey: 'common.placeholders.endDate',
     required: false,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.projects.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.displayOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
@@ -170,6 +170,32 @@ export const PROJECT_ENVIRONMENT_VALUES: ProjectEnvironment[] = [
   'LIBRARY',
   'DASHBOARD',
 ];
+
+export const PROJECT_OPTION_LABEL_KEYS = {
+  context: {
+    PROFESSIONAL: 'taxonomy.skills.context.professional',
+    PERSONAL: 'taxonomy.skills.context.personal',
+    ACADEMIC: 'taxonomy.skills.context.academic',
+    STUDY: 'taxonomy.skills.context.study',
+  },
+  status: {
+    COMPLETED: 'taxonomy.experiences.projectStatus.completed',
+    IN_PROGRESS: 'taxonomy.experiences.projectStatus.inProgress',
+    ARCHIVED: 'pages.admin.projects.fields.status.options.ARCHIVED',
+    PLANNED: 'pages.admin.projects.fields.status.options.PLANNED',
+  },
+  environment: {
+    FRONTEND: 'pages.admin.projects.fields.environment.options.FRONTEND',
+    BACKEND: 'pages.admin.projects.fields.environment.options.BACKEND',
+    FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
+    MOBILE: 'pages.admin.projects.fields.environment.options.MOBILE',
+    LIBRARY: 'taxonomy.skills.category.library',
+    DASHBOARD: 'pages.admin.projects.fields.environment.options.DASHBOARD',
+  },
+} as const satisfies Record<
+  'context' | 'status' | 'environment',
+  Readonly<Record<string, AppTranslationKey>>
+>;
 
 export interface ProjectOption {
   id: string;
@@ -353,7 +379,7 @@ export const buildProjectsMutationPayload = (
       };
   const sortOrder = Number.parseInt(form.sortOrder.trim(), 10);
   if (!Number.isInteger(sortOrder))
-    return { isValid: false, errorKey: 'pages.admin.projects.feedback.invalidSortOrder' };
+    return { isValid: false, errorKey: 'common.feedback.invalidSortOrder' };
   if (!form.context || !form.status || !form.environment)
     return { isValid: false, errorKey: 'pages.admin.projects.feedback.requiredOptions' };
 
@@ -368,7 +394,7 @@ export const buildProjectsMutationPayload = (
   const dateRangeResult = validateAdminDateRange(
     form.startDate,
     form.endDate,
-    'pages.admin.projects.feedback.invalidDateRange',
+    'common.feedback.invalidDateRange',
   );
 
   if (!dateRangeResult.isValid) {

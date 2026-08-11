@@ -296,7 +296,7 @@ describe('PortfolioSettingsOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.portfolioSettings.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

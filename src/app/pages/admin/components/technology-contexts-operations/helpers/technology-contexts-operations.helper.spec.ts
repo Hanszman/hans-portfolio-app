@@ -111,7 +111,7 @@ describe('technology contexts operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.technologyContexts.feedback.invalidDateRange',
+      errorKey: 'common.feedback.invalidDateRange',
     });
     expect(buildTechnologyContextFormValue(null)).toEqual({
       technologyId: '',

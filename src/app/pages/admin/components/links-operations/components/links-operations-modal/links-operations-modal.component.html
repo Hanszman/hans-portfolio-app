@@ -132,9 +132,9 @@
         ></hans-input>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.links.fields.projects.label' | translate"
+          [label]="'pages.experiences.customer.projects' | translate"
           [description]="'pages.admin.links.fields.projects.description' | translate"
-          [emptyMessage]="'pages.admin.links.fields.projects.empty' | translate"
+          [emptyMessage]="'common.empty.projectsForRelation' | translate"
           [options]="projectOptions()"
           [selectedIds]="form().projectIds"
           (toggled)="toggleProject($event)"
@@ -143,23 +143,23 @@
         <app-operations-relation-picker
           [label]="'pages.admin.links.fields.experiences.label' | translate"
           [description]="'pages.admin.links.fields.experiences.description' | translate"
-          [emptyMessage]="'pages.admin.links.fields.experiences.empty' | translate"
+          [emptyMessage]="'common.empty.experiencesForRelation' | translate"
           [options]="experienceOptions()"
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.links.fields.technologies.label' | translate"
+          [label]="'common.relations.technologies' | translate"
           [description]="'pages.admin.links.fields.technologies.description' | translate"
-          [emptyMessage]="'pages.admin.links.fields.technologies.empty' | translate"
+          [emptyMessage]="'common.empty.technologiesForRelation' | translate"
           [options]="technologyOptions()"
           [selectedIds]="form().technologyIds"
           (toggled)="toggleTechnology($event)"
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'pages.admin.links.fields.formations.label' | translate"
+          [label]="'common.relations.formations' | translate"
           [description]="'pages.admin.links.fields.formations.description' | translate"
           [emptyMessage]="'pages.admin.links.fields.formations.empty' | translate"
           [options]="formationOptions()"

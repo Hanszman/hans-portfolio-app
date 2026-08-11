@@ -97,6 +97,7 @@ export class FormationsOperationsModalComponent {
   protected readonly datePickerFormat = computed(() =>
     resolveDatePickerFormat(this.translation.locale()),
   );
+  protected readonly datePickerLocale = computed(() => this.translation.locale());
   protected readonly trackById = trackAdminItemById;
   protected readonly resolveSelectValue = resolveAdminSelectValue;
   protected readonly resolveFieldLabel = createAdminFieldLabelResolver(
@@ -155,7 +156,7 @@ export class FormationsOperationsModalComponent {
         fields: [
           { labelKey: 'common.fields.slug', value: formation.slug },
           {
-            labelKey: 'pages.admin.formations.card.institution',
+            labelKey: 'common.fields.institution',
             value: formation.institution,
           },
           {
@@ -165,18 +166,18 @@ export class FormationsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.formations.card.degreeType',
+            labelKey: 'common.fields.degreeType',
             value: formation.degreeType,
           },
           {
-            labelKey: 'pages.admin.operations.localized.summary',
+            labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), formation.summaryPt, formation.summaryEn,
               formation.summaryEs,
             ),
           },
           {
-            labelKey: 'pages.admin.operations.date',
+            labelKey: 'common.fields.date',
             value: formatAdminDateRangeForDisplay(
               formation.startDate,
               formation.endDateLabel,
@@ -184,11 +185,11 @@ export class FormationsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.formations.card.highlight',
+            labelKey: 'common.fields.highlight',
             value: this.translation.instant(
               formation.highlight
-                ? 'pages.admin.formations.fields.highlight.enabled'
-                : 'pages.admin.formations.fields.highlight.disabled',
+                ? 'common.states.highlighted'
+                : 'common.states.notHighlighted',
             ),
           },
           {
@@ -200,11 +201,11 @@ export class FormationsOperationsModalComponent {
             value: formation.technologyLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.formations.card.links',
+            labelKey: 'common.entities.links',
             value: formation.linkLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.formations.card.imageAssets',
+            labelKey: 'common.entities.imageAssets',
             value: formation.imageAssetLabels.join(', ') || emptyRelations,
           },
         ],

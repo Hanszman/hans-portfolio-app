@@ -480,7 +480,7 @@ describe('tags helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.tags.feedback.requiredNameEs',
+      errorKey: 'common.feedback.requiredSpanishName',
     });
 
     expect(
@@ -512,7 +512,7 @@ describe('tags helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.tags.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
 
     expect(

@@ -40,28 +40,28 @@ export const CUSTOMERS_OPERATIONS_FIELDS = {
     required: true,
   },
   name: {
-    labelKey: 'pages.admin.customers.fields.name.label',
+    labelKey: 'common.fields.name',
     placeholderKey: 'pages.admin.customers.fields.name.placeholder',
     required: true,
   },
   summaryPt: {
-    labelKey: 'pages.admin.customers.fields.summaryPt.label',
+    labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.customers.fields.summaryPt.placeholder',
     required: true,
   },
   summaryEn: {
-    labelKey: 'pages.admin.customers.fields.summaryEn.label',
+    labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.customers.fields.summaryEn.placeholder',
     required: true,
   },
   summaryEs: {
-    labelKey: 'pages.admin.customers.fields.summaryEs.label',
+    labelKey: 'common.fields.spanishSummary',
     placeholderKey: 'pages.admin.customers.fields.summaryEs.placeholder',
     required: true,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.customers.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.integerSortOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;

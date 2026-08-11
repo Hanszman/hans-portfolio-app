@@ -263,7 +263,7 @@ export const buildFormationsMutationPayload = (
   }
 
   if (!titleEs) {
-    return { isValid: false, errorKey: 'pages.admin.formations.feedback.requiredTitleEs' };
+    return { isValid: false, errorKey: 'common.feedback.requiredTitleEs' };
   }
 
   if (!degreeType) {
@@ -276,19 +276,19 @@ export const buildFormationsMutationPayload = (
   if (!summaryPt) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     };
   }
 
   if (!summaryEn) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     };
   }
 
   if (!summaryEs) {
-    return { isValid: false, errorKey: 'pages.admin.formations.feedback.requiredSummaryEs' };
+    return { isValid: false, errorKey: 'common.feedback.requiredSummaryEs' };
   }
 
   if (!startDate) {
@@ -311,7 +311,7 @@ export const buildFormationsMutationPayload = (
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     };
   }
 

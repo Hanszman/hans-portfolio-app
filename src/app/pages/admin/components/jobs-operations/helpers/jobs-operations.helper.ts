@@ -238,31 +238,31 @@ export const buildJobsMutationPayload = (
   }
 
   if (!nameEs) {
-    return { isValid: false, errorKey: 'pages.admin.jobs.feedback.requiredNameEs' };
+    return { isValid: false, errorKey: 'common.feedback.requiredSpanishName' };
   }
 
   if (!summaryPt) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     };
   }
 
   if (!summaryEn) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     };
   }
 
   if (!summaryEs) {
-    return { isValid: false, errorKey: 'pages.admin.jobs.feedback.requiredSummaryEs' };
+    return { isValid: false, errorKey: 'common.feedback.requiredSummaryEs' };
   }
 
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     };
   }
 

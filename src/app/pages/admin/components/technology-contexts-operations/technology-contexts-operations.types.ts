@@ -24,6 +24,13 @@ export const TECHNOLOGY_CONTEXT_VALUES: readonly TechnologyContextKey[] = [
   'STUDY',
 ];
 
+export const TECHNOLOGY_CONTEXT_LABEL_KEYS = {
+  PROFESSIONAL: 'taxonomy.skills.context.professional',
+  PERSONAL: 'taxonomy.skills.context.personal',
+  ACADEMIC: 'taxonomy.skills.context.academic',
+  STUDY: 'taxonomy.skills.context.study',
+} as const satisfies Record<TechnologyContextKey, AppTranslationKey>;
+
 export interface TechnologyContextFormValue {
   technologyId: string;
   context: string;
@@ -55,11 +62,11 @@ export type TechnologyContextMutationBuildResult =
 
 export const TECHNOLOGY_CONTEXT_FIELDS = {
   technologyId: {
-    labelKey: 'pages.admin.technologyContexts.fields.technology.label',
+    labelKey: 'common.fields.technology',
     required: true,
   },
-  context: { labelKey: 'pages.admin.technologyContexts.fields.context.label', required: true },
-  startedAt: { labelKey: 'pages.admin.technologyContexts.fields.startedAt.label', required: true },
+  context: { labelKey: 'pages.admin.projects.fields.context.label', required: true },
+  startedAt: { labelKey: 'pages.admin.formations.fields.startDate.label', required: true },
   endedAt: {
     labelKey: 'pages.admin.technologyContexts.fields.endedAt.label',
     required: false,
@@ -105,7 +112,7 @@ export const buildTechnologyContextMutationPayload = (
   const dateRange = validateAdminDateRange(
     startedAt,
     endedAt,
-    'pages.admin.technologyContexts.feedback.invalidDateRange',
+    'common.feedback.invalidDateRange',
   );
   if (!dateRange.isValid) return dateRange;
   return {

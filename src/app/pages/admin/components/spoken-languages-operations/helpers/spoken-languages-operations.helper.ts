@@ -170,7 +170,7 @@ export const buildSpokenLanguagesMutationPayload = (
   if (!nameEs) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.spokenLanguages.feedback.requiredNameEs',
+      errorKey: 'common.feedback.requiredSpanishName',
     };
   }
 
@@ -195,7 +195,7 @@ export const buildSpokenLanguagesMutationPayload = (
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.spokenLanguages.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     };
   }
 

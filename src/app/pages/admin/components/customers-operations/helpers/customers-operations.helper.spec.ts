@@ -501,7 +501,7 @@ describe('customers operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     });
 
     expect(
@@ -518,7 +518,7 @@ describe('customers operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     });
 
     expect(
@@ -535,7 +535,7 @@ describe('customers operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryEs',
+      errorKey: 'common.feedback.requiredSummaryEs',
     });
 
     expect(
@@ -552,7 +552,7 @@ describe('customers operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
   });
 });

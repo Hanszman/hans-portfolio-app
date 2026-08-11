@@ -230,28 +230,28 @@ export const buildCustomersMutationPayload = (
   if (!summaryPt) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     };
   }
 
   if (!summaryEn) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     };
   }
 
   if (!summaryEs) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.requiredSummaryEs',
+      errorKey: 'common.feedback.requiredSummaryEs',
     };
   }
 
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.customers.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     };
   }
 

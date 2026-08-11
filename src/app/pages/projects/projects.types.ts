@@ -100,16 +100,16 @@ export interface ProjectContextFilterViewModel {
 }
 
 export const PROJECT_CONTEXT_FILTERS: readonly ProjectContextFilterViewModel[] = [
-  { labelKey: 'taxonomy.projects.filters.allContexts', value: 'ALL' },
+  { labelKey: 'common.filters.all', value: 'ALL' },
   { labelKey: 'taxonomy.skills.context.professional', value: 'PROFESSIONAL' },
-  { labelKey: 'taxonomy.projects.context.formation', value: 'ACADEMIC' },
+  { labelKey: 'common.entities.formation', value: 'ACADEMIC' },
   { labelKey: 'taxonomy.skills.context.personal', value: 'PERSONAL' },
 ];
 
 export const PROJECT_VISIBLE_TECHNOLOGY_COUNT = 5;
 
 export const PROJECT_FILTER_ALL_LABEL_KEYS = {
-  contexts: 'taxonomy.projects.filters.allContexts',
+  contexts: 'common.filters.all',
   environments: 'taxonomy.projects.filters.allEnvironments',
   statuses: 'taxonomy.projects.filters.allStatuses',
 } as const satisfies Record<string, AppTranslationKey>;
@@ -117,7 +117,7 @@ export const PROJECT_FILTER_ALL_LABEL_KEYS = {
 export const PROJECT_CONTEXT_LABEL_KEYS: Record<string, AppTranslationKey> = {
   PROFESSIONAL: 'taxonomy.skills.context.professional',
   PERSONAL: 'taxonomy.skills.context.personal',
-  ACADEMIC: 'taxonomy.projects.context.formation',
+  ACADEMIC: 'common.entities.formation',
   STUDY: 'taxonomy.skills.context.study',
 };
 
@@ -127,8 +127,8 @@ export const PROJECT_STATUS_LABEL_KEYS: Record<string, AppTranslationKey> = {
 };
 
 export const PROJECT_ENVIRONMENT_LABEL_KEYS: Record<string, AppTranslationKey> = {
-  FRONTEND: 'taxonomy.experiences.projectEnvironment.frontend',
-  BACKEND: 'taxonomy.experiences.projectEnvironment.backend',
+  FRONTEND: 'taxonomy.skills.stack.frontEnd',
+  BACKEND: 'taxonomy.skills.stack.backEnd',
   FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
 };
 
@@ -150,7 +150,7 @@ export const PROJECT_LINK_TYPE_LABEL_KEYS: Record<string, AppTranslationKey> = {
 export const PROJECT_SUMMARY_LABEL_KEYS = {
   total: 'taxonomy.projects.summary.total',
   featured: 'taxonomy.projects.summary.featured',
-  inProgress: 'taxonomy.projects.summary.inProgress',
+  inProgress: 'taxonomy.experiences.projectStatus.inProgress',
   linkedAssets: 'taxonomy.projects.summary.linkedAssets',
   richestStack: 'taxonomy.projects.summary.richestStack',
 } as const satisfies Record<string, AppTranslationKey>;
@@ -158,15 +158,15 @@ export const PROJECT_SUMMARY_LABEL_KEYS = {
 export const PROJECT_FALLBACK_LABEL_KEYS = {
   noAssets: 'taxonomy.projects.fallback.noAssets',
   noLinks: 'taxonomy.projects.fallback.noLinks',
-  noCompanies: 'taxonomy.projects.fallback.noCompanies',
+  noCompanies: 'common.empty.linkedCompanies',
   untitledLink: 'taxonomy.projects.fallback.untitledLink',
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const PROJECT_STACK_GROUP_LABEL_KEYS = {
-  frontend: 'pages.experiences.detail.stackGroups.frontend',
-  backend: 'pages.experiences.detail.stackGroups.backend',
-  databases: 'pages.experiences.detail.stackGroups.databases',
-  others: 'pages.experiences.detail.stackGroups.others',
+  frontend: 'taxonomy.skills.stack.frontEnd',
+  backend: 'taxonomy.skills.stack.backEnd',
+  databases: 'taxonomy.skills.stack.databases',
+  others: 'taxonomy.skills.stack.others',
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const PROJECT_TECHNOLOGY_STACK_GROUPS: Record<string, keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS> =

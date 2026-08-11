@@ -48,7 +48,7 @@ export const HOME_HERO: HomeHeroViewModel = {
   name: 'Victor Hanszman',
   subtitleKey: 'pages.home.hero.subtitle',
   descriptionKey: 'pages.home.hero.description',
-  locationKey: 'pages.home.hero.location',
+  locationKey: 'common.location.beloHorizonteBrazil',
   primaryActionLabelKey: 'pages.home.hero.cta.projects',
   primaryActionRoute: '/projects',
   secondaryActionLabelKey: 'pages.home.hero.cta.experiences',

@@ -501,7 +501,7 @@ describe('LinksOperationsComponent', () => {
     component.updateType('GITHUB');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.links.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
 
     TestBed.resetTestingModule();
 
@@ -538,7 +538,7 @@ describe('LinksOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.links.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

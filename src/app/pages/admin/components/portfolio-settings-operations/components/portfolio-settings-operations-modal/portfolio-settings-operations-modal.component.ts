@@ -130,13 +130,13 @@ export class PortfolioSettingsOperationsModalComponent {
         id: setting.id,
         title: setting.key,
         fields: [
-          { labelKey: 'pages.admin.portfolioSettings.card.key', value: setting.key },
+          { labelKey: 'common.fields.settingKey', value: setting.key },
           {
-            labelKey: 'pages.admin.portfolioSettings.card.description',
+            labelKey: 'common.fields.description',
             value: setting.description || emptyDescription,
           },
           {
-            labelKey: 'pages.admin.portfolioSettings.card.value',
+            labelKey: 'common.fields.jsonValue',
             value: setting.formattedValue,
             title: setting.formattedValue,
           },

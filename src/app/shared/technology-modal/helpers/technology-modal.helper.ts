@@ -59,14 +59,14 @@ const TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY: Record<string, AppTranslationKey> 
   FRAMEWORK: 'taxonomy.skills.type.frameworks',
   LANGUAGE: 'taxonomy.skills.type.programmingLanguages',
   LIBRARY: 'taxonomy.skills.type.libraries',
-  TOOL: 'taxonomy.skills.type.others',
+  TOOL: 'taxonomy.skills.stack.others',
   DATABASE: 'taxonomy.skills.type.relationalDataBases',
   CLOUD: 'taxonomy.skills.type.cloudHostingPlatforms',
   TESTING: 'taxonomy.skills.type.libraries',
   DEVOPS: 'taxonomy.skills.type.deploymentTools',
   STYLING: 'taxonomy.skills.type.webLanguages',
   ARCHITECTURE: 'taxonomy.skills.type.techniques',
-  OTHER: 'taxonomy.skills.type.others',
+  OTHER: 'taxonomy.skills.stack.others',
   ORM: 'taxonomy.skills.type.libraries',
   PROGRAMMING_LANGUAGES: 'taxonomy.skills.type.programmingLanguages',
   WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
@@ -86,7 +86,7 @@ const TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY: Record<string, AppTranslationKey> 
   DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
   DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
   PROTOCOLS: 'taxonomy.skills.type.protocols',
-  OTHERS: 'taxonomy.skills.type.others',
+  OTHERS: 'taxonomy.skills.stack.others',
 };
 
 const TECHNOLOGY_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
@@ -94,7 +94,7 @@ const TECHNOLOGY_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
   BASIC: 'taxonomy.skills.level.beginner',
   BEGINNER: 'taxonomy.skills.level.beginner',
-  STUDYING: 'taxonomy.skills.level.studying',
+  STUDYING: 'common.states.studying',
 };
 
 const TECHNOLOGY_CONTEXT_ORDER = ['PROFESSIONAL', 'PERSONAL', 'ACADEMIC', 'STUDY'] as const;
@@ -212,7 +212,7 @@ const TECHNOLOGY_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   RARE: 'taxonomy.skills.frequency.rare',
   PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
-  STUDYING: 'taxonomy.skills.frequency.studying',
+  STUDYING: 'common.states.studying',
 };
 
 const TECHNOLOGY_STACK_LABEL_KEYS = {
@@ -327,8 +327,8 @@ export const buildTechnologyModalDetails = (
 ): readonly TagModalDetail[] => {
   const details = [
     buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
-    buildTechnologyModalDetail('pages.experiences.technology.type', technology.category),
-    buildTechnologyModalDetail('pages.experiences.technology.stack', technology.stack),
+    buildTechnologyModalDetail('common.fields.type', technology.category),
+    buildTechnologyModalDetail('common.fields.stack', technology.stack),
     buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),
   ] satisfies readonly (TagModalDetail | null)[];
 

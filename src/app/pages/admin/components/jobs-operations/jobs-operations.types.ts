@@ -42,17 +42,17 @@ export const JOBS_OPERATIONS_FIELDS = {
     required: true,
   },
   namePt: {
-    labelKey: 'pages.admin.jobs.fields.namePt.label',
+    labelKey: 'pages.admin.tags.fields.namePt.label',
     placeholderKey: 'pages.admin.jobs.fields.namePt.placeholder',
     required: true,
   },
   nameEn: {
-    labelKey: 'pages.admin.jobs.fields.nameEn.label',
+    labelKey: 'pages.admin.tags.fields.nameEn.label',
     placeholderKey: 'pages.admin.jobs.fields.nameEn.placeholder',
     required: true,
   },
   nameEs: {
-    labelKey: 'pages.admin.jobs.fields.nameEs.label',
+    labelKey: 'common.fields.spanishName',
     placeholderKey: 'pages.admin.jobs.fields.nameEs.placeholder',
     required: true,
   },
@@ -67,13 +67,13 @@ export const JOBS_OPERATIONS_FIELDS = {
     required: true,
   },
   summaryEs: {
-    labelKey: 'pages.admin.jobs.fields.summaryEs.label',
+    labelKey: 'common.fields.spanishSummary',
     placeholderKey: 'pages.admin.jobs.fields.summaryEs.placeholder',
     required: true,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.jobs.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.integerSortOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;

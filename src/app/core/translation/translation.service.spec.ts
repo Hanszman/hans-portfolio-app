@@ -29,7 +29,7 @@ describe('TranslationService', () => {
     expect(service.locale()).toBe('en-us');
     expect(document.documentElement.lang).toBe('en-us');
     expect(localStorage.getItem(APP_LOCALE_STORAGE_KEY)).toBe('en-us');
-    expect(service.instant('header.controls.english')).toBe('English');
+    expect(service.instant('common.languages.english')).toBe('English');
   });
 
   it('should restore a persisted Portuguese locale', () => {
@@ -38,7 +38,7 @@ describe('TranslationService', () => {
     const service = TestBed.inject(TranslationService);
 
     expect(service.locale()).toBe('pt-br');
-    expect(service.instant('header.controls.english')).toBe('Inglês');
+    expect(service.instant('common.languages.english')).toBe('Inglês');
   });
 
   it('should ignore invalid persisted locales', () => {

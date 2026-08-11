@@ -196,7 +196,7 @@ export const buildTagsMutationPayload = (
   }
 
   if (!nameEs) {
-    return { isValid: false, errorKey: 'pages.admin.tags.feedback.requiredNameEs' };
+    return { isValid: false, errorKey: 'common.feedback.requiredSpanishName' };
   }
 
   if (!type) {
@@ -216,7 +216,7 @@ export const buildTagsMutationPayload = (
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
-      errorKey: 'pages.admin.tags.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     };
   }
 

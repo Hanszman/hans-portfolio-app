@@ -18,17 +18,17 @@ export interface PortfolioSettingsOperationsFormValue {
 
 export const PORTFOLIO_SETTINGS_OPERATIONS_FIELDS = {
   key: {
-    labelKey: 'pages.admin.portfolioSettings.fields.key.label',
+    labelKey: 'common.fields.settingKey',
     placeholderKey: 'pages.admin.portfolioSettings.fields.key.placeholder',
     required: true,
   },
   description: {
-    labelKey: 'pages.admin.portfolioSettings.fields.description.label',
+    labelKey: 'common.fields.description',
     placeholderKey: 'pages.admin.portfolioSettings.fields.description.placeholder',
     required: false,
   },
   valueText: {
-    labelKey: 'pages.admin.portfolioSettings.fields.value.label',
+    labelKey: 'common.fields.jsonValue',
     placeholderKey: 'pages.admin.portfolioSettings.fields.value.placeholder',
     required: true,
   },

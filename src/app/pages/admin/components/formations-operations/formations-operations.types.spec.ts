@@ -39,7 +39,7 @@ describe('formations operations types', () => {
     });
     expect(createFormationDegreeTypeOptions().at(-1)).toEqual({
       id: 'OTHER',
-      labelKey: 'pages.admin.formations.fields.degreeType.options.OTHER',
+      labelKey: 'common.values.other',
       value: 'OTHER',
     });
   });

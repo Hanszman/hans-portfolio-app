@@ -35,6 +35,7 @@ import {
   ProjectsOperationsModalMode,
   PROJECT_CONTEXT_VALUES,
   PROJECT_ENVIRONMENT_VALUES,
+  PROJECT_OPTION_LABEL_KEYS,
   PROJECT_STATUS_VALUES,
   PROJECTS_OPERATIONS_FIELDS,
   PROJECTS_OPERATIONS_FORM_FIELDS,
@@ -83,6 +84,7 @@ export class ProjectsOperationsModalComponent {
   protected readonly datePickerFormat = computed(() =>
     resolveDatePickerFormat(this.translation.locale()),
   );
+  protected readonly datePickerLocale = computed(() => this.translation.locale());
   protected readonly fieldDefinitions = PROJECTS_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
@@ -169,13 +171,13 @@ export class ProjectsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.projects.fields.environment.label',
+            labelKey: 'common.fields.environment',
             value: this.translation.instant(
               `pages.admin.projects.fields.environment.options.${project.environment}` as AppTranslationKey,
             ),
           },
           {
-            labelKey: 'pages.admin.operations.date',
+            labelKey: 'common.fields.date',
             value: formatAdminDateRangeForDisplay(
               project.startDate,
               project.endDate,
@@ -187,7 +189,7 @@ export class ProjectsOperationsModalComponent {
             value: booleanLabel(project.featured),
           },
           {
-            labelKey: 'pages.admin.projects.fields.highlight.label',
+            labelKey: 'common.fields.highlightStatus',
             value: booleanLabel(project.highlight),
           },
           {
@@ -195,11 +197,11 @@ export class ProjectsOperationsModalComponent {
             value: String(project.sortOrder ?? 0),
           },
           {
-            labelKey: 'pages.admin.projects.fields.technologies.label',
+            labelKey: 'common.relations.technologies',
             value: relationValue(project.technologies, 'technology'),
           },
           {
-            labelKey: 'pages.admin.projects.fields.experiences.label',
+            labelKey: 'pages.admin.links.fields.experiences.label',
             value: relationValue(project.experiences, 'experience'),
           },
           {
@@ -207,11 +209,11 @@ export class ProjectsOperationsModalComponent {
             value: relationValue(project.tags, 'tag'),
           },
           {
-            labelKey: 'pages.admin.projects.fields.links.label',
+            labelKey: 'common.relations.links',
             value: relationValue(project.links, 'link'),
           },
           {
-            labelKey: 'pages.admin.projects.fields.imageAssets.label',
+            labelKey: 'common.relations.imageAssets',
             value: relationValue(project.imageAssets, 'imageAsset'),
           },
         ],
@@ -238,7 +240,7 @@ export class ProjectsOperationsModalComponent {
       id: value,
       value,
       label: this.translation.instant(
-        `pages.admin.projects.fields.${field}.options.${value}` as AppTranslationKey,
+        PROJECT_OPTION_LABEL_KEYS[field][value as keyof (typeof PROJECT_OPTION_LABEL_KEYS)[typeof field]],
       ),
     }));
   }

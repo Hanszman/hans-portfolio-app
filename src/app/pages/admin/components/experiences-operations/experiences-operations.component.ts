@@ -199,8 +199,8 @@ export class ExperiencesOperationsComponent implements OnInit {
 
   async submitModal(): Promise<void> {
     if (!this.session.accessToken()) {
-      this.feedback.set('pages.admin.experiences.feedback.missingSession');
-      this.toast.showError('pages.admin.experiences.feedback.missingSession');
+      this.feedback.set('common.feedback.missingAdminSessionShort');
+      this.toast.showError('common.feedback.missingAdminSessionShort');
       return;
     }
     if (this.modalMode() === 'delete') {

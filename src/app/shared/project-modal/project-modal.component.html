@@ -46,20 +46,20 @@
         </p>
 
         <section class="project-modal-section">
-          <h3>{{ 'pages.projects.detail.clients' | translate }}</h3>
+          <h3>{{ 'common.sections.clients' | translate }}</h3>
           <div class="project-modal-chip-list">
             @for (company of currentProject.companyNames; track company) {
               <span class="project-modal-chip">{{ company }}</span>
             } @empty {
               <span class="project-modal-inline-text">
-                {{ 'pages.projects.card.emptyCompanies' | translate }}
+                {{ 'common.empty.linkedCompanies' | translate }}
               </span>
             }
           </div>
         </section>
 
         <section class="project-modal-section">
-          <h3>{{ 'pages.projects.detail.techStack' | translate }}</h3>
+          <h3>{{ 'common.sections.techStack' | translate }}</h3>
           <div class="project-modal-stack">
             @for (group of currentProject.stackGroups; track group.labelKey) {
               <div class="project-modal-stack-group">

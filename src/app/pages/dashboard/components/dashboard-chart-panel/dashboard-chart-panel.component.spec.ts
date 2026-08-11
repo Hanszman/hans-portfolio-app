@@ -33,7 +33,7 @@ describe('DashboardChartPanelComponent', () => {
     fixture.componentRef.setInput('labelKey', 'pages.dashboard.stacks.label');
     fixture.componentRef.setInput('titleKey', 'pages.dashboard.stacks.title');
     fixture.componentRef.setInput('descriptionKey', 'pages.dashboard.stacks.description');
-    fixture.componentRef.setInput('emptyMessageKey', 'pages.dashboard.stacks.empty');
+    fixture.componentRef.setInput('emptyMessageKey', 'common.empty.stackDistribution');
     fixture.componentRef.setInput('chart', createChart());
     fixture.detectChanges();
 
@@ -49,7 +49,7 @@ describe('DashboardChartPanelComponent', () => {
     fixture.componentRef.setInput('labelKey', 'pages.dashboard.stacks.label');
     fixture.componentRef.setInput('titleKey', 'pages.dashboard.stacks.title');
     fixture.componentRef.setInput('descriptionKey', 'pages.dashboard.stacks.description');
-    fixture.componentRef.setInput('emptyMessageKey', 'pages.dashboard.stacks.empty');
+    fixture.componentRef.setInput('emptyMessageKey', 'common.empty.stackDistribution');
     fixture.componentRef.setInput('chart', null);
     fixture.detectChanges();
 

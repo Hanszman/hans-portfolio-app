@@ -734,7 +734,7 @@ describe('formations operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredTitleEs',
+      errorKey: 'common.feedback.requiredTitleEs',
     });
 
     expect(
@@ -782,7 +782,7 @@ describe('formations operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     });
 
     expect(
@@ -806,7 +806,7 @@ describe('formations operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     });
 
     expect(
@@ -830,7 +830,7 @@ describe('formations operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.requiredSummaryEs',
+      errorKey: 'common.feedback.requiredSummaryEs',
     });
 
     expect(
@@ -878,7 +878,7 @@ describe('formations operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.formations.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
   });
 });

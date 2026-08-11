@@ -14,5 +14,5 @@ import { FooterCopyrightComponent } from './components/footer-copyright/footer-c
 })
 export class FooterComponent {
   protected readonly socialLinks = PORTFOLIO_SOCIAL_LINKS;
-  protected readonly locationKey: AppTranslationKey = 'footer.location';
+  protected readonly locationKey: AppTranslationKey = 'common.location.beloHorizonteBrazil';
 }

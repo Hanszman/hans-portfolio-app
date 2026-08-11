@@ -51,7 +51,7 @@ export interface LinksOperationsFormValue {
 
 export const LINKS_OPERATIONS_FIELDS = {
   url: {
-    labelKey: 'pages.admin.links.fields.url.label',
+    labelKey: 'common.fields.url',
     placeholderKey: 'pages.admin.links.fields.url.placeholder',
     required: true,
   },
@@ -81,12 +81,12 @@ export const LINKS_OPERATIONS_FIELDS = {
     required: false,
   },
   descriptionEs: {
-    labelKey: 'pages.admin.links.fields.descriptionEs.label',
+    labelKey: 'common.fields.spanishDescription',
     placeholderKey: 'pages.admin.links.fields.descriptionEs.placeholder',
     required: false,
   },
   type: {
-    labelKey: 'pages.admin.links.fields.type.label',
+    labelKey: 'common.fields.type',
     required: true,
   },
   sortOrder: {
@@ -161,7 +161,21 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
 export const createLinkTypeOptions = (): readonly LinkTypeOptionDefinition[] =>
   createAdminSelectOptionDefinitions(
     LINK_TYPE_VALUES,
-    (value) => `pages.admin.links.fields.type.options.${value}` as AppTranslationKey,
+    (value) => {
+      if (value === 'GITHUB') {
+        return 'taxonomy.projects.linkType.github';
+      }
+
+      if (value === 'DEPLOY') {
+        return 'taxonomy.projects.linkType.deploy';
+      }
+
+      if (value === 'OTHER') {
+        return 'common.values.other';
+      }
+
+      return `pages.admin.links.fields.type.options.${value}` as AppTranslationKey;
+    },
   );
 
 export const createLinkCatalogOptionViewModel = (

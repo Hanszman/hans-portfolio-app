@@ -26,7 +26,7 @@ describe('OperationsComponent', () => {
     fixture = TestBed.createComponent(OperationsComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('kickerKey', 'pages.admin.tags.sectionLabel');
-    fixture.componentRef.setInput('titleKey', 'pages.admin.entities.tags.title');
+    fixture.componentRef.setInput('titleKey', 'common.entities.tags');
     fixture.componentRef.setInput('endpointLabel', 'GET /tags');
     fixture.componentRef.setInput('loadingKey', 'pages.admin.tags.states.loading');
     fixture.componentRef.setInput('emptyKey', 'pages.admin.tags.states.empty');

@@ -211,7 +211,7 @@ export class PortfolioSettingsOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback('pages.admin.portfolioSettings.feedback.missingSession');
+      this.setModalErrorFeedback('common.feedback.missingAdminSession');
       return;
     }
 

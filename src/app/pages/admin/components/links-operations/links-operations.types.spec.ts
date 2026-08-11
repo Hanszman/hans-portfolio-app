@@ -134,12 +134,12 @@ describe('links types helpers', () => {
     expect(createLinkTypeOptions()).toEqual([
       {
         id: 'GITHUB',
-        labelKey: 'pages.admin.links.fields.type.options.GITHUB',
+        labelKey: 'taxonomy.projects.linkType.github',
         value: 'GITHUB',
       },
       {
         id: 'DEPLOY',
-        labelKey: 'pages.admin.links.fields.type.options.DEPLOY',
+        labelKey: 'taxonomy.projects.linkType.deploy',
         value: 'DEPLOY',
       },
       { id: 'NPM', labelKey: 'pages.admin.links.fields.type.options.NPM', value: 'NPM' },
@@ -160,7 +160,7 @@ describe('links types helpers', () => {
         value: 'ARTICLE',
       },
       { id: 'FIGMA', labelKey: 'pages.admin.links.fields.type.options.FIGMA', value: 'FIGMA' },
-      { id: 'OTHER', labelKey: 'pages.admin.links.fields.type.options.OTHER', value: 'OTHER' },
+      { id: 'OTHER', labelKey: 'common.values.other', value: 'OTHER' },
     ]);
   });
 });

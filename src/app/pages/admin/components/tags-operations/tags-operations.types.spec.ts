@@ -160,7 +160,7 @@ describe('tags types helpers', () => {
 
     expect(createTagTypeOptions()[0]).toEqual({
       id: 'STACK',
-      labelKey: 'pages.admin.tags.fields.type.options.STACK',
+      labelKey: 'common.fields.stack',
       value: 'STACK',
     });
   });

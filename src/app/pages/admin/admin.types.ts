@@ -46,9 +46,6 @@ export const ADMIN_ENTITY_ENDPOINT_METHODS_LABEL = 'POST/GET/PUT/DELETE';
 
 export type AdminEntityRelationMode = AdminEntityDefinition['relationMode'];
 
-export type AdminEntityTitleTranslationKey =
-  `pages.admin.entities.${AdminEntityDefinition['id']}.title`;
-
 export type AdminEntityDescriptionTranslationKey =
   `pages.admin.entities.${AdminEntityDefinition['id']}.description`;
 
@@ -63,7 +60,6 @@ export type AdminSessionFactDescriptionTranslationKey =
 export type AdminRelationModeTranslationKey = `pages.admin.relationMode.${AdminEntityRelationMode}`;
 
 export type AdminTranslationKey =
-  | AdminEntityTitleTranslationKey
   | AdminEntityDescriptionTranslationKey
   | AdminEntityOperationTranslationKey
   | AdminSessionFactTitleTranslationKey

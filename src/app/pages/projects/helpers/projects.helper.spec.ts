@@ -19,7 +19,7 @@ describe('projects helper', () => {
     expect(card.environmentLabel).toBe('Full stack');
     expect(card.stackGroups).toEqual([
       {
-        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        labelKey: 'taxonomy.skills.stack.frontEnd',
         technologies: [
           jasmine.objectContaining({
             slug: 'react',
@@ -32,7 +32,7 @@ describe('projects helper', () => {
         ],
       },
       {
-        labelKey: 'pages.experiences.detail.stackGroups.backend',
+        labelKey: 'taxonomy.skills.stack.backEnd',
         technologies: [
           jasmine.objectContaining({
             slug: 'node',
@@ -45,7 +45,7 @@ describe('projects helper', () => {
         ],
       },
       {
-        labelKey: 'pages.experiences.detail.stackGroups.others',
+        labelKey: 'taxonomy.skills.stack.others',
         technologies: [
           jasmine.objectContaining({
             slug: 'vercel',
@@ -158,7 +158,7 @@ describe('projects helper', () => {
 
     expect(card.stackGroups).toEqual([
       {
-        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        labelKey: 'taxonomy.skills.stack.databases',
         technologies: [
           jasmine.objectContaining({
             slug: 'custom-database',

@@ -31,6 +31,7 @@ import { TechnologyContextsOperationsModalComponent } from './components/technol
 import {
   buildTechnologyContextFormValue,
   buildTechnologyContextMutationPayload,
+  TECHNOLOGY_CONTEXT_LABEL_KEYS,
   TECHNOLOGY_CONTEXT_VALUES,
   TechnologyContextFormValue,
   TechnologyContextsOperationsModalMode,
@@ -80,7 +81,7 @@ export class TechnologyContextsOperationsComponent implements OnInit {
     return translateAdminSelectOptions(
       createAdminSelectOptionDefinitions(
         TECHNOLOGY_CONTEXT_VALUES,
-        (value) => `pages.admin.technologyContexts.options.${value}` as AppTranslationKey,
+        (value) => TECHNOLOGY_CONTEXT_LABEL_KEYS[value],
       ),
       this.translation.instant.bind(this.translation),
     );

@@ -7,6 +7,18 @@ DADOS:
 -Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
+*Idiomas:
+-Documentar padrão dos idiomas.
+
+*Experiences:
+-Alinhar verticalmente ícone de calendário com as datas.
+-Criar campos de data (startDate e endDate) na tabela de job e inserir os mesmos dados das datas respectivas das experiences relacionadas (não sempre pra toda experience, mas pra essas que já existem faça assim).
+-Como subtítulo da experiência, colocar o cargo/job (mais recente) relacionado ao invés de repetir o título da experiência/company (tanto na tela como no modal).
+-Listar Cargos/Jobs no modal também, com o range de data de cada um.
+-Na tela colocar o campo de resumo de experiência e no modal colocar a descrição detalhada da experiência.
+-No modal de detalhes de experiences fazer a tag de customer ficar clicável (abrindo o modal de customer respectivo), igual as outras de technologias nesse mesmo modal e igual também às tags de customer da tela de experiences.
+-No modal de experiêncies deixar os projetos clicáveis também (abrindo o modal de projeto respectivo).
+
 *Skills:
 -Colocar scroll nas sessões de Education e Languages, quando houverem mais dados neles. Ou redistribuir os cards de forma mais organizada.
 -Talvez separar em abas ou paginar a tela de skills. Avaliar paginação de cada tela e informação.

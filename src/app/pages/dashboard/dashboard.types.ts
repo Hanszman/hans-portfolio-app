@@ -104,12 +104,12 @@ export interface DashboardChartViewModel {
 
 export const DASHBOARD_SUMMARY_LABEL_KEYS = {
   projects: 'common.entities.projects',
-  experiences: 'pages.dashboard.snapshot.metrics.experiences',
+  experiences: 'common.entities.experiences',
   technologies: 'common.entities.technologies',
   formations: 'pages.dashboard.snapshot.metrics.formations',
-  customers: 'pages.dashboard.snapshot.metrics.customers',
+  customers: 'common.entities.customers',
   jobs: 'pages.dashboard.snapshot.metrics.jobs',
-  spokenLanguages: 'pages.dashboard.snapshot.metrics.languages',
+  spokenLanguages: 'common.entities.languages',
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const DASHBOARD_SUMMARY_ICON_NAMES = {
@@ -133,8 +133,8 @@ export const DASHBOARD_ENVIRONMENT_LABEL_KEYS: Record<
   string,
   AppTranslationKey
 > = {
-  FRONTEND: 'taxonomy.experiences.projectEnvironment.frontend',
-  BACKEND: 'taxonomy.experiences.projectEnvironment.backend',
+  FRONTEND: 'taxonomy.skills.stack.frontEnd',
+  BACKEND: 'taxonomy.skills.stack.backEnd',
   FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
 };
 
@@ -156,7 +156,7 @@ export const DASHBOARD_FREQUENCY_LABEL_KEYS: Record<
 export const DASHBOARD_SOURCE_LABEL_KEYS: Record<string, AppTranslationKey> = {
   EXPERIENCE: 'taxonomy.dashboard.source.experience',
   PROJECT: 'taxonomy.dashboard.source.project',
-  FORMATION: 'taxonomy.dashboard.source.formation',
+  FORMATION: 'common.entities.formation',
 };
 
 const DASHBOARD_STACK_ICON_NAMES: Record<string, string> = {

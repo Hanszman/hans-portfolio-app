@@ -119,7 +119,7 @@ export const SKILL_FILTER_ALL_LABEL_KEYS = {
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFilterValue>[] = [
-  { labelKey: 'taxonomy.skills.stack.all', value: 'ALL' },
+  { labelKey: 'common.filters.all', value: 'ALL' },
   { labelKey: 'taxonomy.skills.stack.frontEnd', value: 'FRONT_END' },
   { labelKey: 'taxonomy.skills.stack.backEnd', value: 'BACK_END' },
   { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
@@ -129,15 +129,15 @@ export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFi
 ];
 
 export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFilterValue>[] = [
-  { labelKey: 'taxonomy.skills.level.all', value: 'ALL' },
+  { labelKey: 'common.filters.all', value: 'ALL' },
   { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
   { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
   { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
-  { labelKey: 'taxonomy.skills.level.studying', value: 'STUDYING' },
+  { labelKey: 'common.states.studying', value: 'STUDYING' },
 ];
 
 export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilterValue>[] = [
-  { labelKey: 'taxonomy.skills.type.all', value: 'ALL' },
+  { labelKey: 'common.filters.all', value: 'ALL' },
   {
     labelKey: 'taxonomy.skills.type.programmingLanguages',
     value: 'PROGRAMMING_LANGUAGES',
@@ -177,7 +177,7 @@ export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilt
     value: 'DEVELOPMENT_PLATFORMS',
   },
   { labelKey: 'taxonomy.skills.type.protocols', value: 'PROTOCOLS' },
-  { labelKey: 'taxonomy.skills.type.others', value: 'OTHERS' },
+  { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
 ];
 
 export const SKILL_FALLBACK_LABEL_KEYS = {
@@ -204,7 +204,7 @@ export const SKILL_CATEGORY_LABEL_KEYS: Record<string, AppTranslationKey> = {
 };
 
 export const SKILL_STACK_LABEL_KEYS: Record<SkillStackFilterValue, AppTranslationKey> = {
-  ALL: 'taxonomy.skills.stack.all',
+  ALL: 'common.filters.all',
   FRONT_END: 'taxonomy.skills.stack.frontEnd',
   BACK_END: 'taxonomy.skills.stack.backEnd',
   DATABASES: 'taxonomy.skills.stack.databases',
@@ -214,7 +214,7 @@ export const SKILL_STACK_LABEL_KEYS: Record<SkillStackFilterValue, AppTranslatio
 };
 
 export const SKILL_TYPE_LABEL_KEYS: Record<SkillTypeFilterValue, AppTranslationKey> = {
-  ALL: 'taxonomy.skills.type.all',
+  ALL: 'common.filters.all',
   PROGRAMMING_LANGUAGES: 'taxonomy.skills.type.programmingLanguages',
   WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
   LIBRARIES: 'taxonomy.skills.type.libraries',
@@ -233,14 +233,14 @@ export const SKILL_TYPE_LABEL_KEYS: Record<SkillTypeFilterValue, AppTranslationK
   DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
   DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
   PROTOCOLS: 'taxonomy.skills.type.protocols',
-  OTHERS: 'taxonomy.skills.type.others',
+  OTHERS: 'taxonomy.skills.stack.others',
 };
 
 export const SKILL_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
   BEGINNER: 'taxonomy.skills.level.beginner',
-  STUDYING: 'taxonomy.skills.level.studying',
+  STUDYING: 'common.states.studying',
 };
 
 export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
@@ -248,7 +248,7 @@ export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   RARE: 'taxonomy.skills.frequency.rare',
   PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
-  STUDYING: 'taxonomy.skills.frequency.studying',
+  STUDYING: 'common.states.studying',
 };
 
 export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> = {

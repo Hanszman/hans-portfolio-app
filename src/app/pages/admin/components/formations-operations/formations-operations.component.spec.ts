@@ -484,11 +484,11 @@ describe('FormationsOperationsComponent', () => {
 
     component.updateDegreeType('BACHELOR');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredSummaryPt');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredPortugueseSummary');
 
     component.updateSummaryPt('Resumo PT');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.requiredSummaryEn');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredEnglishSummary');
 
     component.updateSummaryEn('Summary EN');
 
@@ -504,7 +504,7 @@ describe('FormationsOperationsComponent', () => {
     component.updateEndDate('2020-01-02');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.formations.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
 
     TestBed.resetTestingModule();
     adminSessionServiceMock.accessToken.and.returnValue(null);
@@ -554,7 +554,7 @@ describe('FormationsOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.formations.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

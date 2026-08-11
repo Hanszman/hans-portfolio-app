@@ -227,7 +227,7 @@ describe('ProjectsOperationsComponent', () => {
     session.accessToken.and.returnValue(null);
     c.openCreateModal();
     await c.submitModal();
-    expect(c.modalFeedbackKey()).toBe('pages.admin.projects.feedback.missingSession');
+    expect(c.modalFeedbackKey()).toBe('common.feedback.missingAdminSessionShort');
   });
 
   it('surfaces validation and errors', async () => {

@@ -45,7 +45,7 @@
 
       <section class="experience-modal-section">
         <span class="experience-modal-section-label">{{
-          'pages.experiences.detail.projects' | translate
+          'common.sections.projects' | translate
         }}</span>
         <div class="experience-modal-projects">
           @for (project of currentItem.projects; track project.slug) {
@@ -63,7 +63,7 @@
 
       <section class="experience-modal-section">
         <span class="experience-modal-section-label">{{
-          'pages.experiences.detail.clients' | translate
+          'common.sections.clients' | translate
         }}</span>
         <div class="experience-modal-chip-list">
           @for (customer of currentItem.customers; track customer.slug) {
@@ -78,7 +78,7 @@
 
       <section class="experience-modal-section">
         <span class="experience-modal-section-label">
-          {{ 'pages.experiences.detail.techStack' | translate }}
+          {{ 'common.sections.techStack' | translate }}
         </span>
         <div class="experience-modal-stack-groups">
           @for (group of currentItem.technologyGroups; track group.labelKey) {

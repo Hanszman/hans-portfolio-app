@@ -429,7 +429,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.updateMimeType('image/svg+xml');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
   });
 
   it('should expose load, save and delete failures', async () => {
@@ -610,7 +610,7 @@ describe('ImageAssetsOperationsComponent', () => {
     adminSessionServiceMock.accessToken.and.returnValue(null);
     component.openCreateModal();
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.missingSession');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.missingAdminSession');
 
     adminSessionServiceMock.accessToken.and.returnValue('token-123');
     component.openCreateModal();

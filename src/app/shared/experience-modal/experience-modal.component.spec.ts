@@ -38,7 +38,7 @@ describe('ExperienceModalComponent', () => {
       ],
       technologyGroups: [
         {
-          labelKey: 'pages.experiences.detail.techStack',
+          labelKey: 'common.sections.techStack',
           technologies: [{ slug: 'angular', name: 'Angular' }],
         },
       ],

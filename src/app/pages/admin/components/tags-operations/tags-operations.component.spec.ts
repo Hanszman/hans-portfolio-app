@@ -392,7 +392,7 @@ describe('TagsOperationsComponent', () => {
     component.updateType('STACK');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.tags.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
 
     TestBed.resetTestingModule();
 
@@ -427,7 +427,7 @@ describe('TagsOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.tags.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

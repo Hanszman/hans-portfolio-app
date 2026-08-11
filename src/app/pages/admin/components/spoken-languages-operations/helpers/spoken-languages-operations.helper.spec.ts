@@ -390,7 +390,7 @@ describe('spoken languages helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.spokenLanguages.feedback.requiredNameEs',
+      errorKey: 'common.feedback.requiredSpanishName',
     });
 
     expect(
@@ -438,7 +438,7 @@ describe('spoken languages helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.spokenLanguages.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
   });
 });

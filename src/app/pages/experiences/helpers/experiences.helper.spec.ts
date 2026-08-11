@@ -67,7 +67,7 @@ describe('experiences helper', () => {
       })),
     ).toEqual([
       {
-        labelKey: 'pages.experiences.detail.stackGroups.frontend',
+        labelKey: 'taxonomy.skills.stack.frontEnd',
         technologies: [
           'Angular',
           'TypeScript',
@@ -79,15 +79,15 @@ describe('experiences helper', () => {
         ],
       },
       {
-        labelKey: 'pages.experiences.detail.stackGroups.backend',
+        labelKey: 'taxonomy.skills.stack.backEnd',
         technologies: ['Node.js', 'Knex.js', 'Swagger'],
       },
       {
-        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        labelKey: 'taxonomy.skills.stack.databases',
         technologies: ['SQL Server'],
       },
       {
-        labelKey: 'pages.experiences.detail.stackGroups.others',
+        labelKey: 'taxonomy.skills.stack.others',
         technologies: ['Microsoft Azure'],
       },
     ]);
@@ -151,7 +151,7 @@ describe('experiences helper', () => {
       })),
     ).toEqual([
       {
-        labelKey: 'pages.experiences.detail.stackGroups.databases',
+        labelKey: 'taxonomy.skills.stack.databases',
         technologies: ['Oracle DB'],
       },
     ]);

@@ -48,6 +48,27 @@ export type TechnologyOptionValue =
   | (typeof TECHNOLOGY_LEVEL_VALUES)[number]
   | (typeof TECHNOLOGY_FREQUENCY_VALUES)[number];
 
+export const TECHNOLOGY_OPTION_LABEL_KEYS = {
+  LANGUAGE: 'taxonomy.skills.category.language',
+  FRAMEWORK: 'taxonomy.skills.category.framework',
+  LIBRARY: 'taxonomy.skills.category.library',
+  TOOL: 'pages.admin.technologies.options.TOOL',
+  DATABASE: 'taxonomy.skills.category.database',
+  CLOUD: 'pages.admin.technologies.options.CLOUD',
+  TESTING: 'pages.admin.technologies.options.TESTING',
+  DEVOPS: 'taxonomy.skills.category.devops',
+  STYLING: 'pages.admin.technologies.options.STYLING',
+  ARCHITECTURE: 'pages.admin.technologies.options.ARCHITECTURE',
+  OTHER: 'common.values.other',
+  BASIC: 'taxonomy.skills.level.basic',
+  INTERMEDIATE: 'taxonomy.skills.level.intermediate',
+  ADVANCED: 'taxonomy.skills.level.advanced',
+  FREQUENT: 'taxonomy.skills.frequency.frequent',
+  OCCASIONAL: 'taxonomy.skills.frequency.occasional',
+  PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
+  STUDYING: 'pages.admin.technologies.options.STUDYING',
+} as const satisfies Record<TechnologyOptionValue, AppTranslationKey>;
+
 export interface TechnologiesOperationsFormValue {
   slug: string;
   name: string;
@@ -71,13 +92,13 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
     required: true,
   },
   name: {
-    labelKey: 'pages.admin.technologies.fields.name.label',
+    labelKey: 'common.fields.name',
     placeholderKey: 'pages.admin.technologies.fields.name.placeholder',
     required: true,
   },
-  category: { labelKey: 'pages.admin.technologies.fields.category.label', required: true },
-  level: { labelKey: 'pages.admin.technologies.fields.level.label', required: false },
-  frequency: { labelKey: 'pages.admin.technologies.fields.frequency.label', required: false },
+  category: { labelKey: 'common.fields.category', required: true },
+  level: { labelKey: 'common.fields.level', required: false },
+  frequency: { labelKey: 'common.fields.frequency', required: false },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
     placeholderKey: 'pages.admin.technologies.fields.sortOrder.placeholder',

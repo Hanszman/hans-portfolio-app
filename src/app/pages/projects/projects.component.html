@@ -24,7 +24,7 @@
       ></hans-input>
 
       <div class="projects-filter-row">
-        <span>{{ 'pages.projects.filters.environment' | translate }}:</span>
+        <span>{{ 'common.fields.environment' | translate }}:</span>
 
         <div class="projects-filter-list">
           @for (filter of contextFilters; track filter.value) {
@@ -40,9 +40,9 @@
         </div>
       </div>
 
-      <span class="projects-total">
+      <span class="projects-total lowercase">
         {{ filteredCountLabel() }}
-        {{ 'pages.projects.filters.total' | translate }}
+        {{ 'common.entities.projects' | translate }}
       </span>
     </section>
 

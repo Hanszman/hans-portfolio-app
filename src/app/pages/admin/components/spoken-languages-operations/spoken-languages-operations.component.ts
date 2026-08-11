@@ -252,7 +252,7 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback('pages.admin.spokenLanguages.feedback.missingSession');
+      this.setModalErrorFeedback('common.feedback.missingAdminSession');
       return;
     }
 

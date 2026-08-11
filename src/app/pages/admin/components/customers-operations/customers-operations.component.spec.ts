@@ -413,18 +413,18 @@ describe('CustomersOperationsComponent', () => {
 
     component.updateName('Enterprise Client');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.requiredSummaryPt');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredPortugueseSummary');
 
     component.updateSummaryPt('Cliente corporativo');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.requiredSummaryEn');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredEnglishSummary');
 
     component.updateSummaryEn('Corporate client');
 
     component.updateSummaryEs('Corporate client');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
 
     TestBed.resetTestingModule();
 
@@ -471,7 +471,7 @@ describe('CustomersOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.customers.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

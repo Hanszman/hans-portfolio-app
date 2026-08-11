@@ -11,7 +11,7 @@ describe('EducationModalComponent', () => {
     title: 'Information Systems',
     subtitle: 'University',
     image: null,
-    details: [{ labelKey: 'pages.skills.education.detail.summary' as const, value: 'Degree' }],
+    details: [{ labelKey: 'common.fields.summary' as const, value: 'Degree' }],
     galleryItems: [{ id: 'image', imageSrc: imageSource, imageAlt: 'Degree' }],
   };
 

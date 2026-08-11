@@ -138,7 +138,7 @@ export class LinksOperationsModalComponent {
   );
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() => {
     this.translation.locale();
-    const emptyText = this.translation.instant('pages.admin.links.card.emptyText');
+    const emptyText = this.translation.instant('common.empty.unregisteredText');
 
     return this.links().map((link) => ({
       id: link.id,
@@ -152,7 +152,7 @@ export class LinksOperationsModalComponent {
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
     () => {
       this.translation.locale();
-      const emptyText = this.translation.instant('pages.admin.links.card.emptyText');
+      const emptyText = this.translation.instant('common.empty.unregisteredText');
       const emptyRelations = this.translation.instant('pages.admin.links.card.emptyRelations');
 
       return this.links().map((link) => ({
@@ -163,7 +163,7 @@ export class LinksOperationsModalComponent {
             this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
           ) || emptyText,
         fields: [
-          { labelKey: 'pages.admin.links.card.url', value: link.url, title: link.url },
+          { labelKey: 'common.fields.url', value: link.url, title: link.url },
           {
             labelKey: 'pages.admin.operations.localized.label',
             value:
@@ -172,21 +172,21 @@ export class LinksOperationsModalComponent {
               ) || emptyText,
           },
           {
-            labelKey: 'pages.admin.operations.localized.description',
+            labelKey: 'common.fields.description',
             value:
               resolveAdminLocalizedValue(
                 this.translation.locale(), link.descriptionPt, link.descriptionEn,
                 link.descriptionEs,
               ) || emptyText,
           },
-          { labelKey: 'pages.admin.links.card.type', value: link.type },
+          { labelKey: 'common.fields.type', value: link.type },
           { labelKey: 'common.fields.sortOrder', value: link.sortOrderLabel },
           {
             labelKey: 'common.entities.projects',
             value: link.projectLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.links.card.experiences',
+            labelKey: 'common.entities.experiences',
             value: link.experienceLabels.join(', ') || emptyRelations,
           },
           {
@@ -194,7 +194,7 @@ export class LinksOperationsModalComponent {
             value: link.technologyLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.links.card.formations',
+            labelKey: 'common.entities.formations',
             value: link.formationLabels.join(', ') || emptyRelations,
           },
         ],
@@ -210,7 +210,7 @@ export class LinksOperationsModalComponent {
           title:
             resolveAdminLocalizedValue(
               this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
-            ) || this.translation.instant('pages.admin.links.card.emptyText'),
+            ) || this.translation.instant('common.empty.unregisteredText'),
           subtitle: link.url,
         }
       : null;

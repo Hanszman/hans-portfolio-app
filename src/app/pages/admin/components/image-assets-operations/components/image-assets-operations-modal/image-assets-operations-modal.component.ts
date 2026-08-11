@@ -154,7 +154,7 @@ export class ImageAssetsOperationsModalComponent {
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
     () => {
       this.translation.locale();
-      const emptyText = this.translation.instant('pages.admin.imageAssets.card.emptyText');
+      const emptyText = this.translation.instant('common.empty.unregisteredText');
       const emptyRelations = this.translation.instant(
         'pages.admin.imageAssets.card.emptyRelations',
       );
@@ -173,18 +173,18 @@ export class ImageAssetsOperationsModalComponent {
         },
         fields: [
           {
-            labelKey: 'pages.admin.imageAssets.card.fileName',
+            labelKey: 'common.fields.fileName',
             value: imageAsset.fileName,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.filePath',
+            labelKey: 'common.fields.filePath',
             value: imageAsset.filePath,
             title: imageAsset.filePath,
           },
-          { labelKey: 'pages.admin.imageAssets.card.folder', value: imageAsset.folder },
-          { labelKey: 'pages.admin.imageAssets.card.kind', value: imageAsset.kind },
+          { labelKey: 'common.fields.folder', value: imageAsset.folder },
+          { labelKey: 'common.fields.kind', value: imageAsset.kind },
           {
-            labelKey: 'pages.admin.imageAssets.card.mimeType',
+            labelKey: 'common.fields.mimeType',
             value: imageAsset.mimeType || emptyText,
           },
           {
@@ -215,7 +215,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.projectLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.experiences',
+            labelKey: 'common.entities.experiences',
             value: imageAsset.experienceLabels.join(', ') || emptyRelations,
           },
           {
@@ -223,7 +223,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.technologyLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.formations',
+            labelKey: 'common.entities.formations',
             value: imageAsset.formationLabels.join(', ') || emptyRelations,
           },
           {
@@ -231,7 +231,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.spokenLanguageLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.imageAssets.card.customers',
+            labelKey: 'common.entities.customers',
             value: imageAsset.customerLabels.join(', ') || emptyRelations,
           },
           {

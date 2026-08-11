@@ -574,7 +574,7 @@ describe('jobs operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredNameEs',
+      errorKey: 'common.feedback.requiredSpanishName',
     });
 
     expect(
@@ -593,7 +593,7 @@ describe('jobs operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredSummaryPt',
+      errorKey: 'common.feedback.requiredPortugueseSummary',
     });
 
     expect(
@@ -612,7 +612,7 @@ describe('jobs operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredSummaryEn',
+      errorKey: 'common.feedback.requiredEnglishSummary',
     });
 
     expect(
@@ -631,7 +631,7 @@ describe('jobs operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.requiredSummaryEs',
+      errorKey: 'common.feedback.requiredSummaryEs',
     });
 
     expect(
@@ -650,7 +650,7 @@ describe('jobs operations helper', () => {
       }),
     ).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.jobs.feedback.invalidSortOrder',
+      errorKey: 'common.feedback.invalidIntegerSortOrder',
     });
   });
 });

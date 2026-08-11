@@ -62,12 +62,12 @@ export const TAGS_OPERATIONS_FIELDS = {
     required: true,
   },
   nameEs: {
-    labelKey: 'pages.admin.tags.fields.nameEs.label',
+    labelKey: 'common.fields.spanishName',
     placeholderKey: 'pages.admin.tags.fields.nameEs.placeholder',
     required: true,
   },
   type: {
-    labelKey: 'pages.admin.tags.fields.type.label',
+    labelKey: 'common.fields.type',
     required: true,
   },
   sortOrder: {
@@ -132,7 +132,14 @@ export const createEmptyTagsOperationsFormValue = (): TagsOperationsFormValue =>
 export const createTagTypeOptions = (): readonly TagTypeOptionDefinition[] =>
   createAdminSelectOptionDefinitions(
     TAG_TYPE_VALUES,
-    (value) => `pages.admin.tags.fields.type.options.${value}` as AppTranslationKey,
+    (value) =>
+      value === 'STACK'
+        ? 'common.fields.stack'
+        : value === 'HIGHLIGHT'
+          ? 'common.fields.highlight'
+        : value === 'OTHER'
+          ? 'common.values.other'
+        : (`pages.admin.tags.fields.type.options.${value}` as AppTranslationKey),
   );
 
 export const resolveTagNamePt = (tag: TagRecord): string => tag.namePt ?? tag.labelPt ?? '';

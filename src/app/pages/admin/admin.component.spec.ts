@@ -571,7 +571,7 @@ describe('AdminComponent', () => {
     expect(compiled.textContent).toContain('Tags');
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Image assets');
-    expect(compiled.textContent).toContain('Spoken languages');
+    expect(compiled.textContent).toContain('Languages');
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain('Jobs');
     expect(compiled.textContent).toContain('Formations');

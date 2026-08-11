@@ -260,7 +260,7 @@ export class TagsOperationsComponent implements OnInit {
     const accessToken = this.adminSessionService.accessToken();
 
     if (!accessToken) {
-      this.setModalErrorFeedback('pages.admin.tags.feedback.missingSession');
+      this.setModalErrorFeedback('common.feedback.missingAdminSession');
       return;
     }
 

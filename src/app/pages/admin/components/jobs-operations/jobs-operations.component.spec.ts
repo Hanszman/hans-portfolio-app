@@ -428,18 +428,18 @@ describe('JobsOperationsComponent', () => {
 
     component.updateNameEs('Front-End Engineer');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.requiredSummaryPt');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredPortugueseSummary');
 
     component.updateSummaryPt('Interfaces publicas e privadas.');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.requiredSummaryEn');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredEnglishSummary');
 
     component.updateSummaryEn('Public and private interfaces.');
 
     component.updateSummaryEs('Public and private interfaces.');
     component.updateSortOrder('abc');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.jobs.feedback.invalidSortOrder');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
 
     TestBed.resetTestingModule();
 
@@ -486,7 +486,7 @@ describe('JobsOperationsComponent', () => {
     await missingSessionComponent.submitModal();
 
     expect(missingSessionComponent.modalFeedbackKey()).toBe(
-      'pages.admin.jobs.feedback.missingSession',
+      'common.feedback.missingAdminSession',
     );
   });
 

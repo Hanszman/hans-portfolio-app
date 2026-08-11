@@ -1,9 +1,9 @@
 import { AppTranslationKey } from '../../core/translation/translation.types';
 
 export const NAVIGATION_LABEL_KEY_BY_PATH: Record<string, AppTranslationKey> = {
-  '/home': 'header.navigation.home',
-  '/experiences': 'header.navigation.experiences',
-  '/skills': 'header.navigation.skills',
+  '/home': 'common.entities.home',
+  '/experiences': 'common.entities.experiences',
+  '/skills': 'common.entities.skills',
   '/projects': 'common.entities.projects',
-  '/dashboard': 'header.navigation.dashboard',
+  '/dashboard': 'common.entities.dashboard',
 };

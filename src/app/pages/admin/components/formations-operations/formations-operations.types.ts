@@ -67,42 +67,42 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
     required: true,
   },
   institution: {
-    labelKey: 'pages.admin.formations.fields.institution.label',
+    labelKey: 'common.fields.institution',
     placeholderKey: 'pages.admin.formations.fields.institution.placeholder',
     required: true,
   },
   titlePt: {
-    labelKey: 'pages.admin.formations.fields.titlePt.label',
+    labelKey: 'pages.admin.projects.fields.titlePt.label',
     placeholderKey: 'pages.admin.formations.fields.titlePt.placeholder',
     required: true,
   },
   titleEn: {
-    labelKey: 'pages.admin.formations.fields.titleEn.label',
+    labelKey: 'pages.admin.projects.fields.titleEn.label',
     placeholderKey: 'pages.admin.formations.fields.titleEn.placeholder',
     required: true,
   },
   titleEs: {
-    labelKey: 'pages.admin.formations.fields.titleEs.label',
+    labelKey: 'common.fields.spanishTitle',
     placeholderKey: 'pages.admin.formations.fields.titleEs.placeholder',
     required: true,
   },
   degreeType: {
-    labelKey: 'pages.admin.formations.fields.degreeType.label',
+    labelKey: 'common.fields.degreeType',
     required: true,
   },
   summaryPt: {
-    labelKey: 'pages.admin.formations.fields.summaryPt.label',
+    labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.formations.fields.summaryPt.placeholder',
     required: true,
   },
   summaryEn: {
-    labelKey: 'pages.admin.formations.fields.summaryEn.label',
+    labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.formations.fields.summaryEn.placeholder',
     required: true,
   },
   summaryEs: {
-    labelKey: 'pages.admin.formations.fields.summaryEs.label',
-    placeholderKey: 'pages.admin.formations.fields.summaryEs.placeholder',
+    labelKey: 'common.fields.spanishSummary',
+    placeholderKey: 'common.placeholders.spanishSummary',
     required: true,
   },
   startDate: {
@@ -117,7 +117,7 @@ export const FORMATIONS_OPERATIONS_FIELDS = {
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.formations.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.integerSortOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
@@ -204,7 +204,9 @@ export const createFormationDegreeTypeOptions =
     createAdminSelectOptionDefinitions(
       FORMATION_DEGREE_TYPE_VALUES,
       (value) =>
-        `pages.admin.formations.fields.degreeType.options.${value}` as AppTranslationKey,
+        value === 'OTHER'
+          ? 'common.values.other'
+          : (`pages.admin.formations.fields.degreeType.options.${value}` as AppTranslationKey),
     );
 
 export const createFormationTechnologyOptionViewModel = (

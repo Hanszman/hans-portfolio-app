@@ -81,6 +81,7 @@ export class ExperiencesOperationsModalComponent {
   protected readonly datePickerFormat = computed(() =>
     resolveDatePickerFormat(this.translation.locale()),
   );
+  protected readonly datePickerLocale = computed(() => this.translation.locale());
   protected readonly fieldDefinitions = EXPERIENCES_OPERATIONS_FIELDS;
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
@@ -139,19 +140,19 @@ export class ExperiencesOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.operations.localized.summary',
+            labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), experience.summaryPt, experience.summaryEn, experience.summaryEs,
             ),
           },
           {
-            labelKey: 'pages.admin.operations.localized.description',
+            labelKey: 'common.fields.description',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), experience.descriptionPt, experience.descriptionEn, experience.descriptionEs,
             ),
           },
           {
-            labelKey: 'pages.admin.operations.date',
+            labelKey: 'common.fields.date',
             value: formatAdminDateRangeForDisplay(
               experience.startDate,
               experience.endDate,
@@ -163,7 +164,7 @@ export class ExperiencesOperationsModalComponent {
             value: booleanLabel(experience.isCurrent),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.highlight.label',
+            labelKey: 'common.fields.highlightStatus',
             value: booleanLabel(experience.highlight),
           },
           {
@@ -171,15 +172,15 @@ export class ExperiencesOperationsModalComponent {
             value: String(experience.sortOrder ?? 0),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.technologies.label',
+            labelKey: 'common.relations.technologies',
             value: relationValue(experience.technologies, 'technology'),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.projects.label',
+            labelKey: 'pages.experiences.customer.projects',
             value: relationValue(experience.projects, 'project'),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.customers.label',
+            labelKey: 'common.relations.customers',
             value: relationValue(experience.customers, 'customer'),
           },
           {
@@ -187,11 +188,11 @@ export class ExperiencesOperationsModalComponent {
             value: relationValue(experience.jobs, 'job'),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.links.label',
+            labelKey: 'common.relations.links',
             value: relationValue(experience.links, 'link'),
           },
           {
-            labelKey: 'pages.admin.experiences.fields.imageAssets.label',
+            labelKey: 'common.relations.imageAssets',
             value: relationValue(experience.imageAssets, 'imageAsset'),
           },
         ],

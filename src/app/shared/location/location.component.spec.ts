@@ -13,7 +13,7 @@ describe('LocationComponent', () => {
 
   it('should render the translated location', () => {
     const fixture = TestBed.createComponent(LocationComponent);
-    fixture.componentRef.setInput('labelKey', 'footer.location');
+    fixture.componentRef.setInput('labelKey', 'common.location.beloHorizonteBrazil');
     fixture.detectChanges();
 
     expect((fixture.nativeElement as HTMLElement).textContent).toContain(

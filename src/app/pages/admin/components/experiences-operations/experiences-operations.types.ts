@@ -59,63 +59,63 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
     required: true,
   },
   titlePt: {
-    labelKey: 'pages.admin.experiences.fields.titlePt.label',
+    labelKey: 'pages.admin.projects.fields.titlePt.label',
     placeholderKey: 'pages.admin.experiences.fields.titlePt.placeholder',
     required: true,
   },
   titleEn: {
-    labelKey: 'pages.admin.experiences.fields.titleEn.label',
+    labelKey: 'pages.admin.projects.fields.titleEn.label',
     placeholderKey: 'pages.admin.experiences.fields.titleEn.placeholder',
     required: true,
   },
   titleEs: {
-    labelKey: 'pages.admin.experiences.fields.titleEs.label',
+    labelKey: 'common.fields.spanishTitle',
     placeholderKey: 'pages.admin.experiences.fields.titleEs.placeholder',
     required: true,
   },
   summaryPt: {
-    labelKey: 'pages.admin.experiences.fields.summaryPt.label',
+    labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.experiences.fields.summaryPt.placeholder',
     required: true,
   },
   summaryEn: {
-    labelKey: 'pages.admin.experiences.fields.summaryEn.label',
+    labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.experiences.fields.summaryEn.placeholder',
     required: true,
   },
   summaryEs: {
-    labelKey: 'pages.admin.experiences.fields.summaryEs.label',
-    placeholderKey: 'pages.admin.experiences.fields.summaryEs.placeholder',
+    labelKey: 'common.fields.spanishSummary',
+    placeholderKey: 'common.placeholders.spanishSummary',
     required: true,
   },
   descriptionPt: {
-    labelKey: 'pages.admin.experiences.fields.descriptionPt.label',
+    labelKey: 'pages.admin.links.fields.descriptionPt.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionPt.placeholder',
     required: true,
   },
   descriptionEn: {
-    labelKey: 'pages.admin.experiences.fields.descriptionEn.label',
+    labelKey: 'pages.admin.links.fields.descriptionEn.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionEn.placeholder',
     required: true,
   },
   descriptionEs: {
-    labelKey: 'pages.admin.experiences.fields.descriptionEs.label',
+    labelKey: 'common.fields.spanishDescription',
     placeholderKey: 'pages.admin.experiences.fields.descriptionEs.placeholder',
     required: true,
   },
   startDate: {
-    labelKey: 'pages.admin.experiences.fields.startDate.label',
-    placeholderKey: 'pages.admin.experiences.fields.startDate.placeholder',
+    labelKey: 'common.fields.startDate',
+    placeholderKey: 'common.placeholders.startDate',
     required: true,
   },
   endDate: {
-    labelKey: 'pages.admin.experiences.fields.endDate.label',
-    placeholderKey: 'pages.admin.experiences.fields.endDate.placeholder',
+    labelKey: 'common.fields.endDate',
+    placeholderKey: 'common.placeholders.endDate',
     required: false,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.experiences.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.displayOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
@@ -308,14 +308,14 @@ export const buildExperiencesMutationPayload = (
       };
   const sortOrder = Number.parseInt(form.sortOrder.trim(), 10);
   if (!Number.isInteger(sortOrder))
-    return { isValid: false, errorKey: 'pages.admin.experiences.feedback.invalidSortOrder' };
+    return { isValid: false, errorKey: 'common.feedback.invalidSortOrder' };
   if (!form.startDate.trim())
     return { isValid: false, errorKey: 'pages.admin.experiences.feedback.requiredStartDate' };
 
   const dateRangeResult = validateAdminDateRange(
     form.startDate,
     form.endDate,
-    'pages.admin.experiences.feedback.invalidDateRange',
+    'common.feedback.invalidDateRange',
   );
 
   if (!dateRangeResult.isValid) {

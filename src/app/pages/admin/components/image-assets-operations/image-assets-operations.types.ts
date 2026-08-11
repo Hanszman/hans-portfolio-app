@@ -62,22 +62,22 @@ export interface ImageAssetsOperationsFormValue {
 
 export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
   fileName: {
-    labelKey: 'pages.admin.imageAssets.fields.fileName.label',
+    labelKey: 'common.fields.fileName',
     placeholderKey: 'pages.admin.imageAssets.fields.fileName.placeholder',
     required: true,
   },
   filePath: {
-    labelKey: 'pages.admin.imageAssets.fields.filePath.label',
+    labelKey: 'common.fields.filePath',
     placeholderKey: 'pages.admin.imageAssets.fields.filePath.placeholder',
     required: true,
   },
   folder: {
-    labelKey: 'pages.admin.imageAssets.fields.folder.label',
+    labelKey: 'common.fields.folder',
     placeholderKey: 'pages.admin.imageAssets.fields.folder.placeholder',
     required: true,
   },
   kind: {
-    labelKey: 'pages.admin.imageAssets.fields.kind.label',
+    labelKey: 'common.fields.kind',
     required: true,
   },
   altPt: {
@@ -111,7 +111,7 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
     required: false,
   },
   mimeType: {
-    labelKey: 'pages.admin.imageAssets.fields.mimeType.label',
+    labelKey: 'common.fields.mimeType',
     placeholderKey: 'pages.admin.imageAssets.fields.mimeType.placeholder',
     required: true,
   },
@@ -127,7 +127,7 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.imageAssets.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.integerSortOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;

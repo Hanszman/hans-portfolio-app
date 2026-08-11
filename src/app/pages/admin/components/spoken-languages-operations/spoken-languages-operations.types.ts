@@ -24,6 +24,14 @@ export const SPOKEN_LANGUAGE_PROFICIENCY_VALUES = [
 
 export type SpokenLanguageProficiencyValue = (typeof SPOKEN_LANGUAGE_PROFICIENCY_VALUES)[number];
 
+export const SPOKEN_LANGUAGE_PROFICIENCY_LABEL_KEYS = {
+  NATIVE: 'pages.admin.spokenLanguages.fields.proficiency.options.NATIVE',
+  FLUENT: 'pages.admin.spokenLanguages.fields.proficiency.options.FLUENT',
+  ADVANCED: 'taxonomy.skills.level.advanced',
+  INTERMEDIATE: 'taxonomy.skills.level.intermediate',
+  BASIC: 'taxonomy.skills.level.basic',
+} as const satisfies Record<SpokenLanguageProficiencyValue, AppTranslationKey>;
+
 export type SpokenLanguagesOperationsModalMode =
   | 'create'
   | 'read'
@@ -45,32 +53,32 @@ export interface SpokenLanguagesOperationsFormValue {
 
 export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
   code: {
-    labelKey: 'pages.admin.spokenLanguages.fields.code.label',
+    labelKey: 'common.fields.code',
     placeholderKey: 'pages.admin.spokenLanguages.fields.code.placeholder',
     required: true,
   },
   namePt: {
-    labelKey: 'pages.admin.spokenLanguages.fields.namePt.label',
+    labelKey: 'pages.admin.tags.fields.namePt.label',
     placeholderKey: 'pages.admin.spokenLanguages.fields.namePt.placeholder',
     required: true,
   },
   nameEn: {
-    labelKey: 'pages.admin.spokenLanguages.fields.nameEn.label',
+    labelKey: 'pages.admin.tags.fields.nameEn.label',
     placeholderKey: 'pages.admin.spokenLanguages.fields.nameEn.placeholder',
     required: true,
   },
   nameEs: {
-    labelKey: 'pages.admin.spokenLanguages.fields.nameEs.label',
+    labelKey: 'common.fields.spanishName',
     placeholderKey: 'pages.admin.spokenLanguages.fields.nameEs.placeholder',
     required: true,
   },
   proficiency: {
-    labelKey: 'pages.admin.spokenLanguages.fields.proficiency.label',
+    labelKey: 'common.fields.proficiency',
     required: true,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',
-    placeholderKey: 'pages.admin.spokenLanguages.fields.sortOrder.placeholder',
+    placeholderKey: 'common.placeholders.integerSortOrder',
     required: true,
   },
 } as const satisfies Record<string, AdminFormFieldConfig>;
@@ -126,8 +134,7 @@ export const createSpokenLanguageProficiencyOptions =
   (): readonly SpokenLanguageProficiencyOptionDefinition[] =>
     createAdminSelectOptionDefinitions(
       SPOKEN_LANGUAGE_PROFICIENCY_VALUES,
-      (value) =>
-        `pages.admin.spokenLanguages.fields.proficiency.options.${value}` as AppTranslationKey,
+      (value) => SPOKEN_LANGUAGE_PROFICIENCY_LABEL_KEYS[value],
     );
 
 export const createSpokenLanguageImageAssetOptionViewModel = (

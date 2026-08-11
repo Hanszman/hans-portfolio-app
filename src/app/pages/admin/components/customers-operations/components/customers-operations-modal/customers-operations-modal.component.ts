@@ -134,28 +134,28 @@ export class CustomersOperationsModalComponent {
         subtitle: customer.name,
         fields: [
           { labelKey: 'common.fields.slug', value: customer.slug },
-          { labelKey: 'pages.admin.customers.card.name', value: customer.name },
+          { labelKey: 'common.fields.name', value: customer.name },
           {
-            labelKey: 'pages.admin.operations.localized.summary',
+            labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(), customer.summaryPt, customer.summaryEn, customer.summaryEs,
             ),
           },
           {
-            labelKey: 'pages.admin.customers.card.highlight',
+            labelKey: 'common.fields.highlight',
             value: this.translation.instant(
               customer.highlight
-                ? 'pages.admin.customers.fields.highlight.enabled'
-                : 'pages.admin.customers.fields.highlight.disabled',
+                ? 'common.states.highlighted'
+                : 'common.states.notHighlighted',
             ),
           },
           { labelKey: 'common.fields.sortOrder', value: customer.sortOrderLabel },
           {
-            labelKey: 'pages.admin.customers.card.experiences',
+            labelKey: 'common.entities.experiences',
             value: customer.experienceLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'pages.admin.customers.card.imageAssets',
+            labelKey: 'common.entities.imageAssets',
             value: customer.imageAssetLabels.join(', ') || emptyRelations,
           },
         ],
