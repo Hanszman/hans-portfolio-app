@@ -7,11 +7,12 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { OperationsDetailedItemViewModel } from '../operations.types';
+import { FormattedTextComponent } from '../../formatted-text/formatted-text.component';
 
 @Component({
   selector: 'app-operations-detailed-item',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [FormattedTextComponent, TranslatePipe],
   templateUrl: './operations-detailed-item.component.html',
   styleUrl: './operations-detailed-item.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

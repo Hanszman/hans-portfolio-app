@@ -15,11 +15,12 @@ import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.compone
 import { TagButtonComponent } from '../tag/tag-button/tag-button.component';
 import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
 import { ProjectModalItem } from './project-modal.types';
+import { FormattedTextComponent } from '../formatted-text/formatted-text.component';
 
 @Component({
   selector: 'app-project-modal',
   standalone: true,
-  imports: [ModalSkeletonComponent, TagButtonComponent, TranslatePipe],
+  imports: [FormattedTextComponent, ModalSkeletonComponent, TagButtonComponent, TranslatePipe],
   templateUrl: './project-modal.component.html',
   styleUrl: './project-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

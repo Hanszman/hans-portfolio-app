@@ -86,9 +86,11 @@ export class ExperiencesOperationsModalComponent {
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
   );
+
   protected readonly showSubmit = computed(() =>
     ['create', 'update', 'delete'].includes(this.modalMode() ?? ''),
   );
+
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     const mode = this.modalMode();
     return mode === 'read'
@@ -101,12 +103,15 @@ export class ExperiencesOperationsModalComponent {
             ? 'pages.admin.experiences.modal.delete.description'
             : null;
   });
+
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
     this.experiences().map((experience) => this.toOperationsItem(experience)),
   );
+
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
     () => {
       this.translation.locale();
@@ -136,19 +141,28 @@ export class ExperiencesOperationsModalComponent {
           {
             labelKey: 'pages.admin.operations.localized.title',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), experience.titlePt, experience.titleEn, experience.titleEs,
+              this.translation.locale(),
+              experience.titlePt,
+              experience.titleEn,
+              experience.titleEs,
             ),
           },
           {
             labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), experience.summaryPt, experience.summaryEn, experience.summaryEs,
+              this.translation.locale(),
+              experience.summaryPt,
+              experience.summaryEn,
+              experience.summaryEs,
             ),
           },
           {
             labelKey: 'common.fields.description',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), experience.descriptionPt, experience.descriptionEn, experience.descriptionEs,
+              this.translation.locale(),
+              experience.descriptionPt,
+              experience.descriptionEn,
+              experience.descriptionEs,
             ),
           },
           {
@@ -203,19 +217,29 @@ export class ExperiencesOperationsModalComponent {
     const experience = this.selectedExperience();
     return experience ? this.toOperationsItem(experience) : null;
   });
+
+  protected isMultilineField(field: (typeof EXPERIENCES_OPERATIONS_FORM_FIELDS)[number]): boolean {
+    return (
+      'multiline' in this.fieldDefinitions[field] && this.fieldDefinitions[field].multiline === true
+    );
+  }
+
   protected resolveFieldLabel(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return resolveAdminFieldLabel(EXPERIENCES_OPERATIONS_FIELDS[field], (key) =>
       this.translation.instant(key),
     );
   }
+
   protected resolveFieldPlaceholder(field: keyof typeof EXPERIENCES_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return this.translation.instant(EXPERIENCES_OPERATIONS_FIELDS[field].placeholderKey);
   }
+
   protected emit(field: keyof ExperiencesOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({ field, value: resolveAdminSelectValue(event) });
   }
+
   protected toggle(field: 'isCurrent' | 'highlight', event: Event): void {
     this.booleanChanged.emit({
       field,
@@ -224,18 +248,22 @@ export class ExperiencesOperationsModalComponent {
       ),
     });
   }
+
   protected relation(
     field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.relationToggled.emit({ field, id });
   }
+
   protected optionSelected(id: string): void {
     this.updateSelected.emit(id);
   }
+
   protected deleteOption(id: string): void {
     this.deleteSelected.emit(id);
   }
+
   protected selected(
     field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds',
     id: string,
@@ -248,7 +276,10 @@ export class ExperiencesOperationsModalComponent {
       id: experience.id,
       title: `${experience.companyName} (${experience.slug})`,
       subtitle: resolveAdminLocalizedValue(
-        this.translation.locale(), experience.titlePt, experience.titleEn, experience.titleEs,
+        this.translation.locale(),
+        experience.titlePt,
+        experience.titleEn,
+        experience.titleEs,
       ),
     };
   }

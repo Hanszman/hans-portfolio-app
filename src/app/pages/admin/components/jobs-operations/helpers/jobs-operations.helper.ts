@@ -252,24 +252,6 @@ export const buildJobsMutationPayload = (
     return { isValid: false, errorKey: 'common.feedback.requiredSpanishName' };
   }
 
-  if (!summaryPt) {
-    return {
-      isValid: false,
-      errorKey: 'common.feedback.requiredPortugueseSummary',
-    };
-  }
-
-  if (!summaryEn) {
-    return {
-      isValid: false,
-      errorKey: 'common.feedback.requiredEnglishSummary',
-    };
-  }
-
-  if (!summaryEs) {
-    return { isValid: false, errorKey: 'common.feedback.requiredSummaryEs' };
-  }
-
   if (!startDate) {
     return { isValid: false, errorKey: 'common.feedback.requiredStartDate' };
   }

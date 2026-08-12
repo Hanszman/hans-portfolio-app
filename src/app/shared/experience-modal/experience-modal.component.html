@@ -27,107 +27,110 @@
       </div>
     } @else {
       <div class="experience-modal">
-      <header class="experience-modal-head">
-        <img
-          class="experience-modal-logo"
-          [src]="currentItem.companyImage.src"
-          [alt]="currentItem.companyImage.alt"
-          width="64"
-          height="64"
-          loading="lazy"
-        />
-        <div class="experience-modal-heading">
-          <strong class="experience-modal-period-label">
-            {{ 'common.fields.totalCompanyPeriod' | translate }}
-          </strong>
-          <span class="experience-modal-date">{{ currentItem.dateRangeLabel }}</span>
-        </div>
-      </header>
+        <header class="experience-modal-head">
+          <img
+            class="experience-modal-logo"
+            [src]="currentItem.companyImage.src"
+            [alt]="currentItem.companyImage.alt"
+            width="64"
+            height="64"
+            loading="lazy"
+          />
+          <div class="experience-modal-heading">
+            <strong class="experience-modal-period-label">
+              {{ 'common.fields.totalCompanyPeriod' | translate }}
+            </strong>
+            <span class="experience-modal-date">{{ currentItem.dateRangeLabel }}</span>
+          </div>
+        </header>
 
-      <section class="experience-modal-section">
-        <span class="experience-modal-section-label">
-          {{ 'common.sections.rolesHeld' | translate }}
-        </span>
-        <div class="experience-modal-jobs">
-          @for (job of currentItem.jobs; track job.id) {
-            <article class="experience-modal-job-card">
-              <strong>{{ job.title }}</strong>
-              <span class="experience-modal-job-date">{{ job.dateRangeLabel }}</span>
-              @if (job.summary) {
-                <p>{{ job.summary }}</p>
-              }
-            </article>
-          }
-        </div>
-      </section>
-
-      <section class="experience-modal-section">
-        <span class="experience-modal-section-label">
-          {{ 'common.sections.description' | translate }}
-        </span>
-        <p class="experience-modal-description">{{ currentItem.description }}</p>
-      </section>
-
-      <section class="experience-modal-section">
-        <span class="experience-modal-section-label">{{
-          'common.sections.projects' | translate
-        }}</span>
-        <div class="experience-modal-projects">
-          @for (project of currentItem.projects; track project.slug) {
-            <button
-              type="button"
-              class="experience-modal-project-card"
-              (click)="requestProjectDetails(project.slug)"
-            >
-              <strong>{{ project.title }}</strong>
-              <p>{{ project.summary }}</p>
-            </button>
-          } @empty {
-            <p class="experience-modal-inline-copy">
-              {{ 'pages.experiences.timeline.emptyProjects' | translate }}
-            </p>
-          }
-        </div>
-      </section>
-
-      <section class="experience-modal-section">
-        <span class="experience-modal-section-label">{{
-          'common.sections.clients' | translate
-        }}</span>
-        <div class="experience-modal-chip-list">
-          @for (customer of currentItem.customers; track customer.slug) {
-            <app-tag-button
-              [tag]="customerTag(customer)"
-              (selected)="requestCustomerDetails($event)"
-            />
-          } @empty {
-            <p class="experience-modal-inline-copy">
-              {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
-            </p>
-          }
-        </div>
-      </section>
-
-      <section class="experience-modal-section">
-        <span class="experience-modal-section-label">
-          {{ 'common.sections.techStack' | translate }}
-        </span>
-        <div class="experience-modal-stack-groups">
-          @for (group of currentItem.technologyGroups; track group.labelKey) {
-            <section class="experience-modal-stack-group">
-              <strong>{{ group.labelKey | translate }}</strong>
-              <div class="experience-modal-chip-list">
-                @for (technology of group.technologies; track technology.slug) {
-                  <app-tag-button
-                    [tag]="technologyTag(technology)"
-                    (selected)="requestTechnologyDetails($event)"
-                  />
+        <section class="experience-modal-section">
+          <span class="experience-modal-section-label">
+            {{ 'common.sections.rolesHeld' | translate }}
+          </span>
+          <div class="experience-modal-jobs">
+            @for (job of currentItem.jobs; track job.id) {
+              <article class="experience-modal-job-card">
+                <strong>{{ job.title }}</strong>
+                <span class="experience-modal-job-date">{{ job.dateRangeLabel }}</span>
+                @if (job.summary) {
+                  <app-formatted-text [text]="job.summary" />
                 }
-              </div>
-            </section>
-          }
-        </div>
-      </section>
+              </article>
+            }
+          </div>
+        </section>
+
+        <section class="experience-modal-section">
+          <span class="experience-modal-section-label">
+            {{ 'common.sections.description' | translate }}
+          </span>
+          <app-formatted-text
+            class="experience-modal-description"
+            [text]="currentItem.description"
+          />
+        </section>
+
+        <section class="experience-modal-section">
+          <span class="experience-modal-section-label">{{
+            'common.sections.projects' | translate
+          }}</span>
+          <div class="experience-modal-projects">
+            @for (project of currentItem.projects; track project.slug) {
+              <button
+                type="button"
+                class="experience-modal-project-card"
+                (click)="requestProjectDetails(project.slug)"
+              >
+                <strong>{{ project.title }}</strong>
+                <app-formatted-text [text]="project.summary" />
+              </button>
+            } @empty {
+              <p class="experience-modal-inline-copy">
+                {{ 'pages.experiences.timeline.emptyProjects' | translate }}
+              </p>
+            }
+          </div>
+        </section>
+
+        <section class="experience-modal-section">
+          <span class="experience-modal-section-label">{{
+            'common.sections.clients' | translate
+          }}</span>
+          <div class="experience-modal-chip-list">
+            @for (customer of currentItem.customers; track customer.slug) {
+              <app-tag-button
+                [tag]="customerTag(customer)"
+                (selected)="requestCustomerDetails($event)"
+              />
+            } @empty {
+              <p class="experience-modal-inline-copy">
+                {{ 'pages.experiences.timeline.emptyCustomers' | translate }}
+              </p>
+            }
+          </div>
+        </section>
+
+        <section class="experience-modal-section">
+          <span class="experience-modal-section-label">
+            {{ 'common.sections.techStack' | translate }}
+          </span>
+          <div class="experience-modal-stack-groups">
+            @for (group of currentItem.technologyGroups; track group.labelKey) {
+              <section class="experience-modal-stack-group">
+                <strong>{{ group.labelKey | translate }}</strong>
+                <div class="experience-modal-chip-list">
+                  @for (technology of group.technologies; track technology.slug) {
+                    <app-tag-button
+                      [tag]="technologyTag(technology)"
+                      (selected)="requestTechnologyDetails($event)"
+                    />
+                  }
+                </div>
+              </section>
+            }
+          </div>
+        </section>
       </div>
     }
   }

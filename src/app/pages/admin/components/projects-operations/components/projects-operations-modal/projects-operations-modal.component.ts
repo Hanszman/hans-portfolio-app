@@ -86,12 +86,15 @@ export class ProjectsOperationsModalComponent {
   );
   protected readonly datePickerLocale = computed(() => this.translation.locale());
   protected readonly fieldDefinitions = PROJECTS_OPERATIONS_FIELDS;
+
   protected readonly showPagination = computed(() =>
     ['read', 'pick-update', 'pick-delete'].includes(this.modalMode() ?? ''),
   );
+
   protected readonly showSubmit = computed(() =>
     ['create', 'update', 'delete'].includes(this.modalMode() ?? ''),
   );
+
   protected readonly descriptionKey = computed<AppTranslationKey | null>(() => {
     const mode = this.modalMode();
     return mode === 'read'
@@ -104,21 +107,27 @@ export class ProjectsOperationsModalComponent {
             ? 'pages.admin.projects.modal.delete.description'
             : null;
   });
+
   protected readonly submitLabelKey = computed<AppTranslationKey>(() =>
     this.modalMode() === 'delete' ? 'pages.admin.operations.delete' : 'common.actions.save',
   );
+
   protected readonly contextOptions = computed(() =>
     this.translateOptions(PROJECT_CONTEXT_VALUES, 'context'),
   );
+
   protected readonly statusOptions = computed(() =>
     this.translateOptions(PROJECT_STATUS_VALUES, 'status'),
   );
+
   protected readonly environmentOptions = computed(() =>
     this.translateOptions(PROJECT_ENVIRONMENT_VALUES, 'environment'),
   );
+
   protected readonly operationItems = computed<readonly OperationsItemViewModel[]>(() =>
     this.projects().map((project) => this.toOperationsItem(project)),
   );
+
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
     () => {
       this.translation.locale();
@@ -141,21 +150,28 @@ export class ProjectsOperationsModalComponent {
           {
             labelKey: 'pages.admin.operations.localized.title',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), project.titlePt, project.titleEn, project.titleEs,
+              this.translation.locale(),
+              project.titlePt,
+              project.titleEn,
+              project.titleEs,
             ),
           },
           {
             labelKey: 'pages.admin.operations.localized.shortDescription',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), project.shortDescriptionPt,
-              project.shortDescriptionEn, project.shortDescriptionEs,
+              this.translation.locale(),
+              project.shortDescriptionPt,
+              project.shortDescriptionEn,
+              project.shortDescriptionEs,
             ),
           },
           {
             labelKey: 'pages.admin.operations.localized.fullDescription',
             value: resolveAdminLocalizedValue(
-              this.translation.locale(), project.fullDescriptionPt,
-              project.fullDescriptionEn, project.fullDescriptionEs,
+              this.translation.locale(),
+              project.fullDescriptionPt,
+              project.fullDescriptionEn,
+              project.fullDescriptionEs,
             ),
           },
           {
@@ -220,42 +236,57 @@ export class ProjectsOperationsModalComponent {
       }));
     },
   );
+
   protected readonly selectedOperationItem = computed<OperationsItemViewModel | null>(() => {
     const project = this.selectedProject();
     return project ? this.toOperationsItem(project) : null;
   });
+
+  protected isMultilineField(field: (typeof PROJECTS_OPERATIONS_FORM_FIELDS)[number]): boolean {
+    return (
+      'multiline' in this.fieldDefinitions[field] && this.fieldDefinitions[field].multiline === true
+    );
+  }
+
   protected resolveFieldLabel(field: keyof typeof PROJECTS_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return resolveAdminFieldLabel(PROJECTS_OPERATIONS_FIELDS[field], (key) =>
       this.translation.instant(key),
     );
   }
+
   protected resolveFieldPlaceholder(field: keyof typeof PROJECTS_OPERATIONS_FIELDS): string {
     this.translation.locale();
     return this.translation.instant(PROJECTS_OPERATIONS_FIELDS[field].placeholderKey);
   }
+
   private translateOptions(values: readonly string[], field: 'context' | 'status' | 'environment') {
     this.translation.locale();
     return values.map((value) => ({
       id: value,
       value,
       label: this.translation.instant(
-        PROJECT_OPTION_LABEL_KEYS[field][value as keyof (typeof PROJECT_OPTION_LABEL_KEYS)[typeof field]],
+        PROJECT_OPTION_LABEL_KEYS[field][
+          value as keyof (typeof PROJECT_OPTION_LABEL_KEYS)[typeof field]
+        ],
       ),
     }));
   }
+
   protected emit(field: keyof ProjectsOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,
       value: resolveAdminSelectValue(event),
     });
   }
+
   protected select(field: keyof ProjectsOperationsFormValue, event: Event): void {
     this.fieldChanged.emit({
       field,
       value: resolveAdminSelectValue(event),
     });
   }
+
   protected toggle(field: 'featured' | 'highlight', event: Event): void {
     this.booleanChanged.emit({
       field,
@@ -264,12 +295,14 @@ export class ProjectsOperationsModalComponent {
       ),
     });
   }
+
   protected relation(
     field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.relationToggled.emit({ field, id });
   }
+
   protected selected(
     field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
     id: string,
@@ -281,7 +314,10 @@ export class ProjectsOperationsModalComponent {
     return {
       id: project.id,
       title: `${resolveAdminLocalizedValue(
-        this.translation.locale(), project.titlePt, project.titleEn, project.titleEs,
+        this.translation.locale(),
+        project.titlePt,
+        project.titleEn,
+        project.titleEs,
       )} (${project.slug})`,
       subtitle: project.slug,
     };

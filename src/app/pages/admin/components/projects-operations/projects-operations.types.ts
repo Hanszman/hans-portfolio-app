@@ -76,31 +76,37 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     labelKey: 'pages.admin.projects.fields.shortDescriptionPt.label',
     placeholderKey: 'pages.admin.projects.fields.shortDescriptionPt.placeholder',
     required: true,
+    multiline: true,
   },
   shortDescriptionEn: {
     labelKey: 'pages.admin.projects.fields.shortDescriptionEn.label',
     placeholderKey: 'pages.admin.projects.fields.shortDescriptionEn.placeholder',
     required: true,
+    multiline: true,
   },
   shortDescriptionEs: {
     labelKey: 'pages.admin.projects.fields.shortDescriptionEs.label',
     placeholderKey: 'pages.admin.projects.fields.shortDescriptionEs.placeholder',
     required: true,
+    multiline: true,
   },
   fullDescriptionPt: {
     labelKey: 'pages.admin.projects.fields.fullDescriptionPt.label',
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionPt.placeholder',
     required: true,
+    multiline: true,
   },
   fullDescriptionEn: {
     labelKey: 'pages.admin.projects.fields.fullDescriptionEn.label',
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionEn.placeholder',
     required: true,
+    multiline: true,
   },
   fullDescriptionEs: {
     labelKey: 'pages.admin.projects.fields.fullDescriptionEs.label',
     placeholderKey: 'pages.admin.projects.fields.fullDescriptionEs.placeholder',
     required: true,
+    multiline: true,
   },
   context: {
     labelKey: 'pages.admin.projects.fields.context.label',

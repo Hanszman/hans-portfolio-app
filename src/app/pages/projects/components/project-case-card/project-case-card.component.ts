@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ExpandableListToggleComponent } from '../../../../shared/expandable-list-toggle/expandable-list-toggle.component';
 import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
 import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button.component';
+import { FormattedTextComponent } from '../../../../shared/formatted-text/formatted-text.component';
 import {
   PROJECT_VISIBLE_TECHNOLOGY_COUNT,
   ProjectCaseViewModel,
@@ -19,7 +20,7 @@ import {
 @Component({
   selector: 'app-project-case-card',
   standalone: true,
-  imports: [ExpandableListToggleComponent, TagButtonComponent, TranslatePipe],
+  imports: [ExpandableListToggleComponent, FormattedTextComponent, TagButtonComponent, TranslatePipe],
   templateUrl: './project-case-card.component.html',
   styleUrl: './project-case-card.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

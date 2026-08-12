@@ -1,0 +1,11 @@
+.formatted-text {
+  @apply flex flex-col gap-2 whitespace-pre-wrap;
+
+  p:empty {
+    @apply min-h-2;
+  }
+
+  ul {
+    @apply list-disc space-y-1 pl-5;
+  }
+}

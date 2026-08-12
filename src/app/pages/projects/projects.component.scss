@@ -32,29 +32,6 @@
   @apply flex flex-wrap gap-2;
 }
 
-.projects-filter-chip {
-  @apply rounded-full border px-4 py-2 text-sm font-medium transition;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
-.projects-filter-chip:hover,
-.projects-filter-chip-active {
-  border-color: var(--primary-default-color);
-  background-color: var(--primary-default-color);
-  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--primary-default-color) 22%, transparent);
-  color: var(--white);
-}
-
-.projects-filter-chip:hover {
-  color: var(--white);
-}
-
-.projects-filter-chip-active {
-  color: var(--white);
-}
-
 .projects-total {
   @apply justify-self-start;
 }

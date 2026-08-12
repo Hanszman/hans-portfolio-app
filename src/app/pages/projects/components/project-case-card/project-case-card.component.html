@@ -32,7 +32,7 @@
         tagSize="sm"
       ></hans-tag>
 
-      <p>{{ project().summary }}</p>
+      <app-formatted-text [text]="project().summary" />
 
       <span class="project-case-card-date">
         <hans-icon name="LuCalendar" iconSize="small"></hans-icon>

@@ -61,17 +61,20 @@ export const JOBS_OPERATIONS_FIELDS = {
   summaryPt: {
     labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.jobs.fields.summaryPt.placeholder',
-    required: true,
+    required: false,
+    multiline: true,
   },
   summaryEn: {
     labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.jobs.fields.summaryEn.placeholder',
-    required: true,
+    required: false,
+    multiline: true,
   },
   summaryEs: {
     labelKey: 'common.fields.spanishSummary',
     placeholderKey: 'pages.admin.jobs.fields.summaryEs.placeholder',
-    required: true,
+    required: false,
+    multiline: true,
   },
   startDate: {
     labelKey: 'common.fields.startDate',

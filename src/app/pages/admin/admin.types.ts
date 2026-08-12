@@ -39,6 +39,7 @@ export interface AdminFormFieldConfig {
   readonly labelKey: AppTranslationKey;
   readonly placeholderKey?: AppTranslationKey;
   readonly required?: boolean;
+  readonly multiline?: boolean;
 }
 
 export const ADMIN_MODAL_PAGE_SIZE = DEFAULT_PAGE_SIZE;

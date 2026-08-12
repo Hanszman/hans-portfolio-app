@@ -20,7 +20,7 @@
       </span>
     </header>
 
-    <p class="experience-card-summary">{{ item().summary }}</p>
+    <app-formatted-text class="experience-card-summary" [text]="item().summary" />
 
     <div class="experience-card-customers">
       <hans-icon name="LuUsers" iconSize="small"></hans-icon>

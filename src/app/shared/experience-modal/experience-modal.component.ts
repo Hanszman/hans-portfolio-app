@@ -16,11 +16,12 @@ import { TagButtonComponent } from '../tag/tag-button/tag-button.component';
 import { TagButtonViewModel } from '../tag/tag-button/tag-button.types';
 import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
 import { ExperienceModalItem, ExperienceTechnologyTag } from './experience-modal.types';
+import { FormattedTextComponent } from '../formatted-text/formatted-text.component';
 
 @Component({
   selector: 'app-experience-modal',
   standalone: true,
-  imports: [ModalSkeletonComponent, TagButtonComponent, TranslatePipe],
+  imports: [FormattedTextComponent, ModalSkeletonComponent, TagButtonComponent, TranslatePipe],
   templateUrl: './experience-modal.component.html',
   styleUrl: './experience-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

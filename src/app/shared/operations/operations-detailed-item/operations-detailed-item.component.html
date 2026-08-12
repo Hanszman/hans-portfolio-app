@@ -12,7 +12,7 @@
       @for (field of item().fields; track field.labelKey) {
         <div>
           <p>{{ field.labelKey | translate }}</p>
-          <span [title]="field.title ?? field.value">{{ field.value }}</span>
+          <app-formatted-text [text]="field.value" [title]="field.title ?? field.value" />
         </div>
       }
     </div>

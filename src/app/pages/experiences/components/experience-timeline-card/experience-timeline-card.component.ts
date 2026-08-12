@@ -13,6 +13,7 @@ import { TagButtonComponent } from '../../../../shared/tag/tag-button/tag-button
 import { TimelineCardComponent } from '../../../../shared/timeline/timeline-card/timeline-card.component';
 import { TechnologyModalItem } from '../../../../shared/technology-modal/technology-modal.types';
 import type { TagButtonViewModel } from '../../../../shared/tag/tag-button/tag-button.types';
+import { FormattedTextComponent } from '../../../../shared/formatted-text/formatted-text.component';
 import {
   ExperienceCustomerViewModel,
   ExperienceTimelineItemViewModel,
@@ -24,6 +25,7 @@ import {
   standalone: true,
   imports: [
     ExpandableListToggleComponent,
+    FormattedTextComponent,
     TagButtonComponent,
     TimelineCardComponent,
     TranslatePipe,

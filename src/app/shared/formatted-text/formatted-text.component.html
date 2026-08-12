@@ -1,0 +1,47 @@
+<div class="formatted-text">
+  @for (block of blocks(); track $index) {
+    @if (block.type === 'list') {
+      <ul>
+        @for (item of block.items; track $index) {
+          <li>
+            @for (segment of item; track $index) {
+              @switch (segment.style) {
+                @case ('bold') {
+                  <strong>{{ segment.text }}</strong>
+                }
+                @case ('italic') {
+                  <em>{{ segment.text }}</em>
+                }
+                @case ('underline') {
+                  <u>{{ segment.text }}</u>
+                }
+                @default {
+                  <span>{{ segment.text }}</span>
+                }
+              }
+            }
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>
+        @for (segment of block.segments; track $index) {
+          @switch (segment.style) {
+            @case ('bold') {
+              <strong>{{ segment.text }}</strong>
+            }
+            @case ('italic') {
+              <em>{{ segment.text }}</em>
+            }
+            @case ('underline') {
+              <u>{{ segment.text }}</u>
+            }
+            @default {
+              <span>{{ segment.text }}</span>
+            }
+          }
+        }
+      </p>
+    }
+  }
+</div>

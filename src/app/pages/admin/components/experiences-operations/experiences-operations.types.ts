@@ -77,31 +77,37 @@ export const EXPERIENCES_OPERATIONS_FIELDS = {
     labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.experiences.fields.summaryPt.placeholder',
     required: true,
+    multiline: true,
   },
   summaryEn: {
     labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.experiences.fields.summaryEn.placeholder',
     required: true,
+    multiline: true,
   },
   summaryEs: {
     labelKey: 'common.fields.spanishSummary',
     placeholderKey: 'common.placeholders.spanishSummary',
     required: true,
+    multiline: true,
   },
   descriptionPt: {
     labelKey: 'pages.admin.links.fields.descriptionPt.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionPt.placeholder',
     required: true,
+    multiline: true,
   },
   descriptionEn: {
     labelKey: 'pages.admin.links.fields.descriptionEn.label',
     placeholderKey: 'pages.admin.experiences.fields.descriptionEn.placeholder',
     required: true,
+    multiline: true,
   },
   descriptionEs: {
     labelKey: 'common.fields.spanishDescription',
     placeholderKey: 'pages.admin.experiences.fields.descriptionEs.placeholder',
     required: true,
+    multiline: true,
   },
   startDate: {
     labelKey: 'common.fields.startDate',

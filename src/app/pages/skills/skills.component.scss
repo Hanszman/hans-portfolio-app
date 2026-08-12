@@ -72,21 +72,6 @@
   @apply gap-2;
 }
 
-.skills-highlight-filter-chip {
-  @apply rounded-full border px-4 py-2 text-sm font-medium transition;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-}
-
-.skills-highlight-filter-chip:hover,
-.skills-highlight-filter-chip-active {
-  border-color: var(--primary-default-color);
-  background-color: var(--primary-default-color);
-  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--primary-default-color) 22%, transparent);
-  color: var(--white);
-}
-
 .skills-pagination {
   @apply mt-4 block justify-self-center;
 }

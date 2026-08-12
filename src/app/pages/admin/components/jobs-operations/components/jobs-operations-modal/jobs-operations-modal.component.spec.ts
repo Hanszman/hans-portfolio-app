@@ -197,9 +197,9 @@ describe('JobsOperationsModalComponent', () => {
       true,
       true,
       true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
       true,
     ]);
     expect(modalElement?.confirmLabel).toBe('Save');

@@ -610,63 +610,6 @@ describe('jobs operations helper', () => {
         slug: 'frontend-engineer',
         namePt: 'Engenheiro Front-End',
         nameEn: 'Front-End Engineer',
-        nameEs: 'Front-End Engineer',
-        summaryPt: '',
-        summaryEn: '',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: 'abc',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredPortugueseSummary',
-    });
-
-    expect(
-      buildJobMutation({
-        slug: 'frontend-engineer',
-        namePt: 'Engenheiro Front-End',
-        nameEn: 'Front-End Engineer',
-        nameEs: 'Front-End Engineer',
-        summaryPt: 'Interfaces publicas e privadas.',
-        summaryEn: '',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: 'abc',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredEnglishSummary',
-    });
-
-    expect(
-      buildJobMutation({
-        slug: 'frontend-engineer',
-        namePt: 'Engenheiro Front-End',
-        nameEn: 'Front-End Engineer',
-        nameEs: 'Ingeniero Front-End',
-        summaryPt: 'Interfaces publicas e privadas.',
-        summaryEn: 'Public and private interfaces.',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: '1',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredSummaryEs',
-    });
-
-    expect(
-      buildJobMutation({
-        slug: 'frontend-engineer',
-        namePt: 'Engenheiro Front-End',
-        nameEn: 'Front-End Engineer',
         nameEs: 'Ingeniero Front-End',
         summaryPt: 'Interfaces publicas e privadas.',
         summaryEn: 'Public and private interfaces.',

@@ -29,14 +29,16 @@
 
           <div class="projects-filter-list">
             @for (filter of contextFilters; track filter.value) {
-              <button
-                type="button"
-                class="projects-filter-chip"
-                [class.projects-filter-chip-active]="selectedContext() === filter.value"
+              <hans-button
+                buttonType="button"
+                buttonSize="medium"
+                buttonShape="circle"
+                [buttonColor]="selectedContext() === filter.value ? 'primary' : 'base'"
+                [buttonVariant]="selectedContext() === filter.value ? 'default' : 'outline'"
                 (click)="selectContext(filter.value)"
               >
                 {{ filter.labelKey | translate }}
-              </button>
+              </hans-button>
             }
           </div>
         </div>
@@ -46,14 +48,16 @@
 
           <div class="projects-filter-list">
             @for (filter of highlightFilters; track filter.value) {
-              <button
-                type="button"
-                class="projects-filter-chip"
-                [class.projects-filter-chip-active]="selectedHighlight() === filter.value"
+              <hans-button
+                buttonType="button"
+                buttonSize="medium"
+                buttonShape="circle"
+                [buttonColor]="selectedHighlight() === filter.value ? 'primary' : 'base'"
+                [buttonVariant]="selectedHighlight() === filter.value ? 'default' : 'outline'"
                 (click)="selectHighlightFilter(filter.value)"
               >
                 {{ filter.labelKey | translate }}
-              </button>
+              </hans-button>
             }
           </div>
         </div>

@@ -438,11 +438,11 @@ describe('JobsOperationsComponent', () => {
 
     component.updateNameEs('Front-End Engineer');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredPortugueseSummary');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredStartDate');
 
     component.updateSummaryPt('Interfaces publicas e privadas.');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredEnglishSummary');
+    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredStartDate');
 
     component.updateSummaryEn('Public and private interfaces.');
 

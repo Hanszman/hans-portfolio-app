@@ -122,14 +122,16 @@
 
         <div class="skills-highlight-filter-list">
           @for (filter of highlightFilters; track filter.value) {
-            <button
-              type="button"
-              class="skills-highlight-filter-chip"
-              [class.skills-highlight-filter-chip-active]="selectedHighlight() === filter.value"
+            <hans-button
+              buttonType="button"
+              buttonSize="medium"
+              buttonShape="circle"
+              [buttonColor]="selectedHighlight() === filter.value ? 'primary' : 'base'"
+              [buttonVariant]="selectedHighlight() === filter.value ? 'default' : 'outline'"
               (click)="selectHighlightFilter(filter.value)"
             >
               {{ filter.labelKey | translate }}
-            </button>
+            </hans-button>
           }
         </div>
       </div>
@@ -167,15 +169,10 @@
       }
     </section>
   </section>
-
 </app-wrapper>
 
 @if (selectedTechnology(); as technology) {
-  <app-technology-modal
-    [isOpen]="true"
-    [technology]="technology"
-    (closed)="closeSkillDetails()"
-  />
+  <app-technology-modal [isOpen]="true" [technology]="technology" (closed)="closeSkillDetails()" />
 }
 
 @if (selectedEducation(); as education) {
