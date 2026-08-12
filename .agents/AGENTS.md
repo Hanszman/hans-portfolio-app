@@ -447,3 +447,34 @@ Rules:
 - Keep changes incremental and easy to review.
 - Update docs when decisions, contracts, scripts, or architecture change.
 - After any meaningful implementation, run lint, coverage and build.
+- Never run `git commit`, `git push`, or any deploy command without the user's explicit authorization for that specific change. Leave changes uncommitted so the user can review the diff first.
+
+## Agent tooling index
+
+This file is the single source of truth for project context for any AI coding agent. The
+repository root `CLAUDE.md` only imports this file so Claude Code shares it instead of forking
+a second copy. `.claude/skills/`, `.claude/plans/` and `.claude/drafts/` mirror the folders below
+through one-line pointer files so Claude Code discovers them natively; edit content only here in
+`.agents/`, never in the `.claude/` mirror.
+
+Skills (`.agents/skills/<name>/SKILL.md`; each file's frontmatter documents its own trigger
+conditions):
+
+- `add-portfolio-language-frontend`
+- `add-portfolio-translation-key`
+- `create-portfolio-component`
+- `create-portfolio-page`
+- `create-portfolio-service`
+
+Plans (`.agents/plans/`):
+
+- `plano-adicao-idioma-espanhol.md`
+- `plano-f8-area-admin-hans-portfolio-app.md`
+- `plano-implementacao-hans-portfolio-app-final-version.md`
+- `plano-melhoria-modais-publicos.md`
+- `plano-refatoracao-operations-cruds.md`
+
+Drafts (`.agents/drafts/`, scratch notes, not authoritative):
+
+- `DRAFT-PROMPTS.txt`
+- `TODOLIST.txt`
