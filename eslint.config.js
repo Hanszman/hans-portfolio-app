@@ -5,6 +5,9 @@ const angular = require("angular-eslint");
 
 module.exports = tseslint.config(
   {
+    ignores: ["dist/**", "coverage/**", "tmp-lib/**", ".angular/**"],
+  },
+  {
     files: ["**/*.ts"],
     extends: [
       eslint.configs.recommended,

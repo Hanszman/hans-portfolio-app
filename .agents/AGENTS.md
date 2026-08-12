@@ -63,6 +63,8 @@ When useful during development, also run:
 
 Coverage must stay at `100%` statements, branches, functions and lines for relevant files. Lint must pass with no errors and no warnings. Builds must pass. Do not accept new warnings as "normal" without fixing or explicitly documenting why they are outside the touched scope.
 
+Treat those four coverage metrics as an indivisible delivery gate, the same rule documented in `hans-ui-design-lib`: inspect the final summary of `npm run test:coverage -- --watch=false` and require exactly `100%` in every metric. A green run with any `99.x%` metric is still an incomplete delivery; add the missing branch or case instead of accepting a near-100% result. Run and inspect the required commands after the final code change, never before it.
+
 ## Hans UI Design Library policy
 
 `hans-ui-design-lib` is the official visual foundation.

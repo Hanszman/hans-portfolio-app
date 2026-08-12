@@ -204,6 +204,11 @@ The working goal for this remake is:
 - `100%` statements, branches, functions and lines for each file with relevant behavior
 - explicit exclusions only for configuration, generated files, or trivial framework glue that adds no real value to execution-based coverage
 
+Every delivery has a blocking quality gate: lint, exactly `100%` statements/branches/functions/lines,
+and the production build must all pass after the final change. Passing tests with partial coverage,
+such as `99.x%` on any metric, does not satisfy this gate; inspect the final `test:coverage` summary
+and add the missing branch/case instead of accepting a near-100% result.
+
 For implementation steps, always validate the repo with the relevant scripts:
 
 - `npm run test`

@@ -336,6 +336,8 @@ describe('jobs operations helper', () => {
       buildJobsFormValue(
         createJob({
           nameEs: undefined,
+          summaryPt: undefined,
+          summaryEn: undefined,
           summaryEs: undefined,
           experienceIds: undefined,
           imageAssetIds: undefined,
@@ -352,8 +354,8 @@ describe('jobs operations helper', () => {
       namePt: 'Engenheiro Front-End',
       nameEn: 'Front-End Engineer',
       nameEs: '',
-      summaryPt: 'Interfaces publicas e privadas.',
-      summaryEn: 'Public and private interfaces.',
+      summaryPt: '',
+      summaryEn: '',
       summaryEs: '',
       startDate: '2021-09-23',
       endDate: '',
@@ -364,11 +366,20 @@ describe('jobs operations helper', () => {
     });
 
     const [legacyViewModel] = buildJobsViewModels(
-      [createJob({ nameEs: undefined, summaryEs: undefined })],
+      [
+        createJob({
+          nameEs: undefined,
+          summaryPt: undefined,
+          summaryEn: undefined,
+          summaryEs: undefined,
+        }),
+      ],
       [],
       [],
     );
     expect(legacyViewModel.nameEs).toBe('');
+    expect(legacyViewModel.summaryPt).toBe('');
+    expect(legacyViewModel.summaryEn).toBe('');
     expect(legacyViewModel.summaryEs).toBe('');
   });
 
@@ -524,6 +535,38 @@ describe('jobs operations helper', () => {
         sortOrder: 5,
         experienceIds: ['experience-1'],
         imageAssetIds: ['image-asset-1'],
+      },
+    });
+  });
+
+  it('should null out blank summaries in the mutation payload', () => {
+    expect(
+      buildJobMutation({
+        slug: 'frontend-engineer',
+        namePt: 'Engenheiro Front-End',
+        nameEn: 'Front-End Engineer',
+        summaryPt: '   ',
+        summaryEn: '   ',
+        highlight: true,
+        sortOrder: '5',
+        experienceIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: true,
+      payload: {
+        slug: 'frontend-engineer',
+        namePt: 'Engenheiro Front-End',
+        nameEn: 'Front-End Engineer',
+        nameEs: 'Front-End Engineer',
+        summaryPt: null,
+        summaryEn: null,
+        summaryEs: null,
+        startDate: '2021-09-23T00:00:00.000Z',
+        highlight: true,
+        sortOrder: 5,
+        experienceIds: [],
+        imageAssetIds: [],
       },
     });
   });

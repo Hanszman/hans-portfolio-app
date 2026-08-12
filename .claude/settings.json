@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__list_pages",
+      "Bash(tasklist //FI \"IMAGENAME eq chrome.exe\" //FO CSV)",
+      "Read(//c/Users/Victor/.cache/chrome-devtools-mcp/chrome-profile/**)",
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__click",
+      "mcp__chrome-devtools__evaluate_script",
+      "mcp__chrome-devtools__press_key",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__fill",
+      "mcp__chrome-devtools__select_page",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__hover",
+      "Bash(rtk git *)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(awk -F'|' '{ b=$3; gsub\\(/ /,\"\",b\\); if \\(b!=\"\" && b!=\"Branches\" && b!=\"100\" && $1 !~ /All files/\\) print }' /tmp/hansui_coverage.log | head -30)",
+      "Bash(echo \"EXIT_CODE=$?\")"
+    ]
+  }
+}
