@@ -117,24 +117,12 @@
         ></hans-select-option>
       </div>
 
-      <div class="skills-highlight-filter">
-        <span>{{ 'common.fields.highlight' | translate }}:</span>
-
-        <div class="skills-highlight-filter-list">
-          @for (filter of highlightFilters; track filter.value) {
-            <hans-button
-              buttonType="button"
-              buttonSize="medium"
-              buttonShape="circle"
-              [buttonColor]="selectedHighlight() === filter.value ? 'primary' : 'base'"
-              [buttonVariant]="selectedHighlight() === filter.value ? 'default' : 'outline'"
-              (click)="selectHighlightFilter(filter.value)"
-            >
-              {{ filter.labelKey | translate }}
-            </hans-button>
-          }
-        </div>
-      </div>
+      <app-button-filter
+        [labelKey]="'common.fields.highlight'"
+        [options]="highlightFilters"
+        [selectedValue]="selectedHighlight()"
+        (valueSelected)="selectHighlightFilter($any($event))"
+      />
 
       @if (isLoading()) {
         <app-info-state mode="loading" [message]="'pages.skills.catalog.loading' | translate" />

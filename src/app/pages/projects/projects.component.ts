@@ -17,6 +17,7 @@ import { SectionHeaderComponent } from '../../shared/section-header/section-head
 import { ProjectModalComponent } from '../../shared/project-modal/project-modal.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+import { ButtonFilterComponent } from '../../shared/button-filter/button-filter.component';
 import {
   HIGHLIGHT_FILTERS,
   HighlightFilterValue,
@@ -43,6 +44,7 @@ import {
     ProjectModalComponent,
     SectionHeaderComponent,
     TechnologyModalComponent,
+    ButtonFilterComponent,
     TranslatePipe,
   ],
   templateUrl: './projects.component.html',

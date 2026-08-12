@@ -1,0 +1,18 @@
+<div class="button-filter">
+  <span>{{ labelKey() | translate }}:</span>
+  <div class="button-filter-list">
+    @for (option of options(); track option.value) {
+      <hans-button
+        buttonType="button"
+        buttonSize="medium"
+        buttonShape="circle"
+        [buttonColor]="selectedValue() === option.value ? 'primary' : 'base'"
+        [buttonVariant]="selectedValue() === option.value ? 'default' : 'outline'"
+        [attr.aria-pressed]="selectedValue() === option.value"
+        (click)="valueSelected.emit(option.value)"
+      >
+        {{ option.labelKey | translate }}
+      </hans-button>
+    }
+  </div>
+</div>

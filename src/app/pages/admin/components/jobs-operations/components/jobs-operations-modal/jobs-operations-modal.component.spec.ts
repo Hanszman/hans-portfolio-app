@@ -51,6 +51,7 @@ describe('JobsOperationsModalComponent', () => {
     for (const elementName of [
       'hans-button',
       'hans-input',
+      'hans-textarea',
       'hans-loading',
       'hans-modal',
       'hans-toggle',
@@ -179,7 +180,7 @@ describe('JobsOperationsModalComponent', () => {
         })
       | null;
     const inputElements = Array.from(
-      fixture.nativeElement.querySelectorAll('hans-input'),
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea'),
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
@@ -332,6 +333,8 @@ describe('JobsOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', null);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
+    expect(
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea').length,
+    ).toBe(0);
   });
 });

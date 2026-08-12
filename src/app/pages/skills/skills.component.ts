@@ -24,6 +24,7 @@ import { InfoStateComponent } from '../../shared/info-state/info-state.component
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+import { ButtonFilterComponent } from '../../shared/button-filter/button-filter.component';
 import {
   HIGHLIGHT_FILTERS,
   HighlightFilterValue,
@@ -63,6 +64,7 @@ import {
     TechnologyModalComponent,
     EducationModalComponent,
     SpokenLanguageModalComponent,
+    ButtonFilterComponent,
     TranslatePipe,
   ],
   templateUrl: './skills.component.html',

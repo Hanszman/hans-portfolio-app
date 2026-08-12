@@ -58,20 +58,6 @@
   @apply auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
 }
 
-.skills-highlight-filter,
-.skills-highlight-filter-list {
-  @apply flex flex-wrap items-center gap-3;
-}
-
-.skills-highlight-filter > span {
-  @apply text-base font-medium;
-  color: color-mix(in srgb, var(--text-color) 64%, transparent);
-}
-
-.skills-highlight-filter-list {
-  @apply gap-2;
-}
-
 .skills-pagination {
   @apply mt-4 block justify-self-center;
 }

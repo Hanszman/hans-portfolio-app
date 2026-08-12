@@ -62,6 +62,7 @@ describe('LinksOperationsModalComponent', () => {
     for (const elementName of [
       'hans-button',
       'hans-input',
+      'hans-textarea',
       'hans-loading',
       'hans-modal',
       'hans-select-option',
@@ -190,7 +191,7 @@ describe('LinksOperationsModalComponent', () => {
         })
       | null;
     const inputElements = Array.from(
-      fixture.nativeElement.querySelectorAll('hans-input'),
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea'),
     ) as (HTMLElement & { label?: string; required?: boolean })[];
     const selectElement = fixture.nativeElement.querySelector('hans-select-option') as
       | (HTMLElement & { label?: string; required?: boolean })
@@ -370,6 +371,8 @@ describe('LinksOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', null);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
+    expect(
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea').length,
+    ).toBe(0);
   });
 });

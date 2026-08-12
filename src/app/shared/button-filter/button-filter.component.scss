@@ -1,0 +1,17 @@
+:host {
+  @apply block;
+}
+
+.button-filter,
+.button-filter-list {
+  @apply flex flex-wrap items-center gap-3;
+}
+
+.button-filter > span {
+  @apply text-base font-medium;
+  color: color-mix(in srgb, var(--text-color) 64%, transparent);
+}
+
+.button-filter-list {
+  @apply gap-2;
+}

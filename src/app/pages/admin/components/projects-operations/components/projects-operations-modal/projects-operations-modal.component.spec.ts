@@ -66,6 +66,7 @@ describe('ProjectsOperationsModalComponent', () => {
       'hans-button',
       'hans-date-picker',
       'hans-input',
+      'hans-textarea',
       'hans-loading',
       'hans-modal',
       'hans-select-option',

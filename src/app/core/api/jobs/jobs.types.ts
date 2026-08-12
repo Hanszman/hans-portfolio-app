@@ -32,9 +32,9 @@ export interface JobRecord {
   namePt: string;
   nameEn: string;
   nameEs?: string;
-  summaryPt: string;
-  summaryEn: string;
-  summaryEs?: string;
+  summaryPt?: string | null;
+  summaryEn?: string | null;
+  summaryEs?: string | null;
   startDate: string;
   endDate?: string | null;
   highlight?: boolean | null;
@@ -52,9 +52,9 @@ export interface JobMutationPayload {
   namePt: string;
   nameEn: string;
   nameEs?: string;
-  summaryPt: string;
-  summaryEn: string;
-  summaryEs?: string;
+  summaryPt?: string | null;
+  summaryEn?: string | null;
+  summaryEs?: string | null;
   startDate: string;
   endDate?: string;
   highlight: boolean;

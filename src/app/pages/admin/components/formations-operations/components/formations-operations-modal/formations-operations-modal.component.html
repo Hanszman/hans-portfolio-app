@@ -98,62 +98,59 @@
           (valueChange)="emitDegreeTypeChange(resolveSelectValue($event))"
         ></hans-select-option>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('summaryPt')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.summaryPt.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().summaryPt"
           [placeholder]="fields.summaryPt.placeholderKey! | translate"
           [attr.aria-label]="fields.summaryPt.labelKey | translate"
-          (input)="emitSummaryPtChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitSummaryPtChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('summaryEn')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.summaryEn.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().summaryEn"
           [placeholder]="fields.summaryEn.placeholderKey! | translate"
           [attr.aria-label]="fields.summaryEn.labelKey | translate"
-          (input)="emitSummaryEnChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitSummaryEnChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('summaryEs')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.summaryEs.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().summaryEs"
           [placeholder]="fields.summaryEs.placeholderKey! | translate"
           [attr.aria-label]="fields.summaryEs.labelKey | translate"
-          (input)="emitSummaryEsChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitSummaryEsChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
         <hans-date-picker
           [label]="resolveFieldLabel('startDate')"

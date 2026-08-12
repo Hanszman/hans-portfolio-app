@@ -23,7 +23,13 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
   let fixture: ComponentFixture<PortfolioSettingsOperationsModalComponent>;
 
   beforeAll(() => {
-    for (const elementName of ['hans-button', 'hans-input', 'hans-loading', 'hans-modal']) {
+    for (const elementName of [
+      'hans-button',
+      'hans-input',
+      'hans-textarea',
+      'hans-loading',
+      'hans-modal',
+    ]) {
       if (!customElements.get(elementName)) {
         customElements.define(elementName, class extends HTMLElement {});
       }
@@ -90,7 +96,7 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
         })
       | null;
     const inputElements = Array.from(
-      fixture.nativeElement.querySelectorAll('hans-input'),
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea'),
     ) as (HTMLElement & { label?: string; required?: boolean })[];
 
     expect(inputElements.map((element) => element.label)).toEqual([
@@ -197,7 +203,9 @@ describe('PortfolioSettingsOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', null);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('hans-input').length).toBe(0);
+    expect(
+      fixture.nativeElement.querySelectorAll('hans-input, hans-textarea').length,
+    ).toBe(0);
     expect(fixture.nativeElement.textContent).not.toContain('JSON value');
   });
 });

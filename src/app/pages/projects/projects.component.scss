@@ -14,22 +14,13 @@
   @apply block w-full max-w-sm;
 }
 
-.projects-filter-row {
-  @apply flex flex-wrap items-center gap-3;
-}
-
 .projects-filter-groups {
   @apply grid gap-3;
 }
 
-.projects-filter-row > span,
 .projects-total {
   @apply text-base font-medium;
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
-}
-
-.projects-filter-list {
-  @apply flex flex-wrap gap-2;
 }
 
 .projects-total {

@@ -24,4 +24,14 @@ describe('formatted text helper', () => {
       { type: 'paragraph', segments: [{ text: 'End', style: 'plain' }] },
     ]);
   });
+
+  it('normalizes legacy inline bullets into list items', () => {
+    expect(parseFormattedText('Intro • First • Second')).toEqual([
+      { type: 'paragraph', segments: [{ text: 'Intro', style: 'plain' }] },
+      {
+        type: 'list',
+        items: [[{ text: 'First', style: 'plain' }], [{ text: 'Second', style: 'plain' }]],
+      },
+    ]);
+  });
 });

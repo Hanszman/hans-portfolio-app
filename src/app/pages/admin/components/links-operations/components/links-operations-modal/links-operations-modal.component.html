@@ -70,62 +70,59 @@
           (input)="emitLabelEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('descriptionPt')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.descriptionPt.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().descriptionPt"
           [placeholder]="fields.descriptionPt.placeholderKey! | translate"
           [attr.aria-label]="fields.descriptionPt.labelKey | translate"
-          (input)="emitDescriptionPtChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitDescriptionPtChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('descriptionEn')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.descriptionEn.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().descriptionEn"
           [placeholder]="fields.descriptionEn.placeholderKey! | translate"
           [attr.aria-label]="fields.descriptionEn.labelKey | translate"
-          (input)="emitDescriptionEnChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitDescriptionEnChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('descriptionEs')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.descriptionEs.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().descriptionEs"
           [placeholder]="fields.descriptionEs.placeholderKey! | translate"
           [attr.aria-label]="fields.descriptionEs.labelKey | translate"
-          (input)="emitDescriptionEsChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitDescriptionEsChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
         <hans-select-option
           [label]="resolveFieldLabel('type')"

@@ -24,43 +24,18 @@
       ></hans-input>
 
       <div class="projects-filter-groups">
-        <div class="projects-filter-row">
-          <span>{{ 'common.fields.environment' | translate }}:</span>
-
-          <div class="projects-filter-list">
-            @for (filter of contextFilters; track filter.value) {
-              <hans-button
-                buttonType="button"
-                buttonSize="medium"
-                buttonShape="circle"
-                [buttonColor]="selectedContext() === filter.value ? 'primary' : 'base'"
-                [buttonVariant]="selectedContext() === filter.value ? 'default' : 'outline'"
-                (click)="selectContext(filter.value)"
-              >
-                {{ filter.labelKey | translate }}
-              </hans-button>
-            }
-          </div>
-        </div>
-
-        <div class="projects-filter-row">
-          <span>{{ 'common.fields.highlight' | translate }}:</span>
-
-          <div class="projects-filter-list">
-            @for (filter of highlightFilters; track filter.value) {
-              <hans-button
-                buttonType="button"
-                buttonSize="medium"
-                buttonShape="circle"
-                [buttonColor]="selectedHighlight() === filter.value ? 'primary' : 'base'"
-                [buttonVariant]="selectedHighlight() === filter.value ? 'default' : 'outline'"
-                (click)="selectHighlightFilter(filter.value)"
-              >
-                {{ filter.labelKey | translate }}
-              </hans-button>
-            }
-          </div>
-        </div>
+        <app-button-filter
+          [labelKey]="'common.fields.environment'"
+          [options]="contextFilters"
+          [selectedValue]="selectedContext()"
+          (valueSelected)="selectContext($any($event))"
+        />
+        <app-button-filter
+          [labelKey]="'common.fields.highlight'"
+          [options]="highlightFilters"
+          [selectedValue]="selectedHighlight()"
+          (valueSelected)="selectHighlightFilter($any($event))"
+        />
       </div>
 
       <span class="projects-total lowercase">

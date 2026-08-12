@@ -37,24 +37,23 @@
           (input)="emitKeyChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-input
+        <hans-textarea
           [label]="resolveFieldLabel('description')"
-          inputType="textarea"
           [formattingToolbar]="true"
-          [textareaRows]="6"
+          [rows]="6"
           [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
+          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
           [required]="fields.description.required"
-          inputColor="base"
-          inputSize="medium"
+          textareaColor="base"
+          textareaSize="medium"
           [value]="form().description"
           [placeholder]="fields.description.placeholderKey! | translate"
           [attr.aria-label]="fields.description.labelKey | translate"
-          (input)="emitDescriptionChange($any($event).target?.value ?? '')"
-        ></hans-input>
+          (valuechange)="emitDescriptionChange($any($event).detail ?? '')"
+        ></hans-textarea>
 
         <label class="portfolio-settings-operations-json-field">
           <span>{{ resolveFieldLabel('valueText') }}</span>

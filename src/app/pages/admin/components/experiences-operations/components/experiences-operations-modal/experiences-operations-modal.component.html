@@ -25,23 +25,35 @@
   @if (modalMode() === 'create' || modalMode() === 'update') {
     <div class="experiences-form">
       @for (field of formFields; track field) {
-        <hans-input
-          [label]="resolveFieldLabel(field)"
-          [placeholder]="resolveFieldPlaceholder(field)"
-          [required]="fieldDefinitions[field].required"
-          [inputType]="isMultilineField(field) ? 'textarea' : 'text'"
-          [formattingToolbar]="isMultilineField(field)"
-          [textareaRows]="6"
-          [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldActionLabel]="'common.formatting.bold' | translate"
-          [italicActionLabel]="'common.formatting.italic' | translate"
-          [underlineActionLabel]="'common.formatting.underline' | translate"
-          [unorderedListActionLabel]="'common.formatting.unorderedList' | translate"
-          inputColor="base"
-          inputSize="medium"
-          [value]="$any(form())[field]"
-          (input)="emit($any(field), $event)"
-        ></hans-input>
+        @if (isMultilineField(field)) {
+          <hans-textarea
+            [label]="resolveFieldLabel(field)"
+            [placeholder]="resolveFieldPlaceholder(field)"
+            [required]="fieldDefinitions[field].required"
+            [formattingToolbar]="true"
+            [rows]="6"
+            [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
+            [boldButtonAriaLabel]="'common.formatting.bold' | translate"
+            [italicButtonAriaLabel]="'common.formatting.italic' | translate"
+            [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
+            [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
+            textareaColor="base"
+            textareaSize="medium"
+            [value]="$any(form())[field]"
+            (valuechange)="emit($any(field), $event)"
+          ></hans-textarea>
+        } @else {
+          <hans-input
+            [label]="resolveFieldLabel(field)"
+            [placeholder]="resolveFieldPlaceholder(field)"
+            [required]="fieldDefinitions[field].required"
+            inputType="text"
+            inputColor="base"
+            inputSize="medium"
+            [value]="$any(form())[field]"
+            (input)="emit($any(field), $event)"
+          ></hans-input>
+        }
       }
 
       <hans-date-picker

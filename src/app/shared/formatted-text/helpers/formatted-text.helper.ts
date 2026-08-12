@@ -29,7 +29,11 @@ export const parseFormattedText = (value: string): readonly FormattedTextBlock[]
     }
   };
 
-  for (const rawLine of value.replace(/\r\n?/g, '\n').split('\n')) {
+  const normalizedValue = value
+    .replace(/\r\n?/g, '\n')
+    .replace(/\s+•\s+/g, '\n• ');
+
+  for (const rawLine of normalizedValue.split('\n')) {
     const line = rawLine.trimEnd();
     if (line.startsWith('- ') || line.startsWith('• ')) {
       pendingList.push(parseFormattedTextSegments(line.slice(2)));
