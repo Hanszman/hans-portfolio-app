@@ -36,6 +36,7 @@ export const EN_TRANSLATIONS = {
   'common.pagination.page': 'Go to page {{ page }}',
   'common.entities.projects': 'Projects',
   'common.entities.technologies': 'Technologies',
+  'common.entities.technologiesAndTools': 'Technologies & Tools',
   'common.fields.slug': 'Slug',
   'common.fields.sortOrder': 'Sort order',
   'common.empty.linkedCompanies': 'No linked companies yet.',

@@ -36,6 +36,7 @@ export const ES_ES_TRANSLATIONS = {
   'common.pagination.page': 'Ir a la pagina {{ page }}',
   'common.entities.projects': 'Proyectos',
   'common.entities.technologies': 'Tecnologías',
+  'common.entities.technologiesAndTools': 'Tecnologías & Herramientas',
   'common.fields.slug': 'Slug',
   'common.fields.sortOrder': 'Orden de visualización',
   'common.empty.linkedCompanies': 'Todavía no hay empresas vinculadas.',

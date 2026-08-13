@@ -8,10 +8,13 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
--Remover obrigatoriedade de campo summary/description de customer e de outras entidades.
--Remover campos como highlight e image assets de entidades desnecessárias, como jobs por exemplo.
+-Alterar listas de tags (techonologies, customers, etc) em todas as telas e cards, para sempre mostrar em ordem alfabética (mostrando highlights primeiro, depois as outras).
+-Mostrar summary/description de customer no modal dele.
+-Remover obrigatoriedade de campo summary/description de customer, jobs e de outras entidades.
+-Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
 -Algumas relações não estão mostrando no read do image assets, como jobs por exemplo. Passar investigando e verificando se todas essas relações estão listadas corretamente nos reads.
--Ver se faz sentido colocar summary acima da description no modal de detalhes da experience.
+-Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
+
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
