@@ -8,6 +8,7 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
+-Arrumar modal de detalhes das formations porque está mostrando screenshot quando deveria mostrar o ícone da formação.
 -Alterar listas de tags (techonologies, customers, etc) em todas as telas e cards, para sempre mostrar em ordem alfabética (mostrando highlights primeiro, depois as outras).
 -Mostrar summary/description de customer no modal dele.
 -Remover obrigatoriedade de campo summary/description de customer, jobs e de outras entidades.
@@ -15,10 +16,11 @@ IMPLEMENTAÇÕES:
 -Algumas relações não estão mostrando no read do image assets, como jobs por exemplo. Passar investigando e verificando se todas essas relações estão listadas corretamente nos reads.
 -Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
+-Mostrar tags de technologies relacionadas nos modais de detalhes de formations.
+-Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
 -Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
 -Entender motivo de alguns png não estarem aparecendo na lista de image assets relacionados quando tento atualizar uma entidade, tipo a formation por exemplo.
 -Campo de ordem de exibição está esquisito nas entidades, se eu altero algum pra um valor que outro já tem, deveria atualizar na lista a ordem/numeração de todos os próximos. Não deveriam ter números de ordem de exibição iguais dentro de uma mesma entidade.
--Mostrar tags de technologies relacionadas nos modais de detalhes de formations.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
