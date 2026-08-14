@@ -14,7 +14,11 @@ IMPLEMENTAÇÕES:
 -Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
 -Algumas relações não estão mostrando no read do image assets, como jobs por exemplo. Passar investigando e verificando se todas essas relações estão listadas corretamente nos reads.
 -Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
-
+-Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
+-Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
+-Entender motivo de alguns png não estarem aparecendo na lista de image assets relacionados quando tento atualizar uma entidade, tipo a formation por exemplo.
+-Campo de ordem de exibição está esquisito nas entidades, se eu altero algum pra um valor que outro já tem, deveria atualizar na lista a ordem/numeração de todos os próximos. Não deveriam ter números de ordem de exibição iguais dentro de uma mesma entidade.
+-Mostrar tags de technologies relacionadas nos modais de detalhes de formations.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
@@ -26,9 +30,6 @@ IMPLEMENTAÇÕES:
 
 *Projects:
 -Talvez criar uma coluna para projeto inacabado/concluído.
-
-*Outros:
--Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 
 AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.
