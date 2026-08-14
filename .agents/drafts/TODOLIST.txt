@@ -1,10 +1,9 @@
 [TODO LIST]:
 DADOS:
--Atualizar dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
+-Continuar atualizando dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
 -Cadastrar os links de referência entre as entidades e atualizar modais de visualização (Criar listas de links de prod e git nos modais, com os ícones do git e vercel).
 -Cadastrar imagens dos prints nos modais do projetos utilizando carrossel que implementamos.
--Colocar as certificações e diplomas exibidas em um carrossel. Verificar se teria como adicionar mais de uma foto nas certificações.
--Rodar scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
+-Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
 *Correções:
@@ -40,3 +39,36 @@ DEPOIS:
 -Terminar de fazer alguns projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
 -Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção.
 -Talvez fazer página sobre meus gostos e vida pessoal.
+
+Tecnologias a Adicionar:
+-Claude
+-Codex
+-Tailwind
+-Next
+-Nest
+-Jasmine
+-Karma
+-Jest
+-Vitest
+-Prisma
+-Drizzle
+-etc
+
+Conceitos a Adicionar:
+-Design System
+-Micro Front-End
+-Clean Code
+-DRY
+-KISS
+-YAGNI
+-SRP
+-SOLID
+-DDD
+-TDD
+-Unit Tests
+-E2E Tests
+-API REST
+-MVC
+-Design Patterns
+-Clean Architecture
+-etc
