@@ -173,15 +173,6 @@
       />
 
       <app-operations-relation-picker
-        [label]="'pages.admin.projects.fields.tags.label' | translate"
-        [description]="'pages.admin.projects.fields.tags.description' | translate"
-        [emptyMessage]="'pages.admin.projects.fields.tags.empty' | translate"
-        [options]="tagOptions()"
-        [selectedIds]="form()?.tagIds ?? []"
-        (toggled)="relation('tagIds', $event)"
-      />
-
-      <app-operations-relation-picker
         [label]="'common.relations.links' | translate"
         [description]="'pages.admin.projects.fields.links.description' | translate"
         [emptyMessage]="'common.empty.links' | translate"

@@ -39,7 +39,6 @@ const createProject = (
   updatedAt: '2024-01-01T00:00:00.000Z',
   technologies: [],
   experiences: [],
-  tags: [],
   links: [],
   imageAssets: [],
   ...overrides,

@@ -4,6 +4,7 @@ import { buildAssetUrl } from '../../../core/api/api.config';
 import { resolveLocalizedText } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import { formatAppDate } from '../../../core/date/app-date.helper';
+import { firstValueFrom, Observable } from 'rxjs';
 import {
   AdminFormFieldConfig,
   AdminEntityDefinition,
@@ -283,6 +284,29 @@ export const translateAdminSelectOptions = <TValue extends string>(
 
 export const trackAdminItemById = (index: number, item: { id: string }): string => item.id;
 
+interface AdminPaginatedCatalog<T> {
+  readonly data: readonly T[];
+  readonly pagination: {
+    readonly totalPages: number;
+  };
+}
+
+export const loadAllAdminCatalogItems = async <T>(
+  loadPage: (page: number, pageSize: number) => Observable<AdminPaginatedCatalog<T>>,
+  pageSize = 100,
+): Promise<readonly T[]> => {
+  const firstPage = await firstValueFrom(loadPage(1, pageSize));
+  const remainingPages = Array.from(
+    { length: Math.max(firstPage.pagination.totalPages - 1, 0) },
+    (_, index) => index + 2,
+  );
+  const remainingResponses = await Promise.all(
+    remainingPages.map((page) => firstValueFrom(loadPage(page, pageSize))),
+  );
+
+  return [firstPage, ...remainingResponses].flatMap((response) => response.data);
+};
+
 export interface AdminImageAssetOptionViewModel {
   readonly id: string;
   readonly title: string;
@@ -325,7 +349,6 @@ export interface AdminSessionFactViewModel {
 
 const ADMIN_ENTITY_TITLE_KEYS: Record<AdminEntityDefinition['id'], AppTranslationKey> = {
   'portfolio-settings': 'common.entities.portfolioSettings',
-  tags: 'common.entities.tags',
   links: 'common.entities.links',
   'image-assets': 'common.entities.imageAssets',
   'spoken-languages': 'common.entities.languages',

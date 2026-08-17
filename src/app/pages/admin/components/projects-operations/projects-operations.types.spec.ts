@@ -28,7 +28,6 @@ const form = (): ProjectsOperationsFormValue => ({
   sortOrder: '1',
   technologyIds: ['t-1', 't-1'],
   experienceIds: ['e-1', 'e-1'],
-  tagIds: ['tag-1'],
   linkIds: ['l-1'],
   imageAssetIds: ['i-1'],
 });
@@ -56,7 +55,6 @@ const record = () =>
     sortOrder: 1,
     technologyRelations: [{ technologyId: 't-1' }],
     experienceIds: ['e-1'],
-    tagIds: ['tag-1'],
     linkIds: ['l-1'],
     imageAssetIds: ['i-1'],
   }) as never;
@@ -77,7 +75,7 @@ describe('projects operations types', () => {
     expect(projectRelationId({ technologyId: 't-1' } as never, 'technology')).toBe('t-1');
     expect(projectRelationId({ technology: { id: 't-2' } } as never, 'technology')).toBe('t-2');
     expect(projectRelationId({} as never, 'technology')).toBeNull();
-    for (const key of ['technology', 'experience', 'tag', 'link', 'imageAsset'] as const)
+    for (const key of ['technology', 'experience', 'link', 'imageAsset'] as const)
       expect(normalizeProjectRelationIds(record(), key).length).toBe(1);
     expect(buildProjectsFormValue(null).slug).toBe('');
     expect(buildProjectsFormValue(record()).startDate).toBe('');
@@ -124,8 +122,6 @@ describe('projects operations types', () => {
       technologies: ['t-string', { technology: { id: 't-nested' } }, { id: 't-public' }],
       experienceIds: ['e-direct'],
       experiences: [{ experienceId: 'e-relation' }, { experience: { id: 'e-nested' } }],
-      tagIds: ['tag-direct'],
-      tags: [{ tag: { id: 'tag-nested' } }],
       linkIds: ['link-direct'],
       links: [{ id: 'link-public' }],
       imageAssetIds: ['image-direct'],
@@ -144,7 +140,6 @@ describe('projects operations types', () => {
       'e-relation',
       'e-nested',
     ]);
-    expect(normalizeProjectRelationIds(publicRecord, 'tag')).toEqual(['tag-direct', 'tag-nested']);
     expect(normalizeProjectRelationIds(publicRecord, 'link')).toEqual([
       'link-direct',
       'link-public',

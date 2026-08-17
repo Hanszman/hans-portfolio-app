@@ -35,18 +35,6 @@ export interface ProjectExperienceResponse {
   updatedAt: string;
 }
 
-export interface ProjectTagResponse {
-  id: string;
-  slug: string;
-  labelPt: string;
-  labelEn: string;
-  labelEs?: string;
-  color: string | null;
-  sortOrder: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface ProjectLinkResponse {
   id: string;
   url: string;
@@ -95,13 +83,6 @@ export interface ProjectExperienceRelationResponse {
   experience: ProjectExperienceResponse;
 }
 
-export interface ProjectTagRelationResponse {
-  projectId: string;
-  tagId: string;
-  sortOrder: number;
-  tag: ProjectTagResponse;
-}
-
 export interface ProjectLinkRelationResponse {
   projectId: string;
   linkId: string;
@@ -140,7 +121,6 @@ export interface ProjectCollectionItemResponse {
   updatedAt: string;
   technologies: ProjectTechnologyRelationResponse[];
   experiences: ProjectExperienceRelationResponse[];
-  tags: ProjectTagRelationResponse[];
   links: ProjectLinkRelationResponse[];
   imageAssets: ProjectImageAssetRelationResponse[];
 }
@@ -185,12 +165,10 @@ export interface ProjectRelationRecord {
   id?: string;
   technologyId?: string;
   experienceId?: string;
-  tagId?: string;
   linkId?: string;
   imageAssetId?: string;
   technology?: ProjectRelationReference | null;
   experience?: ProjectRelationReference | null;
-  tag?: ProjectRelationReference | null;
   link?: ProjectRelationReference | null;
   imageAsset?: ProjectRelationReference | null;
 }
@@ -218,12 +196,10 @@ export interface ProjectRecord {
   technologyIds?: string[] | null;
   technologyRelations?: ProjectRelationRecord[] | null;
   experienceIds?: string[] | null;
-  tagIds?: string[] | null;
   linkIds?: string[] | null;
   imageAssetIds?: string[] | null;
   technologies?: ProjectRelationRecord[] | null;
   experiences?: ProjectRelationRecord[] | null;
-  tags?: ProjectRelationRecord[] | null;
   links?: ProjectRelationRecord[] | null;
   imageAssets?: ProjectRelationRecord[] | null;
   createdAt?: string;
@@ -255,7 +231,6 @@ export interface ProjectMutationPayload {
   sortOrder: number;
   technologyRelations: ProjectTechnologyRelationPayload[];
   experienceIds: string[];
-  tagIds: string[];
   linkIds: string[];
   imageAssetIds: string[];
 }

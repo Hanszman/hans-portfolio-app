@@ -8,7 +8,12 @@ import { APP_LOCALE_STORAGE_KEY } from '../../core/translation/translation.confi
 import { provideAppTranslations } from '../../core/translation/translation.providers';
 import { TranslationService } from '../../core/translation/translation.service';
 import { HighlightFilterValue } from '../../shared/filters/highlight-filter.types';
-import { SkillLevelFilterValue, SkillStackFilterValue, SkillTypeFilterValue } from './skills.types';
+import {
+  SkillFrequencyFilterValue,
+  SkillLevelFilterValue,
+  SkillStackFilterValue,
+  SkillTypeFilterValue,
+} from './skills.types';
 import { SkillsComponent } from './skills.component';
 
 const TECHNOLOGIES_REQUEST_URL = buildApiUrl(
@@ -352,11 +357,21 @@ describe('SkillsComponent', () => {
     const component = fixture.componentInstance as unknown as {
       selectStackFilter: (value: SkillStackFilterValue) => void;
       selectLevelFilter: (value: SkillLevelFilterValue) => void;
+      selectFrequencyFilterFromEvent: (event: Event) => void;
+      selectedFrequency: () => SkillFrequencyFilterValue;
     };
 
     component.selectLevelFilter('STUDYING');
     fixture.detectChanges();
 
+    expect(technologiesText()).toContain('Unity');
+    expect(technologiesText()).not.toContain('Angular');
+
+    component.selectLevelFilter('ALL');
+    component.selectFrequencyFilterFromEvent({ detail: 'STUDYING' } as unknown as Event);
+    fixture.detectChanges();
+
+    expect(component.selectedFrequency()).toBe('STUDYING');
     expect(technologiesText()).toContain('Unity');
     expect(technologiesText()).not.toContain('Angular');
 

@@ -30,27 +30,27 @@ describe('experiences helper', () => {
       '/assets/img/experiences/stefanini.jpg',
     );
     expect(timelineItem.customers.map((customer) => customer.name)).toEqual([
-      'Ford',
       'Ale',
+      'Ford',
     ]);
     expect(timelineItem.customers[0].image.src).toBe(
-      '/assets/img/experiences/ford.jpg',
+      '/assets/img/experiences/ale.jpg',
     );
     expect(timelineItem.customers[0].companyName).toBe('Stefanini Group');
     expect(timelineItem.customers[0].projectCount).toBe(2);
     expect(timelineItem.technologies.map((technology) => technology.name)).toEqual([
       'Angular',
-      'TypeScript',
-      'Microsoft Azure',
-      'JavaScript',
-      'HTML',
       'CSS',
-      'Sass',
+      'HTML',
+      'JavaScript',
+      'TypeScript',
       'Bootstrap',
-      'Node.js',
       'Knex.js',
-      'Swagger',
+      'Microsoft Azure',
+      'Node.js',
+      'Sass',
       'SQL Server',
+      'Swagger',
     ]);
     expect(timelineItem.extraTechnologyCount).toBe(4);
   });
@@ -70,17 +70,17 @@ describe('experiences helper', () => {
         labelKey: 'taxonomy.skills.stack.frontEnd',
         technologies: [
           'Angular',
-          'TypeScript',
-          'JavaScript',
-          'HTML',
           'CSS',
-          'Sass',
+          'HTML',
+          'JavaScript',
+          'TypeScript',
           'Bootstrap',
+          'Sass',
         ],
       },
       {
         labelKey: 'taxonomy.skills.stack.backEnd',
-        technologies: ['Node.js', 'Knex.js', 'Swagger'],
+        technologies: ['Knex.js', 'Node.js', 'Swagger'],
       },
       {
         labelKey: 'taxonomy.skills.stack.databases',

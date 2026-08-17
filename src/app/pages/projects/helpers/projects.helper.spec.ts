@@ -106,35 +106,6 @@ describe('projects helper', () => {
     expect(card.imageAlt).toBe('Portfolio');
   });
 
-  it('should map localized tag labels when tags are linked to the project', () => {
-    const card = mapProjectToCaseCard(
-      {
-        ...createProjectsCollectionResponse().data[0],
-        tags: [
-          {
-            projectId: 'project-consumer',
-            tagId: 'tag-angular',
-            sortOrder: 1,
-            tag: {
-              id: 'tag-angular',
-              slug: 'angular',
-              labelPt: 'Angular PT',
-              labelEn: 'Angular EN',
-              labelEs: 'Angular EN',
-              color: '#dd0031',
-              sortOrder: 1,
-              createdAt: '2026-01-01T00:00:00.000Z',
-              updatedAt: '2026-01-01T00:00:00.000Z',
-            },
-          },
-        ],
-      },
-      'pt-br',
-    );
-
-    expect(card.tagLabels).toEqual(['Angular PT']);
-  });
-
   it('should group unmapped database technologies as databases', () => {
     const card = mapProjectToCaseCard(
       {

@@ -32,6 +32,7 @@ import {
   createAdminCollectionPagination,
   createAdminEntityEndpointLabel,
 } from '../../admin.types';
+import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import { ExperiencesOperationsModalComponent } from './components/experiences-operations-modal/experiences-operations-modal.component';
 import {
   ExperienceOption,
@@ -279,42 +280,44 @@ export class ExperiencesOperationsComponent implements OnInit {
   private async refreshCatalogs(): Promise<void> {
     try {
       const [tech, projects, customers, jobs, links, images] = await Promise.all([
-        firstValueFrom(this.technologies.getTechnologies()),
-        firstValueFrom(this.projects.getProjects()),
-        firstValueFrom(this.customers.getAll(1, 100)),
-        firstValueFrom(this.jobs.getAll(1, 100)),
-        firstValueFrom(this.links.getAll(1, 100)),
-        firstValueFrom(this.images.getAll(1, 100)),
+        loadAllAdminCatalogItems((page, pageSize) =>
+          this.technologies.getTechnologies(page, pageSize),
+        ),
+        loadAllAdminCatalogItems((page, pageSize) => this.projects.getProjects(page, pageSize)),
+        loadAllAdminCatalogItems((page, pageSize) => this.customers.getAll(page, pageSize)),
+        loadAllAdminCatalogItems((page, pageSize) => this.jobs.getAll(page, pageSize)),
+        loadAllAdminCatalogItems((page, pageSize) => this.links.getAll(page, pageSize)),
+        loadAllAdminCatalogItems((page, pageSize) => this.images.getAll(page, pageSize)),
       ]);
       this.technologyOptions.set(
-        tech.data.map((x: TechnologyCollectionItemResponse) => ({
+        tech.map((x: TechnologyCollectionItemResponse) => ({
           id: x.id,
           title: x.name,
           subtitle: x.slug,
         })),
       );
       this.projectOptions.set(
-        projects.data.map((x: ProjectCollectionItemResponse) => ({
+        projects.map((x: ProjectCollectionItemResponse) => ({
           id: x.id,
           title: x.titlePt,
           subtitle: x.slug,
         })),
       );
       this.customerOptions.set(
-        customers.data.map((x: CustomerRecord) => ({ id: x.id, title: x.name, subtitle: x.slug })),
+        customers.map((x: CustomerRecord) => ({ id: x.id, title: x.name, subtitle: x.slug })),
       );
       this.jobOptions.set(
-        jobs.data.map((x: JobRecord) => ({ id: x.id, title: x.namePt, subtitle: x.slug })),
+        jobs.map((x: JobRecord) => ({ id: x.id, title: x.namePt, subtitle: x.slug })),
       );
       this.linkOptions.set(
-        links.data.map((x: LinkRecord) => ({
+        links.map((x: LinkRecord) => ({
           id: x.id,
           title: x.labelPt ?? x.labelEn ?? x.url,
           subtitle: x.url,
         })),
       );
       this.imageAssetOptions.set(
-        images.data.map((x: ImageAssetRecord) => ({
+        images.map((x: ImageAssetRecord) => ({
           id: x.id,
           title: x.fileName,
           subtitle: x.filePath,

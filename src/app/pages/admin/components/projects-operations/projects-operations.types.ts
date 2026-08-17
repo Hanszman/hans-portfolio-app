@@ -46,7 +46,6 @@ export interface ProjectsOperationsFormValue {
   sortOrder: string;
   technologyIds: readonly string[];
   experienceIds: readonly string[];
-  tagIds: readonly string[];
   linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
@@ -243,14 +242,13 @@ export const createEmptyProjectsOperationsFormValue = (): ProjectsOperationsForm
   sortOrder: '0',
   technologyIds: [],
   experienceIds: [],
-  tagIds: [],
   linkIds: [],
   imageAssetIds: [],
 });
 
 export const createProjectImageAssetOption = (item: ImageAssetRecord): ProjectImageAssetOption =>
   createAdminImageAssetOptionViewModel(item);
-type ProjectRelationKey = 'technology' | 'experience' | 'tag' | 'link' | 'imageAsset';
+type ProjectRelationKey = 'technology' | 'experience' | 'link' | 'imageAsset';
 interface ProjectRelationConfig {
   readonly directIds: keyof ProjectRecord;
   readonly collections: readonly (keyof ProjectRecord)[];
@@ -270,12 +268,6 @@ const PROJECT_RELATION_KEYS: Record<ProjectRelationKey, ProjectRelationConfig> =
     collections: ['experiences'],
     relationId: 'experienceId',
     nested: 'experience',
-  },
-  tag: {
-    directIds: 'tagIds',
-    collections: ['tags'],
-    relationId: 'tagId',
-    nested: 'tag',
   },
   link: {
     directIds: 'linkIds',
@@ -356,7 +348,6 @@ export const buildProjectsFormValue = (
         sortOrder: String(record.sortOrder ?? 0),
         technologyIds: normalizeProjectRelationIds(record, 'technology'),
         experienceIds: normalizeProjectRelationIds(record, 'experience'),
-        tagIds: normalizeProjectRelationIds(record, 'tag'),
         linkIds: normalizeProjectRelationIds(record, 'link'),
         imageAssetIds: normalizeProjectRelationIds(record, 'imageAsset'),
       }
@@ -432,7 +423,6 @@ export const buildProjectsMutationPayload = (
         technologyId,
       })),
       experienceIds: [...new Set(form.experienceIds)],
-      tagIds: [...new Set(form.tagIds)],
       linkIds: [...new Set(form.linkIds)],
       imageAssetIds: [...new Set(form.imageAssetIds)],
     },

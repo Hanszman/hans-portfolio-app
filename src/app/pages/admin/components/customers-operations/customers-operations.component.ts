@@ -27,6 +27,7 @@ import {
   createAdminCollectionPagination,
   createAdminEntityEndpointLabel,
 } from '../../admin.types';
+import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import { CustomersOperationsModalComponent } from './components/customers-operations-modal/customers-operations-modal.component';
 import {
   buildCustomerExperienceOptions,
@@ -293,18 +294,22 @@ export class CustomersOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [customersResponse, experiencesResponse, imageAssetsResponse] = await Promise.all([
+      const [customersResponse, experiences, imageAssets] = await Promise.all([
         firstValueFrom(
           this.customersOperationsService.getAll(page, this.pagination().pageSize, search),
         ),
-        firstValueFrom(this.experiencesService.getExperiences()),
-        firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.experiencesService.getExperiences(catalogPage, pageSize),
+        ),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
+        ),
       ]);
 
       this.customersSignal.set(customersResponse.data);
       this.paginationSignal.set(customersResponse.pagination);
-      this.experiencesSignal.set(experiencesResponse.data);
-      this.imageAssetsSignal.set(imageAssetsResponse.data);
+      this.experiencesSignal.set(experiences);
+      this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.customers.feedback.loadError');
       this.toastService.showError('pages.admin.customers.feedback.loadError');

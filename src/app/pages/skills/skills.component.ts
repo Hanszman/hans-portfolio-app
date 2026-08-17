@@ -44,12 +44,14 @@ import {
 } from './helpers/skills.helper';
 import {
   SKILL_LEVEL_FILTERS,
+  SKILL_FREQUENCY_FILTERS,
   SKILL_STACK_FILTERS,
   SKILL_TYPE_FILTERS,
   SkillFilterOption,
   SkillFilterChipViewModel,
   SkillCardViewModel,
   SkillLevelFilterValue,
+  SkillFrequencyFilterValue,
   SkillStackFilterValue,
   SkillTypeFilterValue,
 } from './skills.types';
@@ -89,6 +91,7 @@ export class SkillsComponent {
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
   private readonly selectedTypeSignal = signal<SkillTypeFilterValue>('ALL');
   private readonly selectedHighlightSignal = signal<HighlightFilterValue>('ALL');
+  private readonly selectedFrequencySignal = signal<SkillFrequencyFilterValue>('ALL');
   private readonly technologyPageSignal = signal(1);
 
   protected readonly isLoading = signal(true);
@@ -101,11 +104,13 @@ export class SkillsComponent {
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
   protected readonly selectedType = this.selectedTypeSignal.asReadonly();
   protected readonly selectedHighlight = this.selectedHighlightSignal.asReadonly();
+  protected readonly selectedFrequency = this.selectedFrequencySignal.asReadonly();
   protected readonly technologyPage = this.technologyPageSignal.asReadonly();
   protected readonly stackFilters = SKILL_STACK_FILTERS;
   protected readonly levelFilters = SKILL_LEVEL_FILTERS;
   protected readonly typeFilters = SKILL_TYPE_FILTERS;
   protected readonly highlightFilters = HIGHLIGHT_FILTERS;
+  protected readonly frequencyFilters = SKILL_FREQUENCY_FILTERS;
   protected readonly stackFilterOptions = computed(() =>
     this.buildFilterOptions(this.stackFilters),
   );
@@ -113,6 +118,9 @@ export class SkillsComponent {
     this.buildFilterOptions(this.levelFilters),
   );
   protected readonly typeFilterOptions = computed(() => this.buildFilterOptions(this.typeFilters));
+  protected readonly frequencyFilterOptions = computed(() =>
+    this.buildFilterOptions(this.frequencyFilters),
+  );
 
   protected readonly educationCards = computed(() =>
     buildEducationSkillCards(this.formationsSignal(), this.translationService.locale()),
@@ -134,6 +142,7 @@ export class SkillsComponent {
     const selectedLevel = this.selectedLevel();
     const selectedType = this.selectedType();
     const selectedHighlight = this.selectedHighlight();
+    const selectedFrequency = this.selectedFrequency();
 
     return this.technologyCards().filter((card) => {
       const matchesSearch =
@@ -148,8 +157,10 @@ export class SkillsComponent {
       const matchesHighlight =
         selectedHighlight === 'ALL' ||
         (selectedHighlight === 'HIGHLIGHTED' ? card.isHighlight : !card.isHighlight);
+      const matchesFrequency =
+        selectedFrequency === 'ALL' || card.frequencyKey === selectedFrequency;
 
-      return matchesSearch && matchesStack && matchesLevel && matchesType && matchesHighlight;
+      return matchesSearch && matchesStack && matchesLevel && matchesType && matchesHighlight && matchesFrequency;
     });
   });
 
@@ -236,6 +247,13 @@ export class SkillsComponent {
 
   protected selectHighlightFilter(value: HighlightFilterValue): void {
     this.selectedHighlightSignal.set(value);
+    this.resetTechnologyPage();
+  }
+
+  protected selectFrequencyFilterFromEvent(event: Event): void {
+    this.selectedFrequencySignal.set(
+      this.resolveSelectValue(event) as SkillFrequencyFilterValue,
+    );
     this.resetTechnologyPage();
   }
 

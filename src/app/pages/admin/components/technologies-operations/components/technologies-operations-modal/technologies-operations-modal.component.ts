@@ -44,6 +44,8 @@ import {
   TECHNOLOGY_FREQUENCY_VALUES,
   TECHNOLOGY_LEVEL_VALUES,
   TECHNOLOGY_OPTION_LABEL_KEYS,
+  TECHNOLOGY_STACK_VALUES,
+  TECHNOLOGY_TYPE_VALUES,
   TechnologyOptionValue,
 } from '../../technologies-operations.types';
 
@@ -70,7 +72,6 @@ export class TechnologiesOperationsModalComponent {
   readonly projectOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly experienceOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly formationOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
-  readonly tagOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly linkOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
@@ -88,7 +89,6 @@ export class TechnologiesOperationsModalComponent {
   readonly projectToggled = output<string>();
   readonly experienceToggled = output<string>();
   readonly formationToggled = output<string>();
-  readonly tagToggled = output<string>();
   readonly linkToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
@@ -132,6 +132,8 @@ export class TechnologiesOperationsModalComponent {
             labelKey: 'common.fields.category',
             value: technology.category,
           },
+          { labelKey: 'common.fields.stack', value: technology.stack ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.stack]) : '-' },
+          { labelKey: 'common.fields.type', value: technology.type ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.type]) : '-' },
           { labelKey: 'common.fields.level', value: technology.level || '-' },
           {
             labelKey: 'common.fields.frequency',
@@ -172,10 +174,6 @@ export class TechnologiesOperationsModalComponent {
           {
             labelKey: 'common.entities.formations',
             value: relationValue(technology.formationLabels),
-          },
-          {
-            labelKey: 'pages.admin.technologies.card.tags',
-            value: relationValue(technology.tagLabels),
           },
           {
             labelKey: 'common.entities.links',
@@ -219,6 +217,8 @@ export class TechnologiesOperationsModalComponent {
     }
   });
   protected readonly categoryOptions = computed(() => this.getOptions(TECHNOLOGY_CATEGORY_VALUES));
+  protected readonly stackOptions = computed(() => this.getOptions(TECHNOLOGY_STACK_VALUES));
+  protected readonly typeOptions = computed(() => this.getOptions(TECHNOLOGY_TYPE_VALUES));
   protected readonly levelOptions = computed(() => this.getOptions(TECHNOLOGY_LEVEL_VALUES));
   protected readonly frequencyOptions = computed(() =>
     this.getOptions(TECHNOLOGY_FREQUENCY_VALUES),

@@ -16,6 +16,14 @@ export type SkillStackFilterValue =
 
 export type SkillLevelFilterValue = 'ALL' | 'ADVANCED' | 'INTERMEDIATE' | 'BEGINNER' | 'STUDYING';
 
+export type SkillFrequencyFilterValue =
+  | 'ALL'
+  | 'FREQUENT'
+  | 'OCCASIONAL'
+  | 'PREVIOUSLY_USED'
+  | 'RARE'
+  | 'STUDYING';
+
 export type SkillTypeFilterValue =
   | 'ALL'
   | 'PROGRAMMING_LANGUAGES'
@@ -89,6 +97,7 @@ export interface SkillCardViewModel {
   categoryLabel: string;
   levelLabel: string;
   frequencyLabel: string;
+  frequencyKey: SkillFrequencyFilterValue;
   totalExperienceLabel: string;
   isHighlight: boolean;
   iconName: string;
@@ -133,6 +142,15 @@ export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFi
   { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
   { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
   { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
+  { labelKey: 'common.states.studying', value: 'STUDYING' },
+];
+
+export const SKILL_FREQUENCY_FILTERS: readonly SkillFilterChipViewModel<SkillFrequencyFilterValue>[] = [
+  { labelKey: 'common.filters.all', value: 'ALL' },
+  { labelKey: 'taxonomy.skills.frequency.frequent', value: 'FREQUENT' },
+  { labelKey: 'taxonomy.skills.frequency.occasional', value: 'OCCASIONAL' },
+  { labelKey: 'taxonomy.skills.frequency.previouslyUsed', value: 'PREVIOUSLY_USED' },
+  { labelKey: 'taxonomy.skills.frequency.rare', value: 'RARE' },
   { labelKey: 'common.states.studying', value: 'STUDYING' },
 ];
 

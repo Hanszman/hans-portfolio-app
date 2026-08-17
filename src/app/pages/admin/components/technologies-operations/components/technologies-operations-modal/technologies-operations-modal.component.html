@@ -77,6 +77,36 @@
         ></hans-select-option>
 
         <hans-select-option
+          [label]="resolveFieldLabel('stack')"
+          [required]="fields.stack.required"
+          [value]="form().stack"
+          [options]="stackOptions()"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('stack', $event)"
+          (valuechange)="change('stack', $event)"
+          (valueChange)="change('stack', $event)"
+        ></hans-select-option>
+
+        <hans-select-option
+          [label]="resolveFieldLabel('type')"
+          [required]="fields.type.required"
+          [value]="form().type"
+          [options]="typeOptions()"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="change('type', $event)"
+          (valuechange)="change('type', $event)"
+          (valueChange)="change('type', $event)"
+        ></hans-select-option>
+
+        <hans-select-option
           [label]="resolveFieldLabel('frequency')"
           [required]="fields.frequency.required"
           [value]="form().frequency"
@@ -140,15 +170,6 @@
           [options]="formationOptions()"
           [selectedIds]="form().formationIds"
           (toggled)="formationToggled.emit($event)"
-        />
-
-        <app-operations-relation-picker
-          [label]="'pages.admin.technologies.fields.tags.label' | translate"
-          [description]="'pages.admin.technologies.fields.tags.description' | translate"
-          [emptyMessage]="'pages.admin.technologies.fields.tags.empty' | translate"
-          [options]="tagOptions()"
-          [selectedIds]="form().tagIds"
-          (toggled)="tagToggled.emit($event)"
         />
 
         <app-operations-relation-picker

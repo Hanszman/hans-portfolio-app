@@ -60,7 +60,6 @@ export class ProjectsOperationsModalComponent {
   readonly form = input<ProjectsOperationsFormValue>();
   readonly technologyOptions = input<readonly ProjectOption[]>([]);
   readonly experienceOptions = input<readonly ProjectOption[]>([]);
-  readonly tagOptions = input<readonly ProjectOption[]>([]);
   readonly linkOptions = input<readonly ProjectOption[]>([]);
   readonly imageAssetOptions = input<readonly (ProjectOption & { imageUrl: string })[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
@@ -73,7 +72,7 @@ export class ProjectsOperationsModalComponent {
   readonly fieldChanged = output<{ field: keyof ProjectsOperationsFormValue; value: string }>();
   readonly booleanChanged = output<{ field: 'featured' | 'highlight'; value: boolean }>();
   readonly relationToggled = output<{
-    field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds';
+    field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds';
     id: string;
   }>();
   readonly submitted = output<void>();
@@ -221,10 +220,6 @@ export class ProjectsOperationsModalComponent {
             value: relationValue(project.experiences, 'experience'),
           },
           {
-            labelKey: 'pages.admin.projects.fields.tags.label',
-            value: relationValue(project.tags, 'tag'),
-          },
-          {
             labelKey: 'common.relations.links',
             value: relationValue(project.links, 'link'),
           },
@@ -297,14 +292,14 @@ export class ProjectsOperationsModalComponent {
   }
 
   protected relation(
-    field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.relationToggled.emit({ field, id });
   }
 
   protected selected(
-    field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): boolean {
     return this.form()?.[field].includes(id) ?? false;

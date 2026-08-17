@@ -17,6 +17,7 @@ describe('SkillCardComponent', () => {
     categoryLabel: 'Framework',
     levelLabel: 'Avancado',
     frequencyLabel: 'Frequente',
+    frequencyKey: 'FREQUENT',
     totalExperienceLabel: '7 years',
     isHighlight: true,
     iconName: 'LuBlocks',

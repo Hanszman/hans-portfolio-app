@@ -85,7 +85,6 @@ export const PT_BR_TRANSLATIONS = {
   'common.entities.formations': 'Formações',
   'common.entities.customers': 'Clientes',
   'common.entities.languages': 'Idiomas',
-  'common.entities.tags': 'Tags',
   'common.entities.jobs': 'Jobs',
   'common.entities.technologyContexts': 'Technology contexts',
   'common.languages.english': 'Inglês',
@@ -95,6 +94,8 @@ export const PT_BR_TRANSLATIONS = {
   'common.entities.imageAssets': 'Imagens',
   'common.fields.type': 'Tipo',
   'common.fields.name': 'Nome',
+  'common.fields.portugueseName': 'Nome em português',
+  'common.fields.englishName': 'Nome em inglês',
   'common.fields.description': 'Descrição',
   'common.fields.summary': 'Resumo',
   'common.fields.date': 'Data',
@@ -435,62 +436,6 @@ export const PT_BR_TRANSLATIONS = {
     'O portfolio setting não pode ser salvo agora.',
   'pages.admin.portfolioSettings.feedback.deleteError':
     'O portfolio setting não pode ser excluído agora.',
-  'pages.admin.entities.tags.description':
-    'Rótulos reutilizáveis de classificação compartilhados entre projetos, tecnologias e fluxos editoriais futuros.',
-  'pages.admin.tags.sectionLabel': '// TAGS',
-  'pages.admin.tags.description':
-    'CRUD protegido para rótulos reutilizáveis que classificam projetos e tecnologias por meio de arrays relacionais mantidos pela própria tag.',
-  'pages.admin.tags.states.loading': 'Carregando a coleção protegida de tags...',
-  'pages.admin.tags.states.empty': 'Nenhuma tag protegida foi cadastrada ainda.',
-  'pages.admin.tags.card.emptyRelations':
-    'Nenhum registro relacionado está vinculado a esta tag no momento.',
-  'pages.admin.tags.fields.slug.placeholder': 'Digite o slug único da tag',
-  'pages.admin.tags.fields.namePt.label': 'Nome em português',
-  'pages.admin.tags.fields.namePt.placeholder': 'Digite o nome da tag em português',
-  'pages.admin.tags.fields.nameEn.label': 'Nome em inglês',
-  'pages.admin.tags.fields.nameEn.placeholder': 'Digite o nome da tag em inglês',
-  'pages.admin.tags.fields.type.empty': 'Nenhum tipo de tag esta disponível no momento.',
-  'pages.admin.tags.fields.type.options.DOMAIN': 'Dominio',
-  'pages.admin.tags.fields.type.options.PLATFORM': 'Plataforma',
-  'pages.admin.tags.fields.type.options.METHODOLOGY': 'Metodologia',
-  'pages.admin.tags.fields.type.options.INDUSTRY': 'Industria',
-  'pages.admin.tags.fields.sortOrder.placeholder': 'Digite a ordem inteira da tag',
-  'pages.admin.tags.fields.projects.description':
-    'Selecione todos os projetos que devem expor esta tag em seus relacionamentos públicos.',
-  'pages.admin.tags.fields.technologies.description':
-    'Selecione todas as tecnologias que devem manter esta tag em seus arrays relacionais.',
-  'pages.admin.tags.modal.create.title': 'Criar tag',
-  'pages.admin.tags.modal.read.title': 'Ler tags',
-  'pages.admin.tags.modal.read.description':
-    'Revise as tags protegidas atuais e abra os fluxos de edicao ou exclusao diretamente de cada registro.',
-  'pages.admin.tags.modal.pickUpdate.title': 'Selecione uma tag para editar',
-  'pages.admin.tags.modal.pickUpdate.description':
-    'Escolha uma das tags protegidas atuais para abrir seu formulário de edição.',
-  'pages.admin.tags.modal.pickDelete.title': 'Selecione uma tag para excluir',
-  'pages.admin.tags.modal.pickDelete.description':
-    'Escolha uma das tags protegidas atuais para confirmar sua remoção.',
-  'pages.admin.tags.modal.update.title': 'Editar tag',
-  'pages.admin.tags.modal.delete.title': 'Excluir tag',
-  'pages.admin.tags.modal.delete.description':
-    'Esta ação remove permanentemente a tag protegida selecionada e seus relacionamentos atuais do portfolio.',
-  'pages.admin.tags.feedback.created': 'Tag protegida criada com sucesso.',
-  'pages.admin.tags.feedback.updated': 'Tag protegida atualizada com sucesso.',
-  'pages.admin.tags.feedback.deleted': 'Tag protegida excluída com sucesso.',
-  'pages.admin.tags.feedback.requiredSlug': 'O slug da tag é obrigatório antes do envio.',
-  'pages.admin.tags.feedback.requiredNamePt':
-    'O nome da tag em português é obrigatório antes do envio.',
-  'pages.admin.tags.feedback.requiredNameEn':
-    'O nome da tag em inglês é obrigatório antes do envio.',
-  'pages.admin.tags.feedback.requiredType': 'O tipo da tag é obrigatório antes do envio.',
-  'pages.admin.tags.feedback.invalidType':
-    'Selecione um dos tipos de tag suportados antes de enviar.',
-
-  'pages.admin.tags.feedback.selectionRequired':
-    'Selecione uma tag protegida antes de continuar com esta ação.',
-  'pages.admin.tags.feedback.loadError':
-    'A coleção protegida de tags não pode ser carregada agora.',
-  'pages.admin.tags.feedback.saveError': 'A tag protegida não pode ser salva agora.',
-  'pages.admin.tags.feedback.deleteError': 'A tag protegida não pode ser excluída agora.',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
   'pages.admin.links.sectionLabel': '// LINKS',
@@ -1199,5 +1144,4 @@ export const PT_BR_TRANSLATIONS = {
     'Descreva a imagem em espanhol para acessibilidade',
   'pages.admin.imageAssets.fields.captionEs.label': 'Legenda em espanhol',
   'pages.admin.imageAssets.fields.captionEs.placeholder': 'Digite a legenda em espanhol',
-  'pages.admin.tags.fields.nameEs.placeholder': 'Digite o nome da tag em espanhol',
 } as const satisfies AppTranslationLanguage;

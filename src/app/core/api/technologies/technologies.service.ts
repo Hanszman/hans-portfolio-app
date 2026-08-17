@@ -14,10 +14,10 @@ import {
 export class TechnologiesService {
   private readonly httpClient = inject(HttpClient);
 
-  getTechnologies(): Observable<TechnologiesCollectionResponse> {
+  getTechnologies(page = 1, pageSize = 100): Observable<TechnologiesCollectionResponse> {
     const searchParams = new URLSearchParams({
-      page: '1',
-      pageSize: '100',
+      page: String(page),
+      pageSize: String(pageSize),
       sortBy: 'sortOrder',
       sortDirection: 'asc',
     });

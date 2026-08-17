@@ -45,7 +45,10 @@ import {
   createEmptyLinksOperationsFormValue,
   createLinkTypeOptions,
 } from './links-operations.types';
-import { translateAdminSelectOptions } from '../../helpers/admin.helper';
+import {
+  loadAllAdminCatalogItems,
+  translateAdminSelectOptions,
+} from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-links-operations',
@@ -346,27 +349,35 @@ export class LinksOperationsComponent implements OnInit {
     try {
       const [
         linksResponse,
-        projectsResponse,
-        experiencesResponse,
-        technologiesResponse,
-        formationsResponse,
+        projects,
+        experiences,
+        technologies,
+        formations,
       ] =
         await Promise.all([
           firstValueFrom(
             this.linksOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
-          firstValueFrom(this.projectsService.getProjects()),
-          firstValueFrom(this.experiencesService.getExperiences()),
-          firstValueFrom(this.technologiesService.getTechnologies()),
-          firstValueFrom(this.formationsService.getAll(1, 100)),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.projectsService.getProjects(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.experiencesService.getExperiences(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.technologiesService.getTechnologies(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.formationsService.getAll(catalogPage, pageSize),
+          ),
         ]);
 
       this.linksSignal.set(linksResponse.data);
       this.paginationSignal.set(linksResponse.pagination);
-      this.projectsSignal.set(projectsResponse.data);
-      this.experiencesSignal.set(experiencesResponse.data);
-      this.technologiesSignal.set(technologiesResponse.data);
-      this.formationsSignal.set(formationsResponse.data);
+      this.projectsSignal.set(projects);
+      this.experiencesSignal.set(experiences);
+      this.technologiesSignal.set(technologies);
+      this.formationsSignal.set(formations);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.links.feedback.loadError');
       this.toastService.showError('pages.admin.links.feedback.loadError');

@@ -29,7 +29,7 @@ describe('OperationsDetailedItemComponent', () => {
       imageAlt: 'Preview',
       fields: [
         {
-          labelKey: 'pages.admin.tags.card.slug',
+          labelKey: 'common.fields.slug',
           value: 'long-value',
           title: 'Full value',
         },

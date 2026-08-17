@@ -25,11 +25,11 @@ describe('OperationsComponent', () => {
 
     fixture = TestBed.createComponent(OperationsComponent);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('kickerKey', 'pages.admin.tags.sectionLabel');
-    fixture.componentRef.setInput('titleKey', 'common.entities.tags');
-    fixture.componentRef.setInput('endpointLabel', 'GET /tags');
-    fixture.componentRef.setInput('loadingKey', 'pages.admin.tags.states.loading');
-    fixture.componentRef.setInput('emptyKey', 'pages.admin.tags.states.empty');
+    fixture.componentRef.setInput('kickerKey', 'pages.admin.links.sectionLabel');
+    fixture.componentRef.setInput('titleKey', 'common.entities.links');
+    fixture.componentRef.setInput('endpointLabel', 'GET /links');
+    fixture.componentRef.setInput('loadingKey', 'pages.admin.links.states.loading');
+    fixture.componentRef.setInput('emptyKey', 'pages.admin.links.states.empty');
   });
 
   it('composes the workspace and forwards all actions', () => {
@@ -42,7 +42,7 @@ describe('OperationsComponent', () => {
     component.updateClicked.subscribe(updateSpy);
     component.deleteClicked.subscribe(deleteSpy);
     fixture.componentRef.setInput('hasRecords', true);
-    fixture.componentRef.setInput('descriptionKeys', ['pages.admin.entities.tags.description']);
+    fixture.componentRef.setInput('descriptionKeys', ['pages.admin.entities.links.description']);
     fixture.detectChanges();
 
     const actions = fixture.debugElement.query(By.directive(OperationsActionsComponent))
@@ -65,14 +65,14 @@ describe('OperationsComponent', () => {
     expect(fixture.nativeElement.textContent).not.toContain('Loading');
 
     fixture.componentRef.setInput('isLoading', false);
-    fixture.componentRef.setInput('errorKey', 'pages.admin.tags.feedback.loadError');
+    fixture.componentRef.setInput('errorKey', 'pages.admin.links.feedback.loadError');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('hans-message').message).toContain('could not');
 
     fixture.componentRef.setInput('errorKey', null);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('hans-message').message).toBe(
-      'No protected tag has been registered yet.',
+      'No protected link has been registered yet.',
     );
   });
 });

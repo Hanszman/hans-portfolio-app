@@ -3,6 +3,8 @@ import {
   TechnologyAdminRecord,
   TechnologyContextResponse,
   TechnologyMutationPayload,
+  TechnologyStack,
+  TechnologyType,
 } from '../../../../core/api/technologies/technologies.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -43,10 +45,24 @@ export const TECHNOLOGY_FREQUENCY_VALUES = [
   'STUDYING',
 ] as const;
 
+export const TECHNOLOGY_STACK_VALUES: readonly TechnologyStack[] = [
+  'BACK_END', 'DATABASES', 'FRONT_END', 'GAMES', 'MOBILE', 'OTHERS',
+];
+
+export const TECHNOLOGY_TYPE_VALUES: readonly TechnologyType[] = [
+  'CLOUD_HOSTING_PLATFORMS', 'CODE_EDITORS', 'DATABASES_MANAGEMENT_SYSTEMS',
+  'DEPLOYMENT_TOOLS', 'DEVELOPMENT_PLATFORMS', 'FRAMEWORKS', 'LIBRARIES',
+  'METHODOLOGIES', 'NON_RELATIONAL_DATABASES', 'OBJECT_NOTATIONS', 'OTHERS',
+  'PACKAGE_MANAGERS', 'PACKAGES', 'PROGRAMMING_LANGUAGES', 'PROTOCOLS',
+  'RELATIONAL_DATABASES', 'TECHNIQUES', 'VERSIONING_PLATFORMS', 'WEB_LANGUAGES',
+];
+
 export type TechnologyOptionValue =
   | (typeof TECHNOLOGY_CATEGORY_VALUES)[number]
   | (typeof TECHNOLOGY_LEVEL_VALUES)[number]
-  | (typeof TECHNOLOGY_FREQUENCY_VALUES)[number];
+  | (typeof TECHNOLOGY_FREQUENCY_VALUES)[number]
+  | TechnologyStack
+  | TechnologyType;
 
 export const TECHNOLOGY_OPTION_LABEL_KEYS = {
   LANGUAGE: 'taxonomy.skills.category.language',
@@ -67,12 +83,38 @@ export const TECHNOLOGY_OPTION_LABEL_KEYS = {
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
   STUDYING: 'pages.admin.technologies.options.STUDYING',
+  BACK_END: 'taxonomy.skills.stack.backEnd',
+  DATABASES: 'taxonomy.skills.stack.databases',
+  FRONT_END: 'taxonomy.skills.stack.frontEnd',
+  GAMES: 'taxonomy.skills.stack.games',
+  MOBILE: 'taxonomy.skills.stack.mobile',
+  OTHERS: 'taxonomy.skills.stack.others',
+  CLOUD_HOSTING_PLATFORMS: 'taxonomy.skills.type.cloudHostingPlatforms',
+  CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
+  DATABASES_MANAGEMENT_SYSTEMS: 'taxonomy.skills.type.databasesManagementSystems',
+  DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
+  DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
+  FRAMEWORKS: 'taxonomy.skills.type.frameworks',
+  LIBRARIES: 'taxonomy.skills.type.libraries',
+  METHODOLOGIES: 'taxonomy.skills.type.methodologies',
+  NON_RELATIONAL_DATABASES: 'taxonomy.skills.type.nonRelationalDataBases',
+  OBJECT_NOTATIONS: 'taxonomy.skills.type.objectNotations',
+  PACKAGE_MANAGERS: 'taxonomy.skills.type.packageManagers',
+  PACKAGES: 'taxonomy.skills.type.packages',
+  PROGRAMMING_LANGUAGES: 'taxonomy.skills.type.programmingLanguages',
+  PROTOCOLS: 'taxonomy.skills.type.protocols',
+  RELATIONAL_DATABASES: 'taxonomy.skills.type.relationalDataBases',
+  TECHNIQUES: 'taxonomy.skills.type.techniques',
+  VERSIONING_PLATFORMS: 'taxonomy.skills.type.versioningPlatforms',
+  WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
 } as const satisfies Record<TechnologyOptionValue, AppTranslationKey>;
 
 export interface TechnologiesOperationsFormValue {
   slug: string;
   name: string;
   category: string;
+  stack: TechnologyStack | '';
+  type: TechnologyType | '';
   level: string;
   frequency: string;
   highlight: boolean;
@@ -80,7 +122,6 @@ export interface TechnologiesOperationsFormValue {
   projectIds: readonly string[];
   experienceIds: readonly string[];
   formationIds: readonly string[];
-  tagIds: readonly string[];
   linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
@@ -97,6 +138,8 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
     required: true,
   },
   category: { labelKey: 'common.fields.category', required: true },
+  stack: { labelKey: 'common.fields.stack', required: true },
+  type: { labelKey: 'common.fields.type', required: true },
   level: { labelKey: 'common.fields.level', required: false },
   frequency: { labelKey: 'common.fields.frequency', required: false },
   sortOrder: {
@@ -116,7 +159,6 @@ export interface TechnologyOperationsViewModel extends TechnologiesOperationsFor
   projectLabels: readonly string[];
   experienceLabels: readonly string[];
   formationLabels: readonly string[];
-  tagLabels: readonly string[];
   linkLabels: readonly string[];
   technologyContexts: readonly TechnologyContextResponse[];
 }
@@ -129,6 +171,8 @@ export const createEmptyTechnologiesOperationsFormValue = (): TechnologiesOperat
   slug: '',
   name: '',
   category: '',
+  stack: '',
+  type: '',
   level: '',
   frequency: '',
   highlight: true,
@@ -136,7 +180,6 @@ export const createEmptyTechnologiesOperationsFormValue = (): TechnologiesOperat
   projectIds: [],
   experienceIds: [],
   formationIds: [],
-  tagIds: [],
   linkIds: [],
   imageAssetIds: [],
 });
@@ -147,8 +190,8 @@ const normalizeTechnologyRelationIds = (
     | readonly import('../../../../core/api/technologies/technologies.types').TechnologyRelationRecord[]
     | null
     | undefined,
-  idKey: 'projectId' | 'experienceId' | 'formationId' | 'tagId' | 'linkId',
-  nestedKey: 'project' | 'experience' | 'formation' | 'tag' | 'link',
+  idKey: 'projectId' | 'experienceId' | 'formationId' | 'linkId',
+  nestedKey: 'project' | 'experience' | 'formation' | 'link',
 ): readonly string[] => [
   ...new Set([
     ...(directIds ?? []),
@@ -170,6 +213,8 @@ export const buildTechnologiesFormValue = (
         slug: technology.slug,
         name: technology.name,
         category: technology.category,
+        stack: technology.stack ?? '',
+        type: technology.type ?? '',
         level: technology.level ?? '',
         frequency: technology.frequency ?? '',
         highlight: technology.highlight,
@@ -194,7 +239,6 @@ export const buildTechnologiesFormValue = (
           'formationId',
           'formation',
         ),
-        tagIds: normalizeTechnologyRelationIds(technology.tagIds, technology.tags, 'tagId', 'tag'),
         linkIds: normalizeTechnologyRelationIds(
           technology.linkIds,
           technology.links,
@@ -216,10 +260,16 @@ export const buildTechnologiesMutationPayload = (
   const slug = form.slug.trim();
   const name = form.name.trim();
   const category = form.category.trim();
+  const stack = form.stack;
+  const type = form.type;
   const sortOrder = Number.parseInt(form.sortOrder.trim(), 10);
   if (!slug) return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredSlug' };
   if (!name) return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredName' };
   if (!category)
+    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
+  if (!stack)
+    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
+  if (!type)
     return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
   if (!Number.isInteger(sortOrder))
     return { isValid: false, errorKey: 'pages.admin.technologies.feedback.invalidSortOrder' };
@@ -229,6 +279,8 @@ export const buildTechnologiesMutationPayload = (
       slug,
       name,
       category,
+      stack,
+      type,
       ...(form.level.trim() ? { level: form.level.trim() } : {}),
       ...(form.frequency.trim() ? { frequency: form.frequency.trim() } : {}),
       highlight: form.highlight,
@@ -240,7 +292,6 @@ export const buildTechnologiesMutationPayload = (
       formationRelations: [...new Set(form.formationIds)].map((formationId) => ({
         formationId,
       })),
-      tagIds: [...new Set(form.tagIds)],
       linkIds: [...new Set(form.linkIds)],
       imageAssetIds: [...new Set(form.imageAssetIds)],
     },

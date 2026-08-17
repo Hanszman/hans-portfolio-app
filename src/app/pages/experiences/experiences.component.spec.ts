@@ -176,10 +176,14 @@ describe('ExperiencesComponent', () => {
         name: string;
         companyName: string;
         projectCount: number;
+        summary?: string;
       }) => void;
       closeCustomerDetails: () => void;
       selectedCustomer: () => { name: string } | null;
-      selectedCustomerDetails: () => readonly [{ value: string | number }];
+      selectedCustomerDetails: () => readonly {
+        labelKey: string;
+        value: string | number;
+      }[];
       openProjectDetails: (projectSlug: string) => Promise<void>;
       closeProjectDetails: () => void;
       selectedProject: () => { slug: string } | null;
@@ -212,10 +216,30 @@ describe('ExperiencesComponent', () => {
       name: 'Ford',
       companyName: 'Stefanini Group',
       projectCount: 2,
+      summary: 'Automotive customer',
     });
 
     expect(component.selectedCustomer()?.name).toBe('Ford');
     expect(component.selectedCustomerDetails()[0].value).toBe('Stefanini Group');
+    expect(component.selectedCustomerDetails().map(({ value }) => value)).toContain(
+      'Automotive customer',
+    );
+
+    component.openCustomerDetails({
+      name: 'Ford',
+      companyName: 'Stefanini Group',
+      projectCount: 2,
+    });
+    expect(component.selectedCustomerDetails()).toEqual([
+      {
+        labelKey: 'pages.experiences.customer.company',
+        value: 'Stefanini Group',
+      },
+      {
+        labelKey: 'pages.experiences.customer.projects',
+        value: 2,
+      },
+    ]);
 
     component.closeCustomerDetails();
 

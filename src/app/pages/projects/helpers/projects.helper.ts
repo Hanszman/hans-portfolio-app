@@ -10,6 +10,7 @@ import {
 } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import { formatAppDateRange } from '../../../core/date/app-date.helper';
+import { sortTagItems } from '../../../shared/tag/helpers/tag-order.helper';
 import {
   resolveSkillStackKey,
   resolveSkillTypeKey,
@@ -205,7 +206,11 @@ export const mapProjectToCaseCard = (
     (left, right) => left.sortOrder - right.sortOrder,
   )[0];
   const technologies = dedupeProjectTechnologies(
-    project.technologies.map(({ technology }) => mapProjectTechnologyTag(technology, locale)),
+    sortTagItems(
+      project.technologies.map(({ technology }) => technology),
+      ({ name }) => name,
+      locale,
+    ).map((technology) => mapProjectTechnologyTag(technology, locale)),
   );
   const companyNames = dedupe(project.experiences.map(({ experience }) => experience.companyName));
   const experienceTitles = dedupe(
@@ -282,19 +287,7 @@ export const mapProjectToCaseCard = (
       ) || localizedTitle,
     assetCountLabel: String(project.links.length + project.imageAssets.length),
     experienceTitles,
-    tagLabels: dedupe(
-      project.tags.map(({ tag }) =>
-        resolveLocalizedText(
-          locale,
-          {
-            'pt-br': tag.labelPt,
-            'en-us': tag.labelEn,
-            'es-es': tag.labelEs,
-          },
-          tag.labelEn,
-        ),
-      ),
-    ),
+    tagLabels: [],
     galleryItems: [...project.imageAssets]
       .sort((left, right) => left.sortOrder - right.sortOrder)
       .filter(({ imageAsset }, index, relations) => {

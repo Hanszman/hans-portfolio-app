@@ -78,7 +78,6 @@ export const createProjectsCollectionResponse = (
         },
       ],
       experiences: [],
-      tags: [],
       links: [
         {
           projectId: 'project-github-consumer',
@@ -220,7 +219,6 @@ export const createProjectsCollectionResponse = (
           },
         },
       ],
-      tags: [],
       links: [],
       imageAssets: [],
     },
@@ -282,7 +280,6 @@ export const createProjectsCollectionResponse = (
         },
       ],
       experiences: [],
-      tags: [],
       links: [
         {
           projectId: 'project-hardworker',
@@ -376,7 +373,6 @@ export const createProjectsCollectionResponse = (
         },
       ],
       experiences: [],
-      tags: [],
       links: [
         {
           projectId: 'project-portfolio',

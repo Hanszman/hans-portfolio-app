@@ -51,6 +51,16 @@
             </div>
           }
         </dl>
+        @if (education.technologies.length > 0) {
+          <section class="education-modal-technologies">
+            <h2>{{ 'common.entities.technologies' | translate }}</h2>
+            <div class="education-modal-technology-list">
+              @for (technology of education.technologies; track technology.slug) {
+                <app-tag-button [tag]="{ label: technology.name, value: technology.slug }" />
+              }
+            </div>
+          </section>
+        }
       </section>
       @if (education.galleryItems.length > 0) {
         <section class="education-modal-gallery">

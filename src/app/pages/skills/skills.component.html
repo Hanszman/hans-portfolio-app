@@ -115,6 +115,23 @@
           (valuechange)="selectLevelFilterFromEvent($event)"
           (valueChange)="selectLevelFilterFromEvent($event)"
         ></hans-select-option>
+
+        <hans-select-option
+          class="skills-filter-select"
+          [label]="'common.fields.frequency' | translate"
+          [options]="frequencyFilterOptions()"
+          [value]="selectedFrequency()"
+          [enableAutocomplete]="false"
+          [noOptionsText]="'pages.skills.catalog.empty' | translate"
+          inputSize="medium"
+          inputColor="base"
+          labelColor="base"
+          dropdownBackgroundColor="var(--background-color)"
+          dropdownHoverColor="var(--primary-neutral-color)"
+          (change)="selectFrequencyFilterFromEvent($event)"
+          (valuechange)="selectFrequencyFilterFromEvent($event)"
+          (valueChange)="selectFrequencyFilterFromEvent($event)"
+        ></hans-select-option>
       </div>
 
       <app-button-filter

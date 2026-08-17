@@ -45,7 +45,10 @@ import {
   createEmptyFormationsOperationsFormValue,
   createFormationDegreeTypeOptions,
 } from './formations-operations.types';
-import { translateAdminSelectOptions } from '../../helpers/admin.helper';
+import {
+  loadAllAdminCatalogItems,
+  translateAdminSelectOptions,
+} from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-formations-operations',
@@ -341,21 +344,27 @@ export class FormationsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [formationsResponse, technologiesResponse, linksResponse, imageAssetsResponse] =
+      const [formationsResponse, technologies, links, imageAssets] =
         await Promise.all([
           firstValueFrom(
             this.formationsOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
-          firstValueFrom(this.technologiesService.getTechnologies()),
-          firstValueFrom(this.linksOperationsService.getAll(1, 100)),
-          firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.technologiesService.getTechnologies(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.linksOperationsService.getAll(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
+          ),
         ]);
 
       this.formationsSignal.set(formationsResponse.data);
       this.paginationSignal.set(formationsResponse.pagination);
-      this.technologiesSignal.set(technologiesResponse.data);
-      this.linksSignal.set(linksResponse.data);
-      this.imageAssetsSignal.set(imageAssetsResponse.data);
+      this.technologiesSignal.set(technologies);
+      this.linksSignal.set(links);
+      this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.formations.feedback.loadError');
       this.toastService.showError('pages.admin.formations.feedback.loadError');

@@ -37,8 +37,8 @@ describe('OperationsModalComponent', () => {
     component.pageSelected.subscribe(pageSpy);
 
     fixture.componentRef.setInput('isOpen', true);
-    fixture.componentRef.setInput('titleKey', 'pages.admin.tags.modal.read.title');
-    fixture.componentRef.setInput('descriptionKey', 'pages.admin.tags.modal.read.description');
+    fixture.componentRef.setInput('titleKey', 'pages.admin.links.modal.read.title');
+    fixture.componentRef.setInput('descriptionKey', 'pages.admin.links.modal.read.description');
     fixture.componentRef.setInput('showPagination', true);
     fixture.componentRef.setInput('showSearch', true);
     fixture.componentRef.setInput('searchValue', 'angular');
@@ -256,13 +256,13 @@ describe('OperationsModalComponent', () => {
       ...item,
       fields: [
         {
-          labelKey: 'pages.admin.tags.card.slug' as const,
+          labelKey: 'common.fields.slug' as const,
           value: 'item',
         },
       ],
     };
 
-    fixture.componentRef.setInput('feedbackKey', 'pages.admin.tags.feedback.loadError');
+    fixture.componentRef.setInput('feedbackKey', 'pages.admin.links.feedback.loadError');
     fixture.componentRef.setInput('feedbackTone', 'error');
     fixture.componentRef.setInput('items', [item]);
     fixture.componentRef.setInput('detailedItems', [detailedItem]);

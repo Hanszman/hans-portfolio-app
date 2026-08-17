@@ -8,7 +8,7 @@ describe('ToastService', () => {
   });
 
   it('should enqueue semantic toasts with stable ids and defaults', () => {
-    const firstToastId = service.showSuccess('pages.admin.tags.feedback.created');
+    const firstToastId = service.showSuccess('pages.admin.links.feedback.created');
     const secondToastId = service.showError('pages.login.feedback.invalidCredentials');
 
     expect(firstToastId).toBe('toast-1');
@@ -16,7 +16,7 @@ describe('ToastService', () => {
     expect(service.toasts()).toEqual([
       {
         id: 'toast-1',
-        messageKey: 'pages.admin.tags.feedback.created',
+        messageKey: 'pages.admin.links.feedback.created',
         messageParams: {},
         tone: 'success',
         duration: 4000,
@@ -56,7 +56,7 @@ describe('ToastService', () => {
     service.dismiss(toastId);
     expect(service.toasts()).toEqual([]);
 
-    service.showWarning('pages.admin.tags.feedback.loadError');
+    service.showWarning('pages.admin.links.feedback.loadError');
     service.clear();
 
     expect(service.toasts()).toEqual([]);
@@ -64,7 +64,7 @@ describe('ToastService', () => {
 
   it('should apply info defaults in direct show calls and keep unrelated toasts on dismiss', () => {
     const firstToastId = service.show({
-      messageKey: 'pages.admin.tags.feedback.loadError',
+      messageKey: 'pages.admin.links.feedback.loadError',
     });
     const secondToastId = service.showWarning(
       'pages.admin.portfolioSettings.feedback.deleteError',
@@ -76,7 +76,7 @@ describe('ToastService', () => {
     expect(service.toasts()).toEqual([
       {
         id: firstToastId,
-        messageKey: 'pages.admin.tags.feedback.loadError',
+        messageKey: 'pages.admin.links.feedback.loadError',
         messageParams: {},
         tone: 'info',
         duration: 4000,

@@ -14,4 +14,5 @@ export interface EducationModalItem {
   image?: TagModalImage | null;
   details: readonly TagModalDetail[];
   galleryItems: readonly EducationModalGalleryItem[];
+  technologies: readonly { slug: string; name: string }[];
 }

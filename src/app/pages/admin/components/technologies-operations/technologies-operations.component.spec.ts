@@ -10,16 +10,18 @@ import { TechnologyAdminRecord } from '../../../../core/api/technologies/technol
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { FormationsService } from '../../../../core/api/formations/formations.service';
-import { TagsService } from '../../../../core/api/tags/tags.service';
 import { LinksService } from '../../../../core/api/links/links.service';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { TechnologiesOperationsComponent } from './technologies-operations.component';
+import { buildTechnologiesFormValue } from './technologies-operations.types';
 
 const record = (overrides: Partial<TechnologyAdminRecord> = {}): TechnologyAdminRecord => ({
   id: 'technology-1',
   slug: 'angular',
   name: 'Angular',
   category: 'FRAMEWORK',
+  stack: 'FRONT_END',
+  type: 'FRAMEWORKS',
   level: 'ADVANCED',
   frequency: 'FREQUENT',
   highlight: true,
@@ -71,7 +73,6 @@ interface TechnologiesTestApi {
   toggleProject(id: string): void;
   toggleExperience(id: string): void;
   toggleFormation(id: string): void;
-  toggleTag(id: string): void;
   toggleLink(id: string): void;
   submitModal(): Promise<void>;
   goToPage(page: number): Promise<void>;
@@ -102,13 +103,15 @@ describe('TechnologiesOperationsComponent', () => {
   let projects: jasmine.SpyObj<ProjectsService>;
   let experiences: jasmine.SpyObj<ExperiencesService>;
   let formations: jasmine.SpyObj<FormationsService>;
-  let tags: jasmine.SpyObj<TagsService>;
   let links: jasmine.SpyObj<LinksService>;
   let toast: jasmine.SpyObj<ToastService>;
   let session: { accessToken: jasmine.Spy<() => string | null> };
   const settle = async () => {
     fixture.detectChanges();
     await fixture.whenStable();
+    for (let index = 0; index < 5; index += 1) {
+      await Promise.resolve();
+    }
     fixture.detectChanges();
   };
 
@@ -139,7 +142,6 @@ describe('TechnologiesOperationsComponent', () => {
       'getExperiences',
     ]);
     formations = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
-    tags = jasmine.createSpyObj<TagsService>('TagsService', ['getAll']);
     links = jasmine.createSpyObj<LinksService>('LinksService', ['getAll']);
     toast = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
@@ -153,7 +155,6 @@ describe('TechnologiesOperationsComponent', () => {
       of({ data: [], pagination: response().pagination }),
     );
     formations.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
-    tags.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
     links.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
     await TestBed.configureTestingModule({
       imports: [TechnologiesOperationsComponent],
@@ -165,13 +166,20 @@ describe('TechnologiesOperationsComponent', () => {
         { provide: ProjectsService, useValue: projects },
         { provide: ExperiencesService, useValue: experiences },
         { provide: FormationsService, useValue: formations },
-        { provide: TagsService, useValue: tags },
         { provide: LinksService, useValue: links },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(TechnologiesOperationsComponent);
+  });
+
+  it('uses empty select values for legacy technology records without normalized taxonomy', () => {
+    const legacyRecord = record({ stack: undefined, type: undefined });
+
+    expect(buildTechnologiesFormValue(legacyRecord)).toEqual(
+      jasmine.objectContaining({ stack: '', type: '' }),
+    );
   });
 
   it('loads and renders the workspace', async () => {
@@ -191,6 +199,12 @@ describe('TechnologiesOperationsComponent', () => {
     component.updateField('slug', 'new-tech');
     component.updateField('name', 'New tech');
     component.updateField('category', 'TOOL');
+    await component.submitModal();
+    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
+    component.updateField('stack', 'FRONT_END');
+    await component.submitModal();
+    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
+    component.updateField('type', 'FRAMEWORKS');
     component.updateField('sortOrder', '2');
     component.toggleImageAsset('image-1');
     component.toggleImageAsset('image-1');
@@ -200,8 +214,6 @@ describe('TechnologiesOperationsComponent', () => {
     component.toggleExperience('experience-1');
     component.toggleFormation('formation-1');
     component.toggleFormation('formation-1');
-    component.toggleTag('tag-1');
-    component.toggleTag('tag-1');
     component.toggleLink('link-1');
     component.toggleLink('link-1');
     await component.submitModal();
@@ -236,12 +248,10 @@ describe('TechnologiesOperationsComponent', () => {
       projectsSignal: { set(value: readonly unknown[]): void };
       experiencesSignal: { set(value: readonly unknown[]): void };
       formationsSignal: { set(value: readonly unknown[]): void };
-      tagsSignal: { set(value: readonly unknown[]): void };
       linksSignal: { set(value: readonly unknown[]): void };
       projectOptions(): readonly { id: string; title: string; subtitle: string }[];
       experienceOptions(): readonly { id: string; title: string; subtitle: string }[];
       formationOptions(): readonly { id: string; title: string; subtitle: string }[];
-      tagOptions(): readonly { id: string; title: string; subtitle: string }[];
       linkOptions(): readonly { id: string; title: string; subtitle: string }[];
     };
 
@@ -254,10 +264,6 @@ describe('TechnologiesOperationsComponent', () => {
     component.formationsSignal.set([
       { id: 'formation-1', titlePt: 'Information Systems', institution: 'PUC Minas' },
     ]);
-    component.tagsSignal.set([
-      { id: 'tag-1', namePt: 'Front-End', slug: 'front-end' },
-      { id: 'tag-2', namePt: null, slug: 'fallback-tag' },
-    ]);
     component.linksSignal.set([
       { id: 'link-1', labelPt: 'Repository', url: 'https://github.com/example' },
       { id: 'link-2', labelPt: null, url: 'https://example.com' },
@@ -266,10 +272,6 @@ describe('TechnologiesOperationsComponent', () => {
     expect(component.projectOptions()[0].title).toBe('Portfolio');
     expect(component.experienceOptions()[0].subtitle).toBe('Acme');
     expect(component.formationOptions()[0].subtitle).toBe('PUC Minas');
-    expect(component.tagOptions().map((option) => option.title)).toEqual([
-      'Front-End',
-      'fallback-tag',
-    ]);
     expect(component.linkOptions().map((option) => option.title)).toEqual([
       'Repository',
       'https://example.com',
@@ -327,6 +329,8 @@ describe('TechnologiesOperationsComponent', () => {
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
     component.updateField('category', 'TOOL');
+    component.updateField('stack', 'FRONT_END');
+    component.updateField('type', 'FRAMEWORKS');
     component.updateField('sortOrder', 'bad');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.invalidSortOrder');
@@ -358,6 +362,8 @@ describe('TechnologiesOperationsComponent', () => {
     component.updateField('slug', 'x');
     component.updateField('name', 'X');
     component.updateField('category', 'TOOL');
+    component.updateField('stack', 'FRONT_END');
+    component.updateField('type', 'FRAMEWORKS');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.saveError');
     component.openUpdateModal('technology-1');

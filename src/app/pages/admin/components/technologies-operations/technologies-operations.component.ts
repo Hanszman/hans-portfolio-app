@@ -18,8 +18,6 @@ import { ExperiencesService } from '../../../../core/api/experiences/experiences
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { FormationsService } from '../../../../core/api/formations/formations.service';
 import { FormationRecord } from '../../../../core/api/formations/formations.types';
-import { TagsService } from '../../../../core/api/tags/tags.service';
-import { TagRecord } from '../../../../core/api/tags/tags.types';
 import { LinksService } from '../../../../core/api/links/links.service';
 import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -32,6 +30,7 @@ import {
   createAdminCollectionPagination,
   createAdminEntityEndpointLabel,
 } from '../../admin.types';
+import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import {
   buildTechnologiesFormValue,
   buildTechnologiesMutationPayload,
@@ -60,7 +59,6 @@ export class TechnologiesOperationsComponent implements OnInit {
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly formationsService = inject(FormationsService);
-  private readonly tagsService = inject(TagsService);
   private readonly linksService = inject(LinksService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
@@ -69,7 +67,6 @@ export class TechnologiesOperationsComponent implements OnInit {
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
   private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
   private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
-  private readonly tagsSignal = signal<readonly TagRecord[]>([]);
   private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
@@ -104,13 +101,6 @@ export class TechnologiesOperationsComponent implements OnInit {
       id: item.id,
       title: item.titlePt,
       subtitle: item.institution,
-    })),
-  );
-  protected readonly tagOptions = computed(() =>
-    this.tagsSignal().map((item) => ({
-      id: item.id,
-      title: item.namePt ?? item.slug,
-      subtitle: item.slug,
     })),
   );
   protected readonly linkOptions = computed(() =>
@@ -227,16 +217,12 @@ export class TechnologiesOperationsComponent implements OnInit {
     this.toggleRelation('formationIds', id);
   }
 
-  toggleTag(id: string): void {
-    this.toggleRelation('tagIds', id);
-  }
-
   toggleLink(id: string): void {
     this.toggleRelation('linkIds', id);
   }
 
   private toggleRelation(
-    field: 'projectIds' | 'experienceIds' | 'formationIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+    field: 'projectIds' | 'experienceIds' | 'formationIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.formSignal.update((form) => ({
@@ -270,23 +256,25 @@ export class TechnologiesOperationsComponent implements OnInit {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     try {
-      const [response, images, projects, experiences, formations, tags, links] = await Promise.all([
+      const [response, images, projects, experiences, formations, links] = await Promise.all([
         firstValueFrom(this.service.getAll(page, this.pagination().pageSize, search)),
-        firstValueFrom(this.imagesService.getAll(1, 100)),
-        firstValueFrom(this.projectsService.getProjects()),
-        firstValueFrom(this.experiencesService.getExperiences()),
-        firstValueFrom(this.formationsService.getAll(1, 100)),
-        firstValueFrom(this.tagsService.getAll(1, 100)),
-        firstValueFrom(this.linksService.getAll(1, 100)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) => this.imagesService.getAll(catalogPage, pageSize)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.projectsService.getProjects(catalogPage, pageSize),
+        ),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.experiencesService.getExperiences(catalogPage, pageSize),
+        ),
+        loadAllAdminCatalogItems((catalogPage, pageSize) => this.formationsService.getAll(catalogPage, pageSize)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) => this.linksService.getAll(catalogPage, pageSize)),
       ]);
       this.recordsSignal.set(response.data);
       this.paginationSignal.set(response.pagination);
-      this.imagesSignal.set(images.data);
-      this.projectsSignal.set(projects.data);
-      this.experiencesSignal.set(experiences.data);
-      this.formationsSignal.set(formations.data);
-      this.tagsSignal.set(tags.data);
-      this.linksSignal.set(links.data);
+      this.imagesSignal.set(images);
+      this.projectsSignal.set(projects);
+      this.experiencesSignal.set(experiences);
+      this.formationsSignal.set(formations);
+      this.linksSignal.set(links);
     } catch {
       this.errorSignal.set('pages.admin.technologies.feedback.loadError');
       this.toast.showError('pages.admin.technologies.feedback.loadError');

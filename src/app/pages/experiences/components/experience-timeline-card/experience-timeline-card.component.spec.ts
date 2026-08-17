@@ -54,6 +54,7 @@ describe('ExperienceTimelineCardComponent', () => {
         },
         companyName: 'Stefanini Group',
         projectCount: 2,
+        summary: '',
       },
       {
         slug: 'ale',
@@ -64,6 +65,7 @@ describe('ExperienceTimelineCardComponent', () => {
         },
         companyName: 'Stefanini Group',
         projectCount: 2,
+        summary: '',
       },
     ],
     projects: [],

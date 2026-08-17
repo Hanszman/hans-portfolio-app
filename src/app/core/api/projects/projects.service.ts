@@ -21,10 +21,10 @@ export class ProjectsService {
     Pragma: 'no-cache',
   });
 
-  getProjects(): Observable<ProjectsCollectionResponse> {
+  getProjects(page = 1, pageSize = 100): Observable<ProjectsCollectionResponse> {
     const searchParams = new URLSearchParams({
-      page: '1',
-      pageSize: '100',
+      page: String(page),
+      pageSize: String(pageSize),
       sortBy: 'sortOrder',
       sortDirection: 'asc',
     });

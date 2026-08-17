@@ -10,7 +10,7 @@ export interface ExperienceProjectViewModel {
 export interface ExperienceJobViewModel {
   id: string;
   title: string;
-  summary: string;
+  summary?: string;
   startDate: string;
   endDate: string | null;
   dateRangeLabel: string;
@@ -27,6 +27,7 @@ export interface ExperienceCustomerViewModel {
   image: ExperienceImageViewModel;
   companyName: string;
   projectCount: number;
+  summary: string;
 }
 
 export interface ExperienceTechnologyGroupViewModel {

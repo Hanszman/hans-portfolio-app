@@ -40,7 +40,10 @@ import {
   createEmptySpokenLanguagesOperationsFormValue,
   createSpokenLanguageProficiencyOptions,
 } from './spoken-languages-operations.types';
-import { translateAdminSelectOptions } from '../../helpers/admin.helper';
+import {
+  loadAllAdminCatalogItems,
+  translateAdminSelectOptions,
+} from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-spoken-languages-operations',
@@ -289,16 +292,18 @@ export class SpokenLanguagesOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [spokenLanguagesResponse, imageAssetsResponse] = await Promise.all([
+      const [spokenLanguagesResponse, imageAssets] = await Promise.all([
         firstValueFrom(
           this.spokenLanguagesOperationsService.getAll(page, this.pagination().pageSize, search),
         ),
-        firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
+        ),
       ]);
 
       this.spokenLanguagesSignal.set(spokenLanguagesResponse.data);
       this.paginationSignal.set(spokenLanguagesResponse.pagination);
-      this.imageAssetsSignal.set(imageAssetsResponse.data);
+      this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.spokenLanguages.feedback.loadError');
       this.toastService.showError('pages.admin.spokenLanguages.feedback.loadError');

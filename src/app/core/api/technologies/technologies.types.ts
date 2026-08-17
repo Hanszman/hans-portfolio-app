@@ -6,6 +6,35 @@ export type TechnologyContextKey =
   | 'ACADEMIC'
   | 'STUDY';
 
+export type TechnologyStack =
+  | 'BACK_END'
+  | 'DATABASES'
+  | 'FRONT_END'
+  | 'GAMES'
+  | 'MOBILE'
+  | 'OTHERS';
+
+export type TechnologyType =
+  | 'CLOUD_HOSTING_PLATFORMS'
+  | 'CODE_EDITORS'
+  | 'DATABASES_MANAGEMENT_SYSTEMS'
+  | 'DEPLOYMENT_TOOLS'
+  | 'DEVELOPMENT_PLATFORMS'
+  | 'FRAMEWORKS'
+  | 'LIBRARIES'
+  | 'METHODOLOGIES'
+  | 'NON_RELATIONAL_DATABASES'
+  | 'OBJECT_NOTATIONS'
+  | 'OTHERS'
+  | 'PACKAGE_MANAGERS'
+  | 'PACKAGES'
+  | 'PROGRAMMING_LANGUAGES'
+  | 'PROTOCOLS'
+  | 'RELATIONAL_DATABASES'
+  | 'TECHNIQUES'
+  | 'VERSIONING_PLATFORMS'
+  | 'WEB_LANGUAGES';
+
 export interface TechnologyExperienceDurationResponse {
   totalMonths: number;
   years: number;
@@ -48,6 +77,8 @@ export interface TechnologyCollectionItemResponse {
   slug: string;
   name: string;
   category: string;
+  stack?: TechnologyStack;
+  type?: TechnologyType;
   level: string | null;
   frequency: string | null;
   highlight: boolean;
@@ -58,7 +89,6 @@ export interface TechnologyCollectionItemResponse {
   projectUsages?: TechnologyRelationRecord[] | null;
   experienceUses?: TechnologyRelationRecord[] | null;
   formationUses?: TechnologyRelationRecord[] | null;
-  tags?: TechnologyRelationRecord[] | null;
   links?: TechnologyRelationRecord[] | null;
   projectRelations?: TechnologyRelationRecord[] | null;
   experienceRelations?: TechnologyRelationRecord[] | null;
@@ -66,7 +96,6 @@ export interface TechnologyCollectionItemResponse {
   projectIds?: string[] | null;
   experienceIds?: string[] | null;
   formationIds?: string[] | null;
-  tagIds?: string[] | null;
   linkIds?: string[] | null;
   imageAssetIds?: string[] | null;
 }
@@ -75,7 +104,6 @@ export interface TechnologyRelationRecord {
   projectId?: string;
   experienceId?: string;
   formationId?: string;
-  tagId?: string;
   linkId?: string;
   project?: {
     id: string;
@@ -99,13 +127,6 @@ export interface TechnologyRelationRecord {
     titleEn?: string | null;
     titleEs?: string | null;
   } | null;
-  tag?: {
-    id: string;
-    slug?: string;
-    namePt?: string | null;
-    nameEn?: string | null;
-    nameEs?: string | null;
-  } | null;
   link?: {
     id: string;
     url?: string | null;
@@ -119,6 +140,8 @@ export interface TechnologyMutationPayload {
   slug: string;
   name: string;
   category: string;
+  stack: TechnologyStack;
+  type: TechnologyType;
   level?: string;
   frequency?: string;
   highlight: boolean;
@@ -126,7 +149,6 @@ export interface TechnologyMutationPayload {
   projectRelations: { projectId: string }[];
   experienceRelations: { experienceId: string }[];
   formationRelations: { formationId: string }[];
-  tagIds: string[];
   linkIds: string[];
   imageAssetIds: string[];
 }

@@ -27,6 +27,7 @@ import {
   createAdminCollectionPagination,
   createAdminEntityEndpointLabel,
 } from '../../admin.types';
+import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import { JobsOperationsModalComponent } from './components/jobs-operations-modal/jobs-operations-modal.component';
 import {
   buildJobExperienceOptions,
@@ -305,16 +306,20 @@ export class JobsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [jobsResponse, experiencesResponse, imageAssetsResponse] = await Promise.all([
+      const [jobsResponse, experiences, imageAssets] = await Promise.all([
         firstValueFrom(this.jobsOperationsService.getAll(page, this.pagination().pageSize, search)),
-        firstValueFrom(this.experiencesService.getExperiences()),
-        firstValueFrom(this.imageAssetsOperationsService.getAll(1, 100)),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.experiencesService.getExperiences(catalogPage, pageSize),
+        ),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
+        ),
       ]);
 
       this.jobsSignal.set(jobsResponse.data);
       this.paginationSignal.set(jobsResponse.pagination);
-      this.experiencesSignal.set(experiencesResponse.data);
-      this.imageAssetsSignal.set(imageAssetsResponse.data);
+      this.experiencesSignal.set(experiences);
+      this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.jobs.feedback.loadError');
       this.toastService.showError('pages.admin.jobs.feedback.loadError');

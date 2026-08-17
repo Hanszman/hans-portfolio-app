@@ -51,7 +51,10 @@ import {
   createEmptyImageAssetsOperationsFormValue,
   createImageAssetKindOptions,
 } from './image-assets-operations.types';
-import { translateAdminSelectOptions } from '../../helpers/admin.helper';
+import {
+  loadAllAdminCatalogItems,
+  translateAdminSelectOptions,
+} from '../../helpers/admin.helper';
 
 @Component({
   selector: 'app-image-assets-operations',
@@ -398,35 +401,49 @@ export class ImageAssetsOperationsComponent implements OnInit {
     try {
       const [
         imageAssetsResponse,
-        projectsResponse,
-        experiencesResponse,
-        technologiesResponse,
-        formationsResponse,
-        spokenLanguagesResponse,
-        customersResponse,
-        jobsResponse,
+        projects,
+        experiences,
+        technologies,
+        formations,
+        spokenLanguages,
+        customers,
+        jobs,
       ] = await Promise.all([
           firstValueFrom(
             this.imageAssetsOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
-          firstValueFrom(this.projectsService.getProjects()),
-          firstValueFrom(this.experiencesService.getExperiences()),
-          firstValueFrom(this.technologiesService.getTechnologies()),
-          firstValueFrom(this.formationsService.getAll(1, 100)),
-          firstValueFrom(this.spokenLanguagesService.getAll(1, 100)),
-          firstValueFrom(this.customersService.getAll(1, 100)),
-          firstValueFrom(this.jobsService.getAll(1, 100)),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.projectsService.getProjects(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.experiencesService.getExperiences(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.technologiesService.getTechnologies(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.formationsService.getAll(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.spokenLanguagesService.getAll(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.customersService.getAll(catalogPage, pageSize),
+          ),
+          loadAllAdminCatalogItems((catalogPage, pageSize) =>
+            this.jobsService.getAll(catalogPage, pageSize),
+          ),
         ]);
 
       this.imageAssetsSignal.set(imageAssetsResponse.data);
       this.paginationSignal.set(imageAssetsResponse.pagination);
-      this.projectsSignal.set(projectsResponse.data);
-      this.experiencesSignal.set(experiencesResponse.data);
-      this.technologiesSignal.set(technologiesResponse.data);
-      this.formationsSignal.set(formationsResponse.data);
-      this.spokenLanguagesSignal.set(spokenLanguagesResponse.data);
-      this.customersSignal.set(customersResponse.data);
-      this.jobsSignal.set(jobsResponse.data);
+      this.projectsSignal.set(projects);
+      this.experiencesSignal.set(experiences);
+      this.technologiesSignal.set(technologies);
+      this.formationsSignal.set(formations);
+      this.spokenLanguagesSignal.set(spokenLanguages);
+      this.customersSignal.set(customers);
+      this.jobsSignal.set(jobs);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.imageAssets.feedback.loadError');
       this.toastService.showError('pages.admin.imageAssets.feedback.loadError');

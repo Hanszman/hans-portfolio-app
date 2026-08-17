@@ -6,7 +6,6 @@ export type AdminEntityOperation = 'create' | 'update' | 'delete';
 export interface AdminEntityDefinition {
   readonly id:
     | 'portfolio-settings'
-    | 'tags'
     | 'links'
     | 'image-assets'
     | 'spoken-languages'
@@ -85,12 +84,6 @@ export const ADMIN_ENTITY_DEFINITIONS: readonly AdminEntityDefinition[] = [
     id: 'portfolio-settings',
     endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
     substep: 'F8.3',
-    relationMode: 'owner',
-  },
-  {
-    id: 'tags',
-    endpoint: createAdminEntityEndpointLabel('/tags'),
-    substep: 'F8.4',
     relationMode: 'owner',
   },
   {

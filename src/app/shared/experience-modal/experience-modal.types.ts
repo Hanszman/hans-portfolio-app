@@ -12,7 +12,7 @@ export interface ExperienceModalItem {
   jobs: readonly {
     id: string;
     title: string;
-    summary: string;
+    summary?: string;
     dateRangeLabel: string;
   }[];
   customers: readonly {
@@ -21,6 +21,7 @@ export interface ExperienceModalItem {
     image: { src: string; alt: string };
     companyName: string;
     projectCount: number;
+    summary: string;
   }[];
   technologyGroups: readonly {
     labelKey: AppTranslationKey;

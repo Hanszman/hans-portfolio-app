@@ -26,7 +26,6 @@ const FORM: ProjectsOperationsFormValue = {
   sortOrder: '1',
   technologyIds: ['technology-1'],
   experienceIds: ['experience-1'],
-  tagIds: ['tag-1'],
   linkIds: ['link-1'],
   imageAssetIds: ['image-1'],
 };
@@ -53,7 +52,6 @@ const RECORD: ProjectRecord = {
   sortOrder: 1,
   technologyRelations: [{ technologyId: 'technology-1' }],
   experiences: [{ experienceId: 'experience-1' }],
-  tags: [{ tagId: 'tag-1' }],
   links: [{ linkId: 'link-1' }],
   imageAssets: [{ imageAssetId: 'image-1' }],
 };
@@ -131,11 +129,11 @@ describe('ProjectsOperationsModalComponent', () => {
       select(field: keyof ProjectsOperationsFormValue, event: Event): void;
       toggle(field: 'featured' | 'highlight', event: Event): void;
       relation(
-        field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+        field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
         id: string,
       ): void;
       selected(
-        field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+        field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
         id: string,
       ): boolean;
     };

@@ -22,6 +22,7 @@ import { ProjectModalItem } from '../../shared/project-modal/project-modal.types
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
 import { TechnologyModalComponent } from '../../shared/technology-modal/technology-modal.component';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
+import { sortTagItems } from '../../shared/tag/helpers/tag-order.helper';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import {
   resolveSkillStackKey,
@@ -106,7 +107,11 @@ export class HomeComponent {
   });
 
   protected readonly topTechnologyChips = computed<readonly HomeStackChipViewModel[]>(() =>
-    (this.dashboard()?.technologyUsage.topTechnologies ?? []).map((technology) => {
+    sortTagItems(
+      this.dashboard()?.technologyUsage.topTechnologies ?? [],
+      ({ name }) => name,
+      this.translationService.locale(),
+    ).map((technology) => {
       const imageSrc = resolveSkillVisualUrl(technology.slug);
       const stackKey = resolveSkillStackKey(technology);
       const typeKey = resolveSkillTypeKey(technology);

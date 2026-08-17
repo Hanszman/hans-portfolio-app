@@ -9,7 +9,6 @@ import {
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologiesCollectionResponse } from '../../../../core/api/technologies/technologies.types';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { TagsService } from '../../../../core/api/tags/tags.service';
 import { LinksService } from '../../../../core/api/links/links.service';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -41,7 +40,6 @@ const response = (
       sortOrder: 1,
       technologyRelations: [],
       experienceIds: [],
-      tagIds: [],
       linkIds: [],
       imageAssetIds: [],
     },
@@ -151,7 +149,6 @@ describe('ProjectsOperationsComponent', () => {
     techService = jasmine.createSpyObj('TechnologiesService', ['getTechnologies']);
     const tech = techService;
     const exp = jasmine.createSpyObj('ExperiencesService', ['getExperiences']);
-    const tags = jasmine.createSpyObj('TagsService', ['getAll']);
     const links = jasmine.createSpyObj('LinksService', ['getAll']);
     const images = jasmine.createSpyObj('ImageAssetsService', ['getAll']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
@@ -164,7 +161,6 @@ describe('ProjectsOperationsComponent', () => {
       of(catalog() as unknown as TechnologiesCollectionResponse),
     );
     exp.getExperiences.and.returnValue(of(catalog() as never));
-    tags.getAll.and.returnValue(of(catalog() as never));
     links.getAll.and.returnValue(of(catalog() as never));
     images.getAll.and.returnValue(of(catalog() as never));
     await TestBed.configureTestingModule({
@@ -175,7 +171,6 @@ describe('ProjectsOperationsComponent', () => {
         { provide: ProjectsService, useValue: api },
         { provide: TechnologiesService, useValue: tech },
         { provide: ExperiencesService, useValue: exp },
-        { provide: TagsService, useValue: tags },
         { provide: LinksService, useValue: links },
         { provide: ImageAssetsService, useValue: images },
         { provide: AdminSessionService, useValue: session },
@@ -270,7 +265,6 @@ describe('ProjectsOperationsComponent', () => {
       pageSignal: { set(value: object): void };
       modeSignal: { set(value: string | null): void };
       selected: { set(value: ProjectRecord | null): void };
-      tags: { getAll: jasmine.Spy };
       links: { getAll: jasmine.Spy };
     };
     internal.pageSignal.set({
@@ -287,9 +281,6 @@ describe('ProjectsOperationsComponent', () => {
     internal.modeSignal.set('update');
     internal.selected.set(null);
     await c.submitModal();
-    internal.tags.getAll.and.returnValue(
-      of(catalog([{ id: 'tag-1', namePt: null, labelPt: 'Label', slug: 'tag' }]) as never),
-    );
     internal.links.getAll.and.returnValue(
       of(
         catalog([
@@ -300,9 +291,6 @@ describe('ProjectsOperationsComponent', () => {
     c.openCreateModal();
     await fixture.whenStable();
     expect(c.hasProjects()).toBeTrue();
-    internal.tags.getAll.and.returnValue(
-      of(catalog([{ id: 'tag-1', namePt: null, labelPt: null, slug: 'tag' }]) as never),
-    );
     internal.links.getAll.and.returnValue(
       of(
         catalog([

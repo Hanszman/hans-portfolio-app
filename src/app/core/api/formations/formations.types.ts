@@ -4,6 +4,7 @@ export interface FormationTechnologyReference {
   id: string;
   slug?: string | null;
   name?: string | null;
+  highlight?: boolean | null;
 }
 
 export interface FormationLinkReference {

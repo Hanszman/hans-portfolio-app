@@ -12,12 +12,13 @@ import {
   uniqueModalMediaSources,
 } from '../modal-skeleton/helpers/modal-media-loading.helper';
 import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.component';
+import { TagButtonComponent } from '../tag/tag-button/tag-button.component';
 import { EducationModalItem } from './education-modal.types';
 
 @Component({
   selector: 'app-education-modal',
   standalone: true,
-  imports: [ModalSkeletonComponent, TranslatePipe],
+  imports: [ModalSkeletonComponent, TagButtonComponent, TranslatePipe],
   templateUrl: './education-modal.component.html',
   styleUrl: './education-modal.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

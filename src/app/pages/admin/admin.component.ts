@@ -21,7 +21,6 @@ import { JobsOperationsComponent } from './components/jobs-operations/jobs-opera
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
 import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { SpokenLanguagesOperationsComponent } from './components/spoken-languages-operations/spoken-languages-operations.component';
-import { TagsOperationsComponent } from './components/tags-operations/tags-operations.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
   ADMIN_ENTITY_OPERATIONS,
@@ -40,7 +39,6 @@ import {
     TranslatePipe,
     SectionHeaderComponent,
     PortfolioSettingsOperationsComponent,
-    TagsOperationsComponent,
     LinksOperationsComponent,
     ImageAssetsOperationsComponent,
     SpokenLanguagesOperationsComponent,

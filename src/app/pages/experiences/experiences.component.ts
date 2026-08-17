@@ -88,6 +88,9 @@ export class ExperiencesComponent {
         labelKey: 'pages.experiences.customer.projects',
         value: customer.projectCount,
       },
+      ...(customer.summary?.trim()
+        ? [{ labelKey: 'common.fields.summary' as const, value: customer.summary }]
+        : []),
     ];
   });
 

@@ -28,6 +28,17 @@
   @apply m-0 grid gap-3;
 }
 
+.education-modal-technologies h2 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.education-modal-technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .education-modal-details > div {
   @apply grid gap-1 rounded-2xl border px-4 py-3;
   background-color: color-mix(in srgb, var(--background-color) 88%, var(--base-strong-color));

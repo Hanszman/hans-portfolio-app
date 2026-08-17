@@ -20,10 +20,10 @@ export class ExperiencesService {
     Pragma: 'no-cache',
   });
 
-  getExperiences(): Observable<ExperiencesCollectionResponse> {
+  getExperiences(page = 1, pageSize = 20): Observable<ExperiencesCollectionResponse> {
     const searchParams = new URLSearchParams({
-      page: '1',
-      pageSize: '20',
+      page: String(page),
+      pageSize: String(pageSize),
       sortBy: 'startDate',
       sortDirection: 'desc',
     });

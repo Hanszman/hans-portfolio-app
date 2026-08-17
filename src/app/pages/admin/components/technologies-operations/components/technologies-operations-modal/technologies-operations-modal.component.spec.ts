@@ -112,7 +112,6 @@ describe('TechnologiesOperationsModalComponent', () => {
         projectIds: [],
         experienceIds: [],
         formationIds: [],
-        tagIds: [],
         linkIds: [],
         imageAssetIds: [],
         imageAssetLabels: ['unknown.svg'],

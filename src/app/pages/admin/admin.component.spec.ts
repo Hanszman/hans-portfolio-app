@@ -9,7 +9,6 @@ import { JobsService } from '../../core/api/jobs/jobs.service';
 import { LinksService } from '../../core/api/links/links.service';
 import { PortfolioSettingsService } from '../../core/api/portfolio-settings/portfolio-settings.service';
 import { SpokenLanguagesService } from '../../core/api/spoken-languages/spoken-languages.service';
-import { TagsService } from '../../core/api/tags/tags.service';
 import { TechnologyContextsService } from '../../core/api/technology-contexts/technology-contexts.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
 import { ProjectsService } from '../../core/api/projects/projects.service';
@@ -284,38 +283,6 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: TagsService,
-          useValue: {
-            getAll: () =>
-              of({
-                data: [
-                  {
-                    id: 'tag-1',
-                    slug: 'frontend',
-                    namePt: 'Front-end',
-                    nameEn: 'Front-end',
-                    nameEs: 'Front-end',
-                      type: 'STACK',
-                      sortOrder: 1,
-                    projectIds: ['project-1'],
-                    technologyIds: ['technology-1'],
-                  },
-                ],
-                pagination: {
-                  page: 1,
-                  pageSize: 5,
-                  totalItems: 1,
-                  totalPages: 1,
-                  hasPreviousPage: false,
-                  hasNextPage: false,
-                },
-              }),
-            create: jasmine.createSpy(),
-            update: jasmine.createSpy(),
-            delete: jasmine.createSpy(),
-          },
-        },
-        {
           provide: JobsService,
           useValue: {
             getAll: () =>
@@ -566,9 +533,9 @@ describe('AdminComponent', () => {
 
     expect(compiled.textContent).toContain('Admin workspace');
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('12 entity workflows');
+    expect(compiled.textContent).toContain('11 entity workflows');
     expect(compiled.textContent).toContain('Portfolio settings');
-    expect(compiled.textContent).toContain('Tags');
+    expect(compiled.textContent).toContain('Technologies');
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Image assets');
     expect(compiled.textContent).toContain('Languages');
@@ -718,26 +685,6 @@ describe('AdminComponent', () => {
         },
         {
           provide: LinksService,
-          useValue: {
-            getAll: () =>
-              of({
-                data: [],
-                pagination: {
-                  page: 1,
-                  pageSize: 5,
-                  totalItems: 0,
-                  totalPages: 0,
-                  hasPreviousPage: false,
-                  hasNextPage: false,
-                },
-              }),
-            create: jasmine.createSpy(),
-            update: jasmine.createSpy(),
-            delete: jasmine.createSpy(),
-          },
-        },
-        {
-          provide: TagsService,
           useValue: {
             getAll: () =>
               of({

@@ -9,6 +9,7 @@ import {
 import { AppLocale } from '../../../core/translation/translation.types';
 import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import { TechnologyModalItem } from '../../../shared/technology-modal/technology-modal.types';
+import { sortTagItems } from '../../../shared/tag/helpers/tag-order.helper';
 import {
   EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS,
   EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG,
@@ -67,11 +68,17 @@ const mapCustomer = (
   customer: ExperienceCollectionItemResponse['customers'][number]['customer'],
   companyName: string,
   projectCount: number,
+  locale: AppLocale,
 ): ExperienceCustomerViewModel => ({
   slug: customer.slug,
   name: customer.name,
   companyName,
   projectCount,
+  summary: resolveLocalizedText(
+    locale,
+    { 'pt-br': customer.summaryPt, 'en-us': customer.summaryEn, 'es-es': customer.summaryEs },
+    customer.summaryEn,
+  ),
   image: {
     src: buildExperienceAssetPath(
       EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
@@ -218,9 +225,11 @@ export const mapExperienceToTimelineItem = (
   locale: AppLocale,
 ): ExperienceTimelineItemViewModel => {
   const projects = experience.projects.map(({ project }) => mapProject(project, locale));
-  const technologies = experience.technologies.map(({ technology }) =>
-    mapTechnology(technology, projects.length),
-  );
+  const technologies = sortTagItems(
+    experience.technologies.map(({ technology }) => technology),
+    ({ name }) => name,
+    locale,
+  ).map((technology) => mapTechnology(technology, projects.length));
   const jobs = experience.jobs
     .map(({ job }) => mapJob(job, locale))
     .sort(sortJobsByMostRecentEndDate);
@@ -266,8 +275,12 @@ export const mapExperienceToTimelineItem = (
     isHighlight: experience.highlight,
     jobs,
     companyImage: resolveCompanyImage(experience, locale),
-    customers: experience.customers.map(({ customer }) =>
-      mapCustomer(customer, experience.companyName, projects.length),
+    customers: sortTagItems(
+      experience.customers.map(({ customer }) => customer),
+      ({ name }) => name,
+      locale,
+    ).map((customer) =>
+      mapCustomer(customer, experience.companyName, projects.length, locale),
     ),
     projects,
     technologies,

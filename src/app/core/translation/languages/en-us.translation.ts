@@ -82,7 +82,6 @@ export const EN_TRANSLATIONS = {
   'common.entities.formations': 'Formations',
   'common.entities.customers': 'Customers',
   'common.entities.languages': 'Languages',
-  'common.entities.tags': 'Tags',
   'common.entities.jobs': 'Jobs',
   'common.entities.technologyContexts': 'Technology contexts',
   'common.languages.english': 'English',
@@ -92,6 +91,8 @@ export const EN_TRANSLATIONS = {
   'common.entities.imageAssets': 'Image assets',
   'common.fields.type': 'Type',
   'common.fields.name': 'Name',
+  'common.fields.portugueseName': 'Portuguese name',
+  'common.fields.englishName': 'English name',
   'common.fields.description': 'Description',
   'common.fields.summary': 'Summary',
   'common.fields.date': 'Date',
@@ -426,61 +427,6 @@ export const EN_TRANSLATIONS = {
     'The portfolio setting could not be saved right now.',
   'pages.admin.portfolioSettings.feedback.deleteError':
     'The portfolio setting could not be deleted right now.',
-  'pages.admin.entities.tags.description':
-    'Reusable classification labels shared across projects, technologies and future editorial flows.',
-  'pages.admin.tags.sectionLabel': '// TAGS',
-  'pages.admin.tags.description':
-    'Protected CRUD for reusable labels that classify projects and technologies through relation arrays owned by each tag.',
-  'pages.admin.tags.states.loading': 'Loading the protected tags collection...',
-  'pages.admin.tags.states.empty': 'No protected tag has been registered yet.',
-  'pages.admin.tags.card.emptyRelations': 'No related records are currently linked to this tag.',
-  'pages.admin.tags.fields.slug.placeholder': 'Enter the unique tag slug',
-  'pages.admin.tags.fields.namePt.label': 'Portuguese name',
-  'pages.admin.tags.fields.namePt.placeholder': 'Enter the Portuguese tag name',
-  'pages.admin.tags.fields.nameEn.label': 'English name',
-  'pages.admin.tags.fields.nameEn.placeholder': 'Enter the English tag name',
-  'pages.admin.tags.fields.type.empty': 'No tag type is available right now.',
-  'pages.admin.tags.fields.type.options.DOMAIN': 'Domain',
-  'pages.admin.tags.fields.type.options.PLATFORM': 'Platform',
-  'pages.admin.tags.fields.type.options.METHODOLOGY': 'Methodology',
-  'pages.admin.tags.fields.type.options.INDUSTRY': 'Industry',
-  'pages.admin.tags.fields.sortOrder.placeholder': 'Enter the integer sort order',
-  'pages.admin.tags.fields.projects.description':
-    'Select every project that should expose this tag in its public relationships.',
-
-  'pages.admin.tags.fields.technologies.description':
-    'Select every technology that should keep this tag in its relationship arrays.',
-  'pages.admin.tags.modal.create.title': 'Create tag',
-  'pages.admin.tags.modal.read.title': 'Read tags',
-  'pages.admin.tags.modal.read.description':
-    'Review the current protected tags and open update or delete flows directly from each record.',
-  'pages.admin.tags.modal.pickUpdate.title': 'Select a tag to update',
-  'pages.admin.tags.modal.pickUpdate.description':
-    'Choose one of the current protected tags to open its update form.',
-  'pages.admin.tags.modal.pickDelete.title': 'Select a tag to delete',
-  'pages.admin.tags.modal.pickDelete.description':
-    'Choose one of the current protected tags to confirm its removal.',
-  'pages.admin.tags.modal.update.title': 'Update tag',
-  'pages.admin.tags.modal.delete.title': 'Delete tag',
-  'pages.admin.tags.modal.delete.description':
-    'This action permanently removes the selected protected tag and its current relations from the portfolio.',
-  'pages.admin.tags.feedback.created': 'Protected tag created successfully.',
-  'pages.admin.tags.feedback.updated': 'Protected tag updated successfully.',
-  'pages.admin.tags.feedback.deleted': 'Protected tag deleted successfully.',
-  'pages.admin.tags.feedback.requiredSlug': 'The tag slug is required before submitting.',
-  'pages.admin.tags.feedback.requiredNamePt':
-    'The Portuguese tag name is required before submitting.',
-  'pages.admin.tags.feedback.requiredNameEn': 'The English tag name is required before submitting.',
-  'pages.admin.tags.feedback.requiredType': 'The tag type is required before submitting.',
-  'pages.admin.tags.feedback.invalidType':
-    'Select one of the supported tag types before submitting.',
-
-  'pages.admin.tags.feedback.selectionRequired':
-    'Select a protected tag before continuing with this action.',
-  'pages.admin.tags.feedback.loadError':
-    'The protected tags collection could not be loaded right now.',
-  'pages.admin.tags.feedback.saveError': 'The protected tag could not be saved right now.',
-  'pages.admin.tags.feedback.deleteError': 'The protected tag could not be deleted right now.',
   'pages.admin.entities.links.description':
     'External references such as repositories, live demos, documents and complementary navigation targets.',
   'pages.admin.links.sectionLabel': '// LINKS',
@@ -1180,5 +1126,4 @@ export const EN_TRANSLATIONS = {
     'Describe the asset in Spanish for accessibility',
   'pages.admin.imageAssets.fields.captionEs.label': 'Spanish caption',
   'pages.admin.imageAssets.fields.captionEs.placeholder': 'Enter the Spanish caption',
-  'pages.admin.tags.fields.nameEs.placeholder': 'Enter the Spanish tag name',
 } as const satisfies AppTranslationLanguage;

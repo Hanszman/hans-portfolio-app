@@ -58,12 +58,12 @@ export const SPOKEN_LANGUAGES_OPERATIONS_FIELDS = {
     required: true,
   },
   namePt: {
-    labelKey: 'pages.admin.tags.fields.namePt.label',
+    labelKey: 'common.fields.portugueseName',
     placeholderKey: 'pages.admin.spokenLanguages.fields.namePt.placeholder',
     required: true,
   },
   nameEn: {
-    labelKey: 'pages.admin.tags.fields.nameEn.label',
+    labelKey: 'common.fields.englishName',
     placeholderKey: 'pages.admin.spokenLanguages.fields.nameEn.placeholder',
     required: true,
   },

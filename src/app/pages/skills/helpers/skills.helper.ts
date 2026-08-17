@@ -14,6 +14,7 @@ import {
 } from '../../../core/translation/translation.service';
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import { formatAppDateRange } from '../../../core/date/app-date.helper';
+import { sortTagItems } from '../../../shared/tag/helpers/tag-order.helper';
 import {
   SKILL_CATEGORY_LABEL_KEYS,
   SKILL_CONTEXT_ORDER,
@@ -328,6 +329,14 @@ export const mapTechnologyToSkillCard = (
     categoryLabel: typeLabel,
     levelLabel,
     frequencyLabel,
+    frequencyKey:
+      technology.frequency === 'FREQUENT' ||
+      technology.frequency === 'OCCASIONAL' ||
+      technology.frequency === 'PREVIOUSLY_USED' ||
+      technology.frequency === 'RARE' ||
+      technology.frequency === 'STUDYING'
+        ? technology.frequency
+        : 'STUDYING',
     totalExperienceLabel:
       (technology.experienceMetrics
         ? resolveLocalizedText(
@@ -466,6 +475,7 @@ export const buildEducationSkillCards = (
         categoryLabel: formation.institution,
         levelLabel: badgeLabel,
         frequencyLabel: period,
+        frequencyKey: 'ALL',
         totalExperienceLabel: period,
         isHighlight: Boolean(formation.highlight),
         iconName: 'LuGraduationCap',
@@ -531,6 +541,7 @@ export const buildLanguageSkillCards = (
         categoryLabel: translateStaticKey(locale, 'common.entities.languages'),
         levelLabel: badgeLabel,
         frequencyLabel: '',
+        frequencyKey: 'ALL',
         totalExperienceLabel: '',
         isHighlight: Boolean(language.highlight),
         iconName: 'LuLanguages',
@@ -568,6 +579,7 @@ export const mapFormationToEducationModal = (
         { labelKey: 'common.fields.date', value: fallback.totalExperienceLabel },
       ],
       galleryItems: [],
+      technologies: [],
     };
   }
 
@@ -622,19 +634,31 @@ export const mapFormationToEducationModal = (
       description: summary || undefined,
     }));
   const dateRange = formatAppDateRange(formation.startDate, formation.endDate, locale);
+  const iconPath = formation.imageAssets?.find(
+    ({ imageAsset }) => imageAsset?.kind === 'ICON' && imageAsset.filePath,
+  )?.imageAsset?.filePath;
+  const technologies = sortTagItems(
+    (formation.technologies ?? formation.technologyRelations ?? [])
+    .flatMap(({ technology }) =>
+      technology?.slug && technology.name
+        ? [{ slug: technology.slug, name: technology.name, highlight: technology.highlight }]
+        : [],
+    ),
+    ({ name }) => name,
+    locale,
+  ).map(({ slug, name }) => ({ slug, name }));
 
   return {
     title,
     subtitle: formation.institution,
-    image: galleryItems[0]
-      ? { src: galleryItems[0].imageSrc, alt: galleryItems[0].imageAlt }
-      : { src: fallback.visualUrl, alt: title },
+    image: { src: iconPath ? buildAssetUrl(iconPath) : fallback.visualUrl, alt: title },
     details: [
       { labelKey: 'pages.skills.education.detail.degree', value: formation.degreeType },
       { labelKey: 'common.fields.date', value: dateRange },
       { labelKey: 'common.fields.summary', value: summary },
     ].filter(({ value }) => Boolean(value)),
     galleryItems,
+    technologies,
   };
 };
 

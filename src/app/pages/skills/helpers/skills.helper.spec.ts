@@ -279,6 +279,11 @@ describe('skills helper', () => {
           },
           { sortOrder: 0, imageAsset: null },
         ],
+        technologies: [
+          { technology: { id: 'typescript', slug: 'typescript', name: 'TypeScript' } },
+          { technology: { id: 'angular', slug: 'angular', name: 'Angular' } },
+          { technology: null },
+        ],
       },
       fallback,
       'es-es',
@@ -289,8 +294,12 @@ describe('skills helper', () => {
     expect(modal.galleryItems.map(({ id }) => id)).toEqual(['first', 'second']);
     expect(modal.galleryItems[0].imageAlt).toBe('Primera imagen');
     expect(modal.galleryItems[1].description).toBe('Resumen');
-    expect(modal.image?.src).toContain('/first.png');
+    expect(modal.image?.src).toContain('/icon.png');
     expect(modal.details.map(({ value }) => value)).toContain('BACHELOR');
+    expect(modal.technologies).toEqual([
+      { slug: 'angular', name: 'Angular' },
+      { slug: 'typescript', name: 'TypeScript' },
+    ]);
   });
 
   it('should use education and language fallbacks when API records or assets are absent', () => {

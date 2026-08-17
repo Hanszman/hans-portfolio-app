@@ -44,12 +44,12 @@ export const JOBS_OPERATIONS_FIELDS = {
     required: true,
   },
   namePt: {
-    labelKey: 'pages.admin.tags.fields.namePt.label',
+    labelKey: 'common.fields.portugueseName',
     placeholderKey: 'pages.admin.jobs.fields.namePt.placeholder',
     required: true,
   },
   nameEn: {
-    labelKey: 'pages.admin.tags.fields.nameEn.label',
+    labelKey: 'common.fields.englishName',
     placeholderKey: 'pages.admin.jobs.fields.nameEn.placeholder',
     required: true,
   },

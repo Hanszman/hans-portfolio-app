@@ -51,7 +51,6 @@ export const buildTechnologiesViewModels = (
           item.formationUses ?? item.formationRelations,
           'formation',
         ),
-        tagLabels: resolveAdminRelationLabels(item.tags, 'tag'),
         linkLabels: resolveAdminRelationLabels(item.links, 'link'),
         technologyContexts: item.technologyContexts ?? [],
       };

@@ -12,7 +12,6 @@ import { ProjectsService } from '../../../../core/api/projects/projects.service'
 import { ProjectRecord } from '../../../../core/api/projects/projects.types';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { TagsService } from '../../../../core/api/tags/tags.service';
 import { LinksService } from '../../../../core/api/links/links.service';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -25,6 +24,7 @@ import {
   createAdminCollectionPagination,
   createAdminEntityEndpointLabel,
 } from '../../admin.types';
+import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import { ProjectsOperationsModalComponent } from './components/projects-operations-modal/projects-operations-modal.component';
 import {
   ProjectsOperationsFormValue,
@@ -48,7 +48,6 @@ export class ProjectsOperationsComponent implements OnInit {
   private readonly api = inject(ProjectsService);
   private readonly technologies = inject(TechnologiesService);
   private readonly experiences = inject(ExperiencesService);
-  private readonly tags = inject(TagsService);
   private readonly links = inject(LinksService);
   private readonly images = inject(ImageAssetsService);
   private readonly session = inject(AdminSessionService);
@@ -93,7 +92,6 @@ export class ProjectsOperationsComponent implements OnInit {
   });
   protected readonly technologyOptions = signal<readonly ProjectOption[]>([]);
   protected readonly experienceOptions = signal<readonly ProjectOption[]>([]);
-  protected readonly tagOptions = signal<readonly ProjectOption[]>([]);
   protected readonly linkOptions = signal<readonly ProjectOption[]>([]);
   protected readonly imageAssetOptions = signal<readonly (ProjectOption & { imageUrl: string })[]>(
     [],
@@ -177,7 +175,7 @@ export class ProjectsOperationsComponent implements OnInit {
   }
 
   toggle(
-    field: 'technologyIds' | 'experienceIds' | 'tagIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.formSignal.update((form) => ({
@@ -267,35 +265,31 @@ export class ProjectsOperationsComponent implements OnInit {
 
   private async refreshCatalogs(): Promise<void> {
     try {
-      const [tech, experiences, tags, links, images] = await Promise.all([
-        firstValueFrom(this.technologies.getTechnologies()),
-        firstValueFrom(this.experiences.getExperiences()),
-        firstValueFrom(this.tags.getAll(1, 100)),
-        firstValueFrom(this.links.getAll(1, 100)),
-        firstValueFrom(this.images.getAll(1, 100)),
+      const [tech, experiences, links, images] = await Promise.all([
+        loadAllAdminCatalogItems((page, pageSize) =>
+          this.technologies.getTechnologies(page, pageSize),
+        ),
+        loadAllAdminCatalogItems((page, pageSize) =>
+          this.experiences.getExperiences(page, pageSize),
+        ),
+        loadAllAdminCatalogItems((page, pageSize) => this.links.getAll(page, pageSize)),
+        loadAllAdminCatalogItems((page, pageSize) => this.images.getAll(page, pageSize)),
       ]);
       this.technologyOptions.set(
-        tech.data.map((x) => ({ id: x.id, title: x.name, subtitle: x.slug })),
+        tech.map((x) => ({ id: x.id, title: x.name, subtitle: x.slug })),
       );
       this.experienceOptions.set(
-        experiences.data.map((x) => ({ id: x.id, title: x.companyName, subtitle: x.slug })),
-      );
-      this.tagOptions.set(
-        tags.data.map((x) => ({
-          id: x.id,
-          title: x.namePt ?? x.labelPt ?? x.slug,
-          subtitle: x.slug,
-        })),
+        experiences.map((x) => ({ id: x.id, title: x.companyName, subtitle: x.slug })),
       );
       this.linkOptions.set(
-        links.data.map((x) => ({
+        links.map((x) => ({
           id: x.id,
           title: x.labelPt ?? x.labelEn ?? x.url,
           subtitle: x.url,
         })),
       );
       this.imageAssetOptions.set(
-        images.data.map((x) => ({
+        images.map((x) => ({
           id: x.id,
           title: x.fileName,
           subtitle: x.filePath,

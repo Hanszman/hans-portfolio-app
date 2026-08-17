@@ -1,4 +1,5 @@
 import { AppTranslationKey } from '../../../core/translation/translation.types';
+import { of } from 'rxjs';
 import {
   buildAdminEntityViewModels,
   buildAdminSessionFactViewModels,
@@ -18,6 +19,7 @@ import {
   trackAdminItemById,
   translateAdminSelectOptions,
   validateAdminDateRange,
+  loadAllAdminCatalogItems,
 } from './admin.helper';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -58,11 +60,11 @@ describe('formatAdminIdentity', () => {
     expect(
       resolveAdminFieldLabel(
         {
-          labelKey: 'pages.admin.tags.fields.namePt.label',
+          labelKey: 'common.fields.portugueseName',
         },
         translate,
       ),
-    ).toBe('pages.admin.tags.fields.namePt.label');
+    ).toBe('common.fields.portugueseName');
   });
 
   it('should create a reusable field label resolver', () => {
@@ -74,14 +76,14 @@ describe('formatAdminIdentity', () => {
           required: true,
         },
         namePt: {
-          labelKey: 'pages.admin.tags.fields.namePt.label',
+          labelKey: 'common.fields.portugueseName',
         },
       },
       translate,
     );
 
     expect(resolveFieldLabel('slug')).toBe('common.fields.slug');
-    expect(resolveFieldLabel('namePt')).toBe('pages.admin.tags.fields.namePt.label');
+    expect(resolveFieldLabel('namePt')).toBe('common.fields.portugueseName');
   });
 
   it('should resolve select values from the event detail string', () => {
@@ -228,39 +230,60 @@ describe('formatAdminIdentity', () => {
   it('should create and translate reusable admin select options', () => {
     const translate = (key: AppTranslationKey) => `translated:${key}`;
     const definitions = createAdminSelectOptionDefinitions(
-      ['STACK', 'DOMAIN'] as const,
-      (value) => `pages.admin.tags.fields.type.options.${value}` as AppTranslationKey,
+      ['NPM', 'DOCS'] as const,
+      (value) => `pages.admin.links.fields.type.options.${value}` as AppTranslationKey,
     );
 
     expect(definitions).toEqual([
       {
-        id: 'STACK',
-        labelKey: 'pages.admin.tags.fields.type.options.STACK',
-        value: 'STACK',
+        id: 'NPM',
+        labelKey: 'pages.admin.links.fields.type.options.NPM',
+        value: 'NPM',
       },
       {
-        id: 'DOMAIN',
-        labelKey: 'pages.admin.tags.fields.type.options.DOMAIN',
-        value: 'DOMAIN',
+        id: 'DOCS',
+        labelKey: 'pages.admin.links.fields.type.options.DOCS',
+        value: 'DOCS',
       },
     ]);
 
     expect(translateAdminSelectOptions(definitions, translate)).toEqual([
       {
-        id: 'STACK',
-        label: 'translated:pages.admin.tags.fields.type.options.STACK',
-        value: 'STACK',
+        id: 'NPM',
+        label: 'translated:pages.admin.links.fields.type.options.NPM',
+        value: 'NPM',
       },
       {
-        id: 'DOMAIN',
-        label: 'translated:pages.admin.tags.fields.type.options.DOMAIN',
-        value: 'DOMAIN',
+        id: 'DOCS',
+        label: 'translated:pages.admin.links.fields.type.options.DOCS',
+        value: 'DOCS',
       },
     ]);
   });
 
   it('should track admin items by id', () => {
     expect(trackAdminItemById(0, { id: 'tag-1' })).toBe('tag-1');
+  });
+
+  it('should load and concatenate every page of an admin relation catalog', async () => {
+    const loadPage = jasmine.createSpy('loadPage').and.callFake((page: number, pageSize: number) =>
+      of({
+        data: [`page-${page}`],
+        pagination: { totalPages: 3 },
+        pageSize,
+      }),
+    );
+
+    await expectAsync(loadAllAdminCatalogItems(loadPage, 25)).toBeResolvedTo([
+      'page-1',
+      'page-2',
+      'page-3',
+    ]);
+    expect(loadPage.calls.allArgs()).toEqual([
+      [1, 25],
+      [2, 25],
+      [3, 25],
+    ]);
   });
 
   it('should build translated admin entity view models', () => {
