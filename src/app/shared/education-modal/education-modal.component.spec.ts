@@ -74,4 +74,14 @@ describe('EducationModalComponent', () => {
     fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
     expect(fixture.componentInstance.closed.emit).toHaveBeenCalled();
   });
+
+  it('opens linked technology details and ignores technologies without a modal', () => {
+    const modal = { id: 'angular' } as never;
+    spyOn(fixture.componentInstance.technologySelected, 'emit');
+
+    fixture.componentInstance['selectTechnology']({ modal } as never);
+    fixture.componentInstance['selectTechnology']({ modal: undefined } as never);
+
+    expect(fixture.componentInstance.technologySelected.emit).toHaveBeenCalledOnceWith(modal);
+  });
 });

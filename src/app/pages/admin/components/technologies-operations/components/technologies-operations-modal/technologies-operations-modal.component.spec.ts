@@ -56,7 +56,7 @@ describe('TechnologiesOperationsModalComponent', () => {
       },
     ]);
     fixture.detectChanges();
-    component.change('category', new Event('change'));
+    component.change('type', new Event('change'));
     const inputEvent = new Event('input');
     Object.defineProperty(inputEvent, 'target', { value: { value: 'Name' } });
     component.change('name', inputEvent);
@@ -81,7 +81,7 @@ describe('TechnologiesOperationsModalComponent', () => {
         id: 'technology-1',
         name: 'Angular',
         slug: 'angular',
-        category: 'FRAMEWORK',
+        type: 'FRAMEWORKS',
         level: 'ADVANCED',
         frequency: 'FREQUENT',
         highlight: true,
@@ -104,7 +104,7 @@ describe('TechnologiesOperationsModalComponent', () => {
         id: 'technology-2',
         name: 'Unknown',
         slug: 'unknown',
-        category: 'OTHER',
+        type: null,
         level: '',
         frequency: '',
         highlight: false,
@@ -130,7 +130,7 @@ describe('TechnologiesOperationsModalComponent', () => {
       id: 'technology-1',
       name: 'Angular',
       slug: 'angular',
-      category: 'FRAMEWORK',
+      type: 'FRAMEWORKS',
       level: null,
       frequency: null,
       highlight: true,

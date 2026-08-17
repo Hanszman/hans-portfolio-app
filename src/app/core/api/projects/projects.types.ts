@@ -1,10 +1,12 @@
 import { PaginatedResponse } from '../experiences/experiences.types';
+import { TechnologyStack, TechnologyType } from '../technologies/technologies.types';
 
 export interface ProjectTechnologyResponse {
   id: string;
   slug: string;
   name: string;
-  category: string;
+  stack: TechnologyStack;
+  type: TechnologyType;
   level: string | null;
   frequency: string | null;
   highlight: boolean;

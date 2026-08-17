@@ -117,14 +117,8 @@ const resolveTechnologyLabel = (
 ): string => technologyMap.get(technologyId)?.name ?? technologyId;
 
 const normalizeOptionalRelationIds = (
-  relationIds: readonly string[] | null | undefined,
-): readonly string[] => {
-  if (!relationIds) {
-    return [];
-  }
-
-  return [...new Set(relationIds)];
-};
+  relationIds: readonly string[],
+): readonly string[] => [...new Set(relationIds)];
 
 export const buildImageAssetCatalogOptions = (
   items: readonly (
@@ -258,10 +252,18 @@ export const buildImageAssetsViewModels = (
   projects: readonly ProjectCollectionItemResponse[],
   experiences: readonly ExperienceCollectionItemResponse[],
   technologies: readonly TechnologyCollectionItemResponse[],
+  formations: readonly FormationRecord[] = [],
+  spokenLanguages: readonly SpokenLanguageRecord[] = [],
+  customers: readonly CustomerRecord[] = [],
+  jobs: readonly JobRecord[] = [],
 ): readonly ImageAssetOperationsViewModel[] => {
   const projectMap = createProjectMap(projects);
   const experienceMap = createExperienceMap(experiences);
   const technologyMap = createTechnologyMap(technologies);
+  const formationMap = new Map(formations.map((formation) => [formation.id, formation]));
+  const spokenLanguageMap = new Map(spokenLanguages.map((language) => [language.id, language]));
+  const customerMap = new Map(customers.map((customer) => [customer.id, customer]));
+  const jobMap = new Map(jobs.map((job) => [job.id, job]));
 
   return [...imageAssets]
     .sort((left, right) => {
@@ -278,6 +280,30 @@ export const buildImageAssetsViewModels = (
       const projectIds = normalizeImageAssetProjectIds(imageAsset, projects);
       const experienceIds = normalizeImageAssetExperienceIds(imageAsset, experiences);
       const technologyIds = normalizeImageAssetTechnologyIds(imageAsset, technologies);
+      const formationIds = normalizeOptionalRelationIds([
+        ...(imageAsset.formationIds ?? []),
+        ...(imageAsset.formations ?? [])
+          .map(resolveImageAssetFormationIdFromRelation)
+          .filter((id): id is string => !!id),
+      ]);
+      const spokenLanguageIds = normalizeOptionalRelationIds([
+        ...(imageAsset.spokenLanguageIds ?? []),
+        ...(imageAsset.spokenLanguages ?? [])
+          .map(resolveImageAssetSpokenLanguageIdFromRelation)
+          .filter((id): id is string => !!id),
+      ]);
+      const customerIds = normalizeOptionalRelationIds([
+        ...(imageAsset.customerIds ?? []),
+        ...(imageAsset.customers ?? [])
+          .map(resolveImageAssetCustomerIdFromRelation)
+          .filter((id): id is string => !!id),
+      ]);
+      const jobIds = normalizeOptionalRelationIds([
+        ...(imageAsset.jobIds ?? []),
+        ...(imageAsset.jobs ?? [])
+          .map(resolveImageAssetJobIdFromRelation)
+          .filter((id): id is string => !!id),
+      ]);
 
       return {
         id: imageAsset.id,
@@ -304,10 +330,12 @@ export const buildImageAssetsViewModels = (
         technologyLabels: technologyIds.map((technologyId) =>
           resolveTechnologyLabel(technologyId, technologyMap),
         ),
-        formationLabels: normalizeOptionalRelationIds(imageAsset.formationIds),
-        spokenLanguageLabels: normalizeOptionalRelationIds(imageAsset.spokenLanguageIds),
-        customerLabels: normalizeOptionalRelationIds(imageAsset.customerIds),
-        jobLabels: normalizeOptionalRelationIds(imageAsset.jobIds),
+        formationLabels: formationIds.map((id) => formationMap.get(id)?.titlePt ?? id),
+        spokenLanguageLabels: spokenLanguageIds.map(
+          (id) => spokenLanguageMap.get(id)?.namePt ?? id,
+        ),
+        customerLabels: customerIds.map((id) => customerMap.get(id)?.name ?? id),
+        jobLabels: jobIds.map((id) => jobMap.get(id)?.namePt ?? id),
       };
     });
 };

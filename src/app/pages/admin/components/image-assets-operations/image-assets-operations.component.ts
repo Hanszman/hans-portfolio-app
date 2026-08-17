@@ -107,6 +107,10 @@ export class ImageAssetsOperationsComponent implements OnInit {
       this.projectsSignal(),
       this.experiencesSignal(),
       this.technologiesSignal(),
+      this.formationsSignal(),
+      this.spokenLanguagesSignal(),
+      this.customersSignal(),
+      this.jobsSignal(),
     ),
   );
   protected readonly projectOptions = computed(() =>

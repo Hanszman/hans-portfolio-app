@@ -7,6 +7,9 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
+-Ainda estamos com erros no arquivo normalize-seed-snapshot.ts.
+
+*Outros:
 -Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
 -Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
 -Traduzir nível no modal de idioma (será que esse modal é realmente necessário?).

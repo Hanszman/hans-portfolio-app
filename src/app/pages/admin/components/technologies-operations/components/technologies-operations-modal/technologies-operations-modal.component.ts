@@ -40,7 +40,6 @@ import {
 import { AdminSelectOptionViewModel } from '../../../../helpers/admin.helper';
 import { TECHNOLOGY_CONTEXT_LABEL_KEYS } from '../../../technology-contexts-operations/technology-contexts-operations.types';
 import {
-  TECHNOLOGY_CATEGORY_VALUES,
   TECHNOLOGY_FREQUENCY_VALUES,
   TECHNOLOGY_LEVEL_VALUES,
   TECHNOLOGY_OPTION_LABEL_KEYS,
@@ -109,7 +108,7 @@ export class TechnologiesOperationsModalComponent {
     this.technologies().map((technology) => ({
       id: technology.id,
       title: `${technology.name} (${technology.slug})`,
-      subtitle: technology.category,
+      subtitle: technology.type,
     })),
   );
   protected readonly detailedOperationItems = computed<readonly OperationsDetailedItemViewModel[]>(
@@ -128,10 +127,6 @@ export class TechnologiesOperationsModalComponent {
         fields: [
           { labelKey: 'common.fields.slug', value: technology.slug },
           { labelKey: 'common.fields.name', value: technology.name },
-          {
-            labelKey: 'common.fields.category',
-            value: technology.category,
-          },
           { labelKey: 'common.fields.stack', value: technology.stack ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.stack]) : '-' },
           { labelKey: 'common.fields.type', value: technology.type ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.type]) : '-' },
           { labelKey: 'common.fields.level', value: technology.level || '-' },
@@ -193,7 +188,7 @@ export class TechnologiesOperationsModalComponent {
       ? {
           id: technology.id,
           title: `${technology.name} (${technology.slug})`,
-          subtitle: technology.category,
+          subtitle: technology.type,
         }
       : null;
   });
@@ -216,7 +211,6 @@ export class TechnologiesOperationsModalComponent {
         return null;
     }
   });
-  protected readonly categoryOptions = computed(() => this.getOptions(TECHNOLOGY_CATEGORY_VALUES));
   protected readonly stackOptions = computed(() => this.getOptions(TECHNOLOGY_STACK_VALUES));
   protected readonly typeOptions = computed(() => this.getOptions(TECHNOLOGY_TYPE_VALUES));
   protected readonly levelOptions = computed(() => this.getOptions(TECHNOLOGY_LEVEL_VALUES));

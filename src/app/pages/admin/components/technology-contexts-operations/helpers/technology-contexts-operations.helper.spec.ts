@@ -15,7 +15,7 @@ const technology = (id: string, name: string, slug: string): TechnologyCollectio
   id,
   name,
   slug,
-  category: 'OTHER',
+  type: 'OTHERS',
   level: 'BASIC',
   frequency: 'PREVIOUSLY_USED',
   highlight: true,

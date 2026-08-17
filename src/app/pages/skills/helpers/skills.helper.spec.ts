@@ -67,7 +67,7 @@ describe('skills helper', () => {
 
     expect(card.name).toBe('Angular');
     expect(card.subtitle).toBe('Frequent');
-    expect(card.categoryLabel).toBe('Frameworks');
+    expect(card.typeLabel).toBe('Frameworks');
     expect(card.stackKey).toBe('FRONT_END');
     expect(card.typeKey).toBe('FRAMEWORKS');
     expect(card.modal.stack).toBe('Front-End');
@@ -95,7 +95,7 @@ describe('skills helper', () => {
         id: 'tech-custom',
         slug: 'custom-tool',
         name: 'Custom Tool',
-        category: 'CUSTOM_STACK',
+        type: 'OTHERS',
         level: null,
         frequency: null,
         highlight: false,
@@ -103,7 +103,7 @@ describe('skills helper', () => {
       'es-es',
     );
 
-    expect(card.categoryLabel).toBe('Otros');
+    expect(card.typeLabel).toBe('Otros');
     expect(card.levelLabel).toBe('Nivel no informado');
     expect(card.frequencyLabel).toBe('Frecuencia no informada');
     expect(card.totalExperienceLabel).toBe('Sin período consolidado');
@@ -120,7 +120,7 @@ describe('skills helper', () => {
         id: 'tech-react-native',
         slug: 'react-native',
         name: 'React Native',
-        category: 'FRAMEWORK',
+        type: 'FRAMEWORKS',
         level: 'INTERMEDIATE',
         frequency: 'RARE',
         highlight: false,
@@ -135,20 +135,22 @@ describe('skills helper', () => {
   });
 
   it('should resolve backend and database stack filters', () => {
-    expect(resolveSkillStackKey({ slug: 'node-js', category: 'LANGUAGE' })).toBe('BACK_END');
-    expect(resolveSkillStackKey({ slug: 'mysql', category: 'DATABASE' })).toBe('DATABASES');
-    expect(resolveSkillStackKey({ slug: 'unity', category: 'TOOL' })).toBe('GAMES');
-    expect(resolveSkillStackKey({ slug: 'unknown-tool', category: 'TOOL' })).toBe('OTHERS');
+    expect(resolveSkillStackKey({ slug: 'node-js', stack: 'BACK_END' })).toBe('BACK_END');
+    expect(resolveSkillStackKey({ slug: 'mysql', stack: 'DATABASES' })).toBe('DATABASES');
+    expect(resolveSkillStackKey({ slug: 'unity', stack: 'GAMES' })).toBe('GAMES');
+    expect(resolveSkillStackKey({ slug: 'unknown-tool', stack: 'OTHERS' })).toBe('OTHERS');
   });
 
   it('should resolve legacy technology types from the old portfolio catalog', () => {
-    expect(resolveSkillTypeKey({ slug: 'javascript', category: 'LANGUAGE' })).toBe(
+    expect(resolveSkillTypeKey({ slug: 'javascript', type: 'PROGRAMMING_LANGUAGES' })).toBe(
       'PROGRAMMING_LANGUAGES',
     );
-    expect(resolveSkillTypeKey({ slug: 'css', category: 'LANGUAGE' })).toBe('WEB_LANGUAGES');
-    expect(resolveSkillTypeKey({ slug: 'unity', category: 'TOOL' })).toBe('DEVELOPMENT_PLATFORMS');
-    expect(resolveSkillTypeKey({ slug: 'unknown', category: 'DATABASE' })).toBe(
-      'RELATIONAL_DATA_BASES',
+    expect(resolveSkillTypeKey({ slug: 'css', type: 'PROGRAMMING_LANGUAGES' })).toBe(
+      'PROGRAMMING_LANGUAGES',
+    );
+    expect(resolveSkillTypeKey({ slug: 'unity', type: 'DEVELOPMENT_PLATFORMS' })).toBe('DEVELOPMENT_PLATFORMS');
+    expect(resolveSkillTypeKey({ slug: 'unknown', type: 'RELATIONAL_DATABASES' })).toBe(
+      'RELATIONAL_DATABASES',
     );
   });
 
@@ -161,7 +163,7 @@ describe('skills helper', () => {
         kind: 'education',
         name: 'Information Systems',
         modal: jasmine.objectContaining({
-          category: 'Education',
+          type: 'Education',
           image: jasmine.objectContaining({
             src: jasmine.stringMatching(/puc\.png$/),
           }),
@@ -174,7 +176,7 @@ describe('skills helper', () => {
         name: 'Portuguese',
         totalExperienceLabel: '',
         modal: jasmine.objectContaining({
-          category: 'Languages',
+          type: 'Languages',
           image: jasmine.objectContaining({
             src: jasmine.stringMatching(/br\.svg$/),
           }),
@@ -427,7 +429,7 @@ describe('skills helper', () => {
         id: 'tech-weird',
         slug: 'weird-tech',
         name: 'Weird Tech',
-        category: 'FRAMEWORK',
+        type: 'FRAMEWORKS',
         level: 'EXPERT_PLUS',
         frequency: 'VERY_FREQUENT',
         highlight: false,
@@ -498,7 +500,7 @@ describe('skills helper', () => {
     expect(metrics).toEqual([
       { label: 'Tecnologias mapeadas', value: '4' },
       { label: 'Destaques', value: '2' },
-      { label: 'Categorias', value: '4' },
+      { label: 'Tipos', value: '4' },
       { label: 'Stack avançada', value: '2' },
       {
         label: 'Maior tempo total',
@@ -515,7 +517,7 @@ describe('skills helper', () => {
           id: 'tech-empty',
           slug: 'empty',
           name: 'Empty Tech',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -524,7 +526,7 @@ describe('skills helper', () => {
           id: 'tech-ranked',
           slug: 'ranked',
           name: 'Ranked Tech',
-          category: 'FRAMEWORK',
+          type: 'FRAMEWORKS',
           level: 'ADVANCED',
           frequency: 'FREQUENT',
           highlight: true,
@@ -580,7 +582,7 @@ describe('skills helper', () => {
     expect(metrics).toEqual([
       { label: 'Mapped technologies', value: '2' },
       { label: 'Highlights', value: '1' },
-      { label: 'Categories', value: '2' },
+      { label: 'Types', value: '2' },
       { label: 'Advanced stack', value: '1' },
       {
         label: 'Longest total time',
@@ -605,7 +607,7 @@ describe('skills helper', () => {
           id: 'tech-empty',
           slug: 'empty',
           name: 'Empty Tech',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -628,7 +630,7 @@ describe('skills helper', () => {
           id: 'tech-ranked',
           slug: 'ranked',
           name: 'Ranked Tech',
-          category: 'FRAMEWORK',
+          type: 'FRAMEWORKS',
           level: 'ADVANCED',
           frequency: 'FREQUENT',
           highlight: false,
@@ -681,7 +683,7 @@ describe('skills helper', () => {
           id: 'tech-empty-left',
           slug: 'empty-left',
           name: 'Empty Left',
-          category: 'LIBRARY',
+          type: 'LIBRARIES',
           level: null,
           frequency: null,
           highlight: false,
@@ -693,26 +695,26 @@ describe('skills helper', () => {
     expect(metrics[4]?.value).toBe('Ranked Tech');
   });
 
-  it('should group technologies by category and sort them by total duration', () => {
+  it('should group technologies by type and sort them by total duration', () => {
     const groups = buildSkillsGroups(createTechnologiesCollectionResponse().data, 'en-us');
 
     expect(groups.map((group) => group.id)).toEqual([
-      'DATABASE',
-      'DEVOPS',
-      'FRAMEWORK',
-      'LANGUAGE',
+      'DEPLOYMENT_TOOLS',
+      'FRAMEWORKS',
+      'PROGRAMMING_LANGUAGES',
+      'RELATIONAL_DATABASES',
     ]);
-    expect(groups[2]?.items[0]?.name).toBe('Angular');
+    expect(groups[1]?.items[0]?.name).toBe('Angular');
   });
 
-  it('should group unknown categories with fallback tone, icon and sorting', () => {
+  it('should group unknown types with fallback tone, icon and sorting', () => {
     const groups = buildSkillsGroups(
       [
         {
           id: 'tech-a',
           slug: 'custom-alpha',
           name: 'Custom Alpha',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -721,7 +723,7 @@ describe('skills helper', () => {
           id: 'tech-b',
           slug: 'custom-beta',
           name: 'Custom Beta',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -776,8 +778,8 @@ describe('skills helper', () => {
 
     expect(groups).toEqual([
       {
-        id: 'CUSTOM_STACK',
-        title: 'Custom Stack',
+        id: 'OTHERS',
+        title: 'Others',
         description: '2 technologies with real duration coverage by context.',
         tone: 'base',
         iconName: 'LuSparkles',
@@ -789,14 +791,14 @@ describe('skills helper', () => {
     ]);
   });
 
-  it('should sort unknown category groups even when the first compared item has no duration metrics', () => {
+  it('should sort unknown type groups even when the first compared item has no duration metrics', () => {
     const groups = buildSkillsGroups(
       [
         {
           id: 'tech-b',
           slug: 'custom-beta',
           name: 'Custom Beta',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -849,7 +851,7 @@ describe('skills helper', () => {
           id: 'tech-a',
           slug: 'custom-alpha',
           name: 'Custom Alpha',
-          category: 'CUSTOM_STACK',
+          type: 'OTHERS',
           level: null,
           frequency: null,
           highlight: false,
@@ -861,10 +863,15 @@ describe('skills helper', () => {
     expect(groups[0]?.items.map((item) => item.name)).toEqual(['Custom Beta', 'Custom Alpha']);
   });
 
-  it('should extract sorted categories and levels for filters', () => {
+  it('should extract sorted types and levels for filters', () => {
     const filters = extractSkillFilterValues(createTechnologiesCollectionResponse());
 
-    expect(filters.categories).toEqual(['DATABASE', 'DEVOPS', 'FRAMEWORK', 'LANGUAGE']);
+    expect(filters.types).toEqual([
+      'DEPLOYMENT_TOOLS',
+      'FRAMEWORKS',
+      'PROGRAMMING_LANGUAGES',
+      'RELATIONAL_DATABASES',
+    ]);
     expect(filters.levels).toEqual(['ADVANCED', 'INTERMEDIATE']);
   });
 
@@ -877,7 +884,7 @@ describe('skills helper', () => {
           id: 'tech-null-level',
           slug: 'null-level',
           name: 'Null Level',
-          category: 'LIBRARY',
+          type: 'LIBRARIES',
           level: null,
           frequency: 'RARE',
           highlight: false,
@@ -885,8 +892,43 @@ describe('skills helper', () => {
       ],
     });
 
-    expect(filters.categories).toEqual(['DATABASE', 'DEVOPS', 'FRAMEWORK', 'LANGUAGE', 'LIBRARY']);
+    expect(filters.types).toEqual([
+      'DEPLOYMENT_TOOLS',
+      'FRAMEWORKS',
+      'LIBRARIES',
+      'PROGRAMMING_LANGUAGES',
+      'RELATIONAL_DATABASES',
+    ]);
     expect(filters.levels).toEqual(['ADVANCED', 'INTERMEDIATE']);
+  });
+
+  it('should preserve legacy type and stack fallbacks when the API omits optional taxonomy', () => {
+    const legacyBackend = {
+      id: 'tech-node',
+      slug: 'node',
+      name: 'Node.js',
+      type: null,
+      level: null,
+      frequency: null,
+      highlight: false,
+    } as unknown as TechnologyCollectionItemResponse;
+    const unknown = {
+      ...legacyBackend,
+      id: 'tech-unknown',
+      slug: 'unknown-tool',
+    } as unknown as TechnologyCollectionItemResponse;
+
+    expect(resolveSkillStackKey(legacyBackend)).toBe('BACK_END');
+    expect(resolveSkillTypeKey(legacyBackend)).toBe('PROGRAMMING_LANGUAGES');
+    expect(mapTechnologyToSkillCard(unknown, 'en-us').typeLabel).toBe('Others');
+    expect(buildSkillsSummaryMetrics([unknown], 'en-us')[2]?.value).toBe('1');
+    expect(buildSkillsGroups([unknown], 'en-us')[0]?.id).toBe('OTHERS');
+    expect(
+      extractSkillFilterValues({
+        ...createTechnologiesCollectionResponse(),
+        data: [unknown],
+      }).types,
+    ).toEqual(['OTHERS']);
   });
 
   it('should resolve skill visual URLs from fallback assets or return an empty string', () => {

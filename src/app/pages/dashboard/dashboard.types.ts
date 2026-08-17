@@ -178,13 +178,13 @@ const DASHBOARD_HIGHLIGHT_ICON_NAMES: Record<string, string> = {
   language: 'LuLanguages',
 };
 
-const DASHBOARD_TECHNOLOGY_CATEGORY_ICON_NAMES: Record<string, string> = {
-  FRAMEWORK: 'LuBlocks',
-  LANGUAGE: 'LuCpu',
-  LIBRARY: 'LuPackage',
-  DATABASE: 'LuDatabase',
-  ORM: 'LuDatabase',
-  DEVOPS: 'LuCloud',
+const DASHBOARD_TECHNOLOGY_TYPE_ICON_NAMES: Record<string, string> = {
+  FRAMEWORKS: 'LuBlocks',
+  PROGRAMMING_LANGUAGES: 'LuCpu',
+  LIBRARIES: 'LuPackage',
+  RELATIONAL_DATABASES: 'LuDatabase',
+  NON_RELATIONAL_DATABASES: 'LuDatabase',
+  DEPLOYMENT_TOOLS: 'LuCloud',
 };
 
 const DASHBOARD_TECHNOLOGY_VISUAL_FILE_NAMES: Record<string, string> = {
@@ -205,8 +205,8 @@ export const resolveDashboardStackIconName = (slug: string): string =>
 export const resolveDashboardHighlightIconName = (entity: string): string =>
   DASHBOARD_HIGHLIGHT_ICON_NAMES[entity] ?? 'LuSparkles';
 
-export const resolveDashboardTechnologyIconName = (category: string): string =>
-  DASHBOARD_TECHNOLOGY_CATEGORY_ICON_NAMES[category] ?? 'LuCpu';
+export const resolveDashboardTechnologyIconName = (type: string): string =>
+  DASHBOARD_TECHNOLOGY_TYPE_ICON_NAMES[type] ?? 'LuCpu';
 
 export const resolveDashboardTechnologyVisualPath = (slug: string): string =>
   DASHBOARD_TECHNOLOGY_VISUAL_FILE_NAMES[slug.toLowerCase()]

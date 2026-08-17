@@ -113,7 +113,7 @@ const createTechnology = (
   id: 'technology-1',
   slug: 'angular',
   name: 'Angular',
-  category: 'framework',
+  type: 'FRAMEWORKS',
   level: 'advanced',
   frequency: 'frequent',
   highlight: true,

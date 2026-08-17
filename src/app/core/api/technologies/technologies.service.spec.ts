@@ -12,7 +12,6 @@ import { TechnologiesService } from './technologies.service';
 const payload = {
   slug: 'angular',
   name: 'Angular',
-  category: 'FRAMEWORK',
   stack: 'FRONT_END' as const,
   type: 'FRAMEWORKS' as const,
   highlight: true,

@@ -18,7 +18,8 @@ const buildTechnology = (
     id: overrides.id ?? `tech-${overrides.slug ?? 'custom'}`,
     slug: overrides.slug ?? 'custom',
     name: overrides.name ?? 'Custom',
-    category: overrides.category ?? 'TOOL',
+    stack: overrides.stack ?? null,
+    type: overrides.type ?? 'TOOLS',
     level: overrides.level ?? null,
     frequency: overrides.frequency ?? null,
     highlight: overrides.highlight ?? false,
@@ -37,9 +38,9 @@ describe('technology modal helper', () => {
 
   it('should ignore missing detail values', () => {
     expect(
-      buildTechnologyModalDetail('pages.experiences.technology.category', undefined),
+      buildTechnologyModalDetail('pages.experiences.technology.type', undefined),
     ).toBeNull();
-    expect(buildTechnologyModalDetail('pages.experiences.technology.category', '')).toBeNull();
+    expect(buildTechnologyModalDetail('pages.experiences.technology.type', '')).toBeNull();
   });
 
   it('should build the complete modal detail list from an enriched technology', () => {
@@ -48,7 +49,7 @@ describe('technology modal helper', () => {
         slug: 'angular',
         name: 'Angular',
         experience: '6 years',
-        category: 'Frameworks',
+        type: 'Frameworks',
         stack: 'Front-End',
         level: 'Advanced',
         frequency: 'Frequent',
@@ -79,7 +80,7 @@ describe('technology modal helper', () => {
       jasmine.objectContaining({
         slug: 'angular',
         name: 'Angular',
-        category: 'Frameworks',
+        type: 'Frameworks',
         stack: 'Front-End',
         level: 'Advanced',
         frequency: 'Frequent',
@@ -169,7 +170,7 @@ describe('technology modal helper', () => {
   it('should resolve catalog technologies by normalized name when the slug changes', () => {
     const technology = resolveTechnologyModalItem(
       { slug: 'react-js', name: 'React' },
-      [buildTechnology({ slug: 'react', name: 'React', category: 'LIBRARY' })],
+      [buildTechnology({ slug: 'react', name: 'React', type: 'LIBRARIES' })],
       [],
       'en-us',
     );
@@ -178,39 +179,39 @@ describe('technology modal helper', () => {
       jasmine.objectContaining({
         slug: 'react',
         name: 'React',
-        category: 'Libraries',
+        type: 'Libraries',
         projectCount: undefined,
       }),
     );
   });
 
-  it('should fallback to the selected category when the catalog category is missing', () => {
+  it('should fallback to the selected type when the catalog type is missing', () => {
     const technology = resolveTechnologyModalItem(
       {
         slug: 'custom',
         name: 'Custom',
-        category: 'Custom fallback',
+        type: 'Custom fallback',
       },
       [
         {
           ...buildTechnology({ slug: 'custom', name: 'Custom' }),
-          category: undefined,
+          type: undefined,
         } as unknown as TechnologyCollectionItemResponse,
       ],
       [],
       'en-us',
     );
 
-    expect(technology?.category).toBe('Custom fallback');
+    expect(technology?.type).toBe('Custom fallback');
   });
 
-  it('should resolve stack labels from slug and category rules', () => {
+  it('should resolve stack labels from slug and type rules', () => {
     const technologies = [
       buildTechnology({ slug: 'unity', name: 'Unity' }),
       buildTechnology({ slug: 'expo', name: 'Expo' }),
-      buildTechnology({ slug: 'sql-server', name: 'SQL Server', category: 'DATABASE' }),
+      buildTechnology({ slug: 'sql-server', name: 'SQL Server', type: 'RELATIONAL_DATABASES' }),
       buildTechnology({ slug: 'node-js', name: 'Node.js' }),
-      buildTechnology({ slug: 'unknown', name: 'Unknown', category: 'CUSTOM_CATEGORY' }),
+      buildTechnology({ slug: 'unknown', name: 'Unknown', type: 'OTHERS' }),
     ];
 
     expect(
@@ -234,8 +235,8 @@ describe('technology modal helper', () => {
     ).toBe('Back-End');
     expect(
       resolveTechnologyModalItem({ slug: 'unknown', name: 'Unknown' }, technologies, [], 'en-us')
-        ?.category,
-    ).toBe('Custom Category');
+        ?.type,
+    ).toBe('Others');
   });
 
   it('should prefer backend images and fallback to the selected image otherwise', () => {

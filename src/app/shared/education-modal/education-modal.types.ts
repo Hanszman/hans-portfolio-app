@@ -1,4 +1,5 @@
 import { TagModalDetail, TagModalImage } from '../tag/tag-modal/tag-modal.types';
+import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
 
 export interface EducationModalGalleryItem {
   id: string;
@@ -14,5 +15,10 @@ export interface EducationModalItem {
   image?: TagModalImage | null;
   details: readonly TagModalDetail[];
   galleryItems: readonly EducationModalGalleryItem[];
-  technologies: readonly { slug: string; name: string }[];
+  technologies: readonly {
+    slug: string;
+    name: string;
+    image?: TagModalImage | null;
+    modal?: TechnologyModalItem;
+  }[];
 }

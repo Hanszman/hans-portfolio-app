@@ -344,7 +344,7 @@ describe('SkillsComponent', () => {
             id: 'tech-unity',
             slug: 'unity',
             name: 'Unity',
-            category: 'TOOL',
+            type: 'DEVELOPMENT_PLATFORMS',
             level: null,
             frequency: 'STUDYING',
             highlight: false,
@@ -534,7 +534,7 @@ describe('SkillsComponent', () => {
             id: 'tech-a',
             slug: 'alpha',
             name: 'Alpha',
-            category: 'TOOL',
+            type: 'DEVELOPMENT_PLATFORMS',
             level: null,
             frequency: null,
             highlight: false,
@@ -543,7 +543,7 @@ describe('SkillsComponent', () => {
             id: 'tech-b',
             slug: 'beta',
             name: 'Beta',
-            category: 'TOOL',
+            type: 'DEVELOPMENT_PLATFORMS',
             level: null,
             frequency: null,
             highlight: false,
@@ -616,6 +616,22 @@ describe('SkillsComponent', () => {
           summaryEs: 'Resumen',
           startDate: '2015-02-01T00:00:00.000Z',
           endDate: '2018-12-15T00:00:00.000Z',
+          technologies: [
+            {
+              technology: {
+                id: 'technology-angular',
+                slug: 'angular',
+                name: 'Angular',
+              },
+            },
+            {
+              technology: {
+                id: 'technology-missing',
+                slug: 'missing-technology',
+                name: 'Missing technology',
+              },
+            },
+          ],
           imageAssets: [],
         },
       ],
@@ -643,11 +659,20 @@ describe('SkillsComponent', () => {
       selectedTechnology: () => unknown;
       selectedEducation: () => { title: string } | null;
       selectedLanguage: () => { title: string } | null;
+      openEducationTechnology: (technology: unknown) => void;
     };
     component.openSkillDetails(component.technologyCards()[0]);
     expect(component.selectedTechnology()).toBeTruthy();
     component.openSkillDetails(component.educationCards()[0]);
     expect(component.selectedEducation()?.title).toBe('Information Systems');
+    const education = component.selectedEducation() as unknown as {
+      technologies: readonly [{ modal: unknown }, { modal: unknown }];
+    };
+    expect(education.technologies[0].modal).toBeTruthy();
+    expect(education.technologies[1].modal).toBeUndefined();
+    component.openEducationTechnology(education.technologies[0].modal);
+    expect(component.selectedEducation()).toBeNull();
+    expect(component.selectedTechnology()).toBeTruthy();
     component.openSkillDetails(component.languageCards()[0]);
     expect(component.selectedLanguage()?.title).toBe('Portuguese');
     component.openSkillDetails({

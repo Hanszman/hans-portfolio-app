@@ -39,7 +39,7 @@ export interface DashboardProjectContextsResponse {
 export interface DashboardTopTechnologyEntryResponse {
   slug: string;
   name: string;
-  category: string;
+  type: TechnologyType;
   usageCount: number;
 }
 
@@ -108,3 +108,4 @@ export interface DashboardOverviewResponse {
   professionalTimeline: DashboardProfessionalTimelineResponse;
   highlights: DashboardHighlightsResponse;
 }
+import { TechnologyType } from '../technologies/technologies.types';

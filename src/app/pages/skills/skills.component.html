@@ -181,7 +181,12 @@
 }
 
 @if (selectedEducation(); as education) {
-  <app-education-modal [isOpen]="true" [item]="education" (closed)="closeSkillDetails()" />
+  <app-education-modal
+    [isOpen]="true"
+    [item]="education"
+    (closed)="closeSkillDetails()"
+    (technologySelected)="openEducationTechnology($event)"
+  />
 }
 
 @if (selectedLanguage(); as language) {

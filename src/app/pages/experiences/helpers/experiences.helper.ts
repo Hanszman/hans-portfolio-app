@@ -93,7 +93,7 @@ const mapTechnology = (
 ): TechnologyModalItem => ({
   slug: technology.slug,
   name: technology.name,
-  category: technology.category,
+  type: technology.type,
   level: technology.level,
   frequency: technology.frequency,
   image: {
@@ -159,7 +159,7 @@ const sortJobsByMostRecentEndDate = (
 };
 
 const resolveTechnologyGroupKey = (
-  technology: Pick<TechnologyModalItem, 'slug' | 'category'>,
+  technology: Pick<TechnologyModalItem, 'slug' | 'type'>,
 ): ExperienceTechnologyGroupKey => {
   if (EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
     return 'frontend';
@@ -173,7 +173,10 @@ const resolveTechnologyGroupKey = (
     return 'databases';
   }
 
-  return technology.category === 'DATABASE' ? 'databases' : 'others';
+  return technology.type === 'RELATIONAL_DATABASES' ||
+    technology.type === 'NON_RELATIONAL_DATABASES'
+    ? 'databases'
+    : 'others';
 };
 
 const buildTechnologyGroups = (

@@ -23,7 +23,7 @@ const technology: TechnologyCollectionItemResponse = {
   id: 'tech-1',
   slug: 'angular',
   name: 'Angular',
-  category: 'OTHER',
+  type: 'OTHERS',
   level: 'BASIC',
   frequency: 'FREQUENT',
   highlight: true,

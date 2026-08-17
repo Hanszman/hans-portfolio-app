@@ -14,7 +14,7 @@ describe('SkillCardComponent', () => {
     kind: 'technology',
     name: 'Angular',
     subtitle: '7 years',
-    categoryLabel: 'Framework',
+    typeLabel: 'Framework',
     levelLabel: 'Avancado',
     frequencyLabel: 'Frequente',
     frequencyKey: 'FREQUENT',
@@ -39,7 +39,7 @@ describe('SkillCardComponent', () => {
     modal: {
       slug: 'angular',
       name: 'Angular',
-      category: 'Framework',
+      type: 'FRAMEWORKS',
       level: 'Avancado',
       frequency: 'Frequente',
       experience: '7 years',

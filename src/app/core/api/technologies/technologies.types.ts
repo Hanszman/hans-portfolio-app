@@ -76,7 +76,6 @@ export interface TechnologyCollectionItemResponse {
   id: string;
   slug: string;
   name: string;
-  category: string;
   stack?: TechnologyStack;
   type?: TechnologyType;
   level: string | null;
@@ -139,7 +138,6 @@ export interface TechnologyRelationRecord {
 export interface TechnologyMutationPayload {
   slug: string;
   name: string;
-  category: string;
   stack: TechnologyStack;
   type: TechnologyType;
   level?: string;

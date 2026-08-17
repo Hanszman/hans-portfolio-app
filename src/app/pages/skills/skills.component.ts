@@ -148,7 +148,7 @@ export class SkillsComponent {
       const matchesSearch =
         !searchTerm ||
         card.name.toLowerCase().includes(searchTerm) ||
-        card.categoryLabel.toLowerCase().includes(searchTerm) ||
+        card.typeLabel.toLowerCase().includes(searchTerm) ||
         card.levelLabel.toLowerCase().includes(searchTerm) ||
         card.frequencyLabel.toLowerCase().includes(searchTerm);
       const matchesStack = selectedStack === 'ALL' || card.stackKey === selectedStack;
@@ -275,9 +275,25 @@ export class SkillsComponent {
 
     if (skill.kind === 'education') {
       const formation = this.formationsSignal().find(({ slug }) => slug === skill.slug);
-      this.selectedEducationSignal.set(
-        mapFormationToEducationModal(formation, skill, this.translationService.locale()),
+      const technologyModalBySlug = new Map(
+        this.technologyCards().map(({ slug, modal }) => [slug, modal] as const),
       );
+      const education = mapFormationToEducationModal(
+        formation,
+        skill,
+        this.translationService.locale(),
+      );
+      this.selectedEducationSignal.set({
+        ...education,
+        technologies: education.technologies.map((technology) => {
+          const modal = technologyModalBySlug.get(technology.slug);
+          return {
+            ...technology,
+            image: modal?.image ?? null,
+            modal,
+          };
+        }),
+      });
       return;
     }
 
@@ -295,6 +311,11 @@ export class SkillsComponent {
     this.selectedTechnologySignal.set(null);
     this.selectedEducationSignal.set(null);
     this.selectedLanguageSignal.set(null);
+  }
+
+  protected openEducationTechnology(technology: TechnologyModalItem): void {
+    this.closeSkillDetails();
+    this.selectedTechnologySignal.set(technology);
   }
 
   private buildFilterOptions(

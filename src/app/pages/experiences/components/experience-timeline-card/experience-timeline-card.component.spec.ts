@@ -10,7 +10,7 @@ describe('ExperienceTimelineCardComponent', () => {
   const createTechnology = (index: number) => ({
     slug: `tech-${index}`,
     name: `Tech ${index}`,
-    category: 'FRAMEWORK',
+    type: 'FRAMEWORKS',
     level: 'ADVANCED',
     frequency: 'FREQUENT',
     image: {
@@ -80,7 +80,7 @@ describe('ExperienceTimelineCardComponent', () => {
           {
             slug: 'tech-1',
             name: 'Tech 1',
-            category: 'FRAMEWORK',
+            type: 'FRAMEWORKS',
             level: 'ADVANCED',
             frequency: 'FREQUENT',
             image: {

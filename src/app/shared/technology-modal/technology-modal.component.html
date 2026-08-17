@@ -21,7 +21,7 @@
             class="technology-modal-skeleton technology-modal-subtitle-skeleton"
             width="45%"
             height="1.5rem"
-            ariaLabel="Loading technology category"
+            ariaLabel="Loading technology type"
           />
           <div class="technology-modal-details" aria-label="Loading technology information">
             @for (placeholder of [0, 1, 2, 3]; track placeholder) {
@@ -43,8 +43,8 @@
               loading="lazy"
             />
           }
-          @if (technology.category) {
-            <p class="technology-modal-subtitle">{{ technology.category }}</p>
+          @if (technology.type) {
+            <p class="technology-modal-subtitle">{{ technology.type }}</p>
           }
 
           <dl class="technology-modal-details">

@@ -26,7 +26,7 @@ describe('TechnologyModalComponent', () => {
     fixture.componentRef.setInput('technology', {
       slug: 'angular',
       name: 'Angular',
-      category: 'Framework',
+      type: 'FRAMEWORKS',
       stack: 'Front-End',
       level: 'Advanced',
       levelKey: 'ADVANCED',
@@ -129,12 +129,12 @@ describe('TechnologyModalComponent', () => {
       details: () => readonly { value: string | number }[];
     };
 
-    expect(component.details().map((detail) => detail.value)).toContain('Framework');
+    expect(component.details().map((detail) => detail.value)).toContain('FRAMEWORKS');
 
     fixture.componentRef.setInput('technology', {
       slug: 'json',
       name: 'JSON',
-      category: 'Object Notations',
+      type: 'Object Notations',
     });
     fixture.detectChanges();
   });

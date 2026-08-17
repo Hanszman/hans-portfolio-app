@@ -33,6 +33,11 @@
   margin: 0 0 0.75rem;
 }
 
+.education-modal-technologies {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
 .education-modal-technology-list {
   display: flex;
   flex-wrap: wrap;

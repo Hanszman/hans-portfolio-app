@@ -53,9 +53,13 @@ const TECHNOLOGY_MOBILE_SLUGS = new Set(['react-native', 'expo']);
 
 const TECHNOLOGY_GAME_SLUGS = new Set(['unity']);
 
-const TECHNOLOGY_DATABASE_CATEGORIES = new Set(['DATABASE', 'ORM']);
+const TECHNOLOGY_DATABASE_TYPES = new Set([
+  'RELATIONAL_DATABASES',
+  'NON_RELATIONAL_DATABASES',
+  'DATABASES_MANAGEMENT_SYSTEMS',
+]);
 
-const TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY: Record<string, AppTranslationKey> = {
+const TECHNOLOGY_TYPE_LABEL_KEYS: Record<string, AppTranslationKey> = {
   FRAMEWORK: 'taxonomy.skills.type.frameworks',
   LANGUAGE: 'taxonomy.skills.type.programmingLanguages',
   LIBRARY: 'taxonomy.skills.type.libraries',
@@ -249,19 +253,21 @@ const resolveCatalogLabel = (
 };
 
 const resolveStackLabel = (
-  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'category'>,
+  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'stack' | 'type'>,
   locale: AppLocale,
 ): string => {
   const slug = technology.slug.toLowerCase();
   let stackKey: keyof typeof TECHNOLOGY_STACK_LABEL_KEYS = 'OTHERS';
 
-  if (TECHNOLOGY_GAME_SLUGS.has(slug)) {
+  if (technology.stack) {
+    stackKey = technology.stack;
+  } else if (TECHNOLOGY_GAME_SLUGS.has(slug)) {
     stackKey = 'GAMES';
   } else if (TECHNOLOGY_MOBILE_SLUGS.has(slug)) {
     stackKey = 'MOBILE';
-  } else if (TECHNOLOGY_DATABASE_CATEGORIES.has(technology.category)) {
+  } else if (technology.type && TECHNOLOGY_DATABASE_TYPES.has(technology.type)) {
     stackKey = 'DATABASES';
-  } else if (TECHNOLOGY_FRONT_END_SLUGS.has(slug) || technology.category === 'FRAMEWORK') {
+  } else if (TECHNOLOGY_FRONT_END_SLUGS.has(slug) || technology.type === 'FRAMEWORKS') {
     stackKey = 'FRONT_END';
   } else if (TECHNOLOGY_BACK_END_SLUGS.has(slug)) {
     stackKey = 'BACK_END';
@@ -327,7 +333,7 @@ export const buildTechnologyModalDetails = (
 ): readonly TagModalDetail[] => {
   const details = [
     buildTechnologyModalDetail('pages.skills.detail.totalExperience', technology.experience),
-    buildTechnologyModalDetail('common.fields.type', technology.category),
+    buildTechnologyModalDetail('common.fields.type', technology.type),
     buildTechnologyModalDetail('common.fields.stack', technology.stack),
     buildTechnologyModalDetail('pages.experiences.technology.projects', technology.projectCount),
   ] satisfies readonly (TagModalDetail | null)[];
@@ -364,9 +370,8 @@ export const resolveTechnologyModalItem = (
     ...reference,
     slug: technology.slug,
     name: technology.name,
-    category:
-      resolveCatalogLabel(locale, TECHNOLOGY_TYPE_LABEL_KEYS_BY_CATEGORY, technology.category) ??
-      reference.category,
+    type:
+      resolveCatalogLabel(locale, TECHNOLOGY_TYPE_LABEL_KEYS, technology.type) ?? reference.type,
     stack: resolveStackLabel(technology, locale),
     level:
       resolveCatalogLabel(locale, TECHNOLOGY_LEVEL_LABEL_KEYS, technology.level) ?? reference.level,

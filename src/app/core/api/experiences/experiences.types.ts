@@ -14,7 +14,7 @@ export interface ExperienceTechnologyResponse {
   id: string;
   slug: string;
   name: string;
-  category: string;
+  type: TechnologyType;
   level: string;
   frequency: string;
   highlight: boolean;
@@ -264,3 +264,4 @@ export interface ExperienceMutationPayload {
 }
 
 export type AdminExperiencesCollectionResponse = PaginatedResponse<ExperienceRecord>;
+import { TechnologyType } from '../technologies/technologies.types';

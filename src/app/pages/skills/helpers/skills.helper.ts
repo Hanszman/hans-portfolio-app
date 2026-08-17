@@ -16,7 +16,6 @@ import { AppLocale, AppTranslationKey } from '../../../core/translation/translat
 import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import { sortTagItems } from '../../../shared/tag/helpers/tag-order.helper';
 import {
-  SKILL_CATEGORY_LABEL_KEYS,
   SKILL_CONTEXT_ORDER,
   SKILL_CONTEXT_LABEL_KEYS,
   SKILL_FALLBACK_LABEL_KEYS,
@@ -100,8 +99,6 @@ const MOBILE_TECHNOLOGY_SLUGS = new Set(['react-native', 'expo']);
 
 const GAME_TECHNOLOGY_SLUGS = new Set(['unity']);
 
-const DATABASE_TECHNOLOGY_CATEGORIES = new Set(['DATABASE', 'ORM']);
-
 const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
   ajax: 'TECHNIQUES',
   angular: 'FRAMEWORKS',
@@ -141,8 +138,8 @@ const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
   'knex-js': 'LIBRARIES',
   laravel: 'FRAMEWORKS',
   lint: 'TECHNIQUES',
-  mongodb: 'NON_RELATIONAL_DATA_BASES',
-  mysql: 'RELATIONAL_DATA_BASES',
+  mongodb: 'NON_RELATIONAL_DATABASES',
+  mysql: 'RELATIONAL_DATABASES',
   node: 'PROGRAMMING_LANGUAGES',
   'node-js': 'PROGRAMMING_LANGUAGES',
   notepadplusplus: 'CODE_EDITORS',
@@ -151,7 +148,7 @@ const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
   php: 'PROGRAMMING_LANGUAGES',
   phpstorm: 'CODE_EDITORS',
   'php-storm': 'CODE_EDITORS',
-  postgresql: 'RELATIONAL_DATA_BASES',
+  postgresql: 'RELATIONAL_DATABASES',
   pycharm: 'CODE_EDITORS',
   python: 'PROGRAMMING_LANGUAGES',
   react: 'LIBRARIES',
@@ -163,10 +160,10 @@ const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
   soap: 'PROTOCOLS',
   socketio: 'LIBRARIES',
   'socket-io': 'LIBRARIES',
-  sql: 'RELATIONAL_DATA_BASES',
-  sqlserver: 'RELATIONAL_DATA_BASES',
-  'sql-server': 'RELATIONAL_DATA_BASES',
-  'microsoft-sql-server': 'RELATIONAL_DATA_BASES',
+  sql: 'RELATIONAL_DATABASES',
+  sqlserver: 'RELATIONAL_DATABASES',
+  'sql-server': 'RELATIONAL_DATABASES',
+  'microsoft-sql-server': 'RELATIONAL_DATABASES',
   swagger: 'LIBRARIES',
   typescript: 'PROGRAMMING_LANGUAGES',
   unity: 'DEVELOPMENT_PLATFORMS',
@@ -180,24 +177,10 @@ const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
   xml: 'OBJECT_NOTATIONS',
 };
 
-const TYPE_BY_BACKEND_CATEGORY: Record<string, SkillTypeFilterValue> = {
-  FRAMEWORK: 'FRAMEWORKS',
-  LANGUAGE: 'PROGRAMMING_LANGUAGES',
-  LIBRARY: 'LIBRARIES',
-  TOOL: 'OTHERS',
-  DATABASE: 'RELATIONAL_DATA_BASES',
-  CLOUD: 'CLOUD_HOSTING_PLATFORMS',
-  TESTING: 'LIBRARIES',
-  DEVOPS: 'DEPLOYMENT_TOOLS',
-  STYLING: 'WEB_LANGUAGES',
-  ARCHITECTURE: 'TECHNIQUES',
-  OTHER: 'OTHERS',
-  ORM: 'LIBRARIES',
-};
-
 export const resolveSkillStackKey = (
-  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'category'>,
+  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'stack'>,
 ): SkillStackFilterValue => {
+  if (technology.stack) return technology.stack;
   const slug = technology.slug.toLowerCase();
 
   if (GAME_TECHNOLOGY_SLUGS.has(slug)) {
@@ -208,11 +191,7 @@ export const resolveSkillStackKey = (
     return 'MOBILE';
   }
 
-  if (DATABASE_TECHNOLOGY_CATEGORIES.has(technology.category)) {
-    return 'DATABASES';
-  }
-
-  if (FRONT_END_TECHNOLOGY_SLUGS.has(slug) || technology.category === 'FRAMEWORK') {
+  if (FRONT_END_TECHNOLOGY_SLUGS.has(slug)) {
     return 'FRONT_END';
   }
 
@@ -224,10 +203,9 @@ export const resolveSkillStackKey = (
 };
 
 export const resolveSkillTypeKey = (
-  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'category'>,
+  technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'type'>,
 ): SkillTypeFilterValue =>
-  LEGACY_TYPE_BY_SLUG[technology.slug.toLowerCase()] ??
-  TYPE_BY_BACKEND_CATEGORY[technology.category] ??
+  technology.type ?? LEGACY_TYPE_BY_SLUG[technology.slug.toLowerCase()] ??
   'OTHERS';
 
 const resolveSkillLevelKey = (
@@ -326,7 +304,7 @@ export const mapTechnologyToSkillCard = (
     kind: 'technology',
     name: technology.name,
     subtitle: frequencyLabel,
-    categoryLabel: typeLabel,
+    typeLabel,
     levelLabel,
     frequencyLabel,
     frequencyKey:
@@ -350,7 +328,7 @@ export const mapTechnologyToSkillCard = (
           )
         : '') || translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.noDuration),
     isHighlight: technology.highlight,
-    iconName: SKILL_GROUP_ICON_NAMES[technology.category] ?? 'LuSparkles',
+    iconName: SKILL_GROUP_ICON_NAMES[technology.type ?? 'OTHERS'] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
     badgeLabel: shouldShowLevelBadge ? levelLabel : '',
     badgeColor: resolveSkillBadgeColor(technology.level, technology.frequency),
@@ -362,7 +340,7 @@ export const mapTechnologyToSkillCard = (
     modal: {
       slug: technology.slug,
       name: technology.name,
-      category: typeLabel,
+      type: typeLabel,
       stack: stackLabel,
       level: shouldShowLevelBadge ? levelLabel : undefined,
       frequency: frequencyLabel,
@@ -472,7 +450,7 @@ export const buildEducationSkillCards = (
         kind: 'education',
         name,
         subtitle: formation.institution,
-        categoryLabel: formation.institution,
+        typeLabel: formation.institution,
         levelLabel: badgeLabel,
         frequencyLabel: period,
         frequencyKey: 'ALL',
@@ -490,7 +468,7 @@ export const buildEducationSkillCards = (
         modal: {
           slug: formation.slug,
           name,
-          category: translateStaticKey(locale, 'pages.skills.education.title'),
+          type: translateStaticKey(locale, 'pages.skills.education.title'),
           level: badgeLabel,
           frequency: period,
           image: { src: visualUrl, alt: name },
@@ -538,7 +516,7 @@ export const buildLanguageSkillCards = (
         kind: 'language',
         name,
         subtitle: '',
-        categoryLabel: translateStaticKey(locale, 'common.entities.languages'),
+        typeLabel: translateStaticKey(locale, 'common.entities.languages'),
         levelLabel: badgeLabel,
         frequencyLabel: '',
         frequencyKey: 'ALL',
@@ -556,7 +534,7 @@ export const buildLanguageSkillCards = (
         modal: {
           slug: language.code,
           name,
-          category: translateStaticKey(locale, 'common.entities.languages'),
+          type: translateStaticKey(locale, 'common.entities.languages'),
           level: badgeLabel,
           frequency: '',
           image: { src: visualUrl, alt: name },
@@ -716,7 +694,7 @@ export const buildSkillsSummaryMetrics = (
 ): readonly SkillsSummaryMetricViewModel[] => {
   const highlightedCount = technologies.filter((technology) => technology.highlight).length;
   const advancedCount = technologies.filter((technology) => technology.level === 'ADVANCED').length;
-  const categories = new Set(technologies.map((technology) => technology.category));
+  const types = new Set(technologies.map((technology) => technology.type ?? 'OTHERS'));
   const strongestTechnology = [...technologies].sort(
     (left, right) =>
       (right.experienceMetrics?.total.totalMonths ?? 0) -
@@ -733,8 +711,8 @@ export const buildSkillsSummaryMetrics = (
       value: String(highlightedCount),
     },
     {
-      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryCategories),
-      value: String(categories.size),
+      label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryTypes),
+      value: String(types.size),
     },
     {
       label: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.summaryAdvanced),
@@ -765,26 +743,27 @@ export const buildSkillsGroups = (
   const grouped = new Map<string, TechnologyCollectionItemResponse[]>();
 
   for (const technology of technologies) {
-    const currentGroup = grouped.get(technology.category) ?? [];
+    const type = technology.type ?? 'OTHERS';
+    const currentGroup = grouped.get(type) ?? [];
     currentGroup.push(technology);
-    grouped.set(technology.category, currentGroup);
+    grouped.set(type, currentGroup);
   }
 
   return [...grouped.entries()]
     .sort(([left], [right]) => left.localeCompare(right))
-    .map(([category, items]) => ({
-      id: category,
+    .map(([type, items]) => ({
+      id: type,
       title: resolveCatalogLabel(
         locale,
-        SKILL_CATEGORY_LABEL_KEYS,
-        category,
-        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.uncategorized),
+        SKILL_TYPE_LABEL_KEYS,
+        type,
+        translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.untyped),
       ),
       description: translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.groupDescription, {
         count: String(items.length),
       }),
-      tone: SKILL_GROUP_TONES[category] ?? 'base',
-      iconName: SKILL_GROUP_ICON_NAMES[category] ?? 'LuSparkles',
+      tone: SKILL_GROUP_TONES[type] ?? 'base',
+      iconName: SKILL_GROUP_ICON_NAMES[type] ?? 'LuSparkles',
       items: [...items]
         .sort(
           (left, right) =>
@@ -798,14 +777,14 @@ export const buildSkillsGroups = (
 export const extractSkillFilterValues = (
   response: TechnologiesCollectionResponse,
 ): {
-  readonly categories: readonly string[];
+  readonly types: readonly string[];
   readonly levels: readonly string[];
 } => {
-  const categories = new Set<string>();
+  const types = new Set<string>();
   const levels = new Set<string>();
 
   for (const technology of response.data) {
-    categories.add(technology.category);
+    types.add(technology.type ?? 'OTHERS');
 
     if (technology.level) {
       levels.add(technology.level);
@@ -813,7 +792,7 @@ export const extractSkillFilterValues = (
   }
 
   return {
-    categories: [...categories].sort((left, right) => left.localeCompare(right)),
+    types: [...types].sort((left, right) => left.localeCompare(right)),
     levels: [...levels].sort((left, right) => left.localeCompare(right)),
   };
 };

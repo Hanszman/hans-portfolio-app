@@ -30,7 +30,7 @@ export interface TechnologyContextPeriodViewModel {
 export interface TechnologyModalItem {
   slug: string;
   name: string;
-  category?: string;
+  type?: string;
   stack?: string;
   level?: string;
   levelKey?: TechnologyLevelKey;

@@ -356,7 +356,7 @@ export const buildDashboardTechnologyLeaders = (
     slug: technology.slug,
     name: technology.name,
     usageCount: technology.usageCount,
-    iconName: resolveDashboardTechnologyIconName(technology.category),
+    iconName: resolveDashboardTechnologyIconName(technology.type),
     visualUrl: buildAssetUrl(
       resolveDashboardTechnologyVisualPath(technology.slug),
     ),

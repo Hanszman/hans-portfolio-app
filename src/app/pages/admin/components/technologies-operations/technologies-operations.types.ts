@@ -22,20 +22,6 @@ export type TechnologiesOperationsModalMode =
   | 'update'
   | 'delete';
 
-export const TECHNOLOGY_CATEGORY_VALUES = [
-  'LANGUAGE',
-  'FRAMEWORK',
-  'LIBRARY',
-  'TOOL',
-  'DATABASE',
-  'CLOUD',
-  'TESTING',
-  'DEVOPS',
-  'STYLING',
-  'ARCHITECTURE',
-  'OTHER',
-] as const;
-
 export const TECHNOLOGY_LEVEL_VALUES = ['BASIC', 'INTERMEDIATE', 'ADVANCED'] as const;
 
 export const TECHNOLOGY_FREQUENCY_VALUES = [
@@ -58,24 +44,12 @@ export const TECHNOLOGY_TYPE_VALUES: readonly TechnologyType[] = [
 ];
 
 export type TechnologyOptionValue =
-  | (typeof TECHNOLOGY_CATEGORY_VALUES)[number]
   | (typeof TECHNOLOGY_LEVEL_VALUES)[number]
   | (typeof TECHNOLOGY_FREQUENCY_VALUES)[number]
   | TechnologyStack
   | TechnologyType;
 
 export const TECHNOLOGY_OPTION_LABEL_KEYS = {
-  LANGUAGE: 'taxonomy.skills.category.language',
-  FRAMEWORK: 'taxonomy.skills.category.framework',
-  LIBRARY: 'taxonomy.skills.category.library',
-  TOOL: 'pages.admin.technologies.options.TOOL',
-  DATABASE: 'taxonomy.skills.category.database',
-  CLOUD: 'pages.admin.technologies.options.CLOUD',
-  TESTING: 'pages.admin.technologies.options.TESTING',
-  DEVOPS: 'taxonomy.skills.category.devops',
-  STYLING: 'pages.admin.technologies.options.STYLING',
-  ARCHITECTURE: 'pages.admin.technologies.options.ARCHITECTURE',
-  OTHER: 'common.values.other',
   BASIC: 'taxonomy.skills.level.basic',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
   ADVANCED: 'taxonomy.skills.level.advanced',
@@ -112,7 +86,6 @@ export const TECHNOLOGY_OPTION_LABEL_KEYS = {
 export interface TechnologiesOperationsFormValue {
   slug: string;
   name: string;
-  category: string;
   stack: TechnologyStack | '';
   type: TechnologyType | '';
   level: string;
@@ -137,7 +110,6 @@ export const TECHNOLOGIES_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.technologies.fields.name.placeholder',
     required: true,
   },
-  category: { labelKey: 'common.fields.category', required: true },
   stack: { labelKey: 'common.fields.stack', required: true },
   type: { labelKey: 'common.fields.type', required: true },
   level: { labelKey: 'common.fields.level', required: false },
@@ -170,7 +142,6 @@ export type TechnologiesMutationBuildResult =
 export const createEmptyTechnologiesOperationsFormValue = (): TechnologiesOperationsFormValue => ({
   slug: '',
   name: '',
-  category: '',
   stack: '',
   type: '',
   level: '',
@@ -212,7 +183,6 @@ export const buildTechnologiesFormValue = (
     ? {
         slug: technology.slug,
         name: technology.name,
-        category: technology.category,
         stack: technology.stack ?? '',
         type: technology.type ?? '',
         level: technology.level ?? '',
@@ -259,18 +229,15 @@ export const buildTechnologiesMutationPayload = (
 ): TechnologiesMutationBuildResult => {
   const slug = form.slug.trim();
   const name = form.name.trim();
-  const category = form.category.trim();
   const stack = form.stack;
   const type = form.type;
   const sortOrder = Number.parseInt(form.sortOrder.trim(), 10);
   if (!slug) return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredSlug' };
   if (!name) return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredName' };
-  if (!category)
-    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
   if (!stack)
-    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
+    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredStack' };
   if (!type)
-    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredCategory' };
+    return { isValid: false, errorKey: 'pages.admin.technologies.feedback.requiredType' };
   if (!Number.isInteger(sortOrder))
     return { isValid: false, errorKey: 'pages.admin.technologies.feedback.invalidSortOrder' };
   return {
@@ -278,7 +245,6 @@ export const buildTechnologiesMutationPayload = (
     payload: {
       slug,
       name,
-      category,
       stack,
       type,
       ...(form.level.trim() ? { level: form.level.trim() } : {}),

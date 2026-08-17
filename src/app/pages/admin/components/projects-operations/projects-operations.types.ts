@@ -194,7 +194,7 @@ export const PROJECT_OPTION_LABEL_KEYS = {
     BACKEND: 'pages.admin.projects.fields.environment.options.BACKEND',
     FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
     MOBILE: 'pages.admin.projects.fields.environment.options.MOBILE',
-    LIBRARY: 'taxonomy.skills.category.library',
+    LIBRARY: 'taxonomy.skills.type.libraries',
     DASHBOARD: 'pages.admin.projects.fields.environment.options.DASHBOARD',
   },
 } as const satisfies Record<

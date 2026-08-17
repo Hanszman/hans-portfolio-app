@@ -254,7 +254,7 @@ describe('HomeComponent', () => {
           contexts: [],
           sources: [],
           topTechnologies: [
-            { slug: 'unknown-stack', name: 'Unknown Stack', category: 'CUSTOM', usageCount: 1 },
+            { slug: 'unknown-stack', name: 'Unknown Stack', type: 'OTHERS', usageCount: 1 },
           ],
         },
       }),

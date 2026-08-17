@@ -202,7 +202,7 @@ describe('experiences helper', () => {
     });
   });
 
-  it('should classify database technologies by category when the slug is not mapped', () => {
+  it('should classify database technologies by type when the slug is not mapped', () => {
     const experience = {
       ...createExperiencesCollectionResponse().data[1],
       technologies: [
@@ -213,7 +213,7 @@ describe('experiences helper', () => {
             id: 'tech-oracle',
             slug: 'oracle-db',
             name: 'Oracle DB',
-            category: 'DATABASE',
+            type: 'RELATIONAL_DATABASES' as const,
             level: 'INTERMEDIATE',
             frequency: 'OCCASIONAL',
             highlight: false,

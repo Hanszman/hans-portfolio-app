@@ -80,7 +80,7 @@ const createTechnology = (
   id: 'technology-1',
   slug: 'angular',
   name: 'Angular',
-  category: 'framework',
+  type: 'FRAMEWORKS',
   level: 'advanced',
   frequency: 'frequent',
   highlight: true,
@@ -476,6 +476,35 @@ describe('image-assets operations helper', () => {
     expect(viewModel.altEn).toBe('');
     expect(viewModel.captionPt).toBe('');
     expect(viewModel.captionEn).toBe('');
+  });
+
+  it('should resolve every reverse relation label and ignore malformed nested relations', () => {
+    const [viewModel] = buildImageAssetsViewModels(
+      [
+        createImageAsset({
+          formationIds: ['formation-1'],
+          spokenLanguageIds: ['language-1'],
+          customerIds: ['customer-1'],
+          jobIds: ['job-1'],
+          formations: [{} as never],
+          spokenLanguages: [{} as never],
+          customers: [{} as never],
+          jobs: [{} as never],
+        }),
+      ],
+      [],
+      [],
+      [],
+      [{ id: 'formation-1', titlePt: 'Sistemas de Informação' } as never],
+      [{ id: 'language-1', namePt: 'Português' } as never],
+      [{ id: 'customer-1', name: 'Cliente' } as never],
+      [{ id: 'job-1', namePt: 'Engenheiro' } as never],
+    );
+
+    expect(viewModel.formationLabels).toEqual(['Sistemas de Informação']);
+    expect(viewModel.spokenLanguageLabels).toEqual(['Português']);
+    expect(viewModel.customerLabels).toEqual(['Cliente']);
+    expect(viewModel.jobLabels).toEqual(['Engenheiro']);
   });
 
   it('should build valid and invalid mutation payloads', () => {

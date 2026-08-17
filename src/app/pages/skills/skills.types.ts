@@ -1,4 +1,7 @@
-import { TechnologyContextKey } from '../../core/api/technologies/technologies.types';
+import {
+  TechnologyContextKey,
+  TechnologyType,
+} from '../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../core/translation/translation.types';
 import { ContainerTone } from '../../layout/container/container.types';
 import { TechnologyModalItem } from '../../shared/technology-modal/technology-modal.types';
@@ -24,27 +27,7 @@ export type SkillFrequencyFilterValue =
   | 'RARE'
   | 'STUDYING';
 
-export type SkillTypeFilterValue =
-  | 'ALL'
-  | 'PROGRAMMING_LANGUAGES'
-  | 'WEB_LANGUAGES'
-  | 'LIBRARIES'
-  | 'FRAMEWORKS'
-  | 'RELATIONAL_DATA_BASES'
-  | 'NON_RELATIONAL_DATA_BASES'
-  | 'DATABASES_MANAGEMENT_SYSTEMS'
-  | 'CODE_EDITORS'
-  | 'TECHNIQUES'
-  | 'METHODOLOGIES'
-  | 'OBJECT_NOTATIONS'
-  | 'PACKAGE_MANAGERS'
-  | 'PACKAGES'
-  | 'VERSIONING_PLATFORMS'
-  | 'CLOUD_HOSTING_PLATFORMS'
-  | 'DEPLOYMENT_TOOLS'
-  | 'DEVELOPMENT_PLATFORMS'
-  | 'PROTOCOLS'
-  | 'OTHERS';
+export type SkillTypeFilterValue = 'ALL' | TechnologyType;
 
 export interface SkillFilterChipViewModel<TValue extends string = string> {
   labelKey: AppTranslationKey;
@@ -94,7 +77,7 @@ export interface SkillCardViewModel {
   kind: SkillCardKind;
   name: string;
   subtitle: string;
-  categoryLabel: string;
+  typeLabel: string;
   levelLabel: string;
   frequencyLabel: string;
   frequencyKey: SkillFrequencyFilterValue;
@@ -122,7 +105,7 @@ export interface SkillsGroupViewModel {
 }
 
 export const SKILL_FILTER_ALL_LABEL_KEYS = {
-  categories: 'taxonomy.skills.filters.allCategories',
+  types: 'taxonomy.skills.filters.allTypes',
   levels: 'taxonomy.skills.filters.allLevels',
   contexts: 'taxonomy.skills.filters.allContexts',
 } as const satisfies Record<string, AppTranslationKey>;
@@ -165,11 +148,11 @@ export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilt
   { labelKey: 'taxonomy.skills.type.frameworks', value: 'FRAMEWORKS' },
   {
     labelKey: 'taxonomy.skills.type.relationalDataBases',
-    value: 'RELATIONAL_DATA_BASES',
+    value: 'RELATIONAL_DATABASES',
   },
   {
     labelKey: 'taxonomy.skills.type.nonRelationalDataBases',
-    value: 'NON_RELATIONAL_DATA_BASES',
+    value: 'NON_RELATIONAL_DATABASES',
   },
   {
     labelKey: 'taxonomy.skills.type.databasesManagementSystems',
@@ -199,27 +182,18 @@ export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilt
 ];
 
 export const SKILL_FALLBACK_LABEL_KEYS = {
-  uncategorized: 'taxonomy.skills.fallback.uncategorized',
+  untyped: 'taxonomy.skills.fallback.untyped',
   levelNotSet: 'taxonomy.skills.fallback.levelNotSet',
   frequencyNotSet: 'taxonomy.skills.fallback.frequencyNotSet',
   noDuration: 'taxonomy.skills.fallback.noDuration',
   zeroMonths: 'taxonomy.skills.fallback.zeroMonths',
   summaryMapped: 'taxonomy.skills.summary.mapped',
   summaryHighlights: 'taxonomy.skills.summary.highlights',
-  summaryCategories: 'taxonomy.skills.summary.categories',
+  summaryTypes: 'taxonomy.skills.summary.types',
   summaryAdvanced: 'taxonomy.skills.summary.advanced',
   summaryLongest: 'taxonomy.skills.summary.longest',
   groupDescription: 'taxonomy.skills.group.description',
 } as const satisfies Record<string, AppTranslationKey>;
-
-export const SKILL_CATEGORY_LABEL_KEYS: Record<string, AppTranslationKey> = {
-  FRAMEWORK: 'taxonomy.skills.category.framework',
-  LANGUAGE: 'taxonomy.skills.category.language',
-  LIBRARY: 'taxonomy.skills.category.library',
-  DATABASE: 'taxonomy.skills.category.database',
-  DEVOPS: 'taxonomy.skills.category.devops',
-  ORM: 'taxonomy.skills.category.orm',
-};
 
 export const SKILL_STACK_LABEL_KEYS: Record<SkillStackFilterValue, AppTranslationKey> = {
   ALL: 'common.filters.all',
@@ -237,8 +211,8 @@ export const SKILL_TYPE_LABEL_KEYS: Record<SkillTypeFilterValue, AppTranslationK
   WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
   LIBRARIES: 'taxonomy.skills.type.libraries',
   FRAMEWORKS: 'taxonomy.skills.type.frameworks',
-  RELATIONAL_DATA_BASES: 'taxonomy.skills.type.relationalDataBases',
-  NON_RELATIONAL_DATA_BASES: 'taxonomy.skills.type.nonRelationalDataBases',
+  RELATIONAL_DATABASES: 'taxonomy.skills.type.relationalDataBases',
+  NON_RELATIONAL_DATABASES: 'taxonomy.skills.type.nonRelationalDataBases',
   DATABASES_MANAGEMENT_SYSTEMS: 'taxonomy.skills.type.databasesManagementSystems',
   CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
   TECHNIQUES: 'taxonomy.skills.type.techniques',

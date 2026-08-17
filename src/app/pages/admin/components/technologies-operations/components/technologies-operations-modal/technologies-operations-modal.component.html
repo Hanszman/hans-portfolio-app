@@ -47,21 +47,6 @@
         ></hans-input>
 
         <hans-select-option
-          [label]="resolveFieldLabel('category')"
-          [required]="fields.category.required"
-          [value]="form().category"
-          [options]="categoryOptions()"
-          inputSize="medium"
-          inputColor="base"
-          labelColor="base"
-          dropdownBackgroundColor="var(--background-color)"
-          dropdownHoverColor="var(--primary-neutral-color)"
-          (change)="change('category', $event)"
-          (valuechange)="change('category', $event)"
-          (valueChange)="change('category', $event)"
-        ></hans-select-option>
-
-        <hans-select-option
           [label]="resolveFieldLabel('level')"
           [required]="fields.level.required"
           [value]="form().level"

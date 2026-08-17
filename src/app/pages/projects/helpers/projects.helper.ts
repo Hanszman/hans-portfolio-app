@@ -102,7 +102,8 @@ const mapProjectLink = (
 
 const resolveTechnologyStackGroup = (
   technologySlug: string,
-  technologyCategory: string,
+  technologyStack: string,
+  technologyType: string,
 ): keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS => {
   const slugGroup = PROJECT_TECHNOLOGY_STACK_GROUPS[technologySlug];
 
@@ -110,7 +111,11 @@ const resolveTechnologyStackGroup = (
     return slugGroup;
   }
 
-  if (technologyCategory === 'DATABASE') {
+  if (
+    technologyStack === 'DATABASES' ||
+    technologyType === 'RELATIONAL_DATABASES' ||
+    technologyType === 'NON_RELATIONAL_DATABASES'
+  ) {
     return 'databases';
   }
 
@@ -133,7 +138,7 @@ const buildProjectStackGroups = (
 
   for (const { technology } of relations) {
     groupedTechnologies
-      .get(resolveTechnologyStackGroup(technology.slug, technology.category))
+      .get(resolveTechnologyStackGroup(technology.slug, technology.stack, technology.type))
       ?.push(mapProjectTechnologyTag(technology, locale));
   }
 
@@ -180,7 +185,7 @@ const mapProjectTechnologyTag = (
     value: {
       slug: technology.slug,
       name: technology.name,
-      category: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
+      type: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
       stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
       level: resolveNullableCatalogLabel(locale, SKILL_LEVEL_LABEL_KEYS, technology.level),
       frequency: resolveNullableCatalogLabel(

@@ -51,16 +51,6 @@
             </div>
           }
         </dl>
-        @if (education.technologies.length > 0) {
-          <section class="education-modal-technologies">
-            <h2>{{ 'common.entities.technologies' | translate }}</h2>
-            <div class="education-modal-technology-list">
-              @for (technology of education.technologies; track technology.slug) {
-                <app-tag-button [tag]="{ label: technology.name, value: technology.slug }" />
-              }
-            </div>
-          </section>
-        }
       </section>
       @if (education.galleryItems.length > 0) {
         <section class="education-modal-gallery">
@@ -72,6 +62,20 @@
             carouselId="education-detail-gallery"
             carouselColor="primary"
           ></hans-carousel>
+        </section>
+      }
+      @if (education.technologies.length > 0) {
+        <section class="education-modal-technologies">
+          <h2>{{ 'common.entities.technologies' | translate }}</h2>
+          <div class="education-modal-technology-list">
+            @for (technology of education.technologies; track technology.slug) {
+              <app-tag-button
+                [tag]="{ label: technology.name, image: technology.image, value: technology }"
+                [interactive]="!!technology.modal"
+                (selected)="selectTechnology(technology)"
+              />
+            }
+          </div>
         </section>
       }
       </article>

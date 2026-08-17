@@ -14,6 +14,7 @@ import {
 import { ModalSkeletonComponent } from '../modal-skeleton/modal-skeleton.component';
 import { TagButtonComponent } from '../tag/tag-button/tag-button.component';
 import { EducationModalItem } from './education-modal.types';
+import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
 
 @Component({
   selector: 'app-education-modal',
@@ -29,6 +30,7 @@ export class EducationModalComponent {
   readonly item = input<EducationModalItem | null>(null);
   readonly isOpen = input(false);
   readonly closed = output<void>();
+  readonly technologySelected = output<TechnologyModalItem>();
   protected readonly modalSize = computed(() =>
     (this.item()?.galleryItems.length ?? 0) > 0 ? 'large' : 'small',
   );
@@ -50,5 +52,11 @@ export class EducationModalComponent {
 
   protected settleMedia(source: string): void {
     this.mediaTracker.settle(source);
+  }
+
+  protected selectTechnology(technology: EducationModalItem['technologies'][number]): void {
+    if (technology.modal) {
+      this.technologySelected.emit(technology.modal);
+    }
   }
 }

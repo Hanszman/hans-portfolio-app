@@ -9,19 +9,19 @@ describe('HomeStackChipsComponent', () => {
       slug: 'angular',
       label: 'Angular',
       image: null,
-      value: { slug: 'angular', name: 'Angular', category: 'Framework' },
+      value: { slug: 'angular', name: 'Angular', type: 'FRAMEWORKS' },
     },
     {
       slug: 'typescript',
       label: 'TypeScript',
       image: null,
-      value: { slug: 'typescript', name: 'TypeScript', category: 'Language' },
+      value: { slug: 'typescript', name: 'TypeScript', type: 'Language' },
     },
     {
       slug: 'git',
       label: 'Git',
       image: null,
-      value: { slug: 'git', name: 'Git', category: 'DevOps' },
+      value: { slug: 'git', name: 'Git', type: 'DevOps' },
     },
   ];
 

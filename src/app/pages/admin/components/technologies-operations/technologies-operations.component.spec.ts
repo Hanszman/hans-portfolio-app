@@ -19,7 +19,6 @@ const record = (overrides: Partial<TechnologyAdminRecord> = {}): TechnologyAdmin
   id: 'technology-1',
   slug: 'angular',
   name: 'Angular',
-  category: 'FRAMEWORK',
   stack: 'FRONT_END',
   type: 'FRAMEWORKS',
   level: 'ADVANCED',
@@ -198,12 +197,11 @@ describe('TechnologiesOperationsComponent', () => {
     component.openCreateModal();
     component.updateField('slug', 'new-tech');
     component.updateField('name', 'New tech');
-    component.updateField('category', 'TOOL');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
+    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredStack');
     component.updateField('stack', 'FRONT_END');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
+    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredType');
     component.updateField('type', 'FRAMEWORKS');
     component.updateField('sortOrder', '2');
     component.toggleImageAsset('image-1');
@@ -327,8 +325,7 @@ describe('TechnologiesOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredName');
     component.updateField('name', 'X');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredCategory');
-    component.updateField('category', 'TOOL');
+    expect(component.modalFeedbackKey()).toBe('pages.admin.technologies.feedback.requiredStack');
     component.updateField('stack', 'FRONT_END');
     component.updateField('type', 'FRAMEWORKS');
     component.updateField('sortOrder', 'bad');
@@ -361,7 +358,6 @@ describe('TechnologiesOperationsComponent', () => {
     component.openCreateModal();
     component.updateField('slug', 'x');
     component.updateField('name', 'X');
-    component.updateField('category', 'TOOL');
     component.updateField('stack', 'FRONT_END');
     component.updateField('type', 'FRAMEWORKS');
     await component.submitModal();

@@ -12,7 +12,6 @@ const technology = (overrides: Partial<TechnologyAdminRecord> = {}): TechnologyA
   id: 'technology-1',
   slug: 'angular',
   name: 'Angular',
-  category: 'FRAMEWORK',
   stack: 'FRONT_END',
   type: 'FRAMEWORKS',
   level: 'ADVANCED',
@@ -37,7 +36,6 @@ describe('technologies operations helper', () => {
     expect(buildTechnologiesFormValue(undefined)).toEqual({
       slug: '',
       name: '',
-      category: '',
       stack: '',
       type: '',
       level: '',
@@ -53,7 +51,6 @@ describe('technologies operations helper', () => {
     expect(buildTechnologiesFormValue(technology())).toEqual({
       slug: 'angular',
       name: 'Angular',
-      category: 'FRAMEWORK',
       stack: 'FRONT_END',
       type: 'FRAMEWORKS',
       level: 'ADVANCED',
@@ -78,7 +75,6 @@ describe('technologies operations helper', () => {
     ).toEqual({
       slug: 'angular',
       name: 'Angular',
-      category: 'FRAMEWORK',
       stack: 'FRONT_END',
       type: 'FRAMEWORKS',
       level: '',
@@ -199,9 +195,8 @@ describe('technologies operations helper', () => {
     const form = {
       slug: ' angular ',
       name: ' Angular ',
-      category: ' FRAMEWORK ',
-      stack: 'FRONT_END' as const,
       type: 'FRAMEWORKS' as const,
+      stack: 'FRONT_END' as const,
       level: 'ADVANCED',
       frequency: 'FREQUENT',
       highlight: false,
@@ -217,7 +212,6 @@ describe('technologies operations helper', () => {
       payload: {
         slug: 'angular',
         name: 'Angular',
-        category: 'FRAMEWORK',
         stack: 'FRONT_END',
         type: 'FRAMEWORKS',
         level: 'ADVANCED',
@@ -239,9 +233,13 @@ describe('technologies operations helper', () => {
       isValid: false,
       errorKey: 'pages.admin.technologies.feedback.requiredName',
     });
-    expect(buildTechnologiesMutationPayload({ ...form, name: 'Angular', category: '' })).toEqual({
+    expect(buildTechnologiesMutationPayload({ ...form, name: 'Angular', stack: '' })).toEqual({
       isValid: false,
-      errorKey: 'pages.admin.technologies.feedback.requiredCategory',
+      errorKey: 'pages.admin.technologies.feedback.requiredStack',
+    });
+    expect(buildTechnologiesMutationPayload({ ...form, type: '' })).toEqual({
+      isValid: false,
+      errorKey: 'pages.admin.technologies.feedback.requiredType',
     });
     expect(buildTechnologiesMutationPayload({ ...form, sortOrder: 'bad' })).toEqual({
       isValid: false,
