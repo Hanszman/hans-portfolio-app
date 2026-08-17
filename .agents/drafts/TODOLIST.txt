@@ -20,6 +20,8 @@ IMPLEMENTAÇÕES:
 -Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
 -Entender motivo de alguns png não estarem aparecendo na lista de image assets relacionados quando tento atualizar uma entidade, tipo a formation por exemplo.
 -Campo de ordem de exibição está esquisito nas entidades, se eu altero algum pra um valor que outro já tem, deveria atualizar na lista a ordem/numeração de todos os próximos. Não deveriam ter números de ordem de exibição iguais dentro de uma mesma entidade.
+-Colocar filtro de frequência de uso nas technologies.
+-Tag poderia ser só uma coluna de technologies ao invés de uma tabela, deveria ser um enum assim como category, level e frequency. Faça toda a refatoração necessária no banco, back e front (formulários, contracts, migrations, seeds, etc).
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
@@ -50,13 +52,24 @@ Tecnologias a Adicionar:
 -Karma
 -Jest
 -Vitest
+-Vite
+-Webpack
+-Turbopack
+-Fastify
 -Prisma
 -Drizzle
--etc
-
-Conceitos a Adicionar:
+-Entity
+-.NET
+-Razor
+-Cosmos
+-ASP.NET
+-Azure Devops
+-CoffeeScript
 -Design System
 -Micro Front-End
+-CDN
+-YAML
+-Pipeline
 -Clean Code
 -DRY
 -KISS
@@ -67,8 +80,23 @@ Conceitos a Adicionar:
 -TDD
 -Unit Tests
 -E2E Tests
--API REST
 -MVC
--Design Patterns
+-JWT
+-Lazy Loading
 -Clean Architecture
--etc
+-Scalar
+
+Stack:
+-Testes
+-Devops
+-Conceitos
+-IA
+
+Tipos:
+-Ambiente de Execução
+-Executor de Testes
+-Ferramenta de Build
+-Formatos
+-IA
+-Design Patterns
+-Architectures
