@@ -57,12 +57,15 @@ Tecnologias a Adicionar:
 -Webpack
 -Turbopack
 -Fastify
+-RXJS
+-Less
 -Prisma
 -Drizzle
 -Entity
 -.NET
 -Razor
 -Cosmos
+-Redis
 -ASP.NET
 -Azure Devops
 -CoffeeScript
@@ -92,16 +95,17 @@ Stack:
 -Testes
 -Devops
 -Conceitos
--IA
 
 Tipos:
--Ambiente de Execução
--Executor de Testes
--Ferramenta de Build
--Formatos
--IA
--Design Patterns
--Programming Paradigms
--Architectures
+-Ambientes de Execução
+-Ferramentas de Testes
+-Ferramentas de Build
+-Ferramentas de Documentação
+-Notações de Objetos (Editar para "Sintaxes de Marcação e Formatos")
+-Pré-Processadores
+-Inteligências Artificiais
+-Padrões de Projeto
+-Paradigmas de Programção
+-Arquiteturas
 -Princípios
--ORM
+-ORMs
