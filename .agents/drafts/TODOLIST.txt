@@ -7,15 +7,6 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
-Beleza, ficou ótimo, obrigado! Mas temos algumas corrções. Quero que vc faça um planejamento em formato md, na pasta de plans (dentro de .agents e referencie ela também na pasta plans do .claude, assim como fizemos com outros mds pro claude) para corrigirmos todos os seguintes pontos:
--Category e type são a mesma coisa, então deveria ter somente uma coluna no banco na tabela de technologies pra isso. Refatore o sistema removendo essa coluna de category e, tudo que tiver qualquer tipo de menção ou relação com category, substitua por type. E se houver diferença entre um dado e outro nas seeds, prefira manter sempre o de type ao invés de category.
--Como pode ver no print 1, o vs code mostra que tivemos erro no arquivo normalize-seed-snapshot.ts, corrija por favor.
--Na tela de skills, no modal de formations, vi que vc listou as skills como pode ver no print 2. Mas como vc pode ver, ficou um espaço vazio ao lado dessa lista, organize melhor as divs, para que essa div das technologies no modal de formations ocupe a largura toda do modal e disponibilize melhor as tags de technologies. Além disso, como pode ver, as tags estão todas sem ícones das technologies e sem clique de abrir o modal de technologies, preciso que vc use o mesmo componente de tag que utilizamos na homepage, na tela de experiences (como pode ver no print 3), no modal de experiences, no modal de projects, e em vários lugares do sistema, pois esse componente de tag que usamos nessas telas e modais já está com essa característica de exibir o ícone na tag e abrir o modal correspondente. Faça essa refatoração no modal de formations por favor, para padronizarmos ele nesse sentido.
--Na sessão de technologies, na tela de skills, desça o filtro de level pra linha de baixo, pra fica ao lado esquerdo do filtro de frequency, para disponibilizarmos melhor os filtros pela tela.
--Como pode ver nos prints 4 e 5, ainda temos relations que não estão sendo exibidas nos reads dos modais de CRUD das entidades, como pode ver no exemplo, temos um job da 4mti relacionado a essa imagem, mas quando vamos no campo de relations daquela imagem da 4mti, não temos nenhum job relacionado. Revise melhor essa lógica de exibição das relações nesses reads e corrija por favor.
--OBS: Em todos esses casos, quero que vc analise via chrome-devtools, reproduza os cenários/problemas, investigue, corrija e valide vc mesmo por favor. Se em algum momento vc precisar validar a tela de admin, mas não conseguir logar nela por não saber o usuário/senha, me informe que eu logo pra vc no chrome-devtools, para que vc possa continuar a análise. Lembrando que temos que passar com 100% de test:coverage, temos que passar nos lints e nos builds de todos os projetos que vc for mexer (te dou acesso aos 3 repos caso seja necessário vc mexer em todos eles).
-
-Outros:
 -Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
 -Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
 -Traduzir nível no modal de idioma (será que esse modal é realmente necessário?).
