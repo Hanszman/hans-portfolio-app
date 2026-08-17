@@ -7,22 +7,25 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
--Arrumar modal de detalhes das formations porque está mostrando screenshot quando deveria mostrar o ícone da formação.
--Alterar listas de tags (techonologies, customers, etc) em todas as telas e cards, para sempre mostrar em ordem alfabética (mostrando highlights primeiro, depois as outras).
--Mostrar summary/description de customer no modal dele.
--Remover obrigatoriedade de campo summary/description de customer, jobs e de outras entidades.
--Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
--Algumas relações não estão mostrando no read do image assets, como jobs por exemplo. Passar investigando e verificando se todas essas relações estão listadas corretamente nos reads.
--Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
--Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
--Mostrar tags de technologies relacionadas nos modais de detalhes de formations.
--Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
+-Como vc pode ver no print 1, onde marquei de vermelho, temos que arrumar o modal de detalhes das formations, porque está mostrando a image asset de screenshot quando deveria mostrar a image asset de ícone da formação, próximo ao título/subtítulo dela. As imagens de screenshot devem ser mostradas apenas dentro do carroussel de imagens (e os ícones não devem ser mostrados nos carroussels).
+-A Entidade de CRUD "Tag" poderia ser só uma coluna chamada "Stack" de technologies ao invés de uma tabela, deveria ser um enum assim como category, level e frequency. Faça toda a refatoração necessária no banco, back e front (formulários, contracts, migrations, seeds, etc). Não confunda com o componente "tag" que temos no front que usamos como "chip" para listar vários item interativos, pois isso devemos manter, quando digo para excluir a entidade de TAG me refiro à entidade do sistema, que tem o CRUD e a tabela no banco. Migre todos esses dados das tags para serem enums e utilizados pela technologies, assim como fizemos pros outros campos que eu citei. Na relation de technology_tag, todas as seeds dela vão diretamente pra technology, ou seja, vão passar a ser 1:1 e serão tratados como valores da coluna de stack. A relation que temos de project_tag também não precisa existir e, no caso dela, podemos excluir tudo mesmo, contando todos os registros dessa tabela de relação (que acredito que nem tenha, deve estar vazio).
+-Altere a listas de tags (aqui me refiro ao component do frontend mesmo, como vc pode ver no print 2, aquele que usamos pra itens de listas, que são usadas como techonologies, customers, etc que são listados em cards, modals, na homepage, etc) em todas as telas e cards, para sempre mostrar em ordem alfabética (mas mostrando highlights primeiro (ordenados alfabeticamente), depois as outras (ordenadas alfabeticamente)).
+-Mostre tags de technologies relacionadas nos modais de detalhes de formations também por favor, assim como listamos elas nos modais de detalhes de projects e experiences.
+-Na tela de skills, na sessão de technologies, coloque também um filtro dropdown de "frequência de uso", assim como temos com level, type e stack.
+-Como pode ver no print 3, nos modais de customers, seria interessante mostrarmos os campos de summary nele (mas mostre apenas se esse campo estiver preenchido pra esse registro de customer/cliente).
+-Como vc pode ver no print 4, algumas relações não estão mostrando no read do image assets, como jobs por exemplo. Passe investigando e verificando se todas essas relações estão listadas corretamente nos reads.
+-Campo de ordem de exibição está esquisito nas entidades, como pode ver no print 5, se eu altero algum pra um valor que outro já tem, deveria atualizar na lista a ordem/numeração de todos os próximos. Não deveriam ter números de ordem de exibição iguais dentro de uma mesma entidade. E isso serve pro campo de sort order de todas as entidades, faça um algoritmo no backend para sempre que editarmos algum registro, atualizar o sort order de todos os outros daquela tabela.
+-Entenda o motivo de algumas imagens jpg/png não estarem aparecendo na lista de image assets relacionados quando tento atualizar uma entidade, quero dizer o registro mesmo (botão completo com o item e sua imagem), tipo a formation por exemplo, quando tentamos atualizar ela, parece que nem todas as imagens são listadas, pode ter algo a ver com o sort order. Investigue, verifique qual o problema e corrija por favor.
+-Em todos esses casos, quero que vc analise via chrome-devtools, reproduza os cenários/problemas, investigue, corrija e valide vc mesmo por favor. Lembrando que temos que passar com 100% de test:coverage, temos que passar nos lints e nos builds de todos os projetos que vc for mexer (te dou acesso aos 3 repos caso seja necessário vc mexer em todos eles).
+
+Outros:
 -Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
--Entender motivo de alguns png não estarem aparecendo na lista de image assets relacionados quando tento atualizar uma entidade, tipo a formation por exemplo.
--Campo de ordem de exibição está esquisito nas entidades, se eu altero algum pra um valor que outro já tem, deveria atualizar na lista a ordem/numeração de todos os próximos. Não deveriam ter números de ordem de exibição iguais dentro de uma mesma entidade.
--Colocar filtro de frequência de uso nas technologies.
--Tag poderia ser só uma coluna de technologies ao invés de uma tabela, deveria ser um enum assim como category, level e frequency. Faça toda a refatoração necessária no banco, back e front (formulários, contracts, migrations, seeds, etc).
+-Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
+-Remover obrigatoriedade de alguns campos summary/description de customer, jobs e de outras entidades.
+-Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
+-Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Colocar fundo branco ou colorido para as imagens quando estiver no modo dark
+-Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
