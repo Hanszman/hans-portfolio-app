@@ -30,8 +30,8 @@ export interface CustomerRecord {
   id: string;
   slug: string;
   name: string;
-  summaryPt: string;
-  summaryEn: string;
+  summaryPt?: string;
+  summaryEn?: string;
   summaryEs?: string;
   highlight?: boolean | null;
   sortOrder?: number | null;
@@ -46,8 +46,8 @@ export interface CustomerRecord {
 export interface CustomerMutationPayload {
   slug: string;
   name: string;
-  summaryPt: string;
-  summaryEn: string;
+  summaryPt?: string;
+  summaryEn?: string;
   summaryEs?: string;
   highlight: boolean;
   sortOrder: number;

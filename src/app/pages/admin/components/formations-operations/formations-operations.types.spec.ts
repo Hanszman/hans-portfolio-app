@@ -3,11 +3,9 @@ import {
   createEmptyFormationsOperationsFormValue,
   createFormationDegreeTypeOptions,
   createFormationImageAssetOptionViewModel,
-  createFormationLinkOptionViewModel,
   createFormationTechnologyOptionViewModel,
   resolveFormationImageAssetIdFromRelation,
   resolveFormationImageAssetLabel,
-  resolveFormationLinkIdFromRelation,
   resolveFormationTechnologyIdFromRelation,
 } from './formations-operations.types';
 
@@ -28,7 +26,6 @@ describe('formations operations types', () => {
       highlight: true,
       sortOrder: '0',
       technologyIds: [],
-      linkIds: [],
       imageAssetIds: [],
     });
 
@@ -62,53 +59,11 @@ describe('formations operations types', () => {
     });
 
     expect(
-      createFormationLinkOptionViewModel({
-        id: 'link-1',
-        url: 'https://example.com/pt',
-        labelPt: 'Portal PT',
-      }),
-    ).toEqual({
-      id: 'link-1',
-      title: 'Portal PT',
-      subtitle: 'https://example.com/pt',
-    });
-
-    expect(
-      createFormationLinkOptionViewModel({
-        id: 'link-2',
-        url: 'https://example.com/en',
-        labelPt: '',
-        labelEn: 'Portal EN',
-        labelEs: 'Portal EN',
-      }),
-    ).toEqual({
-      id: 'link-2',
-      title: 'Portal EN',
-      subtitle: 'https://example.com/en',
-    });
-
-    expect(
-      createFormationLinkOptionViewModel({
-        id: 'link-3',
-        url: 'https://example.com/url',
-        labelPt: '',
-        labelEn: '',
-        labelEs: '',
-      }),
-    ).toEqual({
-      id: 'link-3',
-      title: 'https://example.com/url',
-      subtitle: 'https://example.com/url',
-    });
-
-    expect(
       createFormationImageAssetOptionViewModel({
         id: 'image-asset-1',
         fileName: 'puc.svg',
         filePath: '/assets/img/formations/puc.svg',
-        folder: 'formations',
         kind: 'ICON',
-        mimeType: 'image/svg+xml',
       }),
     ).toEqual({
       id: 'image-asset-1',
@@ -122,9 +77,7 @@ describe('formations operations types', () => {
         id: 'image-asset-1',
         fileName: 'puc.svg',
         filePath: '/assets/img/formations/puc.svg',
-        folder: 'formations',
         kind: 'ICON',
-        mimeType: 'image/svg+xml',
       }),
     ).toBe('puc.svg (ICON)');
   });
@@ -146,23 +99,6 @@ describe('formations operations types', () => {
       }),
     ).toBe('technology-2');
     expect(resolveFormationTechnologyIdFromRelation({})).toBeNull();
-
-    expect(
-      resolveFormationLinkIdFromRelation({
-        linkId: 'link-1',
-      }),
-    ).toBe('link-1');
-    expect(
-      resolveFormationLinkIdFromRelation({
-        linkId: '',
-        link: {
-          id: 'link-2',
-          url: 'https://example.com/details',
-          labelPt: 'Detalhes',
-        },
-      }),
-    ).toBe('link-2');
-    expect(resolveFormationLinkIdFromRelation({})).toBeNull();
 
     expect(
       resolveFormationImageAssetIdFromRelation({

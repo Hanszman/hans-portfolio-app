@@ -76,15 +76,10 @@ export class ImageAssetsOperationsModalComponent {
   readonly searchChanged = output<string>();
   readonly fileNameChanged = output<string>();
   readonly filePathChanged = output<string>();
-  readonly folderChanged = output<string>();
   readonly kindChanged = output<string>();
   readonly altPtChanged = output<string>();
   readonly altEnChanged = output<string>();
   readonly altEsChanged = output<string>();
-  readonly captionPtChanged = output<string>();
-  readonly captionEnChanged = output<string>();
-  readonly captionEsChanged = output<string>();
-  readonly mimeTypeChanged = output<string>();
   readonly widthChanged = output<string>();
   readonly heightChanged = output<string>();
   readonly sortOrderChanged = output<string>();
@@ -181,12 +176,7 @@ export class ImageAssetsOperationsModalComponent {
             value: imageAsset.filePath,
             title: imageAsset.filePath,
           },
-          { labelKey: 'common.fields.folder', value: imageAsset.folder },
           { labelKey: 'common.fields.kind', value: imageAsset.kind },
-          {
-            labelKey: 'common.fields.mimeType',
-            value: imageAsset.mimeType || emptyText,
-          },
           {
             labelKey: 'pages.admin.imageAssets.card.dimensions',
             value: imageAsset.dimensionsLabel,
@@ -200,14 +190,6 @@ export class ImageAssetsOperationsModalComponent {
             value:
               resolveAdminLocalizedValue(
                 this.translation.locale(), imageAsset.altPt, imageAsset.altEn, imageAsset.altEs,
-              ) || emptyText,
-          },
-          {
-            labelKey: 'pages.admin.operations.localized.caption',
-            value:
-              resolveAdminLocalizedValue(
-                this.translation.locale(), imageAsset.captionPt, imageAsset.captionEn,
-                imageAsset.captionEs,
               ) || emptyText,
           },
           {
@@ -277,10 +259,6 @@ export class ImageAssetsOperationsModalComponent {
     this.filePathChanged.emit(value);
   }
 
-  protected emitFolderChange(value: string): void {
-    this.folderChanged.emit(value);
-  }
-
   protected emitKindChange(value: string): void {
     this.kindChanged.emit(value);
   }
@@ -295,22 +273,6 @@ export class ImageAssetsOperationsModalComponent {
 
   protected emitAltEsChange(value: string): void {
     this.altEsChanged.emit(value);
-  }
-
-  protected emitCaptionPtChange(value: string): void {
-    this.captionPtChanged.emit(value);
-  }
-
-  protected emitCaptionEnChange(value: string): void {
-    this.captionEnChanged.emit(value);
-  }
-
-  protected emitCaptionEsChange(value: string): void {
-    this.captionEsChanged.emit(value);
-  }
-
-  protected emitMimeTypeChange(value: string): void {
-    this.mimeTypeChanged.emit(value);
   }
 
   protected emitWidthChange(value: string): void {

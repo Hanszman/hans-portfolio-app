@@ -5,8 +5,6 @@ import { FormationsService } from '../../../../core/api/formations/formations.se
 import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
-import { LinksService } from '../../../../core/api/links/links.service';
-import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import {
@@ -34,9 +32,7 @@ const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRec
   highlight: true,
   sortOrder: 1,
   technologyRelations: [{ technologyId: 'technology-1', sortOrder: 0 }],
-  linkIds: ['link-1'],
   imageAssetIds: ['image-asset-1'],
-  links: [],
   imageAssets: [],
   ...overrides,
 });
@@ -53,34 +49,14 @@ const createTechnology = (
   ...overrides,
 });
 
-const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
-  id: 'link-1',
-  url: 'https://example.com/formation',
-  labelPt: 'Detalhes',
-  labelEn: 'Details',
-  labelEs: 'Details',
-  descriptionPt: 'Descricao',
-  descriptionEn: 'Description',
-  descriptionEs: 'Description',
-  type: 'DOCS',
-  sortOrder: 1,
-  formationIds: ['formation-1'],
-  ...overrides,
-});
-
 const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
   id: 'image-asset-1',
   fileName: 'puc.svg',
   filePath: '/assets/img/formations/puc.svg',
-  folder: 'formations',
   kind: 'ICON',
   altPt: 'Campus',
   altEn: 'Campus',
   altEs: 'Campus',
-  captionPt: 'Campus',
-  captionEn: 'Campus',
-  captionEs: 'Campus',
-  mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
   sortOrder: 1,
@@ -124,7 +100,6 @@ describe('FormationsOperationsComponent', () => {
   let fixture: ComponentFixture<FormationsOperationsComponent>;
   let formationsOperationsService: jasmine.SpyObj<FormationsService>;
   let technologiesService: jasmine.SpyObj<TechnologiesService>;
-  let linksOperationsService: jasmine.SpyObj<LinksService>;
   let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
@@ -165,10 +140,6 @@ describe('FormationsOperationsComponent', () => {
     technologiesService = jasmine.createSpyObj<TechnologiesService>('TechnologiesService', [
       'getTechnologies',
     ]);
-    linksOperationsService = jasmine.createSpyObj<LinksService>(
-      'LinksService',
-      ['getAll'],
-    );
     imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
       'ImageAssetsService',
       ['getAll'],
@@ -185,19 +156,6 @@ describe('FormationsOperationsComponent', () => {
     formationsOperationsService.update.and.returnValue(of(createFormation()));
     formationsOperationsService.delete.and.returnValue(of(void 0));
     technologiesService.getTechnologies.and.returnValue(of(createTechnologiesCollectionResponse()));
-    linksOperationsService.getAll.and.returnValue(
-      of({
-        data: [createLink()],
-        pagination: {
-          page: 1,
-          pageSize: 100,
-          totalItems: 1,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        },
-      }),
-    );
     imageAssetsOperationsService.getAll.and.returnValue(
       of({
         data: [createImageAsset()],
@@ -226,10 +184,6 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksService,
-          useValue: linksOperationsService,
-        },
-        {
           provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
@@ -254,7 +208,6 @@ describe('FormationsOperationsComponent', () => {
 
     expect(formationsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(technologiesService.getTechnologies).toHaveBeenCalledTimes(1);
-    expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Formations');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/formations'));
@@ -286,7 +239,6 @@ describe('FormationsOperationsComponent', () => {
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
       toggleTechnology(technologyId: string): void;
-      toggleLink(linkId: string): void;
       toggleImageAsset(imageAssetId: string): void;
       submitModal(): Promise<void>;
     };
@@ -306,7 +258,6 @@ describe('FormationsOperationsComponent', () => {
     component.updateHighlight(false);
     component.updateSortOrder('2');
     component.toggleTechnology('technology-1');
-    component.toggleLink('link-1');
     component.toggleImageAsset('image-asset-1');
     await component.submitModal();
 
@@ -325,7 +276,6 @@ describe('FormationsOperationsComponent', () => {
       highlight: false,
       sortOrder: 2,
       technologyRelations: [{ technologyId: 'technology-1' }],
-      linkIds: ['link-1'],
       imageAssetIds: ['image-asset-1'],
     });
 
@@ -348,7 +298,6 @@ describe('FormationsOperationsComponent', () => {
       highlight: true,
       sortOrder: 1,
       technologyRelations: [{ technologyId: 'technology-1' }],
-      linkIds: ['link-1'],
       imageAssetIds: ['image-asset-1'],
     });
 
@@ -380,11 +329,9 @@ describe('FormationsOperationsComponent', () => {
       goToPage(page: number): Promise<void>;
       updateSearchQuery(value: string): Promise<void>;
       toggleTechnology(technologyId: string): void;
-      toggleLink(linkId: string): void;
       toggleImageAsset(imageAssetId: string): void;
       form(): {
         technologyIds: readonly string[];
-        linkIds: readonly string[];
         imageAssetIds: readonly string[];
       };
     };
@@ -430,13 +377,10 @@ describe('FormationsOperationsComponent', () => {
     component.openCreateModal();
     component.toggleTechnology('technology-1');
     component.toggleTechnology('technology-1');
-    component.toggleLink('link-1');
-    component.toggleLink('link-1');
     component.toggleImageAsset('image-asset-1');
     component.toggleImageAsset('image-asset-1');
 
     expect(component.form().technologyIds).toEqual([]);
-    expect(component.form().linkIds).toEqual([]);
     expect(component.form().imageAssetIds).toEqual([]);
   });
 
@@ -524,10 +468,6 @@ describe('FormationsOperationsComponent', () => {
         {
           provide: TechnologiesService,
           useValue: technologiesService,
-        },
-        {
-          provide: LinksService,
-          useValue: linksOperationsService,
         },
         {
           provide: ImageAssetsService,
@@ -653,10 +593,6 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksService,
-          useValue: linksOperationsService,
-        },
-        {
           provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
@@ -706,10 +642,6 @@ describe('FormationsOperationsComponent', () => {
           useValue: technologiesService,
         },
         {
-          provide: LinksService,
-          useValue: linksOperationsService,
-        },
-        {
           provide: ImageAssetsService,
           useValue: imageAssetsOperationsService,
         },
@@ -756,10 +688,6 @@ describe('FormationsOperationsComponent', () => {
         {
           provide: TechnologiesService,
           useValue: technologiesService,
-        },
-        {
-          provide: LinksService,
-          useValue: linksOperationsService,
         },
         {
           provide: ImageAssetsService,

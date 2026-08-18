@@ -26,7 +26,6 @@ const FORM: ExperiencesOperationsFormValue = {
   projectIds: ['project-1'],
   customerIds: ['customer-1'],
   jobIds: ['job-1'],
-  linkIds: ['link-1'],
   imageAssetIds: ['image-1'],
 };
 
@@ -52,7 +51,6 @@ const RECORD: ExperienceRecord = {
   projectIds: ['project-1'],
   customerIds: ['customer-1'],
   jobIds: ['job-1'],
-  linkIds: ['link-1'],
   imageAssetIds: ['image-1'],
 };
 
@@ -132,7 +130,6 @@ describe('ExperiencesOperationsModalComponent', () => {
           | 'projectIds'
           | 'customerIds'
           | 'jobIds'
-          | 'linkIds'
           | 'imageAssetIds',
         id: string,
       ): void;
@@ -144,7 +141,6 @@ describe('ExperiencesOperationsModalComponent', () => {
           | 'projectIds'
           | 'customerIds'
           | 'jobIds'
-          | 'linkIds'
           | 'imageAssetIds',
         id: string,
       ): boolean;

@@ -13,6 +13,8 @@ describe('ProjectModalComponent', () => {
     summary: 'Summary',
     description: 'Description',
     contextLabel: 'Personal',
+    statusLabel: 'In progress',
+    environmentLabel: 'Frontend',
     dateRangeLabel: '2024 - 2026',
     companyNames: ['Hans'],
     stackGroups: [

@@ -1,11 +1,9 @@
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import {
   FormationImageAssetRelationRecord,
-  FormationLinkRelationRecord,
   FormationMutationPayload,
   FormationTechnologyRelationRecord,
 } from '../../../../core/api/formations/formations.types';
-import { LinkRecord } from '../../../../core/api/links/links.types';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
@@ -56,7 +54,6 @@ export interface FormationsOperationsFormValue {
   highlight: boolean;
   sortOrder: string;
   technologyIds: readonly string[];
-  linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
 
@@ -126,12 +123,6 @@ export interface FormationTechnologyOptionViewModel {
   subtitle: string;
 }
 
-export interface FormationLinkOptionViewModel {
-  id: string;
-  title: string;
-  subtitle: string;
-}
-
 export type FormationImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
 
 export type FormationDegreeTypeOptionDefinition =
@@ -156,10 +147,8 @@ export interface FormationOperationsViewModel {
   highlight: boolean;
   sortOrderLabel: string;
   technologyLabels: readonly string[];
-  linkLabels: readonly string[];
   imageAssetLabels: readonly string[];
   technologyIds: readonly string[];
-  linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
 
@@ -193,7 +182,6 @@ export const createEmptyFormationsOperationsFormValue =
     highlight: true,
     sortOrder: '0',
     technologyIds: [],
-    linkIds: [],
     imageAssetIds: [],
   });
 
@@ -215,14 +203,6 @@ export const createFormationTechnologyOptionViewModel = (
   subtitle: technology.slug,
 });
 
-export const createFormationLinkOptionViewModel = (
-  link: LinkRecord,
-): FormationLinkOptionViewModel => ({
-  id: link.id,
-  title: link.labelPt || link.labelEn || link.url,
-  subtitle: link.url,
-});
-
 export const createFormationImageAssetOptionViewModel = (
   imageAsset: ImageAssetRecord,
 ): FormationImageAssetOptionViewModel => createAdminImageAssetOptionViewModel(imageAsset);
@@ -231,10 +211,6 @@ export const resolveFormationTechnologyIdFromRelation = (
   relation: FormationTechnologyRelationRecord,
 ): string | null =>
   relation.technologyId?.trim() || relation.technology?.id?.trim() || null;
-
-export const resolveFormationLinkIdFromRelation = (
-  relation: FormationLinkRelationRecord,
-): string | null => relation.linkId?.trim() || relation.link?.id?.trim() || null;
 
 export const resolveFormationImageAssetIdFromRelation = (
   relation: FormationImageAssetRelationRecord,

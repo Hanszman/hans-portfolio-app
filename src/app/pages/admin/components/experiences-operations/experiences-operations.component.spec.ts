@@ -11,7 +11,6 @@ import { TechnologiesCollectionResponse } from '../../../../core/api/technologie
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { CustomersService } from '../../../../core/api/customers/customers.service';
 import { JobsService } from '../../../../core/api/jobs/jobs.service';
-import { LinksService } from '../../../../core/api/links/links.service';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
@@ -42,7 +41,6 @@ const response = (
       projectIds: [],
       customerIds: [],
       jobIds: [],
-      linkIds: [],
       imageAssetIds: [],
     },
   ],
@@ -152,7 +150,6 @@ describe('ExperiencesOperationsComponent', () => {
     const projects = jasmine.createSpyObj('ProjectsService', ['getProjects']);
     const customers = jasmine.createSpyObj('CustomersService', ['getAll']);
     const jobs = jasmine.createSpyObj('JobsService', ['getAll']);
-    const links = jasmine.createSpyObj('LinksService', ['getAll']);
     const images = jasmine.createSpyObj('ImageAssetsService', ['getAll']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     toast = jasmine.createSpyObj('ToastService', ['showSuccess', 'showError']);
@@ -166,7 +163,6 @@ describe('ExperiencesOperationsComponent', () => {
     projects.getProjects.and.returnValue(of(catalog() as never));
     customers.getAll.and.returnValue(of(catalog() as never));
     jobs.getAll.and.returnValue(of(catalog() as never));
-    links.getAll.and.returnValue(of(catalog() as never));
     images.getAll.and.returnValue(of(catalog() as never));
     await TestBed.configureTestingModule({
       imports: [ExperiencesOperationsComponent],
@@ -178,7 +174,6 @@ describe('ExperiencesOperationsComponent', () => {
         { provide: ProjectsService, useValue: projects },
         { provide: CustomersService, useValue: customers },
         { provide: JobsService, useValue: jobs },
-        { provide: LinksService, useValue: links },
         { provide: ImageAssetsService, useValue: images },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
@@ -277,26 +272,7 @@ describe('ExperiencesOperationsComponent', () => {
     const internal = component as unknown as {
       modeSignal: { set(value: string | null): void };
       selected: { set(value: ExperienceRecord | null): void };
-      links: { getAll: jasmine.Spy };
     };
-    internal.links.getAll.and.returnValue(
-      of(
-        catalog([
-          { id: 'link-1', labelPt: null, labelEn: 'English label', url: 'https://link.test' },
-        ]) as never,
-      ),
-    );
-    component['openCreateModal']();
-    await Promise.resolve();
-    internal.links.getAll.and.returnValue(
-      of(
-        catalog([
-          { id: 'link-1', labelPt: null, labelEn: null, url: 'https://link.test' },
-        ]) as never,
-      ),
-    );
-    component['openCreateModal']();
-    await Promise.resolve();
     techService.getTechnologies.and.returnValue(throwError(() => new Error()));
     component['openCreateModal']();
     await Promise.resolve();

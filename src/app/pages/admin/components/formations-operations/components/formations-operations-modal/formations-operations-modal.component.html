@@ -224,15 +224,6 @@
         ></app-operations-relation-picker>
 
         <app-operations-relation-picker
-          [label]="'common.relations.links' | translate"
-          [description]="'pages.admin.formations.fields.links.description' | translate"
-          [emptyMessage]="'pages.admin.formations.fields.links.empty' | translate"
-          [options]="linkOptions()"
-          [selectedIds]="form().linkIds"
-          (toggled)="toggleLink($event)"
-        ></app-operations-relation-picker>
-
-        <app-operations-relation-picker
           [label]="'common.relations.imageAssets' | translate"
           [description]="'pages.admin.formations.fields.imageAssets.description' | translate"
           [emptyMessage]="'common.empty.imageAssetsForRelation' | translate"

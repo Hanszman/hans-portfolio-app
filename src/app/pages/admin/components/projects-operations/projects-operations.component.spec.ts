@@ -24,12 +24,12 @@ const response = (
       titlePt: 'PT',
       titleEn: 'EN',
       titleEs: 'EN',
-      shortDescriptionPt: 'S',
-      shortDescriptionEn: 'S',
-      shortDescriptionEs: 'S',
-      fullDescriptionPt: 'D',
-      fullDescriptionEn: 'D',
-      fullDescriptionEs: 'D',
+      summaryPt: 'S',
+      summaryEn: 'S',
+      summaryEs: 'S',
+      descriptionPt: 'D',
+      descriptionEn: 'D',
+      descriptionEs: 'D',
       context: 'PROFESSIONAL',
       status: 'COMPLETED',
       environment: 'FRONTEND',
@@ -107,12 +107,12 @@ const fillRequiredProjectFields = (component: ComponentApi): void => {
   component.updateField('titlePt', 'Projeto');
   component.updateField('titleEn', 'Project');
   component.updateField('titleEs', 'Proyecto');
-  component.updateField('shortDescriptionPt', 'Resumo');
-  component.updateField('shortDescriptionEn', 'Summary');
-  component.updateField('shortDescriptionEs', 'Resumen');
-  component.updateField('fullDescriptionPt', 'Descricao');
-  component.updateField('fullDescriptionEn', 'Description');
-  component.updateField('fullDescriptionEs', 'Descripción');
+  component.updateField('summaryPt', 'Resumo');
+  component.updateField('summaryEn', 'Summary');
+  component.updateField('summaryEs', 'Resumen');
+  component.updateField('descriptionPt', 'Descricao');
+  component.updateField('descriptionEn', 'Description');
+  component.updateField('descriptionEs', 'Descripción');
   component.updateField('context', 'PROFESSIONAL');
   component.updateField('status', 'COMPLETED');
   component.updateField('environment', 'FRONTEND');

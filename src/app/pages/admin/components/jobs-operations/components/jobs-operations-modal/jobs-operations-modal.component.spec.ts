@@ -1,6 +1,5 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { appConfig } from '../../../../../../core/api/api.config';
 import { provideAppTranslations } from '../../../../../../core/translation/translation.providers';
 import { JobOperationsViewModel } from '../../jobs-operations.types';
 import { JobsOperationsModalComponent } from './jobs-operations-modal.component';
@@ -20,9 +19,7 @@ const JOBS: readonly JobOperationsViewModel[] = [
     highlight: true,
     sortOrderLabel: '1',
     experienceLabels: ['Analista (Ford)'],
-    imageAssetLabels: ['ford.svg (ICON)'],
     experienceIds: ['experience-1'],
-    imageAssetIds: ['image-asset-1'],
   },
   {
     id: 'job-2',
@@ -38,9 +35,7 @@ const JOBS: readonly JobOperationsViewModel[] = [
     highlight: false,
     sortOrderLabel: '2',
     experienceLabels: [],
-    imageAssetLabels: [],
     experienceIds: [],
-    imageAssetIds: [],
   },
 ];
 
@@ -85,7 +80,6 @@ describe('JobsOperationsModalComponent', () => {
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const experienceSpy = jasmine.createSpy('experienceToggled');
-    const imageAssetSpy = jasmine.createSpy('imageAssetToggled');
     const pageSpy = jasmine.createSpy('pageSelected');
     const submitSpy = jasmine.createSpy('submitted');
     const closeSpy = jasmine.createSpy('closed');
@@ -102,7 +96,6 @@ describe('JobsOperationsModalComponent', () => {
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.experienceToggled.subscribe(experienceSpy);
-    component.imageAssetToggled.subscribe(imageAssetSpy);
     component.pageSelected.subscribe(pageSpy);
     component.submitted.subscribe(submitSpy);
     component.closed.subscribe(closeSpy);
@@ -114,14 +107,6 @@ describe('JobsOperationsModalComponent', () => {
         id: 'experience-1',
         title: 'Analista',
         subtitle: 'Ford',
-      },
-    ]);
-    fixture.componentRef.setInput('imageAssetOptions', [
-      {
-        id: 'image-asset-1',
-        title: 'ford.svg',
-        subtitle: '/assets/img/jobs/ford.svg',
-        imageUrl: `${appConfig.baseUrl}/assets/img/jobs/ford.svg`,
       },
     ]);
     fixture.componentRef.setInput('pagination', {
@@ -147,12 +132,10 @@ describe('JobsOperationsModalComponent', () => {
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleExperience(experienceId: string): void;
-      toggleImageAsset(imageAssetId: string): void;
       selectPage(page: number): void;
       submit(): void;
       requestClose(): void;
       isExperienceSelected(experienceId: string): boolean;
-      isImageAssetSelected(imageAssetId: string): boolean;
     };
 
     componentAccess.emitSlugChange('frontend-engineer');
@@ -168,7 +151,6 @@ describe('JobsOperationsModalComponent', () => {
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleExperience('experience-1');
-    componentAccess.toggleImageAsset('image-asset-1');
     componentAccess.selectPage(2);
     componentAccess.submit();
     componentAccess.requestClose();
@@ -218,12 +200,10 @@ describe('JobsOperationsModalComponent', () => {
     expect(highlightSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
-    expect(imageAssetSpy).toHaveBeenCalledOnceWith('image-asset-1');
     expect(pageSpy).toHaveBeenCalledOnceWith(2);
     expect(submitSpy).toHaveBeenCalledTimes(1);
     expect(closeSpy).toHaveBeenCalledTimes(1);
     expect(componentAccess.isExperienceSelected('experience-1')).toBeFalse();
-    expect(componentAccess.isImageAssetSelected('image-asset-1')).toBeFalse();
   });
 
   it('should render the picker and read flows and emit selection events', () => {
@@ -240,8 +220,6 @@ describe('JobsOperationsModalComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
-    expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
-    expect(fixture.nativeElement.textContent).toContain('ford.svg (ICON)');
 
     fixture.componentRef.setInput('modalMode', 'pick-update');
     fixture.detectChanges();
@@ -291,7 +269,6 @@ describe('JobsOperationsModalComponent', () => {
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
-      imageAssetIds: ['image-asset-1'],
     });
     fixture.componentRef.setInput('form', {
       slug: 'frontend-engineer',
@@ -306,13 +283,11 @@ describe('JobsOperationsModalComponent', () => {
       highlight: true,
       sortOrder: '1',
       experienceIds: ['experience-1'],
-      imageAssetIds: ['image-asset-1'],
     });
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
       isExperienceSelected(experienceId: string): boolean;
-      isImageAssetSelected(imageAssetId: string): boolean;
     };
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
       | (HTMLElement & {
@@ -324,7 +299,6 @@ describe('JobsOperationsModalComponent', () => {
       'This action permanently removes the selected protected job from the portfolio.',
     );
     expect(component.isExperienceSelected('experience-1')).toBeTrue();
-    expect(component.isImageAssetSelected('image-asset-1')).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Delete');
   });
 

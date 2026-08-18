@@ -32,7 +32,6 @@ import {
 import {
   JOBS_OPERATIONS_FIELDS,
   JobExperienceOptionViewModel,
-  JobImageAssetOptionViewModel,
   JobOperationsViewModel,
   JobsOperationsFormValue,
   JobsOperationsModalMode,
@@ -58,7 +57,6 @@ export class JobsOperationsModalComponent {
   readonly selectedJob = input<JobRecord | null>(null);
   readonly form = input<JobsOperationsFormValue>(createEmptyJobsOperationsFormValue());
   readonly experienceOptions = input<readonly JobExperienceOptionViewModel[]>([]);
-  readonly imageAssetOptions = input<readonly JobImageAssetOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
@@ -80,7 +78,6 @@ export class JobsOperationsModalComponent {
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
   readonly experienceToggled = output<string>();
-  readonly imageAssetToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
@@ -181,10 +178,6 @@ export class JobsOperationsModalComponent {
             labelKey: 'common.entities.experiences',
             value: job.experienceLabels.join(', ') || emptyRelations,
           },
-          {
-            labelKey: 'common.entities.imageAssets',
-            value: job.imageAssetLabels.join(', ') || emptyRelations,
-          },
         ],
       }));
     },
@@ -268,10 +261,6 @@ export class JobsOperationsModalComponent {
     this.experienceToggled.emit(experienceId);
   }
 
-  protected toggleImageAsset(imageAssetId: string): void {
-    this.imageAssetToggled.emit(imageAssetId);
-  }
-
   protected selectJobForUpdate(jobId: string): void {
     this.updateSelected.emit(jobId);
   }
@@ -286,9 +275,5 @@ export class JobsOperationsModalComponent {
 
   protected isExperienceSelected(experienceId: string): boolean {
     return this.form().experienceIds.includes(experienceId);
-  }
-
-  protected isImageAssetSelected(imageAssetId: string): boolean {
-    return this.form().imageAssetIds.includes(imageAssetId);
   }
 }

@@ -5,7 +5,6 @@ export type AdminEntityOperation = 'create' | 'update' | 'delete';
 
 export interface AdminEntityDefinition {
   readonly id:
-    | 'portfolio-settings'
     | 'links'
     | 'image-assets'
     | 'spoken-languages'
@@ -80,12 +79,6 @@ export const createAdminEntityEndpointLabel = (resourcePath: string): string =>
   `${ADMIN_ENTITY_ENDPOINT_METHODS_LABEL} ${resourcePath}`;
 
 export const ADMIN_ENTITY_DEFINITIONS: readonly AdminEntityDefinition[] = [
-  {
-    id: 'portfolio-settings',
-    endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
-    substep: 'F8.3',
-    relationMode: 'owner',
-  },
   {
     id: 'links',
     endpoint: createAdminEntityEndpointLabel('/links'),

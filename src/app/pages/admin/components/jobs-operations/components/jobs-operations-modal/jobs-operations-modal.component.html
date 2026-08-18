@@ -194,15 +194,6 @@
           [selectedIds]="form().experienceIds"
           (toggled)="toggleExperience($event)"
         ></app-operations-relation-picker>
-
-        <app-operations-relation-picker
-          [label]="'common.relations.imageAssets' | translate"
-          [description]="'pages.admin.jobs.fields.imageAssets.description' | translate"
-          [emptyMessage]="'common.empty.imageAssetsForRelation' | translate"
-          [options]="imageAssetOptions()"
-          [selectedIds]="form().imageAssetIds"
-          (toggled)="toggleImageAsset($event)"
-        ></app-operations-relation-picker>
       </div>
     }
   }

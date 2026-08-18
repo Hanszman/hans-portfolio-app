@@ -27,7 +27,6 @@ const form = () => ({
   projectIds: ['p-1', 'p-1'],
   customerIds: ['c-1'],
   jobIds: ['j-1'],
-  linkIds: ['l-1'],
   imageAssetIds: ['i-1', 'i-1'],
 });
 
@@ -54,7 +53,6 @@ const record = () =>
     projectIds: ['p-1'],
     customerIds: ['c-1'],
     jobIds: ['j-1'],
-    linkIds: ['l-1'],
     imageAssetIds: ['i-1'],
   }) as never;
 
@@ -66,9 +64,7 @@ describe('experiences operations types', () => {
         id: 'image-1',
         fileName: 'logo.png',
         filePath: '/assets/logo.png',
-        folder: 'assets',
         kind: 'PNG',
-        mimeType: 'image/png',
       } as never).id,
     ).toBe('image-1');
     expect(relationId({ technologyId: 't-1' } as never, 'technologyId')).toBe('t-1');
@@ -80,7 +76,6 @@ describe('experiences operations types', () => {
     expect(normalizeRelationIds(record(), 'projectId')).toEqual(['p-1']);
     expect(normalizeRelationIds(record(), 'customerId')).toEqual(['c-1']);
     expect(normalizeRelationIds(record(), 'jobId')).toEqual(['j-1']);
-    expect(normalizeRelationIds(record(), 'linkId')).toEqual(['l-1']);
     expect(normalizeRelationIds(record(), 'imageAssetId')).toEqual(['i-1']);
   });
 
@@ -122,18 +117,15 @@ describe('experiences operations types', () => {
       projectIds: undefined,
       customerIds: undefined,
       jobIds: undefined,
-      linkIds: undefined,
       imageAssetIds: undefined,
       projects: [{ projectId: 'p-2' }],
       customers: [{ customerId: 'c-2' }],
       jobs: [{ jobId: 'j-2' }],
-      links: [{ linkId: 'l-2' }],
       imageAssets: [{ imageAssetId: 'i-2' }],
     } as never;
     expect(normalizeRelationIds(publicRecord, 'projectId')).toEqual(['p-2']);
     expect(normalizeRelationIds(publicRecord, 'customerId')).toEqual(['c-2']);
     expect(normalizeRelationIds(publicRecord, 'jobId')).toEqual(['j-2']);
-    expect(normalizeRelationIds(publicRecord, 'linkId')).toEqual(['l-2']);
     expect(normalizeRelationIds(publicRecord, 'imageAssetId')).toEqual(['i-2']);
   });
 
@@ -149,8 +141,6 @@ describe('experiences operations types', () => {
       customers: [{ customer: { id: 'c-nested' } }],
       jobIds: ['j-direct'],
       jobs: [{ id: 'j-public' }],
-      linkIds: ['l-direct'],
-      links: [{ linkId: 'l-relation' }],
       imageAssetIds: ['i-direct'],
       imageAssets: [{ imageAsset: { id: 'i-nested' } }],
     } as never;
@@ -169,7 +159,6 @@ describe('experiences operations types', () => {
     ]);
     expect(normalizeRelationIds(publicRecord, 'customerId')).toEqual(['c-direct', 'c-nested']);
     expect(normalizeRelationIds(publicRecord, 'jobId')).toEqual(['j-direct', 'j-public']);
-    expect(normalizeRelationIds(publicRecord, 'linkId')).toEqual(['l-direct', 'l-relation']);
     expect(normalizeRelationIds(publicRecord, 'imageAssetId')).toEqual(['i-direct', 'i-nested']);
   });
 

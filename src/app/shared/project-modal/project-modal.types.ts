@@ -7,6 +7,8 @@ export interface ProjectModalItem {
   summary: string;
   description: string;
   contextLabel: string;
+  statusLabel: string;
+  environmentLabel: string;
   dateRangeLabel: string;
   companyNames: readonly string[];
   stackGroups: readonly {

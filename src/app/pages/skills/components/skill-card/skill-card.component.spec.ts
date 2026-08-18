@@ -83,4 +83,37 @@ describe('SkillCardComponent', () => {
 
     expect(spy).toHaveBeenCalledWith(item);
   });
+
+  it('renders technology and education cards as interactive buttons', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('button.skill-card-button')).toBeTruthy();
+
+    fixture.componentRef.setInput('item', { ...item, kind: 'education' });
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('button.skill-card-button')).toBeTruthy();
+  });
+
+  it('renders language cards as non-interactive elements that do not emit openDetails', () => {
+    const languageItem: SkillCardViewModel = { ...item, kind: 'language' };
+    fixture.componentRef.setInput('item', languageItem);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const spy = jasmine.createSpy('openDetails');
+    component.openDetails.subscribe(spy);
+
+    expect(compiled.querySelector('button.skill-card-button')).toBeFalsy();
+
+    const nonInteractiveCard = compiled.querySelector(
+      '.skill-card-button[data-kind="language"]',
+    ) as HTMLElement;
+    expect(nonInteractiveCard).toBeTruthy();
+    expect(nonInteractiveCard.tagName).not.toBe('BUTTON');
+
+    nonInteractiveCard.click();
+
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

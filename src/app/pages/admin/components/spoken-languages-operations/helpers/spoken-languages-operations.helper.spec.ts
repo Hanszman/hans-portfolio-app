@@ -13,9 +13,7 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   id: 'image-asset-1',
   fileName: 'usa.png',
   filePath: '/assets/img/skills/usa.png',
-  folder: 'skills',
   kind: 'ICON',
-  mimeType: 'image/png',
   spokenLanguageIds: [],
   ...overrides,
 });

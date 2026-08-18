@@ -33,7 +33,6 @@ import {
   FORMATIONS_OPERATIONS_FIELDS,
   FormationDegreeTypeOptionViewModel,
   FormationImageAssetOptionViewModel,
-  FormationLinkOptionViewModel,
   FormationOperationsViewModel,
   FormationTechnologyOptionViewModel,
   FormationsOperationsFormValue,
@@ -60,7 +59,6 @@ export class FormationsOperationsModalComponent {
   readonly selectedFormation = input<FormationRecord | null>(null);
   readonly form = input<FormationsOperationsFormValue>(createEmptyFormationsOperationsFormValue());
   readonly technologyOptions = input<readonly FormationTechnologyOptionViewModel[]>([]);
-  readonly linkOptions = input<readonly FormationLinkOptionViewModel[]>([]);
   readonly imageAssetOptions = input<readonly FormationImageAssetOptionViewModel[]>([]);
   readonly degreeTypeOptions = input<readonly FormationDegreeTypeOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
@@ -86,7 +84,6 @@ export class FormationsOperationsModalComponent {
   readonly highlightChanged = output<boolean>();
   readonly sortOrderChanged = output<string>();
   readonly technologyToggled = output<string>();
-  readonly linkToggled = output<string>();
   readonly imageAssetToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
@@ -201,10 +198,6 @@ export class FormationsOperationsModalComponent {
             value: formation.technologyLabels.join(', ') || emptyRelations,
           },
           {
-            labelKey: 'common.entities.links',
-            value: formation.linkLabels.join(', ') || emptyRelations,
-          },
-          {
             labelKey: 'common.entities.imageAssets',
             value: formation.imageAssetLabels.join(', ') || emptyRelations,
           },
@@ -299,10 +292,6 @@ export class FormationsOperationsModalComponent {
     this.technologyToggled.emit(technologyId);
   }
 
-  protected toggleLink(linkId: string): void {
-    this.linkToggled.emit(linkId);
-  }
-
   protected toggleImageAsset(imageAssetId: string): void {
     this.imageAssetToggled.emit(imageAssetId);
   }
@@ -321,10 +310,6 @@ export class FormationsOperationsModalComponent {
 
   protected isTechnologySelected(technologyId: string): boolean {
     return this.form().technologyIds.includes(technologyId);
-  }
-
-  protected isLinkSelected(linkId: string): boolean {
-    return this.form().linkIds.includes(linkId);
   }
 
   protected isImageAssetSelected(imageAssetId: string): boolean {

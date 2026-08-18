@@ -63,9 +63,7 @@ describe('customers operations types helpers', () => {
         id: 'image-asset-1',
         fileName: 'ford.svg',
         filePath: '/assets/img/customers/ford.svg',
-        folder: 'customers',
         kind: 'ICON',
-        mimeType: 'image/svg+xml',
       }),
     ).toEqual({
       id: 'image-asset-1',
@@ -79,9 +77,7 @@ describe('customers operations types helpers', () => {
         id: 'image-asset-1',
         fileName: 'ford.svg',
         filePath: '/assets/img/customers/ford.svg',
-        folder: 'customers',
         kind: 'ICON',
-        mimeType: 'image/svg+xml',
       }),
     ).toBe('ford.svg (ICON)');
   });

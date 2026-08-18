@@ -11,7 +11,6 @@ import {
   extractSkillFilterValues,
   mapTechnologyToSkillCard,
   mapFormationToEducationModal,
-  mapSpokenLanguageToModal,
   resolveSkillStackKey,
   resolveSkillTypeKey,
   resolveSkillVisualUrl,
@@ -114,7 +113,7 @@ describe('skills helper', () => {
     expect(card.contexts).toEqual([]);
   });
 
-  it('should map mobile and studying technologies for the redesigned filters', () => {
+  it('should map mobile technologies and native RARE/STUDYING taxonomy for the redesigned filters', () => {
     const card = mapTechnologyToSkillCard(
       {
         id: 'tech-react-native',
@@ -129,9 +128,27 @@ describe('skills helper', () => {
     );
 
     expect(card.stackKey).toBe('MOBILE');
-    expect(card.levelKey).toBe('STUDYING');
-    expect(card.badgeColor).toBe('success');
-    expect(card.badgeLabel).toBe('Studying');
+    expect(card.levelKey).toBe('INTERMEDIATE');
+    expect(card.badgeColor).toBe('info');
+    expect(card.badgeLabel).toBe('Intermediate');
+    expect(card.frequencyLabel).toBe('Rare');
+
+    const studyingCard = mapTechnologyToSkillCard(
+      {
+        id: 'tech-studying',
+        slug: 'studying-tech',
+        name: 'Studying Tech',
+        type: 'FRAMEWORKS',
+        level: 'STUDYING',
+        frequency: null,
+        highlight: false,
+      },
+      'en-us',
+    );
+
+    expect(studyingCard.levelKey).toBe('STUDYING');
+    expect(studyingCard.badgeColor).toBe('success');
+    expect(studyingCard.badgeLabel).toBe('Studying');
   });
 
   it('should resolve backend and database stack filters', () => {
@@ -304,19 +321,11 @@ describe('skills helper', () => {
     ]);
   });
 
-  it('should use education and language fallbacks when API records or assets are absent', () => {
+  it('should use education fallbacks when API records or assets are absent', () => {
     const education = buildEducationSkillCards([formationFixture], 'en-us')[0];
-    const language = buildLanguageSkillCards([languageFixture], 'en-us')[0];
     expect(mapFormationToEducationModal(undefined, education, 'en-us')).toEqual(
       jasmine.objectContaining({ title: education.name, galleryItems: [] }),
     );
-
-    const languageFallback = mapSpokenLanguageToModal(undefined, language, 'en-us');
-    expect(languageFallback.image?.src).toBe(language.visualUrl);
-    expect(languageFallback.details.map(({ value }) => value)).toEqual([
-      language.badgeLabel,
-      language.slug,
-    ]);
 
     const educationWithoutGallery = mapFormationToEducationModal(
       {
@@ -374,53 +383,6 @@ describe('skills helper', () => {
 
     expect(modal.galleryItems[0].imageAlt).toBe(`${fallback.name} - 1`);
     expect(modal.galleryItems[0].description).toBeUndefined();
-  });
-
-  it('should map localized spoken-language data and its linked image', () => {
-    const fallback = buildLanguageSkillCards([languageFixture], 'pt-br')[0];
-    const modal = mapSpokenLanguageToModal(
-      {
-        id: 'language',
-        code: 'pt-BR',
-        namePt: 'Português',
-        nameEn: 'Portuguese',
-        nameEs: 'Portugués',
-        proficiency: 'NATIVE',
-        imageAssets: [
-          { imageAsset: { id: 'flag', filePath: '/br.svg', altPt: 'Bandeira do Brasil' } },
-        ],
-      },
-      fallback,
-      'pt-br',
-    );
-
-    expect(modal.title).toBe('Português');
-    expect(modal.image).toEqual(jasmine.objectContaining({ alt: 'Bandeira do Brasil' }));
-    expect(modal.details.map(({ value }) => value)).toEqual(['NATIVE', 'pt-BR']);
-
-    const fallbackAlt = mapSpokenLanguageToModal(
-      {
-        id: 'language-fallback-alt',
-        code: 'pt-BR',
-        namePt: 'Português',
-        nameEn: 'Portuguese',
-        proficiency: 'NATIVE',
-        imageAssets: [
-          {
-            imageAsset: {
-              id: 'flag-without-alt',
-              filePath: '/br.svg',
-              altPt: null,
-              altEn: null,
-              altEs: null,
-            },
-          },
-        ],
-      },
-      fallback,
-      'pt-br',
-    );
-    expect(fallbackAlt.image?.alt).toBe('Português');
   });
 
   it('should use fallback duration labels when experience labels are missing', () => {
@@ -902,7 +864,7 @@ describe('skills helper', () => {
     expect(filters.levels).toEqual(['ADVANCED', 'INTERMEDIATE']);
   });
 
-  it('should preserve legacy type and stack fallbacks when the API omits optional taxonomy', () => {
+  it('should preserve stack fallbacks and default the type to OTHERS when the API omits taxonomy', () => {
     const legacyBackend = {
       id: 'tech-node',
       slug: 'node',
@@ -919,7 +881,7 @@ describe('skills helper', () => {
     } as unknown as TechnologyCollectionItemResponse;
 
     expect(resolveSkillStackKey(legacyBackend)).toBe('BACK_END');
-    expect(resolveSkillTypeKey(legacyBackend)).toBe('PROGRAMMING_LANGUAGES');
+    expect(resolveSkillTypeKey(legacyBackend)).toBe('OTHERS');
     expect(mapTechnologyToSkillCard(unknown, 'en-us').typeLabel).toBe('Others');
     expect(buildSkillsSummaryMetrics([unknown], 'en-us')[2]?.value).toBe('1');
     expect(buildSkillsGroups([unknown], 'en-us')[0]?.id).toBe('OTHERS');

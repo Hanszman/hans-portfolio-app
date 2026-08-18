@@ -22,10 +22,8 @@ const FORMATIONS: readonly FormationOperationsViewModel[] = [
     highlight: true,
     sortOrderLabel: '1',
     technologyLabels: ['Angular (angular)'],
-    linkLabels: ['Details'],
     imageAssetLabels: ['puc.svg (ICON)'],
     technologyIds: ['technology-1'],
-    linkIds: ['link-1'],
     imageAssetIds: ['image-asset-1'],
   },
   {
@@ -44,10 +42,8 @@ const FORMATIONS: readonly FormationOperationsViewModel[] = [
     highlight: false,
     sortOrderLabel: '2',
     technologyLabels: [],
-    linkLabels: [],
     imageAssetLabels: [],
     technologyIds: [],
-    linkIds: [],
     imageAssetIds: [],
   },
 ];
@@ -97,7 +93,6 @@ describe('FormationsOperationsModalComponent', () => {
     const highlightSpy = jasmine.createSpy('highlightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const technologySpy = jasmine.createSpy('technologyToggled');
-    const linkSpy = jasmine.createSpy('linkToggled');
     const imageAssetSpy = jasmine.createSpy('imageAssetToggled');
     const pageSpy = jasmine.createSpy('pageSelected');
     const submitSpy = jasmine.createSpy('submitted');
@@ -117,7 +112,6 @@ describe('FormationsOperationsModalComponent', () => {
     component.highlightChanged.subscribe(highlightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.technologyToggled.subscribe(technologySpy);
-    component.linkToggled.subscribe(linkSpy);
     component.imageAssetToggled.subscribe(imageAssetSpy);
     component.pageSelected.subscribe(pageSpy);
     component.submitted.subscribe(submitSpy);
@@ -127,9 +121,6 @@ describe('FormationsOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.componentRef.setInput('technologyOptions', [
       { id: 'technology-1', title: 'Angular', subtitle: 'angular' },
-    ]);
-    fixture.componentRef.setInput('linkOptions', [
-      { id: 'link-1', title: 'Details', subtitle: 'https://example.com' },
     ]);
     fixture.componentRef.setInput('imageAssetOptions', [
       {
@@ -167,12 +158,10 @@ describe('FormationsOperationsModalComponent', () => {
       emitHighlightChange(event: Event): void;
       emitSortOrderChange(value: string): void;
       toggleTechnology(technologyId: string): void;
-      toggleLink(linkId: string): void;
       toggleImageAsset(imageAssetId: string): void;
       submit(): void;
       requestClose(): void;
       isTechnologySelected(technologyId: string): boolean;
-      isLinkSelected(linkId: string): boolean;
       isImageAssetSelected(imageAssetId: string): boolean;
       resolveSelectValue(event: Event): string;
       selectPage(page: number): void;
@@ -193,7 +182,6 @@ describe('FormationsOperationsModalComponent', () => {
     componentAccess.emitHighlightChange({ target: { checked: false } } as never);
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleTechnology('technology-1');
-    componentAccess.toggleLink('link-1');
     componentAccess.toggleImageAsset('image-asset-1');
     componentAccess.selectPage(2);
     componentAccess.submit();
@@ -253,13 +241,11 @@ describe('FormationsOperationsModalComponent', () => {
     expect(highlightSpy).toHaveBeenCalledWith(false);
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(technologySpy).toHaveBeenCalledOnceWith('technology-1');
-    expect(linkSpy).toHaveBeenCalledOnceWith('link-1');
     expect(imageAssetSpy).toHaveBeenCalledOnceWith('image-asset-1');
     expect(pageSpy).toHaveBeenCalledOnceWith(2);
     expect(submitSpy).toHaveBeenCalledTimes(1);
     expect(closeSpy).toHaveBeenCalledTimes(1);
     expect(componentAccess.isTechnologySelected('technology-1')).toBeFalse();
-    expect(componentAccess.isLinkSelected('link-1')).toBeFalse();
     expect(componentAccess.isImageAssetSelected('image-asset-1')).toBeFalse();
     expect(
       componentAccess.resolveSelectValue(
@@ -345,7 +331,6 @@ describe('FormationsOperationsModalComponent', () => {
       highlight: true,
       sortOrder: 1,
       technologyRelations: [],
-      linkIds: ['link-1'],
       imageAssetIds: ['image-asset-1'],
     });
     fixture.componentRef.setInput('form', {
@@ -363,14 +348,12 @@ describe('FormationsOperationsModalComponent', () => {
       highlight: true,
       sortOrder: '1',
       technologyIds: ['technology-1'],
-      linkIds: ['link-1'],
       imageAssetIds: ['image-asset-1'],
     });
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
       isTechnologySelected(technologyId: string): boolean;
-      isLinkSelected(linkId: string): boolean;
       isImageAssetSelected(imageAssetId: string): boolean;
     };
 
@@ -378,7 +361,6 @@ describe('FormationsOperationsModalComponent', () => {
       'This action permanently removes the selected protected formation from the portfolio.',
     );
     expect(component.isTechnologySelected('technology-1')).toBeTrue();
-    expect(component.isLinkSelected('link-1')).toBeTrue();
     expect(component.isImageAssetSelected('image-asset-1')).toBeTrue();
   });
 

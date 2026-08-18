@@ -9,21 +9,9 @@ export interface JobExperienceReference {
   titleEs?: string | null;
 }
 
-export interface JobImageAssetReference {
-  id: string;
-  fileName?: string | null;
-  filePath?: string | null;
-  kind?: string | null;
-}
-
 export interface JobExperienceRelationRecord {
   experienceId?: string;
   experience?: JobExperienceReference | null;
-}
-
-export interface JobImageAssetRelationRecord {
-  imageAssetId?: string;
-  imageAsset?: JobImageAssetReference | null;
 }
 
 export interface JobRecord {
@@ -40,9 +28,7 @@ export interface JobRecord {
   highlight?: boolean | null;
   sortOrder?: number | null;
   experienceIds?: string[] | null;
-  imageAssetIds?: string[] | null;
   experiences?: JobExperienceRelationRecord[] | null;
-  imageAssets?: JobImageAssetRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -60,7 +46,6 @@ export interface JobMutationPayload {
   highlight: boolean;
   sortOrder: number;
   experienceIds: string[];
-  imageAssetIds: string[];
 }
 
 export type JobsCollectionResponse = PaginatedResponse<JobRecord>;

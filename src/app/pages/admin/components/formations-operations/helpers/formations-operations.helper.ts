@@ -1,6 +1,5 @@
 import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 import { FormationRecord } from '../../../../../core/api/formations/formations.types';
-import { LinkRecord } from '../../../../../core/api/links/links.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   normalizeAdminDateValueForMutation,
@@ -9,29 +8,21 @@ import {
 } from '../../../helpers/admin.helper';
 import {
   FormationImageAssetOptionViewModel,
-  FormationLinkOptionViewModel,
   FormationOperationsViewModel,
   FormationTechnologyOptionViewModel,
   FormationsMutationBuildResult,
   FormationsOperationsFormValue,
   createEmptyFormationsOperationsFormValue,
   createFormationImageAssetOptionViewModel,
-  createFormationLinkOptionViewModel,
   createFormationTechnologyOptionViewModel,
   resolveFormationImageAssetIdFromRelation,
   resolveFormationImageAssetLabel,
-  resolveFormationLinkIdFromRelation,
   resolveFormationTechnologyIdFromRelation,
 } from '../formations-operations.types';
 
 const sortTechnologyOptions = (
   left: FormationTechnologyOptionViewModel,
   right: FormationTechnologyOptionViewModel,
-): number => left.title.localeCompare(right.title);
-
-const sortLinkOptions = (
-  left: FormationLinkOptionViewModel,
-  right: FormationLinkOptionViewModel,
 ): number => left.title.localeCompare(right.title);
 
 const sortImageAssetOptions = (
@@ -50,9 +41,6 @@ const createTechnologyMap = (
 ): Map<string, TechnologyCollectionItemResponse> =>
   new Map(technologies.map((technology) => [technology.id, technology]));
 
-const createLinkMap = (links: readonly LinkRecord[]): Map<string, LinkRecord> =>
-  new Map(links.map((link) => [link.id, link]));
-
 const createImageAssetMap = (
   imageAssets: readonly ImageAssetRecord[],
 ): Map<string, ImageAssetRecord> =>
@@ -65,12 +53,6 @@ const resolveTechnologyLabel = (
   const technology = technologyMap.get(technologyId);
 
   return technology ? `${technology.name} (${technology.slug})` : technologyId;
-};
-
-const resolveLinkLabel = (linkId: string, linkMap: Map<string, LinkRecord>): string => {
-  const link = linkMap.get(linkId);
-
-  return link ? link.labelPt || link.labelEn || link.url : linkId;
 };
 
 const resolveImageAssetLabel = (
@@ -86,11 +68,6 @@ export const buildFormationTechnologyOptions = (
   technologies: readonly TechnologyCollectionItemResponse[],
 ): readonly FormationTechnologyOptionViewModel[] =>
   [...technologies].map(createFormationTechnologyOptionViewModel).sort(sortTechnologyOptions);
-
-export const buildFormationLinkOptions = (
-  links: readonly LinkRecord[],
-): readonly FormationLinkOptionViewModel[] =>
-  [...links].map(createFormationLinkOptionViewModel).sort(sortLinkOptions);
 
 export const buildFormationImageAssetOptions = (
   imageAssets: readonly ImageAssetRecord[],
@@ -109,20 +86,6 @@ export const normalizeFormationTechnologyIds = (formation: FormationRecord): rea
   }
 
   return [...technologyIds];
-};
-
-export const normalizeFormationLinkIds = (formation: FormationRecord): readonly string[] => {
-  const linkIds = new Set<string>();
-
-  for (const linkId of formation.linkIds ?? []) {
-    appendUnique(linkIds, linkId);
-  }
-
-  for (const relation of formation.links ?? []) {
-    appendUnique(linkIds, resolveFormationLinkIdFromRelation(relation));
-  }
-
-  return [...linkIds];
 };
 
 export const normalizeFormationImageAssetIds = (formation: FormationRecord): readonly string[] => {
@@ -161,7 +124,6 @@ export const buildFormationsFormValue = (
     highlight: formation.highlight ?? false,
     sortOrder: String(formation.sortOrder ?? 0),
     technologyIds: normalizeFormationTechnologyIds(formation),
-    linkIds: normalizeFormationLinkIds(formation),
     imageAssetIds: normalizeFormationImageAssetIds(formation),
   };
 };
@@ -169,11 +131,9 @@ export const buildFormationsFormValue = (
 export const buildFormationsViewModels = (
   formations: readonly FormationRecord[],
   technologies: readonly TechnologyCollectionItemResponse[],
-  links: readonly LinkRecord[],
   imageAssets: readonly ImageAssetRecord[],
 ): readonly FormationOperationsViewModel[] => {
   const technologyMap = createTechnologyMap(technologies);
-  const linkMap = createLinkMap(links);
   const imageAssetMap = createImageAssetMap(imageAssets);
 
   return [...formations]
@@ -189,7 +149,6 @@ export const buildFormationsViewModels = (
     })
     .map((formation) => {
       const technologyIds = normalizeFormationTechnologyIds(formation);
-      const linkIds = normalizeFormationLinkIds(formation);
       const imageAssetIds = normalizeFormationImageAssetIds(formation);
 
       return {
@@ -210,12 +169,10 @@ export const buildFormationsViewModels = (
         technologyLabels: technologyIds.map((technologyId) =>
           resolveTechnologyLabel(technologyId, technologyMap),
         ),
-        linkLabels: linkIds.map((linkId) => resolveLinkLabel(linkId, linkMap)),
         imageAssetLabels: imageAssetIds.map((imageAssetId) =>
           resolveImageAssetLabel(imageAssetId, imageAssetMap),
         ),
         technologyIds,
-        linkIds,
         imageAssetIds,
       };
     });
@@ -334,7 +291,6 @@ export const buildFormationsMutationPayload = (
       technologyRelations: [...new Set(formValue.technologyIds)].map((technologyId) => ({
         technologyId,
       })),
-      linkIds: [...new Set(formValue.linkIds)],
       imageAssetIds: [...new Set(formValue.imageAssetIds)],
     },
   };

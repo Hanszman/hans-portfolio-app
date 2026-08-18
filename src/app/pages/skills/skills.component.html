@@ -188,7 +188,3 @@
     (technologySelected)="openEducationTechnology($event)"
   />
 }
-
-@if (selectedLanguage(); as language) {
-  <app-spoken-language-modal [isOpen]="true" [item]="language" (closed)="closeSkillDetails()" />
-}

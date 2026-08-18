@@ -170,9 +170,9 @@ describe('CustomersOperationsModalComponent', () => {
     expect(inputElements.map((element) => element.required)).toEqual([
       true,
       true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
       true,
     ]);
     expect(modalElement?.confirmLabel).toBe('Save');

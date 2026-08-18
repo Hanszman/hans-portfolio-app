@@ -1,8 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import { JobRecord } from '../../../../core/api/jobs/jobs.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
@@ -30,9 +28,7 @@ const createJob = (overrides: Partial<JobRecord> = {}): JobRecord => ({
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
-  imageAssetIds: ['image-asset-1'],
   experiences: [],
-  imageAssets: [],
   ...overrides,
 });
 const createExperience = (
@@ -66,32 +62,6 @@ const createExperience = (
   ...overrides,
 });
 
-const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
-  id: 'image-asset-1',
-  fileName: 'ford.svg',
-  filePath: '/assets/img/jobs/ford.svg',
-  folder: 'jobs',
-  kind: 'ICON',
-  altPt: 'Logo da Ford',
-  altEn: 'Ford logo',
-  altEs: 'Ford logo',
-  captionPt: 'Cargo Ford',
-  captionEn: 'Ford role',
-  captionEs: 'Ford role',
-  mimeType: 'image/svg+xml',
-  width: 128,
-  height: 128,
-  sortOrder: 1,
-  projectIds: [],
-  experienceIds: [],
-  technologyIds: [],
-  formationIds: [],
-  spokenLanguageIds: [],
-  customerIds: [],
-  jobIds: ['job-1'],
-  ...overrides,
-});
-
 const createCollectionResponse = (data: JobRecord[] = [createJob()], page = 1) => ({
   data,
   pagination: {
@@ -122,7 +92,6 @@ describe('JobsOperationsComponent', () => {
   let fixture: ComponentFixture<JobsOperationsComponent>;
   let jobsOperationsService: jasmine.SpyObj<JobsService>;
   let experiencesService: jasmine.SpyObj<ExperiencesService>;
-  let imageAssetsOperationsService: jasmine.SpyObj<ImageAssetsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -163,10 +132,6 @@ describe('JobsOperationsComponent', () => {
     experiencesService = jasmine.createSpyObj<ExperiencesService>('ExperiencesService', [
       'getExperiences',
     ]);
-    imageAssetsOperationsService = jasmine.createSpyObj<ImageAssetsService>(
-      'ImageAssetsService',
-      ['getAll'],
-    );
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     adminSessionServiceMock = {
       accessToken: jasmine
@@ -179,19 +144,6 @@ describe('JobsOperationsComponent', () => {
     jobsOperationsService.update.and.returnValue(of(createJob()));
     jobsOperationsService.delete.and.returnValue(of(void 0));
     experiencesService.getExperiences.and.returnValue(of(createExperiencesCollectionResponse()));
-    imageAssetsOperationsService.getAll.and.returnValue(
-      of({
-        data: [createImageAsset()],
-        pagination: {
-          page: 1,
-          pageSize: 100,
-          totalItems: 1,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        },
-      }),
-    );
 
     await TestBed.configureTestingModule({
       imports: [JobsOperationsComponent],
@@ -205,10 +157,6 @@ describe('JobsOperationsComponent', () => {
         {
           provide: ExperiencesService,
           useValue: experiencesService,
-        },
-        {
-          provide: ImageAssetsService,
-          useValue: imageAssetsOperationsService,
         },
         {
           provide: AdminSessionService,
@@ -231,7 +179,6 @@ describe('JobsOperationsComponent', () => {
 
     expect(jobsOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(experiencesService.getExperiences).toHaveBeenCalledTimes(1);
-    expect(imageAssetsOperationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Jobs');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/jobs'));
     expect(compiled.textContent).toContain('Create');
@@ -260,7 +207,6 @@ describe('JobsOperationsComponent', () => {
       updateHighlight(value: boolean): void;
       updateSortOrder(value: string): void;
       toggleExperience(experienceId: string): void;
-      toggleImageAsset(imageAssetId: string): void;
       submitModal(): Promise<void>;
     };
 
@@ -277,7 +223,6 @@ describe('JobsOperationsComponent', () => {
     component.updateHighlight(false);
     component.updateSortOrder('2');
     component.toggleExperience('experience-1');
-    component.toggleImageAsset('image-asset-1');
     await component.submitModal();
 
     expect(jobsOperationsService.create).toHaveBeenCalledWith({
@@ -293,7 +238,6 @@ describe('JobsOperationsComponent', () => {
       highlight: false,
       sortOrder: 2,
       experienceIds: ['experience-1'],
-      imageAssetIds: ['image-asset-1'],
     });
 
     component.openUpdateModal('job-1');
@@ -312,7 +256,6 @@ describe('JobsOperationsComponent', () => {
       highlight: true,
       sortOrder: 1,
       experienceIds: ['experience-1'],
-      imageAssetIds: ['image-asset-1'],
     });
 
     component.openDeleteModal('job-1');
@@ -344,7 +287,6 @@ describe('JobsOperationsComponent', () => {
     expect(component.modalTitleKey()).toBe('pages.admin.jobs.modal.read.title');
     expect(fixture.nativeElement.textContent).toContain('Front-End Engineer');
     expect(fixture.nativeElement.textContent).toContain('Public and private interfaces.');
-    expect(fixture.nativeElement.textContent).toContain('ford.svg (ICON)');
 
     component.openUpdatePickerModal();
     expect(component.modalTitleKey()).toBe('pages.admin.jobs.modal.pickUpdate.title');
@@ -380,10 +322,8 @@ describe('JobsOperationsComponent', () => {
       updateSearchQuery(value: string): Promise<void>;
       openCreateModal(): void;
       toggleExperience(experienceId: string): void;
-      toggleImageAsset(imageAssetId: string): void;
       form(): {
         experienceIds: readonly string[];
-        imageAssetIds: readonly string[];
       };
     };
 
@@ -400,11 +340,8 @@ describe('JobsOperationsComponent', () => {
     component.openCreateModal();
     component.toggleExperience('experience-1');
     component.toggleExperience('experience-1');
-    component.toggleImageAsset('image-asset-1');
-    component.toggleImageAsset('image-asset-1');
 
     expect(component.form().experienceIds).toEqual([]);
-    expect(component.form().imageAssetIds).toEqual([]);
   });
 
   it('should validate modal input and block unavailable sessions', async () => {
@@ -469,10 +406,6 @@ describe('JobsOperationsComponent', () => {
         {
           provide: ExperiencesService,
           useValue: experiencesService,
-        },
-        {
-          provide: ImageAssetsService,
-          useValue: imageAssetsOperationsService,
         },
         {
           provide: ToastService,
@@ -590,10 +523,6 @@ describe('JobsOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsService,
-          useValue: imageAssetsOperationsService,
-        },
-        {
           provide: ToastService,
           useValue: toastService,
         },
@@ -641,10 +570,6 @@ describe('JobsOperationsComponent', () => {
           useValue: experiencesService,
         },
         {
-          provide: ImageAssetsService,
-          useValue: imageAssetsOperationsService,
-        },
-        {
           provide: AdminSessionService,
           useValue: {
             accessToken: () => 'token-123',
@@ -686,10 +611,6 @@ describe('JobsOperationsComponent', () => {
         {
           provide: ExperiencesService,
           useValue: experiencesService,
-        },
-        {
-          provide: ImageAssetsService,
-          useValue: imageAssetsOperationsService,
         },
         {
           provide: AdminSessionService,

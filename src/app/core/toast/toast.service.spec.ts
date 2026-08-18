@@ -33,7 +33,7 @@ describe('ToastService', () => {
 
   it('should support custom options and dismiss individual or all toasts', () => {
     const toastId = service.show({
-      messageKey: 'pages.admin.portfolioSettings.feedback.loadError',
+      messageKey: 'pages.admin.formations.feedback.loadError',
       messageParams: {
         page: '1',
       },
@@ -44,7 +44,7 @@ describe('ToastService', () => {
     expect(service.toasts()).toEqual([
       {
         id: toastId,
-        messageKey: 'pages.admin.portfolioSettings.feedback.loadError',
+        messageKey: 'pages.admin.formations.feedback.loadError',
         messageParams: {
           page: '1',
         },
@@ -67,9 +67,9 @@ describe('ToastService', () => {
       messageKey: 'pages.admin.links.feedback.loadError',
     });
     const secondToastId = service.showWarning(
-      'pages.admin.portfolioSettings.feedback.deleteError',
+      'pages.admin.formations.feedback.deleteError',
       {
-        entity: 'portfolio-setting',
+        entity: 'formation',
       },
     );
 
@@ -83,9 +83,9 @@ describe('ToastService', () => {
       },
       {
         id: secondToastId,
-        messageKey: 'pages.admin.portfolioSettings.feedback.deleteError',
+        messageKey: 'pages.admin.formations.feedback.deleteError',
         messageParams: {
-          entity: 'portfolio-setting',
+          entity: 'formation',
         },
         tone: 'warning',
         duration: 4000,
@@ -97,9 +97,9 @@ describe('ToastService', () => {
     expect(service.toasts()).toEqual([
       {
         id: secondToastId,
-        messageKey: 'pages.admin.portfolioSettings.feedback.deleteError',
+        messageKey: 'pages.admin.formations.feedback.deleteError',
         messageParams: {
-          entity: 'portfolio-setting',
+          entity: 'formation',
         },
         tone: 'warning',
         duration: 4000,

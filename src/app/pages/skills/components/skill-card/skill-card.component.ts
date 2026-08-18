@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
@@ -10,6 +11,7 @@ import { SkillCardViewModel } from '../../skills.types';
 @Component({
   selector: 'app-skill-card',
   standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './skill-card.component.html',
   styleUrl: './skill-card.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

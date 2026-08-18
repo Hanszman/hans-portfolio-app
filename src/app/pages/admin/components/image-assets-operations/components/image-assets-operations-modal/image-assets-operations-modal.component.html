@@ -48,17 +48,6 @@
           (input)="emitFilePathChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-input
-          [label]="resolveFieldLabel('folder')"
-          [required]="fields.folder.required"
-          inputColor="base"
-          inputSize="medium"
-          [value]="form().folder"
-          [placeholder]="fields.folder.placeholderKey! | translate"
-          [attr.aria-label]="fields.folder.labelKey | translate"
-          (input)="emitFolderChange($any($event).target?.value ?? '')"
-        ></hans-input>
-
         <hans-select-option
           [label]="resolveFieldLabel('kind')"
           [required]="fields.kind.required"
@@ -107,50 +96,6 @@
           [placeholder]="fields.altEs.placeholderKey! | translate"
           [attr.aria-label]="fields.altEs.labelKey | translate"
           (input)="emitAltEsChange($any($event).target?.value ?? '')"
-        ></hans-input>
-
-        <hans-input
-          [label]="resolveFieldLabel('captionPt')"
-          [required]="fields.captionPt.required"
-          inputColor="base"
-          inputSize="medium"
-          [value]="form().captionPt"
-          [placeholder]="fields.captionPt.placeholderKey! | translate"
-          [attr.aria-label]="fields.captionPt.labelKey | translate"
-          (input)="emitCaptionPtChange($any($event).target?.value ?? '')"
-        ></hans-input>
-
-        <hans-input
-          [label]="resolveFieldLabel('captionEn')"
-          [required]="fields.captionEn.required"
-          inputColor="base"
-          inputSize="medium"
-          [value]="form().captionEn"
-          [placeholder]="fields.captionEn.placeholderKey! | translate"
-          [attr.aria-label]="fields.captionEn.labelKey | translate"
-          (input)="emitCaptionEnChange($any($event).target?.value ?? '')"
-        ></hans-input>
-
-        <hans-input
-          [label]="resolveFieldLabel('captionEs')"
-          [required]="fields.captionEs.required"
-          inputColor="base"
-          inputSize="medium"
-          [value]="form().captionEs"
-          [placeholder]="fields.captionEs.placeholderKey! | translate"
-          [attr.aria-label]="fields.captionEs.labelKey | translate"
-          (input)="emitCaptionEsChange($any($event).target?.value ?? '')"
-        ></hans-input>
-
-        <hans-input
-          [label]="resolveFieldLabel('mimeType')"
-          [required]="fields.mimeType.required"
-          inputColor="base"
-          inputSize="medium"
-          [value]="form().mimeType"
-          [placeholder]="fields.mimeType.placeholderKey! | translate"
-          [attr.aria-label]="fields.mimeType.labelKey | translate"
-          (input)="emitMimeTypeChange($any($event).target?.value ?? '')"
         ></hans-input>
 
         <div class="image-assets-operations-dimensions">

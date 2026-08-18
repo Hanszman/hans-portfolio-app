@@ -39,6 +39,18 @@
               tagColor="base"
               tagSize="sm"
             ></hans-tag>
+            <hans-tag
+              [attr.label]="currentProject.statusLabel"
+              iconName="LuActivity"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
+            <hans-tag
+              [attr.label]="currentProject.environmentLabel"
+              iconName="LuLayers3"
+              tagColor="base"
+              tagSize="sm"
+            ></hans-tag>
             <span>{{ currentProject.dateRangeLabel }}</span>
           </div>
 

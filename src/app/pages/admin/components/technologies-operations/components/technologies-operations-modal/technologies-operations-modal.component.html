@@ -158,15 +158,6 @@
         />
 
         <app-operations-relation-picker
-          [label]="'pages.admin.technologies.fields.links.label' | translate"
-          [description]="'pages.admin.technologies.fields.links.description' | translate"
-          [emptyMessage]="'pages.admin.technologies.fields.links.empty' | translate"
-          [options]="linkOptions()"
-          [selectedIds]="form().linkIds"
-          (toggled)="linkToggled.emit($event)"
-        />
-
-        <app-operations-relation-picker
           [label]="'pages.admin.technologies.fields.imageAssets.label' | translate"
           [description]="'pages.admin.technologies.fields.imageAssets.description' | translate"
           [emptyMessage]="'pages.admin.technologies.fields.imageAssets.empty' | translate"

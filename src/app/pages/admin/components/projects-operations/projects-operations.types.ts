@@ -30,12 +30,12 @@ export interface ProjectsOperationsFormValue {
   titlePt: string;
   titleEn: string;
   titleEs?: string;
-  shortDescriptionPt: string;
-  shortDescriptionEn: string;
-  shortDescriptionEs?: string;
-  fullDescriptionPt: string;
-  fullDescriptionEn: string;
-  fullDescriptionEs?: string;
+  summaryPt: string;
+  summaryEn: string;
+  summaryEs?: string;
+  descriptionPt: string;
+  descriptionEn: string;
+  descriptionEs?: string;
   context: ProjectContext | '';
   status: ProjectStatus | '';
   environment: ProjectEnvironment | '';
@@ -71,39 +71,39 @@ export const PROJECTS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.projects.fields.titleEs.placeholder',
     required: true,
   },
-  shortDescriptionPt: {
-    labelKey: 'pages.admin.projects.fields.shortDescriptionPt.label',
-    placeholderKey: 'pages.admin.projects.fields.shortDescriptionPt.placeholder',
+  summaryPt: {
+    labelKey: 'pages.admin.projects.fields.summaryPt.label',
+    placeholderKey: 'pages.admin.projects.fields.summaryPt.placeholder',
     required: true,
     multiline: true,
   },
-  shortDescriptionEn: {
-    labelKey: 'pages.admin.projects.fields.shortDescriptionEn.label',
-    placeholderKey: 'pages.admin.projects.fields.shortDescriptionEn.placeholder',
+  summaryEn: {
+    labelKey: 'pages.admin.projects.fields.summaryEn.label',
+    placeholderKey: 'pages.admin.projects.fields.summaryEn.placeholder',
     required: true,
     multiline: true,
   },
-  shortDescriptionEs: {
-    labelKey: 'pages.admin.projects.fields.shortDescriptionEs.label',
-    placeholderKey: 'pages.admin.projects.fields.shortDescriptionEs.placeholder',
+  summaryEs: {
+    labelKey: 'pages.admin.projects.fields.summaryEs.label',
+    placeholderKey: 'pages.admin.projects.fields.summaryEs.placeholder',
     required: true,
     multiline: true,
   },
-  fullDescriptionPt: {
-    labelKey: 'pages.admin.projects.fields.fullDescriptionPt.label',
-    placeholderKey: 'pages.admin.projects.fields.fullDescriptionPt.placeholder',
+  descriptionPt: {
+    labelKey: 'pages.admin.projects.fields.descriptionPt.label',
+    placeholderKey: 'pages.admin.projects.fields.descriptionPt.placeholder',
     required: true,
     multiline: true,
   },
-  fullDescriptionEn: {
-    labelKey: 'pages.admin.projects.fields.fullDescriptionEn.label',
-    placeholderKey: 'pages.admin.projects.fields.fullDescriptionEn.placeholder',
+  descriptionEn: {
+    labelKey: 'pages.admin.projects.fields.descriptionEn.label',
+    placeholderKey: 'pages.admin.projects.fields.descriptionEn.placeholder',
     required: true,
     multiline: true,
   },
-  fullDescriptionEs: {
-    labelKey: 'pages.admin.projects.fields.fullDescriptionEs.label',
-    placeholderKey: 'pages.admin.projects.fields.fullDescriptionEs.placeholder',
+  descriptionEs: {
+    labelKey: 'pages.admin.projects.fields.descriptionEs.label',
+    placeholderKey: 'pages.admin.projects.fields.descriptionEs.placeholder',
     required: true,
     multiline: true,
   },
@@ -144,12 +144,12 @@ export const PROJECTS_OPERATIONS_FORM_FIELDS = [
   'titlePt',
   'titleEn',
   'titleEs',
-  'shortDescriptionPt',
-  'shortDescriptionEn',
-  'shortDescriptionEs',
-  'fullDescriptionPt',
-  'fullDescriptionEn',
-  'fullDescriptionEs',
+  'summaryPt',
+  'summaryEn',
+  'summaryEs',
+  'descriptionPt',
+  'descriptionEn',
+  'descriptionEs',
   'sortOrder',
 ] as const;
 
@@ -165,6 +165,7 @@ export const PROJECT_STATUS_VALUES: ProjectStatus[] = [
   'IN_PROGRESS',
   'ARCHIVED',
   'PLANNED',
+  'ABANDONED',
 ];
 
 export const PROJECT_ENVIRONMENT_VALUES: ProjectEnvironment[] = [
@@ -173,7 +174,7 @@ export const PROJECT_ENVIRONMENT_VALUES: ProjectEnvironment[] = [
   'FULLSTACK',
   'MOBILE',
   'LIBRARY',
-  'DASHBOARD',
+  'OTHER',
 ];
 
 export const PROJECT_OPTION_LABEL_KEYS = {
@@ -188,6 +189,7 @@ export const PROJECT_OPTION_LABEL_KEYS = {
     IN_PROGRESS: 'taxonomy.experiences.projectStatus.inProgress',
     ARCHIVED: 'pages.admin.projects.fields.status.options.ARCHIVED',
     PLANNED: 'pages.admin.projects.fields.status.options.PLANNED',
+    ABANDONED: 'pages.admin.projects.fields.status.options.ABANDONED',
   },
   environment: {
     FRONTEND: 'pages.admin.projects.fields.environment.options.FRONTEND',
@@ -195,7 +197,7 @@ export const PROJECT_OPTION_LABEL_KEYS = {
     FULLSTACK: 'taxonomy.experiences.projectEnvironment.fullstack',
     MOBILE: 'pages.admin.projects.fields.environment.options.MOBILE',
     LIBRARY: 'taxonomy.skills.type.libraries',
-    DASHBOARD: 'pages.admin.projects.fields.environment.options.DASHBOARD',
+    OTHER: 'pages.admin.projects.fields.environment.options.OTHER',
   },
 } as const satisfies Record<
   'context' | 'status' | 'environment',
@@ -226,12 +228,12 @@ export const createEmptyProjectsOperationsFormValue = (): ProjectsOperationsForm
   titlePt: '',
   titleEn: '',
   titleEs: '',
-  shortDescriptionPt: '',
-  shortDescriptionEn: '',
-  shortDescriptionEs: '',
-  fullDescriptionPt: '',
-  fullDescriptionEn: '',
-  fullDescriptionEs: '',
+  summaryPt: '',
+  summaryEn: '',
+  summaryEs: '',
+  descriptionPt: '',
+  descriptionEn: '',
+  descriptionEs: '',
   context: '',
   status: '',
   environment: '',
@@ -332,12 +334,12 @@ export const buildProjectsFormValue = (
         titlePt: record.titlePt,
         titleEn: record.titleEn,
         titleEs: record.titleEs ?? '',
-        shortDescriptionPt: record.shortDescriptionPt,
-        shortDescriptionEn: record.shortDescriptionEn,
-        shortDescriptionEs: record.shortDescriptionEs ?? '',
-        fullDescriptionPt: record.fullDescriptionPt,
-        fullDescriptionEn: record.fullDescriptionEn,
-        fullDescriptionEs: record.fullDescriptionEs ?? '',
+        summaryPt: record.summaryPt,
+        summaryEn: record.summaryEn,
+        summaryEs: record.summaryEs ?? '',
+        descriptionPt: record.descriptionPt,
+        descriptionEn: record.descriptionEn,
+        descriptionEs: record.descriptionEs ?? '',
         context: record.context,
         status: record.status,
         environment: record.environment,
@@ -361,12 +363,12 @@ export const buildProjectsMutationPayload = (
     'titlePt',
     'titleEn',
     'titleEs',
-    'shortDescriptionPt',
-    'shortDescriptionEn',
-    'shortDescriptionEs',
-    'fullDescriptionPt',
-    'fullDescriptionEn',
-    'fullDescriptionEs',
+    'summaryPt',
+    'summaryEn',
+    'summaryEs',
+    'descriptionPt',
+    'descriptionEn',
+    'descriptionEs',
   ] as const)
     if (!form[key]?.trim())
       return {
@@ -405,12 +407,12 @@ export const buildProjectsMutationPayload = (
       titlePt: form.titlePt.trim(),
       titleEn: form.titleEn.trim(),
       titleEs: form.titleEs!.trim(),
-      shortDescriptionPt: form.shortDescriptionPt.trim(),
-      shortDescriptionEn: form.shortDescriptionEn.trim(),
-      shortDescriptionEs: form.shortDescriptionEs!.trim(),
-      fullDescriptionPt: form.fullDescriptionPt.trim(),
-      fullDescriptionEn: form.fullDescriptionEn.trim(),
-      fullDescriptionEs: form.fullDescriptionEs!.trim(),
+      summaryPt: form.summaryPt.trim(),
+      summaryEn: form.summaryEn.trim(),
+      summaryEs: form.summaryEs!.trim(),
+      descriptionPt: form.descriptionPt.trim(),
+      descriptionEn: form.descriptionEn.trim(),
+      descriptionEs: form.descriptionEs!.trim(),
       context: form.context,
       status: form.status,
       environment: form.environment,

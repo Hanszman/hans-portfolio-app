@@ -9,7 +9,6 @@ import { FormationsService } from './core/api/formations/formations.service';
 import { ImageAssetsService } from './core/api/image-assets/image-assets.service';
 import { JobsService } from './core/api/jobs/jobs.service';
 import { LinksService } from './core/api/links/links.service';
-import { PortfolioSettingsService } from './core/api/portfolio-settings/portfolio-settings.service';
 import { SpokenLanguagesService } from './core/api/spoken-languages/spoken-languages.service';
 import { TechnologyContextsService } from './core/api/technology-contexts/technology-contexts.service';
 import { ExperiencesService } from './core/api/experiences/experiences.service';
@@ -336,38 +335,6 @@ describe('app routes', () => {
           },
         },
         {
-          provide: PortfolioSettingsService,
-          useValue: {
-            getAll: jasmine
-              .createSpy()
-              .and.returnValue(
-                of({
-                  data: [
-                    {
-                      id: 'setting-1',
-                      key: 'hero.metrics',
-                      value: {
-                        projects: 12,
-                      },
-                      description: 'Controls the highlighted portfolio metrics.',
-                    },
-                  ],
-                  pagination: {
-                    page: 1,
-                    pageSize: 5,
-                    totalItems: 1,
-                    totalPages: 1,
-                    hasPreviousPage: false,
-                    hasNextPage: false,
-                  },
-                }),
-              ),
-            create: jasmine.createSpy(),
-            update: jasmine.createSpy(),
-            delete: jasmine.createSpy(),
-          },
-        },
-        {
           provide: SpokenLanguagesService,
           useValue: {
             getAll: jasmine
@@ -487,7 +454,7 @@ describe('app routes', () => {
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
     expect(harness.routeNativeElement?.textContent).toContain(
-      '11 entity workflows',
+      '10 entity workflows',
     );
   });
 
@@ -512,7 +479,7 @@ describe('app routes', () => {
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
     expect(harness.routeNativeElement?.textContent).toContain(
-      '11 entity workflows',
+      '10 entity workflows',
     );
   });
 

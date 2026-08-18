@@ -6,6 +6,11 @@ DADOS:
 -Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
+*Correções:
+-Corrigir erros apontados pelo vscode nos arquivos: normalize-seed-snapshot.ts, dashboard.service.spec.ts.
+-Me arrependi de somente a imagem central das ativas do carroussel poder ser clicada, coloque isso pra todas as que estão ativas.
+-A cor do studying nos gráficos de progress bar pode ser a cor info do theme ao invés de danger.
+
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.

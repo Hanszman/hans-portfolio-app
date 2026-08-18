@@ -149,8 +149,8 @@ export const buildCustomersFormValue = (
   return {
     slug: customer.slug,
     name: customer.name,
-    summaryPt: customer.summaryPt,
-    summaryEn: customer.summaryEn,
+    summaryPt: customer.summaryPt ?? '',
+    summaryEn: customer.summaryEn ?? '',
     summaryEs: customer.summaryEs ?? '',
     highlight: customer.highlight ?? false,
     sortOrder: String(customer.sortOrder ?? 0),
@@ -186,8 +186,8 @@ export const buildCustomersViewModels = (
         id: customer.id,
         slug: customer.slug,
         name: customer.name,
-        summaryPt: customer.summaryPt,
-        summaryEn: customer.summaryEn,
+        summaryPt: customer.summaryPt ?? '',
+        summaryEn: customer.summaryEn ?? '',
         summaryEs: customer.summaryEs ?? '',
         highlight: customer.highlight ?? false,
         sortOrderLabel: String(customer.sortOrder ?? 0),
@@ -210,7 +210,7 @@ export const buildCustomersMutationPayload = (
   const name = formValue.name.trim();
   const summaryPt = formValue.summaryPt.trim();
   const summaryEn = formValue.summaryEn.trim();
-  const summaryEs = formValue.summaryEs?.trim() ?? summaryEn;
+  const summaryEs = formValue.summaryEs?.trim() ?? '';
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
 
   if (!slug) {
@@ -227,27 +227,6 @@ export const buildCustomersMutationPayload = (
     };
   }
 
-  if (!summaryPt) {
-    return {
-      isValid: false,
-      errorKey: 'common.feedback.requiredPortugueseSummary',
-    };
-  }
-
-  if (!summaryEn) {
-    return {
-      isValid: false,
-      errorKey: 'common.feedback.requiredEnglishSummary',
-    };
-  }
-
-  if (!summaryEs) {
-    return {
-      isValid: false,
-      errorKey: 'common.feedback.requiredSummaryEs',
-    };
-  }
-
   if (!Number.isInteger(sortOrder)) {
     return {
       isValid: false,
@@ -260,9 +239,9 @@ export const buildCustomersMutationPayload = (
     payload: {
       slug,
       name,
-      summaryPt,
-      summaryEn,
-      summaryEs,
+      ...(summaryPt ? { summaryPt } : {}),
+      ...(summaryEn ? { summaryEn } : {}),
+      ...(summaryEs ? { summaryEs } : {}),
       highlight: formValue.highlight,
       sortOrder,
       experienceIds: [...new Set(formValue.experienceIds)],

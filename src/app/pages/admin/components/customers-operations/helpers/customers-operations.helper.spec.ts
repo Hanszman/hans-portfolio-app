@@ -47,9 +47,7 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   id: 'image-asset-1',
   fileName: 'ford.svg',
   filePath: '/assets/img/customers/ford.svg',
-  folder: 'customers',
   kind: 'ICON',
-  mimeType: 'image/svg+xml',
   customerIds: [],
   ...overrides,
 });
@@ -304,6 +302,22 @@ describe('customers operations helper', () => {
     expect(
       buildCustomersViewModels([createCustomer({ summaryEs: undefined })], [], [])[0].summaryEs,
     ).toBe('');
+
+    const [viewModelWithoutSummary] = buildCustomersViewModels(
+      [createCustomer({ summaryPt: undefined, summaryEn: undefined })],
+      [],
+      [],
+    );
+    expect(viewModelWithoutSummary.summaryPt).toBe('');
+    expect(viewModelWithoutSummary.summaryEn).toBe('');
+
+    expect(
+      buildCustomersFormValue(
+        createCustomer({ summaryPt: undefined, summaryEn: undefined }),
+        [],
+        [],
+      ),
+    ).toEqual(jasmine.objectContaining({ summaryPt: '', summaryEn: '' }));
   });
 
   it('should build sorted customer view-models with resolved labels', () => {
@@ -443,11 +457,36 @@ describe('customers operations helper', () => {
         name: 'Enterprise Client',
         summaryPt: 'Cliente corporativo',
         summaryEn: 'Corporate client',
-        summaryEs: 'Corporate client',
         highlight: true,
         sortOrder: 5,
         experienceIds: ['experience-1'],
         imageAssetIds: ['image-asset-1'],
+      },
+    });
+  });
+
+  it('should build a valid mutation payload without any summary when omitted', () => {
+    expect(
+      buildCustomersMutationPayload({
+        slug: 'enterprise-client',
+        name: 'Enterprise Client',
+        summaryPt: '',
+        summaryEn: '',
+        summaryEs: '',
+        highlight: true,
+        sortOrder: '5',
+        experienceIds: [],
+        imageAssetIds: [],
+      }),
+    ).toEqual({
+      isValid: true,
+      payload: {
+        slug: 'enterprise-client',
+        name: 'Enterprise Client',
+        highlight: true,
+        sortOrder: 5,
+        experienceIds: [],
+        imageAssetIds: [],
       },
     });
   });
@@ -485,57 +524,6 @@ describe('customers operations helper', () => {
     ).toEqual({
       isValid: false,
       errorKey: 'pages.admin.customers.feedback.requiredName',
-    });
-
-    expect(
-      buildCustomersMutationPayload({
-        slug: 'enterprise-client',
-        name: 'Enterprise Client',
-        summaryPt: '',
-        summaryEn: '',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: 'abc',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredPortugueseSummary',
-    });
-
-    expect(
-      buildCustomersMutationPayload({
-        slug: 'enterprise-client',
-        name: 'Enterprise Client',
-        summaryPt: 'Cliente corporativo',
-        summaryEn: '',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: 'abc',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredEnglishSummary',
-    });
-
-    expect(
-      buildCustomersMutationPayload({
-        slug: 'enterprise-client',
-        name: 'Enterprise Client',
-        summaryPt: 'Cliente corporativo',
-        summaryEn: 'Corporate client',
-        summaryEs: '',
-        highlight: true,
-        sortOrder: '1',
-        experienceIds: [],
-        imageAssetIds: [],
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'common.feedback.requiredSummaryEs',
     });
 
     expect(

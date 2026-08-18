@@ -347,7 +347,6 @@ Important public routes include:
 - `GET /links`
 - `GET /image-assets`
 - `GET /tags`
-- `GET /portfolio-settings`
 - `GET /dashboard`
 - dashboard aggregate endpoints
 

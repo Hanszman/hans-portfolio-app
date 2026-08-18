@@ -248,20 +248,20 @@ export const mapProjectToCaseCard = (
     summary: resolveLocalizedText(
       locale,
       {
-        'pt-br': project.shortDescriptionPt,
-        'en-us': project.shortDescriptionEn,
-        'es-es': project.shortDescriptionEs,
+        'pt-br': project.summaryPt,
+        'en-us': project.summaryEn,
+        'es-es': project.summaryEs,
       },
-      project.shortDescriptionEn,
+      project.summaryEn,
     ),
     description: resolveLocalizedText(
       locale,
       {
-        'pt-br': project.fullDescriptionPt,
-        'en-us': project.fullDescriptionEn,
-        'es-es': project.fullDescriptionEs,
+        'pt-br': project.descriptionPt,
+        'en-us': project.descriptionEn,
+        'es-es': project.descriptionEs,
       },
-      project.fullDescriptionEn,
+      project.descriptionEn,
     ),
     contextLabel: resolveCatalogLabel(locale, project.context, PROJECT_CONTEXT_LABEL_KEYS),
     statusLabel: resolveCatalogLabel(locale, project.status, PROJECT_STATUS_LABEL_KEYS),

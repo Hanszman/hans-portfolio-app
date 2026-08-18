@@ -9,15 +9,10 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     id: 'image-asset-1',
     fileName: 'vh_logo_blue.svg',
     filePath: '/assets/img/logo/vh_logo_blue.svg',
-    folder: 'logo',
     kind: 'ICON',
     altPt: 'Logo azul da Hans',
     altEn: 'Hans blue logo',
     altEs: 'Hans blue logo',
-    captionPt: 'Versao azul da marca.',
-    captionEn: 'Blue brand version.',
-    captionEs: 'Blue brand version.',
-    mimeType: 'image/svg+xml',
     dimensionsLabel: '240 x 96',
     sortOrderLabel: '1',
     projectLabels: ['Portfolio remake'],
@@ -32,15 +27,10 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     id: 'image-asset-2',
     fileName: 'empty.svg',
     filePath: '/assets/img/empty.svg',
-    folder: 'assets',
     kind: 'ICON',
     altPt: '',
     altEn: '',
     altEs: '',
-    captionPt: '',
-    captionEn: '',
-    captionEs: '',
-    mimeType: '',
     dimensionsLabel: '-',
     sortOrderLabel: '2',
     projectLabels: [],
@@ -84,15 +74,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const component = fixture.componentInstance;
     const fileNameSpy = jasmine.createSpy('fileNameChanged');
     const filePathSpy = jasmine.createSpy('filePathChanged');
-    const folderSpy = jasmine.createSpy('folderChanged');
     const kindSpy = jasmine.createSpy('kindChanged');
     const altPtSpy = jasmine.createSpy('altPtChanged');
     const altEnSpy = jasmine.createSpy('altEnChanged');
     const altEsSpy = jasmine.createSpy('altEsChanged');
-    const captionPtSpy = jasmine.createSpy('captionPtChanged');
-    const captionEnSpy = jasmine.createSpy('captionEnChanged');
-    const captionEsSpy = jasmine.createSpy('captionEsChanged');
-    const mimeTypeSpy = jasmine.createSpy('mimeTypeChanged');
     const widthSpy = jasmine.createSpy('widthChanged');
     const heightSpy = jasmine.createSpy('heightChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
@@ -109,15 +94,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
 
     component.fileNameChanged.subscribe(fileNameSpy);
     component.filePathChanged.subscribe(filePathSpy);
-    component.folderChanged.subscribe(folderSpy);
     component.kindChanged.subscribe(kindSpy);
     component.altPtChanged.subscribe(altPtSpy);
     component.altEnChanged.subscribe(altEnSpy);
     component.altEsChanged.subscribe(altEsSpy);
-    component.captionPtChanged.subscribe(captionPtSpy);
-    component.captionEnChanged.subscribe(captionEnSpy);
-    component.captionEsChanged.subscribe(captionEsSpy);
-    component.mimeTypeChanged.subscribe(mimeTypeSpy);
     component.widthChanged.subscribe(widthSpy);
     component.heightChanged.subscribe(heightSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
@@ -160,15 +140,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const componentAccess = component as unknown as {
       emitFileNameChange(value: string): void;
       emitFilePathChange(value: string): void;
-      emitFolderChange(value: string): void;
       emitKindChange(value: string): void;
       emitAltPtChange(value: string): void;
       emitAltEnChange(value: string): void;
       emitAltEsChange(value: string): void;
-      emitCaptionPtChange(value: string): void;
-      emitCaptionEnChange(value: string): void;
-      emitCaptionEsChange(value: string): void;
-      emitMimeTypeChange(value: string): void;
       emitWidthChange(value: string): void;
       emitHeightChange(value: string): void;
       emitSortOrderChange(value: string): void;
@@ -189,15 +164,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
 
     componentAccess.emitFileNameChange('vh_logo_blue.svg');
     componentAccess.emitFilePathChange('/assets/img/logo/vh_logo_blue.svg');
-    componentAccess.emitFolderChange('logo');
     componentAccess.emitKindChange('ICON');
     componentAccess.emitAltPtChange('Logo');
     componentAccess.emitAltEnChange('Logo');
     componentAccess.emitAltEsChange('Logotipo');
-    componentAccess.emitCaptionPtChange('Legenda');
-    componentAccess.emitCaptionEnChange('Caption');
-    componentAccess.emitCaptionEsChange('Leyenda');
-    componentAccess.emitMimeTypeChange('image/svg+xml');
     componentAccess.emitWidthChange('240');
     componentAccess.emitHeightChange('96');
     componentAccess.emitSortOrderChange('7');
@@ -222,14 +192,9 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(inputElements.map((element) => element.label)).toEqual([
       'File name',
       'File path',
-      'Folder',
       'Portuguese alt text',
       'English alt text',
       'Spanish alternative text',
-      'Portuguese caption',
-      'English caption',
-      'Spanish caption',
-      'MIME type',
       'Width',
       'Height',
       'Sort order',
@@ -237,14 +202,9 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(inputElements.map((element) => element.required)).toEqual([
       true,
       true,
-      true,
       false,
       false,
       false,
-      false,
-      false,
-      false,
-      true,
       false,
       false,
       true,
@@ -253,15 +213,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(selectElement?.required).toBeTrue();
     expect(fileNameSpy).toHaveBeenCalledOnceWith('vh_logo_blue.svg');
     expect(filePathSpy).toHaveBeenCalledOnceWith('/assets/img/logo/vh_logo_blue.svg');
-    expect(folderSpy).toHaveBeenCalledOnceWith('logo');
     expect(kindSpy).toHaveBeenCalledOnceWith('ICON');
     expect(altPtSpy).toHaveBeenCalledOnceWith('Logo');
     expect(altEnSpy).toHaveBeenCalledOnceWith('Logo');
     expect(altEsSpy).toHaveBeenCalledOnceWith('Logotipo');
-    expect(captionPtSpy).toHaveBeenCalledOnceWith('Legenda');
-    expect(captionEnSpy).toHaveBeenCalledOnceWith('Caption');
-    expect(captionEsSpy).toHaveBeenCalledOnceWith('Leyenda');
-    expect(mimeTypeSpy).toHaveBeenCalledOnceWith('image/svg+xml');
     expect(widthSpy).toHaveBeenCalledOnceWith('240');
     expect(heightSpy).toHaveBeenCalledOnceWith('96');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
@@ -357,15 +312,10 @@ describe('ImageAssetsOperationsModalComponent', () => {
     fixture.componentRef.setInput('form', {
       fileName: 'vh_logo_blue.svg',
       filePath: '/assets/img/logo/vh_logo_blue.svg',
-      folder: 'logo',
       kind: 'ICON',
       altPt: '',
       altEn: '',
       altEs: '',
-      captionPt: '',
-      captionEn: '',
-      captionEs: '',
-      mimeType: 'image/svg+xml',
       width: '240',
       height: '96',
       sortOrder: '1',

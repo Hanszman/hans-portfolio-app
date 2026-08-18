@@ -159,18 +159,18 @@ export class ProjectsOperationsModalComponent {
             labelKey: 'pages.admin.operations.localized.shortDescription',
             value: resolveAdminLocalizedValue(
               this.translation.locale(),
-              project.shortDescriptionPt,
-              project.shortDescriptionEn,
-              project.shortDescriptionEs,
+              project.summaryPt,
+              project.summaryEn,
+              project.summaryEs,
             ),
           },
           {
             labelKey: 'pages.admin.operations.localized.fullDescription',
             value: resolveAdminLocalizedValue(
               this.translation.locale(),
-              project.fullDescriptionPt,
-              project.fullDescriptionEn,
-              project.fullDescriptionEs,
+              project.descriptionPt,
+              project.descriptionEn,
+              project.descriptionEs,
             ),
           },
           {

@@ -1,9 +1,4 @@
-<button
-  type="button"
-  class="skill-card-button"
-  [attr.data-kind]="item().kind"
-  (click)="requestDetails()"
->
+<ng-template #skillCardContent>
   <hans-card
     class="skill-card"
     [cardLayout]="'custom'"
@@ -54,4 +49,19 @@
       }
     </article>
   </hans-card>
-</button>
+</ng-template>
+
+@if (item().kind === 'language') {
+  <div class="skill-card-button" [attr.data-kind]="item().kind">
+    <ng-container [ngTemplateOutlet]="skillCardContent"></ng-container>
+  </div>
+} @else {
+  <button
+    type="button"
+    class="skill-card-button"
+    [attr.data-kind]="item().kind"
+    (click)="requestDetails()"
+  >
+    <ng-container [ngTemplateOutlet]="skillCardContent"></ng-container>
+  </button>
+}

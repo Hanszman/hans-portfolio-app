@@ -8,30 +8,44 @@ export type TechnologyContextKey =
 
 export type TechnologyStack =
   | 'BACK_END'
+  | 'CONCEPTS'
   | 'DATABASES'
+  | 'DEVOPS'
   | 'FRONT_END'
   | 'GAMES'
   | 'MOBILE'
-  | 'OTHERS';
+  | 'OTHERS'
+  | 'TESTING';
 
 export type TechnologyType =
+  | 'ARCHITECTURES'
+  | 'ARTIFICIAL_INTELLIGENCES'
+  | 'BUILD_TOOLS'
   | 'CLOUD_HOSTING_PLATFORMS'
   | 'CODE_EDITORS'
   | 'DATABASES_MANAGEMENT_SYSTEMS'
   | 'DEPLOYMENT_TOOLS'
+  | 'DESIGN_PATTERNS'
   | 'DEVELOPMENT_PLATFORMS'
+  | 'DOCUMENTATION_TOOLS'
   | 'FRAMEWORKS'
   | 'LIBRARIES'
+  | 'MARKUP_AND_FORMAT_SYNTAXES'
   | 'METHODOLOGIES'
   | 'NON_RELATIONAL_DATABASES'
-  | 'OBJECT_NOTATIONS'
+  | 'ORMS'
   | 'OTHERS'
   | 'PACKAGE_MANAGERS'
   | 'PACKAGES'
+  | 'PREPROCESSORS'
+  | 'PRINCIPLES'
   | 'PROGRAMMING_LANGUAGES'
+  | 'PROGRAMMING_PARADIGMS'
   | 'PROTOCOLS'
   | 'RELATIONAL_DATABASES'
+  | 'RUNTIME_ENVIRONMENTS'
   | 'TECHNIQUES'
+  | 'TESTING_TOOLS'
   | 'VERSIONING_PLATFORMS'
   | 'WEB_LANGUAGES';
 
@@ -88,14 +102,12 @@ export interface TechnologyCollectionItemResponse {
   projectUsages?: TechnologyRelationRecord[] | null;
   experienceUses?: TechnologyRelationRecord[] | null;
   formationUses?: TechnologyRelationRecord[] | null;
-  links?: TechnologyRelationRecord[] | null;
   projectRelations?: TechnologyRelationRecord[] | null;
   experienceRelations?: TechnologyRelationRecord[] | null;
   formationRelations?: TechnologyRelationRecord[] | null;
   projectIds?: string[] | null;
   experienceIds?: string[] | null;
   formationIds?: string[] | null;
-  linkIds?: string[] | null;
   imageAssetIds?: string[] | null;
 }
 
@@ -103,7 +115,6 @@ export interface TechnologyRelationRecord {
   projectId?: string;
   experienceId?: string;
   formationId?: string;
-  linkId?: string;
   project?: {
     id: string;
     slug?: string;
@@ -126,13 +137,6 @@ export interface TechnologyRelationRecord {
     titleEn?: string | null;
     titleEs?: string | null;
   } | null;
-  link?: {
-    id: string;
-    url?: string | null;
-    labelPt?: string | null;
-    labelEn?: string | null;
-    labelEs?: string | null;
-  } | null;
 }
 
 export interface TechnologyMutationPayload {
@@ -147,7 +151,6 @@ export interface TechnologyMutationPayload {
   projectRelations: { projectId: string }[];
   experienceRelations: { experienceId: string }[];
   formationRelations: { formationId: string }[];
-  linkIds: string[];
   imageAssetIds: string[];
 }
 

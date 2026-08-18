@@ -141,7 +141,8 @@ export const DASHBOARD_ENVIRONMENT_LABEL_KEYS: Record<
 export const DASHBOARD_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
-  BEGINNER: 'taxonomy.skills.level.beginner',
+  BASIC: 'taxonomy.skills.level.basic',
+  STUDYING: 'common.states.studying',
 };
 
 export const DASHBOARD_FREQUENCY_LABEL_KEYS: Record<

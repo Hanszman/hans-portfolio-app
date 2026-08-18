@@ -330,7 +330,6 @@ Important public routes include:
 - `GET /links`
 - `GET /image-assets`
 - `GET /tags`
-- `GET /portfolio-settings`
 - `GET /dashboard`
 - `GET /dashboard/stack-distribution`
 - `GET /dashboard/project-contexts`

@@ -19,7 +19,6 @@ import { ProjectsOperationsComponent } from './components/projects-operations/pr
 import { ImageAssetsOperationsComponent } from './components/image-assets-operations/image-assets-operations.component';
 import { JobsOperationsComponent } from './components/jobs-operations/jobs-operations.component';
 import { LinksOperationsComponent } from './components/links-operations/links-operations.component';
-import { PortfolioSettingsOperationsComponent } from './components/portfolio-settings-operations/portfolio-settings-operations.component';
 import { SpokenLanguagesOperationsComponent } from './components/spoken-languages-operations/spoken-languages-operations.component';
 import {
   ADMIN_ENTITY_DEFINITIONS,
@@ -38,7 +37,6 @@ import {
   imports: [
     TranslatePipe,
     SectionHeaderComponent,
-    PortfolioSettingsOperationsComponent,
     LinksOperationsComponent,
     ImageAssetsOperationsComponent,
     SpokenLanguagesOperationsComponent,

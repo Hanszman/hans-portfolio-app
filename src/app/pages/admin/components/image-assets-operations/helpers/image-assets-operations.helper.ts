@@ -16,9 +16,6 @@ import {
   resolveImageAssetAltEn,
   resolveImageAssetAltEs,
   resolveImageAssetAltPt,
-  resolveImageAssetCaptionEn,
-  resolveImageAssetCaptionEs,
-  resolveImageAssetCaptionPt,
   resolveImageAssetExperienceIdFromRelation,
   resolveImageAssetFormationIdFromRelation,
   resolveImageAssetSpokenLanguageIdFromRelation,
@@ -209,15 +206,10 @@ export const buildImageAssetsFormValue = (
   return {
     fileName: imageAsset.fileName,
     filePath: imageAsset.filePath,
-    folder: imageAsset.folder,
     kind: imageAsset.kind ?? '',
     altPt: resolveImageAssetAltPt(imageAsset),
     altEn: resolveImageAssetAltEn(imageAsset),
     altEs: resolveImageAssetAltEs(imageAsset),
-    captionPt: resolveImageAssetCaptionPt(imageAsset),
-    captionEn: resolveImageAssetCaptionEn(imageAsset),
-    captionEs: resolveImageAssetCaptionEs(imageAsset),
-    mimeType: imageAsset.mimeType,
     width:
       imageAsset.width === null || imageAsset.width === undefined ? '' : String(imageAsset.width),
     height:
@@ -309,15 +301,10 @@ export const buildImageAssetsViewModels = (
         id: imageAsset.id,
         fileName: imageAsset.fileName,
         filePath: imageAsset.filePath,
-        folder: imageAsset.folder,
         kind: imageAsset.kind ?? '',
         altPt: resolveImageAssetAltPt(imageAsset),
         altEn: resolveImageAssetAltEn(imageAsset),
         altEs: resolveImageAssetAltEs(imageAsset),
-        captionPt: resolveImageAssetCaptionPt(imageAsset),
-        captionEn: resolveImageAssetCaptionEn(imageAsset),
-        captionEs: resolveImageAssetCaptionEs(imageAsset),
-        mimeType: imageAsset.mimeType,
         dimensionsLabel:
           imageAsset.width && imageAsset.height
             ? `${imageAsset.width} x ${imageAsset.height}`
@@ -356,9 +343,7 @@ export const buildImageAssetsMutationPayload = (
 ): ImageAssetsMutationBuildResult => {
   const fileName = formValue.fileName.trim();
   const filePath = formValue.filePath.trim();
-  const folder = formValue.folder.trim();
   const kind = formValue.kind.trim().toUpperCase();
-  const mimeType = formValue.mimeType.trim();
   const sortOrder = Number.parseInt(formValue.sortOrder.trim(), 10);
   const width = parseOptionalNumber(formValue.width);
   const height = parseOptionalNumber(formValue.height);
@@ -377,13 +362,6 @@ export const buildImageAssetsMutationPayload = (
     };
   }
 
-  if (!folder) {
-    return {
-      isValid: false,
-      errorKey: 'pages.admin.imageAssets.feedback.requiredFolder',
-    };
-  }
-
   if (!kind) {
     return {
       isValid: false,
@@ -395,13 +373,6 @@ export const buildImageAssetsMutationPayload = (
     return {
       isValid: false,
       errorKey: 'pages.admin.imageAssets.feedback.invalidKind',
-    };
-  }
-
-  if (!mimeType) {
-    return {
-      isValid: false,
-      errorKey: 'pages.admin.imageAssets.feedback.requiredMimeType',
     };
   }
 
@@ -424,15 +395,10 @@ export const buildImageAssetsMutationPayload = (
     payload: {
       fileName,
       filePath,
-      folder,
       kind,
       altPt: formValue.altPt.trim(),
       altEn: formValue.altEn.trim(),
       altEs: formValue.altEs?.trim() ?? '',
-      captionPt: formValue.captionPt.trim(),
-      captionEn: formValue.captionEn.trim(),
-      captionEs: formValue.captionEs?.trim() ?? '',
-      mimeType,
       width,
       height,
       sortOrder,

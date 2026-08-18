@@ -77,7 +77,7 @@ const mapCustomer = (
   summary: resolveLocalizedText(
     locale,
     { 'pt-br': customer.summaryPt, 'en-us': customer.summaryEn, 'es-es': customer.summaryEs },
-    customer.summaryEn,
+    customer.summaryEn ?? '',
   ),
   image: {
     src: buildExperienceAssetPath(
@@ -120,11 +120,11 @@ const mapProject = (
   summary: resolveLocalizedText(
     locale,
     {
-      'pt-br': project.shortDescriptionPt,
-      'en-us': project.shortDescriptionEn,
-      'es-es': project.shortDescriptionEs,
+      'pt-br': project.summaryPt,
+      'en-us': project.summaryEn,
+      'es-es': project.summaryEs,
     },
-    project.shortDescriptionEn,
+    project.summaryEn,
   ),
 });
 

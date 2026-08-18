@@ -23,15 +23,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   id: 'image-asset-1',
   fileName: 'vh_logo_blue.svg',
   filePath: '/assets/img/logo/vh_logo_blue.svg',
-  folder: 'logo',
   kind: 'ICON',
   altPt: 'Logo azul da Hans',
   altEn: 'Hans blue logo',
   altEs: 'Hans blue logo',
-  captionPt: 'Versao azul da marca.',
-  captionEn: 'Blue brand version.',
-  captionEs: 'Blue brand version.',
-  mimeType: 'image/svg+xml',
   width: 240,
   height: 96,
   sortOrder: 1,
@@ -53,12 +48,12 @@ const createProject = (
   titlePt: 'Portfolio remake',
   titleEn: 'Portfolio remake',
   titleEs: 'Portfolio remake',
-  shortDescriptionPt: 'Resumo',
-  shortDescriptionEn: 'Summary',
-  shortDescriptionEs: 'Summary',
-  fullDescriptionPt: 'Descricao',
-  fullDescriptionEn: 'Description',
-  fullDescriptionEs: 'Description',
+  summaryPt: 'Resumo',
+  summaryEn: 'Summary',
+  summaryEs: 'Summary',
+  descriptionPt: 'Descricao',
+  descriptionEn: 'Description',
+  descriptionEs: 'Description',
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
@@ -301,15 +296,10 @@ describe('ImageAssetsOperationsComponent', () => {
       openDeleteModal(imageAssetId: string): void;
       updateFileName(value: string): void;
       updateFilePath(value: string): void;
-      updateFolder(value: string): void;
       updateKind(value: string): void;
       updateAltPt(value: string): void;
       updateAltEn(value: string): void;
       updateAltEs(value: string): void;
-      updateCaptionPt(value: string): void;
-      updateCaptionEn(value: string): void;
-      updateCaptionEs(value: string): void;
-      updateMimeType(value: string): void;
       updateWidth(value: string): void;
       updateHeight(value: string): void;
       updateSortOrder(value: string): void;
@@ -326,15 +316,10 @@ describe('ImageAssetsOperationsComponent', () => {
     component.openCreateModal();
     component.updateFileName('brand-light.svg');
     component.updateFilePath('/assets/img/logo/brand-light.svg');
-    component.updateFolder('logo');
     component.updateKind('icon');
     component.updateAltPt('Logo claro');
     component.updateAltEn('Light logo');
     component.updateAltEs('Logo claro');
-    component.updateCaptionPt('Marca clara');
-    component.updateCaptionEn('Light brand');
-    component.updateCaptionEs('Marca clara');
-    component.updateMimeType('image/svg+xml');
     component.updateWidth('180');
     component.updateHeight('72');
     component.updateSortOrder('3');
@@ -350,15 +335,10 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(imageAssetsOperationsService.create).toHaveBeenCalledWith({
       fileName: 'brand-light.svg',
       filePath: '/assets/img/logo/brand-light.svg',
-      folder: 'logo',
       kind: 'ICON',
       altPt: 'Logo claro',
       altEn: 'Light logo',
       altEs: 'Logo claro',
-      captionPt: 'Marca clara',
-      captionEn: 'Light brand',
-      captionEs: 'Marca clara',
-      mimeType: 'image/svg+xml',
       width: 180,
       height: 72,
       sortOrder: 3,
@@ -396,9 +376,7 @@ describe('ImageAssetsOperationsComponent', () => {
       openCreateModal(): void;
       updateFileName(value: string): void;
       updateFilePath(value: string): void;
-      updateFolder(value: string): void;
       updateKind(value: string): void;
-      updateMimeType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -414,10 +392,6 @@ describe('ImageAssetsOperationsComponent', () => {
 
     component.updateFilePath('/assets/img/logo/vh_logo_blue.svg');
     await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredFolder');
-
-    component.updateFolder('logo');
-    await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredKind');
 
     component.updateKind('INVALID');
@@ -425,10 +399,6 @@ describe('ImageAssetsOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.invalidKind');
 
     component.updateKind('ICON');
-    await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.requiredMimeType');
-
-    component.updateMimeType('image/svg+xml');
     component.updateSortOrder('abc');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('common.feedback.invalidIntegerSortOrder');
@@ -449,9 +419,7 @@ describe('ImageAssetsOperationsComponent', () => {
       openDeleteModal(imageAssetId: string): void;
       updateFileName(value: string): void;
       updateFilePath(value: string): void;
-      updateFolder(value: string): void;
       updateKind(value: string): void;
-      updateMimeType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -465,9 +433,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.openCreateModal();
     component.updateFileName('brand-light.svg');
     component.updateFilePath('/assets/img/logo/brand-light.svg');
-    component.updateFolder('logo');
     component.updateKind('ICON');
-    component.updateMimeType('image/svg+xml');
     component.updateSortOrder('2');
     await component.submitModal();
     expect(component.modalFeedbackKey()).toBe('pages.admin.imageAssets.feedback.saveError');
@@ -591,9 +557,7 @@ describe('ImageAssetsOperationsComponent', () => {
       openCreateModal(): void;
       updateFileName(value: string): void;
       updateFilePath(value: string): void;
-      updateFolder(value: string): void;
       updateKind(value: string): void;
-      updateMimeType(value: string): void;
       updateSortOrder(value: string): void;
       submitModal(): Promise<void>;
       modalFeedbackKey(): string | null;
@@ -618,9 +582,7 @@ describe('ImageAssetsOperationsComponent', () => {
     component.openCreateModal();
     component.updateFileName('vh_logo_blue.svg');
     component.updateFilePath('/assets/img/logo/vh_logo_blue.svg');
-    component.updateFolder('logo');
     component.updateKind('ICON');
-    component.updateMimeType('image/svg+xml');
     component.updateSortOrder('1');
     component.modalModeSignal.set('update');
     await component.submitModal();

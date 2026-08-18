@@ -29,12 +29,12 @@ export interface ExperienceProjectResponse {
   titlePt: string;
   titleEn: string;
   titleEs?: string;
-  shortDescriptionPt: string;
-  shortDescriptionEn: string;
-  shortDescriptionEs?: string;
-  fullDescriptionPt: string;
-  fullDescriptionEn: string;
-  fullDescriptionEs?: string;
+  summaryPt: string;
+  summaryEn: string;
+  summaryEs?: string;
+  descriptionPt: string;
+  descriptionEn: string;
+  descriptionEs?: string;
   context: string;
   status: string;
   environment: string;
@@ -189,13 +189,11 @@ export interface ExperienceRelationRecord {
   projectId?: string;
   customerId?: string;
   jobId?: string;
-  linkId?: string;
   imageAssetId?: string;
   technology?: ExperienceRelationReference | null;
   project?: ExperienceRelationReference | null;
   customer?: ExperienceRelationReference | null;
   job?: ExperienceRelationReference | null;
-  link?: ExperienceRelationReference | null;
   imageAsset?: ExperienceRelationReference | null;
 }
 
@@ -222,13 +220,11 @@ export interface ExperienceRecord {
   projectIds?: string[] | null;
   customerIds?: string[] | null;
   jobIds?: string[] | null;
-  linkIds?: string[] | null;
   imageAssetIds?: string[] | null;
   technologies?: ExperienceRelationRecord[] | null;
   projects?: ExperienceRelationRecord[] | null;
   customers?: ExperienceRelationRecord[] | null;
   jobs?: ExperienceRelationRecord[] | null;
-  links?: ExperienceRelationRecord[] | null;
   imageAssets?: ExperienceRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
@@ -259,7 +255,6 @@ export interface ExperienceMutationPayload {
   projectIds: string[];
   customerIds: string[];
   jobIds: string[];
-  linkIds: string[];
   imageAssetIds: string[];
 }
 

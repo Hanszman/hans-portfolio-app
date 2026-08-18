@@ -7,7 +7,6 @@ import { FormationsService } from '../../core/api/formations/formations.service'
 import { ImageAssetsService } from '../../core/api/image-assets/image-assets.service';
 import { JobsService } from '../../core/api/jobs/jobs.service';
 import { LinksService } from '../../core/api/links/links.service';
-import { PortfolioSettingsService } from '../../core/api/portfolio-settings/portfolio-settings.service';
 import { SpokenLanguagesService } from '../../core/api/spoken-languages/spoken-languages.service';
 import { TechnologyContextsService } from '../../core/api/technology-contexts/technology-contexts.service';
 import { ExperiencesService } from '../../core/api/experiences/experiences.service';
@@ -122,35 +121,6 @@ describe('AdminComponent', () => {
                     imageAssetIds: ['image-asset-1'],
                     experiences: [],
                     imageAssets: [],
-                  },
-                ],
-                pagination: {
-                  page: 1,
-                  pageSize: 5,
-                  totalItems: 1,
-                  totalPages: 1,
-                  hasPreviousPage: false,
-                  hasNextPage: false,
-                },
-              }),
-            create: jasmine.createSpy(),
-            update: jasmine.createSpy(),
-            delete: jasmine.createSpy(),
-          },
-        },
-        {
-          provide: PortfolioSettingsService,
-          useValue: {
-            getAll: () =>
-              of({
-                data: [
-                  {
-                    id: 'setting-1',
-                    key: 'hero.metrics',
-                    value: {
-                      projects: 12,
-                    },
-                    description: 'Controls the highlighted portfolio metrics.',
                   },
                 ],
                 pagination: {
@@ -331,12 +301,12 @@ describe('AdminComponent', () => {
                     titlePt: 'Portfolio remake',
                     titleEn: 'Portfolio remake',
                     titleEs: 'Portfolio remake',
-                    shortDescriptionPt: 'Resumo',
-                    shortDescriptionEn: 'Summary',
-                    shortDescriptionEs: 'Summary',
-                    fullDescriptionPt: 'Descricao',
-                    fullDescriptionEn: 'Description',
-                    fullDescriptionEs: 'Description',
+                    summaryPt: 'Resumo',
+                    summaryEn: 'Summary',
+                    summaryEs: 'Summary',
+                    descriptionPt: 'Descricao',
+                    descriptionEn: 'Description',
+                    descriptionEs: 'Description',
                     context: 'personal',
                     status: 'in-progress',
                     environment: 'fullstack',
@@ -533,8 +503,7 @@ describe('AdminComponent', () => {
 
     expect(compiled.textContent).toContain('Admin workspace');
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('11 entity workflows');
-    expect(compiled.textContent).toContain('Portfolio settings');
+    expect(compiled.textContent).toContain('10 entity workflows');
     expect(compiled.textContent).toContain('Technologies');
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Image assets');
@@ -605,26 +574,6 @@ describe('AdminComponent', () => {
         },
         {
           provide: CustomersService,
-          useValue: {
-            getAll: () =>
-              of({
-                data: [],
-                pagination: {
-                  page: 1,
-                  pageSize: 5,
-                  totalItems: 0,
-                  totalPages: 0,
-                  hasPreviousPage: false,
-                  hasNextPage: false,
-                },
-              }),
-            create: jasmine.createSpy(),
-            update: jasmine.createSpy(),
-            delete: jasmine.createSpy(),
-          },
-        },
-        {
-          provide: PortfolioSettingsService,
           useValue: {
             getAll: () =>
               of({

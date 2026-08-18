@@ -1,11 +1,7 @@
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import {
   createEmptyJobsOperationsFormValue,
   createJobExperienceOptionViewModel,
-  createJobImageAssetOptionViewModel,
   resolveJobExperienceIdFromRelation,
-  resolveJobImageAssetIdFromRelation,
-  resolveJobImageAssetLabel,
 } from './jobs-operations.types';
 
 describe('jobs operations types', () => {
@@ -23,7 +19,6 @@ describe('jobs operations types', () => {
       highlight: true,
       sortOrder: '0',
       experienceIds: [],
-      imageAssetIds: [],
     });
   });
 
@@ -61,39 +56,6 @@ describe('jobs operations types', () => {
       title: 'Analista',
       subtitle: 'Ford',
     });
-
-    const imageAsset: ImageAssetRecord = {
-      id: 'image-asset-1',
-      fileName: 'ford.svg',
-      filePath: '/assets/img/customers/ford.svg',
-      folder: 'customers',
-      kind: 'ICON',
-      altPt: null,
-      altEn: null,
-      altEs: null,
-      captionPt: null,
-      captionEn: null,
-      captionEs: null,
-      mimeType: 'image/svg+xml',
-      width: 128,
-      height: 128,
-      sortOrder: 1,
-      projectIds: [],
-      experienceIds: [],
-      technologyIds: [],
-      formationIds: [],
-      spokenLanguageIds: [],
-      customerIds: [],
-      jobIds: ['job-1'],
-    };
-
-    expect(createJobImageAssetOptionViewModel(imageAsset)).toEqual({
-      id: 'image-asset-1',
-      title: 'ford.svg',
-      subtitle: '/assets/img/customers/ford.svg',
-      imageUrl: 'http://localhost:4200/assets/img/customers/ford.svg',
-    });
-    expect(resolveJobImageAssetLabel(imageAsset)).toBe('ford.svg (ICON)');
   });
 
   it('should resolve relation identifiers from direct or nested records', () => {
@@ -116,22 +78,5 @@ describe('jobs operations types', () => {
       }),
     ).toBe('experience-2');
     expect(resolveJobExperienceIdFromRelation({})).toBeNull();
-    expect(
-      resolveJobImageAssetIdFromRelation({
-        imageAssetId: 'image-asset-1',
-      }),
-    ).toBe('image-asset-1');
-    expect(
-      resolveJobImageAssetIdFromRelation({
-        imageAssetId: '',
-        imageAsset: {
-          id: 'image-asset-2',
-          fileName: 'acme.svg',
-          filePath: '/assets/img/customers/acme.svg',
-          kind: 'ICON',
-        },
-      }),
-    ).toBe('image-asset-2');
-    expect(resolveJobImageAssetIdFromRelation({})).toBeNull();
   });
 });

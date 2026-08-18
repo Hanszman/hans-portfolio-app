@@ -1,8 +1,8 @@
 import { TagModalImage } from '../tag/tag-modal/tag-modal.types';
 
-export type TechnologyLevelKey = 'BASIC' | 'INTERMEDIATE' | 'ADVANCED';
+export type TechnologyLevelKey = 'BASIC' | 'INTERMEDIATE' | 'ADVANCED' | 'STUDYING';
 
-export type TechnologyFrequencyKey = 'STUDYING' | 'PREVIOUSLY_USED' | 'OCCASIONAL' | 'FREQUENT';
+export type TechnologyFrequencyKey = 'RARE' | 'OCCASIONAL' | 'FREQUENT';
 
 export type TechnologyProgressColor = 'danger' | 'warning' | 'success';
 

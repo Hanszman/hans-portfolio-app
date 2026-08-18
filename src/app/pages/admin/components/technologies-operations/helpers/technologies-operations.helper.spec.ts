@@ -25,9 +25,7 @@ const image = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => (
   id: 'image-1',
   fileName: 'angular.png',
   filePath: '/assets/img/skills/angular.png',
-  folder: 'skills',
   kind: 'ICON',
-  mimeType: 'image/png',
   ...overrides,
 });
 
@@ -45,7 +43,6 @@ describe('technologies operations helper', () => {
       projectIds: [],
       experienceIds: [],
       formationIds: [],
-      linkIds: [],
       imageAssetIds: [],
     });
     expect(buildTechnologiesFormValue(technology())).toEqual({
@@ -60,7 +57,6 @@ describe('technologies operations helper', () => {
       projectIds: [],
       experienceIds: [],
       formationIds: [],
-      linkIds: [],
       imageAssetIds: ['image-1'],
     });
     expect(
@@ -84,7 +80,6 @@ describe('technologies operations helper', () => {
       projectIds: [],
       experienceIds: [],
       formationIds: [],
-      linkIds: [],
       imageAssetIds: [],
     });
     expect(
@@ -142,7 +137,6 @@ describe('technologies operations helper', () => {
             { formationId: 'formation-direct' },
             { formation: { id: 'formation-nested' } },
           ],
-          links: [{ linkId: 'link-direct' }, { link: { id: 'link-nested' } }],
         }),
       ),
     ).toEqual(
@@ -150,7 +144,6 @@ describe('technologies operations helper', () => {
         projectIds: ['project-direct', 'project-nested'],
         experienceIds: ['experience-direct', 'experience-nested'],
         formationIds: ['formation-direct', 'formation-nested'],
-        linkIds: ['link-direct', 'link-nested'],
       }),
     );
   });
@@ -204,7 +197,6 @@ describe('technologies operations helper', () => {
       projectIds: ['project-1', 'project-1'],
       experienceIds: ['experience-1'],
       formationIds: ['formation-1'],
-      linkIds: ['link-1'],
       imageAssetIds: ['image-1', 'image-1'],
     };
     expect(buildTechnologiesMutationPayload(form)).toEqual({
@@ -221,7 +213,6 @@ describe('technologies operations helper', () => {
         projectRelations: [{ projectId: 'project-1' }],
         experienceRelations: [{ experienceId: 'experience-1' }],
         formationRelations: [{ formationId: 'formation-1' }],
-        linkIds: ['link-1'],
         imageAssetIds: ['image-1'],
       },
     });

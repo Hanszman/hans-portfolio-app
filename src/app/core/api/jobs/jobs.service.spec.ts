@@ -27,7 +27,6 @@ const createJob = (): JobRecord => ({
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
-  imageAssetIds: ['image-asset-1'],
   createdAt: '2026-07-23T00:00:00.000Z',
   updatedAt: '2026-07-23T00:00:00.000Z',
 });
@@ -56,7 +55,6 @@ const createJobPayload = (): JobMutationPayload => ({
   highlight: true,
   sortOrder: 1,
   experienceIds: ['experience-1'],
-  imageAssetIds: ['image-asset-1'],
 });
 
 describe('JobsService', () => {

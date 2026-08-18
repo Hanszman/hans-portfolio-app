@@ -82,22 +82,32 @@ const TECHNOLOGY_TYPE_LABEL_KEYS: Record<string, AppTranslationKey> = {
   CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
   TECHNIQUES: 'taxonomy.skills.type.techniques',
   METHODOLOGIES: 'taxonomy.skills.type.methodologies',
-  OBJECT_NOTATIONS: 'taxonomy.skills.type.objectNotations',
+  ORMS: 'taxonomy.skills.type.orms',
+  MARKUP_AND_FORMAT_SYNTAXES: 'taxonomy.skills.type.markupAndFormatSyntaxes',
   PACKAGE_MANAGERS: 'taxonomy.skills.type.packageManagers',
   PACKAGES: 'taxonomy.skills.type.packages',
   VERSIONING_PLATFORMS: 'taxonomy.skills.type.versioningPlatforms',
   CLOUD_HOSTING_PLATFORMS: 'taxonomy.skills.type.cloudHostingPlatforms',
   DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
   DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
+  RUNTIME_ENVIRONMENTS: 'taxonomy.skills.type.runtimeEnvironments',
+  TESTING_TOOLS: 'taxonomy.skills.type.testingTools',
+  BUILD_TOOLS: 'taxonomy.skills.type.buildTools',
+  DOCUMENTATION_TOOLS: 'taxonomy.skills.type.documentationTools',
+  PREPROCESSORS: 'taxonomy.skills.type.preprocessors',
   PROTOCOLS: 'taxonomy.skills.type.protocols',
+  ARTIFICIAL_INTELLIGENCES: 'taxonomy.skills.type.artificialIntelligences',
+  DESIGN_PATTERNS: 'taxonomy.skills.type.designPatterns',
+  PROGRAMMING_PARADIGMS: 'taxonomy.skills.type.programmingParadigms',
+  ARCHITECTURES: 'taxonomy.skills.type.architectures',
+  PRINCIPLES: 'taxonomy.skills.type.principles',
   OTHERS: 'taxonomy.skills.stack.others',
 };
 
 const TECHNOLOGY_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
-  BASIC: 'taxonomy.skills.level.beginner',
-  BEGINNER: 'taxonomy.skills.level.beginner',
+  BASIC: 'taxonomy.skills.level.basic',
   STUDYING: 'common.states.studying',
 };
 
@@ -117,6 +127,7 @@ const LEVEL_PROGRESS: Record<
   TechnologyLevelKey,
   Pick<TechnologyProgressViewModel, 'value' | 'color'>
 > = {
+  STUDYING: { value: 15, color: 'danger' },
   BASIC: { value: 33, color: 'danger' },
   INTERMEDIATE: { value: 66, color: 'warning' },
   ADVANCED: { value: 100, color: 'success' },
@@ -126,9 +137,8 @@ const FREQUENCY_PROGRESS: Record<
   TechnologyFrequencyKey,
   Pick<TechnologyProgressViewModel, 'value' | 'color'>
 > = {
-  STUDYING: { value: 25, color: 'danger' },
-  PREVIOUSLY_USED: { value: 50, color: 'warning' },
-  OCCASIONAL: { value: 75, color: 'warning' },
+  RARE: { value: 33, color: 'danger' },
+  OCCASIONAL: { value: 66, color: 'warning' },
   FREQUENT: { value: 100, color: 'success' },
 };
 
@@ -215,8 +225,6 @@ const TECHNOLOGY_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   FREQUENT: 'taxonomy.skills.frequency.frequent',
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   RARE: 'taxonomy.skills.frequency.rare',
-  PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
-  STUDYING: 'common.states.studying',
 };
 
 const TECHNOLOGY_STACK_LABEL_KEYS = {
@@ -225,6 +233,9 @@ const TECHNOLOGY_STACK_LABEL_KEYS = {
   DATABASES: 'taxonomy.skills.stack.databases',
   GAMES: 'taxonomy.skills.stack.games',
   MOBILE: 'taxonomy.skills.stack.mobile',
+  TESTING: 'taxonomy.skills.stack.testing',
+  DEVOPS: 'taxonomy.skills.stack.devops',
+  CONCEPTS: 'taxonomy.skills.stack.concepts',
   OTHERS: 'taxonomy.skills.stack.others',
 } as const satisfies Record<string, AppTranslationKey>;
 

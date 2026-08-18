@@ -44,9 +44,7 @@ describe('spoken languages types helpers', () => {
         id: 'image-asset-1',
         fileName: 'usa.png',
         filePath: '/assets/img/skills/usa.png',
-        folder: 'skills',
         kind: 'ICON',
-        mimeType: 'image/png',
       }),
     ).toEqual({
       id: 'image-asset-1',
@@ -60,9 +58,7 @@ describe('spoken languages types helpers', () => {
         id: 'image-asset-1',
         fileName: 'usa.png',
         filePath: '/assets/img/skills/usa.png',
-        folder: 'skills',
         kind: 'ICON',
-        mimeType: 'image/png',
       }),
     ).toBe('usa.png (ICON)');
   });

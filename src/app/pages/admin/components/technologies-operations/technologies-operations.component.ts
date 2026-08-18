@@ -18,8 +18,6 @@ import { ExperiencesService } from '../../../../core/api/experiences/experiences
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { FormationsService } from '../../../../core/api/formations/formations.service';
 import { FormationRecord } from '../../../../core/api/formations/formations.types';
-import { LinksService } from '../../../../core/api/links/links.service';
-import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -59,7 +57,6 @@ export class TechnologiesOperationsComponent implements OnInit {
   private readonly projectsService = inject(ProjectsService);
   private readonly experiencesService = inject(ExperiencesService);
   private readonly formationsService = inject(FormationsService);
-  private readonly linksService = inject(LinksService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
   private readonly recordsSignal = signal<readonly TechnologyAdminRecord[]>([]);
@@ -67,7 +64,6 @@ export class TechnologiesOperationsComponent implements OnInit {
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
   private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
   private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
-  private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -101,13 +97,6 @@ export class TechnologiesOperationsComponent implements OnInit {
       id: item.id,
       title: item.titlePt,
       subtitle: item.institution,
-    })),
-  );
-  protected readonly linkOptions = computed(() =>
-    this.linksSignal().map((item) => ({
-      id: item.id,
-      title: item.labelPt ?? item.url,
-      subtitle: item.url,
     })),
   );
   protected readonly pagination = this.paginationSignal.asReadonly();
@@ -217,12 +206,8 @@ export class TechnologiesOperationsComponent implements OnInit {
     this.toggleRelation('formationIds', id);
   }
 
-  toggleLink(id: string): void {
-    this.toggleRelation('linkIds', id);
-  }
-
   private toggleRelation(
-    field: 'projectIds' | 'experienceIds' | 'formationIds' | 'linkIds' | 'imageAssetIds',
+    field: 'projectIds' | 'experienceIds' | 'formationIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.formSignal.update((form) => ({
@@ -256,7 +241,7 @@ export class TechnologiesOperationsComponent implements OnInit {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     try {
-      const [response, images, projects, experiences, formations, links] = await Promise.all([
+      const [response, images, projects, experiences, formations] = await Promise.all([
         firstValueFrom(this.service.getAll(page, this.pagination().pageSize, search)),
         loadAllAdminCatalogItems((catalogPage, pageSize) => this.imagesService.getAll(catalogPage, pageSize)),
         loadAllAdminCatalogItems((catalogPage, pageSize) =>
@@ -266,7 +251,6 @@ export class TechnologiesOperationsComponent implements OnInit {
           this.experiencesService.getExperiences(catalogPage, pageSize),
         ),
         loadAllAdminCatalogItems((catalogPage, pageSize) => this.formationsService.getAll(catalogPage, pageSize)),
-        loadAllAdminCatalogItems((catalogPage, pageSize) => this.linksService.getAll(catalogPage, pageSize)),
       ]);
       this.recordsSignal.set(response.data);
       this.paginationSignal.set(response.pagination);
@@ -274,7 +258,6 @@ export class TechnologiesOperationsComponent implements OnInit {
       this.projectsSignal.set(projects);
       this.experiencesSignal.set(experiences);
       this.formationsSignal.set(formations);
-      this.linksSignal.set(links);
     } catch {
       this.errorSignal.set('pages.admin.technologies.feedback.loadError');
       this.toast.showError('pages.admin.technologies.feedback.loadError');

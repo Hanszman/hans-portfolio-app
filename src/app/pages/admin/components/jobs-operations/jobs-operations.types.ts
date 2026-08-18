@@ -1,17 +1,10 @@
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import {
   JobExperienceRelationRecord,
-  JobImageAssetRelationRecord,
   JobMutationPayload,
 } from '../../../../core/api/jobs/jobs.types';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
-import {
-  AdminImageAssetOptionViewModel,
-  createAdminImageAssetOptionViewModel,
-  resolveAdminImageAssetLabel,
-} from '../../helpers/admin.helper';
 
 export type JobsOperationsModalMode =
   | 'create'
@@ -34,7 +27,6 @@ export interface JobsOperationsFormValue {
   highlight: boolean;
   sortOrder: string;
   experienceIds: readonly string[];
-  imageAssetIds: readonly string[];
 }
 
 export const JOBS_OPERATIONS_FIELDS = {
@@ -99,8 +91,6 @@ export interface JobExperienceOptionViewModel {
   subtitle: string;
 }
 
-export type JobImageAssetOptionViewModel = AdminImageAssetOptionViewModel;
-
 export interface JobOperationsViewModel {
   id: string;
   slug: string;
@@ -115,9 +105,7 @@ export interface JobOperationsViewModel {
   highlight: boolean;
   sortOrderLabel: string;
   experienceLabels: readonly string[];
-  imageAssetLabels: readonly string[];
   experienceIds: readonly string[];
-  imageAssetIds: readonly string[];
 }
 
 export interface JobsMutationBuildSuccess {
@@ -145,7 +133,6 @@ export const createEmptyJobsOperationsFormValue = (): JobsOperationsFormValue =>
   highlight: true,
   sortOrder: '0',
   experienceIds: [],
-  imageAssetIds: [],
 });
 
 export const createJobExperienceOptionViewModel = (
@@ -156,17 +143,6 @@ export const createJobExperienceOptionViewModel = (
   subtitle: experience.companyName,
 });
 
-export const createJobImageAssetOptionViewModel = (
-  imageAsset: ImageAssetRecord,
-): JobImageAssetOptionViewModel => createAdminImageAssetOptionViewModel(imageAsset);
-
 export const resolveJobExperienceIdFromRelation = (
   relation: JobExperienceRelationRecord,
 ): string | null => relation.experienceId || relation.experience?.id || null;
-
-export const resolveJobImageAssetIdFromRelation = (
-  relation: JobImageAssetRelationRecord,
-): string | null => relation.imageAssetId || relation.imageAsset?.id || null;
-
-export const resolveJobImageAssetLabel = (imageAsset: ImageAssetRecord): string =>
-  resolveAdminImageAssetLabel(imageAsset);

@@ -8,8 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
-import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import {
   JobMutationPayload,
@@ -31,7 +29,6 @@ import { loadAllAdminCatalogItems } from '../../helpers/admin.helper';
 import { JobsOperationsModalComponent } from './components/jobs-operations-modal/jobs-operations-modal.component';
 import {
   buildJobExperienceOptions,
-  buildJobImageAssetOptions,
   buildJobsFormValue,
   buildJobsMutationPayload,
   buildJobsViewModels,
@@ -54,13 +51,11 @@ import {
 export class JobsOperationsComponent implements OnInit {
   private readonly jobsOperationsService = inject(JobsService);
   private readonly experiencesService = inject(ExperiencesService);
-  private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
 
   private readonly jobsSignal = signal<readonly JobRecord[]>([]);
   private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
-  private readonly imageAssetsSignal = signal<readonly ImageAssetRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -77,13 +72,10 @@ export class JobsOperationsComponent implements OnInit {
   );
 
   protected readonly jobs = computed(() =>
-    buildJobsViewModels(this.jobsSignal(), this.experiencesSignal(), this.imageAssetsSignal()),
+    buildJobsViewModels(this.jobsSignal(), this.experiencesSignal()),
   );
   protected readonly experienceOptions = computed(() =>
     buildJobExperienceOptions(this.experiencesSignal()),
-  );
-  protected readonly imageAssetOptions = computed(() =>
-    buildJobImageAssetOptions(this.imageAssetsSignal()),
   );
   protected readonly isLoading = this.isLoadingSignal.asReadonly();
   protected readonly isSubmitting = this.isSubmittingSignal.asReadonly();
@@ -159,9 +151,7 @@ export class JobsOperationsComponent implements OnInit {
     }
 
     this.selectedJobSignal.set(job);
-    this.formSignal.set(
-      buildJobsFormValue(job, this.experiencesSignal(), this.imageAssetsSignal()),
-    );
+    this.formSignal.set(buildJobsFormValue(job, this.experiencesSignal()));
     this.clearModalFeedback();
     this.modalModeSignal.set('update');
   }
@@ -258,13 +248,6 @@ export class JobsOperationsComponent implements OnInit {
     }));
   }
 
-  toggleImageAsset(imageAssetId: string): void {
-    this.formSignal.update((formValue) => ({
-      ...formValue,
-      imageAssetIds: this.toggleSelection(formValue.imageAssetIds, imageAssetId),
-    }));
-  }
-
   async submitModal(): Promise<void> {
     const accessToken = this.adminSessionService.accessToken();
 
@@ -306,20 +289,16 @@ export class JobsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [jobsResponse, experiences, imageAssets] = await Promise.all([
+      const [jobsResponse, experiences] = await Promise.all([
         firstValueFrom(this.jobsOperationsService.getAll(page, this.pagination().pageSize, search)),
         loadAllAdminCatalogItems((catalogPage, pageSize) =>
           this.experiencesService.getExperiences(catalogPage, pageSize),
-        ),
-        loadAllAdminCatalogItems((catalogPage, pageSize) =>
-          this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
         ),
       ]);
 
       this.jobsSignal.set(jobsResponse.data);
       this.paginationSignal.set(jobsResponse.pagination);
       this.experiencesSignal.set(experiences);
-      this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.jobs.feedback.loadError');
       this.toastService.showError('pages.admin.jobs.feedback.loadError');

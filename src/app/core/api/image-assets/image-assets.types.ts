@@ -72,15 +72,10 @@ export interface ImageAssetRecord {
   id: string;
   fileName: string;
   filePath: string;
-  folder: string;
   kind: string;
   altPt?: string | null;
   altEn?: string | null;
   altEs?: string | null;
-  captionPt?: string | null;
-  captionEn?: string | null;
-  captionEs?: string | null;
-  mimeType: string;
   width?: number | null;
   height?: number | null;
   sortOrder?: number | null;
@@ -105,15 +100,10 @@ export interface ImageAssetRecord {
 export interface ImageAssetMutationPayload {
   fileName: string;
   filePath: string;
-  folder: string;
   kind: string;
   altPt: string;
   altEn: string;
   altEs?: string;
-  captionPt: string;
-  captionEn: string;
-  captionEs?: string;
-  mimeType: string;
   width: number | null;
   height: number | null;
   sortOrder: number;

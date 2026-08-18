@@ -1,10 +1,36 @@
 import { createExperiencesCollectionResponse } from '../../../core/api/mocks/experiences.mocks';
+import { ExperienceCollectionItemResponse } from '../../../core/api/experiences/experiences.types';
 import {
   formatExperienceDateRange,
   mapExperienceToTimelineItem,
 } from './experiences.helper';
 
 describe('experiences helper', () => {
+  it('should fallback the customer summary to an empty string when every locale is missing', () => {
+    const experience = createExperiencesCollectionResponse().data[0];
+    const experienceWithoutCustomerSummary = {
+      ...experience,
+      customers: [
+        {
+          ...experience.customers[0],
+          customer: {
+            ...experience.customers[0].customer,
+            summaryPt: undefined,
+            summaryEn: undefined,
+            summaryEs: undefined,
+          },
+        },
+      ],
+    } as unknown as ExperienceCollectionItemResponse;
+
+    const timelineItem = mapExperienceToTimelineItem(
+      experienceWithoutCustomerSummary,
+      'en-us',
+    );
+
+    expect(timelineItem.customers[0].summary).toBe('');
+  });
+
   it('should format an experience date range for both active and finished chapters', () => {
     expect(
       formatExperienceDateRange('2021-09-23T00:00:00.000Z', null, 'en-us'),

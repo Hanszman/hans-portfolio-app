@@ -71,7 +71,6 @@ export class TechnologiesOperationsModalComponent {
   readonly projectOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly experienceOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly formationOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
-  readonly linkOptions = input<readonly TechnologyRelationOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
   readonly feedbackKey = input<AppTranslationKey | null>(null);
@@ -88,7 +87,6 @@ export class TechnologiesOperationsModalComponent {
   readonly projectToggled = output<string>();
   readonly experienceToggled = output<string>();
   readonly formationToggled = output<string>();
-  readonly linkToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
@@ -169,10 +167,6 @@ export class TechnologiesOperationsModalComponent {
           {
             labelKey: 'common.entities.formations',
             value: relationValue(technology.formationLabels),
-          },
-          {
-            labelKey: 'common.entities.links',
-            value: relationValue(technology.linkLabels),
           },
           {
             labelKey: 'common.entities.imageAssets',

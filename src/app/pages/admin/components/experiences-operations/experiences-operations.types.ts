@@ -43,7 +43,6 @@ export interface ExperiencesOperationsFormValue {
   projectIds: readonly string[];
   customerIds: readonly string[];
   jobIds: readonly string[];
-  linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
 
@@ -180,14 +179,13 @@ export const createEmptyExperiencesOperationsFormValue = (): ExperiencesOperatio
   projectIds: [],
   customerIds: [],
   jobIds: [],
-  linkIds: [],
   imageAssetIds: [],
 });
 
 export const createExperienceImageAssetOption = (
   item: ImageAssetRecord,
 ): ExperienceImageAssetOption => createAdminImageAssetOptionViewModel(item);
-type ExperienceRelationKey = 'technology' | 'project' | 'customer' | 'job' | 'link' | 'imageAsset';
+type ExperienceRelationKey = 'technology' | 'project' | 'customer' | 'job' | 'imageAsset';
 
 interface ExperienceRelationConfig {
   readonly directIds: keyof ExperienceRecord;
@@ -212,7 +210,6 @@ const EXPERIENCE_RELATION_KEYS: Record<ExperienceRelationKey, ExperienceRelation
     nested: 'customer',
   },
   job: { directIds: 'jobIds', collections: ['jobs'], nested: 'job' },
-  link: { directIds: 'linkIds', collections: ['links'], nested: 'link' },
   imageAsset: {
     directIds: 'imageAssetIds',
     collections: ['imageAssets'],
@@ -222,7 +219,7 @@ const EXPERIENCE_RELATION_KEYS: Record<ExperienceRelationKey, ExperienceRelation
 
 export const relationId = (
   relation: ExperienceRelationRecord,
-  key: 'technologyId' | 'projectId' | 'customerId' | 'jobId' | 'linkId' | 'imageAssetId',
+  key: 'technologyId' | 'projectId' | 'customerId' | 'jobId' | 'imageAssetId',
 ): string | null => {
   const relationName = key.replace('Id', '') as ExperienceRelationKey;
   const direct = relation[key];
@@ -235,7 +232,7 @@ export const relationId = (
 
 export const normalizeRelationIds = (
   record: ExperienceRecord,
-  key: 'technologyId' | 'projectId' | 'customerId' | 'jobId' | 'linkId' | 'imageAssetId',
+  key: 'technologyId' | 'projectId' | 'customerId' | 'jobId' | 'imageAssetId',
 ): readonly string[] => {
   const relationName = key.replace('Id', '') as ExperienceRelationKey;
   const config = EXPERIENCE_RELATION_KEYS[relationName];
@@ -284,7 +281,6 @@ export const buildExperiencesFormValue = (
         projectIds: normalizeRelationIds(record, 'projectId'),
         customerIds: normalizeRelationIds(record, 'customerId'),
         jobIds: normalizeRelationIds(record, 'jobId'),
-        linkIds: normalizeRelationIds(record, 'linkId'),
         imageAssetIds: normalizeRelationIds(record, 'imageAssetId'),
       }
     : createEmptyExperiencesOperationsFormValue();
@@ -353,7 +349,6 @@ export const buildExperiencesMutationPayload = (
       projectIds: [...new Set(form.projectIds)],
       customerIds: [...new Set(form.customerIds)],
       jobIds: [...new Set(form.jobIds)],
-      linkIds: [...new Set(form.linkIds)],
       imageAssetIds: [...new Set(form.imageAssetIds)],
     },
   };

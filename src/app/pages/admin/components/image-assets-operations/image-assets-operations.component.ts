@@ -275,10 +275,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.patchForm({ filePath: value });
   }
 
-  updateFolder(value: string): void {
-    this.patchForm({ folder: value });
-  }
-
   updateKind(value: string): void {
     this.patchForm({ kind: value });
   }
@@ -293,22 +289,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
 
   updateAltEs(value: string): void {
     this.patchForm({ altEs: value });
-  }
-
-  updateCaptionPt(value: string): void {
-    this.patchForm({ captionPt: value });
-  }
-
-  updateCaptionEn(value: string): void {
-    this.patchForm({ captionEn: value });
-  }
-
-  updateCaptionEs(value: string): void {
-    this.patchForm({ captionEs: value });
-  }
-
-  updateMimeType(value: string): void {
-    this.patchForm({ mimeType: value });
   }
 
   updateWidth(value: string): void {

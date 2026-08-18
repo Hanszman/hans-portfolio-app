@@ -47,17 +47,17 @@ export const CUSTOMERS_OPERATIONS_FIELDS = {
   summaryPt: {
     labelKey: 'pages.admin.jobs.fields.summaryPt.label',
     placeholderKey: 'pages.admin.customers.fields.summaryPt.placeholder',
-    required: true,
+    required: false,
   },
   summaryEn: {
     labelKey: 'pages.admin.jobs.fields.summaryEn.label',
     placeholderKey: 'pages.admin.customers.fields.summaryEn.placeholder',
-    required: true,
+    required: false,
   },
   summaryEs: {
     labelKey: 'common.fields.spanishSummary',
     placeholderKey: 'pages.admin.customers.fields.summaryEs.placeholder',
-    required: true,
+    required: false,
   },
   sortOrder: {
     labelKey: 'common.fields.sortOrder',

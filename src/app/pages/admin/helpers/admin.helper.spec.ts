@@ -297,12 +297,12 @@ describe('formatAdminIdentity', () => {
       ),
     ).toEqual([
       {
-        id: 'portfolio-settings',
-        endpoint: createAdminEntityEndpointLabel('/portfolio-settings'),
-        substep: 'F8.3',
+        id: 'links',
+        endpoint: createAdminEntityEndpointLabel('/links'),
+        substep: 'F8.5',
         relationModeLabel: 'pages.admin.relationMode.owner',
-        title: 'common.entities.portfolioSettings',
-        description: 'pages.admin.entities.portfolio-settings.description',
+        title: 'common.entities.links',
+        description: 'pages.admin.entities.links.description',
         operations: [
           {
             id: 'create',

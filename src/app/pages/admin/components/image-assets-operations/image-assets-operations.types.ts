@@ -39,15 +39,10 @@ export type ImageAssetsOperationsModalMode =
 export interface ImageAssetsOperationsFormValue {
   fileName: string;
   filePath: string;
-  folder: string;
   kind: string;
   altPt: string;
   altEn: string;
   altEs?: string;
-  captionPt: string;
-  captionEn: string;
-  captionEs?: string;
-  mimeType: string;
   width: string;
   height: string;
   sortOrder: string;
@@ -71,11 +66,6 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
     placeholderKey: 'pages.admin.imageAssets.fields.filePath.placeholder',
     required: true,
   },
-  folder: {
-    labelKey: 'common.fields.folder',
-    placeholderKey: 'pages.admin.imageAssets.fields.folder.placeholder',
-    required: true,
-  },
   kind: {
     labelKey: 'common.fields.kind',
     required: true,
@@ -94,26 +84,6 @@ export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
     labelKey: 'pages.admin.imageAssets.fields.altEs.label',
     placeholderKey: 'pages.admin.imageAssets.fields.altEs.placeholder',
     required: false,
-  },
-  captionPt: {
-    labelKey: 'pages.admin.imageAssets.fields.captionPt.label',
-    placeholderKey: 'pages.admin.imageAssets.fields.captionPt.placeholder',
-    required: false,
-  },
-  captionEn: {
-    labelKey: 'pages.admin.imageAssets.fields.captionEn.label',
-    placeholderKey: 'pages.admin.imageAssets.fields.captionEn.placeholder',
-    required: false,
-  },
-  captionEs: {
-    labelKey: 'pages.admin.imageAssets.fields.captionEs.label',
-    placeholderKey: 'pages.admin.imageAssets.fields.captionEs.placeholder',
-    required: false,
-  },
-  mimeType: {
-    labelKey: 'common.fields.mimeType',
-    placeholderKey: 'pages.admin.imageAssets.fields.mimeType.placeholder',
-    required: true,
   },
   width: {
     labelKey: 'pages.admin.imageAssets.fields.width.label',
@@ -148,15 +118,10 @@ export interface ImageAssetOperationsViewModel {
   id: string;
   fileName: string;
   filePath: string;
-  folder: string;
   kind: string;
   altPt: string;
   altEn: string;
   altEs?: string;
-  captionPt: string;
-  captionEn: string;
-  captionEs?: string;
-  mimeType: string;
   dimensionsLabel: string;
   sortOrderLabel: string;
   projectLabels: readonly string[];
@@ -186,15 +151,10 @@ export const createEmptyImageAssetsOperationsFormValue =
   (): ImageAssetsOperationsFormValue => ({
     fileName: '',
     filePath: '',
-    folder: '',
     kind: '',
     altPt: '',
     altEn: '',
     altEs: '',
-    captionPt: '',
-    captionEn: '',
-    captionEs: '',
-    mimeType: '',
     width: '',
     height: '',
     sortOrder: '0',
@@ -303,11 +263,3 @@ export const resolveImageAssetAltEn = (imageAsset: ImageAssetRecord): string =>
   imageAsset.altEn ?? '';
 export const resolveImageAssetAltEs = (imageAsset: ImageAssetRecord): string =>
   imageAsset.altEs ?? '';
-
-export const resolveImageAssetCaptionPt = (imageAsset: ImageAssetRecord): string =>
-  imageAsset.captionPt ?? '';
-
-export const resolveImageAssetCaptionEn = (imageAsset: ImageAssetRecord): string =>
-  imageAsset.captionEn ?? '';
-export const resolveImageAssetCaptionEs = (imageAsset: ImageAssetRecord): string =>
-  imageAsset.captionEs ?? '';

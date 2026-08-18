@@ -15,8 +15,6 @@ import {
 } from '../../../../core/api/formations/formations.types';
 import { ImageAssetsService } from '../../../../core/api/image-assets/image-assets.service';
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
-import { LinksService } from '../../../../core/api/links/links.service';
-import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
 import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
 import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
@@ -33,7 +31,6 @@ import {
 import { FormationsOperationsModalComponent } from './components/formations-operations-modal/formations-operations-modal.component';
 import {
   buildFormationImageAssetOptions,
-  buildFormationLinkOptions,
   buildFormationsFormValue,
   buildFormationsMutationPayload,
   buildFormationsViewModels,
@@ -62,7 +59,6 @@ import {
 export class FormationsOperationsComponent implements OnInit {
   private readonly formationsOperationsService = inject(FormationsService);
   private readonly technologiesService = inject(TechnologiesService);
-  private readonly linksOperationsService = inject(LinksService);
   private readonly imageAssetsOperationsService = inject(ImageAssetsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
@@ -70,7 +66,6 @@ export class FormationsOperationsComponent implements OnInit {
 
   private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
   private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
-  private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly imageAssetsSignal = signal<readonly ImageAssetRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
@@ -91,14 +86,12 @@ export class FormationsOperationsComponent implements OnInit {
     buildFormationsViewModels(
       this.formationsSignal(),
       this.technologiesSignal(),
-      this.linksSignal(),
       this.imageAssetsSignal(),
     ),
   );
   protected readonly technologyOptions = computed(() =>
     buildFormationTechnologyOptions(this.technologiesSignal()),
   );
-  protected readonly linkOptions = computed(() => buildFormationLinkOptions(this.linksSignal()));
   protected readonly imageAssetOptions = computed(() =>
     buildFormationImageAssetOptions(this.imageAssetsSignal()),
   );
@@ -289,13 +282,6 @@ export class FormationsOperationsComponent implements OnInit {
     }));
   }
 
-  toggleLink(linkId: string): void {
-    this.formSignal.update((formValue) => ({
-      ...formValue,
-      linkIds: this.toggleSelection(formValue.linkIds, linkId),
-    }));
-  }
-
   toggleImageAsset(imageAssetId: string): void {
     this.formSignal.update((formValue) => ({
       ...formValue,
@@ -344,16 +330,13 @@ export class FormationsOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [formationsResponse, technologies, links, imageAssets] =
+      const [formationsResponse, technologies, imageAssets] =
         await Promise.all([
           firstValueFrom(
             this.formationsOperationsService.getAll(page, this.pagination().pageSize, search),
           ),
           loadAllAdminCatalogItems((catalogPage, pageSize) =>
             this.technologiesService.getTechnologies(catalogPage, pageSize),
-          ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.linksOperationsService.getAll(catalogPage, pageSize),
           ),
           loadAllAdminCatalogItems((catalogPage, pageSize) =>
             this.imageAssetsOperationsService.getAll(catalogPage, pageSize),
@@ -363,7 +346,6 @@ export class FormationsOperationsComponent implements OnInit {
       this.formationsSignal.set(formationsResponse.data);
       this.paginationSignal.set(formationsResponse.pagination);
       this.technologiesSignal.set(technologies);
-      this.linksSignal.set(links);
       this.imageAssetsSignal.set(imageAssets);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.formations.feedback.loadError');

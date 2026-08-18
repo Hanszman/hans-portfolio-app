@@ -327,7 +327,7 @@ describe('SkillsComponent', () => {
     expect(technologiesText()).not.toContain('Docker');
   });
 
-  it('should filter studying technologies from level or frequency and games by stack', () => {
+  it('should filter studying and rare technologies from level or frequency and games by stack', () => {
     const fixture = TestBed.createComponent(SkillsComponent);
     fixture.detectChanges();
 
@@ -345,8 +345,17 @@ describe('SkillsComponent', () => {
             slug: 'unity',
             name: 'Unity',
             type: 'DEVELOPMENT_PLATFORMS',
-            level: null,
-            frequency: 'STUDYING',
+            level: 'STUDYING',
+            frequency: null,
+            highlight: false,
+          },
+          {
+            id: 'tech-rare',
+            slug: 'rare-tool',
+            name: 'RareTool',
+            type: 'DEVELOPMENT_PLATFORMS',
+            level: 'ADVANCED',
+            frequency: 'RARE',
             highlight: false,
           },
         ],
@@ -368,13 +377,14 @@ describe('SkillsComponent', () => {
     expect(technologiesText()).not.toContain('Angular');
 
     component.selectLevelFilter('ALL');
-    component.selectFrequencyFilterFromEvent({ detail: 'STUDYING' } as unknown as Event);
+    component.selectFrequencyFilterFromEvent({ detail: 'RARE' } as unknown as Event);
     fixture.detectChanges();
 
-    expect(component.selectedFrequency()).toBe('STUDYING');
-    expect(technologiesText()).toContain('Unity');
+    expect(component.selectedFrequency()).toBe('RARE');
+    expect(technologiesText()).toContain('RareTool');
     expect(technologiesText()).not.toContain('Angular');
 
+    component.selectFrequencyFilterFromEvent({ detail: 'ALL' } as unknown as Event);
     component.selectStackFilter('GAMES');
     fixture.detectChanges();
 
@@ -658,7 +668,6 @@ describe('SkillsComponent', () => {
       openSkillDetails: (skill: unknown) => void;
       selectedTechnology: () => unknown;
       selectedEducation: () => { title: string } | null;
-      selectedLanguage: () => { title: string } | null;
       openEducationTechnology: (technology: unknown) => void;
     };
     component.openSkillDetails(component.technologyCards()[0]);
@@ -673,13 +682,26 @@ describe('SkillsComponent', () => {
     component.openEducationTechnology(education.technologies[0].modal);
     expect(component.selectedEducation()).toBeNull();
     expect(component.selectedTechnology()).toBeTruthy();
-    component.openSkillDetails(component.languageCards()[0]);
-    expect(component.selectedLanguage()?.title).toBe('Portuguese');
-    component.openSkillDetails({
-      ...(component.languageCards()[0] as object),
-      slug: 'language-name-fallback',
-    });
-    expect(component.selectedLanguage()?.title).toBe('Portuguese');
+    expect(component.languageCards().length).toBeGreaterThan(0);
+  });
+
+  it('should not open a modal for language skill cards from the skill-card list', () => {
+    const fixture = TestBed.createComponent(SkillsComponent);
+    fixture.detectChanges();
+
+    const httpTestingController = TestBed.inject(HttpTestingController);
+    flushTechnologiesRequest(httpTestingController);
+    flushSkillCatalogRequests(httpTestingController);
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const languageCard = compiled.querySelector(
+      '.skills-panel-list app-skill-card [data-kind="language"]',
+    );
+
+    expect(languageCard).toBeTruthy();
+    expect(languageCard?.tagName).not.toBe('BUTTON');
+    expect(compiled.querySelector('app-spoken-language-modal')).toBeNull();
   });
 
   it('should clear dynamic formation and language cards when their catalogs fail', () => {

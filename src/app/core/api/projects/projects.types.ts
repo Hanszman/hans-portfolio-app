@@ -105,12 +105,12 @@ export interface ProjectCollectionItemResponse {
   titlePt: string;
   titleEn: string;
   titleEs?: string;
-  shortDescriptionPt: string;
-  shortDescriptionEn: string;
-  shortDescriptionEs?: string;
-  fullDescriptionPt: string;
-  fullDescriptionEn: string;
-  fullDescriptionEs?: string;
+  summaryPt: string;
+  summaryEn: string;
+  summaryEs?: string;
+  descriptionPt: string;
+  descriptionEn: string;
+  descriptionEs?: string;
   context: string;
   status: string;
   environment: string;
@@ -132,7 +132,12 @@ export type ProjectsCollectionResponse =
 
 export type ProjectContext = 'PROFESSIONAL' | 'PERSONAL' | 'ACADEMIC' | 'STUDY';
 
-export type ProjectStatus = 'COMPLETED' | 'IN_PROGRESS' | 'ARCHIVED' | 'PLANNED';
+export type ProjectStatus =
+  | 'COMPLETED'
+  | 'IN_PROGRESS'
+  | 'ARCHIVED'
+  | 'PLANNED'
+  | 'ABANDONED';
 
 export type ProjectEnvironment =
   | 'FRONTEND'
@@ -140,7 +145,7 @@ export type ProjectEnvironment =
   | 'FULLSTACK'
   | 'MOBILE'
   | 'LIBRARY'
-  | 'DASHBOARD';
+  | 'OTHER';
 
 export interface ProjectRelationReference {
   id: string;
@@ -181,12 +186,12 @@ export interface ProjectRecord {
   titlePt: string;
   titleEn: string;
   titleEs?: string;
-  shortDescriptionPt: string;
-  shortDescriptionEn: string;
-  shortDescriptionEs?: string;
-  fullDescriptionPt: string;
-  fullDescriptionEn: string;
-  fullDescriptionEs?: string;
+  summaryPt: string;
+  summaryEn: string;
+  summaryEs?: string;
+  descriptionPt: string;
+  descriptionEn: string;
+  descriptionEs?: string;
   context: ProjectContext;
   status: ProjectStatus;
   environment: ProjectEnvironment;
@@ -217,12 +222,12 @@ export interface ProjectMutationPayload {
   titlePt: string;
   titleEn: string;
   titleEs?: string;
-  shortDescriptionPt: string;
-  shortDescriptionEn: string;
-  shortDescriptionEs?: string;
-  fullDescriptionPt: string;
-  fullDescriptionEn: string;
-  fullDescriptionEs?: string;
+  summaryPt: string;
+  summaryEn: string;
+  summaryEs?: string;
+  descriptionPt: string;
+  descriptionEn: string;
+  descriptionEs?: string;
   context: ProjectContext;
   status: ProjectStatus;
   environment: ProjectEnvironment;

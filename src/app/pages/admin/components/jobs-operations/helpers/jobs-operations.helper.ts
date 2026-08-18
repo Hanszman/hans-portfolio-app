@@ -1,4 +1,3 @@
-import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 import { JobRecord } from '../../../../../core/api/jobs/jobs.types';
 import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import {
@@ -8,26 +7,17 @@ import {
 } from '../../../helpers/admin.helper';
 import {
   JobExperienceOptionViewModel,
-  JobImageAssetOptionViewModel,
   JobOperationsViewModel,
   JobsMutationBuildResult,
   JobsOperationsFormValue,
   createEmptyJobsOperationsFormValue,
   createJobExperienceOptionViewModel,
-  createJobImageAssetOptionViewModel,
   resolveJobExperienceIdFromRelation,
-  resolveJobImageAssetIdFromRelation,
-  resolveJobImageAssetLabel,
 } from '../jobs-operations.types';
 
 const sortExperienceOptions = (
   left: JobExperienceOptionViewModel,
   right: JobExperienceOptionViewModel,
-): number => left.title.localeCompare(right.title);
-
-const sortImageAssetOptions = (
-  left: JobImageAssetOptionViewModel,
-  right: JobImageAssetOptionViewModel,
 ): number => left.title.localeCompare(right.title);
 
 const appendUnique = (collection: Set<string>, value: string | null | undefined): void => {
@@ -40,11 +30,6 @@ const createExperienceMap = (
   experiences: readonly ExperienceCollectionItemResponse[],
 ): Map<string, ExperienceCollectionItemResponse> =>
   new Map(experiences.map((experience) => [experience.id, experience]));
-
-const createImageAssetMap = (
-  imageAssets: readonly ImageAssetRecord[],
-): Map<string, ImageAssetRecord> =>
-  new Map(imageAssets.map((imageAsset) => [imageAsset.id, imageAsset]));
 
 const resolveJobExperienceIdsFromCatalog = (
   job: JobRecord,
@@ -61,14 +46,6 @@ const resolveJobExperienceIdsFromCatalog = (
     )
     .map((experience) => experience.id);
 
-const resolveJobImageAssetIdsFromCatalog = (
-  job: JobRecord,
-  imageAssets: readonly ImageAssetRecord[],
-): readonly string[] =>
-  imageAssets
-    .filter((imageAsset) => (imageAsset.jobIds ?? []).includes(job.id))
-    .map((imageAsset) => imageAsset.id);
-
 const resolveExperienceLabel = (
   experienceId: string,
   experienceMap: Map<string, ExperienceCollectionItemResponse>,
@@ -78,24 +55,10 @@ const resolveExperienceLabel = (
   return experience ? `${experience.titlePt} (${experience.companyName})` : experienceId;
 };
 
-const resolveImageAssetLabel = (
-  imageAssetId: string,
-  imageAssetMap: Map<string, ImageAssetRecord>,
-): string => {
-  const imageAsset = imageAssetMap.get(imageAssetId);
-
-  return imageAsset ? resolveJobImageAssetLabel(imageAsset) : imageAssetId;
-};
-
 export const buildJobExperienceOptions = (
   experiences: readonly ExperienceCollectionItemResponse[],
 ): readonly JobExperienceOptionViewModel[] =>
   [...experiences].map(createJobExperienceOptionViewModel).sort(sortExperienceOptions);
-
-export const buildJobImageAssetOptions = (
-  imageAssets: readonly ImageAssetRecord[],
-): readonly JobImageAssetOptionViewModel[] =>
-  [...imageAssets].map(createJobImageAssetOptionViewModel).sort(sortImageAssetOptions);
 
 export const normalizeJobExperienceIds = (
   job: JobRecord,
@@ -118,31 +81,9 @@ export const normalizeJobExperienceIds = (
   return [...experienceIds];
 };
 
-export const normalizeJobImageAssetIds = (
-  job: JobRecord,
-  imageAssets: readonly ImageAssetRecord[],
-): readonly string[] => {
-  const imageAssetIds = new Set<string>();
-
-  for (const imageAssetId of job.imageAssetIds ?? []) {
-    appendUnique(imageAssetIds, imageAssetId);
-  }
-
-  for (const relation of job.imageAssets ?? []) {
-    appendUnique(imageAssetIds, resolveJobImageAssetIdFromRelation(relation));
-  }
-
-  for (const imageAssetId of resolveJobImageAssetIdsFromCatalog(job, imageAssets)) {
-    appendUnique(imageAssetIds, imageAssetId);
-  }
-
-  return [...imageAssetIds];
-};
-
 export const buildJobsFormValue = (
   job: JobRecord | null | undefined,
   experiences: readonly ExperienceCollectionItemResponse[],
-  imageAssets: readonly ImageAssetRecord[],
 ): JobsOperationsFormValue => {
   if (!job) {
     return createEmptyJobsOperationsFormValue();
@@ -161,17 +102,14 @@ export const buildJobsFormValue = (
     highlight: job.highlight ?? false,
     sortOrder: String(job.sortOrder ?? 0),
     experienceIds: normalizeJobExperienceIds(job, experiences),
-    imageAssetIds: normalizeJobImageAssetIds(job, imageAssets),
   };
 };
 
 export const buildJobsViewModels = (
   jobs: readonly JobRecord[],
   experiences: readonly ExperienceCollectionItemResponse[],
-  imageAssets: readonly ImageAssetRecord[],
 ): readonly JobOperationsViewModel[] => {
   const experienceMap = createExperienceMap(experiences);
-  const imageAssetMap = createImageAssetMap(imageAssets);
 
   return [...jobs]
     .sort((left, right) => {
@@ -186,7 +124,6 @@ export const buildJobsViewModels = (
     })
     .map((job) => {
       const experienceIds = normalizeJobExperienceIds(job, experiences);
-      const imageAssetIds = normalizeJobImageAssetIds(job, imageAssets);
 
       return {
         id: job.id,
@@ -204,11 +141,7 @@ export const buildJobsViewModels = (
         experienceLabels: experienceIds.map((experienceId) =>
           resolveExperienceLabel(experienceId, experienceMap),
         ),
-        imageAssetLabels: imageAssetIds.map((imageAssetId) =>
-          resolveImageAssetLabel(imageAssetId, imageAssetMap),
-        ),
         experienceIds,
-        imageAssetIds,
       };
     });
 };
@@ -288,7 +221,6 @@ export const buildJobsMutationPayload = (
       highlight: formValue.highlight,
       sortOrder,
       experienceIds: [...new Set(formValue.experienceIds)],
-      imageAssetIds: [...new Set(formValue.imageAssetIds)],
     },
   };
 };

@@ -7,14 +7,6 @@ export interface FormationTechnologyReference {
   highlight?: boolean | null;
 }
 
-export interface FormationLinkReference {
-  id: string;
-  url?: string | null;
-  labelPt?: string | null;
-  labelEn?: string | null;
-  labelEs?: string | null;
-}
-
 export interface FormationImageAssetReference {
   id: string;
   fileName?: string | null;
@@ -29,11 +21,6 @@ export interface FormationTechnologyRelationRecord {
   technologyId?: string;
   sortOrder?: number | null;
   technology?: FormationTechnologyReference | null;
-}
-
-export interface FormationLinkRelationRecord {
-  linkId?: string;
-  link?: FormationLinkReference | null;
 }
 
 export interface FormationImageAssetRelationRecord {
@@ -58,10 +45,8 @@ export interface FormationRecord {
   highlight?: boolean | null;
   sortOrder?: number | null;
   technologyRelations?: FormationTechnologyRelationRecord[] | null;
-  linkIds?: string[] | null;
   imageAssetIds?: string[] | null;
   technologies?: FormationTechnologyRelationRecord[] | null;
-  links?: FormationLinkRelationRecord[] | null;
   imageAssets?: FormationImageAssetRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
@@ -86,7 +71,6 @@ export interface FormationMutationPayload {
   highlight: boolean;
   sortOrder: number;
   technologyRelations: FormationTechnologyRelationPayload[];
-  linkIds: string[];
   imageAssetIds: string[];
 }
 

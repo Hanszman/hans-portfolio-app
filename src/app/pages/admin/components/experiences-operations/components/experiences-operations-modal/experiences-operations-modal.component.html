@@ -147,15 +147,6 @@
       />
 
       <app-operations-relation-picker
-        [label]="'common.relations.links' | translate"
-        [description]="'pages.admin.experiences.fields.links.description' | translate"
-        [emptyMessage]="'common.empty.links' | translate"
-        [options]="linkOptions()"
-        [selectedIds]="form()?.linkIds ?? []"
-        (toggled)="relation('linkIds', $event)"
-      />
-
-      <app-operations-relation-picker
         [label]="'common.relations.imageAssets' | translate"
         [description]="'pages.admin.experiences.fields.imageAssets.description' | translate"
         [emptyMessage]="'common.empty.imageAssets' | translate"

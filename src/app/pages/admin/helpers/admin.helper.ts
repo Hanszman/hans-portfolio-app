@@ -348,7 +348,6 @@ export interface AdminSessionFactViewModel {
 }
 
 const ADMIN_ENTITY_TITLE_KEYS: Record<AdminEntityDefinition['id'], AppTranslationKey> = {
-  'portfolio-settings': 'common.entities.portfolioSettings',
   links: 'common.entities.links',
   'image-assets': 'common.entities.imageAssets',
   'spoken-languages': 'common.entities.languages',

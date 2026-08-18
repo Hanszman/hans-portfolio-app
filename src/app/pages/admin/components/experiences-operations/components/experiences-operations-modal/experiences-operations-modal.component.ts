@@ -58,7 +58,6 @@ export class ExperiencesOperationsModalComponent {
   readonly projectOptions = input<readonly ExperienceOption[]>([]);
   readonly customerOptions = input<readonly ExperienceOption[]>([]);
   readonly jobOptions = input<readonly ExperienceOption[]>([]);
-  readonly linkOptions = input<readonly ExperienceOption[]>([]);
   readonly imageAssetOptions = input<readonly (ExperienceOption & { imageUrl: string })[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
@@ -70,7 +69,7 @@ export class ExperiencesOperationsModalComponent {
   readonly fieldChanged = output<{ field: keyof ExperiencesOperationsFormValue; value: string }>();
   readonly booleanChanged = output<{ field: 'isCurrent' | 'highlight'; value: boolean }>();
   readonly relationToggled = output<{
-    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds';
+    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'imageAssetIds';
     id: string;
   }>();
   readonly submitted = output<void>();
@@ -202,10 +201,6 @@ export class ExperiencesOperationsModalComponent {
             value: relationValue(experience.jobs, 'job'),
           },
           {
-            labelKey: 'common.relations.links',
-            value: relationValue(experience.links, 'link'),
-          },
-          {
             labelKey: 'common.relations.imageAssets',
             value: relationValue(experience.imageAssets, 'imageAsset'),
           },
@@ -250,7 +245,7 @@ export class ExperiencesOperationsModalComponent {
   }
 
   protected relation(
-    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.relationToggled.emit({ field, id });
@@ -265,7 +260,7 @@ export class ExperiencesOperationsModalComponent {
   }
 
   protected selected(
-    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'imageAssetIds',
     id: string,
   ): boolean {
     return this.form()?.[field].includes(id) ?? false;

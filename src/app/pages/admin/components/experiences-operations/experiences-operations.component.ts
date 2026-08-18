@@ -14,8 +14,6 @@ import { ImageAssetsService } from '../../../../core/api/image-assets/image-asse
 import { ImageAssetRecord } from '../../../../core/api/image-assets/image-assets.types';
 import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import { JobRecord } from '../../../../core/api/jobs/jobs.types';
-import { LinksService } from '../../../../core/api/links/links.service';
-import { LinkRecord } from '../../../../core/api/links/links.types';
 import { CustomersService } from '../../../../core/api/customers/customers.service';
 import { CustomerRecord } from '../../../../core/api/customers/customers.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
@@ -58,7 +56,6 @@ export class ExperiencesOperationsComponent implements OnInit {
   private readonly projects = inject(ProjectsService);
   private readonly customers = inject(CustomersService);
   private readonly jobs = inject(JobsService);
-  private readonly links = inject(LinksService);
   private readonly images = inject(ImageAssetsService);
   private readonly session = inject(AdminSessionService);
   private readonly toast = inject(ToastService);
@@ -92,7 +89,6 @@ export class ExperiencesOperationsComponent implements OnInit {
   protected readonly projectOptions = signal<readonly ExperienceOption[]>([]);
   protected readonly customerOptions = signal<readonly ExperienceOption[]>([]);
   protected readonly jobOptions = signal<readonly ExperienceOption[]>([]);
-  protected readonly linkOptions = signal<readonly ExperienceOption[]>([]);
   protected readonly imageAssetOptions = signal<
     readonly { id: string; title: string; subtitle: string; imageUrl: string }[]
   >([]);
@@ -187,7 +183,7 @@ export class ExperiencesOperationsComponent implements OnInit {
   }
 
   toggle(
-    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'linkIds' | 'imageAssetIds',
+    field: 'technologyIds' | 'projectIds' | 'customerIds' | 'jobIds' | 'imageAssetIds',
     id: string,
   ): void {
     this.formSignal.update((form) => ({
@@ -279,14 +275,13 @@ export class ExperiencesOperationsComponent implements OnInit {
 
   private async refreshCatalogs(): Promise<void> {
     try {
-      const [tech, projects, customers, jobs, links, images] = await Promise.all([
+      const [tech, projects, customers, jobs, images] = await Promise.all([
         loadAllAdminCatalogItems((page, pageSize) =>
           this.technologies.getTechnologies(page, pageSize),
         ),
         loadAllAdminCatalogItems((page, pageSize) => this.projects.getProjects(page, pageSize)),
         loadAllAdminCatalogItems((page, pageSize) => this.customers.getAll(page, pageSize)),
         loadAllAdminCatalogItems((page, pageSize) => this.jobs.getAll(page, pageSize)),
-        loadAllAdminCatalogItems((page, pageSize) => this.links.getAll(page, pageSize)),
         loadAllAdminCatalogItems((page, pageSize) => this.images.getAll(page, pageSize)),
       ]);
       this.technologyOptions.set(
@@ -308,13 +303,6 @@ export class ExperiencesOperationsComponent implements OnInit {
       );
       this.jobOptions.set(
         jobs.map((x: JobRecord) => ({ id: x.id, title: x.namePt, subtitle: x.slug })),
-      );
-      this.linkOptions.set(
-        links.map((x: LinkRecord) => ({
-          id: x.id,
-          title: x.labelPt ?? x.labelEn ?? x.url,
-          subtitle: x.url,
-        })),
       );
       this.imageAssetOptions.set(
         images.map((x: ImageAssetRecord) => ({

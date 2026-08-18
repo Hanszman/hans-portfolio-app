@@ -6,7 +6,6 @@ import {
 import { FormationRecord } from '../../../core/api/formations/formations.types';
 import { SpokenLanguageRecord } from '../../../core/api/spoken-languages/spoken-languages.types';
 import { EducationModalItem } from '../../../shared/education-modal/education-modal.types';
-import { SpokenLanguageModalItem } from '../../../shared/spoken-language-modal/spoken-language-modal.types';
 import { mapTechnologyContextPeriods } from '../../../shared/technology-modal/helpers/technology-modal.helper';
 import {
   resolveLocalizedText,
@@ -99,84 +98,6 @@ const MOBILE_TECHNOLOGY_SLUGS = new Set(['react-native', 'expo']);
 
 const GAME_TECHNOLOGY_SLUGS = new Set(['unity']);
 
-const LEGACY_TYPE_BY_SLUG: Record<string, SkillTypeFilterValue> = {
-  ajax: 'TECHNIQUES',
-  angular: 'FRAMEWORKS',
-  aws: 'CLOUD_HOSTING_PLATFORMS',
-  azure: 'VERSIONING_PLATFORMS',
-  bootstrap: 'FRAMEWORKS',
-  chart: 'LIBRARIES',
-  'chart-js': 'LIBRARIES',
-  cicd: 'METHODOLOGIES',
-  'ci-cd': 'METHODOLOGIES',
-  composer: 'PACKAGE_MANAGERS',
-  css: 'WEB_LANGUAGES',
-  csharp: 'PROGRAMMING_LANGUAGES',
-  'c-sharp': 'PROGRAMMING_LANGUAGES',
-  dbeaver: 'DATABASES_MANAGEMENT_SYSTEMS',
-  docker: 'DEPLOYMENT_TOOLS',
-  expo: 'DEVELOPMENT_PLATFORMS',
-  express: 'FRAMEWORKS',
-  'express-js': 'FRAMEWORKS',
-  ftp: 'PROTOCOLS',
-  gcp: 'CLOUD_HOSTING_PLATFORMS',
-  git: 'VERSIONING_PLATFORMS',
-  github: 'VERSIONING_PLATFORMS',
-  gitlab: 'VERSIONING_PLATFORMS',
-  heroku: 'CLOUD_HOSTING_PLATFORMS',
-  html: 'WEB_LANGUAGES',
-  http: 'PROTOCOLS',
-  java: 'PROGRAMMING_LANGUAGES',
-  javascript: 'PROGRAMMING_LANGUAGES',
-  jenkins: 'DEPLOYMENT_TOOLS',
-  jest: 'LIBRARIES',
-  jquery: 'LIBRARIES',
-  json: 'OBJECT_NOTATIONS',
-  jsx: 'TECHNIQUES',
-  kanban: 'METHODOLOGIES',
-  knex: 'LIBRARIES',
-  'knex-js': 'LIBRARIES',
-  laravel: 'FRAMEWORKS',
-  lint: 'TECHNIQUES',
-  mongodb: 'NON_RELATIONAL_DATABASES',
-  mysql: 'RELATIONAL_DATABASES',
-  node: 'PROGRAMMING_LANGUAGES',
-  'node-js': 'PROGRAMMING_LANGUAGES',
-  notepadplusplus: 'CODE_EDITORS',
-  'notepad-plus-plus': 'CODE_EDITORS',
-  npm: 'PACKAGE_MANAGERS',
-  php: 'PROGRAMMING_LANGUAGES',
-  phpstorm: 'CODE_EDITORS',
-  'php-storm': 'CODE_EDITORS',
-  postgresql: 'RELATIONAL_DATABASES',
-  pycharm: 'CODE_EDITORS',
-  python: 'PROGRAMMING_LANGUAGES',
-  react: 'LIBRARIES',
-  reactnative: 'LIBRARIES',
-  'react-native': 'LIBRARIES',
-  rest: 'PROTOCOLS',
-  sass: 'WEB_LANGUAGES',
-  scrum: 'METHODOLOGIES',
-  soap: 'PROTOCOLS',
-  socketio: 'LIBRARIES',
-  'socket-io': 'LIBRARIES',
-  sql: 'RELATIONAL_DATABASES',
-  sqlserver: 'RELATIONAL_DATABASES',
-  'sql-server': 'RELATIONAL_DATABASES',
-  'microsoft-sql-server': 'RELATIONAL_DATABASES',
-  swagger: 'LIBRARIES',
-  typescript: 'PROGRAMMING_LANGUAGES',
-  unity: 'DEVELOPMENT_PLATFORMS',
-  vercel: 'CLOUD_HOSTING_PLATFORMS',
-  visualstudio: 'CODE_EDITORS',
-  'visual-studio': 'CODE_EDITORS',
-  visualstudiocode: 'CODE_EDITORS',
-  'visual-studio-code': 'CODE_EDITORS',
-  vscode: 'CODE_EDITORS',
-  xampp: 'PACKAGES',
-  xml: 'OBJECT_NOTATIONS',
-};
-
 export const resolveSkillStackKey = (
   technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'stack'>,
 ): SkillStackFilterValue => {
@@ -204,48 +125,25 @@ export const resolveSkillStackKey = (
 
 export const resolveSkillTypeKey = (
   technology: Pick<TechnologyCollectionItemResponse, 'slug' | 'type'>,
-): SkillTypeFilterValue =>
-  technology.type ?? LEGACY_TYPE_BY_SLUG[technology.slug.toLowerCase()] ??
-  'OTHERS';
+): SkillTypeFilterValue => technology.type ?? 'OTHERS';
 
-const resolveSkillLevelKey = (
-  level: string | null,
-  frequency: string | null,
-): SkillLevelFilterValue => {
-  if (level === 'STUDYING' || frequency === 'STUDYING' || frequency === 'RARE') {
-    return 'STUDYING';
-  }
+const resolveSkillLevelKey = (level: string | null): SkillLevelFilterValue =>
+  level === 'ADVANCED' || level === 'INTERMEDIATE' || level === 'BASIC' || level === 'STUDYING'
+    ? level
+    : 'BASIC';
 
-  if (level === 'ADVANCED' || level === 'INTERMEDIATE' || level === 'BEGINNER') {
-    return level;
-  }
-
-  return 'BEGINNER';
-};
-
-const resolveSkillLevelLabel = (
-  locale: AppLocale,
-  level: string | null,
-  frequency: string | null,
-): string => {
-  const levelKey = resolveSkillLevelKey(level, frequency);
-
-  if (levelKey === 'STUDYING') {
-    return translateStaticKey(locale, SKILL_LEVEL_LABEL_KEYS['STUDYING']);
-  }
-
-  return resolveCatalogLabel(
+const resolveSkillLevelLabel = (locale: AppLocale, level: string | null): string =>
+  resolveCatalogLabel(
     locale,
     SKILL_LEVEL_LABEL_KEYS,
     level,
     translateStaticKey(locale, SKILL_FALLBACK_LABEL_KEYS.levelNotSet),
   );
-};
 
-const resolveSkillBadgeColor = (level: string | null, frequency: string | null): string => {
-  const levelKey = resolveSkillLevelKey(level, frequency);
+const resolveSkillBadgeColor = (level: string | null): string => {
+  const levelKey = resolveSkillLevelKey(level);
 
-  if (levelKey === 'BEGINNER') {
+  if (levelKey === 'BASIC') {
     return 'warning';
   }
 
@@ -285,7 +183,7 @@ export const mapTechnologyToSkillCard = (
 
   const stackKey = resolveSkillStackKey(technology);
   const typeKey = resolveSkillTypeKey(technology);
-  const levelLabel = resolveSkillLevelLabel(locale, technology.level, technology.frequency);
+  const levelLabel = resolveSkillLevelLabel(locale, technology.level);
   const frequencyLabel = resolveCatalogLabel(
     locale,
     SKILL_FREQUENCY_LABEL_KEYS,
@@ -294,9 +192,7 @@ export const mapTechnologyToSkillCard = (
   );
   const stackLabel = translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]);
   const typeLabel = translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]);
-  const shouldShowLevelBadge =
-    technology.level !== null ||
-    resolveSkillLevelKey(technology.level, technology.frequency) === 'STUDYING';
+  const shouldShowLevelBadge = technology.level !== null;
 
   return {
     id: technology.id,
@@ -310,11 +206,9 @@ export const mapTechnologyToSkillCard = (
     frequencyKey:
       technology.frequency === 'FREQUENT' ||
       technology.frequency === 'OCCASIONAL' ||
-      technology.frequency === 'PREVIOUSLY_USED' ||
-      technology.frequency === 'RARE' ||
-      technology.frequency === 'STUDYING'
+      technology.frequency === 'RARE'
         ? technology.frequency
-        : 'STUDYING',
+        : 'ALL',
     totalExperienceLabel:
       (technology.experienceMetrics
         ? resolveLocalizedText(
@@ -331,9 +225,9 @@ export const mapTechnologyToSkillCard = (
     iconName: SKILL_GROUP_ICON_NAMES[technology.type ?? 'OTHERS'] ?? 'LuSparkles',
     visualUrl: resolveSkillVisualUrl(technology.slug, imageAsset?.imageAsset.filePath),
     badgeLabel: shouldShowLevelBadge ? levelLabel : '',
-    badgeColor: resolveSkillBadgeColor(technology.level, technology.frequency),
+    badgeColor: resolveSkillBadgeColor(technology.level),
     stackKey,
-    levelKey: resolveSkillLevelKey(technology.level, technology.frequency),
+    levelKey: resolveSkillLevelKey(technology.level),
     typeKey,
     contexts,
     timelineEntries: contextPeriods,
@@ -351,8 +245,7 @@ export const mapTechnologyToSkillCard = (
           ? technology.level
           : undefined,
       frequencyKey:
-        technology.frequency === 'STUDYING' ||
-        technology.frequency === 'PREVIOUSLY_USED' ||
+        technology.frequency === 'RARE' ||
         technology.frequency === 'OCCASIONAL' ||
         technology.frequency === 'FREQUENT'
           ? technology.frequency
@@ -637,54 +530,6 @@ export const mapFormationToEducationModal = (
     ].filter(({ value }) => Boolean(value)),
     galleryItems,
     technologies,
-  };
-};
-
-export const mapSpokenLanguageToModal = (
-  language: SpokenLanguageRecord | undefined,
-  fallback: SkillCardViewModel,
-  locale: AppLocale,
-): SpokenLanguageModalItem => {
-  const title = language
-    ? resolveLocalizedText(
-        locale,
-        {
-          'pt-br': language.namePt,
-          'en-us': language.nameEn,
-          'es-es': language.nameEs,
-        },
-        fallback.name,
-      )
-    : fallback.name;
-  const imageAsset = language?.imageAssets?.find(({ imageAsset }) => imageAsset?.filePath);
-
-  return {
-    title,
-    subtitle: fallback.subtitle,
-    image: imageAsset?.imageAsset?.filePath
-      ? {
-          src: buildAssetUrl(imageAsset.imageAsset.filePath),
-          alt: resolveLocalizedText(
-            locale,
-            {
-              'pt-br': imageAsset.imageAsset.altPt ?? undefined,
-              'en-us': imageAsset.imageAsset.altEn ?? undefined,
-              'es-es': imageAsset.imageAsset.altEs ?? undefined,
-            },
-            title,
-          ),
-        }
-      : { src: fallback.visualUrl, alt: title },
-    details: [
-      {
-        labelKey: 'pages.skills.languages.detail.proficiency',
-        value: language?.proficiency ?? fallback.badgeLabel,
-      },
-      {
-        labelKey: 'common.fields.code',
-        value: language?.code ?? fallback.slug,
-      },
-    ],
   };
 };
 

@@ -40,7 +40,6 @@ export const PT_BR_TRANSLATIONS = {
   'common.fields.slug': 'Slug',
   'common.fields.sortOrder': 'Ordem de exibição',
   'common.empty.linkedCompanies': 'Nenhuma empresa vinculada ainda.',
-  'common.entities.portfolioSettings': 'Portfolio settings',
   'common.entities.links': 'Links',
   'common.entities.formation': 'Formação',
   'common.fields.startDate': 'Data inicial',
@@ -203,7 +202,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.skills.education.detail.degree': 'Formação',
 
   'pages.skills.education.detail.gallery': 'Imagens',
-  'pages.skills.languages.detail.proficiency': 'Proficiência',
   'pages.projects.detail.emptyGallery': 'Nenhuma imagem vinculada',
   'common.time.month': '{{count}} mês',
   'common.time.months': '{{count}} meses',
@@ -226,14 +224,16 @@ export const PT_BR_TRANSLATIONS = {
     '{{count}} tecnologias com tempo real consolidado por contexto.',
   'taxonomy.skills.level.advanced': 'Avançado',
   'taxonomy.skills.level.intermediate': 'Intermediário',
-  'taxonomy.skills.level.beginner': 'Iniciante',
-  'taxonomy.skills.level.basic': 'Basico',
+  'taxonomy.skills.level.basic': 'Básico',
 
   'taxonomy.skills.stack.frontEnd': 'Front-End',
   'taxonomy.skills.stack.backEnd': 'Back-End',
   'taxonomy.skills.stack.databases': 'Bancos de dados',
   'taxonomy.skills.stack.games': 'Games',
   'taxonomy.skills.stack.mobile': 'Mobile',
+  'taxonomy.skills.stack.testing': 'Testes',
+  'taxonomy.skills.stack.devops': 'DevOps',
+  'taxonomy.skills.stack.concepts': 'Conceitos',
   'taxonomy.skills.stack.others': 'Outros',
   'taxonomy.skills.type.programmingLanguages': 'Linguagens de programação',
   'taxonomy.skills.type.webLanguages': 'Linguagens web',
@@ -242,21 +242,31 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.skills.type.relationalDataBases': 'Bancos de dados relacionais',
   'taxonomy.skills.type.nonRelationalDataBases': 'Bancos de dados não relacionais',
   'taxonomy.skills.type.databasesManagementSystems': 'Sistemas de gerenciamento de bancos de dados',
+  'taxonomy.skills.type.orms': 'ORMs',
   'taxonomy.skills.type.codeEditors': 'Editores de código',
   'taxonomy.skills.type.techniques': 'Técnicas',
   'taxonomy.skills.type.methodologies': 'Metodologias',
-  'taxonomy.skills.type.objectNotations': 'Notações de objeto',
+  'taxonomy.skills.type.markupAndFormatSyntaxes': 'Sintaxes de Marcação e Formatos',
   'taxonomy.skills.type.packageManagers': 'Gerenciadores de pacotes',
   'taxonomy.skills.type.packages': 'Pacotes',
   'taxonomy.skills.type.versioningPlatforms': 'Plataformas de versionamento',
   'taxonomy.skills.type.cloudHostingPlatforms': 'Plataformas de hospedagem em nuvem',
   'taxonomy.skills.type.deploymentTools': 'Ferramentas de deploy',
   'taxonomy.skills.type.developmentPlatforms': 'Plataformas de desenvolvimento',
+  'taxonomy.skills.type.runtimeEnvironments': 'Ambientes de execução',
+  'taxonomy.skills.type.testingTools': 'Ferramentas de testes',
+  'taxonomy.skills.type.buildTools': 'Ferramentas de build',
+  'taxonomy.skills.type.documentationTools': 'Ferramentas de documentação',
+  'taxonomy.skills.type.preprocessors': 'Pré-processadores',
   'taxonomy.skills.type.protocols': 'Protocolos',
+  'taxonomy.skills.type.artificialIntelligences': 'Inteligências artificiais',
+  'taxonomy.skills.type.designPatterns': 'Padrões de projeto',
+  'taxonomy.skills.type.programmingParadigms': 'Paradigmas de programação',
+  'taxonomy.skills.type.architectures': 'Arquiteturas',
+  'taxonomy.skills.type.principles': 'Princípios',
   'taxonomy.skills.frequency.frequent': 'Frequente',
   'taxonomy.skills.frequency.occasional': 'Ocasional',
   'taxonomy.skills.frequency.rare': 'Rara',
-  'taxonomy.skills.frequency.previouslyUsed': 'Usado anteriormente',
   'taxonomy.skills.context.professional': 'Profissional',
   'taxonomy.skills.context.personal': 'Pessoal',
   'taxonomy.skills.context.academic': 'Acadêmico',
@@ -381,53 +391,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.operations.emptyRelations': 'Nenhum registro relacionado está vinculado.',
   'pages.admin.relationMode.owner': 'Relacionamentos da entidade dona',
   'pages.admin.relationMode.dedicated': 'Entidade relacional dedicada',
-  'pages.admin.entities.portfolio-settings.description':
-    'Configuração global, destaques e ajustes estruturados que dirigem a shell do portfolio.',
-  'pages.admin.portfolioSettings.sectionLabel': '// PORTFOLIO_SETTINGS',
-  'pages.admin.portfolioSettings.description':
-    'CRUD protegido e real para os ajustes em JSON que moldam a shell, os destaques e os conteúdos estruturados.',
-  'pages.admin.portfolioSettings.states.loading':
-    'Carregando a coleção protegida de portfolio settings...',
-  'pages.admin.portfolioSettings.states.empty':
-    'Nenhum portfolio setting protegido foi cadastrado ainda.',
-
-  'pages.admin.portfolioSettings.card.emptyDescription':
-    'Nenhuma descrição foi registrada para este setting ainda.',
-
-  'pages.admin.portfolioSettings.fields.key.placeholder': 'Digite a chave única do setting',
-  'pages.admin.portfolioSettings.fields.description.placeholder':
-    'Descreva a responsabilidade deste setting',
-  'pages.admin.portfolioSettings.fields.value.placeholder':
-    'Digite um objeto, array ou valor escalar JSON válido',
-  'pages.admin.portfolioSettings.modal.create.title': 'Criar portfolio setting',
-  'pages.admin.portfolioSettings.modal.read.title': 'Ler configuracoes do portfolio',
-  'pages.admin.portfolioSettings.modal.read.description':
-    'Revise as configuracoes JSON protegidas atuais e acesse diretamente os fluxos de edicao ou exclusao de cada registro.',
-  'pages.admin.portfolioSettings.modal.pickUpdate.title': 'Selecione um setting para editar',
-  'pages.admin.portfolioSettings.modal.pickUpdate.description':
-    'Escolha um dos settings protegidos atuais para abrir seu formulário de edição.',
-  'pages.admin.portfolioSettings.modal.pickDelete.title': 'Selecione um setting para excluir',
-  'pages.admin.portfolioSettings.modal.pickDelete.description':
-    'Escolha um dos settings protegidos atuais para confirmar sua remoção.',
-  'pages.admin.portfolioSettings.modal.update.title': 'Editar portfolio setting',
-  'pages.admin.portfolioSettings.modal.delete.title': 'Excluir portfolio setting',
-  'pages.admin.portfolioSettings.modal.delete.description':
-    'Esta ação remove permanentemente o setting protegido selecionado da configuração do portfolio.',
-  'pages.admin.portfolioSettings.feedback.created': 'Portfolio setting criado com sucesso.',
-  'pages.admin.portfolioSettings.feedback.updated': 'Portfolio setting atualizado com sucesso.',
-  'pages.admin.portfolioSettings.feedback.deleted': 'Portfolio setting excluído com sucesso.',
-  'pages.admin.portfolioSettings.feedback.requiredKey':
-    'A chave do setting é obrigatória antes do envio.',
-  'pages.admin.portfolioSettings.feedback.invalidJson':
-    'O valor JSON está inválido. Revise a estrutura antes de enviar.',
-  'pages.admin.portfolioSettings.feedback.selectionRequired':
-    'Selecione um portfolio setting antes de continuar com esta ação.',
-  'pages.admin.portfolioSettings.feedback.loadError':
-    'A coleção protegida de portfolio settings não pode ser carregada agora.',
-  'pages.admin.portfolioSettings.feedback.saveError':
-    'O portfolio setting não pode ser salvo agora.',
-  'pages.admin.portfolioSettings.feedback.deleteError':
-    'O portfolio setting não pode ser excluído agora.',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
   'pages.admin.links.sectionLabel': '// LINKS',
@@ -711,8 +674,6 @@ export const PT_BR_TRANSLATIONS = {
     'Selecione todas as experiences que devem expor este job na narrativa pública.',
   'pages.admin.jobs.fields.experiences.empty':
     'Nenhuma experience está disponível para relacionar agora.',
-  'pages.admin.jobs.fields.imageAssets.description':
-    'Selecione todos os image assets vinculados a este job.',
   'pages.admin.jobs.modal.create.title': 'Criar job',
   'pages.admin.jobs.modal.read.title': 'Ler jobs',
   'pages.admin.jobs.modal.read.description':
@@ -764,10 +725,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.fields.tags.description':
     'Selecione todas as tags vinculadas a esta tecnologia.',
   'pages.admin.technologies.fields.tags.empty': 'Nenhuma tag esta disponível.',
-  'pages.admin.technologies.fields.links.label': 'Links relacionados',
-  'pages.admin.technologies.fields.links.description':
-    'Selecione todos os links conectados a esta tecnologia.',
-  'pages.admin.technologies.fields.links.empty': 'Nenhum link esta disponível.',
   'pages.admin.technologies.fields.highlight.description':
     'Controle se esta technology deve permanecer destacada no catalogo publico de skills.',
   'pages.admin.technologies.fields.highlight.enabled': 'Destacada',
@@ -838,7 +795,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.technologies.options.TESTING': 'Testes',
   'pages.admin.technologies.options.STYLING': 'Estilizacao',
   'pages.admin.technologies.options.ARCHITECTURE': 'Arquitetura',
-  'pages.admin.technologies.options.STUDYING': 'Em estudo',
   'pages.admin.formations.fields.summaryPt.placeholder':
     'Digite o resumo da formation em português',
   'pages.admin.formations.fields.summaryEn.placeholder': 'Digite o resumo da formation em inglês',
@@ -851,9 +807,6 @@ export const PT_BR_TRANSLATIONS = {
     'Selecione todas as technologies que devem permanecer relacionadas a esta formation.',
   'pages.admin.formations.fields.technologies.empty':
     'Nenhuma technology está disponível para relacionar agora.',
-  'pages.admin.formations.fields.links.description':
-    'Selecione todos os links de apoio conectados a esta formation.',
-  'pages.admin.formations.fields.links.empty': 'Nenhum link está disponível para relacionar agora.',
   'pages.admin.formations.fields.imageAssets.description':
     'Selecione todos os image assets vinculados a esta formation.',
   'pages.admin.formations.modal.create.title': 'Criar formation',
@@ -1014,8 +967,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.fields.jobs.description':
     'Selecione todos os cargos conectados a esta experiência.',
   'pages.admin.experiences.fields.jobs.empty': 'Nenhum cargo disponível.',
-  'pages.admin.experiences.fields.links.description':
-    'Selecione todos os links de apoio conectados a esta experiência.',
 
   'pages.admin.experiences.fields.imageAssets.description':
     'Selecione todos os recursos de imagem conectados a esta experiência.',
@@ -1046,16 +997,16 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.titlePt.placeholder': 'Digite o título em português',
   'pages.admin.projects.fields.titleEn.label': 'Título em inglês',
   'pages.admin.projects.fields.titleEn.placeholder': 'Digite o título em inglês',
-  'pages.admin.projects.fields.shortDescriptionPt.label': 'Resumo curto em português',
-  'pages.admin.projects.fields.shortDescriptionPt.placeholder':
+  'pages.admin.projects.fields.summaryPt.label': 'Resumo curto em português',
+  'pages.admin.projects.fields.summaryPt.placeholder':
     'Digite o resumo curto em português',
-  'pages.admin.projects.fields.shortDescriptionEn.label': 'Resumo curto em inglês',
-  'pages.admin.projects.fields.shortDescriptionEn.placeholder': 'Digite o resumo curto em inglês',
-  'pages.admin.projects.fields.fullDescriptionPt.label': 'Descrição completa em português',
-  'pages.admin.projects.fields.fullDescriptionPt.placeholder':
+  'pages.admin.projects.fields.summaryEn.label': 'Resumo curto em inglês',
+  'pages.admin.projects.fields.summaryEn.placeholder': 'Digite o resumo curto em inglês',
+  'pages.admin.projects.fields.descriptionPt.label': 'Descrição completa em português',
+  'pages.admin.projects.fields.descriptionPt.placeholder':
     'Digite a descrição completa em português',
-  'pages.admin.projects.fields.fullDescriptionEn.label': 'Descrição completa em inglês',
-  'pages.admin.projects.fields.fullDescriptionEn.placeholder':
+  'pages.admin.projects.fields.descriptionEn.label': 'Descrição completa em inglês',
+  'pages.admin.projects.fields.descriptionEn.placeholder':
     'Digite a descrição completa em inglês',
   'pages.admin.projects.fields.context.label': 'Contexto',
   'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto',
@@ -1067,13 +1018,13 @@ export const PT_BR_TRANSLATIONS = {
     'Mantenha o projeto em destaque no portfólio.',
   'pages.admin.projects.fields.highlight.description':
     'Mantenha o projeto enfatizado no portfólio.',
-  'pages.admin.projects.feedback.requiredShortDescriptionPt':
+  'pages.admin.projects.feedback.requiredSummaryPt':
     'O resumo curto em português é obrigatório.',
-  'pages.admin.projects.feedback.requiredShortDescriptionEn':
+  'pages.admin.projects.feedback.requiredSummaryEn':
     'O resumo curto em inglês é obrigatório.',
-  'pages.admin.projects.feedback.requiredFullDescriptionPt':
+  'pages.admin.projects.feedback.requiredDescriptionPt':
     'A descrição completa em português é obrigatória.',
-  'pages.admin.projects.feedback.requiredFullDescriptionEn':
+  'pages.admin.projects.feedback.requiredDescriptionEn':
     'A descrição completa em inglês é obrigatória.',
   'pages.admin.projects.feedback.requiredOptions':
     'Selecione todas as opções obrigatórias do projeto.',
@@ -1093,10 +1044,11 @@ export const PT_BR_TRANSLATIONS = {
     'Selecione todos os recursos de imagem conectados a este projeto.',
   'pages.admin.projects.fields.status.options.ARCHIVED': 'Arquivado',
   'pages.admin.projects.fields.status.options.PLANNED': 'Planejado',
+  'pages.admin.projects.fields.status.options.ABANDONED': 'Abandonado',
   'pages.admin.projects.fields.environment.options.FRONTEND': 'Frontend',
   'pages.admin.projects.fields.environment.options.BACKEND': 'Backend',
   'pages.admin.projects.fields.environment.options.MOBILE': 'Mobile',
-  'pages.admin.projects.fields.environment.options.DASHBOARD': 'Dashboard',
+  'pages.admin.projects.fields.environment.options.OTHER': 'Outro',
   'taxonomy.dashboard.source.experience': 'Experiência',
   'taxonomy.dashboard.source.project': 'Projeto',
   'pages.admin.operations.localized.title': 'Título',
@@ -1111,14 +1063,14 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.feedback.requiredDescriptionEs':
     'A descrição em espanhol é obrigatória.',
   'pages.admin.projects.fields.titleEs.placeholder': 'Digite o título em espanhol',
-  'pages.admin.projects.fields.shortDescriptionEs.label': 'Resumo curto em espanhol',
-  'pages.admin.projects.fields.shortDescriptionEs.placeholder': 'Digite o resumo curto em espanhol',
-  'pages.admin.projects.fields.fullDescriptionEs.label': 'Descrição completa em espanhol',
-  'pages.admin.projects.fields.fullDescriptionEs.placeholder':
+  'pages.admin.projects.fields.summaryEs.label': 'Resumo curto em espanhol',
+  'pages.admin.projects.fields.summaryEs.placeholder': 'Digite o resumo curto em espanhol',
+  'pages.admin.projects.fields.descriptionEs.label': 'Descrição completa em espanhol',
+  'pages.admin.projects.fields.descriptionEs.placeholder':
     'Digite a descrição completa em espanhol',
-  'pages.admin.projects.feedback.requiredShortDescriptionEs':
+  'pages.admin.projects.feedback.requiredSummaryEs':
     'O resumo curto em espanhol é obrigatório.',
-  'pages.admin.projects.feedback.requiredFullDescriptionEs':
+  'pages.admin.projects.feedback.requiredDescriptionEs':
     'A descrição completa em espanhol é obrigatória.',
   'pages.admin.formations.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.spokenLanguages.fields.nameEs.placeholder': 'Digite o nome do idioma em espanhol',

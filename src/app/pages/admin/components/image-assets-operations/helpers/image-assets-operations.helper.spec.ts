@@ -20,12 +20,12 @@ const createProject = (
   titlePt: 'Portfolio remake',
   titleEn: 'Portfolio remake',
   titleEs: 'Portfolio remake',
-  shortDescriptionPt: 'Resumo',
-  shortDescriptionEn: 'Summary',
-  shortDescriptionEs: 'Summary',
-  fullDescriptionPt: 'Descricao',
-  fullDescriptionEn: 'Description',
-  fullDescriptionEs: 'Description',
+  summaryPt: 'Resumo',
+  summaryEn: 'Summary',
+  summaryEs: 'Summary',
+  descriptionPt: 'Descricao',
+  descriptionEn: 'Description',
+  descriptionEs: 'Description',
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
@@ -91,15 +91,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   id: 'image-asset-1',
   fileName: 'vh_logo_blue.svg',
   filePath: '/assets/img/logo/vh_logo_blue.svg',
-  folder: 'logo',
   kind: 'ICON',
   altPt: 'Logo azul da Hans',
   altEn: 'Hans blue logo',
   altEs: 'Hans blue logo',
-  captionPt: 'Versao azul da marca.',
-  captionEn: 'Blue brand version.',
-  captionEs: 'Blue brand version.',
-  mimeType: 'image/svg+xml',
   width: 240,
   height: 96,
   sortOrder: 2,
@@ -239,9 +234,6 @@ describe('image-assets operations helper', () => {
           altPt: null,
           altEn: null,
           altEs: null,
-          captionPt: null,
-          captionEn: null,
-          captionEs: null,
           width: null,
           height: null,
           sortOrder: null,
@@ -264,15 +256,10 @@ describe('image-assets operations helper', () => {
     ).toEqual({
       fileName: 'vh_logo_blue.svg',
       filePath: '/assets/img/logo/vh_logo_blue.svg',
-      folder: 'logo',
       kind: 'ICON',
       altPt: '',
       altEn: '',
       altEs: '',
-      captionPt: '',
-      captionEn: '',
-      captionEs: '',
-      mimeType: 'image/svg+xml',
       width: '',
       height: '',
       sortOrder: '0',
@@ -330,15 +317,10 @@ describe('image-assets operations helper', () => {
     expect(buildImageAssetsFormValue(null, [], [], [])).toEqual({
       fileName: '',
       filePath: '',
-      folder: '',
       kind: '',
       altPt: '',
       altEn: '',
       altEs: '',
-      captionPt: '',
-      captionEn: '',
-      captionEs: '',
-      mimeType: '',
       width: '',
       height: '',
       sortOrder: '0',
@@ -456,9 +438,6 @@ describe('image-assets operations helper', () => {
           altPt: null,
           altEn: null,
           altEs: null,
-          captionPt: null,
-          captionEn: null,
-          captionEs: null,
         }),
       ],
       [],
@@ -474,8 +453,6 @@ describe('image-assets operations helper', () => {
     expect(viewModel.kind).toBe('');
     expect(viewModel.altPt).toBe('');
     expect(viewModel.altEn).toBe('');
-    expect(viewModel.captionPt).toBe('');
-    expect(viewModel.captionEn).toBe('');
   });
 
   it('should resolve every reverse relation label and ignore malformed nested relations', () => {
@@ -512,15 +489,10 @@ describe('image-assets operations helper', () => {
       buildImageAssetsMutationPayload({
         fileName: ' vh_logo_blue.svg ',
         filePath: ' /assets/img/logo/vh_logo_blue.svg ',
-        folder: ' logo ',
         kind: 'icon',
         altPt: ' Logo ',
         altEn: ' Logo ',
         altEs: undefined,
-        captionPt: ' Legenda ',
-        captionEn: ' Caption ',
-        captionEs: undefined,
-        mimeType: ' image/svg+xml ',
         width: '240',
         height: '96',
         sortOrder: '4',
@@ -537,15 +509,10 @@ describe('image-assets operations helper', () => {
       payload: {
         fileName: 'vh_logo_blue.svg',
         filePath: '/assets/img/logo/vh_logo_blue.svg',
-        folder: 'logo',
         kind: 'ICON',
         altPt: 'Logo',
         altEn: 'Logo',
         altEs: '',
-        captionPt: 'Legenda',
-        captionEn: 'Caption',
-        captionEs: '',
-        mimeType: 'image/svg+xml',
         width: 240,
         height: 96,
         sortOrder: 4,
@@ -592,31 +559,11 @@ describe('image-assets operations helper', () => {
     expect(
       buildImageAssetsMutationPayload({
         ...buildImageAssetsFormValue(createImageAsset(), [], [], []),
-        folder: '',
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'pages.admin.imageAssets.feedback.requiredFolder',
-    });
-
-    expect(
-      buildImageAssetsMutationPayload({
-        ...buildImageAssetsFormValue(createImageAsset(), [], [], []),
         kind: '',
       }),
     ).toEqual({
       isValid: false,
       errorKey: 'pages.admin.imageAssets.feedback.requiredKind',
-    });
-
-    expect(
-      buildImageAssetsMutationPayload({
-        ...buildImageAssetsFormValue(createImageAsset(), [], [], []),
-        mimeType: '',
-      }),
-    ).toEqual({
-      isValid: false,
-      errorKey: 'pages.admin.imageAssets.feedback.requiredMimeType',
     });
 
     expect(

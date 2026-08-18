@@ -29,7 +29,6 @@ const createFormation = (): FormationRecord => ({
   highlight: true,
   sortOrder: 1,
   technologyRelations: [{ technologyId: 'technology-1', sortOrder: 0 }],
-  linkIds: ['link-1'],
   imageAssetIds: ['image-asset-1'],
   createdAt: '2026-07-23T00:00:00.000Z',
   updatedAt: '2026-07-23T00:00:00.000Z',
@@ -62,7 +61,6 @@ const createFormationPayload = (): FormationMutationPayload => ({
   highlight: true,
   sortOrder: 1,
   technologyRelations: [{ technologyId: 'technology-1' }],
-  linkIds: ['link-1'],
   imageAssetIds: ['image-asset-1'],
 });
 

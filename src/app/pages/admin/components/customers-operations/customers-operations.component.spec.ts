@@ -66,15 +66,10 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   id: 'image-asset-1',
   fileName: 'ford.svg',
   filePath: '/assets/img/customers/ford.svg',
-  folder: 'customers',
   kind: 'ICON',
   altPt: 'Logo da Ford',
   altEn: 'Ford logo',
   altEs: 'Ford logo',
-  captionPt: 'Cliente Ford',
-  captionEn: 'Ford customer',
-  captionEs: 'Ford customer',
-  mimeType: 'image/svg+xml',
   width: 128,
   height: 128,
   sortOrder: 1,
@@ -415,15 +410,8 @@ describe('CustomersOperationsComponent', () => {
     expect(component.modalFeedbackKey()).toBe('pages.admin.customers.feedback.requiredName');
 
     component.updateName('Enterprise Client');
-    await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredPortugueseSummary');
-
     component.updateSummaryPt('Cliente corporativo');
-    await component.submitModal();
-    expect(component.modalFeedbackKey()).toBe('common.feedback.requiredEnglishSummary');
-
     component.updateSummaryEn('Corporate client');
-
     component.updateSummaryEs('Corporate client');
     component.updateSortOrder('abc');
     await component.submitModal();

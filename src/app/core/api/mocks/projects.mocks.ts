@@ -11,11 +11,11 @@ export const createProjectsCollectionResponse = (
       slug: 'github-consumer',
       titlePt: "Github's API Consumer",
       titleEn: "Github's API Consumer",
-      shortDescriptionPt: 'Consumidor da API do Github que mostra usuarios e repositorios.',
-      shortDescriptionEn: "Github's API Consumer that shows users and repositories.",
-      fullDescriptionPt:
+      summaryPt: 'Consumidor da API do Github que mostra usuarios e repositorios.',
+      summaryEn: "Github's API Consumer that shows users and repositories.",
+      descriptionPt:
         'Projeto pessoal full stack com frontend React, backend Node.js e deploy publico para experimentar contratos de API reais.',
-      fullDescriptionEn:
+      descriptionEn:
         'Personal full stack project with a React frontend, Node.js backend and public deploys to experiment with real API contracts.',
       context: 'PERSONAL',
       status: 'IN_PROGRESS',
@@ -147,11 +147,11 @@ export const createProjectsCollectionResponse = (
       slug: '4mti-dp',
       titlePt: 'Diagnostico Publico',
       titleEn: 'Public Diagnostics',
-      shortDescriptionPt: 'Sistema de agrupamento e analise de licitacoes e documentos publicos.',
-      shortDescriptionEn: 'System for grouping and analyzing bids and public documents.',
-      fullDescriptionPt:
+      summaryPt: 'Sistema de agrupamento e analise de licitacoes e documentos publicos.',
+      summaryEn: 'System for grouping and analyzing bids and public documents.',
+      descriptionPt:
         'Projeto profissional full stack no contexto corporativo, com stack PHP e foco em leitura e processamento de documentos.',
-      fullDescriptionEn:
+      descriptionEn:
         'Professional full stack project in a corporate context, with a PHP stack and focus on document processing.',
       context: 'PROFESSIONAL',
       status: 'COMPLETED',
@@ -232,13 +232,13 @@ export const createProjectsCollectionResponse = (
       slug: 'post-graduation-tcc',
       titlePt: 'HardWorker',
       titleEn: 'HardWorker',
-      shortDescriptionPt:
+      summaryPt:
         'Sistema de gestao de projetos, pessoas e atividades desenvolvido para a pos-graduacao.',
-      shortDescriptionEn:
+      summaryEn:
         'Project, people and task management system developed for post-graduation.',
-      fullDescriptionPt:
+      descriptionPt:
         'Case academico com Angular, Node.js e deploy publico para consolidar o TCC da pos-graduacao.',
-      fullDescriptionEn:
+      descriptionEn:
         'Academic case with Angular, Node.js and public deploys to support the post-graduation final paper.',
       context: 'ACADEMIC',
       status: 'COMPLETED',
@@ -313,11 +313,11 @@ export const createProjectsCollectionResponse = (
       slug: 'portfolio',
       titlePt: 'Portfolio',
       titleEn: 'Portfolio',
-      shortDescriptionPt: 'Remake do portfolio publico com Angular moderno.',
-      shortDescriptionEn: 'Public portfolio remake built with modern Angular.',
-      fullDescriptionPt:
+      summaryPt: 'Remake do portfolio publico com Angular moderno.',
+      summaryEn: 'Public portfolio remake built with modern Angular.',
+      descriptionPt:
         'Case pessoal focado em arquitetura frontend, design system, integracao com API real e narrativa profissional.',
-      fullDescriptionEn:
+      descriptionEn:
         'Personal case focused on front-end architecture, design system, live API integration and professional storytelling.',
       context: 'PERSONAL',
       status: 'IN_PROGRESS',

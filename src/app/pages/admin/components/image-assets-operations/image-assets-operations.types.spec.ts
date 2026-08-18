@@ -8,8 +8,6 @@ import {
   createImageAssetKindOptions,
   resolveImageAssetAltEn,
   resolveImageAssetAltPt,
-  resolveImageAssetCaptionEn,
-  resolveImageAssetCaptionPt,
   resolveImageAssetExperienceIdFromRelation,
   resolveImageAssetFormationIdFromRelation,
   resolveImageAssetSpokenLanguageIdFromRelation,
@@ -40,15 +38,10 @@ describe('image-assets operations types', () => {
     expect(createEmptyImageAssetsOperationsFormValue()).toEqual({
       fileName: '',
       filePath: '',
-      folder: '',
       kind: '',
       altPt: '',
       altEn: '',
       altEs: '',
-      captionPt: '',
-      captionEn: '',
-      captionEs: '',
-      mimeType: '',
       width: '',
       height: '',
       sortOrder: '0',
@@ -180,9 +173,5 @@ describe('image-assets operations types', () => {
     expect(resolveImageAssetAltPt({ altPt: 'Logo PT' } as never)).toBe('Logo PT');
     expect(resolveImageAssetAltEn({ altEn: null } as never)).toBe('');
     expect(resolveImageAssetAltEn({ altEn: 'Logo EN' } as never)).toBe('Logo EN');
-    expect(resolveImageAssetCaptionPt({ captionPt: null } as never)).toBe('');
-    expect(resolveImageAssetCaptionPt({ captionPt: 'Legenda PT' } as never)).toBe('Legenda PT');
-    expect(resolveImageAssetCaptionEn({ captionEn: null } as never)).toBe('');
-    expect(resolveImageAssetCaptionEn({ captionEn: 'Caption EN' } as never)).toBe('Caption EN');
   });
 });

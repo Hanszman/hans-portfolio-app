@@ -17,8 +17,6 @@ import { SpokenLanguagesService } from '../../core/api/spoken-languages/spoken-l
 import { SpokenLanguageRecord } from '../../core/api/spoken-languages/spoken-languages.types';
 import { EducationModalComponent } from '../../shared/education-modal/education-modal.component';
 import { EducationModalItem } from '../../shared/education-modal/education-modal.types';
-import { SpokenLanguageModalComponent } from '../../shared/spoken-language-modal/spoken-language-modal.component';
-import { SpokenLanguageModalItem } from '../../shared/spoken-language-modal/spoken-language-modal.types';
 import { WrapperComponent } from '../../layout/wrapper/wrapper.component';
 import { InfoStateComponent } from '../../shared/info-state/info-state.component';
 import { SectionHeaderComponent } from '../../shared/section-header/section-header.component';
@@ -40,7 +38,6 @@ import {
   buildLanguageSkillCards,
   mapTechnologyToSkillCard,
   mapFormationToEducationModal,
-  mapSpokenLanguageToModal,
 } from './helpers/skills.helper';
 import {
   SKILL_LEVEL_FILTERS,
@@ -65,7 +62,6 @@ import {
     SectionHeaderComponent,
     TechnologyModalComponent,
     EducationModalComponent,
-    SpokenLanguageModalComponent,
     ButtonFilterComponent,
     TranslatePipe,
   ],
@@ -85,7 +81,6 @@ export class SkillsComponent {
   private readonly spokenLanguagesSignal = signal<SpokenLanguageRecord[]>([]);
   private readonly selectedTechnologySignal = signal<TechnologyModalItem | null>(null);
   private readonly selectedEducationSignal = signal<EducationModalItem | null>(null);
-  private readonly selectedLanguageSignal = signal<SpokenLanguageModalItem | null>(null);
   private readonly searchTermSignal = signal('');
   private readonly selectedStackSignal = signal<SkillStackFilterValue>('ALL');
   private readonly selectedLevelSignal = signal<SkillLevelFilterValue>('ALL');
@@ -98,7 +93,6 @@ export class SkillsComponent {
   protected readonly hasError = signal(false);
   protected readonly selectedTechnology = this.selectedTechnologySignal.asReadonly();
   protected readonly selectedEducation = this.selectedEducationSignal.asReadonly();
-  protected readonly selectedLanguage = this.selectedLanguageSignal.asReadonly();
   protected readonly searchTerm = this.searchTermSignal.asReadonly();
   protected readonly selectedStack = this.selectedStackSignal.asReadonly();
   protected readonly selectedLevel = this.selectedLevelSignal.asReadonly();
@@ -273,44 +267,31 @@ export class SkillsComponent {
       return;
     }
 
-    if (skill.kind === 'education') {
-      const formation = this.formationsSignal().find(({ slug }) => slug === skill.slug);
-      const technologyModalBySlug = new Map(
-        this.technologyCards().map(({ slug, modal }) => [slug, modal] as const),
-      );
-      const education = mapFormationToEducationModal(
-        formation,
-        skill,
-        this.translationService.locale(),
-      );
-      this.selectedEducationSignal.set({
-        ...education,
-        technologies: education.technologies.map((technology) => {
-          const modal = technologyModalBySlug.get(technology.slug);
-          return {
-            ...technology,
-            image: modal?.image ?? null,
-            modal,
-          };
-        }),
-      });
-      return;
-    }
-
-    const language = this.spokenLanguagesSignal().find(
-      ({ code, nameEn }) =>
-        code.toLowerCase() === skill.slug.toLowerCase() ||
-        nameEn.toLowerCase() === skill.name.toLowerCase(),
+    const formation = this.formationsSignal().find(({ slug }) => slug === skill.slug);
+    const technologyModalBySlug = new Map(
+      this.technologyCards().map(({ slug, modal }) => [slug, modal] as const),
     );
-    this.selectedLanguageSignal.set(
-      mapSpokenLanguageToModal(language, skill, this.translationService.locale()),
+    const education = mapFormationToEducationModal(
+      formation,
+      skill,
+      this.translationService.locale(),
     );
+    this.selectedEducationSignal.set({
+      ...education,
+      technologies: education.technologies.map((technology) => {
+        const modal = technologyModalBySlug.get(technology.slug);
+        return {
+          ...technology,
+          image: modal?.image ?? null,
+          modal,
+        };
+      }),
+    });
   }
 
   protected closeSkillDetails(): void {
     this.selectedTechnologySignal.set(null);
     this.selectedEducationSignal.set(null);
-    this.selectedLanguageSignal.set(null);
   }
 
   protected openEducationTechnology(technology: TechnologyModalItem): void {

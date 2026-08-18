@@ -22,25 +22,22 @@ export type TechnologiesOperationsModalMode =
   | 'update'
   | 'delete';
 
-export const TECHNOLOGY_LEVEL_VALUES = ['BASIC', 'INTERMEDIATE', 'ADVANCED'] as const;
+export const TECHNOLOGY_LEVEL_VALUES = ['BASIC', 'INTERMEDIATE', 'ADVANCED', 'STUDYING'] as const;
 
-export const TECHNOLOGY_FREQUENCY_VALUES = [
-  'FREQUENT',
-  'OCCASIONAL',
-  'PREVIOUSLY_USED',
-  'STUDYING',
-] as const;
+export const TECHNOLOGY_FREQUENCY_VALUES = ['FREQUENT', 'OCCASIONAL', 'RARE'] as const;
 
 export const TECHNOLOGY_STACK_VALUES: readonly TechnologyStack[] = [
-  'BACK_END', 'DATABASES', 'FRONT_END', 'GAMES', 'MOBILE', 'OTHERS',
+  'BACK_END', 'CONCEPTS', 'DATABASES', 'DEVOPS', 'FRONT_END', 'GAMES', 'MOBILE', 'OTHERS', 'TESTING',
 ];
 
 export const TECHNOLOGY_TYPE_VALUES: readonly TechnologyType[] = [
-  'CLOUD_HOSTING_PLATFORMS', 'CODE_EDITORS', 'DATABASES_MANAGEMENT_SYSTEMS',
-  'DEPLOYMENT_TOOLS', 'DEVELOPMENT_PLATFORMS', 'FRAMEWORKS', 'LIBRARIES',
-  'METHODOLOGIES', 'NON_RELATIONAL_DATABASES', 'OBJECT_NOTATIONS', 'OTHERS',
-  'PACKAGE_MANAGERS', 'PACKAGES', 'PROGRAMMING_LANGUAGES', 'PROTOCOLS',
-  'RELATIONAL_DATABASES', 'TECHNIQUES', 'VERSIONING_PLATFORMS', 'WEB_LANGUAGES',
+  'ARCHITECTURES', 'ARTIFICIAL_INTELLIGENCES', 'BUILD_TOOLS', 'CLOUD_HOSTING_PLATFORMS',
+  'CODE_EDITORS', 'DATABASES_MANAGEMENT_SYSTEMS', 'DEPLOYMENT_TOOLS', 'DESIGN_PATTERNS',
+  'DEVELOPMENT_PLATFORMS', 'DOCUMENTATION_TOOLS', 'FRAMEWORKS', 'LIBRARIES',
+  'MARKUP_AND_FORMAT_SYNTAXES', 'METHODOLOGIES', 'NON_RELATIONAL_DATABASES', 'ORMS', 'OTHERS',
+  'PACKAGE_MANAGERS', 'PACKAGES', 'PREPROCESSORS', 'PRINCIPLES', 'PROGRAMMING_LANGUAGES',
+  'PROGRAMMING_PARADIGMS', 'PROTOCOLS', 'RELATIONAL_DATABASES', 'RUNTIME_ENVIRONMENTS',
+  'TECHNIQUES', 'TESTING_TOOLS', 'VERSIONING_PLATFORMS', 'WEB_LANGUAGES',
 ];
 
 export type TechnologyOptionValue =
@@ -55,30 +52,44 @@ export const TECHNOLOGY_OPTION_LABEL_KEYS = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   FREQUENT: 'taxonomy.skills.frequency.frequent',
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
-  PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
-  STUDYING: 'pages.admin.technologies.options.STUDYING',
+  RARE: 'taxonomy.skills.frequency.rare',
+  STUDYING: 'common.states.studying',
   BACK_END: 'taxonomy.skills.stack.backEnd',
   DATABASES: 'taxonomy.skills.stack.databases',
   FRONT_END: 'taxonomy.skills.stack.frontEnd',
   GAMES: 'taxonomy.skills.stack.games',
   MOBILE: 'taxonomy.skills.stack.mobile',
+  TESTING: 'taxonomy.skills.stack.testing',
+  DEVOPS: 'taxonomy.skills.stack.devops',
+  CONCEPTS: 'taxonomy.skills.stack.concepts',
   OTHERS: 'taxonomy.skills.stack.others',
+  ARCHITECTURES: 'taxonomy.skills.type.architectures',
+  ARTIFICIAL_INTELLIGENCES: 'taxonomy.skills.type.artificialIntelligences',
+  BUILD_TOOLS: 'taxonomy.skills.type.buildTools',
   CLOUD_HOSTING_PLATFORMS: 'taxonomy.skills.type.cloudHostingPlatforms',
   CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
   DATABASES_MANAGEMENT_SYSTEMS: 'taxonomy.skills.type.databasesManagementSystems',
   DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
+  DESIGN_PATTERNS: 'taxonomy.skills.type.designPatterns',
   DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
+  DOCUMENTATION_TOOLS: 'taxonomy.skills.type.documentationTools',
   FRAMEWORKS: 'taxonomy.skills.type.frameworks',
   LIBRARIES: 'taxonomy.skills.type.libraries',
+  MARKUP_AND_FORMAT_SYNTAXES: 'taxonomy.skills.type.markupAndFormatSyntaxes',
   METHODOLOGIES: 'taxonomy.skills.type.methodologies',
   NON_RELATIONAL_DATABASES: 'taxonomy.skills.type.nonRelationalDataBases',
-  OBJECT_NOTATIONS: 'taxonomy.skills.type.objectNotations',
+  ORMS: 'taxonomy.skills.type.orms',
   PACKAGE_MANAGERS: 'taxonomy.skills.type.packageManagers',
   PACKAGES: 'taxonomy.skills.type.packages',
+  PREPROCESSORS: 'taxonomy.skills.type.preprocessors',
+  PRINCIPLES: 'taxonomy.skills.type.principles',
   PROGRAMMING_LANGUAGES: 'taxonomy.skills.type.programmingLanguages',
+  PROGRAMMING_PARADIGMS: 'taxonomy.skills.type.programmingParadigms',
   PROTOCOLS: 'taxonomy.skills.type.protocols',
   RELATIONAL_DATABASES: 'taxonomy.skills.type.relationalDataBases',
+  RUNTIME_ENVIRONMENTS: 'taxonomy.skills.type.runtimeEnvironments',
   TECHNIQUES: 'taxonomy.skills.type.techniques',
+  TESTING_TOOLS: 'taxonomy.skills.type.testingTools',
   VERSIONING_PLATFORMS: 'taxonomy.skills.type.versioningPlatforms',
   WEB_LANGUAGES: 'taxonomy.skills.type.webLanguages',
 } as const satisfies Record<TechnologyOptionValue, AppTranslationKey>;
@@ -95,7 +106,6 @@ export interface TechnologiesOperationsFormValue {
   projectIds: readonly string[];
   experienceIds: readonly string[];
   formationIds: readonly string[];
-  linkIds: readonly string[];
   imageAssetIds: readonly string[];
 }
 
@@ -131,7 +141,6 @@ export interface TechnologyOperationsViewModel extends TechnologiesOperationsFor
   projectLabels: readonly string[];
   experienceLabels: readonly string[];
   formationLabels: readonly string[];
-  linkLabels: readonly string[];
   technologyContexts: readonly TechnologyContextResponse[];
 }
 
@@ -151,7 +160,6 @@ export const createEmptyTechnologiesOperationsFormValue = (): TechnologiesOperat
   projectIds: [],
   experienceIds: [],
   formationIds: [],
-  linkIds: [],
   imageAssetIds: [],
 });
 
@@ -161,8 +169,8 @@ const normalizeTechnologyRelationIds = (
     | readonly import('../../../../core/api/technologies/technologies.types').TechnologyRelationRecord[]
     | null
     | undefined,
-  idKey: 'projectId' | 'experienceId' | 'formationId' | 'linkId',
-  nestedKey: 'project' | 'experience' | 'formation' | 'link',
+  idKey: 'projectId' | 'experienceId' | 'formationId',
+  nestedKey: 'project' | 'experience' | 'formation',
 ): readonly string[] => [
   ...new Set([
     ...(directIds ?? []),
@@ -209,12 +217,6 @@ export const buildTechnologiesFormValue = (
           'formationId',
           'formation',
         ),
-        linkIds: normalizeTechnologyRelationIds(
-          technology.linkIds,
-          technology.links,
-          'linkId',
-          'link',
-        ),
         imageAssetIds:
           technology.imageAssetIds ??
           technology.imageAssets?.flatMap((relation) =>
@@ -258,7 +260,6 @@ export const buildTechnologiesMutationPayload = (
       formationRelations: [...new Set(form.formationIds)].map((formationId) => ({
         formationId,
       })),
-      linkIds: [...new Set(form.linkIds)],
       imageAssetIds: [...new Set(form.imageAssetIds)],
     },
   };

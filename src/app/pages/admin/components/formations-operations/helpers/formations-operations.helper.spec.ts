@@ -1,17 +1,14 @@
 import { appConfig } from '../../../../../core/api/api.config';
 import { ImageAssetRecord } from '../../../../../core/api/image-assets/image-assets.types';
 import { FormationRecord } from '../../../../../core/api/formations/formations.types';
-import { LinkRecord } from '../../../../../core/api/links/links.types';
 import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   buildFormationImageAssetOptions,
-  buildFormationLinkOptions,
   buildFormationsFormValue,
   buildFormationsMutationPayload,
   buildFormationsViewModels,
   buildFormationTechnologyOptions,
   normalizeFormationImageAssetIds,
-  normalizeFormationLinkIds,
   normalizeFormationTechnologyIds,
 } from './formations-operations.helper';
 
@@ -28,31 +25,11 @@ const createTechnology = (
   ...overrides,
 });
 
-const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
-  id: 'link-1',
-  url: 'https://example.com',
-  labelPt: 'Repositorio',
-  labelEn: 'Repository',
-  labelEs: 'Repository',
-  descriptionPt: 'Descricao',
-  descriptionEn: 'Description',
-  descriptionEs: 'Description',
-  type: 'DOCS',
-  sortOrder: 1,
-  projectIds: [],
-  experienceIds: [],
-  technologyIds: [],
-  formationIds: [],
-  ...overrides,
-});
-
 const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAssetRecord => ({
   id: 'image-asset-1',
   fileName: 'diploma.png',
   filePath: '/assets/img/formations/diploma.png',
-  folder: 'formations',
   kind: 'COVER',
-  mimeType: 'image/png',
   projectIds: [],
   experienceIds: [],
   technologyIds: [],
@@ -85,14 +62,7 @@ const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRec
       technology: { id: 'technology-2', slug: 'nestjs', name: 'NestJS' },
     },
   ],
-  linkIds: ['link-2'],
   imageAssetIds: ['image-asset-2'],
-  links: [
-    {
-      linkId: 'link-3',
-      link: { id: 'link-3', url: 'https://docs', labelPt: 'Docs', labelEn: 'Docs' },
-    },
-  ],
   imageAssets: [
     {
       imageAssetId: 'image-asset-3',
@@ -108,7 +78,7 @@ const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRec
 });
 
 describe('formations operations helper', () => {
-  it('should sort technology, link and image-asset catalog options by title', () => {
+  it('should sort technology and image-asset catalog options by title', () => {
     expect(
       buildFormationTechnologyOptions([
         createTechnology({ id: 'technology-2', name: 'Zeta', slug: 'zeta' }),
@@ -117,16 +87,6 @@ describe('formations operations helper', () => {
     ).toEqual([
       { id: 'technology-1', title: 'Alpha', subtitle: 'alpha' },
       { id: 'technology-2', title: 'Zeta', subtitle: 'zeta' },
-    ]);
-
-    expect(
-      buildFormationLinkOptions([
-        createLink({ id: 'link-2', labelPt: 'Zeta', url: 'https://zeta.dev' }),
-        createLink({ id: 'link-1', labelPt: 'Alpha', url: 'https://alpha.dev' }),
-      ]),
-    ).toEqual([
-      { id: 'link-1', title: 'Alpha', subtitle: 'https://alpha.dev' },
-      { id: 'link-2', title: 'Zeta', subtitle: 'https://zeta.dev' },
     ]);
 
     expect(
@@ -154,7 +114,6 @@ describe('formations operations helper', () => {
     const formation = createFormation();
 
     expect(normalizeFormationTechnologyIds(formation)).toEqual(['technology-2']);
-    expect(normalizeFormationLinkIds(formation)).toEqual(['link-2', 'link-3']);
     expect(normalizeFormationImageAssetIds(formation)).toEqual(['image-asset-2', 'image-asset-3']);
   });
 
@@ -168,18 +127,6 @@ describe('formations operations helper', () => {
             id: 'technology-3',
             slug: 'rxjs',
             name: 'RxJS',
-          },
-        },
-      ],
-      linkIds: [],
-      links: [
-        {
-          linkId: '',
-          link: {
-            id: 'link-4',
-            url: 'https://example.com/rx',
-            labelEn: 'RxJS Docs',
-            labelEs: 'RxJS Docs',
           },
         },
       ],
@@ -198,7 +145,6 @@ describe('formations operations helper', () => {
     });
 
     expect(normalizeFormationTechnologyIds(formation)).toEqual(['technology-3']);
-    expect(normalizeFormationLinkIds(formation)).toEqual(['link-4']);
     expect(normalizeFormationImageAssetIds(formation)).toEqual(['image-asset-4']);
   });
 
@@ -218,7 +164,6 @@ describe('formations operations helper', () => {
       highlight: true,
       sortOrder: '0',
       technologyIds: [],
-      linkIds: [],
       imageAssetIds: [],
     });
   });
@@ -239,7 +184,6 @@ describe('formations operations helper', () => {
       highlight: true,
       sortOrder: '2',
       technologyIds: ['technology-2'],
-      linkIds: ['link-2', 'link-3'],
       imageAssetIds: ['image-asset-2', 'image-asset-3'],
     });
   });
@@ -271,8 +215,6 @@ describe('formations operations helper', () => {
           sortOrder: null,
           technologyRelations: undefined,
           technologies: undefined,
-          linkIds: undefined,
-          links: undefined,
           imageAssetIds: undefined,
           imageAssets: undefined,
         }),
@@ -292,13 +234,11 @@ describe('formations operations helper', () => {
       highlight: false,
       sortOrder: '0',
       technologyIds: [],
-      linkIds: [],
       imageAssetIds: [],
     });
 
     const [legacyViewModel] = buildFormationsViewModels(
       [createFormation({ titleEs: undefined, summaryEs: undefined })],
-      [],
       [],
       [],
     );
@@ -330,7 +270,6 @@ describe('formations operations helper', () => {
       ],
       [],
       [],
-      [],
     );
 
     expect(viewModels.map(({ id }) => id)).toEqual(['formation-3', 'formation-4', 'formation-2']);
@@ -348,19 +287,12 @@ describe('formations operations helper', () => {
           titleEs: 'Management MBA',
           sortOrder: 1,
           technologyRelations: [],
-          linkIds: ['link-1'],
-          links: [],
           imageAssetIds: ['image-asset-1'],
           imageAssets: [],
         }),
         createFormation(),
       ],
       [createTechnology({ id: 'technology-2', name: 'NestJS', slug: 'nestjs' })],
-      [
-        createLink({ id: 'link-1', labelPt: 'Portal PUC' }),
-        createLink({ id: 'link-2', labelPt: 'Portal UFMG' }),
-        createLink({ id: 'link-3', labelPt: 'Documentacao' }),
-      ],
       [
         createImageAsset({ id: 'image-asset-1', fileName: 'degree.png' }),
         createImageAsset({ id: 'image-asset-2', fileName: 'diploma.png' }),
@@ -373,7 +305,6 @@ describe('formations operations helper', () => {
       'computer-science',
     ]);
     expect(viewModels[1].technologyLabels).toEqual(['NestJS (nestjs)']);
-    expect(viewModels[1].linkLabels).toEqual(['Portal UFMG', 'Documentacao']);
     expect(viewModels[1].imageAssetLabels).toEqual(['diploma.png (COVER)', 'campus.png (COVER)']);
   });
 
@@ -386,8 +317,6 @@ describe('formations operations helper', () => {
           slug: 'zeta-course',
           sortOrder: 1,
           technologyRelations: [],
-          linkIds: [],
-          links: [],
           imageAssetIds: [],
           imageAssets: [],
         }),
@@ -398,13 +327,10 @@ describe('formations operations helper', () => {
           sortOrder: 1,
           highlight: null,
           technologyRelations: [{ technologyId: 'missing-technology' }],
-          linkIds: ['missing-link'],
-          links: [],
           imageAssetIds: ['missing-image'],
           imageAssets: [],
         }),
       ],
-      [],
       [],
       [],
     );
@@ -415,11 +341,10 @@ describe('formations operations helper', () => {
     ]);
     expect(viewModels[0].highlight).toBeFalse();
     expect(viewModels[0].technologyLabels).toEqual(['missing-technology']);
-    expect(viewModels[0].linkLabels).toEqual(['missing-link']);
     expect(viewModels[0].imageAssetLabels).toEqual(['missing-image']);
   });
 
-  it('should fallback to end-date placeholder, zero sort-order and alternative link labels', () => {
+  it('should fallback to end-date placeholder and zero sort-order', () => {
     const viewModels = buildFormationsViewModels(
       [
         createFormation({
@@ -430,38 +355,16 @@ describe('formations operations helper', () => {
           endDate: null,
           technologyRelations: [],
           technologies: [],
-          linkIds: ['link-4', 'link-5'],
-          links: [],
           imageAssetIds: [],
           imageAssets: [],
         }),
       ],
       [],
-      [
-        createLink({
-          id: 'link-4',
-          labelPt: '',
-          labelEn: 'English only label',
-          labelEs: 'English only label',
-          url: 'https://example.com/en-only',
-        }),
-        createLink({
-          id: 'link-5',
-          labelPt: '',
-          labelEn: '',
-          labelEs: '',
-          url: 'https://example.com/url-only',
-        }),
-      ],
       [],
     );
 
     expect(viewModels[0].endDateLabel).toBe('-');
     expect(viewModels[0].sortOrderLabel).toBe('0');
-    expect(viewModels[0].linkLabels).toEqual([
-      'English only label',
-      'https://example.com/url-only',
-    ]);
   });
 
   it('should build a valid mutation payload with deduplicated relations', () => {
@@ -479,7 +382,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '5',
         technologyIds: ['technology-1', 'technology-1'],
-        linkIds: ['link-1', 'link-1'],
         imageAssetIds: ['image-asset-1', 'image-asset-1'],
       }),
     ).toEqual({
@@ -499,7 +401,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 5,
         technologyRelations: [{ technologyId: 'technology-1' }],
-        linkIds: ['link-1'],
         imageAssetIds: ['image-asset-1'],
       },
     });
@@ -522,7 +423,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '1',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -542,7 +442,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 1,
         technologyRelations: [],
-        linkIds: [],
         imageAssetIds: [],
       },
     });
@@ -565,7 +464,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '1',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -584,7 +482,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 1,
         technologyRelations: [],
-        linkIds: [],
         imageAssetIds: [],
       },
     });
@@ -607,7 +504,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '1',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -633,7 +529,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -657,7 +552,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -681,7 +575,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -705,7 +598,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -729,7 +621,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '1',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -753,7 +644,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -777,7 +667,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -801,7 +690,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -825,7 +713,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: '1',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -849,7 +736,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({
@@ -873,7 +759,6 @@ describe('formations operations helper', () => {
         highlight: true,
         sortOrder: 'abc',
         technologyIds: [],
-        linkIds: [],
         imageAssetIds: [],
       }),
     ).toEqual({

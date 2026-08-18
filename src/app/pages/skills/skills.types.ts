@@ -12,20 +12,17 @@ export type SkillStackFilterValue =
   | 'ALL'
   | 'FRONT_END'
   | 'BACK_END'
-  | 'DATABASES'
-  | 'GAMES'
   | 'MOBILE'
+  | 'GAMES'
+  | 'DATABASES'
+  | 'TESTING'
+  | 'DEVOPS'
+  | 'CONCEPTS'
   | 'OTHERS';
 
-export type SkillLevelFilterValue = 'ALL' | 'ADVANCED' | 'INTERMEDIATE' | 'BEGINNER' | 'STUDYING';
+export type SkillLevelFilterValue = 'ALL' | 'ADVANCED' | 'INTERMEDIATE' | 'BASIC' | 'STUDYING';
 
-export type SkillFrequencyFilterValue =
-  | 'ALL'
-  | 'FREQUENT'
-  | 'OCCASIONAL'
-  | 'PREVIOUSLY_USED'
-  | 'RARE'
-  | 'STUDYING';
+export type SkillFrequencyFilterValue = 'ALL' | 'FREQUENT' | 'OCCASIONAL' | 'RARE';
 
 export type SkillTypeFilterValue = 'ALL' | TechnologyType;
 
@@ -117,6 +114,9 @@ export const SKILL_STACK_FILTERS: readonly SkillFilterChipViewModel<SkillStackFi
   { labelKey: 'taxonomy.skills.stack.mobile', value: 'MOBILE' },
   { labelKey: 'taxonomy.skills.stack.games', value: 'GAMES' },
   { labelKey: 'taxonomy.skills.stack.databases', value: 'DATABASES' },
+  { labelKey: 'taxonomy.skills.stack.testing', value: 'TESTING' },
+  { labelKey: 'taxonomy.skills.stack.devops', value: 'DEVOPS' },
+  { labelKey: 'taxonomy.skills.stack.concepts', value: 'CONCEPTS' },
   { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
 ];
 
@@ -124,7 +124,7 @@ export const SKILL_LEVEL_FILTERS: readonly SkillFilterChipViewModel<SkillLevelFi
   { labelKey: 'common.filters.all', value: 'ALL' },
   { labelKey: 'taxonomy.skills.level.advanced', value: 'ADVANCED' },
   { labelKey: 'taxonomy.skills.level.intermediate', value: 'INTERMEDIATE' },
-  { labelKey: 'taxonomy.skills.level.beginner', value: 'BEGINNER' },
+  { labelKey: 'taxonomy.skills.level.basic', value: 'BASIC' },
   { labelKey: 'common.states.studying', value: 'STUDYING' },
 ];
 
@@ -132,9 +132,7 @@ export const SKILL_FREQUENCY_FILTERS: readonly SkillFilterChipViewModel<SkillFre
   { labelKey: 'common.filters.all', value: 'ALL' },
   { labelKey: 'taxonomy.skills.frequency.frequent', value: 'FREQUENT' },
   { labelKey: 'taxonomy.skills.frequency.occasional', value: 'OCCASIONAL' },
-  { labelKey: 'taxonomy.skills.frequency.previouslyUsed', value: 'PREVIOUSLY_USED' },
   { labelKey: 'taxonomy.skills.frequency.rare', value: 'RARE' },
-  { labelKey: 'common.states.studying', value: 'STUDYING' },
 ];
 
 export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilterValue>[] = [
@@ -158,10 +156,14 @@ export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilt
     labelKey: 'taxonomy.skills.type.databasesManagementSystems',
     value: 'DATABASES_MANAGEMENT_SYSTEMS',
   },
+  { labelKey: 'taxonomy.skills.type.orms', value: 'ORMS' },
   { labelKey: 'taxonomy.skills.type.codeEditors', value: 'CODE_EDITORS' },
   { labelKey: 'taxonomy.skills.type.techniques', value: 'TECHNIQUES' },
   { labelKey: 'taxonomy.skills.type.methodologies', value: 'METHODOLOGIES' },
-  { labelKey: 'taxonomy.skills.type.objectNotations', value: 'OBJECT_NOTATIONS' },
+  {
+    labelKey: 'taxonomy.skills.type.markupAndFormatSyntaxes',
+    value: 'MARKUP_AND_FORMAT_SYNTAXES',
+  },
   { labelKey: 'taxonomy.skills.type.packageManagers', value: 'PACKAGE_MANAGERS' },
   { labelKey: 'taxonomy.skills.type.packages', value: 'PACKAGES' },
   {
@@ -177,7 +179,17 @@ export const SKILL_TYPE_FILTERS: readonly SkillFilterChipViewModel<SkillTypeFilt
     labelKey: 'taxonomy.skills.type.developmentPlatforms',
     value: 'DEVELOPMENT_PLATFORMS',
   },
+  { labelKey: 'taxonomy.skills.type.runtimeEnvironments', value: 'RUNTIME_ENVIRONMENTS' },
+  { labelKey: 'taxonomy.skills.type.testingTools', value: 'TESTING_TOOLS' },
+  { labelKey: 'taxonomy.skills.type.buildTools', value: 'BUILD_TOOLS' },
+  { labelKey: 'taxonomy.skills.type.documentationTools', value: 'DOCUMENTATION_TOOLS' },
+  { labelKey: 'taxonomy.skills.type.preprocessors', value: 'PREPROCESSORS' },
   { labelKey: 'taxonomy.skills.type.protocols', value: 'PROTOCOLS' },
+  { labelKey: 'taxonomy.skills.type.artificialIntelligences', value: 'ARTIFICIAL_INTELLIGENCES' },
+  { labelKey: 'taxonomy.skills.type.designPatterns', value: 'DESIGN_PATTERNS' },
+  { labelKey: 'taxonomy.skills.type.programmingParadigms', value: 'PROGRAMMING_PARADIGMS' },
+  { labelKey: 'taxonomy.skills.type.architectures', value: 'ARCHITECTURES' },
+  { labelKey: 'taxonomy.skills.type.principles', value: 'PRINCIPLES' },
   { labelKey: 'taxonomy.skills.stack.others', value: 'OTHERS' },
 ];
 
@@ -202,6 +214,9 @@ export const SKILL_STACK_LABEL_KEYS: Record<SkillStackFilterValue, AppTranslatio
   DATABASES: 'taxonomy.skills.stack.databases',
   GAMES: 'taxonomy.skills.stack.games',
   MOBILE: 'taxonomy.skills.stack.mobile',
+  TESTING: 'taxonomy.skills.stack.testing',
+  DEVOPS: 'taxonomy.skills.stack.devops',
+  CONCEPTS: 'taxonomy.skills.stack.concepts',
   OTHERS: 'taxonomy.skills.stack.others',
 };
 
@@ -214,24 +229,35 @@ export const SKILL_TYPE_LABEL_KEYS: Record<SkillTypeFilterValue, AppTranslationK
   RELATIONAL_DATABASES: 'taxonomy.skills.type.relationalDataBases',
   NON_RELATIONAL_DATABASES: 'taxonomy.skills.type.nonRelationalDataBases',
   DATABASES_MANAGEMENT_SYSTEMS: 'taxonomy.skills.type.databasesManagementSystems',
+  ORMS: 'taxonomy.skills.type.orms',
   CODE_EDITORS: 'taxonomy.skills.type.codeEditors',
   TECHNIQUES: 'taxonomy.skills.type.techniques',
   METHODOLOGIES: 'taxonomy.skills.type.methodologies',
-  OBJECT_NOTATIONS: 'taxonomy.skills.type.objectNotations',
+  MARKUP_AND_FORMAT_SYNTAXES: 'taxonomy.skills.type.markupAndFormatSyntaxes',
   PACKAGE_MANAGERS: 'taxonomy.skills.type.packageManagers',
   PACKAGES: 'taxonomy.skills.type.packages',
   VERSIONING_PLATFORMS: 'taxonomy.skills.type.versioningPlatforms',
   CLOUD_HOSTING_PLATFORMS: 'taxonomy.skills.type.cloudHostingPlatforms',
   DEPLOYMENT_TOOLS: 'taxonomy.skills.type.deploymentTools',
   DEVELOPMENT_PLATFORMS: 'taxonomy.skills.type.developmentPlatforms',
+  RUNTIME_ENVIRONMENTS: 'taxonomy.skills.type.runtimeEnvironments',
+  TESTING_TOOLS: 'taxonomy.skills.type.testingTools',
+  BUILD_TOOLS: 'taxonomy.skills.type.buildTools',
+  DOCUMENTATION_TOOLS: 'taxonomy.skills.type.documentationTools',
+  PREPROCESSORS: 'taxonomy.skills.type.preprocessors',
   PROTOCOLS: 'taxonomy.skills.type.protocols',
+  ARTIFICIAL_INTELLIGENCES: 'taxonomy.skills.type.artificialIntelligences',
+  DESIGN_PATTERNS: 'taxonomy.skills.type.designPatterns',
+  PROGRAMMING_PARADIGMS: 'taxonomy.skills.type.programmingParadigms',
+  ARCHITECTURES: 'taxonomy.skills.type.architectures',
+  PRINCIPLES: 'taxonomy.skills.type.principles',
   OTHERS: 'taxonomy.skills.stack.others',
 };
 
 export const SKILL_LEVEL_LABEL_KEYS: Record<string, AppTranslationKey> = {
   ADVANCED: 'taxonomy.skills.level.advanced',
   INTERMEDIATE: 'taxonomy.skills.level.intermediate',
-  BEGINNER: 'taxonomy.skills.level.beginner',
+  BASIC: 'taxonomy.skills.level.basic',
   STUDYING: 'common.states.studying',
 };
 
@@ -239,8 +265,6 @@ export const SKILL_FREQUENCY_LABEL_KEYS: Record<string, AppTranslationKey> = {
   FREQUENT: 'taxonomy.skills.frequency.frequent',
   OCCASIONAL: 'taxonomy.skills.frequency.occasional',
   RARE: 'taxonomy.skills.frequency.rare',
-  PREVIOUSLY_USED: 'taxonomy.skills.frequency.previouslyUsed',
-  STUDYING: 'common.states.studying',
 };
 
 export const SKILL_CONTEXT_LABEL_KEYS: Record<TechnologyContextKey, AppTranslationKey> = {

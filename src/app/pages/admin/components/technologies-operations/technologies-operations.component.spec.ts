@@ -10,7 +10,6 @@ import { TechnologyAdminRecord } from '../../../../core/api/technologies/technol
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
 import { FormationsService } from '../../../../core/api/formations/formations.service';
-import { LinksService } from '../../../../core/api/links/links.service';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
 import { TechnologiesOperationsComponent } from './technologies-operations.component';
 import { buildTechnologiesFormValue } from './technologies-operations.types';
@@ -45,9 +44,7 @@ const imageResponse = () => ({
       id: 'image-1',
       fileName: 'angular.png',
       filePath: '/assets/img/skills/angular.png',
-      folder: 'skills',
       kind: 'ICON',
-      mimeType: 'image/png',
     },
   ],
   pagination: {
@@ -72,7 +69,6 @@ interface TechnologiesTestApi {
   toggleProject(id: string): void;
   toggleExperience(id: string): void;
   toggleFormation(id: string): void;
-  toggleLink(id: string): void;
   submitModal(): Promise<void>;
   goToPage(page: number): Promise<void>;
   updateSearchQuery(value: string): Promise<void>;
@@ -102,7 +98,6 @@ describe('TechnologiesOperationsComponent', () => {
   let projects: jasmine.SpyObj<ProjectsService>;
   let experiences: jasmine.SpyObj<ExperiencesService>;
   let formations: jasmine.SpyObj<FormationsService>;
-  let links: jasmine.SpyObj<LinksService>;
   let toast: jasmine.SpyObj<ToastService>;
   let session: { accessToken: jasmine.Spy<() => string | null> };
   const settle = async () => {
@@ -141,7 +136,6 @@ describe('TechnologiesOperationsComponent', () => {
       'getExperiences',
     ]);
     formations = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
-    links = jasmine.createSpyObj<LinksService>('LinksService', ['getAll']);
     toast = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     session = { accessToken: jasmine.createSpy('accessToken').and.returnValue('token') };
     service.getAll.and.returnValue(of(response()));
@@ -154,7 +148,6 @@ describe('TechnologiesOperationsComponent', () => {
       of({ data: [], pagination: response().pagination }),
     );
     formations.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
-    links.getAll.and.returnValue(of({ data: [], pagination: response().pagination }));
     await TestBed.configureTestingModule({
       imports: [TechnologiesOperationsComponent],
       providers: [
@@ -165,7 +158,6 @@ describe('TechnologiesOperationsComponent', () => {
         { provide: ProjectsService, useValue: projects },
         { provide: ExperiencesService, useValue: experiences },
         { provide: FormationsService, useValue: formations },
-        { provide: LinksService, useValue: links },
         { provide: AdminSessionService, useValue: session },
         { provide: ToastService, useValue: toast },
       ],
@@ -212,8 +204,6 @@ describe('TechnologiesOperationsComponent', () => {
     component.toggleExperience('experience-1');
     component.toggleFormation('formation-1');
     component.toggleFormation('formation-1');
-    component.toggleLink('link-1');
-    component.toggleLink('link-1');
     await component.submitModal();
     expect(service.create).toHaveBeenCalled();
     component.openUpdateModal('technology-1');
@@ -246,11 +236,9 @@ describe('TechnologiesOperationsComponent', () => {
       projectsSignal: { set(value: readonly unknown[]): void };
       experiencesSignal: { set(value: readonly unknown[]): void };
       formationsSignal: { set(value: readonly unknown[]): void };
-      linksSignal: { set(value: readonly unknown[]): void };
       projectOptions(): readonly { id: string; title: string; subtitle: string }[];
       experienceOptions(): readonly { id: string; title: string; subtitle: string }[];
       formationOptions(): readonly { id: string; title: string; subtitle: string }[];
-      linkOptions(): readonly { id: string; title: string; subtitle: string }[];
     };
 
     component.projectsSignal.set([
@@ -262,18 +250,10 @@ describe('TechnologiesOperationsComponent', () => {
     component.formationsSignal.set([
       { id: 'formation-1', titlePt: 'Information Systems', institution: 'PUC Minas' },
     ]);
-    component.linksSignal.set([
-      { id: 'link-1', labelPt: 'Repository', url: 'https://github.com/example' },
-      { id: 'link-2', labelPt: null, url: 'https://example.com' },
-    ]);
 
     expect(component.projectOptions()[0].title).toBe('Portfolio');
     expect(component.experienceOptions()[0].subtitle).toBe('Acme');
     expect(component.formationOptions()[0].subtitle).toBe('PUC Minas');
-    expect(component.linkOptions().map((option) => option.title)).toEqual([
-      'Repository',
-      'https://example.com',
-    ]);
   });
 
   it('supports read, pickers, paging and empty selections', async () => {
