@@ -471,6 +471,7 @@ conditions):
 Plans (`.agents/plans/`):
 
 - `plano-adicao-idioma-espanhol.md`
+- `plano-datepicker-mes-ano-carrossel-imagem-e-ajustes-entidades.md`
 - `plano-f8-area-admin-hans-portfolio-app.md`
 - `plano-implementacao-hans-portfolio-app-final-version.md`
 - `plano-melhoria-modais-publicos.md`
