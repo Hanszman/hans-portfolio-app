@@ -4,14 +4,8 @@ import { of, throwError } from 'rxjs';
 import { LinksService } from '../../../../core/api/links/links.service';
 import { LinkRecord } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
-import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
-import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
-import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
-import { FormationsService } from '../../../../core/api/formations/formations.service';
-import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
@@ -29,9 +23,6 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   type: 'GITHUB',
   sortOrder: 1,
   projectIds: ['project-1'],
-  experienceIds: ['experience-1'],
-  technologyIds: ['technology-1'],
-  formationIds: ['formation-1'],
   ...overrides,
 });
 const createProject = (
@@ -65,66 +56,6 @@ const createProject = (
   ...overrides,
 });
 
-const createExperience = (
-  overrides: Partial<ExperienceCollectionItemResponse> = {},
-): ExperienceCollectionItemResponse => ({
-  id: 'experience-1',
-  slug: 'stefanini-ford',
-  companyName: 'Stefanini Ford',
-  titlePt: 'Analista',
-  titleEn: 'Analyst',
-  titleEs: 'Analyst',
-  summaryPt: 'Resumo',
-  summaryEn: 'Summary',
-  summaryEs: 'Summary',
-  descriptionPt: 'Descricao',
-  descriptionEn: 'Description',
-  descriptionEs: 'Description',
-  startDate: '2024-01-01',
-  endDate: null,
-  isCurrent: true,
-  highlight: true,
-  sortOrder: 1,
-  createdAt: '2024-01-01T00:00:00.000Z',
-  updatedAt: '2024-01-01T00:00:00.000Z',
-  technologies: [],
-  projects: [],
-  customers: [],
-  jobs: [],
-  links: [],
-  imageAssets: [],
-  ...overrides,
-});
-
-const createTechnology = (
-  overrides: Partial<TechnologyCollectionItemResponse> = {},
-): TechnologyCollectionItemResponse => ({
-  id: 'technology-1',
-  slug: 'angular',
-  name: 'Angular',
-  type: 'FRAMEWORKS',
-  level: 'advanced',
-  frequency: 'frequent',
-  highlight: true,
-  ...overrides,
-});
-
-const createFormation = (overrides: Partial<FormationRecord> = {}): FormationRecord => ({
-  id: 'formation-1',
-  slug: 'information-systems',
-  institution: 'PUC Minas',
-  titlePt: 'Sistemas de Informação',
-  titleEn: 'Information Systems',
-  titleEs: 'Sistemas de Información',
-  degreeType: 'BACHELOR',
-  summaryPt: 'Graduação',
-  summaryEn: 'Graduation',
-  summaryEs: 'Graduación',
-  startDate: '2015-02-01T00:00:00.000Z',
-  endDate: '2018-12-01T00:00:00.000Z',
-  ...overrides,
-});
-
 const createCollectionResponse = (data: LinkRecord[] = [createLink()], page = 1) => ({
   data,
   pagination: {
@@ -141,9 +72,6 @@ describe('LinksOperationsComponent', () => {
   let fixture: ComponentFixture<LinksOperationsComponent>;
   let linksOperationsService: jasmine.SpyObj<LinksService>;
   let projectsService: jasmine.SpyObj<ProjectsService>;
-  let experiencesService: jasmine.SpyObj<ExperiencesService>;
-  let technologiesService: jasmine.SpyObj<TechnologiesService>;
-  let formationsService: jasmine.SpyObj<FormationsService>;
   let toastService: jasmine.SpyObj<ToastService>;
 
   const settleWorkspace = async (
@@ -178,13 +106,6 @@ describe('LinksOperationsComponent', () => {
       ['getAll', 'create', 'update', 'delete'],
     );
     projectsService = jasmine.createSpyObj<ProjectsService>('ProjectsService', ['getProjects']);
-    experiencesService = jasmine.createSpyObj<ExperiencesService>('ExperiencesService', [
-      'getExperiences',
-    ]);
-    technologiesService = jasmine.createSpyObj<TechnologiesService>('TechnologiesService', [
-      'getTechnologies',
-    ]);
-    formationsService = jasmine.createSpyObj<FormationsService>('FormationsService', ['getAll']);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
 
     linksOperationsService.getAll.and.returnValue(of(createCollectionResponse()));
@@ -204,45 +125,6 @@ describe('LinksOperationsComponent', () => {
         },
       }),
     );
-    experiencesService.getExperiences.and.returnValue(
-      of({
-        data: [createExperience()],
-        pagination: {
-          page: 1,
-          pageSize: 20,
-          totalItems: 1,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        },
-      }),
-    );
-    technologiesService.getTechnologies.and.returnValue(
-      of({
-        data: [createTechnology()],
-        pagination: {
-          page: 1,
-          pageSize: 100,
-          totalItems: 1,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        },
-      }),
-    );
-    formationsService.getAll.and.returnValue(
-      of({
-        data: [createFormation()],
-        pagination: {
-          page: 1,
-          pageSize: 100,
-          totalItems: 1,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        },
-      }),
-    );
 
     await TestBed.configureTestingModule({
       imports: [LinksOperationsComponent],
@@ -251,9 +133,6 @@ describe('LinksOperationsComponent', () => {
         provideAppTranslations(),
         { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
-        { provide: ExperiencesService, useValue: experiencesService },
-        { provide: TechnologiesService, useValue: technologiesService },
-        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -274,9 +153,6 @@ describe('LinksOperationsComponent', () => {
 
     expect(linksOperationsService.getAll).toHaveBeenCalledWith(1, 5, '');
     expect(projectsService.getProjects).toHaveBeenCalled();
-    expect(experiencesService.getExperiences).toHaveBeenCalled();
-    expect(technologiesService.getTechnologies).toHaveBeenCalled();
-    expect(formationsService.getAll).toHaveBeenCalledWith(1, 100);
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain(createAdminEntityEndpointLabel('/links'));
     expect(compiled.textContent).toContain('Create');
@@ -303,9 +179,6 @@ describe('LinksOperationsComponent', () => {
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       toggleProject(projectId: string): void;
-      toggleExperience(experienceId: string): void;
-      toggleTechnology(technologyId: string): void;
-      toggleFormation(formationId: string): void;
       submitModal(): Promise<void>;
     };
 
@@ -320,9 +193,6 @@ describe('LinksOperationsComponent', () => {
     component.updateType('deploy');
     component.updateSortOrder('3');
     component.toggleProject('project-1');
-    component.toggleExperience('experience-1');
-    component.toggleTechnology('technology-1');
-    component.toggleFormation('formation-1');
     await component.submitModal();
 
     expect(linksOperationsService.create).toHaveBeenCalledWith({
@@ -336,9 +206,6 @@ describe('LinksOperationsComponent', () => {
       type: 'DEPLOY',
       sortOrder: 3,
       projectIds: ['project-1'],
-      experienceIds: ['experience-1'],
-      technologyIds: ['technology-1'],
-      formationIds: ['formation-1'],
     });
 
     component.openUpdateModal('link-1');
@@ -356,9 +223,6 @@ describe('LinksOperationsComponent', () => {
       type: 'GITHUB',
       sortOrder: 1,
       projectIds: ['project-1'],
-      experienceIds: ['experience-1'],
-      technologyIds: ['technology-1'],
-      formationIds: ['formation-1'],
     });
 
     component.openDeleteModal('link-1');
@@ -390,9 +254,6 @@ describe('LinksOperationsComponent', () => {
     expect(component.modalTitleKey()).toBe('pages.admin.links.modal.read.title');
     expect(fixture.nativeElement.textContent).toContain('https://github.com/vh/portfolio');
     expect(fixture.nativeElement.textContent).toContain('Portfolio remake');
-    expect(fixture.nativeElement.textContent).toContain('Analista');
-    expect(fixture.nativeElement.textContent).toContain('Angular');
-    expect(fixture.nativeElement.textContent).toContain('Sistemas de Informação');
 
     component.openUpdatePickerModal();
     expect(component.modalTitleKey()).toBe('pages.admin.links.modal.pickUpdate.title');
@@ -433,14 +294,8 @@ describe('LinksOperationsComponent', () => {
       updateSearchQuery(value: string): Promise<void>;
       openCreateModal(): void;
       toggleProject(projectId: string): void;
-      toggleExperience(experienceId: string): void;
-      toggleTechnology(technologyId: string): void;
-      toggleFormation(formationId: string): void;
       form(): {
         projectIds: readonly string[];
-        experienceIds: readonly string[];
-        technologyIds: readonly string[];
-        formationIds: readonly string[];
       };
     };
 
@@ -457,17 +312,8 @@ describe('LinksOperationsComponent', () => {
     component.openCreateModal();
     component.toggleProject('project-1');
     component.toggleProject('project-1');
-    component.toggleExperience('experience-1');
-    component.toggleExperience('experience-1');
-    component.toggleTechnology('technology-1');
-    component.toggleTechnology('technology-1');
-    component.toggleFormation('formation-1');
-    component.toggleFormation('formation-1');
 
     expect(component.form().projectIds).toEqual([]);
-    expect(component.form().experienceIds).toEqual([]);
-    expect(component.form().technologyIds).toEqual([]);
-    expect(component.form().formationIds).toEqual([]);
   });
 
   it('should validate modal input and block unavailable sessions', async () => {
@@ -514,9 +360,6 @@ describe('LinksOperationsComponent', () => {
         provideAppTranslations(),
         { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
-        { provide: ExperiencesService, useValue: experiencesService },
-        { provide: TechnologiesService, useValue: technologiesService },
-        { provide: FormationsService, useValue: formationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -614,9 +457,6 @@ describe('LinksOperationsComponent', () => {
         provideAppTranslations(),
         { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
-        { provide: ExperiencesService, useValue: experiencesService },
-        { provide: TechnologiesService, useValue: technologiesService },
-        { provide: FormationsService, useValue: formationsService },
         { provide: ToastService, useValue: toastService },
         {
           provide: AdminSessionService,
@@ -655,9 +495,6 @@ describe('LinksOperationsComponent', () => {
         provideAppTranslations(),
         { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
-        { provide: ExperiencesService, useValue: experiencesService },
-        { provide: TechnologiesService, useValue: technologiesService },
-        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {
@@ -695,9 +532,6 @@ describe('LinksOperationsComponent', () => {
         provideAppTranslations(),
         { provide: LinksService, useValue: linksOperationsService },
         { provide: ProjectsService, useValue: projectsService },
-        { provide: ExperiencesService, useValue: experiencesService },
-        { provide: TechnologiesService, useValue: technologiesService },
-        { provide: FormationsService, useValue: formationsService },
         {
           provide: AdminSessionService,
           useValue: {

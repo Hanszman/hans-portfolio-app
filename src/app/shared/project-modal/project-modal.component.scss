@@ -22,6 +22,10 @@
   @apply flex flex-wrap items-center gap-2;
 }
 
+.project-modal-meta {
+  --base-neutral-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
+}
+
 .project-modal-meta > span {
   @apply font-mono text-sm;
   color: color-mix(in srgb, var(--text-color) 66%, transparent);
@@ -42,13 +46,6 @@
 .project-modal-stack-group > span {
   @apply text-xs font-medium uppercase tracking-[0.08em];
   color: color-mix(in srgb, var(--text-color) 64%, transparent);
-}
-
-.project-modal-chip {
-  @apply inline-flex items-center rounded-xl border px-4 py-2 text-sm font-semibold;
-  border-color: color-mix(in srgb, var(--base-default-color) 22%, transparent);
-  background-color: color-mix(in srgb, var(--background-color) 90%, var(--white));
-  color: var(--text-color);
 }
 
 .project-modal-links {

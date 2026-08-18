@@ -1,8 +1,5 @@
-import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { LinkMutationPayload } from '../../../../core/api/links/links.types';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
-import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
-import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -44,9 +41,6 @@ export interface LinksOperationsFormValue {
   type: string;
   sortOrder: string;
   projectIds: readonly string[];
-  experienceIds: readonly string[];
-  technologyIds: readonly string[];
-  formationIds: readonly string[];
 }
 
 export const LINKS_OPERATIONS_FIELDS = {
@@ -118,16 +112,10 @@ export interface LinkOperationsViewModel {
   type: string;
   sortOrderLabel: string;
   projectLabels: readonly string[];
-  experienceLabels: readonly string[];
-  technologyLabels: readonly string[];
-  formationLabels: readonly string[];
 }
 
 export interface NormalizedLinkRelations {
   projectIds: readonly string[];
-  experienceIds: readonly string[];
-  technologyIds: readonly string[];
-  formationIds: readonly string[];
 }
 
 export interface LinksMutationBuildSuccess {
@@ -153,9 +141,6 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   type: '',
   sortOrder: '0',
   projectIds: [],
-  experienceIds: [],
-  technologyIds: [],
-  formationIds: [],
 });
 
 export const createLinkTypeOptions = (): readonly LinkTypeOptionDefinition[] =>
@@ -179,31 +164,9 @@ export const createLinkTypeOptions = (): readonly LinkTypeOptionDefinition[] =>
   );
 
 export const createLinkCatalogOptionViewModel = (
-  item:
-    | ProjectCollectionItemResponse
-    | ExperienceCollectionItemResponse
-    | TechnologyCollectionItemResponse
-    | FormationRecord,
-): LinkCatalogOptionViewModel => {
-  if ('companyName' in item) {
-    return {
-      id: item.id,
-      title: item.titlePt,
-      subtitle: item.companyName,
-    };
-  }
-
-  if ('titlePt' in item) {
-    return {
-      id: item.id,
-      title: item.titlePt,
-      subtitle: 'institution' in item ? item.institution : item.slug,
-    };
-  }
-
-  return {
-    id: item.id,
-    title: item.name,
-    subtitle: item.slug,
-  };
-};
+  item: ProjectCollectionItemResponse,
+): LinkCatalogOptionViewModel => ({
+  id: item.id,
+  title: item.titlePt,
+  subtitle: item.slug,
+});

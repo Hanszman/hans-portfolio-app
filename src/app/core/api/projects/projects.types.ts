@@ -56,15 +56,10 @@ export interface ProjectImageAssetResponse {
   id: string;
   fileName: string;
   filePath: string;
-  folder: string;
   kind: string;
   altPt: string | null;
   altEn: string | null;
   altEs?: string | null;
-  captionPt: string | null;
-  captionEn: string | null;
-  captionEs?: string | null;
-  mimeType: string;
   width: number | null;
   height: number | null;
   sortOrder: number;

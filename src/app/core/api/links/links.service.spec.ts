@@ -25,9 +25,6 @@ const createLink = (): LinkRecord => ({
   type: 'GITHUB',
   sortOrder: 1,
   projectIds: ['project-1'],
-  experienceIds: ['experience-1'],
-  technologyIds: ['technology-1'],
-  formationIds: ['formation-1'],
   createdAt: '2026-07-12T00:00:00.000Z',
   updatedAt: '2026-07-12T00:00:00.000Z',
 });
@@ -55,9 +52,6 @@ const createLinkPayload = (): LinkMutationPayload => ({
   type: 'GITHUB',
   sortOrder: 1,
   projectIds: ['project-1'],
-  experienceIds: ['experience-1'],
-  technologyIds: ['technology-1'],
-  formationIds: ['formation-1'],
 });
 
 describe('LinksService', () => {

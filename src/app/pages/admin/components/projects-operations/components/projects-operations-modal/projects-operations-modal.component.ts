@@ -156,7 +156,7 @@ export class ProjectsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.operations.localized.shortDescription',
+            labelKey: 'common.fields.summary',
             value: resolveAdminLocalizedValue(
               this.translation.locale(),
               project.summaryPt,
@@ -165,7 +165,7 @@ export class ProjectsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.operations.localized.fullDescription',
+            labelKey: 'common.fields.description',
             value: resolveAdminLocalizedValue(
               this.translation.locale(),
               project.descriptionPt,

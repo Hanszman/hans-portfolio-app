@@ -98,7 +98,7 @@ describe('ProjectModalComponent', () => {
     spyOn(fixture.componentInstance.openTechnology, 'emit');
     fixture.nativeElement.querySelector('hans-modal').dispatchEvent(new Event('close'));
     fixture.nativeElement
-      .querySelector('app-tag-button')
+      .querySelector('.project-modal-tags app-tag-button')
       .dispatchEvent(
         new CustomEvent('selected', { detail: project.stackGroups[0].technologies[0].value }),
       );

@@ -186,15 +186,6 @@
           [selectedIds]="form().customerIds"
           (toggled)="toggleCustomer($event)"
         />
-
-        <app-operations-relation-picker
-          [label]="'pages.admin.imageAssets.fields.jobs.label' | translate"
-          [description]="'pages.admin.imageAssets.fields.jobs.description' | translate"
-          [emptyMessage]="'pages.admin.imageAssets.fields.jobs.empty' | translate"
-          [options]="jobOptions()"
-          [selectedIds]="form().jobIds"
-          (toggled)="toggleJob($event)"
-        />
       </div>
     }
   }

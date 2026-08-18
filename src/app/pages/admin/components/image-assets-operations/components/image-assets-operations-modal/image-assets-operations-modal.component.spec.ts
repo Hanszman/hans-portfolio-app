@@ -21,7 +21,6 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     formationLabels: [],
     spokenLanguageLabels: [],
     customerLabels: [],
-    jobLabels: [],
   },
   {
     id: 'image-asset-2',
@@ -39,7 +38,6 @@ const IMAGE_ASSETS: readonly ImageAssetOperationsViewModel[] = [
     formationLabels: [],
     spokenLanguageLabels: [],
     customerLabels: [],
-    jobLabels: [],
   },
 ];
 
@@ -87,7 +85,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     const formationSpy = jasmine.createSpy('formationToggled');
     const spokenLanguageSpy = jasmine.createSpy('spokenLanguageToggled');
     const customerSpy = jasmine.createSpy('customerToggled');
-    const jobSpy = jasmine.createSpy('jobToggled');
     const pageSpy = jasmine.createSpy('pageSelected');
     const submitSpy = jasmine.createSpy('submitted');
     const closeSpy = jasmine.createSpy('closed');
@@ -107,7 +104,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     component.formationToggled.subscribe(formationSpy);
     component.spokenLanguageToggled.subscribe(spokenLanguageSpy);
     component.customerToggled.subscribe(customerSpy);
-    component.jobToggled.subscribe(jobSpy);
     component.pageSelected.subscribe(pageSpy);
     component.submitted.subscribe(submitSpy);
     component.closed.subscribe(closeSpy);
@@ -153,7 +149,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
       toggleFormation(formationId: string): void;
       toggleSpokenLanguage(spokenLanguageId: string): void;
       toggleCustomer(customerId: string): void;
-      toggleJob(jobId: string): void;
       submit(): void;
       requestClose(): void;
       isProjectSelected(projectId: string): boolean;
@@ -177,7 +172,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     componentAccess.toggleFormation('formation-1');
     componentAccess.toggleSpokenLanguage('spoken-language-1');
     componentAccess.toggleCustomer('customer-1');
-    componentAccess.toggleJob('job-1');
     componentAccess.selectPage(2);
     componentAccess.submit();
     componentAccess.requestClose();
@@ -226,7 +220,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
     expect(formationSpy).toHaveBeenCalledOnceWith('formation-1');
     expect(spokenLanguageSpy).toHaveBeenCalledOnceWith('spoken-language-1');
     expect(customerSpy).toHaveBeenCalledOnceWith('customer-1');
-    expect(jobSpy).toHaveBeenCalledOnceWith('job-1');
     expect(pageSpy).toHaveBeenCalledOnceWith(2);
     expect(submitSpy).toHaveBeenCalledTimes(1);
     expect(closeSpy).toHaveBeenCalledTimes(1);
@@ -325,7 +318,6 @@ describe('ImageAssetsOperationsModalComponent', () => {
       formationIds: [],
       spokenLanguageIds: [],
       customerIds: [],
-      jobIds: [],
     });
     fixture.detectChanges();
 

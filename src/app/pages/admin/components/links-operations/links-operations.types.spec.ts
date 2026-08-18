@@ -17,13 +17,10 @@ describe('links types helpers', () => {
       type: '',
       sortOrder: '0',
       projectIds: [],
-      experienceIds: [],
-      technologyIds: [],
-      formationIds: [],
     });
   });
 
-  it('should build project, experience, technology and formation catalog options', () => {
+  it('should build project catalog options', () => {
     expect(
       createLinkCatalogOptionViewModel({
         id: 'project-1',
@@ -51,81 +48,11 @@ describe('links types helpers', () => {
         experiences: [],
         links: [],
         imageAssets: [],
-      }),
+      } as never),
     ).toEqual({
       id: 'project-1',
       title: 'Portfolio remake',
       subtitle: 'portfolio-remake',
-    });
-
-    expect(
-      createLinkCatalogOptionViewModel({
-        id: 'experience-1',
-        slug: 'stefanini-ford',
-        companyName: 'Stefanini Ford',
-        titlePt: 'Analista',
-        titleEn: 'Analyst',
-        titleEs: 'Analyst',
-        summaryPt: 'Resumo',
-        summaryEn: 'Summary',
-        summaryEs: 'Summary',
-        descriptionPt: 'Descricao',
-        descriptionEn: 'Description',
-        descriptionEs: 'Description',
-        startDate: '2024-01-01',
-        endDate: null,
-        isCurrent: true,
-        highlight: true,
-        sortOrder: 1,
-        createdAt: '2024-01-01T00:00:00.000Z',
-        updatedAt: '2024-01-01T00:00:00.000Z',
-        technologies: [],
-        projects: [],
-        customers: [],
-        jobs: [],
-        links: [],
-        imageAssets: [],
-      }),
-    ).toEqual({
-      id: 'experience-1',
-      title: 'Analista',
-      subtitle: 'Stefanini Ford',
-    });
-
-    expect(
-      createLinkCatalogOptionViewModel({
-        id: 'technology-1',
-        slug: 'angular',
-        name: 'Angular',
-        type: 'FRAMEWORKS',
-        level: 'advanced',
-        frequency: 'frequent',
-        highlight: true,
-      }),
-    ).toEqual({
-      id: 'technology-1',
-      title: 'Angular',
-      subtitle: 'angular',
-    });
-
-    expect(
-      createLinkCatalogOptionViewModel({
-        id: 'formation-1',
-        slug: 'information-systems',
-        institution: 'PUC Minas',
-        titlePt: 'Sistemas de Informação',
-        titleEn: 'Information Systems',
-        titleEs: 'Sistemas de Información',
-        degreeType: 'BACHELOR',
-        summaryPt: 'Graduação',
-        summaryEn: 'Graduation',
-        summaryEs: 'Graduación',
-        startDate: '2015-02-01T00:00:00.000Z',
-      }),
-    ).toEqual({
-      id: 'formation-1',
-      title: 'Sistemas de Informação',
-      subtitle: 'PUC Minas',
     });
   });
 

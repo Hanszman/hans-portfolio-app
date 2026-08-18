@@ -30,7 +30,6 @@ const createImageAsset = (): ImageAssetRecord => ({
   formationIds: [],
   spokenLanguageIds: [],
   customerIds: [],
-  jobIds: [],
   createdAt: '2026-07-16T00:00:00.000Z',
   updatedAt: '2026-07-16T00:00:00.000Z',
 });
@@ -63,7 +62,6 @@ const createImageAssetPayload = (): ImageAssetMutationPayload => ({
   formationIds: [],
   spokenLanguageIds: [],
   customerIds: [],
-  jobIds: [],
 });
 
 describe('ImageAssetsService', () => {

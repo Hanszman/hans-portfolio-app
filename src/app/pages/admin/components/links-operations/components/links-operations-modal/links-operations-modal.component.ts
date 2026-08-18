@@ -64,14 +64,8 @@ export class LinksOperationsModalComponent {
     type: '',
     sortOrder: '0',
     projectIds: [],
-    experienceIds: [],
-    technologyIds: [],
-    formationIds: [],
   });
   readonly projectOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
-  readonly experienceOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
-  readonly technologyOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
-  readonly formationOptions = input<readonly LinkCatalogOptionViewModel[]>([]);
   readonly linkTypeOptions = input<readonly LinkTypeOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
@@ -92,9 +86,6 @@ export class LinksOperationsModalComponent {
   readonly typeChanged = output<string>();
   readonly sortOrderChanged = output<string>();
   readonly projectToggled = output<string>();
-  readonly experienceToggled = output<string>();
-  readonly technologyToggled = output<string>();
-  readonly formationToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
@@ -185,18 +176,6 @@ export class LinksOperationsModalComponent {
             labelKey: 'common.entities.projects',
             value: link.projectLabels.join(', ') || emptyRelations,
           },
-          {
-            labelKey: 'common.entities.experiences',
-            value: link.experienceLabels.join(', ') || emptyRelations,
-          },
-          {
-            labelKey: 'common.entities.technologies',
-            value: link.technologyLabels.join(', ') || emptyRelations,
-          },
-          {
-            labelKey: 'common.entities.formations',
-            value: link.formationLabels.join(', ') || emptyRelations,
-          },
         ],
       }));
     },
@@ -264,18 +243,6 @@ export class LinksOperationsModalComponent {
     this.projectToggled.emit(projectId);
   }
 
-  protected toggleExperience(experienceId: string): void {
-    this.experienceToggled.emit(experienceId);
-  }
-
-  protected toggleTechnology(technologyId: string): void {
-    this.technologyToggled.emit(technologyId);
-  }
-
-  protected toggleFormation(formationId: string): void {
-    this.formationToggled.emit(formationId);
-  }
-
   protected selectLinkForUpdate(linkId: string): void {
     this.updateSelected.emit(linkId);
   }
@@ -290,17 +257,5 @@ export class LinksOperationsModalComponent {
 
   protected isProjectSelected(projectId: string): boolean {
     return this.form().projectIds.includes(projectId);
-  }
-
-  protected isExperienceSelected(experienceId: string): boolean {
-    return this.form().experienceIds.includes(experienceId);
-  }
-
-  protected isTechnologySelected(technologyId: string): boolean {
-    return this.form().technologyIds.includes(technologyId);
-  }
-
-  protected isFormationSelected(formationId: string): boolean {
-    return this.form().formationIds.includes(formationId);
   }
 }

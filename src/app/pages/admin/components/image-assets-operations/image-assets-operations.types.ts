@@ -7,7 +7,6 @@ import {
   ImageAssetFormationRelationRecord,
   ImageAssetSpokenLanguageRelationRecord,
   ImageAssetCustomerRelationRecord,
-  ImageAssetJobRelationRecord,
 } from '../../../../core/api/image-assets/image-assets.types';
 import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
@@ -15,7 +14,6 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages.types';
 import { CustomerRecord } from '../../../../core/api/customers/customers.types';
-import { JobRecord } from '../../../../core/api/jobs/jobs.types';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
 import { AdminFormFieldConfig } from '../../admin.types';
 import {
@@ -52,7 +50,6 @@ export interface ImageAssetsOperationsFormValue {
   formationIds: readonly string[];
   spokenLanguageIds: readonly string[];
   customerIds: readonly string[];
-  jobIds: readonly string[];
 }
 
 export const IMAGE_ASSETS_OPERATIONS_FIELDS = {
@@ -130,7 +127,6 @@ export interface ImageAssetOperationsViewModel {
   formationLabels: readonly string[];
   spokenLanguageLabels: readonly string[];
   customerLabels: readonly string[];
-  jobLabels: readonly string[];
 }
 
 export interface ImageAssetsMutationBuildSuccess {
@@ -164,7 +160,6 @@ export const createEmptyImageAssetsOperationsFormValue =
     formationIds: [],
     spokenLanguageIds: [],
     customerIds: [],
-    jobIds: [],
   });
 
 export const createImageAssetKindOptions =
@@ -181,8 +176,7 @@ export const createImageAssetCatalogOptionViewModel = (
     | TechnologyCollectionItemResponse
     | FormationRecord
     | SpokenLanguageRecord
-    | CustomerRecord
-    | JobRecord,
+    | CustomerRecord,
 ): ImageAssetCatalogOptionViewModel => {
   if ('companyName' in item) {
     return {
@@ -217,10 +211,6 @@ export const createImageAssetCatalogOptionViewModel = (
     return { id: item.id, title: item.name, subtitle: item.slug };
   }
 
-  if ('namePt' in item) {
-    return { id: item.id, title: item.namePt, subtitle: item.slug };
-  }
-
   return {
     id: item.id,
     title: item.name,
@@ -251,10 +241,6 @@ export const resolveImageAssetSpokenLanguageIdFromRelation = (
 export const resolveImageAssetCustomerIdFromRelation = (
   relation: ImageAssetCustomerRelationRecord,
 ): string | null => relation.customerId ?? relation.customer?.id ?? null;
-
-export const resolveImageAssetJobIdFromRelation = (
-  relation: ImageAssetJobRelationRecord,
-): string | null => relation.jobId ?? relation.job?.id ?? null;
 
 export const resolveImageAssetAltPt = (imageAsset: ImageAssetRecord): string =>
   imageAsset.altPt ?? '';

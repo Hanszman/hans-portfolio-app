@@ -4,7 +4,6 @@ import { TechnologyCollectionItemResponse } from '../../../../../core/api/techno
 import { FormationRecord } from '../../../../../core/api/formations/formations.types';
 import { SpokenLanguageRecord } from '../../../../../core/api/spoken-languages/spoken-languages.types';
 import { CustomerRecord } from '../../../../../core/api/customers/customers.types';
-import { JobRecord } from '../../../../../core/api/jobs/jobs.types';
 import {
   ImageAssetCatalogOptionViewModel,
   IMAGE_ASSET_KIND_VALUES,
@@ -20,7 +19,6 @@ import {
   resolveImageAssetFormationIdFromRelation,
   resolveImageAssetSpokenLanguageIdFromRelation,
   resolveImageAssetCustomerIdFromRelation,
-  resolveImageAssetJobIdFromRelation,
   resolveImageAssetProjectIdFromRelation,
   resolveImageAssetTechnologyIdFromRelation,
 } from '../image-assets-operations.types';
@@ -125,7 +123,6 @@ export const buildImageAssetCatalogOptions = (
     | FormationRecord
     | SpokenLanguageRecord
     | CustomerRecord
-    | JobRecord
   )[],
 ): readonly ImageAssetCatalogOptionViewModel[] =>
   [...items].map(createImageAssetCatalogOptionViewModel).sort(sortCatalogOptions);
@@ -232,10 +229,6 @@ export const buildImageAssetsFormValue = (
       ...(imageAsset.customerIds ?? []),
       ...(imageAsset.customers ?? []).map(resolveImageAssetCustomerIdFromRelation).filter((id): id is string => !!id),
     ]),
-    jobIds: normalizeOptionalRelationIds([
-      ...(imageAsset.jobIds ?? []),
-      ...(imageAsset.jobs ?? []).map(resolveImageAssetJobIdFromRelation).filter((id): id is string => !!id),
-    ]),
   };
 };
 
@@ -247,7 +240,6 @@ export const buildImageAssetsViewModels = (
   formations: readonly FormationRecord[] = [],
   spokenLanguages: readonly SpokenLanguageRecord[] = [],
   customers: readonly CustomerRecord[] = [],
-  jobs: readonly JobRecord[] = [],
 ): readonly ImageAssetOperationsViewModel[] => {
   const projectMap = createProjectMap(projects);
   const experienceMap = createExperienceMap(experiences);
@@ -255,7 +247,6 @@ export const buildImageAssetsViewModels = (
   const formationMap = new Map(formations.map((formation) => [formation.id, formation]));
   const spokenLanguageMap = new Map(spokenLanguages.map((language) => [language.id, language]));
   const customerMap = new Map(customers.map((customer) => [customer.id, customer]));
-  const jobMap = new Map(jobs.map((job) => [job.id, job]));
 
   return [...imageAssets]
     .sort((left, right) => {
@@ -290,13 +281,6 @@ export const buildImageAssetsViewModels = (
           .map(resolveImageAssetCustomerIdFromRelation)
           .filter((id): id is string => !!id),
       ]);
-      const jobIds = normalizeOptionalRelationIds([
-        ...(imageAsset.jobIds ?? []),
-        ...(imageAsset.jobs ?? [])
-          .map(resolveImageAssetJobIdFromRelation)
-          .filter((id): id is string => !!id),
-      ]);
-
       return {
         id: imageAsset.id,
         fileName: imageAsset.fileName,
@@ -322,7 +306,6 @@ export const buildImageAssetsViewModels = (
           (id) => spokenLanguageMap.get(id)?.namePt ?? id,
         ),
         customerLabels: customerIds.map((id) => customerMap.get(id)?.name ?? id),
-        jobLabels: jobIds.map((id) => jobMap.get(id)?.namePt ?? id),
       };
     });
 };
@@ -408,7 +391,6 @@ export const buildImageAssetsMutationPayload = (
       formationIds: [...new Set(formValue.formationIds)],
       spokenLanguageIds: [...new Set(formValue.spokenLanguageIds)],
       customerIds: [...new Set(formValue.customerIds)],
-      jobIds: [...new Set(formValue.jobIds)],
     },
   };
 };

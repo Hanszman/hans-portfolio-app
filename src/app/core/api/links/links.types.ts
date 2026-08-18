@@ -8,47 +8,9 @@ export interface LinkProjectReference {
   titleEs?: string | null;
 }
 
-export interface LinkExperienceReference {
-  id: string;
-  slug?: string;
-  companyName?: string | null;
-  titlePt?: string | null;
-  titleEn?: string | null;
-  titleEs?: string | null;
-}
-
-export interface LinkTechnologyReference {
-  id: string;
-  slug?: string;
-  name?: string | null;
-}
-
-export interface LinkFormationReference {
-  id: string;
-  slug?: string;
-  namePt?: string | null;
-  nameEn?: string | null;
-  nameEs?: string | null;
-}
-
 export interface LinkProjectRelationRecord {
   projectId?: string;
   project?: LinkProjectReference | null;
-}
-
-export interface LinkExperienceRelationRecord {
-  experienceId?: string;
-  experience?: LinkExperienceReference | null;
-}
-
-export interface LinkTechnologyRelationRecord {
-  technologyId?: string;
-  technology?: LinkTechnologyReference | null;
-}
-
-export interface LinkFormationRelationRecord {
-  formationId?: string;
-  formation?: LinkFormationReference | null;
 }
 
 export interface LinkRecord {
@@ -63,13 +25,7 @@ export interface LinkRecord {
   type?: string | null;
   sortOrder?: number | null;
   projectIds?: string[] | null;
-  experienceIds?: string[] | null;
-  technologyIds?: string[] | null;
-  formationIds?: string[] | null;
   projects?: LinkProjectRelationRecord[] | null;
-  experiences?: LinkExperienceRelationRecord[] | null;
-  technologies?: LinkTechnologyRelationRecord[] | null;
-  formations?: LinkFormationRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -85,9 +41,6 @@ export interface LinkMutationPayload {
   type: string;
   sortOrder: number;
   projectIds: string[];
-  experienceIds: string[];
-  technologyIds: string[];
-  formationIds: string[];
 }
 
 export type LinksCollectionResponse = PaginatedResponse<LinkRecord>;

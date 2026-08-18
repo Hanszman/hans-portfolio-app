@@ -110,9 +110,7 @@ export const PT_BR_TRANSLATIONS = {
   'common.fields.spanishDescription': 'Descrição em espanhol',
   'common.fields.fileName': 'Nome do arquivo',
   'common.fields.filePath': 'Caminho do arquivo',
-  'common.fields.folder': 'Pasta',
   'common.fields.kind': 'Tipo',
-  'common.fields.mimeType': 'MIME type',
   'common.fields.degreeType': 'Tipo de formação',
   'common.fields.institution': 'Instituição',
   'common.fields.settingKey': 'Chave do setting',
@@ -423,14 +421,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.projects.description':
     'Selecione todos os projetos que devem expor este link em suas referências públicas.',
   'pages.admin.links.fields.experiences.label': 'Experiências relacionadas',
-  'pages.admin.links.fields.experiences.description':
-    'Selecione todas as experiências que devem manter este link em seus arrays relacionais.',
-  'pages.admin.links.fields.technologies.description':
-    'Selecione todas as tecnologias que devem expor este link em futuros contextos públicos.',
-  'pages.admin.links.fields.formations.description':
-    'Selecione todas as formações que devem expor este link.',
-  'pages.admin.links.fields.formations.empty':
-    'Nenhuma formação está disponível para relacionamento agora.',
   'pages.admin.links.modal.create.title': 'Criar link',
   'pages.admin.links.modal.read.title': 'Ler links',
   'pages.admin.links.modal.read.description':
@@ -466,13 +456,11 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.states.empty': 'Nenhum image asset protegido foi cadastrado ainda.',
   'pages.admin.imageAssets.card.dimensions': 'Dimensões',
   'pages.admin.imageAssets.card.spokenLanguages': 'Idiomas',
-  'pages.admin.imageAssets.card.jobs': 'Cargos',
   'pages.admin.imageAssets.card.emptyRelations':
     'Nenhum registro relacionado está vinculado a este image asset no momento.',
   'pages.admin.imageAssets.fields.fileName.placeholder': 'Digite o nome único do arquivo do asset',
   'pages.admin.imageAssets.fields.filePath.placeholder':
     'Digite o caminho público do arquivo usado pelo portfolio',
-  'pages.admin.imageAssets.fields.folder.placeholder': 'Digite a pasta do asset',
   'pages.admin.imageAssets.fields.kind.empty': 'Nenhum tipo de image asset está disponível agora.',
   'pages.admin.imageAssets.fields.kind.options.ICON': 'Icone',
   'pages.admin.imageAssets.fields.kind.options.SCREENSHOT': 'Captura de tela',
@@ -482,13 +470,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.altEn.label': 'Alt em inglês',
   'pages.admin.imageAssets.fields.altEn.placeholder':
     'Descreva o asset em inglês para acessibilidade',
-  'pages.admin.imageAssets.fields.captionPt.label': 'Legenda em português',
-  'pages.admin.imageAssets.fields.captionPt.placeholder':
-    'Digite a legenda em português exibida com este asset',
-  'pages.admin.imageAssets.fields.captionEn.label': 'Legenda em inglês',
-  'pages.admin.imageAssets.fields.captionEn.placeholder':
-    'Digite a legenda em inglês exibida com este asset',
-  'pages.admin.imageAssets.fields.mimeType.placeholder': 'Digite o MIME type do asset',
   'pages.admin.imageAssets.fields.width.label': 'Largura',
   'pages.admin.imageAssets.fields.width.placeholder': 'Digite a largura do asset em pixels',
   'pages.admin.imageAssets.fields.height.label': 'Altura',
@@ -508,10 +489,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.customers.description':
     'Selecione todos os clientes vinculados a esta imagem.',
   'pages.admin.imageAssets.fields.customers.empty': 'Nenhum cliente esta disponível.',
-  'pages.admin.imageAssets.fields.jobs.label': 'Cargos relacionados',
-  'pages.admin.imageAssets.fields.jobs.description':
-    'Selecione todos os cargos vinculados a esta imagem.',
-  'pages.admin.imageAssets.fields.jobs.empty': 'Nenhum cargo esta disponível.',
   'pages.admin.imageAssets.modal.create.title': 'Criar image asset',
   'pages.admin.imageAssets.modal.read.title': 'Ler image assets',
   'pages.admin.imageAssets.modal.read.description':
@@ -533,12 +510,10 @@ export const PT_BR_TRANSLATIONS = {
     'O nome do arquivo é obrigatório antes do envio.',
   'pages.admin.imageAssets.feedback.requiredFilePath':
     'O caminho do arquivo é obrigatório antes do envio.',
-  'pages.admin.imageAssets.feedback.requiredFolder': 'A pasta é obrigatória antes do envio.',
   'pages.admin.imageAssets.feedback.requiredKind':
     'O tipo do image asset é obrigatório antes do envio.',
   'pages.admin.imageAssets.feedback.invalidKind':
     'Selecione um dos tipos de image asset suportados antes do envio.',
-  'pages.admin.imageAssets.feedback.requiredMimeType': 'O MIME type é obrigatório antes do envio.',
   'pages.admin.imageAssets.feedback.invalidDimensions':
     'Largura e altura devem ser números inteiros válidos quando informados.',
   'pages.admin.imageAssets.feedback.selectionRequired':
@@ -997,17 +972,13 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.titlePt.placeholder': 'Digite o título em português',
   'pages.admin.projects.fields.titleEn.label': 'Título em inglês',
   'pages.admin.projects.fields.titleEn.placeholder': 'Digite o título em inglês',
-  'pages.admin.projects.fields.summaryPt.label': 'Resumo curto em português',
   'pages.admin.projects.fields.summaryPt.placeholder':
-    'Digite o resumo curto em português',
-  'pages.admin.projects.fields.summaryEn.label': 'Resumo curto em inglês',
-  'pages.admin.projects.fields.summaryEn.placeholder': 'Digite o resumo curto em inglês',
-  'pages.admin.projects.fields.descriptionPt.label': 'Descrição completa em português',
+    'Digite o resumo em português',
+  'pages.admin.projects.fields.summaryEn.placeholder': 'Digite o resumo em inglês',
   'pages.admin.projects.fields.descriptionPt.placeholder':
-    'Digite a descrição completa em português',
-  'pages.admin.projects.fields.descriptionEn.label': 'Descrição completa em inglês',
+    'Digite a descrição em português',
   'pages.admin.projects.fields.descriptionEn.placeholder':
-    'Digite a descrição completa em inglês',
+    'Digite a descrição em inglês',
   'pages.admin.projects.fields.context.label': 'Contexto',
   'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto',
   'pages.admin.projects.fields.status.label': 'Status',
@@ -1019,13 +990,13 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.highlight.description':
     'Mantenha o projeto enfatizado no portfólio.',
   'pages.admin.projects.feedback.requiredSummaryPt':
-    'O resumo curto em português é obrigatório.',
+    'O resumo em português é obrigatório.',
   'pages.admin.projects.feedback.requiredSummaryEn':
-    'O resumo curto em inglês é obrigatório.',
+    'O resumo em inglês é obrigatório.',
   'pages.admin.projects.feedback.requiredDescriptionPt':
-    'A descrição completa em português é obrigatória.',
+    'A descrição em português é obrigatória.',
   'pages.admin.projects.feedback.requiredDescriptionEn':
-    'A descrição completa em inglês é obrigatória.',
+    'A descrição em inglês é obrigatória.',
   'pages.admin.projects.feedback.requiredOptions':
     'Selecione todas as opções obrigatórias do projeto.',
   'pages.admin.projects.fields.experiences.description':
@@ -1053,8 +1024,6 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.dashboard.source.project': 'Projeto',
   'pages.admin.operations.localized.title': 'Título',
 
-  'pages.admin.operations.localized.shortDescription': 'Resumo curto',
-  'pages.admin.operations.localized.fullDescription': 'Descrição completa',
   'pages.admin.operations.localized.label': 'Rótulo',
   'pages.admin.operations.localized.alt': 'Texto alternativo',
   'pages.admin.operations.localized.caption': 'Legenda',
@@ -1063,15 +1032,13 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.experiences.feedback.requiredDescriptionEs':
     'A descrição em espanhol é obrigatória.',
   'pages.admin.projects.fields.titleEs.placeholder': 'Digite o título em espanhol',
-  'pages.admin.projects.fields.summaryEs.label': 'Resumo curto em espanhol',
-  'pages.admin.projects.fields.summaryEs.placeholder': 'Digite o resumo curto em espanhol',
-  'pages.admin.projects.fields.descriptionEs.label': 'Descrição completa em espanhol',
+  'pages.admin.projects.fields.summaryEs.placeholder': 'Digite o resumo em espanhol',
   'pages.admin.projects.fields.descriptionEs.placeholder':
-    'Digite a descrição completa em espanhol',
+    'Digite a descrição em espanhol',
   'pages.admin.projects.feedback.requiredSummaryEs':
-    'O resumo curto em espanhol é obrigatório.',
+    'O resumo em espanhol é obrigatório.',
   'pages.admin.projects.feedback.requiredDescriptionEs':
-    'A descrição completa em espanhol é obrigatória.',
+    'A descrição em espanhol é obrigatória.',
   'pages.admin.formations.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.spokenLanguages.fields.nameEs.placeholder': 'Digite o nome do idioma em espanhol',
 
@@ -1087,6 +1054,4 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.imageAssets.fields.altEs.label': 'Texto alternativo em espanhol',
   'pages.admin.imageAssets.fields.altEs.placeholder':
     'Descreva a imagem em espanhol para acessibilidade',
-  'pages.admin.imageAssets.fields.captionEs.label': 'Legenda em espanhol',
-  'pages.admin.imageAssets.fields.captionEs.placeholder': 'Digite a legenda em espanhol',
 } as const satisfies AppTranslationLanguage;

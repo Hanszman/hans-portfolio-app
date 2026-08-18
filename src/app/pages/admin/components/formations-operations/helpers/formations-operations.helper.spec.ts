@@ -36,7 +36,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   formationIds: [],
   spokenLanguageIds: [],
   customerIds: [],
-  jobIds: [],
   ...overrides,
 });
 

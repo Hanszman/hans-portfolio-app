@@ -1,16 +1,11 @@
 import { LinkRecord } from '../../../../../core/api/links/links.types';
-import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
-import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
 import {
   buildLinkCatalogOptions,
   buildLinksFormValue,
   buildLinksMutationPayload,
   buildLinksViewModels,
-  normalizeLinkExperienceIds,
-  normalizeLinkFormationIds,
   normalizeLinkProjectIds,
-  normalizeLinkTechnologyIds,
 } from './links-operations.helper';
 
 const createProject = (
@@ -44,50 +39,6 @@ const createProject = (
   ...overrides,
 });
 
-const createExperience = (
-  overrides: Partial<ExperienceCollectionItemResponse> = {},
-): ExperienceCollectionItemResponse => ({
-  id: 'experience-1',
-  slug: 'stefanini-ford',
-  companyName: 'Stefanini Ford',
-  titlePt: 'Analista',
-  titleEn: 'Analyst',
-  titleEs: 'Analyst',
-  summaryPt: 'Resumo',
-  summaryEn: 'Summary',
-  summaryEs: 'Summary',
-  descriptionPt: 'Descricao',
-  descriptionEn: 'Description',
-  descriptionEs: 'Description',
-  startDate: '2024-01-01',
-  endDate: null,
-  isCurrent: true,
-  highlight: true,
-  sortOrder: 1,
-  createdAt: '2024-01-01T00:00:00.000Z',
-  updatedAt: '2024-01-01T00:00:00.000Z',
-  technologies: [],
-  projects: [],
-  customers: [],
-  jobs: [],
-  links: [],
-  imageAssets: [],
-  ...overrides,
-});
-
-const createTechnology = (
-  overrides: Partial<TechnologyCollectionItemResponse> = {},
-): TechnologyCollectionItemResponse => ({
-  id: 'technology-1',
-  slug: 'angular',
-  name: 'Angular',
-  type: 'FRAMEWORKS',
-  level: 'advanced',
-  frequency: 'frequent',
-  highlight: true,
-  ...overrides,
-});
-
 const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   id: 'link-1',
   url: 'https://github.com/vh/portfolio',
@@ -100,9 +51,6 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   type: 'GITHUB',
   sortOrder: 2,
   projectIds: ['project-2'],
-  experienceIds: ['experience-2'],
-  technologyIds: ['technology-2'],
-  formationIds: ['formation-2'],
   projects: [
     {
       projectId: 'project-3',
@@ -113,50 +61,19 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
       },
     },
   ],
-  experiences: [
-    {
-      experienceId: 'experience-3',
-      experience: {
-        id: 'experience-3',
-        slug: 'outsourcing',
-        titlePt: 'Tech lead',
-        companyName: 'Outsourcing',
-      },
-    },
-  ],
-  technologies: [
-    {
-      technologyId: 'technology-3',
-      technology: {
-        id: 'technology-3',
-        slug: 'nestjs',
-        name: 'NestJS',
-      },
-    },
-  ],
-  formations: [
-    {
-      formationId: 'formation-3',
-      formation: {
-        id: 'formation-3',
-        slug: 'puc',
-        namePt: 'PUC',
-      },
-    },
-  ],
   ...overrides,
 });
 
 describe('links helper', () => {
   it('should sort the catalog options by title', () => {
     const options = buildLinkCatalogOptions([
-      createTechnology({
-        id: 'technology-2',
-        name: 'React',
-        slug: 'react',
-      }),
       createProject({
         id: 'project-2',
+        titlePt: 'Zebra project',
+        slug: 'zebra',
+      }),
+      createProject({
+        id: 'project-1',
         titlePt: 'Admin workspace',
         slug: 'admin-workspace',
       }),
@@ -164,14 +81,14 @@ describe('links helper', () => {
 
     expect(options).toEqual([
       {
-        id: 'project-2',
+        id: 'project-1',
         title: 'Admin workspace',
         subtitle: 'admin-workspace',
       },
       {
-        id: 'technology-2',
-        title: 'React',
-        subtitle: 'react',
+        id: 'project-2',
+        title: 'Zebra project',
+        subtitle: 'zebra',
       },
     ]);
   });
@@ -205,10 +122,6 @@ describe('links helper', () => {
         }),
       ]),
     ).toEqual(['project-2', 'project-3', 'project-1']);
-
-    expect(normalizeLinkExperienceIds(createLink())).toEqual(['experience-2', 'experience-3']);
-    expect(normalizeLinkTechnologyIds(createLink())).toEqual(['technology-2', 'technology-3']);
-    expect(normalizeLinkFormationIds(createLink())).toEqual(['formation-2', 'formation-3']);
   });
 
   it('should normalize relation ids from nested records and ignore empty fallback relations', () => {
@@ -221,49 +134,6 @@ describe('links helper', () => {
         [],
       ),
     ).toEqual(['project-nested']);
-
-    expect(
-      normalizeLinkExperienceIds(
-        createLink({
-          experienceIds: undefined,
-          experiences: [
-            {
-              experience: {
-                id: 'experience-nested',
-                slug: 'nested',
-                titlePt: 'Nested experience',
-                companyName: 'Nested company',
-              },
-            },
-            {},
-          ],
-        }),
-      ),
-    ).toEqual(['experience-nested']);
-
-    expect(
-      normalizeLinkTechnologyIds(
-        createLink({
-          technologyIds: undefined,
-          technologies: [
-            { technology: { id: 'technology-nested', slug: 'nested', name: 'Nested tech' } },
-            {},
-          ],
-        }),
-      ),
-    ).toEqual(['technology-nested']);
-
-    expect(
-      normalizeLinkFormationIds(
-        createLink({
-          formationIds: undefined,
-          formations: [
-            { formation: { id: 'formation-nested', slug: 'nested', namePt: 'Nested formation' } },
-            {},
-          ],
-        }),
-      ),
-    ).toEqual(['formation-nested']);
   });
 
   it('should build an empty form when no link is selected', () => {
@@ -278,9 +148,6 @@ describe('links helper', () => {
       type: '',
       sortOrder: '0',
       projectIds: [],
-      experienceIds: [],
-      technologyIds: [],
-      formationIds: [],
     });
   });
 
@@ -296,9 +163,6 @@ describe('links helper', () => {
       type: 'GITHUB',
       sortOrder: '2',
       projectIds: ['project-2', 'project-3'],
-      experienceIds: ['experience-2', 'experience-3'],
-      technologyIds: ['technology-2', 'technology-3'],
-      formationIds: ['formation-2', 'formation-3'],
     });
   });
 
@@ -315,13 +179,7 @@ describe('links helper', () => {
           type: null,
           sortOrder: null,
           projectIds: undefined,
-          experienceIds: undefined,
-          technologyIds: undefined,
-          formationIds: undefined,
           projects: undefined,
-          experiences: undefined,
-          technologies: undefined,
-          formations: undefined,
         }),
         [],
       ),
@@ -336,9 +194,6 @@ describe('links helper', () => {
       type: '',
       sortOrder: '0',
       projectIds: [],
-      experienceIds: [],
-      technologyIds: [],
-      formationIds: [],
     });
   });
 
@@ -354,9 +209,6 @@ describe('links helper', () => {
           type: 'DEPLOY',
           sortOrder: 3,
           projectIds: ['project-1'],
-          experienceIds: ['experience-1'],
-          technologyIds: ['technology-1'],
-          formationIds: ['formation-1'],
         }),
         createLink({
           id: 'link-1',
@@ -376,56 +228,6 @@ describe('links helper', () => {
           slug: 'dashboard-suite',
         }),
       ],
-      [
-        createExperience(),
-        createExperience({
-          id: 'experience-2',
-          titlePt: 'Arquiteto',
-          companyName: 'Stefanini',
-        }),
-        createExperience({
-          id: 'experience-3',
-          titlePt: 'Tech lead',
-          companyName: 'Outsourcing',
-        }),
-      ],
-      [
-        createTechnology(),
-        createTechnology({
-          id: 'technology-2',
-          name: 'React',
-          slug: 'react',
-        }),
-        createTechnology({
-          id: 'technology-3',
-          name: 'NestJS',
-          slug: 'nestjs',
-        }),
-      ],
-      [
-        {
-          id: 'formation-2',
-          slug: 'web-development',
-          institution: 'PUC Minas',
-          titlePt: 'Desenvolvimento Web',
-          titleEn: 'Web Development',
-          degreeType: 'POST_GRADUATE',
-          summaryPt: 'Pós-graduação',
-          summaryEn: 'Postgraduate course',
-          startDate: '2019-01-01T00:00:00.000Z',
-        },
-        {
-          id: 'formation-3',
-          slug: 'fullstack-course',
-          institution: 'Udemy',
-          titlePt: 'Programador FullStack',
-          titleEn: 'FullStack Programmer',
-          degreeType: 'COURSE',
-          summaryPt: 'Curso',
-          summaryEn: 'Course',
-          startDate: '2020-01-01T00:00:00.000Z',
-        },
-      ],
     );
 
     expect(viewModels.map((viewModel) => viewModel.url)).toEqual([
@@ -433,15 +235,6 @@ describe('links helper', () => {
       'https://example.com/demo',
     ]);
     expect(viewModels[0].projectLabels).toEqual(['Admin workspace', 'Dashboard suite']);
-    expect(viewModels[0].experienceLabels).toEqual([
-      'Arquiteto (Stefanini)',
-      'Tech lead (Outsourcing)',
-    ]);
-    expect(viewModels[0].technologyLabels).toEqual(['React', 'NestJS']);
-    expect(viewModels[0].formationLabels).toEqual([
-      'Desenvolvimento Web',
-      'Programador FullStack',
-    ]);
   });
 
   it('should fallback to raw ids and default values when linked catalogs or optional fields are missing', () => {
@@ -459,30 +252,16 @@ describe('links helper', () => {
           type: null,
           sortOrder: null,
           projectIds: ['project-missing'],
-          experienceIds: ['experience-missing'],
-          technologyIds: ['technology-missing'],
-          formationIds: ['formation-missing'],
           projects: undefined,
-          experiences: undefined,
-          technologies: undefined,
-          formations: undefined,
         }),
         createLink({
           id: 'link-default-sort',
           url: 'https://zzz.dev',
           sortOrder: null,
           projectIds: undefined,
-          experienceIds: undefined,
-          technologyIds: undefined,
-          formationIds: undefined,
           projects: undefined,
-          experiences: undefined,
-          technologies: undefined,
-          formations: undefined,
         }),
       ],
-      [],
-      [],
       [],
     );
 
@@ -501,9 +280,6 @@ describe('links helper', () => {
         type: '',
         sortOrderLabel: '0',
         projectLabels: ['project-missing'],
-        experienceLabels: ['experience-missing'],
-        technologyLabels: ['technology-missing'],
-        formationLabels: ['formation-missing'],
       }),
     );
   });
@@ -515,32 +291,18 @@ describe('links helper', () => {
           id: 'link-2',
           url: 'https://zeta.dev',
           projectIds: undefined,
-          experienceIds: undefined,
-          technologyIds: undefined,
-          formationIds: undefined,
           projects: undefined,
-          experiences: undefined,
-          technologies: undefined,
-          formations: undefined,
           sortOrder: 1,
         }),
         createLink({
           id: 'link-1',
           url: 'https://alpha.dev',
           projectIds: undefined,
-          experienceIds: undefined,
-          technologyIds: undefined,
-          formationIds: undefined,
           projects: undefined,
-          experiences: undefined,
-          technologies: undefined,
-          formations: undefined,
           sortOrder: 1,
           type: null,
         }),
       ],
-      [],
-      [],
       [],
     );
 
@@ -562,9 +324,6 @@ describe('links helper', () => {
         type: 'github',
         sortOrder: '5',
         projectIds: ['project-1', 'project-1'],
-        experienceIds: ['experience-1', 'experience-1'],
-        technologyIds: ['technology-1', 'technology-1'],
-        formationIds: ['formation-1', 'formation-1'],
       }),
     ).toEqual({
       isValid: true,
@@ -579,9 +338,6 @@ describe('links helper', () => {
         type: 'GITHUB',
         sortOrder: 5,
         projectIds: ['project-1'],
-        experienceIds: ['experience-1'],
-        technologyIds: ['technology-1'],
-        formationIds: ['formation-1'],
       },
     });
   });
@@ -599,9 +355,6 @@ describe('links helper', () => {
         type: '',
         sortOrder: 'abc',
         projectIds: [],
-        experienceIds: [],
-        technologyIds: [],
-        formationIds: [],
       }),
     ).toEqual({
       isValid: false,
@@ -619,9 +372,6 @@ describe('links helper', () => {
       type: 'GITHUB',
       sortOrder: '1',
       projectIds: [],
-      experienceIds: [],
-      technologyIds: [],
-      formationIds: [],
     };
 
     expect(buildLinksMutationPayload({ ...validBase, labelPt: '' })).toEqual({
@@ -649,9 +399,6 @@ describe('links helper', () => {
         type: '',
         sortOrder: 'abc',
         projectIds: [],
-        experienceIds: [],
-        technologyIds: [],
-        formationIds: [],
       }),
     ).toEqual({
       isValid: false,
@@ -670,9 +417,6 @@ describe('links helper', () => {
         type: 'INVALID',
         sortOrder: 'abc',
         projectIds: [],
-        experienceIds: [],
-        technologyIds: [],
-        formationIds: [],
       }),
     ).toEqual({
       isValid: false,
@@ -691,9 +435,6 @@ describe('links helper', () => {
         type: 'GITHUB',
         sortOrder: 'abc',
         projectIds: [],
-        experienceIds: [],
-        technologyIds: [],
-        formationIds: [],
       }),
     ).toEqual({
       isValid: false,

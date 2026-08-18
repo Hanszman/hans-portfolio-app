@@ -318,16 +318,6 @@ export const mapProjectToCaseCard = (
             localizedTitle,
           ) || localizedTitle,
         title: localizedTitle,
-        description:
-          resolveLocalizedText(
-            locale,
-            {
-              'pt-br': imageAsset.captionPt ?? undefined,
-              'en-us': imageAsset.captionEn ?? undefined,
-              'es-es': imageAsset.captionEs ?? undefined,
-            },
-            '',
-          ) || undefined,
       })),
   };
 };

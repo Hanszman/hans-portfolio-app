@@ -63,7 +63,7 @@
             <h3>{{ 'common.sections.clients' | translate }}</h3>
             <div class="project-modal-chip-list">
               @for (company of currentProject.companyNames; track company) {
-                <span class="project-modal-chip">{{ company }}</span>
+                <app-tag-button [tag]="companyTag(company)" [interactive]="false" />
               } @empty {
                 <span class="project-modal-inline-text">
                   {{ 'common.empty.linkedCompanies' | translate }}

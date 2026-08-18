@@ -14,14 +14,8 @@ import {
   LinkRecord,
 } from '../../../../core/api/links/links.types';
 import { AdminSessionService } from '../../../../core/admin-session/admin-session.service';
-import { ExperiencesService } from '../../../../core/api/experiences/experiences.service';
-import { ExperienceCollectionItemResponse } from '../../../../core/api/experiences/experiences.types';
 import { ProjectsService } from '../../../../core/api/projects/projects.service';
 import { ProjectCollectionItemResponse } from '../../../../core/api/projects/projects.types';
-import { TechnologiesService } from '../../../../core/api/technologies/technologies.service';
-import { TechnologyCollectionItemResponse } from '../../../../core/api/technologies/technologies.types';
-import { FormationsService } from '../../../../core/api/formations/formations.service';
-import { FormationRecord } from '../../../../core/api/formations/formations.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -62,18 +56,12 @@ import {
 export class LinksOperationsComponent implements OnInit {
   private readonly linksOperationsService = inject(LinksService);
   private readonly projectsService = inject(ProjectsService);
-  private readonly experiencesService = inject(ExperiencesService);
-  private readonly technologiesService = inject(TechnologiesService);
-  private readonly formationsService = inject(FormationsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);
 
   private readonly linksSignal = signal<readonly LinkRecord[]>([]);
   private readonly projectsSignal = signal<readonly ProjectCollectionItemResponse[]>([]);
-  private readonly experiencesSignal = signal<readonly ExperienceCollectionItemResponse[]>([]);
-  private readonly technologiesSignal = signal<readonly TechnologyCollectionItemResponse[]>([]);
-  private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -92,25 +80,10 @@ export class LinksOperationsComponent implements OnInit {
   );
 
   protected readonly links = computed(() =>
-    buildLinksViewModels(
-      this.linksSignal(),
-      this.projectsSignal(),
-      this.experiencesSignal(),
-      this.technologiesSignal(),
-      this.formationsSignal(),
-    ),
+    buildLinksViewModels(this.linksSignal(), this.projectsSignal()),
   );
   protected readonly projectOptions = computed(() =>
     buildLinkCatalogOptions(this.projectsSignal()),
-  );
-  protected readonly experienceOptions = computed(() =>
-    buildLinkCatalogOptions(this.experiencesSignal()),
-  );
-  protected readonly technologyOptions = computed(() =>
-    buildLinkCatalogOptions(this.technologiesSignal()),
-  );
-  protected readonly formationOptions = computed(() =>
-    buildLinkCatalogOptions(this.formationsSignal()),
   );
   protected readonly linkTypeOptions = computed(() => {
     this.translation.locale();
@@ -285,27 +258,6 @@ export class LinksOperationsComponent implements OnInit {
     }));
   }
 
-  toggleExperience(experienceId: string): void {
-    this.formSignal.update((formValue) => ({
-      ...formValue,
-      experienceIds: this.toggleSelection(formValue.experienceIds, experienceId),
-    }));
-  }
-
-  toggleTechnology(technologyId: string): void {
-    this.formSignal.update((formValue) => ({
-      ...formValue,
-      technologyIds: this.toggleSelection(formValue.technologyIds, technologyId),
-    }));
-  }
-
-  toggleFormation(formationId: string): void {
-    this.formSignal.update((formValue) => ({
-      ...formValue,
-      formationIds: this.toggleSelection(formValue.formationIds, formationId),
-    }));
-  }
-
   async submitModal(): Promise<void> {
     const accessToken = this.adminSessionService.accessToken();
 
@@ -347,37 +299,18 @@ export class LinksOperationsComponent implements OnInit {
     this.loadErrorKeySignal.set(null);
 
     try {
-      const [
-        linksResponse,
-        projects,
-        experiences,
-        technologies,
-        formations,
-      ] =
-        await Promise.all([
-          firstValueFrom(
-            this.linksOperationsService.getAll(page, this.pagination().pageSize, search),
-          ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.projectsService.getProjects(catalogPage, pageSize),
-          ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.experiencesService.getExperiences(catalogPage, pageSize),
-          ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.technologiesService.getTechnologies(catalogPage, pageSize),
-          ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.formationsService.getAll(catalogPage, pageSize),
-          ),
-        ]);
+      const [linksResponse, projects] = await Promise.all([
+        firstValueFrom(
+          this.linksOperationsService.getAll(page, this.pagination().pageSize, search),
+        ),
+        loadAllAdminCatalogItems((catalogPage, pageSize) =>
+          this.projectsService.getProjects(catalogPage, pageSize),
+        ),
+      ]);
 
       this.linksSignal.set(linksResponse.data);
       this.paginationSignal.set(linksResponse.pagination);
       this.projectsSignal.set(projects);
-      this.experiencesSignal.set(experiences);
-      this.technologiesSignal.set(technologies);
-      this.formationsSignal.set(formations);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.links.feedback.loadError');
       this.toastService.showError('pages.admin.links.feedback.loadError');

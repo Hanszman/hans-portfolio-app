@@ -104,7 +104,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   formationIds: ['formation-1'],
   spokenLanguageIds: ['spoken-language-1'],
   customerIds: ['customer-1'],
-  jobIds: ['job-1'],
   projects: [{ projectId: 'project-3', project: { id: 'project-3', titlePt: 'Dashboard suite' } }],
   experiences: [
     {
@@ -152,15 +151,10 @@ describe('image-assets operations helper', () => {
                 id: 'another-image',
                 fileName: 'vh_logo_blue.svg',
                 filePath: '/assets/img/logo/vh_logo_blue.svg',
-                folder: 'logo',
                 kind: 'ICON',
                 altPt: null,
                 altEn: null,
                 altEs: null,
-                captionPt: null,
-                captionEn: null,
-                captionEs: null,
-                mimeType: 'image/svg+xml',
                 width: 240,
                 height: 96,
                 sortOrder: 1,
@@ -186,15 +180,10 @@ describe('image-assets operations helper', () => {
                 id: 'fallback-image',
                 fileName: 'vh_logo_blue.svg',
                 filePath: '/assets/img/logo/vh_logo_blue.svg',
-                folder: 'logo',
                 kind: 'ICON',
                 altPt: null,
                 altEn: null,
                 altEs: null,
-                captionPt: null,
-                captionEn: null,
-                captionEs: null,
-                mimeType: 'image/svg+xml',
                 width: 240,
                 height: 96,
                 sortOrder: 1,
@@ -240,14 +229,12 @@ describe('image-assets operations helper', () => {
           formationIds: null,
           spokenLanguageIds: undefined,
           customerIds: undefined,
-          jobIds: undefined,
           formations: [
             { formationId: 'formation-nested' },
             { formation: { id: 'formation-object' } },
           ],
           spokenLanguages: [{ spokenLanguage: { id: 'spoken-language-nested' } }],
           customers: [{ customer: { id: 'customer-nested' } }],
-          jobs: [{ job: { id: 'job-nested' } }],
         }),
         [],
         [],
@@ -269,7 +256,6 @@ describe('image-assets operations helper', () => {
       formationIds: ['formation-nested', 'formation-object'],
       spokenLanguageIds: ['spoken-language-nested'],
       customerIds: ['customer-nested'],
-      jobIds: ['job-nested'],
     });
   });
 
@@ -330,7 +316,6 @@ describe('image-assets operations helper', () => {
       formationIds: [],
       spokenLanguageIds: [],
       customerIds: [],
-      jobIds: [],
     });
   });
 
@@ -427,7 +412,6 @@ describe('image-assets operations helper', () => {
           formationIds: null,
           spokenLanguageIds: null,
           customerIds: null,
-          jobIds: null,
           projects: [],
           experiences: [],
           technologies: [],
@@ -462,11 +446,9 @@ describe('image-assets operations helper', () => {
           formationIds: ['formation-1'],
           spokenLanguageIds: ['language-1'],
           customerIds: ['customer-1'],
-          jobIds: ['job-1'],
           formations: [{} as never],
           spokenLanguages: [{} as never],
           customers: [{} as never],
-          jobs: [{} as never],
         }),
       ],
       [],
@@ -475,13 +457,11 @@ describe('image-assets operations helper', () => {
       [{ id: 'formation-1', titlePt: 'Sistemas de Informação' } as never],
       [{ id: 'language-1', namePt: 'Português' } as never],
       [{ id: 'customer-1', name: 'Cliente' } as never],
-      [{ id: 'job-1', namePt: 'Engenheiro' } as never],
     );
 
     expect(viewModel.formationLabels).toEqual(['Sistemas de Informação']);
     expect(viewModel.spokenLanguageLabels).toEqual(['Português']);
     expect(viewModel.customerLabels).toEqual(['Cliente']);
-    expect(viewModel.jobLabels).toEqual(['Engenheiro']);
   });
 
   it('should build valid and invalid mutation payloads', () => {
@@ -502,7 +482,6 @@ describe('image-assets operations helper', () => {
         formationIds: ['formation-1', 'formation-1'],
         spokenLanguageIds: ['spoken-language-1', 'spoken-language-1'],
         customerIds: ['customer-1', 'customer-1'],
-        jobIds: ['job-1', 'job-1'],
       }),
     ).toEqual({
       isValid: true,
@@ -522,7 +501,6 @@ describe('image-assets operations helper', () => {
         formationIds: ['formation-1'],
         spokenLanguageIds: ['spoken-language-1'],
         customerIds: ['customer-1'],
-        jobIds: ['job-1'],
       },
     });
 

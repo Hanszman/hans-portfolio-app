@@ -17,9 +17,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     type: 'GITHUB',
     sortOrderLabel: '1',
     projectLabels: ['Portfolio remake'],
-    experienceLabels: ['Analista (Stefanini Ford)'],
-    technologyLabels: ['Angular'],
-    formationLabels: ['formation-1'],
   },
   {
     id: 'link-2',
@@ -33,9 +30,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     type: 'DEPLOY',
     sortOrderLabel: '2',
     projectLabels: [],
-    experienceLabels: [],
-    technologyLabels: [],
-    formationLabels: [],
   },
   {
     id: 'link-3',
@@ -49,9 +43,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     type: 'OTHER',
     sortOrderLabel: '3',
     projectLabels: [],
-    experienceLabels: [],
-    technologyLabels: [],
-    formationLabels: [],
   },
 ];
 
@@ -95,9 +86,6 @@ describe('LinksOperationsModalComponent', () => {
     const typeSpy = jasmine.createSpy('typeChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
-    const experienceSpy = jasmine.createSpy('experienceToggled');
-    const technologySpy = jasmine.createSpy('technologyToggled');
-    const formationSpy = jasmine.createSpy('formationToggled');
     const pageSpy = jasmine.createSpy('pageSelected');
     const submitSpy = jasmine.createSpy('submitted');
     const closeSpy = jasmine.createSpy('closed');
@@ -112,9 +100,6 @@ describe('LinksOperationsModalComponent', () => {
     component.typeChanged.subscribe(typeSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.projectToggled.subscribe(projectSpy);
-    component.experienceToggled.subscribe(experienceSpy);
-    component.technologyToggled.subscribe(technologySpy);
-    component.formationToggled.subscribe(formationSpy);
     component.pageSelected.subscribe(pageSpy);
     component.submitted.subscribe(submitSpy);
     component.closed.subscribe(closeSpy);
@@ -123,12 +108,6 @@ describe('LinksOperationsModalComponent', () => {
     fixture.componentRef.setInput('modalMode', 'create');
     fixture.componentRef.setInput('projectOptions', [
       { id: 'project-1', title: 'Portfolio remake', subtitle: 'portfolio-remake' },
-    ]);
-    fixture.componentRef.setInput('experienceOptions', [
-      { id: 'experience-1', title: 'Analista', subtitle: 'Stefanini Ford' },
-    ]);
-    fixture.componentRef.setInput('technologyOptions', [
-      { id: 'technology-1', title: 'Angular', subtitle: 'angular' },
     ]);
     fixture.componentRef.setInput('linkTypeOptions', [
       { id: 'GITHUB', label: 'GitHub', value: 'GITHUB' },
@@ -155,15 +134,9 @@ describe('LinksOperationsModalComponent', () => {
       emitTypeChange(value: string): void;
       emitSortOrderChange(value: string): void;
       toggleProject(projectId: string): void;
-      toggleExperience(experienceId: string): void;
-      toggleTechnology(technologyId: string): void;
-      toggleFormation(formationId: string): void;
       submit(): void;
       requestClose(): void;
       isProjectSelected(projectId: string): boolean;
-      isExperienceSelected(experienceId: string): boolean;
-      isTechnologySelected(technologyId: string): boolean;
-      isFormationSelected(formationId: string): boolean;
       selectPage(page: number): void;
     };
 
@@ -177,9 +150,6 @@ describe('LinksOperationsModalComponent', () => {
     componentAccess.emitTypeChange('DEPLOY');
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleProject('project-1');
-    componentAccess.toggleExperience('experience-1');
-    componentAccess.toggleTechnology('technology-1');
-    componentAccess.toggleFormation('formation-1');
     componentAccess.selectPage(2);
     componentAccess.submit();
     componentAccess.requestClose();
@@ -231,16 +201,10 @@ describe('LinksOperationsModalComponent', () => {
     expect(typeSpy).toHaveBeenCalledOnceWith('DEPLOY');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
-    expect(experienceSpy).toHaveBeenCalledOnceWith('experience-1');
-    expect(technologySpy).toHaveBeenCalledOnceWith('technology-1');
-    expect(formationSpy).toHaveBeenCalledOnceWith('formation-1');
     expect(pageSpy).toHaveBeenCalledOnceWith(2);
     expect(submitSpy).toHaveBeenCalledTimes(1);
     expect(closeSpy).toHaveBeenCalledTimes(1);
     expect(componentAccess.isProjectSelected('project-1')).toBeFalse();
-    expect(componentAccess.isExperienceSelected('experience-1')).toBeFalse();
-    expect(componentAccess.isTechnologySelected('technology-1')).toBeFalse();
-    expect(componentAccess.isFormationSelected('formation-1')).toBeFalse();
   });
 
   it('should resolve select-option payloads for the type field', () => {
@@ -337,18 +301,12 @@ describe('LinksOperationsModalComponent', () => {
       type: 'GITHUB',
       sortOrder: '1',
       projectIds: ['project-1'],
-      experienceIds: ['experience-1'],
-      technologyIds: ['technology-1'],
-      formationIds: ['formation-1'],
     });
     fixture.componentRef.setInput('feedbackKey', 'pages.admin.links.feedback.saveError');
     fixture.detectChanges();
 
     const component = fixture.componentInstance as unknown as {
       isProjectSelected(projectId: string): boolean;
-      isExperienceSelected(experienceId: string): boolean;
-      isTechnologySelected(technologyId: string): boolean;
-      isFormationSelected(formationId: string): boolean;
     };
     const modalElement = fixture.nativeElement.querySelector('hans-modal') as
       | (HTMLElement & {
@@ -360,9 +318,6 @@ describe('LinksOperationsModalComponent', () => {
       'This action permanently removes the selected protected link from the portfolio.',
     );
     expect(component.isProjectSelected('project-1')).toBeTrue();
-    expect(component.isExperienceSelected('experience-1')).toBeTrue();
-    expect(component.isTechnologySelected('technology-1')).toBeTrue();
-    expect(component.isFormationSelected('formation-1')).toBeTrue();
     expect(modalElement?.confirmLabel).toBe('Delete');
   });
 

@@ -13,7 +13,6 @@ import { TechnologyCollectionItemResponse } from '../../../../core/api/technolog
 import { FormationsService } from '../../../../core/api/formations/formations.service';
 import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/spoken-languages.service';
 import { CustomersService } from '../../../../core/api/customers/customers.service';
-import { JobsService } from '../../../../core/api/jobs/jobs.service';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { provideAppTranslations } from '../../../../core/translation/translation.providers';
 import { createAdminEntityEndpointLabel } from '../../admin.types';
@@ -36,7 +35,6 @@ const createImageAsset = (overrides: Partial<ImageAssetRecord> = {}): ImageAsset
   formationIds: [],
   spokenLanguageIds: [],
   customerIds: [],
-  jobIds: [],
   ...overrides,
 });
 
@@ -136,7 +134,6 @@ describe('ImageAssetsOperationsComponent', () => {
   let formationsService: jasmine.SpyObj<FormationsService>;
   let spokenLanguagesService: jasmine.SpyObj<SpokenLanguagesService>;
   let customersService: jasmine.SpyObj<CustomersService>;
-  let jobsService: jasmine.SpyObj<JobsService>;
   let toastService: jasmine.SpyObj<ToastService>;
   let adminSessionServiceMock: {
     accessToken: jasmine.Spy<() => string | null>;
@@ -186,7 +183,6 @@ describe('ImageAssetsOperationsComponent', () => {
       ['getAll'],
     );
     customersService = jasmine.createSpyObj<CustomersService>('CustomersService', ['getAll']);
-    jobsService = jasmine.createSpyObj<JobsService>('JobsService', ['getAll']);
     toastService = jasmine.createSpyObj<ToastService>('ToastService', ['showSuccess', 'showError']);
     adminSessionServiceMock = {
       accessToken: jasmine
@@ -251,7 +247,6 @@ describe('ImageAssetsOperationsComponent', () => {
     formationsService.getAll.and.returnValue(of(emptyCatalogResponse));
     spokenLanguagesService.getAll.and.returnValue(of(emptyCatalogResponse));
     customersService.getAll.and.returnValue(of(emptyCatalogResponse));
-    jobsService.getAll.and.returnValue(of(emptyCatalogResponse));
 
     await TestBed.configureTestingModule({
       imports: [ImageAssetsOperationsComponent],
@@ -265,7 +260,6 @@ describe('ImageAssetsOperationsComponent', () => {
         { provide: FormationsService, useValue: formationsService },
         { provide: SpokenLanguagesService, useValue: spokenLanguagesService },
         { provide: CustomersService, useValue: customersService },
-        { provide: JobsService, useValue: jobsService },
         { provide: AdminSessionService, useValue: adminSessionServiceMock },
         { provide: ToastService, useValue: toastService },
       ],
@@ -309,7 +303,6 @@ describe('ImageAssetsOperationsComponent', () => {
       toggleFormation(formationId: string): void;
       toggleSpokenLanguage(spokenLanguageId: string): void;
       toggleCustomer(customerId: string): void;
-      toggleJob(jobId: string): void;
       submitModal(): Promise<void>;
     };
 
@@ -329,7 +322,6 @@ describe('ImageAssetsOperationsComponent', () => {
     component.toggleFormation('formation-1');
     component.toggleSpokenLanguage('spoken-language-1');
     component.toggleCustomer('customer-1');
-    component.toggleJob('job-1');
     await component.submitModal();
 
     expect(imageAssetsOperationsService.create).toHaveBeenCalledWith({
@@ -348,7 +340,6 @@ describe('ImageAssetsOperationsComponent', () => {
       formationIds: ['formation-1'],
       spokenLanguageIds: ['spoken-language-1'],
       customerIds: ['customer-1'],
-      jobIds: ['job-1'],
     });
 
     component.openUpdateModal('image-asset-1');

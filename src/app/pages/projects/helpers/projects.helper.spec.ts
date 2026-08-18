@@ -259,7 +259,7 @@ describe('projects helper', () => {
     expect(card.galleryItems.some(({ id }) => id === 'project-icon')).toBeFalse();
   });
 
-  it('should fallback gallery alt text and keep descriptions undefined when captions are not available', () => {
+  it('should fallback gallery alt text and keep descriptions undefined', () => {
     const card = mapProjectToCaseCard(
       {
         ...createProjectsCollectionResponse().data[0],
@@ -271,9 +271,6 @@ describe('projects helper', () => {
               altPt: '',
               altEn: '',
               altEs: '',
-              captionPt: null,
-              captionEn: null,
-              captionEs: null,
             },
           },
         ],

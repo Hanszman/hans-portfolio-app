@@ -1,15 +1,9 @@
 import {
-  LinkExperienceRelationRecord,
-  LinkFormationRelationRecord,
   LinkMutationPayload,
   LinkProjectRelationRecord,
   LinkRecord,
-  LinkTechnologyRelationRecord,
 } from '../../../../../core/api/links/links.types';
-import { ExperienceCollectionItemResponse } from '../../../../../core/api/experiences/experiences.types';
 import { ProjectCollectionItemResponse } from '../../../../../core/api/projects/projects.types';
-import { TechnologyCollectionItemResponse } from '../../../../../core/api/technologies/technologies.types';
-import { FormationRecord } from '../../../../../core/api/formations/formations.types';
 import {
   LinkCatalogOptionViewModel,
   LINK_TYPE_VALUES,
@@ -36,34 +30,8 @@ const createProjectMap = (
 ): Map<string, ProjectCollectionItemResponse> =>
   new Map(projects.map((project) => [project.id, project]));
 
-const createExperienceMap = (
-  experiences: readonly ExperienceCollectionItemResponse[],
-): Map<string, ExperienceCollectionItemResponse> =>
-  new Map(experiences.map((experience) => [experience.id, experience]));
-
-const createTechnologyMap = (
-  technologies: readonly TechnologyCollectionItemResponse[],
-): Map<string, TechnologyCollectionItemResponse> =>
-  new Map(technologies.map((technology) => [technology.id, technology]));
-
-const createFormationMap = (
-  formations: readonly FormationRecord[],
-): Map<string, FormationRecord> =>
-  new Map(formations.map((formation) => [formation.id, formation]));
-
 const resolveLinkProjectIdFromRelation = (relation: LinkProjectRelationRecord): string | null =>
   relation.projectId ?? relation.project?.id ?? null;
-
-const resolveLinkExperienceIdFromRelation = (
-  relation: LinkExperienceRelationRecord,
-): string | null => relation.experienceId ?? relation.experience?.id ?? null;
-
-const resolveLinkTechnologyIdFromRelation = (
-  relation: LinkTechnologyRelationRecord,
-): string | null => relation.technologyId ?? relation.technology?.id ?? null;
-
-const resolveLinkFormationIdFromRelation = (relation: LinkFormationRelationRecord): string | null =>
-  relation.formationId ?? relation.formation?.id ?? null;
 
 const resolveProjectIdsFromCatalog = (
   link: LinkRecord,
@@ -85,32 +53,8 @@ const resolveProjectLabel = (
   projectMap: Map<string, ProjectCollectionItemResponse>,
 ): string => projectMap.get(projectId)?.titlePt ?? projectId;
 
-const resolveExperienceLabel = (
-  experienceId: string,
-  experienceMap: Map<string, ExperienceCollectionItemResponse>,
-): string => {
-  const experience = experienceMap.get(experienceId);
-
-  return experience ? `${experience.titlePt} (${experience.companyName})` : experienceId;
-};
-
-const resolveTechnologyLabel = (
-  technologyId: string,
-  technologyMap: Map<string, TechnologyCollectionItemResponse>,
-): string => technologyMap.get(technologyId)?.name ?? technologyId;
-
-const resolveFormationLabel = (
-  formationId: string,
-  formationMap: Map<string, FormationRecord>,
-): string => formationMap.get(formationId)?.titlePt ?? formationId;
-
 export const buildLinkCatalogOptions = (
-  items: readonly (
-    | ProjectCollectionItemResponse
-    | ExperienceCollectionItemResponse
-    | TechnologyCollectionItemResponse
-    | FormationRecord
-  )[],
+  items: readonly ProjectCollectionItemResponse[],
 ): readonly LinkCatalogOptionViewModel[] =>
   [...items].map(createLinkCatalogOptionViewModel).sort(sortCatalogOptions);
 
@@ -135,48 +79,6 @@ export const normalizeLinkProjectIds = (
   return [...projectIds];
 };
 
-export const normalizeLinkExperienceIds = (link: LinkRecord): readonly string[] => {
-  const experienceIds = new Set<string>();
-
-  for (const experienceId of link.experienceIds ?? []) {
-    appendUnique(experienceIds, experienceId);
-  }
-
-  for (const relation of link.experiences ?? []) {
-    appendUnique(experienceIds, resolveLinkExperienceIdFromRelation(relation));
-  }
-
-  return [...experienceIds];
-};
-
-export const normalizeLinkTechnologyIds = (link: LinkRecord): readonly string[] => {
-  const technologyIds = new Set<string>();
-
-  for (const technologyId of link.technologyIds ?? []) {
-    appendUnique(technologyIds, technologyId);
-  }
-
-  for (const relation of link.technologies ?? []) {
-    appendUnique(technologyIds, resolveLinkTechnologyIdFromRelation(relation));
-  }
-
-  return [...technologyIds];
-};
-
-export const normalizeLinkFormationIds = (link: LinkRecord): readonly string[] => {
-  const formationIds = new Set<string>();
-
-  for (const formationId of link.formationIds ?? []) {
-    appendUnique(formationIds, formationId);
-  }
-
-  for (const relation of link.formations ?? []) {
-    appendUnique(formationIds, resolveLinkFormationIdFromRelation(relation));
-  }
-
-  return [...formationIds];
-};
-
 export const buildLinksFormValue = (
   link: LinkRecord | null | undefined,
   projects: readonly ProjectCollectionItemResponse[],
@@ -196,23 +98,14 @@ export const buildLinksFormValue = (
     type: link.type ?? '',
     sortOrder: String(link.sortOrder ?? 0),
     projectIds: normalizeLinkProjectIds(link, projects),
-    experienceIds: normalizeLinkExperienceIds(link),
-    technologyIds: normalizeLinkTechnologyIds(link),
-    formationIds: normalizeLinkFormationIds(link),
   };
 };
 
 export const buildLinksViewModels = (
   links: readonly LinkRecord[],
   projects: readonly ProjectCollectionItemResponse[],
-  experiences: readonly ExperienceCollectionItemResponse[],
-  technologies: readonly TechnologyCollectionItemResponse[],
-  formations: readonly FormationRecord[] = [],
 ): readonly LinkOperationsViewModel[] => {
   const projectMap = createProjectMap(projects);
-  const experienceMap = createExperienceMap(experiences);
-  const technologyMap = createTechnologyMap(technologies);
-  const formationMap = createFormationMap(formations);
 
   return [...links]
     .sort((left, right) => {
@@ -227,9 +120,6 @@ export const buildLinksViewModels = (
     })
     .map((link) => {
       const projectIds = normalizeLinkProjectIds(link, projects);
-      const experienceIds = normalizeLinkExperienceIds(link);
-      const technologyIds = normalizeLinkTechnologyIds(link);
-      const formationIds = normalizeLinkFormationIds(link);
 
       return {
         id: link.id,
@@ -243,15 +133,6 @@ export const buildLinksViewModels = (
         type: link.type ?? '',
         sortOrderLabel: String(link.sortOrder ?? 0),
         projectLabels: projectIds.map((projectId) => resolveProjectLabel(projectId, projectMap)),
-        experienceLabels: experienceIds.map((experienceId) =>
-          resolveExperienceLabel(experienceId, experienceMap),
-        ),
-        technologyLabels: technologyIds.map((technologyId) =>
-          resolveTechnologyLabel(technologyId, technologyMap),
-        ),
-        formationLabels: formationIds.map((formationId) =>
-          resolveFormationLabel(formationId, formationMap),
-        ),
       };
     });
 };
@@ -319,9 +200,6 @@ export const buildLinksMutationPayload = (
       type,
       sortOrder,
       projectIds: [...new Set(formValue.projectIds)],
-      experienceIds: [...new Set(formValue.experienceIds)],
-      technologyIds: [...new Set(formValue.technologyIds)],
-      formationIds: [...new Set(formValue.formationIds)],
     } satisfies LinkMutationPayload,
   };
 };

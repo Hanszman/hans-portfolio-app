@@ -12,7 +12,6 @@ import {
   resolveImageAssetFormationIdFromRelation,
   resolveImageAssetSpokenLanguageIdFromRelation,
   resolveImageAssetCustomerIdFromRelation,
-  resolveImageAssetJobIdFromRelation,
   resolveImageAssetProjectIdFromRelation,
   resolveImageAssetTechnologyIdFromRelation,
 } from './image-assets-operations.types';
@@ -51,7 +50,6 @@ describe('image-assets operations types', () => {
       formationIds: [],
       spokenLanguageIds: [],
       customerIds: [],
-      jobIds: [],
     });
   });
 
@@ -108,13 +106,6 @@ describe('image-assets operations types', () => {
         slug: 'ford',
       } as never),
     ).toEqual({ id: 'customer-1', title: 'Ford', subtitle: 'ford' });
-    expect(
-      createImageAssetCatalogOptionViewModel({
-        id: 'job-1',
-        namePt: 'Desenvolvedor',
-        slug: 'developer',
-      } as never),
-    ).toEqual({ id: 'job-1', title: 'Desenvolvedor', subtitle: 'developer' });
     const malformedFallback = createImageAssetCatalogOptionViewModel({
       id: 'fallback-1',
       name: null,
@@ -166,8 +157,6 @@ describe('image-assets operations types', () => {
       'customer-1',
     );
     expect(resolveImageAssetCustomerIdFromRelation({})).toBeNull();
-    expect(resolveImageAssetJobIdFromRelation({ job: { id: 'job-1' } })).toBe('job-1');
-    expect(resolveImageAssetJobIdFromRelation({})).toBeNull();
 
     expect(resolveImageAssetAltPt({ altPt: null } as never)).toBe('');
     expect(resolveImageAssetAltPt({ altPt: 'Logo PT' } as never)).toBe('Logo PT');

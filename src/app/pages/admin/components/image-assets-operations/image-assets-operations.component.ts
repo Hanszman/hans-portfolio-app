@@ -26,8 +26,6 @@ import { SpokenLanguagesService } from '../../../../core/api/spoken-languages/sp
 import { SpokenLanguageRecord } from '../../../../core/api/spoken-languages/spoken-languages.types';
 import { CustomersService } from '../../../../core/api/customers/customers.service';
 import { CustomerRecord } from '../../../../core/api/customers/customers.types';
-import { JobsService } from '../../../../core/api/jobs/jobs.service';
-import { JobRecord } from '../../../../core/api/jobs/jobs.types';
 import { ToastService } from '../../../../core/toast/toast.service';
 import { TranslationService } from '../../../../core/translation/translation.service';
 import { AppTranslationKey } from '../../../../core/translation/translation.types';
@@ -73,7 +71,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
   private readonly formationsService = inject(FormationsService);
   private readonly spokenLanguagesService = inject(SpokenLanguagesService);
   private readonly customersService = inject(CustomersService);
-  private readonly jobsService = inject(JobsService);
   private readonly adminSessionService = inject(AdminSessionService);
   private readonly toastService = inject(ToastService);
   private readonly translation = inject(TranslationService);
@@ -85,7 +82,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
   private readonly formationsSignal = signal<readonly FormationRecord[]>([]);
   private readonly spokenLanguagesSignal = signal<readonly SpokenLanguageRecord[]>([]);
   private readonly customersSignal = signal<readonly CustomerRecord[]>([]);
-  private readonly jobsSignal = signal<readonly JobRecord[]>([]);
   private readonly paginationSignal = signal<AdminCollectionPagination>(
     createAdminCollectionPagination(ADMIN_MODAL_PAGE_SIZE),
   );
@@ -110,7 +106,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
       this.formationsSignal(),
       this.spokenLanguagesSignal(),
       this.customersSignal(),
-      this.jobsSignal(),
     ),
   );
   protected readonly projectOptions = computed(() =>
@@ -131,7 +126,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
   protected readonly customerOptions = computed(() =>
     buildImageAssetCatalogOptions(this.customersSignal()),
   );
-  protected readonly jobOptions = computed(() => buildImageAssetCatalogOptions(this.jobsSignal()));
   protected readonly imageAssetKindOptions = computed(() => {
     this.translation.locale();
 
@@ -338,10 +332,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
     this.patchForm({ customerIds: this.toggleSelection(this.form().customerIds, customerId) });
   }
 
-  toggleJob(jobId: string): void {
-    this.patchForm({ jobIds: this.toggleSelection(this.form().jobIds, jobId) });
-  }
-
   async submitModal(): Promise<void> {
     const accessToken = this.adminSessionService.accessToken();
 
@@ -391,7 +381,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
         formations,
         spokenLanguages,
         customers,
-        jobs,
       ] = await Promise.all([
           firstValueFrom(
             this.imageAssetsOperationsService.getAll(page, this.pagination().pageSize, search),
@@ -414,9 +403,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
           loadAllAdminCatalogItems((catalogPage, pageSize) =>
             this.customersService.getAll(catalogPage, pageSize),
           ),
-          loadAllAdminCatalogItems((catalogPage, pageSize) =>
-            this.jobsService.getAll(catalogPage, pageSize),
-          ),
         ]);
 
       this.imageAssetsSignal.set(imageAssetsResponse.data);
@@ -427,7 +413,6 @@ export class ImageAssetsOperationsComponent implements OnInit {
       this.formationsSignal.set(formations);
       this.spokenLanguagesSignal.set(spokenLanguages);
       this.customersSignal.set(customers);
-      this.jobsSignal.set(jobs);
     } catch {
       this.loadErrorKeySignal.set('pages.admin.imageAssets.feedback.loadError');
       this.toastService.showError('pages.admin.imageAssets.feedback.loadError');

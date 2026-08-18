@@ -63,11 +63,6 @@ export interface ImageAssetCustomerRelationRecord {
   customer?: ImageAssetNamedReference | null;
 }
 
-export interface ImageAssetJobRelationRecord {
-  jobId?: string;
-  job?: ImageAssetNamedReference | null;
-}
-
 export interface ImageAssetRecord {
   id: string;
   fileName: string;
@@ -85,14 +80,12 @@ export interface ImageAssetRecord {
   formationIds?: string[] | null;
   spokenLanguageIds?: string[] | null;
   customerIds?: string[] | null;
-  jobIds?: string[] | null;
   projects?: ImageAssetProjectRelationRecord[] | null;
   experiences?: ImageAssetExperienceRelationRecord[] | null;
   technologies?: ImageAssetTechnologyRelationRecord[] | null;
   formations?: ImageAssetFormationRelationRecord[] | null;
   spokenLanguages?: ImageAssetSpokenLanguageRelationRecord[] | null;
   customers?: ImageAssetCustomerRelationRecord[] | null;
-  jobs?: ImageAssetJobRelationRecord[] | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -113,7 +106,6 @@ export interface ImageAssetMutationPayload {
   formationIds: string[];
   spokenLanguageIds: string[];
   customerIds: string[];
-  jobIds: string[];
 }
 
 export type ImageAssetsCollectionResponse = PaginatedResponse<ImageAssetRecord>;

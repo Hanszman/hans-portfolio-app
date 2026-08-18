@@ -63,7 +63,6 @@ export class ImageAssetsOperationsModalComponent {
   readonly formationOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly spokenLanguageOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly customerOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
-  readonly jobOptions = input<readonly ImageAssetCatalogOptionViewModel[]>([]);
   readonly imageAssetKindOptions = input<readonly ImageAssetKindOptionViewModel[]>([]);
   readonly pagination = input<AdminCollectionPagination>(createAdminCollectionPagination());
   readonly searchValue = input('');
@@ -89,7 +88,6 @@ export class ImageAssetsOperationsModalComponent {
   readonly formationToggled = output<string>();
   readonly spokenLanguageToggled = output<string>();
   readonly customerToggled = output<string>();
-  readonly jobToggled = output<string>();
   readonly submitted = output<void>();
   readonly updateSelected = output<string>();
   readonly deleteSelected = output<string>();
@@ -216,10 +214,6 @@ export class ImageAssetsOperationsModalComponent {
             labelKey: 'common.entities.customers',
             value: imageAsset.customerLabels.join(', ') || emptyRelations,
           },
-          {
-            labelKey: 'pages.admin.imageAssets.card.jobs',
-            value: imageAsset.jobLabels.join(', ') || emptyRelations,
-          },
         ],
       }));
     },
@@ -309,10 +303,6 @@ export class ImageAssetsOperationsModalComponent {
 
   protected toggleCustomer(customerId: string): void {
     this.customerToggled.emit(customerId);
-  }
-
-  protected toggleJob(jobId: string): void {
-    this.jobToggled.emit(jobId);
   }
 
   protected selectImageAssetForUpdate(imageAssetId: string): void {

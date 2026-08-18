@@ -3,12 +3,16 @@
 }
 
 .skill-card-button {
-  @apply block h-full w-full cursor-pointer border-0 bg-transparent p-0 text-left;
+  @apply block h-full w-full border-0 bg-transparent p-0 text-left;
   color: var(--text-color);
 }
 
-.skill-card-button:hover .skill-card,
-.skill-card-button:focus-visible .skill-card {
+.skill-card-button:not([data-kind='language']) {
+  @apply cursor-pointer;
+}
+
+.skill-card-button:not([data-kind='language']):hover .skill-card,
+.skill-card-button:not([data-kind='language']):focus-visible .skill-card {
   --card-border-color: var(--primary-default-color);
   transform: translateY(-0.125rem);
 }
