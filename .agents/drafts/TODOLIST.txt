@@ -7,15 +7,12 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
--Ainda estamos com erros no arquivo normalize-seed-snapshot.ts.
-
-*Outros:
--Pensar numa forma de deixar mais fácil de selecionar o ano na data no datepicker da lib, pois atualmente tem que navegar na setinha eternamente.
--Clicar no carroussel e abrir em nova aba a imagem ou em full screen.
--Traduzir nível no modal de idioma (será que esse modal é realmente necessário?).
+-Precisamos de uma forma de deixar mais fácil de selecionar o ano e o mês na data do datepicker na lib, pois atualmente tem que navegar na setinha eternamente para mudar o ano no datepicker e mesma coisa acontece para os meses. Crie 2 novos popups que vão se abrir quando clicarmos: um no ano e outro no mês. Esses popups vão substituir o conteúdo do popup inicial, um terá a seleção de meses e o outro de anos, assim como temos no datepicker do windows mesmo. E eles terão botões de setinhas de navegação entre as páginas com os anos/meses e também um botão de voltar, para voltar a renderizar o popup anterior, de datepicker que temos atualmente. O campo vai continuar sendo impossível de digitar livremente, a única forma de utilizá-lo será via seleção no datepicker. Crie esse subcomponente dentro da pasta do datepicker e seguindo todos os nossos padrões da lib.
+-Crie uma feature no carroussel que, ao clicar na foto atual, ele vai abrir essa imagem em uma nova aba, de forma que possamos vê-la expandida. Crie esse recurso na lib, seguindo todos os nossos padrões dela por favor.
+-Remova o modal de "spoken languages" ao clicar nele. É pra manter o modal pra todos os cards/tags de skills, apenas para as languages vc vai ocultar essa abertura de modal.
+-Podemos remover também o CRUD (back e front) de portfolio_settings, mas mantendo a tabela dele no banco, para termos histórico.
 -Remover obrigatoriedade de alguns campos summary/description de customer, jobs e de outras entidades.
 -Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
--Podemos remover também o CRUD (back e front) de portfolio_settings, mas mantendo a tabela no banco.
 -Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
 -Colocar fundo branco ou colorido para as imagens quando estiver no modo dark
 -Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
