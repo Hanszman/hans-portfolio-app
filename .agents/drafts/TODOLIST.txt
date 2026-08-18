@@ -11,22 +11,18 @@ IMPLEMENTAÇÕES:
 -Crie uma feature no carroussel que, ao clicar na foto atual, ele vai abrir essa imagem em uma nova aba, de forma que possamos vê-la expandida. Crie esse recurso na lib, seguindo todos os nossos padrões dela por favor.
 -Remova o modal de "spoken languages" ao clicar nele. É pra manter o modal pra todos os cards/tags de skills, apenas para as languages vc vai ocultar essa abertura de modal.
 -Podemos remover também o CRUD (back e front) de portfolio_settings, mas mantendo a tabela dele no banco, para termos histórico.
--Remover obrigatoriedade de alguns campos summary/description de customer, jobs e de outras entidades.
--Remover campos como highlight, summary, description e image assets de entidades desnecessárias, como alguns desses em jobs e por exemplo.
--Transformar em enum/select-option o campo de texto de mime type da image assets (primeiro verificar se realmente esse campo é necessário).
--Colocar fundo branco ou colorido para as imagens quando estiver no modo dark
--Ver se faz sentido colocar summary acima da description no modal de detalhes da experience, adicionando ao conteúdo.
+-Vamos fazer algumas mudanças no campos de formulário dos CRUDS e nos dados de algumas entidades:
+    -Nos image assets, pra que temos os campos file path e folder? não seria necessário termos apenas o file path, já que dentro do file path já temos a folder onde ele se encontra? e no file path, porque colocamos também o nome do arquivo? não seria melhor concatenarmos com o file name nos lugares em que é usado o file path? se realmente for necessário ter o file path completo e for muito custoso pra alterar no back e no front, pode manter o file path completo com o file name junto com ele, removendo apenas o campo de folder, que esse realmente acho desnecessário. Pode tirar também os campos de caption das image assets. Além disso, pra que serve o campo de mime type exatamente? tem realmente necessidade dele? precisamos realmente cadastrar o tipo, sendo que já vai estar no file name como extensão (tipo .png ou .jpg)? Eu acho que seria melhor removermos mesmo esse mime type se possível, mas se ele for realmente necessário, torne ele um campo de select-option ao invés de texto. Todos esses campos que vc for remover do CRUD de image assets, pode remover tanto do back, como do front, como do banco também (coluna e dados) por favor.
+    -Nos customers, remova a obrigatoriedade dos campos de summary, eles não precisam ser obrigatórios, podem ser opcionais.
+    -Nos jobs, pode remover a relação com image assets, não tem necessidade de imagem pra esse campo. Se ele for usado em algum lugar, troque para usar a imagem relacionada à experience relacionada a esse job.
+    -Nas formations, nas technologies e nas experiences, pode remover a relação com links.
+    -Nos projects, inclua a option de "Abandonado" no campo de status. E no campo de ambiente, troque a option "dashboard" por "outro". Além disso, no frontend, no modal de detalhes do projeto mostre essas informações desses campos de ambiente e status por favor. Com relação à description e full description, faça igual fizemos para o experience, mostre a description menor nos cards de projeto da tela e mostre a full description no modal de detalhamento de projeto. Nos outros modais onde os projects aparecem como card (por exemplo dentro do modal de experiences), mostre a description menor mesmo, não a full description. Pode mudar esses nomes de "description" e "full description" para "summary" e "description" respectivamente, para que fique padronizado com as outras entidades.
+    -Ajuste a ordenação de todas as entidades do sistema (tanto no front, como no back) que possuem o campo highlight status, para que tudo sempre seja ordenado primeiro por highlight, depois pela próxima coluna importante que a entidade tiver, como sort order, start date, end date, alfabeticamente por nome ou por slug, etc.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.
 -Os textos com os valores dos gráficos no tema dark estão escuros demais pra visualizar, mudar a cor desses textos para uma cor clara, assim como nos textos normais na tela dark.
-
-*Skills:
--Colocar de alguma forma as informações de conceitos conhecidos, como: design patterns, programming paradigms e architectures. Talvez inserir nos dados de skills os padrões de projeto como POO e MVC por exemplo. Talvez criar um novo CRUD ou adicionar isso em skills com uma nova coluna/tabela-relacionada/estrutura.
-
-*Projects:
--Talvez criar uma coluna para projeto inacabado/concluído.
 
 AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.
