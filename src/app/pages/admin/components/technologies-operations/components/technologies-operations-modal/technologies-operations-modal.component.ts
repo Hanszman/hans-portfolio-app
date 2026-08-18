@@ -127,10 +127,25 @@ export class TechnologiesOperationsModalComponent {
           { labelKey: 'common.fields.name', value: technology.name },
           { labelKey: 'common.fields.stack', value: technology.stack ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.stack]) : '-' },
           { labelKey: 'common.fields.type', value: technology.type ? this.translation.instant(TECHNOLOGY_OPTION_LABEL_KEYS[technology.type]) : '-' },
-          { labelKey: 'common.fields.level', value: technology.level || '-' },
+          {
+            labelKey: 'common.fields.level',
+            value: technology.level
+              ? this.translation.instant(
+                  TECHNOLOGY_OPTION_LABEL_KEYS[
+                    technology.level as TechnologyOptionValue
+                  ],
+                )
+              : '-',
+          },
           {
             labelKey: 'common.fields.frequency',
-            value: technology.frequency || '-',
+            value: technology.frequency
+              ? this.translation.instant(
+                  TECHNOLOGY_OPTION_LABEL_KEYS[
+                    technology.frequency as TechnologyOptionValue
+                  ],
+                )
+              : '-',
           },
           {
             labelKey: 'pages.admin.technologies.card.highlight',

@@ -678,3 +678,9 @@ Preciso que vc acesse os workspaces hans-ui-design-lib, hans-portfolio-app e han
             ---> Ocasional
             ---> Raro
         OBS: Além disso, em todos os filtros vamos continuar tendo a option de "Todos" e isso não vai ter como option nos CRUDs obviamente.
+Correções:
+-Estamos com erro ao tentar abrir as telas de Experiences e Admin, como vc pode ver nos prints Screenshot_1 Screenshot_2 Screenshot_3 e Screenshot_4 (na minha pasta downloads), corrija por favor.
+-Corrija também os erros apontados pelo vscode nos arquivos: normalize-seed-snapshot.ts e dashboard.service.spec.ts, como pode ver nos prints Screenshot_5 e Screenshot_6.
+-Me arrependi de ter escolhido a opção de somente a imagem central das ativas do carroussel poder ser clicada, coloque isso pra todas as que estão ativas. Faça esse ajuste na lib, para que todas as ativas possam ser clicadas e abrir a imagem em nova aba, se a variável pra isso estiver true. Além disso, vc esqueceu de ativar essa variável no front do portfolio nos components de carroussels que chamamos, faça isso não só pro modal de formations, mas pra todos os carroussels que chamarmos no portfolio, como no modal de projects e outros.
+-A cor do studying nos gráficos de progress bar pode ser a cor info do theme ao invés de danger.
+-OBS: Em todos esses casos, quero que vc analise via chrome-devtools, reproduza os cenários/problemas, investigue, corrija e valide vc mesmo por favor. Se em algum momento vc precisar validar a tela de admin, mas não conseguir logar nela por não saber o usuário/senha, me informe que eu logo pra vc no chrome-devtools, para que vc possa continuar a análise. Lembrando que temos que passar com 100% de test:coverage, temos que passar nos lints e nos builds de todos os projetos que vc for mexer (te dou acesso aos 3 repos caso seja necessário vc mexer em todos eles).

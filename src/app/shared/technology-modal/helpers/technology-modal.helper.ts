@@ -127,7 +127,7 @@ const LEVEL_PROGRESS: Record<
   TechnologyLevelKey,
   Pick<TechnologyProgressViewModel, 'value' | 'color'>
 > = {
-  STUDYING: { value: 15, color: 'danger' },
+  STUDYING: { value: 15, color: 'info' },
   BASIC: { value: 33, color: 'danger' },
   INTERMEDIATE: { value: 66, color: 'warning' },
   ADVANCED: { value: 100, color: 'success' },

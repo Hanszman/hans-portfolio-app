@@ -228,7 +228,7 @@ export const PT_BR_TRANSLATIONS = {
 
   'taxonomy.skills.stack.frontEnd': 'Front-End',
   'taxonomy.skills.stack.backEnd': 'Back-End',
-  'taxonomy.skills.stack.databases': 'Bancos de dados',
+  'taxonomy.skills.stack.databases': 'Banco de Dados',
   'taxonomy.skills.stack.games': 'Games',
   'taxonomy.skills.stack.mobile': 'Mobile',
   'taxonomy.skills.stack.testing': 'Testes',

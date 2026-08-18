@@ -4,7 +4,11 @@ export type TechnologyLevelKey = 'BASIC' | 'INTERMEDIATE' | 'ADVANCED' | 'STUDYI
 
 export type TechnologyFrequencyKey = 'RARE' | 'OCCASIONAL' | 'FREQUENT';
 
-export type TechnologyProgressColor = 'danger' | 'warning' | 'success';
+export type TechnologyProgressColor =
+  | 'danger'
+  | 'warning'
+  | 'success'
+  | 'info';
 
 export interface TechnologyProgressViewModel {
   label: string;
