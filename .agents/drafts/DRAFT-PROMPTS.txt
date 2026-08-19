@@ -693,3 +693,5 @@ Correções:
 Correções:
 -Nos modais de detalhes de experiences, como pode ver no print Screenshot_8 na minha pasta downloads, na sessão de tech_stack, não estão muito bem organizadas as sub-sessões por ambiente, tem muita coisa que ta em "others" que deveria estar em "back-end", "front-end" ou outra e isso deveria estar relacionado com o campo de "stack" da technology, corrija isso por favor.
 -Nos modais de crud, como pode ver no print Screenshot_9, nas listas de itens em relations, gostaria que em cada lista os itens fossem ordenados em ordem alfabética por favor.
+Correções:
+-Como pode ver no print Screenshot_10 e Screenshot_11, estou tendo esse erro ao tentar atualizar uma experience específica (4mti-experience).
