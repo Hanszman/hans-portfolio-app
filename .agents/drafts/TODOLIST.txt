@@ -7,8 +7,8 @@ DADOS:
 
 IMPLEMENTAÇÕES:
 *Correções:
--Nos modais de detalhes de experiences, na sessão de tech_stack, não estão muito bem organizadas as sub-sessões por ambiente, tem muita coisa que ta em "others" que deveria estar em "back-end", "front-end" ou outra e isso deveria estar relacionado com o campo de "stack" da technology, corrija isso por favor.
--Nos modais de crud, nas listas de itens em relations, gostaria que em cada lista os itens fossem ordenados em ordem alfabética por favor.
+-Nos modais de detalhes de experiences, como pode ver no print Screenshot_8 na minha pasta downloads, na sessão de tech_stack, não estão muito bem organizadas as sub-sessões por ambiente, tem muita coisa que ta em "others" que deveria estar em "back-end", "front-end" ou outra e isso deveria estar relacionado com o campo de "stack" da technology, corrija isso por favor.
+-Nos modais de crud, como pode ver no print Screenshot_9, nas listas de itens em relations, gostaria que em cada lista os itens fossem ordenados em ordem alfabética por favor.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
