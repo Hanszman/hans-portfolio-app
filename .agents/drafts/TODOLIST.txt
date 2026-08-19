@@ -26,6 +26,7 @@ Tecnologias a Adicionar:
 -Tailwind
 -Next.js
 -NestJS
+-Playwright
 -Jasmine
 -Karma
 -Vitest
@@ -67,21 +68,30 @@ Tecnologias a Adicionar:
 -POO
 -Functional Programming
 
-Stack:
--Testes
--Devops
--Conceitos
-
-Tipos:
--Ambientes de Execução
--Ferramentas de Testes
--Ferramentas de Build
--Ferramentas de Documentação
--Notações de Objetos (Editar para "Sintaxes de Marcação e Formatos")
--Pré-Processadores
--Inteligências Artificiais
--Padrões de Projeto
--Paradigmas de Programção
--Arquiteturas
--Princípios
--ORMs
+-Projects:
+-motiva-design-system
+-motiva-portal-rh
+-motiva-portal-revenda
+-motiva-portal-admin
+-siteware-stratws
+-siteware-design-system
+-hans-ui-design-lib
+-hans-portfolio (app e api)
+-victor_hanszman_portfolio-old (update)
+-StudyNotesApi
+-hans-game-tracker
+-hans-mobile-devkit
+-nestjs-tutorial
+-nextjs-tutorial
+-DotNetTutorial
+-desafio-api-nodejs
+-tdd-ng-19
+-game_station (front e back)
+-online-chat (front e back)
+-rocketseatchat
+-tictactoe-online (front e back)
+-projeto_galeria (app e api)
+-gamer_profile (front e back)
+-meu-projeto-react
+-cotacoes
+-week-6 (front e back)
