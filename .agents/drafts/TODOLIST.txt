@@ -52,6 +52,8 @@ Tecnologias a Adicionar:
 -Microservices
 -Client-Server
 -CDN
+-Native Federation
+-NX
 -YAML
 -Pipeline
 -JWT
