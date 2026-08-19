@@ -163,38 +163,27 @@ export const PROJECT_FALLBACK_LABEL_KEYS = {
 } as const satisfies Record<string, AppTranslationKey>;
 
 export const PROJECT_STACK_GROUP_LABEL_KEYS = {
-  frontend: 'taxonomy.skills.stack.frontEnd',
-  backend: 'taxonomy.skills.stack.backEnd',
-  databases: 'taxonomy.skills.stack.databases',
-  others: 'taxonomy.skills.stack.others',
+  FRONT_END: 'taxonomy.skills.stack.frontEnd',
+  BACK_END: 'taxonomy.skills.stack.backEnd',
+  MOBILE: 'taxonomy.skills.stack.mobile',
+  GAMES: 'taxonomy.skills.stack.games',
+  DATABASES: 'taxonomy.skills.stack.databases',
+  TESTING: 'taxonomy.skills.stack.testing',
+  DEVOPS: 'taxonomy.skills.stack.devops',
+  CONCEPTS: 'taxonomy.skills.stack.concepts',
+  OTHERS: 'taxonomy.skills.stack.others',
 } as const satisfies Record<string, AppTranslationKey>;
 
-export const PROJECT_TECHNOLOGY_STACK_GROUPS: Record<string, keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS> =
-  {
-    angular: 'frontend',
-    react: 'frontend',
-    typescript: 'frontend',
-    javascript: 'frontend',
-    html: 'frontend',
-    css: 'frontend',
-    sass: 'frontend',
-    bootstrap: 'frontend',
-    jquery: 'frontend',
-    chart: 'frontend',
-    'chart-js': 'frontend',
-    node: 'backend',
-    'node-js': 'backend',
-    express: 'backend',
-    'express-js': 'backend',
-    knex: 'backend',
-    'knex-js': 'backend',
-    swagger: 'backend',
-    php: 'backend',
-    laravel: 'backend',
-    mysql: 'databases',
-    postgresql: 'databases',
-    sqlserver: 'databases',
-    'sql-server': 'databases',
-    'microsoft-sql-server': 'databases',
-    mongodb: 'databases',
-  };
+export const PROJECT_STACK_GROUP_ORDER = [
+  'FRONT_END',
+  'BACK_END',
+  'MOBILE',
+  'GAMES',
+  'DATABASES',
+  'TESTING',
+  'DEVOPS',
+  'CONCEPTS',
+  'OTHERS',
+] as const;
+
+export type ProjectStackGroupKey = (typeof PROJECT_STACK_GROUP_ORDER)[number];

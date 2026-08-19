@@ -28,13 +28,14 @@ import {
   PROJECT_FALLBACK_LABEL_KEYS,
   PROJECT_LINK_TYPE_LABEL_KEYS,
   PROJECT_STACK_GROUP_LABEL_KEYS,
+  PROJECT_STACK_GROUP_ORDER,
   PROJECT_STATUS_LABEL_KEYS,
   PROJECT_SUMMARY_LABEL_KEYS,
-  PROJECT_TECHNOLOGY_STACK_GROUPS,
   PROJECT_VISIBLE_TECHNOLOGY_COUNT,
   ProjectCaseViewModel,
   ProjectFilterValues,
   ProjectLinkViewModel,
+  ProjectStackGroupKey,
   ProjectStackGroupViewModel,
   ProjectSummaryMetricViewModel,
   ProjectTechnologyTagViewModel,
@@ -101,53 +102,30 @@ const mapProjectLink = (
 });
 
 const resolveTechnologyStackGroup = (
-  technologySlug: string,
-  technologyStack: string,
-  technologyType: string,
-): keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS => {
-  const slugGroup = PROJECT_TECHNOLOGY_STACK_GROUPS[technologySlug];
-
-  if (slugGroup) {
-    return slugGroup;
-  }
-
-  if (
-    technologyStack === 'DATABASES' ||
-    technologyType === 'RELATIONAL_DATABASES' ||
-    technologyType === 'NON_RELATIONAL_DATABASES'
-  ) {
-    return 'databases';
-  }
-
-  return 'others';
-};
+  technology: Pick<ProjectTechnologyResponse, 'slug' | 'stack'>,
+): ProjectStackGroupKey => resolveSkillStackKey(technology) as ProjectStackGroupKey;
 
 const buildProjectStackGroups = (
   relations: ProjectCollectionItemResponse['technologies'],
   locale: AppLocale,
 ): readonly ProjectStackGroupViewModel[] => {
-  const groupedTechnologies = new Map<
-    keyof typeof PROJECT_STACK_GROUP_LABEL_KEYS,
-    ProjectTechnologyTagViewModel[]
-  >([
-    ['frontend', []],
-    ['backend', []],
-    ['databases', []],
-    ['others', []],
-  ]);
+  const groupedTechnologies = new Map<ProjectStackGroupKey, ProjectTechnologyTagViewModel[]>();
 
   for (const { technology } of relations) {
-    groupedTechnologies
-      .get(resolveTechnologyStackGroup(technology.slug, technology.stack, technology.type))
-      ?.push(mapProjectTechnologyTag(technology, locale));
+    const groupKey = resolveTechnologyStackGroup(technology);
+    const groupTechnologies = groupedTechnologies.get(groupKey) ?? [];
+
+    groupTechnologies.push(mapProjectTechnologyTag(technology, locale));
+    groupedTechnologies.set(groupKey, groupTechnologies);
   }
 
-  return [...groupedTechnologies.entries()]
-    .map(([group, technologies]) => ({
-      labelKey: PROJECT_STACK_GROUP_LABEL_KEYS[group],
-      technologies: dedupeProjectTechnologies(technologies),
-    }))
-    .filter((group) => group.technologies.length > 0);
+  return PROJECT_STACK_GROUP_ORDER.flatMap((groupKey) => {
+    const technologies = dedupeProjectTechnologies(groupedTechnologies.get(groupKey) ?? []);
+
+    return technologies.length > 0
+      ? [{ labelKey: PROJECT_STACK_GROUP_LABEL_KEYS[groupKey], technologies }]
+      : [];
+  });
 };
 
 const resolveProjectFilterContext = (context: string): ProjectCaseViewModel['filterContext'] =>

@@ -2,9 +2,11 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   output,
 } from '@angular/core';
+import { sortOperationsRelationPickerOptions } from './helpers/operations-relation-picker.helper';
 import { OperationsRelationPickerOption } from './operations-relation-picker.types';
 
 @Component({
@@ -22,6 +24,10 @@ export class OperationsRelationPickerComponent {
   readonly options = input<readonly OperationsRelationPickerOption[]>([]);
   readonly selectedIds = input<readonly string[]>([]);
   readonly toggled = output<string>();
+
+  protected readonly sortedOptions = computed(() =>
+    sortOperationsRelationPickerOptions(this.options()),
+  );
 
   protected isSelected(id: string): boolean {
     return this.selectedIds().includes(id);

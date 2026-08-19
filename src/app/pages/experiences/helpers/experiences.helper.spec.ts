@@ -113,7 +113,7 @@ describe('experiences helper', () => {
         technologies: ['SQL Server'],
       },
       {
-        labelKey: 'taxonomy.skills.stack.others',
+        labelKey: 'taxonomy.skills.stack.devops',
         technologies: ['Microsoft Azure'],
       },
     ]);
@@ -228,7 +228,7 @@ describe('experiences helper', () => {
     });
   });
 
-  it('should classify database technologies by type when the slug is not mapped', () => {
+  it('should classify a technology by its own stack field regardless of slug or type', () => {
     const experience = {
       ...createExperiencesCollectionResponse().data[1],
       technologies: [
@@ -239,6 +239,7 @@ describe('experiences helper', () => {
             id: 'tech-oracle',
             slug: 'oracle-db',
             name: 'Oracle DB',
+            stack: 'DATABASES' as const,
             type: 'RELATIONAL_DATABASES' as const,
             level: 'INTERMEDIATE',
             frequency: 'OCCASIONAL',
@@ -262,6 +263,45 @@ describe('experiences helper', () => {
       {
         labelKey: 'taxonomy.skills.stack.databases',
         technologies: ['Oracle DB'],
+      },
+    ]);
+  });
+
+  it('should fall back to the others group when a technology has no recognized stack', () => {
+    const experience = {
+      ...createExperiencesCollectionResponse().data[1],
+      technologies: [
+        {
+          experienceId: 'experience-m2m',
+          technologyId: 'tech-unmapped',
+          technology: {
+            id: 'tech-unmapped',
+            slug: 'unmapped-tool',
+            name: 'Unmapped Tool',
+            stack: undefined as never,
+            type: 'OTHERS' as const,
+            level: 'INTERMEDIATE',
+            frequency: 'OCCASIONAL',
+            highlight: false,
+            sortOrder: 1,
+            createdAt: '2026-03-25T17:44:29.830Z',
+            updatedAt: '2026-03-25T17:44:29.830Z',
+          },
+        },
+      ],
+    };
+
+    const timelineItem = mapExperienceToTimelineItem(experience, 'en-us');
+
+    expect(
+      timelineItem.technologyGroups.map((group) => ({
+        labelKey: group.labelKey,
+        technologies: group.technologies.map((technology) => technology.name),
+      })),
+    ).toEqual([
+      {
+        labelKey: 'taxonomy.skills.stack.others',
+        technologies: ['Unmapped Tool'],
       },
     ]);
   });

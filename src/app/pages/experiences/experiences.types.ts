@@ -73,49 +73,27 @@ export const EXPERIENCE_PROJECT_ENVIRONMENT_LABEL_KEYS: Record<
 export const EXPERIENCE_PRESENT_LABEL_KEY = 'taxonomy.experiences.present';
 
 export const EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS = {
-  frontend: 'taxonomy.skills.stack.frontEnd',
-  backend: 'taxonomy.skills.stack.backEnd',
-  databases: 'taxonomy.skills.stack.databases',
-  others: 'taxonomy.skills.stack.others',
+  FRONT_END: 'taxonomy.skills.stack.frontEnd',
+  BACK_END: 'taxonomy.skills.stack.backEnd',
+  MOBILE: 'taxonomy.skills.stack.mobile',
+  GAMES: 'taxonomy.skills.stack.games',
+  DATABASES: 'taxonomy.skills.stack.databases',
+  TESTING: 'taxonomy.skills.stack.testing',
+  DEVOPS: 'taxonomy.skills.stack.devops',
+  CONCEPTS: 'taxonomy.skills.stack.concepts',
+  OTHERS: 'taxonomy.skills.stack.others',
 } as const satisfies Record<string, AppTranslationKey>;
 
-export const EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS = new Set([
-  'angular',
-  'typescript',
-  'javascript',
-  'html',
-  'css',
-  'sass',
-  'bootstrap',
-  'jquery',
-  'ajax',
-  'json',
-]);
-
-export const EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS = new Set([
-  'node-js',
-  'nodejs',
-  'node',
-  'knex-js',
-  'knex',
-  'swagger',
-  'php',
-  'laravel',
-  'http',
-]);
-
-export const EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS = new Set([
-  'sql-server',
-  'mysql',
-  'postgresql',
-  'dbeaver',
-]);
-
 export const EXPERIENCE_TECHNOLOGY_GROUP_ORDER = [
-  'frontend',
-  'backend',
-  'databases',
-  'others',
+  'FRONT_END',
+  'BACK_END',
+  'MOBILE',
+  'GAMES',
+  'DATABASES',
+  'TESTING',
+  'DEVOPS',
+  'CONCEPTS',
+  'OTHERS',
 ] as const;
 
 export type ExperienceTechnologyGroupKey =

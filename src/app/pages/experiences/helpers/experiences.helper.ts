@@ -11,10 +11,7 @@ import { formatAppDateRange } from '../../../core/date/app-date.helper';
 import { TechnologyModalItem } from '../../../shared/technology-modal/technology-modal.types';
 import { sortTagItems } from '../../../shared/tag/helpers/tag-order.helper';
 import {
-  EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS,
   EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG,
-  EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS,
-  EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS,
   EXPERIENCE_TECHNOLOGY_GROUP_ORDER,
   EXPERIENCE_TECHNOLOGY_GROUP_LABEL_KEYS,
   EXPERIENCE_PRESENT_LABEL_KEY,
@@ -93,6 +90,7 @@ const mapTechnology = (
 ): TechnologyModalItem => ({
   slug: technology.slug,
   name: technology.name,
+  stack: technology.stack,
   type: technology.type,
   level: technology.level,
   frequency: technology.frequency,
@@ -159,25 +157,11 @@ const sortJobsByMostRecentEndDate = (
 };
 
 const resolveTechnologyGroupKey = (
-  technology: Pick<TechnologyModalItem, 'slug' | 'type'>,
-): ExperienceTechnologyGroupKey => {
-  if (EXPERIENCE_FRONTEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
-    return 'frontend';
-  }
-
-  if (EXPERIENCE_BACKEND_TECHNOLOGY_SLUGS.has(technology.slug)) {
-    return 'backend';
-  }
-
-  if (EXPERIENCE_DATABASE_TECHNOLOGY_SLUGS.has(technology.slug)) {
-    return 'databases';
-  }
-
-  return technology.type === 'RELATIONAL_DATABASES' ||
-    technology.type === 'NON_RELATIONAL_DATABASES'
-    ? 'databases'
-    : 'others';
-};
+  technology: Pick<TechnologyModalItem, 'stack'>,
+): ExperienceTechnologyGroupKey =>
+  EXPERIENCE_TECHNOLOGY_GROUP_ORDER.includes(technology.stack as ExperienceTechnologyGroupKey)
+    ? (technology.stack as ExperienceTechnologyGroupKey)
+    : 'OTHERS';
 
 const buildTechnologyGroups = (
   technologies: readonly TechnologyModalItem[],

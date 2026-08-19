@@ -1,3 +1,5 @@
+import { TechnologyStack, TechnologyType } from '../technologies/technologies.types';
+
 export interface PaginatedResponse<TItem> {
   data: TItem[];
   pagination: {
@@ -14,6 +16,7 @@ export interface ExperienceTechnologyResponse {
   id: string;
   slug: string;
   name: string;
+  stack: TechnologyStack;
   type: TechnologyType;
   level: string;
   frequency: string;
@@ -154,8 +157,7 @@ export interface ExperienceCollectionItemResponse {
   imageAssets: ExperienceImageAssetRelationResponse[];
 }
 
-export type ExperiencesCollectionResponse =
-  PaginatedResponse<ExperienceCollectionItemResponse>;
+export type ExperiencesCollectionResponse = PaginatedResponse<ExperienceCollectionItemResponse>;
 
 export interface ExperienceRelationReference {
   id: string;
@@ -254,4 +256,3 @@ export interface ExperienceMutationPayload {
 }
 
 export type AdminExperiencesCollectionResponse = PaginatedResponse<ExperienceRecord>;
-import { TechnologyType } from '../technologies/technologies.types';

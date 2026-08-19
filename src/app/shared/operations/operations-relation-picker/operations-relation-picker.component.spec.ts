@@ -45,4 +45,21 @@ describe('OperationsRelationPickerComponent', () => {
     await fixture.whenStable();
     expect(fixture.nativeElement.textContent).not.toContain('One');
   });
+
+  it('renders options sorted alphabetically by title', async () => {
+    fixture.componentRef.setInput('options', [
+      { id: 'sql-server', title: 'Microsoft SQL Server' },
+      { id: 'swagger', title: 'Swagger' },
+      { id: 'sql', title: 'SQL' },
+    ]);
+    await fixture.whenStable();
+
+    const titles = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll(
+        '.operations-relation-picker-option-copy span',
+      ),
+    ).map((element) => element.textContent);
+
+    expect(titles).toEqual(['Microsoft SQL Server', 'SQL', 'Swagger']);
+  });
 });
