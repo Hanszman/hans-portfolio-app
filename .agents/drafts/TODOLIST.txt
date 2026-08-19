@@ -8,6 +8,8 @@ DADOS:
 IMPLEMENTAÇÕES:
 *Correções:
 -Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
+-Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status como essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética.
+-Para todos os modais de detalhes que possuem o card trigger com um summary e dentro do card uma description maior, vamos concatenar a description no modal de detalhes com esse summary logo antes por favor (exemplo: experiences, projects, etc).
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
