@@ -144,7 +144,7 @@ export const EN_TRANSLATIONS = {
   'pages.home.metrics.years.label': 'Years of Experience',
   'pages.home.metrics.years.description':
     'Building high-quality web products for the market for many years.',
-  'pages.home.metrics.projects.label': 'Projects Delivered',
+  'pages.home.metrics.projects.label': 'Worked Projects',
   'pages.home.metrics.projects.description':
     'Experience with many professional, personal, and academic projects.',
   'pages.home.metrics.technologies.description':
@@ -180,7 +180,7 @@ export const EN_TRANSLATIONS = {
   'pages.skills.sectionLabel': '// SKILLS_ARSENAL',
   'pages.skills.title': 'Skills & Technologies',
   'pages.skills.description':
-    'A comprehensive overview of my technical arsenal, education and language proficiencies.',
+    'A comprehensive overview of my technical arsenal, education and language proficiencies. These are not necessarily technologies I have mastered in depth, but rather an analytical compilation of all the tools I have used or studied throughout my career.',
   'pages.skills.filters.level': 'Level',
   'pages.skills.education.title': 'Education',
   'pages.skills.search.placeholder': 'Search technology...',
@@ -954,26 +954,19 @@ export const EN_TRANSLATIONS = {
   'pages.admin.projects.feedback.created': 'Protected project created successfully.',
   'pages.admin.projects.feedback.updated': 'Protected project updated successfully.',
   'pages.admin.projects.feedback.deleted': 'Protected project deleted successfully.',
-  'pages.admin.projects.feedback.requiredSummaryPt':
-    'The Portuguese summary is required.',
-  'pages.admin.projects.feedback.requiredSummaryEn':
-    'The English summary is required.',
-  'pages.admin.projects.feedback.requiredDescriptionPt':
-    'The Portuguese description is required.',
-  'pages.admin.projects.feedback.requiredDescriptionEn':
-    'The English description is required.',
+  'pages.admin.projects.feedback.requiredSummaryPt': 'The Portuguese summary is required.',
+  'pages.admin.projects.feedback.requiredSummaryEn': 'The English summary is required.',
+  'pages.admin.projects.feedback.requiredDescriptionPt': 'The Portuguese description is required.',
+  'pages.admin.projects.feedback.requiredDescriptionEn': 'The English description is required.',
   'pages.admin.projects.feedback.requiredOptions': 'Select all required project options.',
   'pages.admin.projects.fields.slug.placeholder': 'Enter the unique project slug',
   'pages.admin.projects.fields.titlePt.label': 'Portuguese title',
   'pages.admin.projects.fields.titlePt.placeholder': 'Enter the Portuguese project title',
   'pages.admin.projects.fields.titleEn.label': 'English title',
   'pages.admin.projects.fields.titleEn.placeholder': 'Enter the English project title',
-  'pages.admin.projects.fields.summaryPt.placeholder':
-    'Enter the Portuguese summary',
-  'pages.admin.projects.fields.summaryEn.placeholder':
-    'Enter the English summary',
-  'pages.admin.projects.fields.descriptionPt.placeholder':
-    'Enter the Portuguese description',
+  'pages.admin.projects.fields.summaryPt.placeholder': 'Enter the Portuguese summary',
+  'pages.admin.projects.fields.summaryEn.placeholder': 'Enter the English summary',
+  'pages.admin.projects.fields.descriptionPt.placeholder': 'Enter the Portuguese description',
   'pages.admin.projects.fields.descriptionEn.placeholder': 'Enter the English description',
   'pages.admin.projects.fields.context.label': 'Context',
   'pages.admin.projects.fields.context.placeholder': 'Select the project context',
@@ -1016,13 +1009,10 @@ export const EN_TRANSLATIONS = {
   'pages.admin.experiences.fields.descriptionEs.placeholder': 'Enter the Spanish description',
   'pages.admin.experiences.feedback.requiredDescriptionEs': 'The Spanish description is required.',
   'pages.admin.projects.fields.titleEs.placeholder': 'Enter the Spanish project title',
-  'pages.admin.projects.fields.summaryEs.placeholder':
-    'Enter the Spanish summary',
+  'pages.admin.projects.fields.summaryEs.placeholder': 'Enter the Spanish summary',
   'pages.admin.projects.fields.descriptionEs.placeholder': 'Enter the Spanish description',
-  'pages.admin.projects.feedback.requiredSummaryEs':
-    'The Spanish summary is required.',
-  'pages.admin.projects.feedback.requiredDescriptionEs':
-    'The Spanish description is required.',
+  'pages.admin.projects.feedback.requiredSummaryEs': 'The Spanish summary is required.',
+  'pages.admin.projects.feedback.requiredDescriptionEs': 'The Spanish description is required.',
   'pages.admin.formations.fields.titleEs.placeholder': 'Enter the Spanish title',
   'pages.admin.spokenLanguages.fields.nameEs.placeholder': 'Enter the language name in Spanish',
 

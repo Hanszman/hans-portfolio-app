@@ -150,7 +150,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.home.metrics.years.label': 'Años de experiencia',
   'pages.home.metrics.years.description':
     'Durante muchos años, hemos estado desarrollando productos web de alta calidad para el mercado.',
-  'pages.home.metrics.projects.label': 'Proyectos entregados',
+  'pages.home.metrics.projects.label': 'Proyectos Trabajados',
   'pages.home.metrics.projects.description':
     'Experiencia en numerosos proyectos profesionales, personales y académicos.',
   'pages.home.metrics.technologies.description':
@@ -188,7 +188,7 @@ export const ES_ES_TRANSLATIONS = {
   'pages.skills.sectionLabel': '// SKILLS_ARSENAL',
   'pages.skills.title': 'Habilidades y Tecnologías',
   'pages.skills.description':
-    'Una vista completa de mi arsenal técnico, educación y competencias lingüísticas.',
+    'Una vista completa de mi arsenal técnico, educación y competencias lingüísticas. No se trata necesariamente de tecnologías que domine a la perfección, sino de un conjunto analítico de todas las herramientas que he utilizado o estudiado a lo largo de mi carrera.',
   'pages.skills.filters.level': 'Nivel',
   'pages.skills.education.title': 'Educación',
   'pages.skills.search.placeholder': 'Buscar tecnología...',
@@ -724,10 +724,8 @@ export const ES_ES_TRANSLATIONS = {
     'No hay ningun registro relacionado con esta tecnologia.',
   'pages.admin.technologies.feedback.requiredSlug': 'El slug de la tecnologia es obligatorio.',
   'pages.admin.technologies.feedback.requiredName': 'El nombre de la tecnologia es obligatorio.',
-  'pages.admin.technologies.feedback.requiredStack':
-    'La stack de la tecnología es obligatoria.',
-  'pages.admin.technologies.feedback.requiredType':
-    'El tipo de tecnología es obligatorio.',
+  'pages.admin.technologies.feedback.requiredStack': 'La stack de la tecnología es obligatoria.',
+  'pages.admin.technologies.feedback.requiredType': 'El tipo de tecnología es obligatorio.',
   'pages.admin.technologies.feedback.invalidSortOrder': 'El orden debe ser un numero valido.',
   'pages.admin.technologies.feedback.missingSession':
     'La sesion administrativa no esta disponible.',
@@ -964,14 +962,10 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.projects.fields.titlePt.placeholder': 'Escribe el título en portugués',
   'pages.admin.projects.fields.titleEn.label': 'Título en inglés',
   'pages.admin.projects.fields.titleEn.placeholder': 'Escribe el título en inglés',
-  'pages.admin.projects.fields.summaryPt.placeholder':
-    'Escribe el resumen en portugués',
-  'pages.admin.projects.fields.summaryEn.placeholder':
-    'Escribe el resumen en inglés',
-  'pages.admin.projects.fields.descriptionPt.placeholder':
-    'Escribe la descripción en portugués',
-  'pages.admin.projects.fields.descriptionEn.placeholder':
-    'Escribe la descripción en inglés',
+  'pages.admin.projects.fields.summaryPt.placeholder': 'Escribe el resumen en portugués',
+  'pages.admin.projects.fields.summaryEn.placeholder': 'Escribe el resumen en inglés',
+  'pages.admin.projects.fields.descriptionPt.placeholder': 'Escribe la descripción en portugués',
+  'pages.admin.projects.fields.descriptionEn.placeholder': 'Escribe la descripción en inglés',
   'pages.admin.projects.fields.context.label': 'Contexto',
   'pages.admin.projects.fields.context.placeholder': 'Selecciona el contexto',
   'pages.admin.projects.fields.status.label': 'Estado',
@@ -1012,14 +1006,11 @@ export const ES_ES_TRANSLATIONS = {
 
   'pages.admin.experiences.fields.imageAssets.description':
     'Selecciona todas las imágenes conectadas a esta experiencia.',
-  'pages.admin.projects.feedback.requiredSummaryPt':
-    'El resumen en portugués es obligatorio.',
-  'pages.admin.projects.feedback.requiredSummaryEn':
-    'El resumen en inglés es obligatorio.',
+  'pages.admin.projects.feedback.requiredSummaryPt': 'El resumen en portugués es obligatorio.',
+  'pages.admin.projects.feedback.requiredSummaryEn': 'El resumen en inglés es obligatorio.',
   'pages.admin.projects.feedback.requiredDescriptionPt':
     'La descripción en portugués es obligatoria.',
-  'pages.admin.projects.feedback.requiredDescriptionEn':
-    'La descripción en inglés es obligatoria.',
+  'pages.admin.projects.feedback.requiredDescriptionEn': 'La descripción en inglés es obligatoria.',
   'pages.admin.projects.feedback.requiredOptions':
     'Selecciona todas las opciones obligatorias del proyecto.',
   'pages.admin.projects.fields.technologies.description':
@@ -1048,12 +1039,9 @@ export const ES_ES_TRANSLATIONS = {
   'pages.admin.experiences.feedback.requiredDescriptionEs':
     'La descripción en español es obligatoria.',
   'pages.admin.projects.fields.titleEs.placeholder': 'Introduce el título del proyecto en español',
-  'pages.admin.projects.fields.summaryEs.placeholder':
-    'Introduce el resumen en español',
-  'pages.admin.projects.fields.descriptionEs.placeholder':
-    'Introduce la descripción en español',
-  'pages.admin.projects.feedback.requiredSummaryEs':
-    'El resumen en español es obligatorio.',
+  'pages.admin.projects.fields.summaryEs.placeholder': 'Introduce el resumen en español',
+  'pages.admin.projects.fields.descriptionEs.placeholder': 'Introduce la descripción en español',
+  'pages.admin.projects.feedback.requiredSummaryEs': 'El resumen en español es obligatorio.',
   'pages.admin.projects.feedback.requiredDescriptionEs':
     'La descripción en español es obligatoria.',
   'pages.admin.formations.fields.titleEs.placeholder': 'Introduce el título en español',

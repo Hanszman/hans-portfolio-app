@@ -6,10 +6,14 @@ DADOS:
 -Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
+*Correções:
+-Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
+
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.
 -Os textos com os valores dos gráficos no tema dark estão escuros demais pra visualizar, mudar a cor desses textos para uma cor clara, assim como nos textos normais na tela dark.
+-Ordenar filtro de stack no último gráfico na mesma ordem que temos nos filtros da sessão de technologies na tela de skills.
 
 AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.

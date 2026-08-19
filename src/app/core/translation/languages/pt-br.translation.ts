@@ -149,7 +149,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.home.metrics.years.label': 'Anos de experiência',
   'pages.home.metrics.years.description':
     'Há muitos anos construindo produtos web de alta qualidade no mercado',
-  'pages.home.metrics.projects.label': 'Projetos entregues',
+  'pages.home.metrics.projects.label': 'Projetos Trabalhados',
   'pages.home.metrics.projects.description':
     'Experiência com muitos projetos profissionais, pessoais e academicos.',
   'pages.home.metrics.technologies.description':
@@ -187,7 +187,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.skills.sectionLabel': '// SKILLS_ARSENAL',
   'pages.skills.title': 'Habilidades & Tecnologias',
   'pages.skills.description':
-    'Uma visão completa do meu arsenal técnico, formação e proficiência em idiomas.',
+    'Uma visão completa do meu arsenal técnico, formação e proficiência em idiomas. Essas não são necessariamente tecnologias que eu domino profundamente, mas é um conjunto analítico de todas as ferramentas que já utilizei ou estudei em toda minha carreira.',
   'pages.skills.filters.level': 'Nível',
   'pages.skills.education.title': 'Formação',
   'pages.skills.search.placeholder': 'Buscar tecnologia...',
@@ -972,13 +972,10 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.titlePt.placeholder': 'Digite o título em português',
   'pages.admin.projects.fields.titleEn.label': 'Título em inglês',
   'pages.admin.projects.fields.titleEn.placeholder': 'Digite o título em inglês',
-  'pages.admin.projects.fields.summaryPt.placeholder':
-    'Digite o resumo em português',
+  'pages.admin.projects.fields.summaryPt.placeholder': 'Digite o resumo em português',
   'pages.admin.projects.fields.summaryEn.placeholder': 'Digite o resumo em inglês',
-  'pages.admin.projects.fields.descriptionPt.placeholder':
-    'Digite a descrição em português',
-  'pages.admin.projects.fields.descriptionEn.placeholder':
-    'Digite a descrição em inglês',
+  'pages.admin.projects.fields.descriptionPt.placeholder': 'Digite a descrição em português',
+  'pages.admin.projects.fields.descriptionEn.placeholder': 'Digite a descrição em inglês',
   'pages.admin.projects.fields.context.label': 'Contexto',
   'pages.admin.projects.fields.context.placeholder': 'Selecione o contexto',
   'pages.admin.projects.fields.status.label': 'Status',
@@ -989,14 +986,10 @@ export const PT_BR_TRANSLATIONS = {
     'Mantenha o projeto em destaque no portfólio.',
   'pages.admin.projects.fields.highlight.description':
     'Mantenha o projeto enfatizado no portfólio.',
-  'pages.admin.projects.feedback.requiredSummaryPt':
-    'O resumo em português é obrigatório.',
-  'pages.admin.projects.feedback.requiredSummaryEn':
-    'O resumo em inglês é obrigatório.',
-  'pages.admin.projects.feedback.requiredDescriptionPt':
-    'A descrição em português é obrigatória.',
-  'pages.admin.projects.feedback.requiredDescriptionEn':
-    'A descrição em inglês é obrigatória.',
+  'pages.admin.projects.feedback.requiredSummaryPt': 'O resumo em português é obrigatório.',
+  'pages.admin.projects.feedback.requiredSummaryEn': 'O resumo em inglês é obrigatório.',
+  'pages.admin.projects.feedback.requiredDescriptionPt': 'A descrição em português é obrigatória.',
+  'pages.admin.projects.feedback.requiredDescriptionEn': 'A descrição em inglês é obrigatória.',
   'pages.admin.projects.feedback.requiredOptions':
     'Selecione todas as opções obrigatórias do projeto.',
   'pages.admin.projects.fields.experiences.description':
@@ -1033,12 +1026,9 @@ export const PT_BR_TRANSLATIONS = {
     'A descrição em espanhol é obrigatória.',
   'pages.admin.projects.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.projects.fields.summaryEs.placeholder': 'Digite o resumo em espanhol',
-  'pages.admin.projects.fields.descriptionEs.placeholder':
-    'Digite a descrição em espanhol',
-  'pages.admin.projects.feedback.requiredSummaryEs':
-    'O resumo em espanhol é obrigatório.',
-  'pages.admin.projects.feedback.requiredDescriptionEs':
-    'A descrição em espanhol é obrigatória.',
+  'pages.admin.projects.fields.descriptionEs.placeholder': 'Digite a descrição em espanhol',
+  'pages.admin.projects.feedback.requiredSummaryEs': 'O resumo em espanhol é obrigatório.',
+  'pages.admin.projects.feedback.requiredDescriptionEs': 'A descrição em espanhol é obrigatória.',
   'pages.admin.formations.fields.titleEs.placeholder': 'Digite o título em espanhol',
   'pages.admin.spokenLanguages.fields.nameEs.placeholder': 'Digite o nome do idioma em espanhol',
 
