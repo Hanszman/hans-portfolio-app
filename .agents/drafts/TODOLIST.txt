@@ -9,7 +9,6 @@ IMPLEMENTAÇÕES:
 *Correções:
 -Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
 -Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status como essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética.
--Para todos os modais de detalhes que possuem o card trigger com um summary e dentro do card uma description maior, vamos concatenar a description no modal de detalhes com esse summary logo antes por favor (exemplo: experiences, projects, etc).
 -Tags de technologies (tech_stack) no modal de detalhes dos projects podem ocupar todo o espaço horizontal da div.
 
 *Dashboard:
@@ -79,15 +78,15 @@ Tecnologias a Adicionar:
 -Functional Programming
 
 -Projects:
+-hans-ui-design-lib [OK]
+-hans-portfolio (app e api) [OK]
+-victor_hanszman_portfolio-old [OK]
 -motiva-design-system
 -motiva-portal-rh
 -motiva-portal-revenda
 -motiva-portal-admin
 -siteware-stratws
 -siteware-design-system
--hans-ui-design-lib
--hans-portfolio (app e api)
--victor_hanszman_portfolio-old (update)
 -StudyNotesApi
 -hans-game-tracker
 -hans-mobile-devkit
