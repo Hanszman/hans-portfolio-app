@@ -1,12 +1,13 @@
 [TODO LIST]:
 DADOS:
--Continuar atualizando dados da aplicação finalizando a parte da integração entre Front-End e Back-End. Ajustar melhor os dados, ainda tem muitas inconsistências
--Cadastrar os links de referência entre as entidades e atualizar modais de visualização (Criar listas de links de prod e git nos modais, com os ícones do git e vercel).
--Cadastrar imagens dos prints nos modais do projetos utilizando carrossel que implementamos.
+-Continuar cadastrando os projects do github
+-Fazer a correção das technology contexts (fazer uma automação com a IA e pedi-la pra excluir todos os registros atuais dessa tabela e se basear nas outras relações das tecnologias, por project e formation (experience não, pois já tem nos projects) e colocar a mesma data dessas relações, com o contexto específico de cada um).
+-Depois disso criar um script pra sempre que atualizar um project ou formation, fazer uma inserção disso também na tabela de technology contexts.
 -Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
 *Correções:
+-Alguns ícones de tags de technologies não estão aparecendo algumas vezes nos modais, por algum motivo. Corrija por favor.
 -Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
 -Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status como essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética.
 -Tags de technologies (tech_stack) no modal de detalhes dos projects podem ocupar todo o espaço horizontal da div.
@@ -43,6 +44,7 @@ Tecnologias a Adicionar:
 -Fastify
 -RXJS
 -Less
+-Prettier
 -Prisma
 -Drizzle
 -Entity
@@ -65,6 +67,7 @@ Tecnologias a Adicionar:
 -YAML
 -Pipeline
 -JWT
+-Postman
 -Scalar
 -Clean Code
 -SOLID
@@ -84,12 +87,12 @@ Tecnologias a Adicionar:
 -victor_hanszman_portfolio-old [OK]
 -motiva-portals [OK]
 -siteware-stratws [OK]
--StudyNotesApi
--hans-game-tracker
--hans-mobile-devkit
--nestjs-tutorial
--nextjs-tutorial
--DotNetTutorial
+-StudyNotesApi [OK]
+-hans-game-tracker [OK]
+-hans-mobile-devkit [OK]
+-nestjs-tutorial [OK]
+-nextjs-tutorial [OK]
+-DotNetTutorial [OK]
 -desafio-api-nodejs
 -tdd-ng-19
 -game_station (front e back)
