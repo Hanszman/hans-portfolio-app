@@ -1,19 +1,18 @@
 [TODO LIST]:
 DADOS:
--Continuar cadastrando os projects do github
 -Fazer a correção das technology contexts (fazer uma automação com a IA e pedi-la pra excluir todos os registros atuais dessa tabela e se basear nas outras relações das tecnologias, por project e formation (experience não, pois já tem nos projects) e colocar a mesma data dessas relações, com o contexto específico de cada um). OBS: Pro projects pode pegar tudo, mas pro formations fazer uma tratativa mais elaborada, pois nem todo o tempo da faculdade por exemplo eu estava usando aquelas tecnologias.
 -Depois disso criar um script pra sempre que atualizar um project ou formation, fazer uma inserção disso também na tabela de technology contexts.
 -Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
 IMPLEMENTAÇÕES:
 *Correções:
--Incluir freelancer como option no context de project.
--Alguns ícones de tags de technologies não estão aparecendo algumas vezes nos modais, por algum motivo. Corrija por favor.
--Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
--Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status como essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética.
 -Tags de technologies (tech_stack) no modal de detalhes dos projects podem ocupar todo o espaço horizontal da div.
--Ao cadastras algumas descrições no cruds das entidades (campos que utilizam text-area), o registro fica salvo com vários "enter"/"break lines" aleatórios, que eu não coloquei, meio nada a ver. Corrija por favor.
--Relacionar projects com formations.
+-Conferir soma de total de skills na home page e na sessão de technologies na tela de skills, pois o número não está batendo. Mesmo o da homepage sendo um número aproximado, ele está maior que o da tela de skills e não deveria. Então algum dos dois números está errado.
+-Alguns ícones de tags de technologies não estão aparecendo algumas vezes nos modais, por algum motivo. Corrija por favor.
+-Ao cadastrar algumas descrições no cruds das entidades (campos que utilizam text-area), o registro fica salvo com vários "enter"/"break lines" aleatórios, que eu não coloquei, meio nada a ver. Corrija por favor.
+-Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status como essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética.
+-Talvez relacionar projects com formations.
+-Talvez incluir freelancer como option no context de project.
 
 *Dashboard:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
@@ -25,8 +24,6 @@ AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.
 
 DEPOIS:
--Terminar de fazer alguns projetos que estão inacabados, fazer o deploy deles e atualizar os dados deles nos jsons do portfólio.
--Colocar nos README.md de todos os projetos as versões das tecnologias para facilitar a instação além dos seus links de produção.
 -Talvez fazer página sobre meus gostos e vida pessoal.
 
 Tecnologias a Adicionar:
@@ -106,4 +103,4 @@ Tecnologias a Adicionar:
 -gamer_profile (front e back) [OK]
 -meu-projeto-react [OK]
 -cotacoes [OK]
--codekillers
+-codekillers [OK]
