@@ -1,7 +1,7 @@
 [TODO LIST]:
 DADOS:
 -Continuar cadastrando os projects do github
--Fazer a correção das technology contexts (fazer uma automação com a IA e pedi-la pra excluir todos os registros atuais dessa tabela e se basear nas outras relações das tecnologias, por project e formation (experience não, pois já tem nos projects) e colocar a mesma data dessas relações, com o contexto específico de cada um).
+-Fazer a correção das technology contexts (fazer uma automação com a IA e pedi-la pra excluir todos os registros atuais dessa tabela e se basear nas outras relações das tecnologias, por project e formation (experience não, pois já tem nos projects) e colocar a mesma data dessas relações, com o contexto específico de cada um). OBS: Pro projects pode pegar tudo, mas pro formations fazer uma tratativa mais elaborada, pois nem todo o tempo da faculdade por exemplo eu estava usando aquelas tecnologias.
 -Depois disso criar um script pra sempre que atualizar um project ou formation, fazer uma inserção disso também na tabela de technology contexts.
 -Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
 
@@ -93,8 +93,8 @@ Tecnologias a Adicionar:
 -nestjs-tutorial [OK]
 -nextjs-tutorial [OK]
 -DotNetTutorial [OK]
--desafio-api-nodejs
--tdd-ng-19
+-desafio-api-nodejs [OK]
+-tdd-ng-19 [OK]
 -game_station (front e back)
 -online-chat (front e back)
 -rocketseatchat
