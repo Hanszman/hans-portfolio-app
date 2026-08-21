@@ -6,6 +6,7 @@
 -Ordenar filtro de stack no último gráfico na mesma ordem que temos nos filtros da sessão de technologies na tela de skills.
 
 *FUTURAS:
+-Revisar textos da tela de admin, padronizando o que está divergente e atualizando aquilo que está defasado.
 -Ao cadastrar algumas descrições no cruds das entidades (campos que utilizam text-area), o registro fica salvo com vários "enter"/"break lines" aleatórios, que eu não coloquei, meio nada a ver. Corrija por favor.
 -Talvez incluir freelancer como option no context de project.
 -Talvez relacionar projects com formations.
