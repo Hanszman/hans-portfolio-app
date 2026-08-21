@@ -1,20 +1,11 @@
 [TODO LIST]:
-IMPLEMENTAÇÕES:
-*Correções:
--Como vc pode ver no print Screenshot_1 (na pasta downloads), as tags de technologies (tech_stack) no modal de detalhes dos projects poderiam ocupar todo o espaço horizontal da div. Como elas ficam limitadas à area da esquerda do modal, não estão ocupando tudo, então pode fazer uma sessão abaixo dessas sessões de esquerda e direita, pra colocar essas informações de // clientes e // stack_técnica com as tags ocupando o espaço horizontal inteiro.
--Além disso, como pode ver no próprio Screenshot_1 e também no Screenshot_2, alguns ícones de tags de technologies não estão aparecendo algumas vezes em vários desses modais. Corrija também por favor, para que sempre apareçam os ícones nesses componentes de tags de technologies/customers/etc.
--Como pode ver nos prints Screenshot_3, Screenshot_4 e Screenshot_5, temos uma divergência no número de tecnologias totais. O número correto é 113, esse do print Screenshot_5, pois conferi no banco de dados e é isso mesmo. No print Screenshot_3, também está correto teoricamente, pois ele tem um algoritmo de arredondar pra baixo (pra um número divisivel por 10 ou 5 se não me engano) e mostrar com esse "+", então está certo usar esse algoritmo também. Porém no print Screenshot_4, na tela de skills, está divergente. Seria interessante conferir se essa soma está buscando essa informação corretamente no mesmo endpoint em todos os 3 cenários. Se baseie no que está sendo chamado na tela de dashboard, pois ele provavelmente é o correto, depois arrume na tela de skills e confira na tela de home se está usando também o mesmo endpoint (e mantenha o algoritmo de aproximar com o +).
--Não entendo a necessidade do campo featured status na tabela/crud de projects, pode remover (de tudo, front, back, banco, crud, tabela, seed, etc) somente esse campo e manter o campo highlight status com essa informação por favor. É pelo highlight status que vamos mostrar os projetos principais na tela de home page e eles que devem ser os primeiro a serem exibidos em qualquer ordenação, antes dos itens em ordem alfabética. Então qualquer lugar que estiver usando o featured status, mude pro highlight status.
--Não tem necessidade dos campos de descrição (pt, en, es) também em links, pode remover também por favor (de tudo, front, back, banco, crud, tabela, seed, etc).
--Como pode ver no print Screenshot_6, quero remover essas partes que marquei de vermelho dessa sessão da tela de admin, remova também todos as chaves de tradução que não forem mais usadas nesses casos. E com relação a parte que marquei de azul, troque para o texto para algo como: "Tela operacional oculta e autenticada de administrador para gerenciamento dos fluxos das entidades."
-
-*Dashboard:
+*DASHBOARD:
 -Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 -Os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles. Além disso, alguns são meio nada a ver, como "Cargos" por exemplo, podemos remover ele, separar o de "Formações / Idiomas" em cards diferentes e criar um novo, como "certificações". Além disso, podemos reorganizar melhor esses cards nesse espaço da dashboard.
 -Os textos com os valores dos gráficos no tema dark estão escuros demais pra visualizar, mudar a cor desses textos para uma cor clara, assim como nos textos normais na tela dark.
 -Ordenar filtro de stack no último gráfico na mesma ordem que temos nos filtros da sessão de technologies na tela de skills.
 
-*Correções Futuras:
+*FUTURAS:
 -Ao cadastrar algumas descrições no cruds das entidades (campos que utilizam text-area), o registro fica salvo com vários "enter"/"break lines" aleatórios, que eu não coloquei, meio nada a ver. Corrija por favor.
 -Talvez incluir freelancer como option no context de project.
 -Talvez relacionar projects com formations.
