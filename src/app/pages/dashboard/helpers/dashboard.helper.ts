@@ -49,7 +49,7 @@ import {
   resolveDashboardTechnologyVisualPath,
 } from '../dashboard.types';
 
-const DASHBOARD_CHART_COLORS = [
+const DASHBOARD_CHART_COLOR_TOKENS = [
   'primary',
   'secondary',
   'success',
@@ -58,8 +58,20 @@ const DASHBOARD_CHART_COLORS = [
   'danger',
 ] as const;
 
+const DASHBOARD_CHART_COLOR_VARIANTS = ['default', 'neutral', 'strong'] as const;
+
+const resolveDashboardChartColor = (index: number): string => {
+  const token = DASHBOARD_CHART_COLOR_TOKENS[index % DASHBOARD_CHART_COLOR_TOKENS.length];
+  const variantIndex =
+    Math.floor(index / DASHBOARD_CHART_COLOR_TOKENS.length) %
+    DASHBOARD_CHART_COLOR_VARIANTS.length;
+  const variant = DASHBOARD_CHART_COLOR_VARIANTS[variantIndex];
+
+  return variant === 'default' ? token : `var(--${token}-${variant}-color)`;
+};
+
 const buildChartColors = (size: number): readonly string[] =>
-  DASHBOARD_CHART_COLORS.slice(0, Math.max(size, 1));
+  Array.from({ length: Math.max(size, 1) }, (_, index) => resolveDashboardChartColor(index));
 
 const normalizeLabel = (value: string): string =>
   value

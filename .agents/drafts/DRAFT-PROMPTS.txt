@@ -720,3 +720,4 @@ Beleza, obrigado! Mas vamos lá, temos alguns problemas que quero que vc corrija
 -Além disso, na lib vc colocou vários consts (como por exemplo o LEGEND_ROW_HEIGHT) dentro do arquivo do Chart.tsx, jogue eles pro types ou pro helpers, onde fizer mais sentido por favor.
 -Como pode ver no print Screenshot_5, os textos que pedi pra vc trocar a cor pra uma mais clara quando estivermos no tema dark, ficou preto ao invés da cor clara que eu pedi (assim como nos textos normais mesmo da tela dark).
 -Além disso, como pode ver no print Screenshot_6, o card available to work ficou menor que os outros, deixe-o do mesmo tamanho dos outros por favor.
+-Outro ponto que notei também que gostaria que vc corrigisse é que no primeiro gráfico, a cor de "Front-End" e de "Testing" se repetiram... não deixe que as cores dos graficos repitam por favor, se não houver mais opções, mude um pouco o brilho de alguma ou algo assim.

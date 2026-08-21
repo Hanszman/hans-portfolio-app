@@ -248,6 +248,42 @@ describe('dashboard helper', () => {
     ]);
   });
 
+  it('should assign a distinct color to every stack once the base palette is exhausted', () => {
+    const stacks = [
+      'Front-End',
+      'Back-End',
+      'Mobile',
+      'Games',
+      'Databases',
+      'Testing',
+      'DevOps',
+      'Concepts',
+      'Others',
+    ].map((name, index) => ({
+      slug: name.toLowerCase(),
+      name,
+      projectCount: index + 1,
+      technologyCount: index + 1,
+      totalConnections: index + 1,
+      iconName: 'LuLayers',
+    }));
+
+    const chart = buildDashboardStackChart(stacks, 'en-us');
+
+    expect(chart.colors).toEqual([
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+      'info',
+      'danger',
+      'var(--primary-neutral-color)',
+      'var(--secondary-neutral-color)',
+      'var(--success-neutral-color)',
+    ]);
+    expect(new Set(chart.colors).size).toBe(chart.colors.length);
+  });
+
   it('should sort technology usage ties alphabetically', () => {
     const usageChart = buildDashboardTechnologyUsageChart(
       {
