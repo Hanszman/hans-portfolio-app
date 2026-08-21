@@ -1,9 +1,4 @@
 [TODO LIST]:
-DADOS:
--Fazer a correção das technology contexts: fazer uma automação com a IA e pedi-la pra excluir todos os registros atuais dessa tabela e repopulá-la com novos registros se baseando nas relações de tecnologias com projects, colocando as mesmas datas que estão no registro do project (start e end), com o mesmo contexto daquele project. Faça essa reinserção chamando o endpoint de technology contexts mesmo.
--Depois disso criar um script pra sempre que criar/atualizar/excluir um project, fazer uma inserção (seja criando, editando ou excluindo) também na tabela de technology contexts para todas as tecnologias relacionadas àquele projeto.
--Continuar rodando scripts de banco de dados do prisma para atualizar novas seeds de conteúdo e ficar com nova estrutura versionada.
-
 IMPLEMENTAÇÕES:
 *Correções:
 -Tags de technologies (tech_stack) no modal de detalhes dos projects podem ocupar todo o espaço horizontal da div.
