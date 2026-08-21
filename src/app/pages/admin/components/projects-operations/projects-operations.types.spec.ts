@@ -159,6 +159,7 @@ describe('projects operations types', () => {
       'summaryEn',
       'descriptionPt',
       'descriptionEn',
+      'startDate',
     ] as const)
       expect(buildProjectsMutationPayload({ ...form(), [key]: '' }).isValid).toBeFalse();
     expect(buildProjectsMutationPayload({ ...form(), sortOrder: 'x' }).isValid).toBeFalse();

@@ -125,7 +125,7 @@ export const PROJECTS_OPERATIONS_FIELDS = {
   startDate: {
     labelKey: 'common.fields.startDate',
     placeholderKey: 'common.fields.startDate',
-    required: false,
+    required: true,
   },
   endDate: {
     labelKey: 'common.fields.endDate',
@@ -390,6 +390,10 @@ export const buildProjectsMutationPayload = (
     return { isValid: false, errorKey: 'pages.admin.projects.feedback.requiredOptions' };
   }
 
+  if (!form.startDate.trim()) {
+    return { isValid: false, errorKey: 'common.feedback.requiredStartDate' };
+  }
+
   const dateRangeResult = validateAdminDateRange(
     form.startDate,
     form.endDate,
@@ -418,7 +422,7 @@ export const buildProjectsMutationPayload = (
       environment: form.environment,
       featured: form.featured,
       highlight: form.highlight,
-      startDate: normalizeAdminDateValueForMutation(form.startDate) || undefined,
+      startDate: normalizeAdminDateValueForMutation(form.startDate),
       endDate: normalizeAdminDateValueForMutation(form.endDate) || undefined,
       sortOrder,
       technologyRelations: [...new Set(form.technologyIds)].map((technologyId) => ({

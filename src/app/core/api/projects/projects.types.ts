@@ -228,7 +228,7 @@ export interface ProjectMutationPayload {
   environment: ProjectEnvironment;
   featured: boolean;
   highlight: boolean;
-  startDate?: string;
+  startDate: string;
   endDate?: string;
   sortOrder: number;
   technologyRelations: ProjectTechnologyRelationPayload[];

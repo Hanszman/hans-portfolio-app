@@ -35,7 +35,7 @@ const response = (
       environment: 'FRONTEND',
       featured: false,
       highlight: true,
-      startDate: null,
+      startDate: '2026-01-01',
       endDate: null,
       sortOrder: 1,
       technologyRelations: [],
@@ -116,6 +116,7 @@ const fillRequiredProjectFields = (component: ComponentApi): void => {
   component.updateField('context', 'PROFESSIONAL');
   component.updateField('status', 'COMPLETED');
   component.updateField('environment', 'FRONTEND');
+  component.updateField('startDate', '2026-01-01');
 };
 
 describe('ProjectsOperationsComponent', () => {
