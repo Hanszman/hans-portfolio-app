@@ -150,16 +150,12 @@ const mapProjectTechnologyTag = (
   const imageSrc = resolveSkillVisualUrl(technology.slug);
   const stackKey = resolveSkillStackKey(technology);
   const typeKey = resolveSkillTypeKey(technology);
+  const image = { src: imageSrc, alt: `${technology.name} icon` };
 
   return {
     slug: technology.slug,
     label: technology.name,
-    image: imageSrc
-      ? {
-          src: imageSrc,
-          alt: `${technology.name} icon`,
-        }
-      : null,
+    image,
     value: {
       slug: technology.slug,
       name: technology.name,
@@ -171,12 +167,7 @@ const mapProjectTechnologyTag = (
         SKILL_FREQUENCY_LABEL_KEYS,
         technology.frequency,
       ),
-      image: imageSrc
-        ? {
-            src: imageSrc,
-            alt: `${technology.name} icon`,
-          }
-        : null,
+      image,
     },
   };
 };
@@ -251,7 +242,6 @@ export const mapProjectToCaseCard = (
     filterContext: resolveProjectFilterContext(project.context),
     stackGroups: buildProjectStackGroups(project.technologies, locale),
     dateRangeLabel: formatProjectDateRange(project.startDate, project.endDate, locale),
-    isFeatured: project.featured,
     isHighlight: project.highlight,
     companyNames,
     technologies,
@@ -304,7 +294,6 @@ export const buildProjectsSummaryMetrics = (
   projects: readonly ProjectCollectionItemResponse[],
   locale: AppLocale,
 ): readonly ProjectSummaryMetricViewModel[] => {
-  const featuredCount = projects.filter((project) => project.featured).length;
   const inProgressCount = projects.filter((project) => project.status === 'IN_PROGRESS').length;
   const linkedAssetsCount = projects.reduce(
     (total, project) => total + project.links.length + project.imageAssets.length,
@@ -320,10 +309,6 @@ export const buildProjectsSummaryMetrics = (
     {
       label: translateStaticKey(locale, PROJECT_SUMMARY_LABEL_KEYS.total),
       value: String(projects.length),
-    },
-    {
-      label: translateStaticKey(locale, PROJECT_SUMMARY_LABEL_KEYS.featured),
-      value: String(featuredCount),
     },
     {
       label: translateStaticKey(locale, PROJECT_SUMMARY_LABEL_KEYS.inProgress),

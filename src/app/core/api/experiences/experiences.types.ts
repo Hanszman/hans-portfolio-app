@@ -41,7 +41,6 @@ export interface ExperienceProjectResponse {
   context: string;
   status: string;
   environment: string;
-  featured: boolean;
   highlight: boolean;
   startDate: string;
   endDate: string | null;

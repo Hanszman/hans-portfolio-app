@@ -280,7 +280,6 @@ export const EN_TRANSLATIONS = {
   'pages.projects.detail.gallery': 'Expanded gallery',
   'taxonomy.projects.filters.allEnvironments': 'All environments',
   'taxonomy.projects.filters.allStatuses': 'All statuses',
-  'taxonomy.projects.sort.featured': 'Featured first',
   'taxonomy.projects.sort.recent': 'Most recent start',
   'taxonomy.projects.sort.stack': 'Largest stack',
   'taxonomy.projects.sort.links': 'Most linked assets',
@@ -288,7 +287,6 @@ export const EN_TRANSLATIONS = {
   'taxonomy.projects.linkType.deploy': 'Deploy',
   'taxonomy.projects.linkType.sourceCode': 'Source code',
   'taxonomy.projects.summary.total': 'Published cases',
-  'taxonomy.projects.summary.featured': 'Featured',
   'taxonomy.projects.summary.linkedAssets': 'Linked assets',
   'taxonomy.projects.summary.richestStack': 'Richest stack',
   'taxonomy.projects.fallback.noAssets': 'No linked visual assets yet.',
@@ -310,7 +308,7 @@ export const EN_TRANSLATIONS = {
   'pages.dashboard.distribution.title':
     'Delivery context, environment spread and highlight density',
   'pages.dashboard.distribution.description':
-    'This block keeps the project catalog readable by separating featured volume from context and environment patterns.',
+    'This block keeps the project catalog readable by separating highlight volume from context and environment patterns.',
   'pages.dashboard.distribution.empty': 'No project distribution data was returned yet.',
   'pages.dashboard.distribution.environments': 'Environments',
   'pages.dashboard.technology.label': 'Technology usage',
@@ -351,26 +349,9 @@ export const EN_TRANSLATIONS = {
   'pages.admin.shell.eyebrow': '// ADMIN_WORKSPACE',
   'pages.admin.shell.title': 'Admin workspace',
   'pages.admin.shell.description':
-    'Protected operational shell for the final F8 flows, already aligned with hidden routing, authenticated session handling and the entity roadmap.',
+    'Hidden and authenticated administrator operational screen for managing entity flows.',
   'pages.admin.shell.actions.logout': 'Log out',
   'pages.admin.shell.session.kicker': 'Authenticated session',
-  'pages.admin.shell.registry.kicker': 'Entity registry',
-  'pages.admin.shell.registry.title': '{{count}} entity workflows',
-  'pages.admin.shell.registry.description':
-    'The administrative shell now centralizes every protected domain planned for the remaining CRUD substeps.',
-  'pages.admin.facts.route.title': 'Hidden route confirmed',
-  'pages.admin.facts.route.description':
-    'The public menu stays untouched while /admin remains available only through direct access and guard enforcement.',
-  'pages.admin.facts.validation.title': 'Session validation active',
-  'pages.admin.facts.validation.description':
-    'Every protected entry still depends on a valid bearer token plus server confirmation through GET /admin/session.',
-  'pages.admin.facts.storage.title': 'Scoped persistence',
-  'pages.admin.facts.storage.description':
-    'The current admin session continues isolated in sessionStorage to avoid unnecessary long-lived access.',
-  'pages.admin.entitiesSection.eyebrow': '// NEXT_SUBSTEPS',
-  'pages.admin.entitiesSection.title': 'Protected entities roadmap',
-  'pages.admin.entitiesSection.description':
-    'Each card below marks the official F8 order, its protected endpoint family and the create, update and delete actions that will be enabled in the following deliveries.',
   'pages.admin.operations.create': 'Create',
   'pages.admin.operations.read': 'Read',
   'pages.admin.operations.update': 'Update',
@@ -378,8 +359,6 @@ export const EN_TRANSLATIONS = {
   'pages.admin.operations.yes': 'Yes',
   'pages.admin.operations.no': 'No',
   'pages.admin.operations.emptyRelations': 'No related records are currently linked.',
-  'pages.admin.relationMode.owner': 'Owned relationships',
-  'pages.admin.relationMode.dedicated': 'Dedicated relationship entity',
   'pages.admin.entities.links.description':
     'External references such as repositories, live demos, documents and complementary navigation targets.',
   'pages.admin.links.sectionLabel': '// LINKS',
@@ -395,9 +374,7 @@ export const EN_TRANSLATIONS = {
   'pages.admin.links.fields.labelEn.label': 'English label',
   'pages.admin.links.fields.labelEn.placeholder': 'Enter the English label shown to visitors',
   'pages.admin.links.fields.descriptionPt.label': 'Portuguese description',
-  'pages.admin.links.fields.descriptionPt.placeholder': 'Describe this link in Portuguese',
   'pages.admin.links.fields.descriptionEn.label': 'English description',
-  'pages.admin.links.fields.descriptionEn.placeholder': 'Describe this link in English',
   'pages.admin.links.fields.type.empty': 'No link type is available right now.',
 
   'pages.admin.links.fields.type.options.NPM': 'npm',
@@ -973,9 +950,6 @@ export const EN_TRANSLATIONS = {
   'pages.admin.projects.fields.status.label': 'Status',
   'pages.admin.projects.fields.status.placeholder': 'Select the project status',
   'pages.admin.projects.fields.environment.placeholder': 'Select the project environment',
-  'pages.admin.projects.fields.featured.label': 'Featured status',
-  'pages.admin.projects.fields.featured.description':
-    'Keep this project featured in the public portfolio.',
   'pages.admin.projects.fields.highlight.description':
     'Keep this project emphasized in the public portfolio.',
   'pages.admin.projects.fields.technologies.description':
@@ -1021,7 +995,6 @@ export const EN_TRANSLATIONS = {
   'pages.admin.jobs.fields.summaryEs.placeholder': 'Enter the job summary in Spanish',
   'pages.admin.links.fields.labelEs.label': 'Spanish label',
   'pages.admin.links.fields.labelEs.placeholder': 'Enter the Spanish link label',
-  'pages.admin.links.fields.descriptionEs.placeholder': 'Enter the Spanish link description',
   'pages.admin.links.feedback.requiredLabelPt': 'The Portuguese label is required.',
   'pages.admin.links.feedback.requiredLabelEn': 'The English label is required.',
   'pages.admin.links.feedback.requiredLabelEs': 'The Spanish label is required.',

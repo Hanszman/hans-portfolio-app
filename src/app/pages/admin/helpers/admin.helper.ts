@@ -5,13 +5,7 @@ import { resolveLocalizedText } from '../../../core/translation/translation.serv
 import { AppLocale, AppTranslationKey } from '../../../core/translation/translation.types';
 import { formatAppDate } from '../../../core/date/app-date.helper';
 import { firstValueFrom, Observable } from 'rxjs';
-import {
-  AdminFormFieldConfig,
-  AdminEntityDefinition,
-  AdminEntityOperation,
-  AdminSessionFactDefinition,
-  asAdminTranslationKey,
-} from '../admin.types';
+import { AdminFormFieldConfig } from '../admin.types';
 
 export const formatAdminIdentity = (user: AdminAuthenticatedUser | null): string =>
   user ? `${user.name} · ${user.role}` : '';
@@ -325,67 +319,3 @@ export const createAdminImageAssetOptionViewModel = (
 
 export const resolveAdminImageAssetLabel = (imageAsset: ImageAssetRecord): string =>
   `${imageAsset.fileName} (${imageAsset.kind})`;
-
-export interface AdminEntityViewModel {
-  readonly id: AdminEntityDefinition['id'];
-  readonly endpoint: string;
-  readonly substep: string;
-  readonly relationModeLabel: string;
-  readonly title: string;
-  readonly description: string;
-  readonly operations: readonly AdminEntityOperationViewModel[];
-}
-
-export interface AdminEntityOperationViewModel {
-  readonly id: AdminEntityOperation;
-  readonly label: string;
-}
-
-export interface AdminSessionFactViewModel {
-  readonly id: AdminSessionFactDefinition['id'];
-  readonly title: string;
-  readonly description: string;
-}
-
-const ADMIN_ENTITY_TITLE_KEYS: Record<AdminEntityDefinition['id'], AppTranslationKey> = {
-  links: 'common.entities.links',
-  'image-assets': 'common.entities.imageAssets',
-  'spoken-languages': 'common.entities.languages',
-  customers: 'common.entities.customers',
-  jobs: 'common.entities.jobs',
-  formations: 'common.entities.formations',
-  technologies: 'common.entities.technologies',
-  'technology-contexts': 'common.entities.technologyContexts',
-  experiences: 'common.entities.experiences',
-  projects: 'common.entities.projects',
-};
-
-export const buildAdminEntityViewModels = (
-  entities: readonly AdminEntityDefinition[],
-  translate: (key: AppTranslationKey) => string,
-  operations: readonly AdminEntityOperation[],
-): readonly AdminEntityViewModel[] =>
-  entities.map((entity) => ({
-    id: entity.id,
-    endpoint: entity.endpoint,
-    substep: entity.substep,
-    relationModeLabel: translate(
-      asAdminTranslationKey(`pages.admin.relationMode.${entity.relationMode}`),
-    ),
-    title: translate(ADMIN_ENTITY_TITLE_KEYS[entity.id]),
-    description: translate(asAdminTranslationKey(`pages.admin.entities.${entity.id}.description`)),
-    operations: operations.map((operation) => ({
-      id: operation,
-      label: translate(asAdminTranslationKey(`pages.admin.operations.${operation}`)),
-    })),
-  }));
-
-export const buildAdminSessionFactViewModels = (
-  facts: readonly AdminSessionFactDefinition[],
-  translate: (key: AppTranslationKey) => string,
-): readonly AdminSessionFactViewModel[] =>
-  facts.map((fact) => ({
-    id: fact.id,
-    title: translate(asAdminTranslationKey(`pages.admin.facts.${fact.id}.title`)),
-    description: translate(asAdminTranslationKey(`pages.admin.facts.${fact.id}.description`)),
-  }));

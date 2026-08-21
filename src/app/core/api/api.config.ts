@@ -2,6 +2,7 @@ import { environment } from '../../../environments/environment';
 import {
   ABSOLUTE_URL_PATTERN,
   ASSETS_ROOT_PATH,
+  EXPERIENCES_IMAGE_ASSETS_ROOT_PATH,
   IMAGE_ASSETS_ROOT_PATH,
   SKILLS_IMAGE_ASSETS_ROOT_PATH,
 } from './api.types';
@@ -9,6 +10,16 @@ import {
 const normalizeBaseUrl = (baseUrl: string): string => baseUrl.replace(/\/+$/, '');
 const normalizeRelativePathSegment = (pathSegment: string): string =>
   pathSegment.replace(/^\/+|\/+$/g, '');
+
+const DIACRITICS_PATTERN = new RegExp('[\\u0300-\\u036f]', 'g');
+
+export const normalizeAssetSlug = (value: string): string =>
+  value
+    .normalize('NFD')
+    .replace(DIACRITICS_PATTERN, '')
+    .toLowerCase()
+    .replace(/&/g, 'e')
+    .replace(/[^a-z0-9]+/g, '');
 
 export const appConfig = {
   baseUrl: normalizeBaseUrl(environment.appBaseUrl),
@@ -32,6 +43,9 @@ export const buildRelativeImageAssetPath = (assetPath: string): string =>
 
 export const buildRelativeSkillImageAssetPath = (fileName: string): string =>
   buildRelativeAssetPath(SKILLS_IMAGE_ASSETS_ROOT_PATH, fileName);
+
+export const buildRelativeExperienceImageAssetPath = (fileName: string): string =>
+  buildRelativeAssetPath(EXPERIENCES_IMAGE_ASSETS_ROOT_PATH, fileName);
 
 export const buildApiUrl = (path: string): string => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;

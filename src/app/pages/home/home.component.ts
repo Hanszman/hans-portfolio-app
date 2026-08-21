@@ -117,27 +117,19 @@ export class HomeComponent {
       const typeKey = resolveSkillTypeKey(technology);
       const locale = this.translationService.locale();
 
+      const image = { src: imageSrc, alt: `${technology.name} icon` };
+
       return {
         slug: technology.slug,
         label: technology.name,
-        image: imageSrc
-          ? {
-              src: imageSrc,
-              alt: `${technology.name} icon`,
-            }
-          : null,
+        image,
         value: {
           slug: technology.slug,
           name: technology.name,
           type: translateStaticKey(locale, SKILL_TYPE_LABEL_KEYS[typeKey]),
           stack: translateStaticKey(locale, SKILL_STACK_LABEL_KEYS[stackKey]),
           projectCount: technology.usageCount,
-          image: imageSrc
-            ? {
-                src: imageSrc,
-                alt: `${technology.name} icon`,
-              }
-            : null,
+          image,
         },
       };
     }),

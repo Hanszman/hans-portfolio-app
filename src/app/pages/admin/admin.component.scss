@@ -14,8 +14,7 @@
   box-shadow: 0 20px 60px color-mix(in srgb, var(--base-default-color) 10%, transparent);
 }
 
-.admin-page-overview,
-.admin-page-protection {
+.admin-page-overview {
   @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
 }
 
@@ -35,15 +34,13 @@
 }
 
 .admin-page-card p,
-.admin-page-block-header p,
 .admin-page-entity-copy p,
 .admin-page-endpoint {
   @apply text-base leading-7;
   color: var(--base-strong-color);
 }
 
-.admin-page-card h2,
-.admin-page-block-header h2 {
+.admin-page-card h2 {
   @apply mb-2 text-lg font-semibold;
 }
 
@@ -54,12 +51,6 @@
 
 .admin-page-entities {
   @apply flex min-w-0 flex-col gap-4;
-}
-
-.admin-page-block-header {
-  @apply rounded-3xl border p-5;
-  border-color: color-mix(in srgb, var(--base-default-color) 18%, transparent);
-  background: color-mix(in srgb, var(--background-color) 90%, var(--white));
 }
 
 .admin-page-entity-grid {

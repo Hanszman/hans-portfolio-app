@@ -30,7 +30,6 @@ export interface DashboardStackDistributionResponse {
 export interface DashboardProjectContextsResponse {
   generatedAtUtc: string;
   totalProjects: number;
-  featuredProjects: number;
   highlightedProjects: number;
   contexts: DashboardDistributionEntryResponse[];
   environments: DashboardDistributionEntryResponse[];
@@ -90,7 +89,6 @@ export interface DashboardHighlightItemResponse {
   subtitleEs?: string;
   icon?: string | null;
   imagePath?: string | null;
-  featured?: boolean;
 }
 
 export interface DashboardHighlightsResponse {

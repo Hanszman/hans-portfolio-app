@@ -17,9 +17,6 @@ const createLink = (overrides: Partial<LinkRecord> = {}): LinkRecord => ({
   labelPt: 'Repositorio',
   labelEn: 'Repository',
   labelEs: 'Repository',
-  descriptionPt: 'Codigo fonte',
-  descriptionEn: 'Source code',
-  descriptionEs: 'Source code',
   type: 'GITHUB',
   sortOrder: 1,
   projectIds: ['project-1'],
@@ -42,7 +39,6 @@ const createProject = (
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
-  featured: true,
   highlight: true,
   startDate: '2024-01-01',
   endDate: null,
@@ -173,9 +169,6 @@ describe('LinksOperationsComponent', () => {
       updateLabelPt(value: string): void;
       updateLabelEn(value: string): void;
       updateLabelEs(value: string): void;
-      updateDescriptionPt(value: string): void;
-      updateDescriptionEn(value: string): void;
-      updateDescriptionEs(value: string): void;
       updateType(value: string): void;
       updateSortOrder(value: string): void;
       toggleProject(projectId: string): void;
@@ -187,9 +180,6 @@ describe('LinksOperationsComponent', () => {
     component.updateLabelPt('Demo');
     component.updateLabelEn('Demo');
     component.updateLabelEs('Demo');
-    component.updateDescriptionPt('Descricao');
-    component.updateDescriptionEn('Description');
-    component.updateDescriptionEs('Description');
     component.updateType('deploy');
     component.updateSortOrder('3');
     component.toggleProject('project-1');
@@ -200,9 +190,6 @@ describe('LinksOperationsComponent', () => {
       labelPt: 'Demo',
       labelEn: 'Demo',
       labelEs: 'Demo',
-      descriptionPt: 'Descricao',
-      descriptionEn: 'Description',
-      descriptionEs: 'Description',
       type: 'DEPLOY',
       sortOrder: 3,
       projectIds: ['project-1'],
@@ -217,9 +204,6 @@ describe('LinksOperationsComponent', () => {
       labelPt: 'Repositorio atualizado',
       labelEn: 'Repository',
       labelEs: 'Repository',
-      descriptionPt: 'Codigo fonte',
-      descriptionEn: 'Source code',
-      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
       projectIds: ['project-1'],

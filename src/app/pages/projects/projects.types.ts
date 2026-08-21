@@ -40,7 +40,6 @@ export interface ProjectCaseViewModel {
   filterContext: ProjectContextFilterValue;
   stackGroups: readonly ProjectStackGroupViewModel[];
   dateRangeLabel: string;
-  isFeatured: boolean;
   isHighlight: boolean;
   companyNames: readonly string[];
   technologies: readonly ProjectTechnologyTagViewModel[];
@@ -133,7 +132,6 @@ export const PROJECT_ENVIRONMENT_LABEL_KEYS: Record<string, AppTranslationKey> =
 };
 
 export const PROJECT_SORT_LABEL_KEYS = {
-  FEATURED: 'taxonomy.projects.sort.featured',
   RECENT: 'taxonomy.projects.sort.recent',
   STACK: 'taxonomy.projects.sort.stack',
   LINKS: 'taxonomy.projects.sort.links',
@@ -149,7 +147,6 @@ export const PROJECT_LINK_TYPE_LABEL_KEYS: Record<string, AppTranslationKey> = {
 
 export const PROJECT_SUMMARY_LABEL_KEYS = {
   total: 'taxonomy.projects.summary.total',
-  featured: 'taxonomy.projects.summary.featured',
   inProgress: 'taxonomy.experiences.projectStatus.inProgress',
   linkedAssets: 'taxonomy.projects.summary.linkedAssets',
   richestStack: 'taxonomy.projects.summary.richestStack',

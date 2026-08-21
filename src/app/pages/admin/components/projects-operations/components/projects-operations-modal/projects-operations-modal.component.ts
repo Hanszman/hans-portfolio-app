@@ -70,7 +70,7 @@ export class ProjectsOperationsModalComponent {
   readonly closed = output<void>();
   readonly searchChanged = output<string>();
   readonly fieldChanged = output<{ field: keyof ProjectsOperationsFormValue; value: string }>();
-  readonly booleanChanged = output<{ field: 'featured' | 'highlight'; value: boolean }>();
+  readonly booleanChanged = output<{ field: 'highlight'; value: boolean }>();
   readonly relationToggled = output<{
     field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds';
     id: string;
@@ -200,10 +200,6 @@ export class ProjectsOperationsModalComponent {
             ),
           },
           {
-            labelKey: 'pages.admin.projects.fields.featured.label',
-            value: booleanLabel(project.featured),
-          },
-          {
             labelKey: 'common.fields.highlightStatus',
             value: booleanLabel(project.highlight),
           },
@@ -282,7 +278,7 @@ export class ProjectsOperationsModalComponent {
     });
   }
 
-  protected toggle(field: 'featured' | 'highlight', event: Event): void {
+  protected toggle(field: 'highlight', event: Event): void {
     this.booleanChanged.emit({
       field,
       value: Boolean(

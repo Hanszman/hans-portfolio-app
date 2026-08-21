@@ -283,12 +283,11 @@ describe('projects helper', () => {
     expect(card.galleryItems).toHaveSize(1);
   });
 
-  it('should summarize featured density, in-progress work, linked assets and richest stack', () => {
+  it('should summarize in-progress work, linked assets and richest stack', () => {
     const metrics = buildProjectsSummaryMetrics(createProjectsCollectionResponse().data, 'pt-br');
 
     expect(metrics).toEqual([
       { label: 'Cases publicados', value: '4' },
-      { label: 'Em destaque', value: '2' },
       { label: 'Em andamento', value: '2' },
       { label: 'Assets vinculados', value: '5' },
       {
@@ -302,7 +301,7 @@ describe('projects helper', () => {
   it('should keep the richest-stack support text empty when no cases are available', () => {
     const metrics = buildProjectsSummaryMetrics([], 'en-us');
 
-    expect(metrics[4]).toEqual({
+    expect(metrics[3]).toEqual({
       label: 'Richest stack',
       value: '',
       supportingText: '',

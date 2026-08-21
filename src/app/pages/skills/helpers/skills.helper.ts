@@ -1,3 +1,4 @@
+import { EMPTY, Observable, expand, reduce } from 'rxjs';
 import { buildAssetUrl, buildRelativeSkillImageAssetPath } from '../../../core/api/api.config';
 import {
   TechnologiesCollectionResponse,
@@ -56,13 +57,32 @@ const resolveCatalogLabel = (
   return translationKey ? translateStaticKey(locale, translationKey) : normalizeLabel(value);
 };
 
-export const resolveSkillVisualUrl = (slug: string, fallbackPath?: string): string =>
-  buildAssetUrl(
-    fallbackPath ??
-      (SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()]
-        ? buildRelativeSkillImageAssetPath(SKILL_VISUAL_FILE_NAMES[slug.toLowerCase()])
-        : ''),
+export const fetchAllTechnologyPages = (
+  loadPage: (page: number, pageSize: number) => Observable<TechnologiesCollectionResponse>,
+  pageSize = 100,
+): Observable<readonly TechnologyCollectionItemResponse[]> =>
+  loadPage(1, pageSize).pipe(
+    expand((response) =>
+      response.pagination.page < response.pagination.totalPages
+        ? loadPage(response.pagination.page + 1, pageSize)
+        : EMPTY,
+    ),
+    reduce<TechnologiesCollectionResponse, TechnologyCollectionItemResponse[]>(
+      (accumulated, response) => [...accumulated, ...response.data],
+      [],
+    ),
   );
+
+export const resolveSkillVisualUrl = (slug: string, fallbackPath?: string): string => {
+  const normalizedSlug = slug.toLowerCase();
+
+  return buildAssetUrl(
+    fallbackPath ??
+      buildRelativeSkillImageAssetPath(
+        SKILL_VISUAL_FILE_NAMES[normalizedSlug] ?? `${normalizedSlug.replace(/-/g, '')}.png`,
+      ),
+  );
+};
 
 const FRONT_END_TECHNOLOGY_SLUGS = new Set([
   'angular',

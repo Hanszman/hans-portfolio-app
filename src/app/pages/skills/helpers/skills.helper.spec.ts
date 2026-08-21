@@ -3,12 +3,14 @@ import { createTechnologiesCollectionResponse } from '../../../core/api/mocks/te
 import { translateStaticKey } from '../../../core/translation/translation.service';
 import { FormationRecord } from '../../../core/api/formations/formations.types';
 import { SpokenLanguageRecord } from '../../../core/api/spoken-languages/spoken-languages.types';
+import { of } from 'rxjs';
 import {
   buildEducationSkillCards,
   buildLanguageSkillCards,
   buildSkillsGroups,
   buildSkillsSummaryMetrics,
   extractSkillFilterValues,
+  fetchAllTechnologyPages,
   mapTechnologyToSkillCard,
   mapFormationToEducationModal,
   resolveSkillStackKey,
@@ -109,7 +111,7 @@ describe('skills helper', () => {
     expect(card.badgeLabel).toBe('');
     expect(card.modal.level).toBeUndefined();
     expect(card.iconName).toBe('LuSparkles');
-    expect(card.visualUrl).toBe('');
+    expect(card.visualUrl).toContain('/assets/img/skills/customtool.png');
     expect(card.contexts).toEqual([]);
   });
 
@@ -893,7 +895,7 @@ describe('skills helper', () => {
     ).toEqual(['OTHERS']);
   });
 
-  it('should resolve skill visual URLs from fallback assets or return an empty string', () => {
+  it('should resolve skill visual URLs from mapped assets or a slug-derived fallback', () => {
     expect(resolveSkillVisualUrl('angular')).toContain('/assets/img/skills/angular.png');
     expect(resolveSkillVisualUrl('react-native')).toContain('/assets/img/skills/reactnative.png');
     expect(resolveSkillVisualUrl('microsoft-sql-server')).toContain(
@@ -905,7 +907,9 @@ describe('skills helper', () => {
     expect(resolveSkillVisualUrl('external', 'https://cdn.example.com/external.png')).toBe(
       'https://cdn.example.com/external.png',
     );
-    expect(resolveSkillVisualUrl('unknown-skill')).toBe('');
+    expect(resolveSkillVisualUrl('unknown-skill')).toContain(
+      '/assets/img/skills/unknownskill.png',
+    );
   });
 
   it('should fall back to the English group description when a locale key is missing', () => {
@@ -914,5 +918,54 @@ describe('skills helper', () => {
         count: '3',
       }),
     ).toBe('3 technologies with real duration coverage by context.');
+  });
+
+  it('should fetch every technology page and merge them into a single list', (done) => {
+    const pageOne = createTechnologiesCollectionResponse({
+      data: [{ ...createTechnologiesCollectionResponse().data[0], slug: 'page-one' }],
+      pagination: {
+        page: 1,
+        pageSize: 1,
+        totalItems: 2,
+        totalPages: 2,
+        hasNextPage: true,
+        hasPreviousPage: false,
+      },
+    });
+    const pageTwo = createTechnologiesCollectionResponse({
+      data: [{ ...createTechnologiesCollectionResponse().data[0], slug: 'page-two' }],
+      pagination: {
+        page: 2,
+        pageSize: 1,
+        totalItems: 2,
+        totalPages: 2,
+        hasNextPage: false,
+        hasPreviousPage: true,
+      },
+    });
+    const loadPage = jasmine
+      .createSpy('loadPage')
+      .and.callFake((page: number) => of(page === 1 ? pageOne : pageTwo));
+
+    fetchAllTechnologyPages(loadPage, 1).subscribe((technologies) => {
+      expect(technologies.map((technology) => technology.slug)).toEqual([
+        'page-one',
+        'page-two',
+      ]);
+      expect(loadPage).toHaveBeenCalledWith(1, 1);
+      expect(loadPage).toHaveBeenCalledWith(2, 1);
+      done();
+    });
+  });
+
+  it('should stop after a single page when there is nothing left to fetch', (done) => {
+    const singlePage = createTechnologiesCollectionResponse();
+    const loadPage = jasmine.createSpy('loadPage').and.returnValue(of(singlePage));
+
+    fetchAllTechnologyPages(loadPage).subscribe((technologies) => {
+      expect(technologies).toEqual(singlePage.data);
+      expect(loadPage).toHaveBeenCalledTimes(1);
+      done();
+    });
   });
 });

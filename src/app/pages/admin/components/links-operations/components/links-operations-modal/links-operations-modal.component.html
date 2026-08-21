@@ -70,60 +70,6 @@
           (input)="emitLabelEsChange($any($event).target?.value ?? '')"
         ></hans-input>
 
-        <hans-textarea
-          [label]="resolveFieldLabel('descriptionPt')"
-          [formattingToolbar]="true"
-          [rows]="6"
-          [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
-          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
-          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
-          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
-          [required]="fields.descriptionPt.required"
-          textareaColor="base"
-          textareaSize="medium"
-          [value]="form().descriptionPt"
-          [placeholder]="fields.descriptionPt.placeholderKey! | translate"
-          [attr.aria-label]="fields.descriptionPt.labelKey | translate"
-          (valuechange)="emitDescriptionPtChange($any($event).detail ?? '')"
-        ></hans-textarea>
-
-        <hans-textarea
-          [label]="resolveFieldLabel('descriptionEn')"
-          [formattingToolbar]="true"
-          [rows]="6"
-          [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
-          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
-          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
-          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
-          [required]="fields.descriptionEn.required"
-          textareaColor="base"
-          textareaSize="medium"
-          [value]="form().descriptionEn"
-          [placeholder]="fields.descriptionEn.placeholderKey! | translate"
-          [attr.aria-label]="fields.descriptionEn.labelKey | translate"
-          (valuechange)="emitDescriptionEnChange($any($event).detail ?? '')"
-        ></hans-textarea>
-
-        <hans-textarea
-          [label]="resolveFieldLabel('descriptionEs')"
-          [formattingToolbar]="true"
-          [rows]="6"
-          [formattingToolbarAriaLabel]="'common.formatting.toolbar' | translate"
-          [boldButtonAriaLabel]="'common.formatting.bold' | translate"
-          [italicButtonAriaLabel]="'common.formatting.italic' | translate"
-          [underlineButtonAriaLabel]="'common.formatting.underline' | translate"
-          [listButtonAriaLabel]="'common.formatting.unorderedList' | translate"
-          [required]="fields.descriptionEs.required"
-          textareaColor="base"
-          textareaSize="medium"
-          [value]="form().descriptionEs"
-          [placeholder]="fields.descriptionEs.placeholderKey! | translate"
-          [attr.aria-label]="fields.descriptionEs.labelKey | translate"
-          (valuechange)="emitDescriptionEsChange($any($event).detail ?? '')"
-        ></hans-textarea>
-
         <hans-select-option
           [label]="resolveFieldLabel('type')"
           [required]="fields.type.required"

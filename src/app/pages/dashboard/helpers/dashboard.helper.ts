@@ -334,7 +334,6 @@ export const buildDashboardProjectDistribution = (
   projectContexts: DashboardProjectContextsResponse,
   locale: AppLocale,
 ): DashboardProjectDistributionViewModel => ({
-  featuredProjects: projectContexts.featuredProjects,
   highlightedProjects: projectContexts.highlightedProjects,
   totalProjects: projectContexts.totalProjects,
   contexts: mapDistributionEntries(
@@ -424,7 +423,6 @@ const mapDashboardHighlightCard = (
     },
     highlight.subtitleEn ?? '',
   ),
-  featured: highlight.featured === true,
   iconName: resolveDashboardHighlightIconName(highlight.entity),
   visualUrl: buildAssetUrl(highlight.imagePath ?? highlight.icon),
 });

@@ -18,13 +18,15 @@
         <section class="project-modal-skeleton-column">
           <app-modal-skeleton width="35%" height="2rem" ariaLabel="Loading project metadata" />
           <app-modal-skeleton height="5rem" ariaLabel="Loading project description" />
-          <app-modal-skeleton height="8rem" ariaLabel="Loading project clients" />
-          <app-modal-skeleton height="12rem" ariaLabel="Loading project technologies" />
         </section>
         <aside class="project-modal-skeleton-column">
           <app-modal-skeleton height="19rem" ariaLabel="Loading project gallery" />
           <app-modal-skeleton height="8rem" ariaLabel="Loading project links" />
         </aside>
+        <section class="project-modal-skeleton-column project-modal-section-full">
+          <app-modal-skeleton height="8rem" ariaLabel="Loading project clients" />
+          <app-modal-skeleton height="12rem" ariaLabel="Loading project technologies" />
+        </section>
       </div>
     } @else {
       <div
@@ -58,38 +60,6 @@
             class="project-modal-description"
             [text]="currentProject.description || currentProject.summary"
           />
-
-          <section class="project-modal-section">
-            <h3>{{ 'common.sections.clients' | translate }}</h3>
-            <div class="project-modal-chip-list">
-              @for (company of currentProject.companyNames; track company) {
-                <app-tag-button [tag]="companyTag(company)" [interactive]="false" />
-              } @empty {
-                <span class="project-modal-inline-text">
-                  {{ 'common.empty.linkedCompanies' | translate }}
-                </span>
-              }
-            </div>
-          </section>
-
-          <section class="project-modal-section">
-            <h3>{{ 'common.sections.techStack' | translate }}</h3>
-            <div class="project-modal-stack">
-              @for (group of currentProject.stackGroups; track group.labelKey) {
-                <div class="project-modal-stack-group">
-                  <span>{{ group.labelKey | translate }}</span>
-                  <div class="project-modal-tags">
-                    @for (technology of group.technologies; track technology.slug) {
-                      <app-tag-button
-                        [tag]="technology"
-                        (selected)="requestTechnologyDetails($event)"
-                      />
-                    }
-                  </div>
-                </div>
-              }
-            </div>
-          </section>
 
           @if (currentProject.galleryItems.length === 0 && currentProject.links.length > 0) {
             <section class="project-modal-section">
@@ -136,6 +106,38 @@
             }
           </aside>
         }
+
+        <section class="project-modal-section project-modal-section-full">
+          <h3>{{ 'common.sections.clients' | translate }}</h3>
+          <div class="project-modal-chip-list">
+            @for (company of currentProject.companyNames; track company) {
+              <app-tag-button [tag]="companyTag(company)" [interactive]="false" />
+            } @empty {
+              <span class="project-modal-inline-text">
+                {{ 'common.empty.linkedCompanies' | translate }}
+              </span>
+            }
+          </div>
+        </section>
+
+        <section class="project-modal-section project-modal-section-full">
+          <h3>{{ 'common.sections.techStack' | translate }}</h3>
+          <div class="project-modal-stack">
+            @for (group of currentProject.stackGroups; track group.labelKey) {
+              <div class="project-modal-stack-group">
+                <span>{{ group.labelKey | translate }}</span>
+                <div class="project-modal-tags">
+                  @for (technology of group.technologies; track technology.slug) {
+                    <app-tag-button
+                      [tag]="technology"
+                      (selected)="requestTechnologyDetails($event)"
+                    />
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </section>
       </div>
     }
   }

@@ -33,7 +33,6 @@ describe('ProjectCaseCardComponent', () => {
       },
     ],
     dateRangeLabel: 'Jan 2024 - Atual',
-    isFeatured: true,
     isHighlight: false,
     companyNames: ['Company'],
     technologies: [

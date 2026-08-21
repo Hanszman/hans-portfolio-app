@@ -55,7 +55,6 @@ const createProject = (
   context: 'personal',
   status: 'in-progress',
   environment: 'fullstack',
-  featured: true,
   highlight: true,
   startDate: '2024-01-01',
   endDate: null,

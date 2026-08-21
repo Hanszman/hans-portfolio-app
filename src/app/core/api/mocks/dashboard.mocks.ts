@@ -51,7 +51,6 @@ export const createDashboardOverviewResponse = (
   projectContexts: {
     generatedAtUtc: '2026-04-18T12:00:00.000Z',
     totalProjects: 12,
-    featuredProjects: 3,
     highlightedProjects: 5,
     contexts: [
       {
@@ -174,7 +173,6 @@ export const createDashboardOverviewResponse = (
         subtitleEn: 'Full stack project connected to real APIs.',
         icon: '/assets/img/logo/vh_logo_blue.png',
         imagePath: '/assets/img/projects/github-consumer.png',
-        featured: true,
       },
       {
         entity: 'technology',
@@ -184,7 +182,6 @@ export const createDashboardOverviewResponse = (
         subtitlePt: 'Baseando componentes, contratos e integrações.',
         subtitleEn: 'Powering components, contracts and integrations.',
         icon: '/assets/img/skills/typescript.png',
-        featured: false,
       },
     ],
   },

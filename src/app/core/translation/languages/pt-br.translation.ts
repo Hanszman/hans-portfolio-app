@@ -287,7 +287,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.projects.detail.gallery': 'Galeria ampliada',
   'taxonomy.projects.filters.allEnvironments': 'Todos os ambientes',
   'taxonomy.projects.filters.allStatuses': 'Todos os status',
-  'taxonomy.projects.sort.featured': 'Em destaque primeiro',
   'taxonomy.projects.sort.recent': 'Início mais recente',
   'taxonomy.projects.sort.stack': 'Maior stack',
   'taxonomy.projects.sort.links': 'Mais assets vinculados',
@@ -295,7 +294,6 @@ export const PT_BR_TRANSLATIONS = {
   'taxonomy.projects.linkType.deploy': 'Deploy',
   'taxonomy.projects.linkType.sourceCode': 'Código-fonte',
   'taxonomy.projects.summary.total': 'Cases publicados',
-  'taxonomy.projects.summary.featured': 'Em destaque',
   'taxonomy.projects.summary.linkedAssets': 'Assets vinculados',
   'taxonomy.projects.summary.richestStack': 'Stack mais ampla',
   'taxonomy.projects.fallback.noAssets': 'Nenhum asset visual vinculado ainda.',
@@ -360,26 +358,9 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.shell.eyebrow': '// ADMIN_WORKSPACE',
   'pages.admin.shell.title': 'Workspace administrativo',
   'pages.admin.shell.description':
-    'Shell operacional protegida para os fluxos finais da F8, já alinhada com rota oculta, sessão autenticada e roadmap das entidades.',
+    'Tela operacional oculta e autenticada de administrador para gerenciamento dos fluxos das entidades.',
   'pages.admin.shell.actions.logout': 'Sair',
   'pages.admin.shell.session.kicker': 'Sessão autenticada',
-  'pages.admin.shell.registry.kicker': 'Registro de entidades',
-  'pages.admin.shell.registry.title': '{{count}} fluxos de entidade',
-  'pages.admin.shell.registry.description':
-    'A shell administrativa agora centraliza todos os domínios protegidos planejados para as próximas subetapas de CRUD.',
-  'pages.admin.facts.route.title': 'Rota oculta confirmada',
-  'pages.admin.facts.route.description':
-    'O menu público continua intacto enquanto /admin permanece acessível apenas por URL direta e pelo guard.',
-  'pages.admin.facts.validation.title': 'Validação de sessão ativa',
-  'pages.admin.facts.validation.description':
-    'Toda entrada protegida continua dependente de bearer token válido e confirmação do servidor via GET /admin/session.',
-  'pages.admin.facts.storage.title': 'Persistência com escopo',
-  'pages.admin.facts.storage.description':
-    'A sessão administrativa atual continua isolada em sessionStorage para evitar acesso prolongado sem necessidade.',
-  'pages.admin.entitiesSection.eyebrow': '// PROXIMAS_SUBETAPAS',
-  'pages.admin.entitiesSection.title': 'Roadmap das entidades protegidas',
-  'pages.admin.entitiesSection.description':
-    'Cada card abaixo marca a ordem oficial da F8, sua família de endpoint protegido e as ações de create, update e delete que serão habilitadas nas próximas entregas.',
   'pages.admin.operations.create': 'Criar',
   'pages.admin.operations.read': 'Ler',
   'pages.admin.operations.update': 'Editar',
@@ -387,8 +368,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.operations.yes': 'Sim',
   'pages.admin.operations.no': 'Não',
   'pages.admin.operations.emptyRelations': 'Nenhum registro relacionado está vinculado.',
-  'pages.admin.relationMode.owner': 'Relacionamentos da entidade dona',
-  'pages.admin.relationMode.dedicated': 'Entidade relacional dedicada',
   'pages.admin.entities.links.description':
     'Referências externas como repositórios, demos, documentos e destinos complementares de navegação.',
   'pages.admin.links.sectionLabel': '// LINKS',
@@ -406,9 +385,7 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.links.fields.labelEn.label': 'Rótulo em inglês',
   'pages.admin.links.fields.labelEn.placeholder': 'Digite o rótulo em inglês exibido ao visitante',
   'pages.admin.links.fields.descriptionPt.label': 'Descrição em português',
-  'pages.admin.links.fields.descriptionPt.placeholder': 'Descreva este link em português',
   'pages.admin.links.fields.descriptionEn.label': 'Descrição em inglês',
-  'pages.admin.links.fields.descriptionEn.placeholder': 'Descreva este link em inglês',
   'pages.admin.links.fields.type.empty': 'Nenhum tipo de link esta disponível no momento.',
 
   'pages.admin.links.fields.type.options.NPM': 'npm',
@@ -981,9 +958,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.projects.fields.status.label': 'Status',
   'pages.admin.projects.fields.status.placeholder': 'Selecione o status',
   'pages.admin.projects.fields.environment.placeholder': 'Selecione o ambiente',
-  'pages.admin.projects.fields.featured.label': 'Destaque principal',
-  'pages.admin.projects.fields.featured.description':
-    'Mantenha o projeto em destaque no portfólio.',
   'pages.admin.projects.fields.highlight.description':
     'Mantenha o projeto enfatizado no portfólio.',
   'pages.admin.projects.feedback.requiredSummaryPt': 'O resumo em português é obrigatório.',
@@ -1037,7 +1011,6 @@ export const PT_BR_TRANSLATIONS = {
   'pages.admin.jobs.fields.summaryEs.placeholder': 'Digite o resumo do cargo em espanhol',
   'pages.admin.links.fields.labelEs.label': 'Rótulo em espanhol',
   'pages.admin.links.fields.labelEs.placeholder': 'Digite o rótulo do link em espanhol',
-  'pages.admin.links.fields.descriptionEs.placeholder': 'Digite a descrição do link em espanhol',
   'pages.admin.links.feedback.requiredLabelPt': 'O rótulo em português é obrigatório.',
   'pages.admin.links.feedback.requiredLabelEn': 'O rótulo em inglês é obrigatório.',
   'pages.admin.links.feedback.requiredLabelEs': 'O rótulo em espanhol é obrigatório.',

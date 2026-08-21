@@ -3,6 +3,10 @@ import {
   ExperienceTechnologyResponse,
 } from '../../../core/api/experiences/experiences.types';
 import {
+  buildRelativeExperienceImageAssetPath,
+  normalizeAssetSlug,
+} from '../../../core/api/api.config';
+import {
   resolveLocalizedText,
   translateStaticKey,
 } from '../../../core/translation/translation.service';
@@ -25,17 +29,6 @@ import {
   ExperienceTimelineItemViewModel,
 } from '../experiences.types';
 
-const normalizeAssetName = (value: string): string =>
-  value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/&/g, 'e')
-    .replace(/[^a-z0-9]+/g, '');
-
-const buildExperienceAssetPath = (fileName: string): string =>
-  `/assets/img/experiences/${fileName}`;
-
 const buildSkillAssetPath = (slug: string): string =>
   `/assets/img/skills/${slug.replace(/-js$/, '').replace(/-/g, '')}.png`;
 
@@ -48,7 +41,7 @@ const resolveCompanyImage = (
   return {
     src:
       imageAsset?.filePath ??
-      buildExperienceAssetPath(`${normalizeAssetName(experience.companyName)}.jpg`),
+      buildRelativeExperienceImageAssetPath(`${normalizeAssetSlug(experience.companyName)}.jpg`),
     alt: resolveLocalizedText(
       locale,
       {
@@ -77,7 +70,7 @@ const mapCustomer = (
     customer.summaryEn ?? '',
   ),
   image: {
-    src: buildExperienceAssetPath(
+    src: buildRelativeExperienceImageAssetPath(
       EXPERIENCE_CUSTOMER_IMAGE_FILE_BY_SLUG[customer.slug] ?? `${customer.slug}.jpg`,
     ),
     alt: `${customer.name} logo`,

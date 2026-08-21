@@ -39,7 +39,6 @@ export interface ProjectsOperationsFormValue {
   context: ProjectContext | '';
   status: ProjectStatus | '';
   environment: ProjectEnvironment | '';
-  featured: boolean;
   highlight: boolean;
   startDate: string;
   endDate: string;
@@ -237,7 +236,6 @@ export const createEmptyProjectsOperationsFormValue = (): ProjectsOperationsForm
   context: '',
   status: '',
   environment: '',
-  featured: false,
   highlight: true,
   startDate: '',
   endDate: '',
@@ -343,7 +341,6 @@ export const buildProjectsFormValue = (
         context: record.context,
         status: record.status,
         environment: record.environment,
-        featured: record.featured ?? false,
         highlight: record.highlight ?? false,
         startDate: normalizeAdminDateValueForPicker(record.startDate),
         endDate: normalizeAdminDateValueForPicker(record.endDate),
@@ -420,7 +417,6 @@ export const buildProjectsMutationPayload = (
       context: form.context,
       status: form.status,
       environment: form.environment,
-      featured: form.featured,
       highlight: form.highlight,
       startDate: normalizeAdminDateValueForMutation(form.startDate),
       endDate: normalizeAdminDateValueForMutation(form.endDate) || undefined,

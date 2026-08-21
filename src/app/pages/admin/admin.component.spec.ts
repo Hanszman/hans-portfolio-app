@@ -221,9 +221,6 @@ describe('AdminComponent', () => {
                     labelPt: 'Repositorio',
                     labelEn: 'Repository',
                     labelEs: 'Repository',
-                    descriptionPt: 'Codigo fonte',
-                    descriptionEn: 'Source code',
-                    descriptionEs: 'Source code',
                     type: 'GITHUB',
                     sortOrder: 1,
                     projectIds: ['project-1'],
@@ -304,7 +301,6 @@ describe('AdminComponent', () => {
                     context: 'personal',
                     status: 'in-progress',
                     environment: 'fullstack',
-                    featured: true,
                     highlight: true,
                     startDate: '2024-01-01',
                     endDate: null,
@@ -497,7 +493,6 @@ describe('AdminComponent', () => {
 
     expect(compiled.textContent).toContain('Admin workspace');
     expect(compiled.textContent).toContain('Victor Hanszman');
-    expect(compiled.textContent).toContain('10 entity workflows');
     expect(compiled.textContent).toContain('Technologies');
     expect(compiled.textContent).toContain('Links');
     expect(compiled.textContent).toContain('Image assets');

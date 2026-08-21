@@ -33,7 +33,6 @@ const response = (
       context: 'PROFESSIONAL',
       status: 'COMPLETED',
       environment: 'FRONTEND',
-      featured: false,
       highlight: true,
       startDate: '2026-01-01',
       endDate: null,

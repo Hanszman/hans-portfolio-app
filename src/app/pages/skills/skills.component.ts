@@ -36,6 +36,7 @@ import { SkillCardComponent } from './components/skill-card/skill-card.component
 import {
   buildEducationSkillCards,
   buildLanguageSkillCards,
+  fetchAllTechnologyPages,
   mapTechnologyToSkillCard,
   mapFormationToEducationModal,
 } from './helpers/skills.helper';
@@ -174,12 +175,13 @@ export class SkillsComponent {
   );
 
   constructor() {
-    this.technologiesService
-      .getTechnologies()
+    fetchAllTechnologyPages((page, pageSize) =>
+      this.technologiesService.getTechnologies(page, pageSize),
+    )
       .pipe(takeUntilDestroyed())
       .subscribe({
-        next: (response) => {
-          this.technologiesSignal.set(response.data);
+        next: (technologies) => {
+          this.technologiesSignal.set([...technologies]);
           this.hasError.set(false);
           this.isLoading.set(false);
         },

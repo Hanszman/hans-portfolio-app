@@ -43,9 +43,6 @@ export interface ProjectLinkResponse {
   labelPt: string | null;
   labelEn: string | null;
   labelEs?: string | null;
-  descriptionPt: string | null;
-  descriptionEn: string | null;
-  descriptionEs?: string | null;
   type: string;
   sortOrder: number;
   createdAt: string;
@@ -109,7 +106,6 @@ export interface ProjectCollectionItemResponse {
   context: string;
   status: string;
   environment: string;
-  featured: boolean;
   highlight: boolean;
   startDate: string;
   endDate: string | null;
@@ -190,7 +186,6 @@ export interface ProjectRecord {
   context: ProjectContext;
   status: ProjectStatus;
   environment: ProjectEnvironment;
-  featured?: boolean | null;
   highlight?: boolean | null;
   startDate?: string | null;
   endDate?: string | null;
@@ -226,7 +221,6 @@ export interface ProjectMutationPayload {
   context: ProjectContext;
   status: ProjectStatus;
   environment: ProjectEnvironment;
-  featured: boolean;
   highlight: boolean;
   startDate: string;
   endDate?: string;

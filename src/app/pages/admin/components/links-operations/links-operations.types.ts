@@ -35,9 +35,6 @@ export interface LinksOperationsFormValue {
   labelPt: string;
   labelEn: string;
   labelEs?: string;
-  descriptionPt: string;
-  descriptionEn: string;
-  descriptionEs?: string;
   type: string;
   sortOrder: string;
   projectIds: readonly string[];
@@ -63,21 +60,6 @@ export const LINKS_OPERATIONS_FIELDS = {
     labelKey: 'pages.admin.links.fields.labelEs.label',
     placeholderKey: 'pages.admin.links.fields.labelEs.placeholder',
     required: true,
-  },
-  descriptionPt: {
-    labelKey: 'pages.admin.links.fields.descriptionPt.label',
-    placeholderKey: 'pages.admin.links.fields.descriptionPt.placeholder',
-    required: false,
-  },
-  descriptionEn: {
-    labelKey: 'pages.admin.links.fields.descriptionEn.label',
-    placeholderKey: 'pages.admin.links.fields.descriptionEn.placeholder',
-    required: false,
-  },
-  descriptionEs: {
-    labelKey: 'common.fields.spanishDescription',
-    placeholderKey: 'pages.admin.links.fields.descriptionEs.placeholder',
-    required: false,
   },
   type: {
     labelKey: 'common.fields.type',
@@ -106,9 +88,6 @@ export interface LinkOperationsViewModel {
   labelPt: string;
   labelEn: string;
   labelEs?: string;
-  descriptionPt: string;
-  descriptionEn: string;
-  descriptionEs?: string;
   type: string;
   sortOrderLabel: string;
   projectLabels: readonly string[];
@@ -135,9 +114,6 @@ export const createEmptyLinksOperationsFormValue = (): LinksOperationsFormValue 
   labelPt: '',
   labelEn: '',
   labelEs: '',
-  descriptionPt: '',
-  descriptionEn: '',
-  descriptionEs: '',
   type: '',
   sortOrder: '0',
   projectIds: [],

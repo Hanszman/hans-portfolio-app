@@ -16,6 +16,10 @@
   @apply grid-cols-2 gap-6;
 }
 
+.project-modal-section-full {
+  @apply col-span-2;
+}
+
 .project-modal-meta,
 .project-modal-tags,
 .project-modal-chip-list {
@@ -94,5 +98,9 @@
 @media (max-width: 48rem) {
   .project-modal-with-gallery {
     @apply grid-cols-1;
+  }
+
+  .project-modal-section-full {
+    @apply col-span-1;
   }
 }

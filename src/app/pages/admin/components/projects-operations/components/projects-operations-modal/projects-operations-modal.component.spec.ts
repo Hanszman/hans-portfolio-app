@@ -19,7 +19,6 @@ const FORM: ProjectsOperationsFormValue = {
   context: 'PROFESSIONAL',
   status: 'COMPLETED',
   environment: 'FRONTEND',
-  featured: true,
   highlight: true,
   startDate: '2020-01-01',
   endDate: '',
@@ -45,7 +44,6 @@ const RECORD: ProjectRecord = {
   context: 'PROFESSIONAL',
   status: 'COMPLETED',
   environment: 'FRONTEND',
-  featured: true,
   highlight: true,
   startDate: '2020-01-01',
   endDate: null,
@@ -84,7 +82,7 @@ describe('ProjectsOperationsModalComponent', () => {
     fixture.componentRef.setInput('form', FORM);
     fixture.componentRef.setInput('projects', [
       RECORD,
-      { ...RECORD, id: 'project-with-default-order', sortOrder: undefined },
+      { ...RECORD, id: 'project-with-default-order', sortOrder: undefined, highlight: false },
     ]);
     fixture.componentRef.setInput('selectedProject', RECORD);
     fixture.detectChanges();
@@ -127,7 +125,7 @@ describe('ProjectsOperationsModalComponent', () => {
     const component = fixture.componentInstance as unknown as {
       emit(field: keyof ProjectsOperationsFormValue, event: Event): void;
       select(field: keyof ProjectsOperationsFormValue, event: Event): void;
-      toggle(field: 'featured' | 'highlight', event: Event): void;
+      toggle(field: 'highlight', event: Event): void;
       relation(
         field: 'technologyIds' | 'experienceIds' | 'linkIds' | 'imageAssetIds',
         id: string,
@@ -147,11 +145,9 @@ describe('ProjectsOperationsModalComponent', () => {
     component.emit('titlePt', new CustomEvent('valueChange', { detail: 'Titulo' }));
     component.select('context', new CustomEvent('valueChange', { detail: 'PERSONAL' }));
     component.select('status', { target: { value: 'PLANNED' } } as unknown as Event);
-    component.toggle('featured', new CustomEvent('change', { detail: false }));
     component.toggle('highlight', { target: { checked: true } } as unknown as Event);
     component.emit('slug', { target: {} } as unknown as Event);
     component.select('context', { target: {} } as unknown as Event);
-    component.toggle('featured', { target: {} } as unknown as Event);
     component.relation('technologyIds', 'technology-1');
     expect(component.selected('technologyIds', 'technology-1')).toBeTrue();
     expect(component.selected('technologyIds', 'missing')).toBeFalse();
@@ -159,7 +155,7 @@ describe('ProjectsOperationsModalComponent', () => {
     expect(fieldSpy).toHaveBeenCalledWith({ field: 'titlePt', value: 'Titulo' });
     expect(fieldSpy).toHaveBeenCalledWith({ field: 'context', value: 'PERSONAL' });
     expect(fieldSpy).toHaveBeenCalledWith({ field: 'status', value: 'PLANNED' });
-    expect(booleanSpy).toHaveBeenCalledTimes(3);
+    expect(booleanSpy).toHaveBeenCalledTimes(1);
     expect(relationSpy).toHaveBeenCalledWith({ field: 'technologyIds', id: 'technology-1' });
     fixture.componentRef.setInput('form', undefined);
     fixture.detectChanges();

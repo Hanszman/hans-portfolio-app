@@ -240,7 +240,7 @@ describe('HomeComponent', () => {
     expect(component.highlightedProjects()).toEqual([]);
   });
 
-  it('should keep technology modal image empty when a dashboard slug has no visual', () => {
+  it('should resolve a slug-derived technology modal image when a dashboard slug has no mapped visual', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     const component = fixture.componentInstance as unknown as HomeComponentTestHook;
     flushHomeRequests(
@@ -261,9 +261,9 @@ describe('HomeComponent', () => {
     );
 
     const [chip] = component.topTechnologyChips() as readonly {
-      value: { image: unknown };
+      value: { image: { src: string } | null };
     }[];
-    expect(chip.value.image).toBeNull();
+    expect(chip.value.image?.src).toContain('/assets/img/skills/unknownstack.png');
   });
 
   it('should open and close technology and highlighted project details without stale modals', () => {

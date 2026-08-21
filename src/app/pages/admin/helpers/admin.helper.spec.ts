@@ -1,8 +1,6 @@
 import { AppTranslationKey } from '../../../core/translation/translation.types';
 import { of } from 'rxjs';
 import {
-  buildAdminEntityViewModels,
-  buildAdminSessionFactViewModels,
   createAdminSelectOptionDefinitions,
   createAdminFieldLabelResolver,
   formatAdminDateForDisplay,
@@ -21,12 +19,6 @@ import {
   validateAdminDateRange,
   loadAllAdminCatalogItems,
 } from './admin.helper';
-import {
-  ADMIN_ENTITY_DEFINITIONS,
-  ADMIN_ENTITY_OPERATIONS,
-  ADMIN_SESSION_FACT_DEFINITIONS,
-  createAdminEntityEndpointLabel,
-} from '../admin.types';
 
 describe('formatAdminIdentity', () => {
   it('should format the current admin identity when a user exists', () => {
@@ -286,60 +278,4 @@ describe('formatAdminIdentity', () => {
     ]);
   });
 
-  it('should build translated admin entity view models', () => {
-    const translate = (key: AppTranslationKey) => key;
-
-    expect(
-      buildAdminEntityViewModels(
-        ADMIN_ENTITY_DEFINITIONS.slice(0, 1),
-        translate,
-        ADMIN_ENTITY_OPERATIONS,
-      ),
-    ).toEqual([
-      {
-        id: 'links',
-        endpoint: createAdminEntityEndpointLabel('/links'),
-        substep: 'F8.5',
-        relationModeLabel: 'pages.admin.relationMode.owner',
-        title: 'common.entities.links',
-        description: 'pages.admin.entities.links.description',
-        operations: [
-          {
-            id: 'create',
-            label: 'pages.admin.operations.create',
-          },
-          {
-            id: 'update',
-            label: 'pages.admin.operations.update',
-          },
-          {
-            id: 'delete',
-            label: 'pages.admin.operations.delete',
-          },
-        ],
-      },
-    ]);
-  });
-
-  it('should build translated admin session facts', () => {
-    const translate = (key: AppTranslationKey) => key;
-
-    expect(buildAdminSessionFactViewModels(ADMIN_SESSION_FACT_DEFINITIONS, translate)).toEqual([
-      {
-        id: 'route',
-        title: 'pages.admin.facts.route.title',
-        description: 'pages.admin.facts.route.description',
-      },
-      {
-        id: 'validation',
-        title: 'pages.admin.facts.validation.title',
-        description: 'pages.admin.facts.validation.description',
-      },
-      {
-        id: 'storage',
-        title: 'pages.admin.facts.storage.title',
-        description: 'pages.admin.facts.storage.description',
-      },
-    ]);
-  });
 });

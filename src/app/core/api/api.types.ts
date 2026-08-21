@@ -4,3 +4,4 @@ export const ABSOLUTE_URL_PATTERN = /^https?:\/\//i;
 export const ASSETS_ROOT_PATH = 'assets';
 export const IMAGE_ASSETS_ROOT_PATH = `${ASSETS_ROOT_PATH}/img`;
 export const SKILLS_IMAGE_ASSETS_ROOT_PATH = `${IMAGE_ASSETS_ROOT_PATH}/skills`;
+export const EXPERIENCES_IMAGE_ASSETS_ROOT_PATH = `${IMAGE_ASSETS_ROOT_PATH}/experiences`;

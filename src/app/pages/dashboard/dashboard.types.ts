@@ -37,7 +37,6 @@ export interface DashboardDistributionRowViewModel {
 }
 
 export interface DashboardProjectDistributionViewModel {
-  featuredProjects: number;
   highlightedProjects: number;
   totalProjects: number;
   contexts: readonly DashboardDistributionRowViewModel[];
@@ -76,7 +75,6 @@ export interface DashboardHighlightCardViewModel {
   slug: string;
   title: string;
   subtitle: string;
-  featured: boolean;
   iconName: string;
   visualUrl: string;
 }

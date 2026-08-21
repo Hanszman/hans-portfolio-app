@@ -170,7 +170,7 @@ export class ProjectsOperationsComponent implements OnInit {
     this.formSignal.update((form) => ({ ...form, [field]: value }));
   }
 
-  updateBoolean(field: 'featured' | 'highlight', value: boolean): void {
+  updateBoolean(field: 'highlight', value: boolean): void {
     this.formSignal.update((form) => ({ ...form, [field]: value }));
   }
 

@@ -260,9 +260,6 @@ describe('app routes', () => {
                       labelPt: 'Repositorio',
                       labelEn: 'Repository',
                       labelEs: 'Repository',
-                      descriptionPt: 'Codigo fonte',
-                      descriptionEn: 'Source code',
-                      descriptionEs: 'Source code',
                       type: 'GITHUB',
                       sortOrder: 1,
                       projectIds: ['project-1'],
@@ -447,9 +444,6 @@ describe('app routes', () => {
     await harness.navigateByUrl('/admin');
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
-    expect(harness.routeNativeElement?.textContent).toContain(
-      '10 entity workflows',
-    );
   });
 
   it('should redirect authenticated access from the login route to the protected admin route', async () => {
@@ -472,9 +466,6 @@ describe('app routes', () => {
     await harness.navigateByUrl('/login');
 
     expect(harness.routeNativeElement?.textContent).toContain('Admin workspace');
-    expect(harness.routeNativeElement?.textContent).toContain(
-      '10 entity workflows',
-    );
   });
 
   it('should redirect unknown routes to the strategic home route', async () => {

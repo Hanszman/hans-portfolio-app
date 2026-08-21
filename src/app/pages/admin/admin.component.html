@@ -26,36 +26,9 @@
         <h2>{{ adminIdentity() }}</h2>
         <p>{{ adminUserEmail() }}</p>
       </article>
-
-      <article class="admin-page-card admin-page-card-accent">
-        <p class="admin-page-kicker">
-          {{ 'pages.admin.shell.registry.kicker' | translate }}
-        </p>
-        <h2>
-          {{ 'pages.admin.shell.registry.title' | translate: { count: adminEntityCount() } }}
-        </h2>
-        <p>{{ 'pages.admin.shell.registry.description' | translate }}</p>
-      </article>
-    </div>
-
-    <div class="admin-page-protection">
-      @for (fact of adminFacts(); track fact.id) {
-        <article class="admin-page-card">
-          <h2>{{ fact.title }}</h2>
-          <p>{{ fact.description }}</p>
-        </article>
-      }
     </div>
 
     <div class="admin-page-entities">
-      <div class="admin-page-block-header">
-        <p class="admin-page-kicker">
-          {{ 'pages.admin.entitiesSection.eyebrow' | translate }}
-        </p>
-        <h2>{{ 'pages.admin.entitiesSection.title' | translate }}</h2>
-        <p>{{ 'pages.admin.entitiesSection.description' | translate }}</p>
-      </div>
-
       <div class="admin-page-entity-grid">
         <app-links-operations #linksWorkspace />
 

@@ -58,9 +58,6 @@ export class LinksOperationsModalComponent {
     labelPt: '',
     labelEn: '',
     labelEs: '',
-    descriptionPt: '',
-    descriptionEn: '',
-    descriptionEs: '',
     type: '',
     sortOrder: '0',
     projectIds: [],
@@ -80,9 +77,6 @@ export class LinksOperationsModalComponent {
   readonly labelPtChanged = output<string>();
   readonly labelEnChanged = output<string>();
   readonly labelEsChanged = output<string>();
-  readonly descriptionPtChanged = output<string>();
-  readonly descriptionEnChanged = output<string>();
-  readonly descriptionEsChanged = output<string>();
   readonly typeChanged = output<string>();
   readonly sortOrderChanged = output<string>();
   readonly projectToggled = output<string>();
@@ -162,14 +156,6 @@ export class LinksOperationsModalComponent {
                 this.translation.locale(), link.labelPt, link.labelEn, link.labelEs,
               ) || emptyText,
           },
-          {
-            labelKey: 'common.fields.description',
-            value:
-              resolveAdminLocalizedValue(
-                this.translation.locale(), link.descriptionPt, link.descriptionEn,
-                link.descriptionEs,
-              ) || emptyText,
-          },
           { labelKey: 'common.fields.type', value: link.type },
           { labelKey: 'common.fields.sortOrder', value: link.sortOrderLabel },
           {
@@ -217,18 +203,6 @@ export class LinksOperationsModalComponent {
 
   protected emitLabelEsChange(value: string): void {
     this.labelEsChanged.emit(value);
-  }
-
-  protected emitDescriptionPtChange(value: string): void {
-    this.descriptionPtChanged.emit(value);
-  }
-
-  protected emitDescriptionEnChange(value: string): void {
-    this.descriptionEnChanged.emit(value);
-  }
-
-  protected emitDescriptionEsChange(value: string): void {
-    this.descriptionEsChanged.emit(value);
   }
 
   protected emitTypeChange(value: string): void {

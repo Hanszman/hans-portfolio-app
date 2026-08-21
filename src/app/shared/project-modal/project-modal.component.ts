@@ -17,6 +17,7 @@ import { TagButtonViewModel } from '../tag/tag-button/tag-button.types';
 import { TechnologyModalItem } from '../technology-modal/technology-modal.types';
 import { ProjectModalItem } from './project-modal.types';
 import { FormattedTextComponent } from '../formatted-text/formatted-text.component';
+import { resolveProjectCompanyLogoUrl } from './helpers/project-modal.helper';
 
 @Component({
   selector: 'app-project-modal',
@@ -51,7 +52,11 @@ export class ProjectModalComponent {
   }
 
   protected companyTag(company: string): TagButtonViewModel<string> {
-    return { label: company, value: company };
+    return {
+      label: company,
+      value: company,
+      image: { src: resolveProjectCompanyLogoUrl(company), alt: `${company} logo` },
+    };
   }
 
   protected settleMedia(source: string): void {

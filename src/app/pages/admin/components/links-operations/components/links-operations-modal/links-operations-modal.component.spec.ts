@@ -11,9 +11,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     labelPt: 'Repositorio',
     labelEn: 'Repository',
     labelEs: 'Repository',
-    descriptionPt: 'Codigo fonte',
-    descriptionEn: 'Source code',
-    descriptionEs: 'Source code',
     type: 'GITHUB',
     sortOrderLabel: '1',
     projectLabels: ['Portfolio remake'],
@@ -24,9 +21,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     labelPt: '',
     labelEn: 'English fallback',
     labelEs: 'English fallback',
-    descriptionPt: '',
-    descriptionEn: '',
-    descriptionEs: '',
     type: 'DEPLOY',
     sortOrderLabel: '2',
     projectLabels: [],
@@ -37,9 +31,6 @@ const LINKS: readonly LinkOperationsViewModel[] = [
     labelPt: '',
     labelEn: '',
     labelEs: '',
-    descriptionPt: '',
-    descriptionEn: '',
-    descriptionEs: '',
     type: 'OTHER',
     sortOrderLabel: '3',
     projectLabels: [],
@@ -80,9 +71,6 @@ describe('LinksOperationsModalComponent', () => {
     const labelPtSpy = jasmine.createSpy('labelPtChanged');
     const labelEnSpy = jasmine.createSpy('labelEnChanged');
     const labelEsSpy = jasmine.createSpy('labelEsChanged');
-    const descriptionPtSpy = jasmine.createSpy('descriptionPtChanged');
-    const descriptionEnSpy = jasmine.createSpy('descriptionEnChanged');
-    const descriptionEsSpy = jasmine.createSpy('descriptionEsChanged');
     const typeSpy = jasmine.createSpy('typeChanged');
     const sortOrderSpy = jasmine.createSpy('sortOrderChanged');
     const projectSpy = jasmine.createSpy('projectToggled');
@@ -94,9 +82,6 @@ describe('LinksOperationsModalComponent', () => {
     component.labelPtChanged.subscribe(labelPtSpy);
     component.labelEnChanged.subscribe(labelEnSpy);
     component.labelEsChanged.subscribe(labelEsSpy);
-    component.descriptionPtChanged.subscribe(descriptionPtSpy);
-    component.descriptionEnChanged.subscribe(descriptionEnSpy);
-    component.descriptionEsChanged.subscribe(descriptionEsSpy);
     component.typeChanged.subscribe(typeSpy);
     component.sortOrderChanged.subscribe(sortOrderSpy);
     component.projectToggled.subscribe(projectSpy);
@@ -128,9 +113,6 @@ describe('LinksOperationsModalComponent', () => {
       emitLabelPtChange(value: string): void;
       emitLabelEnChange(value: string): void;
       emitLabelEsChange(value: string): void;
-      emitDescriptionPtChange(value: string): void;
-      emitDescriptionEnChange(value: string): void;
-      emitDescriptionEsChange(value: string): void;
       emitTypeChange(value: string): void;
       emitSortOrderChange(value: string): void;
       toggleProject(projectId: string): void;
@@ -144,9 +126,6 @@ describe('LinksOperationsModalComponent', () => {
     componentAccess.emitLabelPtChange('Demo');
     componentAccess.emitLabelEnChange('Demo');
     componentAccess.emitLabelEsChange('Demostración');
-    componentAccess.emitDescriptionPtChange('Descricao');
-    componentAccess.emitDescriptionEnChange('Description');
-    componentAccess.emitDescriptionEsChange('Descripción');
     componentAccess.emitTypeChange('DEPLOY');
     componentAccess.emitSortOrderChange('7');
     componentAccess.toggleProject('project-1');
@@ -172,9 +151,6 @@ describe('LinksOperationsModalComponent', () => {
       'Portuguese label',
       'English label',
       'Spanish label',
-      'Portuguese description',
-      'English description',
-      'Spanish description',
       'Sort order',
     ]);
     expect(inputElements.map((element) => element.required)).toEqual([
@@ -182,9 +158,6 @@ describe('LinksOperationsModalComponent', () => {
       true,
       true,
       true,
-      false,
-      false,
-      false,
       true,
     ]);
     expect(selectElement?.label).toBe('Type');
@@ -195,9 +168,6 @@ describe('LinksOperationsModalComponent', () => {
     expect(labelPtSpy).toHaveBeenCalledOnceWith('Demo');
     expect(labelEnSpy).toHaveBeenCalledOnceWith('Demo');
     expect(labelEsSpy).toHaveBeenCalledOnceWith('Demostración');
-    expect(descriptionPtSpy).toHaveBeenCalledOnceWith('Descricao');
-    expect(descriptionEnSpy).toHaveBeenCalledOnceWith('Description');
-    expect(descriptionEsSpy).toHaveBeenCalledOnceWith('Descripción');
     expect(typeSpy).toHaveBeenCalledOnceWith('DEPLOY');
     expect(sortOrderSpy).toHaveBeenCalledOnceWith('7');
     expect(projectSpy).toHaveBeenCalledOnceWith('project-1');
@@ -284,9 +254,6 @@ describe('LinksOperationsModalComponent', () => {
       labelPt: null,
       labelEn: null,
       labelEs: null,
-      descriptionPt: 'Codigo fonte',
-      descriptionEn: 'Source code',
-      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: 1,
     });
@@ -295,9 +262,6 @@ describe('LinksOperationsModalComponent', () => {
       labelPt: 'Repositorio',
       labelEn: 'Repository',
       labelEs: 'Repository',
-      descriptionPt: 'Codigo fonte',
-      descriptionEn: 'Source code',
-      descriptionEs: 'Source code',
       type: 'GITHUB',
       sortOrder: '1',
       projectIds: ['project-1'],
