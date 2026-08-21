@@ -18,6 +18,7 @@ const createChart = (title: string, chartType: DashboardChartViewModel['chartTyp
   colors: ['primary', 'secondary'],
   height: 320,
   showLegend: chartType === 'doughnut',
+  legendScrollable: chartType === 'doughnut',
 });
 
 describe('DashboardAnalyticsGridComponent', () => {

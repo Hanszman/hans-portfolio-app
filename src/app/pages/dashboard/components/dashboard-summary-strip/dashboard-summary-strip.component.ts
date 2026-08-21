@@ -19,6 +19,7 @@ export class DashboardSummaryStripComponent {
       alignment: 'center',
       value: card.value,
       labelKey: card.labelKey,
+      titleKey: card.titleKey,
       iconName: card.iconName,
     };
   }

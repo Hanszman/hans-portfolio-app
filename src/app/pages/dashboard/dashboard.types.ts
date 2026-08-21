@@ -17,8 +17,9 @@ export interface DashboardTechnologyTypeOptionViewModel {
 }
 
 export interface DashboardSummaryCardViewModel {
-  labelKey: AppTranslationKey;
-  value: string;
+  labelKey?: AppTranslationKey;
+  value?: string;
+  titleKey?: AppTranslationKey;
   iconName: string;
 }
 
@@ -98,13 +99,14 @@ export interface DashboardChartViewModel {
   colors: readonly string[];
   height: number;
   showLegend: boolean;
+  legendScrollable: boolean;
 }
 
 export const DASHBOARD_SUMMARY_LABEL_KEYS = {
   projects: 'common.entities.projects',
   experiences: 'common.entities.experiences',
   technologies: 'common.entities.technologies',
-  formations: 'pages.dashboard.snapshot.metrics.formations',
+  formations: 'common.entities.formations',
   customers: 'common.entities.customers',
   jobs: 'pages.dashboard.snapshot.metrics.jobs',
   spokenLanguages: 'common.entities.languages',
@@ -118,6 +120,7 @@ export const DASHBOARD_SUMMARY_ICON_NAMES = {
   customers: 'LuHandshake',
   jobs: 'LuBadgeCheck',
   spokenLanguages: 'LuLanguages',
+  availability: 'LuUserCheck',
 } as const;
 
 export const DASHBOARD_CONTEXT_LABEL_KEYS: Record<string, AppTranslationKey> = {

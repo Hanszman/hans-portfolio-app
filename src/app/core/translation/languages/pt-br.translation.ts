@@ -306,8 +306,8 @@ export const PT_BR_TRANSLATIONS = {
   'pages.dashboard.snapshot.loading': 'Carregando agregados do dashboard...',
   'pages.dashboard.snapshot.error':
     'Os endpoints agregados do dashboard estão indisponíveis agora.',
-  'pages.dashboard.snapshot.metrics.formations': 'Formações / idiomas',
   'pages.dashboard.snapshot.metrics.jobs': 'Cargos',
+  'pages.dashboard.snapshot.availability': 'Disponível para trabalho',
   'pages.dashboard.stacks.label': 'Distribuição de stack',
   'pages.dashboard.stacks.title': 'Onde o portfolio carrega mais peso técnico hoje',
   'pages.dashboard.stacks.description':

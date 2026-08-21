@@ -18,6 +18,7 @@ const createChart = (): DashboardChartViewModel => ({
   colors: ['primary', 'secondary'],
   height: 320,
   showLegend: true,
+  legendScrollable: true,
 });
 
 describe('DashboardChartPanelComponent', () => {

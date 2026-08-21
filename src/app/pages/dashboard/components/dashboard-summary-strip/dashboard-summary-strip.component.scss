@@ -3,5 +3,22 @@
 }
 
 .dashboard-summary-grid {
-  @apply grid gap-5 md:grid-cols-2 xl:grid-cols-4;
+  @apply grid gap-4 sm:grid-cols-2 xl:grid-cols-4;
+}
+
+.dashboard-summary-grid ::ng-deep .card-primary .card-content {
+  @apply gap-2 py-2;
+  min-height: 0 !important;
+}
+
+.dashboard-summary-grid ::ng-deep .card-icon {
+  @apply h-10 w-10;
+}
+
+.dashboard-summary-grid ::ng-deep .card-value {
+  @apply text-4xl;
+}
+
+.dashboard-summary-grid ::ng-deep .card-title {
+  @apply text-xl;
 }

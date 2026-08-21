@@ -20,15 +20,25 @@ describe('dashboard helper', () => {
   it('should build localized summary cards from dashboard counters', () => {
     const cards = buildDashboardSummaryCards(createDashboardOverviewResponse().summary);
 
+    expect(cards).toHaveSize(8);
     expect(cards[0]).toEqual({
       labelKey: 'common.entities.projects',
       value: '12',
       iconName: 'LuFolderKanban',
     });
     expect(cards[5]).toEqual({
-      labelKey: 'pages.dashboard.snapshot.metrics.formations',
-      value: '3 / 2',
+      labelKey: 'common.entities.formations',
+      value: '3',
       iconName: 'LuGraduationCap',
+    });
+    expect(cards[6]).toEqual({
+      labelKey: 'common.entities.languages',
+      value: '2',
+      iconName: 'LuLanguages',
+    });
+    expect(cards[7]).toEqual({
+      titleKey: 'pages.dashboard.snapshot.availability',
+      iconName: 'LuUserCheck',
     });
   });
 
@@ -222,6 +232,7 @@ describe('dashboard helper', () => {
       colors: ['primary', 'secondary', 'success', 'warning'],
       height: 320,
       showLegend: true,
+      legendScrollable: true,
     });
     expect(levelChart.chartType).toBe('doughnut');
     expect(levelChart.categories).toEqual(['Advanced']);
@@ -278,16 +289,16 @@ describe('dashboard helper', () => {
         value: 'PROGRAMMING_LANGUAGES',
       },
       {
-        label: 'Cloud Hosting Platforms',
-        value: 'CLOUD_HOSTING_PLATFORMS',
+        label: 'Libraries',
+        value: 'LIBRARIES',
       },
       {
         label: 'Frameworks',
         value: 'FRAMEWORKS',
       },
       {
-        label: 'Libraries',
-        value: 'LIBRARIES',
+        label: 'Cloud Hosting Platforms',
+        value: 'CLOUD_HOSTING_PLATFORMS',
       },
     ]);
     expect(chart).toEqual({
@@ -305,10 +316,11 @@ describe('dashboard helper', () => {
       colors: ['primary', 'secondary', 'success'],
       height: 360,
       showLegend: false,
+      legendScrollable: false,
     });
   });
 
-  it('should sort technology type options alphabetically when totals tie', () => {
+  it('should order technology type options using the canonical skills taxonomy order', () => {
     const projects = createProjectsCollectionResponse({
       data: [
         {
@@ -448,12 +460,12 @@ describe('dashboard helper', () => {
 
     expect(options).toEqual([
       {
-        label: 'Cloud Hosting Platforms',
-        value: 'CLOUD_HOSTING_PLATFORMS',
-      },
-      {
         label: 'Programming Languages',
         value: 'PROGRAMMING_LANGUAGES',
+      },
+      {
+        label: 'Cloud Hosting Platforms',
+        value: 'CLOUD_HOSTING_PLATFORMS',
       },
     ]);
   });

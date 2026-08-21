@@ -23,6 +23,7 @@ const createChart = (): DashboardChartViewModel => ({
   colors: ['primary', 'secondary'],
   height: 360,
   showLegend: false,
+  legendScrollable: false,
 });
 
 describe('DashboardProjectTechnologyPanelComponent', () => {

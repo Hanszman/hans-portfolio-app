@@ -129,6 +129,7 @@ const buildDashboardChartModel = (
   colors: buildChartColors(categories.length),
   height: chartType === 'bar' ? 360 : 320,
   showLegend: chartType === 'doughnut',
+  legendScrollable: chartType === 'doughnut',
 });
 
 const getProjectTechnologyCounts = (
@@ -189,8 +190,17 @@ export const buildDashboardSummaryCards = (
   },
   {
     labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.formations,
-    value: `${summary.formations} / ${summary.spokenLanguages}`,
+    value: String(summary.formations),
     iconName: DASHBOARD_SUMMARY_ICON_NAMES.formations,
+  },
+  {
+    labelKey: DASHBOARD_SUMMARY_LABEL_KEYS.spokenLanguages,
+    value: String(summary.spokenLanguages),
+    iconName: DASHBOARD_SUMMARY_ICON_NAMES.spokenLanguages,
+  },
+  {
+    titleKey: 'pages.dashboard.snapshot.availability',
+    iconName: DASHBOARD_SUMMARY_ICON_NAMES.availability,
   },
 ];
 
@@ -267,18 +277,12 @@ export const buildDashboardTechnologyTypeOptions = (
     typeCounts.set(typeKey, totalCount);
   }
 
-  return SKILL_TYPE_FILTERS.filter(({ value }) => value !== 'ALL' && typeCounts.has(value))
-    .sort(
-      (left, right) =>
-        typeCounts.get(right.value)! - typeCounts.get(left.value)! ||
-        translateStaticKey(locale, left.labelKey).localeCompare(
-          translateStaticKey(locale, right.labelKey),
-        ),
-    )
-    .map((filter) => ({
+  return SKILL_TYPE_FILTERS.filter(({ value }) => value !== 'ALL' && typeCounts.has(value)).map(
+    (filter) => ({
       label: translateStaticKey(locale, filter.labelKey),
       value: filter.value,
-    }));
+    }),
+  );
 };
 
 export const buildDashboardProjectTechnologyChart = (

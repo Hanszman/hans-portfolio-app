@@ -1,12 +1,13 @@
 [TODO LIST]:
 *DASHBOARD:
--Revisar gráficos da dashboard comparando com projeto antigo. Gráficos: "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight"; "Number of Technologies by Level" = "Technology usage signals"; "Number of Projects by Environment" não existe no atual, acrescentar; "Number of Projects by Type of Technologies" = "Projects by type of technologies"; "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico; "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um. Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
-Quero que vc faça algumas correções referentes à tela de dashboard:
--Na tela de dashboard, como vc pode ver no Screenshot_1 na pasta downloads, os cards acima dos gráficos estão muito grandes de espaço e vazios de conteúdo, precisamos mudar o formato deles, reorganizando melhor esses cards nesse espaço da dashboard. Além disso, podemos separar os cards de "Formações / Idiomas" em cards diferentes, ai altere também o ícone que faça sentido para cada um (o de formations pode continuar o chapéu de formatura e o de idiomas pode ser aquele que usamos na tela de skills, aquele parecido com o do google tradutor). Crie um oitavo card com um ícone de visto e um texto maior, escrito algo tipo "Disponível para trabalho".
--Como pode ver no print Screenshot_2, os textos com os valores dentro das barras dos gráficos e na leganda deles (pode ver nos dois últimos por exemplo) no tema dark estão escuros demais pra visualizar, mude a cor desses textos para uma cor clara, para ficarem assim como nos outros textos normais na tela dark.
--A lista de legenda do primeiro gráfico ta invadindo o espaço dele, como pode ver no print Screenshot_3, fazendo o card da esquerda ficar maior que o da direita. Coloque um scroll horizontal (com o css dos scrolls que temos no porfolio) nas legendas, como tratativa, para elas não ocuparem tanto espaço assim verticalmente, impedindo-as de invadir o gráfico e de aumentar o tamanho do card. Faça esse tratamento na lib, mas faça o estilo do scroll aplicando no portfolio.
--Ordene as opções do filtro de stack no último gráfico para a mesma ordem que temos nos filtros da sessão de technologies na tela de skills.
--OBS: Em todos esses casos, quero que vc analise via chrome-devtools, reproduza os cenários/problemas, investigue, corrija e valide vc mesmo por favor. Se em algum momento vc precisar validar a tela de admin, mas não conseguir logar nela por não saber o usuário/senha, me informe que eu logo pra vc no chrome-devtools, para que vc possa continuar a análise. Lembrando que temos que passar com 100% de test:coverage, temos que passar nos lints e nos builds de todos os projetos que vc for mexer (te dou acesso aos 3 repos caso seja necessário vc mexer em todos eles).
+-Revisar gráficos da dashboard comparando com projeto antigo. Gráficos:
+    -> "Number of Technologies by Stack" = "Where the portfolio carries the most technical weight";
+    -> "Number of Technologies by Level" = "Technology usage signals";
+    -> "Number of Projects by Environment" não existe no atual, acrescentar;
+    -> "Number of Projects by Type of Technologies" = "Projects by type of technologies";
+    -> "Number of Technologies by Type" não existe no atual, acrescentar e talvez mudar o formato do gráfico;
+    -> "Technology usage signals" e "Projects by type of technologies" me parecem ser a mesma coisa, verificar diferença e se for igual, manter só um.
+    -> Talvez acrescentar um último gráfico (bar?): TechnologiesByExperience.
 
 *FUTURAS:
 -Revisar textos da tela de admin, padronizando o que está divergente e atualizando aquilo que está defasado.

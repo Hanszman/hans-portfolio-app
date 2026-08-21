@@ -298,8 +298,8 @@ export const EN_TRANSLATIONS = {
     'Aggregated analysis of career stacks, tools and projects, presented on a dashboard with informative charts.',
   'pages.dashboard.snapshot.loading': 'Loading dashboard aggregates...',
   'pages.dashboard.snapshot.error': 'The dashboard aggregate endpoints are unavailable right now.',
-  'pages.dashboard.snapshot.metrics.formations': 'Formations / languages',
   'pages.dashboard.snapshot.metrics.jobs': 'Roles',
+  'pages.dashboard.snapshot.availability': 'Available for work',
   'pages.dashboard.stacks.label': 'Stack distribution',
   'pages.dashboard.stacks.title': 'Where the portfolio carries the most technical weight',
   'pages.dashboard.stacks.description':

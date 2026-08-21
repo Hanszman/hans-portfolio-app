@@ -91,6 +91,30 @@ body[data-app-theme='dark'] {
   background-color: var(--app-scrollbar-thumb-hover-color);
 }
 
+hans-chart::part(legend) {
+  scrollbar-color: var(--app-scrollbar-thumb-color) var(--app-scrollbar-track-color);
+  scrollbar-width: thin;
+}
+
+hans-chart::part(legend)::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+hans-chart::part(legend)::-webkit-scrollbar-track {
+  background-color: var(--app-scrollbar-track-color);
+}
+
+hans-chart::part(legend)::-webkit-scrollbar-thumb {
+  border: 0.125rem solid var(--app-scrollbar-track-color);
+  border-radius: 9999px;
+  background-color: var(--app-scrollbar-thumb-color);
+}
+
+hans-chart::part(legend)::-webkit-scrollbar-thumb:hover {
+  background-color: var(--app-scrollbar-thumb-hover-color);
+}
+
 app-root {
   @apply block;
   min-height: 100vh;
