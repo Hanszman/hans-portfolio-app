@@ -721,3 +721,6 @@ Beleza, obrigado! Mas vamos lá, temos alguns problemas que quero que vc corrija
 -Como pode ver no print Screenshot_5, os textos que pedi pra vc trocar a cor pra uma mais clara quando estivermos no tema dark, ficou preto ao invés da cor clara que eu pedi (assim como nos textos normais mesmo da tela dark).
 -Além disso, como pode ver no print Screenshot_6, o card available to work ficou menor que os outros, deixe-o do mesmo tamanho dos outros por favor.
 -Outro ponto que notei também que gostaria que vc corrigisse é que no primeiro gráfico, a cor de "Front-End" e de "Testing" se repetiram... não deixe que as cores dos graficos repitam por favor, se não houver mais opções, mude um pouco o brilho de alguma ou algo assim.
+Beleza, obrigado! Mas vamos lá:
+-Como vc pode ver no print Screenshot_7, as cores dos textos dos gráficos no modo dark ficaram ótimas, pois ficaram claras agora! Porém, como pode ver no print Screenshot_8, quando mudamos pro tema light ela também está clara, dificultando a leitura nas partes externas do gráfico. Corrija para que somente no modo light fique escura a cor da letra por favor.
+-Como pode ver no print Screenshot_9, como o card de gráfico da esquerda ficou maior por causa do scroll, ajuste o card da direita para ficar maior também e ocupar o mesmo espaço do outro.
