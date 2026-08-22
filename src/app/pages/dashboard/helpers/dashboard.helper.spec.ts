@@ -1,16 +1,16 @@
 import { createDashboardOverviewResponse } from '../../../core/api/mocks/dashboard.mocks';
 import { createProjectsCollectionResponse } from '../../../core/api/mocks/projects.mocks';
 import {
+  buildDashboardProjectContextChart,
   buildDashboardProjectDistribution,
-  buildDashboardProjectEnvironmentChart,
   buildDashboardProjectTechnologyChart,
   buildDashboardSummaryCards,
   buildDashboardStackChart,
   buildDashboardTechnologyLevelChart,
   buildDashboardTechnologyBreakdowns,
   buildDashboardTechnologyLeaders,
+  buildDashboardTechnologyTypeChart,
   buildDashboardTechnologyTypeOptions,
-  buildDashboardTechnologyUsageChart,
   mapDashboardHighlightCards,
   mapDashboardStackRows,
   mapDashboardTimelineCards,
@@ -197,7 +197,7 @@ describe('dashboard helper', () => {
     ]);
   });
 
-  it('should build chart models for stack, levels, environments and top usage', () => {
+  it('should build chart models for stack, levels, contexts and technology types', () => {
     const overview = createDashboardOverviewResponse();
 
     const stackChart = buildDashboardStackChart(
@@ -208,11 +208,11 @@ describe('dashboard helper', () => {
       overview.technologyUsage,
       'en-us',
     );
-    const environmentChart = buildDashboardProjectEnvironmentChart(
+    const contextChart = buildDashboardProjectContextChart(
       overview.projectContexts,
       'en-us',
     );
-    const usageChart = buildDashboardTechnologyUsageChart(
+    const typeChart = buildDashboardTechnologyTypeChart(
       overview.technologyUsage,
       'en-us',
     );
@@ -225,7 +225,7 @@ describe('dashboard helper', () => {
         {
           name: 'Stack distribution',
           type: 'doughnut',
-          data: [26, 14, 9, 6],
+          data: [18, 9, 6, 4],
           label: { position: 'none' },
         },
       ],
@@ -236,16 +236,9 @@ describe('dashboard helper', () => {
     });
     expect(levelChart.chartType).toBe('doughnut');
     expect(levelChart.categories).toEqual(['Advanced']);
-    expect(environmentChart.categories).toEqual(['Web', 'Mobile']);
-    expect(usageChart.chartType).toBe('bar');
-    expect(usageChart.categories).toEqual([
-      'Angular',
-      'TypeScript',
-      'CSS',
-      'HTML',
-      'JavaScript',
-      'JSON',
-    ]);
+    expect(contextChart.categories).toEqual(['Dashboard', 'Admin']);
+    expect(typeChart.chartType).toBe('doughnut');
+    expect(typeChart.categories).toEqual(['Programming Languages', 'Frameworks']);
   });
 
   it('should assign a distinct color to every stack once the base palette is exhausted', () => {
@@ -282,31 +275,6 @@ describe('dashboard helper', () => {
       'var(--success-neutral-color)',
     ]);
     expect(new Set(chart.colors).size).toBe(chart.colors.length);
-  });
-
-  it('should sort technology usage ties alphabetically', () => {
-    const usageChart = buildDashboardTechnologyUsageChart(
-      {
-        ...createDashboardOverviewResponse().technologyUsage,
-        topTechnologies: [
-          {
-            slug: 'zulu',
-            name: 'Zulu',
-            type: 'PROGRAMMING_LANGUAGES',
-            usageCount: 7,
-          },
-          {
-            slug: 'alpha',
-            name: 'Alpha',
-            type: 'PROGRAMMING_LANGUAGES',
-            usageCount: 7,
-          },
-        ],
-      },
-      'en-us',
-    );
-
-    expect(usageChart.categories).toEqual(['Alpha', 'Zulu']);
   });
 
   it('should build technology type options and project technology charts from live project relations', () => {

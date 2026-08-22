@@ -309,30 +309,35 @@ export const PT_BR_TRANSLATIONS = {
   'pages.dashboard.snapshot.metrics.jobs': 'Cargos',
   'pages.dashboard.snapshot.availability': 'Disponível para trabalho',
   'pages.dashboard.stacks.label': 'Distribuição de stack',
-  'pages.dashboard.stacks.title': 'Onde o portfolio carrega mais peso técnico hoje',
+  'pages.dashboard.stacks.title': 'Número de Tecnologias por Stack',
   'pages.dashboard.stacks.description':
-    'Cada área combina projetos relacionados e tecnologias mapeadas para deixar as zonas mais fortes evidentes de imediato.',
+    'Veja como o catálogo de tecnologias se distribui entre cada área de stack, do Front-End ao DevOps.',
   'pages.dashboard.distribution.label': 'Pegada de projetos',
-  'pages.dashboard.distribution.title': 'Contexto de entrega, ambientes e densidade de destaque',
+  'pages.dashboard.distribution.title': 'Número de Projetos por Contexto',
   'pages.dashboard.distribution.description':
-    'Este bloco separa volume destacado, contexto e ambiente para o catálogo de projetos ficar mais legível.',
+    'Compare quantos projetos publicados foram feitos em contexto profissional, pessoal, acadêmico e de estudo.',
   'pages.dashboard.distribution.empty':
     'Nenhum dado de distribuição de projetos foi retornado ainda.',
-  'pages.dashboard.distribution.environments': 'Ambientes',
+  'pages.dashboard.distribution.contexts': 'Contextos',
   'pages.dashboard.technology.label': 'Uso de tecnologia',
-  'pages.dashboard.technology.title': 'Sinais de uso da stack',
+  'pages.dashboard.technology.title': 'Número de Tecnologias por Nível',
   'pages.dashboard.technology.description':
-    'Top tecnologias e seus padrões de frequência, contexto e origem saem direto das relações agregadas da API.',
+    'Detalha o catálogo de tecnologias pelo nível de domínio, de estudando a avançado.',
   'pages.dashboard.technology.empty': 'Nenhum agregado de uso de tecnologia foi retornado ainda.',
   'pages.dashboard.technology.levels': 'Níveis',
   'pages.dashboard.technology.frequencies': 'Frequências',
   'pages.dashboard.technology.contexts': 'Contextos',
   'pages.dashboard.technology.sources': 'Origens',
-  'pages.dashboard.technology.links': 'sinais vinculados',
+  'pages.dashboard.technologyTypes.label': 'Tipos de tecnologia',
+  'pages.dashboard.technologyTypes.title': 'Número de Tecnologias por Tipo',
+  'pages.dashboard.technologyTypes.description':
+    'Mostra como o catálogo de tecnologias se compõe entre famílias como linguagens, frameworks, bibliotecas e bancos de dados.',
+  'pages.dashboard.technologyTypes.empty':
+    'Nenhuma distribuição de tipos de tecnologia foi retornada ainda.',
   'pages.dashboard.projectsByType.label': 'Projetos por tipo de tecnologia',
-  'pages.dashboard.projectsByType.title': 'Projetos por tipo de tecnologias',
+  'pages.dashboard.projectsByType.title': 'Número de Projetos por Tipo de Tecnologias',
   'pages.dashboard.projectsByType.description':
-    'O gráfico final mantém vivo o padrão do dashboard antigo ao agrupar os projetos publicados pela família de tecnologia que eles realmente usam.',
+    'Filtre os projetos publicados por família de tecnologia para ver quantos dependem de cada tipo.',
   'pages.dashboard.projectsByType.empty':
     'Nenhuma distribuição de tecnologias por projeto foi retornada ainda.',
   'pages.dashboard.projectsByType.selectLabel': 'Tipo de tecnologia',

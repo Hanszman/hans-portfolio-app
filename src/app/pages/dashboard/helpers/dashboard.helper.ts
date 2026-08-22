@@ -224,7 +224,7 @@ export const buildDashboardStackChart = (
     'doughnut',
     translateStaticKey(locale, 'pages.dashboard.stacks.label'),
     stacks.map((stack) => stack.name),
-    stacks.map((stack) => stack.totalConnections),
+    stacks.map((stack) => stack.technologyCount),
   );
 
 export const buildDashboardTechnologyLevelChart = (
@@ -240,37 +240,31 @@ export const buildDashboardTechnologyLevelChart = (
     technologyUsage.levels.map((level) => level.count),
   );
 
-export const buildDashboardProjectEnvironmentChart = (
+export const buildDashboardProjectContextChart = (
   projectContexts: DashboardProjectContextsResponse,
   locale: AppLocale,
 ): DashboardChartViewModel =>
   buildDashboardChartModel(
     'doughnut',
-    translateStaticKey(locale, 'pages.dashboard.distribution.environments'),
-    projectContexts.environments.map((environment) =>
-      translateEnumValue(locale, environment.key, DASHBOARD_ENVIRONMENT_LABEL_KEYS),
+    translateStaticKey(locale, 'pages.dashboard.distribution.contexts'),
+    projectContexts.contexts.map((context) =>
+      translateEnumValue(locale, context.key, DASHBOARD_CONTEXT_LABEL_KEYS),
     ),
-    projectContexts.environments.map((environment) => environment.count),
+    projectContexts.contexts.map((context) => context.count),
   );
 
-export const buildDashboardTechnologyUsageChart = (
+export const buildDashboardTechnologyTypeChart = (
   technologyUsage: DashboardTechnologyUsageResponse,
   locale: AppLocale,
-): DashboardChartViewModel => {
-  const topTechnologies = [...technologyUsage.topTechnologies]
-    .sort(
-      (left, right) =>
-        right.usageCount - left.usageCount || left.name.localeCompare(right.name),
-    )
-    .slice(0, 10);
-
-  return buildDashboardChartModel(
-    'bar',
-    translateStaticKey(locale, 'pages.dashboard.technology.links'),
-    topTechnologies.map((technology) => technology.name),
-    topTechnologies.map((technology) => technology.usageCount),
+): DashboardChartViewModel =>
+  buildDashboardChartModel(
+    'doughnut',
+    translateStaticKey(locale, 'pages.dashboard.technologyTypes.label'),
+    technologyUsage.types.map((type) =>
+      translateEnumValue(locale, type.key, SKILL_TYPE_LABEL_KEYS),
+    ),
+    technologyUsage.types.map((type) => type.count),
   );
-};
 
 export const buildDashboardTechnologyTypeOptions = (
   projects: ProjectsCollectionResponse,
@@ -324,9 +318,7 @@ export const mapDashboardStackRows = (
   [...stackDistribution.stacks]
     .sort(
       (left, right) =>
-        right.projectCount +
-          right.technologyCount -
-          (left.projectCount + left.technologyCount) ||
+        right.technologyCount - left.technologyCount ||
         left.slug.localeCompare(right.slug),
     )
     .map((stack) => ({

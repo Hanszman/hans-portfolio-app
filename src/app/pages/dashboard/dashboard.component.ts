@@ -19,9 +19,9 @@ import {
   buildDashboardProjectTechnologyChart,
   buildDashboardTechnologyLevelChart,
   buildDashboardTechnologyTypeOptions,
-  buildDashboardTechnologyUsageChart,
+  buildDashboardTechnologyTypeChart,
   buildDashboardStackChart,
-  buildDashboardProjectEnvironmentChart,
+  buildDashboardProjectContextChart,
   buildDashboardSummaryCards,
   mapDashboardStackRows,
 } from './helpers/dashboard.helper';
@@ -101,22 +101,22 @@ export class DashboardComponent {
       : null;
   });
 
-  protected readonly projectEnvironmentChart = computed(() => {
+  protected readonly projectContextChart = computed(() => {
     const projectContexts = this.dashboardData()?.overview.projectContexts;
 
-    return projectContexts && projectContexts.environments.length > 0
-      ? buildDashboardProjectEnvironmentChart(
+    return projectContexts && projectContexts.contexts.length > 0
+      ? buildDashboardProjectContextChart(
           projectContexts,
           this.translationService.locale(),
         )
       : null;
   });
 
-  protected readonly technologyUsageChart = computed(() => {
+  protected readonly technologyTypeChart = computed(() => {
     const technologyUsage = this.dashboardData()?.overview.technologyUsage;
 
-    return technologyUsage && technologyUsage.topTechnologies.length > 0
-      ? buildDashboardTechnologyUsageChart(
+    return technologyUsage && technologyUsage.types.length > 0
+      ? buildDashboardTechnologyTypeChart(
           technologyUsage,
           this.translationService.locale(),
         )

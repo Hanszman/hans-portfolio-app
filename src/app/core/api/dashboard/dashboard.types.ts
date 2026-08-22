@@ -46,6 +46,7 @@ export interface DashboardTechnologyUsageResponse {
   generatedAtUtc: string;
   totalUsageLinks: number;
   levels: DashboardDistributionEntryResponse[];
+  types: DashboardDistributionEntryResponse[];
   frequencies: DashboardDistributionEntryResponse[];
   contexts: DashboardDistributionEntryResponse[];
   sources: DashboardDistributionEntryResponse[];

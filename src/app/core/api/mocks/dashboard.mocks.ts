@@ -82,6 +82,16 @@ export const createDashboardOverviewResponse = (
         count: 14,
       },
     ],
+    types: [
+      {
+        key: 'PROGRAMMING_LANGUAGES',
+        count: 16,
+      },
+      {
+        key: 'FRAMEWORKS',
+        count: 10,
+      },
+    ],
     frequencies: [
       {
         key: 'DAILY',

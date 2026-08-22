@@ -22,16 +22,16 @@
     [titleKey]="'pages.dashboard.distribution.title'"
     [descriptionKey]="'pages.dashboard.distribution.description'"
     [emptyMessageKey]="'pages.dashboard.distribution.empty'"
-    [chart]="projectEnvironmentChart()"
+    [chart]="projectContextChart()"
     [scrollable]="true"
   />
 
   <app-dashboard-chart-panel
-    [labelKey]="'pages.dashboard.technology.label'"
-    [titleKey]="'pages.dashboard.technology.title'"
-    [descriptionKey]="'pages.dashboard.technology.description'"
-    [emptyMessageKey]="'pages.dashboard.technology.empty'"
-    [chart]="technologyUsageChart()"
+    [labelKey]="'pages.dashboard.technologyTypes.label'"
+    [titleKey]="'pages.dashboard.technologyTypes.title'"
+    [descriptionKey]="'pages.dashboard.technologyTypes.description'"
+    [emptyMessageKey]="'pages.dashboard.technologyTypes.empty'"
+    [chart]="technologyTypeChart()"
     [scrollable]="true"
   />
 </section>

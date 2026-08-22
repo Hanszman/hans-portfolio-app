@@ -13,6 +13,6 @@ import { DashboardChartViewModel } from '../../dashboard.types';
 export class DashboardAnalyticsGridComponent {
   readonly stackChart = input<DashboardChartViewModel | null>(null);
   readonly technologyLevelChart = input<DashboardChartViewModel | null>(null);
-  readonly projectEnvironmentChart = input<DashboardChartViewModel | null>(null);
-  readonly technologyUsageChart = input<DashboardChartViewModel | null>(null);
+  readonly projectContextChart = input<DashboardChartViewModel | null>(null);
+  readonly technologyTypeChart = input<DashboardChartViewModel | null>(null);
 }

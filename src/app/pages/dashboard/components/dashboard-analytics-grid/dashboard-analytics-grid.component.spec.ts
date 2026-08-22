@@ -33,8 +33,8 @@ describe('DashboardAnalyticsGridComponent', () => {
     const fixture = TestBed.createComponent(DashboardAnalyticsGridComponent);
     fixture.componentRef.setInput('stackChart', createChart('Stacks', 'doughnut'));
     fixture.componentRef.setInput('technologyLevelChart', createChart('Levels', 'doughnut'));
-    fixture.componentRef.setInput('projectEnvironmentChart', createChart('Projects', 'doughnut'));
-    fixture.componentRef.setInput('technologyUsageChart', createChart('Usage', 'bar'));
+    fixture.componentRef.setInput('projectContextChart', createChart('Projects', 'doughnut'));
+    fixture.componentRef.setInput('technologyTypeChart', createChart('Types', 'doughnut'));
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

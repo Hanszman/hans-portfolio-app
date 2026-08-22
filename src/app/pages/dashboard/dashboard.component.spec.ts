@@ -64,8 +64,8 @@ describe('DashboardComponent', () => {
       stackRows: () => readonly unknown[];
       stackChart: () => unknown;
       technologyLevelChart: () => unknown;
-      projectEnvironmentChart: () => unknown;
-      technologyUsageChart: () => unknown;
+      projectContextChart: () => unknown;
+      technologyTypeChart: () => unknown;
       technologyTypeOptions: () => readonly unknown[];
       projectTechnologyChart: () => unknown;
     };
@@ -74,8 +74,8 @@ describe('DashboardComponent', () => {
     expect(component.stackRows()).toEqual([]);
     expect(component.stackChart()).toBeNull();
     expect(component.technologyLevelChart()).toBeNull();
-    expect(component.projectEnvironmentChart()).toBeNull();
-    expect(component.technologyUsageChart()).toBeNull();
+    expect(component.projectContextChart()).toBeNull();
+    expect(component.technologyTypeChart()).toBeNull();
     expect(component.technologyTypeOptions()).toEqual([]);
     expect(component.projectTechnologyChart()).toBeNull();
     expect(httpTestingController.match(() => true).length).toBe(2);
