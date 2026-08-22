@@ -7,14 +7,9 @@
     -> Remova o quarto gráfico e substitua por outro chamado "Number of Technologies by Type" e faça um gráfico de pizza com essa informação por favor;
     -> No quinto, mude o nome de "Projects by type of technologies" para "Number of Projects by Type of Technologies";
     -> Em todos eles, mude o subtítulo/descrição para algo que tenha mais relação com cada gráfico e fique melhor escrito;
--Corrigir erro no Chart.helper.test.ts na lib e publicar a versão.
 
 *FUTURAS:
 -Revisar textos da tela de admin, padronizando o que está divergente e atualizando aquilo que está defasado.
--Ao cadastrar algumas descrições no cruds das entidades (campos que utilizam text-area), o registro fica salvo com vários "enter"/"break lines" aleatórios, que eu não coloquei, meio nada a ver. Corrija por favor.
--Talvez incluir freelancer como option no context de project.
--Talvez relacionar projects com formations.
--Talvez fazer página sobre meus gostos e vida pessoal.
 
 AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.

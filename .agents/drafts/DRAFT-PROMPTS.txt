@@ -724,3 +724,4 @@ Beleza, obrigado! Mas vamos lá, temos alguns problemas que quero que vc corrija
 Beleza, obrigado! Mas vamos lá:
 -Como vc pode ver no print Screenshot_7, as cores dos textos dos gráficos no modo dark ficaram ótimas, pois ficaram claras agora! Porém, como pode ver no print Screenshot_8, quando mudamos pro tema light ela também está clara, dificultando a leitura nas partes externas do gráfico. Corrija para que somente no modo light fique escura a cor da letra por favor.
 -Como pode ver no print Screenshot_9, como o card de gráfico da esquerda ficou maior por causa do scroll, ajuste o card da direita para ficar maior também e ocupar o mesmo espaço do outro.
+-Como vc pode ver no print Screenshot_10 na pasta downloads, tivemos esse erro que o vs code relatou no arqquivo Chart.helper.test.ts, corrija por favor.
