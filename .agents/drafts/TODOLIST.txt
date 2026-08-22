@@ -1,15 +1,3 @@
-[TODO LIST]:
-*DASHBOARD:
--Vamos alterar algumas coisas nos gráficos, começando pelos títulos e subtítulos/descrições (em todos os idiomas). Faça essas correções nesses gráficos por favor, ajustando frontend e backend onde necessário:
-    -> No primeiro, mude o nome de "Where the portfolio carries the most technical weight" para "Number of Technologies by Stack". Além disso, repare que esses dados parecem errados, pois se somarmos os valores de cada gomo do gráfico de pie, não vai dar a soma total correta de technologies, por isso corrija o gráfico por favor (acredito que pode alterar no backend mesmo os calculos das informações);
-    -> No segundo, mude o nome de "Technology usage signals" para "Number of Technologies by Level";
-    -> No terceiro, mude o nome de "Delivery context, environment spread and highlight density" para "Number of Projects by Context". Repare também que na verdade o gráfico está separando por algumas das stacks, ao invés de separar projects por contexto (como professional, academic, personal, study), corrija por favor;
-    -> Remova o quarto gráfico e substitua por outro chamado "Number of Technologies by Type" e faça um gráfico de pizza com essa informação por favor;
-    -> No quinto, mude o nome de "Projects by type of technologies" para "Number of Projects by Type of Technologies";
-    -> Em todos eles, mude o subtítulo/descrição para algo que tenha mais relação com cada gráfico e fique melhor escrito;
-
-*FUTURAS:
+TODO:
 -Revisar textos da tela de admin, padronizando o que está divergente e atualizando aquilo que está defasado.
-
-AUTOMATIZAÇÕES:
 -Criar pipeline ci/cd e configurar docker no projeto.
